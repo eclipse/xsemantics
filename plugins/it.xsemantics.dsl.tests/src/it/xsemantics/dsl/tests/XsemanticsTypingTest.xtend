@@ -40,47 +40,47 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testBooleanBinaryOr() {
-		checkBooleanBinary(getXAbstractFeatureCall(0))
+		checkBooleanPremise(getXAbstractFeatureCall(0))
 	}
 	
 	@Test
 	def void testBooleanBinaryAnd() {
-		checkBooleanBinary(getXAbstractFeatureCall(1))
+		checkBooleanPremise(getXAbstractFeatureCall(1))
 	}
 	
 	@Test
 	def void testBooleanBinaryEquals() {
-		checkBooleanBinary(getXAbstractFeatureCall(2))
+		checkBooleanPremise(getXAbstractFeatureCall(2))
 	}
 	
 	@Test
 	def void testBooleanBinaryNotEquals() {
-		checkBooleanBinary(getXAbstractFeatureCall(3))
+		checkBooleanPremise(getXAbstractFeatureCall(3))
 	}
 	
 	@Test
 	def void testBooleanBinaryPlus() {
-		checkNotBooleanBinary(getXAbstractFeatureCall(4))
+		checkNotBooleanPremise(getXAbstractFeatureCall(4))
 	}
 	
 	@Test
 	def void testBooleanMethodCall() {
-		checkBooleanBinary(getXAbstractFeatureCall(5))
+		checkBooleanPremise(getXAbstractFeatureCall(5))
 	}
 	
 	@Test
 	def void testNotBooleanMethodCall() {
-		checkNotBooleanBinary(getXAbstractFeatureCall(6))
+		checkNotBooleanPremise(getXAbstractFeatureCall(6))
 	}
 	
 	@Test
 	def void testBooleanNegation() {
-		checkBooleanBinary(getXAbstractFeatureCall(7))
+		checkBooleanPremise(getXAbstractFeatureCall(7))
 	}
 	
 	@Test
 	def void testNotBooleanVariableDeclaration() {
-		checkNotBooleanBinary(
+		checkNotBooleanPremise(
 			testFiles.testForBooleanVariableDeclaration.
 				firstVariableDeclaration
 		)
@@ -88,9 +88,22 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testNotBooleanAssignment() {
-		checkNotBooleanBinary(
-			testFiles.testForBooleanVariableAssignment.
-				firstAssignment
+		checkNotBooleanPremise(
+			testFiles.testForNonBooleanPremises.firstAssignment
+		)
+	}
+	
+	@Test
+	def void testNotBooleanIf() {
+		checkNotBooleanPremise(
+			testFiles.testForNonBooleanPremises.firstIf
+		)
+	}
+	
+	@Test
+	def void testNotBooleanFor() {
+		checkNotBooleanPremise(
+			testFiles.testForNonBooleanPremises.firstFor
 		)
 	}
 	
@@ -103,13 +116,13 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 			).identifier)
 	}
 	
-	def checkBooleanBinary(XAbstractFeatureCall featureCall) {
+	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		Assert::assertTrue(featureCall.toString,
 			typingSystem.isBooleanPremise(featureCall)
 		)
 	}
 	
-	def checkNotBooleanBinary(XExpression expression) {
+	def checkNotBooleanPremise(XExpression expression) {
 		Assert::assertFalse(expression.toString,
 			typingSystem.isBooleanPremise(expression)
 		)

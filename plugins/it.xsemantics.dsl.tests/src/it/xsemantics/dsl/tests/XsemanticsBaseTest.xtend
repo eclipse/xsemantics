@@ -33,6 +33,8 @@ import org.junit.runner.RunWith
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XAssignment
+import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtext.xbase.XForLoopExpression
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -99,6 +101,16 @@ class XsemanticsBaseTest {
 	def firstAssignment(CharSequence s) {
 		s.parseAndAssertNoError.
 			getAllContentsOfType(typeof(XAssignment)).get(0)
+	}
+	
+	def firstIf(CharSequence s) {
+		s.parseAndAssertNoError.
+			getAllContentsOfType(typeof(XIfExpression)).get(0)
+	}
+	
+	def firstFor(CharSequence s) {
+		s.parseAndAssertNoError.
+			getAllContentsOfType(typeof(XForLoopExpression)).get(0)
 	}
 	
 	def firstJudgmentDescription(CharSequence s) {

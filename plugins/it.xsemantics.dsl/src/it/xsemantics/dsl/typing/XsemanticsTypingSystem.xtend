@@ -11,11 +11,13 @@ import it.xsemantics.dsl.xsemantics.RuleParameter
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.ITypeProvider
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import org.eclipse.xtext.xbase.XAssignment
 
 class XsemanticsTypingSystem {
 	
@@ -50,14 +52,21 @@ class XsemanticsTypingSystem {
 	}
 	
 	def isBooleanPremise(XExpression expression) {
-		// don't consider boolean variable declaration and assignments as expressions
-		if (expression instanceof XVariableDeclaration ||
-			expression instanceof XAssignment) {
+		if (!expression.expressionToCheck) {
 			return false;
 		} else {
 			val booleanType = typeReferences.getTypeForName(Boolean::TYPE, expression);
 			val operationType = typeProvider.getType(expression);
 			return conformanceComputer.isConformant(booleanType, operationType)
 		}
+	}
+	
+	def isExpressionToCheck(XExpression expression) {
+		// don't consider boolean variable declaration and assignments and
+		// if statements as boolean premises
+		return (expression instanceof XFeatureCall) ||
+			(expression instanceof XBinaryOperation) ||
+			(expression instanceof XUnaryOperation) ||
+			(expression instanceof XMemberFeatureCall)
 	}
 }

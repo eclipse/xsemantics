@@ -1145,7 +1145,6 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_2.getFirst(), Boolean.class);
 		  rightResult = (Boolean) result_2.getFirst();
 		  
-		  Boolean _xifexpression = null;
 		  String _op = andOr.getOp();
 		  boolean _operator_equals = ObjectExtensions.operator_equals(_op, "&&");
 		  if (_operator_equals) {
@@ -1157,8 +1156,7 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		      boolean _booleanValue_1 = rightResult.booleanValue();
 		      _operator_and = BooleanExtensions.operator_and(_booleanValue, _booleanValue_1);
 		    }
-		    Boolean _result = result = Boolean.valueOf(_operator_and);
-		    _xifexpression = _result;
+		    result = Boolean.valueOf(_operator_and);
 		  } else {
 		    boolean _operator_or = false;
 		    boolean _booleanValue_2 = leftResult.booleanValue();
@@ -1168,12 +1166,7 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		      boolean _booleanValue_3 = rightResult.booleanValue();
 		      _operator_or = BooleanExtensions.operator_or(_booleanValue_2, _booleanValue_3);
 		    }
-		    Boolean _result_1 = result = Boolean.valueOf(_operator_or);
-		    _xifexpression = _result_1;
-		  }
-		  /* if (andOr.op == "&&") result = leftResult.booleanValue && rightResult.booleanValue else result = leftResult.booleanValue || rightResult.booleanValue */
-		  if (!_xifexpression) {
-		    sneakyThrowRuleFailedException("if (andOr.op == \"&&\") result = leftResult.booleanValue && rightResult.booleanValue else result = leftResult.booleanValue || rightResult.booleanValue");
+		    result = Boolean.valueOf(_operator_or);
 		  }
 		}
 		return new Result<Object>(result);
@@ -1256,7 +1249,6 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_2.getFirst(), Object.class);
 		  rightResult = (Object) result_2.getFirst();
 		  
-		  Boolean _xifexpression = null;
 		  boolean _operator_or = false;
 		  if ((leftResult instanceof String)) {
 		    _operator_or = true;
@@ -1264,35 +1256,21 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		    _operator_or = BooleanExtensions.operator_or((leftResult instanceof String), (rightResult instanceof String));
 		  }
 		  if (_operator_or) {
-		    Boolean _xblockexpression = null;
 		    {
 		      String _string = leftResult.toString();
 		      String left = _string;
 		      String _string_1 = rightResult.toString();
 		      String right = _string_1;
-		      Boolean _xifexpression_1 = null;
 		      String _op = comparison.getOp();
 		      boolean _operator_equals = ObjectExtensions.operator_equals(_op, "==");
 		      if (_operator_equals) {
 		        boolean _operator_equals_1 = ObjectExtensions.operator_equals(left, right);
-		        Boolean _result = result = Boolean.valueOf(_operator_equals_1);
-		        _xifexpression_1 = _result;
+		        result = Boolean.valueOf(_operator_equals_1);
 		      } else {
 		        boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(left, right);
-		        Boolean _result_1 = result = Boolean.valueOf(_operator_lessThan);
-		        _xifexpression_1 = _result_1;
+		        result = Boolean.valueOf(_operator_lessThan);
 		      }
-		      /* if (comparison.op == '==') result = left == right else result = left < right */
-		      if (!_xifexpression_1) {
-		        sneakyThrowRuleFailedException("if (comparison.op == \'==\') result = left == right else result = left < right");
-		      }
-		      _xblockexpression = (_xifexpression_1);
 		    }
-		    _xifexpression = _xblockexpression;
-		  }
-		  /* if (leftResult instanceof String || rightResult instanceof String) { var left = leftResult.toString var right = rightResult.toString if (comparison.op == '==') result = left == right else result = left < right } */
-		  if (!_xifexpression) {
-		    sneakyThrowRuleFailedException("if (leftResult instanceof String || rightResult instanceof String) { var left = leftResult.toString var right = rightResult.toString if (comparison.op == \'==\') result = left == right else result = left < right }");
 		  }
 		}
 		return new Result<Object>(result);

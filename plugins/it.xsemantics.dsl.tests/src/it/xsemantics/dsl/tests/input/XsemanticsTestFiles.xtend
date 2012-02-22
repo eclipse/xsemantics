@@ -1038,7 +1038,7 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
-	def testForBooleanVariableAssignment() '''
+	def testForNonBooleanPremises() '''
 	«testJudgmentDescriptionsEObjectEClass»
 	
 	rule EObjectEClass
@@ -1046,6 +1046,10 @@ class XsemanticsTestFiles {
 	from {
 		var Boolean b
 		b = false
+		if (b) { true } else { false }
+		for (oo : o.eContents) {
+			c.name == 'bar'
+		}
 	}
 	'''
 	
