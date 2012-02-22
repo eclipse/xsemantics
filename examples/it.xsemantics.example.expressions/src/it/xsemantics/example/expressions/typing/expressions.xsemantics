@@ -222,12 +222,38 @@ from {
 	G |- comparison.right ~> var Object rightResult
 	
 	if (leftResult instanceof String || rightResult instanceof String) {
-		var left = leftResult.toString
-		var right = rightResult.toString
+		var leftString = leftResult.toString
+		var rightString = rightResult.toString
 		if (comparison.op == '==')
-			result = left == right
+			result = leftString == rightString
 		else
-			result = left < right
+			result = leftString < rightString
+	} else {
+		// both are int if the expression is well-typed
+		var leftInt = leftResult as Integer
+		var rightInt = rightResult as Integer
+		if (comparison.op == '==')
+			result = leftInt == rightInt
+		else
+			result = leftInt < rightInt
+	}
+}
+
+rule InterpretPlus
+	G |- Plus plus ~> Object result
+from {
+	G |- plus.left ~> var Object leftResult
+	G |- plus.right ~> var Object rightResult
+	
+	if (leftResult instanceof String || rightResult instanceof String) {
+		var leftString = leftResult.toString
+		var rightString = rightResult.toString
+		result = leftString + rightString
+	} else {
+		// both are int if the expression is well-typed
+		var leftInt = leftResult as Integer
+		var rightInt = rightResult as Integer
+		result = leftInt + rightInt
 	}
 }
 

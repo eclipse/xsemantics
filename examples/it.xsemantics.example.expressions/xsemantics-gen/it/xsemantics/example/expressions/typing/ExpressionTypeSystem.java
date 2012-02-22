@@ -60,6 +60,7 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 	public final static String INTERPRETANDOR = "it.xsemantics.example.expressions.typing.rules.InterpretAndOr";
 	public final static String INTERPRETBOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.InterpretBooleanNegation";
 	public final static String INTERPRETCOMPARISON = "it.xsemantics.example.expressions.typing.rules.InterpretComparison";
+	public final static String INTERPRETPLUS = "it.xsemantics.example.expressions.typing.rules.InterpretPlus";
 	public final static String INTERPRETVARIABLEREFENRENCE = "it.xsemantics.example.expressions.typing.rules.InterpretVariableRefenrence";
 
 	protected PolymorphicDispatcher<Result<Type>> typeDispatcher;
@@ -1258,18 +1259,96 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		  if (_operator_or) {
 		    {
 		      String _string = leftResult.toString();
-		      String left = _string;
+		      String leftString = _string;
 		      String _string_1 = rightResult.toString();
-		      String right = _string_1;
+		      String rightString = _string_1;
 		      String _op = comparison.getOp();
 		      boolean _operator_equals = ObjectExtensions.operator_equals(_op, "==");
 		      if (_operator_equals) {
-		        boolean _operator_equals_1 = ObjectExtensions.operator_equals(left, right);
+		        boolean _operator_equals_1 = ObjectExtensions.operator_equals(leftString, rightString);
 		        result = Boolean.valueOf(_operator_equals_1);
 		      } else {
-		        boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(left, right);
+		        boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(leftString, rightString);
 		        result = Boolean.valueOf(_operator_lessThan);
 		      }
+		    }
+		  } else {
+		    {
+		      Integer leftInt = ((Integer) leftResult);
+		      Integer rightInt = ((Integer) rightResult);
+		      String _op_1 = comparison.getOp();
+		      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_op_1, "==");
+		      if (_operator_equals_2) {
+		        boolean _operator_equals_3 = ObjectExtensions.operator_equals(leftInt, rightInt);
+		        result = Boolean.valueOf(_operator_equals_3);
+		      } else {
+		        boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(leftInt, rightInt);
+		        result = Boolean.valueOf(_operator_lessThan_1);
+		      }
+		    }
+		  }
+		}
+		return new Result<Object>(result);
+	}
+	
+	protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Plus plus) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Object> _result_ = applyRuleInterpretPlus(G, _subtrace_, plus);
+			addToTrace(_trace_, ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleInterpretPlus) {
+			throwRuleFailedException(ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Object",
+				INTERPRETPLUS,
+				e_applyRuleInterpretPlus, new ErrorInformation(plus));
+			return null;
+		}
+	}
+	
+	protected Result<Object> applyRuleInterpretPlus(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Plus plus) 
+			throws RuleFailedException {
+		Object result = null;
+		
+		{
+		  /* G |- plus.left ~> var Object leftResult */
+		  Expression _left = plus.getLeft();
+		  Object leftResult = null;
+		  Result<Object> result_1 = interpretInternal(G, _trace_, _left);
+		  checkAssignableTo(result_1.getFirst(), Object.class);
+		  leftResult = (Object) result_1.getFirst();
+		  
+		  /* G |- plus.right ~> var Object rightResult */
+		  Expression _right = plus.getRight();
+		  Object rightResult = null;
+		  Result<Object> result_2 = interpretInternal(G, _trace_, _right);
+		  checkAssignableTo(result_2.getFirst(), Object.class);
+		  rightResult = (Object) result_2.getFirst();
+		  
+		  boolean _operator_or = false;
+		  if ((leftResult instanceof String)) {
+		    _operator_or = true;
+		  } else {
+		    _operator_or = BooleanExtensions.operator_or((leftResult instanceof String), (rightResult instanceof String));
+		  }
+		  if (_operator_or) {
+		    {
+		      String _string = leftResult.toString();
+		      String leftString = _string;
+		      String _string_1 = rightResult.toString();
+		      String rightString = _string_1;
+		      String _operator_plus = StringExtensions.operator_plus(leftString, rightString);
+		      result = _operator_plus;
+		    }
+		  } else {
+		    {
+		      Integer leftInt = ((Integer) leftResult);
+		      Integer rightInt = ((Integer) rightResult);
+		      int _operator_plus_1 = IntegerExtensions.operator_plus(leftInt, rightInt);
+		      result = Integer.valueOf(_operator_plus_1);
 		    }
 		  }
 		}
