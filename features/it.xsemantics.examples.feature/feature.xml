@@ -135,13 +135,12 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.common.types.ui"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
       <import plugin="org.eclipse.compare"/>
-      <import plugin="org.eclipse.emf.mwe2.launch" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.xtext.ui" version="2.2.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
-      <import plugin="it.xsemantics.runtime" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe2.launch" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.ui" version="2.2.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -160,13 +159,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="it.xsemantics.example.fj"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="it.xsemantics.example.fj.lib"
          download-size="0"
          install-size="0"
          version="0.0.0"
