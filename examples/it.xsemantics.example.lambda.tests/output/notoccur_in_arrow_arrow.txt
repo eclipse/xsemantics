@@ -1,0 +1,8 @@
+application trace:
+NotOccurVarInArrow |- TypeVariable 'X' !- ((IntType -> StringType) -> (StringType -> IntType))
+  NotOccurVarInArrow |- TypeVariable 'X' !- (IntType -> StringType)
+    NotOccurType |- TypeVariable 'X' !- IntType
+    NotOccurType |- TypeVariable 'X' !- StringType
+  NotOccurVarInArrow |- TypeVariable 'X' !- (StringType -> IntType)
+    NotOccurType |- TypeVariable 'X' !- StringType
+    NotOccurType |- TypeVariable 'X' !- IntType

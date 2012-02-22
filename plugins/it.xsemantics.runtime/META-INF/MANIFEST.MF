@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSemantics Runtime
+Bundle-SymbolicName: it.xsemantics.runtime
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: it.xsemantics.runtime.Activator
+Bundle-Vendor: Lorenzo Bettini
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;bundle-version="2.7.0";visibility:=reexport,
+ org.eclipse.xtext.util;bundle-version="2.2.1",
+ org.apache.log4j;bundle-version="1.2.13",
+ org.eclipse.xtend2.lib,
+ com.google.inject,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext;bundle-version="2.2.1";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: it.xsemantics.runtime,
+ it.xsemantics.runtime.util,
+ it.xsemantics.runtime.validation

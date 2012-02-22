@@ -1,0 +1,44 @@
+grammar it.xsemantics.example.expressions.Expressions with org.eclipse.xtext.common.Terminals
+
+generate expressions "http://xsemantics.sf.net/example/expressions/Expressions"
+
+Model:
+	(variables+=Variable)*
+;
+
+Variable:
+	name=ID '=' expression=Expression
+;
+
+Expression:
+	Addition;
+
+Addition returns Expression:
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
+
+Multiplication returns Expression:
+	Comparison (({MultiOrDiv.left=current} op=("*"|"/")) right=Comparison)*; 
+
+Comparison returns Expression:
+	BooleanExpression 
+	(({Comparison.left=current} op=("<"|"=="))  right=BooleanExpression)*;
+
+BooleanExpression returns Expression:
+	Atomic (({AndOrExpression.left=current} op=("||"|"&&")) right=Atomic)*;
+
+Atomic returns Expression:
+	'(' Expression ')' |
+	{BooleanNegation} =>"!" expression=Atomic | /* right associativity */
+	{ArithmeticSigned} =>"-" expression=Atomic | /* right associativity */
+	{NumberLiteral} value=INT |
+	{StringLiteral} value=STRING |
+	{BooleanLiteral} value=('true'|'false') |
+	{VariableReference} ref=[Variable]
+;
+
+// the types will be used only internally by the type system
+Type:
+	{IntType} 'int' |
+	{StringType} 'string' |
+	{BooleanType} 'boolean'
+;

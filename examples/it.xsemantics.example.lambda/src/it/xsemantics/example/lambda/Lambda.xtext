@@ -1,0 +1,66 @@
+grammar it.xsemantics.example.lambda.Lambda with org.eclipse.xtext.common.Terminals
+
+generate lambda "http://xsemantics.sf.net/example/lambda/Lambda"
+
+Program: 
+	term=Term
+;
+
+// left associative
+Term:
+	TerminalTerm (=>({Application.fun=current} arg=TerminalTerm)*)
+;
+
+TerminalTerm returns Term:
+	'(' Term ')' |
+	Constant |
+	Arithmetics |
+	Variable |
+	Abstraction
+;
+
+Constant: StringConstant | IntConstant ;
+
+StringConstant:
+	string=STRING
+;
+
+IntConstant:
+	int=INT
+;
+
+Arithmetics:
+	'-' term=Term
+;
+
+Variable:
+	ref=[Parameter]
+;
+
+Abstraction:
+	'lambda' param=Parameter '.' term=Term
+;
+
+Parameter:
+	name=ID (':' type=Type)?
+;
+
+// right associative
+Type:
+	TerminalType ({ArrowType.left = current} '->' right=Type)?
+;
+
+TerminalType returns Type:
+	'(' Type ')' |
+	BasicType |
+	TypeVariable
+;
+
+BasicType:
+	{IntType} 'int' |
+	{StringType} 'string'
+;
+
+TypeVariable:
+	typevarName=ID
+;

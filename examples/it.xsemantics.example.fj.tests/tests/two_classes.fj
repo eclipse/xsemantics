@@ -1,0 +1,8 @@
+class A {
+	A a;
+	A m() { return this; }
+}
+
+class B extends A {
+
+}

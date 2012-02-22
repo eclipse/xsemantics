@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: it.xsemantics.example.expressions.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: it.xsemantics.example.expressions.tests;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: it.xsemantics.example.expressions,
+ it.xsemantics.example.expressions.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.ui.junit,
+ org.junit4,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtend2.lib,
+ com.google.inject,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j,org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+

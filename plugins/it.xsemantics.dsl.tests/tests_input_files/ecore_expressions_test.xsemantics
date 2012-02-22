@@ -1,0 +1,34 @@
+// some expression cases
+
+system it.xsemantics.test.expressions.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EClass c : output EObject
+	type2 ||- EClass c : output EObject
+	testforthis |~ EObject obj : output EClass
+}
+
+rule EClassEObject derives
+	G |- EClass eClass : EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() || 'bar' == new String()
+	'foo' == new String() && 'bar' == new String()
+	'foo' == new String() + 'bar'.toFirstUpper
+	'foo' != new String() + 'bar'.toFirstUpper
+	new String() + 'bar'.toFirstUpper
+	'foo'.contains('f')
+	'foo'.concat('f')
+	!('foo'.contains('f'))
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	//eC.name == 'foo'
+	var Boolean b = false
+}
+
+rule TestForThis
+	G |~ EObject obj : EClass cl
+from {
+	cl = clone(obj.eClass)
+}

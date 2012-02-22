@@ -1,0 +1,124 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ */
+package it.xsemantics.dsl.xsemantics;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>System</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getName <em>Name</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getRules <em>Rules</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getCheckrules <em>Checkrules</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem()
+ * @model
+ * @generated
+ */
+public interface XsemanticsSystem extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.Import}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Imports</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_Imports()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Import> getImports();
+
+  /**
+   * Returns the value of the '<em><b>Judgment Descriptions</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.JudgmentDescription}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Judgment Descriptions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Judgment Descriptions</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_JudgmentDescriptions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<JudgmentDescription> getJudgmentDescriptions();
+
+  /**
+   * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.Rule}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Rules</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_Rules()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Rule> getRules();
+
+  /**
+   * Returns the value of the '<em><b>Checkrules</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.CheckRule}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Checkrules</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Checkrules</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_Checkrules()
+   * @model containment="true"
+   * @generated
+   */
+  EList<CheckRule> getCheckrules();
+
+} // XsemanticsSystem

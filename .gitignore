@@ -1,0 +1,6 @@
+*.class
+bin/
+*~
+logs.zip
+*.orig
+xtend-gen/

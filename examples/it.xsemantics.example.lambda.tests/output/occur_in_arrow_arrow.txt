@@ -1,0 +1,29 @@
+failure trace:
+type variable X occurs in ((IntType -> StringType)) -> ((StringType -> TypeVariable 'X'))
+  application trace:
+  NotOccurVarInArrow |- TypeVariable 'X' !- ((IntType -> StringType) -> (StringType -> TypeVariable 'X'))
+    NotOccurVarInArrow |- TypeVariable 'X' !- (IntType -> StringType)
+      NotOccurType |- TypeVariable 'X' !- IntType
+      NotOccurType |- TypeVariable 'X' !- StringType
+   type variable X occurs in (StringType) -> (TypeVariable 'X')
+    NotOccurVarInArrow |- TypeVariable 'X' !- (StringType -> TypeVariable 'X')
+      NotOccurType |- TypeVariable 'X' !- StringType
+     rule NotOccurVar failed: |- TypeVariable 'X' !- TypeVariable 'X'
+      NotOccurVar |- TypeVariable 'X' !- TypeVariable 'X'
+       X not equals X
+       comparison failed: X and X are equal
+type variable X occurs in (StringType) -> (TypeVariable 'X')
+  application trace:
+  NotOccurVarInArrow |- TypeVariable 'X' !- (StringType -> TypeVariable 'X')
+    NotOccurType |- TypeVariable 'X' !- StringType
+   rule NotOccurVar failed: |- TypeVariable 'X' !- TypeVariable 'X'
+    NotOccurVar |- TypeVariable 'X' !- TypeVariable 'X'
+     X not equals X
+     comparison failed: X and X are equal
+rule NotOccurVar failed: |- TypeVariable 'X' !- TypeVariable 'X'
+  application trace:
+  NotOccurVar |- TypeVariable 'X' !- TypeVariable 'X'
+   X not equals X
+   comparison failed: X and X are equal
+comparison failed: X and X are equal
+  application trace:

@@ -1,0 +1,12 @@
+application trace:
+TAbstraction |- lambda x : StringType . (x) : (StringType -> StringType)
+ TAbstraction |- lambda x : StringType . (x) : Type
+  TParam |- x : StringType : StringType
+   TParam |- x : StringType : Type
+   StringType not equals null
+  TVariable |- x : StringType
+   TVariable [x : StringType -> StringType] |- x : Type
+   StringType cast to Type
+    SubstituteType |- StringType ==> StringType
+     SubstituteType [x : StringType -> StringType] |- StringType ==> StringType
+  SubstituteType |- StringType ==> StringType

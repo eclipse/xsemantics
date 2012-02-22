@@ -1,0 +1,32 @@
+// some particular cases
+
+system it.xsemantics.test.orexpressions.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EClass c : output EObject
+	type2 ||- EClass c : output EObject
+}
+
+rule EClassEObject derives
+	G |- EClass eClass : EObject object
+from {
+	eClass.name == 'foo'
+	or
+	object.eClass.name == 'bar'
+}
+
+rule EClassEObject2 derives
+	G ||- EClass eClass : EObject object
+from {
+	eClass.name == 'foo'
+	or
+	object.eClass.name == 'bar'
+	or
+	{ 
+		val foo = 'foo'
+		object.eClass.name == 'bar2'
+		eClass.name == foo
+	}
+}

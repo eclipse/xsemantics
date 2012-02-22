@@ -1,0 +1,17 @@
+application trace:
+TAbstraction |- lambda x . (x) : (TypeVariable 'X1' -> TypeVariable 'X1')
+ TAbstraction |- lambda x . (x) : Type
+  TParam |- x : TypeVariable 'X1'
+   TParam |- x : Type
+   null not equals null
+   comparison failed: null and null are equal
+  TVariable |- x : TypeVariable 'X1'
+   TVariable [x -> TypeVariable 'X1'] |- x : Type
+   TypeVariable 'X1' cast to Type
+    SubstituteTypeVariable |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     SubstituteTypeVariable [x -> TypeVariable 'X1'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     cannot find mapping for X1 in environment
+  SubstituteTypeVariable |- TypeVariable 'X1' ==> TypeVariable 'X1'
+   cannot find mapping for X1 in environment
+  SubstituteTypeVariable |- TypeVariable 'X1' ==> TypeVariable 'X1'
+   cannot find mapping for X1 in environment

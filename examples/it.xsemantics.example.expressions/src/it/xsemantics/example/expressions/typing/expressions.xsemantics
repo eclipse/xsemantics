@@ -1,0 +1,244 @@
+system it.xsemantics.example.expressions.typing.ExpressionTypeSystem
+
+import it.xsemantics.example.expressions.expressions.*
+
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xbase.lib.CollectionLiterals
+import com.google.common.collect.Lists
+import java.util.*
+
+judgments {
+	type |- Expression expression : output Type
+		error "cannot type " + stringRep(expression)
+		source expression
+	vartype ||- Variable variable : output Type
+		error "cannot type " + stringRep(variable)
+		source variable
+		feature ExpressionsPackage::eINSTANCE.variable_Expression
+	coerce |~ Expression expression |> Type expectedType
+		error "cannot convert " + stringRep(expression) +
+			" to type " + stringRep(expectedType)
+		source expression
+	interpret |- Expression expression ~> output Object
+}
+
+axiom NumeralLiteral
+	G |- NumberLiteral num : ExpressionsFactory::eINSTANCE.createIntType
+
+axiom BooleanLiteral
+	G |- BooleanLiteral bool : ExpressionsFactory::eINSTANCE.createBooleanType
+
+rule StringLiteral
+	G |- StringLiteral str : Type resultType
+from {
+	{
+		val expected = env(G, 'expected', Type)
+		G |~ str |> expected
+		resultType = expected
+	}
+	or
+		resultType = ExpressionsFactory::eINSTANCE.createStringType
+}
+
+rule MultiOrDiv
+	G |- MultiOrDiv multiOrDiv : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left : intType
+	G, 'expected' <- intType |- multiOrDiv.right : intType
+}
+
+rule Minus
+	G |- Minus minus : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- minus.left : intType
+	G, 'expected' <- intType |- minus.right : intType
+}
+
+rule StringToInt
+	G |~ StringLiteral string |> IntType type
+from {
+	Integer::parseInt(string.value)
+}
+
+rule StringToBool
+	G |~ StringLiteral string |> BooleanType type
+from {
+	string.value.equalsIgnoreCase("true") ||
+	string.value.equalsIgnoreCase("false")
+}
+
+axiom IntToInt
+	G |~ NumberLiteral number |> IntType type
+
+rule Plus
+	G |- Plus plus : Type type
+from {
+	G |- plus.left : var Type leftType
+	G |- plus.right : var Type rightType
+	
+	{ 
+		val expected = env(G, 'expected', Type)
+		G |~ plus.left |> expected
+		G |~ plus.right |> expected
+		type = expected
+	}
+	or
+	{
+		(leftType instanceof StringType || rightType instanceof StringType)
+		type = ExpressionsFactory::eINSTANCE.createStringType
+	}
+	or
+	{
+		(leftType instanceof IntType && rightType instanceof IntType)
+		type = leftType // i.e., IntType
+	}
+}
+
+rule Comparison
+	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
+from {
+	G |- comparison.left : var Type leftType
+	G |- comparison.right : var Type rightType
+	
+	(leftType instanceof IntType && rightType instanceof IntType) ||
+	(leftType instanceof StringType && rightType instanceof StringType)
+}
+
+rule BooleanNegation
+	G |- BooleanNegation negation : BooleanType boolType
+from {
+	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- negation.expression : boolType
+}
+
+rule AndOr
+	G |- AndOrExpression andOr : BooleanType boolType
+from {
+	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- andOr.left : boolType
+	G, 'expected' <- boolType |- andOr.right : boolType
+}
+
+rule ArithmeticSigned
+	G |- ArithmeticSigned signed : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- signed.expression : intType
+}
+
+rule VariableReference
+	G |- VariableReference varRef : Type type
+from {
+	G ||- varRef.ref : type
+}
+
+rule Variable
+	G ||- Variable variable : Type type
+from {
+	variable.expression != null
+	G |- variable.expression : type
+}
+
+axiom InterpretNumberLiteral
+	G |- NumberLiteral number ~> number.value
+
+rule InterpretStringLiteral
+	G |- StringLiteral string ~> Object result
+from {
+	var Type expected
+	{
+		expected = env(G, 'expected', IntType)
+		result = Integer::parseInt(string.value)
+	}
+	or
+	{
+		expected = env(G, 'expected', BooleanType)
+		result = Boolean::parseBoolean(string.value)
+	}
+	or
+	result = string.value
+}
+
+axiom InterpretBooleanLiteral
+	G |- BooleanLiteral bool ~> Boolean::valueOf(bool.value)
+
+rule InterpretMinus
+	G |- Minus plus ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- plus.left ~> var Integer leftResult
+	G, 'expected' <- intType |- plus.right ~> var Integer rightResult
+	result = leftResult.intValue - rightResult.intValue
+}
+
+rule InterpretMultiOrDiv
+	G |- MultiOrDiv multiOrDiv ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left ~> var Integer leftResult
+	G, 'expected' <- intType |- multiOrDiv.right ~> var Integer rightResult
+	if (multiOrDiv.op == '*')
+		result = leftResult.intValue * rightResult.intValue
+	else
+		result = leftResult.intValue / rightResult.intValue
+}
+
+rule InterpretArithmeticSigned
+	G |- ArithmeticSigned signed ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- signed.expression ~> var Integer expResult
+	result = -(expResult)
+}
+
+rule InterpretAndOr
+	G |- AndOrExpression andOr ~> Boolean result
+from {
+	var boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- andOr.left ~> var Boolean leftResult
+	G, 'expected' <- boolType |- andOr.right ~> var Boolean rightResult
+	
+	if (andOr.op == "&&")
+		result = leftResult.booleanValue && rightResult.booleanValue
+	else
+		result = leftResult.booleanValue || rightResult.booleanValue
+}
+
+rule InterpretBooleanNegation
+	G |- BooleanNegation neg ~> Boolean result
+from {
+	var boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- neg.expression ~> var Boolean expResult
+	
+	result = !expResult
+}
+
+rule InterpretComparison
+	G |- Comparison comparison ~> Boolean result
+from {
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
+	
+	if (leftResult instanceof String || rightResult instanceof String) {
+		var left = leftResult.toString
+		var right = rightResult.toString
+		if (comparison.op == '==')
+			result = left == right
+		else
+			result = left < right
+	}
+}
+
+rule InterpretVariableRefenrence
+	G |- VariableReference varRef ~> Object result
+from {
+	G |- varRef.ref.expression ~> result
+}
+
+checkrule CheckVariable for
+	Variable variable
+from {
+	empty ||- variable : var Type type
+}

@@ -1,0 +1,17 @@
+system it.xsemantics.test.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EClass c : EObject o
+}
+
+rule EClassEObject derives
+	G |- EClass eClass : EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+}

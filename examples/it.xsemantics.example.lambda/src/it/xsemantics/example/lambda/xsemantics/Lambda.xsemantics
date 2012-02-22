@@ -1,0 +1,210 @@
+system it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
+
+import it.xsemantics.example.lambda.lambda.*
+import it.xsemantics.example.lambda.xsemantics.*
+
+import org.eclipse.emf.ecore.util.*
+
+judgments {
+	type |- TypeSubstitutions substitutions |> Term term : output Type
+	paramtype |~ Parameter param : output Type
+	typesubstitution |- TypeSubstitutions substitutions |> Type original ~> output Type
+	notoccur |- Type type :> Type other
+		error stringRep(type) + " occurs in " + stringRep(other)
+	unify |- TypeSubstitutions substitutions |> 
+		Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
+}
+
+rule SubstituteType
+	G |- TypeSubstitutions substitutions |> Type type ~> Type result
+from {
+	result = type
+}
+
+rule SubstituteTypeVariable
+	G |- TypeSubstitutions substitutions |> TypeVariable variable ~> Type result
+from {
+	{
+		var mapped = substitutions.mapped(variable.typevarName)
+		mapped != null
+		result = EcoreUtil::copy(mapped)
+		G |- substitutions |> result ~> result // recursive
+	}
+	or
+		result = variable
+}
+
+rule SubstituteArrowType
+	G |- TypeSubstitutions substitutions |> ArrowType arrowType ~> ArrowType result
+from {
+	var Type subResult
+	result = EcoreUtil::copy(arrowType)
+	G |- substitutions |> arrowType.left ~> subResult
+	result.left = subResult
+	G |- substitutions |> arrowType.right ~> subResult
+	result.right = subResult
+}
+
+axiom NotOccurBase
+	G |- Type type :> Type other
+
+rule NotOccurVar
+	G |- TypeVariable variable :> TypeVariable other
+from {
+	variable.typevarName != other.typevarName
+}
+
+rule NotOccurVarInArrow
+	G |- TypeVariable variable :> ArrowType arrowType
+from {
+	G |- variable :> arrowType.left
+	G |- variable :> arrowType.right
+}
+
+rule UnifyType
+	G |- TypeSubstitutions substitutions |>  Type t1 ~~ Type t2 ~> t1 ~~ t2
+from {
+	// in general it fails
+	fail
+}
+
+
+axiom UnifyStringType
+	G |- TypeSubstitutions substitutions |> StringType t1 ~~ StringType t2 
+		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
+
+axiom UnifyIntType
+	G |- TypeSubstitutions substitutions |> IntType t1 ~~ IntType t2 
+		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
+
+rule UnifyTypeVariableBasicType
+	G |- TypeSubstitutions substitutions |> TypeVariable typeVar ~~ BasicType basicType 
+		~> EcoreUtil::copy(basicType) ~~ BasicType result
+from {
+	result = EcoreUtil::copy(basicType)
+	substitutions.add(typeVar.typevarName, result)
+}
+
+rule UnifyBasicTypeTypeVariable
+	G |- TypeSubstitutions substitutions |> BasicType basicType ~~ TypeVariable typeVar
+		~> BasicType resultForVar ~~ BasicType resultForBasic
+from {
+	G |- substitutions |> typeVar ~~ basicType ~> resultForVar ~~ resultForBasic
+}
+
+rule UnifyTypeVariables
+	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ TypeVariable originalRight 
+		~> TypeVariable newLeft ~~ TypeVariable newRight
+from {
+	// unify both variables with a fresh new variable
+	newLeft = LambdaUtils::createFreshTypeVariable
+	newRight = EcoreUtil::copy(newLeft)
+	substitutions.add(originalLeft.typevarName, newLeft)
+	substitutions.add(originalRight.typevarName, newRight)
+}
+
+rule UnifyTypeVariableArrowType
+	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ ArrowType originalRight 
+		~> ArrowType newLeft ~~ EcoreUtil::copy(originalRight)
+from {
+	// occur check
+	G |- originalLeft :> originalRight
+	newLeft = EcoreUtil::copy(originalRight)
+	substitutions.add(originalLeft.typevarName, newLeft)
+}
+
+rule UnifyArrowTypeTypeVariable
+	G |- TypeSubstitutions substitutions |> ArrowType originalLeft ~~ TypeVariable originalRight 
+		~> ArrowType newLeft ~~ ArrowType newRight
+from {
+	G |- substitutions |> originalRight ~~ originalLeft ~> newRight ~~ newLeft
+}
+
+rule UnifyArrowTypes
+	G |- TypeSubstitutions substitutions |> ArrowType arrow1 ~~ ArrowType arrow2 
+		~> ArrowType newArrow1 ~~ ArrowType newArrow2
+from {
+	newArrow1 = EcoreUtil::copy(arrow1)
+	newArrow2 = EcoreUtil::copy(arrow2)
+	var Type temp1
+	var Type temp2
+	G |- substitutions |> arrow1.left ~~ arrow2.left ~> temp1 ~~ temp2
+	newArrow1.left = temp1
+	newArrow2.left = temp2
+	G |- substitutions |> arrow1.right ~~ arrow2.right ~> temp1 ~~ temp2
+	newArrow1.right = temp1
+	newArrow2.right = temp2
+}
+
+rule ParameterType
+	G |~ Parameter param : Type type
+from {
+	{
+		param.type != null
+		type = EcoreUtil::copy(param.type)
+	}
+	or
+	type = LambdaUtils::createFreshTypeVariable
+}
+
+axiom StringConstantType
+	G |- TypeSubstitutions substitutions |> 
+		StringConstant stringConstant : LambdaUtils::createStringType
+
+axiom IntConstantType
+	G |- TypeSubstitutions substitutions |> 
+		IntConstant intConstant : LambdaUtils::createIntType
+
+rule VariableType
+	G |- TypeSubstitutions substitutions |> 
+		Variable variable : Type type
+from {
+	G |- substitutions |> EcoreUtil::copy(env(G, variable.ref, Type)) ~> type
+}
+
+rule ArithmeticsType
+	G |- TypeSubstitutions substitutions |> 
+		Arithmetics arithmetics : IntType intType
+from {
+	intType = LambdaUtils::createIntType
+	G |- substitutions |> arithmetics.term : var Type termType
+	// the term type must be unifiable with int type
+	G |- substitutions |> termType ~~ intType ~> intType ~~ intType
+}
+
+rule AbstractionType
+	G |- TypeSubstitutions substitutions |> Abstraction abstraction : ArrowType type
+from {
+	G |~ abstraction.param : var Type paramType
+	G, abstraction.param <- paramType |- 
+		substitutions |> abstraction.term : var Type termType
+	G |- substitutions |> paramType ~> paramType
+	G |- substitutions |> termType ~> termType
+	type = LambdaUtils::createArrowType(paramType, termType)
+}
+
+rule ApplicationType
+	G |- TypeSubstitutions substitutions |> Application application : Type type
+from {
+	G |- substitutions |> application.fun : var Type funType
+	
+	// make sure funType can be unified ArrowType
+	var arrowType = LambdaUtils::createFreshArrowType
+	G |- substitutions |> funType ~~ arrowType ~> funType ~~ arrowType
+	
+	G |- substitutions |> application.arg : var Type argType
+	
+	// unify arrow left with the type of the argument
+	G |- substitutions |> arrowType.left ~~ argType ~> funType ~~ argType
+	
+	// the result is the arrow right after substitutions
+	G |- substitutions |> arrowType.right ~> type
+}
+
+checkrule CheckProgram for
+	Program program
+from {
+	LambdaUtils::resetCounter
+	// if we can type the program term
+	empty |- new TypeSubstitutions() |> program.term : var Type type
+}

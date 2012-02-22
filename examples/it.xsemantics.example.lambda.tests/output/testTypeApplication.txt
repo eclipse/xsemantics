@@ -1,0 +1,82 @@
+application trace:
+TApplication [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- (lambda x . (x) 10) : IntType
+ TApplication |- (lambda x . (x) 10) : Type
+  TAbstraction [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- lambda x . (x) : (IntType -> IntType)
+   TAbstraction |- lambda x . (x) : Type
+    TParam [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- x : TypeVariable 'X1'
+     TParam |- x : Type
+     null not equals null
+     comparison failed: null and null are equal
+    TVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- x : TypeVariable 'X1'
+     TVariable [x -> TypeVariable 'X1'] |- x : Type
+     TypeVariable 'X1' cast to Type
+      SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+       SubstituteTypeVariable [x -> TypeVariable 'X1'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+       cannot find mapping for X1 in environment
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     SubstituteTypeVariable |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     cannot find mapping for X1 in environment
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     SubstituteTypeVariable |- TypeVariable 'X1' ==> TypeVariable 'X1'
+     cannot find mapping for X1 in environment
+  UnifyArrow [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- (IntType -> IntType) == (TypeVariable 'X2' -> TypeVariable 'X3')
+   UnifyArrow |- (TypeVariable 'X1' -> TypeVariable 'X1') == (TypeVariable 'X2' -> TypeVariable 'X3')
+    UnifyVar [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' == TypeVariable 'X2'
+     UnifyVar |- TypeVariable 'X1' == TypeVariable 'X2'
+     X1 equals X2
+     comparison failed: X1 and X2 are not equal
+      ExtendVariableMapping [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ~> TypeVariable 'X2'
+       ExtendVariableMapping |- TypeVariable 'X1' ~> TypeVariable 'X2'
+       cannot find mapping for X1 in environment
+    UnifyVar [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' == TypeVariable 'X3'
+     UnifyVar [X1 -> TypeVariable 'X2'] |- TypeVariable 'X1' == TypeVariable 'X3'
+     X1 equals X3
+     comparison failed: X1 and X3 are not equal
+      ExtendVariableMapping [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ~> TypeVariable 'X3'
+       ExtendVariableMapping [X1 -> TypeVariable 'X2'] |- TypeVariable 'X1' ~> TypeVariable 'X3'
+       TypeVariable 'X2' cast to Type
+        UnifyVar [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X2' == TypeVariable 'X3'
+         UnifyVar [X1 -> TypeVariable 'X2'] |- TypeVariable 'X2' == TypeVariable 'X3'
+         X2 equals X3
+         comparison failed: X2 and X3 are not equal
+          ExtendVariableMapping [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X2' ~> TypeVariable 'X3'
+           ExtendVariableMapping [X1 -> TypeVariable 'X2'] |- TypeVariable 'X2' ~> TypeVariable 'X3'
+           cannot find mapping for X2 in environment
+  SubstituteArrowType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- (IntType -> IntType) ==> (IntType -> IntType)
+   SubstituteArrowType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- (TypeVariable 'X1' -> TypeVariable 'X1') ==> (TypeVariable 'X2' -> TypeVariable 'X3')
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X3'
+     SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X1' ==> Type
+     TypeVariable 'X2' cast to Type
+      SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X2' ==> TypeVariable 'X3'
+       SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+       TypeVariable 'X3' cast to Type
+        SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> TypeVariable 'X3'
+         SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X3' ==> TypeVariable 'X3'
+         cannot find mapping for X3 in environment
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X3'
+     SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X1' ==> Type
+     TypeVariable 'X2' cast to Type
+      SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X2' ==> TypeVariable 'X3'
+       SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+       TypeVariable 'X3' cast to Type
+        SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> TypeVariable 'X3'
+         SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X3' ==> TypeVariable 'X3'
+         cannot find mapping for X3 in environment
+  TIntConstant [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- 10 : IntType
+   TIntConstant [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- 10 : Type
+  UnifyVariableBasicType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' == IntType
+   UnifyVariableBasicType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X3' == IntType
+   TypeVariable 'X3' cast to TypeVariable
+    ExtendVariableMapping [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ~> IntType
+     ExtendVariableMapping [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3'] |- TypeVariable 'X3' ~> IntType
+     cannot find mapping for X3 in environment
+  SubstituteArrowType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- (IntType -> IntType) ==> (IntType -> IntType)
+   SubstituteArrowType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- (TypeVariable 'X3' -> TypeVariable 'X3') ==> (TypeVariable 'X3' -> TypeVariable 'X3')
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> IntType
+     SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> Type
+     IntType cast to Type
+      SubstituteType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- IntType ==> IntType
+    SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> IntType
+     SubstituteTypeVariable [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- TypeVariable 'X3' ==> Type
+     IntType cast to Type
+      SubstituteType [X1 -> TypeVariable 'X2', X2 -> TypeVariable 'X3', X3 -> IntType] |- IntType ==> IntType

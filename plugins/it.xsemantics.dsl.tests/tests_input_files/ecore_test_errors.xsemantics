@@ -1,0 +1,21 @@
+// contains an error: the right parameter cannot be an expression
+// since it is an input parameter
+
+system it.xsemantics.test.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EClass c : EObject o
+}
+
+/*
+ * The left param _createEObject has the same name of the variable
+ * that XbaseCompiler would generate
+ */
+rule EClassEObject derives
+	G |- EClass _createEObject : EcoreFactory::eINSTANCE.createEObject()
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+}

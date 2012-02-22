@@ -1,0 +1,107 @@
+// some particular cases
+
+system it.xsemantics.test.particular.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+import java.util.*
+	
+judgments {
+	type |- EClass c : output EObject
+	type2 ||- String s : output EClass : output EObject
+	type1 |- EObject o
+	features |- EClass c1 >> output List<EStructuralFeature>
+	collections |- EClass c2 |> List<EStructuralFeature> l2
+	type3 ||- EObject o2 : output EClass
+	withfail |~ EObject o2 : output EClass
+	closures ||~ EClass eClass
+	environments ||- EClass eClass
+}
+
+/*
+ * The input param _createEObject has the same name of the variable
+ * that XbaseCompiler would generate
+ */
+rule EClassEObject derives
+	G |- EClass _createEObject : EcoreFactory::eINSTANCE.createEObject()
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+}
+
+/*
+ * The output param _createEObject has the same name of the variable
+ * that XbaseCompiler would generate
+ */
+rule EClassEObject2 derives
+	G ||- String s : EClass _createEObject : EcoreFactory::eINSTANCE.createEObject()
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+}
+
+// generated checkAssignable here uses a Collection type as output param
+rule Features derives
+	G |- EClass eclass >> List<EStructuralFeature> features
+from {
+	G |- eclass >> features
+}
+
+// For testing generated parameters for Java methods
+// in the presence of a parametrized type
+rule Colelctions derives
+	G |- EClass eclass |> List<EStructuralFeature> features
+from {
+	G |- eclass |> features
+}
+
+rule ForEach derives
+	G |- EObject obj
+from {
+	obj.eClass.EStructuralFeatures.forEach [
+		G |- it
+	]
+}
+
+rule ForEachWithBooleanExpressionInside derives
+	G |- EClass eClass
+from {
+	eClass.EStructuralFeatures.forEach [
+		it.name != "foo"
+	]
+}
+
+rule WithFail
+	G |~ EObject o2 : EClass eClass
+from {
+	fail
+	or
+	fail error "this is an error"
+		source o2.eClass
+		feature o2.eClass.eContainingFeature
+}
+
+rule TestForClosures
+	G ||~ EClass eClass
+from {
+	eClass.EStructuralFeatures.forall [
+		it.name != 'foo'
+	]
+	eClass.EStructuralFeatures.get(0).name != 'foo'
+}
+
+rule TestForEnvironments
+	G ||- EClass eClass
+from {
+	'this' <- eClass ||- eClass
+}
+
+// a for each where we call a rule with output arg
+// TODO prohibit rule invocation with output params
+// inside closures
+//rule ForEachWithOutputArgs
+//	G ||- EObject eObject : EClass eClass
+//from {
+//	eObject.eClass.EStructuralFeatures.forEach() [
+//		G ||- eObject : eClass
+//	]
+//}

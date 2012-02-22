@@ -1,0 +1,7 @@
+failure trace:
+rule TVariable failed: |- x : Type
+  application trace:
+  TVariable |- x : Type
+   cannot find mapping for x in environment
+cannot find mapping for x in environment
+  application trace:

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+	<template autoinsert="true" context="it.xsemantics.example.fj.FJ.Class"
+		deleted="false" description="template class definition" enabled="true"
+		id="it.xsemantics.example.fj.FJ.Class" name="Class">class ${name} extends ${extends:CrossReference('Class.extends')} {
+	${cursor}
+}</template>
+	<template autoinsert="true" context="it.xsemantics.example.fj.FJ.Field"
+		deleted="false" description="template field definition" enabled="true"
+		id="it.xsemantics.example.fj.FJ.Field" name="Field">${Object:CrossReference('Field.type')} ${name};
+	</template>
+	<template autoinsert="true" context="it.xsemantics.example.fj.FJ.Method"
+		deleted="false" description="template method definition" enabled="true"
+		id="it.xsemantics.example.fj.FJ.Method" name="Method">${Object:CrossReference('Method.returntype')}
+		${name}() { return ${body}; }</template>
+</templates>

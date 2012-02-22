@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.xsemantics.example.fj/src-gen"
+    editDirectory="/it.xsemantics.example.fj.edit/src" editorDirectory="/it.xsemantics.example.fj.editor/src"
+    modelPluginID="it.xsemantics.example.fj" forceOverwrite="true" modelName="FJ"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.example.fj.edit"
+    editorPluginID="it.xsemantics.example.fj.editor">
+  <genPackages prefix="Fj" basePackage="it.xsemantics.example.fj" disposableProviderFactory="true"
+      ecorePackage="FJ.ecore#/">
+    <genClasses ecoreClass="FJ.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Program/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Program/main"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Type"/>
+    <genClasses ecoreClass="FJ.ecore#//BasicType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//BasicType/basic"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//ClassType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FJ.ecore#//ClassType/classref"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//Class/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FJ.ecore#//Class/superclass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Class/members"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Member"/>
+    <genClasses ecoreClass="FJ.ecore#//Field"/>
+    <genClasses ecoreClass="FJ.ecore#//Method">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Method/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Method/body"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Parameter"/>
+    <genClasses ecoreClass="FJ.ecore#//TypedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//TypedElement/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//TypedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//MethodBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//MethodBody/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Expression"/>
+    <genClasses ecoreClass="FJ.ecore#//This">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//This/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//ParamRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FJ.ecore#//ParamRef/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//New">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//New/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//New/args"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Cast">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Cast/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Cast/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Constant"/>
+    <genClasses ecoreClass="FJ.ecore#//StringConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//StringConstant/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//IntConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//IntConstant/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//BoolConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FJ.ecore#//BoolConstant/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="FJ.ecore#//Selection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Selection/receiver"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FJ.ecore#//Selection/message"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FJ.ecore#//Selection/args"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

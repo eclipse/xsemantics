@@ -1,0 +1,37 @@
+// some particular cases
+
+system it.xsemantics.test.errspecification.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EObject c : output EClass
+		error "cannot find " + c + "'s EClass"
+	subtype |- EClass left <: EClass right
+		error left.name + " is not a subtype of " +
+			right.name
+		source left
+		feature left.getEStructuralFeature("name")
+}
+
+
+rule EObjectEClass
+	G |- EObject obj : EClass eClass
+from {
+	eClass = obj.eClass
+}
+
+rule EObjectEClassWithErrorSpecification
+	G |- EClass obj : EClass eClass
+		error "cannot find EClass for EClass " + stringRep(obj)
+		source obj
+		feature obj.eContainingFeature 
+from {
+	eClass = obj.eClass
+}
+
+rule EClassSubtyping
+	G |- EClass candidate <: EClass superClass
+from {
+	superClass.isSuperTypeOf(candidate)
+}

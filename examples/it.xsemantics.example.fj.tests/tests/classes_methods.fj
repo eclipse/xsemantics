@@ -1,0 +1,16 @@
+// each subclass adds a method
+
+class A {
+	A a;
+	A m() { return this; }
+}
+
+class B extends A {
+	Object b;
+	B n() { return this; }
+}
+
+class C extends B {
+	Object c;
+	C o() { return this; }
+}

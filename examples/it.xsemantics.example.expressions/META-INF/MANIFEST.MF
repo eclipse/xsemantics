@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSemantics Expressions Example
+Bundle-Vendor: Lorenzo Bettini
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: it.xsemantics.example.expressions;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="2.2.1";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.1.0";resolution:=optional;visibility:=reexport,
+ org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ it.xsemantics.runtime;visibility:=reexport
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend2.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: it.xsemantics.example.expressions,
+ it.xsemantics.example.expressions.expressions,
+ it.xsemantics.example.expressions.expressions.impl,
+ it.xsemantics.example.expressions.expressions.util,
+ it.xsemantics.example.expressions.formatting,
+ it.xsemantics.example.expressions.generator,
+ it.xsemantics.example.expressions.parser.antlr,
+ it.xsemantics.example.expressions.parser.antlr.internal,
+ it.xsemantics.example.expressions.scoping,
+ it.xsemantics.example.expressions.serializer,
+ it.xsemantics.example.expressions.services,
+ it.xsemantics.example.expressions.typing,
+ it.xsemantics.example.expressions.typing.validation,
+ it.xsemantics.example.expressions.validation
+

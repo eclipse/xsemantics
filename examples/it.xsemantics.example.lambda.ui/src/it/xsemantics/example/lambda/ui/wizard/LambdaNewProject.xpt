@@ -1,0 +1,21 @@
+«IMPORT it::xsemantics::example::lambda::ui::wizard»
+
+«DEFINE main FOR LambdaProjectInfo»
+«EXPAND model FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR LambdaProjectInfo»
+«FILE "src/lambda/Example.lambda"-»
+/*
+ * This is an example Lambda term
+ *
+ * You can write parameter types explicitly, or right click on the
+ * editor and have the system infer types for you!
+ */
+
+lambda x . 
+	lambda y . 
+		lambda z . x z (y z)
+«ENDFILE»
+«ENDDEFINE»
+

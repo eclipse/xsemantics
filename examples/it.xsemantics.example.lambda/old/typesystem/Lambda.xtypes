@@ -1,0 +1,239 @@
+/*
+ * This is an example typesystem
+ */
+
+typesystem Lambda
+
+grammar "platform:/resource/it.xsemantics.example.lambda/src-gen/it/xtypes/example/lambda/Lambda.ecore"
+
+judgments
+	'|-' '=='
+		kind="unify"
+
+	'|-' '==>'
+		kind="substitution"
+		
+	'|-' '~>'
+		kind="mapping"
+	
+	'|-' '!-'
+		kind="notoccur"
+		binary
+	
+	'|-' ':'
+		kind="type"
+end
+
+// not used
+axiom NotOccurType
+	G |- var Type t1 !- var Type t2
+
+rule NotOccurVar
+derives
+	G |- var TypeVariable t1 !- var TypeVariable t2
+from
+	$t1.typevarName != $t2.typevarName
+
+rule NotOccurVarInArrow
+derives
+	G |- var TypeVariable t1 !- var ArrowType t2
+	error='type variable ' + $t1.typevarName + ' occurs in (' +
+		$t2.left + ') -> (' + $t2.right + ')' 
+from
+	G |- $t1 !- $t2.left
+	G |- $t1 !- $t2.right
+
+// last chance
+rule UnifyType
+derives
+	G |- var Type t1 == var Type t2
+from
+	$t1 = $t2
+
+rule ExtendVariableMapping
+derives
+	G |- var TypeVariable v1 ~> var Type t1
+from
+	(var Type currentMappingForV1 := (Type) env(G, $v1.typevarName)
+	 G |- $currentMappingForV1 == $t1
+	 or
+	 G += $v1.typevarName -> $t1
+	)
+
+rule UnifyVar
+derives
+	G |- var TypeVariable v1 == var TypeVariable v2
+from
+	(
+	$v1.typevarName = $v2.typevarName
+	or
+	G |- $v1 ~> $v2
+	)
+
+axiom UnifyIntType
+	G |- var IntType i1 == var IntType i2
+
+axiom UnifyStringType
+	G |- var StringType s1 == var StringType s2
+
+rule UnifyVariableBasicType
+derives
+	G |- var Type t1 == var BasicType b
+from
+	var TypeVariable v1 := (TypeVariable) $t1
+	G |- $v1 ~> $b
+
+rule UnifyBasicTypeVariable
+derives
+	G |- var BasicType b == var Type t1
+from
+	var TypeVariable v1 := (TypeVariable) $t1
+	G |- $v1 ~> $b
+
+rule UnifyVariableArrow
+derives
+	G |- var Type t1 == var ArrowType a2
+from
+	G |- $t1 !- $a2
+	var TypeVariable v1 := (TypeVariable) $t1
+	G |- $v1 ~> $a2
+
+rule UnifyArrowVariable
+derives
+	G |- var ArrowType a2 == var Type t1
+from
+	G |- $t1 == $a2
+
+rule UnifyArrow
+derives
+	G |- var ArrowType a1 == var ArrowType a2
+from
+	G |- $a1.left == $a2.left
+	G |- $a1.right == $a2.right
+
+rule SubstituteType
+derives
+	G |- var Type t ==> var Type result
+from
+	$result := $t 
+
+rule SubstituteTypeVariable
+derives
+	G |- var TypeVariable v ==> var Type result
+from
+	(
+	$result := clone((Type) env(G, $v.typevarName))
+	G |- $result ==> $result // recursive
+	or
+	$result := $v
+	)
+
+rule SubstituteArrowType
+derives
+	G |- var ArrowType a ==> var Type result
+from
+	var Type newLeft
+	var Type newRight
+	G |- $a.left ==> $newLeft
+	G |- $a.right ==> $newRight
+	// substitution already clones
+	$a.left := $newLeft
+	$a.right := $newRight
+	$result := $a
+
+rule TParam
+derives
+	G |- var Parameter p : var Type t
+from
+	(
+		// if the parameter has already a type, use that
+		$p.type != null
+		$t := $p.type
+		or
+		// otherwise we create a type variable with a fresh name
+		$t := new TypeVariable(typevarName := newname('X'))
+	)
+
+// not used
+axiom TTerm
+	G |- var Term term : var Type t
+
+rule TIntConstant
+derives
+	G |- var IntConstant i : var Type t
+from
+	$t := new IntType()
+
+rule TStringConstant
+derives
+	G |- var StringConstant s : var Type t
+from
+	$t := new StringType()
+
+rule TArithmetics
+derives
+	G |- var Arithmetics ar : var Type int
+from
+	var Type termType
+	G |- $ar.term : $termType
+	G |- $termType == new IntType()
+	G |- $termType ==> $int
+
+rule TAbstraction
+derives
+	G |- var Abstraction fun : var Type t
+from
+	// type of the param
+	var Type paramType
+	G |- $fun.param : $paramType
+	// type of the body with assumption for param
+	var Type bodyType
+	G += $fun.param -> $paramType
+	G |- $fun.term : $bodyType
+	G -= $fun.param
+	// perform substitutions
+	G |- $paramType ==> $paramType
+	G |- $bodyType ==> $bodyType
+	// build the result arrow type
+	$t := new ArrowType(left := clone($paramType), 
+		right := clone($bodyType))
+
+rule TVariable
+derives
+	G |- var Variable v : var Type t
+from
+	$t := (Type) env(G, $v.ref)
+	// perform possible substitutions
+	G |- $t ==> $t
+
+rule TApplication
+derives
+	G |- var Application a : var Type t
+from
+	var Type funType
+	G |- $a.fun : $funType
+
+	// a generic arrow type
+	var ArrowType genericArrowType :=
+		new ArrowType
+			(left := new TypeVariable(typevarName := newname('X')),
+			 right := new TypeVariable(typevarName := newname('X')))
+
+	// make sure $funType is an arrow type
+	G |- $funType == $genericArrowType
+	G |- $funType ==> $genericArrowType
+
+	var Type argType
+	G |- $a.arg : $argType
+
+	// make sure that the left unifies with arg type
+	G |- $genericArrowType.left == $argType
+	G |- $genericArrowType ==> $genericArrowType
+	$t := $genericArrowType.right
+
+rule TProgramOk
+derives
+	G |- var Program p : 'ok'
+from
+	var Type t
+	G |- $p.term : $t

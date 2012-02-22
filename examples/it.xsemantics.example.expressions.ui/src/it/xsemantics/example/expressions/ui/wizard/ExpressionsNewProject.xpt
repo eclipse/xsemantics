@@ -1,0 +1,18 @@
+«IMPORT it::xsemantics::example::expressions::ui::wizard»
+
+«DEFINE main FOR ExpressionsProjectInfo»
+«EXPAND model FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR ExpressionsProjectInfo»
+«FILE "src/expressions/Example.expressions"-»
+/*
+ * This is an example file for expressions DSL
+ */
+
+i = 10 - 5 * 1
+j = i * i / 20
+s = 'foo' + 5
+«ENDFILE»
+«ENDDEFINE»
+

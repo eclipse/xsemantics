@@ -1,0 +1,13 @@
+// each subclass adds fields
+
+class A {
+	A a;
+}
+
+class B extends A {
+	Object b;
+}
+
+class C extends B {
+	Object c;
+}

@@ -1,0 +1,53 @@
+system it.xsemantics.test.ruleinvocation.ecore.TypeSystem
+
+import org.eclipse.emf.ecore.*
+	
+judgments {
+	type |- EClass c1 : EObject o1
+	etype ||- EObject o2 : output EClass
+	etype2 |~ EObject o3 : output EClass
+	etype3 |~ EObject o4 : output EClass : output EStructuralFeature
+	etypeWithVarDeclAsOutputArg ||~ EObject o : output EClass
+}
+
+rule EClassEObject derives
+	G |- EClass eClass : EObject object
+from {
+	// cannot pass input param as output arg
+	// G ||- object : eClass 
+	var EClass eClassResult
+	G ||- object : eClassResult
+	G |- eClass : object.eClass
+}
+
+rule EClassEClass derives
+	G |- EClass eClass1 : EClass eClass2
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass1 == eC
+}
+
+axiom EObjectEClass
+	G ||- EObject eObject : eObject.eClass
+
+rule EObjectEClass2 derives
+	G |~ EObject eObject : EClass eClass
+from {
+	G ||- eObject : eClass
+}
+
+rule EObjectEClassEStructuralFeature derives
+	G |~ EObject eObject : EClass eClass : EStructuralFeature feat
+from {
+	G |~ eObject : eClass : feat
+}
+
+rule WithVarDeclAsOutputArg 
+	G ||~ EObject o : EClass result
+from {
+	G ||- o : var EClass temp
+	result = temp
+}

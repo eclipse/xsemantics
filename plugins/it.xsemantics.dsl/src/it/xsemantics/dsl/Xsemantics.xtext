@@ -1,0 +1,170 @@
+grammar it.xsemantics.dsl.Xsemantics with org.eclipse.xtext.xbase.Xbase
+
+generate xsemantics "http://xsemantics.sf.net/Xsemantics"
+
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+
+XsemanticsSystem:
+	'system' name=QualifiedName
+	imports += Import*
+	('judgments' '{'
+		judgmentDescriptions += JudgmentDescription+
+	'}')?
+	rules+=Rule*
+	checkrules+=CheckRule*
+;
+
+Import:
+	'import' importedNamespace = QualifiedNameWithWildcard
+;
+
+JudgmentDescription:
+	name=ID 
+	judgmentSymbol=JudgmentSymbol
+	judgmentParameters+=JudgmentParameter
+	(relationSymbols+=RelationSymbol
+	judgmentParameters+=JudgmentParameter)*
+	(error=ErrorSpecification)?
+;
+
+JudgmentParameter:
+	{OutputParameter} 'output' jvmTypeReference=JvmTypeReference |
+	{InputParameter} parameter=FullJvmFormalParameter
+;
+
+QualifiedNameWithWildcard:
+	QualifiedName '.*'?
+;
+
+Rule:
+	Axiom | RuleWithPremises;
+
+Axiom:
+	'axiom' name=ID conclusion=RuleConclusion;
+
+RuleWithPremises:
+	'rule' name=ID
+	('derives')?
+	conclusion=RuleConclusion
+	'from' premises=XBlockExpression
+;
+
+CheckRule:
+	'checkrule' name=ID 'for'
+	element=RuleParameter
+	'from' premises=XBlockExpression
+;
+
+RuleConclusion:
+	environment=Environment
+	judgmentSymbol=JudgmentSymbol
+	conclusionElements+=RuleConclusionElement
+	(relationSymbols+=RelationSymbol
+	conclusionElements+=RuleConclusionElement)*
+	(error=ErrorSpecification)?
+;
+
+XExpressionInsideBlock returns xbase::XExpression:
+	PremiseExpression
+;
+
+PremiseExpression returns xbase::XExpression:
+	TerminalPremiseExpression
+	=>({OrExpression.branches+=current} 'or' branches+=XExpressionInsideBlock)*
+;
+
+TerminalPremiseExpression returns xbase::XExpression:
+	RuleInvocation |
+	{Fail} 'fail' (error=ErrorSpecification)? |
+	XVariableDeclaration |
+	XExpression
+;
+
+XLiteral returns xbase::XExpression:
+	EnvironmentAccess |
+	XClosure |
+	XBooleanLiteral |
+	XIntLiteral |
+	XNullLiteral |
+	XStringLiteral |
+	XTypeLiteral
+;
+
+EnvironmentAccess returns xbase::XExpression:
+	{EnvironmentAccess} 'env' '(' 
+		environment=[Environment] ','
+		argument=XExpression ','
+		type=JvmTypeReference ')'
+;
+
+RuleInvocation:
+	=>environment=EnvironmentSpecification
+	judgmentSymbol=JudgmentSymbol
+	expressions+=RuleInvocationExpression
+	(relationSymbols+=RelationSymbol
+	expressions+=RuleInvocationExpression)*
+//	(error=ErrorSpecification)? we don't need it: we can use or fail error...
+;
+
+RuleInvocationExpression:
+	=>expression=(XVariableDeclaration | XExpression)
+;
+
+EnvironmentSpecification:
+	TerminalEnvironmentSpecification
+	=>({EnvironmentComposition.currentEnvironment = current}
+		EnvironmentComposition
+		subEnvironment=EnvironmentSpecification)*
+;
+
+TerminalEnvironmentSpecification returns EnvironmentSpecification:
+	{EmptyEnvironment} 'empty' |
+	{EnvironmentMapping} key=XExpression EnvironmentMapsTo value=XExpression |
+	EnvironmentReference
+;
+
+EnvironmentReference:
+	{EnvironmentReference} environment=[Environment]
+;
+
+Environment: name=ID;
+
+Comma:
+	','
+;
+
+EnvironmentComposition:
+	Comma
+;
+
+EnvironmentMapsTo:
+	'<-'
+;
+
+ErrorSpecification:
+	'error' error=XExpression
+	('source' source=XExpression)?
+	('feature' feature=XExpression)?
+;
+
+JudgmentSymbol:
+	'||-' | '|-' | '||~' | '|~' | '||=' | '|=' | '||>' | '|>'
+; 
+
+RelationSymbol:
+	'<!' | '!>' | '<<!' | '!>>' | '<~!' | '!~>' |
+	':' | '<:' | ':>' | '<<' | '>>' | '~~' |
+	'<|' | '|>' | '<-' | '-->' | '<~' | '~>'
+;
+
+RuleConclusionElement:
+	=>(RuleParameter) | ExpressionInConclusion
+;
+
+RuleParameter:
+	parameter=FullJvmFormalParameter
+;
+
+ExpressionInConclusion:
+	expression=XExpression
+;

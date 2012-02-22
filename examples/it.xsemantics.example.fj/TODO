@@ -1,0 +1,165 @@
+- Domainmodel.xtext (use crossreferences with qualidifed names?)
+
+- duplicate methods?
+
+- basic constants strings, int and bools
+
+- typechecker should also check subexpressions? YES
+see for instance class A extends A {} new A()
+if the type of new is not check we loop forever
+
+
+	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
+			Predicate<IScopedElement> filter, Function<IScopedElement, ICompletionProposal> proposalFactory) {
+		IScope scope = getScopeProvider().getScope(model, reference);
+		Iterable<IScopedElement> candidates = scope.getAllContents();
+		for (IScopedElement candidate: candidates) {
+			if (!acceptor.canAcceptMoreProposals())
+				return;
+			if (filter.apply(candidate)) {
+				acceptor.accept(proposalFactory.apply(candidate));
+			}
+		}
+	}
+	
+- some quick fix using the domainmodel example
+
+- remove debug print statements
+
+- code completion taking into consideration only applicable types
+
+- try to implement import
+
+XTEXT 1.0
+
+Wizard and project
+
+when completing this.m where m is a method, also add () ?
+
+rewrite junit tests using org.eclipse.xtext.junit (see CastTest)
+
+use injections for TypeSystem, TypeChecker, etc.
+
+java.lang.AssertionError: Cyclic resolution of lazy links : MethodCall.name->MethodCall.name
+	at org.eclipse.xtext.linking.lazy.LazyLinkingResource.getEObject(LazyLinkingResource.java:84)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getEObject(ResourceSetImpl.java:219)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:202)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:262)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eResolveProxy(BasicEObjectImpl.java:1483)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.getName(MethodCallImpl.java:95)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.caseSelection(FJTypeSystem.java:150)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.caseSelection(FJTypeSystem.java:1)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:293)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:96)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:82)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.getType(FJTypeSystem.java:194)
+	at it.xsemantics.example.fj.scoping.FJScopeProvider.scope_MethodCall_name(FJScopeProvider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.xtext.util.PolymorphicDispatcher.invoke(PolymorphicDispatcher.java:272)
+	at org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.polymorphicFindScopeForReferenceName(AbstractDeclarativeScopeProvider.java:136)
+	at org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.getScope(AbstractDeclarativeScopeProvider.java:98)
+	at it.xsemantics.example.fj.scoping.FJScopeProvider.getScope(FJScopeProvider.java:126)
+	at org.eclipse.xtext.linking.impl.DefaultLinkingService.getScope(DefaultLinkingService.java:49)
+	at org.eclipse.xtext.linking.impl.DefaultLinkingService.getLinkedObjects(DefaultLinkingService.java:103)
+	at org.eclipse.xtext.linking.lazy.LazyLinkingResource.getEObject(LazyLinkingResource.java:94)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getEObject(ResourceSetImpl.java:219)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:202)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:262)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eResolveProxy(BasicEObjectImpl.java:1483)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.getName(MethodCallImpl.java:95)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.eGet(MethodCallImpl.java:169)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1021)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1013)
+	at org.eclipse.emf.ecore.util.EContentsEList$FeatureIteratorImpl.hasNext(EContentsEList.java:409)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolveCrossReferences(EcoreUtil.java:307)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(EcoreUtil.java:287)
+	at org.eclipse.xtext.resource.impl.DefaultResourceDescription.getImportedNames(DefaultResourceDescription.java:97)
+	at org.eclipse.xtext.builder.builderState.BuilderStateUtil.create(BuilderStateUtil.java:28)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.createNew(PersistableResourceDescriptionsImpl.java:84)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.doUpdate(PersistableResourceDescriptionsImpl.java:60)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.doUpdate(PersistableResourceDescriptionsImpl.java:1)
+	at org.eclipse.xtext.builder.builderState.AbstractBuilderState.update(AbstractBuilderState.java:108)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.doBuild(XtextBuilder.java:151)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.fullBuild(XtextBuilder.java:180)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.build(XtextBuilder.java:78)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:629)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:172)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:282)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:363)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:545)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1975)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:524)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:123)
+	at org.eclipse.xtext.builder.impl.BuildScheduler$BuildJob.run(BuildScheduler.java:100)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+1    [Worker-2] ERROR org.eclipse.xtext.builder.impl.BuildScheduler  - Errors occurred during the build.
+org.eclipse.core.internal.resources.ResourceException: Errors occurred during the build.
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:547)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1975)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:524)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:123)
+	at org.eclipse.xtext.builder.impl.BuildScheduler$BuildJob.run(BuildScheduler.java:100)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Contains: Errors running builder 'Xtext Project Builder' on project 'fjprograms'.
+java.lang.AssertionError: Cyclic resolution of lazy links : MethodCall.name->MethodCall.name
+	at org.eclipse.xtext.linking.lazy.LazyLinkingResource.getEObject(LazyLinkingResource.java:84)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getEObject(ResourceSetImpl.java:219)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:202)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:262)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eResolveProxy(BasicEObjectImpl.java:1483)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.getName(MethodCallImpl.java:95)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.caseSelection(FJTypeSystem.java:150)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.caseSelection(FJTypeSystem.java:1)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:293)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:96)
+	at it.xsemantics.example.fj.fj.util.FjSwitch.doSwitch(FjSwitch.java:82)
+	at it.xsemantics.example.fj.typing.FJTypeSystem.getType(FJTypeSystem.java:194)
+	at it.xsemantics.example.fj.scoping.FJScopeProvider.scope_MethodCall_name(FJScopeProvider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.xtext.util.PolymorphicDispatcher.invoke(PolymorphicDispatcher.java:272)
+	at org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.polymorphicFindScopeForReferenceName(AbstractDeclarativeScopeProvider.java:136)
+	at org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.getScope(AbstractDeclarativeScopeProvider.java:98)
+	at it.xsemantics.example.fj.scoping.FJScopeProvider.getScope(FJScopeProvider.java:126)
+	at org.eclipse.xtext.linking.impl.DefaultLinkingService.getScope(DefaultLinkingService.java:49)
+	at org.eclipse.xtext.linking.impl.DefaultLinkingService.getLinkedObjects(DefaultLinkingService.java:103)
+	at org.eclipse.xtext.linking.lazy.LazyLinkingResource.getEObject(LazyLinkingResource.java:94)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getEObject(ResourceSetImpl.java:219)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:202)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolve(EcoreUtil.java:262)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eResolveProxy(BasicEObjectImpl.java:1483)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.getName(MethodCallImpl.java:95)
+	at it.xsemantics.example.fj.fj.impl.MethodCallImpl.eGet(MethodCallImpl.java:169)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1021)
+	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1013)
+	at org.eclipse.emf.ecore.util.EContentsEList$FeatureIteratorImpl.hasNext(EContentsEList.java:409)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolveCrossReferences(EcoreUtil.java:307)
+	at org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(EcoreUtil.java:287)
+	at org.eclipse.xtext.resource.impl.DefaultResourceDescription.getImportedNames(DefaultResourceDescription.java:97)
+	at org.eclipse.xtext.builder.builderState.BuilderStateUtil.create(BuilderStateUtil.java:28)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.createNew(PersistableResourceDescriptionsImpl.java:84)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.doUpdate(PersistableResourceDescriptionsImpl.java:60)
+	at org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.doUpdate(PersistableResourceDescriptionsImpl.java:1)
+	at org.eclipse.xtext.builder.builderState.AbstractBuilderState.update(AbstractBuilderState.java:108)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.doBuild(XtextBuilder.java:151)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.fullBuild(XtextBuilder.java:180)
+	at org.eclipse.xtext.builder.impl.XtextBuilder.build(XtextBuilder.java:78)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:629)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:172)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:282)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:363)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:545)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1975)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:524)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:123)
+	at org.eclipse.xtext.builder.impl.BuildScheduler$BuildJob.run(BuildScheduler.java:100)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+implement Type as a base class and then have BasicType and ClassType

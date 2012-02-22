@@ -1,0 +1,17 @@
+// each subclass overrides a method
+
+class A {
+	A a;
+	A m() { return new A(); }
+	A n() { return new A(); }
+}
+
+class B extends A {
+	Object b;
+	A m() { return new B(); }
+}
+
+class C extends B {
+	Object c;
+	A n() { return new C(); }
+}

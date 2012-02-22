@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSemantics Lambda Example
+Bundle-Vendor: Lorenzo Bettini
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: it.xsemantics.example.lambda;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="2.2.1";visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ com.ibm.icu;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ it.xsemantics.runtime;bundle-version="1.0.0";visibility:=reexport
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: it.xsemantics.example.lambda,
+ it.xsemantics.example.lambda.formatting,
+ it.xsemantics.example.lambda.lambda,
+ it.xsemantics.example.lambda.lambda.impl,
+ it.xsemantics.example.lambda.lambda.util,
+ it.xsemantics.example.lambda.parser.antlr,
+ it.xsemantics.example.lambda.parser.antlr.internal,
+ it.xsemantics.example.lambda.scoping,
+ it.xsemantics.example.lambda.serializer,
+ it.xsemantics.example.lambda.services,
+ it.xsemantics.example.lambda.validation,
+ it.xsemantics.example.lambda.xsemantics
+
