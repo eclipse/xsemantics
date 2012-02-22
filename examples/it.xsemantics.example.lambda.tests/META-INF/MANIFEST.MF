@@ -21,4 +21,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: it.xsemantics.example.lambda.tests.util
+Export-Package: it.xsemantics.example.lambda,
+ it.xsemantics.example.lambda.tests,
+ it.xsemantics.example.lambda.tests.util

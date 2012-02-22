@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 	XsemanticsDslAllTests.class,
 	XsemanticsRuntimeAllTests.class,
 	XsemanticsGeneratorAllTests.class,
-	XsemanticsGeneratedTypeSystemsAllTests.class
+	XsemanticsGeneratedTypeSystemsAllTests.class,
+	XsemanticsExamplesAllTests.class
 })
 public class XsemanticsAllTests {
 
