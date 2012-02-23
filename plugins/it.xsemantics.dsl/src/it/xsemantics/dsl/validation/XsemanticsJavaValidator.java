@@ -265,10 +265,10 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		List<Rule> rulesOfTheSameKind = xsemanticsUtils
 				.getRulesOfTheSameKind(rule);
 		if (rulesOfTheSameKind.size() > 1) {
-			TupleType tupleType = typingSystem.getTupleType(rule);
+			TupleType tupleType = typingSystem.getInputTypes(rule);
 			for (Rule rule2 : rulesOfTheSameKind) {
 				if (rule2 != rule) {
-					TupleType tupleType2 = typingSystem.getTupleType(rule2);
+					TupleType tupleType2 = typingSystem.getInputTypes(rule2);
 					if (subtyping.equals(tupleType, tupleType2)) {
 						error("Duplicate rule of the same kind with parameters: "
 								+ tupleTypeRepresentation(tupleType),

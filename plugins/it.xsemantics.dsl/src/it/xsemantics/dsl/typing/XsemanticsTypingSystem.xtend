@@ -1,11 +1,11 @@
 package it.xsemantics.dsl.typing
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.Rule
-import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocationExpression
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import org.eclipse.emf.ecore.EObject
@@ -30,6 +30,8 @@ class XsemanticsTypingSystem {
 	@Inject
 	private TypeReferences typeReferences
 	
+	@Inject extension XsemanticsUtils
+	
 	def JvmTypeReference getType(EObject element) {
 		switch element {
 			ExpressionInConclusion: typeProvider.getType(element.expression)
@@ -42,13 +44,12 @@ class XsemanticsTypingSystem {
 		}
 	}
 	
-	def TupleType getTupleType(Rule rule) {
-		val type = new TupleType();
-		for (RuleConclusionElement ruleConclusionElement : rule.getConclusion()
-				.getConclusionElements()) {
-			type.add(getType(ruleConclusionElement));
-		}
-		return type;
+	def TupleType getInputTypes(Rule rule) {
+		val tupleType = new TupleType();
+		rule.inputParams.forEach [
+			tupleType.add(it.getType)
+		]
+		return tupleType;
 	}
 	
 	def isBooleanPremise(XExpression expression) {

@@ -670,6 +670,23 @@ class XsemanticsTestFiles {
 		G |- Object b1 <: Integer i2
 	'''
 	
+	def testRulesOfTheSameKindWithSameInputArgumentTypes() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- Object o1 : output Object
+	}
+	
+	axiom Type1
+		G |- String s1 : Integer i2
+	
+	// output params do not make two rules different
+	axiom Type2
+		G |- String b1 : String i2
+	
+	'''
+	
 	def testRuleWithErrorSpecifications() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	

@@ -193,6 +193,19 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"));
 	}
 
+	public void testRulesOfTheSameKindWithSameInputArgumentTypes()
+			throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testRulesOfTheSameKindWithSameInputArgumentTypes());
+		validate.assertAll(
+				AssertableDiagnostics
+						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+								"Duplicate rule of the same kind with parameters: java.lang.String"),
+				AssertableDiagnostics
+						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+								"Duplicate rule of the same kind with parameters: java.lang.String"));
+	}
+
 	public void testErrorSpecifications() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRuleWithErrorSpecifications()));
@@ -301,7 +314,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				IssueCodes.RETURN_NOT_ALLOWED,
 				"Return statements are not allowed here"));
 	}
-	
+
 	public void testWrongThrowInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongThrowInPremises());
