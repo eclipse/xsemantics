@@ -38,8 +38,8 @@ class ExpressionsTypingTests extends ExpressionsBaseTests {
 			"IntType",
 '''
 ArithmeticSigned: [] |- -('1') : IntType
- StringLiteral: [expected <- IntType] |- '1' : IntType
-  StringToInt: [expected <- IntType] |~ '1' |> IntType''')
+ StringLiteral: ['expected' <- IntType] |- '1' : IntType
+  StringToInt: ['expected' <- IntType] |~ '1' |> IntType''')
 	}
 	
 	@Test
@@ -63,8 +63,8 @@ failed: cannot type -('zzz')
 			'''i = !('true')''', 0, "BooleanType",
 '''
 BooleanNegation: [] |- !('true') : BooleanType
- StringLiteral: [expected <- BooleanType] |- 'true' : BooleanType
-  StringToBool: [expected <- BooleanType] |~ 'true' |> BooleanType'''
+ StringLiteral: ['expected' <- BooleanType] |- 'true' : BooleanType
+  StringToBool: ['expected' <- BooleanType] |~ 'true' |> BooleanType'''
 		)
 	}
 	

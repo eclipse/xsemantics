@@ -41,8 +41,8 @@ class ExpressionsFirstInterpreterTests extends ExpressionsInterpreterTests {
 	@Test
 	override void testMixedPlusNonRequestedInt() {
 		assertResultAndTrace('''i = '10' + (6 / 3) ''', 0, "102",
-'''InterpretPlus: [] |- '10' + (6 / 3) ~> 102
- InterpretStringLiteral: [] |- '10' ~> 10
+'''InterpretPlus: [] |- '10' + (6 / 3) ~> '102'
+ InterpretStringLiteral: [] |- '10' ~> '10'
  InterpretMultiOrDiv: [] |- 6 / 3 ~> 2
   InterpretNumberLiteral: [] |- 6 ~> 6
   InterpretNumberLiteral: [] |- 3 ~> 3'''			
@@ -82,9 +82,9 @@ InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
   InterpretNumberLiteral: [] |- 1 ~> 1
   InterpretNumberLiteral: [] |- 2 ~> 2
  InterpretComparison: [] |- 'f0' == ('f' + 0) ~> true
-  InterpretStringLiteral: [] |- 'f0' ~> f0
-  InterpretPlus: [] |- 'f' + 0 ~> f0
-   InterpretStringLiteral: [] |- 'f' ~> f
+  InterpretStringLiteral: [] |- 'f0' ~> 'f0'
+  InterpretPlus: [] |- 'f' + 0 ~> 'f0'
+   InterpretStringLiteral: [] |- 'f' ~> 'f'
    InterpretNumberLiteral: [] |- 0 ~> 0'''
 		)
 	}

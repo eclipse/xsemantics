@@ -116,24 +116,24 @@ class ExpressionsInterpreterTests extends ExpressionsBaseTests {
 	@Test
 	def void testMixedPlusNonRequestedInt() {
 		assertResultAndTrace('''i = '10' + (6 / 3) ''', 0, "102",
-'''InterpretPlus: [] |- '10' + (6 / 3) ~> 102
- InterpretStringLiteral: [] |- '10' ~> 10
+'''InterpretPlus: [] |- '10' + (6 / 3) ~> '102'
+ InterpretStringLiteral: [] |- '10' ~> '10'
  InterpretMultiOrDiv: [] |- 6 / 3 ~> 2
-  InterpretNumberLiteral: [expected <- IntType] |- 6 ~> 6
-  InterpretNumberLiteral: [expected <- IntType] |- 3 ~> 3'''			
+  InterpretNumberLiteral: ['expected' <- IntType] |- 6 ~> 6
+  InterpretNumberLiteral: ['expected' <- IntType] |- 3 ~> 3'''			
 		)
 	}
 
 	@Test
 	def void testMixedPlusRequestedInt() {
 		assertResultAndTrace('''i = 'foo' + '10' * (6 / 3) ''', 0, "foo20",
-'''InterpretPlus: [] |- 'foo' + '10' * (6 / 3) ~> foo20
- InterpretStringLiteral: [] |- 'foo' ~> foo
+'''InterpretPlus: [] |- 'foo' + '10' * (6 / 3) ~> 'foo20'
+ InterpretStringLiteral: [] |- 'foo' ~> 'foo'
  InterpretMultiOrDiv: [] |- '10' * (6 / 3) ~> 20
-  InterpretStringLiteral: [expected <- IntType] |- '10' ~> 10
-  InterpretMultiOrDiv: [expected <- IntType] |- 6 / 3 ~> 2
-   InterpretNumberLiteral: [expected <- IntType] |- 6 ~> 6
-   InterpretNumberLiteral: [expected <- IntType] |- 3 ~> 3'''			
+  InterpretStringLiteral: ['expected' <- IntType] |- '10' ~> 10
+  InterpretMultiOrDiv: ['expected' <- IntType] |- 6 / 3 ~> 2
+   InterpretNumberLiteral: ['expected' <- IntType] |- 6 ~> 6
+   InterpretNumberLiteral: ['expected' <- IntType] |- 3 ~> 3'''			
 		)
 	}
 	
@@ -144,16 +144,16 @@ class ExpressionsInterpreterTests extends ExpressionsBaseTests {
 		i = b && (false || b)''', 1, true,
 '''
 InterpretAndOr: [] |- b && (false || b) ~> true
- InterpretVariableRefenrence: [expected <- BooleanType] |- b ~> true
-  InterpretAndOr: [expected <- BooleanType] |- true && 'true' ~> true
-   InterpretBooleanLiteral: [expected <- BooleanType] |- true ~> true
-   InterpretStringLiteral: [expected <- BooleanType] |- 'true' ~> true
- InterpretAndOr: [expected <- BooleanType] |- false || b ~> true
-  InterpretBooleanLiteral: [expected <- BooleanType] |- false ~> false
-  InterpretVariableRefenrence: [expected <- BooleanType] |- b ~> true
-   InterpretAndOr: [expected <- BooleanType] |- true && 'true' ~> true
-    InterpretBooleanLiteral: [expected <- BooleanType] |- true ~> true
-    InterpretStringLiteral: [expected <- BooleanType] |- 'true' ~> true''')
+ InterpretVariableRefenrence: ['expected' <- BooleanType] |- b ~> true
+  InterpretAndOr: ['expected' <- BooleanType] |- true && 'true' ~> true
+   InterpretBooleanLiteral: ['expected' <- BooleanType] |- true ~> true
+   InterpretStringLiteral: ['expected' <- BooleanType] |- 'true' ~> true
+ InterpretAndOr: ['expected' <- BooleanType] |- false || b ~> true
+  InterpretBooleanLiteral: ['expected' <- BooleanType] |- false ~> false
+  InterpretVariableRefenrence: ['expected' <- BooleanType] |- b ~> true
+   InterpretAndOr: ['expected' <- BooleanType] |- true && 'true' ~> true
+    InterpretBooleanLiteral: ['expected' <- BooleanType] |- true ~> true
+    InterpretStringLiteral: ['expected' <- BooleanType] |- 'true' ~> true''')
 	}
 	
 	@Test
@@ -161,13 +161,13 @@ InterpretAndOr: [] |- b && (false || b) ~> true
 		assertResultAndTrace('''d = (1 < 2) && ('f0' == ('f' + 0))''', 0, true,
 '''
 InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
- InterpretComparison: [expected <- BooleanType] |- 1 < 2 ~> true
+ InterpretComparison: ['expected' <- BooleanType] |- 1 < 2 ~> true
   InterpretNumberLiteral: [] |- 1 ~> 1
   InterpretNumberLiteral: [] |- 2 ~> 2
- InterpretComparison: [expected <- BooleanType] |- 'f0' == ('f' + 0) ~> true
-  InterpretStringLiteral: [] |- 'f0' ~> f0
-  InterpretPlus: [] |- 'f' + 0 ~> f0
-   InterpretStringLiteral: [] |- 'f' ~> f
+ InterpretComparison: ['expected' <- BooleanType] |- 'f0' == ('f' + 0) ~> true
+  InterpretStringLiteral: [] |- 'f0' ~> 'f0'
+  InterpretPlus: [] |- 'f' + 0 ~> 'f0'
+   InterpretStringLiteral: [] |- 'f' ~> 'f'
    InterpretNumberLiteral: [] |- 0 ~> 0'''
 		)
 	}
