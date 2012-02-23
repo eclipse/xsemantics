@@ -78,8 +78,8 @@ from {
 rule Comparison
 	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
 from {
-	G |- comparison.left : var Type leftType
-	G |- comparison.right : var Type rightType
+	empty |- comparison.left : var Type leftType
+	empty |- comparison.right : var Type rightType
 	
 	(leftType instanceof IntType && rightType instanceof IntType) ||
 	(leftType instanceof StringType && rightType instanceof StringType)
@@ -213,8 +213,8 @@ from {
 rule InterpretComparison
 	G |- Comparison comparison ~> Boolean result
 from {
-	G |- comparison.left ~> var Object leftResult
-	G |- comparison.right ~> var Object rightResult
+	empty |- comparison.left ~> var Object leftResult
+	empty |- comparison.right ~> var Object rightResult
 	
 	if (leftResult instanceof String && rightResult instanceof String) {
 		var leftString = leftResult.toString

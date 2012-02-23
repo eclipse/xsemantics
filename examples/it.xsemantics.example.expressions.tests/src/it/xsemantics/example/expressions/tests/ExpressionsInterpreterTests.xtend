@@ -156,6 +156,22 @@ InterpretAndOr: [] |- b && (false || b) ~> true
     InterpretStringLiteral: [expected <- BooleanType] |- 'true' ~> true''')
 	}
 	
+	@Test
+	def void testInterpretAndOfComparisons() {
+		assertResultAndTrace('''d = (1 < 2) && ('f0' == ('f' + 0))''', 0, true,
+'''
+InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
+ InterpretComparison: [expected <- BooleanType] |- 1 < 2 ~> true
+  InterpretNumberLiteral: [] |- 1 ~> 1
+  InterpretNumberLiteral: [] |- 2 ~> 2
+ InterpretComparison: [expected <- BooleanType] |- 'f0' == ('f' + 0) ~> true
+  InterpretStringLiteral: [] |- 'f0' ~> f0
+  InterpretPlus: [] |- 'f' + 0 ~> f0
+   InterpretStringLiteral: [] |- 'f' ~> f
+   InterpretNumberLiteral: [] |- 0 ~> 0'''
+		)
+	}
+	
 	def void assertResult(CharSequence program, int variableIndex, Object expectedResult) {
 		assertResultAndTrace(program, variableIndex, expectedResult, null)		
 	}

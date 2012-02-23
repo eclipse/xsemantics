@@ -534,17 +534,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		{
-		  /* G |- comparison.left : var Type leftType */
+		  /* empty |- comparison.left : var Type leftType */
 		  Expression _left = comparison.getLeft();
 		  Type leftType = null;
-		  Result<Type> result = typeInternal(G, _trace_, _left);
+		  Result<Type> result = typeInternal(emptyEnvironment(), _trace_, _left);
 		  checkAssignableTo(result.getFirst(), Type.class);
 		  leftType = (Type) result.getFirst();
 		  
-		  /* G |- comparison.right : var Type rightType */
+		  /* empty |- comparison.right : var Type rightType */
 		  Expression _right = comparison.getRight();
 		  Type rightType = null;
-		  Result<Type> result_1 = typeInternal(G, _trace_, _right);
+		  Result<Type> result_1 = typeInternal(emptyEnvironment(), _trace_, _right);
 		  checkAssignableTo(result_1.getFirst(), Type.class);
 		  rightType = (Type) result_1.getFirst();
 		  
@@ -1236,17 +1236,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Boolean result = null;
 		
 		{
-		  /* G |- comparison.left ~> var Object leftResult */
+		  /* empty |- comparison.left ~> var Object leftResult */
 		  Expression _left = comparison.getLeft();
 		  Object leftResult = null;
-		  Result<Object> result_1 = interpretInternal(G, _trace_, _left);
+		  Result<Object> result_1 = interpretInternal(emptyEnvironment(), _trace_, _left);
 		  checkAssignableTo(result_1.getFirst(), Object.class);
 		  leftResult = (Object) result_1.getFirst();
 		  
-		  /* G |- comparison.right ~> var Object rightResult */
+		  /* empty |- comparison.right ~> var Object rightResult */
 		  Expression _right = comparison.getRight();
 		  Object rightResult = null;
-		  Result<Object> result_2 = interpretInternal(G, _trace_, _right);
+		  Result<Object> result_2 = interpretInternal(emptyEnvironment(), _trace_, _right);
 		  checkAssignableTo(result_2.getFirst(), Object.class);
 		  rightResult = (Object) result_2.getFirst();
 		  
