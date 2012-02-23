@@ -6,10 +6,54 @@ package it.xsemantics.example.expressions.generator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
+import com.google.inject.Inject
+import it.xsemantics.example.expressions.typing.ExpressionsSemantics
+import it.xsemantics.example.expressions.expressions.Model
+import it.xsemantics.example.expressions.expressions.Variable
+import it.xsemantics.example.expressions.expressions.Expression
+import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.StringRepresentation
 
 class ExpressionsGenerator implements IGenerator {
 	
+	@Inject ExpressionsSemantics semantics
+	
+	@Inject extension TraceUtils
+	
+	@Inject extension StringRepresentation
+	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		//TODO implement me
+		val dotIndex = resource.URI.lastSegment.lastIndexOf('.')
+		val fileName = resource.URI.lastSegment.substring(0, dotIndex)
+		fsa.generateFile(
+			fileName + ".output",
+			compileModel(resource.contents.get(0) as Model)
+		)
+	}
+	
+	def compileModel(Model expModel) {
+		expModel.variables.map [ compileVariable ].join("\n\n")
+	}
+	
+	def compileVariable(Variable variable) {
+		'''
+		Variable: «variable.name»
+		«variable.expression.compileExpression»
+		'''
+	}
+	
+	def compileExpression(Expression exp) {
+		val typeTrace = new RuleApplicationTrace()
+		val interpreterTrace = new RuleApplicationTrace()
+		val type = semantics.type(null, typeTrace, exp)
+		val result = semantics.interpret(null, interpreterTrace, exp)
+		'''
+		type: «type.value.string»
+		type trace: «typeTrace.traceAsString»
+		
+		interpretation: «result.value.string»
+		interpretation trace: «interpreterTrace.traceAsString»
+		'''
 	}
 }
