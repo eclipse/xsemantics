@@ -35,20 +35,20 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
-public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
+public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.rules.NumeralLiteral";
 	public final static String BOOLEANLITERAL = "it.xsemantics.example.expressions.typing.rules.BooleanLiteral";
 	public final static String STRINGLITERAL = "it.xsemantics.example.expressions.typing.rules.StringLiteral";
 	public final static String MULTIORDIV = "it.xsemantics.example.expressions.typing.rules.MultiOrDiv";
 	public final static String MINUS = "it.xsemantics.example.expressions.typing.rules.Minus";
-	public final static String STRINGTOINT = "it.xsemantics.example.expressions.typing.rules.StringToInt";
-	public final static String STRINGTOBOOL = "it.xsemantics.example.expressions.typing.rules.StringToBool";
-	public final static String INTTOINT = "it.xsemantics.example.expressions.typing.rules.IntToInt";
 	public final static String PLUS = "it.xsemantics.example.expressions.typing.rules.Plus";
 	public final static String COMPARISON = "it.xsemantics.example.expressions.typing.rules.Comparison";
 	public final static String BOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.BooleanNegation";
 	public final static String ANDOR = "it.xsemantics.example.expressions.typing.rules.AndOr";
 	public final static String ARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.rules.ArithmeticSigned";
+	public final static String STRINGTOINT = "it.xsemantics.example.expressions.typing.rules.StringToInt";
+	public final static String STRINGTOBOOL = "it.xsemantics.example.expressions.typing.rules.StringToBool";
+	public final static String INTTOINT = "it.xsemantics.example.expressions.typing.rules.IntToInt";
 	public final static String VARIABLEREFERENCE = "it.xsemantics.example.expressions.typing.rules.VariableReference";
 	public final static String VARIABLE = "it.xsemantics.example.expressions.typing.rules.Variable";
 	public final static String INTERPRETNUMBERLITERAL = "it.xsemantics.example.expressions.typing.rules.InterpretNumberLiteral";
@@ -71,7 +71,7 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 	
 	protected PolymorphicDispatcher<Result<Object>> interpretDispatcher;
 
-	public ExpressionTypeSystem() {
+	public ExpressionsSemantics() {
 		init();
 	}
 
@@ -422,90 +422,6 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		return new Result<Type>(_createIntType_1);
 	}
 	
-	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final StringLiteral string, final IntType type) 
-			throws RuleFailedException {
-		try {
-			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-			Result<Boolean> _result_ = applyRuleStringToInt(G, _subtrace_, string, type);
-			addToTrace(_trace_, ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
-			addAsSubtrace(_trace_, _subtrace_);
-			return _result_;
-		} catch (Exception e_applyRuleStringToInt) {
-			coerceThrowException(STRINGTOINT,
-				e_applyRuleStringToInt, string, type);
-			return null;
-		}
-	}
-	
-	protected Result<Boolean> applyRuleStringToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final StringLiteral string, final IntType type) 
-			throws RuleFailedException {
-		
-		String _value = string.getValue();
-		Integer.parseInt(_value);
-		return new Result<Boolean>(true);
-	}
-	
-	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final StringLiteral string, final BooleanType type) 
-			throws RuleFailedException {
-		try {
-			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-			Result<Boolean> _result_ = applyRuleStringToBool(G, _subtrace_, string, type);
-			addToTrace(_trace_, ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
-			addAsSubtrace(_trace_, _subtrace_);
-			return _result_;
-		} catch (Exception e_applyRuleStringToBool) {
-			coerceThrowException(STRINGTOBOOL,
-				e_applyRuleStringToBool, string, type);
-			return null;
-		}
-	}
-	
-	protected Result<Boolean> applyRuleStringToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final StringLiteral string, final BooleanType type) 
-			throws RuleFailedException {
-		
-		boolean _operator_or = false;
-		String _value = string.getValue();
-		boolean _equalsIgnoreCase = _value.equalsIgnoreCase("true");
-		if (_equalsIgnoreCase) {
-		  _operator_or = true;
-		} else {
-		  String _value_1 = string.getValue();
-		  boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
-		  _operator_or = BooleanExtensions.operator_or(_equalsIgnoreCase, _equalsIgnoreCase_1);
-		}
-		/* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
-		if (!_operator_or) {
-		  sneakyThrowRuleFailedException("string.value.equalsIgnoreCase(\"true\") || string.value.equalsIgnoreCase(\"false\")");
-		}
-		return new Result<Boolean>(true);
-	}
-	
-	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final NumberLiteral number, final IntType type) 
-			throws RuleFailedException {
-		try {
-			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-			Result<Boolean> _result_ = applyRuleIntToInt(G, _subtrace_, number, type);
-			addToTrace(_trace_, ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type));
-			addAsSubtrace(_trace_, _subtrace_);
-			return _result_;
-		} catch (Exception e_applyRuleIntToInt) {
-			coerceThrowException(INTTOINT,
-				e_applyRuleIntToInt, number, type);
-			return null;
-		}
-	}
-	
-	protected Result<Boolean> applyRuleIntToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_,
-			final NumberLiteral number, final IntType type) 
-			throws RuleFailedException {
-		return new Result<Boolean>(true);
-	}
-	
 	protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
 			final Plus plus) 
 			throws RuleFailedException {
@@ -773,6 +689,90 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		}
 		IntType _createIntType_1 = ExpressionsFactory.eINSTANCE.createIntType();
 		return new Result<Type>(_createIntType_1);
+	}
+	
+	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final StringLiteral string, final IntType type) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Boolean> _result_ = applyRuleStringToInt(G, _subtrace_, string, type);
+			addToTrace(_trace_, ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleStringToInt) {
+			coerceThrowException(STRINGTOINT,
+				e_applyRuleStringToInt, string, type);
+			return null;
+		}
+	}
+	
+	protected Result<Boolean> applyRuleStringToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final StringLiteral string, final IntType type) 
+			throws RuleFailedException {
+		
+		String _value = string.getValue();
+		Integer.parseInt(_value);
+		return new Result<Boolean>(true);
+	}
+	
+	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final StringLiteral string, final BooleanType type) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Boolean> _result_ = applyRuleStringToBool(G, _subtrace_, string, type);
+			addToTrace(_trace_, ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleStringToBool) {
+			coerceThrowException(STRINGTOBOOL,
+				e_applyRuleStringToBool, string, type);
+			return null;
+		}
+	}
+	
+	protected Result<Boolean> applyRuleStringToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final StringLiteral string, final BooleanType type) 
+			throws RuleFailedException {
+		
+		boolean _operator_or = false;
+		String _value = string.getValue();
+		boolean _equalsIgnoreCase = _value.equalsIgnoreCase("true");
+		if (_equalsIgnoreCase) {
+		  _operator_or = true;
+		} else {
+		  String _value_1 = string.getValue();
+		  boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
+		  _operator_or = BooleanExtensions.operator_or(_equalsIgnoreCase, _equalsIgnoreCase_1);
+		}
+		/* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
+		if (!_operator_or) {
+		  sneakyThrowRuleFailedException("string.value.equalsIgnoreCase(\"true\") || string.value.equalsIgnoreCase(\"false\")");
+		}
+		return new Result<Boolean>(true);
+	}
+	
+	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final NumberLiteral number, final IntType type) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Boolean> _result_ = applyRuleIntToInt(G, _subtrace_, number, type);
+			addToTrace(_trace_, ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleIntToInt) {
+			coerceThrowException(INTTOINT,
+				e_applyRuleIntToInt, number, type);
+			return null;
+		}
+	}
+	
+	protected Result<Boolean> applyRuleIntToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final NumberLiteral number, final IntType type) 
+			throws RuleFailedException {
+		return new Result<Boolean>(true);
 	}
 	
 	protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
@@ -1250,13 +1250,13 @@ public class ExpressionTypeSystem extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_2.getFirst(), Object.class);
 		  rightResult = (Object) result_2.getFirst();
 		  
-		  boolean _operator_or = false;
-		  if ((leftResult instanceof String)) {
-		    _operator_or = true;
+		  boolean _operator_and = false;
+		  if (!(leftResult instanceof String)) {
+		    _operator_and = false;
 		  } else {
-		    _operator_or = BooleanExtensions.operator_or((leftResult instanceof String), (rightResult instanceof String));
+		    _operator_and = BooleanExtensions.operator_and((leftResult instanceof String), (rightResult instanceof String));
 		  }
-		  if (_operator_or) {
+		  if (_operator_and) {
 		    {
 		      String _string = leftResult.toString();
 		      String leftString = _string;

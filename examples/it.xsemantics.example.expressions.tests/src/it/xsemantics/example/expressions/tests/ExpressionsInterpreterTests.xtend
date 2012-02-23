@@ -1,7 +1,6 @@
 package it.xsemantics.example.expressions.tests
 
 import com.google.inject.Inject
-import it.xsemantics.example.expressions.ExpressionsInjectorProvider
 import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.runtime.util.TraceUtils
 import junit.framework.Assert
@@ -12,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(ExpressionsInjectorProvider))
+@InjectWith(typeof(ExpressionsInjectorProviderCustom))
 class ExpressionsInterpreterTests extends ExpressionsBaseTests {
 
 	@Inject extension ParseHelper<Model>
@@ -164,7 +163,7 @@ InterpretAndOr: [] |- b && (false || b) ~> true
 	def void assertResultAndTrace(CharSequence program, int variableIndex, 
 			Object expectedResult, CharSequence expectedTrace) {
 		val expression = program.parse.variables.get(variableIndex).expression
-		val result = typeSystem.interpret(null, trace, expression)
+		val result = semantics.interpret(null, trace, expression)
 		if (result.failed) {
 			Assert::fail("unexpected failure: " + 
 				result.ruleFailedException.failureTraceAsString

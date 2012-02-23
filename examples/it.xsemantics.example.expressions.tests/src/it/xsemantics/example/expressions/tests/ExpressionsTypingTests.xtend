@@ -1,8 +1,8 @@
 package it.xsemantics.example.expressions.tests
 
 import com.google.inject.Inject
-import it.xsemantics.example.expressions.ExpressionsInjectorProvider
 import it.xsemantics.example.expressions.expressions.Model
+import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.runtime.util.TraceUtils
 import junit.framework.Assert
 import org.eclipse.xtext.junit4.InjectWith
@@ -10,10 +10,9 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.runtime.StringRepresentation
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(ExpressionsInjectorProvider))
+@InjectWith(typeof(ExpressionsInjectorProviderCustom))
 class ExpressionsTypingTests extends ExpressionsBaseTests {
 
 	@Inject extension ParseHelper<Model>
@@ -139,7 +138,7 @@ failed: cannot type !('abc')
 	def void assertResultAndTrace(CharSequence program, int variableIndex, 
 			String expectedResult, CharSequence expectedTrace) {
 		val expression = program.parse.variables.get(variableIndex).expression
-		val result = typeSystem.type(null, trace, expression)
+		val result = semantics.type(null, trace, expression)
 		if (expectedResult != null) {
 			if (result.failed) {
 				Assert::fail("unexpected failure: " + 
@@ -155,9 +154,10 @@ failed: cannot type !('abc')
 					trace.traceAsString
 				)
 			}
-			Assert::assertEquals(expectedTrace.toString,
-				result.ruleFailedException.failureTraceAsString
-			)
+			if (expectedTrace != null)
+				Assert::assertEquals(expectedTrace.toString,
+					result.ruleFailedException.failureTraceAsString
+				)
 		}
 	}
 }

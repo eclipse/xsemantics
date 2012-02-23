@@ -2,7 +2,6 @@ package it.xsemantics.example.expressions.tests
 
 import com.google.inject.Inject
 import it.xsemantics.example.expressions.ExpressionsInjectorProvider
-import it.xsemantics.example.expressions.typing.ExpressionTypeSystem
 import it.xsemantics.runtime.RuleApplicationTrace
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -13,7 +12,7 @@ import org.junit.runner.RunWith
 @InjectWith(typeof(ExpressionsInjectorProvider))
 class ExpressionsBaseTests {
 
-	@Inject protected ExpressionTypeSystem typeSystem
+	@Inject protected IExpressionsSemantics semantics
 	
 	protected RuleApplicationTrace trace
 	

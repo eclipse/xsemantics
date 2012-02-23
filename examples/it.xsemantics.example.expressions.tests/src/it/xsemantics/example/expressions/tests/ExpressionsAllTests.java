@@ -13,7 +13,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	ExpressionsTypingTests.class,
-	ExpressionsInterpreterTests.class
+	ExpressionsInterpreterTests.class,
+	ExpressionsFirstTypingTests.class,
+	ExpressionsFirstInterpreterTests.class
 })
 public class ExpressionsAllTests {
 
