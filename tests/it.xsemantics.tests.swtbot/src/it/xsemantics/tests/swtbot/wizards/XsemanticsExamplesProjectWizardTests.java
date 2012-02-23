@@ -42,16 +42,16 @@ public class XsemanticsExamplesProjectWizardTests {
 	public static void beforeClass() throws Exception {
 		bot = new SWTWorkbenchBot();
 		bot.viewByTitle("Welcome").close();
-		
-		// Change the perspective via the Open Perspective dialog       
+
+		// Change the perspective via the Open Perspective dialog
 		bot.menu("Window").menu("Open Perspective").menu("Other...").click();
 		SWTBotShell openPerspectiveShell = bot.shell("Open Perspective");
 		openPerspectiveShell.activate();
-		 
+
 		// select the dialog
 		bot.table().select("Plug-in Development");
 		bot.button("OK").click();
-		
+
 		bot.viewByTitle("Error Log").close();
 		bot.viewByTitle("Problems").show();
 	}
@@ -76,6 +76,10 @@ public class XsemanticsExamplesProjectWizardTests {
 	@Test
 	public void canCreateANeweExpressionsProject() throws Exception {
 		createProjectAndAssertNoErrorMarker("Expressions Project");
+
+		// check that the Example.output is generated
+		getProjectTreeItem(TEST_PROJECT).expand().getNode("src-gen").expand()
+				.getNode("Example.output");
 	}
 
 	protected void createProjectAndAssertNoErrorMarker(String projectType)

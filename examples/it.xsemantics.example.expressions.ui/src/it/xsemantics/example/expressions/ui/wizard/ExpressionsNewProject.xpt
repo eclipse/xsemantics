@@ -5,14 +5,33 @@
 «ENDDEFINE»
 
 «DEFINE model FOR ExpressionsProjectInfo»
-«FILE "src/expressions/Example.expressions"-»
+«FILE "src/Example.expressions"-»
 /*
- * This is an example file for expressions DSL
+ * This is an example file for expressions DSL;
+ * You'll have an .output file automatically generated in
+ * ../src-gen/Example.output
+ * With type information and evaluation of expressions
  */
 
+// arithmetic expression
 i = 10 - 5 * 1
+
+// you can refer to previously defined variables
 j = i * i / 20
+
+// you can concatenate strings with numbers (automatically converted) 
 s = 'foo' + 5
+
+// string constants are converted to numbers when requested
+p = (5 * j) - (i + '100')
+
+// string constants are converted to booleans when requested
+c = (p < j) && ('true')
+
+// this will evaluate to true
+d = (p < j) && ('f0' == ('f' + 0))
+
+// try yourself :)
 «ENDFILE»
 «ENDDEFINE»
 
