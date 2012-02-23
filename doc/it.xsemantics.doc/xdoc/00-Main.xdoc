@@ -98,6 +98,23 @@ codelanguage-def[Xtend][
 codelanguage-def[Check][import, extension, this, create, cached, this, true, false, let, switch,
 	case, if, then, else, context, WARNING, ERROR]
 
+codelanguage-def[Xsemantics][
+	%% from Xbase
+	abstract,continue,
+	for,new,switch,
+	boolean,do,if,this,it,break,double,
+	byte,else,import,
+	case,enum,instanceof,
+	int,short,
+	char,
+	class,long,
+	float,super,while,typeof,as,
+	val, var,
+	%% from Xsemantics
+	system, judgments, output, axiom, rule, checkrule, derives, from,
+	or, fail, error, source, feature, env, empty
+	]
+
 chapter-ref[Introduction]
 
 chapter-ref[GettingStarted]

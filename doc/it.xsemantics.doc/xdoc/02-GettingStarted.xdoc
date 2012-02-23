@@ -1,3 +1,11 @@
 chapter:GettingStarted[Getting Started]
 
-To get started, you should first download ...
+To get started, you should first install Xsemantics plugins;
+you can use the update site:
+link[http://xsemantics.sourceforge.net/updatesite][http://xsemantics.sourceforge.net/updatesite]
+
+section:UsingXsemantics[Using Xsemantics]
+
+Before you start using Xsemantics for your Xtext language, you
+should add in your plugin project the following dependency:
+code[it.xsemantics.runtime].
