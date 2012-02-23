@@ -1,5 +1,7 @@
 chapter:GettingStarted[Getting Started]
 
+section:Install[Installation of Xsemantics]
+
 To get started, you should first install Xsemantics plugins;
 you can use the update site:
 link[http://xsemantics.sourceforge.net/updatesite][http://xsemantics.sourceforge.net/updatesite]
@@ -9,3 +11,26 @@ section:UsingXsemantics[Using Xsemantics]
 Before you start using Xsemantics for your Xtext language, you
 should add in your plugin project the following dependency:
 code[it.xsemantics.runtime].
+
+To check whether your settings work correctly,
+
+ol[
+	item[you can create an Xtext project,
+accepting the defaults;]
+	item[add the dependency
+code[it.xsemantics.runtime];]
+	item[create a file with extension code[xsemantics] in a subdirectory of one of your
+	source folders;]
+	item[give a name to your code[system], and save;]
+	item[you should now have in your project an additional folder code[xsemantics-gen],
+	where Xsemantics generates the Java file; make sure to set that folder as a source
+	folder (and don't forget to add it also to your code[build.properties] file.]
+]
+
+If you see something similar to the following screenshot you should be fine.
+
+img[images/first-xsemantics-file.png][ ][ ][width:90%]
+
+
+section:Syntax[Xsemantics Syntax]
+

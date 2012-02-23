@@ -3,63 +3,25 @@ chapter:Introduction[Introduction]
 XSemantics is a DSL (implemented in Xtext itself) for writing type systems, 
 reduction rules, interpreters (and in general relation rules) for languages 
 implemented in Xtext. 
-XSemantics then generates Java code that can be used in your language implemented in Xtext 
-for scoping and validation (it also generates a validator in Java). 
+A system definition in Xsemantics is a set of judgment rules which have a 
+conclusion and a set of premises; these rules can act on any
+Java object, though, typically, they will act on EObjects which are
+elements of your Xtext language.
+XSemantics then generates Java code that can be used in your language implemented 
+in Xtext for scoping and validation (it also generates a validator in Java). 
 
-In the following the different syntactical elements are explained by example.
+Xsemantics' language relies on Xbase, so that you have a rich
+syntax for the rules of your system, and you have access to all Java!
+You might want to take a look at link[http://www.eclipse.org/Xtext/documentation/2_1_0/199e-xbase-language-reference.php][Xbase
+language reference] before you start using Xsemantics.
 
-section:Links[References]
+Xsemantics is thought to be used by people who are at least a little familiar
+with formal type systems and operational semantics: it aims at providing
+a syntax which is close to the way deduction rules are written in a formal setting.
+Actually, Xsemantics rules are written in the other direction with respect
+to standard deduction rules: the conclusion come before the premises; this is just
+to make IDE tooling work better, and to give a more "programming" style to rules.
 
-The following is an link[http://www.google.com][external link] 
-and if you want to refer internally you can ref:Introduction[do so as well].You can even
-refer to Java code like this : codeRef[java.lang.String].
-
-section:CodeSections[Code Sections]
-
-A code section looks like this:
-
-code[Java][
-	class HelloWorld {
-		public void sayHello(String name) {
-			System.out.println("Hello "+name);
-		}
-	}
-]
-
-Note how the code is highlighted according to the language you choose.
-It is even possible to have different language configurations to get different coloring.
-
-section:Lists[Lists and Tables]
-
-Lists are very similar to HTML.
-We've got ordered lists:
-
-ol[
-	item[First]
-	item[Second]
-	item[Third]
-]
-
-and unordered lists:
-
-ul[
-	item[Foo]
-	item[Bar]
-	item[Baz]
-]
-
-section:Tables[Tables]
-
-table[
-tr[ td[This is a table cell] td[and another one]]
-tr[ td[table rows can contain many cells] td[but each row has to contain the same number of cells]]
-]
-
-section:TODO[TODO]
-
-todo[document todo elements]
-
-section:Images[Images]
-
-Images are not fully supported by the new Xtend generator,
-but will of course be readded soon :-)
+In the following we will first give a brief description of
+the shape of syntactic elements of Xsemantics, and then we will continue
+with some examples.
