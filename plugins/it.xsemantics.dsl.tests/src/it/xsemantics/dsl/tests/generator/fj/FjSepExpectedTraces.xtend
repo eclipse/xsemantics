@@ -190,5 +190,5 @@ Diagnostic ERROR "Cyclic hierarchy for B" at Program.classes[1]->Class'B'
 Diagnostic ERROR "Cyclic hierarchy for C" at Program.classes[2]->Class'C' '''
 
 	override validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.rules.CheckClass "failed: CheckClass:  |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
+'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.rules.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
 }

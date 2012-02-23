@@ -136,7 +136,7 @@ public class StringRepresentation {
 
 	protected String stringRep(RuleEnvironment environment) {
 		if (environment.empty())
-			return "";
+			return "[]";
 		StringBuilder buffer = new StringBuilder();
 		Set<Entry<Object, Object>> entrySet = environment.getEnvironment()
 				.entrySet();

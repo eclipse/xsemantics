@@ -37,7 +37,7 @@ class StringRepresentationTests extends XsemanticsBaseTest {
 	@Test
 	def testEmptyEnvironment() {
 		testFiles.testSimpleRule.firstRule
-		assertEqualsStrings("", new RuleEnvironment().string)
+		assertEqualsStrings("[]", new RuleEnvironment().string)
 	}
 	
 	@Test

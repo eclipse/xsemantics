@@ -45,26 +45,26 @@ Subclassing: [] |- class B extends A { } <| class A { }
 	
 	def failSubclasses()
 '''
-failed: Subclassing:  |- class A { } <| class B extends A { }
+failed: Subclassing: [] |- class A { } <| class B extends A { }
  failed: class1.superclass != null'''
 	
 	def failSubtypesBasic()
 '''
-failed: BasicSubtyping:  |- String <: int
+failed: BasicSubtyping: [] |- String <: int
  failed: left.basic.equals(right.basic)'''
 	
 	def failSubtypesClasses()
 '''
-failed: ClassSubtyping:  |- A <: B
- failed: Subclassing:  |- class A { } <| class B extends A { }
+failed: ClassSubtyping: [] |- A <: B
+ failed: Subclassing: [] |- class A { } <| class B extends A { }
   failed: class1.superclass != null'''
 
 	def failEqualsBasicType()
-'''failed: BasicEquals:  |- String ~~ int
+'''failed: BasicEquals: [] |- String ~~ int
  failed: left.basic.equals(right.basic)'''
 
 	def failEqualsClassType()
-'''failed: ClassEquals:  |- A ~~ B
+'''failed: ClassEquals: [] |- A ~~ B
  failed: left.classref == right.classref'''
 
   	def okSubtypesClasses()
@@ -267,19 +267,19 @@ TSelection: [] |- new A(10).f : int
  BasicEquals: [] |- String ~~ String'''
 
 	def validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.BasicSubtyping "failed: BasicSubtyping:  |- String <: int" at Program.classes[0]->Class'A'.members[0]->Field'i'.type->BasicType'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.BasicSubtyping "failed: BasicSubtyping: [] |- String <: int" at Program.classes[0]->Class'A'.members[0]->Field'i'.type->BasicType'''
 
 	def validateCheckNewWrongArgNum()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence "failed: SubtypeSequence:  |- new B(20, 'bar', 1) : [20, 'bar', 1] << [int i;, String s;]" at Program.main->New.args[2]->New'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new B(20, 'bar', 1) : [20, 'bar', 1] << [int i;, String s;]" at Program.main->New.args[2]->New'''
 	
 	def validateSubclassNotOverrideMethodChangingReturnType()
 '''NOT IMPLEMENTED'''
 
 	def validateCyclicClassHierarchy()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass:  |- class A extends C { }" at Program.classes[0]->Class'A'
-Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass:  |- class B extends A { }" at Program.classes[1]->Class'B'
-Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass:  |- class C extends B { }" at Program.classes[2]->Class'C' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'
+Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class B extends A { }" at Program.classes[1]->Class'B'
+Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class C extends B { }" at Program.classes[2]->Class'C' '''
 
 	def validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass:  |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
 }

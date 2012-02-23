@@ -44,7 +44,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testBasicTypeFails() {
 		assertFailureTrace(
 			system.unify(substitutions, createStringType, createIntType),
-			"failed: UnifyType:  |- subst{} |> String ~~ int ~> Type ~~ Type"
+			"failed: UnifyType: [] |- subst{} |> String ~~ int ~> Type ~~ Type"
 		)
 	}
 	
