@@ -3,6 +3,7 @@
  */
 package it.xsemantics.dsl.ui.labeling;
 
+import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.Axiom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Import;
@@ -13,6 +14,7 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -25,12 +27,20 @@ import com.google.inject.Inject;
 public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject
+	protected XsemanticsUtils utils;
+
+	@Inject
 	public XsemanticsLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
 	public String text(Rule rule) {
-		return rule.getName();
+		JudgmentDescription judgmentDescription = utils
+				.judgmentDescription(rule);
+		return rule.getName()
+				+ (judgmentDescription != null ? " ("
+						+ Strings.emptyIfNull(judgmentDescription.getName())
+						+ ")" : "");
 	}
 
 	public String text(CheckRule rule) {
