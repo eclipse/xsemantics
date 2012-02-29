@@ -1,0 +1,544 @@
+chapter:Syntax[Xsemantics Syntax]
+
+After giving your system a name, as seen in the previous example, the
+first thing to do is to declare the e[judgments] of your system;
+a judgment consists of
+
+ul[
+	item[a name, which has to be unique in the system;]
+	item[a e[judgment symbol] that can be chosen from some predefined symbols;]
+	item[the e[parameters] of the judgment; parameters of a judgments are separated by
+	a e[relation symbol] that can be chosen from some predefined symbols;]
+]
+
+The parameters can be
+
+ul[
+item[input parameters, in that case they are declared as Java parameters;]
+item[output parameters, in that case you use the keyword code[output] followed
+by the Java type of the output parameter.]
+]
+
+For instance, these are some examples of judgments, using the
+classes from EMF Ecore, and other Java classes
+
+code[Xsemantics][
+system my.test.System
+
+import org.eclipse.emf.ecore.*
+import java.util.*
+
+judgments {
+	type |- EObject obj : output EClassifier
+	subtype |- EObject left <: EObject right
+	interpret |- EObject exp ~> output EObject
+	// nonsense judgment, just a demo
+	foobar ||- List<EObject> objects |> output String <~ EClass context
+}
+]
+
+A judgment can have at least one input parameter, and at most two output
+parameters (the latter limitation does not seem to have an impact, since
+it is rare to want more than two ouput parameters, but of course, it is
+easy to remove this limitation in case).
+
+Once you declared the judgments of your system, you can start declaring the rules.
+
+Each rule consists of
+
+ul[
+item[a name, which has to be unique in the system;]
+item[a e[rule conclusion];]
+item[the e[premises] of the rule;]
+]
+
+The rule conclusion consists of
+
+ul[
+item[the name of the e[environment] of a rule (any identifier, see
+also ref:CodeGeneration[the section about rule environment]);]
+item[a e[judgment symbol];]
+item[the e[parameters] of the rules, which are separated by
+a e[relation symbol] that can be chosen from some predefined symbols;]
+]
+
+The things that make a rule belong to a specific judgment are, as you can
+imagine, the judgment symbol, the relation symbols (which separate the parameters);
+moreover the types of the parameters of a rule must be (Java) subtypes of the
+corresponding types of the judgment (or exactly the same Java types).
+Two rules belonging to the same judgment must differ for at least one input
+parameter's type.
+
+code[Xsemantics][
+rule MyFirstTypeRule  // a rule for the judgment 'type'
+	G |- EObject o : EClassifier result
+from { /* premises */ }
+
+rule MySecondTypeRule  // a rule for the judgment 'type'
+	// OK since EClass is a subclass of EObject
+	// and EClass extends EClassifier
+	G |- EClass o : EClass result
+from { /* premises */ }
+
+rule MyFirstWrongTypeRule  // a rule for the judgment 'type'
+	// ERROR: Notifier is not a subtype of EObject
+	G |- Notifier n : EClass result
+from { /* premises */ }
+
+rule MySecondWrongTypeRule  // a rule for the judgment 'type'
+	// ERROR: it differs from MyFirstTypeRule only for the
+	// output parameter type: EClassImpl
+	G |- EObject o : EClass result
+from { /* premises */ }
+
+rule MyFirstSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EObject o1 <: EObject o2
+from { /* premises */ }
+
+rule MySecondSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EClass c1 <: EClass c2
+from { /* premises */ }
+
+rule MyThirdSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EObject o1 <: EClass c2
+from { /* premises */ }
+]
+
+The premises of a rule which are specified in a code[from] block can be
+any Xbase expression, or a rule invocation.  If you think of a rule
+declaration as a function declaration, then a rule invocation corresponds
+to function invocation, thus you must specify the environment to pass
+to the rule, and the arguments, both input and output arguments.
+
+At runtime, the system will select the most appropriate rule according
+to the runtime types of the passed argument (similar to
+e[polymorphic dispatch] mechanism).
+
+In the premises you can assign values to the output parameters; and
+when you invoke another rule, upon return, the output arguments will have
+the values assigned in the invoked rule.
+
+If one of the premises fails, then the whole rule will fail, and in turn
+all the stack of rule invocation will fail.  If the premise is a boolean
+expression, it will fail if the expression evaluates to false
+(see also ref:CodeGeneration[the section about boolean expressions] for
+a more detailed explanation).  If the premise is a rule invocation,
+it will fail if the invoked rule fails.
+
+For instance, consider these implementations:
+
+code[Xsemantics][
+rule MyFirstTypeRule  // a rule for the judgment 'type'
+	G |- EObject o : EClassifier result
+from {
+	o.eClass != null
+	result = o.eClass
+}
+]
+
+This rules requires that the feature code[eClass] of the passed code[EObject]
+is not null, and the assigns the output parameter code[result].
+
+code[Xsemantics][
+rule MyFirstSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EObject o1 <: EObject o2
+from {
+	G |- o1 <: o2.eClass
+}
+]
+
+This rule simply invokes another rule (in this case of the same judgment), passing
+arguments (note that arguments can be any Xbase expression).
+
+code[Xsemantics][
+rule MyThirdSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EObject o1 <: EClass c2
+from {
+	var EClass o1Type
+	G |- o1 : o1Type
+	G |- o1Type <: c2
+}
+]
+
+This rule declares a local variable code[o1Type] which will be passed (as an output
+argument) to a rule invocation (of another judgment: indeed rules can invoke
+any other rule in the system, even belonging to a different judgment).
+If the rule invocation succeeds, the local variable code[o1Type] will contain
+the output result of the invoked rule.  Then, it will invoke another rule. 
+
+code[Xsemantics][
+rule MySecondSubtypeRule  // a rule for the judgment 'subtype'
+	G |- EClass c1 <: EClass c2
+from { /* premises */ }
+]
+
+The rule conclusion elements corresponding to output parameters can also
+be Xbase expressions; for instance we could have written (compare it with
+the above code for the same rule).
+
+code[Xsemantics][
+rule MyFirstTypeRule  // a rule for the judgment 'type'
+	G |- EObject o : o.eClass
+from {
+	o.eClass != null
+}
+]
+
+Moreover, if a rule does not require any premise, we can use a special
+form of rules, called indeed e[axiom]s
+
+code[Xsemantics][
+// assuming we don't want to do any check
+axiom MyFirstTypeRule  // a rule for the judgment 'type'
+	G |- EObject o : o.eClass
+]
+
+.
+
+section:Premises[Premises]
+
+The premises of an Xsemantics rule are considered in logical
+and relation and are verified in the same order they are specified
+in the block.
+
+If we want to have premises (block of premises) in logical or relation,
+we can use the operator code[or], which separates blocks of
+premises; if (and only if) one of the premises of the first block fails, we
+go to the second block, etc.
+
+section2:ExpressionsInPremises[Expressions in Premises]
+
+Xsemantics consider a Xbase expression as a boolean premise when it is
+used as a statement, i.e., it is not the right expression in
+an assignment, it is not the condition of a loop.  Moreover, this holds
+when the expression is used in a block, NOT in a closure block.
+It is crucial to understand when a boolean expression is considered
+as a premise since when a premise fails the whole rule fails.
+
+code[Xsemantics][
+...
+from {
+	a != b // boolean premise
+	var c = (a != b) // NOT boolean premise
+	if (a != b) ... // NOT boolean premise
+	list.forEach \[ a != b \] // NOT boolean premise
+	// but, be careful:
+	list.forEach \[ 
+		a != b // NOT boolean premise
+		{ a != b } // boolean premise
+	\] 
+}
+]
+
+section2:Environment[Rule Environment]
+
+The concept of rule environment is taken from the type theory
+(usually is denoted by the capital greek letter Gamma, that is why
+we usually use the letter G for the examples, but you can use any
+valid identifier).  It can be used to pass additional argument to rules.
+If you want to be sure to pass an empty environment when invoking a rule
+you can use the keyword code[empty].
+
+Furthermore, when passing an environment during a rule invocation, you
+can specify additional e[environment mapping], using the syntax
+code[key <- value], where you can use any Xbase expression;
+you can also pass an environment with additional
+mappings separated by a comma (or even build an environment from scratch
+by specifyin all the mappings, still separated by a comma); for instance
+code[G, x <- 'foo', y <- 10] or code[x <- o.eClass, y <- (o.eClass.name == 'foo')],
+etc.
+
+Note that when you pass an environment to a rule with additional mappings,
+you actually pass a brand new environment, thus you will not modify the
+current rule environment; if a mapping already exists in the current rule
+environment, in the brand new environment (and only there) the existing mapping
+will be overwritten.  Thus, the rule environment passed to a rule acts
+in a stack manner.
+
+Inside the premises, you can access the environment using the predefined
+function code[env] with the following syntax
+
+code[env(<environment ID>, <key>, <expected Java type>)]
+
+for instance,
+
+code[Xsemantics][
+rule MyFirstTypeRule  // a rule for the judgment 'type'
+	G |- EObject o : o.eClass
+from {
+	// search for the mapping for o.eClass.name
+	// and request it to be an instance of EClassifier
+	var i = env(G, o.eClass.name, EClassifier)
+}
+]
+
+The code[env] function will fail (and make the rule fail) if no
+mapping is found in the passed environment or if the mapped value
+is not an instance of the specified Java class.
+
+section2:ErrorSpecification[Error Specification]
+
+When a premise of a rule fails, the whole chain of rule invocation
+will fail, and the Java code generated by Xsemantics will generate
+some informative errors, which by default, will contain a string
+representation of the failed rules (or boolean expressions) which have
+failed and a string representation of the arguments
+(see also ref:StringRepresentation[]).
+
+However, usually you may want to customize error information genetated
+by your system; you can do this with a custom e[error specification]
+which consists of
+
+ul[
+item[code[error] and a string for the error]
+item[code[source] and an EObject specifying the object the error refers to
+(optional)]
+item[code[feature] and an EStructuralFeature specifying the feature of the object 
+containing the error (optional)]
+]
+
+Error specifications can appear
+
+ul[
+item[after a judgment, so that all rules belonging to that judgment
+will have errors generated according to the error specification]
+item[after a rule conclusion, in that case this will have the precedence
+over the judgment's error specification]
+item[after an explicit failure (ref:ExplicitFailure[])]
+]
+
+code[Xsemantics][
+judgments {
+	type |- EObject obj : output EClassifier
+		error "cannot type " + stringRep(obj)
+		source obj
+	subtype |- EObject left <: EObject right
+		error stringRep(left) + " is not a subtype of " + stringRep(right)
+}
+
+rule EClassCase
+	G |- EClass eClass : EClassifier result
+		error "cannot type EClass " + eClass.name
+			source eClass
+			feature EcorePackage::eINSTANCE.ENamedElement_Name
+from {...}
+]
+
+section2:ExplicitFailure[Explicit Failure]
+
+By using the keyword code[fail] you can implement an explicit failure
+of the current premise block; After the code[fail] it would be good
+to use also an error specification (ref:ErrorSpecification[]).  Indeed,
+explicit failure is really useful in conjunction with an error specification
+(to specify an informative error) and an code[or].  For instance,
+
+code[Xsemantics][
+o.eClass.EAllSuperTypes.contains(s)
+or
+fail 
+	error "my custom error"
+	source o
+]
+
+section2:StringRepresentation[String Representation]
+
+The classes generated by Xsemantics, and its runtime system, rely on
+the class codeRef[it.xsemantics.runtime.StringRepresentation] for generating
+a string corresponding to an object.  This will do its best to generate
+a good string representation; in particular, if the object to represent
+is an EObject which actually corresponds to a node in the model of the AST,
+it will rely on codeRef[org.eclipse.xtext.nodemodel.util.NodeModelUtils] Xtext
+class to use the string which corresponds to the object in the program.
+
+However, you can bind your own implementation of codeRef[it.xsemantics.runtime.StringRepresentation]
+in the runtime module 
+
+code[Java][
+public Class<? extends StringRepresentation> bindStringRepresentation() {
+	return MyDslStringRepresentation.class;
+}
+]
+
+In your custom implementation you can provide a string representation for the
+classes of your model; codeRef[it.xsemantics.runtime.StringRepresentation] relies
+on polymorphic dispatch, and you only need to implement methods code[stringRep]
+for specific classes of your model (actually for any Java class), e.g.,
+
+code[Java][
+public class MyDslStringRepresentation extends StringRepresentation {
+
+	protected String stringRep(MyModelClass e) {
+		return e.getName();
+	}
+
+	protected String stringRep(MyOtherModelClass e) {
+		return e.getFoo() + " - " e.getBar();
+	}
+
+	protected String stringRep(String s) {
+		return "'" + s + "'";
+	}
+}
+]
+
+Note that these methods are protected: if one needs to use 
+codeRef[it.xsemantics.runtime.StringRepresentation] directly, this class
+provides the public method code[String string(Object o)].
+
+In an Xsemantics system, you can get a string representation (through the
+injected codeRef[it.xsemantics.runtime.StringRepresentation]) by simply
+calling code[stringRep()]; this is useful for error specifications 
+(ref:ErrorSpecification[]), for instance
+
+code[Xsemantics][
+judgments {
+	type |- EObject obj : output EClassifier
+		error "cannot type " + stringRep(obj)
+}
+]
+
+section:CheckRules[Rules for Validator: checkrule]
+
+In a Xsemantics system you can also write special rules, e[checkrule]s, which
+do not belong to any judgment, and are then used to generate code[@Check] methods
+of the generated Java validator.
+
+Such rules are of the shape
+
+code[Xsemantics][
+checkrule RuleName for
+	JavaType objectToCheck
+from {
+	// premises
+}
+]
+
+The code[from] block is just the same as in standard rules, but remember
+that these check rules do not receive any rule environment.
+
+Xsemantics will generate a Java validator with a code[@Check] method for each
+code[checkrule] (see also ref:CodeGeneration[]);
+just like in Java validator for Xtext languages, you can have
+many code[checkrule]s for the same JavaType (provided the rule name is unique).
+
+section:CodeGeneration[Generated Code]
+
+Xsemantics will generate two Java classes for each xsemantics system:
+
+ul[
+	item[A Java class with the same name of the system, containing
+	all the implementations of the system's rules;]
+	item[A derived class from codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator],
+	with the same name of the system with suffix code[Validator] in particular,
+	all the generated validators inherits from 
+	codeRef[it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator] ; ]
+]
+
+The generated classes rely on Google injection, so you must not
+instantiate them directly, but only via injection.
+
+Note that the Java code generated by Xsemantics will depend only
+on the plugin code[it.xsemantics.runtime].  Thus, in case you want to deploy
+your Xtext language implemented making use of Xsemantics, your language will
+not need to depend on the whole Xsemantics SDK.
+
+section2:GeneratedSystem[The Generated Java Rule System]
+
+The generated Java class containing the rules of your system will have
+public methods for the judgments of your system.  For instance, if you have
+
+ul[
+	item[a judgment called e[myjudgment]]
+	item[which takes two input parameters of Java types e[MyClass1] and e[MyClass2]]
+	item[and an output parameter of Java type e[MyOutputClass]]
+]
+
+code[Xsemantics][
+judgments {
+	myjudgment |- MyClass1 arg1 : MyClass2 arg2 : output MyOutputClass
+}
+]
+
+the generated Java system will feature three public methods
+
+code[Java][
+public Result<MyOutputClass> myjudgment(MyClass1 arg1, MyClass2 arg2)
+public Result<MyOutputClass> myjudgment(RuleEnvironment env,
+	MyClass1 arg1, MyClass2 arg2)
+public Result<MyOutputClass> myjudgment(
+	RuleEnvironment env, RuleApplication trace,
+	MyClass1 arg1, MyClass2 arg2)
+]
+
+The class codeRef[it.xsemantics.runtime.Result] is part of Xsemantics runtime,
+and it is a wrapper for the actual result value (that can be retrieved
+with method code[getValue()]) and a possible failure
+(in the shape of a codeRef[it.xsemantics.runtime.RuleFailedException]).
+
+The value in the result will be code[null] if the judgment rule failed;
+in that case you might want to inspect the codeRef[it.xsemantics.runtime.RuleFailedException].
+In particular, you might want to use the utility methods of
+codeRef[it.xsemantics.runtime.util.TraceUtils] to get the stack of all
+the rule failures (also already formatted as an indented string).
+
+In case the judgment has two output parameters, the class
+codeRef[it.xsemantics.runtime.Result2] will be used which acts as a pair
+(thus the two values can be obtained with methods code[getFirst()] and
+code[getSecond()], respectively).
+
+If the judgment has no output parameter, the type of the result will
+be codeRef[java.lang.Boolean], i.e., code[Result<Boolean>].
+
+The first generated method basically only takes the arguments specified in the
+judgment.  With the second version, you can also pass an environment
+(generated Java code can transparently deal with null environments).
+The third one is useful for testing/debugging purposes: if you pass
+an instance of codeRef[it.xsemantics.runtime.RuleApplicationTrace] if the
+method terminates with success you can then inspect the trace of all the rules
+invoked together with the values used in the rules.  If the judgment fails,
+you will see also the rules that failed in the rule application trace.
+By using the method code[traceAsString(RuleApplicationTrace)] of
+codeRef[it.xsemantics.runtime.util.TraceUtils] you will have a string representation
+indented, with the following idea
+
+code[
+final result provided by rule MyRule
+ rule 1 used by MyRule to get to the result
+  rule 2 used by rule 1
+   rule 3 used by rule 2
+   ...
+ rule 1a used by MyRule to get to the result
+  rule 2a used by rule 1a
+  ...
+]
+
+An example of usage of traces is shown in ref:ExpressionsCodeGeneration[]
+for the Expressions language example.
+
+The generated Java system will contain also e[issue codes] (as public string
+constants) that will be used by the generated validator when a rule fails.
+This can be useful to then implement quickfixes for specific failures.
+
+section2:GeneratedValidator[The Generated Java Validator]
+
+This validator should not be used (i.e., injected) directly, since it does
+not implement the method code[getEPackages]; so, considering the project
+you have just created, the advised way of using it is to copy the code[getEPackages]
+from the abstract validator generated by Xtext, e.g., code[AbstractMyDslJavaValidator],
+into your code[MyDslJavaValidator], and then make your validator inherit
+from the validator generated by Xsemantics, e.g., code[MyDslSystemValidator].
+Summarizing, for this example your validator should look like this:
+
+code[Java][
+public class MyDslJavaValidator extends MyDslSystemValidator {
+	// copied from AbstractMyDslJavaValidator
+	@Override
+	protected List<EPackage> getEPackages() {
+	    List<EPackage> result = new ArrayList<EPackage>();
+	    result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);
+		return result;
+	}
+}
+]
+
+At the moment, this is the way to use the generated validator.
