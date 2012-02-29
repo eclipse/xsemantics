@@ -164,7 +164,7 @@ InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
  InterpretComparison: ['expected' <- BooleanType] |- 1 < 2 ~> true
   InterpretNumberLiteral: [] |- 1 ~> 1
   InterpretNumberLiteral: [] |- 2 ~> 2
- InterpretComparison: ['expected' <- BooleanType] |- 'f0' == ('f' + 0) ~> true
+ InterpretEquals: ['expected' <- BooleanType] |- 'f0' == ('f' + 0) ~> true
   InterpretStringLiteral: [] |- 'f0' ~> 'f0'
   InterpretPlus: [] |- 'f' + 0 ~> 'f0'
    InterpretStringLiteral: [] |- 'f' ~> 'f'

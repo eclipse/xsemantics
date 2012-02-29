@@ -11,6 +11,7 @@ import it.xsemantics.example.expressions.expressions.BooleanLiteral;
 import it.xsemantics.example.expressions.expressions.BooleanNegation;
 import it.xsemantics.example.expressions.expressions.BooleanType;
 import it.xsemantics.example.expressions.expressions.Comparison;
+import it.xsemantics.example.expressions.expressions.Equals;
 import it.xsemantics.example.expressions.expressions.Expression;
 import it.xsemantics.example.expressions.expressions.ExpressionsFactory;
 import it.xsemantics.example.expressions.expressions.ExpressionsPackage;
@@ -82,6 +83,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass comparisonEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass equalsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -385,6 +393,46 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEquals()
+  {
+    return equalsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEquals_Left()
+  {
+    return (EReference)equalsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEquals_Op()
+  {
+    return (EAttribute)equalsEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEquals_Right()
+  {
+    return (EReference)equalsEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPlus()
   {
     return plusEClass;
@@ -681,6 +729,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEAttribute(comparisonEClass, COMPARISON__OP);
     createEReference(comparisonEClass, COMPARISON__RIGHT);
 
+    equalsEClass = createEClass(EQUALS);
+    createEReference(equalsEClass, EQUALS__LEFT);
+    createEAttribute(equalsEClass, EQUALS__OP);
+    createEReference(equalsEClass, EQUALS__RIGHT);
+
     plusEClass = createEClass(PLUS);
     createEReference(plusEClass, PLUS__LEFT);
     createEReference(plusEClass, PLUS__RIGHT);
@@ -750,6 +803,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Add supertypes to classes
     andOrExpressionEClass.getESuperTypes().add(this.getExpression());
     comparisonEClass.getESuperTypes().add(this.getExpression());
+    equalsEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     minusEClass.getESuperTypes().add(this.getExpression());
     multiOrDivEClass.getESuperTypes().add(this.getExpression());
@@ -784,6 +838,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getComparison_Left(), this.getExpression(), null, "left", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getComparison_Op(), ecorePackage.getEString(), "op", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getComparison_Right(), this.getExpression(), null, "right", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(equalsEClass, Equals.class, "Equals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEquals_Left(), this.getExpression(), null, "left", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEquals_Op(), ecorePackage.getEString(), "op", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEquals_Right(), this.getExpression(), null, "right", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlus_Left(), this.getExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

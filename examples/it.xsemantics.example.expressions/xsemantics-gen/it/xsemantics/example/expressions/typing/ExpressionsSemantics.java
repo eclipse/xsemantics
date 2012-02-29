@@ -6,6 +6,7 @@ import it.xsemantics.example.expressions.expressions.BooleanLiteral;
 import it.xsemantics.example.expressions.expressions.BooleanNegation;
 import it.xsemantics.example.expressions.expressions.BooleanType;
 import it.xsemantics.example.expressions.expressions.Comparison;
+import it.xsemantics.example.expressions.expressions.Equals;
 import it.xsemantics.example.expressions.expressions.Expression;
 import it.xsemantics.example.expressions.expressions.ExpressionsFactory;
 import it.xsemantics.example.expressions.expressions.ExpressionsPackage;
@@ -25,6 +26,7 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -43,6 +45,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	public final static String MINUS = "it.xsemantics.example.expressions.typing.rules.Minus";
 	public final static String PLUS = "it.xsemantics.example.expressions.typing.rules.Plus";
 	public final static String COMPARISON = "it.xsemantics.example.expressions.typing.rules.Comparison";
+	public final static String EQUALS = "it.xsemantics.example.expressions.typing.rules.Equals";
 	public final static String BOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.BooleanNegation";
 	public final static String ANDOR = "it.xsemantics.example.expressions.typing.rules.AndOr";
 	public final static String ARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.rules.ArithmeticSigned";
@@ -60,6 +63,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	public final static String INTERPRETANDOR = "it.xsemantics.example.expressions.typing.rules.InterpretAndOr";
 	public final static String INTERPRETBOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.InterpretBooleanNegation";
 	public final static String INTERPRETCOMPARISON = "it.xsemantics.example.expressions.typing.rules.InterpretComparison";
+	public final static String INTERPRETEQUALS = "it.xsemantics.example.expressions.typing.rules.InterpretEquals";
 	public final static String INTERPRETPLUS = "it.xsemantics.example.expressions.typing.rules.InterpretPlus";
 	public final static String INTERPRETVARIABLEREFENRENCE = "it.xsemantics.example.expressions.typing.rules.InterpretVariableRefenrence";
 
@@ -593,6 +597,53 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  /* (leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType) */
 		  if (!_operator_or) {
 		    sneakyThrowRuleFailedException("(leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType)");
+		  }
+		}
+		BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
+		return new Result<Type>(_createBooleanType);
+	}
+	
+	protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Equals comparison) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Type> _result_ = applyRuleEquals(G, _subtrace_, comparison);
+			addToTrace(_trace_, ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + stringRep(_result_.getFirst()));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleEquals) {
+			typeThrowException(EQUALS,
+				e_applyRuleEquals, comparison);
+			return null;
+		}
+	}
+	
+	protected Result<Type> applyRuleEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Equals comparison) 
+			throws RuleFailedException {
+		
+		{
+		  /* G |- comparison.left : var Type leftType */
+		  Expression _left = comparison.getLeft();
+		  Type leftType = null;
+		  Result<Type> result = typeInternal(G, _trace_, _left);
+		  checkAssignableTo(result.getFirst(), Type.class);
+		  leftType = (Type) result.getFirst();
+		  
+		  /* G |- comparison.right : var Type rightType */
+		  Expression _right = comparison.getRight();
+		  Type rightType = null;
+		  Result<Type> result_1 = typeInternal(G, _trace_, _right);
+		  checkAssignableTo(result_1.getFirst(), Type.class);
+		  rightType = (Type) result_1.getFirst();
+		  
+		  EClass _eClass = leftType.eClass();
+		  EClass _eClass_1 = rightType.eClass();
+		  boolean _operator_equals = ObjectExtensions.operator_equals(_eClass, _eClass_1);
+		  /* leftType.eClass == rightType.eClass */
+		  if (!_operator_equals) {
+		    sneakyThrowRuleFailedException("leftType.eClass == rightType.eClass");
 		  }
 		}
 		BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
@@ -1281,36 +1332,59 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		    _operator_and = BooleanExtensions.operator_and((leftResult instanceof String), (rightResult instanceof String));
 		  }
 		  if (_operator_and) {
-		    {
-		      String _string = leftResult.toString();
-		      String leftString = _string;
-		      String _string_1 = rightResult.toString();
-		      String rightString = _string_1;
-		      String _op = comparison.getOp();
-		      boolean _operator_equals = ObjectExtensions.operator_equals(_op, "==");
-		      if (_operator_equals) {
-		        boolean _operator_equals_1 = ObjectExtensions.operator_equals(leftString, rightString);
-		        result = Boolean.valueOf(_operator_equals_1);
-		      } else {
-		        boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(leftString, rightString);
-		        result = Boolean.valueOf(_operator_lessThan);
-		      }
-		    }
+		    String _string = leftResult.toString();
+		    String _string_1 = rightResult.toString();
+		    boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(_string, _string_1);
+		    result = Boolean.valueOf(_operator_lessThan);
 		  } else {
-		    {
-		      Integer leftInt = ((Integer) leftResult);
-		      Integer rightInt = ((Integer) rightResult);
-		      String _op_1 = comparison.getOp();
-		      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_op_1, "==");
-		      if (_operator_equals_2) {
-		        boolean _operator_equals_3 = ObjectExtensions.operator_equals(leftInt, rightInt);
-		        result = Boolean.valueOf(_operator_equals_3);
-		      } else {
-		        boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(leftInt, rightInt);
-		        result = Boolean.valueOf(_operator_lessThan_1);
-		      }
-		    }
+		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer) leftResult), ((Integer) rightResult));
+		    result = Boolean.valueOf(_operator_lessThan_1);
 		  }
+		}
+		return new Result<Object>(result);
+	}
+	
+	protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Equals comparison) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Object> _result_ = applyRuleInterpretEquals(G, _subtrace_, comparison);
+			addToTrace(_trace_, ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + stringRep(_result_.getFirst()));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleInterpretEquals) {
+			throwRuleFailedException(ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
+				INTERPRETEQUALS,
+				e_applyRuleInterpretEquals, new ErrorInformation(comparison));
+			return null;
+		}
+	}
+	
+	protected Result<Object> applyRuleInterpretEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final Equals comparison) 
+			throws RuleFailedException {
+		Boolean result = null;
+		
+		{
+		  /* empty |- comparison.left ~> var Object leftResult */
+		  Expression _left = comparison.getLeft();
+		  Object leftResult = null;
+		  Result<Object> result_1 = interpretInternal(emptyEnvironment(), _trace_, _left);
+		  checkAssignableTo(result_1.getFirst(), Object.class);
+		  leftResult = (Object) result_1.getFirst();
+		  
+		  /* empty |- comparison.right ~> var Object rightResult */
+		  Expression _right = comparison.getRight();
+		  Object rightResult = null;
+		  Result<Object> result_2 = interpretInternal(emptyEnvironment(), _trace_, _right);
+		  checkAssignableTo(result_2.getFirst(), Object.class);
+		  rightResult = (Object) result_2.getFirst();
+		  
+		  String _string = leftResult.toString();
+		  String _string_1 = rightResult.toString();
+		  boolean _operator_equals = ObjectExtensions.operator_equals(_string, _string_1);
+		  result = Boolean.valueOf(_operator_equals);
 		}
 		return new Result<Object>(result);
 	}

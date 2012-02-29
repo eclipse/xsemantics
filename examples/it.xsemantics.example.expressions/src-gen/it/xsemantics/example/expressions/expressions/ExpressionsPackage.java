@@ -255,6 +255,52 @@ public interface ExpressionsPackage extends EPackage
   int COMPARISON_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.EqualsImpl <em>Equals</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see it.xsemantics.example.expressions.expressions.impl.EqualsImpl
+   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getEquals()
+   * @generated
+   */
+  int EQUALS = 6;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUALS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Op</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUALS__OP = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUALS__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Equals</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUALS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.PlusImpl <em>Plus</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -262,7 +308,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 6;
+  int PLUS = 7;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -299,7 +345,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMinus()
    * @generated
    */
-  int MINUS = 7;
+  int MINUS = 8;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -336,7 +382,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMultiOrDiv()
    * @generated
    */
-  int MULTI_OR_DIV = 8;
+  int MULTI_OR_DIV = 9;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -382,7 +428,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getBooleanNegation()
    * @generated
    */
-  int BOOLEAN_NEGATION = 9;
+  int BOOLEAN_NEGATION = 10;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -410,7 +456,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getArithmeticSigned()
    * @generated
    */
-  int ARITHMETIC_SIGNED = 10;
+  int ARITHMETIC_SIGNED = 11;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -438,7 +484,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 11;
+  int NUMBER_LITERAL = 12;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -466,7 +512,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 12;
+  int STRING_LITERAL = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -494,7 +540,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 13;
+  int BOOLEAN_LITERAL = 14;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -522,7 +568,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getVariableReference()
    * @generated
    */
-  int VARIABLE_REFERENCE = 14;
+  int VARIABLE_REFERENCE = 15;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -550,7 +596,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getIntType()
    * @generated
    */
-  int INT_TYPE = 15;
+  int INT_TYPE = 16;
 
   /**
    * The number of structural features of the '<em>Int Type</em>' class.
@@ -569,7 +615,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getStringType()
    * @generated
    */
-  int STRING_TYPE = 16;
+  int STRING_TYPE = 17;
 
   /**
    * The number of structural features of the '<em>String Type</em>' class.
@@ -588,7 +634,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getBooleanType()
    * @generated
    */
-  int BOOLEAN_TYPE = 17;
+  int BOOLEAN_TYPE = 18;
 
   /**
    * The number of structural features of the '<em>Boolean Type</em>' class.
@@ -758,6 +804,49 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EReference getComparison_Right();
+
+  /**
+   * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.Equals <em>Equals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Equals</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Equals
+   * @generated
+   */
+  EClass getEquals();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Equals#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Equals#getLeft()
+   * @see #getEquals()
+   * @generated
+   */
+  EReference getEquals_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.example.expressions.expressions.Equals#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Equals#getOp()
+   * @see #getEquals()
+   * @generated
+   */
+  EAttribute getEquals_Op();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Equals#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Equals#getRight()
+   * @see #getEquals()
+   * @generated
+   */
+  EReference getEquals_Right();
 
   /**
    * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.Plus <em>Plus</em>}'.
@@ -1176,6 +1265,40 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EReference COMPARISON__RIGHT = eINSTANCE.getComparison_Right();
+
+    /**
+     * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.EqualsImpl <em>Equals</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see it.xsemantics.example.expressions.expressions.impl.EqualsImpl
+     * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getEquals()
+     * @generated
+     */
+    EClass EQUALS = eINSTANCE.getEquals();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EQUALS__LEFT = eINSTANCE.getEquals_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EQUALS__OP = eINSTANCE.getEquals_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EQUALS__RIGHT = eINSTANCE.getEquals_Right();
 
     /**
      * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.PlusImpl <em>Plus</em>}' class.

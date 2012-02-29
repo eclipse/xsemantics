@@ -8,6 +8,7 @@ import it.xsemantics.example.expressions.expressions.BooleanLiteral;
 import it.xsemantics.example.expressions.expressions.BooleanNegation;
 import it.xsemantics.example.expressions.expressions.BooleanType;
 import it.xsemantics.example.expressions.expressions.Comparison;
+import it.xsemantics.example.expressions.expressions.Equals;
 import it.xsemantics.example.expressions.expressions.ExpressionsPackage;
 import it.xsemantics.example.expressions.expressions.IntType;
 import it.xsemantics.example.expressions.expressions.Minus;
@@ -69,6 +70,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -86,6 +89,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -103,6 +108,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -120,6 +127,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -143,11 +152,32 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
 				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Comparison(context, (Comparison) semanticObject); 
+					return; 
+				}
+				else break;
+			case ExpressionsPackage.EQUALS:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAtomicRule() ||
+				   context == grammarAccess.getBooleanExpressionRule() ||
+				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
+				   context == grammarAccess.getComparisonRule() ||
+				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
+					sequence_Equals(context, (Equals) semanticObject); 
 					return; 
 				}
 				else break;
@@ -166,6 +196,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -189,6 +221,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -206,6 +240,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -223,6 +259,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -240,6 +278,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -269,6 +309,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0() ||
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
+				   context == grammarAccess.getEqualsRule() ||
+				   context == grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
@@ -387,10 +429,45 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (left=Comparison_Comparison_1_0_0 (op='<' | op='==') right=Addition)
+	 *     (left=Comparison_Comparison_1_0_0 op='<' right=Equals)
 	 */
 	protected void sequence_Comparison(EObject context, Comparison semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.COMPARISON__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.COMPARISON__LEFT));
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.COMPARISON__OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.COMPARISON__OP));
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.COMPARISON__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.COMPARISON__RIGHT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0(), semanticObject.getOp());
+		feeder.accept(grammarAccess.getComparisonAccess().getRightEqualsParserRuleCall_1_1_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Equals_Equals_1_0_0 op='==' right=Addition)
+	 */
+	protected void sequence_Equals(EObject context, Equals semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.EQUALS__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.EQUALS__LEFT));
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.EQUALS__OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.EQUALS__OP));
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.EQUALS__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.EQUALS__RIGHT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0(), semanticObject.getOp());
+		feeder.accept(grammarAccess.getEqualsAccess().getRightAdditionParserRuleCall_1_1_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	

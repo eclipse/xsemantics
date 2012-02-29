@@ -18,10 +18,16 @@ BooleanExpression returns Expression:
 	(({AndOrExpression.left=current} op=("||"|"&&")) right=Comparison)*;
 
 Comparison returns Expression:
-	Addition 
-	(({Comparison.left=current} 
-		op=("<"|"==")
-	) right=Addition)*;
+       Equals
+       (({Comparison.left=current}
+               op=("<")
+       ) right=Equals)*;
+
+Equals returns Expression:
+       Addition 
+       (({Equals.left=current}
+               op=("==")
+       ) right=Addition)*;
  
 Addition returns Expression:
 	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*; 

@@ -60,8 +60,19 @@ from {
 	G |- comparison.left : var Type leftType
 	G |- comparison.right : var Type rightType
 	
+	// cannot compare booleans
 	(leftType instanceof IntType && rightType instanceof IntType) ||
 	(leftType instanceof StringType && rightType instanceof StringType)
+}
+
+rule Equals
+	G |- Equals comparison : ExpressionsFactory::eINSTANCE.createBooleanType
+from {
+	G |- comparison.left : var Type leftType
+	G |- comparison.right : var Type rightType
+	
+	// can compare only if they have the same type
+	(leftType.eClass == rightType.eClass)
 }
 
 rule BooleanNegation
@@ -157,21 +168,20 @@ from {
 	G |- comparison.right ~> var Object rightResult
 	
 	if (leftResult instanceof String && rightResult instanceof String) {
-		var leftString = leftResult.toString
-		var rightString = rightResult.toString
-		if (comparison.op == '==')
-			result = leftString == rightString
-		else
-			result = leftString < rightString
+		result = leftResult.toString < rightResult.toString
 	} else {
 		// both are int if the expression is well-typed
-		var leftInt = leftResult as Integer
-		var rightInt = rightResult as Integer
-		if (comparison.op == '==')
-			result = leftInt == rightInt
-		else
-			result = leftInt < rightInt
+		result = (leftResult as Integer) < (rightResult as Integer)
 	}
+}
+
+rule InterpretEquals
+	G |- Equals comparison ~> Boolean result
+from {
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
+	
+	result = leftResult.toString == rightResult.toString
 }
 
 rule InterpretPlus

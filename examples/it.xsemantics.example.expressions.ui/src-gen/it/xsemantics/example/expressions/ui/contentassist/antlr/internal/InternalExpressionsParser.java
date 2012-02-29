@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalExpressionsParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'||'", "'&&'", "'<'", "'=='", "'*'", "'/'", "'true'", "'false'", "'='", "'+'", "'-'", "'!'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'||'", "'&&'", "'*'", "'/'", "'true'", "'false'", "'='", "'+'", "'-'", "'!'", "'('", "')'", "'<'", "'=='"
     };
     public static final int RULE_ID=4;
     public static final int T__24=24;
@@ -522,17 +522,102 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end "ruleComparison"
 
 
+    // $ANTLR start "entryRuleEquals"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:201:1: entryRuleEquals : ruleEquals EOF ;
+    public final void entryRuleEquals() throws RecognitionException {
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:202:1: ( ruleEquals EOF )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:203:1: ruleEquals EOF
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsRule()); 
+            }
+            pushFollow(FOLLOW_ruleEquals_in_entryRuleEquals367);
+            ruleEquals();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsRule()); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEquals374); if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleEquals"
+
+
+    // $ANTLR start "ruleEquals"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:210:1: ruleEquals : ( ( rule__Equals__Group__0 ) ) ;
+    public final void ruleEquals() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:214:2: ( ( ( rule__Equals__Group__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__Equals__Group__0 ) )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__Equals__Group__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:216:1: ( rule__Equals__Group__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getGroup()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:217:1: ( rule__Equals__Group__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:217:2: rule__Equals__Group__0
+            {
+            pushFollow(FOLLOW_rule__Equals__Group__0_in_ruleEquals400);
+            rule__Equals__Group__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getGroup()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleEquals"
+
+
     // $ANTLR start "entryRuleAddition"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:201:1: entryRuleAddition : ruleAddition EOF ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:229:1: entryRuleAddition : ruleAddition EOF ;
     public final void entryRuleAddition() throws RecognitionException {
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:202:1: ( ruleAddition EOF )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:203:1: ruleAddition EOF
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:230:1: ( ruleAddition EOF )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:231:1: ruleAddition EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionRule()); 
             }
-            pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition367);
+            pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition427);
             ruleAddition();
 
             state._fsp--;
@@ -540,7 +625,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAdditionRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAddition374); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAddition434); if (state.failed) return ;
 
             }
 
@@ -557,25 +642,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "ruleAddition"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:210:1: ruleAddition : ( ( rule__Addition__Group__0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:238:1: ruleAddition : ( ( rule__Addition__Group__0 ) ) ;
     public final void ruleAddition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:214:2: ( ( ( rule__Addition__Group__0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__Addition__Group__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:242:2: ( ( ( rule__Addition__Group__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__Addition__Group__0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__Addition__Group__0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:216:1: ( rule__Addition__Group__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__Addition__Group__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:244:1: ( rule__Addition__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getGroup()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:217:1: ( rule__Addition__Group__0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:217:2: rule__Addition__Group__0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:245:1: ( rule__Addition__Group__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:245:2: rule__Addition__Group__0
             {
-            pushFollow(FOLLOW_rule__Addition__Group__0_in_ruleAddition400);
+            pushFollow(FOLLOW_rule__Addition__Group__0_in_ruleAddition460);
             rule__Addition__Group__0();
 
             state._fsp--;
@@ -608,16 +693,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "entryRuleMultiplication"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:229:1: entryRuleMultiplication : ruleMultiplication EOF ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:257:1: entryRuleMultiplication : ruleMultiplication EOF ;
     public final void entryRuleMultiplication() throws RecognitionException {
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:230:1: ( ruleMultiplication EOF )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:231:1: ruleMultiplication EOF
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:258:1: ( ruleMultiplication EOF )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:259:1: ruleMultiplication EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationRule()); 
             }
-            pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication427);
+            pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication487);
             ruleMultiplication();
 
             state._fsp--;
@@ -625,7 +710,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMultiplicationRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMultiplication434); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMultiplication494); if (state.failed) return ;
 
             }
 
@@ -642,25 +727,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "ruleMultiplication"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:238:1: ruleMultiplication : ( ( rule__Multiplication__Group__0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:266:1: ruleMultiplication : ( ( rule__Multiplication__Group__0 ) ) ;
     public final void ruleMultiplication() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:242:2: ( ( ( rule__Multiplication__Group__0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__Multiplication__Group__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:270:2: ( ( ( rule__Multiplication__Group__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__Multiplication__Group__0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__Multiplication__Group__0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:244:1: ( rule__Multiplication__Group__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__Multiplication__Group__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:272:1: ( rule__Multiplication__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getGroup()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:245:1: ( rule__Multiplication__Group__0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:245:2: rule__Multiplication__Group__0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:273:1: ( rule__Multiplication__Group__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:273:2: rule__Multiplication__Group__0
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group__0_in_ruleMultiplication460);
+            pushFollow(FOLLOW_rule__Multiplication__Group__0_in_ruleMultiplication520);
             rule__Multiplication__Group__0();
 
             state._fsp--;
@@ -693,16 +778,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "entryRulePrefixed"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:257:1: entryRulePrefixed : rulePrefixed EOF ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:285:1: entryRulePrefixed : rulePrefixed EOF ;
     public final void entryRulePrefixed() throws RecognitionException {
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:258:1: ( rulePrefixed EOF )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:259:1: rulePrefixed EOF
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:286:1: ( rulePrefixed EOF )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:287:1: rulePrefixed EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedRule()); 
             }
-            pushFollow(FOLLOW_rulePrefixed_in_entryRulePrefixed487);
+            pushFollow(FOLLOW_rulePrefixed_in_entryRulePrefixed547);
             rulePrefixed();
 
             state._fsp--;
@@ -710,7 +795,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPrefixedRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrefixed494); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrefixed554); if (state.failed) return ;
 
             }
 
@@ -727,25 +812,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rulePrefixed"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:266:1: rulePrefixed : ( ( rule__Prefixed__Alternatives ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:294:1: rulePrefixed : ( ( rule__Prefixed__Alternatives ) ) ;
     public final void rulePrefixed() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:270:2: ( ( ( rule__Prefixed__Alternatives ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__Prefixed__Alternatives ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:298:2: ( ( ( rule__Prefixed__Alternatives ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__Prefixed__Alternatives ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__Prefixed__Alternatives ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:272:1: ( rule__Prefixed__Alternatives )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__Prefixed__Alternatives ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:300:1: ( rule__Prefixed__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getAlternatives()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:273:1: ( rule__Prefixed__Alternatives )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:273:2: rule__Prefixed__Alternatives
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:301:1: ( rule__Prefixed__Alternatives )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:301:2: rule__Prefixed__Alternatives
             {
-            pushFollow(FOLLOW_rule__Prefixed__Alternatives_in_rulePrefixed520);
+            pushFollow(FOLLOW_rule__Prefixed__Alternatives_in_rulePrefixed580);
             rule__Prefixed__Alternatives();
 
             state._fsp--;
@@ -778,16 +863,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "entryRuleAtomic"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:285:1: entryRuleAtomic : ruleAtomic EOF ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:313:1: entryRuleAtomic : ruleAtomic EOF ;
     public final void entryRuleAtomic() throws RecognitionException {
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:286:1: ( ruleAtomic EOF )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:287:1: ruleAtomic EOF
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:314:1: ( ruleAtomic EOF )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:315:1: ruleAtomic EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicRule()); 
             }
-            pushFollow(FOLLOW_ruleAtomic_in_entryRuleAtomic547);
+            pushFollow(FOLLOW_ruleAtomic_in_entryRuleAtomic607);
             ruleAtomic();
 
             state._fsp--;
@@ -795,7 +880,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAtomic554); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAtomic614); if (state.failed) return ;
 
             }
 
@@ -812,25 +897,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "ruleAtomic"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:294:1: ruleAtomic : ( ( rule__Atomic__Alternatives ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:322:1: ruleAtomic : ( ( rule__Atomic__Alternatives ) ) ;
     public final void ruleAtomic() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:298:2: ( ( ( rule__Atomic__Alternatives ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__Atomic__Alternatives ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:326:2: ( ( ( rule__Atomic__Alternatives ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:327:1: ( ( rule__Atomic__Alternatives ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__Atomic__Alternatives ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:300:1: ( rule__Atomic__Alternatives )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:327:1: ( ( rule__Atomic__Alternatives ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:328:1: ( rule__Atomic__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getAlternatives()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:301:1: ( rule__Atomic__Alternatives )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:301:2: rule__Atomic__Alternatives
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:329:1: ( rule__Atomic__Alternatives )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:329:2: rule__Atomic__Alternatives
             {
-            pushFollow(FOLLOW_rule__Atomic__Alternatives_in_ruleAtomic580);
+            pushFollow(FOLLOW_rule__Atomic__Alternatives_in_ruleAtomic640);
             rule__Atomic__Alternatives();
 
             state._fsp--;
@@ -863,13 +948,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__OpAlternatives_1_0_1_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:315:1: rule__BooleanExpression__OpAlternatives_1_0_1_0 : ( ( '||' ) | ( '&&' ) );
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:343:1: rule__BooleanExpression__OpAlternatives_1_0_1_0 : ( ( '||' ) | ( '&&' ) );
     public final void rule__BooleanExpression__OpAlternatives_1_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:319:1: ( ( '||' ) | ( '&&' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:347:1: ( ( '||' ) | ( '&&' ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -888,15 +973,15 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             }
             switch (alt2) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:320:1: ( '||' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:348:1: ( '||' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:320:1: ( '||' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:321:1: '||'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:348:1: ( '||' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:349:1: '||'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getBooleanExpressionAccess().getOpVerticalLineVerticalLineKeyword_1_0_1_0_0()); 
                     }
-                    match(input,11,FOLLOW_11_in_rule__BooleanExpression__OpAlternatives_1_0_1_0619); if (state.failed) return ;
+                    match(input,11,FOLLOW_11_in_rule__BooleanExpression__OpAlternatives_1_0_1_0679); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getBooleanExpressionAccess().getOpVerticalLineVerticalLineKeyword_1_0_1_0_0()); 
                     }
@@ -907,15 +992,15 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:328:6: ( '&&' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:356:6: ( '&&' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:328:6: ( '&&' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:329:1: '&&'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:356:6: ( '&&' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:357:1: '&&'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getBooleanExpressionAccess().getOpAmpersandAmpersandKeyword_1_0_1_0_1()); 
                     }
-                    match(input,12,FOLLOW_12_in_rule__BooleanExpression__OpAlternatives_1_0_1_0639); if (state.failed) return ;
+                    match(input,12,FOLLOW_12_in_rule__BooleanExpression__OpAlternatives_1_0_1_0699); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getBooleanExpressionAccess().getOpAmpersandAmpersandKeyword_1_0_1_0_1()); 
                     }
@@ -942,21 +1027,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__BooleanExpression__OpAlternatives_1_0_1_0"
 
 
-    // $ANTLR start "rule__Comparison__OpAlternatives_1_0_1_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:341:1: rule__Comparison__OpAlternatives_1_0_1_0 : ( ( '<' ) | ( '==' ) );
-    public final void rule__Comparison__OpAlternatives_1_0_1_0() throws RecognitionException {
+    // $ANTLR start "rule__Addition__Alternatives_1_0"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:369:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );
+    public final void rule__Addition__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:345:1: ( ( '<' ) | ( '==' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:373:1: ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==13) ) {
+            if ( (LA3_0==18) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==14) ) {
+            else if ( (LA3_0==19) ) {
                 alt3=2;
             }
             else {
@@ -968,98 +1053,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             }
             switch (alt3) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:346:1: ( '<' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:374:1: ( ( rule__Addition__Group_1_0_0__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:346:1: ( '<' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:347:1: '<'
-                    {
-                    if ( state.backtracking==0 ) {
-                       before(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0_0()); 
-                    }
-                    match(input,13,FOLLOW_13_in_rule__Comparison__OpAlternatives_1_0_1_0674); if (state.failed) return ;
-                    if ( state.backtracking==0 ) {
-                       after(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0_0()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:354:6: ( '==' )
-                    {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:354:6: ( '==' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:355:1: '=='
-                    {
-                    if ( state.backtracking==0 ) {
-                       before(grammarAccess.getComparisonAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0_1()); 
-                    }
-                    match(input,14,FOLLOW_14_in_rule__Comparison__OpAlternatives_1_0_1_0694); if (state.failed) return ;
-                    if ( state.backtracking==0 ) {
-                       after(grammarAccess.getComparisonAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0_1()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Comparison__OpAlternatives_1_0_1_0"
-
-
-    // $ANTLR start "rule__Addition__Alternatives_1_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:367:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );
-    public final void rule__Addition__Alternatives_1_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:371:1: ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) )
-            int alt4=2;
-            int LA4_0 = input.LA(1);
-
-            if ( (LA4_0==20) ) {
-                alt4=1;
-            }
-            else if ( (LA4_0==21) ) {
-                alt4=2;
-            }
-            else {
-                if (state.backtracking>0) {state.failed=true; return ;}
-                NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
-
-                throw nvae;
-            }
-            switch (alt4) {
-                case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:372:1: ( ( rule__Addition__Group_1_0_0__0 ) )
-                    {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:372:1: ( ( rule__Addition__Group_1_0_0__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:373:1: ( rule__Addition__Group_1_0_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:374:1: ( ( rule__Addition__Group_1_0_0__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:375:1: ( rule__Addition__Group_1_0_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAdditionAccess().getGroup_1_0_0()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:374:1: ( rule__Addition__Group_1_0_0__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:374:2: rule__Addition__Group_1_0_0__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:376:1: ( rule__Addition__Group_1_0_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:376:2: rule__Addition__Group_1_0_0__0
                     {
-                    pushFollow(FOLLOW_rule__Addition__Group_1_0_0__0_in_rule__Addition__Alternatives_1_0728);
+                    pushFollow(FOLLOW_rule__Addition__Group_1_0_0__0_in_rule__Addition__Alternatives_1_0733);
                     rule__Addition__Group_1_0_0__0();
 
                     state._fsp--;
@@ -1077,18 +1082,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:378:6: ( ( rule__Addition__Group_1_0_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:380:6: ( ( rule__Addition__Group_1_0_1__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:378:6: ( ( rule__Addition__Group_1_0_1__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:379:1: ( rule__Addition__Group_1_0_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:380:6: ( ( rule__Addition__Group_1_0_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:381:1: ( rule__Addition__Group_1_0_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAdditionAccess().getGroup_1_0_1()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:380:1: ( rule__Addition__Group_1_0_1__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:380:2: rule__Addition__Group_1_0_1__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:382:1: ( rule__Addition__Group_1_0_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:382:2: rule__Addition__Group_1_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__Addition__Group_1_0_1__0_in_rule__Addition__Alternatives_1_0746);
+                    pushFollow(FOLLOW_rule__Addition__Group_1_0_1__0_in_rule__Addition__Alternatives_1_0751);
                     rule__Addition__Group_1_0_1__0();
 
                     state._fsp--;
@@ -1123,40 +1128,40 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__OpAlternatives_1_0_1_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:389:1: rule__Multiplication__OpAlternatives_1_0_1_0 : ( ( '*' ) | ( '/' ) );
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:391:1: rule__Multiplication__OpAlternatives_1_0_1_0 : ( ( '*' ) | ( '/' ) );
     public final void rule__Multiplication__OpAlternatives_1_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:393:1: ( ( '*' ) | ( '/' ) )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:395:1: ( ( '*' ) | ( '/' ) )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA5_0==15) ) {
-                alt5=1;
+            if ( (LA4_0==13) ) {
+                alt4=1;
             }
-            else if ( (LA5_0==16) ) {
-                alt5=2;
+            else if ( (LA4_0==14) ) {
+                alt4=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
-            switch (alt5) {
+            switch (alt4) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:394:1: ( '*' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:396:1: ( '*' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:394:1: ( '*' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:395:1: '*'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:396:1: ( '*' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:397:1: '*'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicationAccess().getOpAsteriskKeyword_1_0_1_0_0()); 
                     }
-                    match(input,15,FOLLOW_15_in_rule__Multiplication__OpAlternatives_1_0_1_0780); if (state.failed) return ;
+                    match(input,13,FOLLOW_13_in_rule__Multiplication__OpAlternatives_1_0_1_0785); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicationAccess().getOpAsteriskKeyword_1_0_1_0_0()); 
                     }
@@ -1167,15 +1172,15 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:402:6: ( '/' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:404:6: ( '/' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:402:6: ( '/' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:403:1: '/'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:404:6: ( '/' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:405:1: '/'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicationAccess().getOpSolidusKeyword_1_0_1_0_1()); 
                     }
-                    match(input,16,FOLLOW_16_in_rule__Multiplication__OpAlternatives_1_0_1_0800); if (state.failed) return ;
+                    match(input,14,FOLLOW_14_in_rule__Multiplication__OpAlternatives_1_0_1_0805); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicationAccess().getOpSolidusKeyword_1_0_1_0_1()); 
                     }
@@ -1203,57 +1208,57 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Alternatives"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:415:1: rule__Prefixed__Alternatives : ( ( ( rule__Prefixed__Group_0__0 ) ) | ( ( rule__Prefixed__Group_1__0 ) ) | ( ruleAtomic ) );
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:417:1: rule__Prefixed__Alternatives : ( ( ( rule__Prefixed__Group_0__0 ) ) | ( ( rule__Prefixed__Group_1__0 ) ) | ( ruleAtomic ) );
     public final void rule__Prefixed__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:419:1: ( ( ( rule__Prefixed__Group_0__0 ) ) | ( ( rule__Prefixed__Group_1__0 ) ) | ( ruleAtomic ) )
-            int alt6=3;
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:421:1: ( ( ( rule__Prefixed__Group_0__0 ) ) | ( ( rule__Prefixed__Group_1__0 ) ) | ( ruleAtomic ) )
+            int alt5=3;
             switch ( input.LA(1) ) {
-            case 22:
+            case 20:
                 {
-                alt6=1;
+                alt5=1;
                 }
                 break;
-            case 21:
+            case 19:
                 {
-                alt6=2;
+                alt5=2;
                 }
                 break;
             case RULE_ID:
             case RULE_INT:
             case RULE_STRING:
-            case 17:
-            case 18:
-            case 23:
+            case 15:
+            case 16:
+            case 21:
                 {
-                alt6=3;
+                alt5=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt6) {
+            switch (alt5) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:420:1: ( ( rule__Prefixed__Group_0__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:422:1: ( ( rule__Prefixed__Group_0__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:420:1: ( ( rule__Prefixed__Group_0__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:421:1: ( rule__Prefixed__Group_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:422:1: ( ( rule__Prefixed__Group_0__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:423:1: ( rule__Prefixed__Group_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrefixedAccess().getGroup_0()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:422:1: ( rule__Prefixed__Group_0__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:422:2: rule__Prefixed__Group_0__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:424:1: ( rule__Prefixed__Group_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:424:2: rule__Prefixed__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Prefixed__Group_0__0_in_rule__Prefixed__Alternatives834);
+                    pushFollow(FOLLOW_rule__Prefixed__Group_0__0_in_rule__Prefixed__Alternatives839);
                     rule__Prefixed__Group_0__0();
 
                     state._fsp--;
@@ -1271,18 +1276,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:426:6: ( ( rule__Prefixed__Group_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:428:6: ( ( rule__Prefixed__Group_1__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:426:6: ( ( rule__Prefixed__Group_1__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:427:1: ( rule__Prefixed__Group_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:428:6: ( ( rule__Prefixed__Group_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:429:1: ( rule__Prefixed__Group_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrefixedAccess().getGroup_1()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:428:1: ( rule__Prefixed__Group_1__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:428:2: rule__Prefixed__Group_1__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:430:1: ( rule__Prefixed__Group_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:430:2: rule__Prefixed__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Prefixed__Group_1__0_in_rule__Prefixed__Alternatives852);
+                    pushFollow(FOLLOW_rule__Prefixed__Group_1__0_in_rule__Prefixed__Alternatives857);
                     rule__Prefixed__Group_1__0();
 
                     state._fsp--;
@@ -1300,15 +1305,15 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:432:6: ( ruleAtomic )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:434:6: ( ruleAtomic )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:432:6: ( ruleAtomic )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:433:1: ruleAtomic
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:434:6: ( ruleAtomic )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:435:1: ruleAtomic
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrefixedAccess().getAtomicParserRuleCall_2()); 
                     }
-                    pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__Alternatives870);
+                    pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__Alternatives875);
                     ruleAtomic();
 
                     state._fsp--;
@@ -1340,63 +1345,63 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Alternatives"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:443:1: rule__Atomic__Alternatives : ( ( ( rule__Atomic__Group_0__0 ) ) | ( ( rule__Atomic__Group_1__0 ) ) | ( ( rule__Atomic__Group_2__0 ) ) | ( ( rule__Atomic__Group_3__0 ) ) | ( ( rule__Atomic__Group_4__0 ) ) );
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:445:1: rule__Atomic__Alternatives : ( ( ( rule__Atomic__Group_0__0 ) ) | ( ( rule__Atomic__Group_1__0 ) ) | ( ( rule__Atomic__Group_2__0 ) ) | ( ( rule__Atomic__Group_3__0 ) ) | ( ( rule__Atomic__Group_4__0 ) ) );
     public final void rule__Atomic__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:447:1: ( ( ( rule__Atomic__Group_0__0 ) ) | ( ( rule__Atomic__Group_1__0 ) ) | ( ( rule__Atomic__Group_2__0 ) ) | ( ( rule__Atomic__Group_3__0 ) ) | ( ( rule__Atomic__Group_4__0 ) ) )
-            int alt7=5;
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:449:1: ( ( ( rule__Atomic__Group_0__0 ) ) | ( ( rule__Atomic__Group_1__0 ) ) | ( ( rule__Atomic__Group_2__0 ) ) | ( ( rule__Atomic__Group_3__0 ) ) | ( ( rule__Atomic__Group_4__0 ) ) )
+            int alt6=5;
             switch ( input.LA(1) ) {
-            case 23:
+            case 21:
                 {
-                alt7=1;
+                alt6=1;
                 }
                 break;
             case RULE_INT:
                 {
-                alt7=2;
+                alt6=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt7=3;
+                alt6=3;
                 }
                 break;
-            case 17:
-            case 18:
+            case 15:
+            case 16:
                 {
-                alt7=4;
+                alt6=4;
                 }
                 break;
             case RULE_ID:
                 {
-                alt7=5;
+                alt6=5;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt7) {
+            switch (alt6) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:448:1: ( ( rule__Atomic__Group_0__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:450:1: ( ( rule__Atomic__Group_0__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:448:1: ( ( rule__Atomic__Group_0__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:449:1: ( rule__Atomic__Group_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:450:1: ( ( rule__Atomic__Group_0__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:451:1: ( rule__Atomic__Group_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getGroup_0()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:450:1: ( rule__Atomic__Group_0__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:450:2: rule__Atomic__Group_0__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:452:1: ( rule__Atomic__Group_0__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:452:2: rule__Atomic__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Atomic__Group_0__0_in_rule__Atomic__Alternatives902);
+                    pushFollow(FOLLOW_rule__Atomic__Group_0__0_in_rule__Atomic__Alternatives907);
                     rule__Atomic__Group_0__0();
 
                     state._fsp--;
@@ -1414,18 +1419,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:454:6: ( ( rule__Atomic__Group_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:456:6: ( ( rule__Atomic__Group_1__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:454:6: ( ( rule__Atomic__Group_1__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:455:1: ( rule__Atomic__Group_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:456:6: ( ( rule__Atomic__Group_1__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:457:1: ( rule__Atomic__Group_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getGroup_1()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:456:1: ( rule__Atomic__Group_1__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:456:2: rule__Atomic__Group_1__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:458:1: ( rule__Atomic__Group_1__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:458:2: rule__Atomic__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Atomic__Group_1__0_in_rule__Atomic__Alternatives920);
+                    pushFollow(FOLLOW_rule__Atomic__Group_1__0_in_rule__Atomic__Alternatives925);
                     rule__Atomic__Group_1__0();
 
                     state._fsp--;
@@ -1443,18 +1448,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:460:6: ( ( rule__Atomic__Group_2__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:462:6: ( ( rule__Atomic__Group_2__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:460:6: ( ( rule__Atomic__Group_2__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:461:1: ( rule__Atomic__Group_2__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:462:6: ( ( rule__Atomic__Group_2__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:463:1: ( rule__Atomic__Group_2__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getGroup_2()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:462:1: ( rule__Atomic__Group_2__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:462:2: rule__Atomic__Group_2__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:464:1: ( rule__Atomic__Group_2__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:464:2: rule__Atomic__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Atomic__Group_2__0_in_rule__Atomic__Alternatives938);
+                    pushFollow(FOLLOW_rule__Atomic__Group_2__0_in_rule__Atomic__Alternatives943);
                     rule__Atomic__Group_2__0();
 
                     state._fsp--;
@@ -1472,18 +1477,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 4 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:466:6: ( ( rule__Atomic__Group_3__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:468:6: ( ( rule__Atomic__Group_3__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:466:6: ( ( rule__Atomic__Group_3__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:467:1: ( rule__Atomic__Group_3__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:468:6: ( ( rule__Atomic__Group_3__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:469:1: ( rule__Atomic__Group_3__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getGroup_3()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:468:1: ( rule__Atomic__Group_3__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:468:2: rule__Atomic__Group_3__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:470:1: ( rule__Atomic__Group_3__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:470:2: rule__Atomic__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__Atomic__Group_3__0_in_rule__Atomic__Alternatives956);
+                    pushFollow(FOLLOW_rule__Atomic__Group_3__0_in_rule__Atomic__Alternatives961);
                     rule__Atomic__Group_3__0();
 
                     state._fsp--;
@@ -1501,18 +1506,18 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 5 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:472:6: ( ( rule__Atomic__Group_4__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:474:6: ( ( rule__Atomic__Group_4__0 ) )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:472:6: ( ( rule__Atomic__Group_4__0 ) )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:473:1: ( rule__Atomic__Group_4__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:474:6: ( ( rule__Atomic__Group_4__0 ) )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:475:1: ( rule__Atomic__Group_4__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getGroup_4()); 
                     }
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:474:1: ( rule__Atomic__Group_4__0 )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:474:2: rule__Atomic__Group_4__0
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:476:1: ( rule__Atomic__Group_4__0 )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:476:2: rule__Atomic__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__Atomic__Group_4__0_in_rule__Atomic__Alternatives974);
+                    pushFollow(FOLLOW_rule__Atomic__Group_4__0_in_rule__Atomic__Alternatives979);
                     rule__Atomic__Group_4__0();
 
                     state._fsp--;
@@ -1547,40 +1552,40 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__ValueAlternatives_3_1_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:483:1: rule__Atomic__ValueAlternatives_3_1_0 : ( ( 'true' ) | ( 'false' ) );
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:485:1: rule__Atomic__ValueAlternatives_3_1_0 : ( ( 'true' ) | ( 'false' ) );
     public final void rule__Atomic__ValueAlternatives_3_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:487:1: ( ( 'true' ) | ( 'false' ) )
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:489:1: ( ( 'true' ) | ( 'false' ) )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA8_0==17) ) {
-                alt8=1;
+            if ( (LA7_0==15) ) {
+                alt7=1;
             }
-            else if ( (LA8_0==18) ) {
-                alt8=2;
+            else if ( (LA7_0==16) ) {
+                alt7=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
-            switch (alt8) {
+            switch (alt7) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:488:1: ( 'true' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:490:1: ( 'true' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:488:1: ( 'true' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:489:1: 'true'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:490:1: ( 'true' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:491:1: 'true'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getValueTrueKeyword_3_1_0_0()); 
                     }
-                    match(input,17,FOLLOW_17_in_rule__Atomic__ValueAlternatives_3_1_01008); if (state.failed) return ;
+                    match(input,15,FOLLOW_15_in_rule__Atomic__ValueAlternatives_3_1_01013); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAtomicAccess().getValueTrueKeyword_3_1_0_0()); 
                     }
@@ -1591,15 +1596,15 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:496:6: ( 'false' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:498:6: ( 'false' )
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:496:6: ( 'false' )
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:497:1: 'false'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:498:6: ( 'false' )
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:499:1: 'false'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAtomicAccess().getValueFalseKeyword_3_1_0_1()); 
                     }
-                    match(input,18,FOLLOW_18_in_rule__Atomic__ValueAlternatives_3_1_01028); if (state.failed) return ;
+                    match(input,16,FOLLOW_16_in_rule__Atomic__ValueAlternatives_3_1_01033); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAtomicAccess().getValueFalseKeyword_3_1_0_1()); 
                     }
@@ -1627,21 +1632,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:512:1: rule__Variable__Group__0 : rule__Variable__Group__0__Impl rule__Variable__Group__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:514:1: rule__Variable__Group__0 : rule__Variable__Group__0__Impl rule__Variable__Group__1 ;
     public final void rule__Variable__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:516:1: ( rule__Variable__Group__0__Impl rule__Variable__Group__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:517:2: rule__Variable__Group__0__Impl rule__Variable__Group__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:518:1: ( rule__Variable__Group__0__Impl rule__Variable__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:519:2: rule__Variable__Group__0__Impl rule__Variable__Group__1
             {
-            pushFollow(FOLLOW_rule__Variable__Group__0__Impl_in_rule__Variable__Group__01061);
+            pushFollow(FOLLOW_rule__Variable__Group__0__Impl_in_rule__Variable__Group__01066);
             rule__Variable__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Variable__Group__1_in_rule__Variable__Group__01064);
+            pushFollow(FOLLOW_rule__Variable__Group__1_in_rule__Variable__Group__01069);
             rule__Variable__Group__1();
 
             state._fsp--;
@@ -1665,25 +1670,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:524:1: rule__Variable__Group__0__Impl : ( ( rule__Variable__NameAssignment_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:526:1: rule__Variable__Group__0__Impl : ( ( rule__Variable__NameAssignment_0 ) ) ;
     public final void rule__Variable__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:528:1: ( ( ( rule__Variable__NameAssignment_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:529:1: ( ( rule__Variable__NameAssignment_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:530:1: ( ( ( rule__Variable__NameAssignment_0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:531:1: ( ( rule__Variable__NameAssignment_0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:529:1: ( ( rule__Variable__NameAssignment_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:530:1: ( rule__Variable__NameAssignment_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:531:1: ( ( rule__Variable__NameAssignment_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:532:1: ( rule__Variable__NameAssignment_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccess().getNameAssignment_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:531:1: ( rule__Variable__NameAssignment_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:531:2: rule__Variable__NameAssignment_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:533:1: ( rule__Variable__NameAssignment_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:533:2: rule__Variable__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__Variable__NameAssignment_0_in_rule__Variable__Group__0__Impl1091);
+            pushFollow(FOLLOW_rule__Variable__NameAssignment_0_in_rule__Variable__Group__0__Impl1096);
             rule__Variable__NameAssignment_0();
 
             state._fsp--;
@@ -1716,21 +1721,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:541:1: rule__Variable__Group__1 : rule__Variable__Group__1__Impl rule__Variable__Group__2 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:543:1: rule__Variable__Group__1 : rule__Variable__Group__1__Impl rule__Variable__Group__2 ;
     public final void rule__Variable__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:545:1: ( rule__Variable__Group__1__Impl rule__Variable__Group__2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:546:2: rule__Variable__Group__1__Impl rule__Variable__Group__2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:547:1: ( rule__Variable__Group__1__Impl rule__Variable__Group__2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:548:2: rule__Variable__Group__1__Impl rule__Variable__Group__2
             {
-            pushFollow(FOLLOW_rule__Variable__Group__1__Impl_in_rule__Variable__Group__11121);
+            pushFollow(FOLLOW_rule__Variable__Group__1__Impl_in_rule__Variable__Group__11126);
             rule__Variable__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Variable__Group__2_in_rule__Variable__Group__11124);
+            pushFollow(FOLLOW_rule__Variable__Group__2_in_rule__Variable__Group__11129);
             rule__Variable__Group__2();
 
             state._fsp--;
@@ -1754,22 +1759,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:553:1: rule__Variable__Group__1__Impl : ( '=' ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:555:1: rule__Variable__Group__1__Impl : ( '=' ) ;
     public final void rule__Variable__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:557:1: ( ( '=' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:558:1: ( '=' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:559:1: ( ( '=' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:560:1: ( '=' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:558:1: ( '=' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:559:1: '='
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:560:1: ( '=' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:561:1: '='
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccess().getEqualsSignKeyword_1()); 
             }
-            match(input,19,FOLLOW_19_in_rule__Variable__Group__1__Impl1152); if (state.failed) return ;
+            match(input,17,FOLLOW_17_in_rule__Variable__Group__1__Impl1157); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVariableAccess().getEqualsSignKeyword_1()); 
             }
@@ -1795,16 +1800,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:572:1: rule__Variable__Group__2 : rule__Variable__Group__2__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:574:1: rule__Variable__Group__2 : rule__Variable__Group__2__Impl ;
     public final void rule__Variable__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:576:1: ( rule__Variable__Group__2__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:577:2: rule__Variable__Group__2__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:578:1: ( rule__Variable__Group__2__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:579:2: rule__Variable__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Variable__Group__2__Impl_in_rule__Variable__Group__21183);
+            pushFollow(FOLLOW_rule__Variable__Group__2__Impl_in_rule__Variable__Group__21188);
             rule__Variable__Group__2__Impl();
 
             state._fsp--;
@@ -1828,25 +1833,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__Group__2__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:583:1: rule__Variable__Group__2__Impl : ( ( rule__Variable__ExpressionAssignment_2 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:585:1: rule__Variable__Group__2__Impl : ( ( rule__Variable__ExpressionAssignment_2 ) ) ;
     public final void rule__Variable__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:587:1: ( ( ( rule__Variable__ExpressionAssignment_2 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:588:1: ( ( rule__Variable__ExpressionAssignment_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:589:1: ( ( ( rule__Variable__ExpressionAssignment_2 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:590:1: ( ( rule__Variable__ExpressionAssignment_2 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:588:1: ( ( rule__Variable__ExpressionAssignment_2 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:589:1: ( rule__Variable__ExpressionAssignment_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:590:1: ( ( rule__Variable__ExpressionAssignment_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:591:1: ( rule__Variable__ExpressionAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccess().getExpressionAssignment_2()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:590:1: ( rule__Variable__ExpressionAssignment_2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:590:2: rule__Variable__ExpressionAssignment_2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:592:1: ( rule__Variable__ExpressionAssignment_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:592:2: rule__Variable__ExpressionAssignment_2
             {
-            pushFollow(FOLLOW_rule__Variable__ExpressionAssignment_2_in_rule__Variable__Group__2__Impl1210);
+            pushFollow(FOLLOW_rule__Variable__ExpressionAssignment_2_in_rule__Variable__Group__2__Impl1215);
             rule__Variable__ExpressionAssignment_2();
 
             state._fsp--;
@@ -1879,21 +1884,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:606:1: rule__BooleanExpression__Group__0 : rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:608:1: rule__BooleanExpression__Group__0 : rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1 ;
     public final void rule__BooleanExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:610:1: ( rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:611:2: rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:612:1: ( rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:613:2: rule__BooleanExpression__Group__0__Impl rule__BooleanExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group__0__Impl_in_rule__BooleanExpression__Group__01246);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group__0__Impl_in_rule__BooleanExpression__Group__01251);
             rule__BooleanExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BooleanExpression__Group__1_in_rule__BooleanExpression__Group__01249);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group__1_in_rule__BooleanExpression__Group__01254);
             rule__BooleanExpression__Group__1();
 
             state._fsp--;
@@ -1917,22 +1922,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:618:1: rule__BooleanExpression__Group__0__Impl : ( ruleComparison ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:620:1: rule__BooleanExpression__Group__0__Impl : ( ruleComparison ) ;
     public final void rule__BooleanExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:622:1: ( ( ruleComparison ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:623:1: ( ruleComparison )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:624:1: ( ( ruleComparison ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:625:1: ( ruleComparison )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:623:1: ( ruleComparison )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:624:1: ruleComparison
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:625:1: ( ruleComparison )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:626:1: ruleComparison
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getComparisonParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleComparison_in_rule__BooleanExpression__Group__0__Impl1276);
+            pushFollow(FOLLOW_ruleComparison_in_rule__BooleanExpression__Group__0__Impl1281);
             ruleComparison();
 
             state._fsp--;
@@ -1962,16 +1967,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:635:1: rule__BooleanExpression__Group__1 : rule__BooleanExpression__Group__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:637:1: rule__BooleanExpression__Group__1 : rule__BooleanExpression__Group__1__Impl ;
     public final void rule__BooleanExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:639:1: ( rule__BooleanExpression__Group__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:640:2: rule__BooleanExpression__Group__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:641:1: ( rule__BooleanExpression__Group__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:642:2: rule__BooleanExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group__1__Impl_in_rule__BooleanExpression__Group__11305);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group__1__Impl_in_rule__BooleanExpression__Group__11310);
             rule__BooleanExpression__Group__1__Impl();
 
             state._fsp--;
@@ -1995,37 +2000,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:646:1: rule__BooleanExpression__Group__1__Impl : ( ( rule__BooleanExpression__Group_1__0 )* ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:648:1: rule__BooleanExpression__Group__1__Impl : ( ( rule__BooleanExpression__Group_1__0 )* ) ;
     public final void rule__BooleanExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:650:1: ( ( ( rule__BooleanExpression__Group_1__0 )* ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:651:1: ( ( rule__BooleanExpression__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:652:1: ( ( ( rule__BooleanExpression__Group_1__0 )* ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:653:1: ( ( rule__BooleanExpression__Group_1__0 )* )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:651:1: ( ( rule__BooleanExpression__Group_1__0 )* )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:652:1: ( rule__BooleanExpression__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:653:1: ( ( rule__BooleanExpression__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:654:1: ( rule__BooleanExpression__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getGroup_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:653:1: ( rule__BooleanExpression__Group_1__0 )*
-            loop9:
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:655:1: ( rule__BooleanExpression__Group_1__0 )*
+            loop8:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( ((LA9_0>=11 && LA9_0<=12)) ) {
-                    alt9=1;
+                if ( ((LA8_0>=11 && LA8_0<=12)) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt8) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:653:2: rule__BooleanExpression__Group_1__0
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:655:2: rule__BooleanExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__BooleanExpression__Group_1__0_in_rule__BooleanExpression__Group__1__Impl1332);
+            	    pushFollow(FOLLOW_rule__BooleanExpression__Group_1__0_in_rule__BooleanExpression__Group__1__Impl1337);
             	    rule__BooleanExpression__Group_1__0();
 
             	    state._fsp--;
@@ -2035,7 +2040,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop8;
                 }
             } while (true);
 
@@ -2064,21 +2069,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:667:1: rule__BooleanExpression__Group_1__0 : rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:669:1: rule__BooleanExpression__Group_1__0 : rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1 ;
     public final void rule__BooleanExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:671:1: ( rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:672:2: rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:673:1: ( rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:674:2: rule__BooleanExpression__Group_1__0__Impl rule__BooleanExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__0__Impl_in_rule__BooleanExpression__Group_1__01367);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__0__Impl_in_rule__BooleanExpression__Group_1__01372);
             rule__BooleanExpression__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__1_in_rule__BooleanExpression__Group_1__01370);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__1_in_rule__BooleanExpression__Group_1__01375);
             rule__BooleanExpression__Group_1__1();
 
             state._fsp--;
@@ -2102,25 +2107,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:679:1: rule__BooleanExpression__Group_1__0__Impl : ( ( rule__BooleanExpression__Group_1_0__0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:681:1: rule__BooleanExpression__Group_1__0__Impl : ( ( rule__BooleanExpression__Group_1_0__0 ) ) ;
     public final void rule__BooleanExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:683:1: ( ( ( rule__BooleanExpression__Group_1_0__0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:684:1: ( ( rule__BooleanExpression__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:685:1: ( ( ( rule__BooleanExpression__Group_1_0__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:686:1: ( ( rule__BooleanExpression__Group_1_0__0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:684:1: ( ( rule__BooleanExpression__Group_1_0__0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:685:1: ( rule__BooleanExpression__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:686:1: ( ( rule__BooleanExpression__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:687:1: ( rule__BooleanExpression__Group_1_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getGroup_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:686:1: ( rule__BooleanExpression__Group_1_0__0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:686:2: rule__BooleanExpression__Group_1_0__0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:688:1: ( rule__BooleanExpression__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:688:2: rule__BooleanExpression__Group_1_0__0
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__0_in_rule__BooleanExpression__Group_1__0__Impl1397);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__0_in_rule__BooleanExpression__Group_1__0__Impl1402);
             rule__BooleanExpression__Group_1_0__0();
 
             state._fsp--;
@@ -2153,16 +2158,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:696:1: rule__BooleanExpression__Group_1__1 : rule__BooleanExpression__Group_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:698:1: rule__BooleanExpression__Group_1__1 : rule__BooleanExpression__Group_1__1__Impl ;
     public final void rule__BooleanExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:700:1: ( rule__BooleanExpression__Group_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:701:2: rule__BooleanExpression__Group_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:702:1: ( rule__BooleanExpression__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:703:2: rule__BooleanExpression__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__1__Impl_in_rule__BooleanExpression__Group_1__11427);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1__1__Impl_in_rule__BooleanExpression__Group_1__11432);
             rule__BooleanExpression__Group_1__1__Impl();
 
             state._fsp--;
@@ -2186,25 +2191,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:707:1: rule__BooleanExpression__Group_1__1__Impl : ( ( rule__BooleanExpression__RightAssignment_1_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:709:1: rule__BooleanExpression__Group_1__1__Impl : ( ( rule__BooleanExpression__RightAssignment_1_1 ) ) ;
     public final void rule__BooleanExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:711:1: ( ( ( rule__BooleanExpression__RightAssignment_1_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:712:1: ( ( rule__BooleanExpression__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:713:1: ( ( ( rule__BooleanExpression__RightAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:714:1: ( ( rule__BooleanExpression__RightAssignment_1_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:712:1: ( ( rule__BooleanExpression__RightAssignment_1_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:713:1: ( rule__BooleanExpression__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:714:1: ( ( rule__BooleanExpression__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:715:1: ( rule__BooleanExpression__RightAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getRightAssignment_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:714:1: ( rule__BooleanExpression__RightAssignment_1_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:714:2: rule__BooleanExpression__RightAssignment_1_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:716:1: ( rule__BooleanExpression__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:716:2: rule__BooleanExpression__RightAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__RightAssignment_1_1_in_rule__BooleanExpression__Group_1__1__Impl1454);
+            pushFollow(FOLLOW_rule__BooleanExpression__RightAssignment_1_1_in_rule__BooleanExpression__Group_1__1__Impl1459);
             rule__BooleanExpression__RightAssignment_1_1();
 
             state._fsp--;
@@ -2237,21 +2242,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:728:1: rule__BooleanExpression__Group_1_0__0 : rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:730:1: rule__BooleanExpression__Group_1_0__0 : rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1 ;
     public final void rule__BooleanExpression__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:732:1: ( rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:733:2: rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:734:1: ( rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:735:2: rule__BooleanExpression__Group_1_0__0__Impl rule__BooleanExpression__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__0__Impl_in_rule__BooleanExpression__Group_1_0__01488);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__0__Impl_in_rule__BooleanExpression__Group_1_0__01493);
             rule__BooleanExpression__Group_1_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__1_in_rule__BooleanExpression__Group_1_0__01491);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__1_in_rule__BooleanExpression__Group_1_0__01496);
             rule__BooleanExpression__Group_1_0__1();
 
             state._fsp--;
@@ -2275,23 +2280,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:740:1: rule__BooleanExpression__Group_1_0__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:742:1: rule__BooleanExpression__Group_1_0__0__Impl : ( () ) ;
     public final void rule__BooleanExpression__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:744:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:745:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:746:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:747:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:745:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:746:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:747:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:748:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getAndOrExpressionLeftAction_1_0_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:747:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:749:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:749:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:751:1: 
             {
             }
 
@@ -2316,16 +2321,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:759:1: rule__BooleanExpression__Group_1_0__1 : rule__BooleanExpression__Group_1_0__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:761:1: rule__BooleanExpression__Group_1_0__1 : rule__BooleanExpression__Group_1_0__1__Impl ;
     public final void rule__BooleanExpression__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:763:1: ( rule__BooleanExpression__Group_1_0__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:764:2: rule__BooleanExpression__Group_1_0__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:765:1: ( rule__BooleanExpression__Group_1_0__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:766:2: rule__BooleanExpression__Group_1_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__1__Impl_in_rule__BooleanExpression__Group_1_0__11549);
+            pushFollow(FOLLOW_rule__BooleanExpression__Group_1_0__1__Impl_in_rule__BooleanExpression__Group_1_0__11554);
             rule__BooleanExpression__Group_1_0__1__Impl();
 
             state._fsp--;
@@ -2349,25 +2354,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__Group_1_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:770:1: rule__BooleanExpression__Group_1_0__1__Impl : ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:772:1: rule__BooleanExpression__Group_1_0__1__Impl : ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) ) ;
     public final void rule__BooleanExpression__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:774:1: ( ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:775:1: ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:776:1: ( ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:777:1: ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:775:1: ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:776:1: ( rule__BooleanExpression__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:777:1: ( ( rule__BooleanExpression__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:778:1: ( rule__BooleanExpression__OpAssignment_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getOpAssignment_1_0_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:777:1: ( rule__BooleanExpression__OpAssignment_1_0_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:777:2: rule__BooleanExpression__OpAssignment_1_0_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:779:1: ( rule__BooleanExpression__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:779:2: rule__BooleanExpression__OpAssignment_1_0_1
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__OpAssignment_1_0_1_in_rule__BooleanExpression__Group_1_0__1__Impl1576);
+            pushFollow(FOLLOW_rule__BooleanExpression__OpAssignment_1_0_1_in_rule__BooleanExpression__Group_1_0__1__Impl1581);
             rule__BooleanExpression__OpAssignment_1_0_1();
 
             state._fsp--;
@@ -2400,21 +2405,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:791:1: rule__Comparison__Group__0 : rule__Comparison__Group__0__Impl rule__Comparison__Group__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:793:1: rule__Comparison__Group__0 : rule__Comparison__Group__0__Impl rule__Comparison__Group__1 ;
     public final void rule__Comparison__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:795:1: ( rule__Comparison__Group__0__Impl rule__Comparison__Group__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:796:2: rule__Comparison__Group__0__Impl rule__Comparison__Group__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:797:1: ( rule__Comparison__Group__0__Impl rule__Comparison__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:798:2: rule__Comparison__Group__0__Impl rule__Comparison__Group__1
             {
-            pushFollow(FOLLOW_rule__Comparison__Group__0__Impl_in_rule__Comparison__Group__01610);
+            pushFollow(FOLLOW_rule__Comparison__Group__0__Impl_in_rule__Comparison__Group__01615);
             rule__Comparison__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Comparison__Group__1_in_rule__Comparison__Group__01613);
+            pushFollow(FOLLOW_rule__Comparison__Group__1_in_rule__Comparison__Group__01618);
             rule__Comparison__Group__1();
 
             state._fsp--;
@@ -2438,28 +2443,28 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:803:1: rule__Comparison__Group__0__Impl : ( ruleAddition ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:805:1: rule__Comparison__Group__0__Impl : ( ruleEquals ) ;
     public final void rule__Comparison__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:807:1: ( ( ruleAddition ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:808:1: ( ruleAddition )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:809:1: ( ( ruleEquals ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:810:1: ( ruleEquals )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:808:1: ( ruleAddition )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:809:1: ruleAddition
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:810:1: ( ruleEquals )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:811:1: ruleEquals
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getComparisonAccess().getAdditionParserRuleCall_0()); 
+               before(grammarAccess.getComparisonAccess().getEqualsParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleAddition_in_rule__Comparison__Group__0__Impl1640);
-            ruleAddition();
+            pushFollow(FOLLOW_ruleEquals_in_rule__Comparison__Group__0__Impl1645);
+            ruleEquals();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getComparisonAccess().getAdditionParserRuleCall_0()); 
+               after(grammarAccess.getComparisonAccess().getEqualsParserRuleCall_0()); 
             }
 
             }
@@ -2483,16 +2488,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:820:1: rule__Comparison__Group__1 : rule__Comparison__Group__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:822:1: rule__Comparison__Group__1 : rule__Comparison__Group__1__Impl ;
     public final void rule__Comparison__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:824:1: ( rule__Comparison__Group__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:825:2: rule__Comparison__Group__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:826:1: ( rule__Comparison__Group__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:827:2: rule__Comparison__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Comparison__Group__1__Impl_in_rule__Comparison__Group__11669);
+            pushFollow(FOLLOW_rule__Comparison__Group__1__Impl_in_rule__Comparison__Group__11674);
             rule__Comparison__Group__1__Impl();
 
             state._fsp--;
@@ -2516,37 +2521,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:831:1: rule__Comparison__Group__1__Impl : ( ( rule__Comparison__Group_1__0 )* ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:833:1: rule__Comparison__Group__1__Impl : ( ( rule__Comparison__Group_1__0 )* ) ;
     public final void rule__Comparison__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:835:1: ( ( ( rule__Comparison__Group_1__0 )* ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:836:1: ( ( rule__Comparison__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:837:1: ( ( ( rule__Comparison__Group_1__0 )* ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:838:1: ( ( rule__Comparison__Group_1__0 )* )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:836:1: ( ( rule__Comparison__Group_1__0 )* )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:837:1: ( rule__Comparison__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:838:1: ( ( rule__Comparison__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:839:1: ( rule__Comparison__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonAccess().getGroup_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:838:1: ( rule__Comparison__Group_1__0 )*
-            loop10:
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:840:1: ( rule__Comparison__Group_1__0 )*
+            loop9:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( ((LA10_0>=13 && LA10_0<=14)) ) {
-                    alt10=1;
+                if ( (LA9_0==23) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt9) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:838:2: rule__Comparison__Group_1__0
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:840:2: rule__Comparison__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Comparison__Group_1__0_in_rule__Comparison__Group__1__Impl1696);
+            	    pushFollow(FOLLOW_rule__Comparison__Group_1__0_in_rule__Comparison__Group__1__Impl1701);
             	    rule__Comparison__Group_1__0();
 
             	    state._fsp--;
@@ -2556,7 +2561,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop9;
                 }
             } while (true);
 
@@ -2585,21 +2590,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:852:1: rule__Comparison__Group_1__0 : rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:854:1: rule__Comparison__Group_1__0 : rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1 ;
     public final void rule__Comparison__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:856:1: ( rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:857:2: rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:858:1: ( rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:859:2: rule__Comparison__Group_1__0__Impl rule__Comparison__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Comparison__Group_1__0__Impl_in_rule__Comparison__Group_1__01731);
+            pushFollow(FOLLOW_rule__Comparison__Group_1__0__Impl_in_rule__Comparison__Group_1__01736);
             rule__Comparison__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Comparison__Group_1__1_in_rule__Comparison__Group_1__01734);
+            pushFollow(FOLLOW_rule__Comparison__Group_1__1_in_rule__Comparison__Group_1__01739);
             rule__Comparison__Group_1__1();
 
             state._fsp--;
@@ -2623,25 +2628,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:864:1: rule__Comparison__Group_1__0__Impl : ( ( rule__Comparison__Group_1_0__0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:866:1: rule__Comparison__Group_1__0__Impl : ( ( rule__Comparison__Group_1_0__0 ) ) ;
     public final void rule__Comparison__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:868:1: ( ( ( rule__Comparison__Group_1_0__0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:869:1: ( ( rule__Comparison__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:870:1: ( ( ( rule__Comparison__Group_1_0__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:871:1: ( ( rule__Comparison__Group_1_0__0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:869:1: ( ( rule__Comparison__Group_1_0__0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:870:1: ( rule__Comparison__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:871:1: ( ( rule__Comparison__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:872:1: ( rule__Comparison__Group_1_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonAccess().getGroup_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:871:1: ( rule__Comparison__Group_1_0__0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:871:2: rule__Comparison__Group_1_0__0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:873:1: ( rule__Comparison__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:873:2: rule__Comparison__Group_1_0__0
             {
-            pushFollow(FOLLOW_rule__Comparison__Group_1_0__0_in_rule__Comparison__Group_1__0__Impl1761);
+            pushFollow(FOLLOW_rule__Comparison__Group_1_0__0_in_rule__Comparison__Group_1__0__Impl1766);
             rule__Comparison__Group_1_0__0();
 
             state._fsp--;
@@ -2674,16 +2679,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:881:1: rule__Comparison__Group_1__1 : rule__Comparison__Group_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:883:1: rule__Comparison__Group_1__1 : rule__Comparison__Group_1__1__Impl ;
     public final void rule__Comparison__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:885:1: ( rule__Comparison__Group_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:886:2: rule__Comparison__Group_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:887:1: ( rule__Comparison__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:888:2: rule__Comparison__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Comparison__Group_1__1__Impl_in_rule__Comparison__Group_1__11791);
+            pushFollow(FOLLOW_rule__Comparison__Group_1__1__Impl_in_rule__Comparison__Group_1__11796);
             rule__Comparison__Group_1__1__Impl();
 
             state._fsp--;
@@ -2707,25 +2712,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:892:1: rule__Comparison__Group_1__1__Impl : ( ( rule__Comparison__RightAssignment_1_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:894:1: rule__Comparison__Group_1__1__Impl : ( ( rule__Comparison__RightAssignment_1_1 ) ) ;
     public final void rule__Comparison__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:896:1: ( ( ( rule__Comparison__RightAssignment_1_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:897:1: ( ( rule__Comparison__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:898:1: ( ( ( rule__Comparison__RightAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:899:1: ( ( rule__Comparison__RightAssignment_1_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:897:1: ( ( rule__Comparison__RightAssignment_1_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:898:1: ( rule__Comparison__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:899:1: ( ( rule__Comparison__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:900:1: ( rule__Comparison__RightAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonAccess().getRightAssignment_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:899:1: ( rule__Comparison__RightAssignment_1_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:899:2: rule__Comparison__RightAssignment_1_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:901:1: ( rule__Comparison__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:901:2: rule__Comparison__RightAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Comparison__RightAssignment_1_1_in_rule__Comparison__Group_1__1__Impl1818);
+            pushFollow(FOLLOW_rule__Comparison__RightAssignment_1_1_in_rule__Comparison__Group_1__1__Impl1823);
             rule__Comparison__RightAssignment_1_1();
 
             state._fsp--;
@@ -2758,21 +2763,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:913:1: rule__Comparison__Group_1_0__0 : rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:915:1: rule__Comparison__Group_1_0__0 : rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1 ;
     public final void rule__Comparison__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:917:1: ( rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:918:2: rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:919:1: ( rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:920:2: rule__Comparison__Group_1_0__0__Impl rule__Comparison__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__Comparison__Group_1_0__0__Impl_in_rule__Comparison__Group_1_0__01852);
+            pushFollow(FOLLOW_rule__Comparison__Group_1_0__0__Impl_in_rule__Comparison__Group_1_0__01857);
             rule__Comparison__Group_1_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Comparison__Group_1_0__1_in_rule__Comparison__Group_1_0__01855);
+            pushFollow(FOLLOW_rule__Comparison__Group_1_0__1_in_rule__Comparison__Group_1_0__01860);
             rule__Comparison__Group_1_0__1();
 
             state._fsp--;
@@ -2796,23 +2801,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:925:1: rule__Comparison__Group_1_0__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:927:1: rule__Comparison__Group_1_0__0__Impl : ( () ) ;
     public final void rule__Comparison__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:929:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:930:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:931:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:932:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:930:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:931:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:932:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:933:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:932:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:934:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:934:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:936:1: 
             {
             }
 
@@ -2837,16 +2842,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:944:1: rule__Comparison__Group_1_0__1 : rule__Comparison__Group_1_0__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:946:1: rule__Comparison__Group_1_0__1 : rule__Comparison__Group_1_0__1__Impl ;
     public final void rule__Comparison__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:948:1: ( rule__Comparison__Group_1_0__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:949:2: rule__Comparison__Group_1_0__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:950:1: ( rule__Comparison__Group_1_0__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:951:2: rule__Comparison__Group_1_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Comparison__Group_1_0__1__Impl_in_rule__Comparison__Group_1_0__11913);
+            pushFollow(FOLLOW_rule__Comparison__Group_1_0__1__Impl_in_rule__Comparison__Group_1_0__11918);
             rule__Comparison__Group_1_0__1__Impl();
 
             state._fsp--;
@@ -2870,25 +2875,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__Group_1_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:955:1: rule__Comparison__Group_1_0__1__Impl : ( ( rule__Comparison__OpAssignment_1_0_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:957:1: rule__Comparison__Group_1_0__1__Impl : ( ( rule__Comparison__OpAssignment_1_0_1 ) ) ;
     public final void rule__Comparison__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:959:1: ( ( ( rule__Comparison__OpAssignment_1_0_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:960:1: ( ( rule__Comparison__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:961:1: ( ( ( rule__Comparison__OpAssignment_1_0_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:962:1: ( ( rule__Comparison__OpAssignment_1_0_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:960:1: ( ( rule__Comparison__OpAssignment_1_0_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:961:1: ( rule__Comparison__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:962:1: ( ( rule__Comparison__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:963:1: ( rule__Comparison__OpAssignment_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonAccess().getOpAssignment_1_0_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:962:1: ( rule__Comparison__OpAssignment_1_0_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:962:2: rule__Comparison__OpAssignment_1_0_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:964:1: ( rule__Comparison__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:964:2: rule__Comparison__OpAssignment_1_0_1
             {
-            pushFollow(FOLLOW_rule__Comparison__OpAssignment_1_0_1_in_rule__Comparison__Group_1_0__1__Impl1940);
+            pushFollow(FOLLOW_rule__Comparison__OpAssignment_1_0_1_in_rule__Comparison__Group_1_0__1__Impl1945);
             rule__Comparison__OpAssignment_1_0_1();
 
             state._fsp--;
@@ -2920,22 +2925,543 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__Comparison__Group_1_0__1__Impl"
 
 
+    // $ANTLR start "rule__Equals__Group__0"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:978:1: rule__Equals__Group__0 : rule__Equals__Group__0__Impl rule__Equals__Group__1 ;
+    public final void rule__Equals__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:982:1: ( rule__Equals__Group__0__Impl rule__Equals__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:983:2: rule__Equals__Group__0__Impl rule__Equals__Group__1
+            {
+            pushFollow(FOLLOW_rule__Equals__Group__0__Impl_in_rule__Equals__Group__01979);
+            rule__Equals__Group__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Equals__Group__1_in_rule__Equals__Group__01982);
+            rule__Equals__Group__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group__0"
+
+
+    // $ANTLR start "rule__Equals__Group__0__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:990:1: rule__Equals__Group__0__Impl : ( ruleAddition ) ;
+    public final void rule__Equals__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:994:1: ( ( ruleAddition ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:995:1: ( ruleAddition )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:995:1: ( ruleAddition )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:996:1: ruleAddition
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getAdditionParserRuleCall_0()); 
+            }
+            pushFollow(FOLLOW_ruleAddition_in_rule__Equals__Group__0__Impl2009);
+            ruleAddition();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getAdditionParserRuleCall_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group__0__Impl"
+
+
+    // $ANTLR start "rule__Equals__Group__1"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1007:1: rule__Equals__Group__1 : rule__Equals__Group__1__Impl ;
+    public final void rule__Equals__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1011:1: ( rule__Equals__Group__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1012:2: rule__Equals__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Equals__Group__1__Impl_in_rule__Equals__Group__12038);
+            rule__Equals__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group__1"
+
+
+    // $ANTLR start "rule__Equals__Group__1__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1018:1: rule__Equals__Group__1__Impl : ( ( rule__Equals__Group_1__0 )* ) ;
+    public final void rule__Equals__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1022:1: ( ( ( rule__Equals__Group_1__0 )* ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1023:1: ( ( rule__Equals__Group_1__0 )* )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1023:1: ( ( rule__Equals__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1024:1: ( rule__Equals__Group_1__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getGroup_1()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1025:1: ( rule__Equals__Group_1__0 )*
+            loop10:
+            do {
+                int alt10=2;
+                int LA10_0 = input.LA(1);
+
+                if ( (LA10_0==24) ) {
+                    alt10=1;
+                }
+
+
+                switch (alt10) {
+            	case 1 :
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1025:2: rule__Equals__Group_1__0
+            	    {
+            	    pushFollow(FOLLOW_rule__Equals__Group_1__0_in_rule__Equals__Group__1__Impl2065);
+            	    rule__Equals__Group_1__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop10;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getGroup_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group__1__Impl"
+
+
+    // $ANTLR start "rule__Equals__Group_1__0"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1039:1: rule__Equals__Group_1__0 : rule__Equals__Group_1__0__Impl rule__Equals__Group_1__1 ;
+    public final void rule__Equals__Group_1__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1043:1: ( rule__Equals__Group_1__0__Impl rule__Equals__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1044:2: rule__Equals__Group_1__0__Impl rule__Equals__Group_1__1
+            {
+            pushFollow(FOLLOW_rule__Equals__Group_1__0__Impl_in_rule__Equals__Group_1__02100);
+            rule__Equals__Group_1__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Equals__Group_1__1_in_rule__Equals__Group_1__02103);
+            rule__Equals__Group_1__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1__0"
+
+
+    // $ANTLR start "rule__Equals__Group_1__0__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1051:1: rule__Equals__Group_1__0__Impl : ( ( rule__Equals__Group_1_0__0 ) ) ;
+    public final void rule__Equals__Group_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1055:1: ( ( ( rule__Equals__Group_1_0__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1056:1: ( ( rule__Equals__Group_1_0__0 ) )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1056:1: ( ( rule__Equals__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1057:1: ( rule__Equals__Group_1_0__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getGroup_1_0()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1058:1: ( rule__Equals__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1058:2: rule__Equals__Group_1_0__0
+            {
+            pushFollow(FOLLOW_rule__Equals__Group_1_0__0_in_rule__Equals__Group_1__0__Impl2130);
+            rule__Equals__Group_1_0__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getGroup_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1__0__Impl"
+
+
+    // $ANTLR start "rule__Equals__Group_1__1"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1068:1: rule__Equals__Group_1__1 : rule__Equals__Group_1__1__Impl ;
+    public final void rule__Equals__Group_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1072:1: ( rule__Equals__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1073:2: rule__Equals__Group_1__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Equals__Group_1__1__Impl_in_rule__Equals__Group_1__12160);
+            rule__Equals__Group_1__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1__1"
+
+
+    // $ANTLR start "rule__Equals__Group_1__1__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1079:1: rule__Equals__Group_1__1__Impl : ( ( rule__Equals__RightAssignment_1_1 ) ) ;
+    public final void rule__Equals__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1083:1: ( ( ( rule__Equals__RightAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1084:1: ( ( rule__Equals__RightAssignment_1_1 ) )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1084:1: ( ( rule__Equals__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1085:1: ( rule__Equals__RightAssignment_1_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getRightAssignment_1_1()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1086:1: ( rule__Equals__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1086:2: rule__Equals__RightAssignment_1_1
+            {
+            pushFollow(FOLLOW_rule__Equals__RightAssignment_1_1_in_rule__Equals__Group_1__1__Impl2187);
+            rule__Equals__RightAssignment_1_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getRightAssignment_1_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1__1__Impl"
+
+
+    // $ANTLR start "rule__Equals__Group_1_0__0"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1100:1: rule__Equals__Group_1_0__0 : rule__Equals__Group_1_0__0__Impl rule__Equals__Group_1_0__1 ;
+    public final void rule__Equals__Group_1_0__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1104:1: ( rule__Equals__Group_1_0__0__Impl rule__Equals__Group_1_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1105:2: rule__Equals__Group_1_0__0__Impl rule__Equals__Group_1_0__1
+            {
+            pushFollow(FOLLOW_rule__Equals__Group_1_0__0__Impl_in_rule__Equals__Group_1_0__02221);
+            rule__Equals__Group_1_0__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Equals__Group_1_0__1_in_rule__Equals__Group_1_0__02224);
+            rule__Equals__Group_1_0__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1_0__0"
+
+
+    // $ANTLR start "rule__Equals__Group_1_0__0__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1112:1: rule__Equals__Group_1_0__0__Impl : ( () ) ;
+    public final void rule__Equals__Group_1_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1116:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1117:1: ( () )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1117:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1118:1: ()
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1119:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1121:1: 
+            {
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1_0__0__Impl"
+
+
+    // $ANTLR start "rule__Equals__Group_1_0__1"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1131:1: rule__Equals__Group_1_0__1 : rule__Equals__Group_1_0__1__Impl ;
+    public final void rule__Equals__Group_1_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1135:1: ( rule__Equals__Group_1_0__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1136:2: rule__Equals__Group_1_0__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Equals__Group_1_0__1__Impl_in_rule__Equals__Group_1_0__12282);
+            rule__Equals__Group_1_0__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1_0__1"
+
+
+    // $ANTLR start "rule__Equals__Group_1_0__1__Impl"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1142:1: rule__Equals__Group_1_0__1__Impl : ( ( rule__Equals__OpAssignment_1_0_1 ) ) ;
+    public final void rule__Equals__Group_1_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1146:1: ( ( ( rule__Equals__OpAssignment_1_0_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1147:1: ( ( rule__Equals__OpAssignment_1_0_1 ) )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1147:1: ( ( rule__Equals__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1148:1: ( rule__Equals__OpAssignment_1_0_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getOpAssignment_1_0_1()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1149:1: ( rule__Equals__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1149:2: rule__Equals__OpAssignment_1_0_1
+            {
+            pushFollow(FOLLOW_rule__Equals__OpAssignment_1_0_1_in_rule__Equals__Group_1_0__1__Impl2309);
+            rule__Equals__OpAssignment_1_0_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getOpAssignment_1_0_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__Group_1_0__1__Impl"
+
+
     // $ANTLR start "rule__Addition__Group__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:976:1: rule__Addition__Group__0 : rule__Addition__Group__0__Impl rule__Addition__Group__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1163:1: rule__Addition__Group__0 : rule__Addition__Group__0__Impl rule__Addition__Group__1 ;
     public final void rule__Addition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:980:1: ( rule__Addition__Group__0__Impl rule__Addition__Group__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:981:2: rule__Addition__Group__0__Impl rule__Addition__Group__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1167:1: ( rule__Addition__Group__0__Impl rule__Addition__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1168:2: rule__Addition__Group__0__Impl rule__Addition__Group__1
             {
-            pushFollow(FOLLOW_rule__Addition__Group__0__Impl_in_rule__Addition__Group__01974);
+            pushFollow(FOLLOW_rule__Addition__Group__0__Impl_in_rule__Addition__Group__02343);
             rule__Addition__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Addition__Group__1_in_rule__Addition__Group__01977);
+            pushFollow(FOLLOW_rule__Addition__Group__1_in_rule__Addition__Group__02346);
             rule__Addition__Group__1();
 
             state._fsp--;
@@ -2959,22 +3485,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:988:1: rule__Addition__Group__0__Impl : ( ruleMultiplication ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1175:1: rule__Addition__Group__0__Impl : ( ruleMultiplication ) ;
     public final void rule__Addition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:992:1: ( ( ruleMultiplication ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:993:1: ( ruleMultiplication )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1179:1: ( ( ruleMultiplication ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1180:1: ( ruleMultiplication )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:993:1: ( ruleMultiplication )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:994:1: ruleMultiplication
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1180:1: ( ruleMultiplication )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1181:1: ruleMultiplication
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__Group__0__Impl2004);
+            pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__Group__0__Impl2373);
             ruleMultiplication();
 
             state._fsp--;
@@ -3004,16 +3530,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1005:1: rule__Addition__Group__1 : rule__Addition__Group__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1192:1: rule__Addition__Group__1 : rule__Addition__Group__1__Impl ;
     public final void rule__Addition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1009:1: ( rule__Addition__Group__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1010:2: rule__Addition__Group__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1196:1: ( rule__Addition__Group__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1197:2: rule__Addition__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Addition__Group__1__Impl_in_rule__Addition__Group__12033);
+            pushFollow(FOLLOW_rule__Addition__Group__1__Impl_in_rule__Addition__Group__12402);
             rule__Addition__Group__1__Impl();
 
             state._fsp--;
@@ -3037,37 +3563,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1016:1: rule__Addition__Group__1__Impl : ( ( rule__Addition__Group_1__0 )* ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1203:1: rule__Addition__Group__1__Impl : ( ( rule__Addition__Group_1__0 )* ) ;
     public final void rule__Addition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1020:1: ( ( ( rule__Addition__Group_1__0 )* ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1021:1: ( ( rule__Addition__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1207:1: ( ( ( rule__Addition__Group_1__0 )* ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1208:1: ( ( rule__Addition__Group_1__0 )* )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1021:1: ( ( rule__Addition__Group_1__0 )* )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1022:1: ( rule__Addition__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1208:1: ( ( rule__Addition__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1209:1: ( rule__Addition__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getGroup_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1023:1: ( rule__Addition__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1210:1: ( rule__Addition__Group_1__0 )*
             loop11:
             do {
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( ((LA11_0>=20 && LA11_0<=21)) ) {
+                if ( ((LA11_0>=18 && LA11_0<=19)) ) {
                     alt11=1;
                 }
 
 
                 switch (alt11) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1023:2: rule__Addition__Group_1__0
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1210:2: rule__Addition__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Addition__Group_1__0_in_rule__Addition__Group__1__Impl2060);
+            	    pushFollow(FOLLOW_rule__Addition__Group_1__0_in_rule__Addition__Group__1__Impl2429);
             	    rule__Addition__Group_1__0();
 
             	    state._fsp--;
@@ -3106,21 +3632,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1037:1: rule__Addition__Group_1__0 : rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1224:1: rule__Addition__Group_1__0 : rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1 ;
     public final void rule__Addition__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1041:1: ( rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1042:2: rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1228:1: ( rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1229:2: rule__Addition__Group_1__0__Impl rule__Addition__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1__0__Impl_in_rule__Addition__Group_1__02095);
+            pushFollow(FOLLOW_rule__Addition__Group_1__0__Impl_in_rule__Addition__Group_1__02464);
             rule__Addition__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Addition__Group_1__1_in_rule__Addition__Group_1__02098);
+            pushFollow(FOLLOW_rule__Addition__Group_1__1_in_rule__Addition__Group_1__02467);
             rule__Addition__Group_1__1();
 
             state._fsp--;
@@ -3144,25 +3670,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1049:1: rule__Addition__Group_1__0__Impl : ( ( rule__Addition__Alternatives_1_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1236:1: rule__Addition__Group_1__0__Impl : ( ( rule__Addition__Alternatives_1_0 ) ) ;
     public final void rule__Addition__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1053:1: ( ( ( rule__Addition__Alternatives_1_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1054:1: ( ( rule__Addition__Alternatives_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1240:1: ( ( ( rule__Addition__Alternatives_1_0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1241:1: ( ( rule__Addition__Alternatives_1_0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1054:1: ( ( rule__Addition__Alternatives_1_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1055:1: ( rule__Addition__Alternatives_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1241:1: ( ( rule__Addition__Alternatives_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1242:1: ( rule__Addition__Alternatives_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getAlternatives_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1056:1: ( rule__Addition__Alternatives_1_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1056:2: rule__Addition__Alternatives_1_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1243:1: ( rule__Addition__Alternatives_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1243:2: rule__Addition__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__Addition__Alternatives_1_0_in_rule__Addition__Group_1__0__Impl2125);
+            pushFollow(FOLLOW_rule__Addition__Alternatives_1_0_in_rule__Addition__Group_1__0__Impl2494);
             rule__Addition__Alternatives_1_0();
 
             state._fsp--;
@@ -3195,16 +3721,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1066:1: rule__Addition__Group_1__1 : rule__Addition__Group_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1253:1: rule__Addition__Group_1__1 : rule__Addition__Group_1__1__Impl ;
     public final void rule__Addition__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1070:1: ( rule__Addition__Group_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1071:2: rule__Addition__Group_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1257:1: ( rule__Addition__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1258:2: rule__Addition__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1__1__Impl_in_rule__Addition__Group_1__12155);
+            pushFollow(FOLLOW_rule__Addition__Group_1__1__Impl_in_rule__Addition__Group_1__12524);
             rule__Addition__Group_1__1__Impl();
 
             state._fsp--;
@@ -3228,25 +3754,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1077:1: rule__Addition__Group_1__1__Impl : ( ( rule__Addition__RightAssignment_1_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1264:1: rule__Addition__Group_1__1__Impl : ( ( rule__Addition__RightAssignment_1_1 ) ) ;
     public final void rule__Addition__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1081:1: ( ( ( rule__Addition__RightAssignment_1_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1082:1: ( ( rule__Addition__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1268:1: ( ( ( rule__Addition__RightAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1269:1: ( ( rule__Addition__RightAssignment_1_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1082:1: ( ( rule__Addition__RightAssignment_1_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1083:1: ( rule__Addition__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1269:1: ( ( rule__Addition__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1270:1: ( rule__Addition__RightAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getRightAssignment_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1084:1: ( rule__Addition__RightAssignment_1_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1084:2: rule__Addition__RightAssignment_1_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1271:1: ( rule__Addition__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1271:2: rule__Addition__RightAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Addition__RightAssignment_1_1_in_rule__Addition__Group_1__1__Impl2182);
+            pushFollow(FOLLOW_rule__Addition__RightAssignment_1_1_in_rule__Addition__Group_1__1__Impl2551);
             rule__Addition__RightAssignment_1_1();
 
             state._fsp--;
@@ -3279,21 +3805,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1098:1: rule__Addition__Group_1_0_0__0 : rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1285:1: rule__Addition__Group_1_0_0__0 : rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1 ;
     public final void rule__Addition__Group_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1102:1: ( rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1103:2: rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1289:1: ( rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1290:2: rule__Addition__Group_1_0_0__0__Impl rule__Addition__Group_1_0_0__1
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__0__Impl_in_rule__Addition__Group_1_0_0__02216);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__0__Impl_in_rule__Addition__Group_1_0_0__02585);
             rule__Addition__Group_1_0_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__1_in_rule__Addition__Group_1_0_0__02219);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__1_in_rule__Addition__Group_1_0_0__02588);
             rule__Addition__Group_1_0_0__1();
 
             state._fsp--;
@@ -3317,23 +3843,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1110:1: rule__Addition__Group_1_0_0__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1297:1: rule__Addition__Group_1_0_0__0__Impl : ( () ) ;
     public final void rule__Addition__Group_1_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1114:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1115:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1301:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1302:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1115:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1116:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1302:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1303:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1117:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1119:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1304:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1306:1: 
             {
             }
 
@@ -3358,16 +3884,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1129:1: rule__Addition__Group_1_0_0__1 : rule__Addition__Group_1_0_0__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1316:1: rule__Addition__Group_1_0_0__1 : rule__Addition__Group_1_0_0__1__Impl ;
     public final void rule__Addition__Group_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1133:1: ( rule__Addition__Group_1_0_0__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1134:2: rule__Addition__Group_1_0_0__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1320:1: ( rule__Addition__Group_1_0_0__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1321:2: rule__Addition__Group_1_0_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__1__Impl_in_rule__Addition__Group_1_0_0__12277);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_0__1__Impl_in_rule__Addition__Group_1_0_0__12646);
             rule__Addition__Group_1_0_0__1__Impl();
 
             state._fsp--;
@@ -3391,22 +3917,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1140:1: rule__Addition__Group_1_0_0__1__Impl : ( '+' ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1327:1: rule__Addition__Group_1_0_0__1__Impl : ( '+' ) ;
     public final void rule__Addition__Group_1_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1144:1: ( ( '+' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1145:1: ( '+' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1331:1: ( ( '+' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1332:1: ( '+' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1145:1: ( '+' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1146:1: '+'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1332:1: ( '+' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1333:1: '+'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getPlusSignKeyword_1_0_0_1()); 
             }
-            match(input,20,FOLLOW_20_in_rule__Addition__Group_1_0_0__1__Impl2305); if (state.failed) return ;
+            match(input,18,FOLLOW_18_in_rule__Addition__Group_1_0_0__1__Impl2674); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAdditionAccess().getPlusSignKeyword_1_0_0_1()); 
             }
@@ -3432,21 +3958,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1163:1: rule__Addition__Group_1_0_1__0 : rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1350:1: rule__Addition__Group_1_0_1__0 : rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1 ;
     public final void rule__Addition__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1167:1: ( rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1168:2: rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1354:1: ( rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1355:2: rule__Addition__Group_1_0_1__0__Impl rule__Addition__Group_1_0_1__1
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__0__Impl_in_rule__Addition__Group_1_0_1__02340);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__0__Impl_in_rule__Addition__Group_1_0_1__02709);
             rule__Addition__Group_1_0_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__1_in_rule__Addition__Group_1_0_1__02343);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__1_in_rule__Addition__Group_1_0_1__02712);
             rule__Addition__Group_1_0_1__1();
 
             state._fsp--;
@@ -3470,23 +3996,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1175:1: rule__Addition__Group_1_0_1__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1362:1: rule__Addition__Group_1_0_1__0__Impl : ( () ) ;
     public final void rule__Addition__Group_1_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1179:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1180:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1366:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1367:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1180:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1181:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1367:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1368:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1182:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1184:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1369:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1371:1: 
             {
             }
 
@@ -3511,16 +4037,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1194:1: rule__Addition__Group_1_0_1__1 : rule__Addition__Group_1_0_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1381:1: rule__Addition__Group_1_0_1__1 : rule__Addition__Group_1_0_1__1__Impl ;
     public final void rule__Addition__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1198:1: ( rule__Addition__Group_1_0_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1199:2: rule__Addition__Group_1_0_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1385:1: ( rule__Addition__Group_1_0_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1386:2: rule__Addition__Group_1_0_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__1__Impl_in_rule__Addition__Group_1_0_1__12401);
+            pushFollow(FOLLOW_rule__Addition__Group_1_0_1__1__Impl_in_rule__Addition__Group_1_0_1__12770);
             rule__Addition__Group_1_0_1__1__Impl();
 
             state._fsp--;
@@ -3544,22 +4070,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Addition__Group_1_0_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1205:1: rule__Addition__Group_1_0_1__1__Impl : ( '-' ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1392:1: rule__Addition__Group_1_0_1__1__Impl : ( '-' ) ;
     public final void rule__Addition__Group_1_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1209:1: ( ( '-' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1210:1: ( '-' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1396:1: ( ( '-' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1397:1: ( '-' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1210:1: ( '-' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1211:1: '-'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1397:1: ( '-' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1398:1: '-'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getHyphenMinusKeyword_1_0_1_1()); 
             }
-            match(input,21,FOLLOW_21_in_rule__Addition__Group_1_0_1__1__Impl2429); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__Addition__Group_1_0_1__1__Impl2798); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAdditionAccess().getHyphenMinusKeyword_1_0_1_1()); 
             }
@@ -3585,21 +4111,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1228:1: rule__Multiplication__Group__0 : rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1415:1: rule__Multiplication__Group__0 : rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1 ;
     public final void rule__Multiplication__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1232:1: ( rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1233:2: rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1419:1: ( rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1420:2: rule__Multiplication__Group__0__Impl rule__Multiplication__Group__1
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group__0__Impl_in_rule__Multiplication__Group__02464);
+            pushFollow(FOLLOW_rule__Multiplication__Group__0__Impl_in_rule__Multiplication__Group__02833);
             rule__Multiplication__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Multiplication__Group__1_in_rule__Multiplication__Group__02467);
+            pushFollow(FOLLOW_rule__Multiplication__Group__1_in_rule__Multiplication__Group__02836);
             rule__Multiplication__Group__1();
 
             state._fsp--;
@@ -3623,22 +4149,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1240:1: rule__Multiplication__Group__0__Impl : ( rulePrefixed ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1427:1: rule__Multiplication__Group__0__Impl : ( rulePrefixed ) ;
     public final void rule__Multiplication__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1244:1: ( ( rulePrefixed ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1245:1: ( rulePrefixed )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1431:1: ( ( rulePrefixed ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1432:1: ( rulePrefixed )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1245:1: ( rulePrefixed )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1246:1: rulePrefixed
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1432:1: ( rulePrefixed )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1433:1: rulePrefixed
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getPrefixedParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_rulePrefixed_in_rule__Multiplication__Group__0__Impl2494);
+            pushFollow(FOLLOW_rulePrefixed_in_rule__Multiplication__Group__0__Impl2863);
             rulePrefixed();
 
             state._fsp--;
@@ -3668,16 +4194,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1257:1: rule__Multiplication__Group__1 : rule__Multiplication__Group__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1444:1: rule__Multiplication__Group__1 : rule__Multiplication__Group__1__Impl ;
     public final void rule__Multiplication__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1261:1: ( rule__Multiplication__Group__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1262:2: rule__Multiplication__Group__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1448:1: ( rule__Multiplication__Group__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1449:2: rule__Multiplication__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group__1__Impl_in_rule__Multiplication__Group__12523);
+            pushFollow(FOLLOW_rule__Multiplication__Group__1__Impl_in_rule__Multiplication__Group__12892);
             rule__Multiplication__Group__1__Impl();
 
             state._fsp--;
@@ -3701,37 +4227,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1268:1: rule__Multiplication__Group__1__Impl : ( ( rule__Multiplication__Group_1__0 )* ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1455:1: rule__Multiplication__Group__1__Impl : ( ( rule__Multiplication__Group_1__0 )* ) ;
     public final void rule__Multiplication__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1272:1: ( ( ( rule__Multiplication__Group_1__0 )* ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1273:1: ( ( rule__Multiplication__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1459:1: ( ( ( rule__Multiplication__Group_1__0 )* ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1460:1: ( ( rule__Multiplication__Group_1__0 )* )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1273:1: ( ( rule__Multiplication__Group_1__0 )* )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1274:1: ( rule__Multiplication__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1460:1: ( ( rule__Multiplication__Group_1__0 )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1461:1: ( rule__Multiplication__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getGroup_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1275:1: ( rule__Multiplication__Group_1__0 )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1462:1: ( rule__Multiplication__Group_1__0 )*
             loop12:
             do {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( ((LA12_0>=15 && LA12_0<=16)) ) {
+                if ( ((LA12_0>=13 && LA12_0<=14)) ) {
                     alt12=1;
                 }
 
 
                 switch (alt12) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1275:2: rule__Multiplication__Group_1__0
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1462:2: rule__Multiplication__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Multiplication__Group_1__0_in_rule__Multiplication__Group__1__Impl2550);
+            	    pushFollow(FOLLOW_rule__Multiplication__Group_1__0_in_rule__Multiplication__Group__1__Impl2919);
             	    rule__Multiplication__Group_1__0();
 
             	    state._fsp--;
@@ -3770,21 +4296,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1289:1: rule__Multiplication__Group_1__0 : rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1476:1: rule__Multiplication__Group_1__0 : rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1 ;
     public final void rule__Multiplication__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1293:1: ( rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1294:2: rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1480:1: ( rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1481:2: rule__Multiplication__Group_1__0__Impl rule__Multiplication__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group_1__0__Impl_in_rule__Multiplication__Group_1__02585);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1__0__Impl_in_rule__Multiplication__Group_1__02954);
             rule__Multiplication__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Multiplication__Group_1__1_in_rule__Multiplication__Group_1__02588);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1__1_in_rule__Multiplication__Group_1__02957);
             rule__Multiplication__Group_1__1();
 
             state._fsp--;
@@ -3808,25 +4334,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1301:1: rule__Multiplication__Group_1__0__Impl : ( ( rule__Multiplication__Group_1_0__0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1488:1: rule__Multiplication__Group_1__0__Impl : ( ( rule__Multiplication__Group_1_0__0 ) ) ;
     public final void rule__Multiplication__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1305:1: ( ( ( rule__Multiplication__Group_1_0__0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1306:1: ( ( rule__Multiplication__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1492:1: ( ( ( rule__Multiplication__Group_1_0__0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1493:1: ( ( rule__Multiplication__Group_1_0__0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1306:1: ( ( rule__Multiplication__Group_1_0__0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1307:1: ( rule__Multiplication__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1493:1: ( ( rule__Multiplication__Group_1_0__0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1494:1: ( rule__Multiplication__Group_1_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getGroup_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1308:1: ( rule__Multiplication__Group_1_0__0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1308:2: rule__Multiplication__Group_1_0__0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1495:1: ( rule__Multiplication__Group_1_0__0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1495:2: rule__Multiplication__Group_1_0__0
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__0_in_rule__Multiplication__Group_1__0__Impl2615);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__0_in_rule__Multiplication__Group_1__0__Impl2984);
             rule__Multiplication__Group_1_0__0();
 
             state._fsp--;
@@ -3859,16 +4385,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1318:1: rule__Multiplication__Group_1__1 : rule__Multiplication__Group_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1505:1: rule__Multiplication__Group_1__1 : rule__Multiplication__Group_1__1__Impl ;
     public final void rule__Multiplication__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1322:1: ( rule__Multiplication__Group_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1323:2: rule__Multiplication__Group_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1509:1: ( rule__Multiplication__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1510:2: rule__Multiplication__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group_1__1__Impl_in_rule__Multiplication__Group_1__12645);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1__1__Impl_in_rule__Multiplication__Group_1__13014);
             rule__Multiplication__Group_1__1__Impl();
 
             state._fsp--;
@@ -3892,25 +4418,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1329:1: rule__Multiplication__Group_1__1__Impl : ( ( rule__Multiplication__RightAssignment_1_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1516:1: rule__Multiplication__Group_1__1__Impl : ( ( rule__Multiplication__RightAssignment_1_1 ) ) ;
     public final void rule__Multiplication__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1333:1: ( ( ( rule__Multiplication__RightAssignment_1_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1334:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1520:1: ( ( ( rule__Multiplication__RightAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1521:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1334:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1335:1: ( rule__Multiplication__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1521:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1522:1: ( rule__Multiplication__RightAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1336:1: ( rule__Multiplication__RightAssignment_1_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1336:2: rule__Multiplication__RightAssignment_1_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1523:1: ( rule__Multiplication__RightAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1523:2: rule__Multiplication__RightAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Multiplication__RightAssignment_1_1_in_rule__Multiplication__Group_1__1__Impl2672);
+            pushFollow(FOLLOW_rule__Multiplication__RightAssignment_1_1_in_rule__Multiplication__Group_1__1__Impl3041);
             rule__Multiplication__RightAssignment_1_1();
 
             state._fsp--;
@@ -3943,21 +4469,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1350:1: rule__Multiplication__Group_1_0__0 : rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1537:1: rule__Multiplication__Group_1_0__0 : rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1 ;
     public final void rule__Multiplication__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1354:1: ( rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1355:2: rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1541:1: ( rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1542:2: rule__Multiplication__Group_1_0__0__Impl rule__Multiplication__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__0__Impl_in_rule__Multiplication__Group_1_0__02706);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__0__Impl_in_rule__Multiplication__Group_1_0__03075);
             rule__Multiplication__Group_1_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__1_in_rule__Multiplication__Group_1_0__02709);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__1_in_rule__Multiplication__Group_1_0__03078);
             rule__Multiplication__Group_1_0__1();
 
             state._fsp--;
@@ -3981,23 +4507,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1362:1: rule__Multiplication__Group_1_0__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1549:1: rule__Multiplication__Group_1_0__0__Impl : ( () ) ;
     public final void rule__Multiplication__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1366:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1367:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1553:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1554:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1367:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1368:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1554:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1555:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1369:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1371:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1556:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1558:1: 
             {
             }
 
@@ -4022,16 +4548,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1381:1: rule__Multiplication__Group_1_0__1 : rule__Multiplication__Group_1_0__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1568:1: rule__Multiplication__Group_1_0__1 : rule__Multiplication__Group_1_0__1__Impl ;
     public final void rule__Multiplication__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1385:1: ( rule__Multiplication__Group_1_0__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1386:2: rule__Multiplication__Group_1_0__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1572:1: ( rule__Multiplication__Group_1_0__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1573:2: rule__Multiplication__Group_1_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__1__Impl_in_rule__Multiplication__Group_1_0__12767);
+            pushFollow(FOLLOW_rule__Multiplication__Group_1_0__1__Impl_in_rule__Multiplication__Group_1_0__13136);
             rule__Multiplication__Group_1_0__1__Impl();
 
             state._fsp--;
@@ -4055,25 +4581,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__Group_1_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1392:1: rule__Multiplication__Group_1_0__1__Impl : ( ( rule__Multiplication__OpAssignment_1_0_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1579:1: rule__Multiplication__Group_1_0__1__Impl : ( ( rule__Multiplication__OpAssignment_1_0_1 ) ) ;
     public final void rule__Multiplication__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1396:1: ( ( ( rule__Multiplication__OpAssignment_1_0_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1397:1: ( ( rule__Multiplication__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1583:1: ( ( ( rule__Multiplication__OpAssignment_1_0_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1584:1: ( ( rule__Multiplication__OpAssignment_1_0_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1397:1: ( ( rule__Multiplication__OpAssignment_1_0_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1398:1: ( rule__Multiplication__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1584:1: ( ( rule__Multiplication__OpAssignment_1_0_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1585:1: ( rule__Multiplication__OpAssignment_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getOpAssignment_1_0_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1399:1: ( rule__Multiplication__OpAssignment_1_0_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1399:2: rule__Multiplication__OpAssignment_1_0_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1586:1: ( rule__Multiplication__OpAssignment_1_0_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1586:2: rule__Multiplication__OpAssignment_1_0_1
             {
-            pushFollow(FOLLOW_rule__Multiplication__OpAssignment_1_0_1_in_rule__Multiplication__Group_1_0__1__Impl2794);
+            pushFollow(FOLLOW_rule__Multiplication__OpAssignment_1_0_1_in_rule__Multiplication__Group_1_0__1__Impl3163);
             rule__Multiplication__OpAssignment_1_0_1();
 
             state._fsp--;
@@ -4106,21 +4632,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1413:1: rule__Prefixed__Group_0__0 : rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1600:1: rule__Prefixed__Group_0__0 : rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1 ;
     public final void rule__Prefixed__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1417:1: ( rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1418:2: rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1604:1: ( rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1605:2: rule__Prefixed__Group_0__0__Impl rule__Prefixed__Group_0__1
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_0__0__Impl_in_rule__Prefixed__Group_0__02828);
+            pushFollow(FOLLOW_rule__Prefixed__Group_0__0__Impl_in_rule__Prefixed__Group_0__03197);
             rule__Prefixed__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Prefixed__Group_0__1_in_rule__Prefixed__Group_0__02831);
+            pushFollow(FOLLOW_rule__Prefixed__Group_0__1_in_rule__Prefixed__Group_0__03200);
             rule__Prefixed__Group_0__1();
 
             state._fsp--;
@@ -4144,23 +4670,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1425:1: rule__Prefixed__Group_0__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1612:1: rule__Prefixed__Group_0__0__Impl : ( () ) ;
     public final void rule__Prefixed__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1429:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1430:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1616:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1617:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1430:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1431:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1617:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1618:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getBooleanNegationAction_0_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1432:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1434:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1619:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1621:1: 
             {
             }
 
@@ -4185,21 +4711,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1444:1: rule__Prefixed__Group_0__1 : rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1631:1: rule__Prefixed__Group_0__1 : rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2 ;
     public final void rule__Prefixed__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1448:1: ( rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1449:2: rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1635:1: ( rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1636:2: rule__Prefixed__Group_0__1__Impl rule__Prefixed__Group_0__2
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_0__1__Impl_in_rule__Prefixed__Group_0__12889);
+            pushFollow(FOLLOW_rule__Prefixed__Group_0__1__Impl_in_rule__Prefixed__Group_0__13258);
             rule__Prefixed__Group_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Prefixed__Group_0__2_in_rule__Prefixed__Group_0__12892);
+            pushFollow(FOLLOW_rule__Prefixed__Group_0__2_in_rule__Prefixed__Group_0__13261);
             rule__Prefixed__Group_0__2();
 
             state._fsp--;
@@ -4223,25 +4749,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1456:1: rule__Prefixed__Group_0__1__Impl : ( ( '!' ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1643:1: rule__Prefixed__Group_0__1__Impl : ( ( '!' ) ) ;
     public final void rule__Prefixed__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1460:1: ( ( ( '!' ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1461:1: ( ( '!' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1647:1: ( ( ( '!' ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1648:1: ( ( '!' ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1461:1: ( ( '!' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1462:1: ( '!' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1648:1: ( ( '!' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1649:1: ( '!' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getExclamationMarkKeyword_0_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1463:1: ( '!' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1464:2: '!'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1650:1: ( '!' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1651:2: '!'
             {
-            match(input,22,FOLLOW_22_in_rule__Prefixed__Group_0__1__Impl2921); if (state.failed) return ;
+            match(input,20,FOLLOW_20_in_rule__Prefixed__Group_0__1__Impl3290); if (state.failed) return ;
 
             }
 
@@ -4270,16 +4796,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1475:1: rule__Prefixed__Group_0__2 : rule__Prefixed__Group_0__2__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1662:1: rule__Prefixed__Group_0__2 : rule__Prefixed__Group_0__2__Impl ;
     public final void rule__Prefixed__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1479:1: ( rule__Prefixed__Group_0__2__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1480:2: rule__Prefixed__Group_0__2__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1666:1: ( rule__Prefixed__Group_0__2__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1667:2: rule__Prefixed__Group_0__2__Impl
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_0__2__Impl_in_rule__Prefixed__Group_0__22953);
+            pushFollow(FOLLOW_rule__Prefixed__Group_0__2__Impl_in_rule__Prefixed__Group_0__23322);
             rule__Prefixed__Group_0__2__Impl();
 
             state._fsp--;
@@ -4303,25 +4829,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_0__2__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1486:1: rule__Prefixed__Group_0__2__Impl : ( ( rule__Prefixed__ExpressionAssignment_0_2 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1673:1: rule__Prefixed__Group_0__2__Impl : ( ( rule__Prefixed__ExpressionAssignment_0_2 ) ) ;
     public final void rule__Prefixed__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1490:1: ( ( ( rule__Prefixed__ExpressionAssignment_0_2 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1491:1: ( ( rule__Prefixed__ExpressionAssignment_0_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1677:1: ( ( ( rule__Prefixed__ExpressionAssignment_0_2 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1678:1: ( ( rule__Prefixed__ExpressionAssignment_0_2 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1491:1: ( ( rule__Prefixed__ExpressionAssignment_0_2 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1492:1: ( rule__Prefixed__ExpressionAssignment_0_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1678:1: ( ( rule__Prefixed__ExpressionAssignment_0_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1679:1: ( rule__Prefixed__ExpressionAssignment_0_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getExpressionAssignment_0_2()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1493:1: ( rule__Prefixed__ExpressionAssignment_0_2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1493:2: rule__Prefixed__ExpressionAssignment_0_2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1680:1: ( rule__Prefixed__ExpressionAssignment_0_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1680:2: rule__Prefixed__ExpressionAssignment_0_2
             {
-            pushFollow(FOLLOW_rule__Prefixed__ExpressionAssignment_0_2_in_rule__Prefixed__Group_0__2__Impl2980);
+            pushFollow(FOLLOW_rule__Prefixed__ExpressionAssignment_0_2_in_rule__Prefixed__Group_0__2__Impl3349);
             rule__Prefixed__ExpressionAssignment_0_2();
 
             state._fsp--;
@@ -4354,21 +4880,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1509:1: rule__Prefixed__Group_1__0 : rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1696:1: rule__Prefixed__Group_1__0 : rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1 ;
     public final void rule__Prefixed__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1513:1: ( rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1514:2: rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1700:1: ( rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1701:2: rule__Prefixed__Group_1__0__Impl rule__Prefixed__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_1__0__Impl_in_rule__Prefixed__Group_1__03016);
+            pushFollow(FOLLOW_rule__Prefixed__Group_1__0__Impl_in_rule__Prefixed__Group_1__03385);
             rule__Prefixed__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Prefixed__Group_1__1_in_rule__Prefixed__Group_1__03019);
+            pushFollow(FOLLOW_rule__Prefixed__Group_1__1_in_rule__Prefixed__Group_1__03388);
             rule__Prefixed__Group_1__1();
 
             state._fsp--;
@@ -4392,23 +4918,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1521:1: rule__Prefixed__Group_1__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1708:1: rule__Prefixed__Group_1__0__Impl : ( () ) ;
     public final void rule__Prefixed__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1525:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1526:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1712:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1526:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1527:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1714:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getArithmeticSignedAction_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1528:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1530:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1715:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1717:1: 
             {
             }
 
@@ -4433,21 +4959,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1540:1: rule__Prefixed__Group_1__1 : rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1727:1: rule__Prefixed__Group_1__1 : rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2 ;
     public final void rule__Prefixed__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1544:1: ( rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1545:2: rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1731:1: ( rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1732:2: rule__Prefixed__Group_1__1__Impl rule__Prefixed__Group_1__2
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_1__1__Impl_in_rule__Prefixed__Group_1__13077);
+            pushFollow(FOLLOW_rule__Prefixed__Group_1__1__Impl_in_rule__Prefixed__Group_1__13446);
             rule__Prefixed__Group_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Prefixed__Group_1__2_in_rule__Prefixed__Group_1__13080);
+            pushFollow(FOLLOW_rule__Prefixed__Group_1__2_in_rule__Prefixed__Group_1__13449);
             rule__Prefixed__Group_1__2();
 
             state._fsp--;
@@ -4471,25 +4997,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1552:1: rule__Prefixed__Group_1__1__Impl : ( ( '-' ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1739:1: rule__Prefixed__Group_1__1__Impl : ( ( '-' ) ) ;
     public final void rule__Prefixed__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1556:1: ( ( ( '-' ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1557:1: ( ( '-' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1743:1: ( ( ( '-' ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1744:1: ( ( '-' ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1557:1: ( ( '-' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1558:1: ( '-' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1744:1: ( ( '-' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1745:1: ( '-' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getHyphenMinusKeyword_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1559:1: ( '-' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1560:2: '-'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1746:1: ( '-' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1747:2: '-'
             {
-            match(input,21,FOLLOW_21_in_rule__Prefixed__Group_1__1__Impl3109); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__Prefixed__Group_1__1__Impl3478); if (state.failed) return ;
 
             }
 
@@ -4518,16 +5044,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1571:1: rule__Prefixed__Group_1__2 : rule__Prefixed__Group_1__2__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1758:1: rule__Prefixed__Group_1__2 : rule__Prefixed__Group_1__2__Impl ;
     public final void rule__Prefixed__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1575:1: ( rule__Prefixed__Group_1__2__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1576:2: rule__Prefixed__Group_1__2__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1762:1: ( rule__Prefixed__Group_1__2__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1763:2: rule__Prefixed__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Prefixed__Group_1__2__Impl_in_rule__Prefixed__Group_1__23141);
+            pushFollow(FOLLOW_rule__Prefixed__Group_1__2__Impl_in_rule__Prefixed__Group_1__23510);
             rule__Prefixed__Group_1__2__Impl();
 
             state._fsp--;
@@ -4551,25 +5077,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__Group_1__2__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1582:1: rule__Prefixed__Group_1__2__Impl : ( ( rule__Prefixed__ExpressionAssignment_1_2 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1769:1: rule__Prefixed__Group_1__2__Impl : ( ( rule__Prefixed__ExpressionAssignment_1_2 ) ) ;
     public final void rule__Prefixed__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1586:1: ( ( ( rule__Prefixed__ExpressionAssignment_1_2 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( ( rule__Prefixed__ExpressionAssignment_1_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1773:1: ( ( ( rule__Prefixed__ExpressionAssignment_1_2 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1774:1: ( ( rule__Prefixed__ExpressionAssignment_1_2 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( ( rule__Prefixed__ExpressionAssignment_1_2 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1588:1: ( rule__Prefixed__ExpressionAssignment_1_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1774:1: ( ( rule__Prefixed__ExpressionAssignment_1_2 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1775:1: ( rule__Prefixed__ExpressionAssignment_1_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getExpressionAssignment_1_2()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1589:1: ( rule__Prefixed__ExpressionAssignment_1_2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1589:2: rule__Prefixed__ExpressionAssignment_1_2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1776:1: ( rule__Prefixed__ExpressionAssignment_1_2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1776:2: rule__Prefixed__ExpressionAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__Prefixed__ExpressionAssignment_1_2_in_rule__Prefixed__Group_1__2__Impl3168);
+            pushFollow(FOLLOW_rule__Prefixed__ExpressionAssignment_1_2_in_rule__Prefixed__Group_1__2__Impl3537);
             rule__Prefixed__ExpressionAssignment_1_2();
 
             state._fsp--;
@@ -4602,21 +5128,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1605:1: rule__Atomic__Group_0__0 : rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1792:1: rule__Atomic__Group_0__0 : rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1 ;
     public final void rule__Atomic__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1609:1: ( rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1610:2: rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1796:1: ( rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1797:2: rule__Atomic__Group_0__0__Impl rule__Atomic__Group_0__1
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_0__0__Impl_in_rule__Atomic__Group_0__03204);
+            pushFollow(FOLLOW_rule__Atomic__Group_0__0__Impl_in_rule__Atomic__Group_0__03573);
             rule__Atomic__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_0__1_in_rule__Atomic__Group_0__03207);
+            pushFollow(FOLLOW_rule__Atomic__Group_0__1_in_rule__Atomic__Group_0__03576);
             rule__Atomic__Group_0__1();
 
             state._fsp--;
@@ -4640,22 +5166,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1617:1: rule__Atomic__Group_0__0__Impl : ( '(' ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1804:1: rule__Atomic__Group_0__0__Impl : ( '(' ) ;
     public final void rule__Atomic__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1621:1: ( ( '(' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1622:1: ( '(' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1808:1: ( ( '(' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1809:1: ( '(' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1622:1: ( '(' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1623:1: '('
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1809:1: ( '(' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1810:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getLeftParenthesisKeyword_0_0()); 
             }
-            match(input,23,FOLLOW_23_in_rule__Atomic__Group_0__0__Impl3235); if (state.failed) return ;
+            match(input,21,FOLLOW_21_in_rule__Atomic__Group_0__0__Impl3604); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicAccess().getLeftParenthesisKeyword_0_0()); 
             }
@@ -4681,21 +5207,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1636:1: rule__Atomic__Group_0__1 : rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1823:1: rule__Atomic__Group_0__1 : rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2 ;
     public final void rule__Atomic__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1640:1: ( rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1641:2: rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1827:1: ( rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1828:2: rule__Atomic__Group_0__1__Impl rule__Atomic__Group_0__2
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_0__1__Impl_in_rule__Atomic__Group_0__13266);
+            pushFollow(FOLLOW_rule__Atomic__Group_0__1__Impl_in_rule__Atomic__Group_0__13635);
             rule__Atomic__Group_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_0__2_in_rule__Atomic__Group_0__13269);
+            pushFollow(FOLLOW_rule__Atomic__Group_0__2_in_rule__Atomic__Group_0__13638);
             rule__Atomic__Group_0__2();
 
             state._fsp--;
@@ -4719,22 +5245,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1648:1: rule__Atomic__Group_0__1__Impl : ( ruleExpression ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1835:1: rule__Atomic__Group_0__1__Impl : ( ruleExpression ) ;
     public final void rule__Atomic__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1652:1: ( ( ruleExpression ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1653:1: ( ruleExpression )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1839:1: ( ( ruleExpression ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1840:1: ( ruleExpression )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1653:1: ( ruleExpression )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1654:1: ruleExpression
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1840:1: ( ruleExpression )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1841:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getExpressionParserRuleCall_0_1()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Atomic__Group_0__1__Impl3296);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Atomic__Group_0__1__Impl3665);
             ruleExpression();
 
             state._fsp--;
@@ -4764,16 +5290,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1665:1: rule__Atomic__Group_0__2 : rule__Atomic__Group_0__2__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1852:1: rule__Atomic__Group_0__2 : rule__Atomic__Group_0__2__Impl ;
     public final void rule__Atomic__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1669:1: ( rule__Atomic__Group_0__2__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1670:2: rule__Atomic__Group_0__2__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1856:1: ( rule__Atomic__Group_0__2__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1857:2: rule__Atomic__Group_0__2__Impl
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_0__2__Impl_in_rule__Atomic__Group_0__23325);
+            pushFollow(FOLLOW_rule__Atomic__Group_0__2__Impl_in_rule__Atomic__Group_0__23694);
             rule__Atomic__Group_0__2__Impl();
 
             state._fsp--;
@@ -4797,22 +5323,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_0__2__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1676:1: rule__Atomic__Group_0__2__Impl : ( ')' ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1863:1: rule__Atomic__Group_0__2__Impl : ( ')' ) ;
     public final void rule__Atomic__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1680:1: ( ( ')' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1681:1: ( ')' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1867:1: ( ( ')' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1868:1: ( ')' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1681:1: ( ')' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1682:1: ')'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1868:1: ( ')' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1869:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getRightParenthesisKeyword_0_2()); 
             }
-            match(input,24,FOLLOW_24_in_rule__Atomic__Group_0__2__Impl3353); if (state.failed) return ;
+            match(input,22,FOLLOW_22_in_rule__Atomic__Group_0__2__Impl3722); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicAccess().getRightParenthesisKeyword_0_2()); 
             }
@@ -4838,21 +5364,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_1__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1701:1: rule__Atomic__Group_1__0 : rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1888:1: rule__Atomic__Group_1__0 : rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1 ;
     public final void rule__Atomic__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1705:1: ( rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1706:2: rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1892:1: ( rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1893:2: rule__Atomic__Group_1__0__Impl rule__Atomic__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_1__0__Impl_in_rule__Atomic__Group_1__03390);
+            pushFollow(FOLLOW_rule__Atomic__Group_1__0__Impl_in_rule__Atomic__Group_1__03759);
             rule__Atomic__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_1__1_in_rule__Atomic__Group_1__03393);
+            pushFollow(FOLLOW_rule__Atomic__Group_1__1_in_rule__Atomic__Group_1__03762);
             rule__Atomic__Group_1__1();
 
             state._fsp--;
@@ -4876,23 +5402,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_1__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: rule__Atomic__Group_1__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1900:1: rule__Atomic__Group_1__0__Impl : ( () ) ;
     public final void rule__Atomic__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1717:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1718:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1904:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1905:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1718:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1719:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1905:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1906:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getNumberLiteralAction_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1720:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1722:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1907:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1909:1: 
             {
             }
 
@@ -4917,16 +5443,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_1__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1732:1: rule__Atomic__Group_1__1 : rule__Atomic__Group_1__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1919:1: rule__Atomic__Group_1__1 : rule__Atomic__Group_1__1__Impl ;
     public final void rule__Atomic__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1736:1: ( rule__Atomic__Group_1__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1737:2: rule__Atomic__Group_1__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1923:1: ( rule__Atomic__Group_1__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1924:2: rule__Atomic__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_1__1__Impl_in_rule__Atomic__Group_1__13451);
+            pushFollow(FOLLOW_rule__Atomic__Group_1__1__Impl_in_rule__Atomic__Group_1__13820);
             rule__Atomic__Group_1__1__Impl();
 
             state._fsp--;
@@ -4950,25 +5476,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_1__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1743:1: rule__Atomic__Group_1__1__Impl : ( ( rule__Atomic__ValueAssignment_1_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1930:1: rule__Atomic__Group_1__1__Impl : ( ( rule__Atomic__ValueAssignment_1_1 ) ) ;
     public final void rule__Atomic__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1747:1: ( ( ( rule__Atomic__ValueAssignment_1_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1748:1: ( ( rule__Atomic__ValueAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1934:1: ( ( ( rule__Atomic__ValueAssignment_1_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1935:1: ( ( rule__Atomic__ValueAssignment_1_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1748:1: ( ( rule__Atomic__ValueAssignment_1_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1749:1: ( rule__Atomic__ValueAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1935:1: ( ( rule__Atomic__ValueAssignment_1_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1936:1: ( rule__Atomic__ValueAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueAssignment_1_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1750:1: ( rule__Atomic__ValueAssignment_1_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1750:2: rule__Atomic__ValueAssignment_1_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1937:1: ( rule__Atomic__ValueAssignment_1_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1937:2: rule__Atomic__ValueAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_1_1_in_rule__Atomic__Group_1__1__Impl3478);
+            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_1_1_in_rule__Atomic__Group_1__1__Impl3847);
             rule__Atomic__ValueAssignment_1_1();
 
             state._fsp--;
@@ -5001,21 +5527,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_2__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1764:1: rule__Atomic__Group_2__0 : rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1951:1: rule__Atomic__Group_2__0 : rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1 ;
     public final void rule__Atomic__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1768:1: ( rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1769:2: rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1955:1: ( rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1956:2: rule__Atomic__Group_2__0__Impl rule__Atomic__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_2__0__Impl_in_rule__Atomic__Group_2__03512);
+            pushFollow(FOLLOW_rule__Atomic__Group_2__0__Impl_in_rule__Atomic__Group_2__03881);
             rule__Atomic__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_2__1_in_rule__Atomic__Group_2__03515);
+            pushFollow(FOLLOW_rule__Atomic__Group_2__1_in_rule__Atomic__Group_2__03884);
             rule__Atomic__Group_2__1();
 
             state._fsp--;
@@ -5039,23 +5565,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_2__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1776:1: rule__Atomic__Group_2__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1963:1: rule__Atomic__Group_2__0__Impl : ( () ) ;
     public final void rule__Atomic__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1780:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1781:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1967:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1968:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1781:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1782:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1968:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1969:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getStringLiteralAction_2_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1783:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1785:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1970:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1972:1: 
             {
             }
 
@@ -5080,16 +5606,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_2__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1795:1: rule__Atomic__Group_2__1 : rule__Atomic__Group_2__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1982:1: rule__Atomic__Group_2__1 : rule__Atomic__Group_2__1__Impl ;
     public final void rule__Atomic__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1799:1: ( rule__Atomic__Group_2__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1800:2: rule__Atomic__Group_2__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1986:1: ( rule__Atomic__Group_2__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1987:2: rule__Atomic__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_2__1__Impl_in_rule__Atomic__Group_2__13573);
+            pushFollow(FOLLOW_rule__Atomic__Group_2__1__Impl_in_rule__Atomic__Group_2__13942);
             rule__Atomic__Group_2__1__Impl();
 
             state._fsp--;
@@ -5113,25 +5639,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_2__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1806:1: rule__Atomic__Group_2__1__Impl : ( ( rule__Atomic__ValueAssignment_2_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1993:1: rule__Atomic__Group_2__1__Impl : ( ( rule__Atomic__ValueAssignment_2_1 ) ) ;
     public final void rule__Atomic__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1810:1: ( ( ( rule__Atomic__ValueAssignment_2_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1811:1: ( ( rule__Atomic__ValueAssignment_2_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1997:1: ( ( ( rule__Atomic__ValueAssignment_2_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1998:1: ( ( rule__Atomic__ValueAssignment_2_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1811:1: ( ( rule__Atomic__ValueAssignment_2_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1812:1: ( rule__Atomic__ValueAssignment_2_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1998:1: ( ( rule__Atomic__ValueAssignment_2_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1999:1: ( rule__Atomic__ValueAssignment_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueAssignment_2_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1813:1: ( rule__Atomic__ValueAssignment_2_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1813:2: rule__Atomic__ValueAssignment_2_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2000:1: ( rule__Atomic__ValueAssignment_2_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2000:2: rule__Atomic__ValueAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_2_1_in_rule__Atomic__Group_2__1__Impl3600);
+            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_2_1_in_rule__Atomic__Group_2__1__Impl3969);
             rule__Atomic__ValueAssignment_2_1();
 
             state._fsp--;
@@ -5164,21 +5690,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_3__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1827:1: rule__Atomic__Group_3__0 : rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2014:1: rule__Atomic__Group_3__0 : rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1 ;
     public final void rule__Atomic__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1831:1: ( rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1832:2: rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2018:1: ( rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2019:2: rule__Atomic__Group_3__0__Impl rule__Atomic__Group_3__1
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_3__0__Impl_in_rule__Atomic__Group_3__03634);
+            pushFollow(FOLLOW_rule__Atomic__Group_3__0__Impl_in_rule__Atomic__Group_3__04003);
             rule__Atomic__Group_3__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_3__1_in_rule__Atomic__Group_3__03637);
+            pushFollow(FOLLOW_rule__Atomic__Group_3__1_in_rule__Atomic__Group_3__04006);
             rule__Atomic__Group_3__1();
 
             state._fsp--;
@@ -5202,23 +5728,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_3__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1839:1: rule__Atomic__Group_3__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2026:1: rule__Atomic__Group_3__0__Impl : ( () ) ;
     public final void rule__Atomic__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1843:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1844:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2030:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2031:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1844:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1845:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2031:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2032:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getBooleanLiteralAction_3_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1846:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1848:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2033:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2035:1: 
             {
             }
 
@@ -5243,16 +5769,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_3__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1858:1: rule__Atomic__Group_3__1 : rule__Atomic__Group_3__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2045:1: rule__Atomic__Group_3__1 : rule__Atomic__Group_3__1__Impl ;
     public final void rule__Atomic__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1862:1: ( rule__Atomic__Group_3__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1863:2: rule__Atomic__Group_3__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2049:1: ( rule__Atomic__Group_3__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2050:2: rule__Atomic__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_3__1__Impl_in_rule__Atomic__Group_3__13695);
+            pushFollow(FOLLOW_rule__Atomic__Group_3__1__Impl_in_rule__Atomic__Group_3__14064);
             rule__Atomic__Group_3__1__Impl();
 
             state._fsp--;
@@ -5276,25 +5802,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_3__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1869:1: rule__Atomic__Group_3__1__Impl : ( ( rule__Atomic__ValueAssignment_3_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2056:1: rule__Atomic__Group_3__1__Impl : ( ( rule__Atomic__ValueAssignment_3_1 ) ) ;
     public final void rule__Atomic__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1873:1: ( ( ( rule__Atomic__ValueAssignment_3_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1874:1: ( ( rule__Atomic__ValueAssignment_3_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2060:1: ( ( ( rule__Atomic__ValueAssignment_3_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2061:1: ( ( rule__Atomic__ValueAssignment_3_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1874:1: ( ( rule__Atomic__ValueAssignment_3_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1875:1: ( rule__Atomic__ValueAssignment_3_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2061:1: ( ( rule__Atomic__ValueAssignment_3_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2062:1: ( rule__Atomic__ValueAssignment_3_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueAssignment_3_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1876:1: ( rule__Atomic__ValueAssignment_3_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1876:2: rule__Atomic__ValueAssignment_3_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2063:1: ( rule__Atomic__ValueAssignment_3_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2063:2: rule__Atomic__ValueAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_3_1_in_rule__Atomic__Group_3__1__Impl3722);
+            pushFollow(FOLLOW_rule__Atomic__ValueAssignment_3_1_in_rule__Atomic__Group_3__1__Impl4091);
             rule__Atomic__ValueAssignment_3_1();
 
             state._fsp--;
@@ -5327,21 +5853,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_4__0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1890:1: rule__Atomic__Group_4__0 : rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1 ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2077:1: rule__Atomic__Group_4__0 : rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1 ;
     public final void rule__Atomic__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1894:1: ( rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1895:2: rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2081:1: ( rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2082:2: rule__Atomic__Group_4__0__Impl rule__Atomic__Group_4__1
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_4__0__Impl_in_rule__Atomic__Group_4__03756);
+            pushFollow(FOLLOW_rule__Atomic__Group_4__0__Impl_in_rule__Atomic__Group_4__04125);
             rule__Atomic__Group_4__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Atomic__Group_4__1_in_rule__Atomic__Group_4__03759);
+            pushFollow(FOLLOW_rule__Atomic__Group_4__1_in_rule__Atomic__Group_4__04128);
             rule__Atomic__Group_4__1();
 
             state._fsp--;
@@ -5365,23 +5891,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_4__0__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1902:1: rule__Atomic__Group_4__0__Impl : ( () ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2089:1: rule__Atomic__Group_4__0__Impl : ( () ) ;
     public final void rule__Atomic__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1906:1: ( ( () ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1907:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2093:1: ( ( () ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2094:1: ( () )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1907:1: ( () )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1908:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2094:1: ( () )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2095:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getVariableReferenceAction_4_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1909:1: ()
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1911:1: 
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2096:1: ()
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2098:1: 
             {
             }
 
@@ -5406,16 +5932,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_4__1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1921:1: rule__Atomic__Group_4__1 : rule__Atomic__Group_4__1__Impl ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2108:1: rule__Atomic__Group_4__1 : rule__Atomic__Group_4__1__Impl ;
     public final void rule__Atomic__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1925:1: ( rule__Atomic__Group_4__1__Impl )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1926:2: rule__Atomic__Group_4__1__Impl
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2112:1: ( rule__Atomic__Group_4__1__Impl )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2113:2: rule__Atomic__Group_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__Atomic__Group_4__1__Impl_in_rule__Atomic__Group_4__13817);
+            pushFollow(FOLLOW_rule__Atomic__Group_4__1__Impl_in_rule__Atomic__Group_4__14186);
             rule__Atomic__Group_4__1__Impl();
 
             state._fsp--;
@@ -5439,25 +5965,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__Group_4__1__Impl"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1932:1: rule__Atomic__Group_4__1__Impl : ( ( rule__Atomic__RefAssignment_4_1 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2119:1: rule__Atomic__Group_4__1__Impl : ( ( rule__Atomic__RefAssignment_4_1 ) ) ;
     public final void rule__Atomic__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1936:1: ( ( ( rule__Atomic__RefAssignment_4_1 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1937:1: ( ( rule__Atomic__RefAssignment_4_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2123:1: ( ( ( rule__Atomic__RefAssignment_4_1 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2124:1: ( ( rule__Atomic__RefAssignment_4_1 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1937:1: ( ( rule__Atomic__RefAssignment_4_1 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1938:1: ( rule__Atomic__RefAssignment_4_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2124:1: ( ( rule__Atomic__RefAssignment_4_1 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2125:1: ( rule__Atomic__RefAssignment_4_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getRefAssignment_4_1()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1939:1: ( rule__Atomic__RefAssignment_4_1 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1939:2: rule__Atomic__RefAssignment_4_1
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2126:1: ( rule__Atomic__RefAssignment_4_1 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2126:2: rule__Atomic__RefAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__Atomic__RefAssignment_4_1_in_rule__Atomic__Group_4__1__Impl3844);
+            pushFollow(FOLLOW_rule__Atomic__RefAssignment_4_1_in_rule__Atomic__Group_4__1__Impl4213);
             rule__Atomic__RefAssignment_4_1();
 
             state._fsp--;
@@ -5490,22 +6016,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Model__VariablesAssignment"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1957:1: rule__Model__VariablesAssignment : ( ruleVariable ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2144:1: rule__Model__VariablesAssignment : ( ruleVariable ) ;
     public final void rule__Model__VariablesAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1961:1: ( ( ruleVariable ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1962:1: ( ruleVariable )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2148:1: ( ( ruleVariable ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2149:1: ( ruleVariable )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1962:1: ( ruleVariable )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1963:1: ruleVariable
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2149:1: ( ruleVariable )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2150:1: ruleVariable
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getVariablesVariableParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleVariable_in_rule__Model__VariablesAssignment3886);
+            pushFollow(FOLLOW_ruleVariable_in_rule__Model__VariablesAssignment4255);
             ruleVariable();
 
             state._fsp--;
@@ -5535,22 +6061,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__NameAssignment_0"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1972:1: rule__Variable__NameAssignment_0 : ( RULE_ID ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2159:1: rule__Variable__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Variable__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1976:1: ( ( RULE_ID ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1977:1: ( RULE_ID )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2163:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2164:1: ( RULE_ID )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1977:1: ( RULE_ID )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1978:1: RULE_ID
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2164:1: ( RULE_ID )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2165:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Variable__NameAssignment_03917); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Variable__NameAssignment_04286); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0()); 
             }
@@ -5576,22 +6102,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Variable__ExpressionAssignment_2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1987:1: rule__Variable__ExpressionAssignment_2 : ( ruleExpression ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2174:1: rule__Variable__ExpressionAssignment_2 : ( ruleExpression ) ;
     public final void rule__Variable__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1991:1: ( ( ruleExpression ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1992:1: ( ruleExpression )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2178:1: ( ( ruleExpression ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2179:1: ( ruleExpression )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1992:1: ( ruleExpression )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:1993:1: ruleExpression
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2179:1: ( ruleExpression )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2180:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVariableAccess().getExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__Variable__ExpressionAssignment_23948);
+            pushFollow(FOLLOW_ruleExpression_in_rule__Variable__ExpressionAssignment_24317);
             ruleExpression();
 
             state._fsp--;
@@ -5621,25 +6147,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__OpAssignment_1_0_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2002:1: rule__BooleanExpression__OpAssignment_1_0_1 : ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2189:1: rule__BooleanExpression__OpAssignment_1_0_1 : ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) ) ;
     public final void rule__BooleanExpression__OpAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2006:1: ( ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2007:1: ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2193:1: ( ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2194:1: ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2007:1: ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2008:1: ( rule__BooleanExpression__OpAlternatives_1_0_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2194:1: ( ( rule__BooleanExpression__OpAlternatives_1_0_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2195:1: ( rule__BooleanExpression__OpAlternatives_1_0_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getOpAlternatives_1_0_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2009:1: ( rule__BooleanExpression__OpAlternatives_1_0_1_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2009:2: rule__BooleanExpression__OpAlternatives_1_0_1_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2196:1: ( rule__BooleanExpression__OpAlternatives_1_0_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2196:2: rule__BooleanExpression__OpAlternatives_1_0_1_0
             {
-            pushFollow(FOLLOW_rule__BooleanExpression__OpAlternatives_1_0_1_0_in_rule__BooleanExpression__OpAssignment_1_0_13979);
+            pushFollow(FOLLOW_rule__BooleanExpression__OpAlternatives_1_0_1_0_in_rule__BooleanExpression__OpAssignment_1_0_14348);
             rule__BooleanExpression__OpAlternatives_1_0_1_0();
 
             state._fsp--;
@@ -5672,22 +6198,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanExpression__RightAssignment_1_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2018:1: rule__BooleanExpression__RightAssignment_1_1 : ( ruleComparison ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2205:1: rule__BooleanExpression__RightAssignment_1_1 : ( ruleComparison ) ;
     public final void rule__BooleanExpression__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2022:1: ( ( ruleComparison ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2023:1: ( ruleComparison )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2209:1: ( ( ruleComparison ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:1: ( ruleComparison )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2023:1: ( ruleComparison )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2024:1: ruleComparison
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:1: ( ruleComparison )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2211:1: ruleComparison
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanExpressionAccess().getRightComparisonParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleComparison_in_rule__BooleanExpression__RightAssignment_1_14012);
+            pushFollow(FOLLOW_ruleComparison_in_rule__BooleanExpression__RightAssignment_1_14381);
             ruleComparison();
 
             state._fsp--;
@@ -5717,34 +6243,36 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__OpAssignment_1_0_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2033:1: rule__Comparison__OpAssignment_1_0_1 : ( ( rule__Comparison__OpAlternatives_1_0_1_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2220:1: rule__Comparison__OpAssignment_1_0_1 : ( ( '<' ) ) ;
     public final void rule__Comparison__OpAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2037:1: ( ( ( rule__Comparison__OpAlternatives_1_0_1_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2038:1: ( ( rule__Comparison__OpAlternatives_1_0_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2224:1: ( ( ( '<' ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2225:1: ( ( '<' ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2038:1: ( ( rule__Comparison__OpAlternatives_1_0_1_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2039:1: ( rule__Comparison__OpAlternatives_1_0_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2225:1: ( ( '<' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2226:1: ( '<' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getComparisonAccess().getOpAlternatives_1_0_1_0()); 
+               before(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2040:1: ( rule__Comparison__OpAlternatives_1_0_1_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2040:2: rule__Comparison__OpAlternatives_1_0_1_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2227:1: ( '<' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2228:1: '<'
             {
-            pushFollow(FOLLOW_rule__Comparison__OpAlternatives_1_0_1_0_in_rule__Comparison__OpAssignment_1_0_14043);
-            rule__Comparison__OpAlternatives_1_0_1_0();
-
-            state._fsp--;
-            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0()); 
+            }
+            match(input,23,FOLLOW_23_in_rule__Comparison__OpAssignment_1_0_14417); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0()); 
+            }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getComparisonAccess().getOpAlternatives_1_0_1_0()); 
+               after(grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0()); 
             }
 
             }
@@ -5768,28 +6296,28 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Comparison__RightAssignment_1_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2049:1: rule__Comparison__RightAssignment_1_1 : ( ruleAddition ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2243:1: rule__Comparison__RightAssignment_1_1 : ( ruleEquals ) ;
     public final void rule__Comparison__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2053:1: ( ( ruleAddition ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2054:1: ( ruleAddition )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2247:1: ( ( ruleEquals ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2248:1: ( ruleEquals )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2054:1: ( ruleAddition )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2055:1: ruleAddition
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2248:1: ( ruleEquals )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2249:1: ruleEquals
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getComparisonAccess().getRightAdditionParserRuleCall_1_1_0()); 
+               before(grammarAccess.getComparisonAccess().getRightEqualsParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleAddition_in_rule__Comparison__RightAssignment_1_14076);
-            ruleAddition();
+            pushFollow(FOLLOW_ruleEquals_in_rule__Comparison__RightAssignment_1_14456);
+            ruleEquals();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getComparisonAccess().getRightAdditionParserRuleCall_1_1_0()); 
+               after(grammarAccess.getComparisonAccess().getRightEqualsParserRuleCall_1_1_0()); 
             }
 
             }
@@ -5812,23 +6340,121 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__Comparison__RightAssignment_1_1"
 
 
+    // $ANTLR start "rule__Equals__OpAssignment_1_0_1"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2258:1: rule__Equals__OpAssignment_1_0_1 : ( ( '==' ) ) ;
+    public final void rule__Equals__OpAssignment_1_0_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2262:1: ( ( ( '==' ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2263:1: ( ( '==' ) )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2263:1: ( ( '==' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2264:1: ( '==' )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0()); 
+            }
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2265:1: ( '==' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2266:1: '=='
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0()); 
+            }
+            match(input,24,FOLLOW_24_in_rule__Equals__OpAssignment_1_0_14492); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0()); 
+            }
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__OpAssignment_1_0_1"
+
+
+    // $ANTLR start "rule__Equals__RightAssignment_1_1"
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2281:1: rule__Equals__RightAssignment_1_1 : ( ruleAddition ) ;
+    public final void rule__Equals__RightAssignment_1_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2285:1: ( ( ruleAddition ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2286:1: ( ruleAddition )
+            {
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2286:1: ( ruleAddition )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2287:1: ruleAddition
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEqualsAccess().getRightAdditionParserRuleCall_1_1_0()); 
+            }
+            pushFollow(FOLLOW_ruleAddition_in_rule__Equals__RightAssignment_1_14531);
+            ruleAddition();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getEqualsAccess().getRightAdditionParserRuleCall_1_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Equals__RightAssignment_1_1"
+
+
     // $ANTLR start "rule__Addition__RightAssignment_1_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2064:1: rule__Addition__RightAssignment_1_1 : ( ruleMultiplication ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2296:1: rule__Addition__RightAssignment_1_1 : ( ruleMultiplication ) ;
     public final void rule__Addition__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2068:1: ( ( ruleMultiplication ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2069:1: ( ruleMultiplication )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2300:1: ( ( ruleMultiplication ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2301:1: ( ruleMultiplication )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2069:1: ( ruleMultiplication )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2070:1: ruleMultiplication
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2301:1: ( ruleMultiplication )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2302:1: ruleMultiplication
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__RightAssignment_1_14107);
+            pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__RightAssignment_1_14562);
             ruleMultiplication();
 
             state._fsp--;
@@ -5858,25 +6484,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__OpAssignment_1_0_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2079:1: rule__Multiplication__OpAssignment_1_0_1 : ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2311:1: rule__Multiplication__OpAssignment_1_0_1 : ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) ) ;
     public final void rule__Multiplication__OpAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2083:1: ( ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2084:1: ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2315:1: ( ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2316:1: ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2084:1: ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2085:1: ( rule__Multiplication__OpAlternatives_1_0_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2316:1: ( ( rule__Multiplication__OpAlternatives_1_0_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2317:1: ( rule__Multiplication__OpAlternatives_1_0_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getOpAlternatives_1_0_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2086:1: ( rule__Multiplication__OpAlternatives_1_0_1_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2086:2: rule__Multiplication__OpAlternatives_1_0_1_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2318:1: ( rule__Multiplication__OpAlternatives_1_0_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2318:2: rule__Multiplication__OpAlternatives_1_0_1_0
             {
-            pushFollow(FOLLOW_rule__Multiplication__OpAlternatives_1_0_1_0_in_rule__Multiplication__OpAssignment_1_0_14138);
+            pushFollow(FOLLOW_rule__Multiplication__OpAlternatives_1_0_1_0_in_rule__Multiplication__OpAssignment_1_0_14593);
             rule__Multiplication__OpAlternatives_1_0_1_0();
 
             state._fsp--;
@@ -5909,22 +6535,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Multiplication__RightAssignment_1_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2095:1: rule__Multiplication__RightAssignment_1_1 : ( rulePrefixed ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2327:1: rule__Multiplication__RightAssignment_1_1 : ( rulePrefixed ) ;
     public final void rule__Multiplication__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2099:1: ( ( rulePrefixed ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2100:1: ( rulePrefixed )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2331:1: ( ( rulePrefixed ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2332:1: ( rulePrefixed )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2100:1: ( rulePrefixed )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2101:1: rulePrefixed
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2332:1: ( rulePrefixed )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2333:1: rulePrefixed
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicationAccess().getRightPrefixedParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_rulePrefixed_in_rule__Multiplication__RightAssignment_1_14171);
+            pushFollow(FOLLOW_rulePrefixed_in_rule__Multiplication__RightAssignment_1_14626);
             rulePrefixed();
 
             state._fsp--;
@@ -5954,22 +6580,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__ExpressionAssignment_0_2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2110:1: rule__Prefixed__ExpressionAssignment_0_2 : ( ruleAtomic ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2342:1: rule__Prefixed__ExpressionAssignment_0_2 : ( ruleAtomic ) ;
     public final void rule__Prefixed__ExpressionAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2114:1: ( ( ruleAtomic ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2115:1: ( ruleAtomic )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2346:1: ( ( ruleAtomic ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2347:1: ( ruleAtomic )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2115:1: ( ruleAtomic )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2116:1: ruleAtomic
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2347:1: ( ruleAtomic )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2348:1: ruleAtomic
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getExpressionAtomicParserRuleCall_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_0_24202);
+            pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_0_24657);
             ruleAtomic();
 
             state._fsp--;
@@ -5999,22 +6625,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Prefixed__ExpressionAssignment_1_2"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2125:1: rule__Prefixed__ExpressionAssignment_1_2 : ( ruleAtomic ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2357:1: rule__Prefixed__ExpressionAssignment_1_2 : ( ruleAtomic ) ;
     public final void rule__Prefixed__ExpressionAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2129:1: ( ( ruleAtomic ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2130:1: ( ruleAtomic )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2361:1: ( ( ruleAtomic ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2362:1: ( ruleAtomic )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2130:1: ( ruleAtomic )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2131:1: ruleAtomic
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2362:1: ( ruleAtomic )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2363:1: ruleAtomic
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedAccess().getExpressionAtomicParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_1_24233);
+            pushFollow(FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_1_24688);
             ruleAtomic();
 
             state._fsp--;
@@ -6044,22 +6670,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__ValueAssignment_1_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2140:1: rule__Atomic__ValueAssignment_1_1 : ( RULE_INT ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2372:1: rule__Atomic__ValueAssignment_1_1 : ( RULE_INT ) ;
     public final void rule__Atomic__ValueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2144:1: ( ( RULE_INT ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2145:1: ( RULE_INT )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2376:1: ( ( RULE_INT ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2377:1: ( RULE_INT )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2145:1: ( RULE_INT )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2146:1: RULE_INT
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2377:1: ( RULE_INT )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2378:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueINTTerminalRuleCall_1_1_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Atomic__ValueAssignment_1_14264); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Atomic__ValueAssignment_1_14719); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicAccess().getValueINTTerminalRuleCall_1_1_0()); 
             }
@@ -6085,22 +6711,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__ValueAssignment_2_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2155:1: rule__Atomic__ValueAssignment_2_1 : ( RULE_STRING ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2387:1: rule__Atomic__ValueAssignment_2_1 : ( RULE_STRING ) ;
     public final void rule__Atomic__ValueAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2159:1: ( ( RULE_STRING ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2160:1: ( RULE_STRING )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2391:1: ( ( RULE_STRING ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2392:1: ( RULE_STRING )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2160:1: ( RULE_STRING )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2161:1: RULE_STRING
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2392:1: ( RULE_STRING )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2393:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Atomic__ValueAssignment_2_14295); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Atomic__ValueAssignment_2_14750); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
             }
@@ -6126,25 +6752,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__ValueAssignment_3_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2170:1: rule__Atomic__ValueAssignment_3_1 : ( ( rule__Atomic__ValueAlternatives_3_1_0 ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2402:1: rule__Atomic__ValueAssignment_3_1 : ( ( rule__Atomic__ValueAlternatives_3_1_0 ) ) ;
     public final void rule__Atomic__ValueAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2174:1: ( ( ( rule__Atomic__ValueAlternatives_3_1_0 ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2175:1: ( ( rule__Atomic__ValueAlternatives_3_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2406:1: ( ( ( rule__Atomic__ValueAlternatives_3_1_0 ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2407:1: ( ( rule__Atomic__ValueAlternatives_3_1_0 ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2175:1: ( ( rule__Atomic__ValueAlternatives_3_1_0 ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2176:1: ( rule__Atomic__ValueAlternatives_3_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2407:1: ( ( rule__Atomic__ValueAlternatives_3_1_0 ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2408:1: ( rule__Atomic__ValueAlternatives_3_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getValueAlternatives_3_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2177:1: ( rule__Atomic__ValueAlternatives_3_1_0 )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2177:2: rule__Atomic__ValueAlternatives_3_1_0
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2409:1: ( rule__Atomic__ValueAlternatives_3_1_0 )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2409:2: rule__Atomic__ValueAlternatives_3_1_0
             {
-            pushFollow(FOLLOW_rule__Atomic__ValueAlternatives_3_1_0_in_rule__Atomic__ValueAssignment_3_14326);
+            pushFollow(FOLLOW_rule__Atomic__ValueAlternatives_3_1_0_in_rule__Atomic__ValueAssignment_3_14781);
             rule__Atomic__ValueAlternatives_3_1_0();
 
             state._fsp--;
@@ -6177,28 +6803,28 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Atomic__RefAssignment_4_1"
-    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2186:1: rule__Atomic__RefAssignment_4_1 : ( ( RULE_ID ) ) ;
+    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2418:1: rule__Atomic__RefAssignment_4_1 : ( ( RULE_ID ) ) ;
     public final void rule__Atomic__RefAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2190:1: ( ( ( RULE_ID ) ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2191:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2422:1: ( ( ( RULE_ID ) ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2423:1: ( ( RULE_ID ) )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2191:1: ( ( RULE_ID ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2192:1: ( RULE_ID )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2423:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2424:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getRefVariableCrossReference_4_1_0()); 
             }
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2193:1: ( RULE_ID )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2194:1: RULE_ID
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2425:1: ( RULE_ID )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2426:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAtomicAccess().getRefVariableIDTerminalRuleCall_4_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Atomic__RefAssignment_4_14363); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Atomic__RefAssignment_4_14818); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAtomicAccess().getRefVariableIDTerminalRuleCall_4_1_0_1()); 
             }
@@ -6248,157 +6874,174 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_ruleComparison_in_entryRuleComparison307 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleComparison314 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Comparison__Group__0_in_ruleComparison340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddition_in_entryRuleAddition367 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAddition374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group__0_in_ruleAddition400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplication_in_entryRuleMultiplication427 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMultiplication434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group__0_in_ruleMultiplication460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrefixed_in_entryRulePrefixed487 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrefixed494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Alternatives_in_rulePrefixed520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtomic_in_entryRuleAtomic547 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAtomic554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Alternatives_in_ruleAtomic580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__BooleanExpression__OpAlternatives_1_0_1_0619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__BooleanExpression__OpAlternatives_1_0_1_0639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Comparison__OpAlternatives_1_0_1_0674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Comparison__OpAlternatives_1_0_1_0694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__0_in_rule__Addition__Alternatives_1_0728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__0_in_rule__Addition__Alternatives_1_0746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Multiplication__OpAlternatives_1_0_1_0780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Multiplication__OpAlternatives_1_0_1_0800 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__0_in_rule__Prefixed__Alternatives834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__0_in_rule__Prefixed__Alternatives852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__Alternatives870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__0_in_rule__Atomic__Alternatives902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_1__0_in_rule__Atomic__Alternatives920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_2__0_in_rule__Atomic__Alternatives938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_3__0_in_rule__Atomic__Alternatives956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_4__0_in_rule__Atomic__Alternatives974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Atomic__ValueAlternatives_3_1_01008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Atomic__ValueAlternatives_3_1_01028 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group__0__Impl_in_rule__Variable__Group__01061 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__Variable__Group__1_in_rule__Variable__Group__01064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__NameAssignment_0_in_rule__Variable__Group__0__Impl1091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group__1__Impl_in_rule__Variable__Group__11121 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Variable__Group__2_in_rule__Variable__Group__11124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Variable__Group__1__Impl1152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__Group__2__Impl_in_rule__Variable__Group__21183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Variable__ExpressionAssignment_2_in_rule__Variable__Group__2__Impl1210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group__0__Impl_in_rule__BooleanExpression__Group__01246 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group__1_in_rule__BooleanExpression__Group__01249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleComparison_in_rule__BooleanExpression__Group__0__Impl1276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group__1__Impl_in_rule__BooleanExpression__Group__11305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__0_in_rule__BooleanExpression__Group__1__Impl1332 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__0__Impl_in_rule__BooleanExpression__Group_1__01367 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__1_in_rule__BooleanExpression__Group_1__01370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__0_in_rule__BooleanExpression__Group_1__0__Impl1397 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__1__Impl_in_rule__BooleanExpression__Group_1__11427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__RightAssignment_1_1_in_rule__BooleanExpression__Group_1__1__Impl1454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__0__Impl_in_rule__BooleanExpression__Group_1_0__01488 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__1_in_rule__BooleanExpression__Group_1_0__01491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__1__Impl_in_rule__BooleanExpression__Group_1_0__11549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__OpAssignment_1_0_1_in_rule__BooleanExpression__Group_1_0__1__Impl1576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group__0__Impl_in_rule__Comparison__Group__01610 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_rule__Comparison__Group__1_in_rule__Comparison__Group__01613 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddition_in_rule__Comparison__Group__0__Impl1640 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group__1__Impl_in_rule__Comparison__Group__11669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1__0_in_rule__Comparison__Group__1__Impl1696 = new BitSet(new long[]{0x0000000000006002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1__0__Impl_in_rule__Comparison__Group_1__01731 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1__1_in_rule__Comparison__Group_1__01734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__0_in_rule__Comparison__Group_1__0__Impl1761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1__1__Impl_in_rule__Comparison__Group_1__11791 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__RightAssignment_1_1_in_rule__Comparison__Group_1__1__Impl1818 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__0__Impl_in_rule__Comparison__Group_1_0__01852 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__1_in_rule__Comparison__Group_1_0__01855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__1__Impl_in_rule__Comparison__Group_1_0__11913 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__OpAssignment_1_0_1_in_rule__Comparison__Group_1_0__1__Impl1940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group__0__Impl_in_rule__Addition__Group__01974 = new BitSet(new long[]{0x0000000000300000L});
-    public static final BitSet FOLLOW_rule__Addition__Group__1_in_rule__Addition__Group__01977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplication_in_rule__Addition__Group__0__Impl2004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group__1__Impl_in_rule__Addition__Group__12033 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1__0_in_rule__Addition__Group__1__Impl2060 = new BitSet(new long[]{0x0000000000300002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1__0__Impl_in_rule__Addition__Group_1__02095 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1__1_in_rule__Addition__Group_1__02098 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Alternatives_1_0_in_rule__Addition__Group_1__0__Impl2125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1__1__Impl_in_rule__Addition__Group_1__12155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__RightAssignment_1_1_in_rule__Addition__Group_1__1__Impl2182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__0__Impl_in_rule__Addition__Group_1_0_0__02216 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__1_in_rule__Addition__Group_1_0_0__02219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__1__Impl_in_rule__Addition__Group_1_0_0__12277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__Addition__Group_1_0_0__1__Impl2305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__0__Impl_in_rule__Addition__Group_1_0_1__02340 = new BitSet(new long[]{0x0000000000300000L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__1_in_rule__Addition__Group_1_0_1__02343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__1__Impl_in_rule__Addition__Group_1_0_1__12401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Addition__Group_1_0_1__1__Impl2429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group__0__Impl_in_rule__Multiplication__Group__02464 = new BitSet(new long[]{0x0000000000018000L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group__1_in_rule__Multiplication__Group__02467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrefixed_in_rule__Multiplication__Group__0__Impl2494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group__1__Impl_in_rule__Multiplication__Group__12523 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1__0_in_rule__Multiplication__Group__1__Impl2550 = new BitSet(new long[]{0x0000000000018002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1__0__Impl_in_rule__Multiplication__Group_1__02585 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1__1_in_rule__Multiplication__Group_1__02588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__0_in_rule__Multiplication__Group_1__0__Impl2615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1__1__Impl_in_rule__Multiplication__Group_1__12645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__RightAssignment_1_1_in_rule__Multiplication__Group_1__1__Impl2672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__0__Impl_in_rule__Multiplication__Group_1_0__02706 = new BitSet(new long[]{0x0000000000018000L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__1_in_rule__Multiplication__Group_1_0__02709 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__1__Impl_in_rule__Multiplication__Group_1_0__12767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__OpAssignment_1_0_1_in_rule__Multiplication__Group_1_0__1__Impl2794 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__0__Impl_in_rule__Prefixed__Group_0__02828 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__1_in_rule__Prefixed__Group_0__02831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__1__Impl_in_rule__Prefixed__Group_0__12889 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__2_in_rule__Prefixed__Group_0__12892 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Prefixed__Group_0__1__Impl2921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_0__2__Impl_in_rule__Prefixed__Group_0__22953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__ExpressionAssignment_0_2_in_rule__Prefixed__Group_0__2__Impl2980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__0__Impl_in_rule__Prefixed__Group_1__03016 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__1_in_rule__Prefixed__Group_1__03019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__1__Impl_in_rule__Prefixed__Group_1__13077 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__2_in_rule__Prefixed__Group_1__13080 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Prefixed__Group_1__1__Impl3109 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__Group_1__2__Impl_in_rule__Prefixed__Group_1__23141 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Prefixed__ExpressionAssignment_1_2_in_rule__Prefixed__Group_1__2__Impl3168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__0__Impl_in_rule__Atomic__Group_0__03204 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__1_in_rule__Atomic__Group_0__03207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__Atomic__Group_0__0__Impl3235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__1__Impl_in_rule__Atomic__Group_0__13266 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__2_in_rule__Atomic__Group_0__13269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Atomic__Group_0__1__Impl3296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_0__2__Impl_in_rule__Atomic__Group_0__23325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__Atomic__Group_0__2__Impl3353 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_1__0__Impl_in_rule__Atomic__Group_1__03390 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_1__1_in_rule__Atomic__Group_1__03393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_1__1__Impl_in_rule__Atomic__Group_1__13451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_1_1_in_rule__Atomic__Group_1__1__Impl3478 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_2__0__Impl_in_rule__Atomic__Group_2__03512 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_2__1_in_rule__Atomic__Group_2__03515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_2__1__Impl_in_rule__Atomic__Group_2__13573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_2_1_in_rule__Atomic__Group_2__1__Impl3600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_3__0__Impl_in_rule__Atomic__Group_3__03634 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_3__1_in_rule__Atomic__Group_3__03637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_3__1__Impl_in_rule__Atomic__Group_3__13695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_3_1_in_rule__Atomic__Group_3__1__Impl3722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_4__0__Impl_in_rule__Atomic__Group_4__03756 = new BitSet(new long[]{0x0000000000E60070L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_4__1_in_rule__Atomic__Group_4__03759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__Group_4__1__Impl_in_rule__Atomic__Group_4__13817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__RefAssignment_4_1_in_rule__Atomic__Group_4__1__Impl3844 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariable_in_rule__Model__VariablesAssignment3886 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Variable__NameAssignment_03917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__Variable__ExpressionAssignment_23948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanExpression__OpAlternatives_1_0_1_0_in_rule__BooleanExpression__OpAssignment_1_0_13979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleComparison_in_rule__BooleanExpression__RightAssignment_1_14012 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Comparison__OpAlternatives_1_0_1_0_in_rule__Comparison__OpAssignment_1_0_14043 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddition_in_rule__Comparison__RightAssignment_1_14076 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplication_in_rule__Addition__RightAssignment_1_14107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Multiplication__OpAlternatives_1_0_1_0_in_rule__Multiplication__OpAssignment_1_0_14138 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrefixed_in_rule__Multiplication__RightAssignment_1_14171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_0_24202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_1_24233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Atomic__ValueAssignment_1_14264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Atomic__ValueAssignment_2_14295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atomic__ValueAlternatives_3_1_0_in_rule__Atomic__ValueAssignment_3_14326 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Atomic__RefAssignment_4_14363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEquals_in_entryRuleEquals367 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEquals374 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group__0_in_ruleEquals400 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddition_in_entryRuleAddition427 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAddition434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group__0_in_ruleAddition460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplication_in_entryRuleMultiplication487 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMultiplication494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group__0_in_ruleMultiplication520 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrefixed_in_entryRulePrefixed547 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrefixed554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Alternatives_in_rulePrefixed580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtomic_in_entryRuleAtomic607 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAtomic614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Alternatives_in_ruleAtomic640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_rule__BooleanExpression__OpAlternatives_1_0_1_0679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__BooleanExpression__OpAlternatives_1_0_1_0699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__0_in_rule__Addition__Alternatives_1_0733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__0_in_rule__Addition__Alternatives_1_0751 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Multiplication__OpAlternatives_1_0_1_0785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Multiplication__OpAlternatives_1_0_1_0805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__0_in_rule__Prefixed__Alternatives839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__0_in_rule__Prefixed__Alternatives857 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__Alternatives875 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__0_in_rule__Atomic__Alternatives907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_1__0_in_rule__Atomic__Alternatives925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_2__0_in_rule__Atomic__Alternatives943 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_3__0_in_rule__Atomic__Alternatives961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_4__0_in_rule__Atomic__Alternatives979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Atomic__ValueAlternatives_3_1_01013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__Atomic__ValueAlternatives_3_1_01033 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group__0__Impl_in_rule__Variable__Group__01066 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_rule__Variable__Group__1_in_rule__Variable__Group__01069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__NameAssignment_0_in_rule__Variable__Group__0__Impl1096 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group__1__Impl_in_rule__Variable__Group__11126 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Variable__Group__2_in_rule__Variable__Group__11129 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Variable__Group__1__Impl1157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__Group__2__Impl_in_rule__Variable__Group__21188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Variable__ExpressionAssignment_2_in_rule__Variable__Group__2__Impl1215 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group__0__Impl_in_rule__BooleanExpression__Group__01251 = new BitSet(new long[]{0x0000000000001800L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group__1_in_rule__BooleanExpression__Group__01254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleComparison_in_rule__BooleanExpression__Group__0__Impl1281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group__1__Impl_in_rule__BooleanExpression__Group__11310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__0_in_rule__BooleanExpression__Group__1__Impl1337 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__0__Impl_in_rule__BooleanExpression__Group_1__01372 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__1_in_rule__BooleanExpression__Group_1__01375 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__0_in_rule__BooleanExpression__Group_1__0__Impl1402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1__1__Impl_in_rule__BooleanExpression__Group_1__11432 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__RightAssignment_1_1_in_rule__BooleanExpression__Group_1__1__Impl1459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__0__Impl_in_rule__BooleanExpression__Group_1_0__01493 = new BitSet(new long[]{0x0000000000001800L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__1_in_rule__BooleanExpression__Group_1_0__01496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__Group_1_0__1__Impl_in_rule__BooleanExpression__Group_1_0__11554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__OpAssignment_1_0_1_in_rule__BooleanExpression__Group_1_0__1__Impl1581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group__0__Impl_in_rule__Comparison__Group__01615 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__Comparison__Group__1_in_rule__Comparison__Group__01618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEquals_in_rule__Comparison__Group__0__Impl1645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group__1__Impl_in_rule__Comparison__Group__11674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1__0_in_rule__Comparison__Group__1__Impl1701 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1__0__Impl_in_rule__Comparison__Group_1__01736 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1__1_in_rule__Comparison__Group_1__01739 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__0_in_rule__Comparison__Group_1__0__Impl1766 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1__1__Impl_in_rule__Comparison__Group_1__11796 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__RightAssignment_1_1_in_rule__Comparison__Group_1__1__Impl1823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__0__Impl_in_rule__Comparison__Group_1_0__01857 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__1_in_rule__Comparison__Group_1_0__01860 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__Group_1_0__1__Impl_in_rule__Comparison__Group_1_0__11918 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Comparison__OpAssignment_1_0_1_in_rule__Comparison__Group_1_0__1__Impl1945 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group__0__Impl_in_rule__Equals__Group__01979 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__Equals__Group__1_in_rule__Equals__Group__01982 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddition_in_rule__Equals__Group__0__Impl2009 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group__1__Impl_in_rule__Equals__Group__12038 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1__0_in_rule__Equals__Group__1__Impl2065 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1__0__Impl_in_rule__Equals__Group_1__02100 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1__1_in_rule__Equals__Group_1__02103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1_0__0_in_rule__Equals__Group_1__0__Impl2130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1__1__Impl_in_rule__Equals__Group_1__12160 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__RightAssignment_1_1_in_rule__Equals__Group_1__1__Impl2187 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1_0__0__Impl_in_rule__Equals__Group_1_0__02221 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1_0__1_in_rule__Equals__Group_1_0__02224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__Group_1_0__1__Impl_in_rule__Equals__Group_1_0__12282 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Equals__OpAssignment_1_0_1_in_rule__Equals__Group_1_0__1__Impl2309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group__0__Impl_in_rule__Addition__Group__02343 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_rule__Addition__Group__1_in_rule__Addition__Group__02346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplication_in_rule__Addition__Group__0__Impl2373 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group__1__Impl_in_rule__Addition__Group__12402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1__0_in_rule__Addition__Group__1__Impl2429 = new BitSet(new long[]{0x00000000000C0002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1__0__Impl_in_rule__Addition__Group_1__02464 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1__1_in_rule__Addition__Group_1__02467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Alternatives_1_0_in_rule__Addition__Group_1__0__Impl2494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1__1__Impl_in_rule__Addition__Group_1__12524 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__RightAssignment_1_1_in_rule__Addition__Group_1__1__Impl2551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__0__Impl_in_rule__Addition__Group_1_0_0__02585 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__1_in_rule__Addition__Group_1_0_0__02588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_0__1__Impl_in_rule__Addition__Group_1_0_0__12646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Addition__Group_1_0_0__1__Impl2674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__0__Impl_in_rule__Addition__Group_1_0_1__02709 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__1_in_rule__Addition__Group_1_0_1__02712 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Addition__Group_1_0_1__1__Impl_in_rule__Addition__Group_1_0_1__12770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Addition__Group_1_0_1__1__Impl2798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group__0__Impl_in_rule__Multiplication__Group__02833 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group__1_in_rule__Multiplication__Group__02836 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrefixed_in_rule__Multiplication__Group__0__Impl2863 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group__1__Impl_in_rule__Multiplication__Group__12892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1__0_in_rule__Multiplication__Group__1__Impl2919 = new BitSet(new long[]{0x0000000000006002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1__0__Impl_in_rule__Multiplication__Group_1__02954 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1__1_in_rule__Multiplication__Group_1__02957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__0_in_rule__Multiplication__Group_1__0__Impl2984 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1__1__Impl_in_rule__Multiplication__Group_1__13014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__RightAssignment_1_1_in_rule__Multiplication__Group_1__1__Impl3041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__0__Impl_in_rule__Multiplication__Group_1_0__03075 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__1_in_rule__Multiplication__Group_1_0__03078 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__Group_1_0__1__Impl_in_rule__Multiplication__Group_1_0__13136 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__OpAssignment_1_0_1_in_rule__Multiplication__Group_1_0__1__Impl3163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__0__Impl_in_rule__Prefixed__Group_0__03197 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__1_in_rule__Prefixed__Group_0__03200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__1__Impl_in_rule__Prefixed__Group_0__13258 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__2_in_rule__Prefixed__Group_0__13261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Prefixed__Group_0__1__Impl3290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_0__2__Impl_in_rule__Prefixed__Group_0__23322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__ExpressionAssignment_0_2_in_rule__Prefixed__Group_0__2__Impl3349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__0__Impl_in_rule__Prefixed__Group_1__03385 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__1_in_rule__Prefixed__Group_1__03388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__1__Impl_in_rule__Prefixed__Group_1__13446 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__2_in_rule__Prefixed__Group_1__13449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Prefixed__Group_1__1__Impl3478 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__Group_1__2__Impl_in_rule__Prefixed__Group_1__23510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Prefixed__ExpressionAssignment_1_2_in_rule__Prefixed__Group_1__2__Impl3537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__0__Impl_in_rule__Atomic__Group_0__03573 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__1_in_rule__Atomic__Group_0__03576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__Atomic__Group_0__0__Impl3604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__1__Impl_in_rule__Atomic__Group_0__13635 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__2_in_rule__Atomic__Group_0__13638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Atomic__Group_0__1__Impl3665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_0__2__Impl_in_rule__Atomic__Group_0__23694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__Atomic__Group_0__2__Impl3722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_1__0__Impl_in_rule__Atomic__Group_1__03759 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_1__1_in_rule__Atomic__Group_1__03762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_1__1__Impl_in_rule__Atomic__Group_1__13820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_1_1_in_rule__Atomic__Group_1__1__Impl3847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_2__0__Impl_in_rule__Atomic__Group_2__03881 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_2__1_in_rule__Atomic__Group_2__03884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_2__1__Impl_in_rule__Atomic__Group_2__13942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_2_1_in_rule__Atomic__Group_2__1__Impl3969 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_3__0__Impl_in_rule__Atomic__Group_3__04003 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_3__1_in_rule__Atomic__Group_3__04006 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_3__1__Impl_in_rule__Atomic__Group_3__14064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__ValueAssignment_3_1_in_rule__Atomic__Group_3__1__Impl4091 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_4__0__Impl_in_rule__Atomic__Group_4__04125 = new BitSet(new long[]{0x0000000000398070L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_4__1_in_rule__Atomic__Group_4__04128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__Group_4__1__Impl_in_rule__Atomic__Group_4__14186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__RefAssignment_4_1_in_rule__Atomic__Group_4__1__Impl4213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariable_in_rule__Model__VariablesAssignment4255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Variable__NameAssignment_04286 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__Variable__ExpressionAssignment_24317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanExpression__OpAlternatives_1_0_1_0_in_rule__BooleanExpression__OpAssignment_1_0_14348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleComparison_in_rule__BooleanExpression__RightAssignment_1_14381 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Comparison__OpAssignment_1_0_14417 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEquals_in_rule__Comparison__RightAssignment_1_14456 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__Equals__OpAssignment_1_0_14492 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddition_in_rule__Equals__RightAssignment_1_14531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplication_in_rule__Addition__RightAssignment_1_14562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Multiplication__OpAlternatives_1_0_1_0_in_rule__Multiplication__OpAssignment_1_0_14593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrefixed_in_rule__Multiplication__RightAssignment_1_14626 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_0_24657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtomic_in_rule__Prefixed__ExpressionAssignment_1_24688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Atomic__ValueAssignment_1_14719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Atomic__ValueAssignment_2_14750 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atomic__ValueAlternatives_3_1_0_in_rule__Atomic__ValueAssignment_3_14781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Atomic__RefAssignment_4_14818 = new BitSet(new long[]{0x0000000000000002L});
 
 }

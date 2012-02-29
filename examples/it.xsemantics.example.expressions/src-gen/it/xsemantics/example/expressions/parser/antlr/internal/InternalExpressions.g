@@ -293,11 +293,11 @@ ruleComparison returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getComparisonAccess().getAdditionParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getComparisonAccess().getEqualsParserRuleCall_0()); 
     }
-    this_Addition_0=ruleAddition
+    this_Equals_0=ruleEquals
     { 
-        $current = $this_Addition_0.current; 
+        $current = $this_Equals_0.current; 
         afterParserOrEnumRuleCall();
     }
 (((
@@ -308,42 +308,96 @@ ruleComparison returns [EObject current=null]
     }
 )(
 (
-(
-		lv_op_2_1=	'<' 
+		lv_op_2_0=	'<' 
     {
-        newLeafNode(lv_op_2_1, grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0_0());
+        newLeafNode(lv_op_2_0, grammarAccess.getComparisonAccess().getOpLessThanSignKeyword_1_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getComparisonRule());
 	        }
-       		setWithLastConsumed($current, "op", lv_op_2_1, null);
+       		setWithLastConsumed($current, "op", lv_op_2_0, "<");
 	    }
-
-    |		lv_op_2_2=	'==' 
-    {
-        newLeafNode(lv_op_2_2, grammarAccess.getComparisonAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0_1());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getComparisonRule());
-	        }
-       		setWithLastConsumed($current, "op", lv_op_2_2, null);
-	    }
-
-)
 
 )
 ))(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getComparisonAccess().getRightAdditionParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getComparisonAccess().getRightEqualsParserRuleCall_1_1_0()); 
+	    }
+		lv_right_3_0=ruleEquals		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getComparisonRule());
+	        }
+       		set(
+       			$current, 
+       			"right",
+        		lv_right_3_0, 
+        		"Equals");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)
+;
+
+
+
+
+
+// Entry rule entryRuleEquals
+entryRuleEquals returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getEqualsRule()); }
+	 iv_ruleEquals=ruleEquals 
+	 { $current=$iv_ruleEquals.current; } 
+	 EOF 
+;
+
+// Rule Equals
+ruleEquals returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getEqualsAccess().getAdditionParserRuleCall_0()); 
+    }
+    this_Addition_0=ruleAddition
+    { 
+        $current = $this_Addition_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+(((
+    {
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getEqualsAccess().getEqualsLeftAction_1_0_0(),
+            $current);
+    }
+)(
+(
+		lv_op_2_0=	'==' 
+    {
+        newLeafNode(lv_op_2_0, grammarAccess.getEqualsAccess().getOpEqualsSignEqualsSignKeyword_1_0_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEqualsRule());
+	        }
+       		setWithLastConsumed($current, "op", lv_op_2_0, "==");
+	    }
+
+)
+))(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getEqualsAccess().getRightAdditionParserRuleCall_1_1_0()); 
 	    }
 		lv_right_3_0=ruleAddition		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getComparisonRule());
+	            $current = createModelElementForParent(grammarAccess.getEqualsRule());
 	        }
        		set(
        			$current, 

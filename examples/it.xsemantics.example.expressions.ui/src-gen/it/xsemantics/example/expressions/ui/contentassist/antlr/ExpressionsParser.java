@@ -38,7 +38,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getBooleanExpressionAccess().getOpAlternatives_1_0_1_0(), "rule__BooleanExpression__OpAlternatives_1_0_1_0");
-					put(grammarAccess.getComparisonAccess().getOpAlternatives_1_0_1_0(), "rule__Comparison__OpAlternatives_1_0_1_0");
 					put(grammarAccess.getAdditionAccess().getAlternatives_1_0(), "rule__Addition__Alternatives_1_0");
 					put(grammarAccess.getMultiplicationAccess().getOpAlternatives_1_0_1_0(), "rule__Multiplication__OpAlternatives_1_0_1_0");
 					put(grammarAccess.getPrefixedAccess().getAlternatives(), "rule__Prefixed__Alternatives");
@@ -52,6 +51,9 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getComparisonAccess().getGroup(), "rule__Comparison__Group__0");
 					put(grammarAccess.getComparisonAccess().getGroup_1(), "rule__Comparison__Group_1__0");
 					put(grammarAccess.getComparisonAccess().getGroup_1_0(), "rule__Comparison__Group_1_0__0");
+					put(grammarAccess.getEqualsAccess().getGroup(), "rule__Equals__Group__0");
+					put(grammarAccess.getEqualsAccess().getGroup_1(), "rule__Equals__Group_1__0");
+					put(grammarAccess.getEqualsAccess().getGroup_1_0(), "rule__Equals__Group_1_0__0");
 					put(grammarAccess.getAdditionAccess().getGroup(), "rule__Addition__Group__0");
 					put(grammarAccess.getAdditionAccess().getGroup_1(), "rule__Addition__Group_1__0");
 					put(grammarAccess.getAdditionAccess().getGroup_1_0_0(), "rule__Addition__Group_1_0_0__0");
@@ -76,6 +78,8 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBooleanExpressionAccess().getRightAssignment_1_1(), "rule__BooleanExpression__RightAssignment_1_1");
 					put(grammarAccess.getComparisonAccess().getOpAssignment_1_0_1(), "rule__Comparison__OpAssignment_1_0_1");
 					put(grammarAccess.getComparisonAccess().getRightAssignment_1_1(), "rule__Comparison__RightAssignment_1_1");
+					put(grammarAccess.getEqualsAccess().getOpAssignment_1_0_1(), "rule__Equals__OpAssignment_1_0_1");
+					put(grammarAccess.getEqualsAccess().getRightAssignment_1_1(), "rule__Equals__RightAssignment_1_1");
 					put(grammarAccess.getAdditionAccess().getRightAssignment_1_1(), "rule__Addition__RightAssignment_1_1");
 					put(grammarAccess.getMultiplicationAccess().getOpAssignment_1_0_1(), "rule__Multiplication__OpAssignment_1_0_1");
 					put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1(), "rule__Multiplication__RightAssignment_1_1");

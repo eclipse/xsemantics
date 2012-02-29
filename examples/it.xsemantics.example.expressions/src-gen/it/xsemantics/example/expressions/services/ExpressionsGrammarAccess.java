@@ -132,47 +132,83 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	public class ComparisonElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Comparison");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cEqualsParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
 		private final Action cComparisonLeftAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
 		private final Assignment cOpAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final Alternatives cOpAlternatives_1_0_1_0 = (Alternatives)cOpAssignment_1_0_1.eContents().get(0);
-		private final Keyword cOpLessThanSignKeyword_1_0_1_0_0 = (Keyword)cOpAlternatives_1_0_1_0.eContents().get(0);
-		private final Keyword cOpEqualsSignEqualsSignKeyword_1_0_1_0_1 = (Keyword)cOpAlternatives_1_0_1_0.eContents().get(1);
+		private final Keyword cOpLessThanSignKeyword_1_0_1_0 = (Keyword)cOpAssignment_1_0_1.eContents().get(0);
 		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRightAdditionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
+		private final RuleCall cRightEqualsParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Comparison returns Expression:
-		//	Addition (({Comparison.left=current} op=("<" | "==")) right=Addition)*;
+		//	Equals (({Comparison.left=current} op="<") right=Equals)*;
 		public ParserRule getRule() { return rule; }
 
-		//Addition (({Comparison.left=current} op=("<" | "==")) right=Addition)*
+		//Equals (({Comparison.left=current} op="<") right=Equals)*
 		public Group getGroup() { return cGroup; }
 
-		//Addition
-		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
+		//Equals
+		public RuleCall getEqualsParserRuleCall_0() { return cEqualsParserRuleCall_0; }
 
-		//(({Comparison.left=current} op=("<" | "==")) right=Addition)*
+		//(({Comparison.left=current} op="<") right=Equals)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Comparison.left=current} op=("<" | "==")
+		//{Comparison.left=current} op="<"
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{Comparison.left=current}
 		public Action getComparisonLeftAction_1_0_0() { return cComparisonLeftAction_1_0_0; }
 
-		//op=("<" | "==")
+		//op="<"
 		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 
-		//"<" | "=="
-		public Alternatives getOpAlternatives_1_0_1_0() { return cOpAlternatives_1_0_1_0; }
-
 		//"<"
-		public Keyword getOpLessThanSignKeyword_1_0_1_0_0() { return cOpLessThanSignKeyword_1_0_1_0_0; }
+		public Keyword getOpLessThanSignKeyword_1_0_1_0() { return cOpLessThanSignKeyword_1_0_1_0; }
+
+		//right=Equals
+		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
+
+		//Equals
+		public RuleCall getRightEqualsParserRuleCall_1_1_0() { return cRightEqualsParserRuleCall_1_1_0; }
+	}
+
+	public class EqualsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Equals");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Action cEqualsLeftAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
+		private final Assignment cOpAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final Keyword cOpEqualsSignEqualsSignKeyword_1_0_1_0 = (Keyword)cOpAssignment_1_0_1.eContents().get(0);
+		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightAdditionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
+		
+		//Equals returns Expression:
+		//	Addition (({Equals.left=current} op="==") right=Addition)*;
+		public ParserRule getRule() { return rule; }
+
+		//Addition (({Equals.left=current} op="==") right=Addition)*
+		public Group getGroup() { return cGroup; }
+
+		//Addition
+		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
+
+		//(({Equals.left=current} op="==") right=Addition)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Equals.left=current} op="=="
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//{Equals.left=current}
+		public Action getEqualsLeftAction_1_0_0() { return cEqualsLeftAction_1_0_0; }
+
+		//op="=="
+		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 
 		//"=="
-		public Keyword getOpEqualsSignEqualsSignKeyword_1_0_1_0_1() { return cOpEqualsSignEqualsSignKeyword_1_0_1_0_1; }
+		public Keyword getOpEqualsSignEqualsSignKeyword_1_0_1_0() { return cOpEqualsSignEqualsSignKeyword_1_0_1_0; }
 
 		//right=Addition
 		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
@@ -508,6 +544,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private ExpressionElements pExpression;
 	private BooleanExpressionElements pBooleanExpression;
 	private ComparisonElements pComparison;
+	private EqualsElements pEquals;
 	private AdditionElements pAddition;
 	private MultiplicationElements pMultiplication;
 	private PrefixedElements pPrefixed;
@@ -576,13 +613,23 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Comparison returns Expression:
-	//	Addition (({Comparison.left=current} op=("<" | "==")) right=Addition)*;
+	//	Equals (({Comparison.left=current} op="<") right=Equals)*;
 	public ComparisonElements getComparisonAccess() {
 		return (pComparison != null) ? pComparison : (pComparison = new ComparisonElements());
 	}
 	
 	public ParserRule getComparisonRule() {
 		return getComparisonAccess().getRule();
+	}
+
+	//Equals returns Expression:
+	//	Addition (({Equals.left=current} op="==") right=Addition)*;
+	public EqualsElements getEqualsAccess() {
+		return (pEquals != null) ? pEquals : (pEquals = new EqualsElements());
+	}
+	
+	public ParserRule getEqualsRule() {
+		return getEqualsAccess().getRule();
 	}
 
 	//Addition returns Expression:

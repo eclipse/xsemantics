@@ -73,6 +73,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.TYPE: return createType();
       case ExpressionsPackage.AND_OR_EXPRESSION: return createAndOrExpression();
       case ExpressionsPackage.COMPARISON: return createComparison();
+      case ExpressionsPackage.EQUALS: return createEquals();
       case ExpressionsPackage.PLUS: return createPlus();
       case ExpressionsPackage.MINUS: return createMinus();
       case ExpressionsPackage.MULTI_OR_DIV: return createMultiOrDiv();
@@ -154,6 +155,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     ComparisonImpl comparison = new ComparisonImpl();
     return comparison;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Equals createEquals()
+  {
+    EqualsImpl equals = new EqualsImpl();
+    return equals;
   }
 
   /**

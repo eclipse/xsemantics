@@ -95,10 +95,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:13:7: ( '<' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:13:9: '<'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:13:7: ( '*' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:13:9: '*'
             {
-            match('<'); 
+            match('*'); 
 
             }
 
@@ -115,11 +115,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:14:7: ( '==' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:14:9: '=='
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:14:7: ( '/' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:14:9: '/'
             {
-            match("=="); 
-
+            match('/'); 
 
             }
 
@@ -136,10 +135,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:15:7: ( '*' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:15:9: '*'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:15:7: ( 'true' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:15:9: 'true'
             {
-            match('*'); 
+            match("true"); 
+
 
             }
 
@@ -156,10 +156,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:16:7: ( '/' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:16:9: '/'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:16:7: ( 'false' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:16:9: 'false'
             {
-            match('/'); 
+            match("false"); 
+
 
             }
 
@@ -176,11 +177,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:17:7: ( 'true' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:17:9: 'true'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:17:7: ( '=' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:17:9: '='
             {
-            match("true"); 
-
+            match('='); 
 
             }
 
@@ -197,11 +197,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:18:7: ( 'false' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:18:9: 'false'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:18:7: ( '+' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:18:9: '+'
             {
-            match("false"); 
-
+            match('+'); 
 
             }
 
@@ -218,10 +217,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:19:7: ( '=' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:19:9: '='
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:19:7: ( '-' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:19:9: '-'
             {
-            match('='); 
+            match('-'); 
 
             }
 
@@ -238,10 +237,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:20:7: ( '+' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:20:9: '+'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:20:7: ( '!' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:20:9: '!'
             {
-            match('+'); 
+            match('!'); 
 
             }
 
@@ -258,10 +257,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:21:7: ( '-' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:21:9: '-'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:21:7: ( '(' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:21:9: '('
             {
-            match('-'); 
+            match('('); 
 
             }
 
@@ -278,10 +277,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:22:7: ( '!' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:22:9: '!'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:22:7: ( ')' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:22:9: ')'
             {
-            match('!'); 
+            match(')'); 
 
             }
 
@@ -298,10 +297,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:23:7: ( '(' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:23:9: '('
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:23:7: ( '<' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:23:9: '<'
             {
-            match('('); 
+            match('<'); 
 
             }
 
@@ -318,10 +317,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:24:7: ( ')' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:24:9: ')'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:24:7: ( '==' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:24:9: '=='
             {
-            match(')'); 
+            match("=="); 
+
 
             }
 
@@ -338,10 +338,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2206:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2206:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2438:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2438:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2206:11: ( '^' )?
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2438:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -350,7 +350,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2206:11: '^'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2438:11: '^'
                     {
                     match('^'); 
 
@@ -368,7 +368,7 @@ public class InternalExpressionsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2206:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2438:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -417,10 +417,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2208:10: ( ( '0' .. '9' )+ )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2208:12: ( '0' .. '9' )+
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2440:10: ( ( '0' .. '9' )+ )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2440:12: ( '0' .. '9' )+
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2208:12: ( '0' .. '9' )+
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2440:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -434,7 +434,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2208:13: '0' .. '9'
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2440:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -466,10 +466,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -487,10 +487,10 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -506,7 +506,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -522,7 +522,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -547,10 +547,10 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -566,7 +566,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -582,7 +582,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2210:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2442:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -625,12 +625,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2212:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2212:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2444:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2444:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2212:24: ( options {greedy=false; } : . )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2444:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -655,7 +655,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2212:52: .
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2444:52: .
             	    {
             	    matchAny(); 
 
@@ -685,12 +685,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -703,7 +703,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -723,7 +723,7 @@ public class InternalExpressionsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:40: ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -732,9 +732,9 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:41: ( '\\r' )? '\\n'
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:41: ( '\\r' )? '\\n'
                     {
-                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:41: ( '\\r' )?
+                    // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -743,7 +743,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2214:41: '\\r'
+                            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2446:41: '\\r'
                             {
                             match('\r'); 
 
@@ -775,10 +775,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2216:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2216:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2448:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2448:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2216:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2448:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -832,8 +832,8 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2218:16: ( . )
-            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2218:18: .
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2450:16: ( . )
+            // ../it.xsemantics.example.expressions.ui/src-gen/it/xsemantics/example/expressions/ui/contentassist/antlr/internal/InternalExpressions.g:2450:18: .
             {
             matchAny(); 
 
@@ -1007,52 +1007,49 @@ public class InternalExpressionsLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\2\24\1\uffff\1\31\1\uffff\1\35\2\37\5\uffff\1\24\2\uffff"+
-        "\2\24\13\uffff\1\37\1\uffff\1\37\10\uffff\2\37\1\55\1\37\1\uffff"+
-        "\1\57\1\uffff";
+        "\1\uffff\2\24\1\uffff\1\32\2\34\1\37\6\uffff\1\24\2\uffff\2\24\10"+
+        "\uffff\1\34\1\uffff\1\34\13\uffff\2\34\1\55\1\34\1\uffff\1\57\1"+
+        "\uffff";
     static final String DFA12_eofS =
         "\60\uffff";
     static final String DFA12_minS =
-        "\1\0\1\174\1\46\1\uffff\1\75\1\uffff\1\52\1\162\1\141\5\uffff\1"+
-        "\101\2\uffff\2\0\13\uffff\1\165\1\uffff\1\154\10\uffff\1\145\1\163"+
-        "\1\60\1\145\1\uffff\1\60\1\uffff";
+        "\1\0\1\174\1\46\1\uffff\1\52\1\162\1\141\1\75\6\uffff\1\101\2\uffff"+
+        "\2\0\10\uffff\1\165\1\uffff\1\154\13\uffff\1\145\1\163\1\60\1\145"+
+        "\1\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\174\1\46\1\uffff\1\75\1\uffff\1\57\1\162\1\141\5\uffff"+
-        "\1\172\2\uffff\2\uffff\13\uffff\1\165\1\uffff\1\154\10\uffff\1\145"+
-        "\1\163\1\172\1\145\1\uffff\1\172\1\uffff";
+        "\1\uffff\1\174\1\46\1\uffff\1\57\1\162\1\141\1\75\6\uffff\1\172"+
+        "\2\uffff\2\uffff\10\uffff\1\165\1\uffff\1\154\13\uffff\1\145\1\163"+
+        "\1\172\1\145\1\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\3\1\uffff\1\5\3\uffff\1\12\1\13\1\14\1\15\1\16\1\uffff"+
-        "\1\17\1\20\2\uffff\1\24\1\25\1\1\1\2\1\3\1\4\1\11\1\5\1\22\1\23"+
-        "\1\6\1\uffff\1\17\1\uffff\1\12\1\13\1\14\1\15\1\16\1\20\1\21\1\24"+
-        "\4\uffff\1\7\1\uffff\1\10";
+        "\3\uffff\1\3\4\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1\uffff\1\17"+
+        "\1\20\2\uffff\1\24\1\25\1\1\1\2\1\3\1\22\1\23\1\4\1\uffff\1\17\1"+
+        "\uffff\1\16\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\20\1\21\1\24\4\uffff"+
+        "\1\5\1\uffff\1\6";
     static final String DFA12_specialS =
         "\1\2\20\uffff\1\1\1\0\35\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\24\2\23\2\24\1\23\22\24\1\23\1\13\1\21\3\24\1\2\1\22\1\14"+
-            "\1\15\1\5\1\11\1\24\1\12\1\24\1\6\12\20\2\24\1\3\1\4\3\24\32"+
-            "\17\3\24\1\16\1\17\1\24\5\17\1\10\15\17\1\7\6\17\1\24\1\1\uff83"+
+            "\11\24\2\23\2\24\1\23\22\24\1\23\1\12\1\21\3\24\1\2\1\22\1\13"+
+            "\1\14\1\3\1\10\1\24\1\11\1\24\1\4\12\20\2\24\1\15\1\7\3\24\32"+
+            "\17\3\24\1\16\1\17\1\24\5\17\1\6\15\17\1\5\6\17\1\24\1\1\uff83"+
             "\24",
             "\1\25",
             "\1\26",
             "",
-            "\1\30",
-            "",
-            "\1\33\4\uffff\1\34",
+            "\1\30\4\uffff\1\31",
+            "\1\33",
+            "\1\35",
             "\1\36",
-            "\1\40",
             "",
             "",
             "",
             "",
             "",
-            "\32\37\4\uffff\1\37\1\uffff\32\37",
+            "",
+            "\32\34\4\uffff\1\34\1\uffff\32\34",
             "",
             "",
             "\0\47",
             "\0\47",
-            "",
-            "",
-            "",
             "",
             "",
             "",
@@ -1072,12 +1069,15 @@ public class InternalExpressionsLexer extends Lexer {
             "",
             "",
             "",
+            "",
+            "",
+            "",
             "\1\53",
             "\1\54",
-            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\56",
             "",
-            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             ""
     };
 
@@ -1145,27 +1145,27 @@ public class InternalExpressionsLexer extends Lexer {
 
                         else if ( (LA12_0=='&') ) {s = 2;}
 
-                        else if ( (LA12_0=='<') ) {s = 3;}
+                        else if ( (LA12_0=='*') ) {s = 3;}
 
-                        else if ( (LA12_0=='=') ) {s = 4;}
+                        else if ( (LA12_0=='/') ) {s = 4;}
 
-                        else if ( (LA12_0=='*') ) {s = 5;}
+                        else if ( (LA12_0=='t') ) {s = 5;}
 
-                        else if ( (LA12_0=='/') ) {s = 6;}
+                        else if ( (LA12_0=='f') ) {s = 6;}
 
-                        else if ( (LA12_0=='t') ) {s = 7;}
+                        else if ( (LA12_0=='=') ) {s = 7;}
 
-                        else if ( (LA12_0=='f') ) {s = 8;}
+                        else if ( (LA12_0=='+') ) {s = 8;}
 
-                        else if ( (LA12_0=='+') ) {s = 9;}
+                        else if ( (LA12_0=='-') ) {s = 9;}
 
-                        else if ( (LA12_0=='-') ) {s = 10;}
+                        else if ( (LA12_0=='!') ) {s = 10;}
 
-                        else if ( (LA12_0=='!') ) {s = 11;}
+                        else if ( (LA12_0=='(') ) {s = 11;}
 
-                        else if ( (LA12_0=='(') ) {s = 12;}
+                        else if ( (LA12_0==')') ) {s = 12;}
 
-                        else if ( (LA12_0==')') ) {s = 13;}
+                        else if ( (LA12_0=='<') ) {s = 13;}
 
                         else if ( (LA12_0=='^') ) {s = 14;}
 

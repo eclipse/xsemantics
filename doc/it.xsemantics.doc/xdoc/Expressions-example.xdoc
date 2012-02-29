@@ -25,13 +25,17 @@ BooleanExpression returns Expression:
 	(({AndOrExpression.left=current} op=("||"|"&&")) right=Comparison)*;
 
 Comparison returns Expression:
-	Addition 
-	(({Comparison.left=current} 
-		op=("<"|"==")
-	) right=Addition)*;
+       Equals
+       (({Comparison.left=current} op=("<") ) right=Equals)*;
+
+Equals returns Expression:
+       Addition 
+       (({Equals.left=current} op=("==") ) right=Addition)*;
  
 Addition returns Expression:
-	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*; 
+	Multiplication
+	(({Plus.left=current} '+' | {Minus.left=current} '-')
+		right=Multiplication)*; 
 
 Multiplication returns Expression:
 	Prefixed (({MultiOrDiv.left=current} op=("*"|"/")) right=Prefixed)*;
@@ -62,6 +66,11 @@ expression (you don't declare variable types); expressions can refer to
 variables declared before the current variable (the scoping will take care of
 this).
 
+Note that, for the sake of simplicity, we do not consider a full
+expression grammar, for instance, we only consider code[<] as a comparison
+operator.  This is just to keep this example simple and concentrate
+on writing a type system and an interpreter with Xsemantics.
+
 Now we would like to implement these checks:
 
 ul[
@@ -69,8 +78,9 @@ item[code[- / *] binary operators and code[-] unary operator
 act only on numeric expressions]
 item[code[+] can act both on numeric expressions and on strings; if one
 of the operand is a string the whole expression will be a string]
-item[code[< ==] operators act only on numeric and string expressions,
-and the operands must be of the same type]
+item[code[==] operator acts only on expressions of the same type]
+item[code[<] operator acts only on numeric and string expressions,
+and the two subexpressions must be of the same type]
 item[code[&& ||] binary operators and code[!] unary operator
 act only on boolean expressions]
 ]

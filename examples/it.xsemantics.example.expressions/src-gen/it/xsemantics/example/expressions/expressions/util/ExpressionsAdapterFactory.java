@@ -108,6 +108,11 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createComparisonAdapter();
       }
       @Override
+      public Adapter caseEquals(Equals object)
+      {
+        return createEqualsAdapter();
+      }
+      @Override
       public Adapter casePlus(Plus object)
       {
         return createPlusAdapter();
@@ -275,6 +280,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createComparisonAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.Equals <em>Equals</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.example.expressions.expressions.Equals
+   * @generated
+   */
+  public Adapter createEqualsAdapter()
   {
     return null;
   }
