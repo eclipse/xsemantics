@@ -55,6 +55,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c1, o1);
 	}
 	
+	public Result<Boolean> type(final RuleEnvironment _environment_,
+			final EClass c1, final EObject o1) {
+		return type(_environment_,
+			null, c1, o1);
+	}
+	
 	public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c1, final EObject o1) {
 		try {
@@ -66,6 +72,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<EClass> etype(final EObject o2) {
 		return etype(new RuleEnvironment(),
+			null, o2);
+	}
+	
+	public Result<EClass> etype(final RuleEnvironment _environment_,
+			final EObject o2) {
+		return etype(_environment_,
 			null, o2);
 	}
 	
@@ -83,6 +95,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, o3);
 	}
 	
+	public Result<EClass> etype2(final RuleEnvironment _environment_,
+			final EObject o3) {
+		return etype2(_environment_,
+			null, o3);
+	}
+	
 	public Result<EClass> etype2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EObject o3) {
 		try {
@@ -97,6 +115,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, o4);
 	}
 	
+	public Result2<EClass, EStructuralFeature> etype3(final RuleEnvironment _environment_,
+			final EObject o4) {
+		return etype3(_environment_,
+			null, o4);
+	}
+	
 	public Result2<EClass, EStructuralFeature> etype3(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EObject o4) {
 		try {
@@ -108,6 +132,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<EClass> etypeWithVarDeclAsOutputArg(final EObject o) {
 		return etypeWithVarDeclAsOutputArg(new RuleEnvironment(),
+			null, o);
+	}
+	
+	public Result<EClass> etypeWithVarDeclAsOutputArg(final RuleEnvironment _environment_,
+			final EObject o) {
+		return etypeWithVarDeclAsOutputArg(_environment_,
 			null, o);
 	}
 	

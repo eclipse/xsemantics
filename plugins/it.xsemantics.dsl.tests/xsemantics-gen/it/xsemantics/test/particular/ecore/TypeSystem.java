@@ -79,6 +79,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c);
 	}
 	
+	public Result<EObject> type(final RuleEnvironment _environment_,
+			final EClass c) {
+		return type(_environment_,
+			null, c);
+	}
+	
 	public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c) {
 		try {
@@ -90,6 +96,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result2<EClass, EObject> type2(final String s) {
 		return type2(new RuleEnvironment(),
+			null, s);
+	}
+	
+	public Result2<EClass, EObject> type2(final RuleEnvironment _environment_,
+			final String s) {
+		return type2(_environment_,
 			null, s);
 	}
 	
@@ -107,6 +119,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, o);
 	}
 	
+	public Result<Boolean> type1(final RuleEnvironment _environment_,
+			final EObject o) {
+		return type1(_environment_,
+			null, o);
+	}
+	
 	public Result<Boolean> type1(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EObject o) {
 		try {
@@ -118,6 +136,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<List<EStructuralFeature>> features(final EClass c1) {
 		return features(new RuleEnvironment(),
+			null, c1);
+	}
+	
+	public Result<List<EStructuralFeature>> features(final RuleEnvironment _environment_,
+			final EClass c1) {
+		return features(_environment_,
 			null, c1);
 	}
 	
@@ -135,6 +159,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c2, l2);
 	}
 	
+	public Result<Boolean> collections(final RuleEnvironment _environment_,
+			final EClass c2, final List<EStructuralFeature> l2) {
+		return collections(_environment_,
+			null, c2, l2);
+	}
+	
 	public Result<Boolean> collections(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c2, final List<EStructuralFeature> l2) {
 		try {
@@ -146,6 +176,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<EClass> type3(final EObject o2) {
 		return type3(new RuleEnvironment(),
+			null, o2);
+	}
+	
+	public Result<EClass> type3(final RuleEnvironment _environment_,
+			final EObject o2) {
+		return type3(_environment_,
 			null, o2);
 	}
 	
@@ -163,6 +199,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, o2);
 	}
 	
+	public Result<EClass> withfail(final RuleEnvironment _environment_,
+			final EObject o2) {
+		return withfail(_environment_,
+			null, o2);
+	}
+	
 	public Result<EClass> withfail(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EObject o2) {
 		try {
@@ -177,6 +219,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, eClass);
 	}
 	
+	public Result<Boolean> closures(final RuleEnvironment _environment_,
+			final EClass eClass) {
+		return closures(_environment_,
+			null, eClass);
+	}
+	
 	public Result<Boolean> closures(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass eClass) {
 		try {
@@ -188,6 +236,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<Boolean> environments(final EClass eClass) {
 		return environments(new RuleEnvironment(),
+			null, eClass);
+	}
+	
+	public Result<Boolean> environments(final RuleEnvironment _environment_,
+			final EClass eClass) {
+		return environments(_environment_,
 			null, eClass);
 	}
 	

@@ -32,6 +32,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c, o);
 	}
 	
+	public Result<Boolean> type(final RuleEnvironment _environment_,
+			final EClass c, final EObject o) {
+		return type(_environment_,
+			null, c, o);
+	}
+	
 	public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c, final EObject o) {
 		try {

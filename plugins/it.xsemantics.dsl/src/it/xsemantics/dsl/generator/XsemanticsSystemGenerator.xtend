@@ -71,6 +71,12 @@ class XsemanticsSystemGenerator {
 				null, «inputArgs»);
 		}
 		
+		public «resultType» «judgmentDescription.entryPointMethodName»(«importManager.environmentDeclaration.javaFinalParam»,
+				«inputParams») {
+			return «judgmentDescription.entryPointMethodName»(«environmentName»,
+				null, «inputArgs»);
+		}
+		
 		public «resultType» «judgmentDescription.entryPointMethodName»(«importManager.additionalParamsDeclaration»,
 				«inputParams») {
 			try {

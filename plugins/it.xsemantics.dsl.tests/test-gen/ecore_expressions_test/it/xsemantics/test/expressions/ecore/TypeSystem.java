@@ -42,6 +42,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c);
 	}
 	
+	public Result<EObject> type(final RuleEnvironment _environment_,
+			final EClass c) {
+		return type(_environment_,
+			null, c);
+	}
+	
 	public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c) {
 		try {
@@ -56,6 +62,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			null, c);
 	}
 	
+	public Result<EObject> type2(final RuleEnvironment _environment_,
+			final EClass c) {
+		return type2(_environment_,
+			null, c);
+	}
+	
 	public Result<EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final EClass c) {
 		try {
@@ -67,6 +79,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<EClass> testforthis(final EObject obj) {
 		return testforthis(new RuleEnvironment(),
+			null, obj);
+	}
+	
+	public Result<EClass> testforthis(final RuleEnvironment _environment_,
+			final EObject obj) {
+		return testforthis(_environment_,
 			null, obj);
 	}
 	
