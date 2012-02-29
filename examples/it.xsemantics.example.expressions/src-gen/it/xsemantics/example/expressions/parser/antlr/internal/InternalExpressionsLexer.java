@@ -73,10 +73,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:12:7: ( '+' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:12:9: '+'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:12:7: ( '||' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:12:9: '||'
             {
-            match('+'); 
+            match("||"); 
+
 
             }
 
@@ -93,10 +94,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:13:7: ( '-' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:13:9: '-'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:13:7: ( '&&' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:13:9: '&&'
             {
-            match('-'); 
+            match("&&"); 
+
 
             }
 
@@ -113,10 +115,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:14:7: ( '*' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:14:9: '*'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:14:7: ( '<' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:14:9: '<'
             {
-            match('*'); 
+            match('<'); 
 
             }
 
@@ -133,10 +135,11 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:15:7: ( '/' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:15:9: '/'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:15:7: ( '==' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:15:9: '=='
             {
-            match('/'); 
+            match("=="); 
+
 
             }
 
@@ -153,10 +156,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:16:7: ( '<' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:16:9: '<'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:16:7: ( '+' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:16:9: '+'
             {
-            match('<'); 
+            match('+'); 
 
             }
 
@@ -173,11 +176,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:17:7: ( '==' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:17:9: '=='
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:17:7: ( '-' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:17:9: '-'
             {
-            match("=="); 
-
+            match('-'); 
 
             }
 
@@ -194,11 +196,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:18:7: ( '||' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:18:9: '||'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:18:7: ( '*' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:18:9: '*'
             {
-            match("||"); 
-
+            match('*'); 
 
             }
 
@@ -215,11 +216,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:19:7: ( '&&' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:19:9: '&&'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:19:7: ( '/' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:19:9: '/'
             {
-            match("&&"); 
-
+            match('/'); 
 
             }
 
@@ -236,10 +236,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:20:7: ( '(' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:20:9: '('
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:20:7: ( '!' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:20:9: '!'
             {
-            match('('); 
+            match('!'); 
 
             }
 
@@ -256,10 +256,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:21:7: ( ')' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:21:9: ')'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:21:7: ( '(' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:21:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -276,10 +276,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:22:7: ( '!' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:22:9: '!'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:22:7: ( ')' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:22:9: ')'
             {
-            match('!'); 
+            match(')'); 
 
             }
 
@@ -338,10 +338,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:724:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:724:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:754:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:754:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:724:11: ( '^' )?
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:754:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -350,7 +350,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:724:11: '^'
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:754:11: '^'
                     {
                     match('^'); 
 
@@ -368,7 +368,7 @@ public class InternalExpressionsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:724:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:754:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -417,10 +417,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:726:10: ( ( '0' .. '9' )+ )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:726:12: ( '0' .. '9' )+
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:756:10: ( ( '0' .. '9' )+ )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:756:12: ( '0' .. '9' )+
             {
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:726:12: ( '0' .. '9' )+
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:756:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -434,7 +434,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:726:13: '0' .. '9'
+            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:756:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -466,10 +466,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -487,10 +487,10 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -506,7 +506,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -522,7 +522,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -547,10 +547,10 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -566,7 +566,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -582,7 +582,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:728:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:758:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -625,12 +625,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:730:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:730:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:760:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:760:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:730:24: ( options {greedy=false; } : . )*
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:760:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -655,7 +655,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:730:52: .
+            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:760:52: .
             	    {
             	    matchAny(); 
 
@@ -685,12 +685,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -703,7 +703,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -723,7 +723,7 @@ public class InternalExpressionsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:40: ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -732,9 +732,9 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:41: ( '\\r' )? '\\n'
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:41: ( '\\r' )? '\\n'
                     {
-                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:41: ( '\\r' )?
+                    // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -743,7 +743,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:732:41: '\\r'
+                            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:762:41: '\\r'
                             {
                             match('\r'); 
 
@@ -775,10 +775,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:734:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:734:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:764:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:764:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:734:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:764:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -832,8 +832,8 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:736:16: ( . )
-            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:736:18: .
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:766:16: ( . )
+            // ../it.xsemantics.example.expressions/src-gen/it/xsemantics/example/expressions/parser/antlr/internal/InternalExpressions.g:766:18: .
             {
             matchAny(); 
 
@@ -1007,39 +1007,38 @@ public class InternalExpressionsLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\26\3\uffff\1\34\1\uffff\2\24\3\uffff\2\44\1\24\2\uffff"+
-        "\2\24\20\uffff\1\44\1\uffff\1\44\3\uffff\2\44\1\55\1\44\1\uffff"+
-        "\1\57\1\uffff";
+        "\1\uffff\1\26\2\24\4\uffff\1\37\3\uffff\2\44\1\24\2\uffff\2\24\20"+
+        "\uffff\1\44\1\uffff\1\44\3\uffff\2\44\1\55\1\44\1\uffff\1\57\1\uffff";
     static final String DFA12_eofS =
         "\60\uffff";
     static final String DFA12_minS =
-        "\1\0\1\75\3\uffff\1\52\1\uffff\1\174\1\46\3\uffff\1\162\1\141\1"+
-        "\101\2\uffff\2\0\20\uffff\1\165\1\uffff\1\154\3\uffff\1\145\1\163"+
-        "\1\60\1\145\1\uffff\1\60\1\uffff";
+        "\1\0\1\75\1\174\1\46\4\uffff\1\52\3\uffff\1\162\1\141\1\101\2\uffff"+
+        "\2\0\20\uffff\1\165\1\uffff\1\154\3\uffff\1\145\1\163\1\60\1\145"+
+        "\1\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\75\3\uffff\1\57\1\uffff\1\174\1\46\3\uffff\1\162\1\141"+
-        "\1\172\2\uffff\2\uffff\20\uffff\1\165\1\uffff\1\154\3\uffff\1\145"+
-        "\1\163\1\172\1\145\1\uffff\1\172\1\uffff";
+        "\1\uffff\1\75\1\174\1\46\4\uffff\1\57\3\uffff\1\162\1\141\1\172"+
+        "\2\uffff\2\uffff\20\uffff\1\165\1\uffff\1\154\3\uffff\1\145\1\163"+
+        "\1\172\1\145\1\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\uffff\1\6\2\uffff\1\12\1\13\1\14\3\uffff"+
-        "\1\17\1\20\2\uffff\1\24\1\25\1\7\1\1\1\2\1\3\1\4\1\22\1\23\1\5\1"+
-        "\6\1\10\1\11\1\12\1\13\1\14\1\uffff\1\17\1\uffff\1\20\1\21\1\24"+
-        "\4\uffff\1\15\1\uffff\1\16";
+        "\4\uffff\1\4\1\6\1\7\1\10\1\uffff\1\12\1\13\1\14\3\uffff\1\17\1"+
+        "\20\2\uffff\1\24\1\25\1\5\1\1\1\2\1\3\1\4\1\6\1\7\1\10\1\22\1\23"+
+        "\1\11\1\12\1\13\1\14\1\uffff\1\17\1\uffff\1\20\1\21\1\24\4\uffff"+
+        "\1\15\1\uffff\1\16";
     static final String DFA12_specialS =
         "\1\2\20\uffff\1\1\1\0\35\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\24\2\23\2\24\1\23\22\24\1\23\1\13\1\21\3\24\1\10\1\22\1"+
-            "\11\1\12\1\4\1\2\1\24\1\3\1\24\1\5\12\20\2\24\1\6\1\1\3\24\32"+
-            "\17\3\24\1\16\1\17\1\24\5\17\1\15\15\17\1\14\6\17\1\24\1\7\uff83"+
+            "\11\24\2\23\2\24\1\23\22\24\1\23\1\11\1\21\3\24\1\3\1\22\1\12"+
+            "\1\13\1\7\1\5\1\24\1\6\1\24\1\10\12\20\2\24\1\4\1\1\3\24\32"+
+            "\17\3\24\1\16\1\17\1\24\5\17\1\15\15\17\1\14\6\17\1\24\1\2\uff83"+
             "\24",
             "\1\25",
+            "\1\27",
+            "\1\30",
             "",
             "",
             "",
-            "\1\32\4\uffff\1\33",
             "",
-            "\1\36",
-            "\1\37",
+            "\1\35\4\uffff\1\36",
             "",
             "",
             "",
@@ -1143,25 +1142,25 @@ public class InternalExpressionsLexer extends Lexer {
                         s = -1;
                         if ( (LA12_0=='=') ) {s = 1;}
 
-                        else if ( (LA12_0=='+') ) {s = 2;}
+                        else if ( (LA12_0=='|') ) {s = 2;}
 
-                        else if ( (LA12_0=='-') ) {s = 3;}
+                        else if ( (LA12_0=='&') ) {s = 3;}
 
-                        else if ( (LA12_0=='*') ) {s = 4;}
+                        else if ( (LA12_0=='<') ) {s = 4;}
 
-                        else if ( (LA12_0=='/') ) {s = 5;}
+                        else if ( (LA12_0=='+') ) {s = 5;}
 
-                        else if ( (LA12_0=='<') ) {s = 6;}
+                        else if ( (LA12_0=='-') ) {s = 6;}
 
-                        else if ( (LA12_0=='|') ) {s = 7;}
+                        else if ( (LA12_0=='*') ) {s = 7;}
 
-                        else if ( (LA12_0=='&') ) {s = 8;}
+                        else if ( (LA12_0=='/') ) {s = 8;}
 
-                        else if ( (LA12_0=='(') ) {s = 9;}
+                        else if ( (LA12_0=='!') ) {s = 9;}
 
-                        else if ( (LA12_0==')') ) {s = 10;}
+                        else if ( (LA12_0=='(') ) {s = 10;}
 
-                        else if ( (LA12_0=='!') ) {s = 11;}
+                        else if ( (LA12_0==')') ) {s = 11;}
 
                         else if ( (LA12_0=='t') ) {s = 12;}
 

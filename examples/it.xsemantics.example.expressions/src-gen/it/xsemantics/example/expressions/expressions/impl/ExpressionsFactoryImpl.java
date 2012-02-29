@@ -71,11 +71,11 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.VARIABLE: return createVariable();
       case ExpressionsPackage.EXPRESSION: return createExpression();
       case ExpressionsPackage.TYPE: return createType();
+      case ExpressionsPackage.AND_OR_EXPRESSION: return createAndOrExpression();
+      case ExpressionsPackage.COMPARISON: return createComparison();
       case ExpressionsPackage.PLUS: return createPlus();
       case ExpressionsPackage.MINUS: return createMinus();
       case ExpressionsPackage.MULTI_OR_DIV: return createMultiOrDiv();
-      case ExpressionsPackage.COMPARISON: return createComparison();
-      case ExpressionsPackage.AND_OR_EXPRESSION: return createAndOrExpression();
       case ExpressionsPackage.BOOLEAN_NEGATION: return createBooleanNegation();
       case ExpressionsPackage.ARITHMETIC_SIGNED: return createArithmeticSigned();
       case ExpressionsPackage.NUMBER_LITERAL: return createNumberLiteral();
@@ -139,6 +139,28 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
+  public AndOrExpression createAndOrExpression()
+  {
+    AndOrExpressionImpl andOrExpression = new AndOrExpressionImpl();
+    return andOrExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Comparison createComparison()
+  {
+    ComparisonImpl comparison = new ComparisonImpl();
+    return comparison;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Plus createPlus()
   {
     PlusImpl plus = new PlusImpl();
@@ -165,28 +187,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     MultiOrDivImpl multiOrDiv = new MultiOrDivImpl();
     return multiOrDiv;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Comparison createComparison()
-  {
-    ComparisonImpl comparison = new ComparisonImpl();
-    return comparison;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AndOrExpression createAndOrExpression()
-  {
-    AndOrExpressionImpl andOrExpression = new AndOrExpressionImpl();
-    return andOrExpression;
   }
 
   /**

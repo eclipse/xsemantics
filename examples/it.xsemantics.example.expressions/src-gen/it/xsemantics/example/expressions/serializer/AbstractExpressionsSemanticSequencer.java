@@ -71,7 +71,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_BooleanExpression(context, (AndOrExpression) semanticObject); 
 					return; 
 				}
@@ -87,8 +88,9 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
-					sequence_Atomic(context, (ArithmeticSigned) semanticObject); 
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
+					sequence_Prefixed(context, (ArithmeticSigned) semanticObject); 
 					return; 
 				}
 				else break;
@@ -103,7 +105,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Atomic(context, (BooleanLiteral) semanticObject); 
 					return; 
 				}
@@ -119,8 +122,9 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
-					sequence_Atomic(context, (BooleanNegation) semanticObject); 
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
+					sequence_Prefixed(context, (BooleanNegation) semanticObject); 
 					return; 
 				}
 				else break;
@@ -141,7 +145,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Comparison(context, (Comparison) semanticObject); 
 					return; 
 				}
@@ -163,7 +168,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Addition(context, (Minus) semanticObject); 
 					return; 
 				}
@@ -185,7 +191,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Multiplication(context, (MultiOrDiv) semanticObject); 
 					return; 
 				}
@@ -201,7 +208,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Atomic(context, (NumberLiteral) semanticObject); 
 					return; 
 				}
@@ -217,7 +225,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Addition(context, (Plus) semanticObject); 
 					return; 
 				}
@@ -233,7 +242,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Atomic(context, (StringLiteral) semanticObject); 
 					return; 
 				}
@@ -261,7 +271,8 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 				   context == grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0_0() ||
 				   context == grammarAccess.getExpressionRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0()) {
+				   context == grammarAccess.getMultiplicationAccess().getMultiOrDivLeftAction_1_0_0() ||
+				   context == grammarAccess.getPrefixedRule()) {
 					sequence_Atomic(context, (VariableReference) semanticObject); 
 					return; 
 				}
@@ -310,42 +321,10 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     expression=Atomic
-	 */
-	protected void sequence_Atomic(EObject context, ArithmeticSigned semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.ARITHMETIC_SIGNED__EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.ARITHMETIC_SIGNED__EXPRESSION));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getExpressionAtomicParserRuleCall_2_2_0(), semanticObject.getExpression());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (value='true' | value='false')
 	 */
 	protected void sequence_Atomic(EObject context, BooleanLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     expression=Atomic
-	 */
-	protected void sequence_Atomic(EObject context, BooleanNegation semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.BOOLEAN_NEGATION__EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.BOOLEAN_NEGATION__EXPRESSION));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getExpressionAtomicParserRuleCall_1_2_0(), semanticObject.getExpression());
-		feeder.finish();
 	}
 	
 	
@@ -360,7 +339,7 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getValueINTTerminalRuleCall_3_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getAtomicAccess().getValueINTTerminalRuleCall_1_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -376,7 +355,7 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getValueSTRINGTerminalRuleCall_4_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getAtomicAccess().getValueSTRINGTerminalRuleCall_2_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -392,14 +371,14 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getRefVariableIDTerminalRuleCall_6_1_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getAtomicAccess().getRefVariableIDTerminalRuleCall_4_1_0_1(), semanticObject.getRef());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (left=BooleanExpression_AndOrExpression_1_0_0 (op='||' | op='&&') right=Atomic)
+	 *     (left=BooleanExpression_AndOrExpression_1_0_0 (op='||' | op='&&') right=Comparison)
 	 */
 	protected void sequence_BooleanExpression(EObject context, AndOrExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -408,7 +387,7 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (left=Comparison_Comparison_1_0_0 (op='<' | op='==') right=BooleanExpression)
+	 *     (left=Comparison_Comparison_1_0_0 (op='<' | op='==') right=Addition)
 	 */
 	protected void sequence_Comparison(EObject context, Comparison semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -426,10 +405,42 @@ public class AbstractExpressionsSemanticSequencer extends AbstractSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (left=Multiplication_MultiOrDiv_1_0_0 (op='*' | op='/') right=Comparison)
+	 *     (left=Multiplication_MultiOrDiv_1_0_0 (op='*' | op='/') right=Prefixed)
 	 */
 	protected void sequence_Multiplication(EObject context, MultiOrDiv semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     expression=Atomic
+	 */
+	protected void sequence_Prefixed(EObject context, ArithmeticSigned semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.ARITHMETIC_SIGNED__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.ARITHMETIC_SIGNED__EXPRESSION));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrefixedAccess().getExpressionAtomicParserRuleCall_1_2_0(), semanticObject.getExpression());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     expression=Atomic
+	 */
+	protected void sequence_Prefixed(EObject context, BooleanNegation semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.BOOLEAN_NEGATION__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.BOOLEAN_NEGATION__EXPRESSION));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrefixedAccess().getExpressionAtomicParserRuleCall_0_2_0(), semanticObject.getExpression());
+		feeder.finish();
 	}
 	
 	

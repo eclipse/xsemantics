@@ -163,14 +163,14 @@ public interface ExpressionsPackage extends EPackage
   int TYPE_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.PlusImpl <em>Plus</em>}' class.
+   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl <em>And Or Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see it.xsemantics.example.expressions.expressions.impl.PlusImpl
-   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getPlus()
+   * @see it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl
+   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getAndOrExpression()
    * @generated
    */
-  int PLUS = 4;
+  int AND_OR_EXPRESSION = 4;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -179,81 +179,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Plus</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.MinusImpl <em>Minus</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see it.xsemantics.example.expressions.expressions.impl.MinusImpl
-   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMinus()
-   * @generated
-   */
-  int MINUS = 5;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MINUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MINUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Minus</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MINUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.MultiOrDivImpl <em>Multi Or Div</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see it.xsemantics.example.expressions.expressions.impl.MultiOrDivImpl
-   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMultiOrDiv()
-   * @generated
-   */
-  int MULTI_OR_DIV = 6;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTI_OR_DIV__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+  int AND_OR_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -262,7 +188,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MULTI_OR_DIV__OP = EXPRESSION_FEATURE_COUNT + 1;
+  int AND_OR_EXPRESSION__OP = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
@@ -271,16 +197,16 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MULTI_OR_DIV__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+  int AND_OR_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Multi Or Div</em>' class.
+   * The number of structural features of the '<em>And Or Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MULTI_OR_DIV_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int AND_OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.ComparisonImpl <em>Comparison</em>}' class.
@@ -290,7 +216,7 @@ public interface ExpressionsPackage extends EPackage
    * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getComparison()
    * @generated
    */
-  int COMPARISON = 7;
+  int COMPARISON = 5;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -329,14 +255,14 @@ public interface ExpressionsPackage extends EPackage
   int COMPARISON_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl <em>And Or Expression</em>}' class.
+   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.PlusImpl <em>Plus</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl
-   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getAndOrExpression()
+   * @see it.xsemantics.example.expressions.expressions.impl.PlusImpl
+   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getPlus()
    * @generated
    */
-  int AND_OR_EXPRESSION = 8;
+  int PLUS = 6;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -345,16 +271,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int AND_OR_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Op</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_OR_EXPRESSION__OP = EXPRESSION_FEATURE_COUNT + 1;
+  int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
@@ -363,16 +280,99 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int AND_OR_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>And Or Expression</em>' class.
+   * The number of structural features of the '<em>Plus</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int AND_OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.MinusImpl <em>Minus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see it.xsemantics.example.expressions.expressions.impl.MinusImpl
+   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMinus()
+   * @generated
+   */
+  int MINUS = 7;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Minus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.MultiOrDivImpl <em>Multi Or Div</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see it.xsemantics.example.expressions.expressions.impl.MultiOrDivImpl
+   * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getMultiOrDiv()
+   * @generated
+   */
+  int MULTI_OR_DIV = 8;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_OR_DIV__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Op</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_OR_DIV__OP = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_OR_DIV__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Multi Or Div</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_OR_DIV_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link it.xsemantics.example.expressions.expressions.impl.BooleanNegationImpl <em>Boolean Negation</em>}' class.
@@ -674,6 +674,92 @@ public interface ExpressionsPackage extends EPackage
   EClass getType();
 
   /**
+   * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.AndOrExpression <em>And Or Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>And Or Expression</em>'.
+   * @see it.xsemantics.example.expressions.expressions.AndOrExpression
+   * @generated
+   */
+  EClass getAndOrExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getLeft()
+   * @see #getAndOrExpression()
+   * @generated
+   */
+  EReference getAndOrExpression_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getOp()
+   * @see #getAndOrExpression()
+   * @generated
+   */
+  EAttribute getAndOrExpression_Op();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getRight()
+   * @see #getAndOrExpression()
+   * @generated
+   */
+  EReference getAndOrExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.Comparison <em>Comparison</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Comparison</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Comparison
+   * @generated
+   */
+  EClass getComparison();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Comparison#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Comparison#getLeft()
+   * @see #getComparison()
+   * @generated
+   */
+  EReference getComparison_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.example.expressions.expressions.Comparison#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Comparison#getOp()
+   * @see #getComparison()
+   * @generated
+   */
+  EAttribute getComparison_Op();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Comparison#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see it.xsemantics.example.expressions.expressions.Comparison#getRight()
+   * @see #getComparison()
+   * @generated
+   */
+  EReference getComparison_Right();
+
+  /**
    * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.Plus <em>Plus</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -779,92 +865,6 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EReference getMultiOrDiv_Right();
-
-  /**
-   * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.Comparison <em>Comparison</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Comparison</em>'.
-   * @see it.xsemantics.example.expressions.expressions.Comparison
-   * @generated
-   */
-  EClass getComparison();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Comparison#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see it.xsemantics.example.expressions.expressions.Comparison#getLeft()
-   * @see #getComparison()
-   * @generated
-   */
-  EReference getComparison_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link it.xsemantics.example.expressions.expressions.Comparison#getOp <em>Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Op</em>'.
-   * @see it.xsemantics.example.expressions.expressions.Comparison#getOp()
-   * @see #getComparison()
-   * @generated
-   */
-  EAttribute getComparison_Op();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.Comparison#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see it.xsemantics.example.expressions.expressions.Comparison#getRight()
-   * @see #getComparison()
-   * @generated
-   */
-  EReference getComparison_Right();
-
-  /**
-   * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.AndOrExpression <em>And Or Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>And Or Expression</em>'.
-   * @see it.xsemantics.example.expressions.expressions.AndOrExpression
-   * @generated
-   */
-  EClass getAndOrExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getLeft()
-   * @see #getAndOrExpression()
-   * @generated
-   */
-  EReference getAndOrExpression_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getOp <em>Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Op</em>'.
-   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getOp()
-   * @see #getAndOrExpression()
-   * @generated
-   */
-  EAttribute getAndOrExpression_Op();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.example.expressions.expressions.AndOrExpression#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see it.xsemantics.example.expressions.expressions.AndOrExpression#getRight()
-   * @see #getAndOrExpression()
-   * @generated
-   */
-  EReference getAndOrExpression_Right();
 
   /**
    * Returns the meta object for class '{@link it.xsemantics.example.expressions.expressions.BooleanNegation <em>Boolean Negation</em>}'.
@@ -1110,6 +1110,74 @@ public interface ExpressionsPackage extends EPackage
     EClass TYPE = eINSTANCE.getType();
 
     /**
+     * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl <em>And Or Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl
+     * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getAndOrExpression()
+     * @generated
+     */
+    EClass AND_OR_EXPRESSION = eINSTANCE.getAndOrExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_OR_EXPRESSION__LEFT = eINSTANCE.getAndOrExpression_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AND_OR_EXPRESSION__OP = eINSTANCE.getAndOrExpression_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_OR_EXPRESSION__RIGHT = eINSTANCE.getAndOrExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.ComparisonImpl <em>Comparison</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see it.xsemantics.example.expressions.expressions.impl.ComparisonImpl
+     * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getComparison()
+     * @generated
+     */
+    EClass COMPARISON = eINSTANCE.getComparison();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPARISON__LEFT = eINSTANCE.getComparison_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPARISON__OP = eINSTANCE.getComparison_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPARISON__RIGHT = eINSTANCE.getComparison_Right();
+
+    /**
      * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.PlusImpl <em>Plus</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1194,74 +1262,6 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EReference MULTI_OR_DIV__RIGHT = eINSTANCE.getMultiOrDiv_Right();
-
-    /**
-     * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.ComparisonImpl <em>Comparison</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see it.xsemantics.example.expressions.expressions.impl.ComparisonImpl
-     * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getComparison()
-     * @generated
-     */
-    EClass COMPARISON = eINSTANCE.getComparison();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPARISON__LEFT = eINSTANCE.getComparison_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute COMPARISON__OP = eINSTANCE.getComparison_Op();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPARISON__RIGHT = eINSTANCE.getComparison_Right();
-
-    /**
-     * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl <em>And Or Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see it.xsemantics.example.expressions.expressions.impl.AndOrExpressionImpl
-     * @see it.xsemantics.example.expressions.expressions.impl.ExpressionsPackageImpl#getAndOrExpression()
-     * @generated
-     */
-    EClass AND_OR_EXPRESSION = eINSTANCE.getAndOrExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference AND_OR_EXPRESSION__LEFT = eINSTANCE.getAndOrExpression_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute AND_OR_EXPRESSION__OP = eINSTANCE.getAndOrExpression_Op();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference AND_OR_EXPRESSION__RIGHT = eINSTANCE.getAndOrExpression_Right();
 
     /**
      * The meta object literal for the '{@link it.xsemantics.example.expressions.expressions.impl.BooleanNegationImpl <em>Boolean Negation</em>}' class.

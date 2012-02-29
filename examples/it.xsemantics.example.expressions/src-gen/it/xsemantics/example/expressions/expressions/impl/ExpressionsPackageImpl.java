@@ -74,6 +74,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass andOrExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass comparisonEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass plusEClass = null;
 
   /**
@@ -89,20 +103,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass multiOrDivEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass comparisonEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass andOrExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -305,6 +305,86 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAndOrExpression()
+  {
+    return andOrExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAndOrExpression_Left()
+  {
+    return (EReference)andOrExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAndOrExpression_Op()
+  {
+    return (EAttribute)andOrExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAndOrExpression_Right()
+  {
+    return (EReference)andOrExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getComparison()
+  {
+    return comparisonEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getComparison_Left()
+  {
+    return (EReference)comparisonEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getComparison_Op()
+  {
+    return (EAttribute)comparisonEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getComparison_Right()
+  {
+    return (EReference)comparisonEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPlus()
   {
     return plusEClass;
@@ -398,86 +478,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EReference getMultiOrDiv_Right()
   {
     return (EReference)multiOrDivEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getComparison()
-  {
-    return comparisonEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComparison_Left()
-  {
-    return (EReference)comparisonEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getComparison_Op()
-  {
-    return (EAttribute)comparisonEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComparison_Right()
-  {
-    return (EReference)comparisonEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getAndOrExpression()
-  {
-    return andOrExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getAndOrExpression_Left()
-  {
-    return (EReference)andOrExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getAndOrExpression_Op()
-  {
-    return (EAttribute)andOrExpressionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getAndOrExpression_Right()
-  {
-    return (EReference)andOrExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -671,6 +671,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     typeEClass = createEClass(TYPE);
 
+    andOrExpressionEClass = createEClass(AND_OR_EXPRESSION);
+    createEReference(andOrExpressionEClass, AND_OR_EXPRESSION__LEFT);
+    createEAttribute(andOrExpressionEClass, AND_OR_EXPRESSION__OP);
+    createEReference(andOrExpressionEClass, AND_OR_EXPRESSION__RIGHT);
+
+    comparisonEClass = createEClass(COMPARISON);
+    createEReference(comparisonEClass, COMPARISON__LEFT);
+    createEAttribute(comparisonEClass, COMPARISON__OP);
+    createEReference(comparisonEClass, COMPARISON__RIGHT);
+
     plusEClass = createEClass(PLUS);
     createEReference(plusEClass, PLUS__LEFT);
     createEReference(plusEClass, PLUS__RIGHT);
@@ -683,16 +693,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(multiOrDivEClass, MULTI_OR_DIV__LEFT);
     createEAttribute(multiOrDivEClass, MULTI_OR_DIV__OP);
     createEReference(multiOrDivEClass, MULTI_OR_DIV__RIGHT);
-
-    comparisonEClass = createEClass(COMPARISON);
-    createEReference(comparisonEClass, COMPARISON__LEFT);
-    createEAttribute(comparisonEClass, COMPARISON__OP);
-    createEReference(comparisonEClass, COMPARISON__RIGHT);
-
-    andOrExpressionEClass = createEClass(AND_OR_EXPRESSION);
-    createEReference(andOrExpressionEClass, AND_OR_EXPRESSION__LEFT);
-    createEAttribute(andOrExpressionEClass, AND_OR_EXPRESSION__OP);
-    createEReference(andOrExpressionEClass, AND_OR_EXPRESSION__RIGHT);
 
     booleanNegationEClass = createEClass(BOOLEAN_NEGATION);
     createEReference(booleanNegationEClass, BOOLEAN_NEGATION__EXPRESSION);
@@ -748,11 +748,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    andOrExpressionEClass.getESuperTypes().add(this.getExpression());
+    comparisonEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     minusEClass.getESuperTypes().add(this.getExpression());
     multiOrDivEClass.getESuperTypes().add(this.getExpression());
-    comparisonEClass.getESuperTypes().add(this.getExpression());
-    andOrExpressionEClass.getESuperTypes().add(this.getExpression());
     booleanNegationEClass.getESuperTypes().add(this.getExpression());
     arithmeticSignedEClass.getESuperTypes().add(this.getExpression());
     numberLiteralEClass.getESuperTypes().add(this.getExpression());
@@ -775,6 +775,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(andOrExpressionEClass, AndOrExpression.class, "AndOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAndOrExpression_Left(), this.getExpression(), null, "left", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAndOrExpression_Op(), ecorePackage.getEString(), "op", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAndOrExpression_Right(), this.getExpression(), null, "right", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(comparisonEClass, Comparison.class, "Comparison", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getComparison_Left(), this.getExpression(), null, "left", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getComparison_Op(), ecorePackage.getEString(), "op", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getComparison_Right(), this.getExpression(), null, "right", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlus_Left(), this.getExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPlus_Right(), this.getExpression(), null, "right", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -787,16 +797,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getMultiOrDiv_Left(), this.getExpression(), null, "left", null, 0, 1, MultiOrDiv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMultiOrDiv_Op(), ecorePackage.getEString(), "op", null, 0, 1, MultiOrDiv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMultiOrDiv_Right(), this.getExpression(), null, "right", null, 0, 1, MultiOrDiv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(comparisonEClass, Comparison.class, "Comparison", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getComparison_Left(), this.getExpression(), null, "left", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getComparison_Op(), ecorePackage.getEString(), "op", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComparison_Right(), this.getExpression(), null, "right", null, 0, 1, Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(andOrExpressionEClass, AndOrExpression.class, "AndOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAndOrExpression_Left(), this.getExpression(), null, "left", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAndOrExpression_Op(), ecorePackage.getEString(), "op", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAndOrExpression_Right(), this.getExpression(), null, "right", null, 0, 1, AndOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(booleanNegationEClass, BooleanNegation.class, "BooleanNegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBooleanNegation_Expression(), this.getExpression(), null, "expression", null, 0, 1, BooleanNegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

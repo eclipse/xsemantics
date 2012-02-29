@@ -62,6 +62,24 @@ public interface ExpressionsFactory extends EFactory
   Type createType();
 
   /**
+   * Returns a new object of class '<em>And Or Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And Or Expression</em>'.
+   * @generated
+   */
+  AndOrExpression createAndOrExpression();
+
+  /**
+   * Returns a new object of class '<em>Comparison</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Comparison</em>'.
+   * @generated
+   */
+  Comparison createComparison();
+
+  /**
    * Returns a new object of class '<em>Plus</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -87,24 +105,6 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   MultiOrDiv createMultiOrDiv();
-
-  /**
-   * Returns a new object of class '<em>Comparison</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Comparison</em>'.
-   * @generated
-   */
-  Comparison createComparison();
-
-  /**
-   * Returns a new object of class '<em>And Or Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>And Or Expression</em>'.
-   * @generated
-   */
-  AndOrExpression createAndOrExpression();
 
   /**
    * Returns a new object of class '<em>Boolean Negation</em>'.

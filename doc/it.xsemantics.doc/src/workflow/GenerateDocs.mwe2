@@ -12,6 +12,7 @@ Workflow {
 		targetDir = targetDir
 		document = "XSemantics Documentation"
 		pdfLatex = "/usr/bin/pdflatex"
+		cleanAfterRun = false
 	}
 
 }

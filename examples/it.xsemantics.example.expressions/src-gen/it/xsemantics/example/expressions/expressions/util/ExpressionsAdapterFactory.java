@@ -98,6 +98,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createTypeAdapter();
       }
       @Override
+      public Adapter caseAndOrExpression(AndOrExpression object)
+      {
+        return createAndOrExpressionAdapter();
+      }
+      @Override
+      public Adapter caseComparison(Comparison object)
+      {
+        return createComparisonAdapter();
+      }
+      @Override
       public Adapter casePlus(Plus object)
       {
         return createPlusAdapter();
@@ -111,16 +121,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMultiOrDiv(MultiOrDiv object)
       {
         return createMultiOrDivAdapter();
-      }
-      @Override
-      public Adapter caseComparison(Comparison object)
-      {
-        return createComparisonAdapter();
-      }
-      @Override
-      public Adapter caseAndOrExpression(AndOrExpression object)
-      {
-        return createAndOrExpressionAdapter();
       }
       @Override
       public Adapter caseBooleanNegation(BooleanNegation object)
@@ -250,6 +250,36 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.AndOrExpression <em>And Or Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.example.expressions.expressions.AndOrExpression
+   * @generated
+   */
+  public Adapter createAndOrExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.Comparison <em>Comparison</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.example.expressions.expressions.Comparison
+   * @generated
+   */
+  public Adapter createComparisonAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.Plus <em>Plus</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -290,36 +320,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMultiOrDivAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.Comparison <em>Comparison</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see it.xsemantics.example.expressions.expressions.Comparison
-   * @generated
-   */
-  public Adapter createComparisonAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link it.xsemantics.example.expressions.expressions.AndOrExpression <em>And Or Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see it.xsemantics.example.expressions.expressions.AndOrExpression
-   * @generated
-   */
-  public Adapter createAndOrExpressionAdapter()
   {
     return null;
   }

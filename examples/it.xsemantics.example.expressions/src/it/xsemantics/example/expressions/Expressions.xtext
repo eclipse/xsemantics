@@ -11,25 +11,32 @@ Variable:
 ;
 
 Expression:
-	Addition;
-
-Addition returns Expression:
-	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
-
-Multiplication returns Expression:
-	Comparison (({MultiOrDiv.left=current} op=("*"|"/")) right=Comparison)*; 
-
-Comparison returns Expression:
-	BooleanExpression 
-	(({Comparison.left=current} op=("<"|"=="))  right=BooleanExpression)*;
+	BooleanExpression;
 
 BooleanExpression returns Expression:
-	Atomic (({AndOrExpression.left=current} op=("||"|"&&")) right=Atomic)*;
+	Comparison 
+	(({AndOrExpression.left=current} op=("||"|"&&")) right=Comparison)*;
+
+Comparison returns Expression:
+	Addition 
+	(({Comparison.left=current} 
+		op=("<"|"==")
+	) right=Addition)*;
+ 
+Addition returns Expression:
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*; 
+
+Multiplication returns Expression:
+	Prefixed (({MultiOrDiv.left=current} op=("*"|"/")) right=Prefixed)*;
+
+Prefixed returns Expression:
+	{BooleanNegation} =>"!" expression=Atomic | /* right associativity */
+	{ArithmeticSigned} =>"-" expression=Atomic | /* right associativity */
+	Atomic
+;
 
 Atomic returns Expression:
 	'(' Expression ')' |
-	{BooleanNegation} =>"!" expression=Atomic | /* right associativity */
-	{ArithmeticSigned} =>"-" expression=Atomic | /* right associativity */
 	{NumberLiteral} value=INT |
 	{StringLiteral} value=STRING |
 	{BooleanLiteral} value=('true'|'false') |

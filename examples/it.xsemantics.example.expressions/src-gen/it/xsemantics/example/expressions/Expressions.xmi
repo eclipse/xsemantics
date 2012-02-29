@@ -32,12 +32,64 @@
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="Addition">
+    <rules xsi:type="xtext:ParserRule" name="BooleanExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action" feature="left" operator="=">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//AndOrExpression"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="op" operator="=">
+              <terminal xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="||"/>
+                <elements xsi:type="xtext:Keyword" value="&amp;&amp;"/>
+              </terminal>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="right" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Comparison">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action" feature="left" operator="=">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Comparison"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="op" operator="=">
+              <terminal xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="&lt;"/>
+                <elements xsi:type="xtext:Keyword" value="=="/>
+              </terminal>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="right" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Addition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Alternatives">
             <elements xsi:type="xtext:Group">
@@ -58,7 +110,7 @@
             </elements>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </elements>
         </elements>
       </alternatives>
@@ -68,7 +120,7 @@
         <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Action" feature="left" operator="=">
@@ -84,61 +136,39 @@
             </elements>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-          </elements>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Comparison">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Action" feature="left" operator="=">
-              <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Comparison"/>
-              </type>
-            </elements>
-            <elements xsi:type="xtext:Assignment" feature="op" operator="=">
-              <terminal xsi:type="xtext:Alternatives">
-                <elements xsi:type="xtext:Keyword" value="&lt;"/>
-                <elements xsi:type="xtext:Keyword" value="=="/>
-              </terminal>
-            </elements>
-          </elements>
-          <elements xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-          </elements>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="BooleanExpression">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Action" feature="left" operator="=">
-              <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//AndOrExpression"/>
-              </type>
-            </elements>
-            <elements xsi:type="xtext:Assignment" feature="op" operator="=">
-              <terminal xsi:type="xtext:Alternatives">
-                <elements xsi:type="xtext:Keyword" value="||"/>
-                <elements xsi:type="xtext:Keyword" value="&amp;&amp;"/>
-              </terminal>
-            </elements>
-          </elements>
-          <elements xsi:type="xtext:Assignment" feature="right" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
           </elements>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Prefixed">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//BooleanNegation"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" predicated="true" value="!"/>
+          <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//ArithmeticSigned"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" predicated="true" value="-"/>
+          <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atomic">
@@ -150,28 +180,6 @@
           <elements xsi:type="xtext:Keyword" value="("/>
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
           <elements xsi:type="xtext:Keyword" value=")"/>
-        </elements>
-        <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Action">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//BooleanNegation"/>
-            </type>
-          </elements>
-          <elements xsi:type="xtext:Keyword" predicated="true" value="!"/>
-          <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Action">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://xsemantics.sf.net/example/expressions/Expressions#//ArithmeticSigned"/>
-            </type>
-          </elements>
-          <elements xsi:type="xtext:Keyword" predicated="true" value="-"/>
-          <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-          </elements>
         </elements>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Action">

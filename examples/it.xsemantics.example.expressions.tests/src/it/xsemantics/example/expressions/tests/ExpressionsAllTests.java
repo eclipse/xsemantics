@@ -12,6 +12,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	ExpressionsParserTests.class,
 	ExpressionsTypingTests.class,
 	ExpressionsInterpreterTests.class,
 	ExpressionsFirstTypingTests.class,

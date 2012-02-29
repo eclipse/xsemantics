@@ -103,6 +103,22 @@ public class ExpressionsSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ExpressionsPackage.AND_OR_EXPRESSION:
+      {
+        AndOrExpression andOrExpression = (AndOrExpression)theEObject;
+        T result = caseAndOrExpression(andOrExpression);
+        if (result == null) result = caseExpression(andOrExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.COMPARISON:
+      {
+        Comparison comparison = (Comparison)theEObject;
+        T result = caseComparison(comparison);
+        if (result == null) result = caseExpression(comparison);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ExpressionsPackage.PLUS:
       {
         Plus plus = (Plus)theEObject;
@@ -124,22 +140,6 @@ public class ExpressionsSwitch<T> extends Switch<T>
         MultiOrDiv multiOrDiv = (MultiOrDiv)theEObject;
         T result = caseMultiOrDiv(multiOrDiv);
         if (result == null) result = caseExpression(multiOrDiv);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ExpressionsPackage.COMPARISON:
-      {
-        Comparison comparison = (Comparison)theEObject;
-        T result = caseComparison(comparison);
-        if (result == null) result = caseExpression(comparison);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ExpressionsPackage.AND_OR_EXPRESSION:
-      {
-        AndOrExpression andOrExpression = (AndOrExpression)theEObject;
-        T result = caseAndOrExpression(andOrExpression);
-        if (result == null) result = caseExpression(andOrExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -284,6 +284,38 @@ public class ExpressionsSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>And Or Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>And Or Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAndOrExpression(AndOrExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Comparison</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Comparison</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComparison(Comparison object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -327,38 +359,6 @@ public class ExpressionsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMultiOrDiv(MultiOrDiv object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Comparison</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Comparison</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseComparison(Comparison object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>And Or Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>And Or Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAndOrExpression(AndOrExpression object)
   {
     return null;
   }
