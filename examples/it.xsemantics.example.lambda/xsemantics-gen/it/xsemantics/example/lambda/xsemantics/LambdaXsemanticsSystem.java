@@ -85,6 +85,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			null, substitutions, term);
 	}
 	
+	public Result<Type> type(final RuleEnvironment _environment_,
+			final TypeSubstitutions substitutions, final Term term) {
+		return type(_environment_,
+			null, substitutions, term);
+	}
+	
 	public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final TypeSubstitutions substitutions, final Term term) {
 		try {
@@ -96,6 +102,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<Type> paramtype(final Parameter param) {
 		return paramtype(new RuleEnvironment(),
+			null, param);
+	}
+	
+	public Result<Type> paramtype(final RuleEnvironment _environment_,
+			final Parameter param) {
+		return paramtype(_environment_,
 			null, param);
 	}
 	
@@ -113,6 +125,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			null, substitutions, original);
 	}
 	
+	public Result<Type> typesubstitution(final RuleEnvironment _environment_,
+			final TypeSubstitutions substitutions, final Type original) {
+		return typesubstitution(_environment_,
+			null, substitutions, original);
+	}
+	
 	public Result<Type> typesubstitution(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final TypeSubstitutions substitutions, final Type original) {
 		try {
@@ -127,6 +145,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			null, type, other);
 	}
 	
+	public Result<Boolean> notoccur(final RuleEnvironment _environment_,
+			final Type type, final Type other) {
+		return notoccur(_environment_,
+			null, type, other);
+	}
+	
 	public Result<Boolean> notoccur(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Type type, final Type other) {
 		try {
@@ -138,6 +162,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 	
 	public Result2<Type, Type> unify(final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
 		return unify(new RuleEnvironment(),
+			null, substitutions, originalLeft, originalRight);
+	}
+	
+	public Result2<Type, Type> unify(final RuleEnvironment _environment_,
+			final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
+		return unify(_environment_,
 			null, substitutions, originalLeft, originalRight);
 	}
 	

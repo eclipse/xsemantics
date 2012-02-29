@@ -106,6 +106,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			null, expression);
 	}
 	
+	public Result<Type> type(final RuleEnvironment _environment_,
+			final Expression expression) {
+		return type(_environment_,
+			null, expression);
+	}
+	
 	public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Expression expression) {
 		try {
@@ -117,6 +123,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<ClassType> classtype(final Expression expression) {
 		return classtype(new RuleEnvironment(),
+			null, expression);
+	}
+	
+	public Result<ClassType> classtype(final RuleEnvironment _environment_,
+			final Expression expression) {
+		return classtype(_environment_,
 			null, expression);
 	}
 	
@@ -134,6 +146,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			null, left, right);
 	}
 	
+	public Result<Boolean> subtype(final RuleEnvironment _environment_,
+			final Type left, final Type right) {
+		return subtype(_environment_,
+			null, left, right);
+	}
+	
 	public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Type left, final Type right) {
 		try {
@@ -145,6 +163,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<Boolean> assignable(final Expression expression, final Type right) {
 		return assignable(new RuleEnvironment(),
+			null, expression, right);
+	}
+	
+	public Result<Boolean> assignable(final RuleEnvironment _environment_,
+			final Expression expression, final Type right) {
+		return assignable(_environment_,
 			null, expression, right);
 	}
 	
@@ -162,6 +186,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			null, left, right);
 	}
 	
+	public Result<Boolean> equalstype(final RuleEnvironment _environment_,
+			final Type left, final Type right) {
+		return equalstype(_environment_,
+			null, left, right);
+	}
+	
 	public Result<Boolean> equalstype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Type left, final Type right) {
 		try {
@@ -176,6 +206,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			null, current, previous);
 	}
 	
+	public Result<Boolean> overrides(final RuleEnvironment _environment_,
+			final Method current, final Method previous) {
+		return overrides(_environment_,
+			null, current, previous);
+	}
+	
 	public Result<Boolean> overrides(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Method current, final Method previous) {
 		try {
@@ -187,6 +223,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 	
 	public Result<Boolean> subtypesequence(final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
 		return subtypesequence(new RuleEnvironment(),
+			null, owner, expressions, elements);
+	}
+	
+	public Result<Boolean> subtypesequence(final RuleEnvironment _environment_,
+			final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+		return subtypesequence(_environment_,
 			null, owner, expressions, elements);
 	}
 	

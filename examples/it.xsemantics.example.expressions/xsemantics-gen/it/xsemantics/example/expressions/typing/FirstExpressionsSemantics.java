@@ -84,6 +84,12 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 			null, expression);
 	}
 	
+	public Result<Type> type(final RuleEnvironment _environment_,
+			final Expression expression) {
+		return type(_environment_,
+			null, expression);
+	}
+	
 	public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Expression expression) {
 		try {
@@ -98,6 +104,12 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 			null, variable);
 	}
 	
+	public Result<Type> vartype(final RuleEnvironment _environment_,
+			final Variable variable) {
+		return vartype(_environment_,
+			null, variable);
+	}
+	
 	public Result<Type> vartype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,
 			final Variable variable) {
 		try {
@@ -109,6 +121,12 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 	
 	public Result<Object> interpret(final Expression expression) {
 		return interpret(new RuleEnvironment(),
+			null, expression);
+	}
+	
+	public Result<Object> interpret(final RuleEnvironment _environment_,
+			final Expression expression) {
+		return interpret(_environment_,
 			null, expression);
 	}
 	

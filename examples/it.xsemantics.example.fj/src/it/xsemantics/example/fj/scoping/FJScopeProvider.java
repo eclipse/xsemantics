@@ -57,7 +57,7 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	protected Class getExpressionClass(Expression receiver) {
 		ClassType classType = typeSystem.classtype(
-				environmentForExpression(receiver), null, receiver).getValue();
+				environmentForExpression(receiver), receiver).getValue();
 		return (classType != null ? classType.getClassref() : null);
 	}
 
