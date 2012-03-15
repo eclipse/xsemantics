@@ -139,6 +139,9 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
       <import plugin="org.eclipse.compare"/>
       <import plugin="org.eclipse.xtext.xbase.ui"/>
+      <import plugin="org.eclipse.xtext.xbase.lib" version="2.2.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.help"/>
+      <import plugin="it.xsemantics.runtime" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -150,6 +153,13 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="it.xsemantics.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"
