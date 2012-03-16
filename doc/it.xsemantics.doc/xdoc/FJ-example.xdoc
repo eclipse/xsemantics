@@ -1,0 +1,213 @@
+section:FJ[Featherweight Java]
+
+Featherweight Java is a lightweight functional version of Java, 
+which focuses on a few basic features. It is not intended to be used as
+a programming language, but as a formal framework for studying properties 
+of Java (A. Igarashi, B. Pierce, and P.Wadler. e[Featherweight Java: a 
+minimal core calculus for Java and GJ]. ACM TOPLAS, 23(3):396-450, 2001.). 
+In this section we will see how to write the type system of FJ using Xsemantics.
+(As future work we will also define the operational semantics of FJ in Xsemantics.)
+
+section2:FJInANutshell[FJ in a nutshell]
+
+FJ focuses on the following features: 
+mutually recursive class definitions, inheritance, object creation, 
+method invocation, method recursion through this, subtyping and field access. 
+In particular, a FJ program is a list of class definitions and a single 
+main expression.
+Here's an example of an FJ program:
+
+code[Java][
+class A extends Object { }
+class B extends Object { }
+
+class Pair extends Object {
+    Object fst;
+    Object snd;
+
+    Pair setfst(Object newfst) {
+        return new Pair(newfst, this.snd);
+    }
+
+    Pair setsnd(Object newscd) {
+        return new Pair(this.fst, newscd);
+    }
+}
+
+new Pair(new A(), new B()).setfst(new A()).fst
+]
+
+Since in FJ the class constructor has a fixed shape, we consider a 
+simplified version of the language by assuming constructors as implicit; 
+in particular when invoking code[new] we should pass an argument for each field 
+in the class, including inherited fields, in the same order of the hierarchy. 
+Thus, if we have the following classes
+
+code[Java][
+class A { int i; boolean b; }
+class B extends A { String s; }
+]
+
+we must create an instance of code[B2] as follows: 
+code[Java][new B(10, true, "foo")].
+
+section2:FJInXtext[FJ implemented in Xtext]
+
+We had already implemented FJ in Xtext (that implementation can be found at 
+link[http://fj-eclipse.sourceforge.net][http://fj-eclipse.sourceforge.net]).  
+In that implementation, the type system was implemented directly in Java.  
+With Xsemantics we ship another implementation of FJ where the type system is 
+written using Xsemantics instead of manually written Java code.
+
+code[Xtext][
+grammar it.xsemantics.example.fj.FJ with org.eclipse.xtext.common.Terminals
+
+generate fj "http://xsemantics.sf.net/example/fj/FJ"
+
+Program :
+	(classes += Class)*
+	(main = Expression)? ;
+
+Type: BasicType | ClassType;
+
+BasicType : basic=('int' | 'boolean' | 'String');
+
+ClassType : classref=\[Class\];
+
+Class:
+	'class' name=ID ('extends' superclass=\[Class\])? '{'
+		(members += Member)*
+	'}' ;
+
+Member: Field | Method;
+
+Field: type=Type name=ID ';' ;
+
+Method:
+	type=Type name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' '{'
+		body=MethodBody
+	'}' ;
+
+Parameter: type=Type name=ID ;
+
+TypedElement: Member | Parameter;
+
+MethodBody: 'return' expression=Expression ';' ;
+
+Expression:
+	TerminalExpression 
+	=>(
+		{Selection.receiver=current} '.' 
+		message=\[Member\]
+		('(' (args+=Expression (',' args+=Expression)*)? ')')?
+	)* ;
+
+TerminalExpression returns Expression:
+   This |
+   ParamRef |
+   New |
+   =>Cast |
+   Constant |
+   Paren ;
+
+This: variable='this';
+ParamRef: parameter=\[Parameter\];
+New: 'new' type=ClassType '(' (args+=Expression (',' args+=Expression)*)? ')';
+Cast: '(' type=ClassType ')' expression=TerminalExpression;
+Paren returns Expression: '(' Expression ')'; 
+
+Constant: IntConstant | BoolConstant | StringConstant;
+
+StringConstant: constant=STRING;
+
+IntConstant: constant=INT;
+
+BoolConstant: constant = ('true' | 'false');
+]
+
+section2:FJTypeSystem[FJ Type System]
+
+We start by defining the name (we skip imports) and the judgments
+
+code[Xsemantics][
+system it.xsemantics.example.fj.typing.FjTypeSystem
+
+judgments {
+	type |- Expression expression : output Type
+		error "cannot type " + stringRep(expression)
+		source expression
+	classtype |~ Expression expression : output ClassType
+		error stringRep(expression) + " has not a class type"
+		source expression
+	subtype |- Type left <: Type right
+		error stringRep(left) + " is not a subtype of " + stringRep(right)
+	assignable |- Expression expression <| Type right
+		error stringRep(expression) + " is not assignable for " + stringRep(right)
+		source expression
+	equalstype |- Type left ~~ Type right
+		error stringRep(left) + " is not the same type as " + stringRep(right)
+	overrides ||- Method current ~~ Method previous
+		error current.name + " does not override the superclass method"
+		source current
+	subtypesequence |- Expression owner ~> List<Expression> expressions << List<? extends TypedElement> elements
+		error "invalid arguments for expected parameters"
+		source owner
+}
+]
+
+Let's start with simple expressions
+
+code[Xsemantics][
+axiom TParamRef 
+	G |- ParamRef paramref : paramref.parameter.type
+
+// you can manually create the BasicType with EMF FjFactory...
+axiom TStringConstant
+	G |- StringConstant s : { 
+			val result = FjFactory::eINSTANCE.createBasicType();
+			result.basic = 'String'
+			result
+		}
+
+// ...or use static utility methods...
+axiom TIntConstant
+	G |- IntConstant i : FjTypeUtils::createIntType
+
+// ...or closures
+axiom TBoolConstant
+	G |- BoolConstant b : 
+	\[ 
+		it.basic='boolean'
+		it
+	\].apply(FjFactory::eINSTANCE.createBasicType())
+]
+
+Just to show the syntax of rules in Xsemantics which rely on Xbase,
+we present above three different ways of creating the basic types (initialized
+with the corresponding string).
+
+TODO
+
+classtype used by the scope provider
+
+code[Xsemantics][
+axiom TThis
+	G |- This _this : env(G, 'this', ClassType)
+]
+
+code[Xsemantics][
+rule TNew
+	G |- New newExp : newExp.type
+from {
+	var fields = getAll(
+		newExp.type.classref,
+		FjPackage::eINSTANCE.class_Members,
+		FjPackage::eINSTANCE.class_Superclass,
+		typeof(Field)
+	)
+	// we want the superclasses' fields first
+	Collections::reverse(fields)
+	G |- newExp ~> newExp.args << fields
+}
+]
+
