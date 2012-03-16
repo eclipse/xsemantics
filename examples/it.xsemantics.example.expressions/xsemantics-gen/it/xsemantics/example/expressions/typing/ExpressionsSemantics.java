@@ -52,6 +52,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	public final static String STRINGTOINT = "it.xsemantics.example.expressions.typing.rules.StringToInt";
 	public final static String STRINGTOBOOL = "it.xsemantics.example.expressions.typing.rules.StringToBool";
 	public final static String INTTOINT = "it.xsemantics.example.expressions.typing.rules.IntToInt";
+	public final static String BOOLTOBOOL = "it.xsemantics.example.expressions.typing.rules.BoolToBool";
 	public final static String VARIABLEREFERENCE = "it.xsemantics.example.expressions.typing.rules.VariableReference";
 	public final static String VARIABLE = "it.xsemantics.example.expressions.typing.rules.Variable";
 	public final static String INTERPRETNUMBERLITERAL = "it.xsemantics.example.expressions.typing.rules.InterpretNumberLiteral";
@@ -846,6 +847,28 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	
 	protected Result<Boolean> applyRuleIntToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_,
 			final NumberLiteral number, final IntType type) 
+			throws RuleFailedException {
+		return new Result<Boolean>(true);
+	}
+	
+	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final BooleanLiteral bool, final BooleanType type) 
+			throws RuleFailedException {
+		try {
+			RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+			Result<Boolean> _result_ = applyRuleBoolToBool(G, _subtrace_, bool, type);
+			addToTrace(_trace_, ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type));
+			addAsSubtrace(_trace_, _subtrace_);
+			return _result_;
+		} catch (Exception e_applyRuleBoolToBool) {
+			coerceThrowException(BOOLTOBOOL,
+				e_applyRuleBoolToBool, bool, type);
+			return null;
+		}
+	}
+	
+	protected Result<Boolean> applyRuleBoolToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_,
+			final BooleanLiteral bool, final BooleanType type) 
 			throws RuleFailedException {
 		return new Result<Boolean>(true);
 	}

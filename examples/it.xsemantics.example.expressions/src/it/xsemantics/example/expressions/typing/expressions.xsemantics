@@ -133,6 +133,9 @@ from {
 axiom IntToInt
 	G |~ NumberLiteral number |> IntType type
 
+axiom BoolToBool
+	G |~ BooleanLiteral bool |> BooleanType type
+
 rule VariableReference
 	G |- VariableReference varRef : Type type
 from {

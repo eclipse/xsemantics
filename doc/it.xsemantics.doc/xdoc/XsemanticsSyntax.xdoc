@@ -276,6 +276,8 @@ The code[env] function will fail (and make the rule fail) if no
 mapping is found in the passed environment or if the mapped value
 is not an instance of the specified Java class.
 
+An example using the environment can be found in ref:MoreInvolvedExpressionsSystem[].
+
 section2:ErrorSpecification[Error Specification]
 
 When a premise of a rule fails, the whole chain of rule invocation

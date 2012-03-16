@@ -496,6 +496,207 @@ This way when a codeRef[java.lang.String] has to be represented by Xsemantics
 generated code, it will add quotes around it; this way we are sure that we
 are dealing with an actual string.
 
+section2:MoreInvolvedExpressionsSystem[A more involved Expressions System]
+
+Now, let's complicate things a bit, and make the system for our
+Expressions language more powerful, with this new requirement:
+we want to be able to implicitly convert string literals to numbers
+and booleans when this is possible.  This way, if an expression requires
+the subexpressions to be numbers or booleans we can also accept string literals
+if they can be convertible.  
+(Note that we intentionally avoided to consider the number literal
+code[0] as code[false] and a number literal different from code[0]
+as code[true], but you can extend the system further if you want).
+Thus, we want the following expressions to be
+valid (and interpreted accordingly with an implicit conversion):
+
+code[
+i = 20 - '5' // OK! can be given int type and evaluates to 15
+b = (i > 20) || 'true' // OK! can be given boolean type
+// and evaluates to true 
+]
+
+Note that in case no expectation on types is expressed, the system
+will be behave as before:
+
+code[
+i = 20 + '5' // has string type and evaluates to '205'
+j = (20 * 1) + '5' // has string type again
+k = 20 * (1 + '5') // has int type, since * requires int types
+// on subexpressions
+]
+
+Thus, we introduce a new judgment in our system
+
+code[Xsemantics][
+judgments{
+	// as above
+	coerce |~ Expression expression |> Type expectedType
+		error "cannot convert " + stringRep(expression) +
+			" to type " + stringRep(expectedType)
+		source expression
+}
+]
+
+We then have to define the rules for this new judgment:
+
+code[Xsemantics][
+rule StringToInt
+	G |~ StringLiteral string |> IntType type
+from {
+	Integer::parseInt(string.value)
+}
+
+rule StringToBool
+	G |~ StringLiteral string |> BooleanType type
+from {
+	string.value.equalsIgnoreCase("true") ||
+	string.value.equalsIgnoreCase("false")
+}
+]
+
+Then, this judgment will be used by the other rules; in particular, we need to
+modify some rules we have seen so far.
+
+The idea is that, as hinted above, that rules that expect a subexpression to
+be of a specific type should "communicate" this expectation through the
+rule environment (refer to ref:Environment[]), by mapping the string
+code['expected'] to the expected type.
+
+With this assumption, we change the rule for code[StringLiteral], since its
+type now depends on the above expectation:
+
+code[Xsemantics][
+rule StringLiteral
+	G |- StringLiteral str : Type resultType
+from {
+	{
+		val expected = env(G, 'expected', Type)
+		G |~ str |> expected
+		resultType = expected
+	}
+	or
+		resultType = ExpressionsFactory::eINSTANCE.createStringType
+}
+]
+
+The first block of the code[or] can fail due to the fact that
+
+ul[
+	item[No expectation was requested or]
+	item[the expectation cannot be satisfied]
+]
+
+In any other case the type will be code[string] (which might make invoking
+rules fail).
+
+Now we need to adapt those rules that have expectations on subexpressions,
+in order to pass to rule invocation an appropriate environment:
+
+code[Xsemantics][
+rule MultiOrDiv
+	G |- MultiOrDiv multiOrDiv : IntType intType
+from {
+	intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left : intType
+	G, 'expected' <- intType |- multiOrDiv.right : intType
+}
+
+rule AndOr
+	G |- AndOrExpression andOr : BooleanType boolType
+from {
+	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- andOr.left : boolType
+	G, 'expected' <- boolType |- andOr.right : boolType
+}
+]
+
+We only showed two examples (the other rules for expected int and boolean
+types are updated accordingly).
+
+Note that in cases where no expectation is required, we now need to
+pass an empty environment when typing subexpressions, otherwise we might
+reject well-typed expressions due to expectations that were passed to the
+current rule upon invocation.  This is the case of comparison:
+
+code[Xsemantics][
+rule Comparison
+	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
+from {
+	empty |- comparison.left : var Type leftType
+	empty |- comparison.right : var Type rightType
+	
+	(leftType instanceof IntType && rightType instanceof IntType) ||
+	(leftType instanceof StringType && rightType instanceof StringType)
+}
+]
+
+The rule for Plus now is a little bit more complex, since it
+has to take care of possible expectations:
+
+code[Xsemantics][
+rule Plus
+	G |- Plus plus : Type type
+from {
+	G |- plus.left : var Type leftType
+	G |- plus.right : var TyThe -e option is not standard. A POSIX-compliant echo does not accept any options:pe rightType
+	
+	{ 
+		val expected = env(G, 'expected', Type)
+		G |~ plus.left |> expected
+		G |~ plus.right |> expected
+		type = expected
+	}
+	or
+	{
+		(leftType instanceof StringType || rightType instanceof StringType)
+		type = ExpressionsFactory::eINSTANCE.createStringType
+	}
+	or
+	{
+		(leftType instanceof IntType && rightType instanceof IntType)
+		type = leftType // i.e., IntType
+	}
+}
+]
+
+Now we need to adapt also some interpretation rules to take into
+consideration expectations:
+
+code[Xsemantics][
+rule InterpretStringLiteral
+	G |- StringLiteral string ~> Object result
+from {
+	var Type expected
+	{
+		expected = env(G, 'expected', IntType)
+		result = Integer::parseInt(string.value)
+	}
+	or
+	{
+		expected = env(G, 'expected', BooleanType)
+		result = Boolean::parseBoolean(string.value)
+	}
+	or
+	result = string.value
+}
+
+rule InterpretMultiOrDiv
+	G |- MultiOrDiv multiOrDiv ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left ~> var Integer leftResult
+	G, 'expected' <- intType |- multiOrDiv.right ~> var Integer rightResult
+	if (multiOrDiv.op == '*')
+		result = leftResult.intValue * rightResult.intValue
+	else
+		result = leftResult.intValue / rightResult.intValue
+}
+]
+
+Again, we only showed some modified rules; now it should be clear what
+other rules need to be adapted and how.
+
 section2:ExpressionsCodeGeneration[Generation for Expressions]
 
 The Expressions language we used in this example does not implement any
@@ -571,3 +772,36 @@ Note that the indentation represents the stack of invoked rules.
 The quotes around string literals come from our customization of
 codeRef[it.xsemantics.runtime.StringRepresentation], see ref:ExpressionsCustomization[].
 Moreover code[\[\]] represents an empty environment.
+
+A more involved example including variable references and
+implicit coercions is
+
+code[
+intVar = 1
+intVar2 = 2 * (intVar + '1')
+]
+
+which produces the following output
+
+code[
+Variable: intVar2
+type: IntType
+type trace: 
+MultiOrDiv: \[\] |- 2 * (intVar + '1') : IntType
+ NumeralLiteral: \['expected' <- IntType\] |- 2 : IntType
+ Plus: \['expected' <- IntType\] |- intVar + '1' : IntType
+  VariableReference: \['expected' <- IntType\] |- intVar : IntType
+   Variable: \['expected' <- IntType\] ||- intVar = 1 : IntType
+    NumeralLiteral: \['expected' <- IntType\] |- 1 : IntType
+  StringLiteral: \['expected' <- IntType\] |- '1' : IntType
+   StringToInt: \['expected' <- IntType\] |~ '1' |> IntType
+
+interpretation: 4
+interpretation trace: 
+InterpretMultiOrDiv: \[\] |- 2 * (intVar + '1') ~> 4
+ InterpretNumberLiteral: \['expected' <- IntType\] |- 2 ~> 2
+ InterpretPlus: \['expected' <- IntType\] |- intVar + '1' ~> 2
+  InterpretVariableRefenrence: \['expected' <- IntType\] |- intVar ~> 1
+   InterpretNumberLiteral: \['expected' <- IntType\] |- 1 ~> 1
+  InterpretStringLiteral: \['expected' <- IntType\] |- '1' ~> 1
+]
