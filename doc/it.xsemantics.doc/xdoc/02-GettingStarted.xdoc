@@ -6,6 +6,12 @@ To get started, you should first install Xsemantics plugins;
 you can use the update site:
 link[http://xsemantics.sourceforge.net/updatesite][http://xsemantics.sourceforge.net/updatesite]
 
+section2:Sources[Sources]
+
+Sources of Xsemantics (and the examples, ref:Examples[]) are available
+from the git repository, please visit
+link[https://sourceforge.net/p/xsemantics/code][https://sourceforge.net/p/xsemantics/code].
+
 section:UsingXsemantics[Using Xsemantics]
 
 Before you start using Xsemantics for your Xtext language, you

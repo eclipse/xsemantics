@@ -3,4 +3,11 @@ chapter:Examples[Examples]
 Now we will show some examples of Xsemantics systems (type systems and possibly
 operation semantics/interpreter) for some languages implemented in Xtext.
 
+The presented examples are available as an installable feature from the
+update site.  Once installed, you will find project wizards for the example
+languages.  If you want to inspect the sources, you can retrieve them
+from the git repository (see ref:Sources[]).
+
 section-ref[Expressions]
+
+section-ref[FJ]
