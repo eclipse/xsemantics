@@ -274,7 +274,7 @@ class XsemanticsTestFiles {
 		eClass == eC
 	}
 	'''
-
+	
 	def testDuplicateRuleNames() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	
@@ -503,7 +503,18 @@ class XsemanticsTestFiles {
 	'''
 
 	def testRuleInvocationsWithOperatorsConflictingXbase() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type1 |- EClass c : EObject o
+		type2 |- EClass c <: EObject o
+		type3 |- EClass c :> EObject o
+		type4 |- EClass c << EObject o
+		type5 |- EClass c >> EObject o
+		type6 |- EClass c <| EObject o
+		type7 |- EClass c ~~ EObject o
+	}
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -1121,6 +1132,19 @@ class XsemanticsTestFiles {
 	from {
 		obj == obj
 		throw new Exception('foo')
+	}
+	'''
+	
+	// Xtext 2.3
+	
+	def testRuleWithBooleanExpressionsWithNoSideEffect() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		'a' == new String() || 'bar' == new String()
+		'a' == new String() + 'bar'.toFirstUpper
 	}
 	'''
 }
