@@ -30,7 +30,7 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	@Test
 	def void testRuleDescription() {
 		assertDescription(testFiles.
-			testRuleWithoutJudgmentDescription.
+			testSimpleRule.
 				firstRule.judgmentDescription, "|-", ":"
 		)
 	}
@@ -43,7 +43,9 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testRuleWithoutDescription() {
-		val description = testFiles.testRuleWithoutJudgmentDescription.getRule(1).judgmentDescription
+		val description = testFiles.
+			testRuleWithoutJudgmentDescription.
+				getRuleWithoutValidation(1).judgmentDescription
 		Assert::assertNull(description)
 	}
 	
