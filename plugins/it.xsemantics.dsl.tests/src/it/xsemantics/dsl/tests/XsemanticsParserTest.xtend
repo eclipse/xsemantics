@@ -300,11 +300,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		testFiles.testScopingForVariableDeclarationAsOutputArgument.parseAndAssertNoError
 	}
 	
-	@Test
-	def void testWrongReturnInPremises() {
-		testFiles.testWrongReturnInPremises.parseAndAssertNoError
-	}
-	
 	// Xtext 2.3
 	
 	@Test
