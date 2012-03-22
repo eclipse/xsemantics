@@ -19,6 +19,9 @@ public interface IssueCodes {
 	
 	String DUPLICATE_RULE_NAME = PREFIX
 			+ "DuplicateRuleName";
+	
+	String DUPLICATE_PARAM_NAME = PREFIX
+			+ "DuplicateParamName";
 
 	String NOT_EOBJECT = PREFIX + "NotEObject";
 

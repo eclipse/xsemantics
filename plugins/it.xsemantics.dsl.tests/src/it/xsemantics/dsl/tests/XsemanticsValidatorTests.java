@@ -69,11 +69,24 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						.errorMsg("Duplicate rule with the same name"));
 	}
 
-	public void testDuplicateParamNames() throws Exception {
+	public void testDuplicateParamNamesInRule() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testDuplicateParamsInRule());
-		assertTrue(diagnosticsToString(validate).contains(
-				"Duplicate JvmIdentifiableElement 'eClass'"));
+		assertContains(validate, "Duplicate parameter 'eClass'");
+	}
+	
+	public void testDuplicateParamNamesInJudgmentDescription() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testDuplicateParamsInJudgmentDescription());
+		assertContains(validate, "Duplicate parameter 'eClass'");
+	}
+
+	protected void assertContains(AssertableDiagnostics validate, String string) {
+		final String diagnosticsToString = diagnosticsToString(validate);
+		if (!diagnosticsToString.contains(string)) {
+			fail("diagnostics: " + diagnosticsToString
+					+ "\n does not contain: " + string);
+		}
 	}
 
 	public void testRulesWithExpressionInConclusion() throws Exception {

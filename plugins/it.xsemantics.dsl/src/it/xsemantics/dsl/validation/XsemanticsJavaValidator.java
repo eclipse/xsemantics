@@ -6,6 +6,7 @@ import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
+import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -96,7 +97,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 		return super.isLocallyUsed(target, containerToFindUsage);
 	}
-	
+
 	@Override
 	protected void mustBeJavaStatementExpression(XExpression expr) {
 		if (typingSystem.isBooleanPremise(expr)) {
@@ -127,6 +128,26 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 	}
 
+	@Check
+	public void checkRuleParameter(RuleParameter param) {
+		if (helper.findDuplicateParameter(param)) {
+			error("Duplicate parameter '" + param.getParameter().getName()
+					+ "'",
+					XsemanticsPackage.Literals.RULE_PARAMETER__PARAMETER,
+					IssueCodes.DUPLICATE_PARAM_NAME);
+		}
+	}
+
+	@Check
+	public void checkInputParameter(InputParameter param) {
+		if (helper.findDuplicateParameter(param)) {
+			error("Duplicate parameter '" + param.getParameter().getName()
+					+ "'",
+					XsemanticsPackage.Literals.INPUT_PARAMETER__PARAMETER,
+					IssueCodes.DUPLICATE_PARAM_NAME);
+		}
+	}
+
 	protected void checkNoDuplicateJudgmentDescriptionSymbols(
 			JudgmentDescription judgmentDescription) {
 		String judgmentSymbol = judgmentDescription.getJudgmentSymbol();
@@ -143,7 +164,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	protected void checkNumOfOutputParams(
 			JudgmentDescription judgmentDescription) {
-		if (xsemanticsUtils.outputJudgmentParameters(judgmentDescription).size() > maxOfOutputParams) {
+		if (xsemanticsUtils.outputJudgmentParameters(judgmentDescription)
+				.size() > maxOfOutputParams) {
 			error("No more than " + maxOfOutputParams
 					+ " output parameters are handled at the moment",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
@@ -170,9 +192,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					.getConclusion().getConclusionElements();
 			// judgmentParameters.size() == conclusionElements.size())
 			// otherwise we could not find a JudgmentDescription for the rule
-			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters.iterator();
+			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters
+					.iterator();
 			for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
-				if (!xsemanticsUtils.isOutputParameter(judgmentParametersIt.next())
+				if (!xsemanticsUtils.isOutputParameter(judgmentParametersIt
+						.next())
 						&& !(ruleConclusionElement instanceof RuleParameter)) {
 					error("Must be a parameter, not an expression",
 							ruleConclusionElement,
@@ -213,9 +237,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					.getExpressions();
 			// judgmentParamters.size() == conclusionElements.size())
 			// otherwise we could not find a JudgmentDescription for the rule
-			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters.iterator();
+			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters
+					.iterator();
 			for (RuleInvocationExpression ruleInvocationExpression : invocationExpressions) {
-				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt.next())) {
+				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt
+						.next())) {
 					if (!xsemanticsUtils
 							.validOutputArgExpression(ruleInvocationExpression)) {
 						error("Not a valid argument for output parameter",
@@ -339,9 +365,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		return judgmentDescription;
 	}
 
-	protected void checkConformance(JudgmentParameter judgmentParameter, EObject element,
-			final String elementDescription, EStructuralFeature feature) {
-		JvmTypeReference expected = subtyping.getJvmTypeReference(judgmentParameter);
+	protected void checkConformance(JudgmentParameter judgmentParameter,
+			EObject element, final String elementDescription,
+			EStructuralFeature feature) {
+		JvmTypeReference expected = subtyping
+				.getJvmTypeReference(judgmentParameter);
 		JvmTypeReference actual = typingSystem.getType(element);
 		if (!subtyping.isConformant(expected, actual)) {
 			error(elementDescription + " type " + getNameOfTypes(actual)

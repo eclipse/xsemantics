@@ -316,6 +316,15 @@ class XsemanticsTestFiles {
 	from {
 	}
 	'''
+	
+	def testDuplicateParamsInJudgmentDescription() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass eClass : EClass eClass
+	}
+	'''
 
 	def testRuleWithExpressionInConclusion() '''
 	«testJudgmentDescriptionsReferringToEcoreWithOutput»
