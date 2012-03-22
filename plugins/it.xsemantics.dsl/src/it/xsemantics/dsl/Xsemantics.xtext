@@ -84,7 +84,7 @@ XLiteral returns xbase::XExpression:
 	EnvironmentAccess |
 	XClosure |
 	XBooleanLiteral |
-	XIntLiteral |
+	XNumberLiteral |
 	XNullLiteral |
 	XStringLiteral |
 	XTypeLiteral
