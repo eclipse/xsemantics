@@ -69,6 +69,10 @@ class XsemanticsBaseTest {
 		s.parseAndAssertNoError.getRule(index)
 	}
 	
+	def getRuleWithoutValidation(CharSequence s, int index) {
+		s.parse.getRule(index)
+	}
+	
 	def getRule(XsemanticsSystem ts, int index) {
 		val rules = ts.getRules
 		Assert::assertTrue("no rule for index " + index + ", only " + rules.size,
