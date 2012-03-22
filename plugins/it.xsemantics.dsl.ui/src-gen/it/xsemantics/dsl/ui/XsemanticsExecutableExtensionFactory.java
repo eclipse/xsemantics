@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import it.xsemantics.dsl.ui.internal.XsemanticsActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class XsemanticsExecutableExtensionFactory extends AbstractGuiceAwareExec
 
 	@Override
 	protected Bundle getBundle() {
-		return it.xsemantics.dsl.ui.internal.XsemanticsActivator.getInstance().getBundle();
+		return XsemanticsActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return it.xsemantics.dsl.ui.internal.XsemanticsActivator.getInstance().getInjector("it.xsemantics.dsl.Xsemantics");
+		return XsemanticsActivator.getInstance().getInjector(XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
 	}
 	
 }
