@@ -3,16 +3,16 @@ package it.xsemantics.dsl.tests.generator
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsRuleGenerator
-import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.generator.XsemanticsSystemGenerator
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.Rule
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.ImportManager
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.BeforeClass
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.generator.XsemanticsSystemGenerator
-import it.xsemantics.dsl.xsemantics.CheckRule
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -38,7 +38,7 @@ class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
 	}
 	
 	def createAppendable() {
-		new StringBuilderBasedAppendable(createImportManager)
+		new FakeTreeAppendable(createImportManager)
 	}
 	
 	def createImportManager() {

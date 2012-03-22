@@ -6,10 +6,10 @@ import it.xsemantics.dsl.generator.XsemanticsXExpressionCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.compiler.IAppendable
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -530,7 +530,7 @@ e = (EClass) result.getFirst();
 	}
 	
 	def void checkRuleInvocationVariable(CharSequence inputCode, int index,
-		IAppendable appendable, String expectedVariableName) {
+		ITreeAppendable appendable, String expectedVariableName) {
 		val xexp = inputCode.
 			parseAndAssertNoError.ruleInvocations.get(index)
 		val variable = xbaseCompiler.declareResultVariable(xexp, appendable)

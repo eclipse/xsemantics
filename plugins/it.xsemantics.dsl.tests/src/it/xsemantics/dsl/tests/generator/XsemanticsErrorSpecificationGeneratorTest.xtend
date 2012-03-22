@@ -1,16 +1,16 @@
 package it.xsemantics.dsl.tests.generator
 
+import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import com.google.inject.Inject
-import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -87,7 +87,7 @@ EStructuralFeature feature = _eContainingFeature;''', "feature")
 	}
 	
 	def void checkCompilationOfErrorSpecification(CharSequence inputProgram,
-		(ErrorSpecification, IAppendable)=>String compilation,
+		(ErrorSpecification, ITreeAppendable)=>String compilation,
 		CharSequence expected, CharSequence expectedVar
 	) {
 		val jDesc = inputProgram.parseAndAssertNoError.firstJudgmentDescription

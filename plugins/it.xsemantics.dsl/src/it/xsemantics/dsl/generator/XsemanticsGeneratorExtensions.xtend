@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 
 class XsemanticsGeneratorExtensions {
 	
@@ -576,7 +577,7 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def createConfiguredAppendable(EObject context, ImportManager importManager) {
-		val appendable = new StringBuilderBasedAppendable(importManager)
+		val appendable = new FakeTreeAppendable(importManager)
 		appendable.declareVariable(context.referenceForBaseRuntimeSystem.type, "this")
 		appendable
 	}

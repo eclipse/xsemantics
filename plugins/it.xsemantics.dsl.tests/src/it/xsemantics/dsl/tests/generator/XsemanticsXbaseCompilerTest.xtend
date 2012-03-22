@@ -5,7 +5,7 @@ import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.IAppendable
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -246,7 +246,7 @@ feat = (EStructuralFeature) result.getSecond();
 	}
 	
 	def void checkCompilationOfRightExpression(CharSequence inputCode, 
-		String expectedExpName, CharSequence expected, IAppendable appendable) {
+		String expectedExpName, CharSequence expected, ITreeAppendable appendable) {
 		val xexp = inputCode.
 			firstRule.conclusion.conclusionElements.get(1).ruleExpression.expression
 		val result = 
@@ -257,7 +257,7 @@ feat = (EStructuralFeature) result.getSecond();
 	}
 	
 	def void checkCompilationOfPremises(CharSequence inputCode, 
-		CharSequence expected, IAppendable appendable) {
+		CharSequence expected, ITreeAppendable appendable) {
 		val xexp = inputCode.
 			firstRule.rulePremisesAsBlock
 		val result = 

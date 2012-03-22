@@ -7,8 +7,8 @@ import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
-import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 class XsemanticsRuleGenerator {
 	
@@ -117,35 +117,35 @@ class XsemanticsRuleGenerator {
 		appendable
 	}
 	
-	def declareVariablesForOutputParams(Rule rule, IAppendable appendable) {
+	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
 		rule.outputParams.forEach([
 			it.declareVariable(appendable).append("\n")
 		])
 	}
 	
-	def compileRuleBody(Rule rule, String resultType, IAppendable result) {
+	def compileRuleBody(Rule rule, String resultType, ITreeAppendable result) {
 		compilePremises(rule, result)
 		compileRuleConclusionElements(rule, result)
 		compileReturnResult(rule, resultType, result)
 	}
 	
-	def compilePremises(Rule rule, IAppendable result) {
+	def compilePremises(Rule rule, ITreeAppendable result) {
 		switch rule {
 			RuleWithPremises: xbaseCompiler.compile(rule.premises, result, false)
 		}
 	}
 	
-	def compilePremises(CheckRule rule, IAppendable result) {
+	def compilePremises(CheckRule rule, ITreeAppendable result) {
 		xbaseCompiler.compile(rule.premises, result, false)
 	}
 	
-	def compileRuleConclusionElements(Rule rule, IAppendable result) {
+	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {
 		rule.expressionsInConclusion.forEach([
 			xbaseCompiler.compile(it.expression, result, true)
 		])
 	}
 	
-	def compileReturnResult(Rule rule, String resultType, IAppendable result) {
+	def compileReturnResult(Rule rule, String resultType, ITreeAppendable result) {
 		val expressions = rule.outputConclusionElements
 		
 		if (!result.toString.empty)
