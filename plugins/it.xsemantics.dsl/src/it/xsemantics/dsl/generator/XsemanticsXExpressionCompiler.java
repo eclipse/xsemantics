@@ -64,6 +64,21 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	@Override
+	protected void internalToConvertedExpression(XExpression obj,
+			ITreeAppendable appendable) {
+		if (obj instanceof RuleInvocation) {
+			_toJavaExpression((RuleInvocation) obj, appendable);
+		} else if (obj instanceof OrExpression) {
+			_toJavaExpression((OrExpression) obj, appendable);
+		} else if (obj instanceof EnvironmentAccess) {
+			_toJavaExpression((EnvironmentAccess) obj, appendable);
+		} else if (obj instanceof Fail) {
+			_toJavaExpression((Fail) obj, appendable);
+		} else
+			super.internalToConvertedExpression(obj, appendable);
+	}
+
+	@Override
 	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
 		if (insideClosure(expr)) {
