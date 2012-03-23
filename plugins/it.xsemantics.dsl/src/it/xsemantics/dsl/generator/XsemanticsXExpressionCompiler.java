@@ -49,6 +49,21 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	protected XsemanticsTypingSystem typingSystem;
 
 	@Override
+	protected void doInternalToJavaStatement(XExpression obj,
+			ITreeAppendable appendable, boolean isReferenced) {
+		if (obj instanceof RuleInvocation) {
+			_toJavaStatement((RuleInvocation) obj, appendable, isReferenced);
+		} else if (obj instanceof OrExpression) {
+			_toJavaStatement((OrExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof EnvironmentAccess) {
+			_toJavaStatement((EnvironmentAccess) obj, appendable, isReferenced);
+		} else if (obj instanceof Fail) {
+			_toJavaStatement((Fail) obj, appendable, isReferenced);
+		} else
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+	}
+
+	@Override
 	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
 		if (insideClosure(expr)) {
@@ -129,7 +144,8 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	 * @param ruleInvocation
 	 * @param b
 	 */
-	public void _toJavaExpression(RuleInvocation ruleInvocation, ITreeAppendable b) {
+	public void _toJavaExpression(RuleInvocation ruleInvocation,
+			ITreeAppendable b) {
 		b.append("null");
 	}
 
@@ -137,8 +153,8 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		b.append("null");
 	}
 
-	public void _toJavaStatement(RuleInvocation ruleInvocation, ITreeAppendable b,
-			boolean isReferenced) {
+	public void _toJavaStatement(RuleInvocation ruleInvocation,
+			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(ruleInvocation, b);
 		JudgmentDescription judgmentDescription = xsemanticsUtils
 				.judgmentDescription(ruleInvocation,
@@ -254,13 +270,14 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		}
 	}
 
-	protected void ruleInvocationExpressionsToJavaExpressions(ITreeAppendable b,
-			final RuleInvocation ruleInvocation) {
+	protected void ruleInvocationExpressionsToJavaExpressions(
+			ITreeAppendable b, final RuleInvocation ruleInvocation) {
 		ruleInvocationExpressionsToJavaExpressions(b,
 				xsemanticsUtils.inputArgsExpressions(ruleInvocation));
 	}
 
-	protected void ruleInvocationExpressionsToJavaExpressions(ITreeAppendable b,
+	protected void ruleInvocationExpressionsToJavaExpressions(
+			ITreeAppendable b,
 			final List<RuleInvocationExpression> inputArgsExpressions) {
 		Iterator<RuleInvocationExpression> expIt = inputArgsExpressions
 				.iterator();
@@ -327,7 +344,8 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		b.append("null");
 	}
 
-	public void _toJavaStatement(Fail fail, ITreeAppendable b, boolean isReference) {
+	public void _toJavaStatement(Fail fail, ITreeAppendable b,
+			boolean isReference) {
 		generateCommentWithOriginalCode(fail, b);
 		final ErrorSpecification errorSpecification = fail.getError();
 		if (errorSpecification == null) {
@@ -437,7 +455,8 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		return b.declareSyntheticVariable(ruleInvocation, "result");
 	}
 
-	public String declareExceptionVariable(XExpression expression, ITreeAppendable b) {
+	public String declareExceptionVariable(XExpression expression,
+			ITreeAppendable b) {
 		return b.declareSyntheticVariable(expression, "e");
 	}
 
