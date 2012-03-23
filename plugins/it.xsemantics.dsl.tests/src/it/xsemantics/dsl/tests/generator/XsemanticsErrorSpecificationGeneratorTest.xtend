@@ -26,9 +26,9 @@ class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseT
 			testFiles.testJudgmentDescriptionsWithErrorSpecification,
 '''
 
-String _operator_plus = StringExtensions.operator_plus("this ", c);
-String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-String error = _operator_plus_1;''', "error")
+String _plus = ("this " + c);
+String _plus_1 = (_plus + " made an error!");
+String error = _plus_1;''', "error")
 	}
 	
 	@Test

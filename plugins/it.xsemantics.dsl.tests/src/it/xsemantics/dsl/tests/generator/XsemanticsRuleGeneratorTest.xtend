@@ -54,9 +54,9 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 	} catch (Exception e_applyRuleEClassEObject) {
 		
 		String _stringRep = this.stringRep(object);
-		String _operator_plus = StringExtensions.operator_plus("this ", _stringRep);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-		String error = _operator_plus_1;
+		String _plus = ("this " + _stringRep);
+		String _plus_1 = (_plus + " made an error!");
+		String error = _plus_1;
 		EClass _eClass = object.eClass();
 		EObject source = _eClass;
 		EClass _eClass_1 = object.eClass();

@@ -3,6 +3,7 @@ package it.xsemantics.dsl.tests.generator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
+import it.xsemantics.dsl.generator.GeneratorUtils;
 import it.xsemantics.dsl.generator.XsemanticsGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
@@ -204,7 +205,7 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 		// validate the resource
 		List<Issue> issues = validator.validate(resource, CheckMode.ALL,
 				CancelIndicator.NullImpl);
-		if (!issues.isEmpty()) {
+		if (!issues.isEmpty() && GeneratorUtils.hasErrors(issues)) {
 			for (Issue issue : issues) {
 				System.err.println(issue);
 			}

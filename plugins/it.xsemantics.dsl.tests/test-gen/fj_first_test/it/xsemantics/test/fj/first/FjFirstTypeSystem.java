@@ -1,5 +1,6 @@
 package it.xsemantics.test.fj.first;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -38,11 +39,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
@@ -360,9 +358,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		/* program.main == null or empty |- program.main */
 		try {
 		  Expression _main = program.getMain();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_main, null);
+		  boolean _equals = Objects.equal(_main, null);
 		  /* program.main == null */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("program.main == null");
 		  }
 		} catch (Exception e) {
@@ -692,8 +690,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		BasicType _xblockexpression = null;
 		{
-		  BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
-		  final BasicType result = _createBasicType;
+		  final BasicType result = FjFactory.eINSTANCE.createBasicType();
 		  result.setBasic("String");
 		  _xblockexpression = (result);
 		}
@@ -929,26 +926,26 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		/* class1 == class2 or class2.name == "Object" or { class1.superclass != null G |- class1.superclass <| class2 } */
 		try {
-		  boolean _operator_equals = ObjectExtensions.operator_equals(class1, class2);
+		  boolean _equals = Objects.equal(class1, class2);
 		  /* class1 == class2 */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("class1 == class2");
 		  }
 		} catch (Exception e) {
 		  /* class2.name == "Object" or { class1.superclass != null G |- class1.superclass <| class2 } */
 		  try {
 		    String _name = class2.getName();
-		    boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, "Object");
+		    boolean _equals_1 = Objects.equal(_name, "Object");
 		    /* class2.name == "Object" */
-		    if (!_operator_equals_1) {
+		    if (!_equals_1) {
 		      sneakyThrowRuleFailedException("class2.name == \"Object\"");
 		    }
 		  } catch (Exception e_1) {
 		    {
 		      it.xsemantics.example.fj.fj.Class _superclass = class1.getSuperclass();
-		      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
+		      boolean _notEquals = (!Objects.equal(_superclass, null));
 		      /* class1.superclass != null */
-		      if (!_operator_notEquals) {
+		      if (!_notEquals) {
 		        sneakyThrowRuleFailedException("class1.superclass != null");
 		      }
 		      /* G |- class1.superclass <| class2 */
@@ -1014,9 +1011,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
 		it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-		boolean _operator_equals = ObjectExtensions.operator_equals(_classref, _classref_1);
+		boolean _equals = Objects.equal(_classref, _classref_1);
 		/* left.classref == right.classref */
-		if (!_operator_equals) {
+		if (!_equals) {
 		  sneakyThrowRuleFailedException("left.classref == right.classref");
 		}
 		return new Result<Boolean>(true);
@@ -1046,13 +1043,12 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		{
 		  int _size = expressions.size();
 		  int _size_1 = typedElements.size();
-		  boolean _operator_equals = IntegerExtensions.operator_equals(_size, _size_1);
+		  boolean _equals = (_size == _size_1);
 		  /* expressions.size == typedElements.size */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("expressions.size == typedElements.size");
 		  }
-		  Iterator<TypedElement> _iterator = typedElements.iterator();
-		  final Iterator<TypedElement> typedElementsIterator = _iterator;
+		  final Iterator<TypedElement> typedElementsIterator = typedElements.iterator();
 		  for (final Expression exp : expressions) {
 		    {
 		      Type expressionType = null;
@@ -1099,7 +1095,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
 		EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-		List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, it.xsemantics.example.fj.fj.Class.class);
+		List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+		  it.xsemantics.example.fj.fj.Class.class);
 		return new Result<List<it.xsemantics.example.fj.fj.Class>>(_all);
 	}
 	
@@ -1128,7 +1125,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		{
 		  EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
 		  EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-		  List<Field> _all = this.<Field>getAll(cl, _class_Members, _class_Superclass, it.xsemantics.example.fj.fj.Field.class);
+		  List<Field> _all = this.<Field>getAll(cl, _class_Members, _class_Superclass, 
+		    Field.class);
 		  fields = _all;
 		  Collections.reverse(fields);
 		}
@@ -1162,21 +1160,21 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		  final LinkedList<Method> result = _linkedList;
 		  EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
 		  EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-		  List<Method> _all = this.<Method>getAll(cl, _class_Members, _class_Superclass, it.xsemantics.example.fj.fj.Method.class);
-		  final List<Method> allMethods = _all;
+		  final List<Method> allMethods = this.<Method>getAll(cl, _class_Members, _class_Superclass, 
+		    Method.class);
 		  final Procedure1<Method> _function = new Procedure1<Method>() {
 		      public void apply(final Method method) {
 		        final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
 		            public Boolean apply(final Method it) {
 		              String _name = it.getName();
 		              String _name_1 = method.getName();
-		              boolean _operator_equals = ObjectExtensions.operator_equals(_name, _name_1);
-		              return Boolean.valueOf(_operator_equals);
+		              boolean _equals = Objects.equal(_name, _name_1);
+		              return Boolean.valueOf(_equals);
 		            }
 		          };
 		        boolean _exists = IterableExtensions.<Method>exists(result, _function);
-		        boolean _operator_not = BooleanExtensions.operator_not(_exists);
-		        if (_operator_not) {
+		        boolean _not = (!_exists);
+		        if (_not) {
 		          result.add(method);
 		        }
 		      }
@@ -1279,9 +1277,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		/* env(G, 'this', ClassType) */
 		ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-		boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_environmentaccess, null);
+		boolean _notEquals = (!Objects.equal(_environmentaccess, null));
 		/* env(G, 'this', ClassType) != null */
-		if (!_operator_notEquals) {
+		if (!_notEquals) {
 		  sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
 		}
 		return new Result<Boolean>(true);
@@ -1310,8 +1308,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		
 		{
 		  it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-		  ClassType _createClassType = FjTypeUtils.createClassType(_containerOfType);
-		  final ClassType typeForThis = _createClassType;
+		  final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
 		  Type bodyType = null;
 		  /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
 		  MethodBody _body = method.getBody();
@@ -1405,13 +1402,12 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		  /* G |- selection.receiver */
 		  Expression _receiver = selection.getReceiver();
 		  checkInternal(G, _trace_, _receiver);
-		  Member _message = selection.getMessage();
-		  final Member message = _message;
-		  boolean matched = false;
-		  if (!matched) {
+		  final Member message = selection.getMessage();
+		  boolean _matched = false;
+		  if (!_matched) {
 		    if (message instanceof Method) {
 		      final Method _method = (Method)message;
-		      matched=true;
+		      _matched=true;
 		      {
 		        /* G |- selection : selection.args << message.params */
 		        EList<Expression> _args = selection.getArgs();
@@ -1494,8 +1490,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-		boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
-		if (_operator_notEquals) {
+		boolean _notEquals = (!Objects.equal(_superclass, null));
+		if (_notEquals) {
 		  {
 		    List<it.xsemantics.example.fj.fj.Class> superClasses = null;
 		    /* G ||- cl |> superClasses */
@@ -1504,9 +1500,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		    superClasses = (List<it.xsemantics.example.fj.fj.Class>) result.getFirst();
 		    
 		    boolean _contains = superClasses.contains(cl);
-		    boolean _operator_not = BooleanExtensions.operator_not(_contains);
+		    boolean _not = (!_contains);
 		    /* !superClasses.contains(cl) */
-		    if (!_operator_not) {
+		    if (!_not) {
 		      sneakyThrowRuleFailedException("!superClasses.contains(cl)");
 		    }
 		    List<Field> inheritedFields = null;
@@ -1519,13 +1515,13 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		    final Procedure1<Field> _function = new Procedure1<Field>() {
 		        public void apply(final Field inheritedField) {
 		          EList<Member> _members = cl.getMembers();
-		          List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, it.xsemantics.example.fj.fj.Field.class);
+		          List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
 		          for (final Field field : _typeSelect) {
 		            String _name = field.getName();
 		            String _name_1 = inheritedField.getName();
-		            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
+		            boolean _notEquals = (!Objects.equal(_name, _name_1));
 		            /* field.name != inheritedField.name */
-		            if (!_operator_notEquals) {
+		            if (!_notEquals) {
 		              sneakyThrowRuleFailedException("field.name != inheritedField.name");
 		            }
 		          }
@@ -1542,16 +1538,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		    final Procedure1<Method> _function_1 = new Procedure1<Method>() {
 		        public void apply(final Method inheritedMethod) {
 		          EList<Member> _members = cl.getMembers();
-		          List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, it.xsemantics.example.fj.fj.Method.class);
+		          List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
 		          final Procedure1<Method> _function = new Procedure1<Method>() {
 		              public void apply(final Method it) {
 		                /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
 		                try {
 		                  String _name = it.getName();
 		                  String _name_1 = inheritedMethod.getName();
-		                  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
+		                  boolean _notEquals = (!Objects.equal(_name, _name_1));
 		                  /* it.name != inheritedMethod.name */
-		                  if (!_operator_notEquals) {
+		                  if (!_notEquals) {
 		                    sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
 		                  }
 		                } catch (Exception e) {
@@ -1564,14 +1560,13 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
 		                    int _size = _params.size();
 		                    EList<Parameter> _params_1 = inheritedMethod.getParams();
 		                    int _size_1 = _params_1.size();
-		                    boolean _operator_equals = IntegerExtensions.operator_equals(_size, _size_1);
+		                    boolean _equals = (_size == _size_1);
 		                    /* it.params.size == inheritedMethod.params.size */
-		                    if (!_operator_equals) {
+		                    if (!_equals) {
 		                      sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
 		                    }
 		                    EList<Parameter> _params_2 = inheritedMethod.getParams();
-		                    Iterator<Parameter> _iterator = _params_2.iterator();
-		                    final Iterator<Parameter> inheritedMethodParamsIt = _iterator;
+		                    final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
 		                    EList<Parameter> _params_3 = it.getParams();
 		                    for (final Parameter param : _params_3) {
 		                      /* G |- param.type ~~ inheritedMethodParamsIt.next.type */

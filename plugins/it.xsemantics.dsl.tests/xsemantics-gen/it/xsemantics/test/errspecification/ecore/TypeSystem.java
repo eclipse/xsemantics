@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
 	public final static String EOBJECTECLASS = "it.xsemantics.test.errspecification.ecore.rules.EObjectEClass";
@@ -76,9 +75,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	protected void typeThrowException(String _issue, Exception _ex, final EObject c) 
 			throws RuleFailedException {
 		
-		String _operator_plus = StringExtensions.operator_plus("cannot find ", c);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'s EClass");
-		String error = _operator_plus_1;
+		String _plus = ("cannot find " + c);
+		String _plus_1 = (_plus + "\'s EClass");
+		String error = _plus_1;
 		throwRuleFailedException(error,
 				_issue, _ex,
 				new ErrorInformation(null, null));
@@ -99,10 +98,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _name = left.getName();
-		String _operator_plus = StringExtensions.operator_plus(_name, " is not a subtype of ");
+		String _plus = (_name + " is not a subtype of ");
 		String _name_1 = right.getName();
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
-		String error = _operator_plus_1;
+		String _plus_1 = (_plus + _name_1);
+		String error = _plus_1;
 		EObject source = left;
 		EStructuralFeature _eStructuralFeature = left.getEStructuralFeature("name");
 		EStructuralFeature feature = _eStructuralFeature;
@@ -160,8 +159,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		} catch (Exception e_applyRuleEObjectEClassWithErrorSpecification) {
 			
 			String _stringRep = this.stringRep(obj);
-			String _operator_plus = StringExtensions.operator_plus("cannot find EClass for EClass ", _stringRep);
-			String error = _operator_plus;
+			String _plus = ("cannot find EClass for EClass " + _stringRep);
+			String error = _plus;
 			EObject source = obj;
 			EStructuralFeature _eContainingFeature = obj.eContainingFeature();
 			EStructuralFeature feature = _eContainingFeature;

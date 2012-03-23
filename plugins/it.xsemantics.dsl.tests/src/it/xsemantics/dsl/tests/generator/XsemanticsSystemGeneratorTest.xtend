@@ -25,9 +25,9 @@ class XsemanticsSystemGeneratorTest extends XsemanticsGeneratorBaseTest {
 protected void typeThrowException(String _issue, Exception _ex, final EObject c) 
 		throws RuleFailedException {
 	
-	String _operator_plus = StringExtensions.operator_plus("this ", c);
-	String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-	String error = _operator_plus_1;
+	String _plus = ("this " + c);
+	String _plus_1 = (_plus + " made an error!");
+	String error = _plus_1;
 	EObject source = c;
 	EClass _eClass = c.eClass();
 	EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
@@ -48,9 +48,9 @@ protected void typeThrowException(String _issue, Exception _ex, final EObject c)
 protected void typeThrowException(String _issue, Exception _ex, final EObject c) 
 		throws RuleFailedException {
 	
-	String _operator_plus = StringExtensions.operator_plus("this ", c);
-	String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-	String error = _operator_plus_1;
+	String _plus = ("this " + c);
+	String _plus_1 = (_plus + " made an error!");
+	String error = _plus_1;
 	throwRuleFailedException(error,
 			_issue, _ex,
 			new ErrorInformation(null, null));
@@ -68,9 +68,9 @@ protected void typeThrowException(String _issue, Exception _ex, final EObject c)
 		throws RuleFailedException {
 	
 	String _stringRep = this.stringRep(c);
-	String _operator_plus = StringExtensions.operator_plus("this ", _stringRep);
-	String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-	String error = _operator_plus_1;
+	String _plus = ("this " + _stringRep);
+	String _plus_1 = (_plus + " made an error!");
+	String error = _plus_1;
 	EObject source = c;
 	EClass _eClass = c.eClass();
 	EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
@@ -93,9 +93,9 @@ protected void typeThrowException(String _issue, Exception _ex, final EObject c)
 	
 	EClass _eClass = c.eClass();
 	EClass _clone = this.<EClass>clone(_eClass);
-	String _operator_plus = StringExtensions.operator_plus("this ", _clone);
-	String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-	String error = _operator_plus_1;
+	String _plus = ("this " + _clone);
+	String _plus_1 = (_plus + " made an error!");
+	String error = _plus_1;
 	EObject _clone_1 = this.<EObject>clone(c);
 	EObject source = _clone_1;
 	EClass _eClass_1 = c.eClass();

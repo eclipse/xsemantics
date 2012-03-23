@@ -1,5 +1,6 @@
 package it.xsemantics.test.ruleinvocation.ecore;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
@@ -12,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -265,18 +265,17 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		{
 		  String _string = new String();
 		  String _firstUpper = StringExtensions.toFirstUpper("bar");
-		  String _operator_plus = StringExtensions.operator_plus(_string, _firstUpper);
-		  boolean _operator_equals = ObjectExtensions.operator_equals("foo", _operator_plus);
+		  String _plus = (_string + _firstUpper);
+		  boolean _equals = Objects.equal("foo", _plus);
 		  /* 'foo' == new String() + 'bar'.toFirstUpper */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
 		  }
-		  EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
-		  final EClass eC = _createEClass;
+		  final EClass eC = EcoreFactory.eINSTANCE.createEClass();
 		  eC.setName("MyEClass");
-		  boolean _operator_equals_1 = ObjectExtensions.operator_equals(eClass1, eC);
+		  boolean _equals_1 = Objects.equal(eClass1, eC);
 		  /* eClass1 == eC */
-		  if (!_operator_equals_1) {
+		  if (!_equals_1) {
 		    sneakyThrowRuleFailedException("eClass1 == eC");
 		  }
 		}
