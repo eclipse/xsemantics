@@ -98,16 +98,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		return super.isLocallyUsed(target, containerToFindUsage);
 	}
 
-	@Override
-	protected void mustBeJavaStatementExpression(XExpression expr) {
-		if (typingSystem.isBooleanPremise(expr)) {
-			// in this case we consider it valid
-			// since it will be generated correctly
-			return;
-		}
-		super.mustBeJavaStatementExpression(expr);
-	}
-
 	@Check
 	public void checkJudgmentDescription(JudgmentDescription judgmentDescription) {
 		checkNoDuplicateJudgmentDescriptionSymbols(judgmentDescription);

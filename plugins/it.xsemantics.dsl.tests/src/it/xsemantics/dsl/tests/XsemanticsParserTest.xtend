@@ -306,4 +306,9 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testRuleWithBooleanExpressionsWithNoSideEffect() {
 		parser.parse(testFiles.testRuleWithBooleanExpressionsWithNoSideEffect).assertNoErrors
 	}
+	
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInFor() {
+		parser.parse(testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInFor).assertNoErrors
+	}
 }

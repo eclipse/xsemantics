@@ -421,6 +421,25 @@ class XsemanticsTestFiles {
 		'foo' == new String() && 'bar' == new String()
 		'foo' == new String() + 'bar'.toFirstUpper
 		'foo' != new String() + 'bar'.toFirstUpper
+		val temp = new String() + 'bar'.toFirstUpper
+		'foo'.contains('f')
+		'foo'.concat('f')
+		!('foo'.contains('f'))
+		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	}
+	'''
+	
+	def testRuleWithFeatureCallsForBinaryOps() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		// some expressions from Xbase
+		'foo' == new String() || 'bar' == new String()
+		'foo' == new String() && 'bar' == new String()
+		'foo' == new String() + 'bar'.toFirstUpper
+		'foo' != new String() + 'bar'.toFirstUpper
 		new String() + 'bar'.toFirstUpper
 		'foo'.contains('f')
 		'foo'.concat('f')
@@ -1166,6 +1185,18 @@ class XsemanticsTestFiles {
 	from {
 		'a' == new String() || 'bar' == new String()
 		'a' == new String() + 'bar'.toFirstUpper
+	}
+	'''
+	
+	def testRuleWithBooleanExpressionsWithNoSideEffectInFor() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		for (s : eClass.EAllStructuralFeatures) {
+			s.name != 'foo'
+		}
 	}
 	'''
 }
