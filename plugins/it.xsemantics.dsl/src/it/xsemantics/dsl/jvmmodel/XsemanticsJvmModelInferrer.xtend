@@ -1,9 +1,8 @@
 package it.xsemantics.dsl.jvmmodel
- 
+
 import com.google.inject.Inject
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 
@@ -16,32 +15,49 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
     /**
-     * conveninence API to build and initialize JvmTypes and their members.
+     * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
 
 	/**
-	 * Is called for each instance of the first argument's type contained in a resource.
+	 * The dispatch method {@code infer} is called for each instance of the
+	 * given element's type that is contained in a resource.
 	 * 
-	 * @param element - the model to create one or more JvmDeclaredTypes from.
-	 * @param acceptor - each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
-	 *                   current resource.
-	 * @param isPreLinkingPhase - whether the method is called in a pre linking phase, i.e. when the global index isn't fully updated. You
-	 *        must not rely on linking using the index if iPrelinkingPhase is <code>true</code>
+	 * @param element
+	 *            the model to create one or more
+	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType declared
+	 *            types} from.
+	 * @param acceptor
+	 *            each created
+	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType type}
+	 *            without a container should be passed to the acceptor in order
+	 *            get attached to the current resource. The acceptor's
+	 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
+	 *            accept(..)} method takes the constructed empty type for the
+	 *            pre-indexing phase. This one is further initialized in the
+	 *            indexing phase using the closure you pass to the returned
+	 *            {@link org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
+	 *            initializeLater(..)}.
+	 * @param isPreIndexingPhase
+	 *            whether the method is called in a pre-indexing phase, i.e.
+	 *            when the global index is not yet fully updated. You must not
+	 *            rely on linking using the index if isPreIndexingPhase is
+	 *            <code>true</code>.
 	 */
-   	def dispatch void infer(XsemanticsSystem element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
-   		
+   	def dispatch void infer(XsemanticsSystem element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		// An example based on the initial hellow world example could look like this:
    		
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings") [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod(greeting.name, greeting.newTypeRef(typeof(String))) [
-//   					it.body ['''
-//   						return "Hello «greeting.name»";
-//   					''']
-//   				]
-//   			}
-//   		])
+   		// An implementation for the initial hello world example could look like this:
+//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings"))
+//   			.initializeLater([
+//   				for (greeting : element.greetings) {
+//   					members += greeting.toMethod("hello" + greeting.name, greeting.newTypeRef(typeof(String))) [
+//   						body = [
+//   							append('''return "Hello «greeting.name»";''')
+//   						]
+//   					]
+//   				}
+//   			])
    	}
 }
+
