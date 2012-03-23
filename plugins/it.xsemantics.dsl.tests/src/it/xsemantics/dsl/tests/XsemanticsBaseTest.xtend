@@ -198,7 +198,7 @@ class XsemanticsBaseTest {
 	}
 
 	def getXAbstractFeatureCall(int index) {
-		testFiles.testRuleWithFeatureCalls.parseAndAssertNoError.
+		testFiles.testRuleWithFeatureCalls.parse.
 			getXAbstractFeatureCalls.get(index)
 	}
 
