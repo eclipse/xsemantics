@@ -1199,4 +1199,22 @@ class XsemanticsTestFiles {
 		}
 	}
 	'''
+	
+	def testForClosureWithExpressionWithNoSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// boolean expressions inside closures without side effect
+		eClass.EStructuralFeatures.forEach [
+			it.name != "foo"
+		]
+	}
+	'''
 }

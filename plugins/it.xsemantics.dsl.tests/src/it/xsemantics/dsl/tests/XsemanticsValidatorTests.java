@@ -335,6 +335,12 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				IssueCodes.THROW_NOT_ALLOWED,
 				"Throw statements are not allowed here"));
 	}
+	
+	public void testRuleWithBooleanExpressionsWithNoSideEffectInsideClosure() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testForClosureWithExpressionWithNoSideEffect());
+		assertOk(validate);
+	}
 
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {

@@ -472,6 +472,23 @@ typeInternal(environmentComposition(
 	}
 	
 	@Test
+	def void testForClosureWithExpressionWithNoSideEffect() {
+		checkCompilationOfAllPremises(
+			testFiles.testForClosureWithExpressionWithNoSideEffect,
+'''
+
+EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
+    public void apply(final EStructuralFeature it) {
+      String _name = it.getName();
+      boolean _notEquals = (!Objects.equal(_name, "foo"));
+    }
+  };
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);'''
+			)
+	}
+	
+	@Test
 	def void testForScopeOfThisInRule() {
 		checkCompilationOfAllPremises(
 			testFiles.testForScopeOfThisInRule,

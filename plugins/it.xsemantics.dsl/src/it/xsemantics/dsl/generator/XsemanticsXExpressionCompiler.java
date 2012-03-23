@@ -82,7 +82,16 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
 		if (insideClosure(expr)) {
-			super._toJavaStatement(expr, b, isReferenced);
+			// make sure it is referenced if there's only one expression in the
+			// block otherwise we might generate
+			// an invalid Java statement
+			super._toJavaStatement(
+					expr,
+					b,
+					isReferenced
+							|| (expr.getExpressions().size() == 1 && typingSystem
+									.isBooleanPremise(expr.getExpressions()
+											.get(0))));
 		} else {
 			if (expr.getExpressions().isEmpty())
 				return;
