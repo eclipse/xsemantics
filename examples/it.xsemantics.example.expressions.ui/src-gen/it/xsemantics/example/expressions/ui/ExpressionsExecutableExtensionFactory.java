@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import it.xsemantics.example.expressions.ui.internal.ExpressionsActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class ExpressionsExecutableExtensionFactory extends AbstractGuiceAwareExe
 
 	@Override
 	protected Bundle getBundle() {
-		return it.xsemantics.example.expressions.ui.internal.ExpressionsActivator.getInstance().getBundle();
+		return ExpressionsActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return it.xsemantics.example.expressions.ui.internal.ExpressionsActivator.getInstance().getInjector("it.xsemantics.example.expressions.Expressions");
+		return ExpressionsActivator.getInstance().getInjector(ExpressionsActivator.IT_XSEMANTICS_EXAMPLE_EXPRESSIONS_EXPRESSIONS);
 	}
 	
 }
