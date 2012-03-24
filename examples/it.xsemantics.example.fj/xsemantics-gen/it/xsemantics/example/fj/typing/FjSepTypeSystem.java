@@ -1,5 +1,6 @@
 package it.xsemantics.example.fj.typing;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -39,13 +40,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 	public final static String TTHIS = "it.xsemantics.example.fj.typing.rules.TThis";
@@ -305,9 +302,9 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		/* program.main == null or empty |- program.main */
 		try {
 		  Expression _main = program.getMain();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_main, null);
+		  boolean _equals = Objects.equal(_main, null);
 		  /* program.main == null */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("program.main == null");
 		  }
 		} catch (Exception e) {
@@ -369,24 +366,25 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-		boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
-		if (_operator_notEquals) {
+		boolean _notEquals = (!Objects.equal(_superclass, null));
+		if (_notEquals) {
 		  /* !getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl) or fail error "Cyclic hierarchy for " + cl.name source cl */
 		  try {
 		    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
 		    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-		    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, it.xsemantics.example.fj.fj.Class.class);
+		    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+		      it.xsemantics.example.fj.fj.Class.class);
 		    boolean _contains = _all.contains(cl);
-		    boolean _operator_not = BooleanExtensions.operator_not(_contains);
+		    boolean _not = (!_contains);
 		    /* !getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl) */
-		    if (!_operator_not) {
+		    if (!_not) {
 		      sneakyThrowRuleFailedException("!getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl)");
 		    }
 		  } catch (Exception e) {
 		    /* fail error "Cyclic hierarchy for " + cl.name source cl */
 		    String _name = cl.getName();
-		    String _operator_plus = StringExtensions.operator_plus("Cyclic hierarchy for ", _name);
-		    String error = _operator_plus;
+		    String _plus = ("Cyclic hierarchy for " + _name);
+		    String error = _plus;
 		    EObject source = cl;
 		    throwForExplicitFail(error, new ErrorInformation(source, null));
 		  }
@@ -398,8 +396,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(expression);
-		String _operator_plus = StringExtensions.operator_plus("cannot type ", _stringRep);
-		String error = _operator_plus;
+		String _plus = ("cannot type " + _stringRep);
+		String error = _plus;
 		EObject source = expression;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -421,8 +419,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(expression);
-		String _operator_plus = StringExtensions.operator_plus(_stringRep, " has not a class type");
-		String error = _operator_plus;
+		String _plus = (_stringRep + " has not a class type");
+		String error = _plus;
 		EObject source = expression;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -444,10 +442,10 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(left);
-		String _operator_plus = StringExtensions.operator_plus(_stringRep, " is not a subtype of ");
+		String _plus = (_stringRep + " is not a subtype of ");
 		String _stringRep_1 = this.stringRep(right);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _stringRep_1);
-		String error = _operator_plus_1;
+		String _plus_1 = (_plus + _stringRep_1);
+		String error = _plus_1;
 		throwRuleFailedException(error,
 				_issue, _ex,
 				new ErrorInformation(null, null));
@@ -468,10 +466,10 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(expression);
-		String _operator_plus = StringExtensions.operator_plus(_stringRep, " is not assignable for ");
+		String _plus = (_stringRep + " is not assignable for ");
 		String _stringRep_1 = this.stringRep(right);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _stringRep_1);
-		String error = _operator_plus_1;
+		String _plus_1 = (_plus + _stringRep_1);
+		String error = _plus_1;
 		EObject source = expression;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -493,10 +491,10 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(left);
-		String _operator_plus = StringExtensions.operator_plus(_stringRep, " is not the same type as ");
+		String _plus = (_stringRep + " is not the same type as ");
 		String _stringRep_1 = this.stringRep(right);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _stringRep_1);
-		String error = _operator_plus_1;
+		String _plus_1 = (_plus + _stringRep_1);
+		String error = _plus_1;
 		throwRuleFailedException(error,
 				_issue, _ex,
 				new ErrorInformation(null, null));
@@ -517,8 +515,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _name = current.getName();
-		String _operator_plus = StringExtensions.operator_plus(_name, " does not override the superclass method");
-		String error = _operator_plus;
+		String _plus = (_name + " does not override the superclass method");
+		String error = _plus;
 		EObject source = current;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -664,8 +662,7 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		
 		BasicType _xblockexpression = null;
 		{
-		  BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
-		  final BasicType result = _createBasicType;
+		  final BasicType result = FjFactory.eINSTANCE.createBasicType();
 		  result.setBasic("String");
 		  _xblockexpression = (result);
 		}
@@ -821,12 +818,13 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		} catch (Exception e_applyRuleGeneralSubtyping) {
 			
 			String _stringRep = this.stringRep(left);
-			String _operator_plus = StringExtensions.operator_plus("types ", _stringRep);
-			String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " and ");
+			String _plus = ("types " + _stringRep);
+			String _plus_1 = (_plus + " and ");
 			String _stringRep_1 = this.stringRep(right);
-			String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _stringRep_1);
-			String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " are not comparable");
-			String error = _operator_plus_3;
+			String _plus_2 = (_plus_1 + _stringRep_1);
+			String _plus_3 = (_plus_2 + 
+			  " are not comparable");
+			String error = _plus_3;
 			throwRuleFailedException(error,
 				GENERALSUBTYPING, e_applyRuleGeneralSubtyping,
 				new ErrorInformation(null, null));
@@ -897,9 +895,9 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 		  it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
 		  it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_classref, _classref_1);
+		  boolean _equals = Objects.equal(_classref, _classref_1);
 		  /* left.classref == right.classref */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("left.classref == right.classref");
 		  }
 		} catch (Exception e) {
@@ -907,16 +905,17 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		  try {
 		    it.xsemantics.example.fj.fj.Class _classref_2 = right.getClassref();
 		    String _name = _classref_2.getName();
-		    boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, "Object");
+		    boolean _equals_1 = Objects.equal(_name, "Object");
 		    /* right.classref.name == "Object" */
-		    if (!_operator_equals_1) {
+		    if (!_equals_1) {
 		      sneakyThrowRuleFailedException("right.classref.name == \"Object\"");
 		    }
 		  } catch (Exception e_1) {
 		    it.xsemantics.example.fj.fj.Class _classref_3 = left.getClassref();
 		    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
 		    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-		    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(_classref_3, _class_Superclass, _class_Superclass_1, it.xsemantics.example.fj.fj.Class.class);
+		    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(_classref_3, _class_Superclass, _class_Superclass_1, 
+		      it.xsemantics.example.fj.fj.Class.class);
 		    it.xsemantics.example.fj.fj.Class _classref_4 = right.getClassref();
 		    boolean _contains = _all.contains(_classref_4);
 		    /* getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref) */
@@ -973,12 +972,13 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		} catch (Exception e_applyRuleGeneralEquals) {
 			
 			String _stringRep = this.stringRep(left);
-			String _operator_plus = StringExtensions.operator_plus("types ", _stringRep);
-			String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " and ");
+			String _plus = ("types " + _stringRep);
+			String _plus_1 = (_plus + " and ");
 			String _stringRep_1 = this.stringRep(right);
-			String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _stringRep_1);
-			String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " are not comparable");
-			String error = _operator_plus_3;
+			String _plus_2 = (_plus_1 + _stringRep_1);
+			String _plus_3 = (_plus_2 + 
+			  " are not comparable");
+			String error = _plus_3;
 			throwRuleFailedException(error,
 				GENERALEQUALS, e_applyRuleGeneralEquals,
 				new ErrorInformation(null, null));
@@ -1047,9 +1047,9 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		
 		it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
 		it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-		boolean _operator_equals = ObjectExtensions.operator_equals(_classref, _classref_1);
+		boolean _equals = Objects.equal(_classref, _classref_1);
 		/* left.classref == right.classref */
-		if (!_operator_equals) {
+		if (!_equals) {
 		  sneakyThrowRuleFailedException("left.classref == right.classref");
 		}
 		return new Result<Boolean>(true);
@@ -1080,24 +1080,23 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		  try {
 		    int _size = expressions.size();
 		    int _size_1 = typedElements.size();
-		    boolean _operator_equals = IntegerExtensions.operator_equals(_size, _size_1);
+		    boolean _equals = (_size == _size_1);
 		    /* expressions.size == typedElements.size */
-		    if (!_operator_equals) {
+		    if (!_equals) {
 		      sneakyThrowRuleFailedException("expressions.size == typedElements.size");
 		    }
 		  } catch (Exception e) {
 		    /* fail error "expected " + typedElements.size + " arguments, but got " + expressions.size source owner */
 		    int _size_2 = typedElements.size();
-		    String _operator_plus = StringExtensions.operator_plus("expected ", Integer.valueOf(_size_2));
-		    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " arguments, but got ");
+		    String _plus = ("expected " + Integer.valueOf(_size_2));
+		    String _plus_1 = (_plus + " arguments, but got ");
 		    int _size_3 = expressions.size();
-		    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, Integer.valueOf(_size_3));
-		    String error = _operator_plus_2;
+		    String _plus_2 = (_plus_1 + Integer.valueOf(_size_3));
+		    String error = _plus_2;
 		    EObject source = owner;
 		    throwForExplicitFail(error, new ErrorInformation(source, null));
 		  }
-		  Iterator<TypedElement> _iterator = typedElements.iterator();
-		  final Iterator<TypedElement> typedElementsIterator = _iterator;
+		  final Iterator<TypedElement> typedElementsIterator = typedElements.iterator();
 		  for (final Expression exp : expressions) {
 		    /* G |- exp <| typedElementsIterator.next.type */
 		    TypedElement _next = typedElementsIterator.next();
@@ -1200,9 +1199,9 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		
 		/* env(G, 'this', ClassType) */
 		ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-		boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_environmentaccess, null);
+		boolean _notEquals = (!Objects.equal(_environmentaccess, null));
 		/* env(G, 'this', ClassType) != null */
-		if (!_operator_notEquals) {
+		if (!_notEquals) {
 		  sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
 		}
 		return new Result<Boolean>(true);
@@ -1231,8 +1230,7 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		
 		{
 		  it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-		  ClassType _createClassType = FjTypeUtils.createClassType(_containerOfType);
-		  final ClassType typeForThis = _createClassType;
+		  final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
 		  Type bodyType = null;
 		  /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
 		  MethodBody _body = method.getBody();
@@ -1282,8 +1280,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		  it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
 		  EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
 		  EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-		  List<Field> _all = this.<Field>getAll(_classref, _class_Members, _class_Superclass, it.xsemantics.example.fj.fj.Field.class);
-		  List<Field> fields = _all;
+		  List<Field> fields = this.<Field>getAll(_classref, _class_Members, _class_Superclass, 
+		    Field.class);
 		  Collections.reverse(fields);
 		  /* G |- newExp ~> newExp.args << fields */
 		  EList<Expression> _args = newExp.getArgs();
@@ -1325,13 +1323,12 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		  /* G |- selection.receiver */
 		  Expression _receiver = selection.getReceiver();
 		  checkInternal(G, _trace_, _receiver);
-		  Member _message = selection.getMessage();
-		  final Member message = _message;
-		  boolean matched = false;
-		  if (!matched) {
+		  final Member message = selection.getMessage();
+		  boolean _matched = false;
+		  if (!_matched) {
 		    if (message instanceof Method) {
 		      final Method _method = (Method)message;
-		      matched=true;
+		      _matched=true;
 		      {
 		        /* G |- selection ~> selection.args << message.params */
 		        EList<Expression> _args = selection.getArgs();
@@ -1416,9 +1413,9 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 		  String _name = current.getName();
 		  String _name_1 = previous.getName();
-		  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
+		  boolean _notEquals = (!Objects.equal(_name, _name_1));
 		  /* current.name != previous.name */
-		  if (!_operator_notEquals) {
+		  if (!_notEquals) {
 		    sneakyThrowRuleFailedException("current.name != previous.name");
 		  }
 		} catch (Exception e) {
@@ -1433,8 +1430,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		      /* fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
 		      Type _type_2 = previous.getType();
 		      String _stringRep = this.stringRep(_type_2);
-		      String _operator_plus = StringExtensions.operator_plus("cannot change return type of inherited method: ", _stringRep);
-		      String error = _operator_plus;
+		      String _plus = ("cannot change return type of inherited method: " + _stringRep);
+		      String error = _plus;
 		      EObject source = current;
 		      EReference _typedElement_Type = FjPackage.eINSTANCE.getTypedElement_Type();
 		      EStructuralFeature feature = _typedElement_Type;
@@ -1444,14 +1441,13 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		    int _size = _params.size();
 		    EList<Parameter> _params_1 = previous.getParams();
 		    int _size_1 = _params_1.size();
-		    boolean _operator_equals = IntegerExtensions.operator_equals(_size, _size_1);
+		    boolean _equals = (_size == _size_1);
 		    /* current.params.size == previous.params.size */
-		    if (!_operator_equals) {
+		    if (!_equals) {
 		      sneakyThrowRuleFailedException("current.params.size == previous.params.size");
 		    }
 		    EList<Parameter> _params_2 = previous.getParams();
-		    Iterator<Parameter> _iterator = _params_2.iterator();
-		    final Iterator<Parameter> previousParamsIt = _iterator;
+		    final Iterator<Parameter> previousParamsIt = _params_2.iterator();
 		    EList<Parameter> _params_3 = current.getParams();
 		    for (final Parameter param : _params_3) {
 		      /* G |- param.type ~~ previousParamsIt.next.type */
@@ -1496,23 +1492,23 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		    };
 		  IterableExtensions.<Member>forEach(_members, _function);
 		  it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-		  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
-		  if (_operator_notEquals) {
+		  boolean _notEquals = (!Objects.equal(_superclass, null));
+		  if (_notEquals) {
 		    {
 		      it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
 		      EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
 		      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-		      List<Field> _all = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, it.xsemantics.example.fj.fj.Field.class);
-		      List<Field> inheritedFields = _all;
+		      List<Field> inheritedFields = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, 
+		        Field.class);
 		      final Procedure1<Field> _function_1 = new Procedure1<Field>() {
 		          public void apply(final Field inheritedField) {
 		            List<Field> _selectFields = FjAuxiliaryFunctions.selectFields(cl);
 		            for (final Field field : _selectFields) {
 		              String _name = field.getName();
 		              String _name_1 = inheritedField.getName();
-		              boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
+		              boolean _notEquals = (!Objects.equal(_name, _name_1));
 		              /* field.name != inheritedField.name */
-		              if (!_operator_notEquals) {
+		              if (!_notEquals) {
 		                sneakyThrowRuleFailedException("field.name != inheritedField.name");
 		              }
 		            }
@@ -1522,8 +1518,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		      it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
 		      EReference _class_Members_1 = FjPackage.eINSTANCE.getClass_Members();
 		      EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-		      List<Method> _all_1 = this.<Method>getAll(_superclass_2, _class_Members_1, _class_Superclass_1, it.xsemantics.example.fj.fj.Method.class);
-		      List<Method> inheritedMethods = _all_1;
+		      List<Method> inheritedMethods = this.<Method>getAll(_superclass_2, _class_Members_1, _class_Superclass_1, 
+		        Method.class);
 		      final Procedure1<Method> _function_2 = new Procedure1<Method>() {
 		          public void apply(final Method inheritedMethod) {
 		            List<Method> _selectMethods = FjAuxiliaryFunctions.selectMethods(cl);
