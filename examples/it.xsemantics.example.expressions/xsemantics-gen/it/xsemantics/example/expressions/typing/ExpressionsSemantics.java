@@ -1,5 +1,6 @@
 package it.xsemantics.example.expressions.typing;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.expressions.expressions.AndOrExpression;
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned;
 import it.xsemantics.example.expressions.expressions.BooleanLiteral;
@@ -31,11 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 	public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.rules.NumeralLiteral";
@@ -194,8 +190,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(expression);
-		String _operator_plus = StringExtensions.operator_plus("cannot type ", _stringRep);
-		String error = _operator_plus;
+		String _plus = ("cannot type " + _stringRep);
+		String error = _plus;
 		EObject source = expression;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -217,8 +213,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(variable);
-		String _operator_plus = StringExtensions.operator_plus("cannot type ", _stringRep);
-		String error = _operator_plus;
+		String _plus = ("cannot type " + _stringRep);
+		String error = _plus;
 		EObject source = variable;
 		EReference _variable_Expression = ExpressionsPackage.eINSTANCE.getVariable_Expression();
 		EStructuralFeature feature = _variable_Expression;
@@ -242,11 +238,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(expression);
-		String _operator_plus = StringExtensions.operator_plus("cannot convert ", _stringRep);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to type ");
+		String _plus = ("cannot convert " + _stringRep);
+		String _plus_1 = (_plus + 
+		  " to type ");
 		String _stringRep_1 = this.stringRep(expectedType);
-		String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _stringRep_1);
-		String error = _operator_plus_2;
+		String _plus_2 = (_plus_1 + _stringRep_1);
+		String error = _plus_2;
 		EObject source = expression;
 		throwRuleFailedException(error,
 				_issue, _ex,
@@ -384,8 +381,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- multiOrDiv.left : intType */
 		  Expression _left = multiOrDiv.getLeft();
 		  Result<Type> result = typeInternal(environmentComposition(
@@ -403,8 +399,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  intType = (IntType) result_1.getFirst();
 		  
 		}
-		IntType _createIntType_1 = ExpressionsFactory.eINSTANCE.createIntType();
-		return new Result<Type>(_createIntType_1);
+		IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
+		return new Result<Type>(_createIntType);
 	}
 	
 	protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
@@ -428,8 +424,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- minus.left : intType */
 		  Expression _left = minus.getLeft();
 		  Result<Type> result = typeInternal(environmentComposition(
@@ -447,8 +442,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  intType = (IntType) result_1.getFirst();
 		  
 		}
-		IntType _createIntType_1 = ExpressionsFactory.eINSTANCE.createIntType();
-		return new Result<Type>(_createIntType_1);
+		IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
+		return new Result<Type>(_createIntType);
 	}
 	
 	protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
@@ -508,14 +503,14 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		    try {
 		      Type _xblockexpression_1 = null;
 		      {
-		        boolean _operator_or = false;
+		        boolean _or = false;
 		        if ((leftType instanceof StringType)) {
-		          _operator_or = true;
+		          _or = true;
 		        } else {
-		          _operator_or = BooleanExtensions.operator_or((leftType instanceof StringType), (rightType instanceof StringType));
+		          _or = ((leftType instanceof StringType) || (rightType instanceof StringType));
 		        }
 		        /* leftType instanceof StringType || rightType instanceof StringType */
-		        if (!_operator_or) {
+		        if (!_or) {
 		          sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
 		        }
 		        StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
@@ -524,14 +519,14 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		      }
 		    } catch (Exception e_1) {
 		      {
-		        boolean _operator_and = false;
+		        boolean _and = false;
 		        if (!(leftType instanceof IntType)) {
-		          _operator_and = false;
+		          _and = false;
 		        } else {
-		          _operator_and = BooleanExtensions.operator_and((leftType instanceof IntType), (rightType instanceof IntType));
+		          _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
 		        }
 		        /* leftType instanceof IntType && rightType instanceof IntType */
-		        if (!_operator_and) {
+		        if (!_and) {
 		          sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
 		        }
 		        type = leftType;
@@ -577,26 +572,26 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_1.getFirst(), Type.class);
 		  rightType = (Type) result_1.getFirst();
 		  
-		  boolean _operator_or = false;
-		  boolean _operator_and = false;
+		  boolean _or = false;
+		  boolean _and = false;
 		  if (!(leftType instanceof IntType)) {
-		    _operator_and = false;
+		    _and = false;
 		  } else {
-		    _operator_and = BooleanExtensions.operator_and((leftType instanceof IntType), (rightType instanceof IntType));
+		    _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
 		  }
-		  if (_operator_and) {
-		    _operator_or = true;
+		  if (_and) {
+		    _or = true;
 		  } else {
-		    boolean _operator_and_1 = false;
+		    boolean _and_1 = false;
 		    if (!(leftType instanceof StringType)) {
-		      _operator_and_1 = false;
+		      _and_1 = false;
 		    } else {
-		      _operator_and_1 = BooleanExtensions.operator_and((leftType instanceof StringType), (rightType instanceof StringType));
+		      _and_1 = ((leftType instanceof StringType) && (rightType instanceof StringType));
 		    }
-		    _operator_or = BooleanExtensions.operator_or(_operator_and, _operator_and_1);
+		    _or = (_and || _and_1);
 		  }
 		  /* (leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType) */
-		  if (!_operator_or) {
+		  if (!_or) {
 		    sneakyThrowRuleFailedException("(leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType)");
 		  }
 		}
@@ -641,9 +636,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  
 		  EClass _eClass = leftType.eClass();
 		  EClass _eClass_1 = rightType.eClass();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_eClass, _eClass_1);
+		  boolean _equals = Objects.equal(_eClass, _eClass_1);
 		  /* leftType.eClass == rightType.eClass */
-		  if (!_operator_equals) {
+		  if (!_equals) {
 		    sneakyThrowRuleFailedException("leftType.eClass == rightType.eClass");
 		  }
 		}
@@ -752,8 +747,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- signed.expression : intType */
 		  Expression _expression = signed.getExpression();
 		  Result<Type> result = typeInternal(environmentComposition(
@@ -763,8 +757,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  intType = (IntType) result.getFirst();
 		  
 		}
-		IntType _createIntType_1 = ExpressionsFactory.eINSTANCE.createIntType();
-		return new Result<Type>(_createIntType_1);
+		IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
+		return new Result<Type>(_createIntType);
 	}
 	
 	protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_,
@@ -812,18 +806,18 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final StringLiteral string, final BooleanType type) 
 			throws RuleFailedException {
 		
-		boolean _operator_or = false;
+		boolean _or = false;
 		String _value = string.getValue();
 		boolean _equalsIgnoreCase = _value.equalsIgnoreCase("true");
 		if (_equalsIgnoreCase) {
-		  _operator_or = true;
+		  _or = true;
 		} else {
 		  String _value_1 = string.getValue();
 		  boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
-		  _operator_or = BooleanExtensions.operator_or(_equalsIgnoreCase, _equalsIgnoreCase_1);
+		  _or = (_equalsIgnoreCase || _equalsIgnoreCase_1);
 		}
 		/* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
-		if (!_operator_or) {
+		if (!_or) {
 		  sneakyThrowRuleFailedException("string.value.equalsIgnoreCase(\"true\") || string.value.equalsIgnoreCase(\"false\")");
 		}
 		return new Result<Boolean>(true);
@@ -926,9 +920,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		
 		{
 		  Expression _expression = variable.getExpression();
-		  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_expression, null);
+		  boolean _notEquals = (!Objects.equal(_expression, null));
 		  /* variable.expression != null */
-		  if (!_operator_notEquals) {
+		  if (!_notEquals) {
 		    sneakyThrowRuleFailedException("variable.expression != null");
 		  }
 		  /* G |- variable.expression : type */
@@ -1073,8 +1067,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Integer result = null;
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- plus.left ~> var Integer leftResult */
 		  Expression _left = plus.getLeft();
 		  Integer leftResult = null;
@@ -1095,8 +1088,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  
 		  int _intValue = leftResult.intValue();
 		  int _intValue_1 = rightResult.intValue();
-		  int _operator_minus = IntegerExtensions.operator_minus(_intValue, _intValue_1);
-		  result = Integer.valueOf(_operator_minus);
+		  int _minus = (_intValue - _intValue_1);
+		  result = Integer.valueOf(_minus);
 		}
 		return new Result<Object>(result);
 	}
@@ -1124,8 +1117,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Integer result = null;
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- multiOrDiv.left ~> var Integer leftResult */
 		  Expression _left = multiOrDiv.getLeft();
 		  Integer leftResult = null;
@@ -1145,17 +1137,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  rightResult = (Integer) result_2.getFirst();
 		  
 		  String _op = multiOrDiv.getOp();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_op, "*");
-		  if (_operator_equals) {
+		  boolean _equals = Objects.equal(_op, "*");
+		  if (_equals) {
 		    int _intValue = leftResult.intValue();
 		    int _intValue_1 = rightResult.intValue();
-		    int _operator_multiply = IntegerExtensions.operator_multiply(_intValue, _intValue_1);
-		    result = Integer.valueOf(_operator_multiply);
+		    int _multiply = (_intValue * _intValue_1);
+		    result = Integer.valueOf(_multiply);
 		  } else {
 		    int _intValue_2 = leftResult.intValue();
 		    int _intValue_3 = rightResult.intValue();
-		    int _operator_divide = IntegerExtensions.operator_divide(_intValue_2, _intValue_3);
-		    result = Integer.valueOf(_operator_divide);
+		    int _divide = (_intValue_2 / _intValue_3);
+		    result = Integer.valueOf(_divide);
 		  }
 		}
 		return new Result<Object>(result);
@@ -1184,8 +1176,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Integer result = null;
 		
 		{
-		  IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-		  IntType intType = _createIntType;
+		  IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
 		  /* G, 'expected' <- intType |- signed.expression ~> var Integer expResult */
 		  Expression _expression = signed.getExpression();
 		  Integer expResult = null;
@@ -1195,8 +1186,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_1.getFirst(), Integer.class);
 		  expResult = (Integer) result_1.getFirst();
 		  
-		  int _operator_minus = IntegerExtensions.operator_minus(expResult);
-		  result = Integer.valueOf(_operator_minus);
+		  int _minus = (-expResult);
+		  result = Integer.valueOf(_minus);
 		}
 		return new Result<Object>(result);
 	}
@@ -1224,8 +1215,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Boolean result = null;
 		
 		{
-		  BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-		  BooleanType boolType = _createBooleanType;
+		  BooleanType boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
 		  /* G, 'expected' <- boolType |- andOr.left ~> var Boolean leftResult */
 		  Expression _left = andOr.getLeft();
 		  Boolean leftResult = null;
@@ -1245,27 +1235,27 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  rightResult = (Boolean) result_2.getFirst();
 		  
 		  String _op = andOr.getOp();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_op, "&&");
-		  if (_operator_equals) {
-		    boolean _operator_and = false;
+		  boolean _equals = Objects.equal(_op, "&&");
+		  if (_equals) {
+		    boolean _and = false;
 		    boolean _booleanValue = leftResult.booleanValue();
 		    if (!_booleanValue) {
-		      _operator_and = false;
+		      _and = false;
 		    } else {
 		      boolean _booleanValue_1 = rightResult.booleanValue();
-		      _operator_and = BooleanExtensions.operator_and(_booleanValue, _booleanValue_1);
+		      _and = (_booleanValue && _booleanValue_1);
 		    }
-		    result = Boolean.valueOf(_operator_and);
+		    result = Boolean.valueOf(_and);
 		  } else {
-		    boolean _operator_or = false;
+		    boolean _or = false;
 		    boolean _booleanValue_2 = leftResult.booleanValue();
 		    if (_booleanValue_2) {
-		      _operator_or = true;
+		      _or = true;
 		    } else {
 		      boolean _booleanValue_3 = rightResult.booleanValue();
-		      _operator_or = BooleanExtensions.operator_or(_booleanValue_2, _booleanValue_3);
+		      _or = (_booleanValue_2 || _booleanValue_3);
 		    }
-		    result = Boolean.valueOf(_operator_or);
+		    result = Boolean.valueOf(_or);
 		  }
 		}
 		return new Result<Object>(result);
@@ -1294,8 +1284,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		Boolean result = null;
 		
 		{
-		  BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-		  BooleanType boolType = _createBooleanType;
+		  BooleanType boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
 		  /* G, 'expected' <- boolType |- neg.expression ~> var Boolean expResult */
 		  Expression _expression = neg.getExpression();
 		  Boolean expResult = null;
@@ -1305,8 +1294,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_1.getFirst(), Boolean.class);
 		  expResult = (Boolean) result_1.getFirst();
 		  
-		  boolean _operator_not = BooleanExtensions.operator_not(expResult);
-		  result = Boolean.valueOf(_operator_not);
+		  boolean _not = (!expResult);
+		  result = Boolean.valueOf(_not);
 		}
 		return new Result<Object>(result);
 	}
@@ -1348,20 +1337,20 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_2.getFirst(), Object.class);
 		  rightResult = (Object) result_2.getFirst();
 		  
-		  boolean _operator_and = false;
+		  boolean _and = false;
 		  if (!(leftResult instanceof String)) {
-		    _operator_and = false;
+		    _and = false;
 		  } else {
-		    _operator_and = BooleanExtensions.operator_and((leftResult instanceof String), (rightResult instanceof String));
+		    _and = ((leftResult instanceof String) && (rightResult instanceof String));
 		  }
-		  if (_operator_and) {
+		  if (_and) {
 		    String _string = leftResult.toString();
 		    String _string_1 = rightResult.toString();
-		    boolean _operator_lessThan = ComparableExtensions.<String>operator_lessThan(_string, _string_1);
-		    result = Boolean.valueOf(_operator_lessThan);
+		    boolean _lessThan = (_string.compareTo(_string_1) < 0);
+		    result = Boolean.valueOf(_lessThan);
 		  } else {
-		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer) leftResult), ((Integer) rightResult));
-		    result = Boolean.valueOf(_operator_lessThan_1);
+		    boolean _lessThan_1 = (((Integer) leftResult).compareTo(((Integer) rightResult)) < 0);
+		    result = Boolean.valueOf(_lessThan_1);
 		  }
 		}
 		return new Result<Object>(result);
@@ -1406,8 +1395,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  
 		  String _string = leftResult.toString();
 		  String _string_1 = rightResult.toString();
-		  boolean _operator_equals = ObjectExtensions.operator_equals(_string, _string_1);
-		  result = Boolean.valueOf(_operator_equals);
+		  boolean _equals = Objects.equal(_string, _string_1);
+		  result = Boolean.valueOf(_equals);
 		}
 		return new Result<Object>(result);
 	}
@@ -1449,27 +1438,25 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result_2.getFirst(), Object.class);
 		  rightResult = (Object) result_2.getFirst();
 		  
-		  boolean _operator_or = false;
+		  boolean _or = false;
 		  if ((leftResult instanceof String)) {
-		    _operator_or = true;
+		    _or = true;
 		  } else {
-		    _operator_or = BooleanExtensions.operator_or((leftResult instanceof String), (rightResult instanceof String));
+		    _or = ((leftResult instanceof String) || (rightResult instanceof String));
 		  }
-		  if (_operator_or) {
+		  if (_or) {
 		    {
-		      String _string = leftResult.toString();
-		      String leftString = _string;
-		      String _string_1 = rightResult.toString();
-		      String rightString = _string_1;
-		      String _operator_plus = StringExtensions.operator_plus(leftString, rightString);
-		      result = _operator_plus;
+		      String leftString = leftResult.toString();
+		      String rightString = rightResult.toString();
+		      String _plus = (leftString + rightString);
+		      result = _plus;
 		    }
 		  } else {
 		    {
 		      Integer leftInt = ((Integer) leftResult);
 		      Integer rightInt = ((Integer) rightResult);
-		      int _operator_plus_1 = IntegerExtensions.operator_plus(leftInt, rightInt);
-		      result = Integer.valueOf(_operator_plus_1);
+		      int _plus_1 = ((leftInt).intValue() + (rightInt).intValue());
+		      result = Integer.valueOf(_plus_1);
 		    }
 		  }
 		}
