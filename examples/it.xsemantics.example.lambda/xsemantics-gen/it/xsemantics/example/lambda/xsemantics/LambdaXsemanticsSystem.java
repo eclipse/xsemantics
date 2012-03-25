@@ -1,5 +1,6 @@
 package it.xsemantics.example.lambda.xsemantics;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.lambda.lambda.Abstraction;
 import it.xsemantics.example.lambda.lambda.Application;
 import it.xsemantics.example.lambda.lambda.Arithmetics;
@@ -26,8 +27,6 @@ import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 	public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.rules.SubstituteType";
@@ -242,10 +241,10 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			throws RuleFailedException {
 		
 		String _stringRep = this.stringRep(type);
-		String _operator_plus = StringExtensions.operator_plus(_stringRep, " occurs in ");
+		String _plus = (_stringRep + " occurs in ");
 		String _stringRep_1 = this.stringRep(other);
-		String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _stringRep_1);
-		String error = _operator_plus_1;
+		String _plus_1 = (_plus + _stringRep_1);
+		String error = _plus_1;
 		throwRuleFailedException(error,
 				_issue, _ex,
 				new ErrorInformation(null, null));
@@ -326,11 +325,10 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		  Object _xblockexpression = null;
 		  {
 		    String _typevarName = variable.getTypevarName();
-		    Type _mapped = substitutions.mapped(_typevarName);
-		    Type mapped = _mapped;
-		    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(mapped, null);
+		    Type mapped = substitutions.mapped(_typevarName);
+		    boolean _notEquals = (!Objects.equal(mapped, null));
 		    /* mapped != null */
-		    if (!_operator_notEquals) {
+		    if (!_notEquals) {
 		      sneakyThrowRuleFailedException("mapped != null");
 		    }
 		    Type _copy = EcoreUtil.<Type>copy(mapped);
@@ -436,9 +434,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		
 		String _typevarName = variable.getTypevarName();
 		String _typevarName_1 = other.getTypevarName();
-		boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_typevarName, _typevarName_1);
+		boolean _notEquals = (!Objects.equal(_typevarName, _typevarName_1));
 		/* variable.typevarName != other.typevarName */
-		if (!_operator_notEquals) {
+		if (!_notEquals) {
 		  sneakyThrowRuleFailedException("variable.typevarName != other.typevarName");
 		}
 		return new Result<Boolean>(true);
@@ -804,9 +802,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		  Type _xblockexpression = null;
 		  {
 		    Type _type = param.getType();
-		    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
+		    boolean _notEquals = (!Objects.equal(_type, null));
 		    /* param.type != null */
-		    if (!_operator_notEquals) {
+		    if (!_notEquals) {
 		      sneakyThrowRuleFailedException("param.type != null");
 		    }
 		    Type _type_1 = param.getType();
@@ -1034,8 +1032,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		  checkAssignableTo(result.getFirst(), Type.class);
 		  funType = (Type) result.getFirst();
 		  
-		  ArrowType _createFreshArrowType = LambdaUtils.createFreshArrowType();
-		  ArrowType arrowType = _createFreshArrowType;
+		  ArrowType arrowType = LambdaUtils.createFreshArrowType();
 		  /* G |- substitutions |> funType ~~ arrowType ~> funType ~~ arrowType */
 		  Result2<Type, Type> result_1 = unifyInternal(G, _trace_, substitutions, funType, arrowType);
 		  checkAssignableTo(result_1.getFirst(), Type.class);
