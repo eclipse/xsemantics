@@ -228,7 +228,6 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 
 		if (isReferenced) {
 			Later later = new Later() {
-				@Override
 				public void exec(ITreeAppendable b) {
 					compileEnvironmentAccess(environmentAccess, b);
 				}
