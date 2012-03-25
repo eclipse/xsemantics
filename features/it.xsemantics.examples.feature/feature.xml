@@ -111,7 +111,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update url="http://master.dl.sourceforge.net/project/xsemantics/updatesite"/>
+      <update url="http://master.dl.sourceforge.net/project/xsemantics/updatesite_xtext_2_3"/>
    </url>
 
    <requires>

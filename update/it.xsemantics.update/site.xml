@@ -8,28 +8,16 @@ Java code that can be used in your language implemented in Xtext
 for scoping and validation (it can also generate a validator
 in Java).
    </description>
-   <feature url="features/it.xsemantics.examples.feature_1.0.0.201203191813.jar" id="it.xsemantics.examples.feature" version="1.0.0.201203191813">
+   <feature url="features/it.xsemantics.examples.feature_1.0.1.201203252356.jar" id="it.xsemantics.examples.feature" version="1.0.1.201203252356">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.feature_1.0.0.201203191813.jar" id="it.xsemantics.feature" version="1.0.0.201203191813">
+   <feature url="features/it.xsemantics.feature_1.0.1.201203252356.jar" id="it.xsemantics.feature" version="1.0.1.201203252356">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.runtime.feature_1.0.0.201203191813.jar" id="it.xsemantics.runtime.feature" version="1.0.0.201203191813">
+   <feature url="features/it.xsemantics.runtime.feature_1.0.1.201203252356.jar" id="it.xsemantics.runtime.feature" version="1.0.1.201203252356">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.sdkfeature_1.0.0.201203191813.jar" id="it.xsemantics.sdkfeature" version="1.0.0.201203191813">
-      <category name="xsemantics"/>
-   </feature>
-   <feature url="features/it.xsemantics.examples.feature_1.0.1.201203251920.jar" id="it.xsemantics.examples.feature" version="1.0.1.201203251920">
-      <category name="xsemantics"/>
-   </feature>
-   <feature url="features/it.xsemantics.feature_1.0.1.201203251920.jar" id="it.xsemantics.feature" version="1.0.1.201203251920">
-      <category name="xsemantics"/>
-   </feature>
-   <feature url="features/it.xsemantics.runtime.feature_1.0.1.201203251920.jar" id="it.xsemantics.runtime.feature" version="1.0.1.201203251920">
-      <category name="xsemantics"/>
-   </feature>
-   <feature url="features/it.xsemantics.sdkfeature_1.0.1.201203251920.jar" id="it.xsemantics.sdkfeature" version="1.0.1.201203251920">
+   <feature url="features/it.xsemantics.sdkfeature_1.0.1.201203252356.jar" id="it.xsemantics.sdkfeature" version="1.0.1.201203252356">
       <category name="xsemantics"/>
    </feature>
    <category-def name="xsemantics" label="XSemantics">
