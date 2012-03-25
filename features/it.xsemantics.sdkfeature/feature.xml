@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.sdkfeature"
       label="XSemantics SDK"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
