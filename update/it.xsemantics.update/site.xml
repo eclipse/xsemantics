@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site>
+<site url="http://downloads.sourceforge.net/project/xsemantics/updatesite/">
    <description name="XSemantics" url="http://xsemantics.sourceforge.net">
       XSemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation
