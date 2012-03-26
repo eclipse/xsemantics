@@ -38,13 +38,18 @@ public class FJTestLoader {
 
 	private XtextResourceSet resourceSet;
 
-	public FJTestLoader() {
+	public FJTestLoader() throws IOException {
 		new org.eclipse.emf.mwe.utils.StandaloneSetup().setPlatformUri("../");
 
 		resourceSet = injector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL,
 				Boolean.TRUE);
-		resourceSet.getResource(uriForFjLibFiles(OBJECT_FJ), true);
+		//resourceSet.getResource(uriForFjLibFiles(OBJECT_FJ), true);
+		Resource resource = resourceSet.createResource(URI
+				.createURI("dummy:/Object.fj"));
+		String program = "class Object { } ";
+		InputStream in = new ByteArrayInputStream(program.getBytes());
+		resource.load(in, resourceSet.getLoadOptions());
 	}
 
 	public Resource createResource() {
