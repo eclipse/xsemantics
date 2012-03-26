@@ -25,7 +25,7 @@
     <repository>
       <id>xtext</id>
       <layout>p2</layout>
-      <url>http://download.itemis.de/updates</url>
+      <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
     </repository>
     <!-- SWTbot is not part of the indigo update site -->
     <repository>
