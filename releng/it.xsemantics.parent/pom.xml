@@ -44,5 +44,8 @@
 		<module>../../plugins/it.xsemantics.dsl.ui</module>
 		<module>../../examples/it.xsemantics.example.expressions</module>
 		<module>../../examples/it.xsemantics.example.expressions.ui</module>
+		<module>../../examples/it.xsemantics.example.fj</module>
+		<module>../../examples/it.xsemantics.example.fj.ui</module>
+		<module>../../examples/it.xsemantics.example.expressions.tests</module>
 	</modules>
 </project>
