@@ -2,13 +2,13 @@ package it.xsemantics.dsl.tests.runtime
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.EmfFactoryUtils
+import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.util.TraceUtils
-import it.xsemantics.dsl.util.XsemanticsUtils
-import it.xsemantics.dsl.tests.EmfFactoryUtils
-import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import junit.framework.Assert
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.junit4.InjectWith
