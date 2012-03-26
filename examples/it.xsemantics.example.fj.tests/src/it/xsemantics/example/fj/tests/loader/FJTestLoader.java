@@ -28,7 +28,7 @@ import com.google.inject.Injector;
 public class FJTestLoader {
 	public static final String OBJECT_FJ = "Object.fj";
 
-	public static final String PLATFORM_URI_FOR_FJ_LIB = "platform:/resource/it.xsemantics.example.fj/src/it/xsemantics/example/fj/lib/";
+	public static final String PLATFORM_URI_FOR_FJ_LIB = "platform:/resource/it.xsemantics.example.fj.tests/src/it/xsemantics/example/fj/lib/";
 
 	public static final String OBJECT_FJ_URI = PLATFORM_URI_FOR_FJ_LIB
 			+ OBJECT_FJ;
