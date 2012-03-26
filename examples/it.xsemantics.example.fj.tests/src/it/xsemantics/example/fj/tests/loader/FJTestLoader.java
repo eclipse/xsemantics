@@ -62,7 +62,7 @@ public class FJTestLoader {
 
 	protected URI uriForFjTestFiles(String fileName) {
 		return URI
-				.createURI("platform:/resource/it.xsemantics.example.fj.tests/tests/"
+				.createURI("./tests/"
 						+ fileName);
 	}
 	
