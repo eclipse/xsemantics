@@ -40,5 +40,7 @@
 	</build>
 	<modules>
 		<module>../../plugins/it.xsemantics.runtime</module>
+		<module>../../plugins/it.xsemantics.dsl</module>
+		<module>../../plugins/it.xsemantics.dsl.ui</module>
 	</modules>
 </project>
