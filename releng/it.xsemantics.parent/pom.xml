@@ -13,28 +13,56 @@
 		<tycho-version>0.13.0</tycho-version>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtend2</groupId>
+			<artifactId>org.eclipse.xtend2.lib</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
+			<version>2.2.0.v201112121625</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>com.google.inject</artifactId>
+			<version>3.0.0.no_aop</version>
+		</dependency>
+	</dependencies>
+
   <repositories>
-    <!-- configure p2 repository to resolve against -->
-    <repository>
-      <id>indigo</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/releases/indigo</url>
-            <!-- file URL for faster and offline builds -->
-      <!-- <url>file:/${basedir}/../../helios-rcp/</url> -->
-    </repository>
-    <repository>
-      <id>xtext</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
-    </repository>
-    <!-- SWTbot is not part of the indigo update site -->
-    <repository>
-      <id>swtbot</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site/</url>
-    </repository>
+		<repository>
+			<id>indigo</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/indigo</url>
+		</repository>
+		<repository>
+	      <id>xtext-p2</id>
+	      <layout>p2</layout>
+	      <url>http://download.itemis.de/updates</url>
+	    </repository>
+		<repository>
+			<id>maven.eclipse.org</id>
+			<url>http://maven.eclipse.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>xtend</id>
+			<url>http://build.eclipse.org/common/xtend/maven/</url>
+		</repository>
+		<repository>
+			<id>xtext</id>
+			<url>http://build.eclipse.org/common/xtext/maven/maven-snapshot/final/</url>
+		</repository>
   </repositories>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>xtend</id>
+			<url>http://build.eclipse.org/common/xtend/maven/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -43,6 +71,19 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+			  <groupId>org.eclipse.xtend2</groupId>
+			  <artifactId>xtend-maven-plugin</artifactId>
+			  <version>2.2.0</version>
+			  <executions>
+			    <execution>
+			      <goals>
+			        <goal>compile</goal>
+			        <goal>testCompile</goal>
+			      </goals>
+			    </execution>
+			  </executions>
 			</plugin>
 		</plugins>
 	</build>
