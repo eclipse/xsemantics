@@ -42,5 +42,7 @@
 		<module>../../plugins/it.xsemantics.runtime</module>
 		<module>../../plugins/it.xsemantics.dsl</module>
 		<module>../../plugins/it.xsemantics.dsl.ui</module>
+		<module>../../examples/it.xsemantics.example.expressions</module>
+		<module>../../examples/it.xsemantics.example.expressions.ui</module>
 	</modules>
 </project>
