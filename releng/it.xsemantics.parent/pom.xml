@@ -13,23 +13,6 @@
 		<tycho-version>0.13.0</tycho-version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.xtend2</groupId>
-			<artifactId>org.eclipse.xtend2.lib</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
-			<version>2.2.0.v201112121625</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>com.google.inject</artifactId>
-			<version>3.0.0.no_aop</version>
-		</dependency>
-	</dependencies>
 
   <repositories>
 		<repository>
@@ -72,21 +55,46 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
-			<plugin>
-			  <groupId>org.eclipse.xtend2</groupId>
-			  <artifactId>xtend-maven-plugin</artifactId>
-			  <version>2.2.0</version>
-			  <executions>
-			    <execution>
-			      <goals>
-			        <goal>compile</goal>
-			        <goal>testCompile</goal>
-			      </goals>
-			    </execution>
-			  </executions>
-			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+			
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.7</version>
+					<executions>
+						<execution>
+							<id>add-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src-gen</source>
+								</sources>
+								<sources>
+									<source>${project.build.directory}/xtend-gen</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.xtend2</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>2.2.1</version>
+					<configuration>
+						<!-- need to prefix by basedir to generate to currently built module -->
+						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+					</configuration>
+				</plugin>
+			
+			</plugins>
+		</pluginManagement>
 	</build>
+	
 	<modules>
 		<module>../../plugins/it.xsemantics.runtime</module>
 	</modules>
