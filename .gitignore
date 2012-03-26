@@ -4,3 +4,4 @@ bin/
 logs.zip
 *.orig
 xtend-gen/
+target/

@@ -13,39 +13,20 @@
 		<tycho-version>0.13.0</tycho-version>
 	</properties>
 
-
   <repositories>
-		<repository>
-			<id>indigo</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/indigo</url>
-		</repository>
-		<repository>
-	      <id>xtext-p2</id>
-	      <layout>p2</layout>
-	      <url>http://download.itemis.de/updates</url>
-	    </repository>
-		<repository>
-			<id>maven.eclipse.org</id>
-			<url>http://maven.eclipse.org/nexus/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
-		</repository>
-		<repository>
-			<id>xtext</id>
-			<url>http://build.eclipse.org/common/xtext/maven/maven-snapshot/final/</url>
-		</repository>
+    <!-- configure p2 repository to resolve against -->
+    <repository>
+      <id>indigo</id>
+      <layout>p2</layout>
+      <url>http://download.eclipse.org/releases/indigo</url>
+    </repository>
+    <repository>
+      <id>xtext</id>
+      <layout>p2</layout>
+      <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</url>
+    </repository>
   </repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
-		</pluginRepository>
-	</pluginRepositories>
-	
 	<build>
 		<plugins>
 			<plugin>
@@ -56,45 +37,7 @@
 				<extensions>true</extensions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-			
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.7</version>
-					<executions>
-						<execution>
-							<id>add-source</id>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>add-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>src-gen</source>
-								</sources>
-								<sources>
-									<source>${project.build.directory}/xtend-gen</source>
-								</sources>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.xtend2</groupId>
-					<artifactId>xtend-maven-plugin</artifactId>
-					<version>2.2.1</version>
-					<configuration>
-						<!-- need to prefix by basedir to generate to currently built module -->
-						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
-					</configuration>
-				</plugin>
-			
-			</plugins>
-		</pluginManagement>
 	</build>
-	
 	<modules>
 		<module>../../plugins/it.xsemantics.runtime</module>
 	</modules>
