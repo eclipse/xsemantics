@@ -47,5 +47,6 @@
 		<module>../../examples/it.xsemantics.example.fj</module>
 		<module>../../examples/it.xsemantics.example.fj.ui</module>
 		<module>../../examples/it.xsemantics.example.expressions.tests</module>
+		<module>../../examples/it.xsemantics.example.fj.tests</module>
 	</modules>
 </project>
