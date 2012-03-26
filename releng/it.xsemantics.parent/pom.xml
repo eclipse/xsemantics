@@ -50,5 +50,6 @@
 		<module>../../examples/it.xsemantics.example.lambda.ui</module>
 		<module>../../examples/it.xsemantics.example.expressions.tests</module>
 		<module>../../examples/it.xsemantics.example.fj.tests</module>
+		<module>../../examples/it.xsemantics.example.lambda.tests</module>
 	</modules>
 </project>
