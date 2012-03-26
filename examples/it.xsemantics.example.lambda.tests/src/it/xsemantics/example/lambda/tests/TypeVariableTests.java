@@ -6,6 +6,8 @@ package it.xsemantics.example.lambda.tests;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
+
 import it.xsemantics.example.lambda.lambda.Program;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.xsemantics.LambdaTypeVariableFinder;
@@ -17,6 +19,7 @@ import it.xsemantics.example.lambda.xsemantics.LambdaTypeVariableFinder;
 public class TypeVariableTests extends LambdaAbstractTests {
 	LambdaTypeVariableFinder typeVariableFinder = new LambdaTypeVariableFinder();
 
+	@Test
 	public void testNoTypeVariables() throws Exception {
 		String programString = "lambda x : int . x x";
 		Program program = getLambdaProgram(programString);
@@ -25,6 +28,7 @@ public class TypeVariableTests extends LambdaAbstractTests {
 		assertEquals(0, typeVariables.size());
 	}
 
+	@Test
 	public void testTypeVariables() throws Exception {
 		String programString = "lambda x : X1 . lambda y . lambda z : a . y";
 		Program program = getLambdaProgram(programString);
@@ -35,6 +39,7 @@ public class TypeVariableTests extends LambdaAbstractTests {
 		assertEquals("a", typeVariables.get(1).getTypevarName());
 	}
 
+	@Test
 	public void testTypeVariableNames() throws Exception {
 		String programString = "lambda x : X1 . lambda y : a. lambda z : a . y";
 		Program program = getLambdaProgram(programString);

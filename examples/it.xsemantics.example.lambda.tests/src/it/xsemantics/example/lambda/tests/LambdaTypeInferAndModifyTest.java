@@ -1,6 +1,10 @@
 package it.xsemantics.example.lambda.tests;
 
 import static it.xsemantics.example.lambda.tests.util.LambdaTestsUtil.getAbstraction;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import it.xsemantics.example.lambda.lambda.Abstraction;
 import it.xsemantics.example.lambda.lambda.Program;
 import it.xsemantics.example.lambda.lambda.Term;
@@ -12,12 +16,13 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 
 	LambdaTypeModifier lambdaTypeModifier;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		lambdaTypeModifier = getInjector().getInstance(LambdaTypeModifier.class);
 	}
 
+	@Test
 	public void testInferTypeAndSetAbstractionTypeWithNoExplicitType()
 			throws Exception {
 		String programString = "lambda x . x";
@@ -28,6 +33,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertAbstractionParamType(abstraction, failure, expectedTypeString);
 	}
 
+	@Test
 	public void testInferTypeAndModifyAbstractionTypeWithNoExplicitType()
 			throws Exception {
 		String programString = "lambda x . x";
@@ -38,6 +44,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertAbstractionParamType(abstraction, failure, expectedTypeString);
 	}
 
+	@Test
 	public void testInferTypeAndModifyAbstractionTypeWithExplicitType()
 			throws Exception {
 		String programString = "lambda x : int -> int . x";
@@ -48,6 +55,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertAbstractionParamType(abstraction, failure, expectedTypeString);
 	}
 
+	@Test
 	public void testInferTypeAndModifyAbstractionTypeCompose() throws Exception {
 		String programString = "lambda f . lambda g. lambda x. (f (g x))";
 		Abstraction abstraction = getAbstractionFromString(programString);
@@ -57,6 +65,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertAbstractionParamType(abstraction, failure, expectedTypeString);
 	}
 
+	@Test
 	public void testCannotInferTypeAndModifyAbstractionTypeWithExplicitType()
 			throws Exception {
 		String programString = "lambda x : int . x x";
@@ -68,6 +77,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertEquals("int", rep(abstraction.getParam().getType()));
 	}
 
+	@Test
 	public void testInferTypeAndModifyAllTypes() throws Exception {
 		String programString = "lambda f . lambda g. lambda x. (f (g x))";
 		Term term = getTermFromString(programString);
@@ -81,7 +91,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 				.getType()));
 	}
 
-	public void assertAbstractionParamType(Abstraction abstraction,
+	protected void assertAbstractionParamType(Abstraction abstraction,
 			RuleFailedException failure, String expectedTypeString) {
 		assertNotFailure(failure);
 		Type type = abstraction.getParam().getType();
@@ -93,7 +103,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 		assertTrue(failure == null);
 	}
 
-	public Abstraction getAbstractionFromString(String programString)
+	protected Abstraction getAbstractionFromString(String programString)
 			throws Exception {
 		Term term = getTermFromString(programString);
 		Abstraction abstraction = getAbstraction(term);
