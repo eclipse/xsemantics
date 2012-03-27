@@ -73,7 +73,6 @@ public class AuxiliaryFunctionTest extends TestWithLoader {
 		Class class1 = program.getClasses().get(2);
 		assertEquals("C", class1.getName());
 		List<Field> fields = fixture.getFields(class1);
-		System.out.println("fields: " + fields);
 		assertEquals(3, fields.size());
 		assertEquals("c", fields.get(0).getName());
 		assertEquals("b", fields.get(1).getName());
@@ -90,7 +89,6 @@ public class AuxiliaryFunctionTest extends TestWithLoader {
 		Class class1 = program.getClasses().get(2);
 		assertEquals("C", class1.getName());
 		List<Field> fields = fixture.getOrderedFields(class1);
-		System.out.println("fields: " + fields);
 		assertEquals(6, fields.size());
 		assertEquals("b", fields.get(0).getName());
 		assertEquals("a", fields.get(1).getName());
@@ -141,7 +139,6 @@ public class AuxiliaryFunctionTest extends TestWithLoader {
 		Class class1 = program.getClasses().get(2);
 		assertEquals("C", class1.getName());
 		List<Method> methods = fixture.getMethods(class1);
-		System.out.println("methods: " + methods);
 		assertEquals(3, methods.size());
 		assertEquals("n", methods.get(0).getName());
 		assertEquals("o", methods.get(1).getName());
@@ -190,12 +187,10 @@ public class AuxiliaryFunctionTest extends TestWithLoader {
 		resource.getContents().add(c3);
 		
 		ClassSet superClasses = fixture.getSuperclasses(c1);
-		System.out.println("superclasses of c1: " + superClasses);
 		// Object is implicit
 		assertEquals(0, superClasses.size());
 		
 		superClasses = fixture.getSuperclasses(c3);
-		System.out.println("superclasses of c3: " + superClasses);
 		assertEquals(2, superClasses.size());
 		assertTrue(superClasses.contains(c1));
 		assertTrue(superClasses.contains(c2));
@@ -213,12 +208,10 @@ public class AuxiliaryFunctionTest extends TestWithLoader {
 		resource.getContents().add(c3);
 		
 		List<Class> superClasses = fixture.getOrderedSuperclasses(c1);
-		System.out.println("superclasses of c1: " + superClasses);
 		// Object is implicit
 		assertEquals(0, superClasses.size());
 		
 		superClasses = fixture.getOrderedSuperclasses(c3);
-		System.out.println("superclasses of c3: " + superClasses);
 		assertEquals(2, superClasses.size());
 		assertEquals("c2", superClasses.get(0).getName());
 		assertEquals("c1", superClasses.get(1).getName());

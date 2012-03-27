@@ -141,7 +141,6 @@ public class ProgramTest extends TestWithLoader {
 		Resource resource = loadFromString("new Object()");
 		fixture = (Program) resource.getContents().get(0);
 		New n = (New) fixture.getMain();
-		System.out.println("new type: " + n.getType().getClassref().getName());
 		assertEquals("Object", n.getType().getClassref().getName());
 	}
 
@@ -156,7 +155,6 @@ public class ProgramTest extends TestWithLoader {
 		Resource resource = loadFromString(program);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		System.out.println("saved: " + outputStream.toString());
 		// the saved program must not contain the implicit class object
 		assertEquals(program, outputStream.toString());
 	}
@@ -177,7 +175,6 @@ public class ProgramTest extends TestWithLoader {
 			e.printStackTrace();
 			throw e;
 		}
-		System.out.println("saved: " + outputStream.toString());
 		// the saved program must not contain the implicit class object
 		assertEquals(program, outputStream.toString());
 	}
@@ -193,7 +190,6 @@ public class ProgramTest extends TestWithLoader {
 		Resource resource = loadFromString(program);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		System.out.println("saved: " + outputStream.toString());
 		fixture = (Program) resource.getContents().get(0);
 		Class C = fixture.getClasses().get(2);
 		assertEquals("C", C.getName());
@@ -216,37 +212,22 @@ public class ProgramTest extends TestWithLoader {
 		fragmentPrinter.printFragment(program.eResource());
 		String fragmentToStringA = fragmentPrinter.fragmentToString(program.getClasses()
 				.get(0));
-		System.out
-				.println("class A: "
-						+ fragmentToStringA);
 		String fragmentToStringB = fragmentPrinter.fragmentToString(program.getClasses()
 				.get(1));
-		System.out
-				.println("class B: "
-						+ fragmentToStringB);
 		String fragmentToStringC = fragmentPrinter.fragmentToString(program.getClasses()
 				.get(2));
-		System.out
-				.println("class C: "
-						+ fragmentToStringC);
 		String fragmentToString_btype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
 						FjAuxiliaryFunctions.selectFields(program.getClasses().get(0)).get(0)
 								.getType()).getClassref());
-		System.out.println("field b's type: "
-				+ fragmentToString_btype);
 		String fragmentToString_ctype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
 						FjAuxiliaryFunctions.selectFields(program.getClasses().get(0)).get(1)
 								.getType()).getClassref());
-		System.out.println("field c's type: "
-				+ fragmentToString_ctype);
 		String fragmentToString_mrettype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
 						FjAuxiliaryFunctions.selectMethods(program.getClasses().get(0)).get(0)
 								.getType()).getClassref());
-		System.out.println("method m's return type: "
-				+ fragmentToString_mrettype);
 		
 		assertEquals(fragmentToStringB, fragmentToString_btype);
 		assertEquals(fragmentToStringA, fragmentToString_ctype);
