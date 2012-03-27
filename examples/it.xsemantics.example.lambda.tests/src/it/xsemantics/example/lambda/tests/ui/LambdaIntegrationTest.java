@@ -36,6 +36,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +58,8 @@ public class LambdaIntegrationTest extends TestCase {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		super.tearDown();
 		saveAllEditors();
 		closeAllEditors();
