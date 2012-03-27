@@ -22,28 +22,29 @@
 				<version>${tycho-version}</version>
 				<executions>
 					<execution>
-						<id>Headless-tests</id>
+						<id>default-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
 						<configuration>
 							<testSuite>it.xsemantics.example.lambda.tests</testSuite>
 							<testClass>it.xsemantics.example.lambda.tests.LambdaAllTests</testClass>
 							<useUIHarness>false</useUIHarness>
 							<useUIThread>false</useUIThread>
 						</configuration>
+					</execution>
+					<execution>
+						<id>default-ui-test</id>
+						<phase>integration-test</phase>
 						<goals>
 							<goal>test</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>UITests</id>
 						<configuration>
 							<testSuite>it.xsemantics.example.lambda.tests</testSuite>
 							<testClass>it.xsemantics.example.lambda.tests.ui.LambdaAllUiTests</testClass>
-							<argLine>-Xmx512m -XX:MaxPermSize=256m</argLine>
 							<useUIHarness>true</useUIHarness>
 						</configuration>
-						<goals>
-							<goal>test</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
