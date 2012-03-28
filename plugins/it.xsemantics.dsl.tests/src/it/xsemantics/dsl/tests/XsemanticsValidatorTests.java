@@ -359,7 +359,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Throw statements are not allowed here"));
 	}
 
-	@Test
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));
