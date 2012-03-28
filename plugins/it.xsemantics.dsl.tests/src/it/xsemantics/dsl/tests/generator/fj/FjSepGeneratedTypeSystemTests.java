@@ -28,7 +28,6 @@ public class FjSepGeneratedTypeSystemTests extends
 		}
 	}
 
-	@Override
 	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
 		return FjStandaloneSetupSep.class;
 	}

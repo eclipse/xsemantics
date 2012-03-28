@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.junit.Test;
 
 public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests {
 
@@ -21,7 +22,7 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 	protected FjExpectedTraces expectedTraces;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
 		tester = new ValidatorTester<XsemanticsBasedDeclarativeValidator>(
@@ -31,25 +32,30 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 
 	protected abstract java.lang.Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass();
 
+	@Test
 	public void testMethodCall() throws Exception {
 		assertOk(getProgram(testFiles.testForMethodCall()));
 	}
 
+	@Test
 	public void testCheckNewWrongSubtypeSimpler() throws Exception {
 		assertAll(testFiles.testNewWrongArgSubtypeSimpler(),
 				expectedTraces.validateCheckNewWrongSubtypeSimpler());
 	}
 	
+	@Test
 	public void testCheckNewWrongArgNum() throws Exception {
 		assertAll(testFiles.testNewWrongArgNum(),
 				expectedTraces.validateCheckNewWrongArgNum());
 	}
 
+	@Test
 	public void testCyclicClassHierarchy() throws Exception {
 		assertAll(testFiles.testCyclicClassHierarchy(),
 				expectedTraces.validateCyclicClassHierarchy());
 	}
 	
+	@Test
 	public void testSubclassDeclaresSameFieldOfSuperClass() throws Exception {
 		assertAll(testFiles.testSubclassDeclaresSameFieldOfSuperClass(),
 				expectedTraces.validateSubclassDeclaresSameFieldOfSuperClass());
