@@ -13,6 +13,7 @@ import it.xsemantics.runtime.StringRepresentation;
 import it.xsemantics.runtime.util.TraceUtils;
 
 import org.eclipse.emf.ecore.EObject;
+import org.junit.Before;
 import org.junit.Test;
 
 public abstract class FjAbstractGeneratedTypeSystemTests extends
@@ -84,6 +85,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 	}
 
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
