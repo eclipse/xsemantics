@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.junit.Test;
 
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 
@@ -30,13 +31,15 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validationTestHelper = get(ValidationTestHelper.class);
 	}
 
+	@Test
 	public void testDuplicateJudgmentDescriptions() throws Exception {
 		assertDuplicateErrors(
 				loadModelAndValidate(testFiles
 						.testJudgmentDescriptionsWithDuplicates()),
 				"JudgmentDescription", "type");
 	}
-
+	
+	@Test
 	public void testDuplicateJudgmentDescriptionSymbols() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWithDuplicateSymbols());
@@ -48,18 +51,21 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				messageFragment));
 	}
 
+	@Test
 	public void testDuplicateRuleNames() throws Exception {
 		assertDuplicateErrors(
 				loadModelAndValidate(testFiles.testDuplicateRuleNames()),
 				"Rule", "Foo");
 	}
 
+	@Test
 	public void testDuplicateCheckRuleNames() throws Exception {
 		assertDuplicateErrors(
 				loadModelAndValidate(testFiles.testDuplicateCheckRuleNames()),
 				"CheckRule", "Foo");
 	}
 
+	@Test
 	public void testDuplicateRuleAndCheckRuleNames() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testDuplicateRuleAndCheckRuleNames());
@@ -69,6 +75,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						.errorMsg("Duplicate rule with the same name"));
 	}
 
+	@Test
 	public void testDuplicateParamNames() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testDuplicateParamsInRule());
@@ -76,11 +83,13 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Duplicate JvmIdentifiableElement 'eClass'"));
 	}
 
+	@Test
 	public void testRulesWithExpressionInConclusion() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRuleWithExpressionInConclusion()));
 	}
 
+	@Test
 	public void testRulesWithExpressionInConclusionWrong() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithExpressionInConclusion2());
@@ -89,20 +98,24 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Must be a parameter, not an expression"));
 	}
 
+	@Test
 	public void testRulesWithBlockExpressionInConclusion() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRuleWithBlockExpressionInConclusion()));
 	}
 
+	@Test
 	public void testRulesWithSameEnvironmentNames() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRulesWithSameEnvironmentNames()));
 	}
 
+	@Test
 	public void testRuleInvokingAnotherRule() throws Exception {
 		assertOk(loadModelAndValidate(testFiles.testRuleInvokingAnotherRule()));
 	}
 
+	@Test
 	public void testNoRuleForJudgmentDescription() throws Exception {
 		validator.setEnableWarnings(true);
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
@@ -111,11 +124,13 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.warningMsg("No rule defined for the judgment description"));
 	}
 
+	@Test
 	public void testNoJudgmentDescriptionForRule() throws Exception {
 		assertNoJudgmentDescription(testFiles
 				.testRuleWithoutJudgmentDescription());
 	}
 
+	@Test
 	public void testNoJudgmentDescriptionForRuleInvocation() throws Exception {
 		assertNoJudgmentDescription(testFiles
 				.testRuleInvocationWithoutJudgmentDescription());
@@ -129,6 +144,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				IssueCodes.NO_JUDGMENT_DESCRIPTION, messageFragment));
 	}
 
+	@Test
 	public void testRuleConclusionNotSubtype() throws Exception {
 		EObject model = getModel(testFiles.testRuleWithConclusionNotSubtype()
 				.toString());
@@ -142,6 +158,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								+ "org.eclipse.emf.ecore.EClass");
 	}
 
+	@Test
 	public void testRuleInvocationNotSubtype() throws Exception {
 		EObject model = getModel(testFiles
 				.testRuleInvokingAnotherRuleNotValid().toString());
@@ -155,6 +172,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								+ "org.eclipse.emf.ecore.EObject");
 	}
 
+	@Test
 	public void testRuleConclusionNotSubtypeBoth() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithConclusionNotSubtypeBoth());
@@ -171,10 +189,12 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 										+ "org.eclipse.emf.ecore.EObject"));
 	}
 
+	@Test
 	public void testFjExpressionTypingRules() throws Exception {
 		assertOk(loadModelAndValidate(fjTSFiles.fjExpressionTypeRules()));
 	}
 
+	@Test
 	public void testRulesOfTheSameKindWithSameArgumentTypes() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRulesOfTheSameKindWithSameArgumentTypes());
@@ -193,6 +213,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"));
 	}
 
+	@Test
 	public void testRulesOfTheSameKindWithSameInputArgumentTypes()
 			throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
@@ -206,11 +227,13 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								"Duplicate rule of the same kind with parameters: java.lang.String"));
 	}
 
+	@Test
 	public void testErrorSpecifications() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRuleWithErrorSpecifications()));
 	}
 
+	@Test
 	public void testErrorSpecificationSourceNotEObject() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testErrorSpecificationSourceNotEObject());
@@ -218,6 +241,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not an EObject: java.lang.String"));
 	}
 
+	@Test
 	public void testErrorSpecificationFeatureNotEStructuralFeature()
 			throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
@@ -227,6 +251,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not an EStructuralFeature: org.eclipse.emf.ecore.EClass"));
 	}
 
+	@Test
 	public void testRuleInvocationWithWrongOutputArg() throws Exception {
 		EObject model = getModel(testFiles
 				.testRuleInvocationWithWrongOutputArg().toString());
@@ -236,6 +261,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not a valid argument for output parameter");
 	}
 
+	@Test
 	public void testWrongVariableDeclarationAsOutputArgument() throws Exception {
 		EObject model = getModel(testFiles
 				.testWrongVariableDeclarationAsOutputArgument().toString());
@@ -245,6 +271,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not a valid argument for output parameter");
 	}
 
+	@Test
 	public void testMoreThan2OutputParams() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWith3OutputParams());
@@ -253,6 +280,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"No more than 2 output parameters are handled at the moment"));
 	}
 
+	@Test
 	public void testNoInputParam() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWithNoInputParam());
@@ -261,12 +289,14 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"No input parameter; at least one is needed"));
 	}
 
+	@Test
 	public void testAssignmentToOutputParam() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithAssignmentToOutputParam());
 		assertOk(validate);
 	}
 
+	@Test
 	public void testAssignmentToInputParam() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithAssignmentToInputParam());
@@ -275,6 +305,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Assignment to input parameter"));
 	}
 
+	@Test
 	public void testRuleInvocationWithInputParamPassedAsOutput()
 			throws Exception {
 		EObject model = getModel(testFiles
@@ -285,12 +316,14 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not a valid argument for output parameter");
 	}
 
+	@Test
 	public void testVariableDeclarationAsOutputArgument() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testVariableDeclarationAsOutputArgument());
 		assertOk(validate);
 	}
 
+	@Test
 	public void testWrongVariableDeclarationAsInputArgument() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongVariableDeclarationAsInputArgument());
@@ -299,6 +332,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Not a valid argument for input parameter"));
 	}
 
+	@Test
 	public void testRuleInvocationWithOutputArgInsideClosure() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleInvocationWithOutputArgInsideClosure());
@@ -307,6 +341,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Cannot use output parameter inside closure"));
 	}
 
+	@Test
 	public void testWrongReturnInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongReturnInPremises());
@@ -315,6 +350,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Return statements are not allowed here"));
 	}
 
+	@Test
 	public void testWrongThrowInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongThrowInPremises());
@@ -323,6 +359,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				"Throw statements are not allowed here"));
 	}
 
+	@Test
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));
