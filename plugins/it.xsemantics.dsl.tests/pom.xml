@@ -25,6 +25,13 @@
           <testClass>it.xsemantics.dsl.tests.suites.XsemanticsAllTests</testClass>
           <useUIHarness>false</useUIHarness>
           <useUIThread>false</useUIThread>
+          <dependencies>
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>it.xsemantics.example.fj</artifactId>
+              <version>0.0.0</version>
+            </dependency>
+          </dependencies>
         </configuration>
       </plugin>
      </plugins>
