@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Test;
 
 public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	protected static final String VALIDATION_SUBDIR = "validation/";
@@ -34,21 +35,25 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		generator.setOutputPath(outputPath);
 	}
 
+	@Test
 	public void testGeneratorIsNotNull() {
 		assertTrue(generator != null);
 	}
 
+	@Test
 	public void testCleanOutputFolder() {
 		setGeneratorOutputPath(RESULT_DIR + "ecore_test/");
 		cleanOutputFolderAndAssertEmpty();
 	}
 
+	@Test
 	public void testGeneratorOnSimpleRule() throws Exception {
 		runGenerationAndAssertJavaFiles(
 				TESTS_INPUT_FILES + "ecore_test.xsemantics", "ecore_test/",
 				"it/xsemantics/test/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOnRuleInvocation() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_ruleinvocation_test.xsemantics",
@@ -56,42 +61,49 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 				"it/xsemantics/test/ruleinvocation/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOnParticularTest() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_particular_test.xsemantics", "ecore_particular_test/",
 				"it/xsemantics/test/particular/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOrExpressions() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_or_test.xsemantics", "ecore_or_test/",
 				"it/xsemantics/test/orexpressions/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorExpressions() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_expressions_test.xsemantics", "ecore_expressions_test/",
 				"it/xsemantics/test/expressions/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOnEcoreWithValidator() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_validation_test.xsemantics", "ecore_validation_test/",
 				"it/xsemantics/test/validation/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOnFjFirst() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "fj_first_test.xsemantics", "fj_first_test/",
 				"it/xsemantics/test/fj/first/", "FjFirstTypeSystem");
 	}
 
+	@Test
 	public void testGeneratorOnFjAlt() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "fj_alt_test.xsemantics", "fj_alt_test/",
 				"it/xsemantics/test/fj/alt/", "FjAltTypeSystem");
 	}
 
+	@Test
 	public void testErrorSpecifications() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_errspecification_test.xsemantics",
@@ -99,6 +111,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 				"it/xsemantics/test/errspecification/ecore/", "TypeSystem");
 	}
 
+	@Test
 	public void testOnANonValidInputFile() throws Exception {
 		runGeneratorOnInputFileAndExpectErrors(TESTS_INPUT_FILES
 				+ "ecore_test_errors.xsemantics", RESULT_DIR + "foo/", true);
@@ -110,6 +123,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	 * 
 	 * @throws Exception
 	 */
+	@Test
 	public void testRunGenerationInXsemanticsGen() throws Exception {
 		setGeneratorOutputPath(XsemanticsOutputConfigurationProvider.XSEMANTICS_GEN);
 		cleanOutputFolderAndAssertEmpty();
