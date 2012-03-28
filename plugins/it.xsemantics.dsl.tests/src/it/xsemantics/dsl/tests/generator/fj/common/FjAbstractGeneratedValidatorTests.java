@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.junit.Before;
 import org.junit.Test;
 
 public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests {
@@ -22,6 +23,7 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 	protected FjExpectedTraces expectedTraces;
 
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
