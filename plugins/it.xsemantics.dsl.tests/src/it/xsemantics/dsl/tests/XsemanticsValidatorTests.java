@@ -21,7 +21,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	private ValidationTestHelper validationTestHelper;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		validator = get(XsemanticsJavaValidator.class);
 		validator.setEnableWarnings(false);

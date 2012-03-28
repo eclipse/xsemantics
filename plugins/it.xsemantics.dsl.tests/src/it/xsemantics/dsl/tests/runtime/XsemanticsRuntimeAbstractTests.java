@@ -38,7 +38,7 @@ public class XsemanticsRuntimeAbstractTests extends XsemanticsAbstractTests {
 		assertRuleFailedException(exception, expectedMessage, null);
 	}
 
-	public RuleFailedException assertRuleFailedException(Exception exception,
+	protected RuleFailedException assertRuleFailedException(Exception exception,
 			String expectedMessage, String expectedIssue) {
 		assertTrue("should be a RuleFailedException, instead of " + exception,
 				exception instanceof RuleFailedException);

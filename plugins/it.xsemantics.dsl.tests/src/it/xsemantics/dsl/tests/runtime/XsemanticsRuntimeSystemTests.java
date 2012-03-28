@@ -27,6 +27,8 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -76,12 +78,14 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		ts = get(TestTypeSystemWithPolymorphicDispatcher.class);
 		runtimeTypeSystem = get(XsemanticsRuntimeSystem.class);
 	}
 
+	@Test
 	public void testNoSuchMethod() throws RuleFailedException {
 		try {
 			ts.callNonExistentMethod("foo", 10);
@@ -92,16 +96,19 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testStringInteger() throws RuleFailedException {
 		assertLeftRightPair(ts.stringIntegerMethod("foo", 10), "foo", 10);
 	}
 
+	@Test
 	public void testBase1Base2() throws RuleFailedException {
 		assertLeftRightPair(ts.base1base2(new BaseClass1(), new BaseClass2()),
 				BaseClass1.class.getSimpleName(),
 				BaseClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testBase1Derived2() throws RuleFailedException {
 		assertLeftRightPair(
 				ts.base1base2(new BaseClass1(), new DerivedClass2()),
@@ -109,6 +116,7 @@ public class XsemanticsRuntimeSystemTests extends
 				BaseClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testDerived1Derived2() throws RuleFailedException {
 		assertLeftRightPair(
 				ts.base1base2(new DerivedClass1(), new DerivedClass2()),
@@ -116,6 +124,7 @@ public class XsemanticsRuntimeSystemTests extends
 				DerivedClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testDerivedDerived1Derived2() throws RuleFailedException {
 		assertLeftRightPair(
 				ts.base1base2(new DerivedDerivedClass1(), new DerivedClass2()),
@@ -123,6 +132,7 @@ public class XsemanticsRuntimeSystemTests extends
 				DerivedClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testDerivedDerived1Base2() throws RuleFailedException {
 		assertLeftRightPair(
 				ts.base1base2(new DerivedDerivedClass1(), new BaseClass2()),
@@ -130,6 +140,7 @@ public class XsemanticsRuntimeSystemTests extends
 				BaseClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testIsAssignable() {
 		assertAssignable(new BaseClass1(), new BaseClass1(), true);
 		assertAssignable(new DerivedClass1(), new BaseClass1(), true);
@@ -139,6 +150,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAssignable(new DerivedDerivedClass1(), new BaseClass2(), false);
 	}
 
+	@Test
 	public void testResultAssignable() throws RuleFailedException {
 		assertLeftRightPairAsStrings(
 				ts.testAssignableResult(new BaseClass1(), new BaseClass2()),
@@ -146,6 +158,7 @@ public class XsemanticsRuntimeSystemTests extends
 				BaseClass2.class.getSimpleName());
 	}
 
+	@Test
 	public void testResultNotAssignable() {
 		try {
 			ts.testAssignableResult(new DerivedClass1(), new BaseClass2());
@@ -159,6 +172,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testForNullArgument() {
 		try {
 			ts.testAssignableResult(new DerivedClass1(), null);
@@ -168,12 +182,14 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testRuleFailedException() {
 		RuleFailedException original = new RuleFailedException();
 		assertEquals(original,
 				ts.extractRuleFailedException(new WrappedException(original)));
 	}
 
+	@Test
 	public void testRuleFailedExceptionWithStandardException() {
 		RuleFailedException ruleFailedException = ts
 				.extractRuleFailedException(new Exception("foo"));
@@ -182,6 +198,7 @@ public class XsemanticsRuntimeSystemTests extends
 				ruleFailedException.getMessage());
 	}
 
+	@Test
 	public void testRuleFailedExceptionWithRuleFailedException() {
 		final RuleFailedException ruleFailedException2 = new RuleFailedException(
 				"foo");
@@ -191,6 +208,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(ruleFailedException2, ruleFailedException);
 	}
 
+	@Test
 	public void testSneakyThrowRuleFailedException() {
 		RuleFailedException original = new RuleFailedException();
 		try {
@@ -201,6 +219,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testSneakyThrowRuleFailedExceptionWithString() {
 		try {
 			ts.sneakyThrowRuleFailedException("foo");
@@ -210,15 +229,18 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testThrowRuleFailedExceptionWithString() {
 		assertThrownRuleFailedException("foo", new Exception("bar"), "bar");
 	}
 
+	@Test
 	public void testThrowRuleFailedExceptionWithString2() {
 		assertThrownRuleFailedException("foo",
 				ts.newRuleFailedException("bar", "issue"), "failed: bar");
 	}
 
+	@Test
 	public void testThrowForExplicitFail() {
 		try {
 			ts.throwForExplicitFail();
@@ -228,6 +250,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testThrowForExplicitFailWithErrorInformation() {
 		try {
 			ts.throwForExplicitFail("foo",
@@ -250,6 +273,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testThrowRuleFailedExceptionWithErrorInformation() {
 		String message = "foo";
 		try {
@@ -263,10 +287,12 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testAddToTraceNull() {
 		runtimeTypeSystem.addToTrace(null, new Object());
 	}
 
+	@Test
 	public void testAddToTraceNotNull() {
 		final RuleApplicationTrace ruleApplicationTrace = new RuleApplicationTrace();
 		final Object traceElement = new Object();
@@ -274,20 +300,24 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(traceElement, ruleApplicationTrace.getTrace().get(0));
 	}
 
+	@Test
 	public void testSubtraceNotNull() {
 		RuleApplicationTrace newTrace = runtimeTypeSystem
 				.newTrace(new RuleApplicationTrace());
 		assertTrue(newTrace != null);
 	}
 
+	@Test
 	public void testSubtraceNull() {
 		assertTrue(runtimeTypeSystem.newTrace(null) == null);
 	}
 
+	@Test
 	public void testAddAsSubtraceNull() {
 		runtimeTypeSystem.addAsSubtrace(null, new RuleApplicationTrace());
 	}
 
+	@Test
 	public void testAddAsSubtraceNotNull() {
 		final RuleApplicationTrace ruleApplicationTrace = new RuleApplicationTrace();
 		final RuleApplicationTrace subTrace = new RuleApplicationTrace();
@@ -295,6 +325,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(subTrace, ruleApplicationTrace.getTrace().get(0));
 	}
 
+	@Test
 	public void testEnvironmentAccessToNullEnvironment() {
 		try {
 			runtimeTypeSystem.environmentAccess(null, 1, Object.class);
@@ -304,6 +335,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testEnvironmentAccessNotFound() {
 		try {
 			runtimeTypeSystem.environmentAccess(new RuleEnvironment(), 1,
@@ -314,6 +346,7 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testEnvironmentAccessOk() throws RuleFailedException {
 		RuleEnvironment environment = new RuleEnvironment();
 		BaseClass1 key = new BaseClass1();
@@ -324,6 +357,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(value, result);
 	}
 
+	@Test
 	public void testEnvironmentAccessNotAssignable() {
 		RuleEnvironment environment = new RuleEnvironment();
 		BaseClass1 key = new BaseClass1();
@@ -340,23 +374,27 @@ public class XsemanticsRuntimeSystemTests extends
 		}
 	}
 
+	@Test
 	public void testEmptyEnvironment() {
 		RuleEnvironment env = runtimeTypeSystem.emptyEnvironment();
 		assertTrue(env.empty());
 	}
 
+	@Test
 	public void testEnvironmentFromSingleMappingMapping() {
 		RuleEnvironment environment = runtimeTypeSystem.environmentEntry("foo",
 				1);
 		assertEquals(1, environment.get("foo"));
 	}
 
+	@Test
 	public void testEnvironmentCompositionWithNull() {
 		RuleEnvironment environment = runtimeTypeSystem.environmentComposition(
 				null, runtimeTypeSystem.environmentEntry("foo", 1));
 		assertEquals(1, environment.get("foo"));
 	}
 
+	@Test
 	public void testEnvironmentCompositionWithMapping() {
 		RuleEnvironment original = new RuleEnvironment(
 				runtimeTypeSystem.environmentEntry("first", 1));
@@ -369,6 +407,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertTrue(original != environment);
 	}
 
+	@Test
 	public void testEnvironmentCompositionWithOverridingMapping() {
 		RuleEnvironment original = new RuleEnvironment(
 				runtimeTypeSystem.environmentEntry("first", 1));
@@ -380,6 +419,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(2, environment.get("first"));
 	}
 
+	@Test
 	public void testClone() {
 		EClass e = emfUtils.createEClass("foo");
 		EClass cloned = ts.clone(e);
@@ -387,6 +427,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(e.getName(), cloned.getName());
 	}
 
+	@Test
 	public void testAddToListObject() {
 		List<String> strings = new LinkedList<String>();
 		ts.addToList(strings, "foo", String.class);
@@ -395,6 +436,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals("foo", strings.get(0));
 	}
 
+	@Test
 	public void testAddToListList() {
 		List<String> strings = Lists.newArrayList("foo", "bar");
 		List<Object> strings2 = Lists.<Object> newArrayList(1, "foo2", false,
@@ -404,15 +446,18 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals("[foo, bar, foo2, bar2]", strings.toString());
 	}
 
+	@Test
 	public void testGetEObjectWithEObject() {
 		EClass eclass = emfUtils.createEClass("foo");
 		assertSame(eclass, ts.getEObject(eclass));
 	}
 
+	@Test
 	public void testGetEObjectWithNonEObject() {
 		assertTrue(ts.getEObject(new Integer(10)) == null);
 	}
 
+	@Test
 	public void testGetListFromSingleObject() {
 		EClass eclass = emfUtils.createEClass("foo");
 		List<Object> list = ts.getList(eclass);
@@ -420,6 +465,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertTrue(list.contains(eclass));
 	}
 
+	@Test
 	public void testGetListFromList() {
 		EClass eclass = emfUtils.createEClass("foo");
 		eclass.getESuperTypes().add(emfUtils.createEClass("1"));
@@ -429,6 +475,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[1, 2]", list);
 	}
 
+	@Test
 	public void testGetAllNodesInRelation() {
 		List<EObject> list = ts.getAllNodesInRelation(
 				new EClassesForTesting().A,
@@ -436,6 +483,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[B, C]", list);
 	}
 
+	@Test
 	public void testGetAllNodesInRelationWithCycle() {
 		EClassesForTesting classes = new EClassesForTesting();
 		classes.C.getESuperTypes().add(classes.A);
@@ -444,6 +492,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[B, C, A]", list);
 	}
 
+	@Test
 	public void testGetAll() {
 		List<EClass> list = ts.getAll(new EClassesForTesting().A,
 				EcorePackage.Literals.ECLASS__ESUPER_TYPES,
@@ -451,6 +500,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[B, C]", list);
 	}
 
+	@Test
 	public void testGetAll2() {
 		List<String> list = ts.getAll(new EClassesForTesting().A,
 				EcorePackage.Literals.ENAMED_ELEMENT__NAME,
@@ -458,6 +508,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[A, B, C]", list);
 	}
 
+	@Test
 	public void testGetAllFjFields() {
 		List<Field> fields = ts.getAll(new FjClassesForTesting().C,
 				FjPackage.Literals.CLASS__MEMBERS,
@@ -466,6 +517,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertAsStringRep("[Field 'f1', Field 'f2', Field 'df1']", fields);
 	}
 
+	@Test
 	public void testGetAllFjMethods() {
 		List<Method> methods = ts.getAll(new FjClassesForTesting().C,
 				FjPackage.Literals.CLASS__MEMBERS,

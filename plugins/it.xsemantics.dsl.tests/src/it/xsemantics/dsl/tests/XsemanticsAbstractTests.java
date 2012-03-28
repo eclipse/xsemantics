@@ -9,6 +9,7 @@ import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Before;
 
 /**
  * @author bettini
@@ -29,7 +30,8 @@ public class XsemanticsAbstractTests extends AbstractXtextTests {
 	protected EmfFactoryUtils emfUtils = new EmfFactoryUtils();
 
 	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XsemanticsStandaloneSetup.class);
 	}

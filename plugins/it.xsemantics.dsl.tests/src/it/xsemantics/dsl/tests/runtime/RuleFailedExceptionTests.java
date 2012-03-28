@@ -3,6 +3,8 @@
  */
 package it.xsemantics.dsl.tests.runtime;
 
+import org.junit.Test;
+
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleFailedException;
 
@@ -12,11 +14,13 @@ import it.xsemantics.runtime.RuleFailedException;
  */
 public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 
+	@Test
 	public void testMessage() {
 		RuleFailedException ex = new RuleFailedException("message");
 		assertMessage(ex, "message");
 	}
 
+	@Test
 	public void testIssue() {
 		RuleFailedException ex = new RuleFailedException("message", "issue",
 				null);
@@ -24,10 +28,12 @@ public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 		assertEquals("issue", ex.getIssue());
 	}
 
+	@Test
 	public void testErrorInformationsNotNull() {
 		assertTrue(new RuleFailedException("foo").getErrorInformations() != null);
 	}
 
+	@Test
 	public void testMessageAndErrorInformation() {
 		RuleFailedException ex = new RuleFailedException("message");
 		ex.addErrorInformation(new ErrorInformation(emfUtils.createEObject()));
@@ -35,6 +41,7 @@ public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 		assertTrue(ex.getErrorInformations().get(0).getSource() != null);
 	}
 
+	@Test
 	public void testMessageAndErrorInformations() {
 		RuleFailedException ex = new RuleFailedException("message");
 		ex.addErrorInformations(new ErrorInformation(emfUtils.createEObject()),
@@ -44,6 +51,7 @@ public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 		assertTrue(ex.getErrorInformations().get(1).getSource() != null);
 	}
 
+	@Test
 	public void testMessageAndEmptyErrorInformations() {
 		RuleFailedException ex = new RuleFailedException("message");
 		ex.addErrorInformations();

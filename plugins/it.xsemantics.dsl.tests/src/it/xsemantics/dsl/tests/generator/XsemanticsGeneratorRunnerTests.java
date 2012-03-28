@@ -24,7 +24,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		generator = get(Main.class);
 		generator.setOutputPath(null);
