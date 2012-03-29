@@ -51,6 +51,7 @@
 		<module>../../examples/it.xsemantics.example.expressions.tests</module>
 		<module>../../examples/it.xsemantics.example.fj.tests</module>
 		<module>../../examples/it.xsemantics.example.lambda.tests</module>
+		<module>../../doc/it.xsemantics.doc</module>
 		<module>../../features/it.xsemantics.feature</module>
 		<module>../../features/it.xsemantics.runtime.feature</module>
 		<module>../../features/it.xsemantics.examples.feature</module>
