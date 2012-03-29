@@ -10,7 +10,7 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.13.0</tycho-version>
+		<tycho-version>0.14.0</tycho-version>
 	</properties>
 
 	<repositories>
@@ -24,6 +24,11 @@
 			<id>xtext</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</url>
+		</repository>
+		<repository>
+			<id>xdoc</id>
+			<layout>p2</layout>
+			<url>http://samoa.informatik.uni-kiel.de:8080/hudson/job/Xdoc-Xtext2.2/lastSuccessfulBuild/artifact/org.eclipse.xtext.xdoc.releng/target/site</url>
 		</repository>
 	</repositories>
 
