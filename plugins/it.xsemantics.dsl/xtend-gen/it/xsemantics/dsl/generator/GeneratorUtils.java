@@ -12,7 +12,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class GeneratorUtils {
-  public static ArrayList<? extends Object> onlyErrors(final List<Issue> issues) {
+  public static ArrayList<Issue> onlyErrors(final List<Issue> issues) {
     final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
@@ -26,7 +26,7 @@ public class GeneratorUtils {
   }
   
   public static boolean hasErrors(final List<Issue> issues) {
-    ArrayList<? extends Object> _onlyErrors = GeneratorUtils.onlyErrors(issues);
+    ArrayList<Issue> _onlyErrors = GeneratorUtils.onlyErrors(issues);
     boolean _isEmpty = _onlyErrors.isEmpty();
     boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
     return _operator_not;
