@@ -13,19 +13,19 @@
 		<tycho-version>0.13.0</tycho-version>
 	</properties>
 
-  <repositories>
-    <!-- configure p2 repository to resolve against -->
-    <repository>
-      <id>indigo</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/releases/indigo</url>
-    </repository>
-    <repository>
-      <id>xtext</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</url>
-    </repository>
-  </repositories>
+	<repositories>
+		<!-- configure p2 repository to resolve against -->
+		<repository>
+			<id>indigo</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/indigo</url>
+		</repository>
+		<repository>
+			<id>xtext</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
@@ -35,6 +35,20 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<!-- enable source bundle generation -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -53,6 +67,7 @@
 		<module>../../examples/it.xsemantics.example.lambda.tests</module>
 		<module>../../doc/it.xsemantics.doc</module>
 		<module>../../features/it.xsemantics.feature</module>
+		<module>../../features/it.xsemantics.sdkfeature</module>
 		<module>../../features/it.xsemantics.runtime.feature</module>
 		<module>../../features/it.xsemantics.examples.feature</module>
 		<module>../../update/it.xsemantics.repository</module>
