@@ -55,6 +55,7 @@
 		<module>../../features/it.xsemantics.feature</module>
 		<module>../../features/it.xsemantics.runtime.feature</module>
 		<module>../../features/it.xsemantics.examples.feature</module>
+		<module>../../update/it.xsemantics.update</module>
 		<module>../../plugins/it.xsemantics.dsl.tests</module>
 	</modules>
 </project>
