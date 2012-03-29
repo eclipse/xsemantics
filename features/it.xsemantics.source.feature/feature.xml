@@ -112,6 +112,10 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="it.xsemantics.feature"
          version="0.0.0"/>
 
+   <includes
+         id="it.xsemantics.examples.feature"
+         version="0.0.0"/>
+
    <plugin
          id="it.xsemantics.runtime.source"
          download-size="0"
@@ -128,6 +132,48 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="it.xsemantics.dsl.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.example.fj.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.example.fj.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   
+   <plugin
+         id="it.xsemantics.example.expressions.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.example.expressions.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+      <plugin
+         id="it.xsemantics.example.lambda.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.example.lambda.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
