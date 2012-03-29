@@ -10,7 +10,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 	</parent>
 	<groupId>xsemantics</groupId>
-	<artifactId>it.xsemantics.sdkfeature</artifactId>
+	<artifactId>it.xsemantics.source.feature</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
 

@@ -17,7 +17,7 @@ in Java).
    <feature url="features/it.xsemantics.runtime.feature_1.0.0.qualifier.jar" id="it.xsemantics.runtime.feature" version="1.0.0.qualifier">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.sdkfeature_1.0.0.qualifier.jar" id="it.xsemantics.sdkfeature" version="1.0.0.qualifier">
+   <feature url="features/it.xsemantics.source.feature_1.0.0.qualifier.jar" id="it.xsemantics.source.feature" version="1.0.0.qualifier">
       <category name="xsemantics"/>
    </feature>
    <category-def name="xsemantics" label="XSemantics">
