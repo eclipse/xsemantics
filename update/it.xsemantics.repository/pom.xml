@@ -10,7 +10,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>it.xsemantics.update</artifactId>
+	<artifactId>it.xsemantics.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 	
 </project>
