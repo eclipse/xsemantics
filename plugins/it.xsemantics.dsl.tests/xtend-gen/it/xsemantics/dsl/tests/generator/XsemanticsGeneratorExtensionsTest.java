@@ -1,8 +1,8 @@
 package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
-import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
 @RunWith(XtextRunner.class)
 public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
   @Inject
