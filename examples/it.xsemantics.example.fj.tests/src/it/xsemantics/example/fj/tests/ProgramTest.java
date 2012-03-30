@@ -209,7 +209,7 @@ public class ProgramTest extends TestWithLoader {
 	public void testFragments() throws IOException {
 		Program program = getProgramFromString("class A { B b; A c; C m(Object a) { return new C(); } } class B {} class C {}");
 		FragmentPrinter fragmentPrinter = new FragmentPrinter();
-		fragmentPrinter.printFragment(program.eResource());
+		//fragmentPrinter.printFragment(program.eResource());
 		String fragmentToStringA = fragmentPrinter.fragmentToString(program.getClasses()
 				.get(0));
 		String fragmentToStringB = fragmentPrinter.fragmentToString(program.getClasses()
