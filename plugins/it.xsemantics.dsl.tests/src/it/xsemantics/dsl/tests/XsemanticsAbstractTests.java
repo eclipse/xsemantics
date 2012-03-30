@@ -3,7 +3,7 @@
  */
 package it.xsemantics.dsl.tests;
 
-import it.xsemantics.dsl.XsemanticsStandaloneSetup;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom.XsemanticsStandaloneSetupForTests;
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 
@@ -33,7 +33,7 @@ public class XsemanticsAbstractTests extends AbstractXtextTests {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		with(XsemanticsStandaloneSetup.class);
+		with(XsemanticsStandaloneSetupForTests.class);
 	}
 
 	@Override
