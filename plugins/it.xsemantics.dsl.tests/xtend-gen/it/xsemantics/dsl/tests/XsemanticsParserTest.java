@@ -1,8 +1,8 @@
 package it.xsemantics.dsl.tests;
 
 import com.google.inject.Inject;
-import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition;
 import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
 @RunWith(XtextRunner.class)
 public class XsemanticsParserTest extends XsemanticsBaseTest {
   @Inject
