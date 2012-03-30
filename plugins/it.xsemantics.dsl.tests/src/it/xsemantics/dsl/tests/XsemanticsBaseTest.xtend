@@ -19,7 +19,6 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import it.xsemantics.example.fj.fj.FjFactory
 import junit.framework.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
@@ -33,7 +32,6 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -52,14 +50,6 @@ class XsemanticsBaseTest {
 	protected ParseHelper<XsemanticsSystem> parser
     
 	@Inject extension ValidationTestHelper
-	
-	@BeforeClass
-	def static void ensureFjIsLoaded() {
-		// for headless builds (with Maven), we must make sure
-		// that FJ plugin is loaded
-		FjFactory::eINSTANCE.createProgram
-		return
-	}
 	
 	def parseAndAssertNoError(CharSequence s) {
 		var ts = parser.parse(s)

@@ -20,7 +20,6 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
-import it.xsemantics.example.fj.fj.FjFactory;
 import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -62,12 +60,6 @@ public class XsemanticsBaseTest {
   
   @Inject
   private ValidationTestHelper _validationTestHelper;
-  
-  @BeforeClass
-  public static void ensureFjIsLoaded() {
-      FjFactory.eINSTANCE.createProgram();
-      return;
-  }
   
   public XsemanticsSystem parseAndAssertNoError(final CharSequence s) {
     try {
