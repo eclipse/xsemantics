@@ -104,6 +104,12 @@ public class XsemanticsBaseTest {
     return _rule;
   }
   
+  public Rule getRuleWithoutValidation(final CharSequence s, final int index) {
+    XsemanticsSystem _parse = this.parse(s);
+    Rule _rule = this.getRule(_parse, index);
+    return _rule;
+  }
+  
   public Rule getRule(final XsemanticsSystem ts, final int index) {
     Rule _xblockexpression = null;
     {

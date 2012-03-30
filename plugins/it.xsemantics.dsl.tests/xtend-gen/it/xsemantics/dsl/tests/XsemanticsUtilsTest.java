@@ -57,8 +57,8 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testRuleDescription() {
-    CharSequence _testRuleWithoutJudgmentDescription = this.testFiles.testRuleWithoutJudgmentDescription();
-    Rule _firstRule = this.getFirstRule(_testRuleWithoutJudgmentDescription);
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    Rule _firstRule = this.getFirstRule(_testSimpleRule);
     JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_firstRule);
     this.assertDescription(_judgmentDescription, "|-", ":");
   }
@@ -76,8 +76,8 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testRuleWithoutDescription() {
       CharSequence _testRuleWithoutJudgmentDescription = this.testFiles.testRuleWithoutJudgmentDescription();
-      Rule _rule = this.getRule(_testRuleWithoutJudgmentDescription, 1);
-      JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_rule);
+      Rule _ruleWithoutValidation = this.getRuleWithoutValidation(_testRuleWithoutJudgmentDescription, 1);
+      JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_ruleWithoutValidation);
       final JudgmentDescription description = _judgmentDescription;
       Assert.assertNull(description);
   }
