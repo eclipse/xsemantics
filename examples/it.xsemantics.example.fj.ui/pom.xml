@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 	</parent>
 	<groupId>xsemantics</groupId>
 	<artifactId>it.xsemantics.example.fj.ui</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 
 	<build>
