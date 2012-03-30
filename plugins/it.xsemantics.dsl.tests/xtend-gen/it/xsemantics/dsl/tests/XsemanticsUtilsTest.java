@@ -2,8 +2,8 @@ package it.xsemantics.dsl.tests;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -33,7 +33,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
 @RunWith(XtextRunner.class)
 public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Inject

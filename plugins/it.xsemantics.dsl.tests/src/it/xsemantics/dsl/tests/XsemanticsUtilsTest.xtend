@@ -1,20 +1,19 @@
 package it.xsemantics.dsl.tests
 
+import com.google.common.collect.Lists
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import java.util.List
 import junit.framework.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.xsemantics.JudgmentDescription
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import com.google.common.collect.Lists
 
-@InjectWith(typeof(XsemanticsInjectorProvider))
+@InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	
