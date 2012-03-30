@@ -503,7 +503,30 @@ class XsemanticsTestFiles {
 	'''
 
 	def testRuleInvocationsWithOperatorsConflictingXbase() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type1 |- EClass c : EObject o
+		type2 |- EClass c <: EObject o
+		type3 |- EClass c :> EObject o
+		type4 |- EClass c << EObject o
+		type5 |- EClass c >> EObject o
+		type6 |- EClass c <| EObject o
+		type7 |- EClass c ~~ EObject o
+		type8 |- EClass c |> EObject o
+		type9 |- EClass c --> EObject o
+		type10 |- EClass c <- EObject o
+		type11 |- EClass c <~ EObject o
+		type12 |- EClass c ~> EObject o
+		type13 |- EClass c <! EObject o
+		type14 |- EClass c !> EObject o
+		type15 |- EClass c <<! EObject o
+		type16 |- EClass c !>> EObject o
+		type17 |- EClass c <~! EObject o
+		type18 |- EClass c !~> EObject o
+		type19 ||- EClass c >> EObject o
+	}
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object

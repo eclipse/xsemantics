@@ -192,17 +192,6 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testRuleWithExpressionInConclusion2() {
-    try {
-      CharSequence _testRuleWithExpressionInConclusion2 = this.testFiles.testRuleWithExpressionInConclusion2();
-      XsemanticsSystem _parse = this.parser.parse(_testRuleWithExpressionInConclusion2);
-      this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
   public void testRuleWithBlockExpressionInConclusion() {
     try {
       CharSequence _testRuleWithBlockExpressionInConclusion = this.testFiles.testRuleWithBlockExpressionInConclusion();
@@ -261,13 +250,6 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   public void testRuleInvokingAnotherRuleWith3Params() {
     CharSequence _testRuleInvokingAnotherRuleWith3Params = this.testFiles.testRuleInvokingAnotherRuleWith3Params();
     this.parseAndAssertNoError(_testRuleInvokingAnotherRuleWith3Params);
-  }
-  
-  @Test
-  public void testRuleInvokingAnotherRuleNotValid() {
-    CharSequence _testRuleInvokingAnotherRuleNotValid = this.testFiles.testRuleInvokingAnotherRuleNotValid();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRuleInvokingAnotherRuleNotValid);
-    this.checksForRuleInvocations(_parseAndAssertNoError);
   }
   
   public void checksForRuleInvocations(final XsemanticsSystem ts) {
@@ -496,11 +478,5 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   public void testScopingForVariableDeclarationAsOutputArgument() {
     CharSequence _testScopingForVariableDeclarationAsOutputArgument = this.testFiles.testScopingForVariableDeclarationAsOutputArgument();
     this.parseAndAssertNoError(_testScopingForVariableDeclarationAsOutputArgument);
-  }
-  
-  @Test
-  public void testWrongReturnInPremises() {
-    CharSequence _testWrongReturnInPremises = this.testFiles.testWrongReturnInPremises();
-    this.parseAndAssertNoError(_testWrongReturnInPremises);
   }
 }

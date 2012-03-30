@@ -102,11 +102,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testRuleWithExpressionInConclusion2() {
-		parser.parse(testFiles.testRuleWithExpressionInConclusion2).assertNoErrors
-	}
-
-	@Test
 	def void testRuleWithBlockExpressionInConclusion() {
 		parser.parse(testFiles.testRuleWithBlockExpressionInConclusion).assertNoErrors
 	}
@@ -146,12 +141,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		testFiles.testRuleInvokingAnotherRuleWith3Params.parseAndAssertNoError
 	}
 	
-	@Test
-	def void testRuleInvokingAnotherRuleNotValid() {
-		testFiles.testRuleInvokingAnotherRuleNotValid.parseAndAssertNoError.
-			checksForRuleInvocations
-	}
-
 	def void checksForRuleInvocations(XsemanticsSystem ts) {
 		Assert::assertEquals(2, ts.ruleInvocations.size)
 		var expressions = ts.getRulePremises(0)
@@ -310,8 +299,4 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		testFiles.testScopingForVariableDeclarationAsOutputArgument.parseAndAssertNoError
 	}
 	
-	@Test
-	def void testWrongReturnInPremises() {
-		testFiles.testWrongReturnInPremises.parseAndAssertNoError
-	}
 }
