@@ -23,12 +23,12 @@
 		<repository>
 			<id>xtext</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</url>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/</url>
 		</repository>
 		<repository>
 			<id>xdoc</id>
 			<layout>p2</layout>
-			<url>http://samoa.informatik.uni-kiel.de:8080/hudson/job/Xdoc-Xtext2.2/lastSuccessfulBuild/artifact/org.eclipse.xtext.xdoc.releng/target/site</url>
+			<url>http://samoa.informatik.uni-kiel.de:8080/hudson/job/Xdoc-free/lastSuccessfulBuild/artifact/org.eclipse.xtext.xdoc.releng/target/site</url>
 		</repository>
 	</repositories>
 
