@@ -12,6 +12,7 @@ import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Before;
 
 /**
  * @author Lorenzo Bettini
@@ -23,8 +24,8 @@ public class LambdaAbstractTests extends AbstractXtextTests {
 
 	protected LambdaStringRepresentation stringProvider;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		with(LambdaStandaloneSetup.class);
 		typeSystem = get(LambdaXsemanticsSystem.class);

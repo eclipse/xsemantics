@@ -186,7 +186,7 @@ Just to show the syntax of rules in Xsemantics which rely on Xbase,
 we present above three different ways of creating the basic types (initialized
 with the corresponding string).
 
-TODO
+todo[COMPLETE FJ Section]
 
 classtype used by the scope provider
 

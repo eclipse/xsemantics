@@ -1,15 +1,15 @@
 package it.xsemantics.dsl.tests.runtime
 
+import com.google.common.base.Strings
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.runtime.StringRepresentationPostProcessor
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.runtime.StringRepresentationPostProcessor
+import junit.framework.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.google.common.base.Strings
-import junit.framework.Assert
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))

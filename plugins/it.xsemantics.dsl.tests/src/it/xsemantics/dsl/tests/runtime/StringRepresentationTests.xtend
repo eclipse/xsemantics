@@ -2,9 +2,9 @@ package it.xsemantics.dsl.tests.runtime
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.classes.CustomStringRepresentation
+import it.xsemantics.runtime.RuleEnvironment
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

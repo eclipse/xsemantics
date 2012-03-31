@@ -28,7 +28,7 @@ import com.google.inject.Injector;
 public class FJTestLoader {
 	public static final String OBJECT_FJ = "Object.fj";
 
-	public static final String PLATFORM_URI_FOR_FJ_LIB = "platform:/resource/it.xsemantics.example.fj/src/it/xsemantics/example/fj/lib/";
+	public static final String PLATFORM_URI_FOR_FJ_LIB = "platform:/resource/it.xsemantics.example.fj.tests/src/it/xsemantics/example/fj/lib/";
 
 	public static final String OBJECT_FJ_URI = PLATFORM_URI_FOR_FJ_LIB
 			+ OBJECT_FJ;
@@ -38,13 +38,18 @@ public class FJTestLoader {
 
 	private XtextResourceSet resourceSet;
 
-	public FJTestLoader() {
+	public FJTestLoader() throws IOException {
 		new org.eclipse.emf.mwe.utils.StandaloneSetup().setPlatformUri("../");
 
 		resourceSet = injector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL,
 				Boolean.TRUE);
-		resourceSet.getResource(uriForFjLibFiles(OBJECT_FJ), true);
+		//resourceSet.getResource(uriForFjLibFiles(OBJECT_FJ), true);
+		Resource resource = resourceSet.createResource(URI
+				.createURI("dummy:/Object.fj"));
+		String program = "class Object { } ";
+		InputStream in = new ByteArrayInputStream(program.getBytes());
+		resource.load(in, resourceSet.getLoadOptions());
 	}
 
 	public Resource createResource() {
@@ -57,7 +62,7 @@ public class FJTestLoader {
 
 	protected URI uriForFjTestFiles(String fileName) {
 		return URI
-				.createURI("platform:/resource/it.xsemantics.example.fj.tests/tests/"
+				.createURI("./tests/"
 						+ fileName);
 	}
 	

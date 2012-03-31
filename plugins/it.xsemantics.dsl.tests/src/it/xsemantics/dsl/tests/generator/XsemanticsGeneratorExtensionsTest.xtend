@@ -1,10 +1,10 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import junit.framework.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -12,7 +12,7 @@ import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProvider))
+@InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 

@@ -544,3 +544,43 @@ public class MyDslJavaValidator extends MyDslSystemValidator {
 ]
 
 At the moment, this is the way to use the generated validator.
+
+section2:ErrorGeneration[Error Marker Generation]
+
+The generated Java validator will also automatically generate error markers
+in case the corresponding rule invocations fail.  Error markers will be generated
+according to the error information found in the trace of a failure
+(which is contained in a codeRef[it.xsemantics.runtime.RuleFailedException]).
+
+When generating error markers the validator will use only the error information
+that related to an codeRef[org.eclipse.emf.ecore.EObject] which corresponds to
+an actual node in the AST.  Note that this error information can be customized in
+a Xsemantics system by explicit error specifications (see ref:ErrorSpecification[]
+and ref:ExplicitFailure[]), thus, you should keep in mind the above strategy when
+using code[source] (and code[feature]) in an error specification.
+
+Furthermore, the validator will not use ALL the error information referring
+to nodes in the AST: by default it will use the inner most error information
+referring to an actual node in the AST.  This corresponds on using the error
+of the first rule invocation that failed, and this is usually what actually
+is important for generating an error.
+
+For instance, if you consider the example of expressions (ref:Expressions[])
+and the following expression which cannot be typed
+
+code[
+i = (1 + 5) - (10 * true)
+]
+
+the generated validator will generated an error marker to the inner most
+subexpression which made the typing failed, i.e., code[10 * true].
+
+Remember that in an error specification (see ref:ErrorSpecification[]) you can
+also specify the code[feature] for error generation, and in that case the
+validator will use also the specified feature for generating the error marker.
+
+The generated validator relies on an injected codeRef[it.xsemantics.runtime.validation.XsemanticsValidatorFilter]
+to filter the error information according to the strategy defined above;
+you can customize the filtering by injecting your implementation.
+The filter relies on codeRef[it.xsemantics.runtime.util.TraceUtils] which
+provides many utility methods to access the error trace.

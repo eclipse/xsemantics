@@ -42,11 +42,8 @@ public class XsemanticsProposalProviderTest extends
 						"<~!", "!~>", "error");
 	}
 
-	@Override
 	protected ISetup doGetSetup() {
 		return new ISetup() {
-
-			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
 				return new XsemanticsUiInjectorProvider().getInjector();
 			}

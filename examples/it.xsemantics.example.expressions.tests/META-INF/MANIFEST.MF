@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: it.xsemantics.example.expressions.tests
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1.qualifier
 Bundle-SymbolicName: it.xsemantics.example.expressions.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.expressions,
@@ -13,7 +13,6 @@ Require-Bundle: it.xsemantics.example.expressions,
  org.eclipse.xtext.ui.junit,
  org.junit4,
  org.eclipse.ui.workbench;resolution:=optional,
- org.eclipse.xtend2.lib,
  com.google.inject,
  com.google.guava,
  org.eclipse.xtext.xbase.lib

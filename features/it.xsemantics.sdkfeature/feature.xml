@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.sdkfeature"
       label="XSemantics SDK"
-      version="1.0.1.qualifier"
+      version="1.0.0.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
@@ -107,10 +107,6 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
-
-   <url>
-      <update url="http://master.dl.sourceforge.net/project/xsemantics/updatesite_xtext_2_3"/>
-   </url>
 
    <includes
          id="it.xsemantics.feature"

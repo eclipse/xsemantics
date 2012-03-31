@@ -13,6 +13,8 @@ import it.xsemantics.runtime.StringRepresentation;
 import it.xsemantics.runtime.util.TraceUtils;
 
 import org.eclipse.emf.ecore.EObject;
+import org.junit.Before;
+import org.junit.Test;
 
 public abstract class FjAbstractGeneratedTypeSystemTests extends
 		FjAbstractTests {
@@ -83,7 +85,8 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
 		fjTypeSystem = get(IFjTypeSystem.class);
@@ -95,11 +98,13 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 
 	protected abstract java.lang.Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass();
 
+	@Test
 	public void testNullArguments() throws Exception {
 		assertSubtypes(null, null, false, trace,
 				"passed null object to system", "");
 	}
 
+	@Test
 	public void testSubclasses() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchy());
@@ -107,6 +112,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.okSubclasses(), "");
 	}
 
+	@Test
 	public void testSubclassesObject() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchyWithObject());
@@ -116,6 +122,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"");
 	}
 
+	@Test
 	public void testSubclassesFailed() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchy());
@@ -124,6 +131,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"class A { } -- class B extends A { }");
 	}
 
+	@Test
 	public void testSubtypesBasic() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -132,6 +140,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"BasicSubtyping: [] |- String <: String", "");
 	}
 
+	@Test
 	public void testSubtypesBasicFailed() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -140,6 +149,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.failSubtypesBasic(), "String -- int");
 	}
 
+	@Test
 	public void testSubtypesClasses() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -148,6 +158,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.okSubtypesClasses().toString().trim(), "");
 	}
 
+	@Test
 	public void testSubtypesClassesFailed() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -157,6 +168,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"A -- B -- class A { } -- class B extends A { }");
 	}
 
+	@Test
 	public void testEqualsBasicType() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -165,6 +177,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"BasicEquals: [] |- String ~~ String", "");
 	}
 
+	@Test
 	public void testEqualsClassType() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -173,6 +186,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"ClassEquals: [] |- A ~~ A", "");
 	}
 
+	@Test
 	public void testNotEqualsBasicType() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -181,6 +195,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.failEqualsBasicType(), "String -- int");
 	}
 
+	@Test
 	public void testNotEqualsClassType() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -189,6 +204,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.failEqualsClassType(), "A -- B");
 	}
 
+	@Test
 	public void testNotEqualsTypeMixed() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -197,44 +213,52 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"cannot find a rule for |- String ~~ B", "");
 	}
 
+	@Test
 	public void testStringConstant() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram("'foo'")), "String",
 				trace, "TStringConstant: [] |- 'foo' : String", "");
 	}
 
+	@Test
 	public void testIntConstant() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram("10")), "int", trace,
 				"TIntConstant: [] |- 10 : int", "");
 	}
 
+	@Test
 	public void testBoolConstant() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram("true")), "boolean",
 				trace, "TBoolConstant: [] |- true : boolean", "");
 	}
 
+	@Test
 	public void testNew() throws Exception {
 		assertType(
 				fjTestsUtils.mainExpression(getProgram(testFiles.testForNew())),
 				"B", trace, expectedTraces.newType(), "");
 	}
 
+	@Test
 	public void testVariable() throws Exception {
 		assertType(fjTestsUtils.variableExpression(getProgram(testFiles
 				.testForVariable())), "String", trace,
 				expectedTraces.variableType(), "");
 	}
 
+	@Test
 	public void testCast() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram(testFiles
 				.testForCast())), "B", trace, expectedTraces.castType(), "");
 	}
 
+	@Test
 	public void testThisWithEmptyEnvironment() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram(testFiles
 				.testForThis())), null, trace, expectedTraces
 				.failThisDueToNullEnvironment().toString().trim(), "this");
 	}
 
+	@Test
 	public void testThisWithWrongMapping() throws Exception {
 		RuleEnvironment environment = new RuleEnvironment();
 		environment.add("this", "foo");
@@ -245,6 +269,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 						.toString().trim(), "this");
 	}
 
+	@Test
 	public void testThisOk() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -256,18 +281,21 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"A", trace, "TThis: [this <- A] |- this : A", "");
 	}
 
+	@Test
 	public void testMethodCall() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram(testFiles
 				.testForMethodCall())), "String", trace,
 				expectedTraces.methodCallType(), "");
 	}
 
+	@Test
 	public void testFieldSelection() throws Exception {
 		assertType(fjTestsUtils.mainExpression(getProgram(testFiles
 				.testForFieldSelection())), "int", trace,
 				expectedTraces.fieldSelectionType(), "");
 	}
 
+	@Test
 	public void testSuperclasses() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchy());
@@ -277,6 +305,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"[class B extends A { }, class A { }]");
 	}
 
+	@Test
 	public void testSuperclassesWithCyclicHierarchy() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testCyclicClassHierarchy());
@@ -294,17 +323,20 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"[class B extends A { }, class A extends C { }, class C extends B { }, class B extends A { }]");
 	}
 
+	@Test
 	public void testIsNotClassType() throws Exception {
 		assertClassType(fjTestsUtils.mainExpression(getProgram("'foo'")), null,
 				trace, expectedTraces.failClassType(), "'foo'");
 	}
 
+	@Test
 	public void testIsClassType() throws Exception {
 		assertClassType(
 				fjTestsUtils.mainExpression(getProgram("class A {} new A()")),
 				"A", trace, expectedTraces.classType(), "");
 	}
 
+	@Test
 	public void testCheckMethodOk() throws Exception {
 		assertCheck(
 				null,
@@ -313,12 +345,14 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				trace, expectedTraces.methodCheckOk(), "");
 	}
 
+	@Test
 	public void testCheckMethodOkWithThis() throws Exception {
 		assertCheck(null, fjTestsUtils.fjMethodForName(
 				getProgram(testFiles.testForMethodBodyUsingThis()), "m"), true,
 				trace, expectedTraces.methodCheckOkWithThis(), "");
 	}
 
+	@Test
 	public void testCheckMethodBodyNotSubtype() throws Exception {
 		assertCheck(null, fjTestsUtils.fjMethodForName(
 				getProgram(testFiles.testForMethodBodyNotSubtype()), "m"),
@@ -326,12 +360,14 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"int m(String param) { return new A(param... -- String -- int");
 	}
 
+	@Test
 	public void testCheckMethodCallOk() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testMethodCallOk())), true, trace,
 				expectedTraces.methodCallCheckOk(), "");
 	}
 
+	@Test
 	public void testFieldsInHierarchy() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchyForFields());
@@ -340,6 +376,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		assertFields(classes, classes.C, "[int i;, String s;, A c;]");
 	}
 
+	@Test
 	public void testFieldsInHierarchyWithoutFields() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchy());
@@ -348,6 +385,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		assertFields(classes, classes.C, "[]");
 	}
 
+	@Test
 	public void testMethodsInHierarchy() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testClassHierarchyForMethods());
@@ -362,12 +400,14 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"[String i() { return 'C.i'; }, String j() { return 'C.j'; }, String k() { return 'B.k'; }]");
 	}
 
+	@Test
 	public void testCheckNewOk() throws Exception {
 		assertCheck(null,
 				fjTestsUtils.mainExpression(getProgram(testFiles.testNewOk())),
 				true, trace, expectedTraces.newCheckOk(), "");
 	}
 
+	@Test
 	public void testCheckNewWrongSubtypeSimpler() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testNewWrongArgSubtypeSimpler())), false, trace,
@@ -375,6 +415,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"new A('foo') -- int");
 	}
 
+	@Test
 	public void testCheckNewWrongSubtype() throws Exception {
 		assertCheck(
 				null,
@@ -386,6 +427,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"new C(10, 'foo', new C(20, 'bar', new D(... -- new C(20, 'bar', new D()) -- D -- A -- class D {} -- class A { int i; }");
 	}
 
+	@Test
 	public void testCheckNewWrongArgNum() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testNewWrongArgNum())), false, trace,
@@ -393,6 +435,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"new C(10, 'foo', new B(20, 'bar', 1)) -- new B(20, 'bar', 1)");
 	}
 
+	@Test
 	public void testCheckNewWrongSubtypeBasic() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testNewWrongArgSubtypeBasic())), false, trace,
@@ -403,16 +446,19 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		// since it does not have a corresponding NodeModel
 	}
 
+	@Test
 	public void testCastOk1() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testCastOk1())), true, trace, expectedTraces.castOk1(), "");
 	}
 
+	@Test
 	public void testCastOk2() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testCastOk2())), true, trace, expectedTraces.castOk2(), "");
 	}
 
+	@Test
 	public void testCastWrong() throws Exception {
 		assertCheck(
 				null,
@@ -426,6 +472,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		// "(D) new C() -- C -- D -- class C extends B { } -- class D {} -- class B extends A { } -- class D {} -- class A { } -- class D {}");
 	}
 
+	@Test
 	public void testCheckClassWrongSubclassDeclaresSameFieldOfSuperClass()
 			throws Exception {
 		FjClassForTests classes = new FjClassForTests(
@@ -435,6 +482,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"class B extends A { String s; int i; }");
 	}
 
+	@Test
 	public void testCheckClassOkWRTFields() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testSubclassOkWRTFields());
@@ -442,6 +490,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.subclassOkWRTFields(), "");
 	}
 
+	@Test
 	public void testCheckSubclassNotOvverrideMethod() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testSubclassNotOverrideMethod());
@@ -450,6 +499,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				"class C extends A { boolean m(String s) ... -- boolean -- int");
 	}
 
+	@Test
 	public void testCheckSubclassOvverrideMethod() throws Exception {
 		FjClassForTests classes = new FjClassForTests(
 				testFiles.testSubclassNotOverrideMethod());
@@ -457,6 +507,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedTraces.subclassOverrideMethod(), "");
 	}
 
+	@Test
 	public void testNoRuleFound() throws Exception {
 		assertCheck(null, FjTypeUtils.createStringType(), false, trace,
 				"cannot find a rule for |- String", "");
@@ -546,7 +597,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 				expectedType, trace, expectedTrace, expectedErrorInformations);
 	}
 
-	public void assertType(Result<? extends Type> result, String expectedType,
+	protected void assertType(Result<? extends Type> result, String expectedType,
 			RuleApplicationTrace trace, CharSequence expectedTrace,
 			CharSequence expectedErrorInformations) {
 		if (expectedType != null) {

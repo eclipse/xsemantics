@@ -1,10 +1,11 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.RuleInvocation
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Type
 import junit.framework.Assert
@@ -19,10 +20,8 @@ import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 
-@InjectWith(typeof(XsemanticsInjectorProvider))
+@InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsParserTest extends XsemanticsBaseTest {
 	

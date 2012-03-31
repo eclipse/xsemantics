@@ -2,11 +2,11 @@ package it.xsemantics.dsl.tests.generator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.generator.GeneratorUtils;
 import it.xsemantics.dsl.generator.XsemanticsGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
 @RunWith(XtextRunner.class)
 public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 

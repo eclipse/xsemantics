@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.junit.Test;
 
 public class FjActualGeneratedValidatorTests extends
 		FjAbstractGeneratedValidatorTests {
@@ -51,11 +52,11 @@ public class FjActualGeneratedValidatorTests extends
 		}
 	}
 
-	@Override
 	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
 		return FjStandaloneSetupActual.class;
 	}
 
+	@Test
 	public void testSubclassNotOverrideMethodChangingReturnType()
 			throws Exception {
 		assertAll(testFiles.testSubclassNotOverrideMethodChangingReturnType(),

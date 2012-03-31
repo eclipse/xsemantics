@@ -7,6 +7,7 @@ import it.xsemantics.example.fj.fj.Program;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.After;
 
 /**
  * @author bettini
@@ -19,7 +20,8 @@ public abstract class FjAbstractTests extends AbstractXtextTests {
 	protected FjTestsUtils fjTestsUtils = new FjTestsUtils();
 
 	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		super.tearDown();
 	}
 

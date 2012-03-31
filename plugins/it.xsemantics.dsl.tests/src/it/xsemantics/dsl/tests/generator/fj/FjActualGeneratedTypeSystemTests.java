@@ -29,7 +29,6 @@ public class FjActualGeneratedTypeSystemTests extends
 		}
 	}
 
-	@Override
 	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
 		return FjStandaloneSetupActual.class;
 	}

@@ -1,5 +1,8 @@
 package it.xsemantics.example.lambda.tests;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import it.xsemantics.example.lambda.lambda.ArrowType;
 import it.xsemantics.example.lambda.lambda.BasicType;
 import it.xsemantics.example.lambda.lambda.LambdaFactory;
@@ -14,12 +17,13 @@ import static it.xsemantics.example.lambda.tests.util.LambdaTestsUtil.*;
 public class LambdaTypeBeautifierTests extends TestCase {
 	LambdaTypeBeautifier lambdaTypeBeautifier;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		lambdaTypeBeautifier = new LambdaTypeBeautifier();
 	}
 
+	@Test
 	public void testGetBeautifiedStringIntType() {
 		BasicType type = LambdaFactory.eINSTANCE.createIntType();
 
@@ -28,7 +32,8 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		s = lambdaTypeBeautifier.getBeautifiedString(type);
 		assertEquals("int", s);
 	}
-
+	
+	@Test
 	public void testGetBeautifiedStringStringType() {
 		BasicType type = LambdaFactory.eINSTANCE.createStringType();
 
@@ -38,6 +43,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("string", s);
 	}
 
+	@Test
 	public void testGetBeautifiedStringTypeVariable() {
 		TypeVariable typeVariable1 = createTypeVariable("X1");
 		TypeVariable typeVariable2 = createTypeVariable("X2");
@@ -52,6 +58,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("a", s);
 	}
 
+	@Test
 	public void testGetBeautifiedStringArrowType() {
 		ArrowType arrowType = createArrowType(
 				createTypeVariable("X1"),
@@ -62,6 +69,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("a -> b -> a", s);
 	}
 
+	@Test
 	public void testGetBeautifiedStringArrowType2() {
 		ArrowType arrowType = createArrowType(
 				createArrowType(createTypeVariable("X2"),
@@ -71,6 +79,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("(a -> b) -> a", s);
 	}
 
+	@Test
 	public void testGetBeautifiedStringArrowType3() {
 		ArrowType arrowType = createArrowType(
 				createArrowType(createTypeVariable("X2"),
@@ -82,12 +91,14 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("(a -> b) -> a -> c", s);
 	}
 
+	@Test
 	public void testBeautifyIntType() {
 		BasicType type = LambdaFactory.eINSTANCE.createIntType();
 
 		lambdaTypeBeautifier.beautifyTypeVariables(type);
 	}
 
+	@Test
 	public void testBeautifyTypeVariable() {
 		TypeVariable type = createTypeVariable("X1");
 
@@ -95,6 +106,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 		assertEquals("a", type.getTypevarName());
 	}
 
+	@Test
 	public void testBeautifyArrowType() {
 		ArrowType arrowType = createArrowType(createTypeVariable("X2"),
 				createTypeVariable("X1"));
@@ -104,6 +116,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 				.getTypevarName());
 	}
 
+	@Test
 	public void testBeautifyArrowTypeAlreadyBeautified() {
 		ArrowType arrowType = createArrowType(createTypeVariable("b"),
 				createTypeVariable("a"));
@@ -113,6 +126,7 @@ public class LambdaTypeBeautifierTests extends TestCase {
 				.getTypevarName());
 	}
 
+	@Test
 	public void testBeautifyArrowTypeWithExistingTypeVariables() {
 		ArrowType arrowType = createArrowType(createTypeVariable("a"),
 				createTypeVariable("X1"));
