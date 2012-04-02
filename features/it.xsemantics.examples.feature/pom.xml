@@ -9,9 +9,8 @@
 		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 	</parent>
-	<groupId>xsemantics</groupId>
+
 	<artifactId>it.xsemantics.examples.feature</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
 
 </project>
