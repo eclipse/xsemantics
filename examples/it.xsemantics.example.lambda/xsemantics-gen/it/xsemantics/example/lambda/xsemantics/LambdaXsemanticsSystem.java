@@ -94,8 +94,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			final TypeSubstitutions substitutions, final Term term) {
 		try {
 			return typeInternal(_environment_, _trace_, substitutions, term);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -114,8 +114,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			final Parameter param) {
 		try {
 			return paramtypeInternal(_environment_, _trace_, param);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_paramtype) {
+			return resultForFailure(_e_paramtype);
 		}
 	}
 	
@@ -134,8 +134,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			final TypeSubstitutions substitutions, final Type original) {
 		try {
 			return typesubstitutionInternal(_environment_, _trace_, substitutions, original);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_typesubstitution) {
+			return resultForFailure(_e_typesubstitution);
 		}
 	}
 	
@@ -154,8 +154,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			final Type type, final Type other) {
 		try {
 			return notoccurInternal(_environment_, _trace_, type, other);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_notoccur) {
+			return resultForFailure(_e_notoccur);
 		}
 	}
 	
@@ -174,8 +174,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 			final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
 		try {
 			return unifyInternal(_environment_, _trace_, substitutions, originalLeft, originalRight);
-		} catch (Exception e) {
-			return resultForFailure2(e);
+		} catch (Exception _e_unify) {
+			return resultForFailure2(_e_unify);
 		}
 	}
 
@@ -209,8 +209,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(substitutions, term);
 			return typeDispatcher.invoke(_environment_, _trace_, substitutions, term);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -220,8 +220,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(param);
 			return paramtypeDispatcher.invoke(_environment_, _trace_, param);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_paramtype) {
+			sneakyThrowRuleFailedException(_e_paramtype);
 			return null;
 		}
 	}
@@ -231,8 +231,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(substitutions, original);
 			return typesubstitutionDispatcher.invoke(_environment_, _trace_, substitutions, original);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_typesubstitution) {
+			sneakyThrowRuleFailedException(_e_typesubstitution);
 			return null;
 		}
 	}
@@ -255,8 +255,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(type, other);
 			return notoccurDispatcher.invoke(_environment_, _trace_, type, other);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_notoccur) {
+			sneakyThrowRuleFailedException(_e_notoccur);
 			return null;
 		}
 	}
@@ -266,8 +266,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(substitutions, originalLeft, originalRight);
 			return unifyDispatcher.invoke(_environment_, _trace_, substitutions, originalLeft, originalRight);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_unify) {
+			sneakyThrowRuleFailedException(_e_unify);
 			return null;
 		}
 	}

@@ -127,8 +127,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return typeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -147,8 +147,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return classtypeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_classtype) {
+			return resultForFailure(_e_classtype);
 		}
 	}
 	
@@ -167,8 +167,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Type left, final Type right) {
 		try {
 			return subtypeInternal(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_subtype) {
+			return resultForFailure(_e_subtype);
 		}
 	}
 	
@@ -187,8 +187,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression, final Type right) {
 		try {
 			return assignableInternal(_environment_, _trace_, expression, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_assignable) {
+			return resultForFailure(_e_assignable);
 		}
 	}
 	
@@ -207,8 +207,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Type left, final Type right) {
 		try {
 			return equalstypeInternal(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_equalstype) {
+			return resultForFailure(_e_equalstype);
 		}
 	}
 	
@@ -227,8 +227,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Method current, final Method previous) {
 		try {
 			return overridesInternal(_environment_, _trace_, current, previous);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_overrides) {
+			return resultForFailure(_e_overrides);
 		}
 	}
 	
@@ -247,8 +247,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
 		try {
 			return subtypesequenceInternal(_environment_, _trace_, owner, expressions, elements);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_subtypesequence) {
+			return resultForFailure(_e_subtypesequence);
 		}
 	}
 	
@@ -267,8 +267,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 			final EObject obj) {
 		try {
 			return checkInternal(_environment_, _trace_, obj);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_check) {
+			return resultForFailure(_e_check);
 		}
 	}
 
@@ -409,8 +409,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return typeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -432,8 +432,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return classtypeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_classtype) {
+			sneakyThrowRuleFailedException(_e_classtype);
 			return null;
 		}
 	}
@@ -456,8 +456,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(left, right);
 			return subtypeDispatcher.invoke(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_subtype) {
+			sneakyThrowRuleFailedException(_e_subtype);
 			return null;
 		}
 	}
@@ -481,8 +481,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression, right);
 			return assignableDispatcher.invoke(_environment_, _trace_, expression, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_assignable) {
+			sneakyThrowRuleFailedException(_e_assignable);
 			return null;
 		}
 	}
@@ -505,8 +505,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(left, right);
 			return equalstypeDispatcher.invoke(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_equalstype) {
+			sneakyThrowRuleFailedException(_e_equalstype);
 			return null;
 		}
 	}
@@ -528,8 +528,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(current, previous);
 			return overridesDispatcher.invoke(_environment_, _trace_, current, previous);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_overrides) {
+			sneakyThrowRuleFailedException(_e_overrides);
 			return null;
 		}
 	}
@@ -549,8 +549,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(owner, expressions, elements);
 			return subtypesequenceDispatcher.invoke(_environment_, _trace_, owner, expressions, elements);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_subtypesequence) {
+			sneakyThrowRuleFailedException(_e_subtypesequence);
 			return null;
 		}
 	}
@@ -560,8 +560,8 @@ public class FjSepTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(obj);
 			return checkDispatcher.invoke(_environment_, _trace_, obj);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_check) {
+			sneakyThrowRuleFailedException(_e_check);
 			return null;
 		}
 	}

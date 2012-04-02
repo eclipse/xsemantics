@@ -102,8 +102,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return typeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -122,8 +122,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Variable variable) {
 		try {
 			return vartypeInternal(_environment_, _trace_, variable);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_vartype) {
+			return resultForFailure(_e_vartype);
 		}
 	}
 	
@@ -142,8 +142,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Expression expression, final Type expectedType) {
 		try {
 			return coerceInternal(_environment_, _trace_, expression, expectedType);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_coerce) {
+			return resultForFailure(_e_coerce);
 		}
 	}
 	
@@ -162,8 +162,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return interpretInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_interpret) {
+			return resultForFailure(_e_interpret);
 		}
 	}
 
@@ -203,8 +203,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return typeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -228,8 +228,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(variable);
 			return vartypeDispatcher.invoke(_environment_, _trace_, variable);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_vartype) {
+			sneakyThrowRuleFailedException(_e_vartype);
 			return null;
 		}
 	}
@@ -255,8 +255,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression, expectedType);
 			return coerceDispatcher.invoke(_environment_, _trace_, expression, expectedType);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_coerce) {
+			sneakyThrowRuleFailedException(_e_coerce);
 			return null;
 		}
 	}
@@ -266,8 +266,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return interpretDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_interpret) {
+			sneakyThrowRuleFailedException(_e_interpret);
 			return null;
 		}
 	}
