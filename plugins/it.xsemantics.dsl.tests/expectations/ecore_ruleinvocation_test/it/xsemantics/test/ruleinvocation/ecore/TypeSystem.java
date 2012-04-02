@@ -65,8 +65,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EClass c1, final EObject o1) {
 		try {
 			return typeInternal(_environment_, _trace_, c1, o1);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -85,8 +85,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EObject o2) {
 		try {
 			return etypeInternal(_environment_, _trace_, o2);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_etype) {
+			return resultForFailure(_e_etype);
 		}
 	}
 	
@@ -105,8 +105,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EObject o3) {
 		try {
 			return etype2Internal(_environment_, _trace_, o3);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_etype2) {
+			return resultForFailure(_e_etype2);
 		}
 	}
 	
@@ -125,8 +125,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EObject o4) {
 		try {
 			return etype3Internal(_environment_, _trace_, o4);
-		} catch (Exception e) {
-			return resultForFailure2(e);
+		} catch (Exception _e_etype3) {
+			return resultForFailure2(_e_etype3);
 		}
 	}
 	
@@ -145,8 +145,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EObject o) {
 		try {
 			return etypeWithVarDeclAsOutputArgInternal(_environment_, _trace_, o);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_etypeWithVarDeclAsOutputArg) {
+			return resultForFailure(_e_etypeWithVarDeclAsOutputArg);
 		}
 	}
 
@@ -156,8 +156,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(c1, o1);
 			return typeDispatcher.invoke(_environment_, _trace_, c1, o1);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -167,8 +167,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(o2);
 			return etypeDispatcher.invoke(_environment_, _trace_, o2);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_etype) {
+			sneakyThrowRuleFailedException(_e_etype);
 			return null;
 		}
 	}
@@ -178,8 +178,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(o3);
 			return etype2Dispatcher.invoke(_environment_, _trace_, o3);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_etype2) {
+			sneakyThrowRuleFailedException(_e_etype2);
 			return null;
 		}
 	}
@@ -189,8 +189,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(o4);
 			return etype3Dispatcher.invoke(_environment_, _trace_, o4);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_etype3) {
+			sneakyThrowRuleFailedException(_e_etype3);
 			return null;
 		}
 	}
@@ -200,8 +200,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(o);
 			return etypeWithVarDeclAsOutputArgDispatcher.invoke(_environment_, _trace_, o);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_etypeWithVarDeclAsOutputArg) {
+			sneakyThrowRuleFailedException(_e_etypeWithVarDeclAsOutputArg);
 			return null;
 		}
 	}

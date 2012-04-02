@@ -42,8 +42,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			final EClass c, final EObject o) {
 		try {
 			return typeInternal(_environment_, _trace_, c, o);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 
@@ -53,8 +53,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(c, o);
 			return typeDispatcher.invoke(_environment_, _trace_, c, o);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
