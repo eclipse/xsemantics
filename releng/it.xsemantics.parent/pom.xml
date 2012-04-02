@@ -46,6 +46,12 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*.java._trace</exclude>
+						<exclude>**/*.smap</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>plugin-source</id>
