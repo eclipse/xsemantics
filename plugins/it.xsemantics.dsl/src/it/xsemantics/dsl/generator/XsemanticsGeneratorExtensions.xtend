@@ -580,4 +580,8 @@ class XsemanticsGeneratorExtensions {
 		appendable.declareVariable(context.referenceForBaseRuntimeSystem.type, "this")
 		appendable
 	}
+	
+	def exceptionVarName(JudgmentDescription j) {
+		'''_e_«j.name»'''
+	}
 }

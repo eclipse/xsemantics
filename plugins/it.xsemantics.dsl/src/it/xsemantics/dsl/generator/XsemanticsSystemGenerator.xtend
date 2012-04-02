@@ -81,8 +81,8 @@ class XsemanticsSystemGenerator {
 				«inputParams») {
 			try {
 				return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
-			} catch («importManager.exceptionClass» e) {
-				return «resultForFailureMethod»(e);
+			} catch («importManager.exceptionClass» «judgmentDescription.exceptionVarName») {
+				return «resultForFailureMethod»(«judgmentDescription.exceptionVarName»);
 			}
 		}
 	'''
@@ -96,8 +96,8 @@ class XsemanticsSystemGenerator {
 			try {
 				checkParamsNotNull(«inputArgs»);
 				return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
-			} catch («importManager.exceptionClass» e) {
-				sneakyThrowRuleFailedException(e);
+			} catch («importManager.exceptionClass» «judgmentDescription.exceptionVarName») {
+				sneakyThrowRuleFailedException(«judgmentDescription.exceptionVarName»);
 				return null;
 			}
 		}

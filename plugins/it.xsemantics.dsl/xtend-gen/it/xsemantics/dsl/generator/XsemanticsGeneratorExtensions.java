@@ -1226,4 +1226,12 @@ public class XsemanticsGeneratorExtensions {
     }
     return _xblockexpression;
   }
+  
+  public CharSequence exceptionVarName(final JudgmentDescription j) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("_e_");
+    String _name = j.getName();
+    _builder.append(_name, "");
+    return _builder;
+  }
 }
