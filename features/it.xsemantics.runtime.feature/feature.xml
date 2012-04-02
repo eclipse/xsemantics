@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.runtime.feature"
       label="Xsemantics Runtime Feature"
-      version="1.0.1.qualifier"
+      version="1.0.100.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">

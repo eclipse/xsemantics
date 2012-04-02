@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.100-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
