@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -72,6 +73,11 @@ public class LambdaBaseTest {
   protected LambdaStringRepresentationWithTypeBeautifier reprBeautifier;
   
   protected RuleApplicationTrace trace;
+  
+  @BeforeClass
+  public static void setNewLine() {
+    System.setProperty("line.separator", "\n");
+  }
   
   @Before
   public void setUp() {

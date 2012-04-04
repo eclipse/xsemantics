@@ -29,6 +29,7 @@ import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation
 import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTypeBeautifier
 import it.xsemantics.example.lambda.validation.LambdaJavaValidator
 import com.google.inject.Injector
+import org.junit.BeforeClass
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorProvider))
@@ -56,6 +57,11 @@ class LambdaBaseTest {
 	@Inject protected LambdaStringRepresentationWithTypeBeautifier reprBeautifier
 	
 	protected RuleApplicationTrace trace
+	
+	@BeforeClass
+	def static void setNewLine() {
+		System::setProperty("line.separator", "\n")
+	}
 	
 	@Before
 	def void setUp() {
