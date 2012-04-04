@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -60,6 +61,11 @@ public class XsemanticsBaseTest {
   
   @Inject
   private ValidationTestHelper _validationTestHelper;
+  
+  @BeforeClass
+  public static void setNewLine() {
+    System.setProperty("line.separator", "\n");
+  }
   
   public XsemanticsSystem parseAndAssertNoError(final CharSequence s) {
     try {

@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.junit.BeforeClass
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -50,6 +51,11 @@ class XsemanticsBaseTest {
 	protected ParseHelper<XsemanticsSystem> parser
     
 	@Inject extension ValidationTestHelper
+	
+	@BeforeClass
+	def static void setNewLine() {
+		System::setProperty("line.separator", "\n")
+	}
 	
 	def parseAndAssertNoError(CharSequence s) {
 		var ts = parser.parse(s)
