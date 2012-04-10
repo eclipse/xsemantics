@@ -1,75 +1,79 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/00-Main.html" label="XSemantics Documentation" >
-	<topic href="contents/01-Introduction.html#Introduction" label="Introduction" >
+	<topic href="contents/00-Main_11.html#XSemantics%20Documentation_11" label="Reference Documentation" >
+		<topic href="contents/01-Introduction.html#Introduction" label="Introduction" >
+		</topic>
+		<topic href="contents/02-GettingStarted.html#GettingStarted" label="Getting Started" >
+			<topic href="contents/02-GettingStarted.html#Install" label="Installation of Xsemantics" >
+				<topic href="contents/02-GettingStarted.html#Sources" label="Sources" >
+				</topic>
+			</topic>
+			<topic href="contents/02-GettingStarted.html#UsingXsemantics" label="Using Xsemantics" >
+			</topic>
+		</topic>
+		<topic href="contents/XsemanticsSyntax.html#Syntax" label="Xsemantics Syntax" >
+			<topic href="contents/XsemanticsSyntax.html#Premises" label="Premises" >
+				<topic href="contents/XsemanticsSyntax.html#ExpressionsInPremises" label="Expressions in Premises" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#Environment" label="Rule Environment" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#ErrorSpecification" label="Error Specification" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#ExplicitFailure" label="Explicit Failure" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#StringRepresentation" label="String Representation" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#GetAll" label="Graph Closures (getAll)" >
+				</topic>
+			</topic>
+			<topic href="contents/XsemanticsSyntax.html#CheckRules" label="Rules for Validator: checkrule" >
+			</topic>
+			<topic href="contents/XsemanticsSyntax.html#CodeGeneration" label="Generated Code" >
+				<topic href="contents/XsemanticsSyntax.html#GeneratedSystem" label="The Generated Java Rule System" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#GeneratedValidator" label="The Generated Java Validator" >
+				</topic>
+				<topic href="contents/XsemanticsSyntax.html#ErrorGeneration" label="Error Marker Generation" >
+				</topic>
+			</topic>
+		</topic>
 	</topic>
-	<topic href="contents/02-GettingStarted.html#GettingStarted" label="Getting Started" >
-		<topic href="contents/02-GettingStarted.html#Install" label="Installation of Xsemantics" >
-			<topic href="contents/02-GettingStarted.html#Sources" label="Sources" >
-			</topic>
+	<topic href="contents/00-Main_12.html#XSemantics%20Documentation_12" label="Examples" >
+		<topic href="contents/Examples.html#Examples" label="Examples" >
 		</topic>
-		<topic href="contents/02-GettingStarted.html#UsingXsemantics" label="Using Xsemantics" >
-		</topic>
-	</topic>
-	<topic href="contents/XsemanticsSyntax.html#Syntax" label="Xsemantics Syntax" >
-		<topic href="contents/XsemanticsSyntax.html#Premises" label="Premises" >
-			<topic href="contents/XsemanticsSyntax.html#ExpressionsInPremises" label="Expressions in Premises" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#Environment" label="Rule Environment" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#ErrorSpecification" label="Error Specification" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#ExplicitFailure" label="Explicit Failure" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#StringRepresentation" label="String Representation" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#GetAll" label="Graph Closures (getAll)" >
-			</topic>
-		</topic>
-		<topic href="contents/XsemanticsSyntax.html#CheckRules" label="Rules for Validator: checkrule" >
-		</topic>
-		<topic href="contents/XsemanticsSyntax.html#CodeGeneration" label="Generated Code" >
-			<topic href="contents/XsemanticsSyntax.html#GeneratedSystem" label="The Generated Java Rule System" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#GeneratedValidator" label="The Generated Java Validator" >
-			</topic>
-			<topic href="contents/XsemanticsSyntax.html#ErrorGeneration" label="Error Marker Generation" >
-			</topic>
-		</topic>
-	</topic>
-	<topic href="contents/Examples.html#Examples" label="Examples" >
-		<topic href="contents/Examples.html#Expressions" label="An Expression Language" >
-			<topic href="contents/Examples.html#ExpressionsTS" label="Expressions Type System" >
-			</topic>
-			<topic href="contents/Examples.html#ExpressionsInfer" label="Type Inference for Variables" >
-			</topic>
-			<topic href="contents/Examples.html#ExpressionsValidation" label="Expressions Validation" >
-			</topic>
-			<topic href="contents/Examples.html#ExpressionsInterpreter" label="Interpreter for Expressions" >
-			</topic>
-			<topic href="contents/Examples.html#ExpressionsCustomization" label="Customizations for Expressions" >
-			</topic>
-			<topic href="contents/Examples.html#MoreInvolvedExpressionsSystem" label="A more involved Expressions System" >
-			</topic>
-			<topic href="contents/Examples.html#ExpressionsCodeGeneration" label="Generation for Expressions" >
-			</topic>
-		</topic>
-		<topic href="contents/Examples.html#FJ" label="Featherweight Java" >
-			<topic href="contents/Examples.html#FJInANutshell" label="FJ in a nutshell" >
-			</topic>
-			<topic href="contents/Examples.html#FJInXtext" label="FJ implemented in Xtext" >
-			</topic>
-			<topic href="contents/Examples.html#FJTypeSystem" label="FJ Type System" >
-				<topic href="contents/Examples.html#FJTyping" label="Typing FJ Expressions" >
-				</topic>
-				<topic href="contents/Examples.html#FJScoping" label="FJ Scoping" >
-				</topic>
-				<topic href="contents/Examples.html#FJSubTyping" label="FJ Subtyping" >
-				</topic>
-				<topic href="contents/Examples.html#FJValidation" label="FJ Validation" >
+		<topic href="contents/Expressions-example.html#Expressions" label="An Expression Language" >
+			<topic href="contents/Expressions-example.html#ExpressionsTS" label="Expressions Type System" >
+				<topic href="contents/Expressions-example.html#ExpressionsInfer" label="Type Inference for Variables" >
 				</topic>
 			</topic>
+			<topic href="contents/Expressions-example.html#ExpressionsValidation" label="Expressions Validation" >
+			</topic>
+			<topic href="contents/Expressions-example.html#ExpressionsInterpreter" label="Interpreter for Expressions" >
+			</topic>
+			<topic href="contents/Expressions-example.html#ExpressionsCustomization" label="Customizations for Expressions" >
+			</topic>
+			<topic href="contents/Expressions-example.html#MoreInvolvedExpressionsSystem" label="A more involved Expressions System" >
+			</topic>
+			<topic href="contents/Expressions-example.html#ExpressionsCodeGeneration" label="Generation for Expressions" >
+			</topic>
 		</topic>
-		<topic href="contents/Examples.html#Lambda" label="Lambda" >
+		<topic href="contents/FJ-example.html#FJ" label="Featherweight Java" >
+			<topic href="contents/FJ-example.html#FJInANutshell" label="FJ in a nutshell" >
+			</topic>
+			<topic href="contents/FJ-example.html#FJInXtext" label="FJ implemented in Xtext" >
+			</topic>
+			<topic href="contents/FJ-example.html#FJTypeSystem" label="FJ Type System" >
+				<topic href="contents/FJ-example.html#FJTyping" label="Typing FJ Expressions" >
+				</topic>
+				<topic href="contents/FJ-example.html#FJScoping" label="FJ Scoping" >
+				</topic>
+				<topic href="contents/FJ-example.html#FJSubTyping" label="FJ Subtyping" >
+				</topic>
+			</topic>
+			<topic href="contents/FJ-example.html#FJValidation" label="FJ Validation" >
+			</topic>
+		</topic>
+		<topic href="contents/Lambda-example.html#Lambda" label="Lambda" >
 		</topic>
 	</topic>
 </toc>

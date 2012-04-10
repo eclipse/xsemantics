@@ -1,4 +1,4 @@
-section:FJ[Featherweight Java]
+chapter:FJ[Featherweight Java]
 
 Featherweight Java is a lightweight functional version of Java, 
 which focuses on a few basic features. It is not intended to be used as
@@ -8,7 +8,7 @@ minimal core calculus for Java and GJ]. ACM TOPLAS, 23(3):396-450, 2001.).
 In this section we will see how to write the type system of FJ using Xsemantics.
 (As future work we will also define the operational semantics of FJ in Xsemantics.)
 
-section2:FJInANutshell[FJ in a nutshell]
+section:FJInANutshell[FJ in a nutshell]
 
 FJ focuses on the following features: 
 mutually recursive class definitions, inheritance, object creation, 
@@ -51,7 +51,7 @@ class B extends A { String s; }
 we must create an instance of code[B2] as follows: 
 code[Java][new B(10, true, "foo")].
 
-section2:FJInXtext[FJ implemented in Xtext]
+section:FJInXtext[FJ implemented in Xtext]
 
 We had already implemented FJ in Xtext (that implementation can be found at 
 link[http://fj-eclipse.sourceforge.net][http://fj-eclipse.sourceforge.net]).  
@@ -125,7 +125,7 @@ IntConstant: constant=INT;
 BoolConstant: constant = ('true' | 'false');
 ]
 
-section2:FJTypeSystem[FJ Type System]
+section:FJTypeSystem[FJ Type System]
 
 We start by defining the name (we skip imports) and the judgments
 
@@ -157,7 +157,7 @@ judgments {
 }
 ]
 
-section3:FJTyping[Typing FJ Expressions]
+section2:FJTyping[Typing FJ Expressions]
 
 Let's start with simple expressions
 
@@ -288,7 +288,7 @@ We'll see that later (ref:FJScoping[] and ref:FJValidation[]).
 However, we assume that if this rule fails it is because we are trying to type code[Java][this]
 from outside a method body (e.g., in the program's main expression). 
 
-section3:FJScoping[FJ Scoping]
+section2:FJScoping[FJ Scoping]
 
 We use the generated system from the rules defined in Xsemantics in the
 scope provider, in particular for the scope of the members in
@@ -360,7 +360,7 @@ from {
 Once we have the class type of the receiver, we simply use an
 auxiliary function to collect all the members of that class.
 
-section3:FJSubTyping[FJ Subtyping]
+section2:FJSubTyping[FJ Subtyping]
 
 We have a judgment code[subtype] which given a code[left] and code[right]
 arguments succeeds if the former is a subtype of the latter.  Here are the
@@ -508,7 +508,7 @@ from {
 }
 ] 
 
-section3:FJValidation[FJ Validation]
+section:FJValidation[FJ Validation]
 
 We define some checkrules (ref:CheckRules[]) for validating an FJ program.
 
