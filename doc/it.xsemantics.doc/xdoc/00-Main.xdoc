@@ -115,10 +115,20 @@ codelanguage-def[Xsemantics][
 	or, fail, error, source, feature, env, empty
 	]
 
+part[Reference Documentation]
+
 chapter-ref[Introduction]
 
 chapter-ref[GettingStarted]
 
 chapter-ref[Syntax]
 
+part[Examples]
+
 chapter-ref[Examples]
+
+chapter-ref[Expressions]
+
+chapter-ref[FJ]
+
+chapter-ref[Lambda]

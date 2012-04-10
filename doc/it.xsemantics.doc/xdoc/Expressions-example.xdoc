@@ -1,4 +1,4 @@
-section:Expressions[An Expression Language]
+chapter:Expressions[An Expression Language]
 
 Let us consider this Xtext implementation of an Expressions language
 (similar to the e[Arithmetic] example shipped with Xtext)
@@ -94,7 +94,7 @@ we will have also the EClass definitions for the types that will be used
 by the type system.  Of course, you could have simply define the hierarchy
 for types using plain Java.
 
-section2:ExpressionsTS[Expressions Type System]
+section:ExpressionsTS[Expressions Type System]
 
 Since we will extend the semantics of this language, we will start with
 a first implementation (that is why we use "First" in the name of the system).
@@ -308,7 +308,7 @@ the typing would enter an infinite loop!  For this reason, for this example
 language we limited the scope of variables: expressions can refer only
 to variables defined before the current expression.
 
-section2:ExpressionsValidation[Expressions Validation]
+section:ExpressionsValidation[Expressions Validation]
 
 Now that we have our type system for expressions we can write
 validation rules (ref:CheckRules[]):
@@ -328,7 +328,7 @@ Please refer to ref:GeneratedValidator[] to see how to use the generated
 Java validator (which we also followed in the implementation of this
 Expressions example language).
 
-section2:ExpressionsInterpreter[Interpreter for Expressions]
+section:ExpressionsInterpreter[Interpreter for Expressions]
 
 Xsemantics can be used also to write interpreter rules (which can be
 seen also as the operational semantics of the language).
@@ -478,7 +478,7 @@ from {
 At this point, the remaining above interpreter rules should be
 straightforward.
 
-section2:ExpressionsCustomization[Customizations for Expressions]
+section:ExpressionsCustomization[Customizations for Expressions]
 
 For the Expressions language we provide a custom implementation of
 codeRef[it.xsemantics.runtime.StringRepresentation] (see also
@@ -496,7 +496,7 @@ This way when a codeRef[java.lang.String] has to be represented by Xsemantics
 generated code, it will add quotes around it; this way we are sure that we
 are dealing with an actual string.
 
-section2:MoreInvolvedExpressionsSystem[A more involved Expressions System]
+section:MoreInvolvedExpressionsSystem[A more involved Expressions System]
 
 Now, let's complicate things a bit, and make the system for our
 Expressions language more powerful, with this new requirement:
@@ -697,7 +697,7 @@ from {
 Again, we only showed some modified rules; now it should be clear what
 other rules need to be adapted and how.
 
-section2:ExpressionsCodeGeneration[Generation for Expressions]
+section:ExpressionsCodeGeneration[Generation for Expressions]
 
 The Expressions language we used in this example does not implement any
 real code generation.  However, we implemented a generation strategy just
