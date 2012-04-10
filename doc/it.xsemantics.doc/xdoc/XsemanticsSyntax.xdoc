@@ -399,6 +399,34 @@ judgments {
 }
 ]
 
+section2:GetAll[Graph Closures (getAll)]
+
+Typically, in a DSL, when performing checks or interpretation, we need to
+follow recursively a certain feature (e.g., code[superType] of
+an entity in the domain model example); however, 
+the AST for an Xtext language might be a graph due to references,
+and thus it might contain cycles (without implying that the program is incorrect).
+Thus, such recursive inspection of the graph might lead to an infinite loop. 
+In a manual Java implementation we thus would have to keep track of the visited
+nodes while inspecting the graph (to compute the e[closure] of the graph).
+
+To compute the ``closure'' of a graph, Xsemantics provides a predefined function
+which allows to collect nodes in a graph according to EMF features avoiding
+loops:
+
+code[
+getAll(eObject, feature to collect, feature to follow, expected type)
+]
+
+An invocation of code[getAll] will return a list of ``expected
+type'', built by collecting all the elements from ``feature to collect'' of the
+specified ``eObject'', and recursively collecting such elements by following the
+feature ``feature to follow'', but avoid possible loops in the EMF graph
+representing the AST.
+
+An example of use of this predefined function can be found in
+ref:FJTyping[].
+
 section:CheckRules[Rules for Validator: checkrule]
 
 In a Xsemantics system you can also write special rules, e[checkrule]s, which

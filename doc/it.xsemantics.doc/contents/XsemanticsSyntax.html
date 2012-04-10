@@ -563,6 +563,43 @@ calling <span class="inlinecode">stringRep()</span>; this is useful for error sp
 </div>
 </div>
 </p>
+<a name="GetAll"></a>
+<h3>Graph Closures (getAll)</h3>
+<p>
+Typically, in a DSL, when performing checks or interpretation, we need to
+follow recursively a certain feature (e.g., <span class="inlinecode">superType</span> of
+an entity in the domain model example); however, 
+the AST for an Xtext language might be a graph due to references,
+and thus it might contain cycles (without implying that the program is incorrect).
+Thus, such recursive inspection of the graph might lead to an infinite loop. 
+In a manual Java implementation we thus would have to keep track of the visited
+nodes while inspecting the graph (to compute the <em>closure</em> of the graph).
+</p>
+<p>
+To compute the ``closure&apos;&apos; of a graph, Xsemantics provides a predefined function
+which allows to collect nodes in a graph according to EMF features avoiding
+loops:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+An invocation of <span class="inlinecode">getAll</span> will return a list of ``expected
+type&apos;&apos;, built by collecting all the elements from ``feature to collect&apos;&apos; of the
+specified ``eObject&apos;&apos;, and recursively collecting such elements by following the
+feature ``feature to follow&apos;&apos;, but avoid possible loops in the EMF graph
+representing the AST.
+</p>
+<p>
+An example of use of this predefined function can be found in
+<a href="Examples.html#FJTyping" title="Go to &quot;Typing FJ Expressions&quot;" >section FJTyping</a>.
+</p>
 <a name="CheckRules"></a>
 <h2>Rules for Validator: checkrule</h2>
 <p>

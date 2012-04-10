@@ -22,6 +22,8 @@
 			</topic>
 			<topic href="contents/XsemanticsSyntax.html#StringRepresentation" label="String Representation" >
 			</topic>
+			<topic href="contents/XsemanticsSyntax.html#GetAll" label="Graph Closures (getAll)" >
+			</topic>
 		</topic>
 		<topic href="contents/XsemanticsSyntax.html#CheckRules" label="Rules for Validator: checkrule" >
 		</topic>
@@ -57,6 +59,14 @@
 			<topic href="contents/Examples.html#FJInXtext" label="FJ implemented in Xtext" >
 			</topic>
 			<topic href="contents/Examples.html#FJTypeSystem" label="FJ Type System" >
+				<topic href="contents/Examples.html#FJTyping" label="Typing FJ Expressions" >
+				</topic>
+				<topic href="contents/Examples.html#FJScoping" label="FJ Scoping" >
+				</topic>
+				<topic href="contents/Examples.html#FJSubTyping" label="FJ Subtyping" >
+				</topic>
+				<topic href="contents/Examples.html#FJValidation" label="FJ Validation" >
+				</topic>
 			</topic>
 		</topic>
 		<topic href="contents/Examples.html#Lambda" label="Lambda" >

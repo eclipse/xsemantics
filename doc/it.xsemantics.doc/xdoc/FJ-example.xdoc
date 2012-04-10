@@ -149,11 +149,15 @@ judgments {
 	overrides ||- Method current ~~ Method previous
 		error current.name + " does not override the superclass method"
 		source current
-	subtypesequence |- Expression owner ~> List<Expression> expressions << List<? extends TypedElement> elements
+	subtypesequence |- 
+		Expression owner ~> 
+			List<Expression> expressions << List<? extends TypedElement> elements
 		error "invalid arguments for expected parameters"
 		source owner
 }
 ]
+
+section3:FJTyping[Typing FJ Expressions]
 
 Let's start with simple expressions
 
@@ -182,18 +186,16 @@ axiom TBoolConstant
 	\].apply(FjFactory::eINSTANCE.createBasicType())
 ]
 
+The type of a parameter reference is simply the type of the referred
+parameter (since code[Parameter] is an element with an explicit type).
+
 Just to show the syntax of rules in Xsemantics which rely on Xbase,
 we present above three different ways of creating the basic types (initialized
-with the corresponding string).
-
-todo[COMPLETE FJ Section]
-
-classtype used by the scope provider
-
-code[Xsemantics][
-axiom TThis
-	G |- This _this : env(G, 'this', ClassType)
-]
+with the corresponding string).  This is just a demonstration: probably, the
+best way is relying on static utility methods implemented for your DSL
+(as we did with code[FjTypeUtils]).  Alternatively, as we did with the
+Expressions example (see ref:Expressions[]), we could have a different
+class for each basic type.
 
 code[Xsemantics][
 rule TNew
@@ -211,3 +213,457 @@ from {
 }
 ]
 
+The type of a code[New] expression is the classtype mentioned in the expression
+itself (e.g., the type of the expression code[Java][new C()] is code[C]).
+However, we must also check that the expression is well-typed, i.e., that
+all the arguments passed to the new expression are subtypes of the corresponding
+fields of the classtype (see ref:FJInANutshell[] for the syntax of constructors
+in our implementation of FJ).  In order to collect all the fields of the
+given class (including the inherited ones), we use the predefined
+function code[getAll] (see ref:GetAll[]).  The above invocation of code[getAll]
+requires to collect all the code[Member]s in the class specified in the new
+expressions, and recursively the ones found following the superclass, and
+filter them in order to get only the code[Member]s which are code[Field].
+Remember that code[getAll] avoids possible loops in the class hierarchy
+(see also ref:FJValidation[]).  Once we collected the fields we reverse
+the list (using codeRef[java.util.Collections] standard static method) so
+that the superclass fields appear first in the list, and we check that
+the types of the arguments are subtypes of the types of these fields
+(we use the judgment code[subtypesequence], described in ref:FJSubTyping[]).
+
+code[Xsemantics][
+rule TCast
+	G |- Cast cast : cast.type
+from {
+	G |- cast.expression : var Type expType
+	
+	G |- cast.type <: expType
+	or
+	G |- expType <: cast.type
+}
+]
+
+A cast expression, statically, is well-typed if the type of the object and the type we cast to are related,
+and has the type of the type we cast to.
+
+code[Xsemantics][
+rule TSelection
+	G |- Selection selection : selection.message.type
+from {
+	G |- selection.receiver : var ClassType receiverType
+	// check message if it's a method call
+	val message = selection.message
+	switch (message) {
+		Method: { 
+			G |- selection ~> selection.args << message.params
+		}
+	}
+}
+]
+
+The type of the selection is the type of the selected code[Message]
+(which refers to a code[Member]).
+However, we must check that the received of the message is well-typed,
+and in particular that it has a class type (since message selection,
+i.e., field access or method invocation, is allowed only on class instances).
+We perform this check by using as the output argument a code[ClassType]
+(thus, that rule invocation would fail if the receiver had a basic type).
+
+Furthermore, if the message refers to a code[Method], we must
+check that the arguments types are subtypes of the method parameters
+(we use the judgment code[subtypesequence], described in ref:FJSubTyping[]).
+
+code[Xsemantics][
+axiom TThis
+	G |- This _this : env(G, 'this', ClassType)
+]
+
+For the type of code[Java][this] we use the predefined function code[env] 
+(see ref:Environment[]) which returns the value contained in the environment (first parameter of code[env])
+which corresponds to the passed key (code['this'] in this case), provided the mapped
+value is a code[ClassType].  
+The function code[env] fails (and thus makes the rule fail) if no mapping for the specified
+key is found in the environment.  Who puts the mapping for code['this'] in the environment?
+We'll see that later (ref:FJScoping[] and ref:FJValidation[]).
+However, we assume that if this rule fails it is because we are trying to type code[Java][this]
+from outside a method body (e.g., in the program's main expression). 
+
+section3:FJScoping[FJ Scoping]
+
+We use the generated system from the rules defined in Xsemantics in the
+scope provider, in particular for the scope of the members in
+a code[Selection] expression: we need the type of the receiver to
+know which members are visible in that selection expression:
+
+code[Java][
+public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
+
+	@Inject FjTypeSystem typeSystem;
+
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (reference == FjPackage.Literals.SELECTION__MESSAGE) {
+			if (context instanceof Selection) {
+				Selection selection = (Selection) context;
+				return Scopes
+						.scopeFor(FjAuxiliaryFunctions
+								.getMembers(getExpressionClass(selection
+										.getReceiver())));
+			}
+			return IScope.NULLSCOPE;
+		}
+
+		return super.getScope(context, reference);
+	}
+
+	protected Class getExpressionClass(Expression receiver) {
+		ClassType classType = typeSystem.classtype(
+				environmentForExpression(receiver), receiver).getValue();
+		return (classType != null ? classType.getClassref() : null);
+	}
+
+	private RuleEnvironment environmentForExpression(Expression expression) {
+		Class containingClass = EcoreUtil2.getContainerOfType(expression,
+				Class.class);
+		if (containingClass != null) {
+			ClassType thisType = FjTypeUtils.createClassType(containingClass);
+			return new RuleEnvironment(typeSystem.environmentEntry("this",
+					thisType));
+		}
+		return null;
+	}
+
+}
+]
+
+In order to get the type of the receiver expression we use the generated
+system (refer to ref:GeneratedSystem[]).  However, we need to provide
+a binding for code[Java][this] in the environment (see ref:FJTyping[]),
+thus we build a codeRef[it.xsemantics.runtime.RuleEnvironment] (see
+also ref:Environment[]) where we associate the string code["this"] to
+the class which contains the current selection expression.
+
+Note that we do not use the code[type] judgment, but the judgment
+code[classtype] (refer to ref:FJTypeSystem[]) which already returns
+a code[ClassType] as the output
+parameter.  This judgment has only one simple rule which relies on
+the code[type] judgment, but using as the output argument a code[ClassType]:
+
+code[Xsemantics][
+rule TExpressionClassType
+	G |~ Expression expression : ClassType classType
+from {
+	G |- expression : classType
+}
+]
+
+Once we have the class type of the receiver, we simply use an
+auxiliary function to collect all the members of that class.
+
+section3:FJSubTyping[FJ Subtyping]
+
+We have a judgment code[subtype] which given a code[left] and code[right]
+arguments succeeds if the former is a subtype of the latter.  Here are the
+rules for this judgment:
+
+code[Xsemantics][
+rule GeneralSubtyping
+	G |- Type left <: Type right
+		error "types " + stringRep(left) + " and " + stringRep(right) +
+			" are not comparable"
+from {
+	// if we get here we're trying to mix
+	// a BasicType with a ClassType, thus, we fail
+	fail
+}
+
+rule BasicSubtyping
+	derives G |- BasicType left <: BasicType right
+from {
+	left.basic.equals(right.basic)
+}
+
+rule ClassSubtyping
+	derives G |- ClassType left <: ClassType right
+from {
+	left.classref == right.classref
+	or
+	right.classref.name == "Object"
+	or {
+		getAll(left.classref, 
+			FjPackage::eINSTANCE.class_Superclass,
+			FjPackage::eINSTANCE.class_Superclass,
+			typeof(Class))
+		.contains(right.classref)
+	}
+}
+]
+
+The general case always fails, since we cannot mix basic and class types.
+Then for basic types we do not have actual subtyping, thus the two
+basic types must be the same.  For class types we have three possible
+cases:
+
+ol[
+item[the two classes are the same (class subtyping is reflexive)]
+item[the right class is code[Object] (every class is implicitly subclass of code[Object])]
+item[The right class is a parent of the left class (class subtyping is transitive);
+in order to check this last case, we get all the classes in the class
+hierarchy of the left class (using code[getAll], ref:GetAll[]), and use the
+standard Java codeRef[java.util.List] code[contains] method]
+]
+
+Remember that, since code[ClassType] has a reference to an actual
+code[Class] object, it is safe to use object identities.
+
+We also have a code[assignable] judgment which tells whether an
+code[Expression] is assignable to a type, by getting the type of
+of the expression and then checking the subtyping:
+
+code[Xsemantics][
+rule ExpressionAssignableToType
+	G |- Expression expression <| Type right
+from {
+	var Type expressionType
+	G |- expression : expressionType
+	G |- expressionType <: right
+}
+]
+
+Since in the typing rules for expressions (see ref:FJTyping[]) we
+have to check whether arguments are subtypes of parameters (in the
+code[New] and code[Selection] rules) we isolate a specific judgment
+code[subtypesequence], that we recall here
+
+code[Xsemantics][
+judgments {
+	// ...
+	subtypesequence |- 
+		Expression owner ~> 
+			List<Expression> expressions << List<? extends TypedElement> elements
+		error "invalid arguments for expected parameters"
+		source owner
+}
+]
+
+whose (single rule) is implemented as follows:
+
+code[Xsemantics][
+rule SubtypeSequence derives
+	G |- Expression owner ~> 
+		List<Expression> expressions << List<TypedElement> typedElements
+from {
+	expressions.size == typedElements.size
+	or
+	fail
+		error "expected " + typedElements.size + " arguments, but got " +
+			expressions.size
+		source owner 
+	
+	val typedElementsIterator = typedElements.iterator
+	for (exp : expressions) {
+		G |- exp <| typedElementsIterator.next.type
+	}
+}
+]
+
+First of all, the sizes of the two collections must be the same;
+if this first check fails we explicitly fail (see ref:ExplicitFailure[])
+with an informative error; in order to make the error really informative
+and, most of all, to make the error marker generation effective
+(see ref:ErrorGeneration[]), we need the "owner" of this check, i.e.,
+the expression context where this check has to be carried out, in order
+to specify that expression as the source of the error (ref:ErrorSpecification[]).
+Compare this with the way this judgment is used in the typing of
+code[New] and code[Selection] (ref:FJTyping[]).  If this first check
+succeeds, we check that every expression is a subtype of the corresponding
+type; in order to do this we rely on code[assignable] statement,
+described before.
+
+We also have the judgment code[equalstype] for type equality,
+similar to code[subtype], which will be used in check rules for
+validation (ref:FJValidation[]):
+
+code[Xsemantics][
+rule GeneralEquals
+	G |- Type left ~~ Type right
+		error "types " + stringRep(left) + " and " + stringRep(right) +
+			" are not comparable"
+from {
+	// if we get here we're trying to mix
+	// a BasicType with a ClassType, thus, we fail
+	fail
+}
+
+rule BasicEquals
+	derives G |- BasicType left ~~ BasicType right
+from {
+	left.basic.equals(right.basic)
+}
+
+rule ClassEquals
+	derives G |- ClassType left ~~ ClassType right
+from {
+	left.classref == right.classref
+}
+] 
+
+section3:FJValidation[FJ Validation]
+
+We define some checkrules (ref:CheckRules[]) for validating an FJ program.
+
+code[Xsemantics][
+checkrule CheckMethodBody for
+	Method method
+from {
+	val typeForThis = FjTypeUtils::createClassType(
+		EcoreUtil2::getContainerOfType(method, typeof(Class))
+	)
+	'this' <- typeForThis |- method.body.expression <| method.type
+}
+]
+
+This rule checks that the return expression of a method body is
+a subtype of the declared method's type.  It relies on the
+judgment code[assignable] seen in ref:FJSubTyping[].  However,
+since this will involve being able to type possible occurrences
+of code[this] we must also pass an explicit envrionment (ref:Environment[])
+with a mapping for code['this'] (mapped to the class type of the class
+containing the method).  This is similar to what we do for FJ scoping
+(ref:FJScoping[]).
+
+code[Xsemantics][
+checkrule CheckField for
+	Field field
+from {
+	val clazz = field.eContainer as Class
+	
+	if (clazz.superclass != null) {
+		var inheritedFields = getAll(
+			clazz.superclass,
+			FjPackage::eINSTANCE.class_Members,
+			FjPackage::eINSTANCE.class_Superclass,
+			typeof(Field)
+		)
+		// make sure no duplicate fields in the hierarchy
+		for (inheritedField : inheritedFields) {
+			if (field.name == inheritedField.name) {
+				fail
+					error "field already declared in superclass " +
+						stringRep(inheritedField.eContainer)						
+			}
+		}
+	}
+}
+]
+
+For a code[Field] we must check that a field with the same name
+is not defined in the superclasses (for fields with the same name in the
+same class this check is already done by Xtext predefined
+codeRef[org.eclipse.xtext.validation.NamesAreUniqueValidator]).
+Again, to get all the fields in a class hierarchy we use code[getAll]
+(ref:GetAll[]).
+
+For methods we cannot execute the same check, since subclasses
+are allowed to redefine methods, provided they keep the same signature
+(in FJ covariance of return type is not allowed); thus we defined a
+specific judgment, code[overrides], whose only rule is defined
+as follows:
+
+code[Xsemantics][
+rule MethodOverride
+	G ||- Method current ~~ Method previous
+from {
+	current.name != previous.name
+	or
+	{
+		G |- current.type ~~ previous.type
+		or
+		fail error 
+		"cannot change return type of inherited method: " +
+			stringRep(previous.type)
+		source current
+		feature FjPackage::eINSTANCE.typedElement_Type
+		
+		current.params.size == previous.params.size
+		val previousParamsIt = previous.params.iterator
+		for (param : current.params) {
+			G |- param.type ~~ previousParamsIt.next.type
+		}
+	}
+}
+]
+
+Which basically says that a method correctly overrides another
+one if their names are different (no actual overriding to check)
+or if they have exactly the same signature (relying on judgment
+code[equalstype]).
+
+Thus, the checkrule for code[Method] is
+
+code[Xsemantics][
+checkrule CheckMethodOverride for
+	Method method
+from {
+	val clazz = method.eContainer as Class
+	
+	if (clazz.superclass != null) {
+		var inheritedMethods = getAll(
+			clazz.superclass,
+			FjPackage::eINSTANCE.class_Members,
+			FjPackage::eINSTANCE.class_Superclass,
+			typeof(Method)
+		)
+		// check override predicate
+		inheritedMethods.forEach \[
+			inheritedMethod |
+			FjAuxiliaryFunctions::selectMethods(clazz).forEach \[
+				empty ||- it ~~ inheritedMethod
+			\]
+		\]
+	}
+}
+]
+
+Note the use of Xbase closure (please refer to ref:ExpressionsInPremises[]
+for the way Xsemantics interprets boolean expressions inside premises and
+closures).
+
+For a code[Class] we need to check that its superclass hierarchy is
+not cyclic:
+
+code[Xsemantics][
+checkrule CheckClassHierachyNotCyclic for
+	Class cl
+from {
+	if (cl.superclass != null) {
+		!getAll(
+			cl,
+			FjPackage::eINSTANCE.class_Superclass,
+			FjPackage::eINSTANCE.class_Superclass,
+			typeof(Class)
+		).contains(cl)
+		or
+		fail
+			error "Cyclic hierarchy for " + cl.name
+			source cl
+	}
+}
+]
+
+which basically checks that the current class is not in the
+superclasses of itself.  Remember that using code[getAll] (ref:GetAll[])
+avoids infinite loops in cases of cycles in the AST.
+
+Finally, we check that we can give a type to the main expression
+of an FJ program, in the empty environment:
+
+code[Xsemantics][
+checkrule CheckMain for
+	Program program
+from {
+	program.main == null // nothing to check
+	or
+	empty |- program.main : var Type mainType
+}
+]
