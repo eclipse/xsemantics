@@ -98,8 +98,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return typeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -118,8 +118,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Variable variable) {
 		try {
 			return vartypeInternal(_environment_, _trace_, variable);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_vartype) {
+			return resultForFailure(_e_vartype);
 		}
 	}
 	
@@ -138,8 +138,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return interpretInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_interpret) {
+			return resultForFailure(_e_interpret);
 		}
 	}
 
@@ -179,8 +179,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return typeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -204,8 +204,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(variable);
 			return vartypeDispatcher.invoke(_environment_, _trace_, variable);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_vartype) {
+			sneakyThrowRuleFailedException(_e_vartype);
 			return null;
 		}
 	}
@@ -215,8 +215,8 @@ public class FirstExpressionsSemantics extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return interpretDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_interpret) {
+			sneakyThrowRuleFailedException(_e_interpret);
 			return null;
 		}
 	}
