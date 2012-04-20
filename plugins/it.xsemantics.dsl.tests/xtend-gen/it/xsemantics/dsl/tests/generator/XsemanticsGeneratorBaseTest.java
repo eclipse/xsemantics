@@ -11,7 +11,6 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -23,11 +22,6 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
   
   @Inject
   protected XsemanticsSystemGenerator tsGenerator;
-  
-  @BeforeClass
-  public static void setNewLine() {
-    System.setProperty("line.separator", "\n");
-  }
   
   public FakeTreeAppendable createAppendable(final Rule rule) {
     ImportManager _createImportManager = this.createImportManager();

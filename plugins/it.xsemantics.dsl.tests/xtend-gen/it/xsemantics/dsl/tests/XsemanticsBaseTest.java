@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -58,6 +59,11 @@ public class XsemanticsBaseTest {
   
   @Inject
   private ValidationTestHelper _validationTestHelper;
+  
+  @BeforeClass
+  public static void setNewLine() {
+    System.setProperty("line.separator", "\n");
+  }
   
   public XsemanticsSystem parseAndAssertNoError(final CharSequence s) {
     try {
