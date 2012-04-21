@@ -5,6 +5,8 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -18,6 +20,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
      * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
+	
+	@Inject extension XsemanticsGeneratorExtensions
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -45,19 +49,19 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(XsemanticsSystem element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		
-   		// An implementation for the initial hello world example could look like this:
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings"))
-//   			.initializeLater([
-//   				for (greeting : element.greetings) {
-//   					members += greeting.toMethod("hello" + greeting.name, greeting.newTypeRef(typeof(String))) [
-//   						body = [
-//   							append('''return "Hello «greeting.name»";''')
-//   						]
-//   					]
-//   				}
-//   			])
+   		acceptor.accept(
+			element.toClass( element.toJavaFullyQualifiedName )
+		).initializeLater [
+			documentation = element.documentation
+			
+			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
+			members += element.toConstructor() []
+//			members += element.toConstructor() [
+//				parameters += element.toParameter("initializer", procedure)
+//				body = [it.append("initializer.apply(this);")]
+//			]
+			//members += element.addToStringMethod(it)
+		]
    	}
 }
 

@@ -1,12 +1,19 @@
 package it.xsemantics.dsl.jvmmodel;
 
 import com.google.inject.Inject;
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -21,6 +28,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    */
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
+  
+  @Inject
+  private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
   
   /**
    * The dispatch method {@code infer} is called for each instance of the
@@ -48,6 +58,23 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    *            <code>true</code>.
    */
   protected void _infer(final XsemanticsSystem element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
+    String _javaFullyQualifiedName = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(element);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(element, _javaFullyQualifiedName);
+    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(element);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+          EList<JvmMember> _members = it.getMembers();
+          final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
+              public void apply(final JvmConstructor it) {
+              }
+            };
+          JvmConstructor _constructor = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toConstructor(element, _function);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
+        }
+      };
+    _accept.initializeLater(_function);
   }
   
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
