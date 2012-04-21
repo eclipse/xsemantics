@@ -23,6 +23,9 @@ public interface IssueCodes {
 	String DUPLICATE_PARAM_NAME = PREFIX
 			+ "DuplicateParamName";
 
+	String DUPLICATE_JUDGMENT_NAME = PREFIX
+			+ "DuplicateJudgmentName";
+	
 	String NOT_EOBJECT = PREFIX + "NotEObject";
 
 	String NOT_ESTRUCTURALFEATURE = PREFIX + "NotEStructuralFeature";

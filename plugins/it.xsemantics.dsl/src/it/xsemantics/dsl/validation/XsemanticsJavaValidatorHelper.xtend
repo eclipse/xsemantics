@@ -8,20 +8,39 @@ import it.xsemantics.dsl.xsemantics.Rule
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
 
 class XsemanticsJavaValidatorHelper {
 	
 	@Inject extension XsemanticsUtils
 	
-	def noRulesWithTheSameName(Rule rule) {
+	def noRulesWithTheSameNameOfCheckRule(Rule rule) {
 		rule.containingTypeSystem.checkrules.findFirst [
 			it != rule && it.name == rule.name
 		] == null
 	}
 	
-	def noRulesWithTheSameName(CheckRule rule) {
+	def noRulesWithTheSameName(Rule rule) {
 		rule.containingTypeSystem.rules.findFirst [
 			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noCheckRulesWithTheSameNameOfRule(CheckRule rule) {
+		rule.containingTypeSystem.rules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noCheckRulesWithTheSameName(CheckRule rule) {
+		rule.containingTypeSystem.checkrules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noJudgmentDescriptionsWithTheSameName(JudgmentDescription j) {
+		j.containingTypeSystem.judgmentDescriptions.findFirst [
+			it != j && it.name == j.name
 		] == null
 	}
 	

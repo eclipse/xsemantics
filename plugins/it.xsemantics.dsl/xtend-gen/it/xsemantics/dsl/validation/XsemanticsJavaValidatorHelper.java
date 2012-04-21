@@ -25,7 +25,7 @@ public class XsemanticsJavaValidatorHelper {
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
   
-  public boolean noRulesWithTheSameName(final Rule rule) {
+  public boolean noRulesWithTheSameNameOfCheckRule(final Rule rule) {
     XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
     EList<CheckRule> _checkrules = _containingTypeSystem.getCheckrules();
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
@@ -48,7 +48,7 @@ public class XsemanticsJavaValidatorHelper {
     return _equals;
   }
   
-  public boolean noRulesWithTheSameName(final CheckRule rule) {
+  public boolean noRulesWithTheSameName(final Rule rule) {
     XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
     EList<Rule> _rules = _containingTypeSystem.getRules();
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
@@ -67,6 +67,75 @@ public class XsemanticsJavaValidatorHelper {
         }
       };
     Rule _findFirst = IterableExtensions.<Rule>findFirst(_rules, _function);
+    boolean _equals = Objects.equal(_findFirst, null);
+    return _equals;
+  }
+  
+  public boolean noCheckRulesWithTheSameNameOfRule(final CheckRule rule) {
+    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
+    EList<Rule> _rules = _containingTypeSystem.getRules();
+    final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
+        public Boolean apply(final Rule it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, rule));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = rule.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    Rule _findFirst = IterableExtensions.<Rule>findFirst(_rules, _function);
+    boolean _equals = Objects.equal(_findFirst, null);
+    return _equals;
+  }
+  
+  public boolean noCheckRulesWithTheSameName(final CheckRule rule) {
+    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
+    EList<CheckRule> _checkrules = _containingTypeSystem.getCheckrules();
+    final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
+        public Boolean apply(final CheckRule it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, rule));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = rule.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    CheckRule _findFirst = IterableExtensions.<CheckRule>findFirst(_checkrules, _function);
+    boolean _equals = Objects.equal(_findFirst, null);
+    return _equals;
+  }
+  
+  public boolean noJudgmentDescriptionsWithTheSameName(final JudgmentDescription j) {
+    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(j);
+    EList<JudgmentDescription> _judgmentDescriptions = _containingTypeSystem.getJudgmentDescriptions();
+    final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
+        public Boolean apply(final JudgmentDescription it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, j));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = j.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    JudgmentDescription _findFirst = IterableExtensions.<JudgmentDescription>findFirst(_judgmentDescriptions, _function);
     boolean _equals = Objects.equal(_findFirst, null);
     return _equals;
   }

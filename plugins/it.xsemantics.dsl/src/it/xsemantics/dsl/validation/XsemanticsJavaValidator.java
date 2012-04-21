@@ -138,6 +138,16 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 	}
 
+	@Check
+	public void checkNoDuplicateJudgmentDescription(
+			JudgmentDescription judgmentDescription) {
+		if (!helper.noJudgmentDescriptionsWithTheSameName(judgmentDescription)) {
+			error("Duplicate judgment '" + judgmentDescription.getName() + "'",
+					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__NAME,
+					IssueCodes.DUPLICATE_JUDGMENT_NAME);
+		}
+	}
+
 	protected void checkNoDuplicateJudgmentDescriptionSymbols(
 			JudgmentDescription judgmentDescription) {
 		String judgmentSymbol = judgmentDescription.getJudgmentSymbol();
@@ -201,6 +211,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkNoCheckRulesWithTheSameName(Rule rule) {
 		if (!helper.noRulesWithTheSameName(rule)) {
+			error("Duplicate rule '" + rule.getName() + "'", rule,
+					XsemanticsPackage.Literals.RULE__NAME,
+					IssueCodes.DUPLICATE_RULE_NAME);
+		}
+
+		if (!helper.noRulesWithTheSameNameOfCheckRule(rule)) {
 			error("Duplicate checkrule with the same name", rule,
 					XsemanticsPackage.Literals.RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
@@ -209,7 +225,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkNoRulesWithTheSameName(CheckRule rule) {
-		if (!helper.noRulesWithTheSameName(rule)) {
+		if (!helper.noCheckRulesWithTheSameName(rule)) {
+			error("Duplicate checkrule '" + rule.getName() + "'", rule,
+					XsemanticsPackage.Literals.CHECK_RULE__NAME,
+					IssueCodes.DUPLICATE_RULE_NAME);
+		}
+
+		if (!helper.noCheckRulesWithTheSameNameOfRule(rule)) {
 			error("Duplicate rule with the same name", rule,
 					XsemanticsPackage.Literals.CHECK_RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
