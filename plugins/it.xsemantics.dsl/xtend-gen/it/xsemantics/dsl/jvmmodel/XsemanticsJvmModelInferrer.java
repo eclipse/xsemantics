@@ -2,6 +2,7 @@ package it.xsemantics.dsl.jvmmodel;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
+import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
@@ -43,6 +44,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
   
+  @Inject
+  private XsemanticsUtils _xsemanticsUtils;
+  
   /**
    * The dispatch method {@code infer} is called for each instance of the
    * given element's type that is contained in a resource.
@@ -68,50 +72,30 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    *            rely on linking using the index if isPreIndexingPhase is
    *            <code>true</code>.
    */
-  protected void _infer(final XsemanticsSystem element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
-    String _javaFullyQualifiedName = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(element);
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(element, _javaFullyQualifiedName);
+  protected void _infer(final XsemanticsSystem ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
+    String _javaFullyQualifiedName = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(ts);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(ts, _javaFullyQualifiedName);
     IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
-          String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(element);
+          String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
           EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-          JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(element, XsemanticsRuntimeSystem.class);
+          JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsRuntimeSystem.class);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
           EList<JvmMember> _members = it.getMembers();
           final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
               public void apply(final JvmConstructor it) {
               }
             };
-          JvmConstructor _constructor = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toConstructor(element, _function);
+          JvmConstructor _constructor = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toConstructor(ts, _function);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
           final ArrayList<JvmField> issues = CollectionLiterals.<JvmField>newArrayList();
-          EList<Rule> _rules = element.getRules();
+          EList<Rule> _rules = ts.getRules();
           final Procedure1<Rule> _function_1 = new Procedure1<Rule>() {
-              public void apply(final Rule rule) {
-                String _ruleIssueString = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
-                JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(element, String.class);
-                final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
-                    public void apply(final JvmField it) {
-                      it.setVisibility(JvmVisibility.PUBLIC);
-                      it.setStatic(true);
-                      it.setFinal(true);
-                    }
-                  };
-                final JvmField issue = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(element, _ruleIssueString, _newTypeRef, _function);
-                final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
-                    public void apply(final ITreeAppendable it) {
-                      StringConcatenation _builder = new StringConcatenation();
-                      _builder.append("\"");
-                      String _javaFullyQualifiedName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(rule);
-                      _builder.append(_javaFullyQualifiedName, "");
-                      _builder.append("\"");
-                      it.append(_builder);
-                    }
-                  };
-                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setInitializer(issue, _function_1);
-                issues.add(issue);
+              public void apply(final Rule it) {
+                JvmField _genIssueField = XsemanticsJvmModelInferrer.this.genIssueField(it);
+                issues.add(_genIssueField);
               }
             };
           IterableExtensions.<Rule>forEach(_rules, _function_1);
@@ -120,6 +104,36 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         }
       };
     _accept.initializeLater(_function);
+  }
+  
+  public JvmField genIssueField(final Rule rule) {
+    JvmField _xblockexpression = null;
+    {
+      XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
+      String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(rule, String.class);
+      final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+          public void apply(final JvmField it) {
+            it.setVisibility(JvmVisibility.PUBLIC);
+            it.setStatic(true);
+            it.setFinal(true);
+          }
+        };
+      final JvmField issueField = this._jvmTypesBuilder.toField(_containingTypeSystem, _ruleIssueString, _newTypeRef, _function);
+      final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
+          public void apply(final ITreeAppendable it) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("\"");
+            String _javaFullyQualifiedName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(rule);
+            _builder.append(_javaFullyQualifiedName, "");
+            _builder.append("\"");
+            it.append(_builder);
+          }
+        };
+      this._jvmTypesBuilder.setInitializer(issueField, _function_1);
+      _xblockexpression = (issueField);
+    }
+    return _xblockexpression;
   }
   
   public void issueStrings(final XsemanticsSystem element, final ITreeAppendable a) {
@@ -145,16 +159,16 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     IterableExtensions.<Rule>forEach(_rules, _function);
   }
   
-  public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
-    if (element instanceof XsemanticsSystem) {
-      _infer((XsemanticsSystem)element, acceptor, isPreIndexingPhase);
+  public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
+    if (ts instanceof XsemanticsSystem) {
+      _infer((XsemanticsSystem)ts, acceptor, isPreIndexingPhase);
       return;
-    } else if (element != null) {
-      _infer(element, acceptor, isPreIndexingPhase);
+    } else if (ts != null) {
+      _infer(ts, acceptor, isPreIndexingPhase);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(element, acceptor, isPreIndexingPhase).toString());
+        Arrays.<Object>asList(ts, acceptor, isPreIndexingPhase).toString());
     }
   }
 }

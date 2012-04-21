@@ -1,16 +1,17 @@
 package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmVisibility
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.util.XsemanticsUtils
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -26,6 +27,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension JvmTypesBuilder
 	
 	@Inject extension XsemanticsGeneratorExtensions
+	
+	@Inject extension XsemanticsUtils
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -52,32 +55,20 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            rely on linking using the index if isPreIndexingPhase is
 	 *            <code>true</code>.
 	 */
-   	def dispatch void infer(XsemanticsSystem element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+   	def dispatch void infer(XsemanticsSystem ts, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		acceptor.accept(
-			element.toClass( element.toJavaFullyQualifiedName )
+			ts.toClass( ts.toJavaFullyQualifiedName )
 		).initializeLater [
-			documentation = element.documentation
+			documentation = ts.documentation
 			
-			superTypes += element.newTypeRef(typeof(XsemanticsRuntimeSystem))
+			superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
 			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
-			members += element.toConstructor() []
+			members += ts.toConstructor() []
 			
 			val issues = <JvmField>newArrayList()
-			element.rules.forEach [
-				rule |
-				val issue = element.toField(
-					rule.ruleIssueString,
-					element.newTypeRef(typeof(String))
-				) [
-					visibility = JvmVisibility::PUBLIC
-					^static = true
-					final = true
-				]
-				issue.setInitializer [
-					it.append('''"«rule.toJavaFullyQualifiedName»"''')
-				]
-				issues += issue
+			ts.rules.forEach [
+				issues += genIssueField()
 			]
 			members += issues
 			
@@ -87,6 +78,21 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 //			]
 			//members += element.addToStringMethod(it)
 		]
+   	}
+   	
+   	def genIssueField(Rule rule) {
+   		val issueField = rule.containingTypeSystem.toField(
+				rule.ruleIssueString,
+				rule.newTypeRef(typeof(String))
+			) [
+				visibility = JvmVisibility::PUBLIC
+				^static = true
+				final = true
+			]
+		issueField.setInitializer [
+			it.append('''"«rule.toJavaFullyQualifiedName»"''')
+		]
+		issueField
    	}
    	
    	def void issueStrings(XsemanticsSystem element, ITreeAppendable a) {
