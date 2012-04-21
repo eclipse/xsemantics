@@ -34,6 +34,9 @@ package it.xsemantics.test;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
+  public TypeSystem() {
+    init();
+  }
 }
 '''
 		)
@@ -50,6 +53,10 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
+  
+  public TypeSystem() {
+    init();
+  }
 }
 '''
 		)

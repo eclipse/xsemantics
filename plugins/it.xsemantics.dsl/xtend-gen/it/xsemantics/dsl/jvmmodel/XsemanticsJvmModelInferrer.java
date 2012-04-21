@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -83,24 +82,20 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           EList<JvmTypeReference> _superTypes = it.getSuperTypes();
           JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsRuntimeSystem.class);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
-          EList<JvmMember> _members = it.getMembers();
-          final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
-              public void apply(final JvmConstructor it) {
-              }
-            };
-          JvmConstructor _constructor = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toConstructor(ts, _function);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
           final ArrayList<JvmField> issues = CollectionLiterals.<JvmField>newArrayList();
           EList<Rule> _rules = ts.getRules();
-          final Procedure1<Rule> _function_1 = new Procedure1<Rule>() {
+          final Procedure1<Rule> _function = new Procedure1<Rule>() {
               public void apply(final Rule it) {
                 JvmField _genIssueField = XsemanticsJvmModelInferrer.this.genIssueField(it);
                 issues.add(_genIssueField);
               }
             };
-          IterableExtensions.<Rule>forEach(_rules, _function_1);
+          IterableExtensions.<Rule>forEach(_rules, _function);
+          EList<JvmMember> _members = it.getMembers();
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, issues);
           EList<JvmMember> _members_1 = it.getMembers();
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, issues);
+          JvmConstructor _genConstructor = XsemanticsJvmModelInferrer.this.genConstructor(ts);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_1, _genConstructor);
         }
       };
     _accept.initializeLater(_function);
@@ -136,27 +131,19 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _xblockexpression;
   }
   
-  public void issueStrings(final XsemanticsSystem element, final ITreeAppendable a) {
-    EList<Rule> _rules = element.getRules();
-    final Procedure1<Rule> _function = new Procedure1<Rule>() {
-        public void apply(final Rule it) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("public final static ");
-          ITreeAppendable _append = a.append(_builder);
-          JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(element, String.class);
-          JvmType _type = _newTypeRef.getType();
-          ITreeAppendable _append_1 = _append.append(_type);
-          ITreeAppendable _append_2 = _append_1.append(" ");
-          String _ruleIssueString = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleIssueString(it);
-          ITreeAppendable _append_3 = _append_2.append(_ruleIssueString);
-          ITreeAppendable _append_4 = _append_3.append(" ");
-          String _javaFullyQualifiedName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(it);
-          ITreeAppendable _append_5 = _append_4.append(_javaFullyQualifiedName);
-          ITreeAppendable _append_6 = _append_5.append(";");
-          _append_6.newLine();
+  public JvmConstructor genConstructor(final XsemanticsSystem ts) {
+    final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
+        public void apply(final JvmConstructor it) {
+          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+              public void apply(final ITreeAppendable it) {
+                it.append("init();");
+              }
+            };
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
         }
       };
-    IterableExtensions.<Rule>forEach(_rules, _function);
+    JvmConstructor _constructor = this._jvmTypesBuilder.toConstructor(ts, _function);
+    return _constructor;
   }
   
   public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {

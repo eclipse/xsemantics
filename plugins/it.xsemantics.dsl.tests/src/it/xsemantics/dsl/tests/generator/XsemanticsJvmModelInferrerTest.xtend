@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.common.types.JvmMember
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -22,16 +23,35 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	protected XsemanticsJvmModelInferrer inferrer
 	
 	@Test
-	def testSimpleRule() {
-		assertRuleInference(testFiles.testSimpleRule,
+	def testIssueField() {
+		assertIssueField(testFiles.testSimpleRule,
 '''public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";'''
 		)
 	}
 	
-	def assertRuleInference(CharSequence prog, CharSequence expected) {
+	@Test
+	def testConstructor() {
+		assertConstructor(testFiles.testSimpleRule,
+'''public ConstructorName() {
+    init();
+  }'''
+		)
+	}
+	
+	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)
+		field.assertGeneratedMember(expected)
+	}
+	
+	def assertConstructor(CharSequence prog, CharSequence expected) {
+		val cons = inferrer.genConstructor(prog.parseAndAssertNoError)
+		cons.simpleName = "ConstructorName"
+		cons.assertGeneratedMember(expected)
+	}
+	
+	def assertGeneratedMember(JvmMember member, CharSequence expected) {
 		val a = new FakeTreeAppendable()
-		generator.generateMember(field, a, true)
+		generator.generateMember(member, a, true)
 		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
