@@ -37,6 +37,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public TypeSystem() {
     init();
   }
+  
+  public void init() {
+    /* TODO */
+  }
 }
 '''
 		)
@@ -56,6 +60,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   public TypeSystem() {
     init();
+  }
+  
+  public void init() {
+    /* TODO */
   }
 }
 '''

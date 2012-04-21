@@ -72,6 +72,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += ts.genConstructor
 			
+			members += ts.genInit
+			
 //			members += element.toConstructor() [
 //				parameters += element.toParameter("initializer", procedure)
 //				body = [it.append("initializer.apply(this);")]
@@ -99,6 +101,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		ts.toConstructor() [
 			body = [it.append("init();")]
 		]
+   	}
+   	
+   	def genInit(XsemanticsSystem ts) {
+   		ts.toMethod("init", null) [
+   			body = [it.append("/* TODO */")]
+   		]
    	}
 
 }

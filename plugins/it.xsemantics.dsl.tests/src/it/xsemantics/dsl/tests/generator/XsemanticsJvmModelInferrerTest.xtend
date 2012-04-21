@@ -38,6 +38,15 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 		)
 	}
 	
+	@Test
+	def testInit() {
+		assertInit(testFiles.testSimpleRule,
+'''public void init() {
+    /* TODO */
+  }'''
+		)
+	}
+	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)
 		field.assertGeneratedMember(expected)
@@ -47,6 +56,11 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 		val cons = inferrer.genConstructor(prog.parseAndAssertNoError)
 		cons.simpleName = "ConstructorName"
 		cons.assertGeneratedMember(expected)
+	}
+	
+	def assertInit(CharSequence prog, CharSequence expected) {
+		val m = inferrer.genInit(prog.parseAndAssertNoError)
+		m.assertGeneratedMember(expected)
 	}
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {

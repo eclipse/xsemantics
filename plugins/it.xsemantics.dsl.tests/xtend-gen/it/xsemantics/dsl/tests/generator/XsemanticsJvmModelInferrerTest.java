@@ -10,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -49,6 +50,20 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     this.assertConstructor(_testSimpleRule, _builder);
   }
   
+  @Test
+  public void testInit() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public void init() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("/* TODO */");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertInit(_testSimpleRule, _builder);
+  }
+  
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
     Rule _firstRule = this.getFirstRule(prog);
     final JvmField field = this.inferrer.genIssueField(_firstRule);
@@ -60,6 +75,12 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     final JvmConstructor cons = this.inferrer.genConstructor(_parseAndAssertNoError);
     cons.setSimpleName("ConstructorName");
     this.assertGeneratedMember(cons, expected);
+  }
+  
+  public void assertInit(final CharSequence prog, final CharSequence expected) {
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+    final JvmOperation m = this.inferrer.genInit(_parseAndAssertNoError);
+    this.assertGeneratedMember(m, expected);
   }
   
   public void assertGeneratedMember(final JvmMember member, final CharSequence expected) {

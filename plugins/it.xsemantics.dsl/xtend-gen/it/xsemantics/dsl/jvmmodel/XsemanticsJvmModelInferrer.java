@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -96,6 +97,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           EList<JvmMember> _members_1 = it.getMembers();
           JvmConstructor _genConstructor = XsemanticsJvmModelInferrer.this.genConstructor(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_1, _genConstructor);
+          EList<JvmMember> _members_2 = it.getMembers();
+          JvmOperation _genInit = XsemanticsJvmModelInferrer.this.genInit(ts);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _genInit);
         }
       };
     _accept.initializeLater(_function);
@@ -144,6 +148,21 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       };
     JvmConstructor _constructor = this._jvmTypesBuilder.toConstructor(ts, _function);
     return _constructor;
+  }
+  
+  public JvmOperation genInit(final XsemanticsSystem ts) {
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+              public void apply(final ITreeAppendable it) {
+                it.append("/* TODO */");
+              }
+            };
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+        }
+      };
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", null, _function);
+    return _method;
   }
   
   public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
