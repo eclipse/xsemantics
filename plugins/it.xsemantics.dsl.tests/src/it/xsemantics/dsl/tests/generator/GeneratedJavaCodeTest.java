@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Before;
@@ -96,6 +97,9 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 
 	@Inject
 	private IResourceValidator validator;
+	
+	@Inject
+	private JvmModelGenerator jvmModelGenerator;
 
 	@Before
 	public void initializeClassPath() throws Exception {
@@ -232,6 +236,43 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 	protected InMemoryFileSystemAccess generateJavaCode(Resource eResource) {
 		InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
 		generator.doGenerate(eResource, fsa);
+		return fsa;
+	}
+	
+	// model inferrer
+	
+	@Test
+	public void testGenSimpleRule() throws Exception {
+		assertEquals(SIMPLE_TYPE_SYSTEM,
+				compileToJava(testFiles.testSimpleRule(), SIMPLE_TYPE_SYSTEM)
+						.getName());
+	}
+	
+	protected Class<?> compileToJava(CharSequence program, String className)
+			throws Exception {
+		XsemanticsSystem parse = parseAndAssertNoError(program);
+		Resource eResource = parse.eResource();
+		return compileToJava(eResource, className);
+	}
+	
+	protected Class<?> compileToJava(Resource eResource, String className)
+			throws InstantiationException, IllegalAccessException {
+		InMemoryFileSystemAccess fsa = generateJava(eResource);
+		return compileToJava(fsa, className);
+	}
+
+	protected Class<?> compileToJava(InMemoryFileSystemAccess fsa,
+			String className) {
+		CharSequence concatenation = fsa.getFiles().get(
+				OUTPUT_PREFIX + className.replace(".", "/") + ".java");
+		Class<?> class1 = javaCompiler.compileToClass(className,
+				concatenation.toString());
+		return class1;
+	}
+
+	protected InMemoryFileSystemAccess generateJava(Resource eResource) {
+		InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
+		jvmModelGenerator.doGenerate(eResource, fsa);
 		return fsa;
 	}
 
