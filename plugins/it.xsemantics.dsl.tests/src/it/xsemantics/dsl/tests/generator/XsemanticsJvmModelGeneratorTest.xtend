@@ -31,7 +31,25 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 '''
 package it.xsemantics.test;
 
-public class TypeSystem {
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+}
+'''
+		)
+	}
+	
+	@Test
+	def testSimpleRule() {
+		val fs = testFiles.testSimpleRule.runGenerator
+		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
 }
 '''
 		)

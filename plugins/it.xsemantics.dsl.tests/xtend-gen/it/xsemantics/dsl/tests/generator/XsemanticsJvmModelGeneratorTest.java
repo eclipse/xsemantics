@@ -34,7 +34,31 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class TypeSystem {");
+    _builder.append("import it.xsemantics.runtime.XsemanticsRuntimeSystem;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertGeneratedCode(fs, XsemanticsJvmModelGeneratorTest.TEST_TYPESYSTEM_NAME, _builder);
+  }
+  
+  @Test
+  public void testSimpleRule() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    final InMemoryFileSystemAccess fs = this.runGenerator(_testSimpleRule);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package it.xsemantics.test;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import it.xsemantics.runtime.XsemanticsRuntimeSystem;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public final static String ECLASSEOBJECT = \"it.xsemantics.test.rules.EClassEObject\";");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

@@ -7,6 +7,10 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmVisibility
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -54,14 +58,48 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		).initializeLater [
 			documentation = element.documentation
 			
+			superTypes += element.newTypeRef(typeof(XsemanticsRuntimeSystem))
+			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += element.toConstructor() []
+			
+			val issues = <JvmField>newArrayList()
+			element.rules.forEach [
+				rule |
+				val issue = element.toField(
+					rule.ruleIssueString,
+					element.newTypeRef(typeof(String))
+				) [
+					visibility = JvmVisibility::PUBLIC
+					^static = true
+					final = true
+				]
+				issue.setInitializer [
+					it.append('''"«rule.toJavaFullyQualifiedName»"''')
+				]
+				issues += issue
+			]
+			members += issues
+			
 //			members += element.toConstructor() [
 //				parameters += element.toParameter("initializer", procedure)
 //				body = [it.append("initializer.apply(this);")]
 //			]
 			//members += element.addToStringMethod(it)
 		]
+   	}
+   	
+   	def void issueStrings(XsemanticsSystem element, ITreeAppendable a) {
+   		element.rules.forEach [
+   			a.append('''public final static ''').
+   			append(element.newTypeRef(typeof(String)).type).
+   			append(" ").
+   			append(ruleIssueString).
+   			append(" ").
+   			append(toJavaFullyQualifiedName()).
+   			append(";").
+   			newLine
+   		]
    	}
 }
 
