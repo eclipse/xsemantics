@@ -43,7 +43,8 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	def testInit() {
 		assertInit(testFiles.testSimpleRule,
 '''public void init() {
-    /* TODO */
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":");
   }'''
 		)
 	}

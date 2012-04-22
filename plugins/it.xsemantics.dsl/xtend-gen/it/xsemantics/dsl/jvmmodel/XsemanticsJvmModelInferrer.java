@@ -169,21 +169,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _constructor;
   }
   
-  public JvmOperation genInit(final XsemanticsSystem ts) {
-    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                it.append("/* TODO */");
-              }
-            };
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
-        }
-      };
-    JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", null, _function);
-    return _method;
-  }
-  
   public JvmField genPolymorphicDispatcherField(final JudgmentDescription e) {
     XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(e);
     CharSequence _polymorphicDispatcherField = this._xsemanticsGeneratorExtensions.polymorphicDispatcherField(e);
@@ -238,6 +223,71 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         _xifexpression = _map;
       }
       _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public JvmOperation genInit(final XsemanticsSystem ts) {
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+              public void apply(final ITreeAppendable it) {
+                EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
+                final Function1<JudgmentDescription,CharSequence> _function = new Function1<JudgmentDescription,CharSequence>() {
+                    public CharSequence apply(final JudgmentDescription desc) {
+                      CharSequence _genPolymorphicDispatcherInit = XsemanticsJvmModelInferrer.this.genPolymorphicDispatcherInit(desc);
+                      return _genPolymorphicDispatcherInit;
+                    }
+                  };
+                List<CharSequence> _map = ListExtensions.<JudgmentDescription, CharSequence>map(_judgmentDescriptions, _function);
+                String _join = IterableExtensions.join(_map, "\n");
+                it.append(_join);
+              }
+            };
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+        }
+      };
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", null, _function);
+    return _method;
+  }
+  
+  public CharSequence genPolymorphicDispatcherInit(final JudgmentDescription judgmentDescription) {
+    CharSequence _xblockexpression = null;
+    {
+      final String relationSymbols = this._xsemanticsGeneratorExtensions.relationSymbolsArgs(judgmentDescription);
+      String _xifexpression = null;
+      boolean _isEmpty = relationSymbols.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        String _plus = (", " + relationSymbols);
+        _xifexpression = _plus;
+      } else {
+        _xifexpression = "";
+      }
+      final String relationSymbolArgs = _xifexpression;
+      StringConcatenation _builder = new StringConcatenation();
+      CharSequence _polymorphicDispatcherField = this._xsemanticsGeneratorExtensions.polymorphicDispatcherField(judgmentDescription);
+      _builder.append(_polymorphicDispatcherField, "");
+      _builder.append(" = ");
+      CharSequence _polymorphicDispatcherBuildMethod = this._xsemanticsGeneratorExtensions.polymorphicDispatcherBuildMethod(judgmentDescription);
+      _builder.append(_polymorphicDispatcherBuildMethod, "");
+      _builder.append("(");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("\"");
+      CharSequence _polymorphicDispatcherImpl = this._xsemanticsGeneratorExtensions.polymorphicDispatcherImpl(judgmentDescription);
+      _builder.append(_polymorphicDispatcherImpl, "	");
+      _builder.append("\", ");
+      CharSequence _polymorphicDispatcherNumOfArgs = this._xsemanticsGeneratorExtensions.polymorphicDispatcherNumOfArgs(judgmentDescription);
+      _builder.append(_polymorphicDispatcherNumOfArgs, "	");
+      _builder.append(", ");
+      _builder.append("\"");
+      String _judgmentSymbol = judgmentDescription.getJudgmentSymbol();
+      _builder.append(_judgmentSymbol, "	");
+      _builder.append("\"");
+      _builder.append(relationSymbolArgs, "	");
+      _builder.append(");");
+      _xblockexpression = (_builder);
     }
     return _xblockexpression;
   }

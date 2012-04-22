@@ -97,7 +97,7 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 
 	@Inject
 	private IResourceValidator validator;
-	
+
 	@Inject
 	private JvmModelGenerator jvmModelGenerator;
 
@@ -238,23 +238,31 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 		generator.doGenerate(eResource, fsa);
 		return fsa;
 	}
-	
+
 	// model inferrer
-	
+
 	@Test
 	public void testGenSimpleRule() throws Exception {
 		assertEquals(SIMPLE_TYPE_SYSTEM,
 				compileToJava(testFiles.testSimpleRule(), SIMPLE_TYPE_SYSTEM)
 						.getName());
 	}
-	
+
+	@Test
+	public void testGenRuleWithTwoOutputParams() throws Exception {
+		assertEquals(
+				SIMPLE_TYPE_SYSTEM,
+				compileToJava(testFiles.testRuleWithTwoOutputParams(),
+						SIMPLE_TYPE_SYSTEM).getName());
+	}
+
 	protected Class<?> compileToJava(CharSequence program, String className)
 			throws Exception {
 		XsemanticsSystem parse = parseAndAssertNoError(program);
 		Resource eResource = parse.eResource();
 		return compileToJava(eResource, className);
 	}
-	
+
 	protected Class<?> compileToJava(Resource eResource, String className)
 			throws InstantiationException, IllegalAccessException {
 		InMemoryFileSystemAccess fsa = generateJava(eResource);

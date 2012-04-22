@@ -60,7 +60,10 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("public void init() {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("/* TODO */");
+    _builder.append("typeDispatcher = buildPolymorphicDispatcher1(");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("\"typeImpl\", 4, \"|-\", \":\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");

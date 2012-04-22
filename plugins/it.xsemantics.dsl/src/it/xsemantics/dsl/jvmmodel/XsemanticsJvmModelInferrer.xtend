@@ -114,12 +114,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
    	}
    	
-   	def genInit(XsemanticsSystem ts) {
-   		ts.toMethod("init", null) [
-   			body = [it.append("/* TODO */")]
-   		]
-   	}
-
 	def genPolymorphicDispatcherField(JudgmentDescription e) {
 		e.containingTypeSystem.toField(
 			e.polymorphicDispatcherField.toString,
@@ -147,5 +141,30 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			outputParams.map [ it.jvmTypeReference ]
 		}
 	}
+	
+	def genInit(XsemanticsSystem ts) {
+   		ts.toMethod("init", null) [
+   			body = [
+   				it.append(
+	   				ts.
+	   				judgmentDescriptions.map([ 
+	   					desc | desc.genPolymorphicDispatcherInit
+	   				]).join("\n")
+   				)
+   			]
+   		]
+   	}
+   	
+   	def genPolymorphicDispatcherInit(JudgmentDescription judgmentDescription) {
+   		val relationSymbols = judgmentDescription.relationSymbolsArgs
+		val relationSymbolArgs = if (!relationSymbols.empty) ", " + relationSymbols else ""
+		'''
+		«judgmentDescription.polymorphicDispatcherField» = «judgmentDescription.polymorphicDispatcherBuildMethod»(
+			"«judgmentDescription.polymorphicDispatcherImpl»", «
+			»«judgmentDescription.polymorphicDispatcherNumOfArgs», «
+			»"«judgmentDescription.judgmentSymbol»"«
+			»«relationSymbolArgs»);'''
+   	}
+	
 }
 

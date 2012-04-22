@@ -43,7 +43,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public void init() {
-    /* TODO */
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":");
   }
 }
 '''
@@ -71,7 +72,48 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public void init() {
-    /* TODO */
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":");
+  }
+}
+'''
+		)
+	}
+	
+	@Test
+	def testRuleWithTwoOutputParams() {
+		val fs = testFiles.testRuleWithTwoOutputParams.runGenerator
+		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ECLASSEOBJECTESTRUCTURALFEATURE = "it.xsemantics.test.rules.EClassEObjectEStructuralFeature";
+  
+  private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
+  
+  private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> type2Dispatcher;
+  
+  private PolymorphicDispatcher<Result<EObject>> subtypeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":", ":");
+    type2Dispatcher = buildPolymorphicDispatcher2(
+    	"type2Impl", 3, "||-", ":", ":");
+    subtypeDispatcher = buildPolymorphicDispatcher1(
+    	"subtypeImpl", 4, "||-", "<:", ":>");
   }
 }
 '''
