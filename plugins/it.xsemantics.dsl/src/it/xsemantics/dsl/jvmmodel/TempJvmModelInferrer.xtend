@@ -20,6 +20,11 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleApplicationTrace
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
+import it.xsemantics.dsl.xsemantics.RuleWithPremises
+import it.xsemantics.dsl.xsemantics.RuleParameter
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -37,6 +42,8 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
+	
+	@Inject XsemanticsXbaseCompiler xbaseCompiler
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -94,6 +101,11 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				members += j.genEntryPointMethods
 			]
 			
+			ts.rules.forEach [
+				rule |
+				members += rule.compileApplyMethod
+			]
+			
 //			members += element.toConstructor() [
 //				parameters += element.toParameter("initializer", procedure)
 //				body = [it.append("initializer.apply(this);")]
@@ -145,10 +157,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			)
 	}
 	
-	def resultJvmTypeReferences(JudgmentDescription judgmentDescription) {
-		val outputParams = judgmentDescription.outputJudgmentParameters
+	def resultJvmTypeReferences(JudgmentDescription e) {
+		val outputParams = e.outputJudgmentParameters
 		if (outputParams.size == 0) {
-			<JvmTypeReference>newArrayList(judgmentDescription.newTypeRef(typeof(Boolean)))
+			<JvmTypeReference>newArrayList(e.newTypeRef(typeof(Boolean)))
 		} else {
 			outputParams.map [ it.jvmTypeReference ]
 		}
@@ -232,6 +244,82 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			ruleApplicationTraceName.toString,
 			e.newTypeRef(typeof(RuleApplicationTrace))
 		)
+	}
+	
+	def compileApplyMethod(Rule rule) {
+		rule.toMethod(
+			'''applyRule«rule.toJavaClassName»'''.toString,
+			rule.judgmentDescription.resultType
+		) 
+		[
+			parameters += rule.judgmentDescription.environmentParam
+   			parameters += rule.judgmentDescription.ruleApplicationTraceParam
+   			parameters += rule.inputParameters
+   			
+   			body = [
+   				rule.declareVariablesForOutputParams(it) 
+   				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
+   			]
+		]
+	}
+	
+	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
+		rule.outputParams.forEach([
+			it.declareVariable(appendable).append("\n")
+		])
+	}
+	
+	def inputParameters(Rule rule) {
+		rule.inputParams.map([
+			it.toParameter(
+				it.parameter.name,
+				it.parameter.parameterType
+			)
+		])
+	}
+	
+	def compileRuleBody(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
+		compilePremises(rule, result)
+		compileRuleConclusionElements(rule, result)
+		compileReturnResult(rule, resultType, result)
+	}
+	
+	def compilePremises(Rule rule, ITreeAppendable result) {
+		switch rule {
+			RuleWithPremises: xbaseCompiler.compile(rule.premises, result, false)
+		}
+	}
+	
+	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {
+		rule.expressionsInConclusion.forEach([
+			xbaseCompiler.compile(it.expression, result, true)
+		])
+	}
+	
+	def compileReturnResult(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
+		val expressions = rule.outputConclusionElements
+		
+		if (!result.toString.empty)
+			result.append("\n")
+		result.append('''return new «resultType»('''.toString)
+		
+		if (expressions.size() == 0)
+			result.append("true")
+		else {
+			val iterator = expressions.iterator()
+			while (iterator.hasNext) {
+				val elem = iterator.next
+				switch elem {
+					RuleParameter: 
+						result.append(result.getName(elem.parameter))
+					ExpressionInConclusion: 
+						xbaseCompiler.compileAsJavaExpression(elem.expression, result)
+				}
+				if (iterator.hasNext)
+					result.append(", ")
+			}
+		}
+		result.append(");")
 	}
 	
 }
