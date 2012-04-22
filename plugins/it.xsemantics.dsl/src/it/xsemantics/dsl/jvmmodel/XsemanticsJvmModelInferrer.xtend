@@ -3,14 +3,21 @@ package it.xsemantics.dsl.jvmmodel
 import com.google.inject.Inject
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.Result2
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeReferences
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -24,6 +31,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
      * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
+	
+	@Inject extension TypeReferences
 	
 	@Inject extension XsemanticsGeneratorExtensions
 	
@@ -69,6 +78,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			]
 			members += issues
 			
+//			val polymorphicDispatchers = <JvmField>newArrayList()
+//			ts.judgmentDescriptions.forEach [
+//				polymorphicDispatchers += genPolymorphicDispatcherField
+//			]
+			//members += polymorphicDispatchers
+			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += ts.genConstructor
 			
@@ -109,5 +124,37 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		]
    	}
 
+	def genPolymorphicDispatcherField(JudgmentDescription e) {
+		e.containingTypeSystem.toField(
+			e.polymorphicDispatcherField.toString,
+			e.polymorphicDispatcherType
+		)
+	}
+
+	def polymorphicDispatcherType(JudgmentDescription e) {
+		val t = e.newTypeRef(typeof(PolymorphicDispatcher))
+			as JvmParameterizedTypeReference
+		t.arguments.clear
+		t.arguments += e.resultJvmTypeReferences()
+		var JvmParameterizedTypeReference resultT
+		if (t.arguments.size == 1)
+			resultT = e.newTypeRef(typeof(Result)) 
+				as JvmParameterizedTypeReference
+		else
+			resultT = e.newTypeRef(typeof(Result2)) 
+				as JvmParameterizedTypeReference
+		resultT.arguments.clear
+		resultT.arguments += t
+		resultT
+	}
+	
+	def resultJvmTypeReferences(JudgmentDescription judgmentDescription) {
+		val outputParams = judgmentDescription.outputJudgmentParameters
+		if (outputParams.size == 0) {
+			<JvmTypeReference>newArrayList(judgmentDescription.newTypeRef(typeof(Boolean)))
+		} else {
+			outputParams.map [ it.jvmTypeReference ]
+		}
+	}
 }
 

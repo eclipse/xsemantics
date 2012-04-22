@@ -4,13 +4,13 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.common.types.JvmMember
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -20,7 +20,7 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	protected JvmModelGenerator generator
 	
 	@Inject
-	protected XsemanticsJvmModelInferrer inferrer
+	protected extension XsemanticsJvmModelInferrer inferrer
 	
 	@Test
 	def testIssueField() {
@@ -45,6 +45,15 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     /* TODO */
   }'''
 		)
+	}
+	
+	@Test
+	def testPolymorphicDispatcherField() {
+		testFiles.testJudgmentDescriptionsWith2OutputParams.
+			parseAndAssertNoError.judgmentDescriptions.get(0).
+				genPolymorphicDispatcherField.
+				assertGeneratedMember
+("private org.eclipse.xtext.util.PolymorphicDispatcher<org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature> typeDispatcher;")
 	}
 	
 	def assertIssueField(CharSequence prog, CharSequence expected) {

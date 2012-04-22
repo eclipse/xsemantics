@@ -585,4 +585,5 @@ class XsemanticsGeneratorExtensions {
 	def exceptionVarName(JudgmentDescription j) {
 		'''_e_«j.name»'''
 	}
+	
 }

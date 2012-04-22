@@ -3,11 +3,16 @@ package it.xsemantics.dsl.jvmmodel;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.JudgmentDescription;
+import it.xsemantics.dsl.xsemantics.OutputParameter;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -16,15 +21,20 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -40,6 +50,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    */
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
+  
+  @Inject
+  private TypeReferences _typeReferences;
   
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
@@ -163,6 +176,71 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", null, _function);
     return _method;
+  }
+  
+  public JvmField genPolymorphicDispatcherField(final JudgmentDescription e) {
+    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(e);
+    CharSequence _polymorphicDispatcherField = this._xsemanticsGeneratorExtensions.polymorphicDispatcherField(e);
+    String _string = _polymorphicDispatcherField.toString();
+    JvmParameterizedTypeReference _polymorphicDispatcherType = this.polymorphicDispatcherType(e);
+    JvmField _field = this._jvmTypesBuilder.toField(_containingTypeSystem, _string, _polymorphicDispatcherType);
+    return _field;
+  }
+  
+  public JvmParameterizedTypeReference polymorphicDispatcherType(final JudgmentDescription e) {
+    JvmParameterizedTypeReference _xblockexpression = null;
+    {
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, PolymorphicDispatcher.class);
+      final JvmParameterizedTypeReference t = ((JvmParameterizedTypeReference) _newTypeRef);
+      EList<JvmTypeReference> _arguments = t.getArguments();
+      _arguments.clear();
+      EList<JvmTypeReference> _arguments_1 = t.getArguments();
+      List<JvmTypeReference> _resultJvmTypeReferences = this.resultJvmTypeReferences(e);
+      this._jvmTypesBuilder.<JvmTypeReference>operator_add(_arguments_1, _resultJvmTypeReferences);
+      JvmParameterizedTypeReference resultT = null;
+      EList<JvmTypeReference> _arguments_2 = t.getArguments();
+      int _size = _arguments_2.size();
+      boolean _equals = (_size == 1);
+      if (_equals) {
+        JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result.class);
+        resultT = ((JvmParameterizedTypeReference) _newTypeRef_1);
+      } else {
+        JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, Result2.class);
+        resultT = ((JvmParameterizedTypeReference) _newTypeRef_2);
+      }
+      EList<JvmTypeReference> _arguments_3 = resultT.getArguments();
+      _arguments_3.clear();
+      EList<JvmTypeReference> _arguments_4 = resultT.getArguments();
+      this._jvmTypesBuilder.<JvmParameterizedTypeReference>operator_add(_arguments_4, t);
+      _xblockexpression = (resultT);
+    }
+    return _xblockexpression;
+  }
+  
+  public List<JvmTypeReference> resultJvmTypeReferences(final JudgmentDescription judgmentDescription) {
+    List<JvmTypeReference> _xblockexpression = null;
+    {
+      final List<OutputParameter> outputParams = this._xsemanticsUtils.outputJudgmentParameters(judgmentDescription);
+      List<JvmTypeReference> _xifexpression = null;
+      int _size = outputParams.size();
+      boolean _equals = (_size == 0);
+      if (_equals) {
+        JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(judgmentDescription, Boolean.class);
+        ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_newTypeRef);
+        _xifexpression = _newArrayList;
+      } else {
+        final Function1<OutputParameter,JvmTypeReference> _function = new Function1<OutputParameter,JvmTypeReference>() {
+            public JvmTypeReference apply(final OutputParameter it) {
+              JvmTypeReference _jvmTypeReference = it.getJvmTypeReference();
+              return _jvmTypeReference;
+            }
+          };
+        List<JvmTypeReference> _map = ListExtensions.<OutputParameter, JvmTypeReference>map(outputParams, _function);
+        _xifexpression = _map;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
   
   public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {

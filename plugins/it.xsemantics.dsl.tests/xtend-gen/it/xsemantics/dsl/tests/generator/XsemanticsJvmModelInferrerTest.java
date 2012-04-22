@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
@@ -62,6 +64,16 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.append("}");
     this.assertInit(_testSimpleRule, _builder);
+  }
+  
+  @Test
+  public void testPolymorphicDispatcherField() {
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    JvmField _genPolymorphicDispatcherField = this.inferrer.genPolymorphicDispatcherField(_get);
+    this.assertGeneratedMember(_genPolymorphicDispatcherField, "private org.eclipse.xtext.util.PolymorphicDispatcher<org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature> typeDispatcher;");
   }
   
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {

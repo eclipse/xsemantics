@@ -31,9 +31,13 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 '''
 package it.xsemantics.test;
 
+import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
+  private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;
+  
   public TypeSystem() {
     init();
   }
@@ -53,10 +57,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
+  
+  private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;
   
   public TypeSystem() {
     init();
