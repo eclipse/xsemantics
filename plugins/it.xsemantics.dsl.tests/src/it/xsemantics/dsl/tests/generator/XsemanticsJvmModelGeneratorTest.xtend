@@ -32,7 +32,11 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 package it.xsemantics.test;
 
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.List;
+import java.util.Set;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -45,6 +49,18 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 4, "|-", ":");
+  }
+  
+  public Result<Boolean> type(final List<String> list, final Set<Integer> set) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final List<String> list, final Set<Integer> set) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final List<String> list, final Set<Integer> set) {
+    throw new UnsupportedOperationException("typeis not implemented");
   }
 }
 '''
@@ -59,7 +75,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -75,6 +95,18 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 4, "|-", ":");
   }
+  
+  public Result<Boolean> type(final EClass c, final EObject o) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
 }
 '''
 		)
@@ -89,7 +121,10 @@ package it.xsemantics.test;
 
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -114,6 +149,42 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	"type2Impl", 3, "||-", ":", ":");
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "||-", "<:", ":>");
+  }
+  
+  public Result<EObject> type(final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<EObject> type(final RuleEnvironment _environment_, final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type2(final EClass c) {
+    throw new UnsupportedOperationException("type2is not implemented");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type2(final RuleEnvironment _environment_, final EClass c) {
+    throw new UnsupportedOperationException("type2is not implemented");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    throw new UnsupportedOperationException("type2is not implemented");
+  }
+  
+  public Result<EObject> subtype(final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("subtypeis not implemented");
+  }
+  
+  public Result<EObject> subtype(final RuleEnvironment _environment_, final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("subtypeis not implemented");
+  }
+  
+  public Result<EObject> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EStructuralFeature f) {
+    throw new UnsupportedOperationException("subtypeis not implemented");
   }
 }
 '''

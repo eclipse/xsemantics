@@ -7,6 +7,7 @@ import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -18,6 +19,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -80,6 +83,46 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     this.assertGeneratedMember(_genPolymorphicDispatcherField, "private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;");
   }
   
+  @Test
+  public void testEntryPointMethods() {
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    ArrayList<JvmOperation> _genEntryPointMethods = this.inferrer.genEntryPointMethods(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public Result2<EObject,EStructuralFeature> type(final EClass c) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("throw new UnsupportedOperationException(\"typeis not implemented\");");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c_1) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("throw new UnsupportedOperationException(\"typeis not implemented\");");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment__1, final RuleApplicationTrace _trace_, final EClass c_2) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("throw new UnsupportedOperationException(\"typeis not implemented\");");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMembers(_genEntryPointMethods, _builder);
+  }
+  
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
     Rule _firstRule = this.getFirstRule(prog);
     final JvmField field = this.inferrer.genIssueField(_firstRule);
@@ -102,6 +145,19 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   public void assertGeneratedMember(final JvmMember member, final CharSequence expected) {
     final FakeTreeAppendable a = this.createTestAppendable();
     this.generator.generateMember(member, a, true);
+    String _string = a.toString();
+    String _trim = _string.trim();
+    this.assertEqualsStrings(expected, _trim);
+  }
+  
+  public void assertGeneratedMembers(final Iterable<? extends JvmMember> members, final CharSequence expected) {
+    final FakeTreeAppendable a = this.createTestAppendable();
+    final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
+        public void apply(final JvmMember it) {
+          XsemanticsJvmModelInferrerTest.this.generator.generateMember(it, a, false);
+        }
+      };
+    IterableExtensions.forEach(members, _function);
     String _string = a.toString();
     String _trim = _string.trim();
     this.assertEqualsStrings(expected, _trim);

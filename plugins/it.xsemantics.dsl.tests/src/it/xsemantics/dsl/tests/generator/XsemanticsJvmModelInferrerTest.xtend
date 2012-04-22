@@ -58,6 +58,28 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 ("private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;")
 	}
 	
+	@Test
+	def testEntryPointMethods() {
+		testFiles.testJudgmentDescriptionsWith2OutputParams.
+			parseAndAssertNoError.judgmentDescriptions.get(0).
+				genEntryPointMethods.
+				assertGeneratedMembers
+(
+'''
+public Result2<EObject,EStructuralFeature> type(final EClass c) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c_1) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment__1, final RuleApplicationTrace _trace_, final EClass c_2) {
+    throw new UnsupportedOperationException("typeis not implemented");
+  }'''
+)
+	}
+	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)
 		field.assertGeneratedMember(expected)
@@ -77,6 +99,14 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {
 		val a = createTestAppendable
 		generator.generateMember(member, a, true)
+		assertEqualsStrings(expected, a.toString.trim)
+	}
+	
+	def assertGeneratedMembers(Iterable<? extends JvmMember> members, CharSequence expected) {
+		val a = createTestAppendable
+		members.forEach [
+			generator.generateMember(it, a, false)
+		]
 		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
