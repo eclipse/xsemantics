@@ -1,9 +1,9 @@
 package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
-import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer;
+import it.xsemantics.dsl.jvmmodel.TempJvmModelInferrer;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -25,14 +25,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
+@InjectWith(XsemanticsInjectorProviderForInferrer.class)
 @RunWith(XtextRunner.class)
 public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   @Inject
   protected JvmModelGenerator generator;
   
   @Inject
-  protected XsemanticsJvmModelInferrer inferrer;
+  protected TempJvmModelInferrer inferrer;
   
   @Test
   public void testIssueField() {

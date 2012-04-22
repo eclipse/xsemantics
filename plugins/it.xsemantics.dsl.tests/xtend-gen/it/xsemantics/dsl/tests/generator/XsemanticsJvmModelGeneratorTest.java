@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.Map;
 import junit.framework.Assert;
@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
+@InjectWith(XsemanticsInjectorProviderForInferrer.class)
 @RunWith(XtextRunner.class)
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   @Inject

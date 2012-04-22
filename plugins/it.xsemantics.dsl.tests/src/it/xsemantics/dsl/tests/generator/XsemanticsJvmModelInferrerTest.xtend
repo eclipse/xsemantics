@@ -1,19 +1,19 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer
+import it.xsemantics.dsl.jvmmodel.TempJvmModelInferrer
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.compiler.ImportManager
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	
@@ -21,7 +21,7 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	protected JvmModelGenerator generator
 	
 	@Inject
-	protected extension XsemanticsJvmModelInferrer inferrer
+	protected extension TempJvmModelInferrer inferrer
 	
 	@Test
 	def testIssueField() {

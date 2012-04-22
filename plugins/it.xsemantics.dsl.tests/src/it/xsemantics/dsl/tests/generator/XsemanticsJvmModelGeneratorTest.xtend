@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
 import junit.framework.Assert
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 import org.eclipse.xtext.junit4.InjectWith
@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 
 import static it.xsemantics.dsl.tests.generator.XsemanticsJvmModelGeneratorTest.*
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	

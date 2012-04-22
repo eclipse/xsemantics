@@ -7,6 +7,7 @@ import it.xsemantics.dsl.generator.XsemanticsGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
@@ -40,9 +41,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
+@InjectWith(XsemanticsInjectorProviderForInferrer.class)
 @RunWith(XtextRunner.class)
-public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
+public class InferrerGeneratedJavaCodeTest extends XsemanticsBaseTest {
 
 	protected static final String FJ_FIRST_TYPE_SYSTEM = "FjFirstTypeSystem";
 
@@ -117,114 +118,34 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 	}
 
 	@Test
-	public void testSimpleRule() throws Exception {
+	public void testGenSimpleRule() throws Exception {
 		assertEquals(SIMPLE_TYPE_SYSTEM,
-				compileWithJava(testFiles.testSimpleRule(), SIMPLE_TYPE_SYSTEM)
+				compileToJava(testFiles.testSimpleRule(), SIMPLE_TYPE_SYSTEM)
 						.getName());
 	}
 
 	@Test
-	public void testRuleInvocation() throws Exception {
-		checkCompilationOfInputFile("ecore_ruleinvocation_test.xsemantics",
-				RULEINVOCATION_ECORE_TYPE_SYSTEM, TYPE_SYSTEM);
+	public void testGenRuleWithTwoOutputParams() throws Exception {
+		assertEquals(
+				SIMPLE_TYPE_SYSTEM,
+				compileToJava(testFiles.testRuleWithTwoOutputParams(),
+						SIMPLE_TYPE_SYSTEM).getName());
 	}
 
-	@Test
-	public void testFjFirst() throws Exception {
-		checkCompilationOfInputFile("fj_first_test.xsemantics",
-				FJ_FIRST_PACKAGE, FJ_FIRST_TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testFjAlt() throws Exception {
-		checkCompilationOfInputFile("fj_alt_test.xsemantics", FJ_ALT_PACKAGE,
-				FJ_ALT_TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testEcore() throws Exception {
-		checkCompilationOfInputFile("ecore_test.xsemantics", ECORE_TYPE_SYSTEM,
-				TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testParticularCases() throws Exception {
-		checkCompilationOfInputFile("ecore_particular_test.xsemantics",
-				PARTICULAR_ECORE_TYPE_SYSTEM, TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testOrExpressions() throws Exception {
-		checkCompilationOfInputFile("ecore_or_test.xsemantics",
-				OR_ECORE_TYPE_SYSTEM, TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testExpressions() throws Exception {
-		checkCompilationOfInputFile("ecore_expressions_test.xsemantics",
-				EXPRESSIONS_ECORE_TYPE_SYSTEM, TYPE_SYSTEM);
-	}
-
-	@Test
-	public void testValidationEcore() throws Exception {
-		checkCompilationOfInputFile("ecore_validation_test.xsemantics",
-				VALIDATION_ECORE_TYPE_SYSTEM, TYPE_SYSTEM);
-	}
-
-	protected void checkCompilationOfInputFile(String inputFile, String pack,
-			String className) throws Exception {
-		final String fullPathInputFile = TESTS_INPUT_FILES + inputFile;
-
-		final String fullyQualifiedClassName = pack + className;
-
-		InMemoryFileSystemAccess fsa = generateJavaCode(loadResourceFromFile(fullPathInputFile));
-
-		assertEquals(fullyQualifiedClassName,
-				compileWithJava(fsa, fullyQualifiedClassName).getName());
-
-		final String validatorClassName = pack + "validation." + className
-				+ "Validator";
-
-		assertEquals(validatorClassName,
-				compileWithJava(fsa, validatorClassName).getName());
-	}
-
-	protected Class<?> compileWithJava(CharSequence program, String className)
+	protected Class<?> compileToJava(CharSequence program, String className)
 			throws Exception {
 		XsemanticsSystem parse = parseAndAssertNoError(program);
 		Resource eResource = parse.eResource();
-		return compileWithJava(eResource, className);
+		return compileToJava(eResource, className);
 	}
 
-	protected Class<?> compileWithJava(String fileName, String className)
-			throws Exception {
-		return compileWithJava(loadResourceFromFile(fileName), className);
-	}
-
-	protected Resource loadResourceFromFile(String fileName) {
-		// load the resource
-		ResourceSet set = resourceSetProvider.get();
-		Resource resource = set.getResource(URI.createURI(fileName), true);
-
-		// validate the resource
-		List<Issue> issues = validator.validate(resource, CheckMode.ALL,
-				CancelIndicator.NullImpl);
-		if (!issues.isEmpty() && GeneratorUtils.hasErrors(issues)) {
-			for (Issue issue : issues) {
-				System.err.println(issue);
-			}
-			fail("validation failed");
-		}
-		return resource;
-	}
-
-	protected Class<?> compileWithJava(Resource eResource, String className)
+	protected Class<?> compileToJava(Resource eResource, String className)
 			throws InstantiationException, IllegalAccessException {
-		InMemoryFileSystemAccess fsa = generateJavaCode(eResource);
-		return compileWithJava(fsa, className);
+		InMemoryFileSystemAccess fsa = generateJava(eResource);
+		return compileToJava(fsa, className);
 	}
 
-	protected Class<?> compileWithJava(InMemoryFileSystemAccess fsa,
+	protected Class<?> compileToJava(InMemoryFileSystemAccess fsa,
 			String className) {
 		CharSequence concatenation = fsa.getFiles().get(
 				OUTPUT_PREFIX + className.replace(".", "/") + ".java");
@@ -233,9 +154,9 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 		return class1;
 	}
 
-	protected InMemoryFileSystemAccess generateJavaCode(Resource eResource) {
+	protected InMemoryFileSystemAccess generateJava(Resource eResource) {
 		InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
-		generator.doGenerate(eResource, fsa);
+		jvmModelGenerator.doGenerate(eResource, fsa);
 		return fsa;
 	}
 
