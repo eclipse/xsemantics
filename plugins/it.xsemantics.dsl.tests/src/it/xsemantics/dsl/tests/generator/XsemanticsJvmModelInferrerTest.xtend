@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.compiler.ImportManager
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -53,7 +54,7 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 			parseAndAssertNoError.judgmentDescriptions.get(0).
 				genPolymorphicDispatcherField.
 				assertGeneratedMember
-("private org.eclipse.xtext.util.PolymorphicDispatcher<org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature> typeDispatcher;")
+("private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;")
 	}
 	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
@@ -73,9 +74,13 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	}
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {
-		val a = new FakeTreeAppendable()
+		val a = createTestAppendable
 		generator.generateMember(member, a, true)
 		assertEqualsStrings(expected, a.toString.trim)
+	}
+	
+	def createTestAppendable() {
+		new FakeTreeAppendable(new ImportManager(true))
 	}
 	
 }

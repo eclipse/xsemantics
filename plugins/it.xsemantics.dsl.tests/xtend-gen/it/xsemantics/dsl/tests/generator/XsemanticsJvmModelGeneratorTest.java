@@ -44,7 +44,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;");
+    _builder.append("private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;");
     _builder.newLine();
     _builder.append("  ");
     _builder.newLine();
@@ -96,7 +96,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;");
+    _builder.append("private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;");
     _builder.newLine();
     _builder.append("  ");
     _builder.newLine();

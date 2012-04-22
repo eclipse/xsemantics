@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
     JudgmentDescription _get = _judgmentDescriptions.get(0);
     JvmField _genPolymorphicDispatcherField = this.inferrer.genPolymorphicDispatcherField(_get);
-    this.assertGeneratedMember(_genPolymorphicDispatcherField, "private org.eclipse.xtext.util.PolymorphicDispatcher<org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature> typeDispatcher;");
+    this.assertGeneratedMember(_genPolymorphicDispatcherField, "private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;");
   }
   
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
@@ -96,11 +97,16 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   }
   
   public void assertGeneratedMember(final JvmMember member, final CharSequence expected) {
-    FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable();
-    final FakeTreeAppendable a = _fakeTreeAppendable;
+    final FakeTreeAppendable a = this.createTestAppendable();
     this.generator.generateMember(member, a, true);
     String _string = a.toString();
     String _trim = _string.trim();
     this.assertEqualsStrings(expected, _trim);
+  }
+  
+  public FakeTreeAppendable createTestAppendable() {
+    ImportManager _importManager = new ImportManager(true);
+    FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable(_importManager);
+    return _fakeTreeAppendable;
   }
 }

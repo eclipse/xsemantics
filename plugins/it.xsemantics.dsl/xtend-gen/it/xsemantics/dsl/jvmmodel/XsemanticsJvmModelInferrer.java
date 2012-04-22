@@ -21,10 +21,8 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
@@ -50,9 +48,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    */
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
-  
-  @Inject
-  private TypeReferences _typeReferences;
   
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
@@ -107,12 +102,23 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           IterableExtensions.<Rule>forEach(_rules, _function);
           EList<JvmMember> _members = it.getMembers();
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, issues);
+          final ArrayList<JvmField> polymorphicDispatchers = CollectionLiterals.<JvmField>newArrayList();
+          EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
+          final Procedure1<JudgmentDescription> _function_1 = new Procedure1<JudgmentDescription>() {
+              public void apply(final JudgmentDescription it) {
+                JvmField _genPolymorphicDispatcherField = XsemanticsJvmModelInferrer.this.genPolymorphicDispatcherField(it);
+                polymorphicDispatchers.add(_genPolymorphicDispatcherField);
+              }
+            };
+          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions, _function_1);
           EList<JvmMember> _members_1 = it.getMembers();
-          JvmConstructor _genConstructor = XsemanticsJvmModelInferrer.this.genConstructor(ts);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_1, _genConstructor);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, polymorphicDispatchers);
           EList<JvmMember> _members_2 = it.getMembers();
+          JvmConstructor _genConstructor = XsemanticsJvmModelInferrer.this.genConstructor(ts);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_2, _genConstructor);
+          EList<JvmMember> _members_3 = it.getMembers();
           JvmOperation _genInit = XsemanticsJvmModelInferrer.this.genInit(ts);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _genInit);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_3, _genInit);
         }
       };
     _accept.initializeLater(_function);
@@ -182,37 +188,30 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(e);
     CharSequence _polymorphicDispatcherField = this._xsemanticsGeneratorExtensions.polymorphicDispatcherField(e);
     String _string = _polymorphicDispatcherField.toString();
-    JvmParameterizedTypeReference _polymorphicDispatcherType = this.polymorphicDispatcherType(e);
+    JvmTypeReference _polymorphicDispatcherType = this.polymorphicDispatcherType(e);
     JvmField _field = this._jvmTypesBuilder.toField(_containingTypeSystem, _string, _polymorphicDispatcherType);
     return _field;
   }
   
-  public JvmParameterizedTypeReference polymorphicDispatcherType(final JudgmentDescription e) {
-    JvmParameterizedTypeReference _xblockexpression = null;
+  public JvmTypeReference polymorphicDispatcherType(final JudgmentDescription e) {
+    JvmTypeReference _xblockexpression = null;
     {
-      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, PolymorphicDispatcher.class);
-      final JvmParameterizedTypeReference t = ((JvmParameterizedTypeReference) _newTypeRef);
-      EList<JvmTypeReference> _arguments = t.getArguments();
-      _arguments.clear();
-      EList<JvmTypeReference> _arguments_1 = t.getArguments();
-      List<JvmTypeReference> _resultJvmTypeReferences = this.resultJvmTypeReferences(e);
-      this._jvmTypesBuilder.<JvmTypeReference>operator_add(_arguments_1, _resultJvmTypeReferences);
-      JvmParameterizedTypeReference resultT = null;
-      EList<JvmTypeReference> _arguments_2 = t.getArguments();
-      int _size = _arguments_2.size();
+      final List<JvmTypeReference> resultTypeArguments = this.resultJvmTypeReferences(e);
+      JvmTypeReference resultT = null;
+      int _size = resultTypeArguments.size();
       boolean _equals = (_size == 1);
       if (_equals) {
-        JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result.class);
-        resultT = ((JvmParameterizedTypeReference) _newTypeRef_1);
+        JvmTypeReference _get = resultTypeArguments.get(0);
+        JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, Result.class, _get);
+        resultT = _newTypeRef;
       } else {
-        JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, Result2.class);
-        resultT = ((JvmParameterizedTypeReference) _newTypeRef_2);
+        JvmTypeReference _get_1 = resultTypeArguments.get(0);
+        JvmTypeReference _get_2 = resultTypeArguments.get(1);
+        JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result2.class, _get_1, _get_2);
+        resultT = _newTypeRef_1;
       }
-      EList<JvmTypeReference> _arguments_3 = resultT.getArguments();
-      _arguments_3.clear();
-      EList<JvmTypeReference> _arguments_4 = resultT.getArguments();
-      this._jvmTypesBuilder.<JvmParameterizedTypeReference>operator_add(_arguments_4, t);
-      _xblockexpression = (resultT);
+      JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, PolymorphicDispatcher.class, resultT);
+      _xblockexpression = (_newTypeRef_2);
     }
     return _xblockexpression;
   }

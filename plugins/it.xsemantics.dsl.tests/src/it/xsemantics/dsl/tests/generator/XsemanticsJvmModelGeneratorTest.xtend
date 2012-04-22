@@ -36,7 +36,7 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;
+  private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
   public TypeSystem() {
     init();
@@ -64,7 +64,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
   
-  private Result<PolymorphicDispatcher<Boolean>> typeDispatcher;
+  private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
   public TypeSystem() {
     init();
