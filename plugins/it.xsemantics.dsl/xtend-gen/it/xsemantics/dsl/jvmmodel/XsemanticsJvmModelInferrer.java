@@ -179,24 +179,32 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public JvmTypeReference polymorphicDispatcherType(final JudgmentDescription e) {
+    JvmTypeReference _resultType = this.resultType(e);
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, PolymorphicDispatcher.class, _resultType);
+    return _newTypeRef;
+  }
+  
+  public JvmTypeReference resultType(final JudgmentDescription e) {
     JvmTypeReference _xblockexpression = null;
     {
       final List<JvmTypeReference> resultTypeArguments = this.resultJvmTypeReferences(e);
       JvmTypeReference resultT = null;
+      JvmTypeReference _xifexpression = null;
       int _size = resultTypeArguments.size();
       boolean _equals = (_size == 1);
       if (_equals) {
         JvmTypeReference _get = resultTypeArguments.get(0);
         JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, Result.class, _get);
-        resultT = _newTypeRef;
+        JvmTypeReference _resultT = resultT = _newTypeRef;
+        _xifexpression = _resultT;
       } else {
         JvmTypeReference _get_1 = resultTypeArguments.get(0);
         JvmTypeReference _get_2 = resultTypeArguments.get(1);
         JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result2.class, _get_1, _get_2);
-        resultT = _newTypeRef_1;
+        JvmTypeReference _resultT_1 = resultT = _newTypeRef_1;
+        _xifexpression = _resultT_1;
       }
-      JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, PolymorphicDispatcher.class, resultT);
-      _xblockexpression = (_newTypeRef_2);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

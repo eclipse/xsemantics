@@ -122,6 +122,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	def polymorphicDispatcherType(JudgmentDescription e) {
+		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
+	}
+	
+	def resultType(JudgmentDescription e) {
 		val resultTypeArguments = e.resultJvmTypeReferences()
 		var JvmTypeReference resultT
 		if (resultTypeArguments.size == 1)
@@ -130,7 +134,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			resultT = e.newTypeRef(typeof(Result2),
 				resultTypeArguments.get(0), resultTypeArguments.get(1)
 			)
-		e.newTypeRef(typeof(PolymorphicDispatcher), resultT)
 	}
 	
 	def resultJvmTypeReferences(JudgmentDescription judgmentDescription) {
