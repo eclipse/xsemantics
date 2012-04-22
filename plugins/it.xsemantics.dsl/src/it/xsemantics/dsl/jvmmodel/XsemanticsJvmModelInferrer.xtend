@@ -3,6 +3,10 @@ package it.xsemantics.dsl.jvmmodel
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import com.google.inject.Inject
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -12,7 +16,12 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
  */
 class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
-
+    /**
+     * convenience API to build and initialize JVM types and their members.
+     */
+	@Inject extension JvmTypesBuilder
+	
+	@Inject extension XsemanticsGeneratorExtensions
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -40,7 +49,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(XsemanticsSystem ts, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		
+   		acceptor.accept(
+			ts.toClass( ts.toJavaFullyQualifiedName )
+		).initializeLater [
+			documentation = ts.documentation
+			superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+		]
 	}
 	
 }
