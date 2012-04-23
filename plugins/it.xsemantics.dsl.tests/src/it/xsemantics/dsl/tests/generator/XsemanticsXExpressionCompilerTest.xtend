@@ -501,6 +501,24 @@ eClass = _clone;'''
 	}
 	
 	@Test
+	def void testForScopeOfThisInClosure() {
+		checkCompilationOfAllPremises(
+			testFiles.testForScopeOfThisInClosure,
+'''
+
+EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
+final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
+    public void apply(final EStructuralFeature it) {
+      EClass _eClass = obj.eClass();
+      EClass _clone = TypeSystem.this.<EClass>clone(_eClass);
+      eClass = _clone;
+    }
+  };
+IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);'''
+			)
+	}
+	
+	@Test
 	def void testForScopeOfThisInCheckRule() {
 		checkCompilationOfAllPremisesOfCheckRule(
 			testFiles.testForScopeOfThisInCheckRule,

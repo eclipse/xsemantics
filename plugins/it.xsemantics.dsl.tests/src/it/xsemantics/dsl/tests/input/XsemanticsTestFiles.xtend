@@ -1044,6 +1044,20 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
+	def testForScopeOfThisInClosure() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EObjectEClass
+		G |- EObject obj : EClass eClass
+	from {
+		// clone is in the base runtime system
+		// it should be visible through this
+		eClass.EAllStructuralFeatures.forEach [
+			eClass = clone(obj.eClass)
+		]
+	}
+	'''
+	
 	def testForScopeOfThisInCheckRule() '''
 	«testJudgmentDescriptionsEObjectEClass»
 	
