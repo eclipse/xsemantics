@@ -397,7 +397,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   public void checkCompilationOfPremises(final CharSequence inputCode, final CharSequence expected) {
     final Rule rule = this.getFirstRule(inputCode);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
-    final FakeTreeAppendable appendable = this.createAppendable(rule);
+    final ITreeAppendable appendable = this.createAppendable(rule);
     final ITreeAppendable result = this.xbaseCompiler.compile(xexp, appendable, false);
     String _string = expected.toString();
     String _string_1 = result.toString();

@@ -8,7 +8,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -129,7 +129,7 @@ public class XsemanticsRuleGeneratorTest extends XsemanticsGeneratorBaseTest {
   
   public void checkDeclaredVariable(final String newVarName, final String expected, final CharSequence inputProgram) {
     Rule _firstRule = this.getFirstRule(inputProgram);
-    FakeTreeAppendable _createAppendable = this.createAppendable(_firstRule);
+    ITreeAppendable _createAppendable = this.createAppendable(_firstRule);
     this.checkDeclaredVariable(newVarName, expected, _createAppendable);
   }
   

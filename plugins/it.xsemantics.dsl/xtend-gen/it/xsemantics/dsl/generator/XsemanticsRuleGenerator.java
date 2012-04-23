@@ -22,8 +22,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -141,7 +141,7 @@ public class XsemanticsRuleGenerator {
     CharSequence _xblockexpression = null;
     {
       final String resultType = this._xsemanticsGeneratorExtensions.resultType(rule, importManager);
-      final FakeTreeAppendable appendable = this.createAndConfigureAppendable(rule, importManager);
+      final TreeAppendable appendable = this.createAndConfigureAppendable(rule, importManager);
       this.declareVariablesForOutputParams(rule, appendable);
       this.compileRuleBody(rule, resultType, appendable);
       StringConcatenation _builder = new StringConcatenation();
@@ -187,7 +187,7 @@ public class XsemanticsRuleGenerator {
       {
         RuleConclusion _conclusion_1 = rule.getConclusion();
         final ErrorSpecification errorSpecification = _conclusion_1.getError();
-        final FakeTreeAppendable b = this.createAndConfigureAppendable(rule, importManager);
+        final TreeAppendable b = this.createAndConfigureAppendable(rule, importManager);
         final String error = this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b);
         final String source = this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b);
         final String feature = this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b);
@@ -276,7 +276,7 @@ public class XsemanticsRuleGenerator {
     CharSequence _xblockexpression = null;
     {
       final CharSequence resultType = this._xsemanticsGeneratorExtensions.resultType(rule, importManager);
-      final FakeTreeAppendable appendable = this.createAndConfigureAppendable(rule, importManager);
+      final TreeAppendable appendable = this.createAndConfigureAppendable(rule, importManager);
       final CharSequence inputParam = this._xsemanticsGeneratorExtensions.inputParameter(rule, importManager);
       this.compilePremises(rule, appendable);
       StringConcatenation _builder = new StringConcatenation();
@@ -350,10 +350,10 @@ public class XsemanticsRuleGenerator {
     return _xblockexpression;
   }
   
-  public FakeTreeAppendable createAndConfigureAppendable(final Rule rule, final ImportManager importManager) {
-    FakeTreeAppendable _xblockexpression = null;
+  public TreeAppendable createAndConfigureAppendable(final Rule rule, final ImportManager importManager) {
+    TreeAppendable _xblockexpression = null;
     {
-      final FakeTreeAppendable appendable = this._xsemanticsGeneratorExtensions.createConfiguredAppendable(rule, importManager);
+      final TreeAppendable appendable = this._xsemanticsGeneratorExtensions.createConfiguredAppendable(rule, importManager);
       List<RuleParameter> _ruleParams = this._xsemanticsUtils.ruleParams(rule);
       final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
           public void apply(final RuleParameter it) {
@@ -369,10 +369,10 @@ public class XsemanticsRuleGenerator {
     return _xblockexpression;
   }
   
-  public FakeTreeAppendable createAndConfigureAppendable(final CheckRule rule, final ImportManager importManager) {
-    FakeTreeAppendable _xblockexpression = null;
+  public TreeAppendable createAndConfigureAppendable(final CheckRule rule, final ImportManager importManager) {
+    TreeAppendable _xblockexpression = null;
     {
-      final FakeTreeAppendable appendable = this._xsemanticsGeneratorExtensions.createConfiguredAppendable(rule, importManager);
+      final TreeAppendable appendable = this._xsemanticsGeneratorExtensions.createConfiguredAppendable(rule, importManager);
       RuleParameter _element = rule.getElement();
       JvmFormalParameter _parameter = _element.getParameter();
       RuleParameter _element_1 = rule.getElement();

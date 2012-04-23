@@ -12,8 +12,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -112,7 +112,7 @@ public class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGenerat
     final JudgmentDescription jDesc = this.firstJudgmentDescription(_parseAndAssertNoError);
     final ErrorSpecification errSpec = this.firstErrorSpecification(jDesc);
     ImportManager _importManager = new ImportManager(true);
-    final FakeTreeAppendable appendable = this._xsemanticsGeneratorExtensions.createAndConfigureAppendable(jDesc, _importManager);
+    final TreeAppendable appendable = this._xsemanticsGeneratorExtensions.createAndConfigureAppendable(jDesc, _importManager);
     final String variable = compilation.apply(errSpec, appendable);
     this.assertEqualsStrings(expected, appendable);
     this.assertEqualsStrings(expectedVar, variable);

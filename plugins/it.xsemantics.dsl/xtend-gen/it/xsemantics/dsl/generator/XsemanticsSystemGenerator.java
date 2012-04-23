@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -496,7 +496,7 @@ public class XsemanticsSystemGenerator {
         StringConcatenation _builder = new StringConcatenation();
         return _builder;
       }
-      final FakeTreeAppendable b = this._xsemanticsGeneratorExtensions.createAndConfigureAppendable(judgmentDescription, importManager);
+      final TreeAppendable b = this._xsemanticsGeneratorExtensions.createAndConfigureAppendable(judgmentDescription, importManager);
       final String error = this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b);
       final String source = this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b);
       final String feature = this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b);

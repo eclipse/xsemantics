@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -43,9 +43,11 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -68,6 +70,12 @@ public class XsemanticsGeneratorExtensions {
   
   @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private JvmModelGenerator jvmModelGenerator;
+  
+  @Inject
+  private JvmModelAssociator associator;
   
   public String toPackage(final XsemanticsSystem ts) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(ts);
@@ -1182,10 +1190,10 @@ public class XsemanticsGeneratorExtensions {
     return _typeForName;
   }
   
-  public FakeTreeAppendable createAndConfigureAppendable(final JudgmentDescription jDesc, final ImportManager importManager) {
-    FakeTreeAppendable _xblockexpression = null;
+  public TreeAppendable createAndConfigureAppendable(final JudgmentDescription jDesc, final ImportManager importManager) {
+    TreeAppendable _xblockexpression = null;
     {
-      final FakeTreeAppendable appendable = this.createConfiguredAppendable(jDesc, importManager);
+      final TreeAppendable appendable = this.createConfiguredAppendable(jDesc, importManager);
       this.configureAppendable(jDesc, appendable);
       _xblockexpression = (appendable);
     }
@@ -1205,15 +1213,12 @@ public class XsemanticsGeneratorExtensions {
     IterableExtensions.<InputParameter>forEach(_inputParams, _function);
   }
   
-  public FakeTreeAppendable createConfiguredAppendable(final EObject context, final ImportManager importManager) {
-    FakeTreeAppendable _xblockexpression = null;
+  public TreeAppendable createConfiguredAppendable(final EObject context, final ImportManager importManager) {
+    TreeAppendable _xblockexpression = null;
     {
-      FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable(importManager);
-      final FakeTreeAppendable appendable = _fakeTreeAppendable;
-      JvmTypeReference _referenceForBaseRuntimeSystem = this.referenceForBaseRuntimeSystem(context);
-      JvmType _type = _referenceForBaseRuntimeSystem.getType();
-      appendable.declareVariable(_type, "this");
-      _xblockexpression = (appendable);
+      final JvmIdentifiableElement container = this.associator.getNearestLogicalContainer(context);
+      TreeAppendable _createAppendable = this.jvmModelGenerator.createAppendable(container, importManager);
+      _xblockexpression = (_createAppendable);
     }
     return _xblockexpression;
   }

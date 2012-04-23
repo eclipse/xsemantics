@@ -11,6 +11,8 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("all")
@@ -23,15 +25,15 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
   @Inject
   protected XsemanticsSystemGenerator tsGenerator;
   
-  public FakeTreeAppendable createAppendable(final Rule rule) {
+  public ITreeAppendable createAppendable(final Rule rule) {
     ImportManager _createImportManager = this.createImportManager();
-    FakeTreeAppendable _createAndConfigureAppendable = this.ruleGenerator.createAndConfigureAppendable(rule, _createImportManager);
+    TreeAppendable _createAndConfigureAppendable = this.ruleGenerator.createAndConfigureAppendable(rule, _createImportManager);
     return _createAndConfigureAppendable;
   }
   
-  public FakeTreeAppendable createAppendable(final CheckRule rule) {
+  public ITreeAppendable createAppendable(final CheckRule rule) {
     ImportManager _createImportManager = this.createImportManager();
-    FakeTreeAppendable _createAndConfigureAppendable = this.ruleGenerator.createAndConfigureAppendable(rule, _createImportManager);
+    TreeAppendable _createAndConfigureAppendable = this.ruleGenerator.createAndConfigureAppendable(rule, _createImportManager);
     return _createAndConfigureAppendable;
   }
   

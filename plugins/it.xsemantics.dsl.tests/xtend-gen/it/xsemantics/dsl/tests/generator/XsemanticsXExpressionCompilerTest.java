@@ -1038,7 +1038,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     final Rule rule = this.getFirstRule(inputCode);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(rule);
     final RuleInvocation xexp = _ruleInvocations.get(index);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
@@ -1049,7 +1049,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     final Rule rule = this.getFirstRule(inputCode);
     List<OrExpression> _ors = this._xsemanticsUtils.getOrs(rule);
     final OrExpression xexp = _ors.get(index);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
@@ -1066,7 +1066,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   
   public void checkCompilationOfAllPremises(final CharSequence inputCode, final CharSequence expected) {
     final Rule rule = this.getFirstRule(inputCode);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
@@ -1076,7 +1076,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   
   public void checkCompilationOfAllPremisesOfCheckRule(final CharSequence inputCode, final CharSequence expected) {
     final CheckRule rule = this.getFirstCheckRule(inputCode);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
@@ -1088,7 +1088,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     final Rule rule = this.getFirstRule(inputCode);
     EList<XExpression> _rulePremises = this.getRulePremises(rule);
     final XExpression xexp = _rulePremises.get(index);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
@@ -1098,7 +1098,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   public void checkCompilationOfEnvironmentSpecfication(final CharSequence inputCode, final CharSequence expected) {
     final Rule rule = this.getFirstRule(inputCode);
     final EnvironmentSpecification xexp = this.getEnvironmentSpecificationOfRuleInvocation(rule);
-    final FakeTreeAppendable result = this.createAppendable(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
     this.xbaseCompiler.generateEnvironmentSpecificationAsExpression(xexp, result);
     this.assertEqualsStrings(expected, result);
   }
