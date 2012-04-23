@@ -284,19 +284,22 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
 		      List<Field> inheritedFields = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, 
 		        Field.class);
-		      for (final Field inheritedField : inheritedFields) {
-		        String _name = field.getName();
-		        String _name_1 = inheritedField.getName();
-		        boolean _equals = Objects.equal(_name, _name_1);
-		        if (_equals) {
-		          /* fail error "field already declared in superclass " + stringRep(inheritedField.eContainer) */
-		          EObject _eContainer_1 = inheritedField.eContainer();
-		          String _stringRep = this.stringRep(_eContainer_1);
-		          String _plus = ("field already declared in superclass " + _stringRep);
-		          String error = _plus;
-		          throwForExplicitFail(error, new ErrorInformation(null, null));
-		        }
-		      }
+		      final Procedure1<Field> _function = new Procedure1<Field>() {
+		          public void apply(final Field inheritedField) {
+		            String _name = field.getName();
+		            String _name_1 = inheritedField.getName();
+		            boolean _equals = Objects.equal(_name, _name_1);
+		            if (_equals) {
+		              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+		              EObject _eContainer = inheritedField.eContainer();
+		              String _stringRep = FjTypeSystem.this.stringRep(_eContainer);
+		              String _plus = ("field already defined in superclass " + _stringRep);
+		              String error = _plus;
+		              throwForExplicitFail(error, new ErrorInformation(null, null));
+		            }
+		          }
+		        };
+		      IterableExtensions.<Field>forEach(inheritedFields, _function);
 		    }
 		  }
 		}

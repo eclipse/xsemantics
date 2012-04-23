@@ -493,7 +493,7 @@ public class FjActualExpectedTraces extends FjExpectedTraces {
   
   public CharSequence subclassDeclaresSameFieldOfSuperClass() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("field already declared in superclass class A { int i; }");
+    _builder.append("field already defined in superclass class A { int i; }");
     return _builder;
   }
   
@@ -539,7 +539,7 @@ public class FjActualExpectedTraces extends FjExpectedTraces {
   
   public CharSequence validateSubclassDeclaresSameFieldOfSuperClass() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Diagnostic ERROR \"field already declared in superclass class A { int i; }\" at Program.classes[1]->Class\'B\'.members[1]->Field\'i\' ");
+    _builder.append("Diagnostic ERROR \"field already defined in superclass class A { int i; }\" at Program.classes[1]->Class\'B\'.members[1]->Field\'i\' ");
     return _builder;
   }
 }
