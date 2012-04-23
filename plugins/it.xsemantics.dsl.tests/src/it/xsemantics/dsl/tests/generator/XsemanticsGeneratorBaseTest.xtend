@@ -11,6 +11,7 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.runner.RunWith
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
@@ -23,11 +24,11 @@ class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
 	@Inject
 	protected XsemanticsSystemGenerator tsGenerator
 	
-	def createAppendable(Rule rule) {
+	def ITreeAppendable createAppendable(Rule rule) {
 		ruleGenerator.createAndConfigureAppendable(rule, createImportManager)
 	}
 	
-	def createAppendable(CheckRule rule) {
+	def ITreeAppendable createAppendable(CheckRule rule) {
 		ruleGenerator.createAndConfigureAppendable(rule, createImportManager)
 	}
 	
