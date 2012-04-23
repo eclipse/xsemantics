@@ -1,13 +1,6 @@
 package it.xsemantics.dsl.generator
 
 import com.google.inject.Inject
-import it.xsemantics.runtime.ErrorInformation
-import it.xsemantics.runtime.Result
-import it.xsemantics.runtime.Result2
-import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.RuleFailedException
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.CheckRule
@@ -20,19 +13,28 @@ import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.runtime.ErrorInformation
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.Result2
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.RuleFailedException
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
 class XsemanticsGeneratorExtensions {
 	
@@ -45,6 +47,10 @@ class XsemanticsGeneratorExtensions {
 	@Inject extension XsemanticsTypingSystem
 	
 	@Inject extension TypeReferences
+	
+	@Inject JvmModelGenerator jvmModelGenerator
+	
+	@Inject JvmModelAssociator associator
 	
 	def toPackage(XsemanticsSystem ts) {
 		ts.fullyQualifiedName.skipLast(1).toString
@@ -576,9 +582,11 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def createConfiguredAppendable(EObject context, ImportManager importManager) {
-		val appendable = new StringBuilderBasedAppendable(importManager)
-		appendable.declareVariable(context.referenceForBaseRuntimeSystem.type, "this")
-		appendable
+		// the inferrer created a Java class for the generated system
+		// so we retrieve this JvmGenericType from the associator
+		val container = associator.getNearestLogicalContainer(context)
+		// the created appendable contains the correct bindings for 'this'
+		jvmModelGenerator.createAppendable(container, importManager)
 	}
 	
 	def exceptionVarName(JudgmentDescription j) {

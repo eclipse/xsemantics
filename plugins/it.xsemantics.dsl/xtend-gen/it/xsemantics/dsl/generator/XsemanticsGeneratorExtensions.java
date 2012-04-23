@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -34,8 +34,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -60,6 +62,12 @@ public class XsemanticsGeneratorExtensions {
   
   @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private JvmModelGenerator jvmModelGenerator;
+  
+  @Inject
+  private JvmModelAssociator associator;
   
   public String toPackage(final XsemanticsSystem ts) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(ts);
@@ -1217,12 +1225,10 @@ public class XsemanticsGeneratorExtensions {
   public StringBuilderBasedAppendable createConfiguredAppendable(final EObject context, final ImportManager importManager) {
     StringBuilderBasedAppendable _xblockexpression = null;
     {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
-      final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
-      JvmTypeReference _referenceForBaseRuntimeSystem = this.referenceForBaseRuntimeSystem(context);
-      JvmType _type = _referenceForBaseRuntimeSystem.getType();
-      appendable.declareVariable(_type, "this");
-      _xblockexpression = (appendable);
+      JvmIdentifiableElement _nearestLogicalContainer = this.associator.getNearestLogicalContainer(context);
+      final JvmIdentifiableElement container = _nearestLogicalContainer;
+      StringBuilderBasedAppendable _createAppendable = this.jvmModelGenerator.createAppendable(container, importManager);
+      _xblockexpression = (_createAppendable);
     }
     return _xblockexpression;
   }
