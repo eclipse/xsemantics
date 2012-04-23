@@ -1006,6 +1006,37 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
+  public void testForScopeOfThisInClosure() {
+    CharSequence _testForScopeOfThisInClosure = this.testFiles.testForScopeOfThisInClosure();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();");
+    _builder.newLine();
+    _builder.append("final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public void apply(final EStructuralFeature it) {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("EClass _eClass = obj.eClass();");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("EClass _clone = TypeSystem.this.<EClass>clone(_eClass);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("eClass = _clone;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("};");
+    _builder.newLine();
+    _builder.append("IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);");
+    this.checkCompilationOfAllPremises(_testForScopeOfThisInClosure, _builder);
+  }
+  
+  @Test
   public void testForScopeOfThisInCheckRule() {
     CharSequence _testForScopeOfThisInCheckRule = this.testFiles.testForScopeOfThisInCheckRule();
     StringConcatenation _builder = new StringConcatenation();

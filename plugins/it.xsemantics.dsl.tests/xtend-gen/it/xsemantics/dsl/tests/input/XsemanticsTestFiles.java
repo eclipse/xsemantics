@@ -2363,6 +2363,39 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testForScopeOfThisInClosure() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject obj : EClass eClass");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// clone is in the base runtime system");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// it should be visible through this");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.EAllStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eClass = clone(obj.eClass)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testForScopeOfThisInCheckRule() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
