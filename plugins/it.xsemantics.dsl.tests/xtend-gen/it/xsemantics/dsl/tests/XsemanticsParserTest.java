@@ -451,6 +451,12 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   }
   
   @Test
+  public void testForScopeOfThisInClosure() {
+    CharSequence _testForScopeOfThisInClosure = this.testFiles.testForScopeOfThisInClosure();
+    this.parseAndAssertNoError(_testForScopeOfThisInClosure);
+  }
+  
+  @Test
   public void testForScopeOfThisInCheckRule() {
     CharSequence _testForScopeOfThisInCheckRule = this.testFiles.testForScopeOfThisInCheckRule();
     this.parseAndAssertNoError(_testForScopeOfThisInCheckRule);
