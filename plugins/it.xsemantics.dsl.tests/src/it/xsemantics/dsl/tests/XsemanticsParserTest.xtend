@@ -275,6 +275,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
+	def void testForScopeOfThisInClosure() {
+		testFiles.testForScopeOfThisInClosure.parseAndAssertNoError
+	}
+	
+	@Test
 	def void testForScopeOfThisInCheckRule() {
 		testFiles.testForScopeOfThisInCheckRule.parseAndAssertNoError
 	}
