@@ -5,7 +5,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -19,6 +21,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
      * conveninence API to build and initialize JvmTypes and their members.
      */
 	@Inject extension JvmTypesBuilder
+	
+	@Inject extension XsemanticsGeneratorExtensions
 
 	/**
 	 * Is called for each instance of the first argument's type contained in a resource.
@@ -29,19 +33,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 * @param isPreLinkingPhase - whether the method is called in a pre linking phase, i.e. when the global index isn't fully updated. You
 	 *        must not rely on linking using the index if iPrelinkingPhase is <code>true</code>
 	 */
-   	def dispatch void infer(XsemanticsSystem element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
-   		
-   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		// An example based on the initial hellow world example could look like this:
-   		
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings") [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod(greeting.name, greeting.newTypeRef(typeof(String))) [
-//   					it.body ['''
-//   						return "Hello «greeting.name»";
-//   					''']
-//   				]
-//   			}
-//   		])
-   	}
+   	def dispatch void infer(XsemanticsSystem ts, IAcceptor<JvmDeclaredType> acceptor, boolean isPreIndexingPhase) {
+   		acceptor.accept(
+			ts.toClass( ts.toJavaFullyQualifiedName )
+				[
+					documentation = ts.documentation
+					superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+				]
+		)
+	}
 }
