@@ -95,6 +95,11 @@ public class XsemanticsUtils {
     return _containerOfType;
   }
   
+  public JudgmentDescription containingJudgmentDescription(final EObject element) {
+    JudgmentDescription _containerOfType = EcoreUtil2.<JudgmentDescription>getContainerOfType(element, it.xsemantics.dsl.xsemantics.JudgmentDescription.class);
+    return _containerOfType;
+  }
+  
   public List<JudgmentDescription> getJudgmentDescriptions(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(ts, judgmentSymbol, relationSymbols);
     ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_filterJudgmentDescriptions);
