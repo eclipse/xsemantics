@@ -96,7 +96,7 @@ from {
 }
 
 // a for each where we call a rule with output arg
-// TODO prohibit rule invocation with output params
+// cannot perform rule invocation with output params
 // inside closures
 //rule ForEachWithOutputArgs
 //	G ||- EObject eObject : EClass eClass

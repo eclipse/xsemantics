@@ -105,7 +105,11 @@ failed: A is not a subtype of B
    BasicSubtyping: [] |- String <: String
   CheckConstant: [] |- 20
   CheckConstant: [] |- 'bar' '''
-  
+
+   override subclassDeclaresSameFieldOfSuperClass()
+'''failed: CheckClass: [] |- class B extends A { String s; int i; }
+ field already defined in superclass class A { int i; }'''
+
 	override subclassOkWRTFields()
 '''CheckClass: [] |- class B extends A { String s; }'''
 

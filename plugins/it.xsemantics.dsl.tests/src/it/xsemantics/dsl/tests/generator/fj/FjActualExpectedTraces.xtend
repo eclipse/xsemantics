@@ -195,7 +195,7 @@ class FjActualExpectedTraces extends FjExpectedTraces {
   BasicEquals: [] |- String ~~ String'''
 
 	override subclassDeclaresSameFieldOfSuperClass()
-'''field already declared in superclass class A { int i; }'''
+'''field already defined in superclass class A { int i; }'''
 
 	override validateCheckNewWrongArgNum()
 '''Diagnostic ERROR "expected 2 arguments, but got 3" at Program.main->New.args[2]->New'''
@@ -217,5 +217,5 @@ Diagnostic ERROR "Cyclic hierarchy for B" at Program.classes[1]->Class'B'
 Diagnostic ERROR "Cyclic hierarchy for C" at Program.classes[2]->Class'C' '''
 
 	override validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR "field already declared in superclass class A { int i; }" at Program.classes[1]->Class'B'.members[1]->Field'i' '''
+'''Diagnostic ERROR "field already defined in superclass class A { int i; }" at Program.classes[1]->Class'B'.members[1]->Field'i' '''
 }
