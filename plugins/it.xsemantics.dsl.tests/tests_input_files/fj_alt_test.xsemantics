@@ -236,6 +236,10 @@ from {
 			inheritedField |
 			for (field : FjAuxiliaryFunctions::selectFields(cl)) {
 				field.name != inheritedField.name
+				or
+				fail
+					error "field already defined in superclass " +
+						stringRep(inheritedField.eContainer)
 			}
 		]
 		

@@ -229,13 +229,14 @@ from {
 			typeof(Field)
 		)
 		// make sure no duplicate fields in the hierarchy
-		for (inheritedField : inheritedFields) {
+		inheritedFields.forEach [
+			inheritedField |
 			if (field.name == inheritedField.name) {
 				fail
-					error "field already declared in superclass " +
-						stringRep(inheritedField.eContainer)						
+					error "field already defined in superclass " +
+						stringRep(inheritedField.eContainer)
 			}
-		}
+		]
 	}
 }
 
