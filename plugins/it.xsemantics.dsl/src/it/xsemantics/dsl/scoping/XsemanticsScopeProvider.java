@@ -8,14 +8,11 @@ import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -25,7 +22,6 @@ import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
-import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
@@ -43,39 +39,29 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	@Inject
 	protected XsemanticsUtils utils;
 
-	@Inject
-	private TypeReferences typeReferences;
-
 	@Override
 	protected IScope createLocalVarScope(IScope parentScope,
 			LocalVariableScopeContext scopeContext) {
+		parentScope = super.createLocalVarScope(parentScope, scopeContext);
+
 		if (scopeContext != null && scopeContext.getContext() != null) {
 			EObject context = scopeContext.getContext();
 			if (context instanceof Rule) {
-				return Scopes.scopeFor(utils.getJvmParameters((Rule) context),
-						scopeOfThis(parentScope, context));
+				parentScope = Scopes.scopeFor(
+						utils.getJvmParameters((Rule) context), parentScope);
 			} else if (context instanceof CheckRule) {
 				CheckRule checkRule = (CheckRule) context;
-				return Scopes.scopeFor(Collections.singletonList(checkRule
-						.getElement().getParameter()),
-						scopeOfThis(parentScope, context));
+				parentScope = Scopes.scopeFor(Collections
+						.singletonList(checkRule.getElement().getParameter()),
+						parentScope);
 			} else if (context instanceof JudgmentDescription) {
-				return Scopes.scopeFor(
+				parentScope = Scopes.scopeFor(
 						utils.getJvmParameters((JudgmentDescription) context),
-						scopeOfThis(parentScope, context));
+						parentScope);
 			}
 		}
 
-		return super.createLocalVarScope(parentScope, scopeContext);
-	}
-
-	protected IScope scopeOfThis(IScope parentScope, EObject context) {
-		JvmTypeReference typeRef = typeReferences.getTypeForName(
-				XsemanticsRuntimeSystem.class, context);
-		if (typeRef == null)
-			return IScope.NULLSCOPE;
-		return new JvmFeatureScope(parentScope, "this",
-				new LocalVarDescription(THIS, typeRef.getType()));
+		return parentScope;
 	}
 
 	@Override
