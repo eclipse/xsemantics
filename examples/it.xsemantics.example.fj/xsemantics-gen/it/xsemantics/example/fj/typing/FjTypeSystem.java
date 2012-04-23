@@ -116,8 +116,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return typeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_type) {
+			return resultForFailure(_e_type);
 		}
 	}
 	
@@ -136,8 +136,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression) {
 		try {
 			return classtypeInternal(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_classtype) {
+			return resultForFailure(_e_classtype);
 		}
 	}
 	
@@ -156,8 +156,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Type left, final Type right) {
 		try {
 			return subtypeInternal(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_subtype) {
+			return resultForFailure(_e_subtype);
 		}
 	}
 	
@@ -176,8 +176,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression expression, final Type right) {
 		try {
 			return assignableInternal(_environment_, _trace_, expression, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_assignable) {
+			return resultForFailure(_e_assignable);
 		}
 	}
 	
@@ -196,8 +196,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Type left, final Type right) {
 		try {
 			return equalstypeInternal(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_equalstype) {
+			return resultForFailure(_e_equalstype);
 		}
 	}
 	
@@ -216,8 +216,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Method current, final Method previous) {
 		try {
 			return overridesInternal(_environment_, _trace_, current, previous);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_overrides) {
+			return resultForFailure(_e_overrides);
 		}
 	}
 	
@@ -236,8 +236,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 			final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
 		try {
 			return subtypesequenceInternal(_environment_, _trace_, owner, expressions, elements);
-		} catch (Exception e) {
-			return resultForFailure(e);
+		} catch (Exception _e_subtypesequence) {
+			return resultForFailure(_e_subtypesequence);
 		}
 	}
 
@@ -288,19 +288,22 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
 		      List<Field> _all = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, it.xsemantics.example.fj.fj.Field.class);
 		      List<Field> inheritedFields = _all;
-		      for (final Field inheritedField : inheritedFields) {
-		        String _name = field.getName();
-		        String _name_1 = inheritedField.getName();
-		        boolean _operator_equals = ObjectExtensions.operator_equals(_name, _name_1);
-		        if (_operator_equals) {
-		          /* fail error "field already declared in superclass " + stringRep(inheritedField.eContainer) */
-		          EObject _eContainer_1 = inheritedField.eContainer();
-		          String _stringRep = this.stringRep(_eContainer_1);
-		          String _operator_plus = StringExtensions.operator_plus("field already declared in superclass ", _stringRep);
-		          String error = _operator_plus;
-		          throwForExplicitFail(error, new ErrorInformation(null, null));
-		        }
-		      }
+		      final Procedure1<Field> _function = new Procedure1<Field>() {
+		          public void apply(final Field inheritedField) {
+		            String _name = field.getName();
+		            String _name_1 = inheritedField.getName();
+		            boolean _operator_equals = ObjectExtensions.operator_equals(_name, _name_1);
+		            if (_operator_equals) {
+		              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+		              EObject _eContainer = inheritedField.eContainer();
+		              String _stringRep = FjTypeSystem.this.stringRep(_eContainer);
+		              String _operator_plus = StringExtensions.operator_plus("field already defined in superclass ", _stringRep);
+		              String error = _operator_plus;
+		              throwForExplicitFail(error, new ErrorInformation(null, null));
+		            }
+		          }
+		        };
+		      IterableExtensions.<Field>forEach(inheritedFields, _function);
 		    }
 		  }
 		}
@@ -434,8 +437,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return typeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_type) {
+			sneakyThrowRuleFailedException(_e_type);
 			return null;
 		}
 	}
@@ -457,8 +460,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression);
 			return classtypeDispatcher.invoke(_environment_, _trace_, expression);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_classtype) {
+			sneakyThrowRuleFailedException(_e_classtype);
 			return null;
 		}
 	}
@@ -481,8 +484,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(left, right);
 			return subtypeDispatcher.invoke(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_subtype) {
+			sneakyThrowRuleFailedException(_e_subtype);
 			return null;
 		}
 	}
@@ -506,8 +509,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(expression, right);
 			return assignableDispatcher.invoke(_environment_, _trace_, expression, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_assignable) {
+			sneakyThrowRuleFailedException(_e_assignable);
 			return null;
 		}
 	}
@@ -530,8 +533,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(left, right);
 			return equalstypeDispatcher.invoke(_environment_, _trace_, left, right);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_equalstype) {
+			sneakyThrowRuleFailedException(_e_equalstype);
 			return null;
 		}
 	}
@@ -553,8 +556,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(current, previous);
 			return overridesDispatcher.invoke(_environment_, _trace_, current, previous);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_overrides) {
+			sneakyThrowRuleFailedException(_e_overrides);
 			return null;
 		}
 	}
@@ -574,8 +577,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
 		try {
 			checkParamsNotNull(owner, expressions, elements);
 			return subtypesequenceDispatcher.invoke(_environment_, _trace_, owner, expressions, elements);
-		} catch (Exception e) {
-			sneakyThrowRuleFailedException(e);
+		} catch (Exception _e_subtypesequence) {
+			sneakyThrowRuleFailedException(_e_subtypesequence);
 			return null;
 		}
 	}

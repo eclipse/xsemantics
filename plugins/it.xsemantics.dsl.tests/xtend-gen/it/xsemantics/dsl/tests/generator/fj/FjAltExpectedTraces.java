@@ -272,6 +272,15 @@ public class FjAltExpectedTraces extends FjExpectedTraces {
     return _builder;
   }
   
+  public CharSequence subclassDeclaresSameFieldOfSuperClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("failed: CheckClass: [] |- class B extends A { String s; int i; }");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("field already defined in superclass class A { int i; }");
+    return _builder;
+  }
+  
   public CharSequence subclassOkWRTFields() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("CheckClass: [] |- class B extends A { String s; }");

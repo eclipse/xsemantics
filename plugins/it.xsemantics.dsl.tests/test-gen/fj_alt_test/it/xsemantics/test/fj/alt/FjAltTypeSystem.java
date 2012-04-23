@@ -1362,12 +1362,22 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
 		        public void apply(final Field inheritedField) {
 		          List<Field> _selectFields = FjAuxiliaryFunctions.selectFields(cl);
 		          for (final Field field : _selectFields) {
-		            String _name = field.getName();
-		            String _name_1 = inheritedField.getName();
-		            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
-		            /* field.name != inheritedField.name */
-		            if (!_operator_notEquals) {
-		              sneakyThrowRuleFailedException("field.name != inheritedField.name");
+		            /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+		            try {
+		              String _name = field.getName();
+		              String _name_1 = inheritedField.getName();
+		              boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
+		              /* field.name != inheritedField.name */
+		              if (!_operator_notEquals) {
+		                sneakyThrowRuleFailedException("field.name != inheritedField.name");
+		              }
+		            } catch (Exception e) {
+		              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+		              EObject _eContainer = inheritedField.eContainer();
+		              String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
+		              String _operator_plus = StringExtensions.operator_plus("field already defined in superclass ", _stringRep);
+		              String error = _operator_plus;
+		              throwForExplicitFail(error, new ErrorInformation(null, null));
 		            }
 		          }
 		        }
