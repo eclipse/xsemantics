@@ -84,11 +84,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		val entryPointMethods = <JvmOperation>newArrayList()
    		// main entry point method
    		val context = judgmentDescription.containingTypeSystem
-   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   		entryPointMethods += judgmentDescription.toMethod(
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType(context)
    		) [
-   			parameters += judgmentDescription.inputParameters
+   			for (p : judgmentDescription.inputParams) {
+   				parameters += p.parameter.toParameter(
+   					p.parameter.name, p.parameter.parameterType
+   				)
+   			}
    		]
    		
    		// since we create methods in overloading, in order to avoid

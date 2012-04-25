@@ -145,22 +145,29 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       final ArrayList<JvmOperation> entryPointMethods = _newArrayList;
       XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(judgmentDescription);
       final XsemanticsSystem context = _containingTypeSystem;
-      XsemanticsSystem _containingTypeSystem_1 = this._xsemanticsUtils.containingTypeSystem(judgmentDescription);
       CharSequence _entryPointMethodName = this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
       String _string = _entryPointMethodName.toString();
       JvmTypeReference _resultType = this.resultType(judgmentDescription, context);
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
-            EList<JvmFormalParameter> _parameters = it.getParameters();
-            List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(judgmentDescription);
-            CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
+            List<InputParameter> _inputParams = XsemanticsJvmModelInferrer.this._xsemanticsUtils.inputParams(judgmentDescription);
+            for (final InputParameter p : _inputParams) {
+              EList<JvmFormalParameter> _parameters = it.getParameters();
+              JvmFormalParameter _parameter = p.getParameter();
+              JvmFormalParameter _parameter_1 = p.getParameter();
+              String _name = _parameter_1.getName();
+              JvmFormalParameter _parameter_2 = p.getParameter();
+              JvmTypeReference _parameterType = _parameter_2.getParameterType();
+              JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
+              CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter_3);
+            }
           }
         };
-      JvmOperation _method = this._jvmTypesBuilder.toMethod(_containingTypeSystem_1, _string, _resultType, _function);
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(judgmentDescription, _string, _resultType, _function);
       CollectionExtensions.<JvmOperation>operator_add(entryPointMethods, _method);
       JudgmentDescription _cloneWithProxies = EcoreUtil2.<JudgmentDescription>cloneWithProxies(judgmentDescription);
       final JudgmentDescription j = _cloneWithProxies;
-      XsemanticsSystem _containingTypeSystem_2 = this._xsemanticsUtils.containingTypeSystem(j);
+      XsemanticsSystem _containingTypeSystem_1 = this._xsemanticsUtils.containingTypeSystem(j);
       CharSequence _entryPointMethodName_1 = this._xsemanticsGeneratorExtensions.entryPointMethodName(j);
       String _string_1 = _entryPointMethodName_1.toString();
       JvmTypeReference _resultType_1 = this.resultType(j, context);
@@ -176,11 +183,11 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_2, _string_1, _resultType_1, _function_1);
+      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_1, _string_1, _resultType_1, _function_1);
       CollectionExtensions.<JvmOperation>operator_add(entryPointMethods, _method_1);
       JudgmentDescription _cloneWithProxies_1 = EcoreUtil2.<JudgmentDescription>cloneWithProxies(judgmentDescription);
       final JudgmentDescription j2 = _cloneWithProxies_1;
-      XsemanticsSystem _containingTypeSystem_3 = this._xsemanticsUtils.containingTypeSystem(j2);
+      XsemanticsSystem _containingTypeSystem_2 = this._xsemanticsUtils.containingTypeSystem(j2);
       CharSequence _entryPointMethodName_2 = this._xsemanticsGeneratorExtensions.entryPointMethodName(j2);
       String _string_2 = _entryPointMethodName_2.toString();
       JvmTypeReference _resultType_2 = this.resultType(j2, context);
@@ -199,7 +206,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_3, _string_2, _resultType_2, _function_2);
+      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_2, _string_2, _resultType_2, _function_2);
       CollectionExtensions.<JvmOperation>operator_add(entryPointMethods, _method_2);
       _xblockexpression = (entryPointMethods);
     }
