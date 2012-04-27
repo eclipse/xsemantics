@@ -31,10 +31,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
- * <p>Infers a JVM model from the source model.</p>
- * 
- * <p>The JVM model should contain all elements that would appear in the Java code
- * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>
+ * temporary implementation for experiments
  */
 @SuppressWarnings("all")
 public class TempJvmModelInferrer extends AbstractModelInferrer {
