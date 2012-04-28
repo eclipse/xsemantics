@@ -29,6 +29,15 @@ public class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGenerat
   private XsemanticsErrorSpecificationGenerator errSpecGenerator;
   
   @Test
+  public void testCompileErrorOfErrorSpecificationWithSource() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecificationAndSource = this.testFiles.testJudgmentDescriptionsWithErrorSpecificationAndSource();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("EObject source = c;");
+    this.checkSourceOfErrorSpecification(_testJudgmentDescriptionsWithErrorSpecificationAndSource, _builder, "source");
+  }
+  
+  @Test
   public void testCompileErrorOfErrorSpecification() {
     CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
     StringConcatenation _builder = new StringConcatenation();

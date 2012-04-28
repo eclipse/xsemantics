@@ -21,6 +21,15 @@ class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseT
 	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
 	
 	@Test
+	def void testCompileErrorOfErrorSpecificationWithSource() {
+		checkSourceOfErrorSpecification(
+			testFiles.testJudgmentDescriptionsWithErrorSpecificationAndSource,
+'''
+
+EObject source = c;''', "source")
+	}
+	
+	@Test
 	def void testCompileErrorOfErrorSpecification() {
 		checkErrorOfErrorSpecification(
 			testFiles.testJudgmentDescriptionsWithErrorSpecification,

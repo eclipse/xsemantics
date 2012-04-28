@@ -97,6 +97,17 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
+	def testJudgmentDescriptionsWithErrorSpecificationAndSource() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EObject c : output EClass
+			error "error!"
+			source c
+	}
+	'''
+	
 	def testJudgmentDescriptionsWithErrorSpecification() '''
 	«testFileWithImports»
 	import org.eclipse.emf.ecore.*

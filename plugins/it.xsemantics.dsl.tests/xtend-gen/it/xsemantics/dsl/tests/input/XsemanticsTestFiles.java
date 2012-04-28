@@ -196,6 +196,30 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testJudgmentDescriptionsWithErrorSpecificationAndSource() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject c : output EClass");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("error \"error!\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("source c");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testJudgmentDescriptionsWithErrorSpecification() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testFileWithImports = this.testFileWithImports();
