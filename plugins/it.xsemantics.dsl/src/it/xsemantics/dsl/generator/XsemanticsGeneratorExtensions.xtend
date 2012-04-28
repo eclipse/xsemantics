@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+import org.eclipse.xtext.common.types.JvmOperation
 
 class XsemanticsGeneratorExtensions {
 	
@@ -576,8 +577,13 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def configureAppendable(JudgmentDescription jDesc, IAppendable appendable) {
-		jDesc.inputParams.forEach([
-			appendable.declareVariable(it.parameter, it.parameter.simpleName)
+		// the inferrer associates to a JudgmentDescription a method
+		// and its parameters, so we need to declare variables for these
+		// parameters in the appendable (and NOT the original JudgmentDescription's
+		// parameters)
+		val op = associator.getJvmElements(jDesc).head as JvmOperation
+		op.parameters.forEach([
+			appendable.declareVariable(it, it.simpleName)
 		])
 	}
 	

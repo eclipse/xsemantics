@@ -20,12 +20,14 @@ import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -1210,16 +1212,17 @@ public class XsemanticsGeneratorExtensions {
   }
   
   public void configureAppendable(final JudgmentDescription jDesc, final IAppendable appendable) {
-    List<InputParameter> _inputParams = this._xsemanticsUtils.inputParams(jDesc);
-    final Procedure1<InputParameter> _function = new Procedure1<InputParameter>() {
-        public void apply(final InputParameter it) {
-          JvmFormalParameter _parameter = it.getParameter();
-          JvmFormalParameter _parameter_1 = it.getParameter();
-          String _simpleName = _parameter_1.getSimpleName();
-          appendable.declareVariable(_parameter, _simpleName);
-        }
-      };
-    IterableExtensions.<InputParameter>forEach(_inputParams, _function);
+      Set<EObject> _jvmElements = this.associator.getJvmElements(jDesc);
+      EObject _head = IterableExtensions.<EObject>head(_jvmElements);
+      final JvmOperation op = ((JvmOperation) _head);
+      EList<JvmFormalParameter> _parameters = op.getParameters();
+      final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+          public void apply(final JvmFormalParameter it) {
+            String _simpleName = it.getSimpleName();
+            appendable.declareVariable(it, _simpleName);
+          }
+        };
+      IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function);
   }
   
   public StringBuilderBasedAppendable createConfiguredAppendable(final EObject context, final ImportManager importManager) {
