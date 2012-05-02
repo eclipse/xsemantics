@@ -5,7 +5,6 @@ package it.xsemantics.dsl.scoping;
 
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
-import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 
@@ -53,10 +52,6 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 				CheckRule checkRule = (CheckRule) context;
 				parentScope = Scopes.scopeFor(Collections
 						.singletonList(checkRule.getElement().getParameter()),
-						parentScope);
-			} else if (context instanceof JudgmentDescription) {
-				parentScope = Scopes.scopeFor(
-						utils.getJvmParameters((JudgmentDescription) context),
 						parentScope);
 			}
 		}
