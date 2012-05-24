@@ -17,9 +17,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class StringRepresentationTests extends XsemanticsBaseTest {
   @Inject
   private CustomStringRepresentation _customStringRepresentation;

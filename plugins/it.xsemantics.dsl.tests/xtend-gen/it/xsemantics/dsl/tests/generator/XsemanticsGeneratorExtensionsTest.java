@@ -23,9 +23,9 @@ import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProviderCustom.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;

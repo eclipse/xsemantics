@@ -12,9 +12,9 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsRuleGeneratorTest extends XsemanticsGeneratorBaseTest {
   @Test
   public void testAppendableForXbaseGeneratedVariables() {

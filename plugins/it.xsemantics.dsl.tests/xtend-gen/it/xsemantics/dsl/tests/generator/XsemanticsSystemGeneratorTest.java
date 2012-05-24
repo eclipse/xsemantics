@@ -17,9 +17,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsSystemGeneratorTest extends XsemanticsGeneratorBaseTest {
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;

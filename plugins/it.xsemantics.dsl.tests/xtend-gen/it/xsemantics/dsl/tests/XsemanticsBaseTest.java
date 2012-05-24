@@ -44,9 +44,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsBaseTest {
   @Inject
   protected XsemanticsTestFiles testFiles;

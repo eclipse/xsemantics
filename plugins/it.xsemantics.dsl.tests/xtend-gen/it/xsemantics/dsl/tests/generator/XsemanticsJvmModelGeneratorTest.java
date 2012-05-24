@@ -15,9 +15,9 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProviderForInferrer.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderForInferrer.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   @Inject
   protected JvmModelGenerator generator;

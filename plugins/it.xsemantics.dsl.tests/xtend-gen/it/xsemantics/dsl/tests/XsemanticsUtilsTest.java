@@ -31,9 +31,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProviderCustom.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
