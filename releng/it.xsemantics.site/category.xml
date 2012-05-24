@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<feature id="it.xsemantics.sdk" version="0.0.0">
-		<category name="main"/>
-	</feature>
-	<feature id="it.xsemantics.sdk.source" version="0.0.0">
-		<category name="main.source"/>
-	</feature>
-   <category-def name="main" label="Xsemantics"/>
-   <category-def name="main.source" label="Source for Xsemantics"/>
+   <description name="XSemantics" url="http://xsemantics.sourceforge.net">
+      XSemantics is a DSL (implemented in Xtext itself) for writing
+type systems, reduction rules, interpreters (and in general relation
+rules) for languages implemented in Xtext. It then generates
+Java code that can be used in your language implemented in Xtext
+for scoping and validation (it can also generate a validator
+in Java).
+   </description>
+   <feature url="features/it.xsemantics.examples.feature_1.0.100.qualifier.jar" id="it.xsemantics.examples.feature" version="1.0.100.qualifier">
+      <category name="xsemantics"/>
+   </feature>
+   <feature url="features/it.xsemantics.feature_1.0.100.qualifier.jar" id="it.xsemantics.feature" version="1.0.100.qualifier">
+      <category name="xsemantics"/>
+   </feature>
+   <feature url="features/it.xsemantics.runtime.feature_1.0.100.qualifier.jar" id="it.xsemantics.runtime.feature" version="1.0.100.qualifier">
+      <category name="xsemantics"/>
+   </feature>
+   <feature url="features/it.xsemantics.sdk_1.0.100.qualifier.jar" id="it.xsemantics.sdk" version="1.0.100.qualifier">
+      <category name="xsemantics"/>
+   </feature>
+   <category-def name="xsemantics" label="XSemantics">
+      <description>
+         XSemantics is a DSL (implemented in Xtext itself) for writing
+type systems, reduction rules, interpreters (and in general relation
+rules) for languages implemented in Xtext. It then generates
+Java code that can be used in your language implemented in Xtext
+for scoping and validation (it can also generate a validator
+in Java).
+      </description>
+   </category-def>
 </site>
