@@ -1,0 +1,7 @@
+import releng/it.xsemantics.buckminster/projects-platform.cquery
+import releng/it.xsemantics.buckminster/project.cquery
+clean
+build
+perform -D target.os=* -D target.ws=* -D target.arch=* it.xsemantics.site#buckminster.clean
+perform -D target.os=* -D target.ws=* -D target.arch=* it.xsemantics.site#site.p2.zip
+#junit -l 'org.xtext.example.hellobuck.tests/HelloBuckAllTests.launch' --stderr -o '${WORKSPACE}/output/junit_result.xml'

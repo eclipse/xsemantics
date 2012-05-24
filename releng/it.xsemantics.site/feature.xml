@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="it.xsemantics.site"
+	label="it.xsemantics.site Feature"
+	version="1.0.0.qualifier">
+	<includes
+		id="it.xsemantics.sdk"
+		version="0.0.0"/>
+</feature>

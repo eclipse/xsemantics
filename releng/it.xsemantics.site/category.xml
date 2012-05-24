@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature id="it.xsemantics.sdk" version="0.0.0">
+		<category name="main"/>
+	</feature>
+	<feature id="it.xsemantics.sdk.source" version="0.0.0">
+		<category name="main.source"/>
+	</feature>
+   <category-def name="main" label="Xsemantics"/>
+   <category-def name="main.source" label="Source for Xsemantics"/>
+</site>

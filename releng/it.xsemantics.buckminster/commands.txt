@@ -1,0 +1,9 @@
+setpref targetPlatformPath="${target.platform}"
+resolve "${projects.location}/it.xsemantics.buckminster/projects-platform.cquery"
+resolve "${projects.location}/it.xsemantics.buckminster/project.cquery"
+build
+junit -l "it.xsemantics.example.fj.tests/FJAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/FJAllTests.launch.xml"
+junit -l "it.xsemantics.example.expressions.tests/ExpressionsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/ExpressionsAllTests.launch.xml"
+junit -l "it.xsemantics.example.lambda.tests/.launch/LambdaAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/LambdaAllTests.launch.xml"
+junit -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml"
+perform "it.xsemantics.site#site.p2"

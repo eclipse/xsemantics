@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<cs:dependencies>
+		<cs:dependency name="it.xsemantics.example.fj.tests" componentType="osgi.bundle" />
+		<cs:dependency name="it.xsemantics.example.expressions.tests" componentType="osgi.bundle" />
+		<cs:dependency name="it.xsemantics.example.lambda.tests" componentType="osgi.bundle" />
+		<cs:dependency name="it.xsemantics.dsl.tests" componentType="osgi.bundle" />
+	</cs:dependencies>
+</cs:cspecExtension>
