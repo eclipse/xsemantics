@@ -70,11 +70,11 @@ public Result2<EObject,EStructuralFeature> type(final EClass c) {
     throw new UnsupportedOperationException("typeis not implemented");
   }
   
-  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c_1) {
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {
     throw new UnsupportedOperationException("typeis not implemented");
   }
   
-  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment__1, final RuleApplicationTrace _trace_, final EClass c_2) {
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     throw new UnsupportedOperationException("typeis not implemented");
   }'''
 )

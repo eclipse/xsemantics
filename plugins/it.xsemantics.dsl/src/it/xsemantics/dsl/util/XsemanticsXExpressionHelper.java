@@ -1,7 +1,11 @@
 package it.xsemantics.dsl.util;
 
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
+import it.xsemantics.dsl.xsemantics.OrExpression;
+import it.xsemantics.dsl.xsemantics.RuleInvocation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -12,14 +16,24 @@ public class XsemanticsXExpressionHelper extends XExpressionHelper {
 
 	@Inject
 	protected XsemanticsTypingSystem typingSystem;
-	
+
 	@Override
-	public boolean isJavaStatementExpression(XExpression expr) {
+	protected boolean internalHasSideEffectsRec(EObject eObject) {
+		if (!(eObject instanceof XExpression))
+			return super.internalHasSideEffectsRec(eObject);
+		
+		XExpression expr = (XExpression) eObject;
 		if (typingSystem.isBooleanPremise(expr)) {
 			// in this case we consider it valid
-			// since it will be generated correctly
+			// since it will be generated to a correct Java statement
 			return true;
 		}
-		return super.isJavaStatementExpression(expr);
+		if (eObject instanceof EnvironmentAccess || eObject instanceof RuleInvocation
+				|| eObject instanceof OrExpression) {
+			// in this case we consider it valid
+			// since it will be generated to a correct Java statement
+			return true;
+		}
+		return super.internalHasSideEffectsRec(eObject);
 	}
 }

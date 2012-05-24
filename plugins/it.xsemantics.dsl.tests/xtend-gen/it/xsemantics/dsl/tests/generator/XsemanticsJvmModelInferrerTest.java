@@ -102,7 +102,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c_1) {");
+    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("throw new UnsupportedOperationException(\"typeis not implemented\");");
@@ -113,7 +113,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment__1, final RuleApplicationTrace _trace_, final EClass c_2) {");
+    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("throw new UnsupportedOperationException(\"typeis not implemented\");");
