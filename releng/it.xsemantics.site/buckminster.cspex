@@ -4,6 +4,6 @@
 		<cs:dependency name="it.xsemantics.example.fj.tests" componentType="osgi.bundle" />
 		<cs:dependency name="it.xsemantics.example.expressions.tests" componentType="osgi.bundle" />
 		<cs:dependency name="it.xsemantics.example.lambda.tests" componentType="osgi.bundle" />
-		<cs:dependency name="it.xsemantics.dsl.tests" componentType="osgi.bundle" />
+		<cs:dependency name="it.xsemantics.tests.feature" componentType="eclipse.feature" />
 	</cs:dependencies>
 </cs:cspecExtension>

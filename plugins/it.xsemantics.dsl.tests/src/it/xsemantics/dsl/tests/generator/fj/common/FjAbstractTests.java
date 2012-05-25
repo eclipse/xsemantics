@@ -5,7 +5,7 @@ package it.xsemantics.dsl.tests.generator.fj.common;
 
 import it.xsemantics.example.fj.fj.Program;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 

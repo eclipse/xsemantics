@@ -7,7 +7,7 @@ import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom.XsemanticsStanda
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Before;
 

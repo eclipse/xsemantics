@@ -8,3 +8,5 @@ junit -l 'it.xsemantics.example.fj.tests/FJAllTests.launch' --stderr -o 'tests_o
 junit -l 'it.xsemantics.example.expressions.tests/ExpressionsAllTests.launch' --stderr -o 'tests_output/junit_Expressions.xml'
 junit -l 'it.xsemantics.example.lambda.tests/.launch/LambdaAllTests.launch' --stderr -o 'tests_output/junit_Lambda.xml'
 junit -l 'it.xsemantics.dsl.tests/XsemanticsAllTests.launch' --stderr -o 'tests_output/junit_Xsemantics.xml'
+junit -l 'it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch' --stderr -o 'tests_output/junit_LambdaUi.xml'
+junit -l 'it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch' --stderr -o 'tests_output/junit_XsemanticsUi.xml'
