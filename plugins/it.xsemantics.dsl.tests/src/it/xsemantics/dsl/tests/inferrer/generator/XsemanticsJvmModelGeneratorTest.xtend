@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.tests.generator
+package it.xsemantics.dsl.tests.inferrer.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
@@ -10,8 +10,6 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import static it.xsemantics.dsl.tests.generator.XsemanticsJvmModelGeneratorTest.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
 @RunWith(typeof(XtextRunner))

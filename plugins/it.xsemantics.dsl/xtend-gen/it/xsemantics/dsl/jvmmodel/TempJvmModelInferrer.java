@@ -144,15 +144,6 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_1, _function_2);
-          EList<Rule> _rules_1 = ts.getRules();
-          final Procedure1<Rule> _function_3 = new Procedure1<Rule>() {
-              public void apply(final Rule rule) {
-                EList<JvmMember> _members = it.getMembers();
-                JvmOperation _compileApplyMethod = TempJvmModelInferrer.this.compileApplyMethod(rule);
-                TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileApplyMethod);
-              }
-            };
-          IterableExtensions.<Rule>forEach(_rules_1, _function_3);
         }
       };
     _accept.initializeLater(_function);

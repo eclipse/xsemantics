@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.tests.generator;
+package it.xsemantics.dsl.tests.inferrer.generator;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;

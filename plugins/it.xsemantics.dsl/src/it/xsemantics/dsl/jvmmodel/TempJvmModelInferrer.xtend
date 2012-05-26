@@ -101,10 +101,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				members += j.genEntryPointMethods
 			]
 			
-			ts.rules.forEach [
-				rule |
-				members += rule.compileApplyMethod
-			]
+//			ts.rules.forEach [
+//				rule |
+//				members += rule.compileApplyMethod
+//			]
 			
 //			members += element.toConstructor() [
 //				parameters += element.toParameter("initializer", procedure)

@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.tests.generator;
+package it.xsemantics.dsl.tests.inferrer.generator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
