@@ -15,9 +15,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorWithNonBeautifiedTypesProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorWithNonBeautifiedTypesProvider.class)
 public class LambdaUnifyTest extends LambdaBaseTest {
   @Test
   public void testUnifyTypeVar() {

@@ -20,9 +20,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorProvider.class)
 public class LambdaValidatorTest extends LambdaBaseTest {
   private ValidatorTester<LambdaJavaValidator> tester;
   

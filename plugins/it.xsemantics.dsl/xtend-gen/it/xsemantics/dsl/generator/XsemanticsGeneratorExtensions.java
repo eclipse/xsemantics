@@ -1026,7 +1026,7 @@ public class XsemanticsGeneratorExtensions {
       String _judgmentSymbol = _conclusion.getJudgmentSymbol();
       _builder.append(_judgmentSymbol, "");
       _builder.append(" \"");
-      StringBuffer _stringBuffer = new StringBuffer(_builder);
+      StringBuffer _stringBuffer = new StringBuffer(_builder.toString());
       final StringBuffer buffer = _stringBuffer;
       JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(rule);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
@@ -1056,7 +1056,7 @@ public class XsemanticsGeneratorExtensions {
               String _next_1 = relationSymbols.next();
               _builder.append(_next_1, " ");
               _builder.append(" \"");
-              buffer.append(_builder);
+              buffer.append(_builder.toString());
             }
           }
         };

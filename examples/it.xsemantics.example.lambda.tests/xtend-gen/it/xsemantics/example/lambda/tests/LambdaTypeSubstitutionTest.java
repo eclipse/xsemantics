@@ -15,9 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorWithNonBeautifiedTypesProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorWithNonBeautifiedTypesProvider.class)
 public class LambdaTypeSubstitutionTest extends LambdaBaseTest {
   @Inject
   private TypeSubstitutions substitutions;

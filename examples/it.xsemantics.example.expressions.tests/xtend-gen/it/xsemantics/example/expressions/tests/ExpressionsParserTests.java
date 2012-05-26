@@ -24,9 +24,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProviderCustom.class)
 public class ExpressionsParserTests extends ExpressionsBaseTests {
   @Inject
   private ParseHelper<Model> _parseHelper;
