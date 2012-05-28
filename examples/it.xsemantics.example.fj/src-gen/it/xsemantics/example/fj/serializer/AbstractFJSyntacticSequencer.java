@@ -14,8 +14,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
-public class AbstractFJSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractFJSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected FJGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_Expression___LeftParenthesisKeyword_1_0_3_0_RightParenthesisKeyword_1_0_3_2__q;

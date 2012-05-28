@@ -41,12 +41,12 @@ public abstract class AbstractXsemanticsRuntimeModule extends DefaultRuntimeModu
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return it.xsemantics.dsl.serializer.AbstractXsemanticsSemanticSequencer.class;
+		return it.xsemantics.dsl.serializer.XsemanticsSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return it.xsemantics.dsl.serializer.AbstractXsemanticsSyntacticSequencer.class;
+		return it.xsemantics.dsl.serializer.XsemanticsSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

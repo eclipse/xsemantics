@@ -6,7 +6,7 @@
     modelPluginID="it.xsemantics.dsl" forceOverwrite="true" modelName="Xsemantics"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.dsl.edit"
-    editorPluginID="it.xsemantics.dsl.editor" usedGenPackages="../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    editorPluginID="it.xsemantics.dsl.editor" runtimeVersion="2.7" usedGenPackages="../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="Xsemantics" basePackage="it.xsemantics.dsl" disposableProviderFactory="true"
       ecorePackage="Xsemantics.ecore#/">
     <genClasses ecoreClass="Xsemantics.ecore#//XsemanticsSystem">

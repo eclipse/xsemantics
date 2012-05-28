@@ -24,10 +24,14 @@ public class XsemanticsInjectorProvider implements IInjectorProvider, IRegistryC
 	{
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
-			this.injector = new XsemanticsStandaloneSetup().createInjectorAndDoEMFRegistration();
+			this.injector = internalCreateInjector();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
+	}
+	
+	protected Injector internalCreateInjector() {
+	    return new XsemanticsStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	public void restoreRegistry() {

@@ -14,8 +14,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
-public class AbstractXsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public class XsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XsemanticsGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_RuleWithPremises_DerivesKeyword_2_q;
@@ -49,16 +49,33 @@ public class AbstractXsemanticsSyntacticSequencer extends AbstractSyntacticSeque
 		return "";
 	}
 	
+	/**
+	 * EnvironmentComposition:
+	 * 	Comma
+	 * ;
+	 */
 	protected String getEnvironmentCompositionToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return ",";
 	}
+	
+	/**
+	 * EnvironmentMapsTo:
+	 * 	'<-'
+	 * ;
+	 */
 	protected String getEnvironmentMapsToToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "<-";
 	}
+	
+	/**
+	 * OpSingleAssign:
+	 * 	'='
+	 * ;
+	 */
 	protected String getOpSingleAssignToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
