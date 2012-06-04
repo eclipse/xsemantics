@@ -67,15 +67,19 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 (
 '''
 public Result2<EObject,EStructuralFeature> type(final EClass c) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(new RuleEnvironment(), null, c);
   }
   
   public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(_environment_, null, c);
   }
   
   public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    try {
+    	return typeInternal(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	return resultForFailure2(_e_type);
+    }
   }'''
 )
 	}

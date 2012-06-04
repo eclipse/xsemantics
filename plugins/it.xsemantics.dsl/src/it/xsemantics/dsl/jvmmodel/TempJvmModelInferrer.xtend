@@ -208,6 +208,13 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.resultType
    		) [
    			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append(
+   				'''return «judgmentDescription.entryPointMethodName»(new ''')
+   				it.append(judgmentDescription.environmentType.type)
+   				it.append('''(), null, «judgmentDescription.inputArgs»);''')
+   			]
    		]
    		
    		// entry point method with environment parameter
@@ -217,6 +224,11 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
    		) [
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append(
+   				'''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);''')
+   			]
    		]
    		
    		// entry point method with environment parameter and rule application trace
@@ -227,6 +239,19 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append('''
+				try {
+					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
+				} catch (''')
+				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
+				it.append(" ")
+				it.append('''
+				«judgmentDescription.exceptionVarName») {
+					return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
+				}''')
+   			]
    		]
    		
    		entryPointMethods
@@ -245,7 +270,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	def environmentParam(JudgmentDescription e) {
 		e.toParameter(
 			environmentName.toString,
-			e.newTypeRef(typeof(RuleEnvironment))
+			e.environmentType
 		)
 	}
 	
@@ -292,6 +317,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	
 	def ruleFailedExceptionType(EObject o) {
 		o.newTypeRef(typeof(RuleFailedException))
+	}
+	
+	def environmentType(EObject o) {
+		o.newTypeRef(typeof(RuleEnvironment))
 	}
 	
 	def compileApplyMethod(Rule rule) {

@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -360,6 +361,26 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
             EList<JvmFormalParameter> _parameters = it.getParameters();
             List<JvmFormalParameter> _inputParameters = TempJvmModelInferrer.this.inputParameters(judgmentDescription);
             TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("return ");
+                  CharSequence _entryPointMethodName = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
+                  _builder.append(_entryPointMethodName, "");
+                  _builder.append("(new ");
+                  it.append(_builder);
+                  JvmTypeReference _environmentType = TempJvmModelInferrer.this.environmentType(judgmentDescription);
+                  JvmType _type = _environmentType.getType();
+                  it.append(_type);
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  _builder_1.append("(), null, ");
+                  String _inputArgs = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.inputArgs(judgmentDescription);
+                  _builder_1.append(_inputArgs, "");
+                  _builder_1.append(");");
+                  it.append(_builder_1);
+                }
+              };
+            TempJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
       JvmOperation _method = this._jvmTypesBuilder.toMethod(_containingTypeSystem, _string, _resultType, _function);
@@ -376,6 +397,23 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
             EList<JvmFormalParameter> _parameters_1 = it.getParameters();
             List<JvmFormalParameter> _inputParameters = TempJvmModelInferrer.this.inputParameters(judgmentDescription);
             TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _inputParameters);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("return ");
+                  CharSequence _entryPointMethodName = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
+                  _builder.append(_entryPointMethodName, "");
+                  _builder.append("(");
+                  CharSequence _environmentName = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.environmentName();
+                  _builder.append(_environmentName, "");
+                  _builder.append(", null, ");
+                  String _inputArgs = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.inputArgs(judgmentDescription);
+                  _builder.append(_inputArgs, "");
+                  _builder.append(");");
+                  it.append(_builder);
+                }
+              };
+            TempJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
       JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_1, _string_1, _resultType_1, _function_1);
@@ -395,6 +433,47 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
             EList<JvmFormalParameter> _parameters_2 = it.getParameters();
             List<JvmFormalParameter> _inputParameters = TempJvmModelInferrer.this.inputParameters(judgmentDescription);
             TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _inputParameters);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("try {");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("return ");
+                  CharSequence _entryPointInternalMethodName = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.entryPointInternalMethodName(judgmentDescription);
+                  _builder.append(_entryPointInternalMethodName, "	");
+                  _builder.append("(");
+                  CharSequence _additionalArgs = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.additionalArgs();
+                  _builder.append(_additionalArgs, "	");
+                  _builder.append(", ");
+                  String _inputArgs = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.inputArgs(judgmentDescription);
+                  _builder.append(_inputArgs, "	");
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("} catch (");
+                  it.append(_builder);
+                  JvmTypeReference _exceptionType = TempJvmModelInferrer.this.exceptionType(judgmentDescription);
+                  TempJvmModelInferrer.this._typeReferenceSerializer.serialize(_exceptionType, judgmentDescription, it);
+                  it.append(" ");
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  CharSequence _exceptionVarName = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(judgmentDescription);
+                  _builder_1.append(_exceptionVarName, "");
+                  _builder_1.append(") {");
+                  _builder_1.newLineIfNotEmpty();
+                  _builder_1.append("\t");
+                  _builder_1.append("return resultForFailure");
+                  String _suffixStartingFrom2 = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.suffixStartingFrom2(judgmentDescription);
+                  _builder_1.append(_suffixStartingFrom2, "	");
+                  _builder_1.append("(");
+                  CharSequence _exceptionVarName_1 = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(judgmentDescription);
+                  _builder_1.append(_exceptionVarName_1, "	");
+                  _builder_1.append(");");
+                  _builder_1.newLineIfNotEmpty();
+                  _builder_1.append("}");
+                  it.append(_builder_1);
+                }
+              };
+            TempJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
       JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_2, _string_2, _resultType_2, _function_2);
@@ -429,8 +508,8 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
   public JvmFormalParameter environmentParam(final JudgmentDescription e) {
     CharSequence _environmentName = this._xsemanticsGeneratorExtensions.environmentName();
     String _string = _environmentName.toString();
-    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, RuleEnvironment.class);
-    JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(e, _string, _newTypeRef);
+    JvmTypeReference _environmentType = this.environmentType(e);
+    JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(e, _string, _environmentType);
     return _parameter;
   }
   
@@ -518,6 +597,11 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
   
   public JvmTypeReference ruleFailedExceptionType(final EObject o) {
     JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, RuleFailedException.class);
+    return _newTypeRef;
+  }
+  
+  public JvmTypeReference environmentType(final EObject o) {
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, RuleEnvironment.class);
     return _newTypeRef;
   }
   

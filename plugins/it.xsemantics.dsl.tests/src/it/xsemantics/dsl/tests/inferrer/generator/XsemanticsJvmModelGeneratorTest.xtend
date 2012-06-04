@@ -50,15 +50,19 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> type(final List<String> list, final Set<Integer> set) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(new RuleEnvironment(), null, list, set);
   }
   
   public Result<Boolean> type(final RuleEnvironment _environment_, final List<String> list, final Set<Integer> set) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(_environment_, null, list, set);
   }
   
   public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final List<String> list, final Set<Integer> set) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    try {
+    	return typeInternal(_environment_, _trace_, list, set);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
   }
   
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final List<String> list, final Set<Integer> set) {
@@ -109,15 +113,19 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> type(final EClass c, final EObject o) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(new RuleEnvironment(), null, c, o);
   }
   
   public Result<Boolean> type(final RuleEnvironment _environment_, final EClass c, final EObject o) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(_environment_, null, c, o);
   }
   
   public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    try {
+    	return typeInternal(_environment_, _trace_, c, o);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
   }
   
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
@@ -197,39 +205,51 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<EObject> type(final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(new RuleEnvironment(), null, c, f);
   }
   
   public Result<EObject> type(final RuleEnvironment _environment_, final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    return type(_environment_, null, c, f);
   }
   
   public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("typeis not implemented");
+    try {
+    	return typeInternal(_environment_, _trace_, c, f);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
   }
   
   public Result2<EObject,EStructuralFeature> type2(final EClass c) {
-    throw new UnsupportedOperationException("type2is not implemented");
+    return type2(new RuleEnvironment(), null, c);
   }
   
   public Result2<EObject,EStructuralFeature> type2(final RuleEnvironment _environment_, final EClass c) {
-    throw new UnsupportedOperationException("type2is not implemented");
+    return type2(_environment_, null, c);
   }
   
   public Result2<EObject,EStructuralFeature> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
-    throw new UnsupportedOperationException("type2is not implemented");
+    try {
+    	return type2Internal(_environment_, _trace_, c);
+    } catch (Exception _e_type2) {
+    	return resultForFailure2(_e_type2);
+    }
   }
   
   public Result<EObject> subtype(final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("subtypeis not implemented");
+    return subtype(new RuleEnvironment(), null, c, f);
   }
   
   public Result<EObject> subtype(final RuleEnvironment _environment_, final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("subtypeis not implemented");
+    return subtype(_environment_, null, c, f);
   }
   
   public Result<EObject> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EStructuralFeature f) {
-    throw new UnsupportedOperationException("subtypeis not implemented");
+    try {
+    	return subtypeInternal(_environment_, _trace_, c, f);
+    } catch (Exception _e_subtype) {
+    	return resultForFailure(_e_subtype);
+    }
   }
   
   protected Result<EObject> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EStructuralFeature f) {
