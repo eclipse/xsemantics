@@ -79,6 +79,51 @@ public Result2<EObject,EStructuralFeature> type(final EClass c) {
   }'''
 )
 	}
+
+	@Test
+	def testInternalMethod() {
+		testFiles.testJudgmentDescriptionsWith2OutputParams.
+			parseAndAssertNoError.judgmentDescriptions.get(0).
+				compileInternalMethod.
+				assertGeneratedMember
+(
+'''
+protected Result2<EObject,EStructuralFeature> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    try {
+    	checkParamsNotNull(c);
+    	return typeDispatcher.invoke(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }'''
+)
+	}
+
+	@Test
+	def testApplyMethods() {
+		testFiles.testRuleWithTwoOutputParams.
+			parseAndAssertNoError.rules.get(0).
+				compileApplyMethod.
+				assertGeneratedMember
+(
+'''
+protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
+    EObject object = null; // output parameter
+    EStructuralFeature feat = null; // output parameter
+    
+    /* G ||- eClass : object : feat */
+    Result2<EObject, EStructuralFeature> result = type2Internal(G, _trace_, eClass);
+    checkAssignableTo(result.getFirst(), EObject.class);
+    object = (EObject) result.getFirst();
+    checkAssignableTo(result.getSecond(), EStructuralFeature.class);
+    feat = (EStructuralFeature) result.getSecond();
+    
+    return new Result2<EObject,EStructuralFeature>(object, feat);
+  }'''
+)
+	}
+
 	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)

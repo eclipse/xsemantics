@@ -25,6 +25,9 @@ import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.emf.ecore.EObject
+import it.xsemantics.runtime.RuleFailedException
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -42,6 +45,8 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
+	
+	@Inject extension TypeReferenceSerializer
 	
 	@Inject XsemanticsXbaseCompiler xbaseCompiler
 
@@ -101,10 +106,15 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				members += j.genEntryPointMethods
 			]
 			
-//			ts.rules.forEach [
-//				rule |
-//				members += rule.compileApplyMethod
-//			]
+			ts.judgmentDescriptions.forEach [
+				j |
+				members += j.compileInternalMethod
+			]
+			
+			ts.rules.forEach [
+				rule |
+				members += rule.compileApplyMethod
+			]
 			
 //			members += element.toConstructor() [
 //				parameters += element.toParameter("initializer", procedure)
@@ -246,13 +256,55 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		)
 	}
 	
+	def compileInternalMethod(JudgmentDescription judgmentDescription) {
+		judgmentDescription.toMethod(
+			judgmentDescription.entryPointInternalMethodName.toString,
+			judgmentDescription.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			parameters += judgmentDescription.environmentParam
+   			parameters += judgmentDescription.ruleApplicationTraceParam
+   			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append('''
+					try {
+						checkParamsNotNull(«judgmentDescription.inputArgs»);
+						return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «judgmentDescription.inputArgs»);
+					} catch (''')
+				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
+				it.append(" ")
+				it.append('''
+					«judgmentDescription.exceptionVarName») {
+						sneakyThrowRuleFailedException(«judgmentDescription.exceptionVarName»);
+						return null;
+					}'''
+				)
+   			]
+		]
+	}
+	
+	def exceptionType(EObject o) {
+		o.newTypeRef(typeof(Exception))
+	}
+	
+	def ruleFailedExceptionType(EObject o) {
+		o.newTypeRef(typeof(RuleFailedException))
+	}
+	
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
 			'''applyRule«rule.toJavaClassName»'''.toString,
 			rule.judgmentDescription.resultType
 		) 
 		[
-			parameters += rule.judgmentDescription.environmentParam
+			visibility = JvmVisibility::PROTECTED
+			
+			exceptions += rule.ruleFailedExceptionType
+			
+			parameters += rule.paramForEnvironment
    			parameters += rule.judgmentDescription.ruleApplicationTraceParam
    			parameters += rule.inputParameters
    			
@@ -263,10 +315,21 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		]
 	}
 	
+	def paramForEnvironment(Rule rule) {
+		rule.toParameter(rule.ruleEnvName, rule.newTypeRef(typeof(RuleEnvironment)))
+	}
+	
 	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
 		rule.outputParams.forEach([
-			it.declareVariable(appendable).append("\n")
+			it.declareVariableForOutputParam(appendable).append("\n")
 		])
+	}
+	
+	def declareVariableForOutputParam(RuleParameter ruleParam, ITreeAppendable appendable) {
+		val outputVarName = appendable.declareVariable(ruleParam.parameter, ruleParam.parameter.simpleName)
+   		val childAppendable = appendable.trace(ruleParam.parameter, true)
+		ruleParam.parameter.parameterType.serialize(ruleParam.parameter, childAppendable)
+		childAppendable.append(" " + outputVarName + " = null; // output parameter")
 	}
 	
 	def inputParameters(Rule rule) {
@@ -301,7 +364,9 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		
 		if (!result.toString.empty)
 			result.append("\n")
-		result.append('''return new «resultType»('''.toString)
+		result.append("return new ")
+		resultType.serialize(rule, result)
+		result.append("(")
 		
 		if (expressions.size() == 0)
 			result.append("true")

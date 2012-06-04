@@ -123,6 +123,88 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     this.assertGeneratedMembers(_genEntryPointMethods, _builder);
   }
   
+  @Test
+  public void testInternalMethod() {
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    JvmOperation _compileInternalMethod = this.inferrer.compileInternalMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result2<EObject,EStructuralFeature> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("checkParamsNotNull(c);");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("return typeDispatcher.invoke(_environment_, _trace_, c);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("} catch (Exception _e_type) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("sneakyThrowRuleFailedException(_e_type);");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileInternalMethod, _builder);
+  }
+  
+  @Test
+  public void testApplyMethods() {
+    CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRuleWithTwoOutputParams);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    JvmOperation _compileApplyMethod = this.inferrer.compileApplyMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EObject object = null; // output parameter");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EStructuralFeature feat = null; // output parameter");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("/* G ||- eClass : object : feat */");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Result2<EObject, EStructuralFeature> result = type2Internal(G, _trace_, eClass);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("checkAssignableTo(result.getFirst(), EObject.class);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("object = (EObject) result.getFirst();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("checkAssignableTo(result.getSecond(), EStructuralFeature.class);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("feat = (EStructuralFeature) result.getSecond();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return new Result2<EObject,EStructuralFeature>(object, feat);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileApplyMethod, _builder);
+  }
+  
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
     Rule _firstRule = this.getFirstRule(prog);
     final JvmField field = this.inferrer.genIssueField(_firstRule);
