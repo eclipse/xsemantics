@@ -172,7 +172,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XAssignment(context, (XAssignment) semanticObject); 
+					sequence_XAssignment_XMemberFeatureCall(context, (XAssignment) semanticObject); 
 					return; 
 				}
 				else break;
@@ -207,7 +207,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XAdditiveExpression(context, (XBinaryOperation) semanticObject); 
+					sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, (XBinaryOperation) semanticObject); 
 					return; 
 				}
 				else break;
@@ -659,7 +659,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XExpression(context, (XNullLiteral) semanticObject); 
+					sequence_XNullLiteral(context, (XNullLiteral) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1018,7 +1018,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				if(context == grammarAccess.getEnvironmentSpecificationRule() ||
 				   context == grammarAccess.getEnvironmentSpecificationAccess().getEnvironmentCompositionCurrentEnvironmentAction_1_0_0() ||
 				   context == grammarAccess.getTerminalEnvironmentSpecificationRule()) {
-					sequence_EnvironmentSpecification(context, (EmptyEnvironment) semanticObject); 
+					sequence_TerminalEnvironmentSpecification(context, (EmptyEnvironment) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1280,15 +1280,6 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     {EmptyEnvironment}
-	 */
-	protected void sequence_EnvironmentSpecification(EObject context, EmptyEnvironment semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (currentEnvironment=EnvironmentSpecification_EnvironmentComposition_1_0_0 subEnvironment=EnvironmentSpecification)
 	 */
 	protected void sequence_EnvironmentSpecification(EObject context, EnvironmentComposition semanticObject) {
@@ -1492,6 +1483,15 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 		feeder.accept(grammarAccess.getRuleWithPremisesAccess().getConclusionRuleConclusionParserRuleCall_3_0(), semanticObject.getConclusion());
 		feeder.accept(grammarAccess.getRuleWithPremisesAccess().getPremisesXBlockExpressionParserRuleCall_5_0(), semanticObject.getPremises());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {EmptyEnvironment}
+	 */
+	protected void sequence_TerminalEnvironmentSpecification(EObject context, EmptyEnvironment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
