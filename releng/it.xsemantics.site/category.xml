@@ -8,16 +8,19 @@ Java code that can be used in your language implemented in Xtext
 for scoping and validation (it can also generate a validator
 in Java).
    </description>
-   <feature url="features/it.xsemantics.examples.feature_1.0.100.qualifier.jar" id="it.xsemantics.examples.feature" version="1.0.100.qualifier">
+   <feature id="it.xsemantics.examples.feature">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.feature_1.0.100.qualifier.jar" id="it.xsemantics.feature" version="1.0.100.qualifier">
+   <feature id="it.xsemantics.feature">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.runtime.feature_1.0.100.qualifier.jar" id="it.xsemantics.runtime.feature" version="1.0.100.qualifier">
+   <feature id="it.xsemantics.runtime.feature">
       <category name="xsemantics"/>
    </feature>
-   <feature url="features/it.xsemantics.sdk_1.0.100.qualifier.jar" id="it.xsemantics.sdk" version="1.0.100.qualifier">
+   <feature id="it.xsemantics.sdk">
+      <category name="xsemantics"/>
+   </feature>
+   <feature id="it.xsemantics.sdk.source">
       <category name="xsemantics"/>
    </feature>
    <category-def name="xsemantics" label="XSemantics">
