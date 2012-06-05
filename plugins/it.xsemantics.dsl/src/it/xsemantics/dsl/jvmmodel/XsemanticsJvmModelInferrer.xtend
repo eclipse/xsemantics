@@ -7,6 +7,16 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
+import org.eclipse.xtext.common.types.JvmOperation
+import it.xsemantics.dsl.util.XsemanticsUtils
+import org.eclipse.xtext.common.types.JvmTypeReference
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.Result2
+import it.xsemantics.dsl.generator.UniqueNames
+import org.eclipse.emf.ecore.EObject
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.RuleApplicationTrace
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -22,6 +32,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension JvmTypesBuilder
 	
 	@Inject extension XsemanticsGeneratorExtensions
+	
+	@Inject extension XsemanticsUtils
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -54,8 +66,94 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		).initializeLater [
 			documentation = ts.documentation
 			superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+			
+			ts.judgmentDescriptions.forEach [
+				j |
+				members += j.genEntryPointMethods
+			]
 		]
 	}
 	
+	def genEntryPointMethods(JudgmentDescription judgmentDescription) {
+   		val entryPointMethods = <JvmOperation>newArrayList()
+   		// main entry point method
+   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   			judgmentDescription.entryPointMethodName.toString,
+   			judgmentDescription.resultType
+   		) [
+   			parameters += judgmentDescription.inputParameters
+   		]
+   		
+   		// entry point method with environment parameter
+   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   			judgmentDescription.entryPointMethodName.toString,
+   			judgmentDescription.resultType
+   		) [
+   			parameters += judgmentDescription.environmentParam
+   			parameters += judgmentDescription.inputParameters
+  			
+   		]
+   		
+   		// entry point method with environment parameter and rule application trace
+   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   			judgmentDescription.entryPointMethodName.toString,
+   			judgmentDescription.resultType
+   		) [
+   			parameters += judgmentDescription.environmentParam
+   			parameters += judgmentDescription.ruleApplicationTraceParam
+   			parameters += judgmentDescription.inputParameters
+   			
+   		]
+   		
+   		entryPointMethods
+   	}
+   	
+   	def resultType(JudgmentDescription e) {
+		val resultTypeArguments = e.resultJvmTypeReferences()
+		var JvmTypeReference resultT
+		if (resultTypeArguments.size == 1)
+			resultT = e.newTypeRef(typeof(Result), resultTypeArguments.get(0)) 
+		else
+			resultT = e.newTypeRef(typeof(Result2),
+				resultTypeArguments.get(0), resultTypeArguments.get(1)
+			)
+	}
+	
+	def resultJvmTypeReferences(JudgmentDescription e) {
+		val outputParams = e.outputJudgmentParameters
+		if (outputParams.size == 0) {
+			<JvmTypeReference>newArrayList(e.newTypeRef(typeof(Boolean)))
+		} else {
+			outputParams.map [ it.jvmTypeReference ]
+		}
+	}
+	
+	def inputParameters(JudgmentDescription judgmentDescription) {
+		val names = new UniqueNames()
+		judgmentDescription.inputParams.map([
+			it.toParameter(
+				names.createName(it.inputParameterName),
+				it.parameter.parameterType
+			)
+		])
+	}
+	
+	def environmentParam(JudgmentDescription e) {
+		e.toParameter(
+			environmentName.toString,
+			e.environmentType
+		)
+	}
+	
+	def environmentType(EObject o) {
+		o.newTypeRef(typeof(RuleEnvironment))
+	}
+	
+	def ruleApplicationTraceParam(JudgmentDescription e) {
+		e.toParameter(
+			ruleApplicationTraceName.toString,
+			e.newTypeRef(typeof(RuleApplicationTrace))
+		)
+	}
 }
 
