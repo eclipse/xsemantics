@@ -41,7 +41,11 @@ public class XsemanticsExamplesProjectWizardTests {
 	@BeforeClass
 	public static void beforeClass() throws Exception {
 		bot = new SWTWorkbenchBot();
-		bot.viewByTitle("Welcome").close();
+		try {
+			bot.viewByTitle("Welcome").close();
+		} catch (WidgetNotFoundException e) {
+			// OK, no Welcome view, that's fine :)
+		}
 
 		// Change the perspective via the Open Perspective dialog
 		bot.menu("Window").menu("Open Perspective").menu("Other...").click();
@@ -74,7 +78,7 @@ public class XsemanticsExamplesProjectWizardTests {
 	}
 
 	@Test
-	public void canCreateANeweExpressionsProject() throws Exception {
+	public void canCreateANewExpressionsProject() throws Exception {
 		createProjectAndAssertNoErrorMarker("Expressions Project");
 
 		// check that the Example.output is generated
