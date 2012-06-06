@@ -71,7 +71,7 @@ class XsemanticsRuleGenerator {
 				new «importManager.errorInformationClass»(«source», «feature»))'''
 		} else if (rule.judgmentDescription.error != null) {
 			'''
-			«rule.judgmentDescription.throwExpectionMethod»(«rule.ruleIssueString»,
+			«rule.judgmentDescription.throwExceptionMethod»(«rule.ruleIssueString»,
 				e_«rule.applyRuleName», «rule.inputParameterNames»)'''
 		} else {
 			'''

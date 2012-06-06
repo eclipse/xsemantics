@@ -131,6 +131,14 @@ public class InferrerGeneratedJavaCodeTest extends XsemanticsBaseTest {
 				compileToJava(testFiles.testRuleWithTwoOutputParams(),
 						SIMPLE_TYPE_SYSTEM).getName());
 	}
+	
+	@Test
+	public void testThrowExceptionMethod() throws Exception {
+		assertEquals(
+				SIMPLE_TYPE_SYSTEM,
+				compileToJava(testFiles.testJudgmentDescriptionsWithErrorSpecification(),
+						SIMPLE_TYPE_SYSTEM).getName());
+	}
 
 	protected Class<?> compileToJava(CharSequence program, String className)
 			throws Exception {

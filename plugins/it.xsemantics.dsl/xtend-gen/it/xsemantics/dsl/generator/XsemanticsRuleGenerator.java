@@ -228,8 +228,8 @@ public class XsemanticsRuleGenerator {
       if (_notEquals_1) {
         StringConcatenation _builder = new StringConcatenation();
         JudgmentDescription _judgmentDescription_1 = this._xsemanticsUtils.judgmentDescription(rule);
-        CharSequence _throwExpectionMethod = this._xsemanticsGeneratorExtensions.throwExpectionMethod(_judgmentDescription_1);
-        _builder.append(_throwExpectionMethod, "");
+        CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(_judgmentDescription_1);
+        _builder.append(_throwExceptionMethod, "");
         _builder.append("(");
         String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
         _builder.append(_ruleIssueString, "");

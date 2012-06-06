@@ -502,8 +502,8 @@ public class XsemanticsSystemGenerator {
       final String feature = this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("protected void ");
-      CharSequence _throwExpectionMethod = this._xsemanticsGeneratorExtensions.throwExpectionMethod(judgmentDescription);
-      _builder_1.append(_throwExpectionMethod, "");
+      CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(judgmentDescription);
+      _builder_1.append(_throwExceptionMethod, "");
       _builder_1.append("(String _issue, ");
       CharSequence _exceptionClass = this._xsemanticsGeneratorExtensions.exceptionClass(importManager);
       _builder_1.append(_exceptionClass, "");

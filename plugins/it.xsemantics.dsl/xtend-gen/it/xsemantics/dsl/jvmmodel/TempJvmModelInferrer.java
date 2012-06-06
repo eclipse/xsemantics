@@ -1,10 +1,13 @@
 package it.xsemantics.dsl.jvmmodel;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
+import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -14,6 +17,7 @@ import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -75,6 +79,9 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private XsemanticsXbaseCompiler xbaseCompiler;
+  
+  @Inject
+  private XsemanticsErrorSpecificationGenerator errSpecGenerator;
   
   /**
    * The dispatch method {@code infer} is called for each instance of the
@@ -155,6 +162,12 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
                 EList<JvmMember> _members = it.getMembers();
                 JvmOperation _compileInternalMethod = TempJvmModelInferrer.this.compileInternalMethod(j);
                 TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileInternalMethod);
+                final JvmOperation throwExceptionMethod = TempJvmModelInferrer.this.compileThrowExceptionMethod(j);
+                boolean _notEquals = (!Objects.equal(throwExceptionMethod, null));
+                if (_notEquals) {
+                  EList<JvmMember> _members_1 = it.getMembers();
+                  TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, throwExceptionMethod);
+                }
               }
             };
           IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_2, _function_3);
@@ -521,6 +534,70 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
     return _parameter;
   }
   
+  public JvmOperation compileThrowExceptionMethod(final JudgmentDescription judgmentDescription) {
+    JvmOperation _xblockexpression = null;
+    {
+      final ErrorSpecification errorSpecification = judgmentDescription.getError();
+      boolean _equals = Objects.equal(errorSpecification, null);
+      if (_equals) {
+        return null;
+      }
+      CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(judgmentDescription);
+      String _string = _throwExceptionMethod.toString();
+      final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          public void apply(final JvmOperation it) {
+            it.setVisibility(JvmVisibility.PROTECTED);
+            EList<JvmTypeReference> _exceptions = it.getExceptions();
+            JvmTypeReference _ruleFailedExceptionType = TempJvmModelInferrer.this.ruleFailedExceptionType(judgmentDescription);
+            TempJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
+            EList<JvmFormalParameter> _parameters = it.getParameters();
+            JvmTypeReference _newTypeRef = TempJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(judgmentDescription, String.class);
+            JvmFormalParameter _parameter = TempJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_issue", _newTypeRef);
+            TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+            EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+            JvmTypeReference _exceptionType = TempJvmModelInferrer.this.exceptionType(judgmentDescription);
+            JvmFormalParameter _parameter_1 = TempJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_ex", _exceptionType);
+            TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_1);
+            EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+            List<JvmFormalParameter> _inputParameters = TempJvmModelInferrer.this.inputParameters(judgmentDescription);
+            TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _inputParameters);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  final String error = TempJvmModelInferrer.this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it);
+                  final String source = TempJvmModelInferrer.this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it);
+                  final String feature = TempJvmModelInferrer.this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it);
+                  it.newLine();
+                  StringConcatenation _builder = new StringConcatenation();
+                  CharSequence _throwRuleFailedExceptionMethod = TempJvmModelInferrer.this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+                  _builder.append(_throwRuleFailedExceptionMethod, "");
+                  _builder.append("(");
+                  _builder.append(error, "");
+                  _builder.append(",");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("_issue, _ex, new ");
+                  it.append(_builder);
+                  JvmTypeReference _errorInformationType = TempJvmModelInferrer.this.errorInformationType(judgmentDescription);
+                  TempJvmModelInferrer.this._typeReferenceSerializer.serialize(_errorInformationType, judgmentDescription, it);
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  _builder_1.append("(");
+                  _builder_1.append(source, "");
+                  _builder_1.append(", ");
+                  _builder_1.append(feature, "");
+                  _builder_1.append("));");
+                  it.append(_builder_1);
+                }
+              };
+            TempJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+          }
+        };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(judgmentDescription, _string, 
+        null, _function);
+      _xblockexpression = (_method);
+    }
+    return _xblockexpression;
+  }
+  
   public JvmOperation compileInternalMethod(final JudgmentDescription judgmentDescription) {
     CharSequence _entryPointInternalMethodName = this._xsemanticsGeneratorExtensions.entryPointInternalMethodName(judgmentDescription);
     String _string = _entryPointInternalMethodName.toString();
@@ -602,6 +679,11 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
   
   public JvmTypeReference environmentType(final EObject o) {
     JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, RuleEnvironment.class);
+    return _newTypeRef;
+  }
+  
+  public JvmTypeReference errorInformationType(final EObject o) {
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, ErrorInformation.class);
     return _newTypeRef;
   }
   

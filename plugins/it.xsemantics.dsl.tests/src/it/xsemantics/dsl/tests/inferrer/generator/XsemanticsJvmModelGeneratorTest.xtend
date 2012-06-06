@@ -300,6 +300,79 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 	
+	@Test
+	def testJudgmentDescriptionsWithErrorSpecification() {
+		val fs = testFiles.testJudgmentDescriptionsWithErrorSpecification.runGenerator
+		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+  }
+  
+  public Result<EClass> type(final EObject c) {
+    return type(new RuleEnvironment(), null, c);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject c) {
+    return type(_environment_, null, c);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
+    try {
+    	return typeInternal(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
+    try {
+    	checkParamsNotNull(c);
+    	return typeDispatcher.invoke(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+    
+    String _plus = ("this " + c);
+    String _plus_1 = (_plus + " made an error!");
+    String error = _plus_1;
+    EObject source = c;
+    EClass _eClass = c.eClass();
+    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, feature));
+  }
+}
+'''
+		)
+	}
+	
 	def runGenerator(CharSequence prog) {
 		val fs = new InMemoryFileSystemAccess()
 		generator.doGenerate(prog.loadResource, fs)

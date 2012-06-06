@@ -8,6 +8,7 @@ import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.ArrayList;
+import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -133,6 +134,60 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.append("}");
     this.assertGeneratedMembers(_genEntryPointMethods, _builder);
+  }
+  
+  @Test
+  public void testThrowExceptionMethodNull() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    JvmOperation _compileThrowExceptionMethod = this.inferrer.compileThrowExceptionMethod(_get);
+    Assert.assertNull(_compileThrowExceptionMethod);
+  }
+  
+  @Test
+  public void testThrowExceptionMethod() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    JvmOperation _compileThrowExceptionMethod = this.inferrer.compileThrowExceptionMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String _plus = (\"this \" + c);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String _plus_1 = (_plus + \" made an error!\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String error = _plus_1;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EObject source = c;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EClass _eClass = c.eClass();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EStructuralFeature feature = _eContainingFeature;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("throwRuleFailedException(error,");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("_issue, _ex, new ErrorInformation(source, feature));");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileThrowExceptionMethod, _builder);
   }
   
   @Test

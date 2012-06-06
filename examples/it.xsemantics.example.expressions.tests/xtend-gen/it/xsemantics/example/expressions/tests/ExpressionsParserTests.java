@@ -231,7 +231,7 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
       String _string = this._stringRepresentation.string(expression);
       _switchResult = _string;
     }
-    String _string = _switchResult.toString();
-    return _string;
+    String _string_1 = _switchResult.toString();
+    return _string_1;
   }
 }

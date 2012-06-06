@@ -13,6 +13,8 @@ import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
 
+import static extension junit.framework.Assert.*
+
 @InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
@@ -80,6 +82,36 @@ public Result2<EObject,EStructuralFeature> type(final EClass c) {
     } catch (Exception _e_type) {
     	return resultForFailure2(_e_type);
     }
+  }'''
+)
+	}
+
+	@Test
+	def testThrowExceptionMethodNull() {
+		testFiles.testSimpleRule.
+			parseAndAssertNoError.judgmentDescriptions.get(0).
+				compileThrowExceptionMethod.assertNull
+	}
+
+	@Test
+	def testThrowExceptionMethod() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseAndAssertNoError.judgmentDescriptions.get(0).
+				compileThrowExceptionMethod.
+				assertGeneratedMember
+(
+'''
+protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+    
+    String _plus = ("this " + c);
+    String _plus_1 = (_plus + " made an error!");
+    String error = _plus_1;
+    EObject source = c;
+    EClass _eClass = c.eClass();
+    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, feature));
   }'''
 )
 	}

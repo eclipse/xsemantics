@@ -753,7 +753,7 @@ public class XsemanticsGeneratorExtensions {
     return _join;
   }
   
-  public CharSequence throwExpectionMethod(final JudgmentDescription judgmentDescription) {
+  public CharSequence throwExceptionMethod(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = judgmentDescription.getName();
     String _firstLower = StringExtensions.toFirstLower(_name);

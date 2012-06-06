@@ -28,6 +28,8 @@ import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.emf.ecore.EObject
 import it.xsemantics.runtime.RuleFailedException
+import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
+import it.xsemantics.runtime.ErrorInformation
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -49,6 +51,8 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension TypeReferenceSerializer
 	
 	@Inject XsemanticsXbaseCompiler xbaseCompiler
+	
+	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -109,6 +113,9 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			ts.judgmentDescriptions.forEach [
 				j |
 				members += j.compileInternalMethod
+				val throwExceptionMethod = j.compileThrowExceptionMethod
+				if (throwExceptionMethod != null)
+					members += throwExceptionMethod
 			]
 			
 			ts.rules.forEach [
@@ -281,6 +288,44 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		)
 	}
 	
+	def compileThrowExceptionMethod(JudgmentDescription judgmentDescription) {
+		val errorSpecification = judgmentDescription.error
+		if (errorSpecification == null) {
+			return null
+		}
+		
+		judgmentDescription.toMethod(
+			judgmentDescription.throwExceptionMethod.toString,
+			null
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+
+			exceptions += judgmentDescription.ruleFailedExceptionType
+			
+			parameters += judgmentDescription.toParameter("_issue", 
+				judgmentDescription.newTypeRef(typeof(String))
+			)
+   			parameters += judgmentDescription.toParameter("_ex",
+   				judgmentDescription.exceptionType
+   			)
+   			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
+				val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
+				val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
+   				
+   				it.newLine
+   				it.append('''
+   					«throwRuleFailedExceptionMethod»(«error»,
+   						_issue, _ex, new ''')
+				judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
+				it.append('''(«source», «feature»));''')
+   			]
+		]
+	}
+	
 	def compileInternalMethod(JudgmentDescription judgmentDescription) {
 		judgmentDescription.toMethod(
 			judgmentDescription.entryPointInternalMethodName.toString,
@@ -321,6 +366,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	
 	def environmentType(EObject o) {
 		o.newTypeRef(typeof(RuleEnvironment))
+	}
+	
+	def errorInformationType(EObject o) {
+		o.newTypeRef(typeof(ErrorInformation))
 	}
 	
 	def compileApplyMethod(Rule rule) {

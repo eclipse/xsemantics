@@ -389,7 +389,7 @@ class XsemanticsGeneratorExtensions {
 		judgmentDescription.relationSymbols.map(['''"«it»"''']).join(", ")
 	}
 	
-	def throwExpectionMethod(JudgmentDescription judgmentDescription) {
+	def throwExceptionMethod(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.name.toFirstLower»ThrowException'''
 	}
 	

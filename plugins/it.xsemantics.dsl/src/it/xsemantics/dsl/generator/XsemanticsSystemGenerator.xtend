@@ -163,7 +163,7 @@ class XsemanticsSystemGenerator {
 		val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b)
 		
 		'''
-		protected void «judgmentDescription.throwExpectionMethod»«
+		protected void «judgmentDescription.throwExceptionMethod»«
 				»(String _issue, «importManager.exceptionClass» _ex, «judgmentDescription.inputParameters(importManager)») 
 				throws «importManager.ruleFailedExceptionClass» {
 			«b»
