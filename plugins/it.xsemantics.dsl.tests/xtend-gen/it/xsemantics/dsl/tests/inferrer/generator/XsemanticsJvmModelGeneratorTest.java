@@ -784,7 +784,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("/* G ||- eClass : object : feat */");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Result2<EObject, EStructuralFeature> result = type2Internal(G, _trace_, eClass);");
+    _builder.append("Result2<EObject,EStructuralFeature> result = type2Internal(G, _trace_, eClass);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("checkAssignableTo(result.getFirst(), EObject.class);");

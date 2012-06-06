@@ -361,7 +361,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		EStructuralFeature feat = null;
 		
 		/* G |~ eObject : eClass : feat */
-		Result2<EClass, EStructuralFeature> result = etype3Internal(G, _trace_, eObject);
+		Result2<EClass,EStructuralFeature> result = etype3Internal(G, _trace_, eObject);
 		checkAssignableTo(result.getFirst(), EClass.class);
 		eClass = (EClass) result.getFirst();
 		checkAssignableTo(result.getSecond(), EStructuralFeature.class);

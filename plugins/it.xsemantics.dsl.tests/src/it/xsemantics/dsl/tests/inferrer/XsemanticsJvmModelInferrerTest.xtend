@@ -149,7 +149,7 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
     EStructuralFeature feat = null; // output parameter
     
     /* G ||- eClass : object : feat */
-    Result2<EObject, EStructuralFeature> result = type2Internal(G, _trace_, eClass);
+    Result2<EObject,EStructuralFeature> result = type2Internal(G, _trace_, eClass);
     checkAssignableTo(result.getFirst(), EObject.class);
     object = (EObject) result.getFirst();
     checkAssignableTo(result.getSecond(), EStructuralFeature.class);

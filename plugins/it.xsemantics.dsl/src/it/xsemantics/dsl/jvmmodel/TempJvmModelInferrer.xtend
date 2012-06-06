@@ -1,35 +1,32 @@
 package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.generator.TempXsemanticsGeneratorExtensions
 import it.xsemantics.dsl.generator.UniqueNames
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.xsemantics.RuleParameter
+import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import it.xsemantics.runtime.Result
-import it.xsemantics.runtime.Result2
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.util.PolymorphicDispatcher
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.RuleApplicationTrace
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
-import it.xsemantics.dsl.xsemantics.RuleWithPremises
-import it.xsemantics.dsl.xsemantics.RuleParameter
-import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.emf.ecore.EObject
-import it.xsemantics.runtime.RuleFailedException
-import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
-import it.xsemantics.runtime.ErrorInformation
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -44,7 +41,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
      */
 	@Inject extension JvmTypesBuilder
 	
-	@Inject extension XsemanticsGeneratorExtensions
+	@Inject extension TempXsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
 	
@@ -86,11 +83,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			documentation = ts.documentation
 			
 			superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
-			
 
 			val issues = <JvmField>newArrayList()
 			ts.rules.forEach [
-				issues += genIssueField()
+				issues += genIssueField
 			]
 			members += issues
 			
@@ -123,12 +119,6 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				members += rule.compileImplMethod
 				members += rule.compileApplyMethod
 			]
-			
-//			members += element.toConstructor() [
-//				parameters += element.toParameter("initializer", procedure)
-//				body = [it.append("initializer.apply(this);")]
-//			]
-			//members += element.addToStringMethod(it)
 		]
    	}
    	
@@ -162,26 +152,6 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 
 	def polymorphicDispatcherType(JudgmentDescription e) {
 		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
-	}
-	
-	def resultType(JudgmentDescription e) {
-		val resultTypeArguments = e.resultJvmTypeReferences()
-		var JvmTypeReference resultT
-		if (resultTypeArguments.size == 1)
-			resultT = e.newTypeRef(typeof(Result), resultTypeArguments.get(0)) 
-		else
-			resultT = e.newTypeRef(typeof(Result2),
-				resultTypeArguments.get(0), resultTypeArguments.get(1)
-			)
-	}
-	
-	def resultJvmTypeReferences(JudgmentDescription e) {
-		val outputParams = e.outputJudgmentParameters
-		if (outputParams.size == 0) {
-			<JvmTypeReference>newArrayList(e.newTypeRef(typeof(Boolean)))
-		} else {
-			outputParams.map [ it.jvmTypeReference ]
-		}
 	}
 	
 	def genInit(XsemanticsSystem ts) {
@@ -357,20 +327,12 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		]
 	}
 	
-	def exceptionType(EObject o) {
-		o.newTypeRef(typeof(Exception))
-	}
-	
 	def ruleFailedExceptionType(EObject o) {
 		o.newTypeRef(typeof(RuleFailedException))
 	}
 	
 	def environmentType(EObject o) {
 		o.newTypeRef(typeof(RuleEnvironment))
-	}
-	
-	def errorInformationType(EObject o) {
-		o.newTypeRef(typeof(ErrorInformation))
 	}
 	
 	def compileImplMethod(Rule rule) {
@@ -391,7 +353,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
    				it.append('''try {''').increaseIndentation.newLine
 				it.append(rule.ruleApplicationTraceType.type)
 				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
-				rule.judgmentDescription.resultType.serialize(rule, it)
+				rule.judgmentDescription.resultType(it)
 				it.append(" ")
 				it.append('''
 					_result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);

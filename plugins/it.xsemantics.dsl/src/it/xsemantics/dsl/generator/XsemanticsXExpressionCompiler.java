@@ -43,7 +43,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	protected XsemanticsUtils xsemanticsUtils;
 
 	@Inject
-	protected XsemanticsGeneratorExtensions generatorExtensions;
+	protected TempXsemanticsGeneratorExtensions generatorExtensions;
 
 	@Inject
 	protected XsemanticsTypingSystem typingSystem;
@@ -386,7 +386,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 			b.append(errorMessageVar);
 			comma(b);
 			b.append("new ");
-			b.append(generatorExtensions.errorInformationClass());
+			b.append(generatorExtensions.errorInformationType(fail).getType());
 			b.append("(");
 			b.append(sourceVar);
 			comma(b);
@@ -439,7 +439,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		b.decreaseIndentation();
 		newLine(b);
 		b.append("} catch (");
-		exceptionClass(b);
+		b.append(generatorExtensions.exceptionType(expression).getType());
 		b.append(" ");
 		final String declareExceptionVariable = declareExceptionVariable(
 				expression, b);
@@ -447,10 +447,6 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		b.append(") {");
 		b.increaseIndentation();
 		return declareExceptionVariable;
-	}
-
-	protected void exceptionClass(final ITreeAppendable b) {
-		b.append(generatorExtensions.exceptionClass());
 	}
 
 	protected void tryStmnt(final ITreeAppendable b) {
