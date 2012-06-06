@@ -246,6 +246,26 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testRuleJudgmentDescriptionsWithErrorSpecification() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testJudgmentDescriptionsWithErrorSpecification();
+    _builder.append(_testJudgmentDescriptionsWithErrorSpecification, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testJudgmentDescriptionsWithCollectionOutput() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testFileWithImports = this.testFileWithImports();

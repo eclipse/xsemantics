@@ -120,6 +120,16 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
+	def testRuleJudgmentDescriptionsWithErrorSpecification() '''
+	«testJudgmentDescriptionsWithErrorSpecification»
+	
+	rule TestRule
+		G |- EObject o : EClass c
+	from {
+		
+	}
+	'''
+	
 	def testJudgmentDescriptionsWithCollectionOutput() '''
 	«testFileWithImports»
 	import org.eclipse.emf.ecore.*

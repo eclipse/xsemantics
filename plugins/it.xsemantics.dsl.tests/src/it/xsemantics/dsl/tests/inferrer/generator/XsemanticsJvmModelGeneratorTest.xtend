@@ -87,6 +87,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
@@ -138,6 +139,21 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEClassEObject) {
+      throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+      	ECLASSEOBJECT,
+      	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));
+      return null;
+    }
+  }
+  
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     
     {
@@ -171,6 +187,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -279,6 +296,21 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } catch (Exception _e_subtype) {
     	sneakyThrowRuleFailedException(_e_subtype);
     	return null;
+    }
+  }
+  
+  protected Result2<EObject,EStructuralFeature> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result2<EObject,EStructuralFeature> _result_ = applyRuleEClassEObjectEStructuralFeature(G, _subtrace_, eClass);
+      addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEClassEObjectEStructuralFeature) {
+      throwRuleFailedException(ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature",
+      	ECLASSEOBJECTESTRUCTURALFEATURE,
+      	e_applyRuleEClassEObjectEStructuralFeature, new ErrorInformation(eClass));
+      return null;
     }
   }
   

@@ -159,7 +159,96 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
   }'''
 )
 	}
+	
+	@Test
+	def testErrorInformationArgsWithOneEObjectArg() {
+		testFiles.testRuleWithTwoOutputParams.assertErrorInformationArgs
+(
+''', new ErrorInformation(eClass)'''
+)
+	}
+	
+	@Test
+	def testErrorInformationArgsWithTwoEObjectArg() {
+		testFiles.testSimpleRule.assertErrorInformationArgs
+(
+''', new ErrorInformation(eClass), new ErrorInformation(object)'''
+)
+	}
 
+	@Test
+	def testErrorInformationWithNoEObjectArg() {
+		testFiles.testRulesOfTheSameKind.assertErrorInformationArgs
+(
+''''''
+)
+	}
+	
+	@Test
+	def testFinalThrowWithNoErrorInformation() {
+		testFiles.testSimpleRule.assertFinalThrow
+(
+'''
+throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+	ECLASSEOBJECT,
+	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object))'''
+)
+	}
+	
+	@Test
+	def testFinalThrowRuleJudgmentErrorInformation() {
+		testFiles.testRuleJudgmentDescriptionsWithErrorSpecification.assertFinalThrow
+(
+'''
+typeThrowException(TESTRULE,
+	e_applyRuleTestRule, o)'''
+)
+	}
+	
+	@Test
+	def testFinalThrowRuleErrorInformation() {
+		testFiles.testRuleWithErrorSpecifications.assertFinalThrow
+(
+'''
+TypeSystem _TypeSystem = TypeSystem;
+String _stringRep = _TypeSystem.stringRep(object);
+String _plus = ("this " + _stringRep);
+String _plus_1 = (_plus + " made an error!");
+String error = _plus_1;
+EClass _eClass = object.eClass();
+EObject source = _eClass;
+EClass _eClass_1 = object.eClass();
+EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
+EStructuralFeature feature = _eContainingFeature;
+throwRuleFailedException(error,
+	_issue, _ex, new ErrorInformation(source, feature));'''
+)
+	}
+	
+	@Test
+	def testCompileImplMethod() {
+		testFiles.testSimpleRule.
+			parseAndAssertNoError.rules.get(0).
+				compileImplMethod.
+				assertGeneratedMember
+(
+'''
+protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEClassEObject) {
+      throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+      	ECLASSEOBJECT,
+      	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));
+      return null;
+    }
+  }'''
+)
+	}
 	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)
@@ -175,6 +264,18 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
 	def assertInit(CharSequence prog, CharSequence expected) {
 		val m = inferrer.genInit(prog.parseAndAssertNoError)
 		m.assertGeneratedMember(expected)
+	}
+	
+	def assertErrorInformationArgs(CharSequence prog, CharSequence expected) {
+		val a = createTestAppendable
+		inferrer.errorInformationArgs(prog.parseAndAssertNoError.rules.get(0), a)
+		assertEqualsStrings(expected, a.toString.trim)
+	}
+	
+	def assertFinalThrow(CharSequence prog, CharSequence expected) {
+		val a = createTestAppendable
+		inferrer.compileFinalThrow(prog.parseAndAssertNoError.rules.get(0), a)
+		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {

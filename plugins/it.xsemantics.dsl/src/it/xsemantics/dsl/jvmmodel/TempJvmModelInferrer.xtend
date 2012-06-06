@@ -120,6 +120,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			
 			ts.rules.forEach [
 				rule |
+				members += rule.compileImplMethod
 				members += rule.compileApplyMethod
 			]
 			
@@ -370,6 +371,90 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	
 	def errorInformationType(EObject o) {
 		o.newTypeRef(typeof(ErrorInformation))
+	}
+	
+	def compileImplMethod(Rule rule) {
+		rule.toMethod(
+			'''«rule.judgmentDescription.polymorphicDispatcherImpl»'''.toString,
+			rule.judgmentDescription.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			exceptions += rule.ruleFailedExceptionType
+			
+			parameters += rule.paramForEnvironment
+   			parameters += rule.judgmentDescription.ruleApplicationTraceParam
+   			parameters += rule.inputParameters
+   			
+   			body = [
+   				it.append('''try {''').increaseIndentation.newLine
+				it.append(rule.ruleApplicationTraceType.type)
+				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
+				rule.judgmentDescription.resultType.serialize(rule, it)
+				it.append(" ")
+				it.append('''
+					_result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
+					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
+					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
+					return _result_;''').decreaseIndentation.newLine
+				it.append('''} catch (''')
+				rule.exceptionType.serialize(rule, it)
+				it.append(" ")
+				it.append('''''')
+				it.append('''e_«rule.applyRuleName») {''').increaseIndentation.newLine
+   				rule.compileFinalThrow(it)
+   				it.append(''';''').newLine
+   				it.append('''return null;''').decreaseIndentation.newLine
+   				it.append('''}''')
+   			]
+		]
+	}
+	
+	def ruleApplicationTraceType(EObject o) {
+		o.newTypeRef(typeof(RuleApplicationTrace))
+	}
+	
+	def compileFinalThrow(Rule rule, ITreeAppendable b) {
+		if (rule.conclusion.error != null) {
+			val errorSpecification = rule.conclusion.error
+			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
+			val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b)
+			val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b)
+			b.newLine()
+			
+			b.append('''
+   					«throwRuleFailedExceptionMethod»(«error»,
+   						_issue, _ex, new ''')
+			rule.errorInformationType.serialize(rule, b)
+			b.append('''(«source», «feature»));''')
+		} else if (rule.judgmentDescription.error != null) {
+			b.append('''
+			«rule.judgmentDescription.throwExceptionMethod»(«rule.ruleIssueString»,
+				e_«rule.applyRuleName», «rule.inputParameterNames»)''')
+		} else {
+			b.append('''
+			«throwRuleFailedExceptionMethod»(«rule.errorForRule»,
+				«rule.ruleIssueString»,
+				e_«rule.applyRuleName»''')
+			rule.errorInformationArgs(b)
+			b.append(''')''')
+		}
+	}
+	
+	def errorInformationArgs(Rule rule, ITreeAppendable b) {
+		val inputEObjects = rule.inputEObjectParams
+		if (!inputEObjects.empty)
+			b.append(", ")
+		val iter = inputEObjects.iterator
+		val errInfoType = rule.errorInformationType.type
+		while (iter.hasNext) {
+			b.append("new ")
+			b.append(errInfoType)
+			b.append('''(«iter.next.parameter.name»)''')
+			if (iter.hasNext)
+				b.append(", ")
+		}
 	}
 	
 	def compileApplyMethod(Rule rule) {

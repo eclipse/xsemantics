@@ -272,6 +272,136 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     this.assertGeneratedMember(_compileApplyMethod, _builder);
   }
   
+  @Test
+  public void testErrorInformationArgsWithOneEObjectArg() {
+    CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(", new ErrorInformation(eClass)");
+    this.assertErrorInformationArgs(_testRuleWithTwoOutputParams, _builder);
+  }
+  
+  @Test
+  public void testErrorInformationArgsWithTwoEObjectArg() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(", new ErrorInformation(eClass), new ErrorInformation(object)");
+    this.assertErrorInformationArgs(_testSimpleRule, _builder);
+  }
+  
+  @Test
+  public void testErrorInformationWithNoEObjectArg() {
+    CharSequence _testRulesOfTheSameKind = this.testFiles.testRulesOfTheSameKind();
+    StringConcatenation _builder = new StringConcatenation();
+    this.assertErrorInformationArgs(_testRulesOfTheSameKind, _builder);
+  }
+  
+  @Test
+  public void testFinalThrowWithNoErrorInformation() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("throwRuleFailedException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ECLASSEOBJECT,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object))");
+    this.assertFinalThrow(_testSimpleRule, _builder);
+  }
+  
+  @Test
+  public void testFinalThrowRuleJudgmentErrorInformation() {
+    CharSequence _testRuleJudgmentDescriptionsWithErrorSpecification = this.testFiles.testRuleJudgmentDescriptionsWithErrorSpecification();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("typeThrowException(TESTRULE,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("e_applyRuleTestRule, o)");
+    this.assertFinalThrow(_testRuleJudgmentDescriptionsWithErrorSpecification, _builder);
+  }
+  
+  @Test
+  public void testFinalThrowRuleErrorInformation() {
+    CharSequence _testRuleWithErrorSpecifications = this.testFiles.testRuleWithErrorSpecifications();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("TypeSystem _TypeSystem = TypeSystem;");
+    _builder.newLine();
+    _builder.append("String _stringRep = _TypeSystem.stringRep(object);");
+    _builder.newLine();
+    _builder.append("String _plus = (\"this \" + _stringRep);");
+    _builder.newLine();
+    _builder.append("String _plus_1 = (_plus + \" made an error!\");");
+    _builder.newLine();
+    _builder.append("String error = _plus_1;");
+    _builder.newLine();
+    _builder.append("EClass _eClass = object.eClass();");
+    _builder.newLine();
+    _builder.append("EObject source = _eClass;");
+    _builder.newLine();
+    _builder.append("EClass _eClass_1 = object.eClass();");
+    _builder.newLine();
+    _builder.append("EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();");
+    _builder.newLine();
+    _builder.append("EStructuralFeature feature = _eContainingFeature;");
+    _builder.newLine();
+    _builder.append("throwRuleFailedException(error,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("_issue, _ex, new ErrorInformation(source, feature));");
+    this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
+  }
+  
+  @Test
+  public void testCompileImplMethod() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    JvmOperation _compileImplMethod = this.inferrer.compileImplMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("RuleApplicationTrace _subtrace_ = newTrace(_trace_);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("addToTrace(_trace_, ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object));");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("addAsSubtrace(_trace_, _subtrace_);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("return _result_;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("} catch (Exception e_applyRuleEClassEObject) {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("throwRuleFailedException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
+    _builder.newLine();
+    _builder.append("      \t");
+    _builder.append("ECLASSEOBJECT,");
+    _builder.newLine();
+    _builder.append("      \t");
+    _builder.append("e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileImplMethod, _builder);
+  }
+  
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
     Rule _firstRule = this.getFirstRule(prog);
     final JvmField field = this.inferrer.genIssueField(_firstRule);
@@ -289,6 +419,28 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
     final JvmOperation m = this.inferrer.genInit(_parseAndAssertNoError);
     this.assertGeneratedMember(m, expected);
+  }
+  
+  public void assertErrorInformationArgs(final CharSequence prog, final CharSequence expected) {
+    final FakeTreeAppendable a = this.createTestAppendable();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    this.inferrer.errorInformationArgs(_get, a);
+    String _string = a.toString();
+    String _trim = _string.trim();
+    this.assertEqualsStrings(expected, _trim);
+  }
+  
+  public void assertFinalThrow(final CharSequence prog, final CharSequence expected) {
+    final FakeTreeAppendable a = this.createTestAppendable();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    this.inferrer.compileFinalThrow(_get, a);
+    String _string = a.toString();
+    String _trim = _string.trim();
+    this.assertEqualsStrings(expected, _trim);
   }
   
   public void assertGeneratedMember(final JvmMember member, final CharSequence expected) {
