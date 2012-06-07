@@ -347,7 +347,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("throwRuleFailedException(error,");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("_issue, _ex, new ErrorInformation(source, feature));");
+    _builder.append("ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature));");
     this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
   }
   

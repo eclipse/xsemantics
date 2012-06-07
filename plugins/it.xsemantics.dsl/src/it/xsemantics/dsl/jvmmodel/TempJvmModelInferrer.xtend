@@ -387,7 +387,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			
 			b.append('''
    					«throwRuleFailedExceptionMethod»(«error»,
-   						_issue, _ex, new ''')
+   						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
 			rule.errorInformationType.serialize(rule, b)
 			b.append('''(«source», «feature»));''')
 		} else if (rule.judgmentDescription.error != null) {

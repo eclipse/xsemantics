@@ -767,7 +767,12 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
         _builder.append(",");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("_issue, _ex, new ");
+        String _ruleIssueString = this._tempXsemanticsGeneratorExtensions.ruleIssueString(rule);
+        _builder.append(_ruleIssueString, "	");
+        _builder.append(", e_");
+        CharSequence _applyRuleName = this._tempXsemanticsGeneratorExtensions.applyRuleName(rule);
+        _builder.append(_applyRuleName, "	");
+        _builder.append(", new ");
         b.append(_builder);
         JvmTypeReference _errorInformationType = this._tempXsemanticsGeneratorExtensions.errorInformationType(rule);
         this._typeReferenceSerializer.serialize(_errorInformationType, rule, b);
