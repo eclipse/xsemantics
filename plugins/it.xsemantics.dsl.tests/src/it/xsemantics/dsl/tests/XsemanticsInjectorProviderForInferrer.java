@@ -4,8 +4,6 @@ import it.xsemantics.dsl.TempXsemanticsRuntimeModule;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.XsemanticsStandaloneSetup;
 
-import org.eclipse.xtext.junit4.GlobalRegistries;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -26,15 +24,9 @@ public class XsemanticsInjectorProviderForInferrer extends
 		}
 	}
 
-	public Injector getInjector() {
-		if (injector == null) {
-			stateBeforeInjectorCreation = GlobalRegistries
-					.makeCopyOfGlobalState();
-			this.injector = new XsemanticsStandaloneSetupForTests()
-					.createInjectorAndDoEMFRegistration();
-			stateAfterInjectorCreation = GlobalRegistries
-					.makeCopyOfGlobalState();
-		}
-		return injector;
+	@Override
+	protected Injector internalCreateInjector() {
+		return new XsemanticsStandaloneSetupForTests()
+				.createInjectorAndDoEMFRegistration();
 	}
 }

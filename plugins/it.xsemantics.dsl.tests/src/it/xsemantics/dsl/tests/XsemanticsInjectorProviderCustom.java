@@ -1,7 +1,5 @@
 package it.xsemantics.dsl.tests;
 
-import org.eclipse.xtext.junit4.GlobalRegistries;
-
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.XsemanticsRuntimeModule;
 import it.xsemantics.dsl.XsemanticsStandaloneSetup;
@@ -26,13 +24,9 @@ public class XsemanticsInjectorProviderCustom extends
 		}
 	}
 
-	public Injector getInjector()
-	{
-		if (injector == null) {
-			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
-			this.injector = new XsemanticsStandaloneSetupForTests().createInjectorAndDoEMFRegistration();
-			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
-		}
-		return injector;
+	@Override
+	protected Injector internalCreateInjector() {
+		return new XsemanticsStandaloneSetupForTests()
+				.createInjectorAndDoEMFRegistration();
 	}
 }
