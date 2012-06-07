@@ -3,29 +3,23 @@ package it.xsemantics.dsl.tests.inferrer.generator
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
-import junit.framework.Assert
-import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import static junit.framework.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
-	@Inject
-	protected JvmModelGenerator generator
-	
-	static String TEST_TYPESYSTEM_NAME = "it.xsemantics.test.TypeSystem"
-	
-	static String OUTPUT_PREFIX = "DEFAULT_OUTPUT";
+	@Inject extension CompilationTestHelper
 	
 	@Test
 	def testJudgmentDescriptions() {
-		val fs = testFiles.testJudgmentDescriptions.runGenerator
-		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+		testFiles.testJudgmentDescriptions.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
@@ -81,8 +75,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	@Test
 	def testSimpleRule() {
-		val fs = testFiles.testSimpleRule.runGenerator
-		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+		testFiles.testSimpleRule.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
@@ -182,8 +175,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	@Test
 	def testRuleWithTwoOutputParams() {
-		val fs = testFiles.testRuleWithTwoOutputParams.runGenerator
-		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+		testFiles.testRuleWithTwoOutputParams.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
@@ -334,8 +326,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	
 	@Test
 	def testJudgmentDescriptionsWithErrorSpecification() {
-		val fs = testFiles.testJudgmentDescriptionsWithErrorSpecification.runGenerator
-		assertGeneratedCode(fs, TEST_TYPESYSTEM_NAME,
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
@@ -405,21 +396,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 	
-	def runGenerator(CharSequence prog) {
-		val fs = new InMemoryFileSystemAccess()
-		generator.doGenerate(prog.loadResource, fs)
-		fs
-	}
-	
-	def loadResource(CharSequence prog) {
-		prog.parseAndAssertNoError.eResource
-	}
-	
-	def assertGeneratedCode(InMemoryFileSystemAccess fs, String tsName, 
-			CharSequence expected) {
-		val genCode = fs.files.get(OUTPUT_PREFIX + tsName.replace(".", "/") + ".java")
-		Assert::assertNotNull(genCode)
-		assertEqualsStrings(expected, genCode)
+	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
+		input.compile [
+			// check the expected Java code
+			assertEquals(expected.toString, generatedCode)
+			// this will issue Java generation
+			compiledClass
+		]
 	}
 	
 }

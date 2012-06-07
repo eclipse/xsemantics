@@ -3,15 +3,14 @@ package it.xsemantics.dsl.tests.inferrer.generator;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
-import java.util.Map;
 import junit.framework.Assert;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,16 +19,11 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   @Inject
-  protected JvmModelGenerator generator;
-  
-  private static String TEST_TYPESYSTEM_NAME = "it.xsemantics.test.TypeSystem";
-  
-  private static String OUTPUT_PREFIX = "DEFAULT_OUTPUT";
+  private CompilationTestHelper _compilationTestHelper;
   
   @Test
   public void testJudgmentDescriptions() {
     CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
-    final InMemoryFileSystemAccess fs = this.runGenerator(_testJudgmentDescriptions);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
@@ -155,13 +149,12 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertGeneratedCode(fs, XsemanticsJvmModelGeneratorTest.TEST_TYPESYSTEM_NAME, _builder);
+    this.assertCorrectJavaCodeGeneration(_testJudgmentDescriptions, _builder);
   }
   
   @Test
   public void testSimpleRule() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    final InMemoryFileSystemAccess fs = this.runGenerator(_testSimpleRule);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
@@ -410,13 +403,12 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertGeneratedCode(fs, XsemanticsJvmModelGeneratorTest.TEST_TYPESYSTEM_NAME, _builder);
+    this.assertCorrectJavaCodeGeneration(_testSimpleRule, _builder);
   }
   
   @Test
   public void testRuleWithTwoOutputParams() {
     CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
-    final InMemoryFileSystemAccess fs = this.runGenerator(_testRuleWithTwoOutputParams);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
@@ -808,13 +800,12 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertGeneratedCode(fs, XsemanticsJvmModelGeneratorTest.TEST_TYPESYSTEM_NAME, _builder);
+    this.assertCorrectJavaCodeGeneration(_testRuleWithTwoOutputParams, _builder);
   }
   
   @Test
   public void testJudgmentDescriptionsWithErrorSpecification() {
     CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    final InMemoryFileSystemAccess fs = this.runGenerator(_testJudgmentDescriptionsWithErrorSpecification);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
@@ -983,34 +974,22 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertGeneratedCode(fs, XsemanticsJvmModelGeneratorTest.TEST_TYPESYSTEM_NAME, _builder);
+    this.assertCorrectJavaCodeGeneration(_testJudgmentDescriptionsWithErrorSpecification, _builder);
   }
   
-  public InMemoryFileSystemAccess runGenerator(final CharSequence prog) {
-    InMemoryFileSystemAccess _xblockexpression = null;
-    {
-      InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
-      final InMemoryFileSystemAccess fs = _inMemoryFileSystemAccess;
-      Resource _loadResource = this.loadResource(prog);
-      this.generator.doGenerate(_loadResource, fs);
-      _xblockexpression = (fs);
-    }
-    return _xblockexpression;
-  }
-  
-  public Resource loadResource(final CharSequence prog) {
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
-    Resource _eResource = _parseAndAssertNoError.eResource();
-    return _eResource;
-  }
-  
-  public void assertGeneratedCode(final InMemoryFileSystemAccess fs, final String tsName, final CharSequence expected) {
-    Map<String,CharSequence> _files = fs.getFiles();
-    String _replace = tsName.replace(".", "/");
-    String _plus = (XsemanticsJvmModelGeneratorTest.OUTPUT_PREFIX + _replace);
-    String _plus_1 = (_plus + ".java");
-    final CharSequence genCode = _files.get(_plus_1);
-    Assert.assertNotNull(genCode);
-    this.assertEqualsStrings(expected, genCode);
+  private void assertCorrectJavaCodeGeneration(final CharSequence input, final CharSequence expected) {
+    final Procedure1<Result> _function = new Procedure1<Result>() {
+        public void apply(final Result it) {
+          String _string = expected.toString();
+          String _generatedCode = it.getGeneratedCode();
+          Assert.assertEquals(_string, _generatedCode);
+          it.getCompiledClass();
+        }
+      };
+    this._compilationTestHelper.compile(input, new IAcceptor<Result>() {
+        public void accept(Result t) {
+          _function.apply(t);
+        }
+    });
   }
 }

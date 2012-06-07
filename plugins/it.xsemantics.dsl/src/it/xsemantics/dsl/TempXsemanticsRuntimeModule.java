@@ -19,6 +19,11 @@ public class TempXsemanticsRuntimeModule extends XsemanticsRuntimeModule {
 	}
 	
 	@Override
+	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
+		return org.eclipse.xtext.xbase.compiler.JvmModelGenerator.class;
+	}
+	
+	@Override
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends it.xsemantics.dsl.validation.XsemanticsJavaValidator> bindXsemanticsJavaValidator() {
 		return it.xsemantics.dsl.validation.TempXsemanticsJavaValidator.class;
