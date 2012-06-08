@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.jvmmodel.TempJvmModelInferrer;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -224,6 +225,79 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.append("}");
     this.assertGeneratedMember(_compileInternalMethod, _builder);
+  }
+  
+  @Test
+  public void testCheckRuleInternalMethod() {
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
+    EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
+    CheckRule _get = _checkrules.get(0);
+    JvmOperation _compileInternalMethod = this.inferrer.compileInternalMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("EClass result = null;");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("/* empty |- obj : result */");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("checkAssignableTo(result_1.getFirst(), EClass.class);");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("result = (EClass) result_1.getFirst();");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return new Result<Boolean>(true);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileInternalMethod, _builder);
+  }
+  
+  @Test
+  public void testCheckRuleMethod() {
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
+    EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
+    CheckRule _get = _checkrules.get(0);
+    JvmOperation _compileCheckRuleMethod = this.inferrer.compileCheckRuleMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public Result<Boolean> checkEObject(final EObject obj) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("return checkEObjectInternal(null, obj);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("return resultForFailure(e);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileCheckRuleMethod, _builder);
   }
   
   @Test

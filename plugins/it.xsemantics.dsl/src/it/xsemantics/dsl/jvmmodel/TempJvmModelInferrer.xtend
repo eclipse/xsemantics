@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.dsl.xsemantics.CheckRule
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -104,6 +105,12 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			ts.judgmentDescriptions.forEach [
 				j |
 				members += j.genEntryPointMethods
+			]
+			
+			ts.checkrules.forEach [
+				r |
+				members += r.compileCheckRuleMethod
+				members += r.compileInternalMethod
 			]
 			
 			ts.judgmentDescriptions.forEach [
@@ -252,7 +259,7 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		)
 	}
 	
-	def ruleApplicationTraceParam(JudgmentDescription e) {
+	def ruleApplicationTraceParam(EObject e) {
 		e.toParameter(
 			ruleApplicationTraceName.toString,
 			e.newTypeRef(typeof(RuleApplicationTrace))
@@ -430,12 +437,68 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			exceptions += rule.ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
-   			parameters += rule.judgmentDescription.ruleApplicationTraceParam
+   			parameters += rule.ruleApplicationTraceParam
    			parameters += rule.inputParameters
    			
    			body = [
    				rule.declareVariablesForOutputParams(it) 
    				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
+   			]
+		]
+	}
+
+	def compileCheckRuleMethod(CheckRule rule) {
+		rule.toMethod(
+			'''«rule.methodName»''',
+			rule.resultType
+		) 
+		[
+   			parameters += rule.element.parameter.
+   				toParameter(rule.element.parameter.name,
+   					rule.element.parameter.parameterType
+   				)
+   			
+   			body = [
+   				it.append(
+   				'''
+				try {
+					return «rule.methodName»Internal(null, «rule.element.parameter.name»);
+				} catch ('''
+   				)
+   				rule.exceptionType.serialize(rule, it)
+   				it.append(
+   				'''
+				 e) {
+					return resultForFailure(e);
+				}'''
+   				)
+   			]
+		]
+	}
+
+	def compileInternalMethod(CheckRule rule) {
+		rule.toMethod(
+			'''«rule.methodName»Internal''',
+			rule.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			exceptions += rule.ruleFailedExceptionType
+			
+			parameters += rule.ruleApplicationTraceParam
+   			parameters += rule.element.parameter.
+   				toParameter(rule.element.parameter.name,
+   					rule.element.parameter.parameterType
+   				)
+   			
+   			body = [
+   				rule.compilePremises(it)
+   				if (!it.toString.empty)
+					it.newLine
+				it.append("return new ")
+				rule.resultType(it)
+				it.append("(true);")
    			]
 		]
 	}
@@ -472,10 +535,16 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 		compileReturnResult(rule, resultType, result)
 	}
 	
-	def compilePremises(Rule rule, ITreeAppendable result) {
-		switch rule {
-			RuleWithPremises: xbaseCompiler.compile(rule.premises, result, false)
-		}
+	def dispatch compilePremises(Rule rule, ITreeAppendable result) {
+		
+	}
+
+	def dispatch compilePremises(RuleWithPremises rule, ITreeAppendable result) {
+		xbaseCompiler.compile(rule.premises, result, false)
+	}
+
+	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
+		xbaseCompiler.compile(rule.premises, result, false)
 	}
 	
 	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {

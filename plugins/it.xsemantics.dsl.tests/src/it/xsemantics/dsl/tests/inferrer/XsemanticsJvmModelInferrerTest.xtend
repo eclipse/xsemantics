@@ -135,6 +135,47 @@ protected Result2<EObject,EStructuralFeature> typeInternal(final RuleEnvironment
   }'''
 )
 	}
+	
+	@Test
+	def testCheckRuleInternalMethod() {
+		testFiles.testCheckRule.
+			parseAndAssertNoError.checkrules.get(0).
+				compileInternalMethod.
+				assertGeneratedMember
+(
+'''
+protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
+    
+    {
+      EClass result = null;
+      /* empty |- obj : result */
+      Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
+      checkAssignableTo(result_1.getFirst(), EClass.class);
+      result = (EClass) result_1.getFirst();
+      
+    }
+    return new Result<Boolean>(true);
+  }'''
+)
+	}
+
+	@Test
+	def testCheckRuleMethod() {
+		testFiles.testCheckRule.
+			parseAndAssertNoError.checkrules.get(0).
+				compileCheckRuleMethod.
+				assertGeneratedMember
+(
+'''
+public Result<Boolean> checkEObject(final EObject obj) {
+    try {
+    	return checkEObjectInternal(null, obj);
+    } catch (Exception e) {
+    	return resultForFailure(e);
+    }
+  }'''
+)
+	}
 
 	@Test
 	def testApplyMethodForAxiom() {

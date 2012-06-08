@@ -5,6 +5,7 @@ import it.xsemantics.dsl.generator.TempXsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
@@ -269,6 +270,17 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   public void testResultTypeWithTwoOutputParameters() {
     CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
     this.assertResultType(_testJudgmentDescriptionsWith2OutputParams, "Result2<EObject,EStructuralFeature>");
+  }
+  
+  @Test
+  public void testResultForCheckRule() {
+    final FakeTreeAppendable a = this.createAppendable();
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
+    EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
+    CheckRule _get = _checkrules.get(0);
+    this._tempXsemanticsGeneratorExtensions.resultType(_get, a);
+    this.assertEqualsStrings("Result<Boolean>", a);
   }
   
   public void assertResultType(final CharSequence prog, final CharSequence expected) {

@@ -202,6 +202,14 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		testFiles.testJudgmentDescriptionsWith2OutputParams.
 			assertResultType("Result2<EObject,EStructuralFeature>")
 	}
+
+	@Test
+	def void testResultForCheckRule() {
+		val a = createAppendable
+		testFiles.testCheckRule.parseAndAssertNoError.
+			checkrules.get(0).resultType(a)
+		assertEqualsStrings("Result<Boolean>", a)
+	}
 	
 	def assertResultType(CharSequence prog, CharSequence expected) {
 		val a = createAppendable

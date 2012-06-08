@@ -5,6 +5,7 @@ import it.xsemantics.dsl.generator.UniqueNames;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -690,6 +691,17 @@ public class TempXsemanticsGeneratorExtensions {
     return _xblockexpression;
   }
   
+  public void resultType(final CheckRule checkRule, final IAppendable b) {
+    JvmTypeReference _resultType = this.resultType(checkRule);
+    this._typeReferenceSerializer.serialize(_resultType, checkRule, b);
+  }
+  
+  public JvmTypeReference resultType(final CheckRule checkRule) {
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(checkRule, Boolean.class);
+    JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(checkRule, Result.class, _newTypeRef);
+    return _newTypeRef_1;
+  }
+  
   public JvmTypeReference errorInformationType(final EObject o) {
     JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, ErrorInformation.class);
     return _newTypeRef;
@@ -710,5 +722,11 @@ public class TempXsemanticsGeneratorExtensions {
   
   public String environmentCompositionInvocation() {
     return "environmentComposition";
+  }
+  
+  public String methodName(final CheckRule rule) {
+    String _name = rule.getName();
+    String _firstLower = StringExtensions.toFirstLower(_name);
+    return _firstLower;
   }
 }

@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import org.eclipse.emf.ecore.EObject
 import it.xsemantics.runtime.ErrorInformation
+import it.xsemantics.dsl.xsemantics.CheckRule
 
 class TempXsemanticsGeneratorExtensions {
 	
@@ -292,6 +293,16 @@ class TempXsemanticsGeneratorExtensions {
 			outputParams.map [ it.jvmTypeReference ]
 		}
 	}
+	
+	def resultType(CheckRule checkRule, IAppendable b) {
+		checkRule.resultType.serialize(checkRule, b)
+	}
+
+	def resultType(CheckRule checkRule) {
+		checkRule.newTypeRef(typeof(Result),
+			checkRule.newTypeRef(typeof(Boolean)))
+	}
+	
 
 	def errorInformationType(EObject o) {
 		o.newTypeRef(typeof(ErrorInformation))
@@ -311,5 +322,9 @@ class TempXsemanticsGeneratorExtensions {
 	
 	def environmentCompositionInvocation() {
 		"environmentComposition"
+	}
+
+	def methodName(CheckRule rule) {
+		rule.name.toFirstLower
 	}
 }
