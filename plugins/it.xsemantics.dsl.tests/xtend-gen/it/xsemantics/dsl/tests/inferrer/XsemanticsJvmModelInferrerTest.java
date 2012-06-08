@@ -227,7 +227,50 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testApplyMethods() {
+  public void testApplyMethodForAxiom() {
+    CharSequence _testSimpleAxiom = this.testFiles.testSimpleAxiom();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleAxiom);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    JvmOperation _compileApplyMethod = this.inferrer.compileApplyMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return new Result<Boolean>(true);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileApplyMethod, _builder);
+  }
+  
+  @Test
+  public void testApplyMethodForAxiomWithExpressionInConclusion() {
+    CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testAxiomWithExpressionInConclusion);
+    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    Rule _get = _rules.get(0);
+    JvmOperation _compileApplyMethod = this.inferrer.compileApplyMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EClass _eClass = object.eClass();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return new Result<EClass>(_eClass);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileApplyMethod, _builder);
+  }
+  
+  @Test
+  public void testApplyMethodForRuleWithPremise() {
     CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRuleWithTwoOutputParams);
     EList<Rule> _rules = _parseAndAssertNoError.getRules();

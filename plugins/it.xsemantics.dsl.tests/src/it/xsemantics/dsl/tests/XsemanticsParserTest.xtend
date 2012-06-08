@@ -90,6 +90,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testSimpleAxiom() {
 		parser.parse(testFiles.testSimpleAxiom).assertNoErrors
 	}
+
+	@Test
+	def void testAxiomWithExpressionInConclusion() {
+		parser.parse(testFiles.testAxiomWithExpressionInConclusion).assertNoErrors
+	}
 	
 	@Test
 	def void testSimpleRule() {

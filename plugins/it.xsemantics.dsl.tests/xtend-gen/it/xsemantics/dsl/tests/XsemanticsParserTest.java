@@ -175,6 +175,17 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   }
   
   @Test
+  public void testAxiomWithExpressionInConclusion() {
+    try {
+      CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
+      XsemanticsSystem _parse = this.parser.parse(_testAxiomWithExpressionInConclusion);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSimpleRule() {
     try {
       CharSequence _testSimpleRule = this.testFiles.testSimpleRule();

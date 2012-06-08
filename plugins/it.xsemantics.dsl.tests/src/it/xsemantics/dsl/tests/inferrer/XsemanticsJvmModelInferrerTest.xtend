@@ -137,7 +137,38 @@ protected Result2<EObject,EStructuralFeature> typeInternal(final RuleEnvironment
 	}
 
 	@Test
-	def testApplyMethods() {
+	def testApplyMethodForAxiom() {
+		testFiles.testSimpleAxiom.
+			parseAndAssertNoError.rules.get(0).
+				compileApplyMethod.
+				assertGeneratedMember
+(
+'''
+protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    
+    return new Result<Boolean>(true);
+  }'''
+)
+	}
+	
+	@Test
+	def testApplyMethodForAxiomWithExpressionInConclusion() {
+		testFiles.testAxiomWithExpressionInConclusion.
+			parseAndAssertNoError.rules.get(0).
+				compileApplyMethod.
+				assertGeneratedMember
+(
+'''
+protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
+    
+    EClass _eClass = object.eClass();
+    return new Result<EClass>(_eClass);
+  }'''
+)
+	}
+
+	@Test
+	def testApplyMethodForRuleWithPremise() {
 		testFiles.testRuleWithTwoOutputParams.
 			parseAndAssertNoError.rules.get(0).
 				compileApplyMethod.

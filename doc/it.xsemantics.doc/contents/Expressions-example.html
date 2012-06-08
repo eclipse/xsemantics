@@ -72,7 +72,7 @@ Atomic&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{BooleanType}&nbsp;<span class="string">&apos;boolean&apos;</span><br/>
-;<br/>
+;
 </p>
 </div>
 </div>
@@ -145,7 +145,7 @@ a first implementation (that is why we use "First" in the name of the system).
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;more&nbsp;judgments&nbsp;later<br/>
-</span>}<br/>
+</span>}
 </p>
 </div>
 </div>
@@ -169,7 +169,7 @@ output.
 <br/>
 <span class="keyword">axiom</span>&nbsp;StringLiteral<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createStringType
 </p>
 </div>
 </div>
@@ -196,7 +196,7 @@ an instance of the corresponding type.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.left&nbsp;:&nbsp;intType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.right&nbsp;:&nbsp;intType<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -237,7 +237,7 @@ an <span class="inlinecode">IntType</span> as output argument).
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -277,7 +277,7 @@ Note that we use the operator <span class="inlinecode">or</span>, <a href="Xsema
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;can&nbsp;compare&nbsp;only&nbsp;if&nbsp;they&nbsp;have&nbsp;the&nbsp;same&nbsp;type<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType.eClass&nbsp;==&nbsp;rightType.eClass)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -310,7 +310,7 @@ same type), the comparison (which, in our example, limits to
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ArithmeticSigned&nbsp;signed&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -344,7 +344,7 @@ and write the <span class="inlinecode">type</span> judgment with the first param
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(variable)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;variable<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;ExpressionsPackage::eINSTANCE.variable_Expression<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -371,7 +371,7 @@ This will generate a better error marker.
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;variable.expression&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable.expression&nbsp;:&nbsp;type<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -390,7 +390,7 @@ case of mutual dependencies like
 <div class="incode">
 <p class="code">
 i&nbsp;=&nbsp;j&nbsp;+&nbsp;10<br/>
-j&nbsp;=&nbsp;i&nbsp;*5<br/>
+j&nbsp;=&nbsp;i&nbsp;*5
 </p>
 </div>
 </div>
@@ -414,7 +414,7 @@ validation rules (<a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;
 &nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;variable&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -444,7 +444,7 @@ For the Expressions language we thus introduce another judgment kind:
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<span class="comment">//&nbsp;as&nbsp;above...<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Object<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -467,7 +467,7 @@ We then start writing the rules for this new judgment
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;string.value<br/>
 <br/>
 <span class="keyword">axiom</span>&nbsp;InterpretBooleanLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;~&gt;&nbsp;Boolean::valueOf(bool.value)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;~&gt;&nbsp;Boolean::valueOf(bool.value)
 </p>
 </div>
 </div>
@@ -505,7 +505,7 @@ convert it to an actual boolean.
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;expResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;-(expResult)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -535,7 +535,7 @@ an <span class="inlinecode">Integer</span>.
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;neg.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;expResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;!expResult<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -569,7 +569,7 @@ assumed to be a <span class="inlinecode">Boolean</span>.
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;==&nbsp;rightResult.toString<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -608,7 +608,7 @@ subexpressions to string and compare the resulting string representation.
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;VariableReference&nbsp;varRef&nbsp;~&gt;&nbsp;Object&nbsp;result<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;varRef.ref.expression&nbsp;~&gt;&nbsp;result<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -632,7 +632,7 @@ For the Expressions language we provide a custom implementation of
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -663,8 +663,7 @@ valid (and interpreted accordingly with an implicit conversion):
 <p class="code">
 i&nbsp;=&nbsp;20&nbsp;-&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;int&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;15<br/>
 </span>b&nbsp;=&nbsp;(i&nbsp;&gt;&nbsp;20)&nbsp;||&nbsp;<span class="string">&apos;true&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;boolean&nbsp;type<br/>
-</span><span class="comment">//&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;<br/>
-</span>
+</span><span class="comment">//&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;true</span>
 </p>
 </div>
 </div>
@@ -680,8 +679,7 @@ will be behave as before:
 i&nbsp;=&nbsp;20&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;&apos;205&apos;<br/>
 </span>j&nbsp;=&nbsp;(20&nbsp;*&nbsp;1)&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;again<br/>
 </span>k&nbsp;=&nbsp;20&nbsp;*&nbsp;(1&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>)&nbsp;<span class="comment">//&nbsp;has&nbsp;int&nbsp;type,&nbsp;since&nbsp;*&nbsp;requires&nbsp;int&nbsp;types<br/>
-</span><span class="comment">//&nbsp;on&nbsp;subexpressions<br/>
-</span>
+</span><span class="comment">//&nbsp;on&nbsp;subexpressions</span>
 </p>
 </div>
 </div>
@@ -699,7 +697,7 @@ Thus, we introduce a new judgment in our system
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;convert&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;to&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expectedType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -722,7 +720,7 @@ We then have to define the rules for this new judgment:
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"true"</span>)&nbsp;||<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"false"</span>)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -755,7 +753,7 @@ type now depends on the above expectation:
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -799,7 +797,7 @@ in order to pass to rule invocation an appropriate environment:
 &nbsp;&nbsp;&nbsp;&nbsp;boolType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.left&nbsp;:&nbsp;boolType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.right&nbsp;:&nbsp;boolType<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -826,7 +824,7 @@ current rule upon invocation.  This is the case of comparison:
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -861,7 +859,7 @@ has to take care of possible expectations:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -901,7 +899,7 @@ consideration expectations:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;*&nbsp;rightResult.intValue<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;/&nbsp;rightResult.intValue<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -949,7 +947,7 @@ The relevant part of the generator (written in Xtend2) is shown:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpretation&nbsp;trace:&nbsp;&laquo;interpreterTrace.traceAsString&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -966,13 +964,7 @@ are used as extension methods.
 Thus, starting from this expression:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myString&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">myString&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false</span>
 </p>
 <p>
 we get this output:
@@ -996,7 +988,7 @@ InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&
 &nbsp;InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;~&gt;&nbsp;<span class="string">&apos;foo10&apos;</span><br/>
 &nbsp;&nbsp;InterpretStringLiteral:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;~&gt;&nbsp;<span class="string">&apos;foo&apos;</span><br/>
 &nbsp;&nbsp;InterpretNumberLiteral:&nbsp;[]&nbsp;|-&nbsp;10&nbsp;~&gt;&nbsp;10<br/>
-&nbsp;InterpretBooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;~&gt;&nbsp;false<br/>
+&nbsp;InterpretBooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;~&gt;&nbsp;false
 </p>
 </div>
 </div>
@@ -1016,7 +1008,7 @@ implicit coercions is
 <div class="incode">
 <p class="code">
 intVar&nbsp;=&nbsp;1<br/>
-intVar2&nbsp;=&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)<br/>
+intVar2&nbsp;=&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)
 </p>
 </div>
 </div>
@@ -1047,7 +1039,7 @@ InterpretMultiOrDiv:&nbsp;[]&nbsp;|-&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<spa
 &nbsp;InterpretPlus:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;2<br/>
 &nbsp;&nbsp;InterpretVariableRefenrence:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;~&gt;&nbsp;1<br/>
 &nbsp;&nbsp;&nbsp;InterpretNumberLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;1&nbsp;~&gt;&nbsp;1<br/>
-&nbsp;&nbsp;InterpretStringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;1<br/>
+&nbsp;&nbsp;InterpretStringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;1
 </p>
 </div>
 </div>
