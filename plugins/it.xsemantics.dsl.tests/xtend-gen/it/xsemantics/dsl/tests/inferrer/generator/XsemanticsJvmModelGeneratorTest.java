@@ -1,15 +1,19 @@
 package it.xsemantics.dsl.tests.inferrer.generator;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
+import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper;
+import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper.Result;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import junit.framework.Assert;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +23,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   @Inject
-  private CompilationTestHelper _compilationTestHelper;
+  private XsemanticsCompilationTestHelper _xsemanticsCompilationTestHelper;
   
   @Test
   public void testJudgmentDescriptions() {
@@ -1236,16 +1240,105 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     this.assertCorrectJavaCodeGeneration(_testCheckRule, _builder);
   }
   
+  @Test
+  public void testValidator() {
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package it.xsemantics.test.validation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import com.google.inject.Inject;");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.test.TypeSystem;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.validation.Check;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class TypeSystemValidator extends XsemanticsBasedDeclarativeValidator {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("@Inject");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("protected TypeSystem xsemanticsSystem;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("@Check");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public void checkEObject(final EObject obj) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("generateErrors(");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("xsemanticsSystem.checkEObject(obj),");
+    _builder.newLine();
+    _builder.append("    \t\t");
+    _builder.append("obj);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCorrectJavaCodeGeneration(_testCheckRule, 
+      null, _builder);
+  }
+  
   private void assertCorrectJavaCodeGeneration(final CharSequence input, final CharSequence expected) {
+    this.assertCorrectJavaCodeGeneration(input, expected, null);
+  }
+  
+  private void assertCorrectJavaCodeGeneration(final CharSequence input, final CharSequence expected, final CharSequence expectedValidator) {
     final Procedure1<Result> _function = new Procedure1<Result>() {
         public void apply(final Result it) {
-          String _string = expected.toString();
-          String _generatedCode = it.getGeneratedCode();
-          Assert.assertEquals(_string, _generatedCode);
-          it.getCompiledClass();
+          Map<String,CharSequence> _allGeneratedResources = it.getAllGeneratedResources();
+          Set<Entry<String,CharSequence>> _entrySet = _allGeneratedResources.entrySet();
+          for (final Entry<String,CharSequence> e : _entrySet) {
+            boolean _and = false;
+            String _key = e.getKey();
+            boolean _endsWith = _key.endsWith("Validator.java");
+            if (!_endsWith) {
+              _and = false;
+            } else {
+              boolean _notEquals = (!Objects.equal(expectedValidator, null));
+              _and = (_endsWith && _notEquals);
+            }
+            if (_and) {
+              String _string = expectedValidator.toString();
+              CharSequence _value = e.getValue();
+              String _string_1 = _value.toString();
+              Assert.assertEquals(_string, _string_1);
+            } else {
+              boolean _and_1 = false;
+              String _key_1 = e.getKey();
+              boolean _endsWith_1 = _key_1.endsWith("Validator.java");
+              boolean _not = (!_endsWith_1);
+              if (!_not) {
+                _and_1 = false;
+              } else {
+                boolean _notEquals_1 = (!Objects.equal(expected, null));
+                _and_1 = (_not && _notEquals_1);
+              }
+              if (_and_1) {
+                String _string_2 = expected.toString();
+                CharSequence _value_1 = e.getValue();
+                String _string_3 = _value_1.toString();
+                Assert.assertEquals(_string_2, _string_3);
+              }
+            }
+          }
+          it.compileToJava();
         }
       };
-    this._compilationTestHelper.compile(input, new IAcceptor<Result>() {
+    this._xsemanticsCompilationTestHelper.compileAll(input, new IAcceptor<Result>() {
         public void accept(Result t) {
           _function.apply(t);
         }

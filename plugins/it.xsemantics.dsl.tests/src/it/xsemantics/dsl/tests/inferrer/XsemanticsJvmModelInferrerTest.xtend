@@ -321,6 +321,23 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
   }'''
 )
 	}
+
+	@Test
+	def testCompileValidatorCheckRuleMethod() {
+		testFiles.testCheckRule.
+			parseAndAssertNoError.checkrules.get(0).
+				compileValidatorCheckRuleMethod.
+				assertGeneratedMember
+(
+'''
+@Check
+  public void checkEObject(final EObject obj) {
+    generateErrors(
+    	xsemanticsSystem.checkEObject(obj),
+    		obj);
+  }'''
+)
+	}
 	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)

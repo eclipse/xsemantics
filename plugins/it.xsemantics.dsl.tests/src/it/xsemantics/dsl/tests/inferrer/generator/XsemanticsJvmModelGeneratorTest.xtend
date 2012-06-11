@@ -2,10 +2,10 @@ package it.xsemantics.dsl.tests.inferrer.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -15,7 +15,7 @@ import static junit.framework.Assert.*
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
-	@Inject extension CompilationTestHelper
+	@Inject extension XsemanticsCompilationTestHelper
 	
 	@Test
 	def testJudgmentDescriptions() {
@@ -497,13 +497,54 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 		)
 	}
+
+	@Test
+	def testValidator() {
+		testFiles.testCheckRule.assertCorrectJavaCodeGeneration(
+			null,
+'''
+package it.xsemantics.test.validation;
+
+import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
+import it.xsemantics.test.TypeSystem;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
+
+public class TypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
+  @Inject
+  protected TypeSystem xsemanticsSystem;
+  
+  @Check
+  public void checkEObject(final EObject obj) {
+    generateErrors(
+    	xsemanticsSystem.checkEObject(obj),
+    		obj);
+  }
+}
+'''
+		)
+	}
 	
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
-		input.compile [
-			// check the expected Java code
-			assertEquals(expected.toString, generatedCode)
+		assertCorrectJavaCodeGeneration(input, expected, null)		
+	}
+
+	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected, CharSequence expectedValidator) {
+		input.compileAll [
+			for (e : allGeneratedResources.entrySet) {
+				if (e.key.endsWith("Validator.java") && expectedValidator != null) {
+					// check the expected Java code for the validator
+					assertEquals(expectedValidator.toString, e.value.toString)
+				} else if (!e.key.endsWith("Validator.java") && expected != null) {
+					// check the expected Java code for the system
+					assertEquals(expected.toString, e.value.toString)
+				}
+			}
+			
+			
 			// this will issue Java generation
-			compiledClass
+			compileToJava
 		]
 	}
 	

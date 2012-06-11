@@ -28,6 +28,9 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.validation.Check
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -47,6 +50,8 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XsemanticsUtils
 	
 	@Inject extension TypeReferenceSerializer
+	
+	@Inject extension TypeReferences
 	
 	@Inject XsemanticsXbaseCompiler xbaseCompiler
 	
@@ -78,8 +83,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(XsemanticsSystem ts, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+   		val inferredClass = ts.toClass( ts.toJavaFullyQualifiedName )
+   		
    		acceptor.accept(
-			ts.toClass( ts.toJavaFullyQualifiedName )
+			inferredClass
 		).initializeLater [
 			documentation = ts.documentation
 			
@@ -125,6 +132,25 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				rule |
 				members += rule.compileImplMethod
 				members += rule.compileApplyMethod
+			]
+		]
+		
+		// generation of the Validator
+		acceptor.accept(
+			ts.toClass( ts.toValidatorJavaFullyQualifiedName )
+		).initializeLater [
+			documentation = ts.documentation
+			
+			superTypes += ts.newTypeRef(typeof(XsemanticsBasedDeclarativeValidator))
+			
+			members += ts.toField("xsemanticsSystem", inferredClass.createTypeRef) [
+				annotations += ts.toAnnotation(typeof(Inject))
+				visibility = JvmVisibility::PROTECTED
+			]
+			
+			ts.checkrules.forEach [
+				rule |
+				members += rule.compileValidatorCheckRuleMethod
 			]
 		]
    	}
@@ -471,6 +497,30 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 				 e) {
 					return resultForFailure(e);
 				}'''
+   				)
+   			]
+		]
+	}
+
+	def compileValidatorCheckRuleMethod(CheckRule rule) {
+		rule.toMethod(
+			'''«rule.methodName»''',
+			Void::TYPE.getTypeForName(rule)
+		) 
+		[
+			annotations += rule.toAnnotation(typeof(Check))
+			
+   			parameters += rule.element.parameter.
+   				toParameter(rule.element.parameter.name,
+   					rule.element.parameter.parameterType
+   				)
+   			
+   			body = [
+   				it.append(
+   				'''
+				generateErrors(
+					xsemanticsSystem.«rule.methodName»(«rule.element.parameter.name»),
+						«rule.element.parameter.name»);'''
    				)
    			]
 		]

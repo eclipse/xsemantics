@@ -519,6 +519,33 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     this.assertGeneratedMember(_compileImplMethod, _builder);
   }
   
+  @Test
+  public void testCompileValidatorCheckRuleMethod() {
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
+    EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
+    CheckRule _get = _checkrules.get(0);
+    JvmOperation _compileValidatorCheckRuleMethod = this.inferrer.compileValidatorCheckRuleMethod(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Check");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public void checkEObject(final EObject obj) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("generateErrors(");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("xsemanticsSystem.checkEObject(obj),");
+    _builder.newLine();
+    _builder.append("    \t\t");
+    _builder.append("obj);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    this.assertGeneratedMember(_compileValidatorCheckRuleMethod, _builder);
+  }
+  
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {
     Rule _firstRule = this.getFirstRule(prog);
     final JvmField field = this.inferrer.genIssueField(_firstRule);

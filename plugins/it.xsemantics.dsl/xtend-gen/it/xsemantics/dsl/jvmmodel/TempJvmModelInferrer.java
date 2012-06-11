@@ -22,6 +22,7 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -29,16 +30,20 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -76,6 +81,9 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
   private TypeReferenceSerializer _typeReferenceSerializer;
   
   @Inject
+  private TypeReferences _typeReferences;
+  
+  @Inject
   private XsemanticsXbaseCompiler xbaseCompiler;
   
   @Inject
@@ -108,8 +116,8 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
    */
   protected void _infer(final XsemanticsSystem ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     String _javaFullyQualifiedName = this._tempXsemanticsGeneratorExtensions.toJavaFullyQualifiedName(ts);
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(ts, _javaFullyQualifiedName);
-    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    final JvmGenericType inferredClass = this._jvmTypesBuilder.toClass(ts, _javaFullyQualifiedName);
+    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(inferredClass);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           String _documentation = TempJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
@@ -196,6 +204,40 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
         }
       };
     _accept.initializeLater(_function);
+    String _validatorJavaFullyQualifiedName = this._tempXsemanticsGeneratorExtensions.toValidatorJavaFullyQualifiedName(ts);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(ts, _validatorJavaFullyQualifiedName);
+    IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(_class);
+    final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          String _documentation = TempJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
+          TempJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+          EList<JvmTypeReference> _superTypes = it.getSuperTypes();
+          JvmTypeReference _newTypeRef = TempJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsBasedDeclarativeValidator.class);
+          TempJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+          EList<JvmMember> _members = it.getMembers();
+          JvmParameterizedTypeReference _createTypeRef = TempJvmModelInferrer.this._typeReferences.createTypeRef(inferredClass);
+          final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+              public void apply(final JvmField it) {
+                EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+                JvmAnnotationReference _annotation = TempJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Inject.class);
+                TempJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+                it.setVisibility(JvmVisibility.PROTECTED);
+              }
+            };
+          JvmField _field = TempJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "xsemanticsSystem", _createTypeRef, _function);
+          TempJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
+          EList<CheckRule> _checkrules = ts.getCheckrules();
+          final Procedure1<CheckRule> _function_1 = new Procedure1<CheckRule>() {
+              public void apply(final CheckRule rule) {
+                EList<JvmMember> _members = it.getMembers();
+                JvmOperation _compileValidatorCheckRuleMethod = TempJvmModelInferrer.this.compileValidatorCheckRuleMethod(rule);
+                TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileValidatorCheckRuleMethod);
+              }
+            };
+          IterableExtensions.<CheckRule>forEach(_checkrules, _function_1);
+        }
+      };
+    _accept_1.initializeLater(_function_1);
   }
   
   public JvmField genIssueField(final Rule rule) {
@@ -983,6 +1025,59 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
         }
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _builder.toString(), _resultType, _function);
+    return _method;
+  }
+  
+  public JvmOperation compileValidatorCheckRuleMethod(final CheckRule rule) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _methodName = this._tempXsemanticsGeneratorExtensions.methodName(rule);
+    _builder.append(_methodName, "");
+    JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, rule);
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+          JvmAnnotationReference _annotation = TempJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Check.class);
+          TempJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          EList<JvmFormalParameter> _parameters = it.getParameters();
+          RuleParameter _element = rule.getElement();
+          JvmFormalParameter _parameter = _element.getParameter();
+          RuleParameter _element_1 = rule.getElement();
+          JvmFormalParameter _parameter_1 = _element_1.getParameter();
+          String _name = _parameter_1.getName();
+          RuleParameter _element_2 = rule.getElement();
+          JvmFormalParameter _parameter_2 = _element_2.getParameter();
+          JvmTypeReference _parameterType = _parameter_2.getParameterType();
+          JvmFormalParameter _parameter_3 = TempJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
+          TempJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter_3);
+          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+              public void apply(final ITreeAppendable it) {
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("generateErrors(");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("xsemanticsSystem.");
+                String _methodName = TempJvmModelInferrer.this._tempXsemanticsGeneratorExtensions.methodName(rule);
+                _builder.append(_methodName, "	");
+                _builder.append("(");
+                RuleParameter _element = rule.getElement();
+                JvmFormalParameter _parameter = _element.getParameter();
+                String _name = _parameter.getName();
+                _builder.append(_name, "	");
+                _builder.append("),");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                RuleParameter _element_1 = rule.getElement();
+                JvmFormalParameter _parameter_1 = _element_1.getParameter();
+                String _name_1 = _parameter_1.getName();
+                _builder.append(_name_1, "		");
+                _builder.append(");");
+                it.append(_builder);
+              }
+            };
+          TempJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+        }
+      };
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _builder.toString(), _typeForName, _function);
     return _method;
   }
   
