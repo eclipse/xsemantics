@@ -81,6 +81,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		error("Return statements are not allowed here", expr, null,
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
+	
+	@Override
+	@Check
+	public void checkImplicitReturn(XExpression expr) {
+		// we will deal with this during generation
+		return;
+	}
 
 	@Check
 	public void checkThrow(XThrowExpression expr) {

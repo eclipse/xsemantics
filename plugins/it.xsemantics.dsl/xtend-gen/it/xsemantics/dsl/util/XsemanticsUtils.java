@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -38,6 +39,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class XsemanticsUtils {
   @Inject
   private XsemanticsSubtyping _xsemanticsSubtyping;
+  
+  @Inject
+  private IJvmModelAssociations associations;
   
   public List<JvmTypeReference> getJvmTypes(final XsemanticsSystem ts) {
     List<JvmTypeReference> _allContentsOfType = EcoreUtil2.<JvmTypeReference>getAllContentsOfType(ts, JvmTypeReference.class);
@@ -304,7 +308,19 @@ public class XsemanticsUtils {
         boolean _isInputParam = this.isInputParam(ruleParameter);
         _xifexpression = _isInputParam;
       } else {
-        _xifexpression = false;
+        boolean _xblockexpression_1 = false;
+        {
+          final EObject sourceElement = this.associations.getPrimarySourceElement(jvmFormalParameter);
+          boolean _xifexpression_1 = false;
+          if ((sourceElement instanceof RuleParameter)) {
+            boolean _isInputParam_1 = this.isInputParam(((RuleParameter) sourceElement));
+            _xifexpression_1 = _isInputParam_1;
+          } else {
+            _xifexpression_1 = false;
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }

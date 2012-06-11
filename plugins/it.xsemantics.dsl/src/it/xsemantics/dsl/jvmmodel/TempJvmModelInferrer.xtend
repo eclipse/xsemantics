@@ -130,8 +130,10 @@ class TempJvmModelInferrer extends AbstractModelInferrer {
 			
 			ts.rules.forEach [
 				rule |
-				members += rule.compileImplMethod
-				members += rule.compileApplyMethod
+				if (rule.judgmentDescription != null) {
+					members += rule.compileImplMethod
+					members += rule.compileApplyMethod
+				}
 			]
 		]
 		

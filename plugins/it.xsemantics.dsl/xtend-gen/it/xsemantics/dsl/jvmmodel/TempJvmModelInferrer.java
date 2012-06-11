@@ -192,12 +192,16 @@ public class TempJvmModelInferrer extends AbstractModelInferrer {
           EList<Rule> _rules_1 = ts.getRules();
           final Procedure1<Rule> _function_5 = new Procedure1<Rule>() {
               public void apply(final Rule rule) {
-                EList<JvmMember> _members = it.getMembers();
-                JvmOperation _compileImplMethod = TempJvmModelInferrer.this.compileImplMethod(rule);
-                TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileImplMethod);
-                EList<JvmMember> _members_1 = it.getMembers();
-                JvmOperation _compileApplyMethod = TempJvmModelInferrer.this.compileApplyMethod(rule);
-                TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileApplyMethod);
+                JudgmentDescription _judgmentDescription = TempJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
+                boolean _notEquals = (!Objects.equal(_judgmentDescription, null));
+                if (_notEquals) {
+                  EList<JvmMember> _members = it.getMembers();
+                  JvmOperation _compileImplMethod = TempJvmModelInferrer.this.compileImplMethod(rule);
+                  TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileImplMethod);
+                  EList<JvmMember> _members_1 = it.getMembers();
+                  JvmOperation _compileApplyMethod = TempJvmModelInferrer.this.compileApplyMethod(rule);
+                  TempJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileApplyMethod);
+                }
               }
             };
           IterableExtensions.<Rule>forEach(_rules_1, _function_5);
