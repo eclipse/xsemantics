@@ -572,7 +572,7 @@ e = (EClass) result.getFirst();
 	
 	def void checkCompilationOfAllPremises(CharSequence inputCode, CharSequence expected) {
 		val rule = inputCode.firstRule
-		val result = rule.createAppendable
+		val result = rule.createJvmModelGeneratorConfiguredAppendable
 		val xexp = rule.rulePremisesAsBlock
 		xbaseCompiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)

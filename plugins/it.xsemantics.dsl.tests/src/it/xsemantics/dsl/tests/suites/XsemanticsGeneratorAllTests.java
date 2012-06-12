@@ -5,8 +5,8 @@ import it.xsemantics.dsl.tests.generator.UniqueNamesTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsErrorSpecificationGeneratorTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorExtensionsTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorRunnerTests;
-import it.xsemantics.dsl.tests.generator.XsemanticsRuleGeneratorTest;
-import it.xsemantics.dsl.tests.generator.XsemanticsSystemGeneratorTest;
+import it.xsemantics.dsl.tests.generator.XsemanticsJvmModelGeneratorTest;
+import it.xsemantics.dsl.tests.generator.XsemanticsJvmModelInferrerTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsXExpressionCompilerTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsXbaseCompilerTest;
 
@@ -19,10 +19,10 @@ import org.junit.runners.Suite;
 	XsemanticsGeneratorExtensionsTest.class,
 	XsemanticsXbaseCompilerTest.class,
 	XsemanticsXExpressionCompilerTest.class,
-	XsemanticsRuleGeneratorTest.class,
+	XsemanticsJvmModelInferrerTest.class,
+	XsemanticsJvmModelGeneratorTest.class,
 	XsemanticsGeneratorRunnerTests.class,
 	XsemanticsErrorSpecificationGeneratorTest.class,
-	XsemanticsSystemGeneratorTest.class,
 	GeneratedJavaCodeTest.class
 })
 public class XsemanticsGeneratorAllTests {

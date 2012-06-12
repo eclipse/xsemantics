@@ -1,9 +1,9 @@
-package it.xsemantics.dsl.tests.inferrer
+package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
 
 import static extension junit.framework.Assert.*
 
-@InjectWith(typeof(XsemanticsInjectorProviderForInferrer))
+@InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	

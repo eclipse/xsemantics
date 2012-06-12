@@ -3,7 +3,6 @@ package it.xsemantics.dsl.tests.generator;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator;
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -11,9 +10,8 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +20,6 @@ import org.junit.runner.RunWith;
 @RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseTest {
-  @Inject
-  private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
-  
   @Inject
   private XsemanticsErrorSpecificationGenerator errSpecGenerator;
   
@@ -111,8 +106,7 @@ public class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGenerat
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(inputProgram);
     final JudgmentDescription jDesc = this.firstJudgmentDescription(_parseAndAssertNoError);
     final ErrorSpecification errSpec = this.firstErrorSpecification(jDesc);
-    ImportManager _importManager = new ImportManager(true);
-    final TreeAppendable appendable = this._xsemanticsGeneratorExtensions.createAndConfigureAppendable(jDesc, _importManager);
+    final FakeTreeAppendable appendable = this.createAppendable();
     final String variable = compilation.apply(errSpec, appendable);
     this.assertEqualsStrings(expected, appendable);
     this.assertEqualsStrings(expectedVar, variable);

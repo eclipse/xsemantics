@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1097,7 +1098,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   
   public void checkCompilationOfAllPremises(final CharSequence inputCode, final CharSequence expected) {
     final Rule rule = this.getFirstRule(inputCode);
-    final ITreeAppendable result = this.createAppendable(rule);
+    final TreeAppendable result = this.createJvmModelGeneratorConfiguredAppendable(rule);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
     this.xbaseCompiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();

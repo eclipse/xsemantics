@@ -3,11 +3,9 @@ package it.xsemantics.dsl.tests.generator
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,8 +14,6 @@ import org.junit.runner.RunWith
 @RunWith(typeof(XtextRunner))
 class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseTest {
 
-	@Inject extension XsemanticsGeneratorExtensions
-	
 	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
 	
 	@Test
@@ -92,8 +88,7 @@ EStructuralFeature feature = _eContainingFeature;''', "feature")
 	) {
 		val jDesc = inputProgram.parseAndAssertNoError.firstJudgmentDescription
 		val errSpec = jDesc.firstErrorSpecification
-		val appendable = 
-			jDesc.createAndConfigureAppendable(new ImportManager(true))
+		val appendable = createAppendable
 		val variable = compilation.apply(errSpec, appendable)
 		assertEqualsStrings(expected, appendable)
 		assertEqualsStrings(expectedVar, variable)

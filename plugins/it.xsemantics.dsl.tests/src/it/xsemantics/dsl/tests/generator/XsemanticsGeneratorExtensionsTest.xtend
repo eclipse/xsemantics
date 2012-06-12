@@ -1,16 +1,15 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest
 import it.xsemantics.dsl.util.XsemanticsUtils
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import junit.framework.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -27,12 +26,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testTypeSystemToJavaClassFile() {
-		Assert::assertEquals("it/xsemantics/test/TypeSystem.java",
-			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaClassFile)
-	}
-
-	@Test
 	def void testTypeSystemToJavaFullyQualifiedName() {
 		Assert::assertEquals("it.xsemantics.test.TypeSystem",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaFullyQualifiedName)
@@ -45,25 +38,11 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testTypeSystemToJavaClassNameNoQualified() {
-		Assert::assertEquals("TypeSystem",
-			testFiles.typeSystemNoQualifiedName.parseAndAssertNoError.toJavaClassName)
-		Assert::assertEquals("TypeSystem.java",
-			testFiles.typeSystemNoQualifiedName.parseAndAssertNoError.toJavaClassFile)
-	}
-	
-	@Test
 	def void testTypeSystemToValidatorPackage() {
 		Assert::assertEquals("it.xsemantics.test.validation",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorPackage)
 	}
 	
-	@Test
-	def void testTypeSystemToValidatorJavaClassFile() {
-		Assert::assertEquals("it/xsemantics/test/validation/TypeSystemValidator.java",
-			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorJavaClassFile)
-	}
-
 	@Test
 	def void testTypeSystemToValidatorJavaFullyQualifiedName() {
 		Assert::assertEquals("it.xsemantics.test.validation.TypeSystemValidator",
@@ -74,12 +53,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	def void testRuleToPackage() {
 		Assert::assertEquals("it.xsemantics.test.rules",
 			testFiles.testSimpleRule.firstRule.toPackage)
-	}
-	
-	@Test
-	def void testRuleToJavaClassFile() {
-		Assert::assertEquals("it/xsemantics/test/rules/EClassEObject.java",
-			testFiles.testSimpleRule.firstRule.toJavaClassFile)
 	}
 	
 	@Test
@@ -99,79 +72,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		Assert::assertEquals("EClassEObject",
 			testFiles.testSimpleAxiom.firstRule.toJavaClassName)
 	}
-	
-	@Test
-	def void testJvmTypeForTypeSystem() {
-		val jvmType = testFiles.typeSystemQualifiedName.parseAndAssertNoError.createJvmType
-		Assert::assertEquals("it.xsemantics.test.TypeSystem", jvmType.identifier)
-	}
-	
-	@Test
-	def void testJvmTypeForBaseTypeSystem() {
-		Assert::assertEquals(typeof(XsemanticsRuntimeSystem).name,
-			createJvmTypeForTypeSystemBaseClass.identifier)
-	}
-	
-	@Test
-	def void testJvmTypeForRule() {
-		val jvmType = testFiles.testSimpleRule.firstRule.createJvmType
-		Assert::assertEquals("it.xsemantics.test.rules.EClassEObject", jvmType.identifier)
-	}
-	
-	@Test
-	def void testInjectAnnotation() {
-		Assert::assertEquals("@Inject", new ImportManager(true).injectAnnotation)
-	}
-	
-	@Test
-	def void testCheckAnnotation() {
-		Assert::assertEquals("@Check", new ImportManager(true).checkAnnotation)
-	}
-	
-	@Test
-	def void testRuleInputParameters() {
-		Assert::assertEquals("final EClass eClass, final EObject object",
-				testFiles.testSimpleRule.firstRule.
-				inputParameters(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void errorInformationArgs() {
-		Assert::assertEquals(", new ErrorInformation(eClass), new ErrorInformation(object)",
-				testFiles.testSimpleRule.firstRule.
-				errorInformationArgs(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void errorInformationArgsEmpty() {
-		Assert::assertEquals("",
-				testFiles.testRulesWithOnlyNonEObjectParams.firstRule.
-				errorInformationArgs(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testJudgmentDescriptionInputParameters() {
-		Assert::assertEquals("final EClass c, final EObject o",
-				testFiles.testSimpleRule.firstRule.judgmentDescription.
-				inputParameters(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testJudgmentDescriptionInputParametersWithParametrizedTypes() {
-		Assert::assertEquals("final List<Import> list, final Set<JudgmentDescription> set",
-				testFiles.testJudgmentDescriptionsRelatedToXsemantics.
-				parseAndAssertNoError.getJudgmentDescriptions.get(0).
-				inputParameters(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testInputParametersWithNameClashes() {
-		Assert::assertEquals("final Type left, final Type right",
-				fjTestFiles.fjJudgmentDescriptions.
-				parseAndAssertNoError.getJudgmentDescriptions.get(1).
-				inputParameters(new ImportManager(true)).toString)
-	}
-	
+
 	@Test
 	def void testJudgmentDescriptionInputArgs() {
 		Assert::assertEquals("c, o",
@@ -187,34 +88,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testRuleReturnTypeWithoutOutputParams() {
-		Assert::assertEquals("Boolean",
-				testFiles.testSimpleRule.firstRule.
-				ruleResultTypeParameters(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testResultTypeForCheckRule() {
-		Assert::assertEquals("Result<Boolean>",
-				testFiles.testCheckRule.firstCheckRule.
-				resultType(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testInputParameterForCheckRule() {
-		Assert::assertEquals("final EObject obj",
-				testFiles.testCheckRule.firstCheckRule.
-				inputParameter(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testRuleReturnWithoutOutputParams() {
-		Assert::assertEquals("Result<Boolean>",
-				testFiles.testSimpleRule.firstRule.
-				resultType(new ImportManager(true)).toString)
-	}
-	
-	@Test
 	def void testPolymorphicDispatcherNumOfArgs() {
 		Assert::assertEquals("4",
 				testFiles.testSimpleRule.firstRule.judgmentDescription.
@@ -226,21 +99,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		Assert::assertEquals("4",
 				testFiles.testRuleWithOutputParams.firstRule.judgmentDescription.
 				polymorphicDispatcherNumOfArgs().toString)
-	}
-	
-	@Test
-	def void testJudgmentDescriptionResultType() {
-		Assert::assertEquals("Result<Boolean>",
-				testFiles.testSimpleRule.parseAndAssertNoError.getJudgmentDescriptions.get(0).
-				resultType(new ImportManager(true)).toString)
-	}
-	
-	@Test
-	def void testJudgmentDescriptionResultType2() {
-		Assert::assertEquals("Result2<EObject, EStructuralFeature>",
-				testFiles.testJudgmentDescriptionsWith2OutputParams.
-				parseAndAssertNoError.getJudgmentDescriptions.get(0).
-				resultType(new ImportManager(true)).toString)
 	}
 	
 	@Test
@@ -268,26 +126,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testJudgmentDescriptionResultTypeWithAppendable() {
-		val appendable = createAppendable
-		Assert::assertEquals("Result<Boolean>",
-				testFiles.testSimpleRule.parseAndAssertNoError.getJudgmentDescriptions.get(0).
-				resultType(appendable).toString)
-	}
-	
-	@Test
-	def void testAdditionalParamsDeclaration() {
-		Assert::assertEquals("final RuleEnvironment _environment_, final RuleApplicationTrace _trace_",
-				(new ImportManager(true)).additionalParamsDeclaration.toString)
-	}
-	
-	@Test
-	def void testAdditionalParamsDeclarationForRule() {
-		Assert::assertEquals("final RuleEnvironment G, final RuleApplicationTrace _trace_",
-				testFiles.testSimpleRule.firstRule.additionalParamsDeclaration(new ImportManager(true)).toString)
-	}
-	
-	@Test
 	def void testAdditionalArgs() {
 		Assert::assertEquals("_environment_, _trace_",
 				additionalArgs.toString)
@@ -298,14 +136,14 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		Assert::assertEquals("G, _subtrace_",
 				testFiles.testSimpleRule.firstRule.additionalArgsForRule.toString)
 	}
-	
+
 	@Test
 	def void testAdditionalArgsForRuleInvocation() {
 		Assert::assertEquals("_trace_",
 				testFiles.testRuleOnlyInvokingRules.firstRule.
 				ruleInvocationFromPremises.additionalArgsForRuleInvocation.toString)
 	}
-	
+
 	@Test
 	def void testJavaString() {
 		Assert::assertEquals("foo", "foo".javaString)
@@ -349,10 +187,35 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testRuleIssueDeclaration() {
-		assertEqualsStrings('public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";',
-			testFiles.testSimpleRule.firstRule.ruleIssueDeclaration(new ImportManager(true))
-		)
+	def void testResultTypeWithNoOutputParameter() {
+		testFiles.testSimpleRule.assertResultType("Result<Boolean>")
+	}
+
+	@Test
+	def void testResultTypeWithOneOutputParameter() {
+		testFiles.testJudgmentDescriptionsReferringToEcoreWithOutput.
+			assertResultType("Result<EObject>")
+	}
+
+	@Test
+	def void testResultTypeWithTwoOutputParameters() {
+		testFiles.testJudgmentDescriptionsWith2OutputParams.
+			assertResultType("Result2<EObject,EStructuralFeature>")
+	}
+
+	@Test
+	def void testResultForCheckRule() {
+		val a = createAppendable
+		testFiles.testCheckRule.parseAndAssertNoError.
+			checkrules.get(0).resultType(a)
+		assertEqualsStrings("Result<Boolean>", a)
 	}
 	
+	def assertResultType(CharSequence prog, CharSequence expected) {
+		val a = createAppendable
+		prog.parseAndAssertNoError.judgmentDescriptions.get(0).
+			resultType(a)
+		assertEqualsStrings(expected, a)
+	}
+
 }

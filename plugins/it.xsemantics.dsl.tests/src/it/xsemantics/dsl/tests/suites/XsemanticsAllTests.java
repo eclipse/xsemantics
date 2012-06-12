@@ -9,7 +9,6 @@ import org.junit.runners.Suite;
 	XsemanticsRuntimeAllTests.class,
 	XsemanticsGeneratorAllTests.class,
 	XsemanticsGeneratedTypeSystemsAllTests.class,
-	XsemanticsGeneratorInferrerAllTests.class,
 	XsemanticsExamplesAllTests.class
 })
 public class XsemanticsAllTests {

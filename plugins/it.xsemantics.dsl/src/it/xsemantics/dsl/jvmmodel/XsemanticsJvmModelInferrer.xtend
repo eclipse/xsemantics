@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.generator.TempXsemanticsGeneratorExtensions
 import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
@@ -31,6 +30,7 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.validation.Check
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -45,7 +45,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
      */
 	@Inject extension JvmTypesBuilder
 	
-	@Inject extension TempXsemanticsGeneratorExtensions
+	@Inject extension XsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
 	

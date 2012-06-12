@@ -1,11 +1,11 @@
-package it.xsemantics.dsl.tests.inferrer.generator;
+package it.xsemantics.dsl.tests.generator;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper;
 import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper.Result;
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderForInferrer.class)
+@InjectWith(value = XsemanticsInjectorProviderCustom.class)
 @RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {

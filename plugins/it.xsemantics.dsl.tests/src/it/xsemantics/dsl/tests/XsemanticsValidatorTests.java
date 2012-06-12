@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.tests;
 
-import it.xsemantics.dsl.tests.inferrer.XsemanticsAbstractTests;
 import it.xsemantics.dsl.validation.IssueCodes;
 import it.xsemantics.dsl.validation.XsemanticsJavaValidator;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;

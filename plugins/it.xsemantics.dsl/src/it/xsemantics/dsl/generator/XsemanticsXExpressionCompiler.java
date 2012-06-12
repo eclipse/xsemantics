@@ -43,7 +43,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	protected XsemanticsUtils xsemanticsUtils;
 
 	@Inject
-	protected TempXsemanticsGeneratorExtensions generatorExtensions;
+	protected XsemanticsGeneratorExtensions generatorExtensions;
 
 	@Inject
 	protected XsemanticsTypingSystem typingSystem;
