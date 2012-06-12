@@ -510,4 +510,37 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testFailSideEffect() {
+    try {
+      CharSequence _testFailSideEffect = this.testFiles.testFailSideEffect();
+      XsemanticsSystem _parse = this.parser.parse(_testFailSideEffect);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFailInsideClosureSideEffect() {
+    try {
+      CharSequence _testFailInsideClosureSideEffect = this.testFiles.testFailInsideClosureSideEffect();
+      XsemanticsSystem _parse = this.parser.parse(_testFailInsideClosureSideEffect);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFailWithErrorSpecificationInsideClosureSideEffect() {
+    try {
+      CharSequence _testFailWithErrorSpecificationInsideClosureSideEffect = this.testFiles.testFailWithErrorSpecificationInsideClosureSideEffect();
+      XsemanticsSystem _parse = this.parser.parse(_testFailWithErrorSpecificationInsideClosureSideEffect);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

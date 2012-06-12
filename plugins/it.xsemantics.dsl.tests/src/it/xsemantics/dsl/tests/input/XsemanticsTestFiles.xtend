@@ -626,11 +626,7 @@ class XsemanticsTestFiles {
 	rule NoJudgmentDescription derives
 		G  ||- EClass eClass : EObject object
 	from {
-		// some expressions from Xbase
-		'foo' == new String() + 'bar'.toFirstUpper
-		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
-		eC.name = 'MyEClass'
-		eClass == eC
+		
 	}
 	'''
 	
@@ -1245,6 +1241,57 @@ class XsemanticsTestFiles {
 		// boolean expressions inside closures without side effect
 		eClass.EStructuralFeatures.forEach [
 			it.name != "foo"
+		]
+	}
+	'''
+
+	def testFailSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		fail
+			error stringRep(eClass)
+	}
+	'''
+
+	def testFailInsideClosureSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		eClass.EStructuralFeatures.forEach [
+			fail
+		]
+	}
+	'''
+
+	def testFailWithErrorSpecificationInsideClosureSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		eClass.EStructuralFeatures.forEach [
+			fail
+				error "" + stringRep(eClass)
 		]
 	}
 	'''

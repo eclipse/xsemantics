@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests.inferrer
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.jvmmodel.TempJvmModelInferrer
+import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer
 import org.eclipse.xtext.common.types.JvmMember
@@ -23,7 +23,7 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	protected JvmModelGenerator generator
 	
 	@Inject
-	protected extension TempJvmModelInferrer inferrer
+	protected extension XsemanticsJvmModelInferrer inferrer
 	
 	@Test
 	def testIssueField() {

@@ -110,7 +110,7 @@ EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();''',
   }
   boolean _equals_2 = Objects.equal(eClass, eC);
   /* eClass == eC */
-  if (!_equals_2) {
+  if (!Boolean.valueOf(_equals_2)) {
     sneakyThrowRuleFailedException("eClass == eC");
   }
 }'''

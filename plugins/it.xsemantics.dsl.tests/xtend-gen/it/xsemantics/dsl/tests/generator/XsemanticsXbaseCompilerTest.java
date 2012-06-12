@@ -188,7 +188,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("/* eClass == eC */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_equals_2) {");
+    _builder.append("if (!Boolean.valueOf(_equals_2)) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass == eC\");");

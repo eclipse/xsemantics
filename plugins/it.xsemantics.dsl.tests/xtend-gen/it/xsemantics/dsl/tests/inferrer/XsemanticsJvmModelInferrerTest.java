@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests.inferrer;
 
 import com.google.inject.Inject;
-import it.xsemantics.dsl.jvmmodel.TempJvmModelInferrer;
+import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderForInferrer;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -34,7 +34,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   protected JvmModelGenerator generator;
   
   @Inject
-  protected TempJvmModelInferrer inferrer;
+  protected XsemanticsJvmModelInferrer inferrer;
   
   @Test
   public void testIssueField() {

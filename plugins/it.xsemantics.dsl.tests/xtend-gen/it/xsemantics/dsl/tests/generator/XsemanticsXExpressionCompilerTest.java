@@ -952,7 +952,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("/* eClass.EStructuralFeatures.get(0).name != \'foo\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_notEquals) {");
+    _builder.append("if (!Boolean.valueOf(_notEquals)) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.EStructuralFeatures.get(0).name != \\\'foo\\\'\");");

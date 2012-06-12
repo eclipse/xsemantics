@@ -5,7 +5,6 @@ import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import it.xsemantics.test.expressions.ecore.TypeSystem;
 
 public class TypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
-	@Inject
-	protected TypeSystem xsemanticsSystem;
-
+  @Inject
+  protected TypeSystem xsemanticsSystem;
 }

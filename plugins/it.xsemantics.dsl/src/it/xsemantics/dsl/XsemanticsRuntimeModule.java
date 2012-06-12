@@ -3,13 +3,11 @@
  */
 package it.xsemantics.dsl;
 
-import it.xsemantics.dsl.generator.XsemanticsGenerator;
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.scoping.XsemanticsScopeProvider;
 import it.xsemantics.dsl.typing.XsemanticsXbaseTypeProvider;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -25,11 +23,6 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XsemanticsScopeProvider.class;
-	}
-
-	@Override
-	public Class<? extends IGenerator> bindIGenerator() {
-		return XsemanticsGenerator.class;
 	}
 
 	@Override

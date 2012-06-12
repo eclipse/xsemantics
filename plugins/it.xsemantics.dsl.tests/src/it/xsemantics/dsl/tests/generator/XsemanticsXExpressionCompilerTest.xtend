@@ -464,7 +464,7 @@ typeInternal(environmentComposition(
   String _name = _get.getName();
   boolean _notEquals = (!Objects.equal(_name, "foo"));
   /* eClass.EStructuralFeatures.get(0).name != 'foo' */
-  if (!_notEquals) {
+  if (!Boolean.valueOf(_notEquals)) {
     sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");
   }
 }'''

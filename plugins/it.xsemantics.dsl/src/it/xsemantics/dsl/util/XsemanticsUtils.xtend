@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.xsemantics.RuleParameter
 
 class XsemanticsUtils {
 	

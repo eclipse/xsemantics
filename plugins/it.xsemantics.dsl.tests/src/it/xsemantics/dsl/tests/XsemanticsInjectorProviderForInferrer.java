@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests;
 
-import it.xsemantics.dsl.TempXsemanticsRuntimeModule;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
+import it.xsemantics.dsl.XsemanticsRuntimeModule;
 import it.xsemantics.dsl.XsemanticsStandaloneSetup;
 
 import com.google.inject.Guice;
@@ -14,7 +14,7 @@ public class XsemanticsInjectorProviderForInferrer extends
 			XsemanticsStandaloneSetup {
 		@Override
 		public Injector createInjector() {
-			return Guice.createInjector(new TempXsemanticsRuntimeModule() {
+			return Guice.createInjector(new XsemanticsRuntimeModule() {
 				@Override
 				public ClassLoader bindClassLoaderToInstance() {
 					return XsemanticsInjectorProviderForInferrer.class
