@@ -380,11 +380,28 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 								"Unhandled exception"));
 	}
 
+	@Test
 	public void testRuleWithBooleanExpressionsWithNoSideEffectInsideClosure()
 			throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testForClosureWithExpressionWithNoSideEffect());
 		assertOk(validate);
+	}
+
+	@Test
+	public void testNoSideEffectButNoError() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testNoSideEffectButNoError());
+		assertOk(validate);
+	}
+
+	@Test
+	public void testErrorNoSideEffect() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testErrorNoSideEffect());
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
+						"This expression is not allowed in this context"));
 	}
 
 	protected AssertableDiagnostics loadModelAndValidate(

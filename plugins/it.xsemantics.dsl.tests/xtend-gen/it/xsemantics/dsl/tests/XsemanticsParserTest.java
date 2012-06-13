@@ -543,4 +543,15 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBooleanExpressionsInIf() {
+    try {
+      CharSequence _testBooleanExpressionsInIf = this.testFiles.testBooleanExpressionsInIf();
+      XsemanticsSystem _parse = this.parser.parse(_testBooleanExpressionsInIf);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

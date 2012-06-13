@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.ITypeProvider
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import org.eclipse.xtext.xbase.XBooleanLiteral
 
 class XsemanticsTypingSystem {
 	
@@ -68,6 +69,7 @@ class XsemanticsTypingSystem {
 		return (expression instanceof XFeatureCall) ||
 			(expression instanceof XBinaryOperation) ||
 			(expression instanceof XUnaryOperation) ||
-			(expression instanceof XMemberFeatureCall)
+			(expression instanceof XMemberFeatureCall) ||
+			(expression instanceof XBooleanLiteral)
 	}
 }

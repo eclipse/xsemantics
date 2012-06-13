@@ -1295,4 +1295,36 @@ class XsemanticsTestFiles {
 		]
 	}
 	'''
+	
+	def testBooleanExpressionsInIf() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		if (eClass.name != 'foo') { true } else { false }
+		val s = 'foo'
+	}
+	'''
+	
+	def testNoSideEffectButNoError() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		eClass.name + 'foo'
+	}
+	'''
+	
+	def testErrorNoSideEffect() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		eClass.name + 'foo'
+		print(eClass.name)
+	}
+	'''
 }

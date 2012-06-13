@@ -19,22 +19,23 @@ public class XsemanticsXExpressionHelper extends XExpressionHelper {
 	protected XsemanticsTypingSystem typingSystem;
 
 	@Override
-	protected boolean internalHasSideEffectsRec(EObject eObject) {
-		if (!(eObject instanceof XExpression))
-			return super.internalHasSideEffectsRec(eObject);
-		
-		XExpression expr = (XExpression) eObject;
+	public boolean hasSideEffects(XExpression expr) {
 		if (typingSystem.isBooleanPremise(expr)) {
 			// in this case we consider it valid
 			// since it will be generated to a correct Java statement
 			return true;
 		}
-		if (eObject instanceof EnvironmentAccess || eObject instanceof RuleInvocation
-				|| eObject instanceof OrExpression || eObject instanceof Fail) {
+		if (isXsemanticsXExpression(expr)) {
 			// in this case we consider it valid
 			// since it will be generated to a correct Java statement
 			return true;
 		}
-		return super.internalHasSideEffectsRec(eObject);
+		return super.hasSideEffects(expr);
+	}
+
+	public boolean isXsemanticsXExpression(EObject eObject) {
+		return eObject instanceof EnvironmentAccess
+				|| eObject instanceof RuleInvocation
+				|| eObject instanceof OrExpression || eObject instanceof Fail;
 	}
 }

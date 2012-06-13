@@ -4,6 +4,7 @@ import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsSubtyping;
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -53,6 +54,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Inject
 	protected XsemanticsJavaValidatorHelper helper;
 
+	@Inject
+	protected XsemanticsXExpressionHelper xExpressionHelper;
+
 	public final static int maxOfOutputParams = 2;
 
 	protected boolean enableWarnings = true;
@@ -81,7 +85,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		error("Return statements are not allowed here", expr, null,
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
-	
+
 	@Override
 	@Check
 	public void checkImplicitReturn(XExpression expr) {
@@ -103,6 +107,23 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			return true;
 		}
 		return super.isLocallyUsed(target, containerToFindUsage);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.xbase.validation.XbaseJavaValidator#
+	 * isValueExpectedRecursive(org.eclipse.xtext.xbase.XExpression)
+	 */
+	@Override
+	protected boolean isValueExpectedRecursive(XExpression expr) {
+		// this is used by Xbase validator to check expressions with
+		// side effects, by inspecting expr's container
+		// so we must customize it when the container is one of our
+		// custom XExpressions
+		final boolean valueExpectedRecursive = super.isValueExpectedRecursive(expr);
+		return valueExpectedRecursive
+				|| xExpressionHelper.isXsemanticsXExpression(expr.eContainer());
 	}
 
 	@Check

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="it.xsemantics.ui.Examples" 
+				  name="Xsemantics Examples" 
+				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="it.xsemantics.project.Examples" 
+				  name="Examples" 
+				  parentCategory="it.xsemantics.dsl.wizards.category" />
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsFjExampleWizard" 
+			name="Xsemantics FJ Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/it.xsemantics.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Featherweight Java implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsFjExampleWizard" 
+			name="Xsemantics FJ Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="it.xsemantics.dsl.wizards.category/it.xsemantics.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Featherweight Java implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+   <extension
+         point="org.eclipse.emf.common.ui.examples">
+      <example
+            pageImage="icons/genproject.gif"
+            wizardID="it.xsemantics.examples.NewXsemanticsFjExampleWizard">
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fj.zip"
+               description="Parser, Serializer, Linker, etc."
+               name="it.xsemantics.example.fj">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fj.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.fj.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fj.ui.zip"
+               description="A smart editor for the language."
+               name="it.xsemantics.example.fj.ui">
+         </projectDescriptor>
+      </example>
+   </extension>
+
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsExpressionsExampleWizard" 
+			name="Xsemantics Expressions Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/it.xsemantics.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>An Expressions DSL implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsExpressionsExampleWizard" 
+			name="Xsemantics Expressions Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="it.xsemantics.dsl.wizards.category/it.xsemantics.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>An Expressions DSL implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+   <extension
+         point="org.eclipse.emf.common.ui.examples">
+      <example
+            pageImage="icons/genproject.gif"
+            wizardID="it.xsemantics.examples.NewXsemanticsExpressionsExampleWizard">
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.expressions.zip"
+               description="Parser, Serializer, Linker, etc."
+               name="it.xsemantics.example.expressions">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.expressions.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.expressions.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.expressions.ui.zip"
+               description="A smart editor for the language."
+               name="it.xsemantics.example.expressions.ui">
+         </projectDescriptor>
+      </example>
+   </extension>
+
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsLambdaExampleWizard" 
+			name="Xsemantics Lambda Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/it.xsemantics.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Type Inference for lambda calculus implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsLambdaExampleWizard" 
+			name="Xsemantics Lambda Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="it.xsemantics.dsl.wizards.category/it.xsemantics.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Type Inference for lambda calculus implemented with Xsemantics</description>
+		</wizard>
+	</extension>
+   <extension
+         point="org.eclipse.emf.common.ui.examples">
+      <example
+            pageImage="icons/genproject.gif"
+            wizardID="it.xsemantics.examples.NewXsemanticsLambdaExampleWizard">
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.lambda.zip"
+               description="Parser, Serializer, Linker, etc."
+               name="it.xsemantics.example.lambda">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.lambda.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.lambda.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.lambda.ui.zip"
+               description="A smart editor for the language."
+               name="it.xsemantics.example.lambda.ui">
+         </projectDescriptor>
+      </example>
+   </extension>
+
+</plugin>

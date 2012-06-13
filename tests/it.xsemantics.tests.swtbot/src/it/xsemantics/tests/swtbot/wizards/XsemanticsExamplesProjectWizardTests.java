@@ -86,6 +86,25 @@ public class XsemanticsExamplesProjectWizardTests {
 				.getNode("Example.output");
 	}
 
+	@Test
+	public void canCreateExampleFJProjects() throws Exception {
+		createExampleProjectsAndAssertNoErrorMarker("Xsemantics FJ Example",
+				"it.xsemantics.example.fj");
+	}
+
+	@Test
+	public void canCreateExampleExpressionsProjects() throws Exception {
+		createExampleProjectsAndAssertNoErrorMarker(
+				"Xsemantics Expressions Example",
+				"it.xsemantics.example.expressions");
+	}
+
+	@Test
+	public void canCreateExampleLambdaProjects() throws Exception {
+		createExampleProjectsAndAssertNoErrorMarker(
+				"Xsemantics Lambda Example", "it.xsemantics.example.lambda");
+	}
+
 	protected void createProjectAndAssertNoErrorMarker(String projectType)
 			throws CoreException {
 		bot.menu("File").menu("New").menu("Project...").click();
@@ -102,6 +121,30 @@ public class XsemanticsExamplesProjectWizardTests {
 		// creation of a project might require some time
 		bot.waitUntil(shellCloses(shell), 50000);
 		assertTrue("Project doesn't exist", isProjectCreated(TEST_PROJECT));
+
+		waitForAutoBuild();
+		assertNoErrorsInProject();
+	}
+
+	protected void createExampleProjectsAndAssertNoErrorMarker(
+			String projectType, String mainProjectId) throws CoreException {
+		bot.menu("File").menu("New").menu("Other...").click();
+
+		SWTBotShell shell = bot.shell("New");
+		shell.activate();
+		bot.tree().expandNode("Xsemantics").expandNode("Examples")
+				.select(projectType);
+		bot.button("Next >").click();
+
+		bot.button("Finish").click();
+
+		// creation of a project might require some time
+		bot.waitUntil(shellCloses(shell), 50000);
+		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId));
+		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
+				+ ".tests"));
+		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
+				+ ".ui"));
 
 		waitForAutoBuild();
 		assertNoErrorsInProject();

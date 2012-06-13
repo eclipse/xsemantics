@@ -2937,4 +2937,73 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testBooleanExpressionsInIf() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (eClass.name != \'foo\') { true } else { false }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val s = \'foo\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testNoSideEffectButNoError() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.name + \'foo\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testErrorNoSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.name + \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("print(eClass.name)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

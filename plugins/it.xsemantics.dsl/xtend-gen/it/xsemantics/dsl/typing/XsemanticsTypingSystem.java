@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -129,20 +130,26 @@ public class XsemanticsTypingSystem {
     boolean _or = false;
     boolean _or_1 = false;
     boolean _or_2 = false;
+    boolean _or_3 = false;
     if ((expression instanceof XFeatureCall)) {
+      _or_3 = true;
+    } else {
+      _or_3 = ((expression instanceof XFeatureCall) || (expression instanceof XBinaryOperation));
+    }
+    if (_or_3) {
       _or_2 = true;
     } else {
-      _or_2 = ((expression instanceof XFeatureCall) || (expression instanceof XBinaryOperation));
+      _or_2 = (_or_3 || (expression instanceof XUnaryOperation));
     }
     if (_or_2) {
       _or_1 = true;
     } else {
-      _or_1 = (_or_2 || (expression instanceof XUnaryOperation));
+      _or_1 = (_or_2 || (expression instanceof XMemberFeatureCall));
     }
     if (_or_1) {
       _or = true;
     } else {
-      _or = (_or_1 || (expression instanceof XMemberFeatureCall));
+      _or = (_or_1 || (expression instanceof XBooleanLiteral));
     }
     return _or;
   }
