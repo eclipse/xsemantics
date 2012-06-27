@@ -1,5 +1,5 @@
-import releng/it.xsemantics.buckminster/projects-platform.cquery
-import releng/it.xsemantics.buckminster/project.cquery
+resolve releng/it.xsemantics.buckminster/projects-platform.cquery
+resolve releng/it.xsemantics.buckminster/project.cquery
 clean
 build
 perform -D target.os=* -D target.ws=* -D target.arch=* it.xsemantics.site#buckminster.clean
