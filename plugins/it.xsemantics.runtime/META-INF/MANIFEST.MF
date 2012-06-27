@@ -8,7 +8,6 @@ Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.xtext.util;bundle-version="2.3.0",
- org.apache.log4j;bundle-version="1.2.13",
  com.google.inject,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
@@ -18,3 +17,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: it.xsemantics.runtime,
  it.xsemantics.runtime.util,
  it.xsemantics.runtime.validation
+Import-Package: org.apache.log4j

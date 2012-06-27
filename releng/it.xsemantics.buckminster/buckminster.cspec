@@ -3,7 +3,6 @@
     <cs:dependencies>
         <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xtext.sdk" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.swtbot" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.swtbot.eclipse" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.swtbot.eclipse.test.junit4" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.swtbot.ide" componentType="eclipse.feature"/>

@@ -115,7 +115,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
    <requires>
       <import plugin="org.eclipse.xtext" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase" version="2.3.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.log4j" version="1.2.15" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.common"/>
@@ -123,6 +122,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.common.types"/>
       <import plugin="it.xsemantics.runtime"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="2.3.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.log4j"/>
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.eclipse.xtext.ui" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.editors"/>
