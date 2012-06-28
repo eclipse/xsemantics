@@ -62,7 +62,7 @@ classes from EMF Ecore, and other Java classes
 &nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;nonsense&nbsp;judgment,&nbsp;just&nbsp;a&nbsp;demo<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;foobar&nbsp;||-&nbsp;List&lt;EObject&gt;&nbsp;objects&nbsp;|&gt;&nbsp;<span class="keyword">output</span>&nbsp;String&nbsp;&lt;~&nbsp;EClass&nbsp;context<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -153,7 +153,7 @@ parameter&apos;s type.
 <br/>
 <span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -195,7 +195,7 @@ For instance, consider these implementations:
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;o.eClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -212,7 +212,7 @@ is not null, and the assigns the output parameter <span class="inlinecode">resul
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;&lt;:&nbsp;o2.eClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -231,7 +231,7 @@ arguments (note that arguments can be any Xbase expression).
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;EClass&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;:&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1Type&nbsp;&lt;:&nbsp;c2<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -249,7 +249,7 @@ the output result of the invoked rule.  Then, it will invoke another rule.
 <p class="code">
 <span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -267,7 +267,7 @@ the above code for the same rule).
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -282,7 +282,7 @@ form of rules, called indeed <em>axiom</em>s
 <p class="code">
 <span class="comment">//&nbsp;assuming&nbsp;we&nbsp;don&apos;t&nbsp;want&nbsp;to&nbsp;do&nbsp;any&nbsp;check<br/>
 </span><span class="keyword">axiom</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 </p>
 </div>
 </div>
@@ -328,7 +328,7 @@ as a premise since when a premise fails the whole rule fails.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;a&nbsp;!=&nbsp;b&nbsp;}&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -381,7 +381,7 @@ for instance,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;search&nbsp;for&nbsp;the&nbsp;mapping&nbsp;for&nbsp;o.eClass.name<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;request&nbsp;it&nbsp;to&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;EClassifier<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;o.eClass.name,&nbsp;EClassifier)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -459,7 +459,7 @@ Error specifications can appear
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;EClass&nbsp;"</span>&nbsp;+&nbsp;eClass.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eClass<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;EcorePackage::eINSTANCE.ENamedElement_Name<br/>
-<span class="keyword">from</span>&nbsp;{...}
+<span class="keyword">from</span>&nbsp;{...}<br/>
 </p>
 </div>
 </div>
@@ -481,7 +481,7 @@ o.eClass.EAllSuperTypes.contains(s)<br/>
 <span class="keyword">or</span><br/>
 <span class="keyword">fail</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"my&nbsp;custom&nbsp;error"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o<br/>
 </p>
 </div>
 </div>
@@ -507,7 +507,7 @@ in the runtime module
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslStringRepresentation.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -535,7 +535,7 @@ for specific classes of your model (actually for any Java class), e.g.,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -558,7 +558,7 @@ calling <span class="inlinecode">stringRep()</span>; this is useful for error sp
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -581,7 +581,13 @@ which allows to collect nodes in a graph according to EMF features avoiding
 loops:
 </p>
 <p>
-<span class="inlinecode">getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 An invocation of <span class="inlinecode">getAll</span> will return a list of ``expected
@@ -612,7 +618,7 @@ Such rules are of the shape
 &nbsp;&nbsp;&nbsp;&nbsp;JavaType&nbsp;objectToCheck<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;premises<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -681,7 +687,7 @@ public methods for the judgments of your system.  For instance, if you have
 <p class="code">
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;MyOutputClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -698,7 +704,7 @@ the generated Java system will feature three public methods
 &nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 <span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 </p>
 </div>
 </div>
@@ -750,7 +756,7 @@ final&nbsp;result&nbsp;provided&nbsp;by&nbsp;rule&nbsp;MyRule<br/>
 &nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;rule&nbsp;1a&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result<br/>
 &nbsp;&nbsp;rule&nbsp;2a&nbsp;used&nbsp;by&nbsp;rule&nbsp;1a<br/>
-&nbsp;&nbsp;...
+&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -787,7 +793,7 @@ Summarizing, for this example your validator should look like this:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -805,7 +811,7 @@ according to the error information found in the trace of a failure
 </p>
 <p>
 When generating error markers the validator will use only the error information
-that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> which corresponds to
+that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> which corresponds to
 an actual node in the AST.  Note that this error information can be customized in
 a Xsemantics system by explicit error specifications (see <a href="XsemanticsSyntax.html#ErrorSpecification" title="Go to &quot;Error Specification&quot;" >section ErrorSpecification</a>
 and <a href="XsemanticsSyntax.html#ExplicitFailure" title="Go to &quot;Explicit Failure&quot;" >section ExplicitFailure</a>), thus, you should keep in mind the above strategy when
@@ -823,7 +829,13 @@ For instance, if you consider the example of expressions (<a href="Expressions-e
 and the following expression which cannot be typed
 </p>
 <p>
-<span class="inlinecode">i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the generated validator will generated an error marker to the inner most
