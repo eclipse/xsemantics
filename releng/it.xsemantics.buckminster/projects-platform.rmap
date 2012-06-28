@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
-  <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/milestones/"/>
-  <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/indigo"/>
+  <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases/"/>
+  <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/juno"/>
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/helios/dev-build/update-site"/>
   <rm:property key="orbit.repository" value="${eclipse.download}/tools/orbit/downloads/drops/R20120526062928/repository/"/>
   <rm:redirect pattern="it.xsemantics.buckminster" href="project.rmap"/>
   <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>
-  <rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$" searchPathRef="swtbot"/>
   <rm:locator pattern="^com\.google.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.antlr.*" searchPathRef="xtext"/>
-  <rm:locator pattern="^org\.apache\.commons\.lang.*" searchPathRef="xtext"/> 
   <rm:locator pattern="javax.inject" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.hamcrest*" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$" searchPathRef="swtbot"/>
   <rm:locator searchPathRef="eclipse"/>
   <rm:searchPath name="xtext">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
