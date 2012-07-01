@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/00-Main.html" label="XSemantics Documentation" >
-	<topic href="contents/00-Main_11.html#XSemantics%20Documentation_11" label="Reference Documentation" >
+	<topic href="contents/00-Main_12.html#XSemantics%20Documentation_12" label="Reference Documentation" >
 		<topic href="contents/01-Introduction.html#Introduction" label="Introduction" >
 		</topic>
 		<topic href="contents/02-GettingStarted.html#GettingStarted" label="Getting Started" >
@@ -38,7 +38,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/00-Main_12.html#XSemantics%20Documentation_12" label="Examples" >
+	<topic href="contents/00-Main_13.html#XSemantics%20Documentation_13" label="Examples" >
 		<topic href="contents/Examples.html#Examples" label="Examples" >
 		</topic>
 		<topic href="contents/Expressions-example.html#Expressions" label="An Expression Language" >
@@ -74,6 +74,14 @@
 			</topic>
 		</topic>
 		<topic href="contents/Lambda-example.html#Lambda" label="Lambda" >
+			<topic href="contents/Lambda-example.html#LambdaInANutshell" label="Lambda in a nutshell" >
+			</topic>
+			<topic href="contents/Lambda-example.html#LambdaInXtext" label="Lambda implemented in Xtext" >
+			</topic>
+			<topic href="contents/Lambda-example.html#LambdaTypeSystem" label="Lambda Type Inference" >
+				<topic href="contents/Lambda-example.html#WhyCloning" label="Why Cloning?" >
+				</topic>
+			</topic>
 		</topic>
 	</topic>
 </toc>

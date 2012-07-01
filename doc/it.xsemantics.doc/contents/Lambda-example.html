@@ -11,6 +11,711 @@
 <a name="Lambda"></a>
 <h1>Lambda</h1>
 <p>
+From Wikipedia:
+</p>
+<p>
+<em>"In mathematical logic and computer science, lambda calculus is a formal 
+system for function definition, function application and recursion. 
+The portion of lambda calculus relevant to computation is now called 
+the untyped lambda calculus. In both typed and untyped versions, 
+ideas from lambda calculus have found application in the fields of logic, 
+recursion theory (computability), and linguistics, and have played an 
+important role in the development of the theory of programming languages 
+(with untyped lambda calculus being the original inspiration for 
+functional programming, in particular Lisp, and typed lambda calculi 
+serving as the foundation for modern type systems)."</em>
+</p>
+<p>
+As another example of use of Xsemantics we also developed a prototype 
+implementation of a lambda-calculus in XTEXT (we&apos;ll show the grammar in the following); 
+in this lambda-calculus we can specify the type of the parameter of 
+the abstraction, but we can also leave it empty; 
+we can then infer the type of each lambda term. 
+In particular, we infer types using type variables when 
+the type of a term can be generic. 
+The types of this lambda-calculus can be basic types 
+(in this example integer or string), arrow types, and type variables 
+(denoted by identifiers).
+</p>
+<p>
+The challenging part in writing a type system for this language is 
+that we need to perform <em>unification</em> in order to infer the <em>most general type</em>
+(see, e.g., J. A. Robinson. Computational logic: The unification computation. 
+Machine Intelligence, 6, 1971.).
+</p>
+<p>
+Again, this is just a tutorial example, but this technique can be used 
+to infer types in another language implemented in Xtext, 
+especially for functional languages.
+</p>
+<a name="LambdaInANutshell"></a>
+<h2>Lambda in a nutshell</h2>
+<p>
+You can think of lambda abstraction as a function definition 
+(without a name), with a parameter (in this version we consider 
+one single parameter) and a body, such as
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+which is the identity function (given an argument it returns the same argument). 
+Lambda application, which corresponds to function invocation, is denoted 
+without the parenthesis, thus if we have a lambda abstraction 
+<span class="inlinecode">M</span> and an argument <span class="inlinecode">N</span> we write <span class="inlinecode">M&nbsp;N</span> to mean 
+"invoke the function <span class="inlinecode">M</span> passing <span class="inlinecode">N</span> as the argument."
+Of course, <span class="inlinecode">M&nbsp;N</span> is a well typed lambda term only if <span class="inlinecode">M</span>
+is a function which takes as a parameter of a type <span class="inlinecode">T</span> and
+<span class="inlinecode">N</span> is a lambda term with a type conformant to <span class="inlinecode">T</span>.
+</p>
+<p>
+Both of the following definitions with an explicit type for 
+the parameter are correct:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">string</span>&nbsp;.&nbsp;x<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">int</span>&nbsp;.&nbsp;x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+These two functions have types, respectively, 
+<span class="inlinecode"><span class="keyword">string</span>&nbsp;-&gt;&nbsp;<span class="keyword">string</span></span> (given a string it returns a string) and 
+<span class="inlinecode"><span class="keyword">int</span>&nbsp;-&gt;&nbsp;<span class="keyword">int</span></span>. Note that <em>arrow types</em> associate to the right, 
+thus <span class="inlinecode">a&nbsp;-&gt;&nbsp;b&nbsp;-&gt;&nbsp;c</span> is to be intended as <span class="inlinecode">a&nbsp;-&gt;&nbsp;(b&nbsp;-&gt;&nbsp;c)</span>; otherwise, 
+we must use parenthesis.
+</p>
+<p>
+Indeed, we can be more general and say that the parameter 
+<span class="inlinecode">x</span> can be "any" type, using a type variable (similar to Java generics):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;a&nbsp;.&nbsp;x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+This function then has type <span class="inlinecode">a&nbsp;-&gt;&nbsp;a</span>; note that since we return the 
+argument as we received it, then the return type must be the same as 
+the argument type, thus the type variable <span class="inlinecode">a</span> must be the same in <span class="inlinecode">a&nbsp;-&gt;&nbsp;a</span>.
+</p>
+<p>
+In other cases, we cannot be generic; for instance, consider that in our 
+language we have the unary operator <span class="inlinecode">-</span> which can be used on integers only. 
+Then, the function
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;-x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+imposes <span class="inlinecode">x</span> to be an integer, thus this function has type 
+<span class="inlinecode"><span class="keyword">int</span>&nbsp;-&gt;&nbsp;<span class="keyword">int</span></span>.
+</p>
+<p>
+Other functions can be partially generic, like the following one 
+(which makes a little sense, it&apos;s used only as an example)
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;10<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+which has type <span class="inlinecode">a&nbsp;-&gt;&nbsp;<span class="keyword">int</span></span>.
+</p>
+<p>
+We might also let the system infer the type 
+(and that&apos;s what we intend to do with our type system definition).
+</p>
+<p>
+For non trivial cases the type inference is more interesting than the 
+examples we saw so far; for instance, consider this lambda abstraction
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;<span class="keyword">lambda</span>&nbsp;y.&nbsp;x&nbsp;y<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+which has type <span class="inlinecode">(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b</span>: how can this be inferred? 
+Informally, <span class="inlinecode">x</span> cannot have any type, since in the body we read 
+<span class="inlinecode">x&nbsp;y</span> then <span class="inlinecode">x</span> must be a function; for the moment we give it 
+a generic type <span class="inlinecode">X1&nbsp;-&gt;&nbsp;X2</span>; what can the type of <span class="inlinecode">y</span> be? 
+It can be a generic type, say <span class="inlinecode">X3</span>, but since we pass it to <span class="inlinecode">x</span> then 
+it must have the same type of the argument of <span class="inlinecode">x</span>, thus we require 
+<span class="inlinecode">X1</span> to be the same as <span class="inlinecode">X3</span>. The result of <span class="inlinecode">x&nbsp;y</span> will have 
+the same type as the return type of <span class="inlinecode">x</span>, i.e., <span class="inlinecode">X2</span>. Thus, 
+the above function has the following type: 
+it takes an argument for the parameter <span class="inlinecode">x</span> of type <span class="inlinecode">X1&nbsp;-&gt;&nbsp;X2</span>, 
+and it returns a function (the inner lambda abstraction) which takes 
+an argument for the parameter <span class="inlinecode">y</span> of type <span class="inlinecode">X1</span> and returns 
+something of type <span class="inlinecode">X2</span>. Thus, using different (and more readable)
+type variable names, <span class="inlinecode">(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b</span> 
+(we used the parenthesis since by default arrow types associate to the right). 
+Again, the type variables make the function generic, provided 
+that the same type is used for all occurrences of <span class="inlinecode">a</span> and the same 
+type is used for all occurrences of <span class="inlinecode">b</span>.
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;.<span class="keyword">lambda</span>&nbsp;y.y&nbsp;x</span>
+</td>
+<td>
+<span class="inlinecode">a&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;b</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;f&nbsp;.(<span class="keyword">lambda</span>&nbsp;x.(f&nbsp;(f&nbsp;x)))</span>
+</td>
+<td>
+<span class="inlinecode">(a&nbsp;-&gt;&nbsp;a)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;a</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;f&nbsp;.<span class="keyword">lambda</span>&nbsp;g.<span class="keyword">lambda</span>&nbsp;x.(f(g&nbsp;x))</span>
+</td>
+<td>
+<span class="inlinecode">(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;(c&nbsp;-&gt;&nbsp;a)&nbsp;-&gt;&nbsp;c&nbsp;-&gt;&nbsp;b</span>
+</td>
+</tr>
+</table>
+</p>
+<p>
+Note that there are functions which cannot be typed (at least with 
+simple type systems we&apos;re used to), e.g.,
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;x&nbsp;x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+cannot be typed, since <span class="inlinecode">x</span> should be a function, say with type 
+<span class="inlinecode">a&nbsp;-&gt;&nbsp;b</span>, but since we apply <span class="inlinecode">x</span> to <span class="inlinecode">x</span> it should also be of 
+type <span class="inlinecode">a</span>; however, <span class="inlinecode">a&nbsp;-&gt;&nbsp;b</span> and <span class="inlinecode">a</span> cannot be unified, 
+since <span class="inlinecode">a</span> occurs in <span class="inlinecode">a&nbsp;-&gt;&nbsp;b</span>.
+</p>
+<a name="LambdaInXtext"></a>
+<h2>Lambda implemented in Xtext</h2>
+<p>
+This is the grammar for our simple lambda calculus in Xtext:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.lambda.Lambda&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<span class="keyword">generate</span>&nbsp;lambda&nbsp;<span class="string">"http://xsemantics.sf.net/example/lambda/Lambda"</span><br/>
+<br/>
+Program:&nbsp;term=Term;<br/>
+<br/>
+<span class="comment">//&nbsp;left&nbsp;associative<br/>
+</span>Term:&nbsp;TerminalTerm&nbsp;(=&gt;({Application.fun=<span class="keyword">current</span>}&nbsp;arg=TerminalTerm)*)&nbsp;;<br/>
+<br/>
+TerminalTerm&nbsp;<span class="keyword">returns</span>&nbsp;Term:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Term&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Constant&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Arithmetics&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Abstraction<br/>
+;<br/>
+<br/>
+Constant:&nbsp;StringConstant&nbsp;|&nbsp;IntConstant&nbsp;;<br/>
+StringConstant:&nbsp;string=STRING;<br/>
+IntConstant:&nbsp;int=INT;<br/>
+<br/>
+Arithmetics:&nbsp;<span class="string">&apos;-&apos;</span>&nbsp;term=Term;<br/>
+<br/>
+Variable:&nbsp;ref=[Parameter];<br/>
+<br/>
+Abstraction:&nbsp;<span class="string">&apos;lambda&apos;</span>&nbsp;param=Parameter&nbsp;<span class="string">&apos;.&apos;</span>&nbsp;term=Term&nbsp;;<br/>
+<br/>
+Parameter:&nbsp;name=ID&nbsp;(<span class="string">&apos;:&apos;</span>&nbsp;type=Type)?&nbsp;;<br/>
+<br/>
+<span class="comment">//&nbsp;right&nbsp;associative<br/>
+</span>Type:&nbsp;TerminalType&nbsp;({ArrowType.left&nbsp;=&nbsp;<span class="keyword">current</span>}&nbsp;<span class="string">&apos;-&gt;&apos;</span>&nbsp;right=Type)?&nbsp;;<br/>
+<br/>
+TerminalType&nbsp;<span class="keyword">returns</span>&nbsp;Type:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Type&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;BasicType&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeVariable<br/>
+;<br/>
+<br/>
+BasicType:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span><br/>
+;<br/>
+<br/>
+TypeVariable:&nbsp;typevarName=ID;<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="LambdaTypeSystem"></a>
+<h2>Lambda Type Inference</h2>
+<p>
+Thus, we want to write the type system definition in Xsemantics for Lambda, 
+also inferring types (performing unification for inferring the most general type). 
+We start with the judgments:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.lambda.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.*<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.util.*<br/>
+<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Term&nbsp;term&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;paramtype&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;typesubstitution&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;original&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notoccur&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(type)&nbsp;+&nbsp;<span class="string">"&nbsp;occurs&nbsp;in&nbsp;"</span>&nbsp;+&nbsp;stringRep(other)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that this type system uses a utility class implementing a map
+for type substitutions which we will use during type inference
+and unification
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;it.xsemantics.example.lambda.xsemantics;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;TypeSubstitutions&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Map&lt;String,&nbsp;Type&gt;&nbsp;substitutions&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap&lt;String,&nbsp;Type&gt;();<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;reset()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;add(String&nbsp;typeVariableName,&nbsp;Type&nbsp;mapped)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions.put(typeVariableName,&nbsp;mapped);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Type&nbsp;mapped(String&nbsp;typeVariableName)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;substitutions.get(typeVariableName);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Set&lt;Entry&lt;String,&nbsp;Type&gt;&gt;&nbsp;getSubstitutions()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;substitutions.entrySet();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s start with the rules which check that a type variable does NOT occur 
+in another type term (judgment <em>notoccur</em>, which takes two input parameters):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">axiom</span>&nbsp;NotOccurBase<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;NotOccurVar<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;TypeVariable&nbsp;other<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;variable.typevarName&nbsp;!=&nbsp;other.typevarName<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;NotOccurVarInArrow<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;ArrowType&nbsp;arrowType<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.left<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.right<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The base case (which simply holds) catches all the other situations not handled by
+the specific rules; a type variable occurs in another one, if they both have 
+the same name, and a type variable occurs in an arrow type if it occurs either 
+on the left or on the right.
+</p>
+<p>
+Now we show the rules for the judgment <em>typesubstitution</em>, which
+takes as input parameters a map for type substitution and the original type
+and has an output parameter containing the new type after performing
+substitutions.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;SubstituteType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;type&nbsp;~&gt;&nbsp;Type&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;type<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;SubstituteTypeVariable<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;variable&nbsp;~&gt;&nbsp;Type&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;mapped&nbsp;=&nbsp;substitutions.mapped(variable.typevarName)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapped&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(mapped)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;result&nbsp;~&gt;&nbsp;result&nbsp;<span class="comment">//&nbsp;recursive<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;variable<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;SubstituteArrowType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrowType&nbsp;~&gt;&nbsp;ArrowType&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;subResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(arrowType)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~&gt;&nbsp;subResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.left&nbsp;=&nbsp;subResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;subResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.right&nbsp;=&nbsp;subResult<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The general case simply returns the input parameter as the result
+(no substitution needed).
+When we substitute a type variable we create a new <span class="inlinecode">Type</span> by 
+cloning the value the type variable maps to (if this block
+fails, due to no existing mapping, it means that there&apos;s no need of 
+substitution, and the result is simply the input argument). 
+However, we cannot stop here: 
+a type variable can map to another type variable (see the 
+cases below for unification) which in turn can be mapped to something
+else and so on, thus, we must make sure we apply all the substitutions 
+that concern a type variable: we apply the substitution judgment recursively 
+on the result. For instance, if we have the mappings 
+<span class="inlinecode">X1</span> to <span class="inlinecode">(<span class="keyword">int</span>-&gt;X2)</span> and <span class="inlinecode">X2</span> to <span class="inlinecode"><span class="keyword">string</span></span> 
+and we have apply the substitutions to the the type <span class="inlinecode">X1-&gt;X2</span>, 
+the result must be
+<span class="inlinecode">(<span class="keyword">int</span>-&gt;<span class="keyword">string</span>)-&gt;<span class="keyword">string</span></span>.
+</p>
+<p>
+The substitution for an arrow type simply delegates it to its components
+(but again, it clones the original type, and acts on the clone).
+</p>
+<p>
+Cloning is mandatory, as explained in <a href="Lambda-example.html#WhyCloning" title="Go to &quot;Why Cloning?&quot;" >section WhyCloning</a>.
+</p>
+<p>
+The judgment for unification
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+takes the substitutions map, two types and outputs two types:
+it tries to unify the two input types, and if the unification
+succeeds it outputs two new types which are the unified version of the
+two input types after performing the substitutions (which are
+also recorded in the <em>substitutions</em> parameter).
+</p>
+<p>
+The rules for this judgment consider all possible cases which make sense
+(the default case simply fails); let&apos;s start considering the
+simpler ones:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;UnifyType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;&nbsp;Type&nbsp;t1&nbsp;~~&nbsp;Type&nbsp;t2&nbsp;~&gt;&nbsp;t1&nbsp;~~&nbsp;t2<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;in&nbsp;general&nbsp;it&nbsp;fails<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
+}<br/>
+<br/>
+<br/>
+<span class="keyword">axiom</span>&nbsp;UnifyStringType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;StringType&nbsp;t1&nbsp;~~&nbsp;StringType&nbsp;t2&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)<br/>
+<br/>
+<span class="keyword">axiom</span>&nbsp;UnifyIntType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;IntType&nbsp;t1&nbsp;~~&nbsp;IntType&nbsp;t2&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariableBasicType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;typeVar&nbsp;~~&nbsp;BasicType&nbsp;basicType&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(basicType)&nbsp;~~&nbsp;BasicType&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(basicType)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(typeVar.typevarName,&nbsp;result)<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyBasicTypeTypeVariable<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;BasicType&nbsp;basicType&nbsp;~~&nbsp;TypeVariable&nbsp;typeVar<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;BasicType&nbsp;resultForVar&nbsp;~~&nbsp;BasicType&nbsp;resultForBasic<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;typeVar&nbsp;~~&nbsp;basicType&nbsp;~&gt;&nbsp;resultForVar&nbsp;~~&nbsp;resultForBasic<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Besides the trivial cases, a type variable unifies with a basic type,
+and the type variable is replaced by (a clone) of that basic type (and
+the substitution is recorded).  Note that we must also consider the
+symmetric case.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariables<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;TypeVariable&nbsp;newLeft&nbsp;~~&nbsp;TypeVariable&nbsp;newRight<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;both&nbsp;variables&nbsp;with&nbsp;a&nbsp;fresh&nbsp;new&nbsp;variable<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newRight&nbsp;=&nbsp;EcoreUtil::copy(newLeft)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalRight.typevarName,&nbsp;newRight)<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+When we need to unify two type variables we create a fresh new
+type variable (using the utility class <abbr title="it.xsemantics.example.lambda.xsemantics.LambdaUtils" >LambdaUtils</abbr>,
+and we map both variables to that new fresh variable.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariableArrowType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;ArrowType&nbsp;originalRight&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;EcoreUtil::copy(originalRight)<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;originalLeft&nbsp;:&gt;&nbsp;originalRight&nbsp;<span class="comment">//&nbsp;occur&nbsp;check<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;EcoreUtil::copy(originalRight)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyArrowTypeTypeVariable<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;ArrowType&nbsp;newRight<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;originalRight&nbsp;~~&nbsp;originalLeft&nbsp;~&gt;&nbsp;newRight&nbsp;~~&nbsp;newLeft<br/>
+}<br/>
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyArrowTypes<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrow1&nbsp;~~&nbsp;ArrowType&nbsp;arrow2&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newArrow1&nbsp;~~&nbsp;ArrowType&nbsp;newArrow2<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1&nbsp;=&nbsp;EcoreUtil::copy(arrow1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2&nbsp;=&nbsp;EcoreUtil::copy(arrow2)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.left&nbsp;~~&nbsp;arrow2.left&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.left&nbsp;=&nbsp;temp1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.left&nbsp;=&nbsp;temp2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.right&nbsp;~~&nbsp;arrow2.right&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.right&nbsp;=&nbsp;temp1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.right&nbsp;=&nbsp;temp2<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+When we unify a type variable with an arrow type, before substituting
+that type variable with the arrow type, we must first check that
+the variable does not occur in the arrow type (otherwise the unification
+fails).  And two arrow types are unified by unifying their components.
+</p>
+<p>
+Now we can start examining the actual typing rules.
+</p>
+<p>
+First of all we need a dedicated judgment for <span class="inlinecode">Param</span>, since it is
+not a subclass of <span class="inlinecode">Term</span>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;ParameterType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;Type&nbsp;type<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param.type&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;EcoreUtil::copy(param.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Remember that we can write the type of abstraction&apos;s parameter, and in
+that case the type is the clone of the original one; otherwise, we
+give the parameter a brand new type variable.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">axiom</span>&nbsp;StringConstantType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringConstant&nbsp;stringConstant&nbsp;:&nbsp;LambdaUtils::createStringType<br/>
+<br/>
+<span class="keyword">axiom</span>&nbsp;IntConstantType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntConstant&nbsp;intConstant&nbsp;:&nbsp;LambdaUtils::createIntType<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The typing of constants is trivial.
+</p>
+<p>
+For the typing of a variable, one might be tempted to write
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;WRONG!<br/>
+</span><span class="keyword">rule</span>&nbsp;VariableType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;variable.ref&nbsp;:&nbsp;type<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+that is, the type of a variable is the type of the referred parameter.
+However, this would not work, 
+since in the meantime we might have collected substitutions for
+possible type variables occurring in the type type of the
+referred parameter.  Thus, the type of a variable, is the
+type of the referred parameter AFTER we have applied to it
+possible substitutions, that is:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;VariableType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;EcoreUtil::copy(<span class="keyword">env</span>(G,&nbsp;variable.ref,&nbsp;Type))&nbsp;~&gt;&nbsp;type<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Note also that we rely on the fact that the type of the parameter is
+in the environment (the environment will be updated with such information
+later in the typing rule for abstraction).
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;ArithmeticsType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arithmetics&nbsp;arithmetics&nbsp;:&nbsp;IntType&nbsp;intType<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;LambdaUtils::createIntType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arithmetics.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;term&nbsp;type&nbsp;must&nbsp;be&nbsp;unifiable&nbsp;with&nbsp;int&nbsp;type<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~~&nbsp;intType&nbsp;~&gt;&nbsp;intType&nbsp;~~&nbsp;intType<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The code for <span class="inlinecode">Arithmetics</span> will be integer, however, we must
+check whether the type of the subterm has a type which can be
+unified with <span class="inlinecode">IntType</span>.
+</p>
+<a name="WhyCloning"></a>
+<h3>Why Cloning?</h3>
+<p>
+Remember that the types we are manipulating might have been
+explicitly specified in the text of the program by the programmer,
+thus, if we did not use clones, during substitutions, we would directly
+modifying the AST of the original program, which is not what we want.
+</p>
+<p>
 <div class="todo" >
 WRITE THIS Section
 </div>
