@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XSemantics Documentation
 Bundle-SymbolicName: it.xsemantics.doc;singleton:=true
-Bundle-Version: 1.0.100.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.help,
  org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional,
  it.xsemantics.runtime;bundle-version="1.0.0",
- it.xsemantics.example.lambda;bundle-version="1.0.100",
+ it.xsemantics.example.lambda;bundle-version="1.1.0",
  org.eclipse.xtext.ui;bundle-version="2.3.0",
- it.xsemantics.example.lambda.ui;bundle-version="1.0.100"
+ it.xsemantics.example.lambda.ui;bundle-version="1.1.0"
 

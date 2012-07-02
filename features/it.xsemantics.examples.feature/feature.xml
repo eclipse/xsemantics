@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.examples.feature"
       label="XSemantics Examples"
-      version="1.0.100.qualifier"
+      version="1.1.0.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
@@ -138,7 +138,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.ui" version="2.2.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.ui" version="2.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="it.xsemantics.dsl.ui" version="1.0.100" match="greaterOrEqual"/>
+      <import plugin="it.xsemantics.dsl.ui" version="1.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
