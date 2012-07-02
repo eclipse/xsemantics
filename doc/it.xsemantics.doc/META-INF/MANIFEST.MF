@@ -7,5 +7,7 @@ Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.help,
  org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional,
  it.xsemantics.runtime;bundle-version="1.0.0",
- it.xsemantics.example.lambda;bundle-version="1.0.100"
+ it.xsemantics.example.lambda;bundle-version="1.0.100",
+ org.eclipse.xtext.ui;bundle-version="2.3.0",
+ it.xsemantics.example.lambda.ui;bundle-version="1.0.100"
 

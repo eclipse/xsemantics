@@ -1,7 +1,5 @@
 chapter:Introduction[Introduction]
 
-todo[This documentation is not complete yet, and it is currently being written.]
-
 XSemantics is a DSL (implemented in Xtext itself) for writing type systems, 
 reduction rules, interpreters (and in general relation rules) for languages 
 implemented in Xtext. 

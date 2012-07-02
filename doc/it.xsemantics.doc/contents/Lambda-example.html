@@ -743,6 +743,119 @@ of the abstraction after putting the mapping for the type of the parameter in th
 Then we apply possible substitutions to the type of the parameter and the type of the body, 
 and we return a brand new arrow type, using the two components.
 </p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;ApplicationType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Application&nbsp;application&nbsp;:&nbsp;Type&nbsp;type<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.fun&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;funType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;make&nbsp;sure&nbsp;funType&nbsp;can&nbsp;be&nbsp;unified&nbsp;ArrowType<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;arrowType&nbsp;=&nbsp;LambdaUtils::createFreshArrowType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.arg&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;argType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;arrow&nbsp;left&nbsp;with&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;argument<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~~&nbsp;argType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;argType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;result&nbsp;is&nbsp;the&nbsp;arrow&nbsp;right&nbsp;after&nbsp;substitutions<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;type<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+For typing a lambda application, we require the left part of the application
+to be a function, thus we take its type and we 
+make sure it can be unified with a generic arrow type. 
+Then, we take the type of the argument, and we try to unify it with the left part of the arrow type. 
+If also this unification succeeds, the resulting type is the right part of the arrow type
+(after substitutions).
+</p>
+<p>
+Let&apos;s see, informally, how these rules infer the type for
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+To avoid ambiguities with the <span class="inlinecode">-&gt;</span> of <span class="inlinecode">ArrowType</span> in the following example we use 
+<span class="inlinecode">--&gt;</span> for substitution mappings (which are shown in <span class="inlinecode">{&nbsp;}</span>). 
+Try not to confuse mappings for parameters and mappings representing type variable substitutions, 
+which have strings as keys.  Mappings for the environment are represented as
+<span class="inlinecode">key&nbsp;&lt;-&nbsp;value</span>.
+</p>
+<p>
+This is informally the trace of the rules:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+*&nbsp;AbstractionType<br/>
+**&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;x?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X1<br/>
+**&nbsp;type&nbsp;the&nbsp;body&nbsp;(<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;with&nbsp;environment&nbsp;mapping&nbsp;x&nbsp;&lt;-&nbsp;X1<br/>
+***&nbsp;AbstractionType<br/>
+****&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;f?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X2<br/>
+****&nbsp;type&nbsp;the&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;with&nbsp;(additional)&nbsp;environment&nbsp;mapping&nbsp;f&nbsp;&lt;-&nbsp;X2<br/>
+*****&nbsp;ApplicationType<br/>
+******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;left&nbsp;part?&nbsp;the&nbsp;type&nbsp;variable&nbsp;X2<br/>
+******&nbsp;(we&nbsp;used&nbsp;VariableType)<br/>
+******&nbsp;but&nbsp;it&nbsp;must&nbsp;be&nbsp;an&nbsp;arrow&nbsp;type<br/>
+******&nbsp;unify&nbsp;X2&nbsp;with&nbsp;a&nbsp;fresh&nbsp;arrow&nbsp;type&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
+******&nbsp;this&nbsp;will&nbsp;generate&nbsp;the&nbsp;substitution&nbsp;<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)}<br/>
+******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
+******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;right&nbsp;part?&nbsp;it&nbsp;is&nbsp;<span class="keyword">int</span><br/>
+******&nbsp;(we&nbsp;used&nbsp;ArithmeticsType,&nbsp;and&nbsp;we&nbsp;unified&nbsp;type&nbsp;of&nbsp;x,&nbsp;X1&nbsp;with&nbsp;<span class="keyword">int</span>)<br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}<br/>
+******&nbsp;try&nbsp;to&nbsp;unify&nbsp;X3&nbsp;with&nbsp;<span class="keyword">int</span><br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>,&nbsp;<span class="string">&apos;X3&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}<br/>
+******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)<br/>
+******&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;application&nbsp;is&nbsp;X4<br/>
+****&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body<br/>
+****&nbsp;f&nbsp;of&nbsp;type&nbsp;X2,&nbsp;becomes&nbsp;f&nbsp;of&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)<br/>
+****&nbsp;the&nbsp;type&nbsp;of&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;becomes&nbsp;X4<br/>
+****&nbsp;the&nbsp;resulting&nbsp;type&nbsp;is&nbsp;then&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
+**&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body<br/>
+**&nbsp;x&nbsp;of&nbsp;type&nbsp;X1&nbsp;becomes&nbsp;x&nbsp;of&nbsp;type&nbsp;<span class="keyword">int</span><br/>
+**&nbsp;the&nbsp;body&nbsp;has&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
+**&nbsp;the&nbsp;type&nbsp;of&nbsp;our&nbsp;term&nbsp;is&nbsp;<span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+This type, let&apos;s write it for simplicity as <span class="inlinecode"><span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;a)&nbsp;-&gt;&nbsp;a</span>,
+says that we must pass to this lambda term a function which takes an integer, 
+and a function which takes an integer and returns "any type"; 
+as a result we will have that "any type". 
+Thus the following lambda application terms are well typed 
+(remember that application associates to the left):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(10)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;-y)<br/>
+(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(1)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;<span class="string">"foo"</span>)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The first one will return <span class="inlinecode">10</span> (actually <span class="inlinecode">--10</span>), the second one <span class="inlinecode"><span class="string">"foo"</span></span>.
+</p>
 <a name="WhyCloning"></a>
 <h3>Why Cloning?</h3>
 <p>
@@ -751,9 +864,202 @@ explicitly specified in the text of the program by the programmer,
 thus, if we did not use clones, during substitutions, we would directly
 modifying the AST of the original program, which is not what we want.
 </p>
+<a name="LambdaChecking"></a>
+<h2>Lambda Type Checking</h2>
 <p>
-<div class="todo" >
-WRITE THIS Section
+Now that we wrote all the rules for inferring types of Lambda terms, 
+we can write a checkrule (see <a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;Rules for Validator: checkrule&quot;" >section CheckRules</a>) that says that a Lambda <span class="inlinecode">Program</span> 
+is correct if we can assign a type to the term (starting from an empty environment):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">checkrule</span>&nbsp;CheckProgram&nbsp;<span class="keyword">for</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;LambdaUtils::resetCounter<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;can&nbsp;type&nbsp;the&nbsp;program&nbsp;term<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;<span class="keyword">new</span>&nbsp;TypeSubstitutions()&nbsp;|&gt;&nbsp;program.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The invocation of <span class="inlinecode">resetCounter</span> is just to reset the counter used by
+<abbr title="it.xsemantics.example.lambda.xsemantics.LambdaUtils" >LambdaUtils</abbr> to create fresh
+type variables.
+</p>
+<a name="LambdaCustomization"></a>
+<h2>Customizations for Lambda</h2>
+<p>
+Since type variables during the type inference have the form <span class="inlinecode">X&lt;number&gt;</span> which
+makes it hard to visually interpret an inferred type, we use a custom <abbr title="it.xsemantics.runtime.StringRepresentation" >StringRepresentation</abbr>,
+namely <abbr title="it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTypeBeautifier" >LambdaStringRepresentationWithTypeBeautifier</abbr>,
+which relies on <abbr title="it.xsemantics.example.lambda.xsemantics.LambdaTypeBeautifier" >LambdaTypeBeautifier</abbr>: this
+will consistently replace type variables in an inferred type with letters.
+For instance, <span class="inlinecode">X1&nbsp;-&gt;&nbsp;X3&nbsp;-&gt;&nbsp;(X4&nbsp;-&gt;&nbsp;X3)</span> would become <span class="inlinecode">a&nbsp;-&gt;&nbsp;b&nbsp;-&gt;&nbsp;(c&nbsp;-&gt;&nbsp;b)</span>.
+</p>
+<a name="LambdaTypeInferenceIDE"></a>
+<h2>Use of Type Inference in the IDE</h2>
+<p>
+We can also use the generated Java code for the inference type system to create an editor popup 
+action (for the editor of Lambda) to automatically infer types and add the types in the program text, 
+in particular we set the types of the parameters of abstractions.  
+Most of the code we show here deals with Eclipse plugin development: 
+the part which uses the code of the type system generated by Xsemantics is minimal.
+</p>
+<p>
+This is done in the class <abbr title="it.xsemantics.example.lambda.xsemantics.LambdaTypeModifier" >LambdaTypeModifier</abbr>
+(you can see the complete code in the sources of the Lambda example); we show here just the main parts:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTypeModifier&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaXsemanticsSystem&nbsp;typeSystem;&nbsp;<span class="comment">//&nbsp;generated&nbsp;by&nbsp;Xsemantics<br/>
+</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Provider&lt;LambdaTypeBeautifier&gt;&nbsp;lambdaTypeBeautifierProvider;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;RuleFailedException&nbsp;setAllTypes(Term&nbsp;term)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&lt;Type&gt;&nbsp;result&nbsp;=&nbsp;typeSystem.type(<span class="keyword">new</span>&nbsp;TypeSubstitutions(),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermUtils.cloneWithoutTypes(term));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getRuleFailedException()&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getRuleFailedException();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;inferredType&nbsp;=&nbsp;result.getValue();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beautifyType(inferredType);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setAllTypes(term,&nbsp;inferredType);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;beautifyType(Type&nbsp;paramType)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeBeautifierProvider.get().beautifyTypeVariables(paramType);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Through the generated type system we infer the type of the term and then we update all 
+the types of the parameters of the abstractions in the term. 
+Note that before we "beautify" the type variable names.
+</p>
+<p>
+As explained in the Xtext documentation, since we need to modify the EMF model of the program 
+in the open editor, we need to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/model/IXtextDocument.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.IXtextDocument" >IXtextDocument</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/IXtextDocument.java" title="View Source Code" >(src)</a> 
+and its <span class="inlinecode">modify</span> method, with a
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/concurrent/IUnitOfWork.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.util.concurrent.IUnitOfWork" >IUnitOfWork</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java" title="View Source Code" >(src)</a>; this is done by the class 
+<abbr title="it.xsemantics.example.lambda.ui.typing.LambdaTermModifier" >LambdaTermModifier</abbr>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTermModifier&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTypeModifier&nbsp;lambdaTypeModifier;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;modifyTermWithInferredType(IXtextDocument&nbsp;xtextDocument)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.modify(<span class="keyword">new</span>&nbsp;IUnitOfWork.Void&lt;XtextResource&gt;()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;process(XtextResource&nbsp;resource)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program&nbsp;=&nbsp;(Program)&nbsp;resource.getContents().get(0);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeModifier.setAllTypes(program.getTerm());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Then we have the code implementing the editor action (<abbr title="it.xsemantics.example.lambda.ui.popup.actions.InferTypesAction" >InferTypesAction</abbr>):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;InferTypesAction&nbsp;<span class="keyword">implements</span>&nbsp;IEditorActionDelegate&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;IEditorPart&nbsp;editor;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTermModifier&nbsp;lambdaTermModifier;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;InferTypesAction()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTermModifier&nbsp;=&nbsp;LambdaUiUtil.getInjector().getInstance(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermModifier.<span class="keyword">class</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;run(IAction&nbsp;action)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;((XtextEditor)&nbsp;editor).getDocument();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTermModifier.modifyTermWithInferredType(xtextDocument);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;selectionChanged(IAction&nbsp;action,&nbsp;ISelection&nbsp;selection)&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setActiveEditor(IAction&nbsp;action,&nbsp;IEditorPart&nbsp;targetEditor)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.editor&nbsp;=&nbsp;targetEditor;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s see this editor action in action: suppose you have the following opened lambda file 
+(this is the abstraction for composing functions):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;f&nbsp;.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;g&nbsp;.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;x&nbsp;.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;(g&nbsp;x)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+We can right click on the editor and select the infer type action.
+And the content of the editor will be updated with the inferred types:
+</p>
+<p>
+<div class="image" >
+<img src="images/lambda_example_compose.jpeg" class=" " 
+/>
+<div class="caption">
+The original lambda program
+</div>
+</div>
+</p>
+<p>
+<div class="image" >
+<img src="images/lambda_example_compose_action.jpeg" class=" " 
+/>
+<div class="caption">
+Invoke the context menu action
+</div>
+</div>
+</p>
+<p>
+<div class="image" >
+<img src="images/lambda_example_compose_inferred.jpeg" class=" " 
+/>
+<div class="caption">
+The modified lambda program with inferred types
+</div>
 </div>
 </p>
 </body>

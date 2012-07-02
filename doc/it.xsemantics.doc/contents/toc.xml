@@ -82,6 +82,12 @@
 				<topic href="contents/Lambda-example.html#WhyCloning" label="Why Cloning?" >
 				</topic>
 			</topic>
+			<topic href="contents/Lambda-example.html#LambdaChecking" label="Lambda Type Checking" >
+			</topic>
+			<topic href="contents/Lambda-example.html#LambdaCustomization" label="Customizations for Lambda" >
+			</topic>
+			<topic href="contents/Lambda-example.html#LambdaTypeInferenceIDE" label="Use of Type Inference in the IDE" >
+			</topic>
 		</topic>
 	</topic>
 </toc>
