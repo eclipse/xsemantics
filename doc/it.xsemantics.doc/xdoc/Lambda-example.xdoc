@@ -333,6 +333,11 @@ The substitution for an arrow type simply delegates it to its components
 
 Cloning is mandatory, as explained in ref:WhyCloning[].
 
+Note that, if we do not need to have a reference to the original input type,
+the substitution judgment can also be invoked by passing the same
+argument both for the input and as the output parameter (as we will see
+in the following).
+
 The judgment for unification
 
 code[Xsemantics][
@@ -466,6 +471,10 @@ Remember that we can write the type of abstraction's parameter, and in
 that case the type is the clone of the original one; otherwise, we
 give the parameter a brand new type variable.
 
+The judgment for typing takes as a parameter also the e[substitutions]
+mapping table, since, as we will see, when inferring a type, we must also
+apply the possible substitutions computed so far.
+
 code[Xsemantics][
 axiom StringConstantType
 	G |- TypeSubstitutions substitutions |> 
@@ -526,6 +535,25 @@ from {
 The code for code[Arithmetics] will be integer, however, we must
 check whether the type of the subterm has a type which can be
 unified with code[IntType].
+
+code[Xsemantics][
+rule AbstractionType
+	G |- TypeSubstitutions substitutions |> Abstraction abstraction : ArrowType type
+from {
+	G |~ abstraction.param : var Type paramType
+	G, abstraction.param <- paramType |- 
+		substitutions |> abstraction.term : var Type termType
+	G |- substitutions |> paramType ~> paramType
+	G |- substitutions |> termType ~> termType
+	type = LambdaUtils::createArrowType(paramType, termType)
+}
+]
+
+For typing a lambda abstraction we take the type of the parameter and we type the body 
+of the abstraction after putting the mapping for the type of the parameter in the environment
+(see also ref:Environment[]). 
+Then we apply possible substitutions to the type of the parameter and the type of the body, 
+and we return a brand new arrow type, using the two components.
 
 section2:WhyCloning[Why Cloning?]
 

@@ -455,6 +455,12 @@ The substitution for an arrow type simply delegates it to its components
 Cloning is mandatory, as explained in <a href="Lambda-example.html#WhyCloning" title="Go to &quot;Why Cloning?&quot;" >section WhyCloning</a>.
 </p>
 <p>
+Note that, if we do not need to have a reference to the original input type,
+the substitution judgment can also be invoked by passing the same
+argument both for the input and as the output parameter (as we will see
+in the following).
+</p>
+<p>
 The judgment for unification
 </p>
 <p>
@@ -622,6 +628,11 @@ that case the type is the clone of the original one; otherwise, we
 give the parameter a brand new type variable.
 </p>
 <p>
+The judgment for typing takes as a parameter also the <em>substitutions</em>
+mapping table, since, as we will see, when inferring a type, we must also
+apply the possible substitutions computed so far.
+</p>
+<p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -706,6 +717,31 @@ later in the typing rule for abstraction).
 The code for <span class="inlinecode">Arithmetics</span> will be integer, however, we must
 check whether the type of the subterm has a type which can be
 unified with <span class="inlinecode">IntType</span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">rule</span>&nbsp;AbstractionType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Abstraction&nbsp;abstraction&nbsp;:&nbsp;ArrowType&nbsp;type<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;abstraction.param&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;paramType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;abstraction.param&nbsp;&lt;-&nbsp;paramType&nbsp;|-&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions&nbsp;|&gt;&nbsp;abstraction.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;paramType&nbsp;~&gt;&nbsp;paramType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~&gt;&nbsp;termType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createArrowType(paramType,&nbsp;termType)<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+For typing a lambda abstraction we take the type of the parameter and we type the body 
+of the abstraction after putting the mapping for the type of the parameter in the environment
+(see also <a href="XsemanticsSyntax.html#Environment" title="Go to &quot;Rule Environment&quot;" >section Environment</a>). 
+Then we apply possible substitutions to the type of the parameter and the type of the body, 
+and we return a brand new arrow type, using the two components.
 </p>
 <a name="WhyCloning"></a>
 <h3>Why Cloning?</h3>
