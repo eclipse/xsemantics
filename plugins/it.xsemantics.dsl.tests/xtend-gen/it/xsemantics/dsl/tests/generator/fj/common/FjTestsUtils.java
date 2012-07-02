@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests.generator.fj.common;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Member;
@@ -14,8 +15,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class FjTestsUtils {
@@ -35,7 +34,7 @@ public class FjTestsUtils {
   public Field fjFieldForName(final Program program, final String fieldName) {
     Field _xblockexpression = null;
     {
-      List<Field> _allContentsOfType = EcoreUtil2.<Field>getAllContentsOfType(program, it.xsemantics.example.fj.fj.Field.class);
+      List<Field> _allContentsOfType = EcoreUtil2.<Field>getAllContentsOfType(program, Field.class);
       final Function1<Field,Boolean> _function = new Function1<Field,Boolean>() {
           public Boolean apply(final Field it) {
             String _name = it.getName();
@@ -43,11 +42,10 @@ public class FjTestsUtils {
             return Boolean.valueOf(_equals);
           }
         };
-      Field _findFirst = IterableExtensions.<Field>findFirst(_allContentsOfType, _function);
-      final Field field = _findFirst;
-      String _operator_plus = StringExtensions.operator_plus("field not found: ", fieldName);
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(field, null);
-      Assert.assertTrue(_operator_plus, _operator_notEquals);
+      final Field field = IterableExtensions.<Field>findFirst(_allContentsOfType, _function);
+      String _plus = ("field not found: " + fieldName);
+      boolean _notEquals = (!Objects.equal(field, null));
+      Assert.assertTrue(_plus, _notEquals);
       _xblockexpression = (field);
     }
     return _xblockexpression;
@@ -56,7 +54,7 @@ public class FjTestsUtils {
   public Method fjMethodForName(final Program program, final String methodName) {
     Method _xblockexpression = null;
     {
-      List<Method> _allContentsOfType = EcoreUtil2.<Method>getAllContentsOfType(program, it.xsemantics.example.fj.fj.Method.class);
+      List<Method> _allContentsOfType = EcoreUtil2.<Method>getAllContentsOfType(program, Method.class);
       final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
           public Boolean apply(final Method it) {
             String _name = it.getName();
@@ -64,11 +62,10 @@ public class FjTestsUtils {
             return Boolean.valueOf(_equals);
           }
         };
-      Method _findFirst = IterableExtensions.<Method>findFirst(_allContentsOfType, _function);
-      final Method method = _findFirst;
-      String _operator_plus = StringExtensions.operator_plus("method not found: ", methodName);
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(method, null);
-      Assert.assertTrue(_operator_plus, _operator_notEquals);
+      final Method method = IterableExtensions.<Method>findFirst(_allContentsOfType, _function);
+      String _plus = ("method not found: " + methodName);
+      boolean _notEquals = (!Objects.equal(method, null));
+      Assert.assertTrue(_plus, _notEquals);
       _xblockexpression = (method);
     }
     return _xblockexpression;
@@ -80,7 +77,7 @@ public class FjTestsUtils {
   }
   
   public ParamRef variableExpression(final Program program) {
-    List<ParamRef> _allContentsOfType = EcoreUtil2.<ParamRef>getAllContentsOfType(program, it.xsemantics.example.fj.fj.ParamRef.class);
+    List<ParamRef> _allContentsOfType = EcoreUtil2.<ParamRef>getAllContentsOfType(program, ParamRef.class);
     ParamRef _get = _allContentsOfType.get(0);
     return _get;
   }

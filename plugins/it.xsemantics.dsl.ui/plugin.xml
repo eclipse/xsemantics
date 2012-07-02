@@ -12,6 +12,7 @@
               extensions="xsemantics"
               icon="icons/xsemantics.png"
               id="it.xsemantics.dsl.Xsemantics"
+              matchingStrategy="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
               name="Xsemantics Editor">
         </editor>
     </extension>
@@ -152,6 +153,28 @@
     </extension>
 
 
+    <!-- marker definitions for it.xsemantics.dsl.Xsemantics -->
+    <extension
+            id="xsemantics.check.fast"
+            name="Xsemantics Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xsemantics.check.normal"
+            name="Xsemantics Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xsemantics.check.expensive"
+            name="Xsemantics Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">
@@ -217,13 +240,34 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+    <!-- quickfix marker resolution generator for it.xsemantics.dsl.Xsemantics -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="it.xsemantics.dsl.ui.xsemantics.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="it.xsemantics.dsl.ui.xsemantics.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="it.xsemantics.dsl.ui.xsemantics.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
@@ -303,6 +347,62 @@
 			</command>
 		</menuContribution>
 	</extension>
+	<!-- Call Hierachy -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="it.xsemantics.dsl.Xsemantics.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+				style="push"
+				tooltip="Open Call Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="it.xsemantics.dsl.Xsemantics.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+         adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+         <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+      </factory> 
+   </extension>
+   <extension point="org.eclipse.ui.editorActions">
+      <editorContribution targetID="it.xsemantics.dsl.Xsemantics" 
+                          id="it.xsemantics.dsl.Xsemantics.ide.rulerActions">
+	     <action
+	             label="Not Used"
+	             class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+	             style="push"
+	             actionID="RulerDoubleClick"
+	             id="it.xsemantics.dsl.Xsemantics.doubleClickBreakpointAction"/>
+	  </editorContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+         targetID="example.rulerContextMenuId"
+         id="it.xsemantics.dsl.Xsemantics.ide.RulerPopupActions">
+         <action
+            label="Toggle Breakpoint"
+            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+            menubarPath="additions"
+            id="it.xsemantics.dsl.Xsemantics.ide.rulerContextMenu.toggleBreakpointAction">
+         </action>
+      </viewerContribution>
+   </extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="it.xsemantics.dsl.Xsemantics.compare.contentViewers"

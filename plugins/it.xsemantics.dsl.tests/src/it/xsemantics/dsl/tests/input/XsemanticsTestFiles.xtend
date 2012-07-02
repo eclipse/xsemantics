@@ -97,17 +97,6 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
-	def testJudgmentDescriptionsWithErrorSpecificationAndSource() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
-	
-	judgments {
-		type |- EObject c : output EClass
-			error "error!"
-			source c
-	}
-	'''
-	
 	def testJudgmentDescriptionsWithErrorSpecification() '''
 	«testFileWithImports»
 	import org.eclipse.emf.ecore.*
@@ -128,6 +117,16 @@ class XsemanticsTestFiles {
 		type |- EObject c : output EClass
 			error "this " + c + " made an error!"
 			
+	}
+	'''
+	
+	def testRuleJudgmentDescriptionsWithErrorSpecification() '''
+	«testJudgmentDescriptionsWithErrorSpecification»
+	
+	rule TestRule
+		G |- EObject o : EClass c
+	from {
+		
 	}
 	'''
 	
@@ -271,6 +270,13 @@ class XsemanticsTestFiles {
 	axiom eClassEObject
 		G |- EClass eClass : EObject object
 	'''
+	
+	def testAxiomWithExpressionInConclusion() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	axiom EObjectEClass
+		G |- EObject object : object.eClass
+	'''
 
 	def testSimpleRule() '''
 	«testJudgmentDescriptionsReferringToEcore»
@@ -285,7 +291,7 @@ class XsemanticsTestFiles {
 		eClass == eC
 	}
 	'''
-
+	
 	def testDuplicateRuleNames() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	
@@ -325,6 +331,15 @@ class XsemanticsTestFiles {
 	rule EClassEObject derives
 		G |- EClass eClass : EObject eClass
 	from {
+	}
+	'''
+	
+	def testDuplicateParamsInJudgmentDescription() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass eClass : EClass eClass
 	}
 	'''
 
@@ -413,6 +428,25 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testRuleWithFeatureCalls() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		// some expressions from Xbase
+		'foo' == new String() || 'bar' == new String()
+		'foo' == new String() && 'bar' == new String()
+		'foo' == new String() + 'bar'.toFirstUpper
+		'foo' != new String() + 'bar'.toFirstUpper
+		val temp = new String() + 'bar'.toFirstUpper
+		'foo'.contains('f')
+		'foo'.concat('f')
+		!('foo'.contains('f'))
+		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	}
+	'''
+	
+	def testRuleWithFeatureCallsForBinaryOps() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	
 	rule EClassEObject derives
@@ -592,11 +626,7 @@ class XsemanticsTestFiles {
 	rule NoJudgmentDescription derives
 		G  ||- EClass eClass : EObject object
 	from {
-		// some expressions from Xbase
-		'foo' == new String() + 'bar'.toFirstUpper
-		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
-		eC.name = 'MyEClass'
-		eClass == eC
+		
 	}
 	'''
 	
@@ -1169,6 +1199,132 @@ class XsemanticsTestFiles {
 	from {
 		obj == obj
 		throw new Exception('foo')
+	}
+	'''
+	
+	// Xtext 2.3
+	
+	def testRuleWithBooleanExpressionsWithNoSideEffect() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		'a' == new String() || 'bar' == new String()
+		'a' == new String() + 'bar'.toFirstUpper
+	}
+	'''
+	
+	def testRuleWithBooleanExpressionsWithNoSideEffectInFor() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		for (s : eClass.EAllStructuralFeatures) {
+			s.name != 'foo'
+		}
+	}
+	'''
+	
+	def testForClosureWithExpressionWithNoSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// boolean expressions inside closures without side effect
+		eClass.EStructuralFeatures.forEach [
+			it.name != "foo"
+		]
+	}
+	'''
+
+	def testFailSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		fail
+			error stringRep(eClass)
+	}
+	'''
+
+	def testFailInsideClosureSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		eClass.EStructuralFeatures.forEach [
+			fail
+		]
+	}
+	'''
+
+	def testFailWithErrorSpecificationInsideClosureSideEffect()
+	'''«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		eClass.EStructuralFeatures.forEach [
+			fail
+				error "" + stringRep(eClass)
+		]
+	}
+	'''
+	
+	def testBooleanExpressionsInIf() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		if (eClass.name != 'foo') { true } else { false }
+		val s = 'foo'
+	}
+	'''
+	
+	def testNoSideEffectButNoError() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		eClass.name + 'foo'
+	}
+	'''
+	
+	def testErrorNoSideEffect() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		eClass.name + 'foo'
+		print(eClass.name)
 	}
 	'''
 }

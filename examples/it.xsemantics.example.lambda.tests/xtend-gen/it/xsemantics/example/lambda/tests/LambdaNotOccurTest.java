@@ -13,9 +13,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorWithNonBeautifiedTypesProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorWithNonBeautifiedTypesProvider.class)
 public class LambdaNotOccurTest extends LambdaBaseTest {
   @Test
   public void NotOccurConstantTypes() {
@@ -35,11 +35,10 @@ public class LambdaNotOccurTest extends LambdaBaseTest {
   
   @Test
   public void NotOccurTypeVariablesFails() {
-      TypeVariable _createFreshTypeVariable = LambdaUtils.createFreshTypeVariable();
-      final TypeVariable variable = _createFreshTypeVariable;
-      TypeVariable _createTypeVariable = LambdaUtils.createTypeVariable("X1");
-      Result<Boolean> _notoccur = this.system.notoccur(variable, _createTypeVariable);
-      this.<Boolean>assertFailure(_notoccur);
+    final TypeVariable variable = LambdaUtils.createFreshTypeVariable();
+    TypeVariable _createTypeVariable = LambdaUtils.createTypeVariable("X1");
+    Result<Boolean> _notoccur = this.system.notoccur(variable, _createTypeVariable);
+    this.<Boolean>assertFailure(_notoccur);
   }
   
   @Test
@@ -52,15 +51,14 @@ public class LambdaNotOccurTest extends LambdaBaseTest {
   
   @Test
   public void notOccurTypeVariablesInArrowTypeFails() {
-      TypeVariable _createTypeVariable = LambdaUtils.createTypeVariable("a");
-      final TypeVariable variable = _createTypeVariable;
-      ArrowType _createFreshArrowType = LambdaUtils.createFreshArrowType();
-      TypeVariable _createFreshTypeVariable = LambdaUtils.createFreshTypeVariable();
-      TypeVariable _createTypeVariable_1 = LambdaUtils.createTypeVariable("a");
-      ArrowType _createArrowType = LambdaUtils.createArrowType(_createFreshTypeVariable, _createTypeVariable_1);
-      ArrowType _createArrowType_1 = LambdaUtils.createArrowType(_createFreshArrowType, _createArrowType);
-      Result<Boolean> _notoccur = this.system.notoccur(variable, _createArrowType_1);
-      CharSequence _notOccurTypeVariablesInArrowTypeFails = this.traces.notOccurTypeVariablesInArrowTypeFails();
-      this.<Boolean>assertFailureTrace(_notoccur, _notOccurTypeVariablesInArrowTypeFails);
+    final TypeVariable variable = LambdaUtils.createTypeVariable("a");
+    ArrowType _createFreshArrowType = LambdaUtils.createFreshArrowType();
+    TypeVariable _createFreshTypeVariable = LambdaUtils.createFreshTypeVariable();
+    TypeVariable _createTypeVariable = LambdaUtils.createTypeVariable("a");
+    ArrowType _createArrowType = LambdaUtils.createArrowType(_createFreshTypeVariable, _createTypeVariable);
+    ArrowType _createArrowType_1 = LambdaUtils.createArrowType(_createFreshArrowType, _createArrowType);
+    Result<Boolean> _notoccur = this.system.notoccur(variable, _createArrowType_1);
+    CharSequence _notOccurTypeVariablesInArrowTypeFails = this.traces.notOccurTypeVariablesInArrowTypeFails();
+    this.<Boolean>assertFailureTrace(_notoccur, _notOccurTypeVariablesInArrowTypeFails);
   }
 }

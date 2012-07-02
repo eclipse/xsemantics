@@ -21,38 +21,18 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
-@SuppressWarnings("restriction")
-public class AbstractLambdaSemanticSequencer extends AbstractSemanticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractLambdaSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected LambdaGrammarAccess grammarAccess;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
-	@Inject
-	protected ITransientValueService transientValues;
-	
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-	
-	protected ISemanticSequencer genericSequencer;
-	
-	
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
+	private LambdaGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LambdaPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -105,7 +85,7 @@ public class AbstractLambdaSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getTerminalTypeRule() ||
 				   context == grammarAccess.getTypeRule() ||
 				   context == grammarAccess.getTypeAccess().getArrowTypeLeftAction_1_0()) {
-					sequence_Type(context, (IntType) semanticObject); 
+					sequence_BasicType(context, (IntType) semanticObject); 
 					return; 
 				}
 				else break;
@@ -136,7 +116,7 @@ public class AbstractLambdaSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getTerminalTypeRule() ||
 				   context == grammarAccess.getTypeRule() ||
 				   context == grammarAccess.getTypeAccess().getArrowTypeLeftAction_1_0()) {
-					sequence_Type(context, (StringType) semanticObject); 
+					sequence_BasicType(context, (StringType) semanticObject); 
 					return; 
 				}
 				else break;
@@ -194,6 +174,24 @@ public class AbstractLambdaSemanticSequencer extends AbstractSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getArithmeticsAccess().getTermTermParserRuleCall_1_0(), semanticObject.getTerm());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {IntType}
+	 */
+	protected void sequence_BasicType(EObject context, IntType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {StringType}
+	 */
+	protected void sequence_BasicType(EObject context, StringType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -305,24 +303,6 @@ public class AbstractLambdaSemanticSequencer extends AbstractSemanticSequencer {
 		feeder.accept(grammarAccess.getTypeAccess().getArrowTypeLeftAction_1_0(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getTypeAccess().getRightTypeParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {IntType}
-	 */
-	protected void sequence_Type(EObject context, IntType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {StringType}
-	 */
-	protected void sequence_Type(EObject context, StringType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

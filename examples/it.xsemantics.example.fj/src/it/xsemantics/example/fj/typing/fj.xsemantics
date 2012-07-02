@@ -1,3 +1,8 @@
+/*
+ * A version of the FJ system where type computation involves also
+ * type checking.
+ */
+
 system it.xsemantics.example.fj.typing.FjTypeSystem
 
 import it.xsemantics.example.fj.fj.*

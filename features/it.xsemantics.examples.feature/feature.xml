@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.examples.feature"
       label="XSemantics Examples"
-      version="1.0.1.qualifier"
+      version="1.1.0.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
@@ -112,16 +112,15 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <requires>
       <import plugin="org.eclipse.xtext" version="2.2.1" match="greaterOrEqual"/>
-      <import plugin="org.apache.log4j" version="1.2.15" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.antlr.runtime"/>
       <import plugin="org.eclipse.xtext.common.types"/>
       <import plugin="it.xsemantics.runtime"/>
+      <import plugin="org.apache.log4j"/>
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
-      <import plugin="org.eclipse.xtend2.lib"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
@@ -137,6 +136,9 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xpand"/>
       <import plugin="org.eclipse.emf.mwe2.launch" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.ui" version="2.2.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui" version="2.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="it.xsemantics.dsl.ui" version="1.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -176,6 +178,13 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="it.xsemantics.example.lambda.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.xsemantics.ui.examples"
          download-size="0"
          install-size="0"
          version="0.0.0"

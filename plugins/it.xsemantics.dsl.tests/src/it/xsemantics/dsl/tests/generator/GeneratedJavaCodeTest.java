@@ -3,7 +3,6 @@ package it.xsemantics.dsl.tests.generator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import it.xsemantics.dsl.generator.GeneratorUtils;
-import it.xsemantics.dsl.generator.XsemanticsGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
@@ -20,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -86,7 +86,7 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 	protected EclipseRuntimeDependentJavaCompiler javaCompiler;
 
 	@Inject
-	protected XsemanticsGenerator generator;
+	protected IGenerator generator;
 
 	@Inject
 	protected XsemanticsGeneratorExtensions genExtensions;
@@ -178,6 +178,11 @@ public class GeneratedJavaCodeTest extends XsemanticsBaseTest {
 		assertEquals(fullyQualifiedClassName,
 				compileWithJava(fsa, fullyQualifiedClassName).getName());
 
+		checkCompilationOfGeneratedValidator(pack, className, fsa);
+	}
+
+	protected void checkCompilationOfGeneratedValidator(String pack,
+			String className, InMemoryFileSystemAccess fsa) {
 		final String validatorClassName = pack + "validation." + className
 				+ "Validator";
 

@@ -1,4 +1,795 @@
 chapter:Lambda[Lambda]
 
-todo[WRITE THIS Section]
+From Wikipedia:
+
+e["In mathematical logic and computer science, lambda calculus is a formal 
+system for function definition, function application and recursion. 
+The portion of lambda calculus relevant to computation is now called 
+the untyped lambda calculus. In both typed and untyped versions, 
+ideas from lambda calculus have found application in the fields of logic, 
+recursion theory (computability), and linguistics, and have played an 
+important role in the development of the theory of programming languages 
+(with untyped lambda calculus being the original inspiration for 
+functional programming, in particular Lisp, and typed lambda calculi 
+serving as the foundation for modern type systems)."]
+
+As another example of use of Xsemantics we also developed a prototype 
+implementation of a lambda-calculus in XTEXT (we'll show the grammar in the following); 
+in this lambda-calculus we can specify the type of the parameter of 
+the abstraction, but we can also leave it empty; 
+we can then infer the type of each lambda term. 
+In particular, we infer types using type variables when 
+the type of a term can be generic. 
+The types of this lambda-calculus can be basic types 
+(in this example integer or string), arrow types, and type variables 
+(denoted by identifiers).
+
+The challenging part in writing a type system for this language is 
+that we need to perform e[unification] in order to infer the e[most general type]
+(see, e.g., J. A. Robinson. Computational logic: The unification computation. 
+Machine Intelligence, 6, 1971.).
+
+Again, this is just a tutorial example, but this technique can be used 
+to infer types in another language implemented in Xtext, 
+especially for functional languages.
+
+section:LambdaInANutshell[Lambda in a nutshell]
+
+You can think of lambda abstraction as a function definition 
+(without a name), with a parameter (in this version we consider 
+one single parameter) and a body, such as
+
+code[Lambda][
+lambda x. x
+]
+
+which is the identity function (given an argument it returns the same argument). 
+Lambda application, which corresponds to function invocation, is denoted 
+without the parenthesis, thus if we have a lambda abstraction 
+code[M] and an argument code[N] we write code[M N] to mean 
+"invoke the function code[M] passing code[N] as the argument."
+Of course, code[M N] is a well typed lambda term only if code[M]
+is a function which takes as a parameter of a type code[T] and
+code[N] is a lambda term with a type conformant to code[T].
+
+Both of the following definitions with an explicit type for 
+the parameter are correct:
+
+code[Lambda][
+lambda x : string . x
+lambda x : int . x
+]
+
+These two functions have types, respectively, 
+code[Lambda][string -> string] (given a string it returns a string) and 
+code[Lambda][int -> int]. Note that e[arrow types] associate to the right, 
+thus code[a -> b -> c] is to be intended as code[a -> (b -> c)]; otherwise, 
+we must use parenthesis.
+
+Indeed, we can be more general and say that the parameter 
+code[x] can be "any" type, using a type variable (similar to Java generics):
+
+code[Lambda][
+lambda x : a . x
+]
+
+This function then has type code[a -> a]; note that since we return the 
+argument as we received it, then the return type must be the same as 
+the argument type, thus the type variable code[a] must be the same in code[a -> a].
+
+In other cases, we cannot be generic; for instance, consider that in our 
+language we have the unary operator code[-] which can be used on integers only. 
+Then, the function
+
+code[Lambda][
+lambda x . -x
+]
+
+imposes code[x] to be an integer, thus this function has type 
+code[Lambda][int -> int].
+
+Other functions can be partially generic, like the following one 
+(which makes a little sense, it's used only as an example)
+
+code[Lambda][
+lambda x . 10
+]
+
+which has type code[Lambda][a -> int].
+
+We might also let the system infer the type 
+(and that's what we intend to do with our type system definition).
+
+For non trivial cases the type inference is more interesting than the 
+examples we saw so far; for instance, consider this lambda abstraction
+
+code[Lambda][
+lambda x . lambda y. x y
+]
+
+which has type code[Lambda][(a -> b) -> a -> b]: how can this be inferred? 
+Informally, code[x] cannot have any type, since in the body we read 
+code[x y] then code[x] must be a function; for the moment we give it 
+a generic type code[X1 -> X2]; what can the type of code[y] be? 
+It can be a generic type, say code[X3], but since we pass it to code[x] then 
+it must have the same type of the argument of code[x], thus we require 
+code[X1] to be the same as code[X3]. The result of code[x y] will have 
+the same type as the return type of code[x], i.e., code[X2]. Thus, 
+the above function has the following type: 
+it takes an argument for the parameter code[x] of type code[X1 -> X2], 
+and it returns a function (the inner lambda abstraction) which takes 
+an argument for the parameter code[y] of type code[X1] and returns 
+something of type code[X2]. Thus, using different (and more readable)
+type variable names, code[(a -> b) -> a -> b] 
+(we used the parenthesis since by default arrow types associate to the right). 
+Again, the type variables make the function generic, provided 
+that the same type is used for all occurrences of code[a] and the same 
+type is used for all occurrences of code[b].
+
+table[
+tr[ td[code[Lambda][lambda x .lambda y.y x]] td[code[a -> (a -> b) -> b]]]
+tr[ td[code[Lambda][lambda f .(lambda x.(f (f x)))]] td[code[(a -> a) -> a -> a]]]
+tr[ td[code[Lambda][lambda f .lambda g.lambda x.(f(g x))]] td[code[(a -> b) -> (c -> a) -> c -> b]]]
+]
+
+Note that there are functions which cannot be typed (at least with 
+simple type systems we're used to), e.g.,
+
+code[Lambda][
+lambda x . x x
+]
+
+cannot be typed, since code[x] should be a function, say with type 
+code[a -> b], but since we apply code[x] to code[x] it should also be of 
+type code[a]; however, code[a -> b] and code[a] cannot be unified, 
+since code[a] occurs in code[a -> b].
+
+section:LambdaInXtext[Lambda implemented in Xtext]
+
+This is the grammar for our simple lambda calculus in Xtext:
+
+code[Xtext][
+grammar it.xsemantics.example.lambda.Lambda with org.eclipse.xtext.common.Terminals
+generate lambda "http://xsemantics.sf.net/example/lambda/Lambda"
+
+Program: term=Term;
+
+// left associative
+Term: TerminalTerm (=>({Application.fun=current} arg=TerminalTerm)*) ;
+
+TerminalTerm returns Term:
+	'(' Term ')' |
+	Constant |
+	Arithmetics |
+	Variable |
+	Abstraction
+;
+
+Constant: StringConstant | IntConstant ;
+StringConstant: string=STRING;
+IntConstant: int=INT;
+
+Arithmetics: '-' term=Term;
+
+Variable: ref=\[Parameter\];
+
+Abstraction: 'lambda' param=Parameter '.' term=Term ;
+
+Parameter: name=ID (':' type=Type)? ;
+
+// right associative
+Type: TerminalType ({ArrowType.left = current} '->' right=Type)? ;
+
+TerminalType returns Type:
+	'(' Type ')' |
+	BasicType |
+	TypeVariable
+;
+
+BasicType:
+	{IntType} 'int' |
+	{StringType} 'string'
+;
+
+TypeVariable: typevarName=ID;
+]
+
+section:LambdaTypeSystem[Lambda Type Inference]
+
+Thus, we want to write the type system definition in Xsemantics for Lambda, 
+also inferring types (performing unification for inferring the most general type). 
+We start with the judgments:
+
+code[Xsemantics][
+system it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
+
+import it.xsemantics.example.lambda.lambda.*
+import it.xsemantics.example.lambda.xsemantics.*
+
+import org.eclipse.emf.ecore.util.*
+
+judgments {
+	type |- TypeSubstitutions substitutions |> Term term : output Type
+	paramtype |~ Parameter param : output Type
+	typesubstitution |- TypeSubstitutions substitutions |> Type original ~> output Type
+	notoccur |- Type type :> Type other
+		error stringRep(type) + " occurs in " + stringRep(other)
+	unify |- TypeSubstitutions substitutions |> 
+		Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
+}
+]
+
+Note that this type system uses a utility class implementing a map
+for type substitutions which we will use during type inference
+and unification
+
+code[Java][
+package it.xsemantics.example.lambda.xsemantics;
+
+public class TypeSubstitutions {
+
+	protected Map<String, Type> substitutions = new HashMap<String, Type>();
+
+	public void reset() {
+		substitutions.clear();
+	}
+
+	public void add(String typeVariableName, Type mapped) {
+		substitutions.put(typeVariableName, mapped);
+	}
+
+	public Type mapped(String typeVariableName) {
+		return substitutions.get(typeVariableName);
+	}
+
+	public Set<Entry<String, Type>> getSubstitutions() {
+		return substitutions.entrySet();
+	}
+}
+]
+
+Let's start with the rules which check that a type variable does NOT occur 
+in another type term (judgment e[notoccur], which takes two input parameters):
+
+code[Xsemantics][
+axiom NotOccurBase
+	G |- Type type :> Type other
+
+rule NotOccurVar
+	G |- TypeVariable variable :> TypeVariable other
+from {
+	variable.typevarName != other.typevarName
+}
+
+rule NotOccurVarInArrow
+	G |- TypeVariable variable :> ArrowType arrowType
+from {
+	G |- variable :> arrowType.left
+	G |- variable :> arrowType.right
+}
+]
+
+The base case (which simply holds) catches all the other situations not handled by
+the specific rules; a type variable occurs in another one, if they both have 
+the same name, and a type variable occurs in an arrow type if it occurs either 
+on the left or on the right.
+
+Now we show the rules for the judgment e[typesubstitution], which
+takes as input parameters a map for type substitution and the original type
+and has an output parameter containing the new type after performing
+substitutions.
+
+code[Xsemantics][
+rule SubstituteType
+	G |- TypeSubstitutions substitutions |> Type type ~> Type result
+from {
+	result = type
+}
+
+rule SubstituteTypeVariable
+	G |- TypeSubstitutions substitutions |> TypeVariable variable ~> Type result
+from {
+	{
+		var mapped = substitutions.mapped(variable.typevarName)
+		mapped != null
+		result = EcoreUtil::copy(mapped)
+		G |- substitutions |> result ~> result // recursive
+	}
+	or
+		result = variable
+}
+
+rule SubstituteArrowType
+	G |- TypeSubstitutions substitutions |> ArrowType arrowType ~> ArrowType result
+from {
+	var Type subResult
+	result = EcoreUtil::copy(arrowType)
+	G |- substitutions |> arrowType.left ~> subResult
+	result.left = subResult
+	G |- substitutions |> arrowType.right ~> subResult
+	result.right = subResult
+}
+]
+
+The general case simply returns the input parameter as the result
+(no substitution needed).
+When we substitute a type variable we create a new code[Type] by 
+cloning the value the type variable maps to (if this block
+fails, due to no existing mapping, it means that there's no need of 
+substitution, and the result is simply the input argument). 
+However, we cannot stop here: 
+a type variable can map to another type variable (see the 
+cases below for unification) which in turn can be mapped to something
+else and so on, thus, we must make sure we apply all the substitutions 
+that concern a type variable: we apply the substitution judgment recursively 
+on the result. For instance, if we have the mappings 
+code[X1] to code[Lambda][(int->X2)] and code[X2] to code[Lambda][string] 
+and we have apply the substitutions to the the type code[X1->X2], 
+the result must be
+code[Lambda][(int->string)->string].
+
+The substitution for an arrow type simply delegates it to its components
+(but again, it clones the original type, and acts on the clone).
+
+Cloning is mandatory, as explained in ref:WhyCloning[].
+
+Note that, if we do not need to have a reference to the original input type,
+the substitution judgment can also be invoked by passing the same
+argument both for the input and as the output parameter (as we will see
+in the following).
+
+The judgment for unification
+
+code[Xsemantics][
+unify |- TypeSubstitutions substitutions |> 
+	Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
+]
+
+takes the substitutions map, two types and outputs two types:
+it tries to unify the two input types, and if the unification
+succeeds it outputs two new types which are the unified version of the
+two input types after performing the substitutions (which are
+also recorded in the e[substitutions] parameter).
+
+The rules for this judgment consider all possible cases which make sense
+(the default case simply fails); let's start considering the
+simpler ones:
+
+code[Xsemantics][
+rule UnifyType
+	G |- TypeSubstitutions substitutions |>  Type t1 ~~ Type t2 ~> t1 ~~ t2
+from {
+	// in general it fails
+	fail
+}
+
+
+axiom UnifyStringType
+	G |- TypeSubstitutions substitutions |> StringType t1 ~~ StringType t2 
+		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
+
+axiom UnifyIntType
+	G |- TypeSubstitutions substitutions |> IntType t1 ~~ IntType t2 
+		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
+
+rule UnifyTypeVariableBasicType
+	G |- TypeSubstitutions substitutions |> TypeVariable typeVar ~~ BasicType basicType 
+		~> EcoreUtil::copy(basicType) ~~ BasicType result
+from {
+	result = EcoreUtil::copy(basicType)
+	substitutions.add(typeVar.typevarName, result)
+}
+
+rule UnifyBasicTypeTypeVariable
+	G |- TypeSubstitutions substitutions |> BasicType basicType ~~ TypeVariable typeVar
+		~> BasicType resultForVar ~~ BasicType resultForBasic
+from {
+	G |- substitutions |> typeVar ~~ basicType ~> resultForVar ~~ resultForBasic
+}
+]
+
+Besides the trivial cases, a type variable unifies with a basic type,
+and the type variable is replaced by (a clone) of that basic type (and
+the substitution is recorded).  Note that we must also consider the
+symmetric case.
+
+code[Xsemantics][
+rule UnifyTypeVariables
+	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ TypeVariable originalRight 
+		~> TypeVariable newLeft ~~ TypeVariable newRight
+from {
+	// unify both variables with a fresh new variable
+	newLeft = LambdaUtils::createFreshTypeVariable
+	newRight = EcoreUtil::copy(newLeft)
+	substitutions.add(originalLeft.typevarName, newLeft)
+	substitutions.add(originalRight.typevarName, newRight)
+}
+]
+
+When we need to unify two type variables we create a fresh new
+type variable (using the utility class codeRef[it.xsemantics.example.lambda.xsemantics.LambdaUtils],
+and we map both variables to that new fresh variable.
+
+code[Xsemantics][
+rule UnifyTypeVariableArrowType
+	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ ArrowType originalRight 
+		~> ArrowType newLeft ~~ EcoreUtil::copy(originalRight)
+from {
+	G |- originalLeft :> originalRight // occur check
+	newLeft = EcoreUtil::copy(originalRight)
+	substitutions.add(originalLeft.typevarName, newLeft)
+}
+
+rule UnifyArrowTypeTypeVariable
+	G |- TypeSubstitutions substitutions |> ArrowType originalLeft ~~ TypeVariable originalRight 
+		~> ArrowType newLeft ~~ ArrowType newRight
+from {
+	G |- substitutions |> originalRight ~~ originalLeft ~> newRight ~~ newLeft
+}
+
+rule UnifyArrowTypes
+	G |- TypeSubstitutions substitutions |> ArrowType arrow1 ~~ ArrowType arrow2 
+		~> ArrowType newArrow1 ~~ ArrowType newArrow2
+from {
+	newArrow1 = EcoreUtil::copy(arrow1)
+	newArrow2 = EcoreUtil::copy(arrow2)
+	var Type temp1
+	var Type temp2
+	G |- substitutions |> arrow1.left ~~ arrow2.left ~> temp1 ~~ temp2
+	newArrow1.left = temp1
+	newArrow2.left = temp2
+	G |- substitutions |> arrow1.right ~~ arrow2.right ~> temp1 ~~ temp2
+	newArrow1.right = temp1
+	newArrow2.right = temp2
+}
+]
+
+When we unify a type variable with an arrow type, before substituting
+that type variable with the arrow type, we must first check that
+the variable does not occur in the arrow type (otherwise the unification
+fails).  And two arrow types are unified by unifying their components.
+
+Now we can start examining the actual typing rules.
+
+First of all we need a dedicated judgment for code[Param], since it is
+not a subclass of code[Term]:
+
+code[Xsemantics][
+rule ParameterType
+	G |~ Parameter param : Type type
+from {
+	{
+		param.type != null
+		type = EcoreUtil::copy(param.type)
+	}
+	or
+	type = LambdaUtils::createFreshTypeVariable
+}
+]
+
+Remember that we can write the type of abstraction's parameter, and in
+that case the type is the clone of the original one; otherwise, we
+give the parameter a brand new type variable.
+
+The judgment for typing takes as a parameter also the e[substitutions]
+mapping table, since, as we will see, when inferring a type, we must also
+apply the possible substitutions computed so far.
+
+code[Xsemantics][
+axiom StringConstantType
+	G |- TypeSubstitutions substitutions |> 
+		StringConstant stringConstant : LambdaUtils::createStringType
+
+axiom IntConstantType
+	G |- TypeSubstitutions substitutions |> 
+		IntConstant intConstant : LambdaUtils::createIntType
+]
+
+The typing of constants is trivial.
+
+For the typing of a variable, one might be tempted to write
+
+code[Xsemantics][
+// WRONG!
+rule VariableType
+	G |- TypeSubstitutions substitutions |> 
+		Variable variable : Type type
+from {
+	G |~ variable.ref : type
+}
+]
+
+that is, the type of a variable is the type of the referred parameter.
+However, this would not work, 
+since in the meantime we might have collected substitutions for
+possible type variables occurring in the type type of the
+referred parameter.  Thus, the type of a variable, is the
+type of the referred parameter AFTER we have applied to it
+possible substitutions, that is:
+
+code[Xsemantics][
+rule VariableType
+	G |- TypeSubstitutions substitutions |> 
+		Variable variable : Type type
+from {
+	G |- substitutions |> EcoreUtil::copy(env(G, variable.ref, Type)) ~> type
+}
+]
+
+Note also that we rely on the fact that the type of the parameter is
+in the environment (the environment will be updated with such information
+later in the typing rule for abstraction).
+
+code[Xsemantics][
+rule ArithmeticsType
+	G |- TypeSubstitutions substitutions |> 
+		Arithmetics arithmetics : IntType intType
+from {
+	intType = LambdaUtils::createIntType
+	G |- substitutions |> arithmetics.term : var Type termType
+	// the term type must be unifiable with int type
+	G |- substitutions |> termType ~~ intType ~> intType ~~ intType
+}
+]
+
+The code for code[Arithmetics] will be integer, however, we must
+check whether the type of the subterm has a type which can be
+unified with code[IntType].
+
+code[Xsemantics][
+rule AbstractionType
+	G |- TypeSubstitutions substitutions |> Abstraction abstraction : ArrowType type
+from {
+	G |~ abstraction.param : var Type paramType
+	G, abstraction.param <- paramType |- 
+		substitutions |> abstraction.term : var Type termType
+	G |- substitutions |> paramType ~> paramType
+	G |- substitutions |> termType ~> termType
+	type = LambdaUtils::createArrowType(paramType, termType)
+}
+]
+
+For typing a lambda abstraction we take the type of the parameter and we type the body 
+of the abstraction after putting the mapping for the type of the parameter in the environment
+(see also ref:Environment[]). 
+Then we apply possible substitutions to the type of the parameter and the type of the body, 
+and we return a brand new arrow type, using the two components.
+
+code[Xsemantics][
+rule ApplicationType
+	G |- TypeSubstitutions substitutions |> Application application : Type type
+from {
+	G |- substitutions |> application.fun : var Type funType
+	
+	// make sure funType can be unified ArrowType
+	var arrowType = LambdaUtils::createFreshArrowType
+	G |- substitutions |> funType ~~ arrowType ~> funType ~~ arrowType
+	
+	G |- substitutions |> application.arg : var Type argType
+	
+	// unify arrow left with the type of the argument
+	G |- substitutions |> arrowType.left ~~ argType ~> funType ~~ argType
+	
+	// the result is the arrow right after substitutions
+	G |- substitutions |> arrowType.right ~> type
+}
+]
+
+For typing a lambda application, we require the left part of the application
+to be a function, thus we take its type and we 
+make sure it can be unified with a generic arrow type. 
+Then, we take the type of the argument, and we try to unify it with the left part of the arrow type. 
+If also this unification succeeds, the resulting type is the right part of the arrow type
+(after substitutions).
+
+Let's see, informally, how these rules infer the type for
+
+code[Lambda][
+lambda x. lambda f. f -x
+]
+
+To avoid ambiguities with the code[->] of code[ArrowType] in the following example we use 
+code[-->] for substitution mappings (which are shown in code[{ }]). 
+Try not to confuse mappings for parameters and mappings representing type variable substitutions, 
+which have strings as keys.  Mappings for the environment are represented as
+code[key <- value].
+
+This is informally the trace of the rules:
+
+code[Lambda][
+* AbstractionType
+** what is the type of x? a fresh type variable X1
+** type the body (lambda f. f -x) with environment mapping x <- X1
+*** AbstractionType
+**** what is the type of f? a fresh type variable X2
+**** type the body (f -x) with (additional) environment mapping f <- X2
+***** ApplicationType
+****** what is the type of the left part? the type variable X2
+****** (we used VariableType)
+****** but it must be an arrow type
+****** unify X2 with a fresh arrow type (X3 -> X4)
+****** this will generate the substitution 'X2' --> (X3 -> X4)
+****** {'X2' --> (X3 -> X4)}
+****** thus now the type of f is (X3 -> X4)
+****** what is the type of the right part? it is int
+****** (we used ArithmeticsType, and we unified type of x, X1 with int)
+****** {'X2' --> (X3 -> X4), 'X1' --> int}
+****** try to unify X3 with int
+****** {'X2' --> (X3 -> X4), 'X1' --> int, 'X3' --> int}
+****** thus now the type of f is (int -> X4)
+****** the type of the application is X4
+**** apply the substitution to the type of param and body
+**** f of type X2, becomes f of type (int -> X4)
+**** the type of body (f -x) becomes X4
+**** the resulting type is then (int -> X4) -> X4
+** apply the substitution to the type of param and body
+** x of type X1 becomes x of type int
+** the body has type (int -> X4) -> X4
+** the type of our term is int -> (int -> X4) -> X4
+]
+
+This type, let's write it for simplicity as code[Lambda][int -> (int -> a) -> a],
+says that we must pass to this lambda term a function which takes an integer, 
+and a function which takes an integer and returns "any type"; 
+as a result we will have that "any type". 
+Thus the following lambda application terms are well typed 
+(remember that application associates to the left):
+
+code[Lambda][
+(lambda x. lambda f. f -x) (10) (lambda y. -y)
+(lambda x. lambda f. f -x) (1) (lambda y. "foo")
+]
+
+The first one will return code[10] (actually code[--10]), the second one code["foo"].
+
+section2:WhyCloning[Why Cloning?]
+
+Remember that the types we are manipulating might have been
+explicitly specified in the text of the program by the programmer,
+thus, if we did not use clones, during substitutions, we would directly
+modifying the AST of the original program, which is not what we want.
+
+section:LambdaChecking[Lambda Type Checking]
+
+Now that we wrote all the rules for inferring types of Lambda terms, 
+we can write a checkrule (see ref:CheckRules[]) that says that a Lambda code[Program] 
+is correct if we can assign a type to the term (starting from an empty environment):
+
+code[Xsemantics][
+checkrule CheckProgram for
+	Program program
+from {
+	LambdaUtils::resetCounter
+	// if we can type the program term
+	empty |- new TypeSubstitutions() |> program.term : var Type type
+}
+]
+
+The invocation of code[resetCounter] is just to reset the counter used by
+codeRef[it.xsemantics.example.lambda.xsemantics.LambdaUtils] to create fresh
+type variables.
+
+section:LambdaCustomization[Customizations for Lambda]
+
+Since type variables during the type inference have the form code[X<number>] which
+makes it hard to visually interpret an inferred type, we use a custom codeRef[it.xsemantics.runtime.StringRepresentation],
+namely codeRef[it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTypeBeautifier],
+which relies on codeRef[it.xsemantics.example.lambda.xsemantics.LambdaTypeBeautifier]: this
+will consistently replace type variables in an inferred type with letters.
+For instance, code[X1 -> X3 -> (X4 -> X3)] would become code[a -> b -> (c -> b)].
+
+section:LambdaTypeInferenceIDE[Use of Type Inference in the IDE]
+
+We can also use the generated Java code for the inference type system to create an editor popup 
+action (for the editor of Lambda) to automatically infer types and add the types in the program text, 
+in particular we set the types of the parameters of abstractions.  
+Most of the code we show here deals with Eclipse plugin development: 
+the part which uses the code of the type system generated by Xsemantics is minimal.
+
+This is done in the class codeRef[it.xsemantics.example.lambda.xsemantics.LambdaTypeModifier]
+(you can see the complete code in the sources of the Lambda example); we show here just the main parts:
+
+code[Java][
+public class LambdaTypeModifier {
+
+	@Inject
+	protected LambdaXsemanticsSystem typeSystem; // generated by Xsemantics
+
+	@Inject
+	protected Provider<LambdaTypeBeautifier> lambdaTypeBeautifierProvider;
+
+	public RuleFailedException setAllTypes(Term term) {
+		Result<Type> result = typeSystem.type(new TypeSubstitutions(),
+				LambdaTermUtils.cloneWithoutTypes(term));
+		if (result.getRuleFailedException() != null)
+			return result.getRuleFailedException();
+		Type inferredType = result.getValue();
+		beautifyType(inferredType);
+		setAllTypes(term, inferredType);
+		return null;
+	}
+	
+	protected void beautifyType(Type paramType) {
+		lambdaTypeBeautifierProvider.get().beautifyTypeVariables(paramType);
+	}
+	...
+]
+
+Through the generated type system we infer the type of the term and then we update all 
+the types of the parameters of the abstractions in the term. 
+Note that before we "beautify" the type variable names.
+
+As explained in the Xtext documentation, since we need to modify the EMF model of the program 
+in the open editor, we need to use the codeRef[org.eclipse.xtext.ui.editor.model.IXtextDocument] 
+and its code[modify] method, with a
+codeRef[org.eclipse.xtext.util.concurrent.IUnitOfWork]; this is done by the class 
+codeRef[it.xsemantics.example.lambda.ui.typing.LambdaTermModifier]:
+
+code[Java][
+public class LambdaTermModifier {
+
+	@Inject
+	protected LambdaTypeModifier lambdaTypeModifier;
+
+	public void modifyTermWithInferredType(IXtextDocument xtextDocument) {
+		xtextDocument.modify(new IUnitOfWork.Void<XtextResource>() {
+			public void process(XtextResource resource) {
+				Program program = (Program) resource.getContents().get(0);
+				lambdaTypeModifier.setAllTypes(program.getTerm());
+			}
+		});
+	}
+
+}
+]
+
+Then we have the code implementing the editor action (codeRef[it.xsemantics.example.lambda.ui.popup.actions.InferTypesAction]):
+
+code[Java][
+public class InferTypesAction implements IEditorActionDelegate {
+	protected IEditorPart editor;
+
+	protected LambdaTermModifier lambdaTermModifier;
+
+	public InferTypesAction() {
+		lambdaTermModifier = LambdaUiUtil.getInjector().getInstance(
+				LambdaTermModifier.class);
+	}
+
+	public void run(IAction action) {
+		IXtextDocument xtextDocument = ((XtextEditor) editor).getDocument();
+		lambdaTermModifier.modifyTermWithInferredType(xtextDocument);
+	}
+
+	public void selectionChanged(IAction action, ISelection selection) {
+
+	}
+
+	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
+		this.editor = targetEditor;
+	}
+
+}
+]
+
+Let's see this editor action in action: suppose you have the following opened lambda file 
+(this is the abstraction for composing functions):
+
+code[Lambda][
+lambda f .
+	lambda g .
+		lambda x .
+			f (g x)
+]
+
+We can right click on the editor and select the infer type action.
+And the content of the editor will be updated with the inferred types:
+
+img[images/lambda_example_compose.jpeg][The original lambda program][ ][]
+
+img[images/lambda_example_compose_action.jpeg][Invoke the context menu action][ ][]
+
+img[images/lambda_example_compose_inferred.jpeg][The modified lambda program with inferred types][ ][]
+
+
 

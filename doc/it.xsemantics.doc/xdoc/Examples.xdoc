@@ -5,5 +5,13 @@ operation semantics/interpreter) for some languages implemented in Xtext.
 
 The presented examples are available as an installable feature from the
 update site.  Once installed, you will find project wizards for the example
-languages.  If you want to inspect the sources, you can retrieve them
-from the git repository (see ref:Sources[]).
+languages, as shown in the screenshot
+
+img[images/xsemantics-examples-wizards.png][Xsemantics Examples Wizards][ ][width:70%]
+
+For each example language included in Xsemantics, you will then find
+a wizard which creates a project to experiment with that example language,
+and a wizard to materialize in the workspace the sources of the
+projects for that example language. (the sources are also available 
+from the git repository, see ref:Sources[]).
+

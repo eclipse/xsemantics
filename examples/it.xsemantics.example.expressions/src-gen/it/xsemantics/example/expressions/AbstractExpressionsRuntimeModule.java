@@ -41,12 +41,12 @@ public abstract class AbstractExpressionsRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return it.xsemantics.example.expressions.serializer.AbstractExpressionsSemanticSequencer.class;
+		return it.xsemantics.example.expressions.serializer.ExpressionsSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return it.xsemantics.example.expressions.serializer.AbstractExpressionsSyntacticSequencer.class;
+		return it.xsemantics.example.expressions.serializer.ExpressionsSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

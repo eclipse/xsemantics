@@ -15,15 +15,15 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   @Inject
   private XsemanticsXbaseCompiler xbaseCompiler;
@@ -38,10 +38,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("{");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("final EClass result = _createEClass;");
+    _builder.append("final EClass result = EcoreFactory.eINSTANCE.createEClass();");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("result.setName(\"MyEClass\");");
@@ -50,7 +47,8 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("_xblockexpression = (result);");
     _builder.newLine();
     _builder.append("}");
-    this.checkCompilationOfRightExpression(_testRuleWithBlockExpressionInConclusion, "_xblockexpression", _builder);
+    this.checkCompilationOfRightExpression(_testRuleWithBlockExpressionInConclusion, 
+      "_xblockexpression", _builder);
   }
   
   @Test
@@ -59,7 +57,8 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("EObject _createEObject = EcoreFactory.eINSTANCE.createEObject();");
-    this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusion, "_createEObject", _builder);
+    this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusion, 
+      "_createEObject", _builder);
   }
   
   @Test
@@ -68,20 +67,21 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("EObject _createEObject = EcoreFactory.eINSTANCE.createEObject();");
-    this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable, "_createEObject", _builder);
+    this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable, 
+      "_createEObject", _builder);
   }
   
   @Test
   public void testWithConfiguredAppendable() {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-      final StringBuilderBasedAppendable appendable = _createAppendable;
-      String _string = new String();
-      appendable.declareVariable(_string, "_createEObject");
-      CharSequence _testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable = this.testFiles.testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable();
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.newLine();
-      _builder.append("EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();");
-      this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable, "_createEObject_1", _builder, appendable);
+    final FakeTreeAppendable appendable = this.createAppendable();
+    String _string = new String();
+    appendable.declareVariable(_string, "_createEObject");
+    CharSequence _testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable = this.testFiles.testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();");
+    this.checkCompilationOfRightExpression(_testRuleWithExpressionInConclusionWithInputParamNameAsXbaseGeneratedVariable, 
+      "_createEObject_1", _builder, appendable);
   }
   
   @Test
@@ -98,16 +98,16 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _firstUpper = StringExtensions.toFirstUpper(\"bar\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("String _operator_plus = StringExtensions.operator_plus(_string, _firstUpper);");
+    _builder.append("String _plus = (_string + _firstUpper);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(\"foo\", _operator_plus);");
+    _builder.append("boolean _equals = Objects.equal(\"foo\", _plus);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' == new String() + \"bar\".toFirstUpper */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals) {");
+    _builder.append("if (!_equals) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() + \\\"bar\\\".toFirstUpper\");");
@@ -134,10 +134,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("typeInternal(G, _trace_, eClass, _eClass_1);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("final EClass eC = _createEClass;");
+    _builder.append("final EClass eC = EcoreFactory.eINSTANCE.createEClass();");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("eC.setName(\"MyEClass\");");
@@ -146,16 +143,16 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = eC.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, \"MyEClass2\");");
+    _builder.append("boolean _equals_1 = Objects.equal(_name, \"MyEClass2\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_not = BooleanExtensions.operator_not(_operator_equals_1);");
+    _builder.append("boolean _not = (!_equals_1);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* !(eC.name == \'MyEClass2\') */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_not) {");
+    _builder.append("if (!_not) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"!(eC.name == \\\'MyEClass2\\\')\");");
@@ -170,13 +167,13 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("int _length = _name_1.length();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_lessThan = IntegerExtensions.operator_lessThan(_length, 10);");
+    _builder.append("boolean _lessThan = (_length < 10);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eC.name.length < 10 */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_lessThan) {");
+    _builder.append("if (!_lessThan) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eC.name.length < 10\");");
@@ -185,13 +182,13 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_2 = ObjectExtensions.operator_equals(eClass, eC);");
+    _builder.append("boolean _equals_2 = Objects.equal(eClass, eC);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass == eC */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals_2) {");
+    _builder.append("if (!Boolean.valueOf(_equals_2)) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass == eC\");");
@@ -242,7 +239,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.newLine();
     _builder.append("/* G ||- eClass : object : feat */");
     _builder.newLine();
-    _builder.append("Result2<EObject, EStructuralFeature> result = type2Internal(G, _trace_, eClass);");
+    _builder.append("Result2<EObject,EStructuralFeature> result = type2Internal(G, _trace_, eClass);");
     _builder.newLine();
     _builder.append("checkAssignableTo(result.getFirst(), EObject.class);");
     _builder.newLine();
@@ -378,53 +375,42 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   }
   
   public void checkCompilationOfRightExpression(final CharSequence inputCode, final String expectedExpName, final CharSequence expected) {
-    StringBuilderBasedAppendable _createAppendable = this.createAppendable();
+    FakeTreeAppendable _createAppendable = this.createAppendable();
     this.checkCompilationOfRightExpression(inputCode, expectedExpName, expected, _createAppendable);
   }
   
+  public void checkCompilationOfRightExpression(final CharSequence inputCode, final String expectedExpName, final CharSequence expected, final ITreeAppendable appendable) {
+    Rule _firstRule = this.getFirstRule(inputCode);
+    RuleConclusion _conclusion = _firstRule.getConclusion();
+    EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
+    RuleConclusionElement _get = _conclusionElements.get(1);
+    ExpressionInConclusion _ruleExpression = this.ruleExpression(_get);
+    final XExpression xexp = _ruleExpression.getExpression();
+    final ITreeAppendable result = this.xbaseCompiler.compile(xexp, appendable, true);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
+    final String expName = result.getName(xexp);
+    Assert.assertEquals(expectedExpName, expName);
+  }
+  
   public void checkCompilationOfPremises(final CharSequence inputCode, final CharSequence expected) {
-    StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-    this.checkCompilationOfPremises(inputCode, expected, _createAppendable);
-  }
-  
-  public void checkCompilationOfRightExpression(final CharSequence inputCode, final String expectedExpName, final CharSequence expected, final IAppendable appendable) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      RuleConclusion _conclusion = _firstRule.getConclusion();
-      EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
-      RuleConclusionElement _get = _conclusionElements.get(1);
-      ExpressionInConclusion _ruleExpression = this.ruleExpression(_get);
-      XExpression _expression = _ruleExpression.getExpression();
-      final XExpression xexp = _expression;
-      IAppendable _compile = this.xbaseCompiler.compile(xexp, appendable, true);
-      final IAppendable result = _compile;
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
-      String _name = result.getName(xexp);
-      final String expName = _name;
-      Assert.assertEquals(expectedExpName, expName);
-  }
-  
-  public void checkCompilationOfPremises(final CharSequence inputCode, final CharSequence expected, final IAppendable appendable) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      XBlockExpression _rulePremisesAsBlock = this.getRulePremisesAsBlock(_firstRule);
-      final XBlockExpression xexp = _rulePremisesAsBlock;
-      IAppendable _compile = this.xbaseCompiler.compile(xexp, appendable, false);
-      final IAppendable result = _compile;
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final Rule rule = this.getFirstRule(inputCode);
+    final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
+    final ITreeAppendable appendable = this.createAppendable(rule);
+    final ITreeAppendable result = this.xbaseCompiler.compile(xexp, appendable, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
   public void checkCompilationOfPremisesOfCheckRule(final CharSequence inputCode, final CharSequence expected) {
-      CheckRule _firstCheckRule = this.getFirstCheckRule(inputCode);
-      XBlockExpression _rulePremisesAsBlock = this.getRulePremisesAsBlock(_firstCheckRule);
-      final XBlockExpression xexp = _rulePremisesAsBlock;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-      IAppendable _compile = this.xbaseCompiler.compile(xexp, _createAppendable, false);
-      final IAppendable result = _compile;
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    CheckRule _firstCheckRule = this.getFirstCheckRule(inputCode);
+    final XBlockExpression xexp = this.getRulePremisesAsBlock(_firstCheckRule);
+    FakeTreeAppendable _createAppendable = this.createAppendable();
+    final ITreeAppendable result = this.xbaseCompiler.compile(xexp, _createAppendable, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
 }

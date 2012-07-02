@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -32,9 +31,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProviderCustom.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
@@ -42,14 +41,11 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testJudgmentDescriptions() {
     try {
-      {
-        CharSequence _testJudgmentDescriptionsWithDuplicateSymbols = this.testFiles.testJudgmentDescriptionsWithDuplicateSymbols();
-        XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsWithDuplicateSymbols);
-        List<JudgmentDescription> _judgmentDescriptions = this.getJudgmentDescriptions(_parse, "|-", ":");
-        final List<JudgmentDescription> descriptions = _judgmentDescriptions;
-        int _size = descriptions.size();
-        Assert.assertEquals(2, _size);
-      }
+      CharSequence _testJudgmentDescriptionsWithDuplicateSymbols = this.testFiles.testJudgmentDescriptionsWithDuplicateSymbols();
+      XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsWithDuplicateSymbols);
+      final List<JudgmentDescription> descriptions = this.getJudgmentDescriptions(_parse, "|-", ":");
+      int _size = descriptions.size();
+      Assert.assertEquals(2, _size);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,11 +71,10 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testRuleWithoutDescription() {
-      CharSequence _testRuleWithoutJudgmentDescription = this.testFiles.testRuleWithoutJudgmentDescription();
-      Rule _ruleWithoutValidation = this.getRuleWithoutValidation(_testRuleWithoutJudgmentDescription, 1);
-      JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_ruleWithoutValidation);
-      final JudgmentDescription description = _judgmentDescription;
-      Assert.assertNull(description);
+    CharSequence _testRuleWithoutJudgmentDescription = this.testFiles.testRuleWithoutJudgmentDescription();
+    Rule _ruleWithoutValidation = this.getRuleWithoutValidation(_testRuleWithoutJudgmentDescription, 1);
+    final JudgmentDescription description = this._xsemanticsUtils.judgmentDescription(_ruleWithoutValidation);
+    Assert.assertNull(description);
   }
   
   @Test
@@ -102,25 +97,24 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testRulesOfTheSameKind() {
-      CharSequence _testRulesOfTheSameKind = this.testFiles.testRulesOfTheSameKind();
-      XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRulesOfTheSameKind);
-      final XsemanticsSystem ts = _parseAndAssertNoError;
-      EList<Rule> _rules = ts.getRules();
-      Rule _get = _rules.get(0);
-      List<Rule> _rulesOfTheSameKind = this._xsemanticsUtils.getRulesOfTheSameKind(_get);
-      EList<Rule> _rules_1 = ts.getRules();
-      Rule _get_1 = _rules_1.get(0);
-      EList<Rule> _rules_2 = ts.getRules();
-      Rule _get_2 = _rules_2.get(1);
-      this.assertRules(_rulesOfTheSameKind, _get_1, _get_2);
-      EList<Rule> _rules_3 = ts.getRules();
-      Rule _get_3 = _rules_3.get(2);
-      List<Rule> _rulesOfTheSameKind_1 = this._xsemanticsUtils.getRulesOfTheSameKind(_get_3);
-      EList<Rule> _rules_4 = ts.getRules();
-      Rule _get_4 = _rules_4.get(2);
-      EList<Rule> _rules_5 = ts.getRules();
-      Rule _get_5 = _rules_5.get(3);
-      this.assertRules(_rulesOfTheSameKind_1, _get_4, _get_5);
+    CharSequence _testRulesOfTheSameKind = this.testFiles.testRulesOfTheSameKind();
+    final XsemanticsSystem ts = this.parseAndAssertNoError(_testRulesOfTheSameKind);
+    EList<Rule> _rules = ts.getRules();
+    Rule _get = _rules.get(0);
+    List<Rule> _rulesOfTheSameKind = this._xsemanticsUtils.getRulesOfTheSameKind(_get);
+    EList<Rule> _rules_1 = ts.getRules();
+    Rule _get_1 = _rules_1.get(0);
+    EList<Rule> _rules_2 = ts.getRules();
+    Rule _get_2 = _rules_2.get(1);
+    this.assertRules(_rulesOfTheSameKind, _get_1, _get_2);
+    EList<Rule> _rules_3 = ts.getRules();
+    Rule _get_3 = _rules_3.get(2);
+    List<Rule> _rulesOfTheSameKind_1 = this._xsemanticsUtils.getRulesOfTheSameKind(_get_3);
+    EList<Rule> _rules_4 = ts.getRules();
+    Rule _get_4 = _rules_4.get(2);
+    EList<Rule> _rules_5 = ts.getRules();
+    Rule _get_5 = _rules_5.get(3);
+    this.assertRules(_rulesOfTheSameKind_1, _get_4, _get_5);
   }
   
   @Test
@@ -277,157 +271,140 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testOuputArg() {
-      CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-      Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(0);
-      final RuleInvocation ruleInvocation = _get;
-      List<RuleInvocationExpression> _outputArgsExpressions = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
-      final List<RuleInvocationExpression> outputArgs = _outputArgsExpressions;
-      int _size = outputArgs.size();
-      Assert.assertEquals(0, _size);
+    CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
+    Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
+    final List<RuleInvocationExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    int _size = outputArgs.size();
+    Assert.assertEquals(0, _size);
   }
   
   @Test
   public void testOuputArg2() {
-      CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-      Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(1);
-      final RuleInvocation ruleInvocation = _get;
-      List<RuleInvocationExpression> _outputArgsExpressions = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
-      final List<RuleInvocationExpression> outputArgs = _outputArgsExpressions;
-      int _size = outputArgs.size();
-      Assert.assertEquals(0, _size);
+    CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
+    Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation ruleInvocation = _ruleInvocations.get(1);
+    final List<RuleInvocationExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    int _size = outputArgs.size();
+    Assert.assertEquals(0, _size);
   }
   
   @Test
   public void testInputArgs() {
-      CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-      Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(0);
-      final RuleInvocation ruleInvocation = _get;
-      List<RuleInvocationExpression> _inputArgsExpressions = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
-      final List<RuleInvocationExpression> inputArgs = _inputArgsExpressions;
-      int _size = inputArgs.size();
-      Assert.assertEquals(2, _size);
+    CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
+    Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
+    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
+    int _size = inputArgs.size();
+    Assert.assertEquals(2, _size);
   }
   
   @Test
   public void testInputArgsWithOutputParams() {
-      CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
-      Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(0);
-      final RuleInvocation ruleInvocation = _get;
-      List<RuleInvocationExpression> _inputArgsExpressions = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
-      final List<RuleInvocationExpression> inputArgs = _inputArgsExpressions;
-      int _size = inputArgs.size();
-      Assert.assertEquals(2, _size);
-      EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-      RuleInvocationExpression _get_1 = _expressions.get(0);
-      RuleInvocationExpression _get_2 = inputArgs.get(0);
-      Assert.assertEquals(_get_1, _get_2);
-      EList<RuleInvocationExpression> _expressions_1 = ruleInvocation.getExpressions();
-      RuleInvocationExpression _get_3 = _expressions_1.get(2);
-      RuleInvocationExpression _get_4 = inputArgs.get(1);
-      Assert.assertEquals(_get_3, _get_4);
+    CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
+    Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
+    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
+    int _size = inputArgs.size();
+    Assert.assertEquals(2, _size);
+    EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
+    RuleInvocationExpression _get = _expressions.get(0);
+    RuleInvocationExpression _get_1 = inputArgs.get(0);
+    Assert.assertEquals(_get, _get_1);
+    EList<RuleInvocationExpression> _expressions_1 = ruleInvocation.getExpressions();
+    RuleInvocationExpression _get_2 = _expressions_1.get(2);
+    RuleInvocationExpression _get_3 = inputArgs.get(1);
+    Assert.assertEquals(_get_2, _get_3);
   }
   
   @Test
   public void testOutputArgsWithOutputParams() {
-      CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
-      Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(0);
-      final RuleInvocation ruleInvocation = _get;
-      List<RuleInvocationExpression> _outputArgsExpressions = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
-      final List<RuleInvocationExpression> inputArgs = _outputArgsExpressions;
-      int _size = inputArgs.size();
-      Assert.assertEquals(1, _size);
-      EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-      RuleInvocationExpression _get_1 = _expressions.get(1);
-      RuleInvocationExpression _get_2 = inputArgs.get(0);
-      Assert.assertEquals(_get_1, _get_2);
+    CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
+    Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
+    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    int _size = inputArgs.size();
+    Assert.assertEquals(1, _size);
+    EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
+    RuleInvocationExpression _get = _expressions.get(1);
+    RuleInvocationExpression _get_1 = inputArgs.get(0);
+    Assert.assertEquals(_get, _get_1);
   }
   
   @Test
   public void testOutputConclusionElements() {
-      CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
-      Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
-      final Rule rule = _firstRule;
-      List<RuleConclusionElement> _outputConclusionElements = this._xsemanticsUtils.outputConclusionElements(rule);
-      final List<RuleConclusionElement> outputConclusionElements = _outputConclusionElements;
-      int _size = outputConclusionElements.size();
-      Assert.assertEquals(1, _size);
-      RuleConclusion _conclusion = rule.getConclusion();
-      EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
-      RuleConclusionElement _get = _conclusionElements.get(1);
-      RuleConclusionElement _get_1 = outputConclusionElements.get(0);
-      Assert.assertEquals(_get, _get_1);
+    CharSequence _testRuleWithOutputParams = this.testFiles.testRuleWithOutputParams();
+    final Rule rule = this.getFirstRule(_testRuleWithOutputParams);
+    final List<RuleConclusionElement> outputConclusionElements = this._xsemanticsUtils.outputConclusionElements(rule);
+    int _size = outputConclusionElements.size();
+    Assert.assertEquals(1, _size);
+    RuleConclusion _conclusion = rule.getConclusion();
+    EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
+    RuleConclusionElement _get = _conclusionElements.get(1);
+    RuleConclusionElement _get_1 = outputConclusionElements.get(0);
+    Assert.assertEquals(_get, _get_1);
   }
   
   @Test
   public void testIterateIfThenElse() {
-      String[] _split = "a,B,c".split(",");
-      List<String> _list = IterableExtensions.<String>toList(((Iterable<? extends String>)Conversions.doWrapArray(_split)));
-      final List<String> stringList = _list;
-      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-      final ArrayList<Object> toUpper = _newArrayList;
-      ArrayList<Object> _newArrayList_1 = CollectionLiterals.<Object>newArrayList();
-      final ArrayList<Object> toLower = _newArrayList_1;
-      final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-          public Boolean apply(final String it) {
-            String _lowerCase = it.toLowerCase();
-            boolean _equals = _lowerCase.equals(it);
-            return Boolean.valueOf(_equals);
-          }
-        };
-      final Procedure1<String> _function_1 = new Procedure1<String>() {
-          public void apply(final String it) {
-            CollectionExtensions.<String>operator_add(toLower, it);
-          }
-        };
-      final Procedure1<String> _function_2 = new Procedure1<String>() {
-          public void apply(final String it) {
-            CollectionExtensions.<String>operator_add(toUpper, it);
-          }
-        };
-      this._xsemanticsUtils.<String>iterateIfThenElse(stringList, _function, _function_1, _function_2);
-      String _string = toLower.toString();
-      Assert.assertEquals("[a, c]", _string);
-      String _string_1 = toUpper.toString();
-      Assert.assertEquals("[B]", _string_1);
+    String[] _split = "a,B,c".split(",");
+    final List<String> stringList = IterableExtensions.<String>toList(((Iterable<? extends String>)Conversions.doWrapArray(_split)));
+    final ArrayList<Object> toUpper = CollectionLiterals.<Object>newArrayList();
+    final ArrayList<Object> toLower = CollectionLiterals.<Object>newArrayList();
+    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+        public Boolean apply(final String it) {
+          String _lowerCase = it.toLowerCase();
+          boolean _equals = _lowerCase.equals(it);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+        public void apply(final String it) {
+          toLower.add(it);
+        }
+      };
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
+        public void apply(final String it) {
+          toUpper.add(it);
+        }
+      };
+    this._xsemanticsUtils.<String>iterateIfThenElse(stringList, _function, _function_1, _function_2);
+    String _string = toLower.toString();
+    Assert.assertEquals("[a, c]", _string);
+    String _string_1 = toUpper.toString();
+    Assert.assertEquals("[B]", _string_1);
   }
   
   @Test
   public void testOutputConclusionElementsWithoutOutputParams() {
-      CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-      Rule _firstRule = this.getFirstRule(_testSimpleRule);
-      final Rule rule = _firstRule;
-      List<RuleConclusionElement> _outputConclusionElements = this._xsemanticsUtils.outputConclusionElements(rule);
-      final List<RuleConclusionElement> outputConclusionElements = _outputConclusionElements;
-      int _size = outputConclusionElements.size();
-      Assert.assertEquals(0, _size);
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    final Rule rule = this.getFirstRule(_testSimpleRule);
+    final List<RuleConclusionElement> outputConclusionElements = this._xsemanticsUtils.outputConclusionElements(rule);
+    int _size = outputConclusionElements.size();
+    Assert.assertEquals(0, _size);
   }
   
   public void assertRules(final List<Rule> rules, final Rule expectedRule1, final Rule expectedRule2) {
-      int _size = rules.size();
-      Assert.assertEquals(2, _size);
-      Rule _get = rules.get(0);
-      Assert.assertEquals(expectedRule1, _get);
-      Rule _get_1 = rules.get(1);
-      Assert.assertEquals(expectedRule2, _get_1);
+    int _size = rules.size();
+    Assert.assertEquals(2, _size);
+    Rule _get = rules.get(0);
+    Assert.assertEquals(expectedRule1, _get);
+    Rule _get_1 = rules.get(1);
+    Assert.assertEquals(expectedRule2, _get_1);
   }
   
   public void assertDescription(final JudgmentDescription description, final String judgmentSymbol, final String relationSymbol) {
-      Assert.assertNotNull(description);
-      String _judgmentSymbol = description.getJudgmentSymbol();
-      Assert.assertEquals(judgmentSymbol, _judgmentSymbol);
-      EList<String> _relationSymbols = description.getRelationSymbols();
-      String _get = _relationSymbols.get(0);
-      Assert.assertEquals(relationSymbol, _get);
+    Assert.assertNotNull(description);
+    String _judgmentSymbol = description.getJudgmentSymbol();
+    Assert.assertEquals(judgmentSymbol, _judgmentSymbol);
+    EList<String> _relationSymbols = description.getRelationSymbols();
+    String _get = _relationSymbols.get(0);
+    Assert.assertEquals(relationSymbol, _get);
   }
   
   public List<JudgmentDescription> getJudgmentDescriptions(final XsemanticsSystem ts, final String judgmentSymbol, final String relationSymbol) {

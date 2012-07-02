@@ -13,18 +13,15 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProviderCustom.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProviderCustom.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
   @Inject
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
@@ -38,14 +35,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
     String _package = this._xsemanticsGeneratorExtensions.toPackage(_parseAndAssertNoError);
     Assert.assertEquals("it.xsemantics.test", _package);
-  }
-  
-  @Test
-  public void testTypeSystemToJavaClassFile() {
-    CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
-    String _javaClassFile = this._xsemanticsGeneratorExtensions.toJavaClassFile(_parseAndAssertNoError);
-    Assert.assertEquals("it/xsemantics/test/TypeSystem.java", _javaClassFile);
   }
   
   @Test
@@ -65,31 +54,11 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testTypeSystemToJavaClassNameNoQualified() {
-      CharSequence _typeSystemNoQualifiedName = this.testFiles.typeSystemNoQualifiedName();
-      XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemNoQualifiedName);
-      String _javaClassName = this._xsemanticsGeneratorExtensions.toJavaClassName(_parseAndAssertNoError);
-      Assert.assertEquals("TypeSystem", _javaClassName);
-      CharSequence _typeSystemNoQualifiedName_1 = this.testFiles.typeSystemNoQualifiedName();
-      XsemanticsSystem _parseAndAssertNoError_1 = this.parseAndAssertNoError(_typeSystemNoQualifiedName_1);
-      String _javaClassFile = this._xsemanticsGeneratorExtensions.toJavaClassFile(_parseAndAssertNoError_1);
-      Assert.assertEquals("TypeSystem.java", _javaClassFile);
-  }
-  
-  @Test
   public void testTypeSystemToValidatorPackage() {
     CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
     String _validatorPackage = this._xsemanticsGeneratorExtensions.toValidatorPackage(_parseAndAssertNoError);
     Assert.assertEquals("it.xsemantics.test.validation", _validatorPackage);
-  }
-  
-  @Test
-  public void testTypeSystemToValidatorJavaClassFile() {
-    CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
-    String _validatorJavaClassFile = this._xsemanticsGeneratorExtensions.toValidatorJavaClassFile(_parseAndAssertNoError);
-    Assert.assertEquals("it/xsemantics/test/validation/TypeSystemValidator.java", _validatorJavaClassFile);
   }
   
   @Test
@@ -106,14 +75,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     Rule _firstRule = this.getFirstRule(_testSimpleRule);
     String _package = this._xsemanticsGeneratorExtensions.toPackage(_firstRule);
     Assert.assertEquals("it.xsemantics.test.rules", _package);
-  }
-  
-  @Test
-  public void testRuleToJavaClassFile() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    String _javaClassFile = this._xsemanticsGeneratorExtensions.toJavaClassFile(_firstRule);
-    Assert.assertEquals("it/xsemantics/test/rules/EClassEObject.java", _javaClassFile);
   }
   
   @Test
@@ -141,113 +102,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testJvmTypeForTypeSystem() {
-      CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
-      XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
-      JvmGenericType _createJvmType = this._xsemanticsGeneratorExtensions.createJvmType(_parseAndAssertNoError);
-      final JvmGenericType jvmType = _createJvmType;
-      String _identifier = jvmType.getIdentifier();
-      Assert.assertEquals("it.xsemantics.test.TypeSystem", _identifier);
-  }
-  
-  @Test
-  public void testJvmTypeForBaseTypeSystem() {
-    String _name = it.xsemantics.runtime.XsemanticsRuntimeSystem.class.getName();
-    JvmGenericType _createJvmTypeForTypeSystemBaseClass = this._xsemanticsGeneratorExtensions.createJvmTypeForTypeSystemBaseClass();
-    String _identifier = _createJvmTypeForTypeSystemBaseClass.getIdentifier();
-    Assert.assertEquals(_name, _identifier);
-  }
-  
-  @Test
-  public void testJvmTypeForRule() {
-      CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-      Rule _firstRule = this.getFirstRule(_testSimpleRule);
-      JvmGenericType _createJvmType = this._xsemanticsGeneratorExtensions.createJvmType(_firstRule);
-      final JvmGenericType jvmType = _createJvmType;
-      String _identifier = jvmType.getIdentifier();
-      Assert.assertEquals("it.xsemantics.test.rules.EClassEObject", _identifier);
-  }
-  
-  @Test
-  public void testInjectAnnotation() {
-    ImportManager _importManager = new ImportManager(true);
-    String _injectAnnotation = this._xsemanticsGeneratorExtensions.injectAnnotation(_importManager);
-    Assert.assertEquals("@Inject", _injectAnnotation);
-  }
-  
-  @Test
-  public void testCheckAnnotation() {
-    ImportManager _importManager = new ImportManager(true);
-    String _checkAnnotation = this._xsemanticsGeneratorExtensions.checkAnnotation(_importManager);
-    Assert.assertEquals("@Check", _checkAnnotation);
-  }
-  
-  @Test
-  public void testRuleInputParameters() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    String _inputParameters = this._xsemanticsGeneratorExtensions.inputParameters(_firstRule, _importManager);
-    String _string = _inputParameters.toString();
-    Assert.assertEquals("final EClass eClass, final EObject object", _string);
-  }
-  
-  @Test
-  public void errorInformationArgs() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    String _errorInformationArgs = this._xsemanticsGeneratorExtensions.errorInformationArgs(_firstRule, _importManager);
-    String _string = _errorInformationArgs.toString();
-    Assert.assertEquals(", new ErrorInformation(eClass), new ErrorInformation(object)", _string);
-  }
-  
-  @Test
-  public void errorInformationArgsEmpty() {
-    CharSequence _testRulesWithOnlyNonEObjectParams = this.testFiles.testRulesWithOnlyNonEObjectParams();
-    Rule _firstRule = this.getFirstRule(_testRulesWithOnlyNonEObjectParams);
-    ImportManager _importManager = new ImportManager(true);
-    String _errorInformationArgs = this._xsemanticsGeneratorExtensions.errorInformationArgs(_firstRule, _importManager);
-    String _string = _errorInformationArgs.toString();
-    Assert.assertEquals("", _string);
-  }
-  
-  @Test
-  public void testJudgmentDescriptionInputParameters() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_firstRule);
-    ImportManager _importManager = new ImportManager(true);
-    String _inputParameters = this._xsemanticsGeneratorExtensions.inputParameters(_judgmentDescription, _importManager);
-    String _string = _inputParameters.toString();
-    Assert.assertEquals("final EClass c, final EObject o", _string);
-  }
-  
-  @Test
-  public void testJudgmentDescriptionInputParametersWithParametrizedTypes() {
-    CharSequence _testJudgmentDescriptionsRelatedToXsemantics = this.testFiles.testJudgmentDescriptionsRelatedToXsemantics();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsRelatedToXsemantics);
-    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
-    JudgmentDescription _get = _judgmentDescriptions.get(0);
-    ImportManager _importManager = new ImportManager(true);
-    String _inputParameters = this._xsemanticsGeneratorExtensions.inputParameters(_get, _importManager);
-    String _string = _inputParameters.toString();
-    Assert.assertEquals("final List<Import> list, final Set<JudgmentDescription> set", _string);
-  }
-  
-  @Test
-  public void testInputParametersWithNameClashes() {
-    CharSequence _fjJudgmentDescriptions = this.fjTestFiles.fjJudgmentDescriptions();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_fjJudgmentDescriptions);
-    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
-    JudgmentDescription _get = _judgmentDescriptions.get(1);
-    ImportManager _importManager = new ImportManager(true);
-    String _inputParameters = this._xsemanticsGeneratorExtensions.inputParameters(_get, _importManager);
-    String _string = _inputParameters.toString();
-    Assert.assertEquals("final Type left, final Type right", _string);
-  }
-  
-  @Test
   public void testJudgmentDescriptionInputArgs() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     Rule _firstRule = this.getFirstRule(_testSimpleRule);
@@ -264,46 +118,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     String _inputParameterNames = this._xsemanticsGeneratorExtensions.inputParameterNames(_firstRule);
     String _string = _inputParameterNames.toString();
     Assert.assertEquals("eClass, object", _string);
-  }
-  
-  @Test
-  public void testRuleReturnTypeWithoutOutputParams() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    IAppendable _ruleResultTypeParameters = this._xsemanticsGeneratorExtensions.ruleResultTypeParameters(_firstRule, _importManager);
-    String _string = _ruleResultTypeParameters.toString();
-    Assert.assertEquals("Boolean", _string);
-  }
-  
-  @Test
-  public void testResultTypeForCheckRule() {
-    CharSequence _testCheckRule = this.testFiles.testCheckRule();
-    CheckRule _firstCheckRule = this.getFirstCheckRule(_testCheckRule);
-    ImportManager _importManager = new ImportManager(true);
-    CharSequence _resultType = this._xsemanticsGeneratorExtensions.resultType(_firstCheckRule, _importManager);
-    String _string = _resultType.toString();
-    Assert.assertEquals("Result<Boolean>", _string);
-  }
-  
-  @Test
-  public void testInputParameterForCheckRule() {
-    CharSequence _testCheckRule = this.testFiles.testCheckRule();
-    CheckRule _firstCheckRule = this.getFirstCheckRule(_testCheckRule);
-    ImportManager _importManager = new ImportManager(true);
-    CharSequence _inputParameter = this._xsemanticsGeneratorExtensions.inputParameter(_firstCheckRule, _importManager);
-    String _string = _inputParameter.toString();
-    Assert.assertEquals("final EObject obj", _string);
-  }
-  
-  @Test
-  public void testRuleReturnWithoutOutputParams() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    String _resultType = this._xsemanticsGeneratorExtensions.resultType(_firstRule, _importManager);
-    String _string = _resultType.toString();
-    Assert.assertEquals("Result<Boolean>", _string);
   }
   
   @Test
@@ -324,30 +138,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     CharSequence _polymorphicDispatcherNumOfArgs = this._xsemanticsGeneratorExtensions.polymorphicDispatcherNumOfArgs(_judgmentDescription);
     String _string = _polymorphicDispatcherNumOfArgs.toString();
     Assert.assertEquals("4", _string);
-  }
-  
-  @Test
-  public void testJudgmentDescriptionResultType() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
-    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
-    JudgmentDescription _get = _judgmentDescriptions.get(0);
-    ImportManager _importManager = new ImportManager(true);
-    String _resultType = this._xsemanticsGeneratorExtensions.resultType(_get, _importManager);
-    String _string = _resultType.toString();
-    Assert.assertEquals("Result<Boolean>", _string);
-  }
-  
-  @Test
-  public void testJudgmentDescriptionResultType2() {
-    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
-    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
-    JudgmentDescription _get = _judgmentDescriptions.get(0);
-    ImportManager _importManager = new ImportManager(true);
-    String _resultType = this._xsemanticsGeneratorExtensions.resultType(_get, _importManager);
-    String _string = _resultType.toString();
-    Assert.assertEquals("Result2<EObject, EStructuralFeature>", _string);
   }
   
   @Test
@@ -381,37 +171,6 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testJudgmentDescriptionResultTypeWithAppendable() {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-      final StringBuilderBasedAppendable appendable = _createAppendable;
-      CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-      XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
-      EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
-      JudgmentDescription _get = _judgmentDescriptions.get(0);
-      IAppendable _resultType = this._xsemanticsGeneratorExtensions.resultType(_get, appendable);
-      String _string = _resultType.toString();
-      Assert.assertEquals("Result<Boolean>", _string);
-  }
-  
-  @Test
-  public void testAdditionalParamsDeclaration() {
-    ImportManager _importManager = new ImportManager(true);
-    CharSequence _additionalParamsDeclaration = this._xsemanticsGeneratorExtensions.additionalParamsDeclaration(_importManager);
-    String _string = _additionalParamsDeclaration.toString();
-    Assert.assertEquals("final RuleEnvironment _environment_, final RuleApplicationTrace _trace_", _string);
-  }
-  
-  @Test
-  public void testAdditionalParamsDeclarationForRule() {
-    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    CharSequence _additionalParamsDeclaration = this._xsemanticsGeneratorExtensions.additionalParamsDeclaration(_firstRule, _importManager);
-    String _string = _additionalParamsDeclaration.toString();
-    Assert.assertEquals("final RuleEnvironment G, final RuleApplicationTrace _trace_", _string);
-  }
-  
-  @Test
   public void testAdditionalArgs() {
     CharSequence _additionalArgs = this._xsemanticsGeneratorExtensions.additionalArgs();
     String _string = _additionalArgs.toString();
@@ -439,12 +198,12 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   
   @Test
   public void testJavaString() {
-      String _javaString = this._xsemanticsGeneratorExtensions.javaString("foo");
-      Assert.assertEquals("foo", _javaString);
-      String _javaString_1 = this._xsemanticsGeneratorExtensions.javaString("\'foo\'");
-      Assert.assertEquals("\\\'foo\\\'", _javaString_1);
-      String _javaString_2 = this._xsemanticsGeneratorExtensions.javaString("\"foo\"");
-      Assert.assertEquals("\\\"foo\\\"", _javaString_2);
+    String _javaString = this._xsemanticsGeneratorExtensions.javaString("foo");
+    Assert.assertEquals("foo", _javaString);
+    String _javaString_1 = this._xsemanticsGeneratorExtensions.javaString("\'foo\'");
+    Assert.assertEquals("\\\'foo\\\'", _javaString_1);
+    String _javaString_2 = this._xsemanticsGeneratorExtensions.javaString("\"foo\"");
+    Assert.assertEquals("\\\"foo\\\"", _javaString_2);
   }
   
   @Test
@@ -496,11 +255,40 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testRuleIssueDeclaration() {
+  public void testResultTypeWithNoOutputParameter() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    Rule _firstRule = this.getFirstRule(_testSimpleRule);
-    ImportManager _importManager = new ImportManager(true);
-    CharSequence _ruleIssueDeclaration = this._xsemanticsGeneratorExtensions.ruleIssueDeclaration(_firstRule, _importManager);
-    this.assertEqualsStrings("public final static String ECLASSEOBJECT = \"it.xsemantics.test.rules.EClassEObject\";", _ruleIssueDeclaration);
+    this.assertResultType(_testSimpleRule, "Result<Boolean>");
+  }
+  
+  @Test
+  public void testResultTypeWithOneOutputParameter() {
+    CharSequence _testJudgmentDescriptionsReferringToEcoreWithOutput = this.testFiles.testJudgmentDescriptionsReferringToEcoreWithOutput();
+    this.assertResultType(_testJudgmentDescriptionsReferringToEcoreWithOutput, "Result<EObject>");
+  }
+  
+  @Test
+  public void testResultTypeWithTwoOutputParameters() {
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
+    this.assertResultType(_testJudgmentDescriptionsWith2OutputParams, "Result2<EObject,EStructuralFeature>");
+  }
+  
+  @Test
+  public void testResultForCheckRule() {
+    final FakeTreeAppendable a = this.createAppendable();
+    CharSequence _testCheckRule = this.testFiles.testCheckRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
+    EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
+    CheckRule _get = _checkrules.get(0);
+    this._xsemanticsGeneratorExtensions.resultType(_get, a);
+    this.assertEqualsStrings("Result<Boolean>", a);
+  }
+  
+  public void assertResultType(final CharSequence prog, final CharSequence expected) {
+    final FakeTreeAppendable a = this.createAppendable();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    this._xsemanticsGeneratorExtensions.resultType(_get, a);
+    this.assertEqualsStrings(expected, a);
   }
 }

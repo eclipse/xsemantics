@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import it.xsemantics.example.lambda.ui.internal.LambdaActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class LambdaExecutableExtensionFactory extends AbstractGuiceAwareExecutab
 
 	@Override
 	protected Bundle getBundle() {
-		return it.xsemantics.example.lambda.ui.internal.LambdaActivator.getInstance().getBundle();
+		return LambdaActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return it.xsemantics.example.lambda.ui.internal.LambdaActivator.getInstance().getInjector("it.xsemantics.example.lambda.Lambda");
+		return LambdaActivator.getInstance().getInjector(LambdaActivator.IT_XSEMANTICS_EXAMPLE_LAMBDA_LAMBDA);
 	}
 	
 }

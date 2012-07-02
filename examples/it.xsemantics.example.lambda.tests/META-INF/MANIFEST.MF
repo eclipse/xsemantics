@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lambda Tests
 Bundle-SymbolicName: it.xsemantics.example.lambda.tests
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: it.xsemantics.example.lambda.tests.Activator
 Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.core.runtime,
@@ -15,12 +15,18 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide;bundle-version="3.7.0",
  org.eclipse.xtext.junit4;bundle-version="2.2.1",
  org.junit4;bundle-version="4.8.1",
- org.eclipse.xtend2.lib,
  com.google.inject,
  com.google.guava,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.ui.workbench;resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: it.xsemantics.example.lambda,
  it.xsemantics.example.lambda.tests,
  it.xsemantics.example.lambda.tests.util
+Import-Package: org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core

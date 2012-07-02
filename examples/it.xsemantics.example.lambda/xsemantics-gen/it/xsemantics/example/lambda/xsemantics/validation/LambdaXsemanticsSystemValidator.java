@@ -7,13 +7,13 @@ import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
 public class LambdaXsemanticsSystemValidator extends XsemanticsBasedDeclarativeValidator {
-	@Inject
-	protected LambdaXsemanticsSystem xsemanticsSystem;
-
-	@Check
-	public void checkProgram(final Program program) {
-		generateErrors(
-			xsemanticsSystem.checkProgram(program),
-			program);
-	}
+  @Inject
+  protected LambdaXsemanticsSystem xsemanticsSystem;
+  
+  @Check
+  public void checkProgram(final Program program) {
+    generateErrors(
+    	xsemanticsSystem.checkProgram(program),
+    		program);
+  }
 }

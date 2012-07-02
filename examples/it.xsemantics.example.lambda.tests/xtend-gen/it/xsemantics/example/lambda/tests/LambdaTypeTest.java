@@ -14,9 +14,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorWithNonBeautifiedTypesProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorWithNonBeautifiedTypesProvider.class)
 public class LambdaTypeTest extends LambdaBaseTest {
   @Test
   public void testStringConstantType() {
@@ -40,22 +40,22 @@ public class LambdaTypeTest extends LambdaBaseTest {
   
   @Test
   public void testExplicitVariableType() {
-      Abstraction _abstraction = this.getAbstraction("lambda x : int . x");
-      final Abstraction abstraction = _abstraction;
-      RuleEnvironment _environmentForParam = this.environmentForParam(abstraction);
-      Term _term = abstraction.getTerm();
-      Variable _variable = this.getVariable(_term);
-      this.assertType(_environmentForParam, _variable, "int", "");
+    final Abstraction abstraction = this.getAbstraction("lambda x : int . x");
+    RuleEnvironment _environmentForParam = this.environmentForParam(abstraction);
+    Term _term = abstraction.getTerm();
+    Variable _variable = this.getVariable(_term);
+    this.assertType(_environmentForParam, _variable, 
+      "int", "");
   }
   
   @Test
   public void testImplicitVariableType() {
-      Abstraction _abstraction = this.getAbstraction("lambda x . x");
-      final Abstraction abstraction = _abstraction;
-      RuleEnvironment _environmentForParam = this.environmentForParam(abstraction);
-      Term _term = abstraction.getTerm();
-      Variable _variable = this.getVariable(_term);
-      this.assertType(_environmentForParam, _variable, "X1", "");
+    final Abstraction abstraction = this.getAbstraction("lambda x . x");
+    RuleEnvironment _environmentForParam = this.environmentForParam(abstraction);
+    Term _term = abstraction.getTerm();
+    Variable _variable = this.getVariable(_term);
+    this.assertType(_environmentForParam, _variable, 
+      "X1", "");
   }
   
   @Test
@@ -76,45 +76,55 @@ public class LambdaTypeTest extends LambdaBaseTest {
   
   @Test
   public void testAbstractionExplicitVariableType() {
-    this.assertAbstractionType("lambda x : int . x", "int -> int", "");
+    this.assertAbstractionType("lambda x : int . x", 
+      "int -> int", "");
   }
   
   @Test
   public void testAbstractionImplicitVariableType() {
-      Abstraction _abstraction = this.getAbstraction("lambda x . x");
-      final Abstraction abstraction = _abstraction;
-      this.assertType(abstraction, "a -> a", "");
+    final Abstraction abstraction = this.getAbstraction("lambda x . x");
+    this.assertType(abstraction, 
+      "a -> a", "");
   }
   
   @Test
   public void testAbstractionWithArithmetics() {
     Abstraction _abstraction = this.getAbstraction("lambda x . -x");
-    this.assertType(_abstraction, "int -> int", "X1=int");
+    this.assertType(_abstraction, 
+      "int -> int", "X1=int");
   }
   
   @Test
   public void testApplicationType() {
-    this.assertAbstractionType("lambda x .lambda y . x y", "(a -> b) -> a -> b", "X1=(X3 -> X4), X2=X5, X3=X5");
+    this.assertAbstractionType("lambda x .lambda y . x y", "(a -> b) -> a -> b", 
+      "X1=(X3 -> X4), X2=X5, X3=X5");
   }
   
   @Test
   public void testApplicationType2() {
-    this.assertAbstractionType("lambda x .lambda y . y x", "a -> (a -> b) -> b", "X1=X5, X2=(X3 -> X4), X3=X5");
+    this.assertAbstractionType("lambda x .lambda y . y x", "a -> (a -> b) -> b", 
+      "X1=X5, X2=(X3 -> X4), X3=X5");
   }
   
   @Test
   public void testCompose() {
-    this.assertAbstractionType("lambda f . lambda g. lambda x. (f (g x))", "(a -> b) -> (c -> a) -> c -> b", "X1=(X4 -> X5), X2=(X6 -> X7), X3=X8, X4=X9, X6=X8, X7=X9");
+    this.assertAbstractionType("lambda f . lambda g. lambda x. (f (g x))", 
+      "(a -> b) -> (c -> a) -> c -> b", 
+      "X1=(X4 -> X5), X2=(X6 -> X7), X3=X8, X4=X9, X6=X8, X7=X9");
   }
   
   @Test
   public void testCompose2() {
-    this.assertAbstractionType("lambda f . lambda g. lambda x. (g (f x))", "(a -> b) -> (b -> c) -> a -> c", "X1=(X6 -> X7), X2=(X4 -> X5), X3=X8, X4=X9, X6=X8, X7=X9");
+    this.assertAbstractionType("lambda f . lambda g. lambda x. (g (f x))", 
+      "(a -> b) -> (b -> c) -> a -> c", 
+      "X1=(X6 -> X7), X2=(X4 -> X5), X3=X8, X4=X9, X6=X8, X7=X9");
   }
   
   @Test
   public void testCompose3() {
-    this.assertAbstractionType("lambda x . lambda y. lambda z. x z (y z)", "(a -> b -> c) -> (a -> b) -> a -> c", "X1=(X4 -> X5), X2=(X9 -> X10), X3=X6, X10=X12, X4=X6, X5=(X7 -> X8), X6=X11, X7=X12, X9=X11");
+    this.assertAbstractionType("lambda x . lambda y. lambda z. x z (y z)", 
+      "(a -> b -> c) -> (a -> b) -> a -> c", 
+      "X1=(X4 -> X5), X2=(X9 -> X10), X3=X6, X10=X12, X4=X6, X5=(X7 -> X8), X6=X11, X7=X12, X9=X11");
   }
   
   @Test
@@ -172,8 +182,8 @@ public class LambdaTypeTest extends LambdaBaseTest {
   }
   
   public void assertType(final RuleEnvironment env, final Term term, final String expectedType, final String expectedSubsts) {
-      Result<Type> _type = this.system.type(env, null, this.substitutions, term);
-      this.<Type>assertResultAsStringBeautifier(_type, expectedType);
-      this.assertTypeSubstitutions(this.substitutions, expectedSubsts);
+    Result<Type> _type = this.system.type(env, null, this.substitutions, term);
+    this.<Type>assertResultAsStringBeautifier(_type, expectedType);
+    this.assertTypeSubstitutions(this.substitutions, expectedSubsts);
   }
 }

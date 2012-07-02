@@ -22,12 +22,16 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XsemanticsUtils {
 	
 	@Inject extension XsemanticsSubtyping
+	
+	@Inject
+    IJvmModelAssociations associations;
 	
 	def getJvmTypes(XsemanticsSystem ts) {
 		ts.getAllContentsOfType(typeof(JvmTypeReference))
@@ -169,8 +173,15 @@ class XsemanticsUtils {
 		val ruleParameter = jvmFormalParameter.getContainerOfType(typeof(RuleParameter))
 		if (ruleParameter != null)
 			ruleParameter.inputParam
-		else
-			false
+		else {
+			// retrieve the AST element associated to the method
+        	// created by our model inferrer
+        	val sourceElement = associations.getPrimarySourceElement(jvmFormalParameter);
+        	if (sourceElement instanceof RuleParameter) {
+        		(sourceElement as RuleParameter).inputParam
+        	} else
+				false
+		}
 	}
 	
 	def List<RuleParameter> outputParams(Rule rule) {

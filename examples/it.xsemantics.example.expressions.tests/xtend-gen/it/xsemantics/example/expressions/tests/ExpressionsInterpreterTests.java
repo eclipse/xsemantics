@@ -1,5 +1,6 @@
 package it.xsemantics.example.expressions.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.expressions.expressions.Expression;
 import it.xsemantics.example.expressions.expressions.Model;
@@ -16,15 +17,12 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProviderCustom.class)
 public class ExpressionsInterpreterTests extends ExpressionsBaseTests {
   @Inject
   private ParseHelper<Model> _parseHelper;
@@ -92,16 +90,16 @@ public class ExpressionsInterpreterTests extends ExpressionsBaseTests {
   public void testSigned() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("i = -2");
-    int _operator_minus = IntegerExtensions.operator_minus(2);
-    this.assertResult(_builder, 0, Integer.valueOf(_operator_minus));
+    int _minus = (-2);
+    this.assertResult(_builder, 0, Integer.valueOf(_minus));
   }
   
   @Test
   public void testSignedWithString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("i = -\'2\' ");
-    int _operator_minus = IntegerExtensions.operator_minus(2);
-    this.assertResult(_builder, 0, Integer.valueOf(_operator_minus));
+    int _minus = (-2);
+    this.assertResult(_builder, 0, Integer.valueOf(_minus));
   }
   
   @Test
@@ -295,31 +293,27 @@ public class ExpressionsInterpreterTests extends ExpressionsBaseTests {
   
   public void assertResultAndTrace(final CharSequence program, final int variableIndex, final Object expectedResult, final CharSequence expectedTrace) {
     try {
-      {
-        Model _parse = this._parseHelper.parse(program);
-        EList<Variable> _variables = _parse.getVariables();
-        Variable _get = _variables.get(variableIndex);
-        Expression _expression = _get.getExpression();
-        final Expression expression = _expression;
-        Result<Object> _interpret = this.semantics.interpret(null, this.trace, expression);
-        final Result<Object> result = _interpret;
-        boolean _failed = result.failed();
-        if (_failed) {
-          RuleFailedException _ruleFailedException = result.getRuleFailedException();
-          String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
-          String _operator_plus = StringExtensions.operator_plus("unexpected failure: ", _failureTraceAsString);
-          Assert.fail(_operator_plus);
-        }
-        String _string = expectedResult.toString();
-        Object _value = result.getValue();
-        String _string_1 = _value.toString();
-        Assert.assertEquals(_string, _string_1);
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(expectedTrace, null);
-        if (_operator_notEquals) {
-          String _string_2 = expectedTrace.toString();
-          String _traceAsString = this._traceUtils.traceAsString(this.trace);
-          Assert.assertEquals(_string_2, _traceAsString);
-        }
+      Model _parse = this._parseHelper.parse(program);
+      EList<Variable> _variables = _parse.getVariables();
+      Variable _get = _variables.get(variableIndex);
+      final Expression expression = _get.getExpression();
+      final Result<Object> result = this.semantics.interpret(null, this.trace, expression);
+      boolean _failed = result.failed();
+      if (_failed) {
+        RuleFailedException _ruleFailedException = result.getRuleFailedException();
+        String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
+        String _plus = ("unexpected failure: " + _failureTraceAsString);
+        Assert.fail(_plus);
+      }
+      String _string = expectedResult.toString();
+      Object _value = result.getValue();
+      String _string_1 = _value.toString();
+      Assert.assertEquals(_string, _string_1);
+      boolean _notEquals = (!Objects.equal(expectedTrace, null));
+      if (_notEquals) {
+        String _string_2 = expectedTrace.toString();
+        String _traceAsString = this._traceUtils.traceAsString(this.trace);
+        Assert.assertEquals(_string_2, _traceAsString);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -15,9 +15,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class QualifiedNameTest extends XsemanticsBaseTest {
   @Inject
   private IQualifiedNameProvider _iQualifiedNameProvider;
@@ -25,16 +25,13 @@ public class QualifiedNameTest extends XsemanticsBaseTest {
   @Test
   public void testParsingOfName() {
     try {
-      {
-        CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-        XsemanticsSystem _parse = this.parser.parse(_testSimpleRule);
-        EList<Rule> _rules = _parse.getRules();
-        Rule _get = _rules.get(0);
-        final Rule rule = _get;
-        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(rule);
-        String _string = _fullyQualifiedName.toString();
-        Assert.assertEquals("it.xsemantics.test.TypeSystem.EClassEObject", _string);
-      }
+      CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+      XsemanticsSystem _parse = this.parser.parse(_testSimpleRule);
+      EList<Rule> _rules = _parse.getRules();
+      final Rule rule = _rules.get(0);
+      QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(rule);
+      String _string = _fullyQualifiedName.toString();
+      Assert.assertEquals("it.xsemantics.test.TypeSystem.EClassEObject", _string);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

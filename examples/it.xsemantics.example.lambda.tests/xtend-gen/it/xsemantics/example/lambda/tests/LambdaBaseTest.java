@@ -29,16 +29,14 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorProvider.class)
 public class LambdaBaseTest {
   @Inject
   protected LambdaJavaValidator validator;
@@ -81,11 +79,11 @@ public class LambdaBaseTest {
   
   @Before
   public void setUp() {
-      LambdaUtils.resetCounter();
-      TypeSubstitutions _typeSubstitutions = new TypeSubstitutions();
-      this.substitutions = _typeSubstitutions;
-      RuleApplicationTrace _ruleApplicationTrace = new RuleApplicationTrace();
-      this.trace = _ruleApplicationTrace;
+    LambdaUtils.resetCounter();
+    TypeSubstitutions _typeSubstitutions = new TypeSubstitutions();
+    this.substitutions = _typeSubstitutions;
+    RuleApplicationTrace _ruleApplicationTrace = new RuleApplicationTrace();
+    this.trace = _ruleApplicationTrace;
   }
   
   public Program parseAndGetProgram(final CharSequence prog) {
@@ -101,8 +99,7 @@ public class LambdaBaseTest {
     try {
       Program _xblockexpression = null;
       {
-        Program _parse = this._parseHelper.parse(prog);
-        final Program model = _parse;
+        final Program model = this._parseHelper.parse(prog);
         this._validationTestHelper.assertNoErrors(model);
         _xblockexpression = (model);
       }
@@ -114,21 +111,21 @@ public class LambdaBaseTest {
   
   public <T extends Object> void assertFailure(final Result<T> result) {
     boolean _failed = result.failed();
-    boolean _operator_not = BooleanExtensions.operator_not(_failed);
-    if (_operator_not) {
+    boolean _not = (!_failed);
+    if (_not) {
       T _value = result.getValue();
       String _string = this._stringRepresentation.string(_value);
-      String _operator_plus = StringExtensions.operator_plus("should have failed, instead got: ", _string);
+      String _plus = ("should have failed, instead got: " + _string);
       boolean _failed_1 = result.failed();
-      Assert.assertTrue(_operator_plus, _failed_1);
+      Assert.assertTrue(_plus, _failed_1);
     }
   }
   
   public <T extends Object> void assertFailureTrace(final Result<T> result, final CharSequence expectedTrace) {
-      this.<T>assertFailure(result);
-      RuleFailedException _ruleFailedException = result.getRuleFailedException();
-      String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
-      this.assertStrings(expectedTrace, _failureTraceAsString);
+    this.<T>assertFailure(result);
+    RuleFailedException _ruleFailedException = result.getRuleFailedException();
+    String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
+    this.assertStrings(expectedTrace, _failureTraceAsString);
   }
   
   public void assertStrings(final Object expected, final Object actual) {
@@ -138,43 +135,43 @@ public class LambdaBaseTest {
   }
   
   public <T extends Object> void assertResultAsString(final Result<T> result, final String expected) {
-      boolean _failed = result.failed();
-      if (_failed) {
-        RuleFailedException _ruleFailedException = result.getRuleFailedException();
-        String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
-        String _operator_plus = StringExtensions.operator_plus("should not have failed: ", _failureTraceAsString);
-        boolean _failed_1 = result.failed();
-        Assert.assertFalse(_operator_plus, _failed_1);
-      }
-      T _value = result.getValue();
-      String _string = this._stringRepresentation.string(_value);
-      Assert.assertEquals(expected, _string);
+    boolean _failed = result.failed();
+    if (_failed) {
+      RuleFailedException _ruleFailedException = result.getRuleFailedException();
+      String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
+      String _plus = ("should not have failed: " + _failureTraceAsString);
+      boolean _failed_1 = result.failed();
+      Assert.assertFalse(_plus, _failed_1);
+    }
+    T _value = result.getValue();
+    String _string = this._stringRepresentation.string(_value);
+    Assert.assertEquals(expected, _string);
   }
   
   public <T extends Object> void assertResultAsStringBeautifier(final Result<T> result, final String expected) {
-      boolean _failed = result.failed();
-      if (_failed) {
-        RuleFailedException _ruleFailedException = result.getRuleFailedException();
-        String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
-        String _operator_plus = StringExtensions.operator_plus("should not have failed: ", _failureTraceAsString);
-        boolean _failed_1 = result.failed();
-        Assert.assertFalse(_operator_plus, _failed_1);
-      }
-      T _value = result.getValue();
-      String _string = this.reprBeautifier.string(_value);
-      Assert.assertEquals(expected, _string);
+    boolean _failed = result.failed();
+    if (_failed) {
+      RuleFailedException _ruleFailedException = result.getRuleFailedException();
+      String _failureTraceAsString = this._traceUtils.failureTraceAsString(_ruleFailedException);
+      String _plus = ("should not have failed: " + _failureTraceAsString);
+      boolean _failed_1 = result.failed();
+      Assert.assertFalse(_plus, _failed_1);
+    }
+    T _value = result.getValue();
+    String _string = this.reprBeautifier.string(_value);
+    Assert.assertEquals(expected, _string);
   }
   
   public <T extends Object, V extends Object> void assertResult2AsString(final Result2<T,V> result, final String expected) {
-      boolean _failed = result.failed();
-      Assert.assertFalse("should not have failed", _failed);
-      T _first = result.getFirst();
-      String _string = this._stringRepresentation.string(_first);
-      String _operator_plus = StringExtensions.operator_plus(_string, " -- ");
-      V _second = result.getSecond();
-      String _string_1 = this._stringRepresentation.string(_second);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _string_1);
-      Assert.assertEquals(expected, _operator_plus_1);
+    boolean _failed = result.failed();
+    Assert.assertFalse("should not have failed", _failed);
+    T _first = result.getFirst();
+    String _string = this._stringRepresentation.string(_first);
+    String _plus = (_string + " -- ");
+    V _second = result.getSecond();
+    String _string_1 = this._stringRepresentation.string(_second);
+    String _plus_1 = (_plus + _string_1);
+    Assert.assertEquals(expected, _plus_1);
   }
   
   public void assertResultTrue(final Result<Boolean> result) {
@@ -226,9 +223,9 @@ public class LambdaBaseTest {
   }
   
   public void assertTypeSubstitutions(final TypeSubstitutions substitutions, final String expected) {
-    String _operator_plus = StringExtensions.operator_plus("subst{", expected);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "}");
+    String _plus = ("subst{" + expected);
+    String _plus_1 = (_plus + "}");
     String _string = this.reprForSubstitutions.string(substitutions);
-    this.assertStrings(_operator_plus_1, _string);
+    this.assertStrings(_plus_1, _string);
   }
 }

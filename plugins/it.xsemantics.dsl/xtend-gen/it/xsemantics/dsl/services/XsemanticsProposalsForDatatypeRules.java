@@ -21,7 +21,7 @@ public class XsemanticsProposalsForDatatypeRules {
   public List<String> judgmentSymbols() {
     ParserRule _judgmentSymbolRule = this.grammarAccess.getJudgmentSymbolRule();
     AbstractElement _alternatives = _judgmentSymbolRule.getAlternatives();
-    List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, org.eclipse.xtext.Keyword.class);
+    List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, Keyword.class);
     final Function1<Keyword,String> _function = new Function1<Keyword,String>() {
         public String apply(final Keyword it) {
           String _value = it.getValue();
@@ -35,7 +35,7 @@ public class XsemanticsProposalsForDatatypeRules {
   public List<String> relationSymbols() {
     ParserRule _relationSymbolRule = this.grammarAccess.getRelationSymbolRule();
     AbstractElement _alternatives = _relationSymbolRule.getAlternatives();
-    List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, org.eclipse.xtext.Keyword.class);
+    List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, Keyword.class);
     final Function1<Keyword,String> _function = new Function1<Keyword,String>() {
         public String apply(final Keyword it) {
           String _value = it.getValue();

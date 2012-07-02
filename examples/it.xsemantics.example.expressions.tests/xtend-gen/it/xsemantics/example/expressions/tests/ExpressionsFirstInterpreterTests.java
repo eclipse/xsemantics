@@ -8,9 +8,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProviderFirst.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProviderFirst.class)
 public class ExpressionsFirstInterpreterTests extends ExpressionsInterpreterTests {
   @Test
   public void testInterpreterAndOrWithString() {

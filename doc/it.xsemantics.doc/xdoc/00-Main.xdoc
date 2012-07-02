@@ -115,6 +115,8 @@ codelanguage-def[Xsemantics][
 	or, fail, error, source, feature, env, empty
 	]
 
+codelanguage-def[Lambda][lambda,int,string]
+
 part[Reference Documentation]
 
 chapter-ref[Introduction]

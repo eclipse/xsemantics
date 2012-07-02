@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
@@ -39,16 +40,13 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsBaseTest {
   @Inject
   protected XsemanticsTestFiles testFiles;
@@ -71,8 +69,7 @@ public class XsemanticsBaseTest {
     try {
       XsemanticsSystem _xblockexpression = null;
       {
-        XsemanticsSystem _parse = this.parser.parse(s);
-        XsemanticsSystem ts = _parse;
+        XsemanticsSystem ts = this.parser.parse(s);
         this._validationTestHelper.assertNoErrors(ts);
         _xblockexpression = (ts);
       }
@@ -111,15 +108,14 @@ public class XsemanticsBaseTest {
   public Rule getRule(final XsemanticsSystem ts, final int index) {
     Rule _xblockexpression = null;
     {
-      EList<Rule> _rules = ts.getRules();
-      final EList<Rule> rules = _rules;
-      String _operator_plus = StringExtensions.operator_plus("no rule for index ", Integer.valueOf(index));
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ", only ");
+      final EList<Rule> rules = ts.getRules();
+      String _plus = ("no rule for index " + Integer.valueOf(index));
+      String _plus_1 = (_plus + ", only ");
       int _size = rules.size();
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, Integer.valueOf(_size));
+      String _plus_2 = (_plus_1 + Integer.valueOf(_size));
       int _size_1 = rules.size();
-      boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_size_1, index);
-      Assert.assertTrue(_operator_plus_2, _operator_greaterThan);
+      boolean _greaterThan = (_size_1 > index);
+      Assert.assertTrue(_plus_2, _greaterThan);
       Rule _get = rules.get(index);
       _xblockexpression = (_get);
     }
@@ -140,15 +136,14 @@ public class XsemanticsBaseTest {
   public CheckRule getCheckRule(final XsemanticsSystem ts, final int index) {
     CheckRule _xblockexpression = null;
     {
-      EList<CheckRule> _checkrules = ts.getCheckrules();
-      final EList<CheckRule> rules = _checkrules;
-      String _operator_plus = StringExtensions.operator_plus("no rule for index ", Integer.valueOf(index));
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ", only ");
+      final EList<CheckRule> rules = ts.getCheckrules();
+      String _plus = ("no rule for index " + Integer.valueOf(index));
+      String _plus_1 = (_plus + ", only ");
       int _size = rules.size();
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, Integer.valueOf(_size));
+      String _plus_2 = (_plus_1 + Integer.valueOf(_size));
       int _size_1 = rules.size();
-      boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_size_1, index);
-      Assert.assertTrue(_operator_plus_2, _operator_greaterThan);
+      boolean _greaterThan = (_size_1 > index);
+      Assert.assertTrue(_plus_2, _greaterThan);
       CheckRule _get = rules.get(index);
       _xblockexpression = (_get);
     }
@@ -157,28 +152,28 @@ public class XsemanticsBaseTest {
   
   public XVariableDeclaration firstVariableDeclaration(final CharSequence s) {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(s);
-    List<XVariableDeclaration> _allContentsOfType = EcoreUtil2.<XVariableDeclaration>getAllContentsOfType(_parseAndAssertNoError, org.eclipse.xtext.xbase.XVariableDeclaration.class);
+    List<XVariableDeclaration> _allContentsOfType = EcoreUtil2.<XVariableDeclaration>getAllContentsOfType(_parseAndAssertNoError, XVariableDeclaration.class);
     XVariableDeclaration _get = _allContentsOfType.get(0);
     return _get;
   }
   
   public XAssignment firstAssignment(final CharSequence s) {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(s);
-    List<XAssignment> _allContentsOfType = EcoreUtil2.<XAssignment>getAllContentsOfType(_parseAndAssertNoError, org.eclipse.xtext.xbase.XAssignment.class);
+    List<XAssignment> _allContentsOfType = EcoreUtil2.<XAssignment>getAllContentsOfType(_parseAndAssertNoError, XAssignment.class);
     XAssignment _get = _allContentsOfType.get(0);
     return _get;
   }
   
   public XIfExpression firstIf(final CharSequence s) {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(s);
-    List<XIfExpression> _allContentsOfType = EcoreUtil2.<XIfExpression>getAllContentsOfType(_parseAndAssertNoError, org.eclipse.xtext.xbase.XIfExpression.class);
+    List<XIfExpression> _allContentsOfType = EcoreUtil2.<XIfExpression>getAllContentsOfType(_parseAndAssertNoError, XIfExpression.class);
     XIfExpression _get = _allContentsOfType.get(0);
     return _get;
   }
   
   public XForLoopExpression firstFor(final CharSequence s) {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(s);
-    List<XForLoopExpression> _allContentsOfType = EcoreUtil2.<XForLoopExpression>getAllContentsOfType(_parseAndAssertNoError, org.eclipse.xtext.xbase.XForLoopExpression.class);
+    List<XForLoopExpression> _allContentsOfType = EcoreUtil2.<XForLoopExpression>getAllContentsOfType(_parseAndAssertNoError, XForLoopExpression.class);
     XForLoopExpression _get = _allContentsOfType.get(0);
     return _get;
   }
@@ -190,13 +185,13 @@ public class XsemanticsBaseTest {
   }
   
   public JudgmentDescription firstJudgmentDescription(final XsemanticsSystem ts) {
-    List<JudgmentDescription> _allContentsOfType = EcoreUtil2.<JudgmentDescription>getAllContentsOfType(ts, it.xsemantics.dsl.xsemantics.JudgmentDescription.class);
+    List<JudgmentDescription> _allContentsOfType = EcoreUtil2.<JudgmentDescription>getAllContentsOfType(ts, JudgmentDescription.class);
     JudgmentDescription _get = _allContentsOfType.get(0);
     return _get;
   }
   
   public ErrorSpecification firstErrorSpecification(final EObject o) {
-    List<ErrorSpecification> _allContentsOfType = EcoreUtil2.<ErrorSpecification>getAllContentsOfType(o, it.xsemantics.dsl.xsemantics.ErrorSpecification.class);
+    List<ErrorSpecification> _allContentsOfType = EcoreUtil2.<ErrorSpecification>getAllContentsOfType(o, ErrorSpecification.class);
     ErrorSpecification _get = _allContentsOfType.get(0);
     return _get;
   }
@@ -243,13 +238,13 @@ public class XsemanticsBaseTest {
   public RuleParameter ruleParameterByName(final Rule rule, final String name) {
     RuleConclusion _conclusion = rule.getConclusion();
     EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
-    List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_conclusionElements, it.xsemantics.dsl.xsemantics.RuleParameter.class);
+    List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_conclusionElements, RuleParameter.class);
     final Function1<RuleParameter,Boolean> _function = new Function1<RuleParameter,Boolean>() {
         public Boolean apply(final RuleParameter it) {
           JvmFormalParameter _parameter = it.getParameter();
           String _name = _parameter.getName();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_name, name);
-          return Boolean.valueOf(_operator_equals);
+          boolean _equals = Objects.equal(_name, name);
+          return Boolean.valueOf(_equals);
         }
       };
     RuleParameter _findFirst = IterableExtensions.<RuleParameter>findFirst(_typeSelect, _function);
@@ -263,12 +258,12 @@ public class XsemanticsBaseTest {
   public void assertIsInstance(final Class superClass, final Object o) {
     Class<? extends Object> _class = o.getClass();
     String _name = _class.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, " is not an instance of ");
+    String _plus = (_name + " is not an instance of ");
     String _name_1 = superClass.getName();
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
+    String _plus_1 = (_plus + _name_1);
     Class<? extends Object> _class_1 = o.getClass();
     boolean _isAssignableFrom = superClass.isAssignableFrom(_class_1);
-    Assert.assertTrue(_operator_plus_1, _isAssignableFrom);
+    Assert.assertTrue(_plus_1, _isAssignableFrom);
   }
   
   public void assertOrExpression(final XExpression exp, final int branches) {
@@ -303,9 +298,9 @@ public class XsemanticsBaseTest {
   }
   
   public XAbstractFeatureCall getXAbstractFeatureCall(final int index) {
-    CharSequence _testRuleWithFeatureCalls = this.testFiles.testRuleWithFeatureCalls();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRuleWithFeatureCalls);
-    List<XAbstractFeatureCall> _xAbstractFeatureCalls = this.getXAbstractFeatureCalls(_parseAndAssertNoError);
+    CharSequence _testRuleWithFeatureCallsForBinaryOps = this.testFiles.testRuleWithFeatureCallsForBinaryOps();
+    XsemanticsSystem _parse = this.parse(_testRuleWithFeatureCallsForBinaryOps);
+    List<XAbstractFeatureCall> _xAbstractFeatureCalls = this.getXAbstractFeatureCalls(_parse);
     XAbstractFeatureCall _get = _xAbstractFeatureCalls.get(index);
     return _get;
   }
@@ -314,7 +309,7 @@ public class XsemanticsBaseTest {
     EList<Rule> _rules = ts.getRules();
     Rule _get = _rules.get(0);
     EList<XExpression> _rulePremises = this.getRulePremises(_get);
-    List<XAbstractFeatureCall> _typeSelect = EcoreUtil2.<XAbstractFeatureCall>typeSelect(_rulePremises, org.eclipse.xtext.xbase.XAbstractFeatureCall.class);
+    List<XAbstractFeatureCall> _typeSelect = EcoreUtil2.<XAbstractFeatureCall>typeSelect(_rulePremises, XAbstractFeatureCall.class);
     return _typeSelect;
   }
   
@@ -322,14 +317,14 @@ public class XsemanticsBaseTest {
     EList<Rule> _rules = ts.getRules();
     Rule _get = _rules.get(0);
     EList<XExpression> _rulePremises = this.getRulePremises(_get);
-    List<EnvironmentAccess> _typeSelect = EcoreUtil2.<EnvironmentAccess>typeSelect(_rulePremises, it.xsemantics.dsl.xsemantics.EnvironmentAccess.class);
+    List<EnvironmentAccess> _typeSelect = EcoreUtil2.<EnvironmentAccess>typeSelect(_rulePremises, EnvironmentAccess.class);
     EnvironmentAccess _get_1 = _typeSelect.get(0);
     return _get_1;
   }
   
   public void assertEqualsStrings(final Object o1, final Object o2) {
-    String _operator_plus = StringExtensions.operator_plus("", o1);
-    String _operator_plus_1 = StringExtensions.operator_plus("", o2);
-    Assert.assertEquals(_operator_plus, _operator_plus_1);
+    String _plus = ("" + o1);
+    String _plus_1 = ("" + o2);
+    Assert.assertEquals(_plus, _plus_1);
   }
 }

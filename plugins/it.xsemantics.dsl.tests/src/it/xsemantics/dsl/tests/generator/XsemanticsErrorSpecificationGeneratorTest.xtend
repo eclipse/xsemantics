@@ -1,33 +1,20 @@
 package it.xsemantics.dsl.tests.generator
 
+import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import com.google.inject.Inject
-import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseTest {
 
-	@Inject extension XsemanticsGeneratorExtensions
-	
 	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
-	
-	@Test
-	def void testCompileErrorOfErrorSpecificationWithSource() {
-		checkSourceOfErrorSpecification(
-			testFiles.testJudgmentDescriptionsWithErrorSpecificationAndSource,
-'''
-
-EObject source = c;''', "source")
-	}
 	
 	@Test
 	def void testCompileErrorOfErrorSpecification() {
@@ -35,9 +22,9 @@ EObject source = c;''', "source")
 			testFiles.testJudgmentDescriptionsWithErrorSpecification,
 '''
 
-String _operator_plus = StringExtensions.operator_plus("this ", c);
-String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " made an error!");
-String error = _operator_plus_1;''', "error")
+String _plus = ("this " + c);
+String _plus_1 = (_plus + " made an error!");
+String error = _plus_1;''', "error")
 	}
 	
 	@Test
@@ -96,13 +83,12 @@ EStructuralFeature feature = _eContainingFeature;''', "feature")
 	}
 	
 	def void checkCompilationOfErrorSpecification(CharSequence inputProgram,
-		(ErrorSpecification, IAppendable)=>String compilation,
+		(ErrorSpecification, ITreeAppendable)=>String compilation,
 		CharSequence expected, CharSequence expectedVar
 	) {
 		val jDesc = inputProgram.parseAndAssertNoError.firstJudgmentDescription
 		val errSpec = jDesc.firstErrorSpecification
-		val appendable = 
-			jDesc.createAndConfigureAppendable(new ImportManager(true))
+		val appendable = createAppendable
 		val variable = compilation.apply(errSpec, appendable)
 		assertEqualsStrings(expected, appendable)
 		assertEqualsStrings(expectedVar, variable)

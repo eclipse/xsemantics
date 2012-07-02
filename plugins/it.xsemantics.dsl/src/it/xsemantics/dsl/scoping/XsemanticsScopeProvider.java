@@ -3,21 +3,21 @@
  */
 package it.xsemantics.dsl.scoping;
 
+import static com.google.common.collect.Lists.newArrayList;
 import it.xsemantics.dsl.util.XsemanticsUtils;
-import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
+import it.xsemantics.dsl.xsemantics.RuleParameter;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
@@ -38,22 +38,30 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	@Inject
 	protected XsemanticsUtils utils;
 
-	@Override
-	protected IScope createLocalVarScope(IScope parentScope,
-			LocalVariableScopeContext scopeContext) {
-		parentScope = super.createLocalVarScope(parentScope, scopeContext);
+	@Inject
+	protected IJvmModelAssociations associations;
 
-		if (scopeContext != null && scopeContext.getContext() != null) {
-			EObject context = scopeContext.getContext();
-			if (context instanceof Rule) {
-				parentScope = Scopes.scopeFor(
-						utils.getJvmParameters((Rule) context), parentScope);
-			} else if (context instanceof CheckRule) {
-				CheckRule checkRule = (CheckRule) context;
-				parentScope = Scopes.scopeFor(Collections
-						.singletonList(checkRule.getElement().getParameter()),
-						parentScope);
+	@Override
+	protected IScope createLocalVarScopeForJvmOperation(JvmOperation context,
+			IScope parentScope) {
+		parentScope = super.createLocalVarScopeForJvmOperation(context,
+				parentScope);
+
+		// retrieve the AST element associated to the method
+		// created by our model inferrer
+		EObject sourceElement = associations.getPrimarySourceElement(context);
+		if (sourceElement instanceof Rule) {
+			Rule rule = (Rule) sourceElement;
+			List<RuleParameter> outputParams = utils.outputParams(rule);
+			List<IValidatedEObjectDescription> descriptions = newArrayList();
+			for (RuleParameter p : outputParams) {
+				if (p.getParameter() != null
+						&& p.getParameter().getName() != null)
+					descriptions
+							.add(createLocalVarDescription(p.getParameter()));
 			}
+			return new JvmFeatureScope(parentScope, "operation "
+					+ context.getSimpleName(), descriptions);
 		}
 
 		return parentScope;

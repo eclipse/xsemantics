@@ -27,9 +27,9 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 
 import com.google.inject.Inject;
 
@@ -49,10 +49,49 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	protected XsemanticsTypingSystem typingSystem;
 
 	@Override
-	protected void _toJavaStatement(XBlockExpression expr, IAppendable b,
+	protected void doInternalToJavaStatement(XExpression obj,
+			ITreeAppendable appendable, boolean isReferenced) {
+		if (obj instanceof RuleInvocation) {
+			_toJavaStatement((RuleInvocation) obj, appendable, isReferenced);
+		} else if (obj instanceof OrExpression) {
+			_toJavaStatement((OrExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof EnvironmentAccess) {
+			_toJavaStatement((EnvironmentAccess) obj, appendable, isReferenced);
+		} else if (obj instanceof Fail) {
+			_toJavaStatement((Fail) obj, appendable, isReferenced);
+		} else
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+	}
+
+	@Override
+	protected void internalToConvertedExpression(XExpression obj,
+			ITreeAppendable appendable) {
+		if (obj instanceof RuleInvocation) {
+			_toJavaExpression((RuleInvocation) obj, appendable);
+		} else if (obj instanceof OrExpression) {
+			_toJavaExpression((OrExpression) obj, appendable);
+		} else if (obj instanceof EnvironmentAccess) {
+			_toJavaExpression((EnvironmentAccess) obj, appendable);
+		} else if (obj instanceof Fail) {
+			_toJavaExpression((Fail) obj, appendable);
+		} else
+			super.internalToConvertedExpression(obj, appendable);
+	}
+
+	@Override
+	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
 		if (insideClosure(expr)) {
-			super._toJavaStatement(expr, b, isReferenced);
+			// make sure it is referenced if there's only one expression in the
+			// block otherwise we might generate
+			// an invalid Java statement
+			super._toJavaStatement(
+					expr,
+					b,
+					isReferenced
+							|| (expr.getExpressions().size() == 1 && typingSystem
+									.isBooleanPremise(expr.getExpressions()
+											.get(0))));
 		} else {
 			if (expr.getExpressions().isEmpty())
 				return;
@@ -94,7 +133,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	 * @param hasToBeReferenced
 	 */
 	protected void compileBooleanXExpression(XExpression expression,
-			IAppendable b, boolean hasToBeReferenced) {
+			ITreeAppendable b, boolean hasToBeReferenced) {
 		if (expression instanceof XBlockExpression) {
 			// original generation
 			// no need to handle XBlock as a boolean expression:
@@ -129,16 +168,17 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	 * @param ruleInvocation
 	 * @param b
 	 */
-	public void _toJavaExpression(RuleInvocation ruleInvocation, IAppendable b) {
+	public void _toJavaExpression(RuleInvocation ruleInvocation,
+			ITreeAppendable b) {
 		b.append("null");
 	}
 
-	public void _toJavaExpression(OrExpression orExpression, IAppendable b) {
+	public void _toJavaExpression(OrExpression orExpression, ITreeAppendable b) {
 		b.append("null");
 	}
 
-	public void _toJavaStatement(RuleInvocation ruleInvocation, IAppendable b,
-			boolean isReferenced) {
+	public void _toJavaStatement(RuleInvocation ruleInvocation,
+			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(ruleInvocation, b);
 		JudgmentDescription judgmentDescription = xsemanticsUtils
 				.judgmentDescription(ruleInvocation,
@@ -181,19 +221,18 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public void _toJavaStatement(final EnvironmentAccess environmentAccess,
-			final IAppendable b, boolean isReferenced) {
+			final ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(environmentAccess, b);
 
 		toJavaStatement(environmentAccess.getArgument(), b, true);
 
 		if (isReferenced) {
 			Later later = new Later() {
-				@Override
-				public void exec() {
+				public void exec(ITreeAppendable b) {
 					compileEnvironmentAccess(environmentAccess, b);
 				}
 			};
-			declareSyntheticVariable(environmentAccess, b, later);
+			declareFreshLocalVariable(environmentAccess, b, later);
 		} else {
 			newLine(b);
 			compileEnvironmentAccess(environmentAccess, b);
@@ -202,12 +241,12 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	protected void _toJavaExpression(EnvironmentAccess environmentAccess,
-			IAppendable b) {
+			ITreeAppendable b) {
 		b.append(b.getName(environmentAccess));
 	}
 
 	protected void compileEnvironmentAccess(
-			EnvironmentAccess environmentAccess, IAppendable b) {
+			EnvironmentAccess environmentAccess, ITreeAppendable b) {
 		b.append(generatorExtensions.environmentAccessMethod());
 		b.append("(");
 		b.append(environmentAccess.getEnvironment().getName());
@@ -220,7 +259,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	protected void _toJavaStatement(final OrExpression orExpression,
-			final IAppendable b, boolean isReferenced) {
+			final ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
 
 		final XExpression left = orExpression.getBranches().get(0);
@@ -240,27 +279,28 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public void throwNewRuleFailedException(final XExpression expression,
-			final IAppendable b) {
+			final ITreeAppendable b) {
 		b.append(generatorExtensions.sneakyThrowRuleFailedException());
 		b.append("(");
 		generateStringWithOriginalCode(expression, b);
 		b.append(");");
 	}
 
-	protected void ruleInvocationExpressionsToJavaStatements(IAppendable b,
+	protected void ruleInvocationExpressionsToJavaStatements(ITreeAppendable b,
 			final EList<RuleInvocationExpression> ruleInvocationExpressions) {
 		for (RuleInvocationExpression ruleInvocationExpression : ruleInvocationExpressions) {
 			toJavaStatement(ruleInvocationExpression.getExpression(), b, true);
 		}
 	}
 
-	protected void ruleInvocationExpressionsToJavaExpressions(IAppendable b,
-			final RuleInvocation ruleInvocation) {
+	protected void ruleInvocationExpressionsToJavaExpressions(
+			ITreeAppendable b, final RuleInvocation ruleInvocation) {
 		ruleInvocationExpressionsToJavaExpressions(b,
 				xsemanticsUtils.inputArgsExpressions(ruleInvocation));
 	}
 
-	protected void ruleInvocationExpressionsToJavaExpressions(IAppendable b,
+	protected void ruleInvocationExpressionsToJavaExpressions(
+			ITreeAppendable b,
 			final List<RuleInvocationExpression> inputArgsExpressions) {
 		Iterator<RuleInvocationExpression> expIt = inputArgsExpressions
 				.iterator();
@@ -271,7 +311,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		}
 	}
 
-	protected void reassignResults(IAppendable b,
+	protected void reassignResults(ITreeAppendable b,
 			RuleInvocation ruleInvocation, String resultVariable,
 			boolean checkAssignable) {
 		List<RuleInvocationExpression> expIt = xsemanticsUtils
@@ -318,16 +358,17 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 
 	protected void generateJavaClassReference(
 			final JvmTypeReference expressionType,
-			final XExpression expression, IAppendable b) {
+			final XExpression expression, ITreeAppendable b) {
 		b.append(expressionType.getType());
 		b.append(".class");
 	}
 
-	public void _toJavaExpression(Fail fail, IAppendable b) {
+	public void _toJavaExpression(Fail fail, ITreeAppendable b) {
 		b.append("null");
 	}
 
-	public void _toJavaStatement(Fail fail, IAppendable b, boolean isReference) {
+	public void _toJavaStatement(Fail fail, ITreeAppendable b,
+			boolean isReference) {
 		generateCommentWithOriginalCode(fail, b);
 		final ErrorSpecification errorSpecification = fail.getError();
 		if (errorSpecification == null) {
@@ -345,7 +386,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 			b.append(errorMessageVar);
 			comma(b);
 			b.append("new ");
-			b.append(generatorExtensions.errorInformationClass());
+			b.append(generatorExtensions.errorInformationType(fail).getType());
 			b.append("(");
 			b.append(sourceVar);
 			comma(b);
@@ -356,32 +397,32 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	protected void generateCommentWithOriginalCode(EObject modelElement,
-			IAppendable b) {
+			ITreeAppendable b) {
 		b.append("\n").append("/* ")
 				.append(nodeModelUtils.getProgramText(modelElement))
 				.append(" */");
 	}
 
 	protected void generateStringWithOriginalCode(EObject modelElement,
-			IAppendable b) {
+			ITreeAppendable b) {
 		b.append("\"")
 				.append(generatorExtensions.javaString(nodeModelUtils
 						.getProgramText(modelElement))).append("\"");
 	}
 
-	protected void newLine(IAppendable b) {
+	protected void newLine(ITreeAppendable b) {
 		b.append("\n");
 	}
 
-	protected void space(IAppendable b) {
+	protected void space(ITreeAppendable b) {
 		b.append(" ");
 	}
 
-	protected void comma(IAppendable b) {
+	protected void comma(ITreeAppendable b) {
 		b.append(", ");
 	}
 
-	protected void assign(IAppendable b) {
+	protected void assign(ITreeAppendable b) {
 		space(b);
 		b.append("=");
 		space(b);
@@ -394,11 +435,11 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	 * @param expression
 	 * @return
 	 */
-	protected String catchStmnt(final IAppendable b, XExpression expression) {
+	protected String catchStmnt(final ITreeAppendable b, XExpression expression) {
 		b.decreaseIndentation();
 		newLine(b);
 		b.append("} catch (");
-		exceptionClass(b);
+		b.append(generatorExtensions.exceptionType(expression).getType());
 		b.append(" ");
 		final String declareExceptionVariable = declareExceptionVariable(
 				expression, b);
@@ -408,24 +449,20 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 		return declareExceptionVariable;
 	}
 
-	protected void exceptionClass(final IAppendable b) {
-		b.append(generatorExtensions.exceptionClass());
-	}
-
-	protected void tryStmnt(final IAppendable b) {
+	protected void tryStmnt(final ITreeAppendable b) {
 		newLine(b);
 		b.append("try {");
 		b.increaseIndentation();
 	}
 
-	protected void closeBracket(final IAppendable b) {
+	protected void closeBracket(final ITreeAppendable b) {
 		b.decreaseIndentation();
 		newLine(b);
 		b.append("}");
 	}
 
 	protected String generateResultVariable(RuleInvocation ruleInvocation,
-			IAppendable b) {
+			ITreeAppendable b) {
 		final String declareResultVariable = declareResultVariable(
 				ruleInvocation, b);
 		b.append(declareResultVariable);
@@ -433,16 +470,17 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public String declareResultVariable(RuleInvocation ruleInvocation,
-			IAppendable b) {
+			ITreeAppendable b) {
 		return b.declareSyntheticVariable(ruleInvocation, "result");
 	}
 
-	public String declareExceptionVariable(XExpression expression, IAppendable b) {
+	public String declareExceptionVariable(XExpression expression,
+			ITreeAppendable b) {
 		return b.declareSyntheticVariable(expression, "e");
 	}
 
 	public String compileErrorOfErrorSpecification(
-			final ErrorSpecification errorSpecification, final IAppendable b) {
+			final ErrorSpecification errorSpecification, final ITreeAppendable b) {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getError(),
 				b,
@@ -451,7 +489,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public String compileSourceOfErrorSpecification(
-			final ErrorSpecification errorSpecification, final IAppendable b) {
+			final ErrorSpecification errorSpecification, final ITreeAppendable b) {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getSource(),
 				b,
@@ -460,7 +498,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public String compileFeatureOfErrorSpecification(
-			final ErrorSpecification errorSpecification, final IAppendable b) {
+			final ErrorSpecification errorSpecification, final ITreeAppendable b) {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getFeature(),
 				b,
@@ -469,7 +507,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	protected String compileAndAssignToLocalVariable(
-			final XExpression expression, final IAppendable b,
+			final XExpression expression, final ITreeAppendable b,
 			JvmTypeReference expectedType, String proposedVariable) {
 		if (expression == null)
 			return "null";
@@ -487,7 +525,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	public void generateEnvironmentSpecificationAsExpression(
-			EnvironmentSpecification environmentSpecification, IAppendable b) {
+			EnvironmentSpecification environmentSpecification, ITreeAppendable b) {
 		if (environmentSpecification instanceof EmptyEnvironment) {
 			b.append(generatorExtensions.emptyEnvironmentInvocation());
 		} else if (environmentSpecification instanceof EnvironmentReference) {
@@ -520,7 +558,7 @@ public class XsemanticsXExpressionCompiler extends XbaseCompiler {
 	}
 
 	protected void generateEnvironmentSpecificationAsStatements(
-			EnvironmentSpecification environmentSpecification, IAppendable b) {
+			EnvironmentSpecification environmentSpecification, ITreeAppendable b) {
 		if (environmentSpecification instanceof EnvironmentMapping) {
 			EnvironmentMapping mapping = (EnvironmentMapping) environmentSpecification;
 			toJavaStatement(mapping.getKey(), b, true);

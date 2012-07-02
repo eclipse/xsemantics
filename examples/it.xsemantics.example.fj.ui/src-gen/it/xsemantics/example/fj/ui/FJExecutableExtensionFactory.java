@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import it.xsemantics.example.fj.ui.internal.FJActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class FJExecutableExtensionFactory extends AbstractGuiceAwareExecutableEx
 
 	@Override
 	protected Bundle getBundle() {
-		return it.xsemantics.example.fj.ui.internal.FJActivator.getInstance().getBundle();
+		return FJActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return it.xsemantics.example.fj.ui.internal.FJActivator.getInstance().getInjector("it.xsemantics.example.fj.FJ");
+		return FJActivator.getInstance().getInjector(FJActivator.IT_XSEMANTICS_EXAMPLE_FJ_FJ);
 	}
 	
 }

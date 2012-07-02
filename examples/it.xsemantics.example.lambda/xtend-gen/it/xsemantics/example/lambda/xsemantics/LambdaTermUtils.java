@@ -14,9 +14,8 @@ public class LambdaTermUtils {
   public static Term cloneWithoutTypes(final Term term) {
     Term _xblockexpression = null;
     {
-      Term _copy = EcoreUtil.<Term>copy(term);
-      final Term clone = _copy;
-      List<Abstraction> _eAllOfType = EcoreUtil2.<Abstraction>eAllOfType(clone, it.xsemantics.example.lambda.lambda.Abstraction.class);
+      final Term clone = EcoreUtil.<Term>copy(term);
+      List<Abstraction> _eAllOfType = EcoreUtil2.<Abstraction>eAllOfType(clone, Abstraction.class);
       final Procedure1<Abstraction> _function = new Procedure1<Abstraction>() {
           public void apply(final Abstraction it) {
             Parameter _param = it.getParam();

@@ -24,9 +24,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProviderCustom.class)
 public class ExpressionsParserTests extends ExpressionsBaseTests {
   @Inject
   private ParseHelper<Model> _parseHelper;
@@ -93,11 +93,11 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
   
   public String expressionToString(final Expression expression) {
     CharSequence _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (expression instanceof AndOrExpression) {
         final AndOrExpression _andOrExpression = (AndOrExpression)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         String _op = _andOrExpression.getOp();
         _builder.append(_op, "");
@@ -115,10 +115,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof Comparison) {
         final Comparison _comparison = (Comparison)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         String _op = _comparison.getOp();
         _builder.append(_op, "");
@@ -136,10 +136,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof Plus) {
         final Plus _plus = (Plus)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("+");
         _builder.newLine();
@@ -156,10 +156,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof Minus) {
         final Minus _minus = (Minus)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("-");
         _builder.newLine();
@@ -176,10 +176,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof MultiOrDiv) {
         final MultiOrDiv _multiOrDiv = (MultiOrDiv)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         String _op = _multiOrDiv.getOp();
         _builder.append(_op, "");
@@ -197,10 +197,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof BooleanNegation) {
         final BooleanNegation _booleanNegation = (BooleanNegation)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("!");
         _builder.newLine();
@@ -212,10 +212,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (expression instanceof ArithmeticSigned) {
         final ArithmeticSigned _arithmeticSigned = (ArithmeticSigned)expression;
-        matched=true;
+        _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("-");
         _builder.newLine();
@@ -227,7 +227,7 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _switchResult = _builder;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       String _string = this._stringRepresentation.string(expression);
       _switchResult = _string;
     }

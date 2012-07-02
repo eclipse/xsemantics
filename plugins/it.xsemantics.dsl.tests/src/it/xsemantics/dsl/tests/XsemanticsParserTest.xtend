@@ -90,6 +90,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testSimpleAxiom() {
 		parser.parse(testFiles.testSimpleAxiom).assertNoErrors
 	}
+
+	@Test
+	def void testAxiomWithExpressionInConclusion() {
+		parser.parse(testFiles.testAxiomWithExpressionInConclusion).assertNoErrors
+	}
 	
 	@Test
 	def void testSimpleRule() {
@@ -304,4 +309,35 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		testFiles.testScopingForVariableDeclarationAsOutputArgument.parseAndAssertNoError
 	}
 	
+	// Xtext 2.3
+	
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffect() {
+		parser.parse(testFiles.testRuleWithBooleanExpressionsWithNoSideEffect).assertNoErrors
+	}
+	
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInFor() {
+		parser.parse(testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInFor).assertNoErrors
+	}
+
+	@Test
+	def void testFailSideEffect() {
+		parser.parse(testFiles.testFailSideEffect).assertNoErrors
+	}
+
+	@Test
+	def void testFailInsideClosureSideEffect() {
+		parser.parse(testFiles.testFailInsideClosureSideEffect).assertNoErrors
+	}
+
+	@Test
+	def void testFailWithErrorSpecificationInsideClosureSideEffect() {
+		parser.parse(testFiles.testFailWithErrorSpecificationInsideClosureSideEffect).assertNoErrors
+	}
+	
+	@Test
+	def void testBooleanExpressionsInIf() {
+		parser.parse(testFiles.testBooleanExpressionsInIf).assertNoErrors
+	}
 }

@@ -7,13 +7,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.validation.Check;
 
 public class TypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
-	@Inject
-	protected TypeSystem xsemanticsSystem;
-
-	@Check
-	public void checkEClass(final EClass eClass) {
-		generateErrors(
-			xsemanticsSystem.checkEClass(eClass),
-			eClass);
-	}
+  @Inject
+  protected TypeSystem xsemanticsSystem;
+  
+  @Check
+  public void checkEClass(final EClass eClass) {
+    generateErrors(
+    	xsemanticsSystem.checkEClass(eClass),
+    		eClass);
+  }
 }

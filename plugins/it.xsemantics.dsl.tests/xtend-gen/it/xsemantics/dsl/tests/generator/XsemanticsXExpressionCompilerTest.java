@@ -19,15 +19,16 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTest {
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
@@ -74,13 +75,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(_name, \"foo\");");
+    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.name == \'foo\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals) {");
+    _builder.append("if (!_equals) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.name == \\\'foo\\\'\");");
@@ -97,13 +98,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_1 = _eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals_1) {");
+    _builder.append("if (!_equals_1) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -128,13 +129,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(_name, \"foo\");");
+    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.name == \'foo\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals) {");
+    _builder.append("if (!_equals) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.name == \\\'foo\\\'\");");
@@ -151,13 +152,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_1 = _eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals_1) {");
+    _builder.append("if (!_equals_1) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -188,13 +189,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(_name, \"foo\");");
+    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* eClass.name == \'foo\' */");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("if (!_operator_equals) {");
+    _builder.append("if (!_equals) {");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.name == \\\'foo\\\'\");");
@@ -206,13 +207,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_1 = eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, \"foo\");");
+    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"foo\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* eClass.name == \'foo\' */");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("if (!_operator_equals_1) {");
+    _builder.append("if (!_equals_1) {");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.name == \\\'foo\\\'\");");
@@ -221,7 +222,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("_xblockexpression = (_operator_equals_1);");
+    _builder.append("_xblockexpression = (_equals_1);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -238,13 +239,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_2 = _eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_2, \"bar\");");
+    _builder.append("boolean _equals_2 = Objects.equal(_name_2, \"bar\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("if (!_operator_equals_2) {");
+    _builder.append("if (!_equals_2) {");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -259,13 +260,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_3 = _eClass_1.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals_3 = ObjectExtensions.operator_equals(_name_3, \"bar\");");
+    _builder.append("boolean _equals_3 = Objects.equal(_name_3, \"bar\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("if (!_operator_equals_3) {");
+    _builder.append("if (!_equals_3) {");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -346,13 +347,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = _eClass_3.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(_name, \"bar\");");
+    _builder.append("boolean _equals = Objects.equal(_name, \"bar\");");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("if (!_operator_equals) {");
+    _builder.append("if (!_equals) {");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -361,7 +362,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("}");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("_xblockexpression = (_operator_equals);");
+    _builder.append("_xblockexpression = (_equals);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("}");
@@ -376,13 +377,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name_1 = _eClass_4.getName();");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* object.eClass.name == \'bar\' */");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("if (!_operator_equals_1) {");
+    _builder.append("if (!_equals_1) {");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("sneakyThrowRuleFailedException(\"object.eClass.name == \\\'bar\\\'\");");
@@ -402,12 +403,11 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   
   @Test
   public void testRuleInvocationResultVariable() {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-      final StringBuilderBasedAppendable appendable = _createAppendable;
-      CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-      this.checkRuleInvocationVariable(_testRuleInvokingAnotherRule, 0, appendable, "result");
-      CharSequence _testRuleInvokingAnotherRule_1 = this.testFiles.testRuleInvokingAnotherRule();
-      this.checkRuleInvocationVariable(_testRuleInvokingAnotherRule_1, 1, appendable, "result_1");
+    final FakeTreeAppendable appendable = this.createAppendable();
+    CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
+    this.checkRuleInvocationVariable(_testRuleInvokingAnotherRule, 0, appendable, "result");
+    CharSequence _testRuleInvokingAnotherRule_1 = this.testFiles.testRuleInvokingAnotherRule();
+    this.checkRuleInvocationVariable(_testRuleInvokingAnotherRule_1, 1, appendable, "result_1");
   }
   
   @Test
@@ -418,19 +418,19 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("{");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_or = false;");
+    _builder.append("boolean _or = false;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("String _string = new String();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals = ObjectExtensions.operator_equals(\"foo\", _string);");
+    _builder.append("boolean _equals = Objects.equal(\"foo\", _string);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (_operator_equals) {");
+    _builder.append("if (_equals) {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("_operator_or = true;");
+    _builder.append("_or = true;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("} else {");
@@ -439,10 +439,10 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _string_1 = new String();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals_1 = ObjectExtensions.operator_equals(\"bar\", _string_1);");
+    _builder.append("boolean _equals_1 = Objects.equal(\"bar\", _string_1);");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("_operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);");
+    _builder.append("_or = (_equals || _equals_1);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -451,7 +451,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("/* \'foo\' == new String() || \'bar\' == new String() */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_or) {");
+    _builder.append("if (!_or) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() || \\\'bar\\\' == new String()\");");
@@ -460,19 +460,19 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_and = false;");
+    _builder.append("boolean _and = false;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("String _string_2 = new String();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_2 = ObjectExtensions.operator_equals(\"foo\", _string_2);");
+    _builder.append("boolean _equals_2 = Objects.equal(\"foo\", _string_2);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals_2) {");
+    _builder.append("if (!_equals_2) {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("_operator_and = false;");
+    _builder.append("_and = false;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("} else {");
@@ -481,10 +481,10 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _string_3 = new String();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _operator_equals_3 = ObjectExtensions.operator_equals(\"bar\", _string_3);");
+    _builder.append("boolean _equals_3 = Objects.equal(\"bar\", _string_3);");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("_operator_and = BooleanExtensions.operator_and(_operator_equals_2, _operator_equals_3);");
+    _builder.append("_and = (_equals_2 && _equals_3);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -493,7 +493,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("/* \'foo\' == new String() && \'bar\' == new String() */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_and) {");
+    _builder.append("if (!_and) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() && \\\'bar\\\' == new String()\");");
@@ -508,16 +508,16 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _firstUpper = StringExtensions.toFirstUpper(\"bar\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("String _operator_plus = StringExtensions.operator_plus(_string_4, _firstUpper);");
+    _builder.append("String _plus = (_string_4 + _firstUpper);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_equals_4 = ObjectExtensions.operator_equals(\"foo\", _operator_plus);");
+    _builder.append("boolean _equals_4 = Objects.equal(\"foo\", _plus);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' == new String() + \'bar\'.toFirstUpper */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_equals_4) {");
+    _builder.append("if (!_equals_4) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() + \\\'bar\\\'.toFirstUpper\");");
@@ -532,16 +532,16 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _firstUpper_1 = StringExtensions.toFirstUpper(\"bar\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("String _operator_plus_1 = StringExtensions.operator_plus(_string_5, _firstUpper_1);");
+    _builder.append("String _plus_1 = (_string_5 + _firstUpper_1);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_notEquals = ObjectExtensions.operator_notEquals(\"foo\", _operator_plus_1);");
+    _builder.append("boolean _notEquals = (!Objects.equal(\"foo\", _plus_1));");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' != new String() + \'bar\'.toFirstUpper */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_notEquals) {");
+    _builder.append("if (!_notEquals) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' != new String() + \\\'bar\\\'.toFirstUpper\");");
@@ -556,7 +556,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _firstUpper_2 = StringExtensions.toFirstUpper(\"bar\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("StringExtensions.operator_plus(_string_6, _firstUpper_2);");
+    _builder.append("final String temp = (_string_6 + _firstUpper_2);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("boolean _contains = \"foo\".contains(\"f\");");
@@ -580,13 +580,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("boolean _contains_1 = \"foo\".contains(\"f\");");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_not = BooleanExtensions.operator_not(_contains_1);");
+    _builder.append("boolean _not = (!_contains_1);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* !(\'foo\'.contains(\'f\')) */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_not) {");
+    _builder.append("if (!_not) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"!(\\\'foo\\\'.contains(\\\'f\\\'))\");");
@@ -595,10 +595,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("final EClass eC = _createEClass;");
+    _builder.append("final EClass eC = EcoreFactory.eINSTANCE.createEClass();");
     _builder.newLine();
     _builder.append("}");
     this.checkCompilationOfAllPremises(_testRuleWithFeatureCalls, _builder);
@@ -606,14 +603,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   
   @Test
   public void testThrowRuleFailedException() {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable();
-      final StringBuilderBasedAppendable a = _createAppendable;
-      XAbstractFeatureCall _xAbstractFeatureCall = this.getXAbstractFeatureCall(0);
-      this.xbaseCompiler.throwNewRuleFailedException(_xAbstractFeatureCall, a);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() || \\\'bar\\\' == new String()\");");
-      String _string = a.toString();
-      this.assertEqualsStrings(_builder, _string);
+    final FakeTreeAppendable a = this.createAppendable();
+    XAbstractFeatureCall _xAbstractFeatureCall = this.getXAbstractFeatureCall(0);
+    this.xbaseCompiler.throwNewRuleFailedException(_xAbstractFeatureCall, a);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() || \\\'bar\\\' == new String()\");");
+    String _string = a.toString();
+    this.assertEqualsStrings(_builder, _string);
   }
   
   @Test
@@ -642,20 +638,22 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.newLine();
     _builder.append("String _instanceClassName = _environmentaccess.getInstanceClassName();");
     _builder.newLine();
-    _builder.append("ObjectExtensions.operator_equals(\"foo\", _instanceClassName);");
+    _builder.append("Objects.equal(\"foo\", _instanceClassName);");
     this.checkCompilationOfXExpression(_testWithEnvironmentAccess, 4, _builder);
   }
   
   @Test
   public void testEmptyEnvironmentSpecification() {
     CharSequence _testEmptyEnvironment = this.testFiles.testEmptyEnvironment();
-    this.checkCompilationOfEnvironmentSpecfication(_testEmptyEnvironment, "emptyEnvironment()");
+    this.checkCompilationOfEnvironmentSpecfication(_testEmptyEnvironment, 
+      "emptyEnvironment()");
   }
   
   @Test
   public void testEnvironmentReference() {
     CharSequence _testRuleOnlyInvokingRules = this.testFiles.testRuleOnlyInvokingRules();
-    this.checkCompilationOfEnvironmentSpecfication(_testRuleOnlyInvokingRules, "G");
+    this.checkCompilationOfEnvironmentSpecfication(_testRuleOnlyInvokingRules, 
+      "G");
   }
   
   @Test
@@ -823,10 +821,10 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = it.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
+    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("return Boolean.valueOf(_operator_notEquals);");
+    _builder.append("return Boolean.valueOf(_notEquals);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("}");
@@ -862,13 +860,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = it.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
+    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("/* it.name != \'foo\' */");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("if (!Boolean.valueOf(_operator_notEquals)) {");
+    _builder.append("if (!Boolean.valueOf(_notEquals)) {");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("sneakyThrowRuleFailedException(\"it.name != \\\'foo\\\'\");");
@@ -877,7 +875,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("}");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("return Boolean.valueOf(_operator_notEquals);");
+    _builder.append("return Boolean.valueOf(_notEquals);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("}");
@@ -949,13 +947,13 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("String _name = _get.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
+    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.EStructuralFeatures.get(0).name != \'foo\' */");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("if (!_operator_notEquals) {");
+    _builder.append("if (!Boolean.valueOf(_notEquals)) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass.EStructuralFeatures.get(0).name != \\\'foo\\\'\");");
@@ -965,6 +963,34 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.newLine();
     _builder.append("}");
     this.checkCompilationOfAllPremises(_testForClosures, _builder);
+  }
+  
+  @Test
+  public void testForClosureWithExpressionWithNoSideEffect() {
+    CharSequence _testForClosureWithExpressionWithNoSideEffect = this.testFiles.testForClosureWithExpressionWithNoSideEffect();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();");
+    _builder.newLine();
+    _builder.append("final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public void apply(final EStructuralFeature it) {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("String _name = it.getName();");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("};");
+    _builder.newLine();
+    _builder.append("IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);");
+    this.checkCompilationOfAllPremises(_testForClosureWithExpressionWithNoSideEffect, _builder);
   }
   
   @Test
@@ -1018,9 +1044,7 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.newLine();
     _builder.append("EClass _eClass = obj.eClass();");
     _builder.newLine();
-    _builder.append("EClass _clone = this.<EClass>clone(_eClass);");
-    _builder.newLine();
-    _builder.append("final EClass eClass = _clone;");
+    _builder.append("final EClass eClass = this.<EClass>clone(_eClass);");
     this.checkCompilationOfAllPremisesOfCheckRule(_testForScopeOfThisInCheckRule, _builder);
   }
   
@@ -1043,91 +1067,71 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
   }
   
   public void checkCompilationOfRuleInvocation(final CharSequence inputCode, final int index, final CharSequence expected) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      final Rule rule = _firstRule;
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(rule);
-      RuleInvocation _get = _ruleInvocations.get(index);
-      final RuleInvocation xexp = _get;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      this.xbaseCompiler.toJavaStatement(xexp, result, false);
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final Rule rule = this.getFirstRule(inputCode);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(rule);
+    final RuleInvocation xexp = _ruleInvocations.get(index);
+    final ITreeAppendable result = this.createAppendable(rule);
+    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
   public void checkCompilationOfOr(final CharSequence inputCode, final int index, final CharSequence expected) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      final Rule rule = _firstRule;
-      List<OrExpression> _ors = this._xsemanticsUtils.getOrs(rule);
-      OrExpression _get = _ors.get(index);
-      final OrExpression xexp = _get;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      this.xbaseCompiler.toJavaStatement(xexp, result, false);
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final Rule rule = this.getFirstRule(inputCode);
+    List<OrExpression> _ors = this._xsemanticsUtils.getOrs(rule);
+    final OrExpression xexp = _ors.get(index);
+    final ITreeAppendable result = this.createAppendable(rule);
+    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
-  public void checkRuleInvocationVariable(final CharSequence inputCode, final int index, final IAppendable appendable, final String expectedVariableName) {
-      XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(inputCode);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_parseAndAssertNoError);
-      RuleInvocation _get = _ruleInvocations.get(index);
-      final RuleInvocation xexp = _get;
-      String _declareResultVariable = this.xbaseCompiler.declareResultVariable(xexp, appendable);
-      final String variable = _declareResultVariable;
-      Assert.assertEquals(expectedVariableName, variable);
+  public void checkRuleInvocationVariable(final CharSequence inputCode, final int index, final ITreeAppendable appendable, final String expectedVariableName) {
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(inputCode);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_parseAndAssertNoError);
+    final RuleInvocation xexp = _ruleInvocations.get(index);
+    final String variable = this.xbaseCompiler.declareResultVariable(xexp, appendable);
+    Assert.assertEquals(expectedVariableName, variable);
   }
   
   public void checkCompilationOfAllPremises(final CharSequence inputCode, final CharSequence expected) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      final Rule rule = _firstRule;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      XBlockExpression _rulePremisesAsBlock = this.getRulePremisesAsBlock(rule);
-      final XBlockExpression xexp = _rulePremisesAsBlock;
-      this.xbaseCompiler.toJavaStatement(xexp, result, false);
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final Rule rule = this.getFirstRule(inputCode);
+    final TreeAppendable result = this.createJvmModelGeneratorConfiguredAppendable(rule);
+    final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
+    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
   public void checkCompilationOfAllPremisesOfCheckRule(final CharSequence inputCode, final CharSequence expected) {
-      CheckRule _firstCheckRule = this.getFirstCheckRule(inputCode);
-      final CheckRule rule = _firstCheckRule;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      XBlockExpression _rulePremisesAsBlock = this.getRulePremisesAsBlock(rule);
-      final XBlockExpression xexp = _rulePremisesAsBlock;
-      this.xbaseCompiler.toJavaStatement(xexp, result, false);
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final CheckRule rule = this.getFirstCheckRule(inputCode);
+    final ITreeAppendable result = this.createAppendable(rule);
+    final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
+    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
   public void checkCompilationOfXExpression(final CharSequence inputCode, final int index, final CharSequence expected) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      final Rule rule = _firstRule;
-      EList<XExpression> _rulePremises = this.getRulePremises(rule);
-      XExpression _get = _rulePremises.get(index);
-      final XExpression xexp = _get;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      this.xbaseCompiler.toJavaStatement(xexp, result, false);
-      String _string = expected.toString();
-      String _string_1 = result.toString();
-      Assert.assertEquals(_string, _string_1);
+    final Rule rule = this.getFirstRule(inputCode);
+    EList<XExpression> _rulePremises = this.getRulePremises(rule);
+    final XExpression xexp = _rulePremises.get(index);
+    final ITreeAppendable result = this.createAppendable(rule);
+    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    String _string = expected.toString();
+    String _string_1 = result.toString();
+    Assert.assertEquals(_string, _string_1);
   }
   
   public void checkCompilationOfEnvironmentSpecfication(final CharSequence inputCode, final CharSequence expected) {
-      Rule _firstRule = this.getFirstRule(inputCode);
-      final Rule rule = _firstRule;
-      EnvironmentSpecification _environmentSpecificationOfRuleInvocation = this.getEnvironmentSpecificationOfRuleInvocation(rule);
-      final EnvironmentSpecification xexp = _environmentSpecificationOfRuleInvocation;
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(rule);
-      final StringBuilderBasedAppendable result = _createAppendable;
-      this.xbaseCompiler.generateEnvironmentSpecificationAsExpression(xexp, result);
-      this.assertEqualsStrings(expected, result);
+    final Rule rule = this.getFirstRule(inputCode);
+    final EnvironmentSpecification xexp = this.getEnvironmentSpecificationOfRuleInvocation(rule);
+    final ITreeAppendable result = this.createAppendable(rule);
+    this.xbaseCompiler.generateEnvironmentSpecificationAsExpression(xexp, result);
+    this.assertEqualsStrings(expected, result);
   }
 }

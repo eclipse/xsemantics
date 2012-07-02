@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProvider.class)
 public class ExpressionsBaseTests {
   @Inject
   protected IExpressionsSemantics semantics;

@@ -4,6 +4,7 @@ import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsSubtyping;
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -53,6 +54,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Inject
 	protected XsemanticsJavaValidatorHelper helper;
 
+	@Inject
+	protected XsemanticsXExpressionHelper xExpressionHelper;
+
 	public final static int maxOfOutputParams = 2;
 
 	protected boolean enableWarnings = true;
@@ -82,6 +86,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
 
+	@Override
+	@Check
+	public void checkImplicitReturn(XExpression expr) {
+		// we will deal with this during generation
+		return;
+	}
+
 	@Check
 	public void checkThrow(XThrowExpression expr) {
 		error("Throw statements are not allowed here", expr, null,
@@ -96,6 +107,23 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			return true;
 		}
 		return super.isLocallyUsed(target, containerToFindUsage);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.xbase.validation.XbaseJavaValidator#
+	 * isValueExpectedRecursive(org.eclipse.xtext.xbase.XExpression)
+	 */
+	@Override
+	protected boolean isValueExpectedRecursive(XExpression expr) {
+		// this is used by Xbase validator to check expressions with
+		// side effects, by inspecting expr's container
+		// so we must customize it when the container is one of our
+		// custom XExpressions
+		final boolean valueExpectedRecursive = super.isValueExpectedRecursive(expr);
+		return valueExpectedRecursive
+				|| xExpressionHelper.isXsemanticsXExpression(expr.eContainer());
 	}
 
 	@Check
@@ -164,7 +192,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	protected void checkNumOfOutputParams(
 			JudgmentDescription judgmentDescription) {
-		if (xsemanticsUtils.outputJudgmentParameters(judgmentDescription).size() > maxOfOutputParams) {
+		if (xsemanticsUtils.outputJudgmentParameters(judgmentDescription)
+				.size() > maxOfOutputParams) {
 			error("No more than " + maxOfOutputParams
 					+ " output parameters are handled at the moment",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
@@ -191,9 +220,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					.getConclusion().getConclusionElements();
 			// judgmentParameters.size() == conclusionElements.size())
 			// otherwise we could not find a JudgmentDescription for the rule
-			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters.iterator();
+			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters
+					.iterator();
 			for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
-				if (!xsemanticsUtils.isOutputParameter(judgmentParametersIt.next())
+				if (!xsemanticsUtils.isOutputParameter(judgmentParametersIt
+						.next())
 						&& !(ruleConclusionElement instanceof RuleParameter)) {
 					error("Must be a parameter, not an expression",
 							ruleConclusionElement,
@@ -246,9 +277,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					.getExpressions();
 			// judgmentParamters.size() == conclusionElements.size())
 			// otherwise we could not find a JudgmentDescription for the rule
-			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters.iterator();
+			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters
+					.iterator();
 			for (RuleInvocationExpression ruleInvocationExpression : invocationExpressions) {
-				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt.next())) {
+				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt
+						.next())) {
 					if (!xsemanticsUtils
 							.validOutputArgExpression(ruleInvocationExpression)) {
 						error("Not a valid argument for output parameter",
@@ -372,9 +405,11 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		return judgmentDescription;
 	}
 
-	protected void checkConformance(JudgmentParameter judgmentParameter, EObject element,
-			final String elementDescription, EStructuralFeature feature) {
-		JvmTypeReference expected = subtyping.getJvmTypeReference(judgmentParameter);
+	protected void checkConformance(JudgmentParameter judgmentParameter,
+			EObject element, final String elementDescription,
+			EStructuralFeature feature) {
+		JvmTypeReference expected = subtyping
+				.getJvmTypeReference(judgmentParameter);
 		JvmTypeReference actual = typingSystem.getType(element);
 		if (!subtyping.isConformant(expected, actual)) {
 			error(elementDescription + " type " + getNameOfTypes(actual)

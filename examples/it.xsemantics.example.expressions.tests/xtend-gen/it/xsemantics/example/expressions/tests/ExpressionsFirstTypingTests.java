@@ -8,9 +8,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = ExpressionsInjectorProviderFirst.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(ExpressionsInjectorProviderFirst.class)
 public class ExpressionsFirstTypingTests extends ExpressionsTypingTests {
   @Test
   public void testArithmeticSignedWithString() {
@@ -21,7 +21,8 @@ public class ExpressionsFirstTypingTests extends ExpressionsTypingTests {
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("StringType cannot be assigned to IntType");
-    this.assertResultAndTrace(_builder, 0, null, _builder_1);
+    this.assertResultAndTrace(_builder, 0, 
+      null, _builder_1);
   }
   
   @Test

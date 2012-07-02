@@ -21,7 +21,6 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class ExpressionsGenerator implements IGenerator {
@@ -35,19 +34,17 @@ public class ExpressionsGenerator implements IGenerator {
   private StringRepresentation _stringRepresentation;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-      URI _uRI = resource.getURI();
-      String _lastSegment = _uRI.lastSegment();
-      int _lastIndexOf = _lastSegment.lastIndexOf(".");
-      final int dotIndex = _lastIndexOf;
-      URI _uRI_1 = resource.getURI();
-      String _lastSegment_1 = _uRI_1.lastSegment();
-      String _substring = _lastSegment_1.substring(0, dotIndex);
-      final String fileName = _substring;
-      String _operator_plus = StringExtensions.operator_plus(fileName, ".output");
-      EList<EObject> _contents = resource.getContents();
-      EObject _get = _contents.get(0);
-      String _compileModel = this.compileModel(((Model) _get));
-      fsa.generateFile(_operator_plus, _compileModel);
+    URI _uRI = resource.getURI();
+    String _lastSegment = _uRI.lastSegment();
+    final int dotIndex = _lastSegment.lastIndexOf(".");
+    URI _uRI_1 = resource.getURI();
+    String _lastSegment_1 = _uRI_1.lastSegment();
+    final String fileName = _lastSegment_1.substring(0, dotIndex);
+    String _plus = (fileName + ".output");
+    EList<EObject> _contents = resource.getContents();
+    EObject _get = _contents.get(0);
+    String _compileModel = this.compileModel(((Model) _get));
+    fsa.generateFile(_plus, _compileModel);
   }
   
   public String compileModel(final Model expModel) {
@@ -83,10 +80,8 @@ public class ExpressionsGenerator implements IGenerator {
       final RuleApplicationTrace typeTrace = _ruleApplicationTrace;
       RuleApplicationTrace _ruleApplicationTrace_1 = new RuleApplicationTrace();
       final RuleApplicationTrace interpreterTrace = _ruleApplicationTrace_1;
-      Result<Type> _type = this.semantics.type(null, typeTrace, exp);
-      final Result<Type> type = _type;
-      Result<Object> _interpret = this.semantics.interpret(null, interpreterTrace, exp);
-      final Result<Object> result = _interpret;
+      final Result<Type> type = this.semantics.type(null, typeTrace, exp);
+      final Result<Object> result = this.semantics.interpret(null, interpreterTrace, exp);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type: ");
       Type _value = type.getValue();

@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests.generator.fj.common;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -15,8 +16,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class FjExpectedTraces {
@@ -42,17 +41,17 @@ public class FjExpectedTraces {
           String _string = FjExpectedTraces.this._stringRepresentation.string(_source);
           String _xifexpression = null;
           EStructuralFeature _feature = it.getFeature();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_feature, null);
-          if (_operator_notEquals) {
+          boolean _notEquals = (!Objects.equal(_feature, null));
+          if (_notEquals) {
             EStructuralFeature _feature_1 = it.getFeature();
             String _name = _feature_1.getName();
-            String _operator_plus = StringExtensions.operator_plus(" feature: ", _name);
-            _xifexpression = _operator_plus;
+            String _plus = (" feature: " + _name);
+            _xifexpression = _plus;
           } else {
             _xifexpression = "";
           }
-          String _operator_plus_1 = StringExtensions.operator_plus(_string, _xifexpression);
-          return _operator_plus_1;
+          String _plus_1 = (_string + _xifexpression);
+          return _plus_1;
         }
       };
     List<String> _map = ListExtensions.<ErrorInformation, String>map(_filteredErrorInformation, _function);

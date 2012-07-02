@@ -8,49 +8,53 @@ import it.xsemantics.example.fj.typing.FjSepTypeSystem;
 import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
+/**
+ * A version of the FJ system where type computation and
+ * checking are separated.
+ */
 public class FjSepTypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
-	@Inject
-	protected FjSepTypeSystem xsemanticsSystem;
-
-	@Check
-	public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
-		generateErrors(
-			xsemanticsSystem.checkClassOk(clazz),
-			clazz);
-	}
-	
-	@Check
-	public void checkMain(final Program program) {
-		generateErrors(
-			xsemanticsSystem.checkMain(program),
-			program);
-	}
-	
-	@Check
-	public void checkMethodBody(final Method method) {
-		generateErrors(
-			xsemanticsSystem.checkMethodBody(method),
-			method);
-	}
-	
-	@Check
-	public void checkField(final Field field) {
-		generateErrors(
-			xsemanticsSystem.checkField(field),
-			field);
-	}
-	
-	@Check
-	public void checkMethodOverride(final Method method) {
-		generateErrors(
-			xsemanticsSystem.checkMethodOverride(method),
-			method);
-	}
-	
-	@Check
-	public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-		generateErrors(
-			xsemanticsSystem.checkClassHierachyNotCyclic(cl),
-			cl);
-	}
+  @Inject
+  protected FjSepTypeSystem xsemanticsSystem;
+  
+  @Check
+  public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
+    generateErrors(
+    	xsemanticsSystem.checkClassOk(clazz),
+    		clazz);
+  }
+  
+  @Check
+  public void checkMain(final Program program) {
+    generateErrors(
+    	xsemanticsSystem.checkMain(program),
+    		program);
+  }
+  
+  @Check
+  public void checkMethodBody(final Method method) {
+    generateErrors(
+    	xsemanticsSystem.checkMethodBody(method),
+    		method);
+  }
+  
+  @Check
+  public void checkField(final Field field) {
+    generateErrors(
+    	xsemanticsSystem.checkField(field),
+    		field);
+  }
+  
+  @Check
+  public void checkMethodOverride(final Method method) {
+    generateErrors(
+    	xsemanticsSystem.checkMethodOverride(method),
+    		method);
+  }
+  
+  @Check
+  public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
+    generateErrors(
+    	xsemanticsSystem.checkClassHierachyNotCyclic(cl),
+    		cl);
+  }
 }

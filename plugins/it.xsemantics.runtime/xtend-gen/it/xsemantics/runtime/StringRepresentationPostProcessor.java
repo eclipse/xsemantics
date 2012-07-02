@@ -1,8 +1,6 @@
 package it.xsemantics.runtime;
 
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
+import com.google.common.base.Objects;
 
 @SuppressWarnings("all")
 public class StringRepresentationPostProcessor {
@@ -12,8 +10,8 @@ public class StringRepresentationPostProcessor {
   
   public String process(final String string) {
     String _xifexpression = null;
-    boolean _operator_equals = ObjectExtensions.operator_equals(string, null);
-    if (_operator_equals) {
+    boolean _equals = Objects.equal(string, null);
+    if (_equals) {
       _xifexpression = "";
     } else {
       int _maxChars = this.maxChars();
@@ -35,11 +33,10 @@ public class StringRepresentationPostProcessor {
   public String stopAtNewLine(final String string) {
     String _xblockexpression = null;
     {
-      int _indexOf = string.indexOf("\n");
-      final int firstNewLine = _indexOf;
+      final int firstNewLine = string.indexOf("\n");
       String _xifexpression = null;
-      boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(firstNewLine, 0);
-      if (_operator_greaterThan) {
+      boolean _greaterThan = (firstNewLine > 0);
+      if (_greaterThan) {
         String _substring = string.substring(0, firstNewLine);
         _xifexpression = _substring;
       } else {
@@ -53,12 +50,12 @@ public class StringRepresentationPostProcessor {
   public String limitChars(final String string, final int limit) {
     String _xifexpression = null;
     int _length = string.length();
-    boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_length, limit);
-    if (_operator_greaterThan) {
+    boolean _greaterThan = (_length > limit);
+    if (_greaterThan) {
       String _substring = string.substring(0, limit);
       String _omissis = this.omissis();
-      String _operator_plus = StringExtensions.operator_plus(_substring, _omissis);
-      _xifexpression = _operator_plus;
+      String _plus = (_substring + _omissis);
+      _xifexpression = _plus;
     } else {
       _xifexpression = string;
     }

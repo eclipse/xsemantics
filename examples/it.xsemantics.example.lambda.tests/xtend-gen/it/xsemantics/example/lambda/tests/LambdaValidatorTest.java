@@ -15,16 +15,14 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = LambdaInjectorProvider.class)
 @SuppressWarnings("all")
-@RunWith(XtextRunner.class)
-@InjectWith(LambdaInjectorProvider.class)
 public class LambdaValidatorTest extends LambdaBaseTest {
   private ValidatorTester<LambdaJavaValidator> tester;
   
@@ -33,9 +31,9 @@ public class LambdaValidatorTest extends LambdaBaseTest {
   
   @Before
   public void setUp() {
-      super.setUp();
-      ValidatorTester<LambdaJavaValidator> _validatorTester = new ValidatorTester<LambdaJavaValidator>(this.validator, this.injector);
-      this.tester = _validatorTester;
+    super.setUp();
+    ValidatorTester<LambdaJavaValidator> _validatorTester = new ValidatorTester<LambdaJavaValidator>(this.validator, this.injector);
+    this.tester = _validatorTester;
   }
   
   @Test
@@ -82,18 +80,16 @@ public class LambdaValidatorTest extends LambdaBaseTest {
   public void assertOk(final AssertableDiagnostics validate) {
     List<Diagnostic> _listOfDiagnostics = this.listOfDiagnostics(validate);
     int _size = _listOfDiagnostics.size();
-    boolean _operator_notEquals = IntegerExtensions.operator_notEquals(_size, 0);
-    if (_operator_notEquals) {
-      {
-        List<Diagnostic> _listOfDiagnostics_1 = this.listOfDiagnostics(validate);
-        for (final Diagnostic diag : _listOfDiagnostics_1) {
-          String _string = diag.toString();
-          System.err.println(_string);
-        }
-        String _diagnosticsToString = this.diagnosticsToString(validate);
-        String _operator_plus = StringExtensions.operator_plus("There are expected to be no diagnostics.: ", _diagnosticsToString);
-        Assert.fail(_operator_plus);
+    boolean _notEquals = (_size != 0);
+    if (_notEquals) {
+      List<Diagnostic> _listOfDiagnostics_1 = this.listOfDiagnostics(validate);
+      for (final Diagnostic diag : _listOfDiagnostics_1) {
+        String _string = diag.toString();
+        System.err.println(_string);
       }
+      String _diagnosticsToString = this.diagnosticsToString(validate);
+      String _plus = ("There are expected to be no diagnostics.: " + _diagnosticsToString);
+      Assert.fail(_plus);
     }
   }
   
@@ -118,8 +114,7 @@ public class LambdaValidatorTest extends LambdaBaseTest {
   
   public List<Diagnostic> listOfDiagnostics(final AssertableDiagnostics validate) {
     Diagnostic _diagnostic = validate.getDiagnostic();
-    List<Diagnostic> _children = _diagnostic.getChildren();
-    return _children;
+    return _diagnostic.getChildren();
   }
   
   public String diagnosticsToString(final AssertableDiagnostics validate) {

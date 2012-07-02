@@ -13,6 +13,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.junit.Test;
 
+@SuppressWarnings("restriction")
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 
 	private XsemanticsJavaValidator validator;
@@ -38,7 +39,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						.testJudgmentDescriptionsWithDuplicates()),
 				"judgment", "type");
 	}
-	
+
 	@Test
 	public void testDuplicateJudgmentDescriptionSymbols() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
@@ -76,12 +77,19 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testDuplicateParamNames() throws Exception {
+	public void testDuplicateParamNamesInRule() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testDuplicateParamsInRule());
 		assertContains(validate, "Duplicate parameter 'eClass'");
 	}
-	
+
+	@Test
+	public void testDuplicateParamNamesInJudgmentDescription() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testDuplicateParamsInJudgmentDescription());
+		assertContains(validate, "Duplicate parameter 'eClass'");
+	}
+
 	protected void assertContains(AssertableDiagnostics validate, String string) {
 		final String diagnosticsToString = diagnosticsToString(validate);
 		if (!diagnosticsToString.contains(string)) {
@@ -352,18 +360,48 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testWrongReturnInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongReturnInPremises());
-		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.RETURN_NOT_ALLOWED,
-				"Return statements are not allowed here"));
+		validate.assertAll(
+				AssertableDiagnostics.error(IssueCodes.RETURN_NOT_ALLOWED,
+						"Return statements are not allowed here"),
+				AssertableDiagnostics
+						.error(org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+								"Incompatible types"));
 	}
 
 	@Test
 	public void testWrongThrowInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongThrowInPremises());
-		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.THROW_NOT_ALLOWED,
-				"Throw statements are not allowed here"));
+		validate.assertAll(
+				AssertableDiagnostics.error(IssueCodes.THROW_NOT_ALLOWED,
+						"Throw statements are not allowed here"),
+				AssertableDiagnostics
+						.error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
+								"Unhandled exception"));
+	}
+
+	@Test
+	public void testRuleWithBooleanExpressionsWithNoSideEffectInsideClosure()
+			throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testForClosureWithExpressionWithNoSideEffect());
+		assertOk(validate);
+	}
+
+	@Test
+	public void testNoSideEffectButNoError() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testNoSideEffectButNoError());
+		assertOk(validate);
+	}
+
+	@Test
+	public void testErrorNoSideEffect() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testErrorNoSideEffect());
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
+						"This expression is not allowed in this context"));
 	}
 
 	protected AssertableDiagnostics loadModelAndValidate(
@@ -375,8 +413,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 			String elementClassName, String duplicateName) {
 		// System.out.println(diagnosticsToString(validate));
 		String messageFragment = "Duplicate " + elementClassName + " '"
-				+ duplicateName
-				+ "'";
+				+ duplicateName + "'";
 		validate.assertAll(AssertableDiagnostics.errorMsg(messageFragment),
 				AssertableDiagnostics.errorMsg(messageFragment));
 	}

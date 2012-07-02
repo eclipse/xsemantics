@@ -15,6 +15,8 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -27,9 +29,9 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class XsemanticsTypingTest extends XsemanticsBaseTest {
   @Inject
   protected XsemanticsTypingSystem typingSystem;
@@ -40,19 +42,19 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
   @Test
   public void testRuleParameterTypes() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
-    this.assertRuleConclusionTypes(_testSimpleRule, org.eclipse.emf.ecore.EClass.class, org.eclipse.emf.ecore.EObject.class);
+    this.assertRuleConclusionTypes(_testSimpleRule, EClass.class, EObject.class);
   }
   
   @Test
   public void testRuleConclusionTypesWithExpressions() {
     CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
-    this.assertRuleConclusionTypes(_testRuleWithExpressionInConclusion, org.eclipse.emf.ecore.EClass.class, org.eclipse.emf.ecore.EObject.class);
+    this.assertRuleConclusionTypes(_testRuleWithExpressionInConclusion, EClass.class, EObject.class);
   }
   
   @Test
   public void testRuleInvocation() {
     CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-    this.assertRuleInvocationTypes(_testRuleInvokingAnotherRule, 0, org.eclipse.emf.ecore.EClass.class, org.eclipse.emf.ecore.EClass.class);
+    this.assertRuleInvocationTypes(_testRuleInvokingAnotherRule, 0, EClass.class, EClass.class);
   }
   
   @Test
@@ -133,7 +135,7 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
   
   @Test
   public void testEnvironmentAccess() {
-    String _name = org.eclipse.emf.ecore.EClass.class.getName();
+    String _name = EClass.class.getName();
     CharSequence _testWithEnvironmentAccess = this.testFiles.testWithEnvironmentAccess();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testWithEnvironmentAccess);
     EnvironmentAccess _environmentAccess = this.getEnvironmentAccess(_parseAndAssertNoError);
@@ -155,39 +157,37 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
   }
   
   public void assertRuleConclusionTypes(final CharSequence source, final Class leftClass, final Class rightClass) {
-      Rule _firstRule = this.getFirstRule(source);
-      RuleConclusion _conclusion = _firstRule.getConclusion();
-      final RuleConclusion conclusion = _conclusion;
-      String _name = leftClass.getName();
-      EList<RuleConclusionElement> _conclusionElements = conclusion.getConclusionElements();
-      RuleConclusionElement _get = _conclusionElements.get(0);
-      JvmTypeReference _type = this.typingSystem.getType(_get);
-      String _identifier = _type.getIdentifier();
-      Assert.assertEquals(_name, _identifier);
-      String _name_1 = rightClass.getName();
-      EList<RuleConclusionElement> _conclusionElements_1 = conclusion.getConclusionElements();
-      RuleConclusionElement _get_1 = _conclusionElements_1.get(1);
-      JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
-      String _identifier_1 = _type_1.getIdentifier();
-      Assert.assertEquals(_name_1, _identifier_1);
+    Rule _firstRule = this.getFirstRule(source);
+    final RuleConclusion conclusion = _firstRule.getConclusion();
+    String _name = leftClass.getName();
+    EList<RuleConclusionElement> _conclusionElements = conclusion.getConclusionElements();
+    RuleConclusionElement _get = _conclusionElements.get(0);
+    JvmTypeReference _type = this.typingSystem.getType(_get);
+    String _identifier = _type.getIdentifier();
+    Assert.assertEquals(_name, _identifier);
+    String _name_1 = rightClass.getName();
+    EList<RuleConclusionElement> _conclusionElements_1 = conclusion.getConclusionElements();
+    RuleConclusionElement _get_1 = _conclusionElements_1.get(1);
+    JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
+    String _identifier_1 = _type_1.getIdentifier();
+    Assert.assertEquals(_name_1, _identifier_1);
   }
   
   public void assertRuleInvocationTypes(final CharSequence source, final int index, final Class leftClass, final Class rightClass) {
-      Rule _firstRule = this.getFirstRule(source);
-      List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
-      RuleInvocation _get = _ruleInvocations.get(index);
-      final RuleInvocation invocation = _get;
-      String _name = leftClass.getName();
-      EList<RuleInvocationExpression> _expressions = invocation.getExpressions();
-      RuleInvocationExpression _get_1 = _expressions.get(0);
-      JvmTypeReference _type = this.typingSystem.getType(_get_1);
-      String _identifier = _type.getIdentifier();
-      Assert.assertEquals(_name, _identifier);
-      String _name_1 = rightClass.getName();
-      EList<RuleInvocationExpression> _expressions_1 = invocation.getExpressions();
-      RuleInvocationExpression _get_2 = _expressions_1.get(1);
-      JvmTypeReference _type_1 = this.typingSystem.getType(_get_2);
-      String _identifier_1 = _type_1.getIdentifier();
-      Assert.assertEquals(_name_1, _identifier_1);
+    Rule _firstRule = this.getFirstRule(source);
+    List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
+    final RuleInvocation invocation = _ruleInvocations.get(index);
+    String _name = leftClass.getName();
+    EList<RuleInvocationExpression> _expressions = invocation.getExpressions();
+    RuleInvocationExpression _get = _expressions.get(0);
+    JvmTypeReference _type = this.typingSystem.getType(_get);
+    String _identifier = _type.getIdentifier();
+    Assert.assertEquals(_name, _identifier);
+    String _name_1 = rightClass.getName();
+    EList<RuleInvocationExpression> _expressions_1 = invocation.getExpressions();
+    RuleInvocationExpression _get_1 = _expressions_1.get(1);
+    JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
+    String _identifier_1 = _type_1.getIdentifier();
+    Assert.assertEquals(_name_1, _identifier_1);
   }
 }

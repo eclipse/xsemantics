@@ -9,13 +9,12 @@ import junit.framework.Assert;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@InjectWith(value = XsemanticsInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-@InjectWith(XsemanticsInjectorProvider.class)
-@RunWith(XtextRunner.class)
 public class StringRepresentationPostProcessorTests extends XsemanticsBaseTest {
   @Inject
   private StringRepresentationPostProcessor processor;
@@ -67,12 +66,12 @@ public class StringRepresentationPostProcessorTests extends XsemanticsBaseTest {
   @Test
   public void testProcessLongString() {
     int _length = StringRepresentationPostProcessor.OMISSIS.length();
-    int _operator_plus = IntegerExtensions.operator_plus(StringRepresentationPostProcessor.MAX_CHARS, _length);
-    int _operator_plus_1 = IntegerExtensions.operator_plus(StringRepresentationPostProcessor.MAX_CHARS, 30);
-    String _repeat = Strings.repeat("a", _operator_plus_1);
+    int _plus = (StringRepresentationPostProcessor.MAX_CHARS + _length);
+    int _plus_1 = (StringRepresentationPostProcessor.MAX_CHARS + 30);
+    String _repeat = Strings.repeat("a", _plus_1);
     String _process = this.processor.process(_repeat);
     int _length_1 = _process.length();
-    Assert.assertEquals(_operator_plus, _length_1);
+    Assert.assertEquals(_plus, _length_1);
   }
   
   @Test

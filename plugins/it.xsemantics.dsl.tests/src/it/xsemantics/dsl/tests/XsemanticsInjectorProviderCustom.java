@@ -24,10 +24,9 @@ public class XsemanticsInjectorProviderCustom extends
 		}
 	}
 
-	private Injector injector = new XsemanticsStandaloneSetupForTests()
-			.createInjectorAndDoEMFRegistration();
-
-	public Injector getInjector() {
-		return injector;
+	@Override
+	protected Injector internalCreateInjector() {
+		return new XsemanticsStandaloneSetupForTests()
+				.createInjectorAndDoEMFRegistration();
 	}
 }

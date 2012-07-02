@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.util;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsSubtyping;
@@ -28,12 +29,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -41,19 +40,22 @@ public class XsemanticsUtils {
   @Inject
   private XsemanticsSubtyping _xsemanticsSubtyping;
   
+  @Inject
+  private IJvmModelAssociations associations;
+  
   public List<JvmTypeReference> getJvmTypes(final XsemanticsSystem ts) {
-    List<JvmTypeReference> _allContentsOfType = EcoreUtil2.<JvmTypeReference>getAllContentsOfType(ts, org.eclipse.xtext.common.types.JvmTypeReference.class);
+    List<JvmTypeReference> _allContentsOfType = EcoreUtil2.<JvmTypeReference>getAllContentsOfType(ts, JvmTypeReference.class);
     return _allContentsOfType;
   }
   
   public List<Rule> getRules(final XsemanticsSystem ts) {
-    List<Rule> _allContentsOfType = EcoreUtil2.<Rule>getAllContentsOfType(ts, it.xsemantics.dsl.xsemantics.Rule.class);
+    List<Rule> _allContentsOfType = EcoreUtil2.<Rule>getAllContentsOfType(ts, Rule.class);
     return _allContentsOfType;
   }
   
   public List<JvmFormalParameter> getJvmParameters(final Rule rule) {
     RuleConclusion _conclusion = rule.getConclusion();
-    List<JvmFormalParameter> _allContentsOfType = EcoreUtil2.<JvmFormalParameter>getAllContentsOfType(_conclusion, org.eclipse.xtext.common.types.JvmFormalParameter.class);
+    List<JvmFormalParameter> _allContentsOfType = EcoreUtil2.<JvmFormalParameter>getAllContentsOfType(_conclusion, JvmFormalParameter.class);
     return _allContentsOfType;
   }
   
@@ -66,38 +68,35 @@ public class XsemanticsUtils {
         }
       };
     List<XExpression> _map = ListExtensions.<RuleInvocationExpression, XExpression>map(_expressions, _function);
-    List<XVariableDeclaration> _typeSelect = EcoreUtil2.<XVariableDeclaration>typeSelect(_map, org.eclipse.xtext.xbase.XVariableDeclaration.class);
+    List<XVariableDeclaration> _typeSelect = EcoreUtil2.<XVariableDeclaration>typeSelect(_map, XVariableDeclaration.class);
     return _typeSelect;
   }
   
   public List<JvmFormalParameter> getJvmParameters(final JudgmentDescription jd) {
-    List<JvmFormalParameter> _allContentsOfType = EcoreUtil2.<JvmFormalParameter>getAllContentsOfType(jd, org.eclipse.xtext.common.types.JvmFormalParameter.class);
+    List<JvmFormalParameter> _allContentsOfType = EcoreUtil2.<JvmFormalParameter>getAllContentsOfType(jd, JvmFormalParameter.class);
     return _allContentsOfType;
   }
   
   public List<RuleInvocation> getRuleInvocations(final EObject element) {
-    List<RuleInvocation> _allContentsOfType = EcoreUtil2.<RuleInvocation>getAllContentsOfType(element, it.xsemantics.dsl.xsemantics.RuleInvocation.class);
+    List<RuleInvocation> _allContentsOfType = EcoreUtil2.<RuleInvocation>getAllContentsOfType(element, RuleInvocation.class);
     return _allContentsOfType;
   }
   
   public List<OrExpression> getOrs(final EObject element) {
-    List<OrExpression> _allContentsOfType = EcoreUtil2.<OrExpression>getAllContentsOfType(element, it.xsemantics.dsl.xsemantics.OrExpression.class);
+    List<OrExpression> _allContentsOfType = EcoreUtil2.<OrExpression>getAllContentsOfType(element, OrExpression.class);
     return _allContentsOfType;
   }
   
   public XsemanticsSystem containingTypeSystem(final EObject element) {
-    XsemanticsSystem _containerOfType = EcoreUtil2.<XsemanticsSystem>getContainerOfType(element, it.xsemantics.dsl.xsemantics.XsemanticsSystem.class);
-    return _containerOfType;
+    return EcoreUtil2.<XsemanticsSystem>getContainerOfType(element, XsemanticsSystem.class);
   }
   
   public Rule containingRule(final EObject element) {
-    Rule _containerOfType = EcoreUtil2.<Rule>getContainerOfType(element, it.xsemantics.dsl.xsemantics.Rule.class);
-    return _containerOfType;
+    return EcoreUtil2.<Rule>getContainerOfType(element, Rule.class);
   }
   
   public JudgmentDescription containingJudgmentDescription(final EObject element) {
-    JudgmentDescription _containerOfType = EcoreUtil2.<JudgmentDescription>getContainerOfType(element, it.xsemantics.dsl.xsemantics.JudgmentDescription.class);
-    return _containerOfType;
+    return EcoreUtil2.<JudgmentDescription>getContainerOfType(element, JudgmentDescription.class);
   }
   
   public List<JudgmentDescription> getJudgmentDescriptions(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
@@ -110,17 +109,17 @@ public class XsemanticsUtils {
     EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
-          boolean _operator_and = false;
+          boolean _and = false;
           String _judgmentSymbol = it.getJudgmentSymbol();
           boolean _equals = _judgmentSymbol.equals(judgmentSymbol);
           if (!_equals) {
-            _operator_and = false;
+            _and = false;
           } else {
             EList<String> _relationSymbols = it.getRelationSymbols();
             boolean _elementsEqual = IterableExtensions.elementsEqual(_relationSymbols, relationSymbols);
-            _operator_and = BooleanExtensions.operator_and(_equals, _elementsEqual);
+            _and = (_equals && _elementsEqual);
           }
-          return Boolean.valueOf(_operator_and);
+          return Boolean.valueOf(_and);
         }
       };
     Iterable<JudgmentDescription> _filter = IterableExtensions.<JudgmentDescription>filter(_judgmentDescriptions, _function);
@@ -147,12 +146,11 @@ public class XsemanticsUtils {
     JudgmentDescription _xblockexpression = null;
     {
       XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(object);
-      List<JudgmentDescription> _judgmentDescriptions = this.getJudgmentDescriptions(_containingTypeSystem, judgmentSymbol, relationSymbols);
-      final List<JudgmentDescription> descriptions = _judgmentDescriptions;
+      final List<JudgmentDescription> descriptions = this.getJudgmentDescriptions(_containingTypeSystem, judgmentSymbol, relationSymbols);
       JudgmentDescription _xifexpression = null;
       int _size = descriptions.size();
-      boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
-      if (_operator_greaterThan) {
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
         JudgmentDescription _get = descriptions.get(0);
         _xifexpression = _get;
       }
@@ -174,19 +172,19 @@ public class XsemanticsUtils {
     EList<Rule> _rules = ts.getRules();
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
-          boolean _operator_and = false;
+          boolean _and = false;
           RuleConclusion _conclusion = it.getConclusion();
           String _judgmentSymbol = _conclusion.getJudgmentSymbol();
           boolean _equals = _judgmentSymbol.equals(judgmentSymbol);
           if (!_equals) {
-            _operator_and = false;
+            _and = false;
           } else {
             RuleConclusion _conclusion_1 = it.getConclusion();
             EList<String> _relationSymbols = _conclusion_1.getRelationSymbols();
             boolean _elementsEqual = IterableExtensions.elementsEqual(_relationSymbols, relationSymbols);
-            _operator_and = BooleanExtensions.operator_and(_equals, _elementsEqual);
+            _and = (_equals && _elementsEqual);
           }
-          return Boolean.valueOf(_operator_and);
+          return Boolean.valueOf(_and);
         }
       };
     Iterable<Rule> _filter = IterableExtensions.<Rule>filter(_rules, _function);
@@ -210,7 +208,7 @@ public class XsemanticsUtils {
   
   public List<OutputParameter> outputJudgmentParameters(final JudgmentDescription judgmentDescription) {
     EList<JudgmentParameter> _judgmentParameters = judgmentDescription.getJudgmentParameters();
-    List<OutputParameter> _typeSelect = EcoreUtil2.<OutputParameter>typeSelect(_judgmentParameters, it.xsemantics.dsl.xsemantics.OutputParameter.class);
+    List<OutputParameter> _typeSelect = EcoreUtil2.<OutputParameter>typeSelect(_judgmentParameters, OutputParameter.class);
     return _typeSelect;
   }
   
@@ -225,8 +223,7 @@ public class XsemanticsUtils {
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(rule);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
-      Iterator<JudgmentParameter> _iterator = _judgmentParameters.iterator();
-      final Iterator<JudgmentParameter> judgmentParameters = _iterator;
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       RuleConclusion _conclusion = rule.getConclusion();
       EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
       final Function1<RuleConclusionElement,Boolean> _function = new Function1<RuleConclusionElement,Boolean>() {
@@ -251,7 +248,7 @@ public class XsemanticsUtils {
   
   public List<InputParameter> inputParams(final JudgmentDescription judgmentDescription) {
     EList<JudgmentParameter> _judgmentParameters = judgmentDescription.getJudgmentParameters();
-    List<InputParameter> _typeSelect = EcoreUtil2.<InputParameter>typeSelect(_judgmentParameters, it.xsemantics.dsl.xsemantics.InputParameter.class);
+    List<InputParameter> _typeSelect = EcoreUtil2.<InputParameter>typeSelect(_judgmentParameters, InputParameter.class);
     return _typeSelect;
   }
   
@@ -260,21 +257,20 @@ public class XsemanticsUtils {
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(rule);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
-      Iterator<JudgmentParameter> _iterator = _judgmentParameters.iterator();
-      final Iterator<JudgmentParameter> judgmentParameters = _iterator;
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       RuleConclusion _conclusion = rule.getConclusion();
       EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
       final Function1<RuleConclusionElement,Boolean> _function = new Function1<RuleConclusionElement,Boolean>() {
           public Boolean apply(final RuleConclusionElement it) {
             JudgmentParameter _next = judgmentParameters.next();
             boolean _isOutputParameter = XsemanticsUtils.this.isOutputParameter(_next);
-            boolean _operator_not = BooleanExtensions.operator_not(_isOutputParameter);
-            return Boolean.valueOf(_operator_not);
+            boolean _not = (!_isOutputParameter);
+            return Boolean.valueOf(_not);
           }
         };
       Iterable<RuleConclusionElement> _filter = IterableExtensions.<RuleConclusionElement>filter(_conclusionElements, _function);
       ArrayList<RuleConclusionElement> _newArrayList = Lists.<RuleConclusionElement>newArrayList(_filter);
-      List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_newArrayList, it.xsemantics.dsl.xsemantics.RuleParameter.class);
+      List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_newArrayList, RuleParameter.class);
       _xblockexpression = (_typeSelect);
     }
     return _xblockexpression;
@@ -305,15 +301,26 @@ public class XsemanticsUtils {
   public boolean isInputParam(final JvmFormalParameter jvmFormalParameter) {
     boolean _xblockexpression = false;
     {
-      RuleParameter _containerOfType = EcoreUtil2.<RuleParameter>getContainerOfType(jvmFormalParameter, it.xsemantics.dsl.xsemantics.RuleParameter.class);
-      final RuleParameter ruleParameter = _containerOfType;
+      final RuleParameter ruleParameter = EcoreUtil2.<RuleParameter>getContainerOfType(jvmFormalParameter, RuleParameter.class);
       boolean _xifexpression = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(ruleParameter, null);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(ruleParameter, null));
+      if (_notEquals) {
         boolean _isInputParam = this.isInputParam(ruleParameter);
         _xifexpression = _isInputParam;
       } else {
-        _xifexpression = false;
+        boolean _xblockexpression_1 = false;
+        {
+          final EObject sourceElement = this.associations.getPrimarySourceElement(jvmFormalParameter);
+          boolean _xifexpression_1 = false;
+          if ((sourceElement instanceof RuleParameter)) {
+            boolean _isInputParam_1 = this.isInputParam(((RuleParameter) sourceElement));
+            _xifexpression_1 = _isInputParam_1;
+          } else {
+            _xifexpression_1 = false;
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -325,8 +332,7 @@ public class XsemanticsUtils {
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(rule);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
-      Iterator<JudgmentParameter> _iterator = _judgmentParameters.iterator();
-      final Iterator<JudgmentParameter> judgmentParameters = _iterator;
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       RuleConclusion _conclusion = rule.getConclusion();
       EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
       final Function1<RuleConclusionElement,Boolean> _function = new Function1<RuleConclusionElement,Boolean>() {
@@ -338,7 +344,7 @@ public class XsemanticsUtils {
         };
       Iterable<RuleConclusionElement> _filter = IterableExtensions.<RuleConclusionElement>filter(_conclusionElements, _function);
       ArrayList<RuleConclusionElement> _newArrayList = Lists.<RuleConclusionElement>newArrayList(_filter);
-      List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_newArrayList, it.xsemantics.dsl.xsemantics.RuleParameter.class);
+      List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_newArrayList, RuleParameter.class);
       _xblockexpression = (_typeSelect);
     }
     return _xblockexpression;
@@ -347,15 +353,15 @@ public class XsemanticsUtils {
   public boolean hasOutputParams(final Rule rule) {
     List<RuleParameter> _outputParams = this.outputParams(rule);
     boolean _isEmpty = _outputParams.isEmpty();
-    boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-    return _operator_not;
+    boolean _not = (!_isEmpty);
+    return _not;
   }
   
   public boolean hasOutputParams(final RuleInvocation ruleInvocation) {
     List<OutputParameter> _outputParams = this.outputParams(ruleInvocation);
     boolean _isEmpty = _outputParams.isEmpty();
-    boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-    return _operator_not;
+    boolean _not = (!_isEmpty);
+    return _not;
   }
   
   public <T extends Object> void iterateIfThenElse(final Iterable<T> iterable, final Function1<? super T,? extends Boolean> predicate, final Procedure1<? super T> ifTrue, final Procedure1<? super T> ifFalse) {
@@ -375,13 +381,13 @@ public class XsemanticsUtils {
   public List<RuleParameter> ruleParams(final Rule rule) {
     RuleConclusion _conclusion = rule.getConclusion();
     EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
-    List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_conclusionElements, it.xsemantics.dsl.xsemantics.RuleParameter.class);
+    List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_conclusionElements, RuleParameter.class);
     return _typeSelect;
   }
   
   public List<ExpressionInConclusion> expressionsInConclusion(final Rule rule) {
     RuleConclusion _conclusion = rule.getConclusion();
-    List<ExpressionInConclusion> _allContentsOfType = EcoreUtil2.<ExpressionInConclusion>getAllContentsOfType(_conclusion, it.xsemantics.dsl.xsemantics.ExpressionInConclusion.class);
+    List<ExpressionInConclusion> _allContentsOfType = EcoreUtil2.<ExpressionInConclusion>getAllContentsOfType(_conclusion, ExpressionInConclusion.class);
     return _allContentsOfType;
   }
   
@@ -390,8 +396,7 @@ public class XsemanticsUtils {
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(ruleInvocation);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
-      Iterator<JudgmentParameter> _iterator = _judgmentParameters.iterator();
-      final Iterator<JudgmentParameter> judgmentParameters = _iterator;
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
       final Function1<RuleInvocationExpression,Boolean> _function = new Function1<RuleInvocationExpression,Boolean>() {
           public Boolean apply(final RuleInvocationExpression it) {
@@ -408,48 +413,42 @@ public class XsemanticsUtils {
   }
   
   public boolean validOutputArgExpression(final RuleInvocationExpression ruleInvocationExpression) {
-      XExpression _expression = ruleInvocationExpression.getExpression();
-      final XExpression xexp = _expression;
-      boolean matched = false;
-      if (!matched) {
-        if (xexp instanceof XFeatureCall) {
-          final XFeatureCall _xFeatureCall = (XFeatureCall)xexp;
-          matched=true;
-          {
-            JvmIdentifiableElement _feature = _xFeatureCall.getFeature();
-            final JvmIdentifiableElement feature = _feature;
-            if ((feature instanceof JvmFormalParameter)) {
-              boolean _isInputParam = this.isInputParam(((JvmFormalParameter) feature));
-              boolean _operator_not = BooleanExtensions.operator_not(_isInputParam);
-              return _operator_not;
-            }
-            return true;
-          }
+    final XExpression xexp = ruleInvocationExpression.getExpression();
+    boolean _matched = false;
+    if (!_matched) {
+      if (xexp instanceof XFeatureCall) {
+        final XFeatureCall _xFeatureCall = (XFeatureCall)xexp;
+        _matched=true;
+        final JvmIdentifiableElement feature = _xFeatureCall.getFeature();
+        if ((feature instanceof JvmFormalParameter)) {
+          boolean _isInputParam = this.isInputParam(((JvmFormalParameter) feature));
+          return (!_isInputParam);
         }
+        return true;
       }
-      if (!matched) {
-        if (xexp instanceof XVariableDeclaration) {
-          final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)xexp;
-          matched=true;
-          boolean _operator_and = false;
-          boolean _isWriteable = _xVariableDeclaration.isWriteable();
-          if (!_isWriteable) {
-            _operator_and = false;
-          } else {
-            XExpression _right = _xVariableDeclaration.getRight();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_right, null);
-            _operator_and = BooleanExtensions.operator_and(_isWriteable, _operator_equals);
-          }
-          return _operator_and;
+    }
+    if (!_matched) {
+      if (xexp instanceof XVariableDeclaration) {
+        final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)xexp;
+        _matched=true;
+        boolean _and = false;
+        boolean _isWriteable = _xVariableDeclaration.isWriteable();
+        if (!_isWriteable) {
+          _and = false;
+        } else {
+          XExpression _right = _xVariableDeclaration.getRight();
+          boolean _equals = Objects.equal(_right, null);
+          _and = (_isWriteable && _equals);
         }
+        return _and;
       }
-      return false;
+    }
+    return false;
   }
   
   public boolean validInputArgExpression(final RuleInvocationExpression ruleInvocationExpression) {
     XExpression _expression = ruleInvocationExpression.getExpression();
-    boolean _operator_not = BooleanExtensions.operator_not((_expression instanceof XVariableDeclaration));
-    return _operator_not;
+    return (!(_expression instanceof XVariableDeclaration));
   }
   
   public List<RuleInvocationExpression> inputArgsExpressions(final RuleInvocation ruleInvocation) {
@@ -457,15 +456,14 @@ public class XsemanticsUtils {
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(ruleInvocation);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
-      Iterator<JudgmentParameter> _iterator = _judgmentParameters.iterator();
-      final Iterator<JudgmentParameter> judgmentParameters = _iterator;
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
       final Function1<RuleInvocationExpression,Boolean> _function = new Function1<RuleInvocationExpression,Boolean>() {
           public Boolean apply(final RuleInvocationExpression it) {
             JudgmentParameter _next = judgmentParameters.next();
             boolean _isOutputParameter = XsemanticsUtils.this.isOutputParameter(_next);
-            boolean _operator_not = BooleanExtensions.operator_not(_isOutputParameter);
-            return Boolean.valueOf(_operator_not);
+            boolean _not = (!_isOutputParameter);
+            return Boolean.valueOf(_not);
           }
         };
       Iterable<RuleInvocationExpression> _filter = IterableExtensions.<RuleInvocationExpression>filter(_expressions, _function);

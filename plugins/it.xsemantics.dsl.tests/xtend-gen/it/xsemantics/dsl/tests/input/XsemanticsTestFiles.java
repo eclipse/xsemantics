@@ -196,30 +196,6 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
-  public CharSequence testJudgmentDescriptionsWithErrorSpecificationAndSource() {
-    StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("judgments {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("type |- EObject c : output EClass");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("error \"error!\"");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("source c");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence testJudgmentDescriptionsWithErrorSpecification() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testFileWithImports = this.testFileWithImports();
@@ -264,6 +240,26 @@ public class XsemanticsTestFiles {
     _builder.append("error \"this \" + c + \" made an error!\"");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleJudgmentDescriptionsWithErrorSpecification() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testJudgmentDescriptionsWithErrorSpecification();
+    _builder.append(_testJudgmentDescriptionsWithErrorSpecification, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -569,6 +565,20 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testAxiomWithExpressionInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject object : object.eClass");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testSimpleRule() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
@@ -680,6 +690,24 @@ public class XsemanticsTestFiles {
     _builder.append("G |- EClass eClass : EObject eClass");
     _builder.newLine();
     _builder.append("from {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testDuplicateParamsInJudgmentDescription() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EClass eClass : EClass eClass");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -884,6 +912,54 @@ public class XsemanticsTestFiles {
   }
   
   public CharSequence testRuleWithFeatureCalls() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// some expressions from Xbase");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' == new String() || \'bar\' == new String()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' == new String() && \'bar\' == new String()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' == new String() + \'bar\'.toFirstUpper");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' != new String() + \'bar\'.toFirstUpper");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val temp = new String() + \'bar\'.toFirstUpper");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\'.contains(\'f\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\'.concat(\'f\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("!(\'foo\'.contains(\'f\'))");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val EClass eC = EcoreFactory::eINSTANCE.createEClass()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleWithFeatureCallsForBinaryOps() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
     _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
@@ -1345,19 +1421,6 @@ public class XsemanticsTestFiles {
     _builder.append("from {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("// some expressions from Xbase");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\'foo\' == new String() + \'bar\'.toFirstUpper");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("val EClass eC = EcoreFactory::eINSTANCE.createEClass()");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("eC.name = \'MyEClass\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("eClass == eC");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -2635,6 +2698,309 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("throw new Exception(\'foo\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleWithBooleanExpressionsWithNoSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'a\' == new String() || \'bar\' == new String()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'a\' == new String() + \'bar\'.toFirstUpper");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleWithBooleanExpressionsWithNoSideEffectInFor() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (s : eClass.EAllStructuralFeatures) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.name != \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testForClosureWithExpressionWithNoSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type |- EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("rule TestForClosures");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("G |- EClass eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// boolean expressions inside closures without side effect");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eClass.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("it.name != \"foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testFailSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type |- EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("rule TestForClosures");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("G |- EClass eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fail");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("error stringRep(eClass)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testFailInsideClosureSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type |- EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("rule TestForClosures");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("G |- EClass eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eClass.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fail");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testFailWithErrorSpecificationInsideClosureSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type |- EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("rule TestForClosures");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("G |- EClass eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eClass.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fail");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("error \"\" + stringRep(eClass)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testBooleanExpressionsInIf() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (eClass.name != \'foo\') { true } else { false }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val s = \'foo\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testNoSideEffectButNoError() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.name + \'foo\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testErrorNoSideEffect() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.name + \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("print(eClass.name)");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
