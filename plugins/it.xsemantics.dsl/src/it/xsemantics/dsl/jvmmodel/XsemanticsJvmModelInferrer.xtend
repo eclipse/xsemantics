@@ -158,7 +158,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	}
    	
    	def genIssueField(Rule rule) {
-   		val issueField = rule.containingTypeSystem.toField(
+   		val issueField = rule.toField(
 				rule.ruleIssueString,
 				rule.newTypeRef(typeof(String))
 			) [

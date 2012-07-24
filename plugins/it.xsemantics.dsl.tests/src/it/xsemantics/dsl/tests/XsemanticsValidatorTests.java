@@ -374,10 +374,10 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testWrongThrowInPremises());
 		validate.assertAll(
 				AssertableDiagnostics.error(IssueCodes.THROW_NOT_ALLOWED,
-						"Throw statements are not allowed here"),
-				AssertableDiagnostics
-						.error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
-								"Unhandled exception"));
+						"Throw statements are not allowed here"));
+//				AssertableDiagnostics
+//						.error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
+//								"Unhandled exception"));
 	}
 
 	@Test

@@ -247,7 +247,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   public JvmField genIssueField(final Rule rule) {
     JvmField _xblockexpression = null;
     {
-      XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
       String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
       JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(rule, String.class);
       final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
@@ -257,7 +256,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             it.setFinal(true);
           }
         };
-      final JvmField issueField = this._jvmTypesBuilder.toField(_containingTypeSystem, _ruleIssueString, _newTypeRef, _function);
+      final JvmField issueField = this._jvmTypesBuilder.toField(rule, _ruleIssueString, _newTypeRef, _function);
       final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
           public void apply(final ITreeAppendable it) {
             StringConcatenation _builder = new StringConcatenation();
