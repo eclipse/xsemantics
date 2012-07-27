@@ -289,11 +289,10 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public JvmField genPolymorphicDispatcherField(final JudgmentDescription e) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(e);
     CharSequence _polymorphicDispatcherField = this._xsemanticsGeneratorExtensions.polymorphicDispatcherField(e);
     String _string = _polymorphicDispatcherField.toString();
     JvmTypeReference _polymorphicDispatcherType = this.polymorphicDispatcherType(e);
-    JvmField _field = this._jvmTypesBuilder.toField(_containingTypeSystem, _string, _polymorphicDispatcherType);
+    JvmField _field = this._jvmTypesBuilder.toField(e, _string, _polymorphicDispatcherType);
     return _field;
   }
   
@@ -372,7 +371,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     ArrayList<JvmOperation> _xblockexpression = null;
     {
       final ArrayList<JvmOperation> entryPointMethods = CollectionLiterals.<JvmOperation>newArrayList();
-      XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(judgmentDescription);
       CharSequence _entryPointMethodName = this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
       String _string = _entryPointMethodName.toString();
       JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
@@ -403,9 +401,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
-      JvmOperation _method = this._jvmTypesBuilder.toMethod(_containingTypeSystem, _string, _resultType, _function);
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(judgmentDescription, _string, _resultType, _function);
       entryPointMethods.add(_method);
-      XsemanticsSystem _containingTypeSystem_1 = this._xsemanticsUtils.containingTypeSystem(judgmentDescription);
       CharSequence _entryPointMethodName_1 = this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
       String _string_1 = _entryPointMethodName_1.toString();
       JvmTypeReference _resultType_1 = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
@@ -436,9 +433,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
-      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_1, _string_1, _resultType_1, _function_1);
+      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(judgmentDescription, _string_1, _resultType_1, _function_1);
       entryPointMethods.add(_method_1);
-      XsemanticsSystem _containingTypeSystem_2 = this._xsemanticsUtils.containingTypeSystem(judgmentDescription);
       CharSequence _entryPointMethodName_2 = this._xsemanticsGeneratorExtensions.entryPointMethodName(judgmentDescription);
       String _string_2 = _entryPointMethodName_2.toString();
       JvmTypeReference _resultType_2 = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
@@ -496,7 +492,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
         };
-      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(_containingTypeSystem_2, _string_2, _resultType_2, _function_2);
+      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(judgmentDescription, _string_2, _resultType_2, _function_2);
       entryPointMethods.add(_method_2);
       _xblockexpression = (entryPointMethods);
     }

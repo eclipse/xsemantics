@@ -179,7 +179,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	}
    	
 	def genPolymorphicDispatcherField(JudgmentDescription e) {
-		e.containingTypeSystem.toField(
+		e.toField(
 			e.polymorphicDispatcherField.toString,
 			e.polymorphicDispatcherType
 		)
@@ -216,7 +216,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	def genEntryPointMethods(JudgmentDescription judgmentDescription) {
    		val entryPointMethods = <JvmOperation>newArrayList()
    		// main entry point method
-   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   		entryPointMethods += judgmentDescription.toMethod(
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
@@ -231,7 +231,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		]
    		
    		// entry point method with environment parameter
-   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   		entryPointMethods += judgmentDescription.toMethod(
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
@@ -245,7 +245,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		]
    		
    		// entry point method with environment parameter and rule application trace
-   		entryPointMethods += judgmentDescription.containingTypeSystem.toMethod(
+   		entryPointMethods += judgmentDescription.toMethod(
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
