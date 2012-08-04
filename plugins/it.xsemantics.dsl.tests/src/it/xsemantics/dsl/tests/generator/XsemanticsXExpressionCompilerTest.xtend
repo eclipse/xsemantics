@@ -510,8 +510,8 @@ EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeat
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
     public void apply(final EStructuralFeature it) {
       EClass _eClass = obj.eClass();
-      EClass _clone = TypeSystem.this.<EClass>clone(_eClass);
-      eClass = _clone;
+      final EClass e = TypeSystem.this.<EClass>clone(_eClass);
+      InputOutput.<EClass>println(e);
     }
   };
 IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);'''

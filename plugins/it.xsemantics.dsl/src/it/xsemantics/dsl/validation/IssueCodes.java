@@ -34,8 +34,6 @@ public interface IssueCodes {
 	
 	String NOT_VALID_OUTPUT_ARG = PREFIX + "NotValidOutputArg";
 	
-	String NOT_VALID_OUTPUT_ARG_INSIDE_CLOSURE = PREFIX + "NotValidOutputArgInsideClosure";
-	
 	String NOT_VALID_INPUT_ARG = PREFIX + "NotValidInputArg";
 	
 	String TOO_MANY_OUTPUT_PARAMS = PREFIX + "TooManyOutputParams";

@@ -3,7 +3,6 @@
  */
 package it.xsemantics.dsl.scoping;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.filter;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.head;
 import it.xsemantics.dsl.util.XsemanticsUtils;
@@ -47,43 +46,13 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	protected IJvmModelAssociations associations;
 
 	@Override
-	protected IScope createLocalVarScopeForJvmOperation(JvmOperation context,
-			IScope parentScope) {
-		parentScope = super.createLocalVarScopeForJvmOperation(context,
-				parentScope);
-
-		// we need the original source Rule (associated to the method
-		// created by our model inferrer), in order to add to the scope
-		// the output parameters of the Rule (which will correspond to
-		// local variables in the generated code).
-		EObject sourceElement = associations.getPrimarySourceElement(context);
-		if (sourceElement instanceof Rule) {
-			Rule rule = (Rule) sourceElement;
-			List<IValidatedEObjectDescription> descriptions = newArrayList();
-			addRuleParamsInDescriptions(utils.outputParams(rule), descriptions);
-			return new JvmFeatureScope(parentScope, "operation "
-					+ context.getSimpleName(), descriptions);
-		}
-
-		return parentScope;
-	}
-
-	private void addRuleParamsInDescriptions(List<RuleParameter> params,
-			List<IValidatedEObjectDescription> descriptions) {
-		for (RuleParameter p : params) {
-			if (p.getParameter() != null && p.getParameter().getName() != null)
-				descriptions.add(createLocalVarDescription(p.getParameter()));
-		}
-	}
-
-	@Override
 	protected IScope createLocalVarScope(IScope parentScope,
 			LocalVariableScopeContext scopeContext) {
 		if (scopeContext == null || scopeContext.getContext() == null)
 			return parentScope;
 		EObject context = scopeContext.getContext();
 
-		// to a Rule the inferrer associates both field(s) and methods
+		// The inferrer associates to a Rule both field(s) and methods
 		// and we need the method (i.e., the JvmOperation) to actually
 		// build a correct scope
 		JvmOperation jvmOperation = getJvmOperationAssociatedToSourceElement(context);
@@ -120,8 +89,14 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 			int indexOfContextExpressionInBlock, boolean referredFromClosure,
 			IScope parentScope) {
 		// copied from XbaseScopeProvider with the case for RuleInvocation's
-		// variable declarations
+		// variable declarations, and Rule's output parameters
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
+		EObject container = block.eContainer();
+		if (container instanceof Rule) {
+			Rule rule = (Rule) container;
+			addRuleParamsInDescriptions(utils.outputParams(rule), descriptions,
+					referredFromClosure);
+		}
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
@@ -142,6 +117,20 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 			return parentScope;
 		return new JvmFeatureScope(parentScope, "XBlockExpression",
 				descriptions);
+	}
+
+	private void addRuleParamsInDescriptions(List<RuleParameter> params,
+			List<IValidatedEObjectDescription> descriptions,
+			boolean referredFromClosure) {
+		for (RuleParameter p : params) {
+			if (p.getParameter() != null && p.getParameter().getName() != null) {
+				IValidatedEObjectDescription desc = createLocalVarDescription(p
+						.getParameter());
+				if (referredFromClosure)
+					desc.setIssueCode(IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS);
+				descriptions.add(desc);
+			}
+		}
 	}
 
 	protected void addVariableDeclaration(

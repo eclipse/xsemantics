@@ -2407,7 +2407,10 @@ public class XsemanticsTestFiles {
     _builder.append("eClass.EAllStructuralFeatures.forEach [");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("eClass = clone(obj.eClass)");
+    _builder.append("val e = clone(obj.eClass)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(e)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("]");
@@ -2638,7 +2641,7 @@ public class XsemanticsTestFiles {
     _builder.append("rule EObjectEClass");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("G |- EObject obj : EClass eClass");
+    _builder.append("G |- EObject obj : EClass eC");
     _builder.newLine();
     _builder.append("from {");
     _builder.newLine();
@@ -2646,7 +2649,64 @@ public class XsemanticsTestFiles {
     _builder.append("obj.eClass.EAllStructuralFeatures.forEach [");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("G |- obj : eClass // cannot access output arg in closure");
+    _builder.append("G |- obj : eC // cannot access output arg in closure");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testAccessToVarInsideClosure() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject obj : EClass eClass");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var s = \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClass.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(s)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testAccessToOutputParamInsideClosure() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject obj : EClass eC");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eC.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(eC)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("]");

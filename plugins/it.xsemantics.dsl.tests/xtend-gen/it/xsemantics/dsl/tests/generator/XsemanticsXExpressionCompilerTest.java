@@ -1022,10 +1022,10 @@ public class XsemanticsXExpressionCompilerTest extends XsemanticsGeneratorBaseTe
     _builder.append("EClass _eClass = obj.eClass();");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("EClass _clone = TypeSystem.this.<EClass>clone(_eClass);");
+    _builder.append("final EClass e = TypeSystem.this.<EClass>clone(_eClass);");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("eClass = _clone;");
+    _builder.append("InputOutput.<EClass>println(e);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");

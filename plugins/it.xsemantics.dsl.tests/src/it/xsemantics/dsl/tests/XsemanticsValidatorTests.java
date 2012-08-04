@@ -351,9 +351,27 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testRuleInvocationWithOutputArgInsideClosure() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleInvocationWithOutputArgInsideClosure());
-		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NOT_VALID_OUTPUT_ARG_INSIDE_CLOSURE,
-				"Cannot use output parameter inside closure"));
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
+						"Cannot refer to a non-final variable eC from within a closure"));
+	}
+
+	@Test
+	public void testAccessToVarInsideClosure() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testAccessToVarInsideClosure());
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
+						"Cannot refer to a non-final variable s from within a closure"));
+	}
+
+	@Test
+	public void testAccessToOutputParamInsideClosure() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testAccessToOutputParamInsideClosure());
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
+						"Cannot refer to a non-final variable eC from within a closure"));
 	}
 
 	@Test
@@ -372,12 +390,12 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testWrongThrowInPremises() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongThrowInPremises());
-		validate.assertAll(
-				AssertableDiagnostics.error(IssueCodes.THROW_NOT_ALLOWED,
-						"Throw statements are not allowed here"));
-//				AssertableDiagnostics
-//						.error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
-//								"Unhandled exception"));
+		validate.assertAll(AssertableDiagnostics.error(
+				IssueCodes.THROW_NOT_ALLOWED,
+				"Throw statements are not allowed here"));
+		// AssertableDiagnostics
+		// .error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
+		// "Unhandled exception"));
 	}
 
 	@Test

@@ -23,14 +23,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -269,7 +267,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkRuleInvocation(RuleInvocation ruleInvocation) {
 		JudgmentDescription judgmentDescription = checkRuleInvocationConformantToJudgmentDescription(ruleInvocation);
-		boolean insideClosure = isInsideClosure(ruleInvocation);
 		if (judgmentDescription != null) {
 			List<JudgmentParameter> judgmentParameters = judgmentDescription
 					.getJudgmentParameters();
@@ -289,12 +286,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
 								IssueCodes.NOT_VALID_OUTPUT_ARG);
 					}
-					if (insideClosure) {
-						error("Cannot use output parameter inside closure",
-								ruleInvocationExpression,
-								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
-								IssueCodes.NOT_VALID_OUTPUT_ARG_INSIDE_CLOSURE);
-					}
 				} else {
 					if (!xsemanticsUtils
 							.validInputArgExpression(ruleInvocationExpression)) {
@@ -307,10 +298,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 			}
 		}
-	}
-
-	protected boolean isInsideClosure(RuleInvocation ruleInvocation) {
-		return EcoreUtil2.getContainerOfType(ruleInvocation, XClosure.class) != null;
 	}
 
 	@Check

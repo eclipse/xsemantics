@@ -1066,7 +1066,8 @@ class XsemanticsTestFiles {
 		// clone is in the base runtime system
 		// it should be visible through this
 		eClass.EAllStructuralFeatures.forEach [
-			eClass = clone(obj.eClass)
+			val e = clone(obj.eClass)
+			println(e)
 		]
 	}
 	'''
@@ -1172,10 +1173,35 @@ class XsemanticsTestFiles {
 	«testJudgmentDescriptionsEObjectEClass»
 	
 	rule EObjectEClass
-		G |- EObject obj : EClass eClass
+		G |- EObject obj : EClass eC
 	from {
 		obj.eClass.EAllStructuralFeatures.forEach [
-			G |- obj : eClass // cannot access output arg in closure
+			G |- obj : eC // cannot access output arg in closure
+		]
+	}
+	'''
+
+	def testAccessToVarInsideClosure() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EObjectEClass
+		G |- EObject obj : EClass eClass
+	from {
+		var s = 'foo'
+		eClass.EStructuralFeatures.forEach [
+			println(s)
+		]
+	}
+	'''
+
+	def testAccessToOutputParamInsideClosure() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EObjectEClass
+		G |- EObject obj : EClass eC
+	from {
+		eC.EStructuralFeatures.forEach [
+			println(eC)
 		]
 	}
 	'''
