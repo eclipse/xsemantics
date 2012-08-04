@@ -422,6 +422,16 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						"This expression is not allowed in this context"));
 	}
 
+	@Test
+	public void testVarDeclInRuleInvokationShadowsPreviousVariable()
+			throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testVarDeclInRuleInvokationShadowsPreviousVariable());
+		validate.assertAll(AssertableDiagnostics
+				.error(org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
+						"Duplicate variable name 's'"));
+	}
+
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));

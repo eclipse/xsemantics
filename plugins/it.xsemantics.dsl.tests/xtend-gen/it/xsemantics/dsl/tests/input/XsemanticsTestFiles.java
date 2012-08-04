@@ -2716,6 +2716,42 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testVarDeclInRuleInvokationShadowsPreviousVariable() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject obj : EClass eClass");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var s = \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(s)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- obj : var EClass s // s should shadow previous declaration");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("s.EStructuralFeatures.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(it)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testWrongReturnInPremises() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();

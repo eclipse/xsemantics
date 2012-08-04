@@ -88,22 +88,21 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	protected IScope createLocalVarScopeForBlock(XBlockExpression block,
 			int indexOfContextExpressionInBlock, boolean referredFromClosure,
 			IScope parentScope) {
-		// copied from XbaseScopeProvider with the case for RuleInvocation's
-		// variable declarations, and Rule's output parameters
+		parentScope = super.createLocalVarScopeForBlock(block,
+				indexOfContextExpressionInBlock, referredFromClosure,
+				parentScope);
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		EObject container = block.eContainer();
+		// add the output parameters as variable declarations
 		if (container instanceof Rule) {
 			Rule rule = (Rule) container;
 			addRuleParamsInDescriptions(utils.outputParams(rule), descriptions,
 					referredFromClosure);
 		}
+		// add the variable declarations inside rule invocations
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
-			if (expression instanceof XVariableDeclaration) {
-				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
-				addVariableDeclaration(descriptions, varDecl,
-						referredFromClosure);
-			} else if (expression instanceof RuleInvocation) {
+			if (expression instanceof RuleInvocation) {
 				RuleInvocation ruleInvocation = (RuleInvocation) expression;
 				List<XVariableDeclaration> variableDeclarations = utils
 						.getVariableDeclarations(ruleInvocation);

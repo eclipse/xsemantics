@@ -1205,7 +1205,22 @@ class XsemanticsTestFiles {
 		]
 	}
 	'''
+
+	def testVarDeclInRuleInvokationShadowsPreviousVariable() '''
+	«testJudgmentDescriptionsEObjectEClass»
 	
+	rule EObjectEClass
+		G |- EObject obj : EClass eClass
+	from {
+		var s = 'foo'
+		println(s)
+		G |- obj : var EClass s // s should shadow previous declaration
+		s.EStructuralFeatures.forEach [
+			println(it)
+		]
+	}
+	'''	
+
 	def testWrongReturnInPremises() '''
 	«testJudgmentDescriptionsEObjectEClass»
 	
