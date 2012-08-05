@@ -15,6 +15,7 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.Import;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.OrExpression;
@@ -1117,6 +1118,12 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case XsemanticsPackage.INJECTED:
+				if(context == grammarAccess.getInjectedRule()) {
+					sequence_Injected(context, (Injected) semanticObject); 
+					return; 
+				}
+				else break;
 			case XsemanticsPackage.INPUT_PARAMETER:
 				if(context == grammarAccess.getJudgmentParameterRule()) {
 					sequence_JudgmentParameter(context, (InputParameter) semanticObject); 
@@ -1356,6 +1363,25 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (type=JvmTypeReference name=ValidID)
+	 */
+	protected void sequence_Injected(EObject context, Injected semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.INJECTED__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.INJECTED__TYPE));
+			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.INJECTED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.INJECTED__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getInjectedAccess().getTypeJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getInjectedAccess().getNameValidIDParserRuleCall_2_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (
 	 *         name=ID 
 	 *         judgmentSymbol=JudgmentSymbol 
@@ -1525,7 +1551,14 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=QualifiedName imports+=Import* judgmentDescriptions+=JudgmentDescription* rules+=Rule* checkrules+=CheckRule*)
+	 *     (
+	 *         name=QualifiedName 
+	 *         imports+=Import* 
+	 *         injections+=Injected* 
+	 *         judgmentDescriptions+=JudgmentDescription* 
+	 *         rules+=Rule* 
+	 *         checkrules+=CheckRule*
+	 *     )
 	 */
 	protected void sequence_XsemanticsSystem(EObject context, XsemanticsSystem semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

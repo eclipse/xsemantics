@@ -33,9 +33,9 @@ import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.runner.RunWith
+import org.junit.BeforeClass
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.junit.BeforeClass
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -169,6 +169,11 @@ class XsemanticsBaseTest {
 				it.parameter.name == name
 			]
 	}
+
+	def expressionInConclusion(Rule rule, int index) {
+		rule.conclusion.conclusionElements.typeSelect(typeof(ExpressionInConclusion)).
+			get(index).ruleExpression
+	}
 	
 	def ruleExpression(RuleConclusionElement ruleConclusionElement) {
 		(ruleConclusionElement as ExpressionInConclusion)
@@ -216,7 +221,7 @@ class XsemanticsBaseTest {
 		ts.getRules.get(0).rulePremises.typeSelect(typeof(EnvironmentAccess)).get(0)
 	}
 	
-	def assertEqualsStrings(Object o1, Object o2) {
-		Assert::assertEquals("" + o1, "" + o2)
+	def assertEqualsStrings(Object expected, Object actual) {
+		Assert::assertEquals("" + expected, "" + actual)
 	}
 }

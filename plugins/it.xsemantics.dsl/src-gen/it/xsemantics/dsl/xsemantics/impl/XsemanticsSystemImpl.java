@@ -1,12 +1,10 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Import;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
@@ -37,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getCheckrules <em>Checkrules</em>}</li>
@@ -76,6 +75,16 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected EList<Import> imports;
+
+  /**
+   * The cached value of the '{@link #getInjections() <em>Injections</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getInjections()
+   * @generated
+   * @ordered
+   */
+  protected EList<Injected> injections;
 
   /**
    * The cached value of the '{@link #getJudgmentDescriptions() <em>Judgment Descriptions</em>}' containment reference list.
@@ -170,6 +179,20 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Injected> getInjections()
+  {
+    if (injections == null)
+    {
+      injections = new EObjectContainmentEList<Injected>(Injected.class, this, XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS);
+    }
+    return injections;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<JudgmentDescription> getJudgmentDescriptions()
   {
     if (judgmentDescriptions == null)
@@ -219,6 +242,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
+        return ((InternalEList<?>)getInjections()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return ((InternalEList<?>)getJudgmentDescriptions()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:
@@ -243,6 +268,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return getName();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return getImports();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
+        return getInjections();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return getJudgmentDescriptions();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:
@@ -270,6 +297,10 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         getImports().clear();
         getImports().addAll((Collection<? extends Import>)newValue);
+        return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
+        getInjections().clear();
+        getInjections().addAll((Collection<? extends Injected>)newValue);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         getJudgmentDescriptions().clear();
@@ -303,6 +334,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         getImports().clear();
         return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
+        getInjections().clear();
+        return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         getJudgmentDescriptions().clear();
         return;
@@ -330,6 +364,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return imports != null && !imports.isEmpty();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
+        return injections != null && !injections.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return judgmentDescriptions != null && !judgmentDescriptions.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:

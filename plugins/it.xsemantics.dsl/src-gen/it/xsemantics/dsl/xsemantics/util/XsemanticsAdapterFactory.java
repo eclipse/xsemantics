@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics.util;
 
@@ -88,6 +85,11 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseImport(Import object)
       {
         return createImportAdapter();
+      }
+      @Override
+      public Adapter caseInjected(Injected object)
+      {
+        return createInjectedAdapter();
       }
       @Override
       public Adapter caseJudgmentDescription(JudgmentDescription object)
@@ -262,6 +264,21 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createImportAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.Injected <em>Injected</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.dsl.xsemantics.Injected
+   * @generated
+   */
+  public Adapter createInjectedAdapter()
   {
     return null;
   }

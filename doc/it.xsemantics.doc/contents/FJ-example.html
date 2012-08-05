@@ -33,23 +33,32 @@ Here&apos;s an example of an FJ program:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;A&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{&nbsp;}<br/>
-<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{&nbsp;}<br/>
+<span class="keyword">class</span>&nbsp;A&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{&nbsp;}
 <br/>
-<span class="keyword">class</span>&nbsp;Pair&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;fst;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;snd;<br/>
+<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{&nbsp;}
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Pair&nbsp;setfst(Object&nbsp;newfst)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Pair(newfst,&nbsp;<span class="keyword">this</span>.snd);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<span class="keyword">class</span>&nbsp;Pair&nbsp;<span class="keyword">extends</span>&nbsp;Object&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Pair&nbsp;setsnd(Object&nbsp;newscd)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">this</span>.fst,&nbsp;newscd);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;Object&nbsp;fst;
 <br/>
-<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">new</span>&nbsp;A(),&nbsp;<span class="keyword">new</span>&nbsp;B()).setfst(<span class="keyword">new</span>&nbsp;A()).fst<br/>
+&nbsp;&nbsp;Object&nbsp;snd;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Pair&nbsp;setfst(Object&nbsp;newfst)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Pair(newfst,&nbsp;<span class="keyword">this</span>.snd);
+<br/>
+&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Pair&nbsp;setsnd(Object&nbsp;newscd)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">this</span>.fst,&nbsp;newscd);
+<br/>
+&nbsp;&nbsp;}
+<br/>
+}
+<br/>
+<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">new</span>&nbsp;A(),&nbsp;<span class="keyword">new</span>&nbsp;B()).setfst(<span class="keyword">new</span>&nbsp;A()).fst
+<br/>
 </p>
 </div>
 </div>
@@ -65,8 +74,10 @@ Thus, if we have the following classes
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;A&nbsp;{&nbsp;<span class="keyword">int</span>&nbsp;i;&nbsp;<span class="keyword">boolean</span>&nbsp;b;&nbsp;}<br/>
-<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;A&nbsp;{&nbsp;String&nbsp;s;&nbsp;}<br/>
+<span class="keyword">class</span>&nbsp;A&nbsp;{&nbsp;<span class="keyword">int</span>&nbsp;i;&nbsp;<span class="keyword">boolean</span>&nbsp;b;&nbsp;}
+<br/>
+<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;A&nbsp;{&nbsp;String&nbsp;s;&nbsp;}
+<br/>
 </p>
 </div>
 </div>
@@ -88,69 +99,94 @@ written using Xsemantics instead of manually written Java code.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.fj.FJ&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.fj.FJ&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals
 <br/>
-<span class="keyword">generate</span>&nbsp;fj&nbsp;<span class="string">"http://xsemantics.sf.net/example/fj/FJ"</span><br/>
+<span class="keyword">generate</span>&nbsp;fj&nbsp;<span class="string">"http://xsemantics.sf.net/example/fj/FJ"</span>
 <br/>
-Program&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(classes&nbsp;+=&nbsp;Class)*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(main&nbsp;=&nbsp;Expression)?&nbsp;;<br/>
+Program&nbsp;:
 <br/>
-Type:&nbsp;BasicType&nbsp;|&nbsp;ClassType;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(classes&nbsp;+=&nbsp;Class)*
 <br/>
-BasicType&nbsp;:&nbsp;basic=(<span class="string">&apos;int&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;boolean&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;String&apos;</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(main&nbsp;=&nbsp;Expression)?&nbsp;;
 <br/>
-ClassType&nbsp;:&nbsp;classref=[Class];<br/>
+Type:&nbsp;BasicType&nbsp;|&nbsp;ClassType;
 <br/>
-Class:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;class&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superclass=[Class])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(members&nbsp;+=&nbsp;Member)*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>&nbsp;;<br/>
+BasicType&nbsp;:&nbsp;basic=(<span class="string">&apos;int&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;boolean&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;String&apos;</span>);
 <br/>
-Member:&nbsp;Field&nbsp;|&nbsp;Method;<br/>
+ClassType&nbsp;:&nbsp;classref=[Class];
 <br/>
-Field:&nbsp;type=Type&nbsp;name=ID&nbsp;<span class="string">&apos;;&apos;</span>&nbsp;;<br/>
+Class:
 <br/>
-Method:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type=Type&nbsp;name=ID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;(params+=Parameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=Parameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=MethodBody<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>&nbsp;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;class&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superclass=[Class])?&nbsp;<span class="string">&apos;{&apos;</span>
 <br/>
-Parameter:&nbsp;type=Type&nbsp;name=ID&nbsp;;<br/>
+(members&nbsp;+=&nbsp;Member)*
 <br/>
-TypedElement:&nbsp;Member&nbsp;|&nbsp;Parameter;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>&nbsp;;
 <br/>
-MethodBody:&nbsp;<span class="string">&apos;return&apos;</span>&nbsp;expression=Expression&nbsp;<span class="string">&apos;;&apos;</span>&nbsp;;<br/>
+Member:&nbsp;Field&nbsp;|&nbsp;Method;
 <br/>
-Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;TerminalExpression&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;=&gt;(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Selection.receiver=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;.&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message=[Member]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;(args+=Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;args+=Expression)*)?&nbsp;<span class="string">&apos;)&apos;</span>)?<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;)*&nbsp;;<br/>
+Field:&nbsp;type=Type&nbsp;name=ID&nbsp;<span class="string">&apos;;&apos;</span>&nbsp;;
 <br/>
-TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;This&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;ParamRef&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;New&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;=&gt;Cast&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;Constant&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;Paren&nbsp;;<br/>
+Method:
 <br/>
-This:&nbsp;variable=<span class="string">&apos;this&apos;</span>;<br/>
-ParamRef:&nbsp;parameter=[Parameter];<br/>
-New:&nbsp;<span class="string">&apos;new&apos;</span>&nbsp;type=ClassType&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;(args+=Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;args+=Expression)*)?&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
-Cast:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;type=ClassType&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;expression=TerminalExpression;<br/>
-Paren&nbsp;<span class="keyword">returns</span>&nbsp;Expression:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type=Type&nbsp;name=ID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;(params+=Parameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=Parameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<span class="string">&apos;{&apos;</span>
 <br/>
-Constant:&nbsp;IntConstant&nbsp;|&nbsp;BoolConstant&nbsp;|&nbsp;StringConstant;<br/>
+body=MethodBody
 <br/>
-StringConstant:&nbsp;constant=STRING;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>&nbsp;;
 <br/>
-IntConstant:&nbsp;constant=INT;<br/>
+Parameter:&nbsp;type=Type&nbsp;name=ID&nbsp;;
 <br/>
-BoolConstant:&nbsp;constant&nbsp;=&nbsp;(<span class="string">&apos;true&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;false&apos;</span>);<br/>
+TypedElement:&nbsp;Member&nbsp;|&nbsp;Parameter;
+<br/>
+MethodBody:&nbsp;<span class="string">&apos;return&apos;</span>&nbsp;expression=Expression&nbsp;<span class="string">&apos;;&apos;</span>&nbsp;;
+<br/>
+Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;TerminalExpression&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt;(
+<br/>
+{Selection.receiver=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;.&apos;</span>&nbsp;
+<br/>
+message=[Member]
+<br/>
+(<span class="string">&apos;(&apos;</span>&nbsp;(args+=Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;args+=Expression)*)?&nbsp;<span class="string">&apos;)&apos;</span>)?
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;)*&nbsp;;
+<br/>
+TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;This&nbsp;|
+<br/>
+&nbsp;ParamRef&nbsp;|
+<br/>
+&nbsp;New&nbsp;|
+<br/>
+&nbsp;=&gt;Cast&nbsp;|
+<br/>
+&nbsp;Constant&nbsp;|
+<br/>
+&nbsp;Paren&nbsp;;
+<br/>
+This:&nbsp;variable=<span class="string">&apos;this&apos;</span>;
+<br/>
+ParamRef:&nbsp;parameter=[Parameter];
+<br/>
+New:&nbsp;<span class="string">&apos;new&apos;</span>&nbsp;type=ClassType&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;(args+=Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;args+=Expression)*)?&nbsp;<span class="string">&apos;)&apos;</span>;
+<br/>
+Cast:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;type=ClassType&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;expression=TerminalExpression;
+<br/>
+Paren&nbsp;<span class="keyword">returns</span>&nbsp;Expression:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>;&nbsp;
+<br/>
+Constant:&nbsp;IntConstant&nbsp;|&nbsp;BoolConstant&nbsp;|&nbsp;StringConstant;
+<br/>
+StringConstant:&nbsp;constant=STRING;
+<br/>
+IntConstant:&nbsp;constant=INT;
+<br/>
+BoolConstant:&nbsp;constant&nbsp;=&nbsp;(<span class="string">&apos;true&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;false&apos;</span>);
+<br/>
 </p>
 </div>
 </div>
@@ -164,31 +200,54 @@ We start by defining the name (we skip imports) and the judgments
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.fj.typing.FjTypeSystem<br/>
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.fj.typing.FjTypeSystem
 <br/>
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;classtype&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;ClassType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(expression)&nbsp;+&nbsp;<span class="string">"&nbsp;has&nbsp;not&nbsp;a&nbsp;class&nbsp;type"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;Type&nbsp;left&nbsp;&lt;:&nbsp;Type&nbsp;right<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;assignable&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;&lt;|&nbsp;Type&nbsp;right<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(expression)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;assignable&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;equalstype&nbsp;|-&nbsp;Type&nbsp;left&nbsp;~~&nbsp;Type&nbsp;right<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;overrides&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;current.name&nbsp;+&nbsp;<span class="string">"&nbsp;does&nbsp;not&nbsp;override&nbsp;the&nbsp;superclass&nbsp;method"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;current<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;subtypesequence&nbsp;|-&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;owner&nbsp;~&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;extends&nbsp;TypedElement&gt;&nbsp;elements<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;owner<br/>
-}<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)
+<br/>
+<span class="keyword">source</span>&nbsp;expression
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;classtype&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;ClassType
+<br/>
+<span class="keyword">error</span>&nbsp;stringRep(expression)&nbsp;+&nbsp;<span class="string">"&nbsp;has&nbsp;not&nbsp;a&nbsp;class&nbsp;type"</span>
+<br/>
+<span class="keyword">source</span>&nbsp;expression
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;Type&nbsp;left&nbsp;&lt;:&nbsp;Type&nbsp;right
+<br/>
+<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;assignable&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;&lt;|&nbsp;Type&nbsp;right
+<br/>
+<span class="keyword">error</span>&nbsp;stringRep(expression)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;assignable&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)
+<br/>
+<span class="keyword">source</span>&nbsp;expression
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;equalstype&nbsp;|-&nbsp;Type&nbsp;left&nbsp;~~&nbsp;Type&nbsp;right
+<br/>
+<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;overrides&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous
+<br/>
+<span class="keyword">error</span>&nbsp;current.name&nbsp;+&nbsp;<span class="string">"&nbsp;does&nbsp;not&nbsp;override&nbsp;the&nbsp;superclass&nbsp;method"</span>
+<br/>
+<span class="keyword">source</span>&nbsp;current
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;subtypesequence&nbsp;|-&nbsp;
+<br/>
+Expression&nbsp;owner&nbsp;~&gt;&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;extends&nbsp;TypedElement&gt;&nbsp;elements
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span>
+<br/>
+<span class="keyword">source</span>&nbsp;owner
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -202,28 +261,44 @@ Let&apos;s start with simple expressions
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;TParamRef&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ParamRef&nbsp;paramref&nbsp;:&nbsp;paramref.parameter.type<br/>
+<span class="keyword">axiom</span>&nbsp;TParamRef&nbsp;
 <br/>
-<span class="comment">//&nbsp;you&nbsp;can&nbsp;manually&nbsp;create&nbsp;the&nbsp;BasicType&nbsp;with&nbsp;EMF&nbsp;FjFactory...<br/>
-</span><span class="keyword">axiom</span>&nbsp;TStringConstant<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringConstant&nbsp;s&nbsp;:&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;FjFactory::eINSTANCE.createBasicType();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.basic&nbsp;=&nbsp;<span class="string">&apos;String&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ParamRef&nbsp;paramref&nbsp;:&nbsp;paramref.parameter.type
 <br/>
-<span class="comment">//&nbsp;...or&nbsp;use&nbsp;static&nbsp;utility&nbsp;methods...<br/>
-</span><span class="keyword">axiom</span>&nbsp;TIntConstant<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;IntConstant&nbsp;i&nbsp;:&nbsp;FjTypeUtils::createIntType<br/>
+<span class="comment">//&nbsp;you&nbsp;can&nbsp;manually&nbsp;create&nbsp;the&nbsp;BasicType&nbsp;with&nbsp;EMF&nbsp;FjFactory...
 <br/>
-<span class="comment">//&nbsp;...or&nbsp;closures<br/>
-</span><span class="keyword">axiom</span>&nbsp;TBoolConstant<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BoolConstant&nbsp;b&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span>.basic=<span class="string">&apos;boolean&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;].apply(FjFactory::eINSTANCE.createBasicType())<br/>
+</span><span class="keyword">axiom</span>&nbsp;TStringConstant
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringConstant&nbsp;s&nbsp;:&nbsp;{&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;FjFactory::eINSTANCE.createBasicType();
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.basic&nbsp;=&nbsp;<span class="string">&apos;String&apos;</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result
+<br/>
+}
+<br/>
+<span class="comment">//&nbsp;...or&nbsp;use&nbsp;static&nbsp;utility&nbsp;methods...
+<br/>
+</span><span class="keyword">axiom</span>&nbsp;TIntConstant
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;IntConstant&nbsp;i&nbsp;:&nbsp;FjTypeUtils::createIntType
+<br/>
+<span class="comment">//&nbsp;...or&nbsp;closures
+<br/>
+</span><span class="keyword">axiom</span>&nbsp;TBoolConstant
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BoolConstant&nbsp;b&nbsp;:&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;
+<br/>
+<span class="keyword">it</span>.basic=<span class="string">&apos;boolean&apos;</span>
+<br/>
+<span class="keyword">it</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;].apply(FjFactory::eINSTANCE.createBasicType())
+<br/>
 </p>
 </div>
 </div>
@@ -245,19 +320,32 @@ class for each basic type.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;TNew<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;New&nbsp;newExp&nbsp;:&nbsp;newExp.type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newExp.type.classref,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Field)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;want&nbsp;the&nbsp;superclasses&apos;&nbsp;fields&nbsp;first<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;Collections::reverse(fields)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;TNew
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;New&nbsp;newExp&nbsp;:&nbsp;newExp.type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;getAll(
+<br/>
+newExp.type.classref,
+<br/>
+FjPackage::eINSTANCE.class_Members,
+<br/>
+FjPackage::eINSTANCE.class_Superclass,
+<br/>
+<span class="keyword">typeof</span>(Field)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;want&nbsp;the&nbsp;superclasses&apos;&nbsp;fields&nbsp;first
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;Collections::reverse(fields)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -285,15 +373,23 @@ the types of the arguments are subtypes of the types of these fields
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;TCast<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Cast&nbsp;cast&nbsp;:&nbsp;cast.type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;cast.expression&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;cast.type&nbsp;&lt;:&nbsp;expType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expType&nbsp;&lt;:&nbsp;cast.type<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;TCast
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Cast&nbsp;cast&nbsp;:&nbsp;cast.type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;cast.expression&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;cast.type&nbsp;&lt;:&nbsp;expType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expType&nbsp;&lt;:&nbsp;cast.type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -306,18 +402,30 @@ and has the type of the type we cast to.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;TSelection<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Selection&nbsp;selection&nbsp;:&nbsp;selection.message.type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;selection.receiver&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;ClassType&nbsp;receiverType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;check&nbsp;message&nbsp;if&nbsp;it&apos;s&nbsp;a&nbsp;method&nbsp;call<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;message&nbsp;=&nbsp;selection.message<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;(message)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;selection&nbsp;~&gt;&nbsp;selection.args&nbsp;&lt;&lt;&nbsp;message.params<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;TSelection
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Selection&nbsp;selection&nbsp;:&nbsp;selection.message.type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;selection.receiver&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;ClassType&nbsp;receiverType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;check&nbsp;message&nbsp;if&nbsp;it&apos;s&nbsp;a&nbsp;method&nbsp;call
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;message&nbsp;=&nbsp;selection.message
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;(message)&nbsp;{
+<br/>
+Method:&nbsp;{&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;selection&nbsp;~&gt;&nbsp;selection.args&nbsp;&lt;&lt;&nbsp;message.params
+<br/>
+}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -340,8 +448,10 @@ check that the arguments types are subtypes of the method parameters
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;TThis<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;This&nbsp;_this&nbsp;:&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;this&apos;</span>,&nbsp;ClassType)<br/>
+<span class="keyword">axiom</span>&nbsp;TThis
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;This&nbsp;_this&nbsp;:&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;this&apos;</span>,&nbsp;ClassType)
+<br/>
 </p>
 </div>
 </div>
@@ -369,44 +479,70 @@ know which members are visible in that selection expression:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FJScopeProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeScopeProvider&nbsp;{<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FJScopeProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeScopeProvider&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;FjTypeSystem&nbsp;typeSystem;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;FjTypeSystem&nbsp;typeSystem;
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(reference&nbsp;==&nbsp;FjPackage.Literals.SELECTION__MESSAGE)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(context&nbsp;<span class="keyword">instanceof</span>&nbsp;Selection)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selection&nbsp;selection&nbsp;=&nbsp;(Selection)&nbsp;context;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Scopes<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.scopeFor(FjAuxiliaryFunctions<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getMembers(getExpressionClass(selection<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getReceiver())));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;IScope.NULLSCOPE;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Override
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getScope(context,&nbsp;reference);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference)&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Class&nbsp;getExpressionClass(Expression&nbsp;receiver)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassType&nbsp;classType&nbsp;=&nbsp;typeSystem.classtype(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environmentForExpression(receiver),&nbsp;receiver).getValue();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;(classType&nbsp;!=&nbsp;null&nbsp;?&nbsp;classType.getClassref()&nbsp;:&nbsp;null);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<span class="keyword">if</span>&nbsp;(reference&nbsp;==&nbsp;FjPackage.Literals.SELECTION__MESSAGE)&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;RuleEnvironment&nbsp;environmentForExpression(Expression&nbsp;expression)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;containingClass&nbsp;=&nbsp;EcoreUtil2.getContainerOfType(expression,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class.<span class="keyword">class</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(containingClass&nbsp;!=&nbsp;null)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassType&nbsp;thisType&nbsp;=&nbsp;FjTypeUtils.createClassType(containingClass);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;RuleEnvironment(typeSystem.environmentEntry(<span class="string">"this"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisType));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(context&nbsp;<span class="keyword">instanceof</span>&nbsp;Selection)&nbsp;{
 <br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selection&nbsp;selection&nbsp;=&nbsp;(Selection)&nbsp;context;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Scopes
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.scopeFor(FjAuxiliaryFunctions
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getMembers(getExpressionClass(selection
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getReceiver())));
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;IScope.NULLSCOPE;
+<br/>
+}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getScope(context,&nbsp;reference);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Class&nbsp;getExpressionClass(Expression&nbsp;receiver)&nbsp;{
+<br/>
+ClassType&nbsp;classType&nbsp;=&nbsp;typeSystem.classtype(
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environmentForExpression(receiver),&nbsp;receiver).getValue();
+<br/>
+<span class="keyword">return</span>&nbsp;(classType&nbsp;!=&nbsp;null&nbsp;?&nbsp;classType.getClassref()&nbsp;:&nbsp;null);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;RuleEnvironment&nbsp;environmentForExpression(Expression&nbsp;expression)&nbsp;{
+<br/>
+Class&nbsp;containingClass&nbsp;=&nbsp;EcoreUtil2.getContainerOfType(expression,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class.<span class="keyword">class</span>);
+<br/>
+<span class="keyword">if</span>&nbsp;(containingClass&nbsp;!=&nbsp;null)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ClassType&nbsp;thisType&nbsp;=&nbsp;FjTypeUtils.createClassType(containingClass);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;RuleEnvironment(typeSystem.environmentEntry(<span class="string">"this"</span>,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisType));
+<br/>
+}
+<br/>
+<span class="keyword">return</span>&nbsp;null;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -430,11 +566,16 @@ the <span class="inlinecode">type</span> judgment, but using as the output argum
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;TExpressionClassType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;ClassType&nbsp;classType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;classType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;TExpressionClassType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;ClassType&nbsp;classType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;classType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -454,36 +595,62 @@ rules for this judgment:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;GeneralSubtyping<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;left&nbsp;&lt;:&nbsp;Type&nbsp;right<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"types&nbsp;"</span>&nbsp;+&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;and&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;are&nbsp;not&nbsp;comparable"</span><br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;get&nbsp;here&nbsp;we&apos;re&nbsp;trying&nbsp;to&nbsp;mix<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;BasicType&nbsp;with&nbsp;a&nbsp;ClassType,&nbsp;thus,&nbsp;we&nbsp;fail<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;GeneralSubtyping
 <br/>
-<span class="keyword">rule</span>&nbsp;BasicSubtyping<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;BasicType&nbsp;left&nbsp;&lt;:&nbsp;BasicType&nbsp;right<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;left.basic.equals(right.basic)<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;left&nbsp;&lt;:&nbsp;Type&nbsp;right
 <br/>
-<span class="keyword">rule</span>&nbsp;ClassSubtyping<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;ClassType&nbsp;left&nbsp;&lt;:&nbsp;ClassType&nbsp;right<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;right.classref.name&nbsp;==&nbsp;<span class="string">"Object"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getAll(left.classref,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.contains(right.classref)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"types&nbsp;"</span>&nbsp;+&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;and&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;are&nbsp;not&nbsp;comparable"</span>
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;get&nbsp;here&nbsp;we&apos;re&nbsp;trying&nbsp;to&nbsp;mix
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;BasicType&nbsp;with&nbsp;a&nbsp;ClassType,&nbsp;thus,&nbsp;we&nbsp;fail
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;BasicSubtyping
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;BasicType&nbsp;left&nbsp;&lt;:&nbsp;BasicType&nbsp;right
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;left.basic.equals(right.basic)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;ClassSubtyping
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;ClassType&nbsp;left&nbsp;&lt;:&nbsp;ClassType&nbsp;right
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;right.classref.name&nbsp;==&nbsp;<span class="string">"Object"</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>&nbsp;{
+<br/>
+getAll(left.classref,&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class))
+<br/>
+.contains(right.classref)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -523,13 +690,20 @@ of the expression and then checking the subtyping:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;ExpressionAssignableToType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;&lt;|&nbsp;Type&nbsp;right<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expressionType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;expressionType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expressionType&nbsp;&lt;:&nbsp;right<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;ExpressionAssignableToType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;&lt;|&nbsp;Type&nbsp;right
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expressionType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;expressionType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expressionType&nbsp;&lt;:&nbsp;right
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -544,14 +718,22 @@ have to check whether arguments are subtypes of parameters (in the
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;subtypesequence&nbsp;|-&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;owner&nbsp;~&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;extends&nbsp;TypedElement&gt;&nbsp;elements<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;owner<br/>
-}<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;subtypesequence&nbsp;|-&nbsp;
+<br/>
+Expression&nbsp;owner&nbsp;~&gt;&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;extends&nbsp;TypedElement&gt;&nbsp;elements
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span>
+<br/>
+<span class="keyword">source</span>&nbsp;owner
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -563,22 +745,37 @@ whose (single rule) is implemented as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;SubtypeSequence&nbsp;<span class="keyword">derives</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Expression&nbsp;owner&nbsp;~&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;TypedElement&gt;&nbsp;typedElements<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;expressions.size&nbsp;==&nbsp;typedElements.size<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"expected&nbsp;"</span>&nbsp;+&nbsp;typedElements.size&nbsp;+&nbsp;<span class="string">"&nbsp;arguments,&nbsp;but&nbsp;got&nbsp;"</span>&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expressions.size<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;owner&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;typedElementsIterator&nbsp;=&nbsp;typedElements.iterator<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(exp&nbsp;:&nbsp;expressions)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;exp&nbsp;&lt;|&nbsp;typedElementsIterator.next.type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;SubtypeSequence&nbsp;<span class="keyword">derives</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Expression&nbsp;owner&nbsp;~&gt;&nbsp;
+<br/>
+List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;TypedElement&gt;&nbsp;typedElements
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;expressions.size&nbsp;==&nbsp;typedElements.size
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"expected&nbsp;"</span>&nbsp;+&nbsp;typedElements.size&nbsp;+&nbsp;<span class="string">"&nbsp;arguments,&nbsp;but&nbsp;got&nbsp;"</span>&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;expressions.size
+<br/>
+<span class="keyword">source</span>&nbsp;owner&nbsp;
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;typedElementsIterator&nbsp;=&nbsp;typedElements.iterator
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(exp&nbsp;:&nbsp;expressions)&nbsp;{
+<br/>
+G&nbsp;|-&nbsp;exp&nbsp;&lt;|&nbsp;typedElementsIterator.next.type
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -606,27 +803,44 @@ validation (<a href="FJ-example.html#FJValidation" title="Go to &quot;FJ Validat
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;GeneralEquals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;left&nbsp;~~&nbsp;Type&nbsp;right<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"types&nbsp;"</span>&nbsp;+&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;and&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;are&nbsp;not&nbsp;comparable"</span><br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;get&nbsp;here&nbsp;we&apos;re&nbsp;trying&nbsp;to&nbsp;mix<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;BasicType&nbsp;with&nbsp;a&nbsp;ClassType,&nbsp;thus,&nbsp;we&nbsp;fail<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;GeneralEquals
 <br/>
-<span class="keyword">rule</span>&nbsp;BasicEquals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;BasicType&nbsp;left&nbsp;~~&nbsp;BasicType&nbsp;right<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;left.basic.equals(right.basic)<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;left&nbsp;~~&nbsp;Type&nbsp;right
 <br/>
-<span class="keyword">rule</span>&nbsp;ClassEquals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;ClassType&nbsp;left&nbsp;~~&nbsp;ClassType&nbsp;right<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref<br/>
-}<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"types&nbsp;"</span>&nbsp;+&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;and&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;are&nbsp;not&nbsp;comparable"</span>
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;get&nbsp;here&nbsp;we&apos;re&nbsp;trying&nbsp;to&nbsp;mix
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;BasicType&nbsp;with&nbsp;a&nbsp;ClassType,&nbsp;thus,&nbsp;we&nbsp;fail
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;BasicEquals
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;BasicType&nbsp;left&nbsp;~~&nbsp;BasicType&nbsp;right
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;left.basic.equals(right.basic)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;ClassEquals
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;ClassType&nbsp;left&nbsp;~~&nbsp;ClassType&nbsp;right
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -640,14 +854,22 @@ We define some checkrules (<a href="XsemanticsSyntax.html#CheckRules" title="Go 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckMethodBody&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;method<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;typeForThis&nbsp;=&nbsp;FjTypeUtils::createClassType(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil2::getContainerOfType(method,&nbsp;<span class="keyword">typeof</span>(Class))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;this&apos;</span>&nbsp;&lt;-&nbsp;typeForThis&nbsp;|-&nbsp;method.body.expression&nbsp;&lt;|&nbsp;method.type<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckMethodBody&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;method
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;typeForThis&nbsp;=&nbsp;FjTypeUtils::createClassType(
+<br/>
+EcoreUtil2::getContainerOfType(method,&nbsp;<span class="keyword">typeof</span>(Class))
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;this&apos;</span>&nbsp;&lt;-&nbsp;typeForThis&nbsp;|-&nbsp;method.body.expression&nbsp;&lt;|&nbsp;method.type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -666,28 +888,49 @@ containing the method).  This is similar to what we do for FJ scoping
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckField&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;field<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;field.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedFields&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Field)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;make&nbsp;sure&nbsp;no&nbsp;duplicate&nbsp;fields&nbsp;in&nbsp;the&nbsp;hierarchy<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(inheritedField&nbsp;:&nbsp;inheritedFields)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(field.name&nbsp;==&nbsp;inheritedField.name)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"field&nbsp;already&nbsp;declared&nbsp;in&nbsp;superclass&nbsp;"</span>&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringRep(inheritedField.eContainer)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckField&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;field
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;field.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{
+<br/>
+<span class="keyword">var</span>&nbsp;inheritedFields&nbsp;=&nbsp;getAll(
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Field)
+<br/>
+)
+<br/>
+<span class="comment">//&nbsp;make&nbsp;sure&nbsp;no&nbsp;duplicate&nbsp;fields&nbsp;in&nbsp;the&nbsp;hierarchy
+<br/>
+</span><span class="keyword">for</span>&nbsp;(inheritedField&nbsp;:&nbsp;inheritedFields)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(field.name&nbsp;==&nbsp;inheritedField.name)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"field&nbsp;already&nbsp;declared&nbsp;in&nbsp;superclass&nbsp;"</span>&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringRep(inheritedField.eContainer)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -711,27 +954,48 @@ as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MethodOverride<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;current.name&nbsp;!=&nbsp;previous.name<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;current.type&nbsp;~~&nbsp;previous.type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>&nbsp;<span class="keyword">error</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"cannot&nbsp;change&nbsp;return&nbsp;type&nbsp;of&nbsp;inherited&nbsp;method:&nbsp;"</span>&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringRep(previous.type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;current<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;FjPackage::eINSTANCE.typedElement_Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.params.size&nbsp;==&nbsp;previous.params.size<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;previousParamsIt&nbsp;=&nbsp;previous.params.iterator<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(param&nbsp;:&nbsp;current.params)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;param.type&nbsp;~~&nbsp;previousParamsIt.next.type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;MethodOverride
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;current.name&nbsp;!=&nbsp;previous.name
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+G&nbsp;|-&nbsp;current.type&nbsp;~~&nbsp;previous.type
+<br/>
+<span class="keyword">or</span>
+<br/>
+<span class="keyword">fail</span>&nbsp;<span class="keyword">error</span>&nbsp;
+<br/>
+<span class="string">"cannot&nbsp;change&nbsp;return&nbsp;type&nbsp;of&nbsp;inherited&nbsp;method:&nbsp;"</span>&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;stringRep(previous.type)
+<br/>
+<span class="keyword">source</span>&nbsp;current
+<br/>
+<span class="keyword">feature</span>&nbsp;FjPackage::eINSTANCE.typedElement_Type
+<br/>
+
+<br/>
+current.params.size&nbsp;==&nbsp;previous.params.size
+<br/>
+<span class="keyword">val</span>&nbsp;previousParamsIt&nbsp;=&nbsp;previous.params.iterator
+<br/>
+<span class="keyword">for</span>&nbsp;(param&nbsp;:&nbsp;current.params)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;param.type&nbsp;~~&nbsp;previousParamsIt.next.type
+<br/>
+}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -749,27 +1013,47 @@ Thus, the checkrule for <span class="inlinecode">Method</span> is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckMethodOverride&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;method<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;method.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedMethods&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Method)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;check&nbsp;override&nbsp;predicate<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedMethods.forEach&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedMethod&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjAuxiliaryFunctions::selectMethods(clazz).forEach&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;<span class="keyword">it</span>&nbsp;~~&nbsp;inheritedMethod<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckMethodOverride&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;method
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;method.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{
+<br/>
+<span class="keyword">var</span>&nbsp;inheritedMethods&nbsp;=&nbsp;getAll(
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Method)
+<br/>
+)
+<br/>
+<span class="comment">//&nbsp;check&nbsp;override&nbsp;predicate
+<br/>
+</span>inheritedMethods.forEach&nbsp;[
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;inheritedMethod&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjAuxiliaryFunctions::selectMethods(clazz).forEach&nbsp;[
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;<span class="keyword">it</span>&nbsp;~~&nbsp;inheritedMethod
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]
+<br/>
+]
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -787,22 +1071,38 @@ not cyclic:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckClassHierachyNotCyclic&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;cl<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(cl.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cl,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).contains(cl)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"Cyclic&nbsp;hierarchy&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;cl.name<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;cl<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckClassHierachyNotCyclic&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;cl
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(cl.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{
+<br/>
+!getAll(
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cl,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class)
+<br/>
+).contains(cl)
+<br/>
+<span class="keyword">or</span>
+<br/>
+<span class="keyword">fail</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"Cyclic&nbsp;hierarchy&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;cl.name
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;cl
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -820,13 +1120,20 @@ of an FJ program, in the empty environment:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckMain&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;program.main&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;<span class="comment">//&nbsp;nothing&nbsp;to&nbsp;check<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;program.main&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;mainType<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckMain&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;program.main&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;<span class="comment">//&nbsp;nothing&nbsp;to&nbsp;check
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;program.main&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;mainType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>

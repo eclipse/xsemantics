@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics;
 
@@ -42,6 +39,15 @@ public interface XsemanticsFactory extends EFactory
    * @generated
    */
   Import createImport();
+
+  /**
+   * Returns a new object of class '<em>Injected</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Injected</em>'.
+   * @generated
+   */
+  Injected createInjected();
 
   /**
    * Returns a new object of class '<em>Judgment Description</em>'.

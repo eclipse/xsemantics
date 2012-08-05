@@ -2,8 +2,7 @@
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
-import it.xsemantics.dsl.xsemantics.Rule;
-import it.xsemantics.dsl.xsemantics.RuleConclusion;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,22 +14,34 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Rule</b></em>'.
+ * An implementation of the model object '<em><b>Injected</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link it.xsemantics.dsl.xsemantics.impl.RuleImpl#getName <em>Name</em>}</li>
- *   <li>{@link it.xsemantics.dsl.xsemantics.impl.RuleImpl#getConclusion <em>Conclusion</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.InjectedImpl#getType <em>Type</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.InjectedImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
+public class InjectedImpl extends MinimalEObjectImpl.Container implements Injected
 {
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected JvmTypeReference type;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -52,21 +63,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getConclusion() <em>Conclusion</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConclusion()
-   * @generated
-   * @ordered
-   */
-  protected RuleConclusion conclusion;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RuleImpl()
+  protected InjectedImpl()
   {
     super();
   }
@@ -79,7 +80,55 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   @Override
   protected EClass eStaticClass()
   {
-    return XsemanticsPackage.Literals.RULE;
+    return XsemanticsPackage.Literals.INJECTED;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public JvmTypeReference getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
+  {
+    JvmTypeReference oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XsemanticsPackage.INJECTED__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(JvmTypeReference newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.INJECTED__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.INJECTED__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.INJECTED__TYPE, newType, newType));
   }
 
   /**
@@ -102,55 +151,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.RULE__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RuleConclusion getConclusion()
-  {
-    return conclusion;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConclusion(RuleConclusion newConclusion, NotificationChain msgs)
-  {
-    RuleConclusion oldConclusion = conclusion;
-    conclusion = newConclusion;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XsemanticsPackage.RULE__CONCLUSION, oldConclusion, newConclusion);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setConclusion(RuleConclusion newConclusion)
-  {
-    if (newConclusion != conclusion)
-    {
-      NotificationChain msgs = null;
-      if (conclusion != null)
-        msgs = ((InternalEObject)conclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.RULE__CONCLUSION, null, msgs);
-      if (newConclusion != null)
-        msgs = ((InternalEObject)newConclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.RULE__CONCLUSION, null, msgs);
-      msgs = basicSetConclusion(newConclusion, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.RULE__CONCLUSION, newConclusion, newConclusion));
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.INJECTED__NAME, oldName, name));
   }
 
   /**
@@ -163,8 +164,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case XsemanticsPackage.RULE__CONCLUSION:
-        return basicSetConclusion(null, msgs);
+      case XsemanticsPackage.INJECTED__TYPE:
+        return basicSetType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -179,10 +180,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case XsemanticsPackage.RULE__NAME:
+      case XsemanticsPackage.INJECTED__TYPE:
+        return getType();
+      case XsemanticsPackage.INJECTED__NAME:
         return getName();
-      case XsemanticsPackage.RULE__CONCLUSION:
-        return getConclusion();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,11 +198,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case XsemanticsPackage.RULE__NAME:
-        setName((String)newValue);
+      case XsemanticsPackage.INJECTED__TYPE:
+        setType((JvmTypeReference)newValue);
         return;
-      case XsemanticsPackage.RULE__CONCLUSION:
-        setConclusion((RuleConclusion)newValue);
+      case XsemanticsPackage.INJECTED__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -217,11 +218,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case XsemanticsPackage.RULE__NAME:
-        setName(NAME_EDEFAULT);
+      case XsemanticsPackage.INJECTED__TYPE:
+        setType((JvmTypeReference)null);
         return;
-      case XsemanticsPackage.RULE__CONCLUSION:
-        setConclusion((RuleConclusion)null);
+      case XsemanticsPackage.INJECTED__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -237,10 +238,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case XsemanticsPackage.RULE__NAME:
+      case XsemanticsPackage.INJECTED__TYPE:
+        return type != null;
+      case XsemanticsPackage.INJECTED__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case XsemanticsPackage.RULE__CONCLUSION:
-        return conclusion != null;
     }
     return super.eIsSet(featureID);
   }
@@ -262,4 +263,4 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     return result.toString();
   }
 
-} //RuleImpl
+} //InjectedImpl

@@ -1,7 +1,23 @@
 chapter:Syntax[Xsemantics Syntax]
 
-After giving your system a name, as seen in the previous example, the
-first thing to do is to declare the e[judgments] of your system;
+After giving your system a name, as seen in the previous example, 
+you can specify code[Xsemantics][import]s like in Java (without the terminating code[;]),
+possibly with a terminating code[*] in order to import all the classes of that
+Java package.
+
+You can then specify code[Xsemantics][inject] fields which can then be used
+in all the rules of your system.
+
+code[Xsemantics][
+inject MyClass foo
+inject MyOtherUtilityClass bar
+]
+
+Remember that these will correspond to fields in the generated Java class
+(ref:CodeGeneration[]),
+that will be instantiated through Guice injection.
+
+Then, you have to declare the e[judgments] of your system;
 a judgment consists of
 
 ul[

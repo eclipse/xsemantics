@@ -1368,4 +1368,58 @@ class XsemanticsTestFiles {
 		print(eClass.name)
 	}
 	'''
+
+	def testSystemWithInjections() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	/* a utility field */
+	inject List<String> strings
+	inject String myString
+	/* another utility field */
+	inject List<EClass> eClasses
+	inject List<EClass> classes
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	'''
+
+	def testAccessToInjectedFields() '''
+	«testSystemWithInjections»
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		println(o)
+		println(myString)
+		strings.add(myString)
+		eClasses.add(o.eClass)
+	}
+	'''
+
+	def testAccessToInjectedFieldsInExpressionInConclusion() '''
+	«testSystemWithInjections»
+	
+	axiom EObjectEClass
+		G |- EObject o : classes.get(0)
+	'''
+
+	def testAccessToThisInExpressionInConclusion() '''
+	«testSystemWithInjections»
+	
+	axiom EObjectEClass
+		G |- EObject o : 
+		{ 
+			println(this);
+			clone(o).eClass
+		}
+	'''
+
+	def testTwoExpressionsInConclusion() '''
+	«testJudgmentDescriptionsWith2OutputParams»
+	
+	axiom TwoExpressionsInConclusion
+		G |- EClass cl : cl : cl.EAllStructuralFeatures.head
+	'''
 }

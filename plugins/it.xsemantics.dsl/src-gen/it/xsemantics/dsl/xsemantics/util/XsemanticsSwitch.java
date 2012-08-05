@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics.util;
 
@@ -88,6 +85,13 @@ public class XsemanticsSwitch<T> extends Switch<T>
       {
         Import import_ = (Import)theEObject;
         T result = caseImport(import_);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XsemanticsPackage.INJECTED:
+      {
+        Injected injected = (Injected)theEObject;
+        T result = caseInjected(injected);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -305,6 +309,22 @@ public class XsemanticsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseImport(Import object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Injected</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Injected</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInjected(Injected object)
   {
     return null;
   }

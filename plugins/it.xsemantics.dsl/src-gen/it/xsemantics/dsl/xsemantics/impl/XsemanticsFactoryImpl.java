@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
@@ -69,6 +66,7 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM: return createXsemanticsSystem();
       case XsemanticsPackage.IMPORT: return createImport();
+      case XsemanticsPackage.INJECTED: return createInjected();
       case XsemanticsPackage.JUDGMENT_DESCRIPTION: return createJudgmentDescription();
       case XsemanticsPackage.JUDGMENT_PARAMETER: return createJudgmentParameter();
       case XsemanticsPackage.RULE: return createRule();
@@ -118,6 +116,17 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Injected createInjected()
+  {
+    InjectedImpl injected = new InjectedImpl();
+    return injected;
   }
 
   /**

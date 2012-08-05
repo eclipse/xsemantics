@@ -554,4 +554,48 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testSystemWithInjections() {
+    try {
+      CharSequence _testSystemWithInjections = this.testFiles.testSystemWithInjections();
+      XsemanticsSystem _parse = this.parser.parse(_testSystemWithInjections);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAccessToInjectedFields() {
+    try {
+      CharSequence _testAccessToInjectedFields = this.testFiles.testAccessToInjectedFields();
+      XsemanticsSystem _parse = this.parser.parse(_testAccessToInjectedFields);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAccessToInjectedFieldsInExpressionInConclusion() {
+    try {
+      CharSequence _testAccessToInjectedFieldsInExpressionInConclusion = this.testFiles.testAccessToInjectedFieldsInExpressionInConclusion();
+      XsemanticsSystem _parse = this.parser.parse(_testAccessToInjectedFieldsInExpressionInConclusion);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAccessToThisInExpressionInConclusion() {
+    try {
+      CharSequence _testAccessToThisInExpressionInConclusion = this.testFiles.testAccessToThisInExpressionInConclusion();
+      XsemanticsSystem _parse = this.parser.parse(_testAccessToThisInExpressionInConclusion);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -341,8 +341,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
+    return new Result<EObject>(EClassEObject_exp_1(G, _trace_, _createEObject));
+  }
+  
+  private EObject EClassEObject_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass _createEObject) throws RuleFailedException {
     EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();
-    return new Result<EObject>(_createEObject_1);
+    return _createEObject_1;
   }
   
   protected Result2<EClass,EObject> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
@@ -371,8 +375,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
-    EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();
-    return new Result2<EClass,EObject>(_createEObject, _createEObject_1);
+    return new Result2<EClass,EObject>(_createEObject, EClassEObject2_exp_1(G, _trace_, s));
+  }
+  
+  private EObject EClassEObject2_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
+    EObject _createEObject = EcoreFactory.eINSTANCE.createEObject();
+    return _createEObject;
   }
   
   protected Result<List<EStructuralFeature>> featuresImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eclass) throws RuleFailedException {

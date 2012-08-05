@@ -340,4 +340,24 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testBooleanExpressionsInIf() {
 		parser.parse(testFiles.testBooleanExpressionsInIf).assertNoErrors
 	}
+
+	@Test
+	def void testSystemWithInjections() {
+		parser.parse(testFiles.testSystemWithInjections).assertNoErrors
+	}
+
+	@Test
+	def void testAccessToInjectedFields() {
+		parser.parse(testFiles.testAccessToInjectedFields).assertNoErrors
+	}
+
+	@Test
+	def void testAccessToInjectedFieldsInExpressionInConclusion() {
+		parser.parse(testFiles.testAccessToInjectedFieldsInExpressionInConclusion).assertNoErrors
+	}
+
+	@Test
+	def void testAccessToThisInExpressionInConclusion() {
+		parser.parse(testFiles.testAccessToThisInExpressionInConclusion).assertNoErrors
+	}
 }

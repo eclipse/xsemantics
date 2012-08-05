@@ -59,7 +59,8 @@ one single parameter) and a body, such as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x.&nbsp;x<br/>
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;x
+<br/>
 </p>
 </div>
 </div>
@@ -82,8 +83,10 @@ the parameter are correct:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">string</span>&nbsp;.&nbsp;x<br/>
-<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">int</span>&nbsp;.&nbsp;x<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">string</span>&nbsp;.&nbsp;x
+<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">int</span>&nbsp;.&nbsp;x
+<br/>
 </p>
 </div>
 </div>
@@ -103,7 +106,8 @@ Indeed, we can be more general and say that the parameter
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;a&nbsp;.&nbsp;x<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;a&nbsp;.&nbsp;x
+<br/>
 </p>
 </div>
 </div>
@@ -122,7 +126,8 @@ Then, the function
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;-x<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;-x
+<br/>
 </p>
 </div>
 </div>
@@ -139,7 +144,8 @@ Other functions can be partially generic, like the following one
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;10<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;10
+<br/>
 </p>
 </div>
 </div>
@@ -159,7 +165,8 @@ examples we saw so far; for instance, consider this lambda abstraction
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;<span class="keyword">lambda</span>&nbsp;y.&nbsp;x&nbsp;y<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;<span class="keyword">lambda</span>&nbsp;y.&nbsp;x&nbsp;y
+<br/>
 </p>
 </div>
 </div>
@@ -220,7 +227,8 @@ simple type systems we&apos;re used to), e.g.,
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;x&nbsp;x<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;x&nbsp;x
+<br/>
 </p>
 </div>
 </div>
@@ -240,49 +248,68 @@ This is the grammar for our simple lambda calculus in Xtext:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.lambda.Lambda&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br/>
-<span class="keyword">generate</span>&nbsp;lambda&nbsp;<span class="string">"http://xsemantics.sf.net/example/lambda/Lambda"</span><br/>
+<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.lambda.Lambda&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals
 <br/>
-Program:&nbsp;term=Term;<br/>
+<span class="keyword">generate</span>&nbsp;lambda&nbsp;<span class="string">"http://xsemantics.sf.net/example/lambda/Lambda"</span>
 <br/>
-<span class="comment">//&nbsp;left&nbsp;associative<br/>
-</span>Term:&nbsp;TerminalTerm&nbsp;(=&gt;({Application.fun=<span class="keyword">current</span>}&nbsp;arg=TerminalTerm)*)&nbsp;;<br/>
+Program:&nbsp;term=Term;
 <br/>
-TerminalTerm&nbsp;<span class="keyword">returns</span>&nbsp;Term:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Term&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Constant&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Arithmetics&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Abstraction<br/>
-;<br/>
+<span class="comment">//&nbsp;left&nbsp;associative
 <br/>
-Constant:&nbsp;StringConstant&nbsp;|&nbsp;IntConstant&nbsp;;<br/>
-StringConstant:&nbsp;string=STRING;<br/>
-IntConstant:&nbsp;int=INT;<br/>
+</span>Term:&nbsp;TerminalTerm&nbsp;(=&gt;({Application.fun=<span class="keyword">current</span>}&nbsp;arg=TerminalTerm)*)&nbsp;;
 <br/>
-Arithmetics:&nbsp;<span class="string">&apos;-&apos;</span>&nbsp;term=Term;<br/>
+TerminalTerm&nbsp;<span class="keyword">returns</span>&nbsp;Term:
 <br/>
-Variable:&nbsp;ref=[Parameter];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Term&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|
 <br/>
-Abstraction:&nbsp;<span class="string">&apos;lambda&apos;</span>&nbsp;param=Parameter&nbsp;<span class="string">&apos;.&apos;</span>&nbsp;term=Term&nbsp;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Constant&nbsp;|
 <br/>
-Parameter:&nbsp;name=ID&nbsp;(<span class="string">&apos;:&apos;</span>&nbsp;type=Type)?&nbsp;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Arithmetics&nbsp;|
 <br/>
-<span class="comment">//&nbsp;right&nbsp;associative<br/>
-</span>Type:&nbsp;TerminalType&nbsp;({ArrowType.left&nbsp;=&nbsp;<span class="keyword">current</span>}&nbsp;<span class="string">&apos;-&gt;&apos;</span>&nbsp;right=Type)?&nbsp;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;|
 <br/>
-TerminalType&nbsp;<span class="keyword">returns</span>&nbsp;Type:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Type&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;BasicType&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeVariable<br/>
-;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Abstraction
 <br/>
-BasicType:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span><br/>
-;<br/>
+;
 <br/>
-TypeVariable:&nbsp;typevarName=ID;<br/>
+Constant:&nbsp;StringConstant&nbsp;|&nbsp;IntConstant&nbsp;;
+<br/>
+StringConstant:&nbsp;string=STRING;
+<br/>
+IntConstant:&nbsp;int=INT;
+<br/>
+Arithmetics:&nbsp;<span class="string">&apos;-&apos;</span>&nbsp;term=Term;
+<br/>
+Variable:&nbsp;ref=[Parameter];
+<br/>
+Abstraction:&nbsp;<span class="string">&apos;lambda&apos;</span>&nbsp;param=Parameter&nbsp;<span class="string">&apos;.&apos;</span>&nbsp;term=Term&nbsp;;
+<br/>
+Parameter:&nbsp;name=ID&nbsp;(<span class="string">&apos;:&apos;</span>&nbsp;type=Type)?&nbsp;;
+<br/>
+<span class="comment">//&nbsp;right&nbsp;associative
+<br/>
+</span>Type:&nbsp;TerminalType&nbsp;({ArrowType.left&nbsp;=&nbsp;<span class="keyword">current</span>}&nbsp;<span class="string">&apos;-&gt;&apos;</span>&nbsp;right=Type)?&nbsp;;
+<br/>
+TerminalType&nbsp;<span class="keyword">returns</span>&nbsp;Type:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Type&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;BasicType&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeVariable
+<br/>
+;
+<br/>
+BasicType:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span>
+<br/>
+;
+<br/>
+TypeVariable:&nbsp;typevarName=ID;
+<br/>
 </p>
 </div>
 </div>
@@ -298,22 +325,32 @@ We start with the judgments:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem<br/>
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 <br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.lambda.*<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.lambda.*
 <br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.util.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.lambda.xsemantics.*
 <br/>
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Term&nbsp;term&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;paramtype&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;typesubstitution&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;original&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;notoccur&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(type)&nbsp;+&nbsp;<span class="string">"&nbsp;occurs&nbsp;in&nbsp;"</span>&nbsp;+&nbsp;stringRep(other)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-}<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.util.*
+<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Term&nbsp;term&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;paramtype&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;typesubstitution&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;original&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notoccur&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other
+<br/>
+<span class="keyword">error</span>&nbsp;stringRep(type)&nbsp;+&nbsp;<span class="string">"&nbsp;occurs&nbsp;in&nbsp;"</span>&nbsp;+&nbsp;stringRep(other)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -327,28 +364,38 @@ and unification
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;it.xsemantics.example.lambda.xsemantics;<br/>
+<span class="keyword">package</span>&nbsp;it.xsemantics.example.lambda.xsemantics;
 <br/>
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;TypeSubstitutions&nbsp;{<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;TypeSubstitutions&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Map&lt;String,&nbsp;Type&gt;&nbsp;substitutions&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap&lt;String,&nbsp;Type&gt;();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Map&lt;String,&nbsp;Type&gt;&nbsp;substitutions&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap&lt;String,&nbsp;Type&gt;();
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;reset()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions.clear();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;reset()&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;add(String&nbsp;typeVariableName,&nbsp;Type&nbsp;mapped)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions.put(typeVariableName,&nbsp;mapped);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+substitutions.clear();
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Type&nbsp;mapped(String&nbsp;typeVariableName)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;substitutions.get(typeVariableName);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Set&lt;Entry&lt;String,&nbsp;Type&gt;&gt;&nbsp;getSubstitutions()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;substitutions.entrySet();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;add(String&nbsp;typeVariableName,&nbsp;Type&nbsp;mapped)&nbsp;{
+<br/>
+substitutions.put(typeVariableName,&nbsp;mapped);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Type&nbsp;mapped(String&nbsp;typeVariableName)&nbsp;{
+<br/>
+<span class="keyword">return</span>&nbsp;substitutions.get(typeVariableName);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Set&lt;Entry&lt;String,&nbsp;Type&gt;&gt;&nbsp;getSubstitutions()&nbsp;{
+<br/>
+<span class="keyword">return</span>&nbsp;substitutions.entrySet();
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -361,21 +408,32 @@ in another type term (judgment <em>notoccur</em>, which takes two input paramete
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;NotOccurBase<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other<br/>
+<span class="keyword">axiom</span>&nbsp;NotOccurBase
 <br/>
-<span class="keyword">rule</span>&nbsp;NotOccurVar<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;TypeVariable&nbsp;other<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;variable.typevarName&nbsp;!=&nbsp;other.typevarName<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Type&nbsp;type&nbsp;:&gt;&nbsp;Type&nbsp;other
 <br/>
-<span class="keyword">rule</span>&nbsp;NotOccurVarInArrow<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;ArrowType&nbsp;arrowType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.left<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.right<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;NotOccurVar
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;TypeVariable&nbsp;other
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;variable.typevarName&nbsp;!=&nbsp;other.typevarName
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;NotOccurVarInArrow
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeVariable&nbsp;variable&nbsp;:&gt;&nbsp;ArrowType&nbsp;arrowType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.left
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.right
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -396,35 +454,60 @@ substitutions.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;SubstituteType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;type&nbsp;~&gt;&nbsp;Type&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;type<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;SubstituteType
 <br/>
-<span class="keyword">rule</span>&nbsp;SubstituteTypeVariable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;variable&nbsp;~&gt;&nbsp;Type&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;mapped&nbsp;=&nbsp;substitutions.mapped(variable.typevarName)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapped&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(mapped)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;result&nbsp;~&gt;&nbsp;result&nbsp;<span class="comment">//&nbsp;recursive<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;variable<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Type&nbsp;type&nbsp;~&gt;&nbsp;Type&nbsp;result
 <br/>
-<span class="keyword">rule</span>&nbsp;SubstituteArrowType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrowType&nbsp;~&gt;&nbsp;ArrowType&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;subResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(arrowType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~&gt;&nbsp;subResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result.left&nbsp;=&nbsp;subResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;subResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result.right&nbsp;=&nbsp;subResult<br/>
-}<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;type
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;SubstituteTypeVariable
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;variable&nbsp;~&gt;&nbsp;Type&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+<span class="keyword">var</span>&nbsp;mapped&nbsp;=&nbsp;substitutions.mapped(variable.typevarName)
+<br/>
+mapped&nbsp;!=&nbsp;<span class="keyword">null</span>
+<br/>
+result&nbsp;=&nbsp;EcoreUtil::copy(mapped)
+<br/>
+G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;result&nbsp;~&gt;&nbsp;result&nbsp;<span class="comment">//&nbsp;recursive
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+result&nbsp;=&nbsp;variable
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;SubstituteArrowType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrowType&nbsp;~&gt;&nbsp;ArrowType&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;subResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(arrowType)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~&gt;&nbsp;subResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.left&nbsp;=&nbsp;subResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;subResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.right&nbsp;=&nbsp;subResult
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -467,8 +550,10 @@ The judgment for unification
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
+unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
 </p>
 </div>
 </div>
@@ -489,36 +574,58 @@ simpler ones:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;UnifyType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;&nbsp;Type&nbsp;t1&nbsp;~~&nbsp;Type&nbsp;t2&nbsp;~&gt;&nbsp;t1&nbsp;~~&nbsp;t2<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;in&nbsp;general&nbsp;it&nbsp;fails<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;UnifyType
 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;&nbsp;Type&nbsp;t1&nbsp;~~&nbsp;Type&nbsp;t2&nbsp;~&gt;&nbsp;t1&nbsp;~~&nbsp;t2
 <br/>
-<span class="keyword">axiom</span>&nbsp;UnifyStringType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;StringType&nbsp;t1&nbsp;~~&nbsp;StringType&nbsp;t2&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)<br/>
+<span class="keyword">from</span>&nbsp;{
 <br/>
-<span class="keyword">axiom</span>&nbsp;UnifyIntType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;IntType&nbsp;t1&nbsp;~~&nbsp;IntType&nbsp;t2&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;in&nbsp;general&nbsp;it&nbsp;fails
 <br/>
-<span class="keyword">rule</span>&nbsp;UnifyTypeVariableBasicType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;typeVar&nbsp;~~&nbsp;BasicType&nbsp;basicType&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;EcoreUtil::copy(basicType)&nbsp;~~&nbsp;BasicType&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(basicType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(typeVar.typevarName,&nbsp;result)<br/>
-}<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>
 <br/>
-<span class="keyword">rule</span>&nbsp;UnifyBasicTypeTypeVariable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;BasicType&nbsp;basicType&nbsp;~~&nbsp;TypeVariable&nbsp;typeVar<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;BasicType&nbsp;resultForVar&nbsp;~~&nbsp;BasicType&nbsp;resultForBasic<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;typeVar&nbsp;~~&nbsp;basicType&nbsp;~&gt;&nbsp;resultForVar&nbsp;~~&nbsp;resultForBasic<br/>
-}<br/>
+}
+<br/>
+
+<br/>
+<span class="keyword">axiom</span>&nbsp;UnifyStringType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;StringType&nbsp;t1&nbsp;~~&nbsp;StringType&nbsp;t2&nbsp;
+<br/>
+~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)
+<br/>
+<span class="keyword">axiom</span>&nbsp;UnifyIntType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;IntType&nbsp;t1&nbsp;~~&nbsp;IntType&nbsp;t2&nbsp;
+<br/>
+~&gt;&nbsp;EcoreUtil::copy(t1)&nbsp;~~&nbsp;EcoreUtil::copy(t2)
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariableBasicType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;typeVar&nbsp;~~&nbsp;BasicType&nbsp;basicType&nbsp;
+<br/>
+~&gt;&nbsp;EcoreUtil::copy(basicType)&nbsp;~~&nbsp;BasicType&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;EcoreUtil::copy(basicType)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(typeVar.typevarName,&nbsp;result)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyBasicTypeTypeVariable
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;BasicType&nbsp;basicType&nbsp;~~&nbsp;TypeVariable&nbsp;typeVar
+<br/>
+~&gt;&nbsp;BasicType&nbsp;resultForVar&nbsp;~~&nbsp;BasicType&nbsp;resultForBasic
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;typeVar&nbsp;~~&nbsp;basicType&nbsp;~&gt;&nbsp;resultForVar&nbsp;~~&nbsp;resultForBasic
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -533,16 +640,26 @@ symmetric case.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;UnifyTypeVariables<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;TypeVariable&nbsp;newLeft&nbsp;~~&nbsp;TypeVariable&nbsp;newRight<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;both&nbsp;variables&nbsp;with&nbsp;a&nbsp;fresh&nbsp;new&nbsp;variable<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newRight&nbsp;=&nbsp;EcoreUtil::copy(newLeft)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalRight.typevarName,&nbsp;newRight)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariables
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;
+<br/>
+~&gt;&nbsp;TypeVariable&nbsp;newLeft&nbsp;~~&nbsp;TypeVariable&nbsp;newRight
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;both&nbsp;variables&nbsp;with&nbsp;a&nbsp;fresh&nbsp;new&nbsp;variable
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newRight&nbsp;=&nbsp;EcoreUtil::copy(newLeft)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalRight.typevarName,&nbsp;newRight)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -556,37 +673,64 @@ and we map both variables to that new fresh variable.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;UnifyTypeVariableArrowType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;ArrowType&nbsp;originalRight&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;EcoreUtil::copy(originalRight)<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;originalLeft&nbsp;:&gt;&nbsp;originalRight&nbsp;<span class="comment">//&nbsp;occur&nbsp;check<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;EcoreUtil::copy(originalRight)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;UnifyTypeVariableArrowType
 <br/>
-<span class="keyword">rule</span>&nbsp;UnifyArrowTypeTypeVariable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;ArrowType&nbsp;newRight<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;originalRight&nbsp;~~&nbsp;originalLeft&nbsp;~&gt;&nbsp;newRight&nbsp;~~&nbsp;newLeft<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;TypeVariable&nbsp;originalLeft&nbsp;~~&nbsp;ArrowType&nbsp;originalRight&nbsp;
 <br/>
-<span class="keyword">rule</span>&nbsp;UnifyArrowTypes<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrow1&nbsp;~~&nbsp;ArrowType&nbsp;arrow2&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;ArrowType&nbsp;newArrow1&nbsp;~~&nbsp;ArrowType&nbsp;newArrow2<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow1&nbsp;=&nbsp;EcoreUtil::copy(arrow1)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow2&nbsp;=&nbsp;EcoreUtil::copy(arrow2)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.left&nbsp;~~&nbsp;arrow2.left&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.left&nbsp;=&nbsp;temp1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.left&nbsp;=&nbsp;temp2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.right&nbsp;~~&nbsp;arrow2.right&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.right&nbsp;=&nbsp;temp1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.right&nbsp;=&nbsp;temp2<br/>
-}<br/>
+~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;EcoreUtil::copy(originalRight)
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;originalLeft&nbsp;:&gt;&nbsp;originalRight&nbsp;<span class="comment">//&nbsp;occur&nbsp;check
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;newLeft&nbsp;=&nbsp;EcoreUtil::copy(originalRight)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyArrowTypeTypeVariable
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;originalLeft&nbsp;~~&nbsp;TypeVariable&nbsp;originalRight&nbsp;
+<br/>
+~&gt;&nbsp;ArrowType&nbsp;newLeft&nbsp;~~&nbsp;ArrowType&nbsp;newRight
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;originalRight&nbsp;~~&nbsp;originalLeft&nbsp;~&gt;&nbsp;newRight&nbsp;~~&nbsp;newLeft
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;UnifyArrowTypes
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;ArrowType&nbsp;arrow1&nbsp;~~&nbsp;ArrowType&nbsp;arrow2&nbsp;
+<br/>
+~&gt;&nbsp;ArrowType&nbsp;newArrow1&nbsp;~~&nbsp;ArrowType&nbsp;newArrow2
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1&nbsp;=&nbsp;EcoreUtil::copy(arrow1)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2&nbsp;=&nbsp;EcoreUtil::copy(arrow2)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp1
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;temp2
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.left&nbsp;~~&nbsp;arrow2.left&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.left&nbsp;=&nbsp;temp1
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.left&nbsp;=&nbsp;temp2
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.right&nbsp;~~&nbsp;arrow2.right&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow1.right&nbsp;=&nbsp;temp1
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newArrow2.right&nbsp;=&nbsp;temp2
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -608,16 +752,26 @@ not a subclass of <span class="inlinecode">Term</span>:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;ParameterType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param.type&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;EcoreUtil::copy(param.type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;ParameterType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Parameter&nbsp;param&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+param.type&nbsp;!=&nbsp;<span class="keyword">null</span>
+<br/>
+type&nbsp;=&nbsp;EcoreUtil::copy(param.type)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createFreshTypeVariable
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -636,13 +790,18 @@ apply the possible substitutions computed so far.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;StringConstantType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringConstant&nbsp;stringConstant&nbsp;:&nbsp;LambdaUtils::createStringType<br/>
+<span class="keyword">axiom</span>&nbsp;StringConstantType
 <br/>
-<span class="keyword">axiom</span>&nbsp;IntConstantType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntConstant&nbsp;intConstant&nbsp;:&nbsp;LambdaUtils::createIntType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+StringConstant&nbsp;stringConstant&nbsp;:&nbsp;LambdaUtils::createStringType
+<br/>
+<span class="keyword">axiom</span>&nbsp;IntConstantType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+IntConstant&nbsp;intConstant&nbsp;:&nbsp;LambdaUtils::createIntType
+<br/>
 </p>
 </div>
 </div>
@@ -657,13 +816,20 @@ For the typing of a variable, one might be tempted to write
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;WRONG!<br/>
-</span><span class="keyword">rule</span>&nbsp;VariableType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;variable.ref&nbsp;:&nbsp;type<br/>
-}<br/>
+<span class="comment">//&nbsp;WRONG!
+<br/>
+</span><span class="keyword">rule</span>&nbsp;VariableType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;variable.ref&nbsp;:&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -681,12 +847,18 @@ possible substitutions, that is:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;VariableType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;EcoreUtil::copy(<span class="keyword">env</span>(G,&nbsp;variable.ref,&nbsp;Type))&nbsp;~&gt;&nbsp;type<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;VariableType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;EcoreUtil::copy(<span class="keyword">env</span>(G,&nbsp;variable.ref,&nbsp;Type))&nbsp;~&gt;&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -700,15 +872,24 @@ later in the typing rule for abstraction).
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;ArithmeticsType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arithmetics&nbsp;arithmetics&nbsp;:&nbsp;IntType&nbsp;intType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;LambdaUtils::createIntType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arithmetics.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;term&nbsp;type&nbsp;must&nbsp;be&nbsp;unifiable&nbsp;with&nbsp;int&nbsp;type<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~~&nbsp;intType&nbsp;~&gt;&nbsp;intType&nbsp;~~&nbsp;intType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;ArithmeticsType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;
+<br/>
+Arithmetics&nbsp;arithmetics&nbsp;:&nbsp;IntType&nbsp;intType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;LambdaUtils::createIntType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arithmetics.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;term&nbsp;type&nbsp;must&nbsp;be&nbsp;unifiable&nbsp;with&nbsp;int&nbsp;type
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~~&nbsp;intType&nbsp;~&gt;&nbsp;intType&nbsp;~~&nbsp;intType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -722,16 +903,26 @@ unified with <span class="inlinecode">IntType</span>.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;AbstractionType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Abstraction&nbsp;abstraction&nbsp;:&nbsp;ArrowType&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;abstraction.param&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;paramType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;abstraction.param&nbsp;&lt;-&nbsp;paramType&nbsp;|-&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;substitutions&nbsp;|&gt;&nbsp;abstraction.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;paramType&nbsp;~&gt;&nbsp;paramType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~&gt;&nbsp;termType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createArrowType(paramType,&nbsp;termType)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;AbstractionType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Abstraction&nbsp;abstraction&nbsp;:&nbsp;ArrowType&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;abstraction.param&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;paramType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;abstraction.param&nbsp;&lt;-&nbsp;paramType&nbsp;|-&nbsp;
+<br/>
+substitutions&nbsp;|&gt;&nbsp;abstraction.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;paramType&nbsp;~&gt;&nbsp;paramType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~&gt;&nbsp;termType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;LambdaUtils::createArrowType(paramType,&nbsp;termType)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -747,23 +938,36 @@ and we return a brand new arrow type, using the two components.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;ApplicationType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Application&nbsp;application&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.fun&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;funType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;make&nbsp;sure&nbsp;funType&nbsp;can&nbsp;be&nbsp;unified&nbsp;ArrowType<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;arrowType&nbsp;=&nbsp;LambdaUtils::createFreshArrowType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.arg&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;argType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;arrow&nbsp;left&nbsp;with&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;argument<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~~&nbsp;argType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;argType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;result&nbsp;is&nbsp;the&nbsp;arrow&nbsp;right&nbsp;after&nbsp;substitutions<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;type<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;ApplicationType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;Application&nbsp;application&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.fun&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;funType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;make&nbsp;sure&nbsp;funType&nbsp;can&nbsp;be&nbsp;unified&nbsp;ArrowType
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;arrowType&nbsp;=&nbsp;LambdaUtils::createFreshArrowType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;arrowType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;application.arg&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;argType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;unify&nbsp;arrow&nbsp;left&nbsp;with&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;argument
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.left&nbsp;~~&nbsp;argType&nbsp;~&gt;&nbsp;funType&nbsp;~~&nbsp;argType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;result&nbsp;is&nbsp;the&nbsp;arrow&nbsp;right&nbsp;after&nbsp;substitutions
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -783,7 +987,8 @@ Let&apos;s see, informally, how these rules infer the type for
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x<br/>
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x
+<br/>
 </p>
 </div>
 </div>
@@ -802,35 +1007,64 @@ This is informally the trace of the rules:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-*&nbsp;AbstractionType<br/>
-**&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;x?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X1<br/>
-**&nbsp;type&nbsp;the&nbsp;body&nbsp;(<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;with&nbsp;environment&nbsp;mapping&nbsp;x&nbsp;&lt;-&nbsp;X1<br/>
-***&nbsp;AbstractionType<br/>
-****&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;f?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X2<br/>
-****&nbsp;type&nbsp;the&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;with&nbsp;(additional)&nbsp;environment&nbsp;mapping&nbsp;f&nbsp;&lt;-&nbsp;X2<br/>
-*****&nbsp;ApplicationType<br/>
-******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;left&nbsp;part?&nbsp;the&nbsp;type&nbsp;variable&nbsp;X2<br/>
-******&nbsp;(we&nbsp;used&nbsp;VariableType)<br/>
-******&nbsp;but&nbsp;it&nbsp;must&nbsp;be&nbsp;an&nbsp;arrow&nbsp;type<br/>
-******&nbsp;unify&nbsp;X2&nbsp;with&nbsp;a&nbsp;fresh&nbsp;arrow&nbsp;type&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
-******&nbsp;this&nbsp;will&nbsp;generate&nbsp;the&nbsp;substitution&nbsp;<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
-******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)}<br/>
-******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(X3&nbsp;-&gt;&nbsp;X4)<br/>
-******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;right&nbsp;part?&nbsp;it&nbsp;is&nbsp;<span class="keyword">int</span><br/>
-******&nbsp;(we&nbsp;used&nbsp;ArithmeticsType,&nbsp;and&nbsp;we&nbsp;unified&nbsp;type&nbsp;of&nbsp;x,&nbsp;X1&nbsp;with&nbsp;<span class="keyword">int</span>)<br/>
-******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}<br/>
-******&nbsp;try&nbsp;to&nbsp;unify&nbsp;X3&nbsp;with&nbsp;<span class="keyword">int</span><br/>
-******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>,&nbsp;<span class="string">&apos;X3&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}<br/>
-******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)<br/>
-******&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;application&nbsp;is&nbsp;X4<br/>
-****&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body<br/>
-****&nbsp;f&nbsp;of&nbsp;type&nbsp;X2,&nbsp;becomes&nbsp;f&nbsp;of&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)<br/>
-****&nbsp;the&nbsp;type&nbsp;of&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;becomes&nbsp;X4<br/>
-****&nbsp;the&nbsp;resulting&nbsp;type&nbsp;is&nbsp;then&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
-**&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body<br/>
-**&nbsp;x&nbsp;of&nbsp;type&nbsp;X1&nbsp;becomes&nbsp;x&nbsp;of&nbsp;type&nbsp;<span class="keyword">int</span><br/>
-**&nbsp;the&nbsp;body&nbsp;has&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
-**&nbsp;the&nbsp;type&nbsp;of&nbsp;our&nbsp;term&nbsp;is&nbsp;<span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
+*&nbsp;AbstractionType
+<br/>
+**&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;x?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X1
+<br/>
+**&nbsp;type&nbsp;the&nbsp;body&nbsp;(<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;with&nbsp;environment&nbsp;mapping&nbsp;x&nbsp;&lt;-&nbsp;X1
+<br/>
+***&nbsp;AbstractionType
+<br/>
+****&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;f?&nbsp;a&nbsp;fresh&nbsp;type&nbsp;variable&nbsp;X2
+<br/>
+****&nbsp;type&nbsp;the&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;with&nbsp;(additional)&nbsp;environment&nbsp;mapping&nbsp;f&nbsp;&lt;-&nbsp;X2
+<br/>
+*****&nbsp;ApplicationType
+<br/>
+******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;left&nbsp;part?&nbsp;the&nbsp;type&nbsp;variable&nbsp;X2
+<br/>
+******&nbsp;(we&nbsp;used&nbsp;VariableType)
+<br/>
+******&nbsp;but&nbsp;it&nbsp;must&nbsp;be&nbsp;an&nbsp;arrow&nbsp;type
+<br/>
+******&nbsp;unify&nbsp;X2&nbsp;with&nbsp;a&nbsp;fresh&nbsp;arrow&nbsp;type&nbsp;(X3&nbsp;-&gt;&nbsp;X4)
+<br/>
+******&nbsp;this&nbsp;will&nbsp;generate&nbsp;the&nbsp;substitution&nbsp;<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)
+<br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4)}
+<br/>
+******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(X3&nbsp;-&gt;&nbsp;X4)
+<br/>
+******&nbsp;what&nbsp;is&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;right&nbsp;part?&nbsp;it&nbsp;is&nbsp;<span class="keyword">int</span>
+<br/>
+******&nbsp;(we&nbsp;used&nbsp;ArithmeticsType,&nbsp;and&nbsp;we&nbsp;unified&nbsp;type&nbsp;of&nbsp;x,&nbsp;X1&nbsp;with&nbsp;<span class="keyword">int</span>)
+<br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}
+<br/>
+******&nbsp;try&nbsp;to&nbsp;unify&nbsp;X3&nbsp;with&nbsp;<span class="keyword">int</span>
+<br/>
+******&nbsp;{<span class="string">&apos;X2&apos;</span>&nbsp;--&gt;&nbsp;(X3&nbsp;-&gt;&nbsp;X4),&nbsp;<span class="string">&apos;X1&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>,&nbsp;<span class="string">&apos;X3&apos;</span>&nbsp;--&gt;&nbsp;<span class="keyword">int</span>}
+<br/>
+******&nbsp;thus&nbsp;now&nbsp;the&nbsp;type&nbsp;of&nbsp;f&nbsp;is&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)
+<br/>
+******&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;application&nbsp;is&nbsp;X4
+<br/>
+****&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body
+<br/>
+****&nbsp;f&nbsp;of&nbsp;type&nbsp;X2,&nbsp;becomes&nbsp;f&nbsp;of&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)
+<br/>
+****&nbsp;the&nbsp;type&nbsp;of&nbsp;body&nbsp;(f&nbsp;-x)&nbsp;becomes&nbsp;X4
+<br/>
+****&nbsp;the&nbsp;resulting&nbsp;type&nbsp;is&nbsp;then&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4
+<br/>
+**&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body
+<br/>
+**&nbsp;x&nbsp;of&nbsp;type&nbsp;X1&nbsp;becomes&nbsp;x&nbsp;of&nbsp;type&nbsp;<span class="keyword">int</span>
+<br/>
+**&nbsp;the&nbsp;body&nbsp;has&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4
+<br/>
+**&nbsp;the&nbsp;type&nbsp;of&nbsp;our&nbsp;term&nbsp;is&nbsp;<span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4
+<br/>
 </p>
 </div>
 </div>
@@ -847,8 +1081,10 @@ Thus the following lambda application terms are well typed
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(10)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;-y)<br/>
-(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(1)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;<span class="string">"foo"</span>)<br/>
+(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(10)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;-y)
+<br/>
+(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(1)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;<span class="string">"foo"</span>)
+<br/>
 </p>
 </div>
 </div>
@@ -875,13 +1111,20 @@ is correct if we can assign a type to the term (starting from an empty environme
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckProgram&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;LambdaUtils::resetCounter<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;can&nbsp;type&nbsp;the&nbsp;program&nbsp;term<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;<span class="keyword">new</span>&nbsp;TypeSubstitutions()&nbsp;|&gt;&nbsp;program.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckProgram&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;LambdaUtils::resetCounter
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;can&nbsp;type&nbsp;the&nbsp;program&nbsp;term
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;<span class="keyword">new</span>&nbsp;TypeSubstitutions()&nbsp;|&gt;&nbsp;program.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -918,29 +1161,45 @@ This is done in the class <abbr title="it.xsemantics.example.lambda.xsemantics.L
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTypeModifier&nbsp;{<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTypeModifier&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaXsemanticsSystem&nbsp;typeSystem;&nbsp;<span class="comment">//&nbsp;generated&nbsp;by&nbsp;Xsemantics<br/>
-</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Provider&lt;LambdaTypeBeautifier&gt;&nbsp;lambdaTypeBeautifierProvider;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;RuleFailedException&nbsp;setAllTypes(Term&nbsp;term)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&lt;Type&gt;&nbsp;result&nbsp;=&nbsp;typeSystem.type(<span class="keyword">new</span>&nbsp;TypeSubstitutions(),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermUtils.cloneWithoutTypes(term));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getRuleFailedException()&nbsp;!=&nbsp;null)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getRuleFailedException();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;inferredType&nbsp;=&nbsp;result.getValue();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beautifyType(inferredType);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setAllTypes(term,&nbsp;inferredType);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;beautifyType(Type&nbsp;paramType)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeBeautifierProvider.get().beautifyTypeVariables(paramType);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaXsemanticsSystem&nbsp;typeSystem;&nbsp;<span class="comment">//&nbsp;generated&nbsp;by&nbsp;Xsemantics
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;@Inject
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Provider&lt;LambdaTypeBeautifier&gt;&nbsp;lambdaTypeBeautifierProvider;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;RuleFailedException&nbsp;setAllTypes(Term&nbsp;term)&nbsp;{
+<br/>
+Result&lt;Type&gt;&nbsp;result&nbsp;=&nbsp;typeSystem.type(<span class="keyword">new</span>&nbsp;TypeSubstitutions(),
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermUtils.cloneWithoutTypes(term));
+<br/>
+<span class="keyword">if</span>&nbsp;(result.getRuleFailedException()&nbsp;!=&nbsp;null)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getRuleFailedException();
+<br/>
+Type&nbsp;inferredType&nbsp;=&nbsp;result.getValue();
+<br/>
+beautifyType(inferredType);
+<br/>
+setAllTypes(term,&nbsp;inferredType);
+<br/>
+<span class="keyword">return</span>&nbsp;null;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;beautifyType(Type&nbsp;paramType)&nbsp;{
+<br/>
+lambdaTypeBeautifierProvider.get().beautifyTypeVariables(paramType);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...
+<br/>
 </p>
 </div>
 </div>
@@ -961,21 +1220,30 @@ and its <span class="inlinecode">modify</span> method, with a
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTermModifier&nbsp;{<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;LambdaTermModifier&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTypeModifier&nbsp;lambdaTypeModifier;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;modifyTermWithInferredType(IXtextDocument&nbsp;xtextDocument)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.modify(<span class="keyword">new</span>&nbsp;IUnitOfWork.Void&lt;XtextResource&gt;()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;process(XtextResource&nbsp;resource)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program&nbsp;=&nbsp;(Program)&nbsp;resource.getContents().get(0);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeModifier.setAllTypes(program.getTerm());<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTypeModifier&nbsp;lambdaTypeModifier;
 <br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;modifyTermWithInferredType(IXtextDocument&nbsp;xtextDocument)&nbsp;{
+<br/>
+xtextDocument.modify(<span class="keyword">new</span>&nbsp;IUnitOfWork.Void&lt;XtextResource&gt;()&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;process(XtextResource&nbsp;resource)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;program&nbsp;=&nbsp;(Program)&nbsp;resource.getContents().get(0);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeModifier.setAllTypes(program.getTerm());
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+});
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -987,30 +1255,40 @@ Then we have the code implementing the editor action (<abbr title="it.xsemantics
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;InferTypesAction&nbsp;<span class="keyword">implements</span>&nbsp;IEditorActionDelegate&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;IEditorPart&nbsp;editor;<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;InferTypesAction&nbsp;<span class="keyword">implements</span>&nbsp;IEditorActionDelegate&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTermModifier&nbsp;lambdaTermModifier;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;IEditorPart&nbsp;editor;
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;InferTypesAction()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTermModifier&nbsp;=&nbsp;LambdaUiUtil.getInjector().getInstance(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermModifier.<span class="keyword">class</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;LambdaTermModifier&nbsp;lambdaTermModifier;
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;run(IAction&nbsp;action)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;((XtextEditor)&nbsp;editor).getDocument();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTermModifier.modifyTermWithInferredType(xtextDocument);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;InferTypesAction()&nbsp;{
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;selectionChanged(IAction&nbsp;action,&nbsp;ISelection&nbsp;selection)&nbsp;{<br/>
+lambdaTermModifier&nbsp;=&nbsp;LambdaUiUtil.getInjector().getInstance(
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LambdaTermModifier.<span class="keyword">class</span>);
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setActiveEditor(IAction&nbsp;action,&nbsp;IEditorPart&nbsp;targetEditor)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.editor&nbsp;=&nbsp;targetEditor;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;run(IAction&nbsp;action)&nbsp;{
+<br/>
+IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;((XtextEditor)&nbsp;editor).getDocument();
+<br/>
+lambdaTermModifier.modifyTermWithInferredType(xtextDocument);
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;selectionChanged(IAction&nbsp;action,&nbsp;ISelection&nbsp;selection)&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setActiveEditor(IAction&nbsp;action,&nbsp;IEditorPart&nbsp;targetEditor)&nbsp;{
+<br/>
+<span class="keyword">this</span>.editor&nbsp;=&nbsp;targetEditor;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -1023,10 +1301,14 @@ Let&apos;s see this editor action in action: suppose you have the following open
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">lambda</span>&nbsp;f&nbsp;.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;g&nbsp;.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;x&nbsp;.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;(g&nbsp;x)<br/>
+<span class="keyword">lambda</span>&nbsp;f&nbsp;.
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;g&nbsp;.
+<br/>
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;(g&nbsp;x)
+<br/>
 </p>
 </div>
 </div>

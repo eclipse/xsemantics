@@ -18,61 +18,93 @@ Let us consider this Xtext implementation of an Expressions language
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.expressions.Expressions&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<span class="keyword">grammar</span>&nbsp;it.xsemantics.example.expressions.Expressions&nbsp;
 <br/>
-<span class="keyword">generate</span>&nbsp;expressions&nbsp;<span class="string">"http://xsemantics.sf.net/example/expressions/Expressions"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals
 <br/>
-Model:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(variables+=Variable)*<br/>
-;<br/>
+<span class="keyword">generate</span>&nbsp;expressions&nbsp;<span class="string">"http://xsemantics.sf.net/example/expressions/Expressions"</span>
 <br/>
-Variable:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;name=ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;expression=Expression<br/>
-;<br/>
+Model:
 <br/>
-Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;BooleanExpression;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(variables+=Variable)*
 <br/>
-BooleanExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Comparison&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(({AndOrExpression.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"||"</span>|<span class="string">"&amp;&amp;"</span>))&nbsp;right=Comparison)*;<br/>
+;
 <br/>
-Comparison&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(({Comparison.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"&lt;"</span>)&nbsp;)&nbsp;right=Equals)*;<br/>
+Variable:
 <br/>
-Equals&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addition&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(({Equals.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"=="</span>)&nbsp;)&nbsp;right=Addition)*;<br/>
-&nbsp;<br/>
-Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Multiplication<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(({Plus.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;|&nbsp;{Minus.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;-&apos;</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right=Multiplication)*;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name=ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;expression=Expression
 <br/>
-Multiplication&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Prefixed&nbsp;(({MultiOrDiv.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"*"</span>|<span class="string">"/"</span>))&nbsp;right=Prefixed)*;<br/>
+;
 <br/>
-Prefixed&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{BooleanNegation}&nbsp;=&gt;<span class="string">"!"</span>&nbsp;expression=Atomic&nbsp;|&nbsp;<span class="comment">/*&nbsp;right&nbsp;associativity&nbsp;*/</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{ArithmeticSigned}&nbsp;=&gt;<span class="string">"-"</span>&nbsp;expression=Atomic&nbsp;|&nbsp;<span class="comment">/*&nbsp;right&nbsp;associativity&nbsp;*/</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Atomic;<br/>
+Expression:
 <br/>
-Atomic&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{NumberLiteral}&nbsp;value=INT&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{StringLiteral}&nbsp;value=STRING&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{BooleanLiteral}&nbsp;value=(<span class="string">&apos;true&apos;</span>|<span class="string">&apos;false&apos;</span>)&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{VariableReference}&nbsp;ref=[Variable]<br/>
-;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;BooleanExpression;
 <br/>
-<span class="comment">//&nbsp;the&nbsp;types&nbsp;will&nbsp;be&nbsp;used&nbsp;only&nbsp;internally&nbsp;by&nbsp;the&nbsp;type&nbsp;system<br/>
-</span>Type:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{BooleanType}&nbsp;<span class="string">&apos;boolean&apos;</span><br/>
-;<br/>
+BooleanExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Comparison&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(({AndOrExpression.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"||"</span>|<span class="string">"&amp;&amp;"</span>))&nbsp;right=Comparison)*;
+<br/>
+Comparison&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equals
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(({Comparison.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"&lt;"</span>)&nbsp;)&nbsp;right=Equals)*;
+<br/>
+Equals&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addition&nbsp;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(({Equals.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"=="</span>)&nbsp;)&nbsp;right=Addition)*;
+<br/>
+<br/>
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Multiplication
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(({Plus.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;|&nbsp;{Minus.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;-&apos;</span>)
+<br/>
+right=Multiplication)*;&nbsp;
+<br/>
+Multiplication&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Prefixed&nbsp;(({MultiOrDiv.left=<span class="keyword">current</span>}&nbsp;op=(<span class="string">"*"</span>|<span class="string">"/"</span>))&nbsp;right=Prefixed)*;
+<br/>
+Prefixed&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{BooleanNegation}&nbsp;=&gt;<span class="string">"!"</span>&nbsp;expression=Atomic&nbsp;|&nbsp;<span class="comment">/*&nbsp;right&nbsp;associativity&nbsp;*/</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ArithmeticSigned}&nbsp;=&gt;<span class="string">"-"</span>&nbsp;expression=Atomic&nbsp;|&nbsp;<span class="comment">/*&nbsp;right&nbsp;associativity&nbsp;*/</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Atomic;
+<br/>
+Atomic&nbsp;<span class="keyword">returns</span>&nbsp;Expression:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{NumberLiteral}&nbsp;value=INT&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{StringLiteral}&nbsp;value=STRING&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{BooleanLiteral}&nbsp;value=(<span class="string">&apos;true&apos;</span>|<span class="string">&apos;false&apos;</span>)&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{VariableReference}&nbsp;ref=[Variable]
+<br/>
+;
+<br/>
+<span class="comment">//&nbsp;the&nbsp;types&nbsp;will&nbsp;be&nbsp;used&nbsp;only&nbsp;internally&nbsp;by&nbsp;the&nbsp;type&nbsp;system
+<br/>
+</span>Type:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{IntType}&nbsp;<span class="string">&apos;int&apos;</span>&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span>&nbsp;|
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{BooleanType}&nbsp;<span class="string">&apos;boolean&apos;</span>
+<br/>
+;
+<br/>
 </p>
 </div>
 </div>
@@ -136,16 +168,22 @@ a first implementation (that is why we use "First" in the name of the system).
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.FirstExpressionsSemantics<br/>
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.FirstExpressionsSemantics
 <br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.expressions.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.expressions.*
 <br/>
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;more&nbsp;judgments&nbsp;later<br/>
-</span>}<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)
+<br/>
+<span class="keyword">source</span>&nbsp;expression
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;more&nbsp;judgments&nbsp;later
+<br/>
+</span>}
+<br/>
 </p>
 </div>
 </div>
@@ -159,17 +197,24 @@ output.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;NumeralLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;NumberLiteral&nbsp;num&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
+<span class="keyword">axiom</span>&nbsp;NumeralLiteral
 <br/>
-<span class="keyword">axiom</span>&nbsp;BooleanLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;NumberLiteral&nbsp;num&nbsp;:&nbsp;
 <br/>
-<span class="keyword">axiom</span>&nbsp;StringLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
+ExpressionsFactory::eINSTANCE.createIntType
+<br/>
+<span class="keyword">axiom</span>&nbsp;BooleanLiteral
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;:&nbsp;
+<br/>
+ExpressionsFactory::eINSTANCE.createBooleanType
+<br/>
+<span class="keyword">axiom</span>&nbsp;StringLiteral
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;
+<br/>
+ExpressionsFactory::eINSTANCE.createStringType
+<br/>
 </p>
 </div>
 </div>
@@ -182,21 +227,34 @@ an instance of the corresponding type.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MultiOrDiv<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;:&nbsp;IntType&nbsp;intType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.left&nbsp;:&nbsp;intType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.right&nbsp;:&nbsp;intType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;MultiOrDiv
 <br/>
-<span class="keyword">rule</span>&nbsp;Minus<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Minus&nbsp;minus&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.left&nbsp;:&nbsp;intType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.right&nbsp;:&nbsp;intType<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;:&nbsp;IntType&nbsp;intType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.left&nbsp;:&nbsp;intType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.right&nbsp;:&nbsp;intType
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;Minus
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Minus&nbsp;minus&nbsp;:&nbsp;
+<br/>
+ExpressionsFactory::eINSTANCE.createIntType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.left&nbsp;:&nbsp;intType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;minus.right&nbsp;:&nbsp;intType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -222,22 +280,37 @@ an <span class="inlinecode">IntType</span> as output argument).
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;Plus<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;||&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;Plus
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;||&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)
+<br/>
+type&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)
+<br/>
+type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -258,26 +331,42 @@ Note that we use the operator <span class="inlinecode">or</span>, <a href="Xsema
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;Comparison<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;cannot&nbsp;compare&nbsp;booleans<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;Comparison
 <br/>
-<span class="keyword">rule</span>&nbsp;Equals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Equals&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;can&nbsp;compare&nbsp;only&nbsp;if&nbsp;they&nbsp;have&nbsp;the&nbsp;same&nbsp;type<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType.eClass&nbsp;==&nbsp;rightType.eClass)<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;cannot&nbsp;compare&nbsp;booleans
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;Equals
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Equals&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;can&nbsp;compare&nbsp;only&nbsp;if&nbsp;they&nbsp;have&nbsp;the&nbsp;same&nbsp;type
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType.eClass&nbsp;==&nbsp;rightType.eClass)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -293,24 +382,38 @@ same type), the comparison (which, in our example, limits to
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;BooleanNegation<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanNegation&nbsp;negation&nbsp;:&nbsp;BooleanType&nbsp;boolType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;negation.expression&nbsp;:&nbsp;boolType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;BooleanNegation
 <br/>
-<span class="keyword">rule</span>&nbsp;AndOr<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;:&nbsp;BooleanType&nbsp;boolType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.left&nbsp;:&nbsp;boolType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.right&nbsp;:&nbsp;boolType<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanNegation&nbsp;negation&nbsp;:&nbsp;BooleanType&nbsp;boolType
 <br/>
-<span class="keyword">rule</span>&nbsp;ArithmeticSigned<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ArithmeticSigned&nbsp;signed&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType<br/>
-}<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;negation.expression&nbsp;:&nbsp;boolType
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;AndOr
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;:&nbsp;BooleanType&nbsp;boolType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.left&nbsp;:&nbsp;boolType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.right&nbsp;:&nbsp;boolType
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;ArithmeticSigned
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ArithmeticSigned&nbsp;signed&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createIntType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -338,13 +441,20 @@ and write the <span class="inlinecode">type</span> judgment with the first param
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<span class="comment">//&nbsp;as&nbsp;above...<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;vartype&nbsp;||-&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(variable)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;variable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;ExpressionsPackage::eINSTANCE.variable_Expression<br/>
-}<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<span class="comment">//&nbsp;as&nbsp;above...
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;vartype&nbsp;||-&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(variable)
+<br/>
+<span class="keyword">source</span>&nbsp;variable
+<br/>
+<span class="keyword">feature</span>&nbsp;ExpressionsPackage::eINSTANCE.variable_Expression
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -360,18 +470,28 @@ This will generate a better error marker.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;VariableReference<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;VariableReference&nbsp;varRef&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;varRef.ref&nbsp;:&nbsp;type<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;VariableReference
 <br/>
-<span class="keyword">rule</span>&nbsp;Variable<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;variable.expression&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable.expression&nbsp;:&nbsp;type<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;VariableReference&nbsp;varRef&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;varRef.ref&nbsp;:&nbsp;type
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;Variable
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;variable.expression&nbsp;!=&nbsp;<span class="keyword">null</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable.expression&nbsp;:&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -389,8 +509,10 @@ case of mutual dependencies like
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-i&nbsp;=&nbsp;j&nbsp;+&nbsp;10<br/>
-j&nbsp;=&nbsp;i&nbsp;*5<br/>
+i&nbsp;=&nbsp;j&nbsp;+&nbsp;10
+<br/>
+j&nbsp;=&nbsp;i&nbsp;*5
+<br/>
 </p>
 </div>
 </div>
@@ -410,11 +532,16 @@ validation rules (<a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;CheckVariable&nbsp;<span class="keyword">for</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;variable&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type<br/>
-}<br/>
+<span class="keyword">checkrule</span>&nbsp;CheckVariable&nbsp;<span class="keyword">for</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;variable&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -441,10 +568,14 @@ For the Expressions language we thus introduce another judgment kind:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<span class="comment">//&nbsp;as&nbsp;above...<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Object<br/>
-}<br/>
+<span class="keyword">judgments</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<span class="comment">//&nbsp;as&nbsp;above...
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Object
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -460,14 +591,18 @@ We then start writing the rules for this new judgment
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">axiom</span>&nbsp;InterpretNumberLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;NumberLiteral&nbsp;number&nbsp;~&gt;&nbsp;number.value<br/>
+<span class="keyword">axiom</span>&nbsp;InterpretNumberLiteral
 <br/>
-<span class="keyword">axiom</span>&nbsp;InterpretStringLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;string.value<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;NumberLiteral&nbsp;number&nbsp;~&gt;&nbsp;number.value
 <br/>
-<span class="keyword">axiom</span>&nbsp;InterpretBooleanLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;~&gt;&nbsp;Boolean::valueOf(bool.value)<br/>
+<span class="keyword">axiom</span>&nbsp;InterpretStringLiteral
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;string.value
+<br/>
+<span class="keyword">axiom</span>&nbsp;InterpretBooleanLiteral
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanLiteral&nbsp;bool&nbsp;~&gt;&nbsp;Boolean::valueOf(bool.value)
+<br/>
 </p>
 </div>
 </div>
@@ -481,31 +616,52 @@ convert it to an actual boolean.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretMinus<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Minus&nbsp;plus&nbsp;~&gt;&nbsp;Integer&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;-&nbsp;rightResult.intValue<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;InterpretMinus
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;~&gt;&nbsp;Integer&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(multiOrDiv.op&nbsp;==&nbsp;<span class="string">&apos;*&apos;</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;*&nbsp;rightResult.intValue<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;/&nbsp;rightResult.intValue<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Minus&nbsp;plus&nbsp;~&gt;&nbsp;Integer&nbsp;result
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretArithmeticSigned<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ArithmeticSigned&nbsp;signed&nbsp;~&gt;&nbsp;Integer&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;expResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;-(expResult)<br/>
-}<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;-&nbsp;rightResult.intValue
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;~&gt;&nbsp;Integer&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;multiOrDiv.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(multiOrDiv.op&nbsp;==&nbsp;<span class="string">&apos;*&apos;</span>)
+<br/>
+result&nbsp;=&nbsp;leftResult.intValue&nbsp;*&nbsp;rightResult.intValue
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>
+<br/>
+result&nbsp;=&nbsp;leftResult.intValue&nbsp;/&nbsp;rightResult.intValue
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretArithmeticSigned
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;ArithmeticSigned&nbsp;signed&nbsp;~&gt;&nbsp;Integer&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;signed.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;expResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;-(expResult)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -518,24 +674,39 @@ an <span class="inlinecode">Integer</span>.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretAndOr<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(andOr.op&nbsp;==&nbsp;<span class="string">"&amp;&amp;"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.booleanValue&nbsp;&amp;&amp;&nbsp;rightResult.booleanValue<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.booleanValue&nbsp;||&nbsp;rightResult.booleanValue<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;InterpretAndOr
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretBooleanNegation<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanNegation&nbsp;neg&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;neg.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;expResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;!expResult<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;~&gt;&nbsp;Boolean&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;andOr.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;rightResult
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(andOr.op&nbsp;==&nbsp;<span class="string">"&amp;&amp;"</span>)
+<br/>
+result&nbsp;=&nbsp;leftResult.booleanValue&nbsp;&amp;&amp;&nbsp;rightResult.booleanValue
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>
+<br/>
+result&nbsp;=&nbsp;leftResult.booleanValue&nbsp;||&nbsp;rightResult.booleanValue
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretBooleanNegation
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BooleanNegation&nbsp;neg&nbsp;~&gt;&nbsp;Boolean&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;neg.expression&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Boolean&nbsp;expResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;!expResult
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -548,28 +719,46 @@ assumed to be a <span class="inlinecode">Boolean</span>.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretComparison<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(leftResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String&nbsp;&amp;&amp;&nbsp;rightResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;&lt;&nbsp;rightResult.toString<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;both&nbsp;are&nbsp;int&nbsp;if&nbsp;the&nbsp;expression&nbsp;is&nbsp;well-typed<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;(leftResult&nbsp;<span class="keyword">as</span>&nbsp;Integer)&nbsp;&lt;&nbsp;(rightResult&nbsp;<span class="keyword">as</span>&nbsp;Integer)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;InterpretComparison
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretEquals<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Equals&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;==&nbsp;rightResult.toString<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(leftResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String&nbsp;&amp;&amp;&nbsp;rightResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String)&nbsp;{
+<br/>
+result&nbsp;=&nbsp;leftResult.toString&nbsp;&lt;&nbsp;rightResult.toString
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{
+<br/>
+<span class="comment">//&nbsp;both&nbsp;are&nbsp;int&nbsp;if&nbsp;the&nbsp;expression&nbsp;is&nbsp;well-typed
+<br/>
+</span>result&nbsp;=&nbsp;(leftResult&nbsp;<span class="keyword">as</span>&nbsp;Integer)&nbsp;&lt;&nbsp;(rightResult&nbsp;<span class="keyword">as</span>&nbsp;Integer)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretEquals
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Equals&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;==&nbsp;rightResult.toString
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -586,29 +775,49 @@ subexpressions to string and compare the resulting string representation.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretPlus<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;~&gt;&nbsp;Object&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(leftResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String&nbsp;||&nbsp;rightResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;leftString&nbsp;=&nbsp;leftResult.toString<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;rightString&nbsp;=&nbsp;rightResult.toString<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftString&nbsp;+&nbsp;rightString<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;both&nbsp;are&nbsp;int&nbsp;if&nbsp;the&nbsp;expression&nbsp;is&nbsp;well-typed<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;leftInt&nbsp;=&nbsp;leftResult&nbsp;<span class="keyword">as</span>&nbsp;Integer<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;rightInt&nbsp;=&nbsp;rightResult&nbsp;<span class="keyword">as</span>&nbsp;Integer<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftInt&nbsp;+&nbsp;rightInt<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;InterpretPlus
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretVariableRefenrence<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;VariableReference&nbsp;varRef&nbsp;~&gt;&nbsp;Object&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;varRef.ref.expression&nbsp;~&gt;&nbsp;result<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;~&gt;&nbsp;Object&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(leftResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String&nbsp;||&nbsp;rightResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String)&nbsp;{
+<br/>
+<span class="keyword">var</span>&nbsp;leftString&nbsp;=&nbsp;leftResult.toString
+<br/>
+<span class="keyword">var</span>&nbsp;rightString&nbsp;=&nbsp;rightResult.toString
+<br/>
+result&nbsp;=&nbsp;leftString&nbsp;+&nbsp;rightString
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{
+<br/>
+<span class="comment">//&nbsp;both&nbsp;are&nbsp;int&nbsp;if&nbsp;the&nbsp;expression&nbsp;is&nbsp;well-typed
+<br/>
+</span><span class="keyword">var</span>&nbsp;leftInt&nbsp;=&nbsp;leftResult&nbsp;<span class="keyword">as</span>&nbsp;Integer
+<br/>
+<span class="keyword">var</span>&nbsp;rightInt&nbsp;=&nbsp;rightResult&nbsp;<span class="keyword">as</span>&nbsp;Integer
+<br/>
+result&nbsp;=&nbsp;leftInt&nbsp;+&nbsp;rightInt
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretVariableRefenrence
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;VariableReference&nbsp;varRef&nbsp;~&gt;&nbsp;Object&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;varRef.ref.expression&nbsp;~&gt;&nbsp;result
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -628,11 +837,16 @@ For the Expressions language we provide a custom implementation of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExpressionsStringRepresentation&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExpressionsStringRepresentation&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{
+<br/>
+<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -661,9 +875,12 @@ valid (and interpreted accordingly with an implicit conversion):
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-i&nbsp;=&nbsp;20&nbsp;-&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;int&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;15<br/>
-</span>b&nbsp;=&nbsp;(i&nbsp;&gt;&nbsp;20)&nbsp;||&nbsp;<span class="string">&apos;true&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;boolean&nbsp;type<br/>
-</span><span class="comment">//&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;<br/>
+i&nbsp;=&nbsp;20&nbsp;-&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;int&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;15
+<br/>
+</span>b&nbsp;=&nbsp;(i&nbsp;&gt;&nbsp;20)&nbsp;||&nbsp;<span class="string">&apos;true&apos;</span>&nbsp;<span class="comment">//&nbsp;OK!&nbsp;can&nbsp;be&nbsp;given&nbsp;boolean&nbsp;type
+<br/>
+</span><span class="comment">//&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;
+<br/>
 </span>
 </p>
 </div>
@@ -677,10 +894,14 @@ will be behave as before:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-i&nbsp;=&nbsp;20&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;&apos;205&apos;<br/>
-</span>j&nbsp;=&nbsp;(20&nbsp;*&nbsp;1)&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;again<br/>
-</span>k&nbsp;=&nbsp;20&nbsp;*&nbsp;(1&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>)&nbsp;<span class="comment">//&nbsp;has&nbsp;int&nbsp;type,&nbsp;since&nbsp;*&nbsp;requires&nbsp;int&nbsp;types<br/>
-</span><span class="comment">//&nbsp;on&nbsp;subexpressions<br/>
+i&nbsp;=&nbsp;20&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;and&nbsp;evaluates&nbsp;to&nbsp;&apos;205&apos;
+<br/>
+</span>j&nbsp;=&nbsp;(20&nbsp;*&nbsp;1)&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<span class="comment">//&nbsp;has&nbsp;string&nbsp;type&nbsp;again
+<br/>
+</span>k&nbsp;=&nbsp;20&nbsp;*&nbsp;(1&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>)&nbsp;<span class="comment">//&nbsp;has&nbsp;int&nbsp;type,&nbsp;since&nbsp;*&nbsp;requires&nbsp;int&nbsp;types
+<br/>
+</span><span class="comment">//&nbsp;on&nbsp;subexpressions
+<br/>
 </span>
 </p>
 </div>
@@ -693,13 +914,20 @@ Thus, we introduce a new judgment in our system
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;as&nbsp;above<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;coerce&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;|&gt;&nbsp;Type&nbsp;expectedType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;convert&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;to&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expectedType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
-}<br/>
+<span class="keyword">judgments</span>{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;as&nbsp;above
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;coerce&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;|&gt;&nbsp;Type&nbsp;expectedType
+<br/>
+<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;convert&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)&nbsp;+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;to&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expectedType)
+<br/>
+<span class="keyword">source</span>&nbsp;expression
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -711,18 +939,28 @@ We then have to define the rules for this new judgment:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;StringToInt<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;StringLiteral&nbsp;string&nbsp;|&gt;&nbsp;IntType&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(string.value)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;StringToInt
 <br/>
-<span class="keyword">rule</span>&nbsp;StringToBool<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;StringLiteral&nbsp;string&nbsp;|&gt;&nbsp;BooleanType&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"true"</span>)&nbsp;||<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"false"</span>)<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;StringLiteral&nbsp;string&nbsp;|&gt;&nbsp;IntType&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(string.value)
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;StringToBool
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;StringLiteral&nbsp;string&nbsp;|&gt;&nbsp;BooleanType&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"true"</span>)&nbsp;||
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;string.value.equalsIgnoreCase(<span class="string">"false"</span>)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -745,17 +983,28 @@ type now depends on the above expectation:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;StringLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;Type&nbsp;resultType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;Type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;str&nbsp;|&gt;&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultType&nbsp;=&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;StringLiteral
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;Type&nbsp;resultType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+<span class="keyword">val</span>&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;Type)
+<br/>
+G&nbsp;|~&nbsp;str&nbsp;|&gt;&nbsp;expected
+<br/>
+resultType&nbsp;=&nbsp;expected
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+resultType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -785,21 +1034,34 @@ in order to pass to rule invocation an appropriate environment:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MultiOrDiv<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;:&nbsp;IntType&nbsp;intType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.left&nbsp;:&nbsp;intType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.right&nbsp;:&nbsp;intType<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;MultiOrDiv
 <br/>
-<span class="keyword">rule</span>&nbsp;AndOr<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;:&nbsp;BooleanType&nbsp;boolType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;boolType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.left&nbsp;:&nbsp;boolType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.right&nbsp;:&nbsp;boolType<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;:&nbsp;IntType&nbsp;intType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.left&nbsp;:&nbsp;intType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.right&nbsp;:&nbsp;intType
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;AndOr
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;:&nbsp;BooleanType&nbsp;boolType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;boolType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.left&nbsp;:&nbsp;boolType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;boolType&nbsp;|-&nbsp;andOr.right&nbsp;:&nbsp;boolType
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -818,15 +1080,23 @@ current rule upon invocation.  This is the case of comparison:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;Comparison<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;Comparison
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -839,29 +1109,51 @@ has to take care of possible expectations:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;Plus<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;:&nbsp;Type&nbsp;type<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;TyThe&nbsp;-e&nbsp;option&nbsp;is&nbsp;not&nbsp;standard.&nbsp;A&nbsp;POSIX-compliant&nbsp;echo&nbsp;does&nbsp;not&nbsp;accept&nbsp;any&nbsp;options:pe&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;Type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;plus.left&nbsp;|&gt;&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;plus.right&nbsp;|&gt;&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;||&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;Plus
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;:&nbsp;Type&nbsp;type
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;TyThe&nbsp;-e&nbsp;option&nbsp;is&nbsp;not&nbsp;standard.&nbsp;A&nbsp;POSIX-compliant&nbsp;echo&nbsp;does&nbsp;not&nbsp;accept&nbsp;any&nbsp;options:pe&nbsp;rightType
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+<br/>
+<span class="keyword">val</span>&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;Type)
+<br/>
+G&nbsp;|~&nbsp;plus.left&nbsp;|&gt;&nbsp;expected
+<br/>
+G&nbsp;|~&nbsp;plus.right&nbsp;|&gt;&nbsp;expected
+<br/>
+type&nbsp;=&nbsp;expected
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;||&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)
+<br/>
+type&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createStringType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)
+<br/>
+type&nbsp;=&nbsp;leftType&nbsp;<span class="comment">//&nbsp;i.e.,&nbsp;IntType
+<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -874,34 +1166,60 @@ consideration expectations:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretStringLiteral<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;Object&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expected<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;IntType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;Integer::parseInt(string.value)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;BooleanType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;Boolean::parseBoolean(string.value)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;string.value<br/>
-}<br/>
+<span class="keyword">rule</span>&nbsp;InterpretStringLiteral
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;~&gt;&nbsp;Integer&nbsp;result<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(multiOrDiv.op&nbsp;==&nbsp;<span class="string">&apos;*&apos;</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;*&nbsp;rightResult.intValue<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.intValue&nbsp;/&nbsp;rightResult.intValue<br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;Object&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expected
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;IntType)
+<br/>
+result&nbsp;=&nbsp;Integer::parseInt(string.value)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br/>
+expected&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;expected&apos;</span>,&nbsp;BooleanType)
+<br/>
+result&nbsp;=&nbsp;Boolean::parseBoolean(string.value)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;string.value
+<br/>
+}
+<br/>
+<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;~&gt;&nbsp;Integer&nbsp;result
+<br/>
+<span class="keyword">from</span>&nbsp;{
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;leftResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Integer&nbsp;rightResult
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(multiOrDiv.op&nbsp;==&nbsp;<span class="string">&apos;*&apos;</span>)
+<br/>
+result&nbsp;=&nbsp;leftResult.intValue&nbsp;*&nbsp;rightResult.intValue
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>
+<br/>
+result&nbsp;=&nbsp;leftResult.intValue&nbsp;/&nbsp;rightResult.intValue
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -928,28 +1246,47 @@ The relevant part of the generator (written in Xtend2) is shown:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;ExpressionsGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;ExpressionsSemantics&nbsp;semantics<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TraceUtils<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;StringRepresentation<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;skipped&nbsp;some&nbsp;code<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compileExpression(Expression&nbsp;exp)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;typeTrace&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;RuleApplicationTrace()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;interpreterTrace&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;RuleApplicationTrace()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;type&nbsp;=&nbsp;semantics.type(null,&nbsp;typeTrace,&nbsp;exp)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;semantics.interpret(null,&nbsp;interpreterTrace,&nbsp;exp)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;&laquo;</span>type.value.string<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;trace:&nbsp;&laquo;</span>typeTrace.traceAsString<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpretation:&nbsp;&laquo;</span>result.value.string<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpretation&nbsp;trace:&nbsp;&laquo;</span>interpreterTrace.traceAsString<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">class</span>&nbsp;ExpressionsGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;ExpressionsSemantics&nbsp;semantics
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TraceUtils
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;StringRepresentation
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;skipped&nbsp;some&nbsp;code
+<br/>
+</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compileExpression(Expression&nbsp;exp)&nbsp;{
+<br/>
+<span class="keyword">val</span>&nbsp;typeTrace&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;RuleApplicationTrace()
+<br/>
+<span class="keyword">val</span>&nbsp;interpreterTrace&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;RuleApplicationTrace()
+<br/>
+<span class="keyword">val</span>&nbsp;type&nbsp;=&nbsp;semantics.type(null,&nbsp;typeTrace,&nbsp;exp)
+<br/>
+<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;semantics.interpret(null,&nbsp;interpreterTrace,&nbsp;exp)
+<br/>
+<span class="string">&apos;&apos;&apos;
+<br/>
+type:&nbsp;Â&laquo;</span>type.value.stringÂ<span class="string">&raquo;
+<br/>
+type&nbsp;trace:&nbsp;Â&laquo;</span>typeTrace.traceAsStringÂ<span class="string">&raquo;
+<br/>
+
+<br/>
+interpretation:&nbsp;Â&laquo;</span>result.value.stringÂ<span class="string">&raquo;
+<br/>
+interpretation&nbsp;trace:&nbsp;Â&laquo;</span>interpreterTrace.traceAsStringÂ<span class="string">&raquo;
+<br/>
+&apos;&apos;&apos;</span>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+}
+<br/>
 </p>
 </div>
 </div>
@@ -969,7 +1306,8 @@ Thus, starting from this expression:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myString&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false<br/>
+myString&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false
+<br/>
 </p>
 </div>
 </div>
@@ -981,22 +1319,36 @@ we get this output:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Variable:&nbsp;myString<br/>
-type:&nbsp;StringType<br/>
-type&nbsp;trace:&nbsp;<br/>
-Plus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false&nbsp;:&nbsp;StringType<br/>
-&nbsp;Plus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;:&nbsp;StringType<br/>
-&nbsp;&nbsp;StringLiteral:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;StringType<br/>
-&nbsp;&nbsp;NumeralLiteral:&nbsp;[]&nbsp;|-&nbsp;10&nbsp;:&nbsp;IntType<br/>
-&nbsp;BooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;:&nbsp;BooleanType<br/>
+Variable:&nbsp;myString
 <br/>
-interpretation:&nbsp;<span class="string">&apos;foo10false&apos;</span><br/>
-interpretation&nbsp;trace:&nbsp;<br/>
-InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false&nbsp;~&gt;&nbsp;<span class="string">&apos;foo10false&apos;</span><br/>
-&nbsp;InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;~&gt;&nbsp;<span class="string">&apos;foo10&apos;</span><br/>
-&nbsp;&nbsp;InterpretStringLiteral:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;~&gt;&nbsp;<span class="string">&apos;foo&apos;</span><br/>
-&nbsp;&nbsp;InterpretNumberLiteral:&nbsp;[]&nbsp;|-&nbsp;10&nbsp;~&gt;&nbsp;10<br/>
-&nbsp;InterpretBooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;~&gt;&nbsp;false<br/>
+type:&nbsp;StringType
+<br/>
+type&nbsp;trace:&nbsp;
+<br/>
+Plus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false&nbsp;:&nbsp;StringType
+<br/>
+&nbsp;Plus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;:&nbsp;StringType
+<br/>
+StringLiteral:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;StringType
+<br/>
+NumeralLiteral:&nbsp;[]&nbsp;|-&nbsp;10&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;BooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;:&nbsp;BooleanType
+<br/>
+interpretation:&nbsp;<span class="string">&apos;foo10false&apos;</span>
+<br/>
+interpretation&nbsp;trace:&nbsp;
+<br/>
+InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;+&nbsp;false&nbsp;~&gt;&nbsp;<span class="string">&apos;foo10false&apos;</span>
+<br/>
+&nbsp;InterpretPlus:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;+&nbsp;10&nbsp;~&gt;&nbsp;<span class="string">&apos;foo10&apos;</span>
+<br/>
+InterpretStringLiteral:&nbsp;[]&nbsp;|-&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;~&gt;&nbsp;<span class="string">&apos;foo&apos;</span>
+<br/>
+InterpretNumberLiteral:&nbsp;[]&nbsp;|-&nbsp;10&nbsp;~&gt;&nbsp;10
+<br/>
+&nbsp;InterpretBooleanLiteral:&nbsp;[]&nbsp;|-&nbsp;false&nbsp;~&gt;&nbsp;false
+<br/>
 </p>
 </div>
 </div>
@@ -1015,8 +1367,10 @@ implicit coercions is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-intVar&nbsp;=&nbsp;1<br/>
-intVar2&nbsp;=&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)<br/>
+intVar&nbsp;=&nbsp;1
+<br/>
+intVar2&nbsp;=&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)
+<br/>
 </p>
 </div>
 </div>
@@ -1028,26 +1382,44 @@ which produces the following output
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Variable:&nbsp;intVar2<br/>
-type:&nbsp;IntType<br/>
-type&nbsp;trace:&nbsp;<br/>
-MultiOrDiv:&nbsp;[]&nbsp;|-&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)&nbsp;:&nbsp;IntType<br/>
-&nbsp;NumeralLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;2&nbsp;:&nbsp;IntType<br/>
-&nbsp;Plus:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;:&nbsp;IntType<br/>
-&nbsp;&nbsp;VariableReference:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;:&nbsp;IntType<br/>
-&nbsp;&nbsp;&nbsp;Variable:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;||-&nbsp;intVar&nbsp;=&nbsp;1&nbsp;:&nbsp;IntType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;NumeralLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;1&nbsp;:&nbsp;IntType<br/>
-&nbsp;&nbsp;StringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;:&nbsp;IntType<br/>
-&nbsp;&nbsp;&nbsp;StringToInt:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|~&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;|&gt;&nbsp;IntType<br/>
+Variable:&nbsp;intVar2
 <br/>
-interpretation:&nbsp;4<br/>
-interpretation&nbsp;trace:&nbsp;<br/>
-InterpretMultiOrDiv:&nbsp;[]&nbsp;|-&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)&nbsp;~&gt;&nbsp;4<br/>
-&nbsp;InterpretNumberLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;2&nbsp;~&gt;&nbsp;2<br/>
-&nbsp;InterpretPlus:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;2<br/>
-&nbsp;&nbsp;InterpretVariableRefenrence:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;~&gt;&nbsp;1<br/>
-&nbsp;&nbsp;&nbsp;InterpretNumberLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;1&nbsp;~&gt;&nbsp;1<br/>
-&nbsp;&nbsp;InterpretStringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;1<br/>
+type:&nbsp;IntType
+<br/>
+type&nbsp;trace:&nbsp;
+<br/>
+MultiOrDiv:&nbsp;[]&nbsp;|-&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;NumeralLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;2&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;Plus:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;:&nbsp;IntType
+<br/>
+VariableReference:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;Variable:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;||-&nbsp;intVar&nbsp;=&nbsp;1&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;&nbsp;NumeralLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;1&nbsp;:&nbsp;IntType
+<br/>
+StringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;:&nbsp;IntType
+<br/>
+&nbsp;StringToInt:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|~&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;|&gt;&nbsp;IntType
+<br/>
+interpretation:&nbsp;4
+<br/>
+interpretation&nbsp;trace:&nbsp;
+<br/>
+InterpretMultiOrDiv:&nbsp;[]&nbsp;|-&nbsp;2&nbsp;*&nbsp;(intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>)&nbsp;~&gt;&nbsp;4
+<br/>
+&nbsp;InterpretNumberLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;2&nbsp;~&gt;&nbsp;2
+<br/>
+&nbsp;InterpretPlus:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;+&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;2
+<br/>
+InterpretVariableRefenrence:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;intVar&nbsp;~&gt;&nbsp;1
+<br/>
+&nbsp;InterpretNumberLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;1&nbsp;~&gt;&nbsp;1
+<br/>
+InterpretStringLiteral:&nbsp;[<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;IntType]&nbsp;|-&nbsp;<span class="string">&apos;1&apos;</span>&nbsp;~&gt;&nbsp;1
+<br/>
 </p>
 </div>
 </div>

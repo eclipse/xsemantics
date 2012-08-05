@@ -10,6 +10,7 @@ import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -30,6 +31,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
@@ -56,6 +58,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -82,6 +85,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private ITypeProvider _iTypeProvider;
   
   @Inject
   private XsemanticsXbaseCompiler xbaseCompiler;
@@ -136,15 +142,36 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           IterableExtensions.<Rule>forEach(_rules, _function);
           EList<JvmMember> _members = it.getMembers();
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, issues);
+          EList<Injected> _injections = ts.getInjections();
+          final Procedure1<Injected> _function_1 = new Procedure1<Injected>() {
+              public void apply(final Injected injectedField) {
+                EList<JvmMember> _members = it.getMembers();
+                String _name = injectedField.getName();
+                JvmTypeReference _type = injectedField.getType();
+                final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+                    public void apply(final JvmField it) {
+                      String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(injectedField);
+                      XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+                      EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+                      JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Inject.class);
+                      XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+                      it.setVisibility(JvmVisibility.PRIVATE);
+                    }
+                  };
+                JvmField _field = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(injectedField, _name, _type, _function);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
+              }
+            };
+          IterableExtensions.<Injected>forEach(_injections, _function_1);
           final ArrayList<JvmField> polymorphicDispatchers = CollectionLiterals.<JvmField>newArrayList();
           EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
-          final Procedure1<JudgmentDescription> _function_1 = new Procedure1<JudgmentDescription>() {
+          final Procedure1<JudgmentDescription> _function_2 = new Procedure1<JudgmentDescription>() {
               public void apply(final JudgmentDescription it) {
                 JvmField _genPolymorphicDispatcherField = XsemanticsJvmModelInferrer.this.genPolymorphicDispatcherField(it);
                 polymorphicDispatchers.add(_genPolymorphicDispatcherField);
               }
             };
-          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions, _function_1);
+          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions, _function_2);
           EList<JvmMember> _members_1 = it.getMembers();
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, polymorphicDispatchers);
           EList<JvmMember> _members_2 = it.getMembers();
@@ -153,17 +180,33 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           EList<JvmMember> _members_3 = it.getMembers();
           JvmOperation _genInit = XsemanticsJvmModelInferrer.this.genInit(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_3, _genInit);
+          EList<Injected> _injections_1 = ts.getInjections();
+          final Procedure1<Injected> _function_3 = new Procedure1<Injected>() {
+              public void apply(final Injected injectedField) {
+                EList<JvmMember> _members = it.getMembers();
+                String _name = injectedField.getName();
+                JvmTypeReference _type = injectedField.getType();
+                JvmOperation _getter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toGetter(injectedField, _name, _type);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _getter);
+                EList<JvmMember> _members_1 = it.getMembers();
+                String _name_1 = injectedField.getName();
+                JvmTypeReference _type_1 = injectedField.getType();
+                JvmOperation _setter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toSetter(injectedField, _name_1, _type_1);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _setter);
+              }
+            };
+          IterableExtensions.<Injected>forEach(_injections_1, _function_3);
           EList<JudgmentDescription> _judgmentDescriptions_1 = ts.getJudgmentDescriptions();
-          final Procedure1<JudgmentDescription> _function_2 = new Procedure1<JudgmentDescription>() {
+          final Procedure1<JudgmentDescription> _function_4 = new Procedure1<JudgmentDescription>() {
               public void apply(final JudgmentDescription j) {
                 EList<JvmMember> _members = it.getMembers();
                 ArrayList<JvmOperation> _genEntryPointMethods = XsemanticsJvmModelInferrer.this.genEntryPointMethods(j);
                 XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _genEntryPointMethods);
               }
             };
-          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_1, _function_2);
+          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_1, _function_4);
           EList<CheckRule> _checkrules = ts.getCheckrules();
-          final Procedure1<CheckRule> _function_3 = new Procedure1<CheckRule>() {
+          final Procedure1<CheckRule> _function_5 = new Procedure1<CheckRule>() {
               public void apply(final CheckRule r) {
                 EList<JvmMember> _members = it.getMembers();
                 JvmOperation _compileCheckRuleMethod = XsemanticsJvmModelInferrer.this.compileCheckRuleMethod(r);
@@ -173,9 +216,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileInternalMethod);
               }
             };
-          IterableExtensions.<CheckRule>forEach(_checkrules, _function_3);
+          IterableExtensions.<CheckRule>forEach(_checkrules, _function_5);
           EList<JudgmentDescription> _judgmentDescriptions_2 = ts.getJudgmentDescriptions();
-          final Procedure1<JudgmentDescription> _function_4 = new Procedure1<JudgmentDescription>() {
+          final Procedure1<JudgmentDescription> _function_6 = new Procedure1<JudgmentDescription>() {
               public void apply(final JudgmentDescription j) {
                 EList<JvmMember> _members = it.getMembers();
                 JvmOperation _compileInternalMethod = XsemanticsJvmModelInferrer.this.compileInternalMethod(j);
@@ -188,9 +231,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 }
               }
             };
-          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_2, _function_4);
+          IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_2, _function_6);
           EList<Rule> _rules_1 = ts.getRules();
-          final Procedure1<Rule> _function_5 = new Procedure1<Rule>() {
+          final Procedure1<Rule> _function_7 = new Procedure1<Rule>() {
               public void apply(final Rule rule) {
                 JudgmentDescription _judgmentDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
                 boolean _notEquals = (!Objects.equal(_judgmentDescription, null));
@@ -201,10 +244,19 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                   EList<JvmMember> _members_1 = it.getMembers();
                   JvmOperation _compileApplyMethod = XsemanticsJvmModelInferrer.this.compileApplyMethod(rule);
                   XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileApplyMethod);
+                  List<ExpressionInConclusion> _expressionsInConclusion = XsemanticsJvmModelInferrer.this._xsemanticsUtils.expressionsInConclusion(rule);
+                  final Procedure1<ExpressionInConclusion> _function = new Procedure1<ExpressionInConclusion>() {
+                      public void apply(final ExpressionInConclusion e) {
+                        EList<JvmMember> _members = it.getMembers();
+                        JvmOperation _expressionInConclusionToMethod = XsemanticsJvmModelInferrer.this.expressionInConclusionToMethod(e);
+                        XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _expressionInConclusionToMethod);
+                      }
+                    };
+                  IterableExtensions.<ExpressionInConclusion>forEach(_expressionsInConclusion, _function);
                 }
               }
             };
-          IterableExtensions.<Rule>forEach(_rules_1, _function_5);
+          IterableExtensions.<Rule>forEach(_rules_1, _function_7);
         }
       };
     _accept.initializeLater(_function);
@@ -1182,11 +1234,24 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _map;
   }
   
+  public String inputArgs(final Rule rule) {
+    List<RuleParameter> _inputParams = this._xsemanticsUtils.inputParams(rule);
+    final Function1<RuleParameter,String> _function = new Function1<RuleParameter,String>() {
+        public String apply(final RuleParameter it) {
+          JvmFormalParameter _parameter = it.getParameter();
+          String _name = _parameter.getName();
+          return _name;
+        }
+      };
+    List<String> _map = ListExtensions.<RuleParameter, String>map(_inputParams, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    return _join;
+  }
+  
   public ITreeAppendable compileRuleBody(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {
     ITreeAppendable _xblockexpression = null;
     {
       this.compilePremises(rule, result);
-      this.compileRuleConclusionElements(rule, result);
       ITreeAppendable _compileReturnResult = this.compileReturnResult(rule, resultType, result);
       _xblockexpression = (_compileReturnResult);
     }
@@ -1207,17 +1272,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     XExpression _premises = rule.getPremises();
     ITreeAppendable _compile = this.xbaseCompiler.compile(_premises, result, false);
     return _compile;
-  }
-  
-  public void compileRuleConclusionElements(final Rule rule, final ITreeAppendable result) {
-    List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
-    final Procedure1<ExpressionInConclusion> _function = new Procedure1<ExpressionInConclusion>() {
-        public void apply(final ExpressionInConclusion it) {
-          XExpression _expression = it.getExpression();
-          XsemanticsJvmModelInferrer.this.xbaseCompiler.compile(_expression, result, true);
-        }
-      };
-    IterableExtensions.<ExpressionInConclusion>forEach(_expressionsInConclusion, _function);
   }
   
   public ITreeAppendable compileReturnResult(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {
@@ -1258,8 +1312,20 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
               if (elem instanceof ExpressionInConclusion) {
                 final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)elem;
                 _matched=true;
-                XExpression _expression = _expressionInConclusion.getExpression();
-                this.xbaseCompiler.compileAsJavaExpression(_expression, result);
+                StringConcatenation _builder = new StringConcatenation();
+                String _nameOfExpressionInConclusion = this.nameOfExpressionInConclusion(_expressionInConclusion);
+                _builder.append(_nameOfExpressionInConclusion, "");
+                _builder.append("(");
+                String _ruleEnvName = this._xsemanticsGeneratorExtensions.ruleEnvName(rule);
+                _builder.append(_ruleEnvName, "");
+                _builder.append(", ");
+                CharSequence _ruleApplicationTraceName = this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                _builder.append(_ruleApplicationTraceName, "");
+                _builder.append(", ");
+                String _inputArgs = this.inputArgs(rule);
+                _builder.append(_inputArgs, "");
+                _builder.append(")");
+                result.append(_builder);
               }
             }
             boolean _hasNext_1 = iterator.hasNext();
@@ -1275,6 +1341,61 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       _xblockexpression = (_append);
     }
     return _xblockexpression;
+  }
+  
+  public JvmOperation expressionInConclusionToMethod(final ExpressionInConclusion exp) {
+    JvmOperation _xblockexpression = null;
+    {
+      final Rule rule = this._xsemanticsUtils.containingRule(exp);
+      String _nameOfExpressionInConclusion = this.nameOfExpressionInConclusion(exp);
+      XExpression _expression = exp.getExpression();
+      JvmTypeReference _type = this._iTypeProvider.getType(_expression);
+      final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          public void apply(final JvmOperation it) {
+            it.setVisibility(JvmVisibility.PRIVATE);
+            EList<JvmTypeReference> _exceptions = it.getExceptions();
+            JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(exp);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
+            EList<JvmFormalParameter> _parameters = it.getParameters();
+            JvmFormalParameter _paramForEnvironment = XsemanticsJvmModelInferrer.this.paramForEnvironment(rule);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _paramForEnvironment);
+            EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+            JvmFormalParameter _ruleApplicationTraceParam = XsemanticsJvmModelInferrer.this.ruleApplicationTraceParam(rule);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _ruleApplicationTraceParam);
+            EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+            List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(rule);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _inputParameters);
+            XExpression _expression = exp.getExpression();
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _expression);
+          }
+        };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(exp, _nameOfExpressionInConclusion, _type, _function);
+      _xblockexpression = (_method);
+    }
+    return _xblockexpression;
+  }
+  
+  public String nameOfExpressionInConclusion(final ExpressionInConclusion e) {
+    Rule _containingRule = this._xsemanticsUtils.containingRule(e);
+    String _name = _containingRule.getName();
+    String _plus = (_name + "_exp_");
+    EObject _eContainer = e.eContainer();
+    EList<RuleConclusionElement> _conclusionElements = ((RuleConclusion) _eContainer).getConclusionElements();
+    List<ExpressionInConclusion> _typeSelect = EcoreUtil2.<ExpressionInConclusion>typeSelect(_conclusionElements, ExpressionInConclusion.class);
+    int _indexOf = _typeSelect.indexOf(e);
+    int _plus_1 = (_indexOf + 1);
+    String _plus_2 = (_plus + Integer.valueOf(_plus_1));
+    return _plus_2;
+  }
+  
+  /**
+   * a generic method computing the index of an AST object between its siblings
+   */
+  protected int index(final EObject obj) {
+    EObject _eContainer = obj.eContainer();
+    EList<EObject> _eContents = _eContainer.eContents();
+    int _indexOf = _eContents.indexOf(obj);
+    return _indexOf;
   }
   
   public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {

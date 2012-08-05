@@ -5,6 +5,7 @@ import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -333,10 +334,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("EClass _eClass = object.eClass();");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("return new Result<EClass>(_eClass);");
+    _builder.append("return new Result<EClass>(EObjectEClass_exp_1(G, _trace_, object));");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -544,6 +542,18 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.append("}");
     this.assertGeneratedMember(_compileValidatorCheckRuleMethod, _builder);
+  }
+  
+  @Test
+  public void testNameOfExpressionInConclusion() {
+    CharSequence _testTwoExpressionsInConclusion = this.testFiles.testTwoExpressionsInConclusion();
+    final Rule rule = this.getFirstRule(_testTwoExpressionsInConclusion);
+    ExpressionInConclusion _expressionInConclusion = this.expressionInConclusion(rule, 0);
+    String _nameOfExpressionInConclusion = this.inferrer.nameOfExpressionInConclusion(_expressionInConclusion);
+    this.assertEqualsStrings("TwoExpressionsInConclusion_exp_1", _nameOfExpressionInConclusion);
+    ExpressionInConclusion _expressionInConclusion_1 = this.expressionInConclusion(rule, 1);
+    String _nameOfExpressionInConclusion_1 = this.inferrer.nameOfExpressionInConclusion(_expressionInConclusion_1);
+    this.assertEqualsStrings("TwoExpressionsInConclusion_exp_2", _nameOfExpressionInConclusion_1);
   }
   
   public void assertIssueField(final CharSequence prog, final CharSequence expected) {

@@ -28,24 +28,26 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cImportsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cImportsImportParserRuleCall_2_0 = (RuleCall)cImportsAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cJudgmentsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
-		private final Assignment cJudgmentDescriptionsAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final RuleCall cJudgmentDescriptionsJudgmentDescriptionParserRuleCall_3_2_0 = (RuleCall)cJudgmentDescriptionsAssignment_3_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
-		private final Assignment cRulesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cRulesRuleParserRuleCall_4_0 = (RuleCall)cRulesAssignment_4.eContents().get(0);
-		private final Assignment cCheckrulesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cCheckrulesCheckRuleParserRuleCall_5_0 = (RuleCall)cCheckrulesAssignment_5.eContents().get(0);
+		private final Assignment cInjectionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInjectionsInjectedParserRuleCall_3_0 = (RuleCall)cInjectionsAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cJudgmentsKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Assignment cJudgmentDescriptionsAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cJudgmentDescriptionsJudgmentDescriptionParserRuleCall_4_2_0 = (RuleCall)cJudgmentDescriptionsAssignment_4_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Assignment cRulesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cRulesRuleParserRuleCall_5_0 = (RuleCall)cRulesAssignment_5.eContents().get(0);
+		private final Assignment cCheckrulesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cCheckrulesCheckRuleParserRuleCall_6_0 = (RuleCall)cCheckrulesAssignment_6.eContents().get(0);
 		
 		//XsemanticsSystem:
-		//	"system" name=QualifiedName imports+=Import* ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-		//	rules+=Rule* checkrules+=CheckRule*;
+		//	"system" name=QualifiedName imports+=Import* injections+=Injected* ("judgments" "{"
+		//	judgmentDescriptions+=JudgmentDescription+ "}")? rules+=Rule* checkrules+=CheckRule*;
 		public ParserRule getRule() { return rule; }
 
-		//"system" name=QualifiedName imports+=Import* ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-		//rules+=Rule* checkrules+=CheckRule*
+		//"system" name=QualifiedName imports+=Import* injections+=Injected* ("judgments" "{"
+		//judgmentDescriptions+=JudgmentDescription+ "}")? rules+=Rule* checkrules+=CheckRule*
 		public Group getGroup() { return cGroup; }
 
 		//"system"
@@ -63,35 +65,41 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		//Import
 		public RuleCall getImportsImportParserRuleCall_2_0() { return cImportsImportParserRuleCall_2_0; }
 
+		//injections+=Injected*
+		public Assignment getInjectionsAssignment_3() { return cInjectionsAssignment_3; }
+
+		//Injected
+		public RuleCall getInjectionsInjectedParserRuleCall_3_0() { return cInjectionsInjectedParserRuleCall_3_0; }
+
 		//("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//"judgments"
-		public Keyword getJudgmentsKeyword_3_0() { return cJudgmentsKeyword_3_0; }
+		public Keyword getJudgmentsKeyword_4_0() { return cJudgmentsKeyword_4_0; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3_1() { return cLeftCurlyBracketKeyword_3_1; }
+		public Keyword getLeftCurlyBracketKeyword_4_1() { return cLeftCurlyBracketKeyword_4_1; }
 
 		//judgmentDescriptions+=JudgmentDescription+
-		public Assignment getJudgmentDescriptionsAssignment_3_2() { return cJudgmentDescriptionsAssignment_3_2; }
+		public Assignment getJudgmentDescriptionsAssignment_4_2() { return cJudgmentDescriptionsAssignment_4_2; }
 
 		//JudgmentDescription
-		public RuleCall getJudgmentDescriptionsJudgmentDescriptionParserRuleCall_3_2_0() { return cJudgmentDescriptionsJudgmentDescriptionParserRuleCall_3_2_0; }
+		public RuleCall getJudgmentDescriptionsJudgmentDescriptionParserRuleCall_4_2_0() { return cJudgmentDescriptionsJudgmentDescriptionParserRuleCall_4_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3_3() { return cRightCurlyBracketKeyword_3_3; }
+		public Keyword getRightCurlyBracketKeyword_4_3() { return cRightCurlyBracketKeyword_4_3; }
 
 		//rules+=Rule*
-		public Assignment getRulesAssignment_4() { return cRulesAssignment_4; }
+		public Assignment getRulesAssignment_5() { return cRulesAssignment_5; }
 
 		//Rule
-		public RuleCall getRulesRuleParserRuleCall_4_0() { return cRulesRuleParserRuleCall_4_0; }
+		public RuleCall getRulesRuleParserRuleCall_5_0() { return cRulesRuleParserRuleCall_5_0; }
 
 		//checkrules+=CheckRule*
-		public Assignment getCheckrulesAssignment_5() { return cCheckrulesAssignment_5; }
+		public Assignment getCheckrulesAssignment_6() { return cCheckrulesAssignment_6; }
 
 		//CheckRule
-		public RuleCall getCheckrulesCheckRuleParserRuleCall_5_0() { return cCheckrulesCheckRuleParserRuleCall_5_0; }
+		public RuleCall getCheckrulesCheckRuleParserRuleCall_6_0() { return cCheckrulesCheckRuleParserRuleCall_6_0; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -116,6 +124,38 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//QualifiedNameWithWildcard
 		public RuleCall getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0; }
+	}
+
+	public class InjectedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Injected");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cInjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		
+		//Injected:
+		//	"inject" type=JvmTypeReference name=ValidID;
+		public ParserRule getRule() { return rule; }
+
+		//"inject" type=JvmTypeReference name=ValidID
+		public Group getGroup() { return cGroup; }
+
+		//"inject"
+		public Keyword getInjectKeyword_0() { return cInjectKeyword_0; }
+
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_0; }
+
+		//name=ValidID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
 	}
 
 	public class JudgmentDescriptionElements extends AbstractParserRuleElementFinder {
@@ -1174,6 +1214,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private XsemanticsSystemElements pXsemanticsSystem;
 	private ImportElements pImport;
+	private InjectedElements pInjected;
 	private JudgmentDescriptionElements pJudgmentDescription;
 	private JudgmentParameterElements pJudgmentParameter;
 	private QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
@@ -1242,8 +1283,8 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//XsemanticsSystem:
-	//	"system" name=QualifiedName imports+=Import* ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-	//	rules+=Rule* checkrules+=CheckRule*;
+	//	"system" name=QualifiedName imports+=Import* injections+=Injected* ("judgments" "{"
+	//	judgmentDescriptions+=JudgmentDescription+ "}")? rules+=Rule* checkrules+=CheckRule*;
 	public XsemanticsSystemElements getXsemanticsSystemAccess() {
 		return (pXsemanticsSystem != null) ? pXsemanticsSystem : (pXsemanticsSystem = new XsemanticsSystemElements());
 	}
@@ -1260,6 +1301,16 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
+	}
+
+	//Injected:
+	//	"inject" type=JvmTypeReference name=ValidID;
+	public InjectedElements getInjectedAccess() {
+		return (pInjected != null) ? pInjected : (pInjected = new InjectedElements());
+	}
+	
+	public ParserRule getInjectedRule() {
+		return getInjectedAccess().getRule();
 	}
 
 	//JudgmentDescription:

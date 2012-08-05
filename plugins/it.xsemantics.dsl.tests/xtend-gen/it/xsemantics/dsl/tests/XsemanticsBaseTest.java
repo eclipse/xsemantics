@@ -251,6 +251,15 @@ public class XsemanticsBaseTest {
     return _findFirst;
   }
   
+  public ExpressionInConclusion expressionInConclusion(final Rule rule, final int index) {
+    RuleConclusion _conclusion = rule.getConclusion();
+    EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
+    List<ExpressionInConclusion> _typeSelect = EcoreUtil2.<ExpressionInConclusion>typeSelect(_conclusionElements, ExpressionInConclusion.class);
+    ExpressionInConclusion _get = _typeSelect.get(index);
+    ExpressionInConclusion _ruleExpression = this.ruleExpression(_get);
+    return _ruleExpression;
+  }
+  
   public ExpressionInConclusion ruleExpression(final RuleConclusionElement ruleConclusionElement) {
     return ((ExpressionInConclusion) ruleConclusionElement);
   }
@@ -322,9 +331,9 @@ public class XsemanticsBaseTest {
     return _get_1;
   }
   
-  public void assertEqualsStrings(final Object o1, final Object o2) {
-    String _plus = ("" + o1);
-    String _plus_1 = ("" + o2);
+  public void assertEqualsStrings(final Object expected, final Object actual) {
+    String _plus = ("" + expected);
+    String _plus_1 = ("" + actual);
     Assert.assertEquals(_plus, _plus_1);
   }
 }

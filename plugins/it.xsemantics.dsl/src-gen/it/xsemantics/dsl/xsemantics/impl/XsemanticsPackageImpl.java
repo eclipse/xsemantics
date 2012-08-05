@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
@@ -18,6 +15,7 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.Import;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
@@ -66,6 +64,13 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * @generated
    */
   private EClass importEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass injectedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -336,7 +341,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_JudgmentDescriptions()
+  public EReference getXsemanticsSystem_Injections()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(2);
   }
@@ -346,7 +351,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Rules()
+  public EReference getXsemanticsSystem_JudgmentDescriptions()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(3);
   }
@@ -356,9 +361,19 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Checkrules()
+  public EReference getXsemanticsSystem_Rules()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getXsemanticsSystem_Checkrules()
+  {
+    return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -379,6 +394,36 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInjected()
+  {
+    return injectedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getInjected_Type()
+  {
+    return (EReference)injectedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInjected_Name()
+  {
+    return (EAttribute)injectedEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1044,12 +1089,17 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     xsemanticsSystemEClass = createEClass(XSEMANTICS_SYSTEM);
     createEAttribute(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__NAME);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__IMPORTS);
+    createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__INJECTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__RULES);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__CHECKRULES);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+
+    injectedEClass = createEClass(INJECTED);
+    createEReference(injectedEClass, INJECTED__TYPE);
+    createEAttribute(injectedEClass, INJECTED__NAME);
 
     judgmentDescriptionEClass = createEClass(JUDGMENT_DESCRIPTION);
     createEAttribute(judgmentDescriptionEClass, JUDGMENT_DESCRIPTION__NAME);
@@ -1164,8 +1214,8 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
     TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
 
@@ -1191,12 +1241,17 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEClass(xsemanticsSystemEClass, XsemanticsSystem.class, "XsemanticsSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXsemanticsSystem_Name(), ecorePackage.getEString(), "name", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Imports(), this.getImport(), null, "imports", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getXsemanticsSystem_Injections(), this.getInjected(), null, "injections", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_JudgmentDescriptions(), this.getJudgmentDescription(), null, "judgmentDescriptions", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Rules(), this.getRule(), null, "rules", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Checkrules(), this.getCheckRule(), null, "checkrules", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(injectedEClass, Injected.class, "Injected", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getInjected_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, Injected.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInjected_Name(), ecorePackage.getEString(), "name", null, 0, 1, Injected.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(judgmentDescriptionEClass, JudgmentDescription.class, "JudgmentDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getJudgmentDescription_Name(), ecorePackage.getEString(), "name", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -270,8 +270,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     
+    return new Result<EClass>(EObjectEClass_exp_1(G, _trace_, eObject));
+  }
+  
+  private EClass EObjectEClass_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     EClass _eClass = eObject.eClass();
-    return new Result<EClass>(_eClass);
+    return _eClass;
   }
   
   protected Result<EClass> etype2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {

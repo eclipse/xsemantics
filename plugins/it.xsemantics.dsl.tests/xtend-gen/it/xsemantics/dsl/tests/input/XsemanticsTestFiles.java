@@ -3102,4 +3102,119 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testSystemWithInjections() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/* a utility field */");
+    _builder.newLine();
+    _builder.append("inject List<String> strings");
+    _builder.newLine();
+    _builder.append("inject String myString");
+    _builder.newLine();
+    _builder.append("/* another utility field */");
+    _builder.newLine();
+    _builder.append("inject List<EClass> eClasses");
+    _builder.newLine();
+    _builder.append("inject List<EClass> classes");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject o : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testAccessToInjectedFields() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testSystemWithInjections = this.testSystemWithInjections();
+    _builder.append(_testSystemWithInjections, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(o)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(myString)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("strings.add(myString)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eClasses.add(o.eClass)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testAccessToInjectedFieldsInExpressionInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testSystemWithInjections = this.testSystemWithInjections();
+    _builder.append(_testSystemWithInjections, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : classes.get(0)");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testAccessToThisInExpressionInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testSystemWithInjections = this.testSystemWithInjections();
+    _builder.append(_testSystemWithInjections, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(this);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("clone(o).eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testTwoExpressionsInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testJudgmentDescriptionsWith2OutputParams();
+    _builder.append(_testJudgmentDescriptionsWith2OutputParams, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom TwoExpressionsInConclusion");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass cl : cl : cl.EAllStructuralFeatures.head");
+    _builder.newLine();
+    return _builder;
+  }
 }
