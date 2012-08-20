@@ -501,12 +501,8 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTTypedElement(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     
-    return new Result<Type>(TTypedElement_exp_1(G, _trace_, typedElement));
-  }
-  
-  private Type TTypedElement_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     Type _type = typedElement.getType();
-    return _type;
+    return new Result<Type>(_type);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
@@ -526,13 +522,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     
-    return new Result<Type>(TThis_exp_1(G, _trace_, _this));
-  }
-  
-  private ClassType TThis_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     /* env(G, 'this', ClassType) */
     ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    return _environmentaccess;
+    return new Result<Type>(_environmentaccess);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
@@ -552,12 +544,8 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     
-    return new Result<Type>(TNew_exp_1(G, _trace_, newExp));
-  }
-  
-  private ClassType TNew_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     ClassType _type = newExp.getType();
-    return _type;
+    return new Result<Type>(_type);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
@@ -604,17 +592,13 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTStringConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringConstant s) throws RuleFailedException {
     
-    return new Result<Type>(TStringConstant_exp_1(G, _trace_, s));
-  }
-  
-  private BasicType TStringConstant_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringConstant s) throws RuleFailedException {
     BasicType _xblockexpression = null;
     {
       final BasicType result = FjFactory.eINSTANCE.createBasicType();
       result.setBasic("String");
       _xblockexpression = (result);
     }
-    return _xblockexpression;
+    return new Result<Type>(_xblockexpression);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
@@ -634,12 +618,8 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTIntConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
     
-    return new Result<Type>(TIntConstant_exp_1(G, _trace_, i));
-  }
-  
-  private BasicType TIntConstant_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
     BasicType _createIntType = FjTypeUtils.createIntType();
-    return _createIntType;
+    return new Result<Type>(_createIntType);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BoolConstant b) throws RuleFailedException {
@@ -659,10 +639,6 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTBoolConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BoolConstant b) throws RuleFailedException {
     
-    return new Result<Type>(TBoolConstant_exp_1(G, _trace_, b));
-  }
-  
-  private BasicType TBoolConstant_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BoolConstant b) throws RuleFailedException {
     final Function1<BasicType,BasicType> _function = new Function1<BasicType,BasicType>() {
         public BasicType apply(final BasicType it) {
           BasicType _xblockexpression = null;
@@ -675,7 +651,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       };
     BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
     BasicType _apply = _function.apply(_createBasicType);
-    return _apply;
+    return new Result<Type>(_apply);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
@@ -722,12 +698,8 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTCast(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     
-    return new Result<Type>(TCast_exp_1(G, _trace_, cast));
-  }
-  
-  private ClassType TCast_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     ClassType _type = cast.getType();
-    return _type;
+    return new Result<Type>(_type);
   }
   
   protected Result<ClassType> classtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression) throws RuleFailedException {

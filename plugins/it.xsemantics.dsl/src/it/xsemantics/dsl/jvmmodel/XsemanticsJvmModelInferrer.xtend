@@ -3,8 +3,10 @@ package it.xsemantics.dsl.jvmmodel
 import com.google.inject.Inject
 import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
@@ -15,26 +17,20 @@ import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
+import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.validation.Check
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import it.xsemantics.dsl.xsemantics.RuleConclusion
-import org.eclipse.xtext.xbase.typing.ITypeProvider
-
-import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -56,8 +52,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension TypeReferenceSerializer
 	
 	@Inject extension TypeReferences
-	
-	@Inject extension ITypeProvider
 	
 	@Inject XsemanticsXbaseCompiler xbaseCompiler
 	
@@ -159,10 +153,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				if (rule.judgmentDescription != null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
-					rule.expressionsInConclusion.forEach [
-						e |
-						members += e.expressionInConclusionToMethod
-					]
 				}
 			]
 		]
@@ -619,6 +609,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compileRuleBody(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
 		compilePremises(rule, result)
+		compileRuleConclusionElements(rule, result)
 		compileReturnResult(rule, resultType, result)
 	}
 	
@@ -632,6 +623,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
 	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
 		xbaseCompiler.compile(rule.premises, result, false)
+	}
+	
+	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {
+		rule.expressionsInConclusion.forEach([
+			xbaseCompiler.compile(it.expression, result, true)
+		])
 	}
 	
 	def compileReturnResult(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
@@ -653,9 +650,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					RuleParameter: 
 						result.append(result.getName(elem.parameter))
 					ExpressionInConclusion: 
-						result.append(
-						'''«elem.nameOfExpressionInConclusion»(«rule.ruleEnvName», «ruleApplicationTraceName», «rule.inputArgs»)'''
-						)
+						xbaseCompiler.compileAsJavaExpression(elem.expression, result)
 				}
 				if (iterator.hasNext)
 					result.append(", ")
@@ -664,36 +659,5 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		result.append(");")
 	}
 
-	def expressionInConclusionToMethod(ExpressionInConclusion exp) {
-		val rule = exp.containingRule
-		exp.toMethod(
-			exp.nameOfExpressionInConclusion,
-			exp.expression.type
-		) 
-		[
-			visibility = JvmVisibility::PRIVATE
-			
-			exceptions += exp.ruleFailedExceptionType
-			
-			parameters += rule.paramForEnvironment
-   			parameters += rule.ruleApplicationTraceParam
-   			parameters += rule.inputParameters
-   			
-   			body = exp.expression
-		]
-	}
-
-	def nameOfExpressionInConclusion(ExpressionInConclusion e) {
-		e.containingRule.name + "_exp_" + 
-			((e.eContainer as RuleConclusion).conclusionElements.
-				typeSelect(typeof(ExpressionInConclusion)).indexOf(e) + 1)
-	}
-
-	/**
-	 * a generic method computing the index of an AST object between its siblings
-	 */
-	def protected index(EObject obj) {
-		obj.eContainer.eContents.indexOf(obj)
-	}
 }
 

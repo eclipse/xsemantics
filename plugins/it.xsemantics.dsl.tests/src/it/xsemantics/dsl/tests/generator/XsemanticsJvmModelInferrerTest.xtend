@@ -202,7 +202,8 @@ protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final 
 '''
 protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
     
-    return new Result<EClass>(EObjectEClass_exp_1(G, _trace_, object));
+    EClass _eClass = object.eClass();
+    return new Result<EClass>(_eClass);
   }'''
 )
 	}
@@ -338,17 +339,6 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 )
 	}
 
-	@Test
-	def testNameOfExpressionInConclusion() {
-		val rule = testFiles.testTwoExpressionsInConclusion.firstRule
-		assertEqualsStrings("TwoExpressionsInConclusion_exp_1", 
-			rule.expressionInConclusion(0).nameOfExpressionInConclusion
-		)
-		assertEqualsStrings("TwoExpressionsInConclusion_exp_2", 
-			rule.expressionInConclusion(1).nameOfExpressionInConclusion
-		)
-	}
-	
 	def assertIssueField(CharSequence prog, CharSequence expected) {
 		val field = inferrer.genIssueField(prog.firstRule)
 		field.assertGeneratedMember(expected)

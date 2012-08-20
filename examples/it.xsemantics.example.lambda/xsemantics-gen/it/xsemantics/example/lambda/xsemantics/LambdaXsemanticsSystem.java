@@ -474,15 +474,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     
     /* fail */
     throwForExplicitFail();
-    return new Result2<Type,Type>(UnifyType_exp_1(G, _trace_, substitutions, t1, t2), UnifyType_exp_2(G, _trace_, substitutions, t1, t2));
-  }
-  
-  private Type UnifyType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
-    return t1;
-  }
-  
-  private Type UnifyType_exp_2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
-    return t2;
+    return new Result2<Type,Type>(t1, t2);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
@@ -502,17 +494,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<Type,Type> applyRuleUnifyStringType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     
-    return new Result2<Type,Type>(UnifyStringType_exp_1(G, _trace_, substitutions, t1, t2), UnifyStringType_exp_2(G, _trace_, substitutions, t1, t2));
-  }
-  
-  private StringType UnifyStringType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     StringType _copy = EcoreUtil.<StringType>copy(t1);
-    return _copy;
-  }
-  
-  private StringType UnifyStringType_exp_2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
-    StringType _copy = EcoreUtil.<StringType>copy(t2);
-    return _copy;
+    StringType _copy_1 = EcoreUtil.<StringType>copy(t2);
+    return new Result2<Type,Type>(_copy, _copy_1);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
@@ -532,17 +516,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<Type,Type> applyRuleUnifyIntType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     
-    return new Result2<Type,Type>(UnifyIntType_exp_1(G, _trace_, substitutions, t1, t2), UnifyIntType_exp_2(G, _trace_, substitutions, t1, t2));
-  }
-  
-  private IntType UnifyIntType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     IntType _copy = EcoreUtil.<IntType>copy(t1);
-    return _copy;
-  }
-  
-  private IntType UnifyIntType_exp_2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
-    IntType _copy = EcoreUtil.<IntType>copy(t2);
-    return _copy;
+    IntType _copy_1 = EcoreUtil.<IntType>copy(t2);
+    return new Result2<Type,Type>(_copy, _copy_1);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
@@ -569,12 +545,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       String _typevarName = typeVar.getTypevarName();
       substitutions.add(_typevarName, result);
     }
-    return new Result2<Type,Type>(UnifyTypeVariableBasicType_exp_1(G, _trace_, substitutions, typeVar, basicType), result);
-  }
-  
-  private BasicType UnifyTypeVariableBasicType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
-    BasicType _copy = EcoreUtil.<BasicType>copy(basicType);
-    return _copy;
+    BasicType _copy_1 = EcoreUtil.<BasicType>copy(basicType);
+    return new Result2<Type,Type>(_copy_1, result);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
@@ -664,12 +636,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       String _typevarName = originalLeft.getTypevarName();
       substitutions.add(_typevarName, newLeft);
     }
-    return new Result2<Type,Type>(newLeft, UnifyTypeVariableArrowType_exp_1(G, _trace_, substitutions, originalLeft, originalRight));
-  }
-  
-  private ArrowType UnifyTypeVariableArrowType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
-    ArrowType _copy = EcoreUtil.<ArrowType>copy(originalRight);
-    return _copy;
+    ArrowType _copy_1 = EcoreUtil.<ArrowType>copy(originalRight);
+    return new Result2<Type,Type>(newLeft, _copy_1);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
@@ -810,13 +778,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleStringConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     
-    return new Result<Type>(StringConstantType_exp_1(G, _trace_, substitutions, stringConstant));
-  }
-  
-  private StringType StringConstantType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     LambdaUtils _lambdaUtils = this.getLambdaUtils();
     StringType _createStringType = _lambdaUtils.createStringType();
-    return _createStringType;
+    return new Result<Type>(_createStringType);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
@@ -836,13 +800,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleIntConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     
-    return new Result<Type>(IntConstantType_exp_1(G, _trace_, substitutions, intConstant));
-  }
-  
-  private IntType IntConstantType_exp_1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     LambdaUtils _lambdaUtils = this.getLambdaUtils();
     IntType _createIntType = _lambdaUtils.createIntType();
-    return _createIntType;
+    return new Result<Type>(_createIntType);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
