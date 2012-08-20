@@ -208,6 +208,8 @@ import it.xsemantics.example.lambda.xsemantics.*
 
 import org.eclipse.emf.ecore.util.*
 
+inject LambdaUtils lambdaUtils
+
 judgments {
 	type |- TypeSubstitutions substitutions |> Term term : output Type
 	paramtype |~ Parameter param : output Type
@@ -399,7 +401,7 @@ rule UnifyTypeVariables
 		~> TypeVariable newLeft ~~ TypeVariable newRight
 from {
 	// unify both variables with a fresh new variable
-	newLeft = LambdaUtils::createFreshTypeVariable
+	newLeft = lambdaUtils.createFreshTypeVariable
 	newRight = EcoreUtil::copy(newLeft)
 	substitutions.add(originalLeft.typevarName, newLeft)
 	substitutions.add(originalRight.typevarName, newRight)
@@ -463,7 +465,7 @@ from {
 		type = EcoreUtil::copy(param.type)
 	}
 	or
-	type = LambdaUtils::createFreshTypeVariable
+	type = lambdaUtils.createFreshTypeVariable
 }
 ]
 
@@ -478,11 +480,11 @@ apply the possible substitutions computed so far.
 code[Xsemantics][
 axiom StringConstantType
 	G |- TypeSubstitutions substitutions |> 
-		StringConstant stringConstant : LambdaUtils::createStringType
+		StringConstant stringConstant : lambdaUtils.createStringType
 
 axiom IntConstantType
 	G |- TypeSubstitutions substitutions |> 
-		IntConstant intConstant : LambdaUtils::createIntType
+		IntConstant intConstant : lambdaUtils.createIntType
 ]
 
 The typing of constants is trivial.
@@ -525,7 +527,7 @@ rule ArithmeticsType
 	G |- TypeSubstitutions substitutions |> 
 		Arithmetics arithmetics : IntType intType
 from {
-	intType = LambdaUtils::createIntType
+	intType = lambdaUtils.createIntType
 	G |- substitutions |> arithmetics.term : var Type termType
 	// the term type must be unifiable with int type
 	G |- substitutions |> termType ~~ intType ~> intType ~~ intType
@@ -545,7 +547,7 @@ from {
 		substitutions |> abstraction.term : var Type termType
 	G |- substitutions |> paramType ~> paramType
 	G |- substitutions |> termType ~> termType
-	type = LambdaUtils::createArrowType(paramType, termType)
+	type = lambdaUtils.createArrowType(paramType, termType)
 }
 ]
 
@@ -562,7 +564,7 @@ from {
 	G |- substitutions |> application.fun : var Type funType
 	
 	// make sure funType can be unified ArrowType
-	var arrowType = LambdaUtils::createFreshArrowType
+	var arrowType = lambdaUtils.createFreshArrowType
 	G |- substitutions |> funType ~~ arrowType ~> funType ~~ arrowType
 	
 	G |- substitutions |> application.arg : var Type argType
@@ -659,7 +661,7 @@ code[Xsemantics][
 checkrule CheckProgram for
 	Program program
 from {
-	LambdaUtils::resetCounter
+	lambdaUtils.resetCounter
 	// if we can type the program term
 	empty |- new TypeSubstitutions() |> program.term : var Type type
 }

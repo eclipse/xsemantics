@@ -128,9 +128,14 @@ BoolConstant: constant = ('true' | 'false');
 section:FJTypeSystem[FJ Type System]
 
 We start by defining the name (we skip imports) and the judgments
+(ref:Judgments[]); we also use an injected field (ref:InjectedFields[])
+of type codeRef[it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions]
+which contains some auxiliary functions that we will use in the rules.
 
 code[Xsemantics][
 system it.xsemantics.example.fj.typing.FjTypeSystem
+
+inject FjAuxiliaryFunctions fjAux
 
 judgments {
 	type |- Expression expression : output Type
@@ -299,6 +304,8 @@ code[Java][
 public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject FjTypeSystem typeSystem;
+	
+	@Inject	FjAuxiliaryFunctions fjAux;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -306,7 +313,7 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 			if (context instanceof Selection) {
 				Selection selection = (Selection) context;
 				return Scopes
-						.scopeFor(FjAuxiliaryFunctions
+						.scopeFor(fjAux
 								.getMembers(getExpressionClass(selection
 										.getReceiver())));
 			}
@@ -617,7 +624,7 @@ from {
 		// check override predicate
 		inheritedMethods.forEach \[
 			inheritedMethod |
-			FjAuxiliaryFunctions::selectMethods(clazz).forEach \[
+			fjAux.selectMethods(clazz).forEach \[
 				empty ||- it ~~ inheritedMethod
 			\]
 		\]
@@ -627,7 +634,8 @@ from {
 
 Note the use of Xbase closure (please refer to ref:ExpressionsInPremises[]
 for the way Xsemantics interprets boolean expressions inside premises and
-closures).
+closures).  We also use the injected field (ref:InjectedFields[]) code[fjAux]
+that we declared at the beginning in the system.
 
 For a code[Class] we need to check that its superclass hierarchy is
 not cyclic:

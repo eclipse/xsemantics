@@ -1,6 +1,7 @@
 package it.xsemantics.test.fj.alt;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -96,6 +97,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String CHECKCLASS = "it.xsemantics.test.fj.alt.rules.CheckClass";
   
+  @Inject
+  private FjAuxiliaryFunctions fjAux;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<ClassType>> classtypeDispatcher;
@@ -133,6 +137,14 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     	"subclassImpl", 4, "|-", "<|");
     checkDispatcher = buildPolymorphicDispatcher1(
     	"checkImpl", 3, "|-");
+  }
+  
+  public FjAuxiliaryFunctions getFjAux() {
+    return this.fjAux;
+  }
+  
+  public void setFjAux(final FjAuxiliaryFunctions fjAux) {
+    this.fjAux = fjAux;
   }
   
   public Result<Type> type(final Expression expression) {
@@ -1123,7 +1135,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     {
       ClassType _type = newExp.getType();
       it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-      List<Field> fields = FjAuxiliaryFunctions.getFields(_classref);
+      List<Field> fields = this.fjAux.getFields(_classref);
       /* G |- newExp : newExp.args << fields */
       EList<Expression> _args = newExp.getArgs();
       subtypesequenceInternal(G, _trace_, newExp, _args, fields);
@@ -1243,7 +1255,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     boolean _notEquals = (!Objects.equal(_superclass, null));
     if (_notEquals) {
       {
-        List<it.xsemantics.example.fj.fj.Class> superClasses = FjAuxiliaryFunctions.getSuperclasses(cl);
+        List<it.xsemantics.example.fj.fj.Class> superClasses = this.fjAux.getSuperclasses(cl);
         boolean _contains = superClasses.contains(cl);
         boolean _not = (!_contains);
         /* !superClasses.contains(cl) */
@@ -1251,10 +1263,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
           sneakyThrowRuleFailedException("!superClasses.contains(cl)");
         }
         it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
-        List<Field> inheritedFields = FjAuxiliaryFunctions.getFields(_superclass_1);
+        List<Field> inheritedFields = this.fjAux.getFields(_superclass_1);
         final Procedure1<Field> _function = new Procedure1<Field>() {
             public void apply(final Field inheritedField) {
-              List<Field> _selectFields = FjAuxiliaryFunctions.selectFields(cl);
+              List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
               for (final Field field : _selectFields) {
                 /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
                 try {
@@ -1278,10 +1290,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
           };
         IterableExtensions.<Field>forEach(inheritedFields, _function);
         it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
-        List<Method> inheritedMethods = FjAuxiliaryFunctions.getMethods(_superclass_2);
+        List<Method> inheritedMethods = this.fjAux.getMethods(_superclass_2);
         final Procedure1<Method> _function_1 = new Procedure1<Method>() {
             public void apply(final Method inheritedMethod) {
-              List<Method> _selectMethods = FjAuxiliaryFunctions.selectMethods(cl);
+              List<Method> _selectMethods = FjAltTypeSystem.this.fjAux.selectMethods(cl);
               final Procedure1<Method> _function = new Procedure1<Method>() {
                   public void apply(final Method it) {
                     /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */

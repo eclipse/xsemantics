@@ -12,6 +12,10 @@
 			</topic>
 		</topic>
 		<topic href="contents/XsemanticsSyntax.html#Syntax" label="Xsemantics Syntax" >
+			<topic href="contents/XsemanticsSyntax.html#InjectedFields" label="Injected Fields" >
+			</topic>
+			<topic href="contents/XsemanticsSyntax.html#Judgments" label="Judgments" >
+			</topic>
 			<topic href="contents/XsemanticsSyntax.html#Premises" label="Premises" >
 				<topic href="contents/XsemanticsSyntax.html#ExpressionsInPremises" label="Expressions in Premises" >
 				</topic>

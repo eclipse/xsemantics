@@ -19,6 +19,8 @@ import com.google.common.collect.Lists
 
 import java.util.*
 
+inject FjAuxiliaryFunctions fjAux
+
 judgments {
 	type |- Expression expression : output Type
 		error "cannot type " + stringRep(expression)
@@ -260,7 +262,7 @@ from {
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			FjAuxiliaryFunctions::selectMethods(clazz).forEach [
+			fjAux.selectMethods(clazz).forEach [
 				empty ||- it ~~ inheritedMethod
 			]
 		]

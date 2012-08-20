@@ -16,40 +16,40 @@ import it.xsemantics.example.lambda.lambda.TypeVariable;
  */
 public class LambdaUtils {
 
-	protected static int counter = 0;
+	protected int counter = 0;
 
-	public static void resetCounter() {
+	public void resetCounter() {
 		counter = 0;
 	}
 
-	public static TypeVariable createTypeVariable(String name) {
+	public TypeVariable createTypeVariable(String name) {
 		TypeVariable typeVariable = LambdaFactory.eINSTANCE
 				.createTypeVariable();
 		typeVariable.setTypevarName(name);
 		return typeVariable;
 	}
 
-	public static TypeVariable createFreshTypeVariable() {
+	public TypeVariable createFreshTypeVariable() {
 		return createTypeVariable("X" + ++counter);
 	}
 
-	public static ArrowType createFreshArrowType() {
+	public ArrowType createFreshArrowType() {
 		return createArrowType(createFreshTypeVariable(),
 				createFreshTypeVariable());
 	}
 
-	public static ArrowType createArrowType(Type left, Type right) {
+	public ArrowType createArrowType(Type left, Type right) {
 		ArrowType arrowType = LambdaFactory.eINSTANCE.createArrowType();
 		arrowType.setLeft(left);
 		arrowType.setRight(right);
 		return arrowType;
 	}
 
-	public static StringType createStringType() {
+	public StringType createStringType() {
 		return LambdaFactory.eINSTANCE.createStringType();
 	}
 
-	public static IntType createIntType() {
+	public IntType createIntType() {
 		return LambdaFactory.eINSTANCE.createIntType();
 	}
 }

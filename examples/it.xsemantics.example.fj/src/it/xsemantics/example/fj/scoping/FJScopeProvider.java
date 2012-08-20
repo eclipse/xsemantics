@@ -33,6 +33,9 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	FjTypeSystem typeSystem;
+	
+	@Inject
+	FjAuxiliaryFunctions fjAux;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -40,9 +43,8 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 			if (context instanceof Selection) {
 				Selection selection = (Selection) context;
 				return Scopes
-						.scopeFor(FjAuxiliaryFunctions
-								.getMembers(getExpressionClass(selection
-										.getReceiver())));
+						.scopeFor(fjAux.getMembers(getExpressionClass(selection
+								.getReceiver())));
 			}
 			return IScope.NULLSCOPE;
 		}

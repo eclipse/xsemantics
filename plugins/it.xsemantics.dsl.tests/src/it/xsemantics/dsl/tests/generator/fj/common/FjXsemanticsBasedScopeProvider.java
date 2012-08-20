@@ -29,9 +29,12 @@ public class FjXsemanticsBasedScopeProvider extends
 	@Inject
 	IFjTypeSystem typeSystem;
 
+	@Inject
+	FjAuxiliaryFunctions fjAux;
+
 	public IScope scope_Member(Selection sel, EReference ref) {
-		return Scopes.scopeFor(FjAuxiliaryFunctions
-				.getMembers(getExpressionClass(sel.getReceiver())));
+		return Scopes.scopeFor(fjAux.getMembers(getExpressionClass(sel
+				.getReceiver())));
 	}
 
 	protected Class getExpressionClass(Expression receiver) {

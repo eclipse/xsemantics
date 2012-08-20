@@ -6,7 +6,6 @@ import it.xsemantics.example.lambda.lambda.Type;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.tests.LambdaBaseTest;
 import it.xsemantics.example.lambda.tests.LambdaInjectorWithNonBeautifiedTypesProvider;
-import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
 import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions;
 import it.xsemantics.runtime.Result;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -30,7 +29,7 @@ public class LambdaTypeSubstitutionTest extends LambdaBaseTest {
   
   @Test
   public void testTypeVariableSubstitution() {
-    TypeVariable _createFreshTypeVariable = LambdaUtils.createFreshTypeVariable();
+    TypeVariable _createFreshTypeVariable = this.lambdaUtils.createFreshTypeVariable();
     Result<Type> _typesubstitution = this.system.typesubstitution(this.substitutions, _createFreshTypeVariable);
     this.<Type>assertResultAsString(_typesubstitution, 
       "X1");
@@ -38,9 +37,9 @@ public class LambdaTypeSubstitutionTest extends LambdaBaseTest {
   
   @Test
   public void testTypeVariableSubstitutionRecursive() {
-    final TypeVariable firstVariable = LambdaUtils.createFreshTypeVariable();
-    final TypeVariable secondVariable = LambdaUtils.createFreshTypeVariable();
-    final TypeVariable thirdVariable = LambdaUtils.createFreshTypeVariable();
+    final TypeVariable firstVariable = this.lambdaUtils.createFreshTypeVariable();
+    final TypeVariable secondVariable = this.lambdaUtils.createFreshTypeVariable();
+    final TypeVariable thirdVariable = this.lambdaUtils.createFreshTypeVariable();
     String _typevarName = firstVariable.getTypevarName();
     this.substitutions.add(_typevarName, secondVariable);
     String _typevarName_1 = secondVariable.getTypevarName();
@@ -52,10 +51,10 @@ public class LambdaTypeSubstitutionTest extends LambdaBaseTest {
   
   @Test
   public void testArrowTypeSubstitutionRecursive() {
-    final TypeVariable firstVariable = LambdaUtils.createFreshTypeVariable();
-    final TypeVariable secondVariable = LambdaUtils.createFreshTypeVariable();
-    final TypeVariable thirdVariable = LambdaUtils.createFreshTypeVariable();
-    final ArrowType arrowType = LambdaUtils.createArrowType(firstVariable, secondVariable);
+    final TypeVariable firstVariable = this.lambdaUtils.createFreshTypeVariable();
+    final TypeVariable secondVariable = this.lambdaUtils.createFreshTypeVariable();
+    final TypeVariable thirdVariable = this.lambdaUtils.createFreshTypeVariable();
+    final ArrowType arrowType = this.lambdaUtils.createArrowType(firstVariable, secondVariable);
     String _typevarName = firstVariable.getTypevarName();
     this.substitutions.add(_typevarName, secondVariable);
     String _typevarName_1 = secondVariable.getTypevarName();

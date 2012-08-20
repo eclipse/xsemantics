@@ -19,6 +19,8 @@ import com.google.common.collect.Lists
 
 import java.util.*
 
+inject FjAuxiliaryFunctions fjAux
+
 judgments {
 	type |- Expression expression : output Type
 		error "cannot type " + stringRep(expression)
@@ -272,7 +274,7 @@ from {
 		// make sure no duplicate fields in the hierarchy
 		inheritedFields.forEach [
 			inheritedField |
-			for (field : FjAuxiliaryFunctions::selectFields(cl)) {
+			for (field : fjAux.selectFields(cl)) {
 				field.name != inheritedField.name
 			}
 		]
@@ -286,7 +288,7 @@ from {
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			FjAuxiliaryFunctions::selectMethods(cl).forEach [
+			fjAux.selectMethods(cl).forEach [
 				G ||- it ~~ inheritedMethod
 			]
 		]

@@ -31,7 +31,7 @@ public class FjAuxiliaryFunctions {
 	 * @param cl
 	 * @return the fields of a class (including the inherited ones)
 	 */
-	public static List<Field> getFields(Class cl) {
+	public List<Field> getFields(Class cl) {
 		if (cl == null)
 			return Collections.emptyList();
 		
@@ -45,7 +45,7 @@ public class FjAuxiliaryFunctions {
 		return fields;
 	}
 	
-	public static List<Field> selectFields(Class cl) {
+	public List<Field> selectFields(Class cl) {
 		return EcoreUtil2.typeSelect(
 				cl.getMembers(), Field.class);
 	}
@@ -57,7 +57,7 @@ public class FjAuxiliaryFunctions {
 	 * @param cl
 	 * @return the methods of a class (including the inherited ones)
 	 */
-	public static List<Method> getMethods(Class cl) {
+	public List<Method> getMethods(Class cl) {
 		if (cl == null)
 			return Collections.emptyList();
 		
@@ -81,7 +81,7 @@ public class FjAuxiliaryFunctions {
 		return new LinkedList<Method>(methodMap.values());
 	}
 	
-	public static List<Method> selectMethods(Class cl) {
+	public List<Method> selectMethods(Class cl) {
 		return EcoreUtil2.typeSelect(
 				cl.getMembers(), Method.class);
 	}
@@ -110,7 +110,7 @@ public class FjAuxiliaryFunctions {
 	 * @param cl
 	 * @return the superclasses of a given class (without duplicates)
 	 */
-	public static List<Class> getSuperclasses(Class cl) {
+	public List<Class> getSuperclasses(Class cl) {
 		List<Class> orderedSuperClasses = new LinkedList<Class>();
 		// only used to avoid loops.
 		ClassSet superClasses = new ClassSet();
@@ -128,7 +128,7 @@ public class FjAuxiliaryFunctions {
 		return orderedSuperClasses;
 	}
 
-	public static List<Member> getMembers(Class cl) {
+	public List<Member> getMembers(Class cl) {
 		List<Member> allMembers = new LinkedList<Member>();
 		allMembers.addAll(getFields(cl));
 		allMembers.addAll(getMethods(cl));

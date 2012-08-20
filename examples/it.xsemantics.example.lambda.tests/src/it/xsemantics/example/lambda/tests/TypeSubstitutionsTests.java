@@ -3,12 +3,10 @@
  */
 package it.xsemantics.example.lambda.tests;
 
-import static it.xsemantics.example.lambda.xsemantics.LambdaUtils.createFreshTypeVariable;
-import junit.framework.Assert;
 import it.xsemantics.example.lambda.lambda.Type;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
-import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
 import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions;
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,14 +21,14 @@ public class TypeSubstitutionsTests extends LambdaBaseTest {
 	
 	@Before
 	public void setUp() {
-		LambdaUtils.resetCounter();
+		lambdaUtils.resetCounter();
 		substitutions = new TypeSubstitutions();
 	}
 	
 	@Test
 	public void testWithMappedVar() {
-		TypeVariable typeVariable = createFreshTypeVariable();
-		addSubst(typeVariable, createFreshTypeVariable());
+		TypeVariable typeVariable = lambdaUtils.createFreshTypeVariable();
+		addSubst(typeVariable, lambdaUtils.createFreshTypeVariable());
 		Type mapped = mapped(typeVariable);
 		Assert.assertTrue(mapped != null);
 		assertTypeVariable(mapped, "X2");
@@ -38,8 +36,8 @@ public class TypeSubstitutionsTests extends LambdaBaseTest {
 	
 	@Test
 	public void testReset() {
-		TypeVariable typeVariable = createFreshTypeVariable();
-		addSubst(typeVariable, createFreshTypeVariable());
+		TypeVariable typeVariable = lambdaUtils.createFreshTypeVariable();
+		addSubst(typeVariable, lambdaUtils.createFreshTypeVariable());
 		substitutions.reset();
 		Type mapped = mapped(typeVariable);
 		Assert.assertTrue(mapped == null);

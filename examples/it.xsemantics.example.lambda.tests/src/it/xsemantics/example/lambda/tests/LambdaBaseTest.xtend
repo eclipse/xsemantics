@@ -56,6 +56,8 @@ class LambdaBaseTest {
 	
 	@Inject protected LambdaStringRepresentationWithTypeBeautifier reprBeautifier
 	
+	@Inject protected LambdaUtils lambdaUtils
+	
 	protected RuleApplicationTrace trace
 	
 	@BeforeClass
@@ -65,7 +67,7 @@ class LambdaBaseTest {
 	
 	@Before
 	def void setUp() {
-		LambdaUtils::resetCounter
+		lambdaUtils.resetCounter
 		substitutions = new TypeSubstitutions()
 		trace = new RuleApplicationTrace()
 	}

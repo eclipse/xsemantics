@@ -5,6 +5,8 @@ you can specify code[Xsemantics][import]s like in Java (without the terminating 
 possibly with a terminating code[*] in order to import all the classes of that
 Java package.
 
+section:InjectedFields[Injected Fields]
+
 You can then specify code[Xsemantics][inject] fields which can then be used
 in all the rules of your system.
 
@@ -16,6 +18,8 @@ inject MyOtherUtilityClass bar
 Remember that these will correspond to fields in the generated Java class
 (ref:CodeGeneration[]),
 that will be instantiated through Guice injection.
+
+section:Judgments[Judgments]
 
 Then, you have to declare the e[judgments] of your system;
 a judgment consists of

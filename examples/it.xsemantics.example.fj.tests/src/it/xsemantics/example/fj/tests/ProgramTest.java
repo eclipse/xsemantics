@@ -207,6 +207,7 @@ public class ProgramTest extends TestWithLoader {
 	 * @throws IOException
 	 */
 	public void testFragments() throws IOException {
+		FjAuxiliaryFunctions aux = new FjAuxiliaryFunctions();
 		Program program = getProgramFromString("class A { B b; A c; C m(Object a) { return new C(); } } class B {} class C {}");
 		FragmentPrinter fragmentPrinter = new FragmentPrinter();
 		//fragmentPrinter.printFragment(program.eResource());
@@ -218,15 +219,15 @@ public class ProgramTest extends TestWithLoader {
 				.get(2));
 		String fragmentToString_btype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
-						FjAuxiliaryFunctions.selectFields(program.getClasses().get(0)).get(0)
+						aux.selectFields(program.getClasses().get(0)).get(0)
 								.getType()).getClassref());
 		String fragmentToString_ctype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
-						FjAuxiliaryFunctions.selectFields(program.getClasses().get(0)).get(1)
+						aux.selectFields(program.getClasses().get(0)).get(1)
 								.getType()).getClassref());
 		String fragmentToString_mrettype = fragmentPrinter
 				.fragmentToString(AuxiliaryFunctions.getClassType(
-						FjAuxiliaryFunctions.selectMethods(program.getClasses().get(0)).get(0)
+						aux.selectMethods(program.getClasses().get(0)).get(0)
 								.getType()).getClassref());
 		
 		assertEquals(fragmentToStringB, fragmentToString_btype);

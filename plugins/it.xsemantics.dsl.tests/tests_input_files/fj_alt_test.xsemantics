@@ -16,6 +16,8 @@ import com.google.common.collect.Lists
 
 import java.util.*
 
+inject FjAuxiliaryFunctions fjAux
+
 judgments {
 	type |- Expression expression : output Type
 	classtype ||~ Expression expression : output ClassType
@@ -189,7 +191,7 @@ from {
 rule CheckNew derives
 	G |- New newExp
 from {
-	var fields = FjAuxiliaryFunctions::getFields(newExp.type.classref)
+	var fields = fjAux.getFields(newExp.type.classref)
 	G |- newExp : newExp.args << fields
 	// check all subexpressions (arguments)
 	newExp.args.forEach [ G |- it ]
@@ -228,13 +230,13 @@ rule CheckClass
 	G |- Class cl
 from {
 	if (cl.superclass != null) {
-		var List<Class> superClasses = FjAuxiliaryFunctions::getSuperclasses(cl)
+		var List<Class> superClasses = fjAux.getSuperclasses(cl)
 		!superClasses.contains(cl)
 		
-		var inheritedFields = FjAuxiliaryFunctions::getFields(cl.superclass)
+		var inheritedFields = fjAux.getFields(cl.superclass)
 		inheritedFields.forEach [
 			inheritedField |
-			for (field : FjAuxiliaryFunctions::selectFields(cl)) {
+			for (field : fjAux.selectFields(cl)) {
 				field.name != inheritedField.name
 				or
 				fail
@@ -243,11 +245,11 @@ from {
 			}
 		]
 		
-		var inheritedMethods = FjAuxiliaryFunctions::getMethods(cl.superclass)
+		var inheritedMethods = fjAux.getMethods(cl.superclass)
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			FjAuxiliaryFunctions::selectMethods(cl).forEach [
+			fjAux.selectMethods(cl).forEach [
 				it.name != inheritedMethod.name
 				or
 				{

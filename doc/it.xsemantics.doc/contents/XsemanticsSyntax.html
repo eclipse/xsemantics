@@ -16,6 +16,8 @@ you can specify <span class="inlinecode"><span class="keyword">import</span></sp
 possibly with a terminating <span class="inlinecode">*</span> in order to import all the classes of that
 Java package.
 </p>
+<a name="InjectedFields"></a>
+<h2>Injected Fields</h2>
 <p>
 You can then specify <span class="inlinecode"><span class="keyword">inject</span></span> fields which can then be used
 in all the rules of your system.
@@ -24,10 +26,8 @@ in all the rules of your system.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">inject</span>&nbsp;MyClass&nbsp;foo
-<br/>
-<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar
-<br/>
+<span class="keyword">inject</span>&nbsp;MyClass&nbsp;foo<br/>
+<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar<br/>
 </p>
 </div>
 </div>
@@ -37,6 +37,8 @@ Remember that these will correspond to fields in the generated Java class
 (<a href="XsemanticsSyntax.html#CodeGeneration" title="Go to &quot;Generated Code&quot;" >section CodeGeneration</a>),
 that will be instantiated through Guice injection.
 </p>
+<a name="Judgments"></a>
+<h2>Judgments</h2>
 <p>
 Then, you have to declare the <em>judgments</em> of your system;
 a judgment consists of
@@ -77,26 +79,18 @@ classes from EMF Ecore, and other Java classes
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">system</span>&nbsp;my.test.System
+<span class="keyword">system</span>&nbsp;my.test.System<br/>
 <br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.*
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.*<br/>
+<span class="keyword">import</span>&nbsp;java.util.*<br/>
 <br/>
-<span class="keyword">import</span>&nbsp;java.util.*
-<br/>
-<span class="keyword">judgments</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;EObject&nbsp;left&nbsp;&lt;:&nbsp;EObject&nbsp;right
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;nonsense&nbsp;judgment,&nbsp;just&nbsp;a&nbsp;demo
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;foobar&nbsp;||-&nbsp;List&lt;EObject&gt;&nbsp;objects&nbsp;|&gt;&nbsp;<span class="keyword">output</span>&nbsp;String&nbsp;&lt;~&nbsp;EClass&nbsp;context
-<br/>
-}
-<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;EObject&nbsp;left&nbsp;&lt;:&nbsp;EObject&nbsp;right<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;nonsense&nbsp;judgment,&nbsp;just&nbsp;a&nbsp;demo<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;foobar&nbsp;||-&nbsp;List&lt;EObject&gt;&nbsp;objects&nbsp;|&gt;&nbsp;<span class="keyword">output</span>&nbsp;String&nbsp;&lt;~&nbsp;EClass&nbsp;context<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -156,58 +150,38 @@ parameter&apos;s type.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
+<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClassifier&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClassifier&nbsp;result
+<span class="keyword">rule</span>&nbsp;MySecondTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;OK&nbsp;since&nbsp;EClass&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;EObject<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;EClass&nbsp;extends&nbsp;EClassifier<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;o&nbsp;:&nbsp;EClass&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
+<span class="keyword">rule</span>&nbsp;MyFirstWrongTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;Notifier&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;EObject<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Notifier&nbsp;n&nbsp;:&nbsp;EClass&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-<span class="keyword">rule</span>&nbsp;MySecondTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
+<span class="keyword">rule</span>&nbsp;MySecondWrongTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;it&nbsp;differs&nbsp;from&nbsp;MyFirstTypeRule&nbsp;only&nbsp;for&nbsp;the<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;output&nbsp;parameter&nbsp;type:&nbsp;EClassImpl<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClass&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;OK&nbsp;since&nbsp;EClass&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;EObject
+<span class="keyword">rule</span>&nbsp;MyFirstSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;EClass&nbsp;extends&nbsp;EClassifier
+<span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 <br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;o&nbsp;:&nbsp;EClass&nbsp;result
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
-<span class="keyword">rule</span>&nbsp;MyFirstWrongTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;Notifier&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;EObject
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Notifier&nbsp;n&nbsp;:&nbsp;EClass&nbsp;result
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
-<span class="keyword">rule</span>&nbsp;MySecondWrongTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;it&nbsp;differs&nbsp;from&nbsp;MyFirstTypeRule&nbsp;only&nbsp;for&nbsp;the
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;output&nbsp;parameter&nbsp;type:&nbsp;EClassImpl
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClass&nbsp;result
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
-<span class="keyword">rule</span>&nbsp;MyFirstSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
-<span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
-<span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -244,18 +218,12 @@ For instance, consider these implementations:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClassifier&nbsp;result
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;o.eClass
-<br/>
-}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;EClassifier&nbsp;result<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;o.eClass<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -268,16 +236,11 @@ is not null, and the assigns the output parameter <span class="inlinecode">resul
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyFirstSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;&lt;:&nbsp;o2.eClass
-<br/>
-}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyFirstSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;&lt;:&nbsp;o2.eClass<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -290,20 +253,13 @@ arguments (note that arguments can be any Xbase expression).
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;EClass&nbsp;o1Type
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;:&nbsp;o1Type
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1Type&nbsp;&lt;:&nbsp;c2
-<br/>
-}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;EClass&nbsp;o1Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;:&nbsp;o1Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1Type&nbsp;&lt;:&nbsp;c2<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -319,12 +275,9 @@ the output result of the invoked rule.  Then, it will invoke another rule.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2
-<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
-<br/>
+<span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -338,16 +291,11 @@ the above code for the same rule).
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span>
-<br/>
-}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -360,12 +308,9 @@ form of rules, called indeed <em>axiom</em>s
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;assuming&nbsp;we&nbsp;don&apos;t&nbsp;want&nbsp;to&nbsp;do&nbsp;any&nbsp;check
-<br/>
-</span><span class="keyword">axiom</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
-<br/>
+<span class="comment">//&nbsp;assuming&nbsp;we&nbsp;don&apos;t&nbsp;want&nbsp;to&nbsp;do&nbsp;any&nbsp;check<br/>
+</span><span class="keyword">axiom</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 </p>
 </div>
 </div>
@@ -400,30 +345,18 @@ as a premise since when a premise fails the whole rule fails.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-...
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;c&nbsp;=&nbsp;(a&nbsp;!=&nbsp;b)&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(a&nbsp;!=&nbsp;b)&nbsp;...&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;list.forEach&nbsp;[&nbsp;a&nbsp;!=&nbsp;b&nbsp;]&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;but,&nbsp;be&nbsp;careful:
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;list.forEach&nbsp;[&nbsp;
-<br/>
-a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise
-<br/>
-</span>{&nbsp;a&nbsp;!=&nbsp;b&nbsp;}&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;
-<br/>
-}
-<br/>
+...<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;c&nbsp;=&nbsp;(a&nbsp;!=&nbsp;b)&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(a&nbsp;!=&nbsp;b)&nbsp;...&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;list.forEach&nbsp;[&nbsp;a&nbsp;!=&nbsp;b&nbsp;]&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;but,&nbsp;be&nbsp;careful:<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;list.forEach&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;a&nbsp;!=&nbsp;b&nbsp;}&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -470,20 +403,13 @@ for instance,
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;search&nbsp;for&nbsp;the&nbsp;mapping&nbsp;for&nbsp;o.eClass.name
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;request&nbsp;it&nbsp;to&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;EClassifier
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;o.eClass.name,&nbsp;EClassifier)
-<br/>
-}
-<br/>
+<span class="keyword">rule</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;search&nbsp;for&nbsp;the&nbsp;mapping&nbsp;for&nbsp;o.eClass.name<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;request&nbsp;it&nbsp;to&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;EClassifier<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;o.eClass.name,&nbsp;EClassifier)<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -548,32 +474,20 @@ Error specifications can appear
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;obj<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;EObject&nbsp;left&nbsp;&lt;:&nbsp;EObject&nbsp;right<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)<br/>
+}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier
-<br/>
-<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)
-<br/>
-<span class="keyword">source</span>&nbsp;obj
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;EObject&nbsp;left&nbsp;&lt;:&nbsp;EObject&nbsp;right
-<br/>
-<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;a&nbsp;subtype&nbsp;of&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)
-<br/>
-}
-<br/>
-<span class="keyword">rule</span>&nbsp;EClassCase
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;eClass&nbsp;:&nbsp;EClassifier&nbsp;result
-<br/>
-<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;EClass&nbsp;"</span>&nbsp;+&nbsp;eClass.name
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eClass
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;EcorePackage::eINSTANCE.ENamedElement_Name
-<br/>
-<span class="keyword">from</span>&nbsp;{...}
-<br/>
+<span class="keyword">rule</span>&nbsp;EClassCase<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;eClass&nbsp;:&nbsp;EClassifier&nbsp;result<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;EClass&nbsp;"</span>&nbsp;+&nbsp;eClass.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eClass<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;EcorePackage::eINSTANCE.ENamedElement_Name<br/>
+<span class="keyword">from</span>&nbsp;{...}<br/>
 </p>
 </div>
 </div>
@@ -591,16 +505,11 @@ explicit failure is really useful in conjunction with an error specification
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-o.eClass.EAllSuperTypes.contains(s)
-<br/>
-<span class="keyword">or</span>
-<br/>
-<span class="keyword">fail</span>&nbsp;
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"my&nbsp;custom&nbsp;error"</span>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o
-<br/>
+o.eClass.EAllSuperTypes.contains(s)<br/>
+<span class="keyword">or</span><br/>
+<span class="keyword">fail</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"my&nbsp;custom&nbsp;error"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o<br/>
 </p>
 </div>
 </div>
@@ -624,12 +533,9 @@ in the runtime module
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslStringRepresentation.<span class="keyword">class</span>;
-<br/>
-}
-<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslStringRepresentation.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -644,28 +550,20 @@ for specific classes of your model (actually for any Java class), e.g.,
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslStringRepresentation&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&nbsp;{
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslStringRepresentation&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&nbsp;{<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(MyModelClass&nbsp;e)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(MyModelClass&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;e.getName();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
-<span class="keyword">return</span>&nbsp;e.getName();
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(MyOtherModelClass&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;e.getFoo()&nbsp;+&nbsp;<span class="string">"&nbsp;-&nbsp;"</span>&nbsp;e.getBar();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(MyOtherModelClass&nbsp;e)&nbsp;{
-<br/>
-<span class="keyword">return</span>&nbsp;e.getFoo()&nbsp;+&nbsp;<span class="string">"&nbsp;-&nbsp;"</span>&nbsp;e.getBar();
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{
-<br/>
-<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>
-}
-<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -685,14 +583,10 @@ calling <span class="inlinecode">stringRep()</span>; this is useful for error sp
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier
-<br/>
-<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)
-<br/>
-}
-<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -718,8 +612,7 @@ loops:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)
-<br/>
+getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)<br/>
 </p>
 </div>
 </div>
@@ -749,16 +642,11 @@ Such rules are of the shape
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">checkrule</span>&nbsp;RuleName&nbsp;<span class="keyword">for</span>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;JavaType&nbsp;objectToCheck
-<br/>
-<span class="keyword">from</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;premises
-<br/>
-</span>}
-<br/>
+<span class="keyword">checkrule</span>&nbsp;RuleName&nbsp;<span class="keyword">for</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;JavaType&nbsp;objectToCheck<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;premises<br/>
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -825,12 +713,9 @@ public methods for the judgments of your system.  For instance, if you have
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">judgments</span>&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;myjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;MyOutputClass
-<br/>
-}
-<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;myjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;MyOutputClass<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -842,18 +727,12 @@ the generated Java system will feature three public methods
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
-<br/>
-<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(RuleEnvironment&nbsp;env,
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
-<br/>
-<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
-<br/>
+<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(RuleEnvironment&nbsp;env,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+<span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 </p>
 </div>
 </div>
@@ -898,22 +777,14 @@ indented, with the following idea
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-final&nbsp;result&nbsp;provided&nbsp;by&nbsp;rule&nbsp;MyRule
-<br/>
-&nbsp;rule&nbsp;1&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result
-<br/>
-rule&nbsp;2&nbsp;used&nbsp;by&nbsp;rule&nbsp;1
-<br/>
-&nbsp;rule&nbsp;3&nbsp;used&nbsp;by&nbsp;rule&nbsp;2
-<br/>
-&nbsp;...
-<br/>
-&nbsp;rule&nbsp;1a&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result
-<br/>
-rule&nbsp;2a&nbsp;used&nbsp;by&nbsp;rule&nbsp;1a
-<br/>
-...
-<br/>
+final&nbsp;result&nbsp;provided&nbsp;by&nbsp;rule&nbsp;MyRule<br/>
+&nbsp;rule&nbsp;1&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result<br/>
+&nbsp;&nbsp;rule&nbsp;2&nbsp;used&nbsp;by&nbsp;rule&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;rule&nbsp;3&nbsp;used&nbsp;by&nbsp;rule&nbsp;2<br/>
+&nbsp;&nbsp;&nbsp;...<br/>
+&nbsp;rule&nbsp;1a&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result<br/>
+&nbsp;&nbsp;rule&nbsp;2a&nbsp;used&nbsp;by&nbsp;rule&nbsp;1a<br/>
+&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -942,24 +813,15 @@ Summarizing, for this example your validator should look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSystemValidator&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;copied&nbsp;from&nbsp;AbstractMyDslJavaValidator
-<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Override
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;List&lt;EPackage&gt;&nbsp;getEPackages()&nbsp;{
-<br/>
-&nbsp;&nbsp;&nbsp;List&lt;EPackage&gt;&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;EPackage&gt;();
-<br/>
-&nbsp;&nbsp;&nbsp;result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);
-<br/>
-<span class="keyword">return</span>&nbsp;result;
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>
-}
-<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSystemValidator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;copied&nbsp;from&nbsp;AbstractMyDslJavaValidator<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;List&lt;EPackage&gt;&nbsp;getEPackages()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;EPackage&gt;&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;EPackage&gt;();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -998,8 +860,7 @@ and the following expression which cannot be typed
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)
-<br/>
+i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)<br/>
 </p>
 </div>
 </div>

@@ -70,6 +70,9 @@ public class LambdaBaseTest {
   @Inject
   protected LambdaStringRepresentationWithTypeBeautifier reprBeautifier;
   
+  @Inject
+  protected LambdaUtils lambdaUtils;
+  
   protected RuleApplicationTrace trace;
   
   @BeforeClass
@@ -79,7 +82,7 @@ public class LambdaBaseTest {
   
   @Before
   public void setUp() {
-    LambdaUtils.resetCounter();
+    this.lambdaUtils.resetCounter();
     TypeSubstitutions _typeSubstitutions = new TypeSubstitutions();
     this.substitutions = _typeSubstitutions;
     RuleApplicationTrace _ruleApplicationTrace = new RuleApplicationTrace();
