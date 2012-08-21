@@ -4,7 +4,7 @@
 package it.xsemantics.dsl;
 
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
-import it.xsemantics.dsl.generator.XsemanticsXExpressionCompiler;
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.scoping.XsemanticsScopeProvider;
 import it.xsemantics.dsl.typing.XsemanticsXbaseTypeProvider;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
@@ -45,6 +45,6 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 	}
 	
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
-		return XsemanticsXExpressionCompiler.class;
+		return XsemanticsXbaseCompiler.class;
 	}
 }

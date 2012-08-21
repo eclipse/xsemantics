@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
@@ -47,6 +46,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
@@ -85,7 +85,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   private TypeReferences _typeReferences;
   
   @Inject
-  private XsemanticsXbaseCompiler xbaseCompiler;
+  private XbaseCompiler xbaseCompiler;
   
   @Inject
   private XsemanticsErrorSpecificationGenerator errSpecGenerator;
@@ -1245,20 +1245,18 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _compilePremises(final Rule rule, final ITreeAppendable result) {
-    return null;
+  protected void _compilePremises(final Rule rule, final ITreeAppendable result) {
+    return;
   }
   
-  protected ITreeAppendable _compilePremises(final RuleWithPremises rule, final ITreeAppendable result) {
+  protected void _compilePremises(final RuleWithPremises rule, final ITreeAppendable result) {
     XExpression _premises = rule.getPremises();
-    ITreeAppendable _compile = this.xbaseCompiler.compile(_premises, result, false);
-    return _compile;
+    this.xbaseCompiler.toJavaStatement(_premises, result, false);
   }
   
-  protected ITreeAppendable _compilePremises(final CheckRule rule, final ITreeAppendable result) {
+  protected void _compilePremises(final CheckRule rule, final ITreeAppendable result) {
     XExpression _premises = rule.getPremises();
-    ITreeAppendable _compile = this.xbaseCompiler.compile(_premises, result, false);
-    return _compile;
+    this.xbaseCompiler.toJavaStatement(_premises, result, false);
   }
   
   public void compileRuleConclusionElements(final Rule rule, final ITreeAppendable result) {
@@ -1266,7 +1264,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<ExpressionInConclusion> _function = new Procedure1<ExpressionInConclusion>() {
         public void apply(final ExpressionInConclusion it) {
           XExpression _expression = it.getExpression();
-          XsemanticsJvmModelInferrer.this.xbaseCompiler.compile(_expression, result, true);
+          XsemanticsJvmModelInferrer.this.xbaseCompiler.toJavaStatement(_expression, result, true);
         }
       };
     IterableExtensions.<ExpressionInConclusion>forEach(_expressionsInConclusion, _function);
@@ -1311,7 +1309,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)elem;
                 _matched=true;
                 XExpression _expression = _expressionInConclusion.getExpression();
-                this.xbaseCompiler.compileAsJavaExpression(_expression, result);
+                this.xbaseCompiler.toJavaExpression(_expression, result);
               }
             }
             boolean _hasNext_1 = iterator.hasNext();
@@ -1342,13 +1340,16 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     }
   }
   
-  public ITreeAppendable compilePremises(final EObject rule, final ITreeAppendable result) {
+  public void compilePremises(final EObject rule, final ITreeAppendable result) {
     if (rule instanceof RuleWithPremises) {
-      return _compilePremises((RuleWithPremises)rule, result);
+      _compilePremises((RuleWithPremises)rule, result);
+      return;
     } else if (rule instanceof CheckRule) {
-      return _compilePremises((CheckRule)rule, result);
+      _compilePremises((CheckRule)rule, result);
+      return;
     } else if (rule instanceof Rule) {
-      return _compilePremises((Rule)rule, result);
+      _compilePremises((Rule)rule, result);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(rule, result).toString());

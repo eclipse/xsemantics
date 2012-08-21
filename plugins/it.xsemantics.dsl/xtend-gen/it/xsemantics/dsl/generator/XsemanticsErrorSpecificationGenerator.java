@@ -1,14 +1,14 @@
 package it.xsemantics.dsl.generator;
 
 import com.google.inject.Inject;
-import it.xsemantics.dsl.generator.XsemanticsXExpressionCompiler;
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 
 @SuppressWarnings("all")
 public class XsemanticsErrorSpecificationGenerator {
   @Inject
-  private XsemanticsXExpressionCompiler xbaseCompiler;
+  private XsemanticsXbaseCompiler xbaseCompiler;
   
   public String compileErrorOfErrorSpecification(final ErrorSpecification errorSpecification, final ITreeAppendable appendable) {
     String _compileErrorOfErrorSpecification = this.xbaseCompiler.compileErrorOfErrorSpecification(errorSpecification, appendable);

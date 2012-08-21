@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
@@ -27,6 +26,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
@@ -53,7 +53,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject extension TypeReferences
 	
-	@Inject XsemanticsXbaseCompiler xbaseCompiler
+	@Inject XbaseCompiler xbaseCompiler
 	
 	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
 
@@ -614,20 +614,20 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def dispatch compilePremises(Rule rule, ITreeAppendable result) {
-		
+		return
 	}
 
 	def dispatch compilePremises(RuleWithPremises rule, ITreeAppendable result) {
-		xbaseCompiler.compile(rule.premises, result, false)
+		xbaseCompiler.toJavaStatement(rule.premises, result, false)
 	}
 
 	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
-		xbaseCompiler.compile(rule.premises, result, false)
+		xbaseCompiler.toJavaStatement(rule.premises, result, false)
 	}
 	
 	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {
 		rule.expressionsInConclusion.forEach([
-			xbaseCompiler.compile(it.expression, result, true)
+			xbaseCompiler.toJavaStatement(it.expression, result, true)
 		])
 	}
 	
@@ -650,7 +650,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					RuleParameter: 
 						result.append(result.getName(elem.parameter))
 					ExpressionInConclusion: 
-						xbaseCompiler.compileAsJavaExpression(elem.expression, result)
+						xbaseCompiler.toJavaExpression(elem.expression, result)
 				}
 				if (iterator.hasNext)
 					result.append(", ")

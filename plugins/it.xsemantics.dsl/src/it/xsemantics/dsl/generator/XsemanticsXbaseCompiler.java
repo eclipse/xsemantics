@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public class XsemanticsXExpressionCompiler extends XbaseCompiler {
+public class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	@Inject
 	protected XsemanticsNodeModelUtils nodeModelUtils;

@@ -6,7 +6,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 class XsemanticsErrorSpecificationGenerator {
 	
-	@Inject XsemanticsXExpressionCompiler xbaseCompiler
+	@Inject XsemanticsXbaseCompiler xbaseCompiler
 	
 	def compileErrorOfErrorSpecification(ErrorSpecification errorSpecification, ITreeAppendable appendable) {
 		xbaseCompiler.compileErrorOfErrorSpecification(errorSpecification, appendable)
