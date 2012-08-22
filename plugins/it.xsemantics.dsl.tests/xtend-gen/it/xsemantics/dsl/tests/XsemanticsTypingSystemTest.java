@@ -5,13 +5,14 @@ import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
+import it.xsemantics.dsl.xsemantics.JudgmentDescription;
+import it.xsemantics.dsl.xsemantics.JudgmentParameter;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
@@ -26,13 +27,14 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @InjectWith(value = XsemanticsInjectorProvider.class)
 @RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-public class XsemanticsTypingTest extends XsemanticsBaseTest {
+public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
   @Inject
   protected XsemanticsTypingSystem typingSystem;
   
@@ -52,9 +54,9 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testRuleInvocation() {
+  public void testRuleInvocationExpressions() {
     CharSequence _testRuleInvokingAnotherRule = this.testFiles.testRuleInvokingAnotherRule();
-    this.assertRuleInvocationTypes(_testRuleInvokingAnotherRule, 0, EClass.class, EClass.class);
+    this.assertRuleInvocationExpressionsTypes(_testRuleInvokingAnotherRule, 0, EClass.class, EClass.class);
   }
   
   @Test
@@ -135,13 +137,45 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
   
   @Test
   public void testEnvironmentAccess() {
-    String _name = EClass.class.getName();
     CharSequence _testWithEnvironmentAccess = this.testFiles.testWithEnvironmentAccess();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testWithEnvironmentAccess);
-    EnvironmentAccess _environmentAccess = this.getEnvironmentAccess(_parseAndAssertNoError);
-    JvmTypeReference _type = this.typingSystem.getType(_environmentAccess);
-    String _identifier = _type.getIdentifier();
-    this.assertEqualsStrings(_name, _identifier);
+    this.assertPremiseType(_testWithEnvironmentAccess, 1, 
+      "org.eclipse.emf.ecore.EClass");
+  }
+  
+  @Test
+  public void testStandardXVariableDeclaration() {
+    CharSequence _testRuleWithFeatureCallsForBinaryOps = this.testFiles.testRuleWithFeatureCallsForBinaryOps();
+    this.assertPremiseType(_testRuleWithFeatureCallsForBinaryOps, 8, 
+      "org.eclipse.emf.ecore.EClass");
+  }
+  
+  @Test
+  public void testExpressionInConclusion() {
+    CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
+    Rule _ruleWithoutValidation = this.getRuleWithoutValidation(_testAxiomWithExpressionInConclusion, 0);
+    ExpressionInConclusion _expressionInConclusion = this.expressionInConclusion(_ruleWithoutValidation, 0);
+    this.assertEObjectType(_expressionInConclusion, 
+      "org.eclipse.emf.ecore.EClass");
+  }
+  
+  @Test
+  public void testInputParameter() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    JudgmentDescription _firstJudgmentDescription = this.firstJudgmentDescription(_testSimpleRule);
+    EList<JudgmentParameter> _judgmentParameters = _firstJudgmentDescription.getJudgmentParameters();
+    JudgmentParameter _head = IterableExtensions.<JudgmentParameter>head(_judgmentParameters);
+    this.assertEObjectType(_head, 
+      "org.eclipse.emf.ecore.EClass");
+  }
+  
+  @Test
+  public void testOutputParameter() {
+    CharSequence _testJudgmentDescriptionsReferringToEcoreWithOutput = this.testFiles.testJudgmentDescriptionsReferringToEcoreWithOutput();
+    JudgmentDescription _firstJudgmentDescription = this.firstJudgmentDescription(_testJudgmentDescriptionsReferringToEcoreWithOutput);
+    EList<JudgmentParameter> _judgmentParameters = _firstJudgmentDescription.getJudgmentParameters();
+    JudgmentParameter _get = _judgmentParameters.get(1);
+    this.assertEObjectType(_get, 
+      "org.eclipse.emf.ecore.EObject");
   }
   
   public void checkBooleanPremise(final XAbstractFeatureCall featureCall) {
@@ -173,7 +207,7 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
     Assert.assertEquals(_name_1, _identifier_1);
   }
   
-  public void assertRuleInvocationTypes(final CharSequence source, final int index, final Class leftClass, final Class rightClass) {
+  public void assertRuleInvocationExpressionsTypes(final CharSequence source, final int index, final Class leftClass, final Class rightClass) {
     Rule _firstRule = this.getFirstRule(source);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation invocation = _ruleInvocations.get(index);
@@ -189,5 +223,17 @@ public class XsemanticsTypingTest extends XsemanticsBaseTest {
     JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
     String _identifier_1 = _type_1.getIdentifier();
     Assert.assertEquals(_name_1, _identifier_1);
+  }
+  
+  public void assertPremiseType(final CharSequence prog, final int premiseIndex, final CharSequence expected) {
+    Rule _ruleWithoutValidation = this.getRuleWithoutValidation(prog, 0);
+    XExpression _premise = this.getPremise(_ruleWithoutValidation, premiseIndex);
+    this.assertEObjectType(_premise, expected);
+  }
+  
+  public void assertEObjectType(final EObject o, final CharSequence expected) {
+    final JvmTypeReference type = this.typingSystem.getType(o);
+    String _identifier = type.getIdentifier();
+    this.assertEqualsStrings(expected, _identifier);
   }
 }

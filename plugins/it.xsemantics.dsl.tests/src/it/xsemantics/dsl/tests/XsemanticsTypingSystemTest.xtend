@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.XExpression
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsTypingTest extends XsemanticsBaseTest {
+class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
 	
 	@Inject
 	protected XsemanticsTypingSystem typingSystem
@@ -34,8 +34,8 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testRuleInvocation() {
-		assertRuleInvocationTypes(testFiles.testRuleInvokingAnotherRule, 0, typeof(EClass), typeof(EClass))
+	def void testRuleInvocationExpressions() {
+		assertRuleInvocationExpressionsTypes(testFiles.testRuleInvokingAnotherRule, 0, typeof(EClass), typeof(EClass))
 	}
 	
 	@Test
@@ -109,12 +109,46 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testEnvironmentAccess() {
-		assertEqualsStrings(
-			typeof(EClass).name,
-			typingSystem.getType(
-				testFiles.testWithEnvironmentAccess.parseAndAssertNoError.environmentAccess
-			).identifier)
+		assertPremiseType(
+			testFiles.testWithEnvironmentAccess, 1,
+			"org.eclipse.emf.ecore.EClass")
 	}
+
+	@Test
+	def void testStandardXVariableDeclaration() {
+		assertPremiseType(
+			testFiles.testRuleWithFeatureCallsForBinaryOps, 8,
+			"org.eclipse.emf.ecore.EClass")
+	}
+
+	@Test
+	def void testExpressionInConclusion() {
+		assertEObjectType(
+			testFiles.testAxiomWithExpressionInConclusion.
+				getRuleWithoutValidation(0).
+					expressionInConclusion(0),
+			"org.eclipse.emf.ecore.EClass"
+		)
+	}
+
+	@Test
+	def void testInputParameter() {
+		assertEObjectType(
+			testFiles.testSimpleRule.
+				firstJudgmentDescription.judgmentParameters.head,
+			"org.eclipse.emf.ecore.EClass"
+		)
+	}
+
+	@Test
+	def void testOutputParameter() {
+		assertEObjectType(
+			testFiles.testJudgmentDescriptionsReferringToEcoreWithOutput.
+				firstJudgmentDescription.judgmentParameters.get(1),
+			"org.eclipse.emf.ecore.EObject"
+		)
+	}
+
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		Assert::assertTrue(featureCall.toString,
@@ -138,10 +172,19 @@ class XsemanticsTypingTest extends XsemanticsBaseTest {
 		)
 	}
 	
-	def void assertRuleInvocationTypes(CharSequence source, int index, Class leftClass, Class rightClass) {
+	def void assertRuleInvocationExpressionsTypes(CharSequence source, int index, Class leftClass, Class rightClass) {
 		val invocation = source.firstRule.ruleInvocations.get(index)
 		Assert::assertEquals(leftClass.name, typingSystem.getType(invocation.expressions.get(0)).identifier)
 		Assert::assertEquals(rightClass.name, typingSystem.getType(invocation.expressions.get(1)).identifier)
 	}
 
+	def assertPremiseType(CharSequence prog, int premiseIndex, CharSequence expected) {
+		prog.getRuleWithoutValidation(0).getPremise(premiseIndex).
+			assertEObjectType(expected)
+	}
+
+	def assertEObjectType(EObject o, CharSequence expected) {
+		val type = typingSystem.getType(o)
+		assertEqualsStrings(expected, type.identifier)
+	}
 }

@@ -6,7 +6,7 @@ package it.xsemantics.dsl;
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.scoping.XsemanticsScopeProvider;
-import it.xsemantics.dsl.typing.XsemanticsXbaseTypeProvider;
+import it.xsemantics.dsl.typing.XsemanticsTypeProvider;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -29,7 +29,7 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 
 	@Override
 	public Class<? extends ITypeProvider> bindITypeProvider() {
-		return XsemanticsXbaseTypeProvider.class;
+		return XsemanticsTypeProvider.class;
 	}
 
 	public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {

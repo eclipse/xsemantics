@@ -231,6 +231,12 @@ public class XsemanticsBaseTest {
     return ((XBlockExpression) _premises);
   }
   
+  public XExpression getPremise(final Rule rule, final int index) {
+    EList<XExpression> _rulePremises = this.getRulePremises(rule);
+    XExpression _get = _rulePremises.get(index);
+    return _get;
+  }
+  
   public RuleParameter ruleParameter(final RuleConclusionElement ruleConclusionElement) {
     return ((RuleParameter) ruleConclusionElement);
   }

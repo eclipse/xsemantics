@@ -324,7 +324,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 		for (RuleInvocationExpression ruleInvocationExpression : expIt) {
 			final XExpression expression = ruleInvocationExpression
 					.getExpression();
-			final JvmTypeReference expressionType = getTypeProvider().getType(
+			final JvmTypeReference expressionType = typingSystem.getType(
 					expression);
 			final String getMethod = getMethods.next();
 

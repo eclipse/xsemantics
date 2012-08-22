@@ -1,0 +1,41 @@
+system it.xsemantics.dsl.typing.XsemanticsTypeSystem
+
+import org.eclipse.xtext.xbase.*
+import org.eclipse.xtext.common.types.*
+import it.xsemantics.dsl.xsemantics.*
+import org.eclipse.emf.ecore.EObject
+
+inject util.TypeReferences typeReferences
+inject typing.ITypeProvider typeProvider
+
+judgments {
+	type |- EObject exp : output JvmTypeReference
+}
+
+axiom XExpressionType
+	G |- XExpression e : typeProvider.getType(e)
+
+/* xbase type provider does not seem to return the type for var decl */
+axiom XVariableDeclarationType
+	G |- XVariableDeclaration e : e.type
+
+rule RuleInvocationExpressionType
+	G |- RuleInvocationExpression e : JvmTypeReference type
+from {
+	G |- e.expression : type
+}
+
+rule ExpressionInConclusionType
+	G |- ExpressionInConclusion e : JvmTypeReference type
+from {
+	G |- e.expression : type
+}
+
+axiom RuleParameterType
+	G |- RuleParameter p : p.parameter.parameterType
+
+axiom InputParameterType
+	G |- InputParameter p : p.parameter.parameterType
+
+axiom OutputParameterType
+	G |- OutputParameter p : p.jvmTypeReference

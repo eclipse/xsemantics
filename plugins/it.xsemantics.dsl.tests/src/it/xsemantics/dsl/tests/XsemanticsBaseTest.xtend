@@ -158,6 +158,10 @@ class XsemanticsBaseTest {
 	def getRulePremisesAsBlock(CheckRule rule) {
 		(rule.premises as XBlockExpression)
 	}
+
+	def getPremise(Rule rule, int index) {
+		rule.rulePremises.get(index)
+	}
 	
 	def ruleParameter(RuleConclusionElement ruleConclusionElement) {
 		(ruleConclusionElement as RuleParameter)
