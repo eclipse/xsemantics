@@ -18,6 +18,12 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	@Inject extension XsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
+
+	@Test
+	def void testTypeSystemToPackageWithNullName() {
+		Assert::assertEquals(null,
+			'system '.parse.toPackage)
+	}
 	
 	@Test
 	def void testTypeSystemToPackage() {

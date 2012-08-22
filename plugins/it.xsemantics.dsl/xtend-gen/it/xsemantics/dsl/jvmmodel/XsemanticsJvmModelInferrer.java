@@ -117,7 +117,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    */
   protected void _infer(final XsemanticsSystem ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     String _javaFullyQualifiedName = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(ts);
-    final JvmGenericType inferredClass = this._jvmTypesBuilder.toClass(ts, _javaFullyQualifiedName);
+    boolean _equals = Objects.equal(_javaFullyQualifiedName, null);
+    if (_equals) {
+      return;
+    }
+    String _javaFullyQualifiedName_1 = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(ts);
+    final JvmGenericType inferredClass = this._jvmTypesBuilder.toClass(ts, _javaFullyQualifiedName_1);
     IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(inferredClass);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {

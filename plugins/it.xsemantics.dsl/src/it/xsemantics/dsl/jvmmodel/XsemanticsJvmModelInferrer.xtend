@@ -83,6 +83,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(XsemanticsSystem ts, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+   		if (ts.toJavaFullyQualifiedName == null)
+   			return
+   		
    		val inferredClass = ts.toClass( ts.toJavaFullyQualifiedName )
    		
    		acceptor.accept(

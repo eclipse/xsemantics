@@ -36,19 +36,19 @@ class XsemanticsGeneratorExtensions {
 	@Inject extension JvmTypesBuilder
 	
 	def toJavaFullyQualifiedName(XsemanticsSystem ts) {
-		val packageString = ts.toPackage.toString
-		if (packageString.length > 0)
+		val packageString = ts.toPackage?.toString
+		if (packageString?.length > 0)
 			packageString + "." + ts.toJavaClassName
 		else
 			ts.toJavaClassName
 	}
 	
 	def toPackage(XsemanticsSystem ts) {
-		ts.fullyQualifiedName.skipLast(1).toString
+		ts.fullyQualifiedName?.skipLast(1)?.toString
 	}
 	
 	def toJavaClassName(XsemanticsSystem ts) {
-		ts.fullyQualifiedName.lastSegment
+		ts.fullyQualifiedName?.lastSegment
 	}
 	
 	def toJavaFullyQualifiedName(Rule rule) {
@@ -69,14 +69,14 @@ class XsemanticsGeneratorExtensions {
 	
 	def toValidatorPackage(XsemanticsSystem ts) {
 		val typeSystemPackage = ts.toPackage
-		if (typeSystemPackage.length > 0)
+		if (typeSystemPackage?.length > 0)
 			typeSystemPackage + "." + "validation"
 		else
 			"validation"
 	}
 
 	def toValidatorJavaClassName(XsemanticsSystem ts) {
-		ts.fullyQualifiedName.lastSegment + "Validator"
+		ts.fullyQualifiedName?.lastSegment + "Validator"
 	}
 	
 	def toValidatorJavaFullyQualifiedName(XsemanticsSystem ts) {

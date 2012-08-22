@@ -30,6 +30,13 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   private XsemanticsUtils _xsemanticsUtils;
   
   @Test
+  public void testTypeSystemToPackageWithNullName() {
+    XsemanticsSystem _parse = this.parse("system ");
+    String _package = this._xsemanticsGeneratorExtensions.toPackage(_parse);
+    Assert.assertEquals(null, _package);
+  }
+  
+  @Test
   public void testTypeSystemToPackage() {
     CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_typeSystemQualifiedName);
