@@ -6,6 +6,7 @@ package it.xsemantics.dsl.scoping;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.filter;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.head;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
@@ -44,6 +46,9 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 
 	@Inject
 	protected IJvmModelAssociations associations;
+
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Override
 	protected IScope createLocalVarScope(IScope parentScope,
@@ -70,6 +75,19 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 			return createLocalVarScopeForJvmOperation(jvmOperation, parentScope);
 		}
 
+	}
+	
+	@Override
+	protected JvmDeclaredType getContextType(EObject obj) {
+		// the context type of an ExpressionInConclusion is the same
+		// as the inferred class of the containing Rule
+		// this way, visibility works correctly and
+		// an ExpressionInConclusion can access private injected fields
+		if (obj instanceof ExpressionInConclusion) {
+			return super.getContextType(logicalContainerProvider
+					.getLogicalContainer(utils.containingRule(obj)));
+		}
+		return super.getContextType(obj);
 	}
 
 	private JvmOperation getJvmOperationAssociatedToSourceElement(

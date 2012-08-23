@@ -1025,8 +1025,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
-    List<EClass> _classes = this.getClasses();
-    EClass _get = _classes.get(0);
+    EClass _get = this.classes.get(0);
     return new Result<EClass>(_get);
   }
 }

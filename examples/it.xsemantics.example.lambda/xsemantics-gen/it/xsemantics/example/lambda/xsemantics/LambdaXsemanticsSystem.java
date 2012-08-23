@@ -778,8 +778,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleStringConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     
-    LambdaUtils _lambdaUtils = this.getLambdaUtils();
-    StringType _createStringType = _lambdaUtils.createStringType();
+    StringType _createStringType = this.lambdaUtils.createStringType();
     return new Result<Type>(_createStringType);
   }
   
@@ -800,8 +799,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleIntConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     
-    LambdaUtils _lambdaUtils = this.getLambdaUtils();
-    IntType _createIntType = _lambdaUtils.createIntType();
+    IntType _createIntType = this.lambdaUtils.createIntType();
     return new Result<Type>(_createIntType);
   }
   

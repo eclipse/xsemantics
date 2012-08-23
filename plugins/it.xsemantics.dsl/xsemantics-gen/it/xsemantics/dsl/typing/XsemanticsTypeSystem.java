@@ -112,8 +112,7 @@ public class XsemanticsTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleXExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     
-    ITypeProvider _typeProvider = this.getTypeProvider();
-    JvmTypeReference _type = _typeProvider.getType(e);
+    JvmTypeReference _type = this.typeProvider.getType(e);
     return new Result<JvmTypeReference>(_type);
   }
   

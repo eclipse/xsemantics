@@ -2581,10 +2581,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("List<EClass> _classes = this.getClasses();");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("EClass _get = _classes.get(0);");
+    _builder.append("EClass _get = this.classes.get(0);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return new Result<EClass>(_get);");
