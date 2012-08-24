@@ -3,7 +3,7 @@ package it.xsemantics.dsl.util;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import it.xsemantics.dsl.typing.XsemanticsSubtyping;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class XsemanticsUtils {
   @Inject
-  private XsemanticsSubtyping _xsemanticsSubtyping;
+  private XsemanticsTypeSystem _xsemanticsTypeSystem;
   
   @Inject
   private IJvmModelAssociations associations;
@@ -282,7 +282,7 @@ public class XsemanticsUtils {
         public Boolean apply(final RuleParameter it) {
           JvmFormalParameter _parameter = it.getParameter();
           JvmTypeReference _parameterType = _parameter.getParameterType();
-          boolean _isEObject = XsemanticsUtils.this._xsemanticsSubtyping.isEObject(_parameterType, rule);
+          boolean _isEObject = XsemanticsUtils.this._xsemanticsTypeSystem.isEObject(_parameterType, rule);
           return Boolean.valueOf(_isEObject);
         }
       };

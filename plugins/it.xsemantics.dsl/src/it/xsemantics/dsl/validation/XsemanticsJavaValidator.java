@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.validation;
 
 import it.xsemantics.dsl.typing.TupleType;
-import it.xsemantics.dsl.typing.XsemanticsSubtyping;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
@@ -42,9 +41,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Inject
 	protected XsemanticsTypeSystem typeSystem;
-
-	@Inject
-	protected XsemanticsSubtyping subtyping;
 
 	@Inject
 	protected XsemanticsUtils xsemanticsUtils;
@@ -305,7 +301,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		XExpression source = errorSpecification.getSource();
 		if (source != null) {
 			JvmTypeReference sourceType = typeSystem.getType(source);
-			if (!subtyping.isEObject(sourceType, errorSpecification)) {
+			if (!typeSystem.isEObject(sourceType, errorSpecification)) {
 				error("Not an EObject: " + getNameOfTypes(sourceType),
 						XsemanticsPackage.Literals.ERROR_SPECIFICATION__SOURCE,
 						IssueCodes.NOT_EOBJECT);
@@ -314,7 +310,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		XExpression feature = errorSpecification.getFeature();
 		if (feature != null) {
 			JvmTypeReference featureType = typeSystem.getType(feature);
-			if (!subtyping
+			if (!typeSystem
 					.isEStructuralFeature(featureType, errorSpecification)) {
 				error("Not an EStructuralFeature: "
 						+ getNameOfTypes(featureType),
@@ -332,7 +328,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			for (Rule rule2 : rulesOfTheSameKind) {
 				if (rule2 != rule) {
 					TupleType tupleType2 = typeSystem.getInputTypes(rule2);
-					if (subtyping.equals(tupleType, tupleType2)) {
+					if (typeSystem.equals(tupleType, tupleType2)) {
 						error("Duplicate rule of the same kind with parameters: "
 								+ tupleTypeRepresentation(tupleType),
 								XsemanticsPackage.Literals.RULE__CONCLUSION,
@@ -395,10 +391,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	protected void checkConformance(JudgmentParameter judgmentParameter,
 			EObject element, final String elementDescription,
 			EStructuralFeature feature) {
-		JvmTypeReference expected = subtyping
-				.getJvmTypeReference(judgmentParameter);
+		JvmTypeReference expected = typeSystem.getType(judgmentParameter);
 		JvmTypeReference actual = typeSystem.getType(element);
-		if (!subtyping.isConformant(expected, actual)) {
+		if (!typeSystem.isConformant(expected, actual)) {
 			error(elementDescription + " type " + getNameOfTypes(actual)
 					+ " is not subtype of JudgmentDescription declared type "
 					+ getNameOfTypes(expected), element, feature,

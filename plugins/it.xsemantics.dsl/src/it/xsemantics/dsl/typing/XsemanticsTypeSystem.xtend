@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import org.eclipse.emf.ecore.EStructuralFeature
 
 class XsemanticsTypeSystem {
 	
@@ -37,6 +38,36 @@ class XsemanticsTypeSystem {
 			tupleType.add(it.getType)
 		]
 		return tupleType;
+	}
+	
+	def equals(TupleType tupleType1, TupleType tupleType2) {
+		if (tupleType1.size() != tupleType2.size())
+			return false;
+		val judgmentParametersIt = tupleType1.iterator();
+		for (JvmTypeReference jvmTypeReference : tupleType2) {
+			if (!equals(judgmentParametersIt.next(), jvmTypeReference))
+				return false;
+		}
+		return true;
+	}
+	
+	def equals(JvmTypeReference t1, JvmTypeReference t2) {
+		isConformant(t1, t2) && isConformant(t2, t1);
+	}
+	
+	def isConformant(JvmTypeReference expected,
+			JvmTypeReference actual) {
+		conformanceComputer.isConformant(expected, actual);
+	}
+	
+	def isEObject(JvmTypeReference type, EObject context) {
+		isConformant(
+				typeReferences.getTypeForName(typeof(EObject), context), type);
+	}
+	
+	def isEStructuralFeature(JvmTypeReference type, EObject context) {
+		isConformant(typeReferences.getTypeForName(
+				typeof(EStructuralFeature), context), type);
 	}
 	
 	def isBooleanPremise(XExpression expression) {

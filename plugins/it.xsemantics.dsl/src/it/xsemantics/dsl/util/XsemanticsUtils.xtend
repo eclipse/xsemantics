@@ -2,7 +2,7 @@ package it.xsemantics.dsl.util
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
-import it.xsemantics.dsl.typing.XsemanticsSubtyping
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -28,7 +28,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XsemanticsUtils {
 	
-	@Inject extension XsemanticsSubtyping
+	@Inject extension XsemanticsTypeSystem
 	
 	@Inject
     IJvmModelAssociations associations;

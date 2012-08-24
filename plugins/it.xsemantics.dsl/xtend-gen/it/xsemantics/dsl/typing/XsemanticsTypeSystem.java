@@ -7,8 +7,10 @@ import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.runtime.Result;
+import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -53,6 +55,55 @@ public class XsemanticsTypeSystem {
       };
     IterableExtensions.<RuleParameter>forEach(_inputParams, _function);
     return tupleType;
+  }
+  
+  public boolean equals(final TupleType tupleType1, final TupleType tupleType2) {
+    int _size = tupleType1.size();
+    int _size_1 = tupleType2.size();
+    boolean _notEquals = (_size != _size_1);
+    if (_notEquals) {
+      return false;
+    }
+    final Iterator<JvmTypeReference> judgmentParametersIt = tupleType1.iterator();
+    for (final JvmTypeReference jvmTypeReference : tupleType2) {
+      JvmTypeReference _next = judgmentParametersIt.next();
+      boolean _equals = this.equals(_next, jvmTypeReference);
+      boolean _not = (!_equals);
+      if (_not) {
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  public boolean equals(final JvmTypeReference t1, final JvmTypeReference t2) {
+    boolean _and = false;
+    boolean _isConformant = this.isConformant(t1, t2);
+    if (!_isConformant) {
+      _and = false;
+    } else {
+      boolean _isConformant_1 = this.isConformant(t2, t1);
+      _and = (_isConformant && _isConformant_1);
+    }
+    return _and;
+  }
+  
+  public boolean isConformant(final JvmTypeReference expected, final JvmTypeReference actual) {
+    boolean _isConformant = this.conformanceComputer.isConformant(expected, actual);
+    return _isConformant;
+  }
+  
+  public boolean isEObject(final JvmTypeReference type, final EObject context) {
+    JvmTypeReference _typeForName = this.typeReferences.getTypeForName(EObject.class, context);
+    boolean _isConformant = this.isConformant(_typeForName, type);
+    return _isConformant;
+  }
+  
+  public boolean isEStructuralFeature(final JvmTypeReference type, final EObject context) {
+    JvmTypeReference _typeForName = this.typeReferences.getTypeForName(
+      EStructuralFeature.class, context);
+    boolean _isConformant = this.isConformant(_typeForName, type);
+    return _isConformant;
   }
   
   public boolean isBooleanPremise(final XExpression expression) {

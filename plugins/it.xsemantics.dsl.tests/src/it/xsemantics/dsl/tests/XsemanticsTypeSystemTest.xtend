@@ -13,6 +13,12 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.common.types.JvmTypeReference
+import it.xsemantics.dsl.typing.TupleType
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.common.notify.Notifier
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -22,6 +28,9 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	protected XsemanticsTypeSystem typeSystem
 	
 	@Inject extension XsemanticsUtils
+	
+	@Inject
+	protected TypeReferences typeReferences
 	
 	@Test
 	def void testRuleParameterTypes() {
@@ -149,6 +158,96 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testEObjectSubtyping() {
+		assertSubtyping(typeof(Notifier), typeof(EObject))
+	}
+	
+	@Test
+	def void testObjectSubtyping() {
+		assertSubtyping(typeof(Object), typeof(EObject))
+	}
+	
+	@Test
+	def void testNotEquals() {
+		assertEquals(typeof(Notifier), typeof(EObject), false)
+	}
+	
+	@Test
+	def void testEquals() {
+		assertEquals(typeof(EObject), typeof(EObject), true)
+	}
+	
+	@Test
+	def void testIsEObject() {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		Assert::assertTrue
+			(typeSystem.isEObject
+				(typeReferences.getTypeForName(typeof(XsemanticsSystem), ts), ts))
+	}
+	
+	@Test
+	def void testIsEObjectFails() {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		Assert::assertFalse
+			(typeSystem.isEObject
+				(typeReferences.getTypeForName(typeof(String), ts), ts))
+	}
+	
+	@Test
+	def void testIsEStructuralFeature() {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		Assert::assertTrue
+			(typeSystem.isEStructuralFeature
+				(typeReferences.getTypeForName(typeof(EAttribute), ts), ts))
+	}
+	
+	@Test
+	def void testIsEStructuralFeatureFails() {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		Assert::assertFalse
+			(typeSystem.isEStructuralFeature
+				(typeReferences.getTypeForName(typeof(XsemanticsSystem), ts), ts))
+	}
+	
+	@Test
+	def void testTupleTypeNotEqualsDifferentSize() {
+		val tupleType = new TupleType()
+		tupleType.add(typeForName(typeof(EAttribute)))
+		Assert::assertFalse(
+			typeSystem.equals(new TupleType(), tupleType)
+		)
+	}
+	
+	@Test
+	def void testTupleTypeEquals() {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		val tupleType1 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		val tupleType2 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		Assert::assertTrue(
+			typeSystem.equals(tupleType2, tupleType1)
+		)
+	}
+	
+	@Test
+	def void testTupleTypeNotEquals() {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		val tupleType1 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		val tupleType2 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(Notifier), ts))
+		Assert::assertFalse(
+			typeSystem.equals(tupleType2, tupleType1)
+		)
+	}
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		Assert::assertTrue(featureCall.toString,
@@ -187,4 +286,37 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val type = typeSystem.getType(o)
 		assertEqualsStrings(expected, type.identifier)
 	}
+	
+	def typeForName(Class clazz) {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		typeReferences.getTypeForName(clazz, ts)
+	}
+	
+	def tupleType(JvmTypeReference c1, JvmTypeReference c2) {
+		val tupleType = new TupleType()
+		tupleType.add(c1)
+		tupleType.add(c2)
+		tupleType
+	}
+	
+	def assertSubtyping(Class expected, Class actual) {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		Assert::assertTrue(typeSystem.isConformant(
+				typeReferences.getTypeForName(expected, ts),
+				typeReferences.getTypeForName(actual, ts)
+		))
+	}
+	
+	def assertEquals(Class left, Class right, boolean expectedEquals) {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		assertEquals(typeReferences.getTypeForName(left, ts),
+				typeReferences.getTypeForName(right, ts), expectedEquals)
+	}
+	
+	def assertEquals(JvmTypeReference left, JvmTypeReference right, boolean expectedEquals) {
+		Assert::assertTrue(typeSystem.equals(left, right) == expectedEquals)
+	}
+	
 }
