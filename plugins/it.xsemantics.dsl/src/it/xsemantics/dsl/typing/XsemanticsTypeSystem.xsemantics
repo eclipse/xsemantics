@@ -1,4 +1,4 @@
-system it.xsemantics.dsl.typing.XsemanticsTypeSystem
+system it.xsemantics.dsl.typing.XsemanticsTypeSystemGen
 
 import org.eclipse.xtext.xbase.*
 import org.eclipse.xtext.common.types.*

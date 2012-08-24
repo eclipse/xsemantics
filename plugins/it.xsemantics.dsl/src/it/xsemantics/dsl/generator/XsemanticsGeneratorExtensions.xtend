@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
@@ -29,7 +29,7 @@ class XsemanticsGeneratorExtensions {
 	
 	@Inject extension XsemanticsUtils
 	
-	@Inject extension XsemanticsTypingSystem
+	@Inject extension XsemanticsTypeSystem
 	
 	@Inject extension TypeReferenceSerializer
 	

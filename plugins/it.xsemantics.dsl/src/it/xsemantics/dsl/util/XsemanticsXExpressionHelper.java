@@ -1,6 +1,6 @@
 package it.xsemantics.dsl.util;
 
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
@@ -16,11 +16,11 @@ import com.google.inject.Inject;
 public class XsemanticsXExpressionHelper extends XExpressionHelper {
 
 	@Inject
-	protected XsemanticsTypingSystem typingSystem;
+	protected XsemanticsTypeSystem typeSystem;
 
 	@Override
 	public boolean hasSideEffects(XExpression expr) {
-		if (typingSystem.isBooleanPremise(expr)) {
+		if (typeSystem.isBooleanPremise(expr)) {
 			// in this case we consider it valid
 			// since it will be generated to a correct Java statement
 			return true;

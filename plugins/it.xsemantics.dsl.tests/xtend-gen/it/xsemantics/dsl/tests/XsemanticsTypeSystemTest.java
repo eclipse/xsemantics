@@ -3,7 +3,7 @@ package it.xsemantics.dsl.tests;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -34,9 +34,9 @@ import org.junit.runner.RunWith;
 @InjectWith(value = XsemanticsInjectorProvider.class)
 @RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
+public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
   @Inject
-  protected XsemanticsTypingSystem typingSystem;
+  protected XsemanticsTypeSystem typeSystem;
   
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
@@ -180,13 +180,13 @@ public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
   
   public void checkBooleanPremise(final XAbstractFeatureCall featureCall) {
     String _string = featureCall.toString();
-    boolean _isBooleanPremise = this.typingSystem.isBooleanPremise(featureCall);
+    boolean _isBooleanPremise = this.typeSystem.isBooleanPremise(featureCall);
     Assert.assertTrue(_string, _isBooleanPremise);
   }
   
   public void checkNotBooleanPremise(final XExpression expression) {
     String _string = expression.toString();
-    boolean _isBooleanPremise = this.typingSystem.isBooleanPremise(expression);
+    boolean _isBooleanPremise = this.typeSystem.isBooleanPremise(expression);
     Assert.assertFalse(_string, _isBooleanPremise);
   }
   
@@ -196,13 +196,13 @@ public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
     String _name = leftClass.getName();
     EList<RuleConclusionElement> _conclusionElements = conclusion.getConclusionElements();
     RuleConclusionElement _get = _conclusionElements.get(0);
-    JvmTypeReference _type = this.typingSystem.getType(_get);
+    JvmTypeReference _type = this.typeSystem.getType(_get);
     String _identifier = _type.getIdentifier();
     Assert.assertEquals(_name, _identifier);
     String _name_1 = rightClass.getName();
     EList<RuleConclusionElement> _conclusionElements_1 = conclusion.getConclusionElements();
     RuleConclusionElement _get_1 = _conclusionElements_1.get(1);
-    JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
+    JvmTypeReference _type_1 = this.typeSystem.getType(_get_1);
     String _identifier_1 = _type_1.getIdentifier();
     Assert.assertEquals(_name_1, _identifier_1);
   }
@@ -214,13 +214,13 @@ public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
     String _name = leftClass.getName();
     EList<RuleInvocationExpression> _expressions = invocation.getExpressions();
     RuleInvocationExpression _get = _expressions.get(0);
-    JvmTypeReference _type = this.typingSystem.getType(_get);
+    JvmTypeReference _type = this.typeSystem.getType(_get);
     String _identifier = _type.getIdentifier();
     Assert.assertEquals(_name, _identifier);
     String _name_1 = rightClass.getName();
     EList<RuleInvocationExpression> _expressions_1 = invocation.getExpressions();
     RuleInvocationExpression _get_1 = _expressions_1.get(1);
-    JvmTypeReference _type_1 = this.typingSystem.getType(_get_1);
+    JvmTypeReference _type_1 = this.typeSystem.getType(_get_1);
     String _identifier_1 = _type_1.getIdentifier();
     Assert.assertEquals(_name_1, _identifier_1);
   }
@@ -232,7 +232,7 @@ public class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
   }
   
   public void assertEObjectType(final EObject o, final CharSequence expected) {
-    final JvmTypeReference type = this.typingSystem.getType(o);
+    final JvmTypeReference type = this.typeSystem.getType(o);
     String _identifier = type.getIdentifier();
     this.assertEqualsStrings(expected, _identifier);
   }

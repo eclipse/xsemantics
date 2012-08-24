@@ -3,7 +3,7 @@ package it.xsemantics.dsl.generator;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Environment;
@@ -51,7 +51,7 @@ public class XsemanticsGeneratorExtensions {
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
-  private XsemanticsTypingSystem _xsemanticsTypingSystem;
+  private XsemanticsTypeSystem _xsemanticsTypeSystem;
   
   @Inject
   private TypeReferenceSerializer _typeReferenceSerializer;
@@ -561,7 +561,7 @@ public class XsemanticsGeneratorExtensions {
       if (element instanceof ExpressionInConclusion) {
         final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)element;
         _matched=true;
-        JvmTypeReference _type = this._xsemanticsTypingSystem.getType(_expressionInConclusion);
+        JvmTypeReference _type = this._xsemanticsTypeSystem.getType(_expressionInConclusion);
         String _simpleName = _type.getSimpleName();
         _switchResult = _simpleName;
       }
@@ -622,7 +622,7 @@ public class XsemanticsGeneratorExtensions {
       if (element instanceof ExpressionInConclusion) {
         final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)element;
         _matched=true;
-        JvmTypeReference _type = this._xsemanticsTypingSystem.getType(_expressionInConclusion);
+        JvmTypeReference _type = this._xsemanticsTypeSystem.getType(_expressionInConclusion);
         String _simpleName = _type.getSimpleName();
         _switchResult = _simpleName;
       }

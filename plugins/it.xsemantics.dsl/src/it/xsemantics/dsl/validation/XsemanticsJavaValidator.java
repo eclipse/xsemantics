@@ -2,7 +2,7 @@ package it.xsemantics.dsl.validation;
 
 import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsSubtyping;
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -41,7 +41,7 @@ import com.google.inject.Inject;
 public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Inject
-	protected XsemanticsTypingSystem typingSystem;
+	protected XsemanticsTypeSystem typeSystem;
 
 	@Inject
 	protected XsemanticsSubtyping subtyping;
@@ -304,7 +304,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	public void checkErrorSpecification(ErrorSpecification errorSpecification) {
 		XExpression source = errorSpecification.getSource();
 		if (source != null) {
-			JvmTypeReference sourceType = typingSystem.getType(source);
+			JvmTypeReference sourceType = typeSystem.getType(source);
 			if (!subtyping.isEObject(sourceType, errorSpecification)) {
 				error("Not an EObject: " + getNameOfTypes(sourceType),
 						XsemanticsPackage.Literals.ERROR_SPECIFICATION__SOURCE,
@@ -313,7 +313,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 		XExpression feature = errorSpecification.getFeature();
 		if (feature != null) {
-			JvmTypeReference featureType = typingSystem.getType(feature);
+			JvmTypeReference featureType = typeSystem.getType(feature);
 			if (!subtyping
 					.isEStructuralFeature(featureType, errorSpecification)) {
 				error("Not an EStructuralFeature: "
@@ -328,10 +328,10 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		List<Rule> rulesOfTheSameKind = xsemanticsUtils
 				.getRulesOfTheSameKind(rule);
 		if (rulesOfTheSameKind.size() > 1) {
-			TupleType tupleType = typingSystem.getInputTypes(rule);
+			TupleType tupleType = typeSystem.getInputTypes(rule);
 			for (Rule rule2 : rulesOfTheSameKind) {
 				if (rule2 != rule) {
-					TupleType tupleType2 = typingSystem.getInputTypes(rule2);
+					TupleType tupleType2 = typeSystem.getInputTypes(rule2);
 					if (subtyping.equals(tupleType, tupleType2)) {
 						error("Duplicate rule of the same kind with parameters: "
 								+ tupleTypeRepresentation(tupleType),
@@ -397,7 +397,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			EStructuralFeature feature) {
 		JvmTypeReference expected = subtyping
 				.getJvmTypeReference(judgmentParameter);
-		JvmTypeReference actual = typingSystem.getType(element);
+		JvmTypeReference actual = typeSystem.getType(element);
 		if (!subtyping.isConformant(expected, actual)) {
 			error(elementDescription + " type " + getNameOfTypes(actual)
 					+ " is not subtype of JudgmentDescription declared type "

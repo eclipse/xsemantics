@@ -6,7 +6,7 @@ import it.xsemantics.dsl.tests.XsemanticsParserTest;
 import it.xsemantics.dsl.tests.XsemanticsProposalsForDatatypeRulesTest;
 import it.xsemantics.dsl.tests.XsemanticsSubtypingTest;
 import it.xsemantics.dsl.tests.XsemanticsTypeProviderTest;
-import it.xsemantics.dsl.tests.XsemanticsTypingSystemTest;
+import it.xsemantics.dsl.tests.XsemanticsTypeSystemTest;
 import it.xsemantics.dsl.tests.XsemanticsUtilsTest;
 import it.xsemantics.dsl.tests.XsemanticsValidatorTests;
 
@@ -22,7 +22,7 @@ import org.junit.runners.Suite;
 	XsemanticsUtilsTest.class,
 	XsemanticsNodeModelUtilsTest.class,
 	XsemanticsTypeProviderTest.class,
-	XsemanticsTypingSystemTest.class,
+	XsemanticsTypeSystemTest.class,
 	XsemanticsSubtypingTest.class
 })
 public class XsemanticsDslAllTests {

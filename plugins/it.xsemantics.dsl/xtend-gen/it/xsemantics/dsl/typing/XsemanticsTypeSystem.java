@@ -2,7 +2,7 @@ package it.xsemantics.dsl.typing;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.TupleType;
-import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystemGen;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 @SuppressWarnings("all")
-public class XsemanticsTypingSystem {
+public class XsemanticsTypeSystem {
   @Inject
   private XbaseTypeConformanceComputer conformanceComputer;
   
@@ -30,13 +30,13 @@ public class XsemanticsTypingSystem {
   private TypeReferences typeReferences;
   
   @Inject
-  private XsemanticsTypeSystem xsemanticsTypeSystem;
+  private XsemanticsTypeSystemGen xsemanticsTypeSystemGen;
   
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
   
   public JvmTypeReference getType(final EObject element) {
-    Result<JvmTypeReference> _type = this.xsemanticsTypeSystem.type(element);
+    Result<JvmTypeReference> _type = this.xsemanticsTypeSystemGen.type(element);
     JvmTypeReference _value = _type.getValue();
     return _value;
   }
@@ -47,7 +47,7 @@ public class XsemanticsTypingSystem {
     List<RuleParameter> _inputParams = this._xsemanticsUtils.inputParams(rule);
     final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
         public void apply(final RuleParameter it) {
-          JvmTypeReference _type = XsemanticsTypingSystem.this.getType(it);
+          JvmTypeReference _type = XsemanticsTypeSystem.this.getType(it);
           tupleType.add(_type);
         }
       };

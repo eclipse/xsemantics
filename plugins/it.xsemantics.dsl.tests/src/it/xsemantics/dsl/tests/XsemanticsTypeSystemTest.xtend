@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import junit.framework.Assert
 import org.eclipse.emf.ecore.EClass
@@ -16,10 +16,10 @@ import org.eclipse.xtext.xbase.XExpression
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
+class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	
 	@Inject
-	protected XsemanticsTypingSystem typingSystem
+	protected XsemanticsTypeSystem typeSystem
 	
 	@Inject extension XsemanticsUtils
 	
@@ -152,30 +152,30 @@ class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		Assert::assertTrue(featureCall.toString,
-			typingSystem.isBooleanPremise(featureCall)
+			typeSystem.isBooleanPremise(featureCall)
 		)
 	}
 	
 	def checkNotBooleanPremise(XExpression expression) {
 		Assert::assertFalse(expression.toString,
-			typingSystem.isBooleanPremise(expression)
+			typeSystem.isBooleanPremise(expression)
 		)
 	}
 	
 	def void assertRuleConclusionTypes(CharSequence source, Class leftClass, Class rightClass) {
 		val conclusion = source.getFirstRule.conclusion
 		Assert::assertEquals(leftClass.name, 
-			typingSystem.getType(conclusion.conclusionElements.get(0)).identifier
+			typeSystem.getType(conclusion.conclusionElements.get(0)).identifier
 		)
 		Assert::assertEquals(rightClass.name, 
-			typingSystem.getType(conclusion.conclusionElements.get(1)).identifier
+			typeSystem.getType(conclusion.conclusionElements.get(1)).identifier
 		)
 	}
 	
 	def void assertRuleInvocationExpressionsTypes(CharSequence source, int index, Class leftClass, Class rightClass) {
 		val invocation = source.firstRule.ruleInvocations.get(index)
-		Assert::assertEquals(leftClass.name, typingSystem.getType(invocation.expressions.get(0)).identifier)
-		Assert::assertEquals(rightClass.name, typingSystem.getType(invocation.expressions.get(1)).identifier)
+		Assert::assertEquals(leftClass.name, typeSystem.getType(invocation.expressions.get(0)).identifier)
+		Assert::assertEquals(rightClass.name, typeSystem.getType(invocation.expressions.get(1)).identifier)
 	}
 
 	def assertPremiseType(CharSequence prog, int premiseIndex, CharSequence expected) {
@@ -184,7 +184,7 @@ class XsemanticsTypingSystemTest extends XsemanticsBaseTest {
 	}
 
 	def assertEObjectType(EObject o, CharSequence expected) {
-		val type = typingSystem.getType(o)
+		val type = typeSystem.getType(o)
 		assertEqualsStrings(expected, type.identifier)
 	}
 }

@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
 
-class XsemanticsTypingSystem {
+class XsemanticsTypeSystem {
 	
 	@Inject
 	private XbaseTypeConformanceComputer conformanceComputer
@@ -23,12 +23,12 @@ class XsemanticsTypingSystem {
 	private TypeReferences typeReferences
 	
 	@Inject
-	private XsemanticsTypeSystem xsemanticsTypeSystem
+	private XsemanticsTypeSystemGen xsemanticsTypeSystemGen
 	
 	@Inject extension XsemanticsUtils
 	
 	def JvmTypeReference getType(EObject element) {
-		xsemanticsTypeSystem.type(element).value
+		xsemanticsTypeSystemGen.type(element).value
 	}
 	
 	def TupleType getInputTypes(Rule rule) {

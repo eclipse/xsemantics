@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
-public class XsemanticsTypeSystem extends XsemanticsRuntimeSystem {
+public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   public final static String XEXPRESSIONTYPE = "it.xsemantics.dsl.typing.rules.XExpressionType";
   
   public final static String XVARIABLEDECLARATIONTYPE = "it.xsemantics.dsl.typing.rules.XVariableDeclarationType";
@@ -44,7 +44,7 @@ public class XsemanticsTypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<JvmTypeReference>> typeDispatcher;
   
-  public XsemanticsTypeSystem() {
+  public XsemanticsTypeSystemGen() {
     init();
   }
   

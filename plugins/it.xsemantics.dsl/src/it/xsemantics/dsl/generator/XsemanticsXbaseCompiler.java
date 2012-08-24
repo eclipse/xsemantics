@@ -1,6 +1,6 @@
 package it.xsemantics.dsl.generator;
 
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
@@ -46,7 +46,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 	protected XsemanticsGeneratorExtensions generatorExtensions;
 
 	@Inject
-	protected XsemanticsTypingSystem typingSystem;
+	protected XsemanticsTypeSystem typeSystem;
 
 	@Override
 	protected void doInternalToJavaStatement(XExpression obj,
@@ -89,7 +89,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 					expr,
 					b,
 					isReferenced
-							|| (expr.getExpressions().size() == 1 && typingSystem
+							|| (expr.getExpressions().size() == 1 && typeSystem
 									.isBooleanPremise(expr.getExpressions()
 											.get(0))));
 		} else {
@@ -142,7 +142,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 			return;
 		}
 
-		boolean isBoolean = typingSystem.isBooleanPremise(expression);
+		boolean isBoolean = typeSystem.isBooleanPremise(expression);
 		if (isBoolean)
 			hasToBeReferenced = true;
 
@@ -324,7 +324,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 		for (RuleInvocationExpression ruleInvocationExpression : expIt) {
 			final XExpression expression = ruleInvocationExpression
 					.getExpression();
-			final JvmTypeReference expressionType = typingSystem.getType(
+			final JvmTypeReference expressionType = typeSystem.getType(
 					expression);
 			final String getMethod = getMethods.next();
 

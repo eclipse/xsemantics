@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsSubtyping
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
 import it.xsemantics.dsl.xsemantics.XsemanticsFactory
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
 class XsemanticsSubtypingTest extends XsemanticsBaseTest {
 	
 	@Inject
-	protected XsemanticsTypingSystem typingSystem
+	protected XsemanticsTypeSystem typeSystem
 	
 	@Inject
 	protected TypeReferences typeReferences

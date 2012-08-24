@@ -5,7 +5,7 @@ import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsSubtyping;
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
 import it.xsemantics.dsl.xsemantics.OutputParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsFactory;
@@ -28,7 +28,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XsemanticsSubtypingTest extends XsemanticsBaseTest {
   @Inject
-  protected XsemanticsTypingSystem typingSystem;
+  protected XsemanticsTypeSystem typeSystem;
   
   @Inject
   protected TypeReferences typeReferences;
