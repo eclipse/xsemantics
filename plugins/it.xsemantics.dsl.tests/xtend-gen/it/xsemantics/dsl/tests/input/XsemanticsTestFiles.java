@@ -3217,4 +3217,65 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testSystemWithValidatorExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testCheckRuleWithValidatorExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testSystemWithValidatorExtends = this.testSystemWithValidatorExtends();
+    _builder.append(_testSystemWithValidatorExtends, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject c : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("axiom EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject object : object.eClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject obj");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var EClass result");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- obj : result");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testSystemWithValidatorExtendsNotAbstractDeclarativeValidator() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("validatorExtends org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    return _builder;
+  }
 }

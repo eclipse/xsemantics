@@ -2594,6 +2594,68 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     this.assertCorrectJavaCodeGeneration(_testAccessToInjectedFieldsInExpressionInConclusion, _builder);
   }
   
+  @Test
+  public void testSystemWithValidatorExtends() {
+    CharSequence _testCheckRuleWithValidatorExtends = this.testFiles.testCheckRuleWithValidatorExtends();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package it.xsemantics.test.validation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import com.google.inject.Inject;");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.test.TypeSystem;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.validation.AbstractDeclarativeValidator;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.validation.Check;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class TypeSystemValidator extends AbstractDeclarativeValidator {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("@Inject");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("protected TypeSystem xsemanticsSystem;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("@Inject");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("protected XsemanticsValidatorErrorGenerator errorGenerator;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("@Check");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public void checkEObject(final EObject obj) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("errorGenerator.generateErrors(this, ");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("xsemanticsSystem.checkEObject(obj),");
+    _builder.newLine();
+    _builder.append("    \t\t");
+    _builder.append("obj);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCorrectJavaCodeGeneration(_testCheckRuleWithValidatorExtends, 
+      null, _builder);
+  }
+  
   private void assertCorrectJavaCodeGeneration(final CharSequence input, final CharSequence expected) {
     this.assertCorrectJavaCodeGeneration(input, expected, null);
   }

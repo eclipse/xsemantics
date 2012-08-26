@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>System</b></em>'.
@@ -34,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getName <em>Name</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
@@ -65,6 +68,16 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getValidatorExtends() <em>Validator Extends</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValidatorExtends()
+   * @generated
+   * @ordered
+   */
+  protected JvmParameterizedTypeReference validatorExtends;
 
   /**
    * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
@@ -165,6 +178,54 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  public JvmParameterizedTypeReference getValidatorExtends()
+  {
+    return validatorExtends;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetValidatorExtends(JvmParameterizedTypeReference newValidatorExtends, NotificationChain msgs)
+  {
+    JvmParameterizedTypeReference oldValidatorExtends = validatorExtends;
+    validatorExtends = newValidatorExtends;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS, oldValidatorExtends, newValidatorExtends);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValidatorExtends(JvmParameterizedTypeReference newValidatorExtends)
+  {
+    if (newValidatorExtends != validatorExtends)
+    {
+      NotificationChain msgs = null;
+      if (validatorExtends != null)
+        msgs = ((InternalEObject)validatorExtends).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS, null, msgs);
+      if (newValidatorExtends != null)
+        msgs = ((InternalEObject)newValidatorExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS, null, msgs);
+      msgs = basicSetValidatorExtends(newValidatorExtends, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS, newValidatorExtends, newValidatorExtends));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -240,6 +301,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
+        return basicSetValidatorExtends(null, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
@@ -266,6 +329,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         return getName();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
+        return getValidatorExtends();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return getImports();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
@@ -293,6 +358,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         setName((String)newValue);
+        return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
+        setValidatorExtends((JvmParameterizedTypeReference)newValue);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         getImports().clear();
@@ -331,6 +399,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
+        setValidatorExtends((JvmParameterizedTypeReference)null);
+        return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         getImports().clear();
         return;
@@ -362,6 +433,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
+        return validatorExtends != null;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
         return imports != null && !imports.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:

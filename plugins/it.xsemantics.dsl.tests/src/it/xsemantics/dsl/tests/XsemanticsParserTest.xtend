@@ -360,4 +360,9 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testAccessToThisInExpressionInConclusion() {
 		parser.parse(testFiles.testAccessToThisInExpressionInConclusion).assertNoErrors
 	}
+	
+	@Test
+	def void testSystemWithValidatorExtends() {
+		parser.parse(testFiles.testSystemWithValidatorExtends).assertNoErrors
+	}
 }

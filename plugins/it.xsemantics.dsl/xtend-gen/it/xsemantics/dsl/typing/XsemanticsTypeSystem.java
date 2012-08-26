@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
@@ -95,6 +96,12 @@ public class XsemanticsTypeSystem {
   
   public boolean isEObject(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(EObject.class, context);
+    boolean _isConformant = this.isConformant(_typeForName, type);
+    return _isConformant;
+  }
+  
+  public boolean isAbstractDeclarativeValidator(final JvmTypeReference type, final EObject context) {
+    JvmTypeReference _typeForName = this.typeReferences.getTypeForName(AbstractDeclarativeValidator.class, context);
     boolean _isConformant = this.isConformant(_typeForName, type);
     return _isConformant;
   }

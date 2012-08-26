@@ -9,6 +9,7 @@
       ecorePackage="Xsemantics.ecore#/">
     <genClasses ecoreClass="Xsemantics.ecore#//XsemanticsSystem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//XsemanticsSystem/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/validatorExtends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/injections"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/judgmentDescriptions"/>

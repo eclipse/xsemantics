@@ -4,25 +4,37 @@
 package it.xsemantics.dsl.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 import com.google.inject.Inject;
 
 import it.xsemantics.dsl.services.XsemanticsProposalsForDatatypeRules;
 import it.xsemantics.dsl.ui.contentassist.AbstractXsemanticsProposalProvider;
+import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 /**
  * see
  * http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on
  * how to customize content assistant
  */
+@SuppressWarnings("restriction")
 public class XsemanticsProposalProvider extends
 		AbstractXsemanticsProposalProvider {
 
 	@Inject
-	XsemanticsProposalsForDatatypeRules proposalsForDatatypeRules;
+	private XsemanticsProposalsForDatatypeRules proposalsForDatatypeRules;
+
+	@Inject
+	private ITypesProposalProvider typeProposalProvider;
+
+	@Inject
+	private JvmTypesBuilder typesBuilder;
 
 	@Override
 	public void complete_JudgmentSymbol(EObject model, RuleCall ruleCall,
@@ -40,4 +52,18 @@ public class XsemanticsProposalProvider extends
 		}
 	}
 
+	@Override
+	public void completeXsemanticsSystem_ValidatorExtends(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// we show only subtypes of AbstractDeclarativeValidator
+		typeProposalProvider
+				.createSubTypeProposals(
+						typesBuilder.newTypeRef(model,
+								AbstractDeclarativeValidator.class).getType(),
+						this,
+						context,
+						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
+						acceptor);
+	}
 }

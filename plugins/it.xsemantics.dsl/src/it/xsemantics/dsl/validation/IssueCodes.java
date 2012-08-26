@@ -30,6 +30,8 @@ public interface IssueCodes {
 
 	String NOT_ESTRUCTURALFEATURE = PREFIX + "NotEStructuralFeature";
 
+	String NOT_VALIDATOR = PREFIX + "NotAbstractDeclarativeValidator";
+	
 	String NOT_PARAMETER = PREFIX + "NotParameter";
 	
 	String NOT_VALID_OUTPUT_ARG = PREFIX + "NotValidOutputArg";

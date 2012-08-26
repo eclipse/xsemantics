@@ -432,6 +432,16 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						"Duplicate variable name 's'"));
 	}
 
+	@Test
+	public void testValidatorExtendsNotAbstractDeclarativeValidator()
+			throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testSystemWithValidatorExtendsNotAbstractDeclarativeValidator());
+		validate.assertAll(AssertableDiagnostics
+				.error(IssueCodes.NOT_VALIDATOR,
+						"Not an AbstractDeclarativeValidator: org.eclipse.emf.ecore.EClass"));
+	}
+
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));

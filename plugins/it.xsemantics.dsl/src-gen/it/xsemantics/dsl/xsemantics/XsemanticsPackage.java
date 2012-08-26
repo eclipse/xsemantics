@@ -78,13 +78,22 @@ public interface XsemanticsPackage extends EPackage
   int XSEMANTICS_SYSTEM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Validator Extends</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = 1;
+
+  /**
    * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__IMPORTS = 1;
+  int XSEMANTICS_SYSTEM__IMPORTS = 2;
 
   /**
    * The feature id for the '<em><b>Injections</b></em>' containment reference list.
@@ -93,7 +102,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__INJECTIONS = 2;
+  int XSEMANTICS_SYSTEM__INJECTIONS = 3;
 
   /**
    * The feature id for the '<em><b>Judgment Descriptions</b></em>' containment reference list.
@@ -102,7 +111,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 3;
+  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 4;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -111,7 +120,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__RULES = 4;
+  int XSEMANTICS_SYSTEM__RULES = 5;
 
   /**
    * The feature id for the '<em><b>Checkrules</b></em>' containment reference list.
@@ -120,7 +129,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__CHECKRULES = 5;
+  int XSEMANTICS_SYSTEM__CHECKRULES = 6;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -129,7 +138,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 6;
+  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ImportImpl <em>Import</em>}' class.
@@ -1062,6 +1071,17 @@ public interface XsemanticsPackage extends EPackage
   EAttribute getXsemanticsSystem_Name();
 
   /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Validator Extends</em>'.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends()
+   * @see #getXsemanticsSystem()
+   * @generated
+   */
+  EReference getXsemanticsSystem_ValidatorExtends();
+
+  /**
    * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1878,6 +1898,14 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EAttribute XSEMANTICS_SYSTEM__NAME = eINSTANCE.getXsemanticsSystem_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Validator Extends</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = eINSTANCE.getXsemanticsSystem_ValidatorExtends();
 
     /**
      * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.

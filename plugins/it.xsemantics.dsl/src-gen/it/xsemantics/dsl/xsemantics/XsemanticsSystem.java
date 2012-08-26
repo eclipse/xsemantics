@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>System</b></em>'.
@@ -15,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getName <em>Name</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
@@ -54,6 +57,32 @@ public interface XsemanticsSystem extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Validator Extends</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Validator Extends</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Validator Extends</em>' containment reference.
+   * @see #setValidatorExtends(JvmParameterizedTypeReference)
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_ValidatorExtends()
+   * @model containment="true"
+   * @generated
+   */
+  JvmParameterizedTypeReference getValidatorExtends();
+
+  /**
+   * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Validator Extends</em>' containment reference.
+   * @see #getValidatorExtends()
+   * @generated
+   */
+  void setValidatorExtends(JvmParameterizedTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.

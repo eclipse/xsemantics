@@ -1553,6 +1553,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         name=QualifiedName 
+	 *         validatorExtends=JvmParameterizedTypeReference? 
 	 *         imports+=Import* 
 	 *         injections+=Injected* 
 	 *         judgmentDescriptions+=JudgmentDescription* 

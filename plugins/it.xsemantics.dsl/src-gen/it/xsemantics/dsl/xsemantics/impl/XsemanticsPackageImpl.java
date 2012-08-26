@@ -331,7 +331,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Imports()
+  public EReference getXsemanticsSystem_ValidatorExtends()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(1);
   }
@@ -341,7 +341,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Injections()
+  public EReference getXsemanticsSystem_Imports()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(2);
   }
@@ -351,7 +351,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_JudgmentDescriptions()
+  public EReference getXsemanticsSystem_Injections()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(3);
   }
@@ -361,7 +361,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Rules()
+  public EReference getXsemanticsSystem_JudgmentDescriptions()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(4);
   }
@@ -371,9 +371,19 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Checkrules()
+  public EReference getXsemanticsSystem_Rules()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getXsemanticsSystem_Checkrules()
+  {
+    return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -1088,6 +1098,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     // Create classes and their features
     xsemanticsSystemEClass = createEClass(XSEMANTICS_SYSTEM);
     createEAttribute(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__NAME);
+    createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__IMPORTS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__INJECTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS);
@@ -1240,6 +1251,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     // Initialize classes and features; add operations and parameters
     initEClass(xsemanticsSystemEClass, XsemanticsSystem.class, "XsemanticsSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXsemanticsSystem_Name(), ecorePackage.getEString(), "name", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getXsemanticsSystem_ValidatorExtends(), theTypesPackage.getJvmParameterizedTypeReference(), null, "validatorExtends", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Imports(), this.getImport(), null, "imports", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Injections(), this.getInjected(), null, "injections", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_JudgmentDescriptions(), this.getJudgmentDescription(), null, "judgmentDescriptions", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -1033,6 +1033,38 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 
+	@Test
+	def testSystemWithValidatorExtends() {
+		testFiles.testCheckRuleWithValidatorExtends.assertCorrectJavaCodeGeneration(
+			null,
+'''
+package it.xsemantics.test.validation;
+
+import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
+import it.xsemantics.test.TypeSystem;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.Check;
+
+public class TypeSystemValidator extends AbstractDeclarativeValidator {
+  @Inject
+  protected TypeSystem xsemanticsSystem;
+  
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
+  @Check
+  public void checkEObject(final EObject obj) {
+    errorGenerator.generateErrors(this, 
+    	xsemanticsSystem.checkEObject(obj),
+    		obj);
+  }
+}
+'''
+		)
+	}
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}

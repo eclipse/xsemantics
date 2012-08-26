@@ -16,6 +16,7 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
 import java.util.Iterator;
 import java.util.List;
@@ -115,7 +116,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		// side effects, by inspecting expr's container
 		// so we must customize it when the container is one of our
 		// custom XExpressions
-		final boolean valueExpectedRecursive = super.isValueExpectedRecursive(expr);
+		final boolean valueExpectedRecursive = super
+				.isValueExpectedRecursive(expr);
 		return valueExpectedRecursive
 				|| xExpressionHelper.isXsemanticsXExpression(expr.eContainer());
 	}
@@ -310,12 +312,25 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		XExpression feature = errorSpecification.getFeature();
 		if (feature != null) {
 			JvmTypeReference featureType = typeSystem.getType(feature);
-			if (!typeSystem
-					.isEStructuralFeature(featureType, errorSpecification)) {
+			if (!typeSystem.isEStructuralFeature(featureType,
+					errorSpecification)) {
 				error("Not an EStructuralFeature: "
 						+ getNameOfTypes(featureType),
 						XsemanticsPackage.Literals.ERROR_SPECIFICATION__FEATURE,
 						IssueCodes.NOT_ESTRUCTURALFEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkSystem(XsemanticsSystem system) {
+		if (system.getValidatorExtends() != null) {
+			if (!typeSystem.isAbstractDeclarativeValidator(
+					system.getValidatorExtends(), system)) {
+				error("Not an AbstractDeclarativeValidator: "
+						+ getNameOfTypes(system.getValidatorExtends()),
+						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
+						IssueCodes.NOT_VALIDATOR);
 			}
 		}
 	}

@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 
 class XsemanticsTypeSystem {
 	
@@ -63,6 +64,11 @@ class XsemanticsTypeSystem {
 	def isEObject(JvmTypeReference type, EObject context) {
 		isConformant(
 				typeReferences.getTypeForName(typeof(EObject), context), type);
+	}
+
+	def isAbstractDeclarativeValidator(JvmTypeReference type, EObject context) {
+		isConformant(
+				typeReferences.getTypeForName(typeof(AbstractDeclarativeValidator), context), type);
 	}
 	
 	def isEStructuralFeature(JvmTypeReference type, EObject context) {

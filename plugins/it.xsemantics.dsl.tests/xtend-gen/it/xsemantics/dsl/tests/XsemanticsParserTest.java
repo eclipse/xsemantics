@@ -598,4 +598,15 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testSystemWithValidatorExtends() {
+    try {
+      CharSequence _testSystemWithValidatorExtends = this.testFiles.testSystemWithValidatorExtends();
+      XsemanticsSystem _parse = this.parser.parse(_testSystemWithValidatorExtends);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

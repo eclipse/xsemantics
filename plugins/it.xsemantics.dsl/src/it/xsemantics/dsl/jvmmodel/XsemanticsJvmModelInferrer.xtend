@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -166,12 +167,21 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		).initializeLater [
 			documentation = ts.documentation
 			
-			superTypes += ts.newTypeRef(typeof(XsemanticsBasedDeclarativeValidator))
+			if (ts.validatorExtends != null)
+				superTypes += ts.validatorExtends.cloneWithProxies
+			else
+				superTypes += ts.newTypeRef(typeof(XsemanticsBasedDeclarativeValidator))
 			
 			members += ts.toField("xsemanticsSystem", inferredClass.createTypeRef) [
 				annotations += ts.toAnnotation(typeof(Inject))
 				visibility = JvmVisibility::PROTECTED
 			]
+			
+			if (ts.validatorExtends != null)
+				members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
+					annotations += ts.toAnnotation(typeof(Inject))
+					visibility = JvmVisibility::PROTECTED
+				]
 			
 			ts.checkrules.forEach [
 				rule |
@@ -543,7 +553,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			body = [
    				it.append(
    				'''
-				generateErrors(
+				«IF rule.containingTypeSystem.validatorExtends != null»errorGenerator.«ENDIF»generateErrors(«IF rule.containingTypeSystem.validatorExtends != null»this, «ENDIF»
 					xsemanticsSystem.«rule.methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
    				)

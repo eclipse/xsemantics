@@ -4,7 +4,7 @@ class XsemanticsTestFiles {
 	def typeSystemQualifiedName() '''
 	system it.xsemantics.test.TypeSystem
 	'''
-	
+
 	def typeSystemNoQualifiedName() '''
 	system TypeSystem
 	'''
@@ -1421,5 +1421,37 @@ class XsemanticsTestFiles {
 	
 	axiom TwoExpressionsInConclusion
 		G |- EClass cl : cl : cl.EAllStructuralFeatures.head
+	'''
+
+	def testSystemWithValidatorExtends() '''
+	system it.xsemantics.test.TypeSystem
+	
+	validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator
+	'''
+
+	def testCheckRuleWithValidatorExtends() '''
+	«testSystemWithValidatorExtends»
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EObject c : output EClass
+	}
+	
+	axiom EObjectEClass
+		G |- EObject object : object.eClass
+	
+	checkrule CheckEObject for
+		EObject obj
+	from {
+		var EClass result
+		empty |- obj : result
+	}
+	'''
+
+	def testSystemWithValidatorExtendsNotAbstractDeclarativeValidator() '''
+	system it.xsemantics.test.TypeSystem
+	
+	validatorExtends org.eclipse.emf.ecore.EClass
 	'''
 }
