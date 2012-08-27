@@ -102,6 +102,8 @@ a first implementation (that is why we use "First" in the name of the system).
 code[Xsemantics][
 system it.xsemantics.example.expressions.typing.FirstExpressionsSemantics
 
+validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
+
 import it.xsemantics.example.expressions.expressions.*
 
 judgments {
@@ -324,7 +326,8 @@ from {
 This simply checks that we can give a code[Variable] a type
 (in an empty environment).
 
-Please refer to ref:GeneratedValidator[] to see how to use the generated
+Please refer to ref:GeneratedValidator[], in particular,
+ref:validatorExtends[], to see how to use the generated
 Java validator (which we also followed in the implementation of this
 Expressions example language).
 

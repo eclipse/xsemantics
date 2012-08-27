@@ -36,6 +36,10 @@
 				<topic href="contents/XsemanticsSyntax.html#GeneratedSystem" label="The Generated Java Rule System" >
 				</topic>
 				<topic href="contents/XsemanticsSyntax.html#GeneratedValidator" label="The Generated Java Validator" >
+					<topic href="contents/XsemanticsSyntax.html#validatorExtends" label="The validatorExtends clause" >
+					</topic>
+					<topic href="contents/XsemanticsSyntax.html#withoutValidatorExtends" label="Without the validatorExtends clause" >
+					</topic>
 				</topic>
 				<topic href="contents/XsemanticsSyntax.html#ErrorGeneration" label="Error Marker Generation" >
 				</topic>

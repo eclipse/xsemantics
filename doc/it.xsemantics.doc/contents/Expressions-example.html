@@ -138,6 +138,8 @@ a first implementation (that is why we use "First" in the name of the system).
 <p class="code">
 <span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.FirstExpressionsSemantics<br/>
 <br/>
+<span class="keyword">validatorExtends</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator<br/>
+<br/>
 <span class="keyword">import</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.expressions.*<br/>
 <br/>
 <span class="keyword">judgments</span>&nbsp;{<br/>
@@ -424,7 +426,8 @@ This simply checks that we can give a <span class="inlinecode">Variable</span> a
 (in an empty environment).
 </p>
 <p>
-Please refer to <a href="XsemanticsSyntax.html#GeneratedValidator" title="Go to &quot;The Generated Java Validator&quot;" >section GeneratedValidator</a> to see how to use the generated
+Please refer to <a href="XsemanticsSyntax.html#GeneratedValidator" title="Go to &quot;The Generated Java Validator&quot;" >section GeneratedValidator</a>, in particular,
+<a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>, to see how to use the generated
 Java validator (which we also followed in the implementation of this
 Expressions example language).
 </p>

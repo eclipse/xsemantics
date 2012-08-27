@@ -657,7 +657,7 @@ that these check rules do not receive any rule environment.
 </p>
 <p>
 Xsemantics will generate a Java validator with a <span class="inlinecode">@Check</span> method for each
-<span class="inlinecode">checkrule</span> (see also <a href="XsemanticsSyntax.html#CodeGeneration" title="Go to &quot;Generated Code&quot;" >section CodeGeneration</a>);
+<span class="inlinecode">checkrule</span> (see also <a href="XsemanticsSyntax.html#GeneratedValidator" title="Go to &quot;The Generated Java Validator&quot;" >section GeneratedValidator</a>);
 just like in Java validator for Xtext languages, you can have
 many <span class="inlinecode">checkrule</span>s for the same JavaType (provided the rule name is unique).
 </p>
@@ -673,10 +673,15 @@ Xsemantics will generate two Java classes for each xsemantics system:
 			all the implementations of the system&apos;s rules;
 	</li>
 	<li>
-		A derived class from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>,
-			with the same name of the system with suffix <span class="inlinecode">Validator</span> in particular,
-			all the generated validators inherits from 
-			<abbr title="it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator" >XsemanticsBasedDeclarativeValidator</abbr> ; 
+		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+			subclass,
+			with the same name of the system with suffix <span class="inlinecode">Validator</span> 
+			(in particular, if the
+			<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause, <a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>,
+			is not used,
+			then the generated validator inherits from 
+			<abbr title="it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator" >XsemanticsBasedDeclarativeValidator</abbr>,
+			otherwise it will inherit from the one specified with <span class="inlinecode"><span class="keyword">validatorExtends</span></span>) ; 
 	</li>
 </ul>
 </p>
@@ -801,7 +806,90 @@ This can be useful to then implement quickfixes for specific failures.
 <a name="GeneratedValidator"></a>
 <h3>The Generated Java Validator</h3>
 <p>
-This validator should not be used (i.e., injected) directly, since it does
+From a system definition Xsemantics also generates a Java
+class (which extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>).
+If you plan to use this generated validator, because you defined
+some <em>checkrule</em>s (<a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;Rules for Validator: checkrule&quot;" >section CheckRules</a>), it is better to specify
+the <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause in order to have
+a validator which extends the validator that Xtext generated for you
+in the <span class="inlinecode">src-gen</span> folder.
+This is detailed in <a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>.  If this clause is not
+specified, using the generated validator requires some more work,
+as detaild in <a href="XsemanticsSyntax.html#withoutValidatorExtends" title="Go to &quot;Without the validatorExtends clause&quot;" >section withoutValidatorExtends</a>.
+</p>
+<a name="validatorExtends"></a>
+<h4>The validatorExtends clause</h4>
+<p>
+Recently, the
+<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause was introduced in order
+to specify the base class of the generated validator.
+Using this clause (right after the <span class="inlinecode"><span class="keyword">system</span></span> definition),
+the generated validator will be already easily usable: all that remains
+to do is to modify your DSL validator in your <span class="inlinecode">src</span> folder
+so that it extends the validator by Xsemantics.
+</p>
+<p>
+The <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause requires a
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+subclass (the content assist will filter completions accordingly).
+The class which should be specified is the class which Xtext
+generated for you in the <span class="inlinecode">src-gen</span> folder
+(which should be of the shape <span class="inlinecode">AbstractMyDslJavaValidator</span>).
+Then, the validator class in the <span class="inlinecode">src</span> folder should be modified
+so that it extends the validator class generated by Xsemantics.
+</p>
+<p>
+For instance, if your validator initially looks like:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslJavaValidator&nbsp;{<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+In your system definition you should specify
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;org.my.dsl.MyDslSemantics<br/>
+<br/>
+<span class="keyword">validatorExtends</span>&nbsp;org.my.dsl.validation.AbstractMyDslJavaValidator<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+And then, your original Java validator (in the <span class="inlinecode">src</span> folder)
+should be modified so that it
+extends the validator generated by Xsemantics:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSemanticsValidator&nbsp;{<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The examples described in <a href="Expressions-example.html#Expressions" title="Go to &quot;An Expression Language&quot;" >section Expressions</a> and in
+<a href="Lambda-example.html#Lambda" title="Go to &quot;Lambda&quot;" >section Lambda</a> use the <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause.
+</p>
+<a name="withoutValidatorExtends"></a>
+<h4>Without the validatorExtends clause</h4>
+<p>
+If the
+<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause is not used in the
+Xsemantics system definition,
+the validator generated by Xsemantics cannot be used (i.e., injected) directly, 
+since it does
 not implement the method <span class="inlinecode">getEPackages</span>; so, considering the project
 you have just created, the advised way of using it is to copy the <span class="inlinecode">getEPackages</span>
 from the abstract validator generated by Xtext, e.g., <span class="inlinecode">AbstractMyDslJavaValidator</span>,
@@ -827,7 +915,11 @@ Summarizing, for this example your validator should look like this:
 </div>
 </p>
 <p>
-At the moment, this is the way to use the generated validator.
+The example described in <a href="FJ-example.html#FJ" title="Go to &quot;Featherweight Java&quot;" >section FJ</a> uses this technique.
+</p>
+<p>
+A better way to use the generated validator is to rely on the
+<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause as detailed in <a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>.
 </p>
 <a name="ErrorGeneration"></a>
 <h3>Error Marker Generation</h3>
@@ -880,6 +972,11 @@ to filter the error information according to the strategy defined above;
 you can customize the filtering by injecting your implementation.
 The filter relies on <abbr title="it.xsemantics.runtime.util.TraceUtils" >TraceUtils</abbr> which
 provides many utility methods to access the error trace.
+</p>
+<p>
+If one needs the full control on how error markers are generated,
+a custom <abbr title="it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator" >XsemanticsValidatorErrorGenerator</abbr>
+can be injected.
 </p>
 </body>
 </html>
