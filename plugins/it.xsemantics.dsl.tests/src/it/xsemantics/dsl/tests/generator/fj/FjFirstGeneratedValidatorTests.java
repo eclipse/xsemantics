@@ -4,14 +4,10 @@ import it.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedValidatorT
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModuleForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import it.xsemantics.test.fj.first.FjFirstTypeSystem;
 import it.xsemantics.test.fj.first.validation.FjFirstTypeSystemValidator;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class FjFirstGeneratedValidatorTests extends
 		FjAbstractGeneratedValidatorTests {
@@ -23,23 +19,14 @@ public class FjFirstGeneratedValidatorTests extends
 				implements IFjTypeSystem {
 
 		}
-		
-		public static class CustomFjTypeSystemValidator extends FjFirstTypeSystemValidator {
-			@Override
-			protected List<EPackage> getEPackages() {
-			    List<EPackage> result = new ArrayList<EPackage>();
-			    result.add(it.xsemantics.example.fj.fj.FjPackage.eINSTANCE);
-				return result;
-			}
-		}
 
 		@Override
 		protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
 			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
 
 				@Override
-				public Class<? extends XsemanticsBasedDeclarativeValidator> bindXsemanticsBasedDeclarativeValidator() {
-					return CustomFjTypeSystemValidator.class;
+				public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
+					return FjFirstTypeSystemValidator.class;
 				}
 				
 			};

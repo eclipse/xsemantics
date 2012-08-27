@@ -5,6 +5,7 @@ import it.xsemantics.runtime.StringRepresentation;
 import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class FjCustomRuntimeModuleForTesting extends FJRuntimeModule {
 	private Class<? extends IFjTypeSystem> fjTypeSystemClass;
@@ -27,7 +28,7 @@ public class FjCustomRuntimeModuleForTesting extends FJRuntimeModule {
 		return FjTestsStringRepresentation.class;
 	}
 
-	public java.lang.Class<? extends XsemanticsBasedDeclarativeValidator> bindXsemanticsBasedDeclarativeValidator() {
+	public java.lang.Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
 		return XsemanticsBasedDeclarativeValidator.class;
 	}
 }

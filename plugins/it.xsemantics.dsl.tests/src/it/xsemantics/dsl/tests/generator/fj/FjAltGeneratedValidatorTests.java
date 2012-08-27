@@ -4,13 +4,13 @@ import it.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedValidatorT
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModuleForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import it.xsemantics.test.fj.alt.validation.FjAltTypeSystemValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class FjAltGeneratedValidatorTests extends
 		FjAbstractGeneratedValidatorTests {
@@ -33,7 +33,7 @@ public class FjAltGeneratedValidatorTests extends
 			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
 
 				@Override
-				public Class<? extends XsemanticsBasedDeclarativeValidator> bindXsemanticsBasedDeclarativeValidator() {
+				public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
 					return CustomFjTypeSystemValidator.class;
 				}
 				

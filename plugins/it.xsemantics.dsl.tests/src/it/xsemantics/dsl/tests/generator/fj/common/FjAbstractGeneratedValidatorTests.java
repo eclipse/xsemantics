@@ -1,7 +1,5 @@
 package it.xsemantics.dsl.tests.generator.fj.common;
 
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
-
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -9,12 +7,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.junit.Before;
 import org.junit.Test;
 
 public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests {
 
-	protected ValidatorTester<XsemanticsBasedDeclarativeValidator> tester;
+	protected ValidatorTester<AbstractDeclarativeValidator> tester;
 
 	protected FjInputFilesForTyping testFiles = new FjInputFilesForTyping();
 
@@ -27,8 +26,8 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 	public void setUp() throws Exception {
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
-		tester = new ValidatorTester<XsemanticsBasedDeclarativeValidator>(
-				get(XsemanticsBasedDeclarativeValidator.class), getInjector());
+		tester = new ValidatorTester<AbstractDeclarativeValidator>(
+				get(AbstractDeclarativeValidator.class), getInjector());
 		expectedTraces = get(FjExpectedTraces.class);
 	}
 

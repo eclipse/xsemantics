@@ -5,12 +5,12 @@ import it.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModuleForTesti
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces;
 import it.xsemantics.example.fj.typing.validation.FjSepTypeSystemValidator;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.junit.Test;
 
 public class FjSepGeneratedValidatorTests extends
@@ -34,7 +34,7 @@ public class FjSepGeneratedValidatorTests extends
 			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
 
 				@Override
-				public Class<? extends XsemanticsBasedDeclarativeValidator> bindXsemanticsBasedDeclarativeValidator() {
+				public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
 					return CustomFjTypeSystemValidator.class;
 				}
 
