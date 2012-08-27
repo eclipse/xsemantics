@@ -14,6 +14,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	ExpressionsParserTests.class,
 	ExpressionsTypingTests.class,
+	ExpressionsValidatorTests.class,
 	ExpressionsInterpreterTests.class,
 	ExpressionsFirstTypingTests.class,
 	ExpressionsFirstInterpreterTests.class

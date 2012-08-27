@@ -1,5 +1,7 @@
 system it.xsemantics.example.expressions.typing.ExpressionsSemantics
 
+validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
+
 import it.xsemantics.example.expressions.expressions.*
 
 judgments {

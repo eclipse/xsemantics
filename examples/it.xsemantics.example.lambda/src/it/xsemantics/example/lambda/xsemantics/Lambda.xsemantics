@@ -1,5 +1,7 @@
 system it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 
+validatorExtends it.xsemantics.example.lambda.validation.AbstractLambdaJavaValidator
+
 import it.xsemantics.example.lambda.lambda.*
 import it.xsemantics.example.lambda.xsemantics.*
 
