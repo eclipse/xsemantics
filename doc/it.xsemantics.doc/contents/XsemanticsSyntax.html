@@ -940,7 +940,7 @@ using <span class="inlinecode">source</span> (and <span class="inlinecode">featu
 <p>
 Furthermore, the validator will not use ALL the error information referring
 to nodes in the AST: by default it will use the inner most error information
-referring to an actual node in the AST.  This corresponds on using the error
+referring to an actual node in the AST.  This corresponds to using the error
 of the first rule invocation that failed, and this is usually what actually
 is important for generating an error.
 </p>
@@ -972,6 +972,7 @@ to filter the error information according to the strategy defined above;
 you can customize the filtering by injecting your implementation.
 The filter relies on <abbr title="it.xsemantics.runtime.util.TraceUtils" >TraceUtils</abbr> which
 provides many utility methods to access the error trace.
+An example of customization is shown in <a href="Lambda-example.html#LambdaCustomization" title="Go to &quot;Customizations for Lambda&quot;" >section LambdaCustomization</a>.
 </p>
 <p>
 If one needs the full control on how error markers are generated,

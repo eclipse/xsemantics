@@ -905,6 +905,55 @@ which relies on <abbr title="it.xsemantics.example.lambda.xsemantics.LambdaTypeB
 will consistently replace type variables in an inferred type with letters.
 For instance, <span class="inlinecode">X1&nbsp;-&gt;&nbsp;X3&nbsp;-&gt;&nbsp;(X4&nbsp;-&gt;&nbsp;X3)</span> would become <span class="inlinecode">a&nbsp;-&gt;&nbsp;b&nbsp;-&gt;&nbsp;(c&nbsp;-&gt;&nbsp;b)</span>.
 </p>
+<p>
+Another customization that we perform in this example, is the way error markers
+will be generated.
+</p>
+<p>
+For instance, due to the way error markers are generated
+(<a href="XsemanticsSyntax.html#ErrorGeneration" title="Go to &quot;Error Marker Generation&quot;" >section ErrorGeneration</a>), if we have the following code
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;f&nbsp;.&nbsp;-<span class="string">&apos;f&apos;</span><br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+we would get an error since the rule <em>ArithmeticsType</em>
+cannot be applied.  However, we would like also to know why
+it cannot be applied, i.e., because the string type of the string
+literal <span class="inlinecode"><span class="string">&apos;f&apos;</span></span> cannot be unified with the int type required
+by <em>ArithmeticsType</em>.
+</p>
+<p>
+We can fix this by injecting a custom
+<abbr title="it.xsemantics.runtime.validation.XsemanticsValidatorFilter" >XsemanticsValidatorFilter</abbr>,
+so that it also shows the rules which failed from that point on: 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;LambdaValidatorFilter&nbsp;<span class="keyword">extends</span>&nbsp;XsemanticsValidatorFilter&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TraceUtils<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;filterRuleFailedExceptions(RuleFailedException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;inner&nbsp;=&nbsp;e.innermostRuleFailedExceptionWithNodeModelSources<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(inner&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;inner.failureAsList<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<span class="comment">//&nbsp;we&nbsp;must&nbsp;return&nbsp;at&nbsp;least&nbsp;a&nbsp;failure,&nbsp;so&nbsp;we&nbsp;default&nbsp;to&nbsp;the&nbsp;passed&nbsp;one<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Lists::newArrayList(e)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
 <a name="LambdaTypeInferenceIDE"></a>
 <h2>Use of Type Inference in the IDE</h2>
 <p>

@@ -678,7 +678,7 @@ using code[source] (and code[feature]) in an error specification.
 
 Furthermore, the validator will not use ALL the error information referring
 to nodes in the AST: by default it will use the inner most error information
-referring to an actual node in the AST.  This corresponds on using the error
+referring to an actual node in the AST.  This corresponds to using the error
 of the first rule invocation that failed, and this is usually what actually
 is important for generating an error.
 
@@ -701,6 +701,7 @@ to filter the error information according to the strategy defined above;
 you can customize the filtering by injecting your implementation.
 The filter relies on codeRef[it.xsemantics.runtime.util.TraceUtils] which
 provides many utility methods to access the error trace.
+An example of customization is shown in ref:LambdaCustomization[].
 
 If one needs the full control on how error markers are generated,
 a custom codeRef[it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator]
