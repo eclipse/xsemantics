@@ -78,13 +78,22 @@ public interface XsemanticsPackage extends EPackage
   int XSEMANTICS_SYSTEM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Super System</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XSEMANTICS_SYSTEM__SUPER_SYSTEM = 1;
+
+  /**
    * The feature id for the '<em><b>Validator Extends</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = 1;
+  int XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = 2;
 
   /**
    * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -93,7 +102,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__IMPORTS = 2;
+  int XSEMANTICS_SYSTEM__IMPORTS = 3;
 
   /**
    * The feature id for the '<em><b>Injections</b></em>' containment reference list.
@@ -102,7 +111,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__INJECTIONS = 3;
+  int XSEMANTICS_SYSTEM__INJECTIONS = 4;
 
   /**
    * The feature id for the '<em><b>Judgment Descriptions</b></em>' containment reference list.
@@ -111,7 +120,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 4;
+  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 5;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -120,7 +129,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__RULES = 5;
+  int XSEMANTICS_SYSTEM__RULES = 6;
 
   /**
    * The feature id for the '<em><b>Checkrules</b></em>' containment reference list.
@@ -129,7 +138,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__CHECKRULES = 6;
+  int XSEMANTICS_SYSTEM__CHECKRULES = 7;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -138,7 +147,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 7;
+  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ImportImpl <em>Import</em>}' class.
@@ -1071,6 +1080,17 @@ public interface XsemanticsPackage extends EPackage
   EAttribute getXsemanticsSystem_Name();
 
   /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getSuperSystem <em>Super System</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Super System</em>'.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsSystem#getSuperSystem()
+   * @see #getXsemanticsSystem()
+   * @generated
+   */
+  EReference getXsemanticsSystem_SuperSystem();
+
+  /**
    * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1898,6 +1918,14 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EAttribute XSEMANTICS_SYSTEM__NAME = eINSTANCE.getXsemanticsSystem_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Super System</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XSEMANTICS_SYSTEM__SUPER_SYSTEM = eINSTANCE.getXsemanticsSystem_SuperSystem();
 
     /**
      * The meta object literal for the '<em><b>Validator Extends</b></em>' containment reference feature.

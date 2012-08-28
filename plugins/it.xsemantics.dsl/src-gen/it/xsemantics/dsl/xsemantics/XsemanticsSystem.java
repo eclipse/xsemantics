@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  * The following features are supported:
  * <ul>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getName <em>Name</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getSuperSystem <em>Super System</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}</li>
@@ -57,6 +58,32 @@ public interface XsemanticsSystem extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Super System</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Super System</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Super System</em>' containment reference.
+   * @see #setSuperSystem(JvmParameterizedTypeReference)
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_SuperSystem()
+   * @model containment="true"
+   * @generated
+   */
+  JvmParameterizedTypeReference getSuperSystem();
+
+  /**
+   * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getSuperSystem <em>Super System</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Super System</em>' containment reference.
+   * @see #getSuperSystem()
+   * @generated
+   */
+  void setSuperSystem(JvmParameterizedTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Validator Extends</b></em>' containment reference.

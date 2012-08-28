@@ -16,6 +16,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -608,5 +609,25 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testSystemExtends() {
+    try {
+      CharSequence _testSystemExtends = this.testFiles.testSystemExtends();
+      XsemanticsSystem _parse = this.parser.parse(_testSystemExtends);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSystemExtendsTestBaseSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.dsl.tests.input.TestBaseSystem");
+    _builder.newLine();
+    CharSequence _testSystemExtendsTestBaseSystem = this.testFiles.testSystemExtendsTestBaseSystem();
+    this.parseWithBaseSystemAndAssertNoError(_builder, _testSystemExtendsTestBaseSystem);
   }
 }

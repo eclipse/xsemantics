@@ -99,23 +99,45 @@ ruleXsemanticsSystem returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_2='validatorExtends' 
+)(	otherlv_2='extends' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getXsemanticsSystemAccess().getValidatorExtendsKeyword_2_0());
+    	newLeafNode(otherlv_2, grammarAccess.getXsemanticsSystemAccess().getExtendsKeyword_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getValidatorExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getSuperSystemJvmParameterizedTypeReferenceParserRuleCall_2_1_0()); 
 	    }
-		lv_validatorExtends_3_0=ruleJvmParameterizedTypeReference		{
+		lv_superSystem_3_0=ruleJvmParameterizedTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
+	        }
+       		set(
+       			$current, 
+       			"superSystem",
+        		lv_superSystem_3_0, 
+        		"JvmParameterizedTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_4='validatorExtends' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getXsemanticsSystemAccess().getValidatorExtendsKeyword_3_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getValidatorExtendsJvmParameterizedTypeReferenceParserRuleCall_3_1_0()); 
+	    }
+		lv_validatorExtends_5_0=ruleJvmParameterizedTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		set(
        			$current, 
        			"validatorExtends",
-        		lv_validatorExtends_3_0, 
+        		lv_validatorExtends_5_0, 
         		"JvmParameterizedTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -124,16 +146,16 @@ ruleXsemanticsSystem returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getImportsImportParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getImportsImportParserRuleCall_4_0()); 
 	    }
-		lv_imports_4_0=ruleImport		{
+		lv_imports_6_0=ruleImport		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		add(
        			$current, 
        			"imports",
-        		lv_imports_4_0, 
+        		lv_imports_6_0, 
         		"Import");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -142,64 +164,64 @@ ruleXsemanticsSystem returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getInjectionsInjectedParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getInjectionsInjectedParserRuleCall_5_0()); 
 	    }
-		lv_injections_5_0=ruleInjected		{
+		lv_injections_7_0=ruleInjected		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		add(
        			$current, 
        			"injections",
-        		lv_injections_5_0, 
+        		lv_injections_7_0, 
         		"Injected");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*(	otherlv_6='judgments' 
+)*(	otherlv_8='judgments' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getXsemanticsSystemAccess().getJudgmentsKeyword_5_0());
+    	newLeafNode(otherlv_8, grammarAccess.getXsemanticsSystemAccess().getJudgmentsKeyword_6_0());
     }
-	otherlv_7='{' 
+	otherlv_9='{' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getXsemanticsSystemAccess().getLeftCurlyBracketKeyword_5_1());
+    	newLeafNode(otherlv_9, grammarAccess.getXsemanticsSystemAccess().getLeftCurlyBracketKeyword_6_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getJudgmentDescriptionsJudgmentDescriptionParserRuleCall_5_2_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getJudgmentDescriptionsJudgmentDescriptionParserRuleCall_6_2_0()); 
 	    }
-		lv_judgmentDescriptions_8_0=ruleJudgmentDescription		{
+		lv_judgmentDescriptions_10_0=ruleJudgmentDescription		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		add(
        			$current, 
        			"judgmentDescriptions",
-        		lv_judgmentDescriptions_8_0, 
+        		lv_judgmentDescriptions_10_0, 
         		"JudgmentDescription");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)+	otherlv_9='}' 
+)+	otherlv_11='}' 
     {
-    	newLeafNode(otherlv_9, grammarAccess.getXsemanticsSystemAccess().getRightCurlyBracketKeyword_5_3());
+    	newLeafNode(otherlv_11, grammarAccess.getXsemanticsSystemAccess().getRightCurlyBracketKeyword_6_3());
     }
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getRulesRuleParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getRulesRuleParserRuleCall_7_0()); 
 	    }
-		lv_rules_10_0=ruleRule		{
+		lv_rules_12_0=ruleRule		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		add(
        			$current, 
        			"rules",
-        		lv_rules_10_0, 
+        		lv_rules_12_0, 
         		"Rule");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -208,16 +230,16 @@ ruleXsemanticsSystem returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getCheckrulesCheckRuleParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getXsemanticsSystemAccess().getCheckrulesCheckRuleParserRuleCall_8_0()); 
 	    }
-		lv_checkrules_11_0=ruleCheckRule		{
+		lv_checkrules_13_0=ruleCheckRule		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXsemanticsSystemRule());
 	        }
        		add(
        			$current, 
        			"checkrules",
-        		lv_checkrules_11_0, 
+        		lv_checkrules_13_0, 
         		"CheckRule");
 	        afterParserOrEnumRuleCall();
 	    }

@@ -49,4 +49,6 @@ public interface IssueCodes {
 	String RETURN_NOT_ALLOWED = PREFIX + "ReturnNotAllowed";
 
 	String THROW_NOT_ALLOWED = PREFIX + "ThrowNotAllowed";
+
+	String NOT_VALID_SUPER_SYSTEM = PREFIX + "NotValidSuperSystem";
 }

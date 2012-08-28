@@ -3278,4 +3278,25 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testSystemExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem extends it.xsemantics.runtime.XsemanticsRuntimeSystem");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testSystemExtendsTestBaseSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem extends it.xsemantics.dsl.tests.input.TestBaseSystem");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testSystemExtendsInvalidBaseSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem extends it.xsemantics.dsl.tests.input.TestInvalidBaseSystem");
+    _builder.newLine();
+    return _builder;
+  }
 }

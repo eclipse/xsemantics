@@ -6,6 +6,7 @@ import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 XsemanticsSystem:
 	'system' name=QualifiedName
+	('extends' superSystem=JvmParameterizedTypeReference)?
 	('validatorExtends' validatorExtends=JvmParameterizedTypeReference)?
 	imports += Import*
 	injections += Injected*

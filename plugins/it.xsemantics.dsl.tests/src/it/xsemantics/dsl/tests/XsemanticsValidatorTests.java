@@ -442,6 +442,15 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						"Not an AbstractDeclarativeValidator: org.eclipse.emf.ecore.EClass"));
 	}
 
+	@Test
+	public void testSystemExtendsInvalidBaseSystem() throws Exception {
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testSystemExtendsInvalidBaseSystem());
+		validate.assertAll(AssertableDiagnostics
+				.error(IssueCodes.NOT_VALID_SUPER_SYSTEM,
+						"Not an Xsemantics system: it.xsemantics.dsl.tests.input.TestInvalidBaseSystem"));
+	}
+
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));

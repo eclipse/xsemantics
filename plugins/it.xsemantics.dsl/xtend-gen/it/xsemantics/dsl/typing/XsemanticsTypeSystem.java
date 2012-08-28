@@ -7,6 +7,7 @@ import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -109,6 +110,13 @@ public class XsemanticsTypeSystem {
   public boolean isEStructuralFeature(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(
       EStructuralFeature.class, context);
+    boolean _isConformant = this.isConformant(_typeForName, type);
+    return _isConformant;
+  }
+  
+  public boolean isValidSuperSystem(final JvmTypeReference type, final EObject context) {
+    JvmTypeReference _typeForName = this.typeReferences.getTypeForName(
+      XsemanticsRuntimeSystem.class, context);
     boolean _isConformant = this.isConformant(_typeForName, type);
     return _isConformant;
   }

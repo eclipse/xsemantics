@@ -25,6 +25,8 @@ import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -72,6 +74,33 @@ public class XsemanticsBaseTest {
         XsemanticsSystem ts = this.parser.parse(s);
         this._validationTestHelper.assertNoErrors(ts);
         _xblockexpression = (ts);
+      }
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public XsemanticsSystem parseWithBaseSystemAndAssertNoError(final CharSequence baseSystem, final CharSequence s) {
+    XsemanticsSystem _xblockexpression = null;
+    {
+      final XsemanticsSystem ts = this.parseWithBaseSystem(baseSystem, s);
+      this._validationTestHelper.assertNoErrors(ts);
+      _xblockexpression = (ts);
+    }
+    return _xblockexpression;
+  }
+  
+  public XsemanticsSystem parseWithBaseSystem(final CharSequence baseSystem, final CharSequence s) {
+    try {
+      XsemanticsSystem _xblockexpression = null;
+      {
+        XsemanticsSystem base = this.parser.parse(baseSystem);
+        this._validationTestHelper.assertNoErrors(base);
+        Resource _eResource = base.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        XsemanticsSystem _parse = this.parser.parse(s, _resourceSet);
+        _xblockexpression = (_parse);
       }
       return _xblockexpression;
     } catch (Exception _e) {

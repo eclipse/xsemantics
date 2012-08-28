@@ -32,8 +32,8 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.junit.runner.RunWith
 import org.junit.BeforeClass
+import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
@@ -49,7 +49,7 @@ class XsemanticsBaseTest {
 	
 	@Inject
 	protected ParseHelper<XsemanticsSystem> parser
-    
+	
 	@Inject extension ValidationTestHelper
 	
 	@BeforeClass
@@ -61,6 +61,18 @@ class XsemanticsBaseTest {
 		var ts = parser.parse(s)
 		ts.assertNoErrors
 		ts
+	}
+	
+	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
+		val ts = baseSystem.parseWithBaseSystem(s)
+		ts.assertNoErrors
+		ts
+	}
+
+	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
+		var base = parser.parse(baseSystem)
+		base.assertNoErrors
+		parser.parse(s, base.eResource.resourceSet)
 	}
 	
 	def parse(CharSequence s) {

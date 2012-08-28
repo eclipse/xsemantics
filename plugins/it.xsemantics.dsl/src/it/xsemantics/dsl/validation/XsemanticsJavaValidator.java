@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -331,6 +332,15 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						+ getNameOfTypes(system.getValidatorExtends()),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
 						IssueCodes.NOT_VALIDATOR);
+			}
+		}
+		JvmParameterizedTypeReference superSystem = system.getSuperSystem();
+		if (superSystem != null) {
+			if (!typeSystem.isValidSuperSystem(superSystem, system)) {
+				error("Not an Xsemantics system: "
+						+ getNameOfTypes(superSystem),
+						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
+						IssueCodes.NOT_VALID_SUPER_SYSTEM);
 			}
 		}
 	}

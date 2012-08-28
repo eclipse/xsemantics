@@ -1454,4 +1454,16 @@ class XsemanticsTestFiles {
 	
 	validatorExtends org.eclipse.emf.ecore.EClass
 	'''
+
+	def testSystemExtends() '''
+	system it.xsemantics.test.TypeSystem extends it.xsemantics.runtime.XsemanticsRuntimeSystem
+	'''
+
+	def testSystemExtendsTestBaseSystem() '''
+	system it.xsemantics.test.TypeSystem extends it.xsemantics.dsl.tests.input.TestBaseSystem
+	'''
+
+	def testSystemExtendsInvalidBaseSystem() '''
+	system it.xsemantics.test.TypeSystem extends it.xsemantics.dsl.tests.input.TestInvalidBaseSystem
+	'''
 }

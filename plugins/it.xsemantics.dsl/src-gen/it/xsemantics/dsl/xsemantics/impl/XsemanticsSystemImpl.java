@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getName <em>Name</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getSuperSystem <em>Super System</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getInjections <em>Injections</em>}</li>
@@ -68,6 +69,16 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getSuperSystem() <em>Super System</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperSystem()
+   * @generated
+   * @ordered
+   */
+  protected JvmParameterizedTypeReference superSystem;
 
   /**
    * The cached value of the '{@link #getValidatorExtends() <em>Validator Extends</em>}' containment reference.
@@ -171,6 +182,54 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public JvmParameterizedTypeReference getSuperSystem()
+  {
+    return superSystem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSuperSystem(JvmParameterizedTypeReference newSuperSystem, NotificationChain msgs)
+  {
+    JvmParameterizedTypeReference oldSuperSystem = superSystem;
+    superSystem = newSuperSystem;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM, oldSuperSystem, newSuperSystem);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSuperSystem(JvmParameterizedTypeReference newSuperSystem)
+  {
+    if (newSuperSystem != superSystem)
+    {
+      NotificationChain msgs = null;
+      if (superSystem != null)
+        msgs = ((InternalEObject)superSystem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM, null, msgs);
+      if (newSuperSystem != null)
+        msgs = ((InternalEObject)newSuperSystem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM, null, msgs);
+      msgs = basicSetSuperSystem(newSuperSystem, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM, newSuperSystem, newSuperSystem));
   }
 
   /**
@@ -301,6 +360,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM:
+        return basicSetSuperSystem(null, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return basicSetValidatorExtends(null, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
@@ -329,6 +390,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         return getName();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM:
+        return getSuperSystem();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return getValidatorExtends();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
@@ -358,6 +421,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         setName((String)newValue);
+        return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM:
+        setSuperSystem((JvmParameterizedTypeReference)newValue);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         setValidatorExtends((JvmParameterizedTypeReference)newValue);
@@ -399,6 +465,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM:
+        setSuperSystem((JvmParameterizedTypeReference)null);
+        return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         setValidatorExtends((JvmParameterizedTypeReference)null);
         return;
@@ -433,6 +502,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__SUPER_SYSTEM:
+        return superSystem != null;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return validatorExtends != null;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:

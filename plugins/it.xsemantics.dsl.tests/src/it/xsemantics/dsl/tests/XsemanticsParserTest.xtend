@@ -365,4 +365,18 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testSystemWithValidatorExtends() {
 		parser.parse(testFiles.testSystemWithValidatorExtends).assertNoErrors
 	}
+
+	@Test
+	def void testSystemExtends() {
+		parser.parse(testFiles.testSystemExtends).assertNoErrors
+	}
+
+	@Test
+	def void testSystemExtendsTestBaseSystem() {
+		'''
+		system it.xsemantics.dsl.tests.input.TestBaseSystem
+		'''.parseWithBaseSystemAndAssertNoError(
+			testFiles.testSystemExtendsTestBaseSystem
+		)
+	}
 }

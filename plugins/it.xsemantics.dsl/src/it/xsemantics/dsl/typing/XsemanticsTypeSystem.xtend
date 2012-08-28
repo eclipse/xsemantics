@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 
 class XsemanticsTypeSystem {
 	
@@ -74,6 +75,11 @@ class XsemanticsTypeSystem {
 	def isEStructuralFeature(JvmTypeReference type, EObject context) {
 		isConformant(typeReferences.getTypeForName(
 				typeof(EStructuralFeature), context), type);
+	}
+	
+	def isValidSuperSystem(JvmTypeReference type, EObject context) {
+		isConformant(typeReferences.getTypeForName(
+				typeof(XsemanticsRuntimeSystem), context), type);
 	}
 	
 	def isBooleanPremise(XExpression expression) {
