@@ -1,4 +1,5 @@
-resolve releng/it.xsemantics.buckminster/projects-platform.cquery
+# the target platform is resolved by another jenkins job
+#resolve releng/it.xsemantics.buckminster/projects-platform.cquery
 resolve releng/it.xsemantics.buckminster/project.cquery
 clean
 build
