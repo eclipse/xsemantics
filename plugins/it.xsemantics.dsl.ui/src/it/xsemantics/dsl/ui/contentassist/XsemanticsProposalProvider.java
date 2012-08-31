@@ -4,6 +4,7 @@
 package it.xsemantics.dsl.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -17,6 +18,7 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.services.XsemanticsProposalsForDatatypeRules;
 import it.xsemantics.dsl.ui.contentassist.AbstractXsemanticsProposalProvider;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
 /**
  * see
@@ -57,13 +59,26 @@ public class XsemanticsProposalProvider extends
 			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		// we show only subtypes of AbstractDeclarativeValidator
-		typeProposalProvider
-				.createSubTypeProposals(
-						typesBuilder.newTypeRef(model,
-								AbstractDeclarativeValidator.class).getType(),
-						this,
-						context,
-						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
-						acceptor);
+		showOnlySubtypesOf(model, context, acceptor,
+				AbstractDeclarativeValidator.class,
+				XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS);
+	}
+
+	@Override
+	public void completeXsemanticsSystem_SuperSystem(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// we show only subtypes of XsemanticsRuntimeSystem
+		showOnlySubtypesOf(model, context, acceptor,
+				XsemanticsRuntimeSystem.class,
+				XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM);
+	}
+
+	protected void showOnlySubtypesOf(EObject model,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor,
+			Class<?> superType, EReference reference) {
+		typeProposalProvider.createSubTypeProposals(
+				typesBuilder.newTypeRef(model, superType).getType(), this,
+				context, reference, acceptor);
 	}
 }
