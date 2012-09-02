@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.util;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
@@ -20,11 +21,14 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -33,6 +37,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -471,5 +476,35 @@ public class XsemanticsUtils {
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;
+  }
+  
+  public ArrayList<JudgmentDescription> allJudgments(final XsemanticsSystem system) {
+    EList<JudgmentDescription> _judgmentDescriptions = system.getJudgmentDescriptions();
+    List<JudgmentDescription> _superSystemJudgments = this.superSystemJudgments(system);
+    Iterable<JudgmentDescription> _plus = Iterables.<JudgmentDescription>concat(_judgmentDescriptions, _superSystemJudgments);
+    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_plus);
+    return _newArrayList;
+  }
+  
+  public List<JudgmentDescription> superSystemJudgments(final XsemanticsSystem system) {
+    XsemanticsSystem _superSystemDefinition = this.superSystemDefinition(system);
+    EList<JudgmentDescription> _judgmentDescriptions = _superSystemDefinition==null?(EList<JudgmentDescription>)null:_superSystemDefinition.getJudgmentDescriptions();
+    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList();
+    List<JudgmentDescription> _elvis = ObjectExtensions.<List<JudgmentDescription>>operator_elvis(_judgmentDescriptions, _newArrayList);
+    return _elvis;
+  }
+  
+  public XsemanticsSystem superSystemDefinition(final XsemanticsSystem system) {
+    JvmParameterizedTypeReference _superSystem = system.getSuperSystem();
+    XsemanticsSystem _originalSystemDefinition = _superSystem==null?(XsemanticsSystem)null:this.originalSystemDefinition(_superSystem);
+    return _originalSystemDefinition;
+  }
+  
+  public XsemanticsSystem originalSystemDefinition(final JvmTypeReference typeReference) {
+    JvmType _type = typeReference.getType();
+    Set<EObject> _sourceElements = this.associations.getSourceElements(_type);
+    Iterable<XsemanticsSystem> _filter = Iterables.<XsemanticsSystem>filter(_sourceElements, XsemanticsSystem.class);
+    XsemanticsSystem _head = IterableExtensions.<XsemanticsSystem>head(_filter);
+    return _head;
   }
 }

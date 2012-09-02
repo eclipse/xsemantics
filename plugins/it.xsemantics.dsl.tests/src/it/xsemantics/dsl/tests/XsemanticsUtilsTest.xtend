@@ -28,7 +28,7 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 
 	@Test
-	def void testRuleDescription() {
+	def void testRuleJudgmentDescription() {
 		assertDescription(testFiles.
 			testSimpleRule.
 				firstRule.judgmentDescription, "|-", ":"
@@ -251,6 +251,66 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 		val rule = testFiles.testSimpleRule.firstRule
 		val outputConclusionElements = rule.outputConclusionElements
 		Assert::assertEquals(0, outputConclusionElements.size)
+	}
+
+	@Test
+	def void testOriginalSystemDefinition() {
+		systemExtendsSystemWithJudgments.
+				superSystem.
+				originalSystemDefinition.
+				name.assertEqualsStrings('it.xsemantics.test.TypeSystem')
+	}
+
+	@Test
+	def void testSuperSystemDefinition() {
+		systemExtendsSystemWithJudgments.
+				superSystemDefinition.
+				name.assertEqualsStrings('it.xsemantics.test.TypeSystem')
+	}
+
+	@Test
+	def void testSuperSystemDefinitionWithNoSuperSystem() {
+		Assert::assertNull(testFiles.testSimpleRule.parseAndAssertNoError.
+				superSystemDefinition)
+	}
+
+	@Test
+	def void testSuperSystemJudgments() {
+		Assert::assertEquals(1, systemExtendsSystemWithJudgments.
+				superSystemJudgments.size)
+	}
+
+	@Test
+	def void testAllJudgments() {
+		Assert::assertEquals(2, systemExtendsSystemWithAdditionalJudgment.
+				allJudgments.size)
+	}
+
+	@Test
+	def void testSuperSystemJudgmentsWithNoSuperSystem() {
+		Assert::assertEquals(0, 
+				testFiles.testSimpleRule.parseAndAssertNoError.
+				superSystemJudgments.size)
+	}
+
+	@Test
+	def void testRuleJudgmentDescriptionInherited() {
+		assertDescription(testFiles.
+			testSimpleRule.
+				firstRule.judgmentDescription, "|-", ":"
+		)
+	}
+
+	def systemExtendsSystemWithJudgments() {
+		testFiles.testJudgmentDescriptions.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgments)
+	}
+
+	def systemExtendsSystemWithAdditionalJudgment() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore)
 	}
 	
 	def void assertRules(List<Rule> rules, Rule expectedRule1, Rule expectedRule2) {

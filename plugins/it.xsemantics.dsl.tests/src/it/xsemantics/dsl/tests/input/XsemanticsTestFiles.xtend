@@ -1466,4 +1466,21 @@ class XsemanticsTestFiles {
 	def testSystemExtendsInvalidBaseSystem() '''
 	system it.xsemantics.test.TypeSystem extends it.xsemantics.dsl.tests.input.TestInvalidBaseSystem
 	'''
+
+	def testSystemExtendsSystemWithJudgments() '''
+	system it.xsemantics.test.ExtendedTypeSystem 
+		extends it.xsemantics.test.TypeSystem
+	'''
+
+	def testSystemExtendsSystemWithJudgmentsReferringToEcore() '''
+	system it.xsemantics.test.ExtendedTypeSystem 
+		extends it.xsemantics.test.TypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		subtype |- EClass c1 <: EClass c2
+	}
+	'''
+
 }

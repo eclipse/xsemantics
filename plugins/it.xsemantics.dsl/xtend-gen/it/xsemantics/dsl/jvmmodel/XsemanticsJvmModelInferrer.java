@@ -129,9 +129,18 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         public void apply(final JvmGenericType it) {
           String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-          EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-          JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsRuntimeSystem.class);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+          JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
+          boolean _notEquals = (!Objects.equal(_superSystem, null));
+          if (_notEquals) {
+            EList<JvmTypeReference> _superTypes = it.getSuperTypes();
+            JvmParameterizedTypeReference _superSystem_1 = ts.getSuperSystem();
+            JvmTypeReference _cloneWithProxies = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_superSystem_1);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
+          } else {
+            EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
+            JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsRuntimeSystem.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _newTypeRef);
+          }
           final ArrayList<JvmField> issues = CollectionLiterals.<JvmField>newArrayList();
           EList<Rule> _rules = ts.getRules();
           final Procedure1<Rule> _function = new Procedure1<Rule>() {

@@ -94,7 +94,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		).initializeLater [
 			documentation = ts.documentation
 			
-			superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+			if (ts.superSystem != null)
+				superTypes += ts.superSystem.cloneWithProxies
+			else
+				superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
 
 			val issues = <JvmField>newArrayList()
 			ts.rules.forEach [

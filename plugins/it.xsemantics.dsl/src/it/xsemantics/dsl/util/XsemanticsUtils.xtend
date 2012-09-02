@@ -97,7 +97,8 @@ class XsemanticsUtils {
 	
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
 		val descriptions = object.
-			containingTypeSystem.getJudgmentDescriptions(judgmentSymbol, relationSymbols)
+			containingTypeSystem.
+				getJudgmentDescriptions(judgmentSymbol, relationSymbols)
 		if (descriptions.size > 0)
 			descriptions.get(0)
 	}
@@ -259,6 +260,26 @@ class XsemanticsUtils {
 				[ !judgmentParameters.next.outputParameter ]
 			)
 		)
+	}
+
+	def allJudgments(XsemanticsSystem system) {
+		Lists::newArrayList(system.judgmentDescriptions + 
+			system.superSystemJudgments)
+	}
+
+	def superSystemJudgments(XsemanticsSystem system) {
+		system.superSystemDefinition?.judgmentDescriptions ?:
+			Lists::newArrayList
+	}
+
+	def superSystemDefinition(XsemanticsSystem system) {
+		system.superSystem?.originalSystemDefinition
+	}
+
+	def originalSystemDefinition(JvmTypeReference typeReference) {
+		// it is the JvmType which is associated to an XsemanticsSystem
+		associations.getSourceElements(typeReference.type).
+			filter(typeof(XsemanticsSystem)).head
 	}
 	
 }

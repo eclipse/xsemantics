@@ -20,6 +20,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -52,7 +53,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testRuleDescription() {
+  public void testRuleJudgmentDescription() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     Rule _firstRule = this.getFirstRule(_testSimpleRule);
     JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_firstRule);
@@ -387,6 +388,78 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     final List<RuleConclusionElement> outputConclusionElements = this._xsemanticsUtils.outputConclusionElements(rule);
     int _size = outputConclusionElements.size();
     Assert.assertEquals(0, _size);
+  }
+  
+  @Test
+  public void testOriginalSystemDefinition() {
+    XsemanticsSystem _systemExtendsSystemWithJudgments = this.systemExtendsSystemWithJudgments();
+    JvmParameterizedTypeReference _superSystem = _systemExtendsSystemWithJudgments.getSuperSystem();
+    XsemanticsSystem _originalSystemDefinition = this._xsemanticsUtils.originalSystemDefinition(_superSystem);
+    String _name = _originalSystemDefinition.getName();
+    this.assertEqualsStrings(_name, "it.xsemantics.test.TypeSystem");
+  }
+  
+  @Test
+  public void testSuperSystemDefinition() {
+    XsemanticsSystem _systemExtendsSystemWithJudgments = this.systemExtendsSystemWithJudgments();
+    XsemanticsSystem _superSystemDefinition = this._xsemanticsUtils.superSystemDefinition(_systemExtendsSystemWithJudgments);
+    String _name = _superSystemDefinition.getName();
+    this.assertEqualsStrings(_name, "it.xsemantics.test.TypeSystem");
+  }
+  
+  @Test
+  public void testSuperSystemDefinitionWithNoSuperSystem() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
+    XsemanticsSystem _superSystemDefinition = this._xsemanticsUtils.superSystemDefinition(_parseAndAssertNoError);
+    Assert.assertNull(_superSystemDefinition);
+  }
+  
+  @Test
+  public void testSuperSystemJudgments() {
+    XsemanticsSystem _systemExtendsSystemWithJudgments = this.systemExtendsSystemWithJudgments();
+    List<JudgmentDescription> _superSystemJudgments = this._xsemanticsUtils.superSystemJudgments(_systemExtendsSystemWithJudgments);
+    int _size = _superSystemJudgments.size();
+    Assert.assertEquals(1, _size);
+  }
+  
+  @Test
+  public void testAllJudgments() {
+    XsemanticsSystem _systemExtendsSystemWithAdditionalJudgment = this.systemExtendsSystemWithAdditionalJudgment();
+    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsSystemWithAdditionalJudgment);
+    int _size = _allJudgments.size();
+    Assert.assertEquals(2, _size);
+  }
+  
+  @Test
+  public void testSuperSystemJudgmentsWithNoSuperSystem() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
+    List<JudgmentDescription> _superSystemJudgments = this._xsemanticsUtils.superSystemJudgments(_parseAndAssertNoError);
+    int _size = _superSystemJudgments.size();
+    Assert.assertEquals(0, _size);
+  }
+  
+  @Test
+  public void testRuleJudgmentDescriptionInherited() {
+    CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
+    Rule _firstRule = this.getFirstRule(_testSimpleRule);
+    JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_firstRule);
+    this.assertDescription(_judgmentDescription, "|-", ":");
+  }
+  
+  public XsemanticsSystem systemExtendsSystemWithJudgments() {
+    CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
+    CharSequence _testSystemExtendsSystemWithJudgments = this.testFiles.testSystemExtendsSystemWithJudgments();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptions, _testSystemExtendsSystemWithJudgments);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
+  
+  public XsemanticsSystem systemExtendsSystemWithAdditionalJudgment() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore);
+    return _parseWithBaseSystemAndAssertNoError;
   }
   
   public void assertRules(final List<Rule> rules, final Rule expectedRule1, final Rule expectedRule2) {
