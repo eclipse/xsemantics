@@ -2,6 +2,7 @@ package it.xsemantics.dsl.validation;
 
 import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -18,7 +19,6 @@ import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,6 +53,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Inject
 	protected XsemanticsXExpressionHelper xExpressionHelper;
+
+	@Inject
+	protected XsemanticsNodeModelUtils nodeModelUtils;
 
 	public final static int maxOfOutputParams = 2;
 
@@ -281,7 +284,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						.next())) {
 					if (!xsemanticsUtils
 							.validOutputArgExpression(ruleInvocationExpression)) {
-						error("Not a valid argument for output parameter",
+						error("Not a valid argument for output parameter: "
+								+ nodeModelUtils
+										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
 								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
 								IssueCodes.NOT_VALID_OUTPUT_ARG);
@@ -289,7 +294,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				} else {
 					if (!xsemanticsUtils
 							.validInputArgExpression(ruleInvocationExpression)) {
-						error("Not a valid argument for input parameter",
+						error("Not a valid argument for input parameter: "
+								+ nodeModelUtils
+										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
 								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
 								IssueCodes.NOT_VALID_INPUT_ARG);
@@ -344,7 +351,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						IssueCodes.NOT_VALID_SUPER_SYSTEM);
 			}
 		}
-		List<XsemanticsSystem> superSystems = xsemanticsUtils.allSuperSystemDefinitions(system);
+		List<XsemanticsSystem> superSystems = xsemanticsUtils
+				.allSuperSystemDefinitions(system);
 		if (superSystems.contains(system)) {
 			error("Cycle in extends relation",
 					XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,

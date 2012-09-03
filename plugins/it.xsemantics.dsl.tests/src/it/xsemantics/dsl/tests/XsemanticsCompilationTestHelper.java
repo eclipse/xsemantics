@@ -9,13 +9,16 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -61,14 +64,21 @@ public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 
 	public void compileAll(CharSequence source, IAcceptor<Result> acceptor) {
 		try {
-			final EObject parsed = parseHelper.parse(source);
+			compileAll(parseHelper.parse(source), acceptor);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void compileAll(final EObject parsed, IAcceptor<Result> acceptor) {
 			validationTestHelper.assertNoErrors(parsed);
 			final InMemoryFileSystemAccess access = new InMemoryFileSystemAccess();
-			generator.doGenerate(parsed.eResource(), access);
-			if (access.getFiles().size() != 2) {
-				throw new AssertionError(
-						"Expected two generated Java sources, but found "
-								+ access.getFiles().keySet());
+			
+			ResourceSet resourceSet = parsed.eResource().getResourceSet();
+			for (Resource resource : Lists.newArrayList(resourceSet.getResources())) {
+				if (resource instanceof XtextResource) {
+					generator.doGenerate(resource, access);
+				}
 			}
 			
 			acceptor.accept(new Result() {
@@ -97,8 +107,5 @@ public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 
 			});
 			
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

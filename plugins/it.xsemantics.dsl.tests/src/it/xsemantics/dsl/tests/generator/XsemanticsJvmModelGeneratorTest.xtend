@@ -10,6 +10,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static junit.framework.Assert.*
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -1065,19 +1066,215 @@ public class TypeSystemValidator extends AbstractDeclarativeValidator {
 		)
 	}
 
+	@Test
+	def testSystemWithExtends() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			).assertCorrectJavaCodeGeneration(
+"ExtendedTypeSystem2",
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.test.ExtendedTypeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
+  public final static String FROMTYPESYSTEM = "it.xsemantics.test.rules.FromTypeSystem";
+  
+  public final static String FROMEXTENDEDTYPESYSTEM = "it.xsemantics.test.rules.FromExtendedTypeSystem";
+  
+  public final static String FROMTHISTYPESYSTEM = "it.xsemantics.test.rules.FromThisTypeSystem";
+  
+  private PolymorphicDispatcher<Result<Boolean>> type2Dispatcher;
+  
+  public ExtendedTypeSystem2() {
+    init();
+  }
+  
+  public void init() {
+    type2Dispatcher = buildPolymorphicDispatcher1(
+    	"type2Impl", 4, "||-", ":");
+  }
+  
+  public Result<Boolean> type2(final EClass c1, final EClass c2) {
+    return type2(new RuleEnvironment(), null, c1, c2);
+  }
+  
+  public Result<Boolean> type2(final RuleEnvironment _environment_, final EClass c1, final EClass c2) {
+    return type2(_environment_, null, c1, c2);
+  }
+  
+  public Result<Boolean> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	return type2Internal(_environment_, _trace_, c1, c2);
+    } catch (Exception _e_type2) {
+    	return resultForFailure(_e_type2);
+    }
+  }
+  
+  public Result<Boolean> checkEObject(final EObject o) {
+    try {
+    	return checkEObjectInternal(null, o);
+    } catch (Exception e) {
+    	return resultForFailure(e);
+    }
+  }
+  
+  protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    
+    {
+      /* empty |- o : var EClass c */
+      EClass c = null;
+      Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, o);
+      checkAssignableTo(result.getFirst(), EClass.class);
+      c = (EClass) result.getFirst();
+      
+      /* empty |- o.eClass <: c */
+      EClass _eClass = o.eClass();
+      subtypeInternal(emptyEnvironment(), _trace_, _eClass, c);
+    }
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	checkParamsNotNull(c1, c2);
+    	return type2Dispatcher.invoke(_environment_, _trace_, c1, c2);
+    } catch (Exception _e_type2) {
+    	sneakyThrowRuleFailedException(_e_type2);
+    	return null;
+    }
+  }
+  
+  protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
+      addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleFromTypeSystem) {
+      typeThrowException(FROMTYPESYSTEM,
+      	e_applyRuleFromTypeSystem, c);
+      return null;
+    }
+  }
+  
+  protected Result<EClass> applyRuleFromTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
+    
+    /* G |- c.eClass <: c.eClass */
+    EClass _eClass = c.eClass();
+    EClass _eClass_1 = c.eClass();
+    subtypeInternal(G, _trace_, _eClass, _eClass_1);
+    EClass _eClass_2 = c.eClass();
+    return new Result<EClass>(_eClass_2);
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
+      addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleFromExtendedTypeSystem) {
+      throwRuleFailedException(ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2),
+      	FROMEXTENDEDTYPESYSTEM,
+      	e_applyRuleFromExtendedTypeSystem, new ErrorInformation(c1), new ErrorInformation(c2));
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleFromExtendedTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
+    
+    /* G ||- c1 : c2 */
+    type2Internal(G, _trace_, c1, c2);
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
+      addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleFromThisTypeSystem) {
+      throwRuleFailedException(ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2),
+      	FROMTHISTYPESYSTEM,
+      	e_applyRuleFromThisTypeSystem, new ErrorInformation(c1), new ErrorInformation(c2));
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleFromThisTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
+    
+    /* G |- c1 : var EClass o */
+    EClass o = null;
+    Result<EClass> result = typeInternal(G, _trace_, c1);
+    checkAssignableTo(result.getFirst(), EClass.class);
+    o = (EClass) result.getFirst();
+    
+    return new Result<Boolean>(true);
+  }
+}
+''',
+'''
+package it.xsemantics.test.validation;
+
+import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
+import it.xsemantics.test.ExtendedTypeSystem2;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
+
+public class ExtendedTypeSystem2Validator extends XsemanticsBasedDeclarativeValidator {
+  @Inject
+  protected ExtendedTypeSystem2 xsemanticsSystem;
+  
+  @Check
+  public void checkEObject(final EObject o) {
+    generateErrors(
+    	xsemanticsSystem.checkEObject(o),
+    		o);
+  }
+}
+'''
+		)
+	}
+
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected, CharSequence expectedValidator) {
-		input.compileAll [
+		parse(input).assertCorrectJavaCodeGeneration(null, expected, expectedValidator)
+	}
+
+	def private assertCorrectJavaCodeGeneration(XsemanticsSystem system, 
+		String prefix, CharSequence expected, CharSequence expectedValidator
+	) {
+		system.compileAll [
 			for (e : allGeneratedResources.entrySet) {
-				if (e.key.endsWith("Validator.java") && expectedValidator != null) {
-					// check the expected Java code for the validator
-					assertEquals(expectedValidator.toString, e.value.toString)
-				} else if (!e.key.endsWith("Validator.java") && expected != null) {
-					// check the expected Java code for the system
-					assertEquals(expected.toString, e.value.toString)
+				if (prefix == null || e.key.contains(prefix)) {
+					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
+						// check the expected Java code for the validator
+						assertEquals(expectedValidator.toString, e.value.toString)
+					} else if (!e.key.endsWith("Validator.java") && expected != null) {
+						// check the expected Java code for the system
+						assertEquals(expected.toString, e.value.toString)
+					}
 				}
 			}
 			

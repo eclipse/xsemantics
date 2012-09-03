@@ -1516,7 +1516,14 @@ class XsemanticsTestFiles {
 	rule FromThisTypeSystem
 		G ||- EClass c1 : EClass c2
 	from {
-		G |- c1 : c2
+		G |- c1 : var EClass o
+	}
+	
+	checkrule CheckEObject for
+		EObject o
+	from {
+		empty |- o : var EClass c
+		empty |- o.eClass <: c
 	}
 	'''
 
