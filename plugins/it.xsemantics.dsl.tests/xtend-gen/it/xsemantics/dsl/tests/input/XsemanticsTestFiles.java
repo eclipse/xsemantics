@@ -3567,4 +3567,112 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testDuplicateRuleOfTheSameKindFromSuperSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the rule is already defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("// so an \'override\' is mandatory");
+    _builder.newLine();
+    _builder.append("axiom FromTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject c : c.eClass");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testNoRuleOfTheSameKindToOverride() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// no rule to override in the base system with EClass, EClass");
+    _builder.newLine();
+    _builder.append("override axiom FromTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass o : EClass c");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testOverrideRuleWithDifferentName() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// override rule must have the same name");
+    _builder.newLine();
+    _builder.append("// of the one in the base system");
+    _builder.newLine();
+    _builder.append("override axiom DifferentName");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testNoCheckRuleToOverride() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// wrong name of override rule");
+    _builder.newLine();
+    _builder.append("override checkrule WrongCheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// wrong element type");
+    _builder.newLine();
+    _builder.append("override checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EClass o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

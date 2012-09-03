@@ -98,25 +98,25 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testRulesOfTheSameKind() {
+  public void testAllRulesOfTheSameKind() {
     CharSequence _testRulesOfTheSameKind = this.testFiles.testRulesOfTheSameKind();
     final XsemanticsSystem ts = this.parseAndAssertNoError(_testRulesOfTheSameKind);
     EList<Rule> _rules = ts.getRules();
     Rule _get = _rules.get(0);
-    List<Rule> _rulesOfTheSameKind = this._xsemanticsUtils.getRulesOfTheSameKind(_get);
+    List<Rule> _allRulesOfTheSameKind = this._xsemanticsUtils.allRulesOfTheSameKind(_get);
     EList<Rule> _rules_1 = ts.getRules();
     Rule _get_1 = _rules_1.get(0);
     EList<Rule> _rules_2 = ts.getRules();
     Rule _get_2 = _rules_2.get(1);
-    this.assertRules(_rulesOfTheSameKind, _get_1, _get_2);
+    this.assertRules(_allRulesOfTheSameKind, _get_1, _get_2);
     EList<Rule> _rules_3 = ts.getRules();
     Rule _get_3 = _rules_3.get(2);
-    List<Rule> _rulesOfTheSameKind_1 = this._xsemanticsUtils.getRulesOfTheSameKind(_get_3);
+    List<Rule> _allRulesOfTheSameKind_1 = this._xsemanticsUtils.allRulesOfTheSameKind(_get_3);
     EList<Rule> _rules_4 = ts.getRules();
     Rule _get_4 = _rules_4.get(2);
     EList<Rule> _rules_5 = ts.getRules();
     Rule _get_5 = _rules_5.get(3);
-    this.assertRules(_rulesOfTheSameKind_1, _get_4, _get_5);
+    this.assertRules(_allRulesOfTheSameKind_1, _get_4, _get_5);
   }
   
   @Test

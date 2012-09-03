@@ -128,8 +128,12 @@ class XsemanticsUtils {
 				it.conclusion.relationSymbols.elementsEqual(relationSymbols)	]
 	}
 	
-	def List<Rule> getRulesOfTheSameKind(Rule rule) {
-		Lists::newArrayList(rule.containingTypeSystem.filterRulesByJudgmentDescription
+	def allRulesOfTheSameKind(Rule rule) {
+		rule.containingTypeSystem.allRulesOfTheSameKind(rule)
+	}
+
+	def List<Rule> allRulesOfTheSameKind(XsemanticsSystem system, Rule rule) {
+		Lists::newArrayList(system.allRulesByJudgmentDescription
 			(rule.conclusion.judgmentSymbol, rule.conclusion.relationSymbols))
 	}
 	
@@ -340,6 +344,10 @@ class XsemanticsUtils {
 		// it is the JvmType which is associated to an XsemanticsSystem
 		associations.getSourceElements(typeReference.type).
 			filter(typeof(XsemanticsSystem)).head
+	}
+
+	def ruleByName(Iterable<Rule> rules, String n) {
+		rules.findFirst [ name == n ]
 	}
 	
 }

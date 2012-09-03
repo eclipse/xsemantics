@@ -19,6 +19,7 @@ import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -212,7 +213,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkRule(Rule rule) {
-		checkNoDuplicateRulesWithSameArguments(rule);
 		JudgmentDescription judgmentDescription = checkRuleConformantToJudgmentDescription(rule);
 		if (judgmentDescription != null) {
 			List<JudgmentParameter> judgmentParameters = judgmentDescription
@@ -266,15 +266,43 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					IssueCodes.DUPLICATE_RULE_NAME);
 		}
 	}
-	
+
 	@Check
 	public void checkValidOverride(Rule rule) {
 		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
 		if (system != null) {
-			if (rule.isOverride() && system.getSuperSystem() == null) {
-				error("Cannot override rule without system 'extends'", rule,
-						XsemanticsPackage.Literals.RULE__OVERRIDE,
-						IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+			if (rule.isOverride()) {
+				XsemanticsSystem superSystem = xsemanticsUtils
+						.superSystemDefinition(system);
+				if (superSystem == null) {
+					error("Cannot override rule without system 'extends'",
+							rule, XsemanticsPackage.Literals.RULE__OVERRIDE,
+							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+				} else {
+					List<Rule> rulesOfTheSameKind = xsemanticsUtils
+							.allRulesOfTheSameKind(superSystem, rule);
+					TupleType tupleType = typeSystem.getInputTypes(rule);
+					Rule ruleToOverride = null;
+					for (Rule rule2 : rulesOfTheSameKind) {
+						TupleType tupleType2 = typeSystem.getInputTypes(rule2);
+						if (typeSystem.equals(tupleType, tupleType2)) {
+							ruleToOverride = rule2;
+							break;
+						}
+					}
+					if (ruleToOverride == null) {
+						error("No rule of the same kind to override: "
+								+ tupleTypeRepresentation(tupleType), rule,
+								XsemanticsPackage.Literals.RULE__OVERRIDE,
+								IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND);
+					} else if (!ruleToOverride.getName().equals(rule.getName())) {
+						error("Must have the same name of the rule to override: "
+								+ ruleToOverride.getName(),
+								rule,
+								XsemanticsPackage.Literals.RULE__OVERRIDE,
+								IssueCodes.OVERRIDE_RULE_MUST_HAVE_THE_SAME_NAME);
+					}
+				}
 			}
 		}
 	}
@@ -283,10 +311,32 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	public void checkValidOverride(CheckRule rule) {
 		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
 		if (system != null) {
-			if (rule.isOverride() && system.getSuperSystem() == null) {
-				error("Cannot override checkrule without system 'extends'", rule,
-						XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
-						IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+			if (rule.isOverride()) {
+				XsemanticsSystem superSystem = xsemanticsUtils
+						.superSystemDefinition(system);
+				if (superSystem == null) {
+					error("Cannot override checkrule without system 'extends'",
+							rule,
+							XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
+							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+				} else {
+					ArrayList<CheckRule> inheritedCheckRules = xsemanticsUtils
+							.allCheckRules(superSystem);
+					CheckRule inheritedRule = null;
+					for (CheckRule checkRule2 : inheritedCheckRules) {
+						if (typeSystem.equals(rule.getElement().getParameter()
+								.getParameterType(), checkRule2.getElement()
+								.getParameter().getParameterType())
+								&& rule.getName().equals(checkRule2.getName())) {
+							inheritedRule = checkRule2;
+						}
+					}
+					if (inheritedRule == null)
+						error("No checkrule to override: " + rule.getName(),
+								rule,
+								XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
+								IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND);
+				}
 			}
 		}
 	}
@@ -394,17 +444,19 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 	}
 
+	@Check
 	protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
 		List<Rule> rulesOfTheSameKind = xsemanticsUtils
-				.getRulesOfTheSameKind(rule);
+				.allRulesOfTheSameKind(rule);
 		if (rulesOfTheSameKind.size() > 1) {
 			TupleType tupleType = typeSystem.getInputTypes(rule);
 			for (Rule rule2 : rulesOfTheSameKind) {
-				if (rule2 != rule) {
+				if (rule2 != rule && !rule.isOverride()) {
 					TupleType tupleType2 = typeSystem.getInputTypes(rule2);
 					if (typeSystem.equals(tupleType, tupleType2)) {
 						error("Duplicate rule of the same kind with parameters: "
-								+ tupleTypeRepresentation(tupleType),
+								+ tupleTypeRepresentation(tupleType)
+								+ ", in system: " + containingSystemName(rule2),
 								XsemanticsPackage.Literals.RULE__CONCLUSION,
 								IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
 						break;
@@ -412,6 +464,10 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				}
 			}
 		}
+	}
+
+	protected String containingSystemName(EObject object) {
+		return xsemanticsUtils.containingTypeSystem(object).getName();
 	}
 
 	protected JudgmentDescription checkRuleConformantToJudgmentDescription(

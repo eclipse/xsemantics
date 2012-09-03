@@ -16,6 +16,8 @@ import org.junit.Test;
 @SuppressWarnings("restriction")
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 
+	private static final String IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM = ", in system: it.xsemantics.test.TypeSystem";
+
 	private XsemanticsJavaValidator validator;
 
 	private ValidatorTester<XsemanticsJavaValidator> tester;
@@ -216,16 +218,20 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validate.assertAll(
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String, java.lang.Integer or int"),
+								"Duplicate rule of the same kind with parameters: java.lang.String, java.lang.Integer or int"
+										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String, int or java.lang.Integer"),
+								"Duplicate rule of the same kind with parameters: java.lang.String, int or java.lang.Integer"
+										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"),
+								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"
+										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"));
+								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"
+										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
 	}
 
 	@Test
@@ -233,13 +239,14 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 			throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRulesOfTheSameKindWithSameInputArgumentTypes());
-		validate.assertAll(
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String"),
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String"));
+		validate.assertAll(AssertableDiagnostics.error(
+				IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+				"Duplicate rule of the same kind with parameters: java.lang.String"
+						+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
+				AssertableDiagnostics.error(
+						IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+						"Duplicate rule of the same kind with parameters: java.lang.String"
+								+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
 	}
 
 	@Test

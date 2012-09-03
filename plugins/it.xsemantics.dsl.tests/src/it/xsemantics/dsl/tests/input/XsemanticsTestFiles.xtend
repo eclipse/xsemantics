@@ -1598,4 +1598,59 @@ class XsemanticsTestFiles {
 	validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator
 	'''
 
+	def testDuplicateRuleOfTheSameKindFromSuperSystem() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// the rule is already defined in TypeSystem
+	// so an 'override' is mandatory
+	axiom FromTypeSystem
+		G |- EObject c : c.eClass
+	'''
+
+	def testNoRuleOfTheSameKindToOverride() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// no rule to override in the base system with EClass, EClass
+	override axiom FromTypeSystem
+		G |- EClass o : EClass c
+	'''	
+
+	def testOverrideRuleWithDifferentName() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// override rule must have the same name
+	// of the one in the base system
+	override axiom DifferentName
+		G |- EObject o : EClass c
+	'''
+
+	def testNoCheckRuleToOverride() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// wrong name of override rule
+	override checkrule WrongCheckEObject for
+		EObject o
+	from {
+		
+	}
+	
+	// wrong element type
+	override checkrule CheckEObject for
+		EClass o
+	from {
+		
+	}
+	'''
 }

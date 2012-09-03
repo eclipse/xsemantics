@@ -66,10 +66,10 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testRulesOfTheSameKind() {
+	def void testAllRulesOfTheSameKind() {
 		val ts = testFiles.testRulesOfTheSameKind.parseAndAssertNoError
-		ts.getRules.get(0).rulesOfTheSameKind.assertRules(ts.getRules.get(0), ts.getRules.get(1))
-		ts.getRules.get(2).rulesOfTheSameKind.assertRules(ts.getRules.get(2), ts.getRules.get(3))
+		ts.getRules.get(0).allRulesOfTheSameKind.assertRules(ts.getRules.get(0), ts.getRules.get(1))
+		ts.getRules.get(2).allRulesOfTheSameKind.assertRules(ts.getRules.get(2), ts.getRules.get(3))
 	}
 	
 	@Test

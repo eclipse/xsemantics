@@ -57,4 +57,8 @@ public interface IssueCodes {
 	String EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS = PREFIX + "ExtendsCannotCoexistWithValidatorExtends";
 
 	String OVERRIDE_WITHOUT_SYSTEM_EXTENDS = PREFIX + "OverrideWithoutSystemExtends";
+
+	String NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND = PREFIX + "NoRuleToOverrideOfTheSameKind";
+
+	String OVERRIDE_RULE_MUST_HAVE_THE_SAME_NAME = PREFIX + "OverrideRuleMustHaveTheSameName";
 }

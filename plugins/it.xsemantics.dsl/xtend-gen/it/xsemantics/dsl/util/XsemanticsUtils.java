@@ -210,14 +210,19 @@ public class XsemanticsUtils {
     return _filter;
   }
   
-  public List<Rule> getRulesOfTheSameKind(final Rule rule) {
+  public List<Rule> allRulesOfTheSameKind(final Rule rule) {
     XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(rule);
+    List<Rule> _allRulesOfTheSameKind = this.allRulesOfTheSameKind(_containingTypeSystem, rule);
+    return _allRulesOfTheSameKind;
+  }
+  
+  public List<Rule> allRulesOfTheSameKind(final XsemanticsSystem system, final Rule rule) {
     RuleConclusion _conclusion = rule.getConclusion();
     String _judgmentSymbol = _conclusion.getJudgmentSymbol();
     RuleConclusion _conclusion_1 = rule.getConclusion();
     EList<String> _relationSymbols = _conclusion_1.getRelationSymbols();
-    Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_containingTypeSystem, _judgmentSymbol, _relationSymbols);
-    ArrayList<Rule> _newArrayList = Lists.<Rule>newArrayList(_filterRulesByJudgmentDescription);
+    Iterable<Rule> _allRulesByJudgmentDescription = this.allRulesByJudgmentDescription(system, _judgmentSymbol, _relationSymbols);
+    ArrayList<Rule> _newArrayList = Lists.<Rule>newArrayList(_allRulesByJudgmentDescription);
     return _newArrayList;
   }
   
@@ -623,5 +628,17 @@ public class XsemanticsUtils {
     Iterable<XsemanticsSystem> _filter = Iterables.<XsemanticsSystem>filter(_sourceElements, XsemanticsSystem.class);
     XsemanticsSystem _head = IterableExtensions.<XsemanticsSystem>head(_filter);
     return _head;
+  }
+  
+  public Rule ruleByName(final Iterable<Rule> rules, final String n) {
+    final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
+        public Boolean apply(final Rule it) {
+          String _name = it.getName();
+          boolean _equals = Objects.equal(_name, n);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    Rule _findFirst = IterableExtensions.<Rule>findFirst(rules, _function);
+    return _findFirst;
   }
 }
