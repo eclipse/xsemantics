@@ -630,4 +630,14 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
     CharSequence _testSystemExtendsTestBaseSystem = this.testFiles.testSystemExtendsTestBaseSystem();
     this.parseWithBaseSystemAndAssertNoError(_builder, _testSystemExtendsTestBaseSystem);
   }
+  
+  @Test
+  public void testSystemExtendsTestBaseSystem2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.dsl.tests.input.TestBaseSystem");
+    _builder.newLine();
+    CharSequence _testSystemExtendsTestBaseSystem = this.testFiles.testSystemExtendsTestBaseSystem();
+    CharSequence _testSystemExtendsSystem2 = this.testFiles.testSystemExtendsSystem2();
+    this.parseWithBaseSystemAndAssertNoError(_builder, _testSystemExtendsTestBaseSystem, _testSystemExtendsSystem2);
+  }
 }

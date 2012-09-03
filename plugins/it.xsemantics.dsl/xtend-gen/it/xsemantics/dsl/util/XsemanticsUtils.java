@@ -3,6 +3,7 @@ package it.xsemantics.dsl.util;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
@@ -19,6 +20,7 @@ import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -112,6 +114,11 @@ public class XsemanticsUtils {
   
   public Iterable<JudgmentDescription> filterJudgmentDescriptions(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
+    Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(_judgmentDescriptions, judgmentSymbol, relationSymbols);
+    return _filterJudgmentDescriptions;
+  }
+  
+  public Iterable<JudgmentDescription> filterJudgmentDescriptions(final Iterable<JudgmentDescription> desc, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
@@ -127,7 +134,7 @@ public class XsemanticsUtils {
           return Boolean.valueOf(_and);
         }
       };
-    Iterable<JudgmentDescription> _filter = IterableExtensions.<JudgmentDescription>filter(_judgmentDescriptions, _function);
+    Iterable<JudgmentDescription> _filter = IterableExtensions.<JudgmentDescription>filter(desc, _function);
     return _filter;
   }
   
@@ -151,7 +158,9 @@ public class XsemanticsUtils {
     JudgmentDescription _xblockexpression = null;
     {
       XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(object);
-      final List<JudgmentDescription> descriptions = this.getJudgmentDescriptions(_containingTypeSystem, judgmentSymbol, relationSymbols);
+      ArrayList<JudgmentDescription> _allJudgments = this.allJudgments(_containingTypeSystem);
+      Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(_allJudgments, judgmentSymbol, relationSymbols);
+      final ArrayList<JudgmentDescription> descriptions = Lists.<JudgmentDescription>newArrayList(_filterJudgmentDescriptions);
       JudgmentDescription _xifexpression = null;
       int _size = descriptions.size();
       boolean _greaterThan = (_size > 0);
@@ -480,10 +489,23 @@ public class XsemanticsUtils {
   
   public ArrayList<JudgmentDescription> allJudgments(final XsemanticsSystem system) {
     EList<JudgmentDescription> _judgmentDescriptions = system.getJudgmentDescriptions();
-    List<JudgmentDescription> _superSystemJudgments = this.superSystemJudgments(system);
-    Iterable<JudgmentDescription> _plus = Iterables.<JudgmentDescription>concat(_judgmentDescriptions, _superSystemJudgments);
-    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_plus);
-    return _newArrayList;
+    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_judgmentDescriptions);
+    final Procedure1<ArrayList<JudgmentDescription>> _function = new Procedure1<ArrayList<JudgmentDescription>>() {
+        public void apply(final ArrayList<JudgmentDescription> it) {
+          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          final Function1<XsemanticsSystem,EList<JudgmentDescription>> _function = new Function1<XsemanticsSystem,EList<JudgmentDescription>>() {
+              public EList<JudgmentDescription> apply(final XsemanticsSystem it) {
+                EList<JudgmentDescription> _judgmentDescriptions = it.getJudgmentDescriptions();
+                return _judgmentDescriptions;
+              }
+            };
+          List<EList<JudgmentDescription>> _map = ListExtensions.<XsemanticsSystem, EList<JudgmentDescription>>map(_allSuperSystemDefinitions, _function);
+          Iterable<JudgmentDescription> _flatten = Iterables.<JudgmentDescription>concat(_map);
+          Iterables.<JudgmentDescription>addAll(it, _flatten);
+        }
+      };
+    ArrayList<JudgmentDescription> _doubleArrow = ObjectExtensions.<ArrayList<JudgmentDescription>>operator_doubleArrow(_newArrayList, _function);
+    return _doubleArrow;
   }
   
   public List<JudgmentDescription> superSystemJudgments(final XsemanticsSystem system) {
@@ -492,6 +514,38 @@ public class XsemanticsUtils {
     ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList();
     List<JudgmentDescription> _elvis = ObjectExtensions.<List<JudgmentDescription>>operator_elvis(_judgmentDescriptions, _newArrayList);
     return _elvis;
+  }
+  
+  public ArrayList<XsemanticsSystem> allSuperSystemDefinitions(final XsemanticsSystem system) {
+    HashSet<XsemanticsSystem> _newHashSet = Sets.<XsemanticsSystem>newHashSet();
+    ArrayList<XsemanticsSystem> _allSuperSystemDefinitionsInternal = this.allSuperSystemDefinitionsInternal(system, _newHashSet);
+    return _allSuperSystemDefinitionsInternal;
+  }
+  
+  protected ArrayList<XsemanticsSystem> allSuperSystemDefinitionsInternal(final XsemanticsSystem system, final Set<XsemanticsSystem> visited) {
+    ArrayList<XsemanticsSystem> _xblockexpression = null;
+    {
+      boolean _contains = visited.contains(system);
+      if (_contains) {
+        return Lists.<XsemanticsSystem>newArrayList();
+      }
+      visited.add(system);
+      ArrayList<XsemanticsSystem> _newArrayList = Lists.<XsemanticsSystem>newArrayList();
+      final Procedure1<ArrayList<XsemanticsSystem>> _function = new Procedure1<ArrayList<XsemanticsSystem>>() {
+          public void apply(final ArrayList<XsemanticsSystem> it) {
+            final XsemanticsSystem superS = XsemanticsUtils.this.superSystemDefinition(system);
+            boolean _notEquals = (!Objects.equal(superS, null));
+            if (_notEquals) {
+              it.add(superS);
+              ArrayList<XsemanticsSystem> _allSuperSystemDefinitionsInternal = XsemanticsUtils.this.allSuperSystemDefinitionsInternal(superS, visited);
+              Iterables.<XsemanticsSystem>addAll(it, _allSuperSystemDefinitionsInternal);
+            }
+          }
+        };
+      ArrayList<XsemanticsSystem> _doubleArrow = ObjectExtensions.<ArrayList<XsemanticsSystem>>operator_doubleArrow(_newArrayList, _function);
+      _xblockexpression = (_doubleArrow);
+    }
+    return _xblockexpression;
   }
   
   public XsemanticsSystem superSystemDefinition(final XsemanticsSystem system) {

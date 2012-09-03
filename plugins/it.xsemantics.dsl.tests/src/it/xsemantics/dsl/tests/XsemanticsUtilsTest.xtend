@@ -275,6 +275,42 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testAllSuperSystemDefinitions() {
+		systemExtendsSystemWithJudgments.
+				allSuperSystemDefinitions.
+				head.name.
+				assertEqualsStrings('it.xsemantics.test.TypeSystem')
+	}
+
+	@Test
+	def void testAllSuperSystemDefinitions2() {
+		val superSystems = systemExtendsSystemWithAdditionalJudgment2.
+				allSuperSystemDefinitions
+		Assert::assertEquals(2, superSystems.size)
+		superSystems.get(0).name.
+				assertEqualsStrings('it.xsemantics.test.ExtendedTypeSystem')
+		superSystems.get(1).name.
+				assertEqualsStrings('it.xsemantics.test.TypeSystem')
+	}
+
+	@Test
+	def void testAllSuperSystemDefinitionsWithCycle() {
+		val superSystems = testFiles.testSystemBaseWithCycle.
+			parseWithBaseSystem
+			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore).
+				parseWithBaseSystem(testFiles.testSystemExtendsExtendedTypeSystem).
+					allSuperSystemDefinitions
+		// due to the cycle the initial type system appears to
+		Assert::assertEquals(3, superSystems.size)
+	}
+
+	@Test
+	def void testAllSuperSystemDefinitionsWithNoSuperSystem() {
+		Assert::assertEquals(0, testFiles.testSimpleRule.parseAndAssertNoError.
+				allSuperSystemDefinitions.size)
+	}
+
+	@Test
 	def void testSuperSystemJudgments() {
 		Assert::assertEquals(1, systemExtendsSystemWithJudgments.
 				superSystemJudgments.size)
@@ -287,6 +323,12 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testAllJudgments2() {
+		Assert::assertEquals(3, systemExtendsSystemWithAdditionalJudgment2.
+				allJudgments.size)
+	}
+
+	@Test
 	def void testSuperSystemJudgmentsWithNoSuperSystem() {
 		Assert::assertEquals(0, 
 				testFiles.testSimpleRule.parseAndAssertNoError.
@@ -295,10 +337,24 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testRuleJudgmentDescriptionInherited() {
-		assertDescription(testFiles.
-			testSimpleRule.
-				firstRule.judgmentDescription, "|-", ":"
-		)
+		val ts = systemExtendsSystemWithAdditionalJudgment2
+		assertDescription(ts.getRule(0).judgmentDescription, "|-", ":")
+		assertDescription(ts.getRule(1).judgmentDescription, "|-", "<:")
+		assertDescription(ts.getRule(2).judgmentDescription, "||-", ":")
+	}
+
+	@Test
+	def void testRuleInvocationJudgmentDescriptionInherited() {
+		val ts = systemExtendsSystemWithAdditionalJudgment2
+		assertDescription
+			(ts.getRule(0).ruleInvocationFromPremises.judgmentDescription,
+				"|-", "<:")
+		assertDescription
+			(ts.getRule(1).ruleInvocationFromPremises.judgmentDescription,
+				"||-", ":")
+		assertDescription
+			(ts.getRule(2).ruleInvocationFromPremises.judgmentDescription,
+				"|-", ":")
 	}
 
 	def systemExtendsSystemWithJudgments() {
@@ -312,6 +368,15 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 			parseWithBaseSystemAndAssertNoError
 			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore)
 	}
+
+	def systemExtendsSystemWithAdditionalJudgment2() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			)
+	}
 	
 	def void assertRules(List<Rule> rules, Rule expectedRule1, Rule expectedRule2) {
 		Assert::assertEquals(2, rules.size)
@@ -320,7 +385,7 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 	
 	def void assertDescription(JudgmentDescription description, String judgmentSymbol, String relationSymbol) {
-		Assert::assertNotNull(description)
+		Assert::assertNotNull("judgment description is null", description)
 		Assert::assertEquals(judgmentSymbol, description.judgmentSymbol)
 		Assert::assertEquals(relationSymbol, description.relationSymbols.get(0))
 	}

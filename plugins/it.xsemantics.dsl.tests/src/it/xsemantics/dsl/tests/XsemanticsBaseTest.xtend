@@ -62,17 +62,31 @@ class XsemanticsBaseTest {
 		ts.assertNoErrors
 		ts
 	}
+
+	/* s extends baseSystem2 which extends baseSystem */
+	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, 
+		CharSequence baseSystem2, CharSequence s
+	) {
+		val ts = baseSystem.parseWithBaseSystem(baseSystem2)
+		ts.assertNoErrors
+		ts.parseWithBaseSystem(s)
+	}
 	
 	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
-		val ts = baseSystem.parseWithBaseSystem(s)
+		val base = parser.parse(baseSystem)
+		base.assertNoErrors
+		val ts = base.parseWithBaseSystem(s)
 		ts.assertNoErrors
 		ts
 	}
 
 	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
-		var base = parser.parse(baseSystem)
-		base.assertNoErrors
-		parser.parse(s, base.eResource.resourceSet)
+		val base = parser.parse(baseSystem)
+		base.parseWithBaseSystem(s)
+	}
+
+	def parseWithBaseSystem(XsemanticsSystem baseSystem, CharSequence s) {
+		parser.parse(s, baseSystem.eResource.resourceSet)
 	}
 	
 	def parse(CharSequence s) {

@@ -81,28 +81,56 @@ public class XsemanticsBaseTest {
     }
   }
   
-  public XsemanticsSystem parseWithBaseSystemAndAssertNoError(final CharSequence baseSystem, final CharSequence s) {
+  /**
+   * s extends baseSystem2 which extends baseSystem
+   */
+  public XsemanticsSystem parseWithBaseSystemAndAssertNoError(final CharSequence baseSystem, final CharSequence baseSystem2, final CharSequence s) {
     XsemanticsSystem _xblockexpression = null;
     {
-      final XsemanticsSystem ts = this.parseWithBaseSystem(baseSystem, s);
+      final XsemanticsSystem ts = this.parseWithBaseSystem(baseSystem, baseSystem2);
       this._validationTestHelper.assertNoErrors(ts);
-      _xblockexpression = (ts);
+      XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(ts, s);
+      _xblockexpression = (_parseWithBaseSystem);
     }
     return _xblockexpression;
+  }
+  
+  public XsemanticsSystem parseWithBaseSystemAndAssertNoError(final CharSequence baseSystem, final CharSequence s) {
+    try {
+      XsemanticsSystem _xblockexpression = null;
+      {
+        final XsemanticsSystem base = this.parser.parse(baseSystem);
+        this._validationTestHelper.assertNoErrors(base);
+        final XsemanticsSystem ts = this.parseWithBaseSystem(base, s);
+        this._validationTestHelper.assertNoErrors(ts);
+        _xblockexpression = (ts);
+      }
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public XsemanticsSystem parseWithBaseSystem(final CharSequence baseSystem, final CharSequence s) {
     try {
       XsemanticsSystem _xblockexpression = null;
       {
-        XsemanticsSystem base = this.parser.parse(baseSystem);
-        this._validationTestHelper.assertNoErrors(base);
-        Resource _eResource = base.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        XsemanticsSystem _parse = this.parser.parse(s, _resourceSet);
-        _xblockexpression = (_parse);
+        final XsemanticsSystem base = this.parser.parse(baseSystem);
+        XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(base, s);
+        _xblockexpression = (_parseWithBaseSystem);
       }
       return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public XsemanticsSystem parseWithBaseSystem(final XsemanticsSystem baseSystem, final CharSequence s) {
+    try {
+      Resource _eResource = baseSystem.eResource();
+      ResourceSet _resourceSet = _eResource.getResourceSet();
+      XsemanticsSystem _parse = this.parser.parse(s, _resourceSet);
+      return _parse;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

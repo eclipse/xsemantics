@@ -25,6 +25,8 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import java.util.Set
+import com.google.common.collect.Sets
 
 class XsemanticsUtils {
 	
@@ -79,7 +81,11 @@ class XsemanticsUtils {
 	}
 	
 	def filterJudgmentDescriptions(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
-		ts.getJudgmentDescriptions.filter
+		ts.getJudgmentDescriptions.filterJudgmentDescriptions(judgmentSymbol, relationSymbols)
+	}
+
+	def filterJudgmentDescriptions(Iterable<JudgmentDescription> desc, String judgmentSymbol, Iterable<String> relationSymbols) {
+		desc.filter
 			[ it.judgmentSymbol.equals(judgmentSymbol) && 
 				it.relationSymbols.elementsEqual(relationSymbols) ]
 	}
@@ -96,9 +102,11 @@ class XsemanticsUtils {
 	}
 	
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
-		val descriptions = object.
+		val descriptions = Lists::newArrayList(
+			object.
 			containingTypeSystem.
-				getJudgmentDescriptions(judgmentSymbol, relationSymbols)
+				allJudgments.filterJudgmentDescriptions
+					(judgmentSymbol, relationSymbols))
 		if (descriptions.size > 0)
 			descriptions.get(0)
 	}
@@ -263,13 +271,34 @@ class XsemanticsUtils {
 	}
 
 	def allJudgments(XsemanticsSystem system) {
-		Lists::newArrayList(system.judgmentDescriptions + 
-			system.superSystemJudgments)
+		Lists::newArrayList(system.judgmentDescriptions) => [
+			it += system.allSuperSystemDefinitions.
+				map[judgmentDescriptions].flatten
+		]
 	}
 
 	def superSystemJudgments(XsemanticsSystem system) {
 		system.superSystemDefinition?.judgmentDescriptions ?:
 			Lists::newArrayList
+	}
+
+	def allSuperSystemDefinitions(XsemanticsSystem system) {
+		system.
+			allSuperSystemDefinitionsInternal(Sets::newHashSet)
+	}
+
+	def protected allSuperSystemDefinitionsInternal(XsemanticsSystem system, Set<XsemanticsSystem> visited) {
+		if (visited.contains(system))
+			return Lists::<XsemanticsSystem>newArrayList()
+		
+		visited.add(system)
+		Lists::<XsemanticsSystem>newArrayList() => [
+			val superS = system.superSystemDefinition
+			if (superS != null) {
+				it += superS
+				it += superS.allSuperSystemDefinitionsInternal(visited)
+			}
+		]
 	}
 
 	def superSystemDefinition(XsemanticsSystem system) {

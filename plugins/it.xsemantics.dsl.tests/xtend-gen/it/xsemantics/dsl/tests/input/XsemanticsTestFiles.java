@@ -3310,6 +3310,16 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testSystemExtendsSystem2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem2 ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testSystemExtendsSystemWithJudgmentsReferringToEcore() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("system it.xsemantics.test.ExtendedTypeSystem ");
@@ -3327,6 +3337,85 @@ public class XsemanticsTestFiles {
     _builder.append("subtype |- EClass c1 <: EClass c2");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testSystemExtendsExtendedTypeSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem2 ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type2 ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("rule FromTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject c : c.eClass");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- c.eClass <: c.eClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined in ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.append("rule FromExtendedTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G ||- c1 : c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined here");
+    _builder.newLine();
+    _builder.append("rule FromThisTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- c1 : c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  /**
+   * TypeSystem -> ExtendedTypeSystem2 -> ExtendedTypeSystem -> TypeSystem
+   */
+  public CharSequence testSystemBaseWithCycle() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
     _builder.newLine();
     return _builder;
   }

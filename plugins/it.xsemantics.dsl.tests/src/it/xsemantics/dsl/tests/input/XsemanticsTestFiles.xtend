@@ -1472,6 +1472,11 @@ class XsemanticsTestFiles {
 		extends it.xsemantics.test.TypeSystem
 	'''
 
+	def testSystemExtendsSystem2() '''
+	system it.xsemantics.test.ExtendedTypeSystem2 
+		extends it.xsemantics.test.ExtendedTypeSystem
+	'''
+
 	def testSystemExtendsSystemWithJudgmentsReferringToEcore() '''
 	system it.xsemantics.test.ExtendedTypeSystem 
 		extends it.xsemantics.test.TypeSystem
@@ -1481,6 +1486,44 @@ class XsemanticsTestFiles {
 	judgments {
 		subtype |- EClass c1 <: EClass c2
 	}
+	'''
+
+	def testSystemExtendsExtendedTypeSystem() '''
+	system it.xsemantics.test.ExtendedTypeSystem2 
+		extends it.xsemantics.test.ExtendedTypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type2 ||- EClass c1 : EClass c2
+	}
+	
+	// the judgment is defined in TypeSystem
+	rule FromTypeSystem
+		G |- EObject c : c.eClass
+	from {
+		G |- c.eClass <: c.eClass
+	}
+	
+	// the judgment is defined in ExtendedTypeSystem
+	rule FromExtendedTypeSystem
+		G |- EClass c1 <: EClass c2
+	from {
+		G ||- c1 : c2
+	}
+	
+	// the judgment is defined here
+	rule FromThisTypeSystem
+		G ||- EClass c1 : EClass c2
+	from {
+		G |- c1 : c2
+	}
+	'''
+
+	/* TypeSystem -> ExtendedTypeSystem2 -> ExtendedTypeSystem -> TypeSystem */
+	def testSystemBaseWithCycle() '''
+	system it.xsemantics.test.TypeSystem
+		extends it.xsemantics.test.ExtendedTypeSystem2
 	'''
 
 }
