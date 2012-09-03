@@ -18,6 +18,7 @@ import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -342,6 +343,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
 						IssueCodes.NOT_VALID_SUPER_SYSTEM);
 			}
+		}
+		List<XsemanticsSystem> superSystems = xsemanticsUtils.allSuperSystemDefinitions(system);
+		if (superSystems.contains(system)) {
+			error("Cycle in extends relation",
+					XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
+					IssueCodes.CYCLIC_HIERARCHY);
 		}
 	}
 

@@ -194,7 +194,10 @@ class XsemanticsUtils {
 	}
 	
 	def List<RuleParameter> outputParams(Rule rule) {
-		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
+		val judgmentDescription = rule.judgmentDescription
+		if (judgmentDescription == null)
+			return Lists::newArrayList
+		val judgmentParameters = judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
 			rule.conclusion.conclusionElements.filter(

@@ -3419,4 +3419,14 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testSystemBaseWithCycle2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem2 ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    return _builder;
+  }
 }

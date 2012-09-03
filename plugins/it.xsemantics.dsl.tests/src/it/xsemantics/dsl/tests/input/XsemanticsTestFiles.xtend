@@ -1526,4 +1526,8 @@ class XsemanticsTestFiles {
 		extends it.xsemantics.test.ExtendedTypeSystem2
 	'''
 
+	def testSystemBaseWithCycle2() '''
+	system it.xsemantics.test.ExtendedTypeSystem2 
+		extends it.xsemantics.test.ExtendedTypeSystem
+	'''
 }

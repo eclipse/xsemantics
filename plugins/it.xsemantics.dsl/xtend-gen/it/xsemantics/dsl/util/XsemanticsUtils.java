@@ -344,8 +344,12 @@ public class XsemanticsUtils {
   public List<RuleParameter> outputParams(final Rule rule) {
     List<RuleParameter> _xblockexpression = null;
     {
-      JudgmentDescription _judgmentDescription = this.judgmentDescription(rule);
-      EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
+      final JudgmentDescription judgmentDescription = this.judgmentDescription(rule);
+      boolean _equals = Objects.equal(judgmentDescription, null);
+      if (_equals) {
+        return Lists.<RuleParameter>newArrayList();
+      }
+      EList<JudgmentParameter> _judgmentParameters = judgmentDescription.getJudgmentParameters();
       final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
       RuleConclusion _conclusion = rule.getConclusion();
       EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();

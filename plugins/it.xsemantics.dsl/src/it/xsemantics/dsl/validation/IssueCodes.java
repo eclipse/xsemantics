@@ -51,4 +51,6 @@ public interface IssueCodes {
 	String THROW_NOT_ALLOWED = PREFIX + "ThrowNotAllowed";
 
 	String NOT_VALID_SUPER_SYSTEM = PREFIX + "NotValidSuperSystem";
+
+	String CYCLIC_HIERARCHY = PREFIX + "CyclicHierarchy";
 }

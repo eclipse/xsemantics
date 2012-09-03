@@ -7,6 +7,7 @@ import it.xsemantics.dsl.tests.XsemanticsProposalsForDatatypeRulesTest;
 import it.xsemantics.dsl.tests.XsemanticsTypeProviderTest;
 import it.xsemantics.dsl.tests.XsemanticsTypeSystemTest;
 import it.xsemantics.dsl.tests.XsemanticsUtilsTest;
+import it.xsemantics.dsl.tests.XsemanticsValidatorTest;
 import it.xsemantics.dsl.tests.XsemanticsValidatorTests;
 
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.junit.runners.Suite;
 	XsemanticsParserTest.class,
 	XsemanticsProposalsForDatatypeRulesTest.class,
 	XsemanticsValidatorTests.class,
+	XsemanticsValidatorTest.class,
 	QualifiedNameTest.class,
 	XsemanticsUtilsTest.class,
 	XsemanticsNodeModelUtilsTest.class,
