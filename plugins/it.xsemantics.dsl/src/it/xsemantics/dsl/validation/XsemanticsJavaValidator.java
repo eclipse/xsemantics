@@ -333,11 +333,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkSystem(XsemanticsSystem system) {
-		if (system.getValidatorExtends() != null) {
-			if (!typeSystem.isAbstractDeclarativeValidator(
-					system.getValidatorExtends(), system)) {
+		JvmParameterizedTypeReference validatorExtends = system
+				.getValidatorExtends();
+		if (validatorExtends != null) {
+			if (!typeSystem.isAbstractDeclarativeValidator(validatorExtends,
+					system)) {
 				error("Not an AbstractDeclarativeValidator: "
-						+ getNameOfTypes(system.getValidatorExtends()),
+						+ getNameOfTypes(validatorExtends),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
 						IssueCodes.NOT_VALIDATOR);
 			}
@@ -349,6 +351,14 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						+ getNameOfTypes(superSystem),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
 						IssueCodes.NOT_VALID_SUPER_SYSTEM);
+			}
+			if (validatorExtends != null) {
+				error("system 'extends' cannot coexist with 'validatorExtends'",
+						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
+						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
+				error("system 'extends' cannot coexist with 'validatorExtends'",
+						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
+						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
 			}
 		}
 		List<XsemanticsSystem> superSystems = xsemanticsUtils

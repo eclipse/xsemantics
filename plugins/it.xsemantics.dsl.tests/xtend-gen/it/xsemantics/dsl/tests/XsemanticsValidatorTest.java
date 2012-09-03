@@ -32,4 +32,15 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       IssueCodes.CYCLIC_HIERARCHY, 
       "Cycle in extends relation");
   }
+  
+  @Test
+  public void testSystemExtendsWithValidatorExtends() {
+    CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
+    CharSequence _testSystemExtendsWithValidatorExtends = this.testFiles.testSystemExtendsWithValidatorExtends();
+    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_testJudgmentDescriptions, _testSystemExtendsWithValidatorExtends);
+    EClass _xsemanticsSystem = XsemanticsPackage.eINSTANCE.getXsemanticsSystem();
+    this._validationTestHelper.assertError(_parseWithBaseSystem, _xsemanticsSystem, 
+      IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS, 
+      "system \'extends\' cannot coexist with \'validatorExtends\'");
+  }
 }

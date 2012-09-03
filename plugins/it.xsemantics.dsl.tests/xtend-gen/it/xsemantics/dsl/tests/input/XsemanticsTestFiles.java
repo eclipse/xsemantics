@@ -3445,4 +3445,17 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testSystemExtendsWithValidatorExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator");
+    _builder.newLine();
+    return _builder;
+  }
 }

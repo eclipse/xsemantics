@@ -53,4 +53,6 @@ public interface IssueCodes {
 	String NOT_VALID_SUPER_SYSTEM = PREFIX + "NotValidSuperSystem";
 
 	String CYCLIC_HIERARCHY = PREFIX + "CyclicHierarchy";
+
+	String EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS = PREFIX + "ExtendsCannotCoexistWithValidatorExtends";
 }

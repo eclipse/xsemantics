@@ -1537,4 +1537,12 @@ class XsemanticsTestFiles {
 	system it.xsemantics.test.ExtendedTypeSystem2 
 		extends it.xsemantics.test.ExtendedTypeSystem
 	'''
+
+	def testSystemExtendsWithValidatorExtends() '''
+	system it.xsemantics.test.ExtendedTypeSystem 
+		extends it.xsemantics.test.TypeSystem
+	
+	validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator
+	'''
+
 }

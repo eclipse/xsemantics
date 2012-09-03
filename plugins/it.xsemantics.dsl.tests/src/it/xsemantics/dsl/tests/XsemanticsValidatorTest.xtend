@@ -28,4 +28,16 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"Cycle in extends relation"
 		)
 	}
+
+	@Test
+	def void testSystemExtendsWithValidatorExtends() {
+		testFiles.testJudgmentDescriptions.parseWithBaseSystem(
+			testFiles.testSystemExtendsWithValidatorExtends
+		).
+		assertError(
+			XsemanticsPackage::eINSTANCE.xsemanticsSystem,
+			IssueCodes::EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS,
+			"system 'extends' cannot coexist with 'validatorExtends'"
+		)
+	}
  }
