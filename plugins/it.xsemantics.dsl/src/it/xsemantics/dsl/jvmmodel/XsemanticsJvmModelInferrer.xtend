@@ -170,7 +170,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		).initializeLater [
 			documentation = ts.documentation
 			
-			if (ts.validatorExtends != null)
+			if (ts.superSystemDefinition != null)
+				superTypes += ts.newTypeRef(ts.superSystemDefinition.toValidatorJavaFullyQualifiedName)
+			else if (ts.validatorExtends != null)
 				superTypes += ts.validatorExtends.cloneWithProxies
 			else
 				superTypes += ts.newTypeRef(typeof(XsemanticsBasedDeclarativeValidator))

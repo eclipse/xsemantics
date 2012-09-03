@@ -1233,12 +1233,12 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import it.xsemantics.test.ExtendedTypeSystem2;
+import it.xsemantics.test.validation.ExtendedTypeSystemValidator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 
-public class ExtendedTypeSystem2Validator extends XsemanticsBasedDeclarativeValidator {
+public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
   @Inject
   protected ExtendedTypeSystem2 xsemanticsSystem;
   

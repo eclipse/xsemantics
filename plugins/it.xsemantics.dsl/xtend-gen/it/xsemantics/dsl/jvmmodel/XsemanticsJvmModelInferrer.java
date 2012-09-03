@@ -268,17 +268,27 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         public void apply(final JvmGenericType it) {
           String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-          JvmParameterizedTypeReference _validatorExtends = ts.getValidatorExtends();
-          boolean _notEquals = (!Objects.equal(_validatorExtends, null));
+          XsemanticsSystem _superSystemDefinition = XsemanticsJvmModelInferrer.this._xsemanticsUtils.superSystemDefinition(ts);
+          boolean _notEquals = (!Objects.equal(_superSystemDefinition, null));
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-            JvmParameterizedTypeReference _validatorExtends_1 = ts.getValidatorExtends();
-            JvmTypeReference _cloneWithProxies = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_validatorExtends_1);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
+            XsemanticsSystem _superSystemDefinition_1 = XsemanticsJvmModelInferrer.this._xsemanticsUtils.superSystemDefinition(ts);
+            String _validatorJavaFullyQualifiedName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.toValidatorJavaFullyQualifiedName(_superSystemDefinition_1);
+            JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, _validatorJavaFullyQualifiedName);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
           } else {
-            EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
-            JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsBasedDeclarativeValidator.class);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _newTypeRef);
+            JvmParameterizedTypeReference _validatorExtends = ts.getValidatorExtends();
+            boolean _notEquals_1 = (!Objects.equal(_validatorExtends, null));
+            if (_notEquals_1) {
+              EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
+              JvmParameterizedTypeReference _validatorExtends_1 = ts.getValidatorExtends();
+              JvmTypeReference _cloneWithProxies = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_validatorExtends_1);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _cloneWithProxies);
+            } else {
+              EList<JvmTypeReference> _superTypes_2 = it.getSuperTypes();
+              JvmTypeReference _newTypeRef_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsBasedDeclarativeValidator.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_2, _newTypeRef_1);
+            }
           }
           EList<JvmMember> _members = it.getMembers();
           JvmParameterizedTypeReference _createTypeRef = XsemanticsJvmModelInferrer.this._typeReferences.createTypeRef(inferredClass);
@@ -293,10 +303,10 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           JvmField _field = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "xsemanticsSystem", _createTypeRef, _function);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
           JvmParameterizedTypeReference _validatorExtends_2 = ts.getValidatorExtends();
-          boolean _notEquals_1 = (!Objects.equal(_validatorExtends_2, null));
-          if (_notEquals_1) {
+          boolean _notEquals_2 = (!Objects.equal(_validatorExtends_2, null));
+          if (_notEquals_2) {
             EList<JvmMember> _members_1 = it.getMembers();
-            JvmTypeReference _newTypeRef_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsValidatorErrorGenerator.class);
+            JvmTypeReference _newTypeRef_2 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsValidatorErrorGenerator.class);
             final Procedure1<JvmField> _function_1 = new Procedure1<JvmField>() {
                 public void apply(final JvmField it) {
                   EList<JvmAnnotationReference> _annotations = it.getAnnotations();
@@ -305,7 +315,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                   it.setVisibility(JvmVisibility.PROTECTED);
                 }
               };
-            JvmField _field_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "errorGenerator", _newTypeRef_1, _function_1);
+            JvmField _field_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "errorGenerator", _newTypeRef_2, _function_1);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, _field_1);
           }
           EList<CheckRule> _checkrules = ts.getCheckrules();
