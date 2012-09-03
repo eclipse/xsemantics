@@ -3423,6 +3423,115 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testRuleOverride() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("override axiom FromTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject c : c.eClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined in ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.append("override rule FromExtendedTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G ||- c1 : c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined here");
+    _builder.newLine();
+    _builder.append("override rule FromThisTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- c1 : var EClass o");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("override checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- o : var EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- o.eClass <: c");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testInvalidRuleOverrideWithoutSystemExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject c : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the judgment is defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("override axiom FromTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject c : c.eClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("override checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- o : var EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- o.eClass <: c");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   /**
    * TypeSystem -> ExtendedTypeSystem2 -> ExtendedTypeSystem -> TypeSystem
    */

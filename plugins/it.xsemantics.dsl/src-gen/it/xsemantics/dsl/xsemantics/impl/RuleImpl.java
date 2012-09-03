@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.RuleImpl#isOverride <em>Override</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.RuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.RuleImpl#getConclusion <em>Conclusion</em>}</li>
  * </ul>
@@ -31,6 +32,26 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
 {
+  /**
+   * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean OVERRIDE_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected boolean override = OVERRIDE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -80,6 +101,29 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected EClass eStaticClass()
   {
     return XsemanticsPackage.Literals.RULE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isOverride()
+  {
+    return override;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOverride(boolean newOverride)
+  {
+    boolean oldOverride = override;
+    override = newOverride;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.RULE__OVERRIDE, oldOverride, override));
   }
 
   /**
@@ -179,6 +223,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case XsemanticsPackage.RULE__OVERRIDE:
+        return isOverride();
       case XsemanticsPackage.RULE__NAME:
         return getName();
       case XsemanticsPackage.RULE__CONCLUSION:
@@ -197,6 +243,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case XsemanticsPackage.RULE__OVERRIDE:
+        setOverride((Boolean)newValue);
+        return;
       case XsemanticsPackage.RULE__NAME:
         setName((String)newValue);
         return;
@@ -217,6 +266,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case XsemanticsPackage.RULE__OVERRIDE:
+        setOverride(OVERRIDE_EDEFAULT);
+        return;
       case XsemanticsPackage.RULE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -237,6 +289,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
+      case XsemanticsPackage.RULE__OVERRIDE:
+        return override != OVERRIDE_EDEFAULT;
       case XsemanticsPackage.RULE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XsemanticsPackage.RULE__CONCLUSION:
@@ -256,7 +310,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (override: ");
+    result.append(override);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

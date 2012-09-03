@@ -531,7 +531,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRule_Name()
+  public EAttribute getRule_Override()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
   }
@@ -541,9 +541,19 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getRule_Name()
+  {
+    return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getRule_Conclusion()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(1);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -591,7 +601,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCheckRule_Name()
+  public EAttribute getCheckRule_Override()
   {
     return (EAttribute)checkRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -601,9 +611,19 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getCheckRule_Name()
+  {
+    return (EAttribute)checkRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getCheckRule_Element()
   {
-    return (EReference)checkRuleEClass.getEStructuralFeatures().get(1);
+    return (EReference)checkRuleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -613,7 +633,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    */
   public EReference getCheckRule_Premises()
   {
-    return (EReference)checkRuleEClass.getEStructuralFeatures().get(2);
+    return (EReference)checkRuleEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1133,6 +1153,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     judgmentParameterEClass = createEClass(JUDGMENT_PARAMETER);
 
     ruleEClass = createEClass(RULE);
+    createEAttribute(ruleEClass, RULE__OVERRIDE);
     createEAttribute(ruleEClass, RULE__NAME);
     createEReference(ruleEClass, RULE__CONCLUSION);
 
@@ -1142,6 +1163,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     createEReference(ruleWithPremisesEClass, RULE_WITH_PREMISES__PREMISES);
 
     checkRuleEClass = createEClass(CHECK_RULE);
+    createEAttribute(checkRuleEClass, CHECK_RULE__OVERRIDE);
     createEAttribute(checkRuleEClass, CHECK_RULE__NAME);
     createEReference(checkRuleEClass, CHECK_RULE__ELEMENT);
     createEReference(checkRuleEClass, CHECK_RULE__PREMISES);
@@ -1287,6 +1309,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEClass(judgmentParameterEClass, JudgmentParameter.class, "JudgmentParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRule_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Conclusion(), this.getRuleConclusion(), null, "conclusion", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1296,6 +1319,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEReference(getRuleWithPremises_Premises(), theXbasePackage.getXExpression(), null, "premises", null, 0, 1, RuleWithPremises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(checkRuleEClass, CheckRule.class, "CheckRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getCheckRule_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, CheckRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getCheckRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, CheckRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCheckRule_Element(), this.getRuleParameter(), null, "element", null, 0, 1, CheckRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCheckRule_Premises(), theXbasePackage.getXExpression(), null, "premises", null, 0, 1, CheckRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

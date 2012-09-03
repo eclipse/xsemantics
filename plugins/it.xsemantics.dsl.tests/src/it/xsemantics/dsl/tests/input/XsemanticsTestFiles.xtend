@@ -1527,6 +1527,59 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testRuleOverride() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// the judgment is defined in TypeSystem
+	override axiom FromTypeSystem
+		G |- EObject c : c.eClass
+	
+	// the judgment is defined in ExtendedTypeSystem
+	override rule FromExtendedTypeSystem
+		G |- EClass c1 <: EClass c2
+	from {
+		G ||- c1 : c2
+	}
+	
+	// the judgment is defined here
+	override rule FromThisTypeSystem
+		G ||- EClass c1 : EClass c2
+	from {
+		G |- c1 : var EClass o
+	}
+	
+	override checkrule CheckEObject for
+		EObject o
+	from {
+		empty |- o : var EClass c
+		empty |- o.eClass <: c
+	}
+	'''
+
+	def testInvalidRuleOverrideWithoutSystemExtends() '''
+	system it.xsemantics.test.TypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EObject c : output EClass
+	}
+	
+	// the judgment is defined in TypeSystem
+	override axiom FromTypeSystem
+		G |- EObject c : c.eClass
+	
+	override checkrule CheckEObject for
+		EObject o
+	from {
+		empty |- o : var EClass c
+		empty |- o.eClass <: c
+	}
+	'''
+
 	/* TypeSystem -> ExtendedTypeSystem2 -> ExtendedTypeSystem -> TypeSystem */
 	def testSystemBaseWithCycle() '''
 	system it.xsemantics.test.TypeSystem

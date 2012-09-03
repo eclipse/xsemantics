@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.CheckRuleImpl#isOverride <em>Override</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.CheckRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.CheckRuleImpl#getElement <em>Element</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.CheckRuleImpl#getPremises <em>Premises</em>}</li>
@@ -34,6 +35,26 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public class CheckRuleImpl extends MinimalEObjectImpl.Container implements CheckRule
 {
+  /**
+   * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean OVERRIDE_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected boolean override = OVERRIDE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -93,6 +114,29 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
   protected EClass eStaticClass()
   {
     return XsemanticsPackage.Literals.CHECK_RULE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isOverride()
+  {
+    return override;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOverride(boolean newOverride)
+  {
+    boolean oldOverride = override;
+    override = newOverride;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.CHECK_RULE__OVERRIDE, oldOverride, override));
   }
 
   /**
@@ -242,6 +286,8 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
   {
     switch (featureID)
     {
+      case XsemanticsPackage.CHECK_RULE__OVERRIDE:
+        return isOverride();
       case XsemanticsPackage.CHECK_RULE__NAME:
         return getName();
       case XsemanticsPackage.CHECK_RULE__ELEMENT:
@@ -262,6 +308,9 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
   {
     switch (featureID)
     {
+      case XsemanticsPackage.CHECK_RULE__OVERRIDE:
+        setOverride((Boolean)newValue);
+        return;
       case XsemanticsPackage.CHECK_RULE__NAME:
         setName((String)newValue);
         return;
@@ -285,6 +334,9 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
   {
     switch (featureID)
     {
+      case XsemanticsPackage.CHECK_RULE__OVERRIDE:
+        setOverride(OVERRIDE_EDEFAULT);
+        return;
       case XsemanticsPackage.CHECK_RULE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -308,6 +360,8 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
   {
     switch (featureID)
     {
+      case XsemanticsPackage.CHECK_RULE__OVERRIDE:
+        return override != OVERRIDE_EDEFAULT;
       case XsemanticsPackage.CHECK_RULE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XsemanticsPackage.CHECK_RULE__ELEMENT:
@@ -329,7 +383,9 @@ public class CheckRuleImpl extends MinimalEObjectImpl.Container implements Check
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (override: ");
+    result.append(override);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

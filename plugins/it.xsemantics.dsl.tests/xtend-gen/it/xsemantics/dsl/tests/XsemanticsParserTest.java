@@ -648,4 +648,15 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
     CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
     this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
   }
+  
+  @Test
+  public void testRuleOverride() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
+    CharSequence _testRuleOverride = this.testFiles.testRuleOverride();
+    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_parseWithBaseSystemAndAssertNoError, _testRuleOverride);
+    this._validationTestHelper.assertNoErrors(_parseWithBaseSystem);
+  }
 }

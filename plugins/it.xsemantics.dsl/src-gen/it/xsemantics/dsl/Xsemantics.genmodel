@@ -33,6 +33,7 @@
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//JudgmentParameter"/>
     <genClasses ecoreClass="Xsemantics.ecore#//Rule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Rule/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Rule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//Rule/conclusion"/>
     </genClasses>
@@ -41,6 +42,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//RuleWithPremises/premises"/>
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//CheckRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//CheckRule/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//CheckRule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//CheckRule/element"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//CheckRule/premises"/>

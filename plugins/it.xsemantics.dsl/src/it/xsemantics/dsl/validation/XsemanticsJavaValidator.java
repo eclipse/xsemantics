@@ -266,6 +266,30 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					IssueCodes.DUPLICATE_RULE_NAME);
 		}
 	}
+	
+	@Check
+	public void checkValidOverride(Rule rule) {
+		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
+		if (system != null) {
+			if (rule.isOverride() && system.getSuperSystem() == null) {
+				error("Cannot override rule without system 'extends'", rule,
+						XsemanticsPackage.Literals.RULE__OVERRIDE,
+						IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+			}
+		}
+	}
+
+	@Check
+	public void checkValidOverride(CheckRule rule) {
+		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
+		if (system != null) {
+			if (rule.isOverride() && system.getSuperSystem() == null) {
+				error("Cannot override checkrule without system 'extends'", rule,
+						XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
+						IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+			}
+		}
+	}
 
 	@Check
 	public void checkRuleInvocation(RuleInvocation ruleInvocation) {

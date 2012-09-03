@@ -40,4 +40,19 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"system 'extends' cannot coexist with 'validatorExtends'"
 		)
 	}
- }
+
+	@Test
+	def void testInvalidRuleOverrideWithoutSystemExtends() {
+		val ts = testFiles.testInvalidRuleOverrideWithoutSystemExtends.parse
+		ts.assertError(
+			XsemanticsPackage::eINSTANCE.rule,
+			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			"Cannot override rule without system 'extends'"
+		)
+		ts.assertError(
+			XsemanticsPackage::eINSTANCE.checkRule,
+			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			"Cannot override checkrule without system 'extends'"
+		)
+	}
+}

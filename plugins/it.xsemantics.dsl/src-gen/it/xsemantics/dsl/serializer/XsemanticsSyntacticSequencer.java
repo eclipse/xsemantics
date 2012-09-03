@@ -18,7 +18,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class XsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XsemanticsGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_RuleWithPremises_DerivesKeyword_2_q;
+	protected AbstractElementAlias match_RuleWithPremises_DerivesKeyword_3_q;
 	protected AbstractElementAlias match_XBlockExpression_SemicolonKeyword_2_1_q;
 	protected AbstractElementAlias match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q;
 	protected AbstractElementAlias match_XExpressionInClosure_SemicolonKeyword_1_1_q;
@@ -29,7 +29,7 @@ public class XsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (XsemanticsGrammarAccess) access;
-		match_RuleWithPremises_DerivesKeyword_2_q = new TokenAlias(false, true, grammarAccess.getRuleWithPremisesAccess().getDerivesKeyword_2());
+		match_RuleWithPremises_DerivesKeyword_3_q = new TokenAlias(false, true, grammarAccess.getRuleWithPremisesAccess().getDerivesKeyword_3());
 		match_XBlockExpression_SemicolonKeyword_2_1_q = new TokenAlias(false, true, grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1());
 		match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2()));
 		match_XExpressionInClosure_SemicolonKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getXExpressionInClosureAccess().getSemicolonKeyword_1_1());
@@ -88,8 +88,8 @@ public class XsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_RuleWithPremises_DerivesKeyword_2_q.equals(syntax))
-				emit_RuleWithPremises_DerivesKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_RuleWithPremises_DerivesKeyword_3_q.equals(syntax))
+				emit_RuleWithPremises_DerivesKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XBlockExpression_SemicolonKeyword_2_1_q.equals(syntax))
 				emit_XBlockExpression_SemicolonKeyword_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q.equals(syntax))
@@ -110,7 +110,7 @@ public class XsemanticsSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * Syntax:
 	 *     'derives'?
 	 */
-	protected void emit_RuleWithPremises_DerivesKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_RuleWithPremises_DerivesKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

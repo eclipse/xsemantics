@@ -1208,42 +1208,19 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID conclusion=RuleConclusion)
+	 *     (override?='override'? name=ID conclusion=RuleConclusion)
 	 */
 	protected void sequence_Axiom(EObject context, Axiom semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.RULE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.RULE__NAME));
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.RULE__CONCLUSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.RULE__CONCLUSION));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAxiomAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getAxiomAccess().getConclusionRuleConclusionParserRuleCall_2_0(), semanticObject.getConclusion());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (name=ID element=RuleParameter premises=XBlockExpression)
+	 *     (override?='override'? name=ID element=RuleParameter premises=XBlockExpression)
 	 */
 	protected void sequence_CheckRule(EObject context, CheckRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__NAME));
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__ELEMENT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__ELEMENT));
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__PREMISES) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.CHECK_RULE__PREMISES));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getCheckRuleAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getCheckRuleAccess().getElementRuleParameterParserRuleCall_3_0(), semanticObject.getElement());
-		feeder.accept(grammarAccess.getCheckRuleAccess().getPremisesXBlockExpressionParserRuleCall_5_0(), semanticObject.getPremises());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -1492,23 +1469,10 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID conclusion=RuleConclusion premises=XBlockExpression)
+	 *     (override?='override'? name=ID conclusion=RuleConclusion premises=XBlockExpression)
 	 */
 	protected void sequence_RuleWithPremises(EObject context, RuleWithPremises semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.RULE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.RULE__NAME));
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.RULE__CONCLUSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.RULE__CONCLUSION));
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.RULE_WITH_PREMISES__PREMISES) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.RULE_WITH_PREMISES__PREMISES));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getRuleWithPremisesAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getRuleWithPremisesAccess().getConclusionRuleConclusionParserRuleCall_3_0(), semanticObject.getConclusion());
-		feeder.accept(grammarAccess.getRuleWithPremisesAccess().getPremisesXBlockExpressionParserRuleCall_5_0(), semanticObject.getPremises());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

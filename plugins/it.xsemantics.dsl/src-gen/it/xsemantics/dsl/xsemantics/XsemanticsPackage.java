@@ -308,13 +308,22 @@ public interface XsemanticsPackage extends EPackage
   int RULE = 5;
 
   /**
+   * The feature id for the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__OVERRIDE = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__NAME = 0;
+  int RULE__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Conclusion</b></em>' containment reference.
@@ -323,7 +332,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE__CONCLUSION = 1;
+  int RULE__CONCLUSION = 2;
 
   /**
    * The number of structural features of the '<em>Rule</em>' class.
@@ -332,7 +341,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_FEATURE_COUNT = 2;
+  int RULE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.AxiomImpl <em>Axiom</em>}' class.
@@ -343,6 +352,15 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   int AXIOM = 6;
+
+  /**
+   * The feature id for the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AXIOM__OVERRIDE = RULE__OVERRIDE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -380,6 +398,15 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   int RULE_WITH_PREMISES = 7;
+
+  /**
+   * The feature id for the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_WITH_PREMISES__OVERRIDE = RULE__OVERRIDE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -428,13 +455,22 @@ public interface XsemanticsPackage extends EPackage
   int CHECK_RULE = 8;
 
   /**
+   * The feature id for the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHECK_RULE__OVERRIDE = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CHECK_RULE__NAME = 0;
+  int CHECK_RULE__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -443,7 +479,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHECK_RULE__ELEMENT = 1;
+  int CHECK_RULE__ELEMENT = 2;
 
   /**
    * The feature id for the '<em><b>Premises</b></em>' containment reference.
@@ -452,7 +488,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHECK_RULE__PREMISES = 2;
+  int CHECK_RULE__PREMISES = 3;
 
   /**
    * The number of structural features of the '<em>Check Rule</em>' class.
@@ -461,7 +497,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHECK_RULE_FEATURE_COUNT = 3;
+  int CHECK_RULE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.RuleConclusionImpl <em>Rule Conclusion</em>}' class.
@@ -1295,6 +1331,17 @@ public interface XsemanticsPackage extends EPackage
   EClass getRule();
 
   /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.Rule#isOverride <em>Override</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Override</em>'.
+   * @see it.xsemantics.dsl.xsemantics.Rule#isOverride()
+   * @see #getRule()
+   * @generated
+   */
+  EAttribute getRule_Override();
+
+  /**
    * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.Rule#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1356,6 +1403,17 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   EClass getCheckRule();
+
+  /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.CheckRule#isOverride <em>Override</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Override</em>'.
+   * @see it.xsemantics.dsl.xsemantics.CheckRule#isOverride()
+   * @see #getCheckRule()
+   * @generated
+   */
+  EAttribute getCheckRule_Override();
 
   /**
    * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.CheckRule#getName <em>Name</em>}'.
@@ -2090,6 +2148,14 @@ public interface XsemanticsPackage extends EPackage
     EClass RULE = eINSTANCE.getRule();
 
     /**
+     * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE__OVERRIDE = eINSTANCE.getRule_Override();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2142,6 +2208,14 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EClass CHECK_RULE = eINSTANCE.getCheckRule();
+
+    /**
+     * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CHECK_RULE__OVERRIDE = eINSTANCE.getCheckRule_Override();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

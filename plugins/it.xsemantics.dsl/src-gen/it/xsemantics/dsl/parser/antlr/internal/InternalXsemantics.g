@@ -651,15 +651,30 @@ ruleAxiom returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='axiom' 
+((
+(
+		lv_override_0_0=	'override' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getAxiomAccess().getAxiomKeyword_0());
+        newLeafNode(lv_override_0_0, grammarAccess.getAxiomAccess().getOverrideOverrideKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAxiomRule());
+	        }
+       		setWithLastConsumed($current, "override", true, "override");
+	    }
+
+)
+)?	otherlv_1='axiom' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAxiomAccess().getAxiomKeyword_1());
     }
 (
 (
-		lv_name_1_0=RULE_ID
+		lv_name_2_0=RULE_ID
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getAxiomAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_2_0, grammarAccess.getAxiomAccess().getNameIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -668,7 +683,7 @@ ruleAxiom returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_2_0, 
         		"ID");
 	    }
 
@@ -676,16 +691,16 @@ ruleAxiom returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAxiomAccess().getConclusionRuleConclusionParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getAxiomAccess().getConclusionRuleConclusionParserRuleCall_3_0()); 
 	    }
-		lv_conclusion_2_0=ruleRuleConclusion		{
+		lv_conclusion_3_0=ruleRuleConclusion		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAxiomRule());
 	        }
        		set(
        			$current, 
        			"conclusion",
-        		lv_conclusion_2_0, 
+        		lv_conclusion_3_0, 
         		"RuleConclusion");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -712,15 +727,30 @@ ruleRuleWithPremises returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='rule' 
+((
+(
+		lv_override_0_0=	'override' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getRuleWithPremisesAccess().getRuleKeyword_0());
+        newLeafNode(lv_override_0_0, grammarAccess.getRuleWithPremisesAccess().getOverrideOverrideKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRuleWithPremisesRule());
+	        }
+       		setWithLastConsumed($current, "override", true, "override");
+	    }
+
+)
+)?	otherlv_1='rule' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getRuleWithPremisesAccess().getRuleKeyword_1());
     }
 (
 (
-		lv_name_1_0=RULE_ID
+		lv_name_2_0=RULE_ID
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getRuleWithPremisesAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_2_0, grammarAccess.getRuleWithPremisesAccess().getNameIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -729,50 +759,50 @@ ruleRuleWithPremises returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_2_0, 
         		"ID");
 	    }
 
 )
-)(	otherlv_2='derives' 
+)(	otherlv_3='derives' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getRuleWithPremisesAccess().getDerivesKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getRuleWithPremisesAccess().getDerivesKeyword_3());
     }
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRuleWithPremisesAccess().getConclusionRuleConclusionParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getRuleWithPremisesAccess().getConclusionRuleConclusionParserRuleCall_4_0()); 
 	    }
-		lv_conclusion_3_0=ruleRuleConclusion		{
+		lv_conclusion_4_0=ruleRuleConclusion		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRuleWithPremisesRule());
 	        }
        		set(
        			$current, 
        			"conclusion",
-        		lv_conclusion_3_0, 
+        		lv_conclusion_4_0, 
         		"RuleConclusion");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4='from' 
+)	otherlv_5='from' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getRuleWithPremisesAccess().getFromKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getRuleWithPremisesAccess().getFromKeyword_5());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRuleWithPremisesAccess().getPremisesXBlockExpressionParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getRuleWithPremisesAccess().getPremisesXBlockExpressionParserRuleCall_6_0()); 
 	    }
-		lv_premises_5_0=ruleXBlockExpression		{
+		lv_premises_6_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRuleWithPremisesRule());
 	        }
        		set(
        			$current, 
        			"premises",
-        		lv_premises_5_0, 
+        		lv_premises_6_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -799,15 +829,30 @@ ruleCheckRule returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='checkrule' 
+((
+(
+		lv_override_0_0=	'override' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getCheckRuleAccess().getCheckruleKeyword_0());
+        newLeafNode(lv_override_0_0, grammarAccess.getCheckRuleAccess().getOverrideOverrideKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCheckRuleRule());
+	        }
+       		setWithLastConsumed($current, "override", true, "override");
+	    }
+
+)
+)?	otherlv_1='checkrule' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getCheckRuleAccess().getCheckruleKeyword_1());
     }
 (
 (
-		lv_name_1_0=RULE_ID
+		lv_name_2_0=RULE_ID
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getCheckRuleAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_2_0, grammarAccess.getCheckRuleAccess().getNameIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -816,50 +861,50 @@ ruleCheckRule returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_2_0, 
         		"ID");
 	    }
 
 )
-)	otherlv_2='for' 
+)	otherlv_3='for' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getCheckRuleAccess().getForKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getCheckRuleAccess().getForKeyword_3());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getCheckRuleAccess().getElementRuleParameterParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getCheckRuleAccess().getElementRuleParameterParserRuleCall_4_0()); 
 	    }
-		lv_element_3_0=ruleRuleParameter		{
+		lv_element_4_0=ruleRuleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getCheckRuleRule());
 	        }
        		set(
        			$current, 
        			"element",
-        		lv_element_3_0, 
+        		lv_element_4_0, 
         		"RuleParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4='from' 
+)	otherlv_5='from' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getCheckRuleAccess().getFromKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getCheckRuleAccess().getFromKeyword_5());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getCheckRuleAccess().getPremisesXBlockExpressionParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getCheckRuleAccess().getPremisesXBlockExpressionParserRuleCall_6_0()); 
 	    }
-		lv_premises_5_0=ruleXBlockExpression		{
+		lv_premises_6_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getCheckRuleRule());
 	        }
        		set(
        			$current, 
        			"premises",
-        		lv_premises_5_0, 
+        		lv_premises_6_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }

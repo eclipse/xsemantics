@@ -55,4 +55,6 @@ public interface IssueCodes {
 	String CYCLIC_HIERARCHY = PREFIX + "CyclicHierarchy";
 
 	String EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS = PREFIX + "ExtendsCannotCoexistWithValidatorExtends";
+
+	String OVERRIDE_WITHOUT_SYSTEM_EXTENDS = PREFIX + "OverrideWithoutSystemExtends";
 }

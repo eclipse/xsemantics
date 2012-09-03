@@ -349,129 +349,153 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	public class AxiomElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Axiom");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAxiomKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cConclusionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cConclusionRuleConclusionParserRuleCall_2_0 = (RuleCall)cConclusionAssignment_2.eContents().get(0);
-		
-		//Axiom:
-		//	"axiom" name=ID conclusion=RuleConclusion;
-		public ParserRule getRule() { return rule; }
-
-		//"axiom" name=ID conclusion=RuleConclusion
-		public Group getGroup() { return cGroup; }
-
-		//"axiom"
-		public Keyword getAxiomKeyword_0() { return cAxiomKeyword_0; }
-
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
-		//conclusion=RuleConclusion
-		public Assignment getConclusionAssignment_2() { return cConclusionAssignment_2; }
-
-		//RuleConclusion
-		public RuleCall getConclusionRuleConclusionParserRuleCall_2_0() { return cConclusionRuleConclusionParserRuleCall_2_0; }
-	}
-
-	public class RuleWithPremisesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleWithPremises");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cRuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cDerivesKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Keyword cAxiomKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Assignment cConclusionAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cConclusionRuleConclusionParserRuleCall_3_0 = (RuleCall)cConclusionAssignment_3.eContents().get(0);
-		private final Keyword cFromKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cPremisesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cPremisesXBlockExpressionParserRuleCall_5_0 = (RuleCall)cPremisesAssignment_5.eContents().get(0);
 		
-		//RuleWithPremises:
-		//	"rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression;
+		//Axiom:
+		//	override?="override"? "axiom" name=ID conclusion=RuleConclusion;
 		public ParserRule getRule() { return rule; }
 
-		//"rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression
+		//override?="override"? "axiom" name=ID conclusion=RuleConclusion
 		public Group getGroup() { return cGroup; }
 
-		//"rule"
-		public Keyword getRuleKeyword_0() { return cRuleKeyword_0; }
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
+		//"axiom"
+		public Keyword getAxiomKeyword_1() { return cAxiomKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
-		//"derives"?
-		public Keyword getDerivesKeyword_2() { return cDerivesKeyword_2; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
 		//conclusion=RuleConclusion
 		public Assignment getConclusionAssignment_3() { return cConclusionAssignment_3; }
 
 		//RuleConclusion
 		public RuleCall getConclusionRuleConclusionParserRuleCall_3_0() { return cConclusionRuleConclusionParserRuleCall_3_0; }
+	}
+
+	public class RuleWithPremisesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleWithPremises");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Keyword cRuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cDerivesKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cConclusionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cConclusionRuleConclusionParserRuleCall_4_0 = (RuleCall)cConclusionAssignment_4.eContents().get(0);
+		private final Keyword cFromKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cPremisesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cPremisesXBlockExpressionParserRuleCall_6_0 = (RuleCall)cPremisesAssignment_6.eContents().get(0);
+		
+		//RuleWithPremises:
+		//	override?="override"? "rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression;
+		public ParserRule getRule() { return rule; }
+
+		//override?="override"? "rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression
+		public Group getGroup() { return cGroup; }
+
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
+		//"rule"
+		public Keyword getRuleKeyword_1() { return cRuleKeyword_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+
+		//"derives"?
+		public Keyword getDerivesKeyword_3() { return cDerivesKeyword_3; }
+
+		//conclusion=RuleConclusion
+		public Assignment getConclusionAssignment_4() { return cConclusionAssignment_4; }
+
+		//RuleConclusion
+		public RuleCall getConclusionRuleConclusionParserRuleCall_4_0() { return cConclusionRuleConclusionParserRuleCall_4_0; }
 
 		//"from"
-		public Keyword getFromKeyword_4() { return cFromKeyword_4; }
+		public Keyword getFromKeyword_5() { return cFromKeyword_5; }
 
 		//premises=XBlockExpression
-		public Assignment getPremisesAssignment_5() { return cPremisesAssignment_5; }
+		public Assignment getPremisesAssignment_6() { return cPremisesAssignment_6; }
 
 		//XBlockExpression
-		public RuleCall getPremisesXBlockExpressionParserRuleCall_5_0() { return cPremisesXBlockExpressionParserRuleCall_5_0; }
+		public RuleCall getPremisesXBlockExpressionParserRuleCall_6_0() { return cPremisesXBlockExpressionParserRuleCall_6_0; }
 	}
 
 	public class CheckRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CheckRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCheckruleKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cForKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cElementAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cElementRuleParameterParserRuleCall_3_0 = (RuleCall)cElementAssignment_3.eContents().get(0);
-		private final Keyword cFromKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cPremisesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cPremisesXBlockExpressionParserRuleCall_5_0 = (RuleCall)cPremisesAssignment_5.eContents().get(0);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Keyword cCheckruleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cForKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cElementAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cElementRuleParameterParserRuleCall_4_0 = (RuleCall)cElementAssignment_4.eContents().get(0);
+		private final Keyword cFromKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cPremisesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cPremisesXBlockExpressionParserRuleCall_6_0 = (RuleCall)cPremisesAssignment_6.eContents().get(0);
 		
 		//CheckRule:
-		//	"checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression;
+		//	override?="override"? "checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression;
 		public ParserRule getRule() { return rule; }
 
-		//"checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression
+		//override?="override"? "checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression
 		public Group getGroup() { return cGroup; }
 
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
 		//"checkrule"
-		public Keyword getCheckruleKeyword_0() { return cCheckruleKeyword_0; }
+		public Keyword getCheckruleKeyword_1() { return cCheckruleKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
 		//"for"
-		public Keyword getForKeyword_2() { return cForKeyword_2; }
+		public Keyword getForKeyword_3() { return cForKeyword_3; }
 
 		//element=RuleParameter
-		public Assignment getElementAssignment_3() { return cElementAssignment_3; }
+		public Assignment getElementAssignment_4() { return cElementAssignment_4; }
 
 		//RuleParameter
-		public RuleCall getElementRuleParameterParserRuleCall_3_0() { return cElementRuleParameterParserRuleCall_3_0; }
+		public RuleCall getElementRuleParameterParserRuleCall_4_0() { return cElementRuleParameterParserRuleCall_4_0; }
 
 		//"from"
-		public Keyword getFromKeyword_4() { return cFromKeyword_4; }
+		public Keyword getFromKeyword_5() { return cFromKeyword_5; }
 
 		//premises=XBlockExpression
-		public Assignment getPremisesAssignment_5() { return cPremisesAssignment_5; }
+		public Assignment getPremisesAssignment_6() { return cPremisesAssignment_6; }
 
 		//XBlockExpression
-		public RuleCall getPremisesXBlockExpressionParserRuleCall_5_0() { return cPremisesXBlockExpressionParserRuleCall_5_0; }
+		public RuleCall getPremisesXBlockExpressionParserRuleCall_6_0() { return cPremisesXBlockExpressionParserRuleCall_6_0; }
 	}
 
 	public class RuleConclusionElements extends AbstractParserRuleElementFinder {
@@ -1390,7 +1414,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Axiom:
-	//	"axiom" name=ID conclusion=RuleConclusion;
+	//	override?="override"? "axiom" name=ID conclusion=RuleConclusion;
 	public AxiomElements getAxiomAccess() {
 		return (pAxiom != null) ? pAxiom : (pAxiom = new AxiomElements());
 	}
@@ -1400,7 +1424,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RuleWithPremises:
-	//	"rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression;
+	//	override?="override"? "rule" name=ID "derives"? conclusion=RuleConclusion "from" premises=XBlockExpression;
 	public RuleWithPremisesElements getRuleWithPremisesAccess() {
 		return (pRuleWithPremises != null) ? pRuleWithPremises : (pRuleWithPremises = new RuleWithPremisesElements());
 	}
@@ -1410,7 +1434,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CheckRule:
-	//	"checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression;
+	//	override?="override"? "checkrule" name=ID "for" element=RuleParameter "from" premises=XBlockExpression;
 	public CheckRuleElements getCheckRuleAccess() {
 		return (pCheckRule != null) ? pCheckRule : (pCheckRule = new CheckRuleElements());
 	}

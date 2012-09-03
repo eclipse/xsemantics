@@ -399,4 +399,17 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 				testFiles.testSystemExtendsExtendedTypeSystem
 			)
 	}
+
+	@Test
+	def void testRuleOverride() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			).
+			parseWithBaseSystem(
+				testFiles.testRuleOverride
+			).assertNoErrors
+	}
 }

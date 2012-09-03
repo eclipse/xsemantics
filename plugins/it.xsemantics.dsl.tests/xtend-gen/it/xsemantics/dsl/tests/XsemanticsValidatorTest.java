@@ -43,4 +43,18 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS, 
       "system \'extends\' cannot coexist with \'validatorExtends\'");
   }
+  
+  @Test
+  public void testInvalidRuleOverrideWithoutSystemExtends() {
+    CharSequence _testInvalidRuleOverrideWithoutSystemExtends = this.testFiles.testInvalidRuleOverrideWithoutSystemExtends();
+    final XsemanticsSystem ts = this.parse(_testInvalidRuleOverrideWithoutSystemExtends);
+    EClass _rule = XsemanticsPackage.eINSTANCE.getRule();
+    this._validationTestHelper.assertError(ts, _rule, 
+      IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS, 
+      "Cannot override rule without system \'extends\'");
+    EClass _checkRule = XsemanticsPackage.eINSTANCE.getCheckRule();
+    this._validationTestHelper.assertError(ts, _checkRule, 
+      IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS, 
+      "Cannot override checkrule without system \'extends\'");
+  }
 }

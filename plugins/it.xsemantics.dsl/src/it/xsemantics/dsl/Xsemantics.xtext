@@ -47,17 +47,17 @@ Rule:
 	Axiom | RuleWithPremises;
 
 Axiom:
-	'axiom' name=ID conclusion=RuleConclusion;
+	(override?='override')? 'axiom' name=ID conclusion=RuleConclusion;
 
 RuleWithPremises:
-	'rule' name=ID
+	(override?='override')? 'rule' name=ID
 	('derives')?
 	conclusion=RuleConclusion
 	'from' premises=XBlockExpression
 ;
 
 CheckRule:
-	'checkrule' name=ID 'for'
+	(override?='override')? 'checkrule' name=ID 'for'
 	element=RuleParameter
 	'from' premises=XBlockExpression
 ;
