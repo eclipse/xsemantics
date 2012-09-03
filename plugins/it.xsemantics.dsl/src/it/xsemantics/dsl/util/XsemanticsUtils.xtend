@@ -105,7 +105,7 @@ class XsemanticsUtils {
 		val descriptions = Lists::newArrayList(
 			object.
 			containingTypeSystem.
-				allJudgments.filterJudgmentDescriptions
+				allJudgments
 					(judgmentSymbol, relationSymbols))
 		if (descriptions.size > 0)
 			descriptions.get(0)
@@ -118,7 +118,12 @@ class XsemanticsUtils {
 	}
 	
 	def filterRulesByJudgmentDescription(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
-		ts.getRules.filter
+		ts.getRules.filterRulesByJudgmentDescription(judgmentSymbol,
+			relationSymbols)
+	}
+
+	def filterRulesByJudgmentDescription(Iterable<Rule> rules, String judgmentSymbol, Iterable<String> relationSymbols) {
+		rules.filter
 			[ it.conclusion.judgmentSymbol.equals(judgmentSymbol) &&
 				it.conclusion.relationSymbols.elementsEqual(relationSymbols)	]
 	}
@@ -277,6 +282,29 @@ class XsemanticsUtils {
 		Lists::newArrayList(system.judgmentDescriptions) => [
 			it += system.allSuperSystemDefinitions.
 				map[judgmentDescriptions].flatten
+		]
+	}
+	
+	def allJudgments(XsemanticsSystem system, String judgmentSymbol, Iterable<String> relationSymbols) {
+		system.allJudgments.filterJudgmentDescriptions(judgmentSymbol, relationSymbols)
+	}
+
+	def allRules(XsemanticsSystem system) {
+		Lists::newArrayList(system.rules) => [
+			it += system.allSuperSystemDefinitions.
+				map[rules].flatten
+		]
+	}
+
+	def allRulesByJudgmentDescription(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
+		ts.allRules.filterRulesByJudgmentDescription(judgmentSymbol,
+			relationSymbols)
+	}
+
+	def allCheckRules(XsemanticsSystem system) {
+		Lists::newArrayList(system.checkrules) => [
+			it += system.allSuperSystemDefinitions.
+				map[checkrules].flatten
 		]
 	}
 

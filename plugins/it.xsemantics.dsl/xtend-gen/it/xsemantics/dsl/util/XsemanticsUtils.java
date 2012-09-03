@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -158,9 +159,8 @@ public class XsemanticsUtils {
     JudgmentDescription _xblockexpression = null;
     {
       XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(object);
-      ArrayList<JudgmentDescription> _allJudgments = this.allJudgments(_containingTypeSystem);
-      Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(_allJudgments, judgmentSymbol, relationSymbols);
-      final ArrayList<JudgmentDescription> descriptions = Lists.<JudgmentDescription>newArrayList(_filterJudgmentDescriptions);
+      Iterable<JudgmentDescription> _allJudgments = this.allJudgments(_containingTypeSystem, judgmentSymbol, relationSymbols);
+      final ArrayList<JudgmentDescription> descriptions = Lists.<JudgmentDescription>newArrayList(_allJudgments);
       JudgmentDescription _xifexpression = null;
       int _size = descriptions.size();
       boolean _greaterThan = (_size > 0);
@@ -184,6 +184,11 @@ public class XsemanticsUtils {
   
   public Iterable<Rule> filterRulesByJudgmentDescription(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     EList<Rule> _rules = ts.getRules();
+    Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_rules, judgmentSymbol, relationSymbols);
+    return _filterRulesByJudgmentDescription;
+  }
+  
+  public Iterable<Rule> filterRulesByJudgmentDescription(final Iterable<Rule> rules, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           boolean _and = false;
@@ -201,7 +206,7 @@ public class XsemanticsUtils {
           return Boolean.valueOf(_and);
         }
       };
-    Iterable<Rule> _filter = IterableExtensions.<Rule>filter(_rules, _function);
+    Iterable<Rule> _filter = IterableExtensions.<Rule>filter(rules, _function);
     return _filter;
   }
   
@@ -509,6 +514,60 @@ public class XsemanticsUtils {
         }
       };
     ArrayList<JudgmentDescription> _doubleArrow = ObjectExtensions.<ArrayList<JudgmentDescription>>operator_doubleArrow(_newArrayList, _function);
+    return _doubleArrow;
+  }
+  
+  public Iterable<JudgmentDescription> allJudgments(final XsemanticsSystem system, final String judgmentSymbol, final Iterable<String> relationSymbols) {
+    ArrayList<JudgmentDescription> _allJudgments = this.allJudgments(system);
+    Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(_allJudgments, judgmentSymbol, relationSymbols);
+    return _filterJudgmentDescriptions;
+  }
+  
+  public ArrayList<Rule> allRules(final XsemanticsSystem system) {
+    EList<Rule> _rules = system.getRules();
+    ArrayList<Rule> _newArrayList = Lists.<Rule>newArrayList(_rules);
+    final Procedure1<ArrayList<Rule>> _function = new Procedure1<ArrayList<Rule>>() {
+        public void apply(final ArrayList<Rule> it) {
+          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          final Function1<XsemanticsSystem,EList<Rule>> _function = new Function1<XsemanticsSystem,EList<Rule>>() {
+              public EList<Rule> apply(final XsemanticsSystem it) {
+                EList<Rule> _rules = it.getRules();
+                return _rules;
+              }
+            };
+          List<EList<Rule>> _map = ListExtensions.<XsemanticsSystem, EList<Rule>>map(_allSuperSystemDefinitions, _function);
+          Iterable<Rule> _flatten = Iterables.<Rule>concat(_map);
+          Iterables.<Rule>addAll(it, _flatten);
+        }
+      };
+    ArrayList<Rule> _doubleArrow = ObjectExtensions.<ArrayList<Rule>>operator_doubleArrow(_newArrayList, _function);
+    return _doubleArrow;
+  }
+  
+  public Iterable<Rule> allRulesByJudgmentDescription(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
+    ArrayList<Rule> _allRules = this.allRules(ts);
+    Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_allRules, judgmentSymbol, relationSymbols);
+    return _filterRulesByJudgmentDescription;
+  }
+  
+  public ArrayList<CheckRule> allCheckRules(final XsemanticsSystem system) {
+    EList<CheckRule> _checkrules = system.getCheckrules();
+    ArrayList<CheckRule> _newArrayList = Lists.<CheckRule>newArrayList(_checkrules);
+    final Procedure1<ArrayList<CheckRule>> _function = new Procedure1<ArrayList<CheckRule>>() {
+        public void apply(final ArrayList<CheckRule> it) {
+          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          final Function1<XsemanticsSystem,EList<CheckRule>> _function = new Function1<XsemanticsSystem,EList<CheckRule>>() {
+              public EList<CheckRule> apply(final XsemanticsSystem it) {
+                EList<CheckRule> _checkrules = it.getCheckrules();
+                return _checkrules;
+              }
+            };
+          List<EList<CheckRule>> _map = ListExtensions.<XsemanticsSystem, EList<CheckRule>>map(_allSuperSystemDefinitions, _function);
+          Iterable<CheckRule> _flatten = Iterables.<CheckRule>concat(_map);
+          Iterables.<CheckRule>addAll(it, _flatten);
+        }
+      };
+    ArrayList<CheckRule> _doubleArrow = ObjectExtensions.<ArrayList<CheckRule>>operator_doubleArrow(_newArrayList, _function);
     return _doubleArrow;
   }
   

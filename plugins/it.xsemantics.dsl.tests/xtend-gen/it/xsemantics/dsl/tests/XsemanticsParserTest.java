@@ -643,20 +643,13 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   
   @Test
   public void testSystemExtendsExtendedTypeSystem() {
-    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
-    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
-    this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
+    XsemanticsSystem _systemExtendsExtendedTypeSystem = this.systemExtendsExtendedTypeSystem();
+    this._validationTestHelper.assertNoErrors(_systemExtendsExtendedTypeSystem);
   }
   
   @Test
   public void testRuleOverride() {
-    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
-    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
-    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
-    CharSequence _testRuleOverride = this.testFiles.testRuleOverride();
-    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_parseWithBaseSystemAndAssertNoError, _testRuleOverride);
-    this._validationTestHelper.assertNoErrors(_parseWithBaseSystem);
+    XsemanticsSystem _systemExtendsSystemWithRuleOverride = this.systemExtendsSystemWithRuleOverride();
+    this._validationTestHelper.assertNoErrors(_systemExtendsSystemWithRuleOverride);
   }
 }

@@ -111,6 +111,16 @@ public class XsemanticsBaseTest {
     }
   }
   
+  public XsemanticsSystem parseWithBaseSystemAndAssertNoError(final XsemanticsSystem baseSystem, final CharSequence s) {
+    XsemanticsSystem _xblockexpression = null;
+    {
+      final XsemanticsSystem ts = this.parseWithBaseSystem(baseSystem, s);
+      this._validationTestHelper.assertNoErrors(ts);
+      _xblockexpression = (ts);
+    }
+    return _xblockexpression;
+  }
+  
   public XsemanticsSystem parseWithBaseSystem(final CharSequence baseSystem, final CharSequence s) {
     try {
       XsemanticsSystem _xblockexpression = null;
@@ -398,5 +408,37 @@ public class XsemanticsBaseTest {
     String _plus = ("" + expected);
     String _plus_1 = ("" + actual);
     Assert.assertEquals(_plus, _plus_1);
+  }
+  
+  public XsemanticsSystem systemExtendsSystemWithJudgments() {
+    CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
+    CharSequence _testSystemExtendsSystemWithJudgments = this.testFiles.testSystemExtendsSystemWithJudgments();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptions, _testSystemExtendsSystemWithJudgments);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
+  
+  public XsemanticsSystem systemExtendsSystemWithAdditionalJudgment() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
+  
+  public XsemanticsSystem systemExtendsExtendedTypeSystem() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
+  
+  public XsemanticsSystem systemExtendsSystemWithRuleOverride() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
+    CharSequence _testRuleOverride = this.testFiles.testRuleOverride();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError_1 = this.parseWithBaseSystemAndAssertNoError(_parseWithBaseSystemAndAssertNoError, _testRuleOverride);
+    return _parseWithBaseSystemAndAssertNoError_1;
   }
 }

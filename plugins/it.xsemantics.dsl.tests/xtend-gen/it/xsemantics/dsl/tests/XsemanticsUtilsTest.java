@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.OutputParameter;
@@ -426,8 +427,8 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testAllSuperSystemDefinitions2() {
-    XsemanticsSystem _systemExtendsSystemWithAdditionalJudgment2 = this.systemExtendsSystemWithAdditionalJudgment2();
-    final ArrayList<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsSystemWithAdditionalJudgment2);
+    XsemanticsSystem _systemExtendsExtendedTypeSystem = this.systemExtendsExtendedTypeSystem();
+    final ArrayList<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsExtendedTypeSystem);
     int _size = superSystems.size();
     Assert.assertEquals(2, _size);
     XsemanticsSystem _get = superSystems.get(0);
@@ -477,8 +478,8 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testAllJudgments2() {
-    XsemanticsSystem _systemExtendsSystemWithAdditionalJudgment2 = this.systemExtendsSystemWithAdditionalJudgment2();
-    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsSystemWithAdditionalJudgment2);
+    XsemanticsSystem _systemExtendsExtendedTypeSystem = this.systemExtendsExtendedTypeSystem();
+    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsExtendedTypeSystem);
     int _size = _allJudgments.size();
     Assert.assertEquals(3, _size);
   }
@@ -494,7 +495,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testRuleJudgmentDescriptionInherited() {
-    final XsemanticsSystem ts = this.systemExtendsSystemWithAdditionalJudgment2();
+    final XsemanticsSystem ts = this.systemExtendsExtendedTypeSystem();
     Rule _rule = this.getRule(ts, 0);
     JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_rule);
     this.assertDescription(_judgmentDescription, "|-", ":");
@@ -508,7 +509,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   @Test
   public void testRuleInvocationJudgmentDescriptionInherited() {
-    final XsemanticsSystem ts = this.systemExtendsSystemWithAdditionalJudgment2();
+    final XsemanticsSystem ts = this.systemExtendsExtendedTypeSystem();
     Rule _rule = this.getRule(ts, 0);
     RuleInvocation _ruleInvocationFromPremises = this.getRuleInvocationFromPremises(_rule);
     JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_ruleInvocationFromPremises);
@@ -526,26 +527,29 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
       "|-", ":");
   }
   
-  public XsemanticsSystem systemExtendsSystemWithJudgments() {
-    CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
-    CharSequence _testSystemExtendsSystemWithJudgments = this.testFiles.testSystemExtendsSystemWithJudgments();
-    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptions, _testSystemExtendsSystemWithJudgments);
-    return _parseWithBaseSystemAndAssertNoError;
+  @Test
+  public void testAllRules() {
+    XsemanticsSystem _systemExtendsSystemWithRuleOverride = this.systemExtendsSystemWithRuleOverride();
+    ArrayList<Rule> _allRules = this._xsemanticsUtils.allRules(_systemExtendsSystemWithRuleOverride);
+    int _size = _allRules.size();
+    Assert.assertEquals(6, _size);
   }
   
-  public XsemanticsSystem systemExtendsSystemWithAdditionalJudgment() {
-    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
-    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore);
-    return _parseWithBaseSystemAndAssertNoError;
+  @Test
+  public void testAllRulesByJudgmentDescription() {
+    XsemanticsSystem _systemExtendsSystemWithRuleOverride = this.systemExtendsSystemWithRuleOverride();
+    ArrayList<String> _newArrayList = Lists.<String>newArrayList(":");
+    Iterable<Rule> _allRulesByJudgmentDescription = this._xsemanticsUtils.allRulesByJudgmentDescription(_systemExtendsSystemWithRuleOverride, "|-", _newArrayList);
+    int _size = IterableExtensions.size(_allRulesByJudgmentDescription);
+    Assert.assertEquals(2, _size);
   }
   
-  public XsemanticsSystem systemExtendsSystemWithAdditionalJudgment2() {
-    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
-    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
-    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
-    return _parseWithBaseSystemAndAssertNoError;
+  @Test
+  public void testCheckAllRules() {
+    XsemanticsSystem _systemExtendsSystemWithRuleOverride = this.systemExtendsSystemWithRuleOverride();
+    ArrayList<CheckRule> _allCheckRules = this._xsemanticsUtils.allCheckRules(_systemExtendsSystemWithRuleOverride);
+    int _size = _allCheckRules.size();
+    Assert.assertEquals(2, _size);
   }
   
   public void assertRules(final List<Rule> rules, final Rule expectedRule1, final Rule expectedRule2) {

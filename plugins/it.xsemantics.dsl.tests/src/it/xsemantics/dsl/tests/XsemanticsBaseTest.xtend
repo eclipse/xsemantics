@@ -80,6 +80,12 @@ class XsemanticsBaseTest {
 		ts
 	}
 
+	def parseWithBaseSystemAndAssertNoError(XsemanticsSystem baseSystem, CharSequence s) {
+		val ts = baseSystem.parseWithBaseSystem(s)
+		ts.assertNoErrors
+		ts
+	}
+
 	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
 		val base = parser.parse(baseSystem)
 		base.parseWithBaseSystem(s)
@@ -254,4 +260,38 @@ class XsemanticsBaseTest {
 	def assertEqualsStrings(Object expected, Object actual) {
 		Assert::assertEquals("" + expected, "" + actual)
 	}
+
+	def systemExtendsSystemWithJudgments() {
+		testFiles.testJudgmentDescriptions.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgments)
+	}
+
+	def systemExtendsSystemWithAdditionalJudgment() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore)
+	}
+
+	def systemExtendsExtendedTypeSystem() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			)
+	}
+
+	def systemExtendsSystemWithRuleOverride() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			).
+			parseWithBaseSystemAndAssertNoError(
+				testFiles.testRuleOverride
+			)
+	}
+
 }
