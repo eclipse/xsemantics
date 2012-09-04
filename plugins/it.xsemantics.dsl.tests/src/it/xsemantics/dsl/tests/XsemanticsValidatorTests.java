@@ -39,7 +39,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		assertDuplicateErrors(
 				loadModelAndValidate(testFiles
 						.testJudgmentDescriptionsWithDuplicates()),
-				"judgment", "type");
+				"judgment", "type", IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM);
 	}
 
 	@Test
@@ -464,12 +464,16 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	protected void assertDuplicateErrors(AssertableDiagnostics validate,
-			String elementClassName, String duplicateName) {
+			String elementClassName, String duplicateName,
+			String... msgFragments) {
 		// System.out.println(diagnosticsToString(validate));
 		String messageFragment = "Duplicate " + elementClassName + " '"
 				+ duplicateName + "'";
 		validate.assertAll(AssertableDiagnostics.errorMsg(messageFragment),
 				AssertableDiagnostics.errorMsg(messageFragment));
+		for (String msgFragment : msgFragments) {
+			validate.assertAny(AssertableDiagnostics.errorMsg(msgFragment));
+		}
 	}
 
 	protected void assertOk(AssertableDiagnostics validate) {

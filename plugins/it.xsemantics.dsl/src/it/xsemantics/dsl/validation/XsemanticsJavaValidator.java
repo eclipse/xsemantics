@@ -171,8 +171,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkNoDuplicateJudgmentDescription(
 			JudgmentDescription judgmentDescription) {
-		if (!helper.noJudgmentDescriptionsWithTheSameName(judgmentDescription)) {
-			error("Duplicate judgment '" + judgmentDescription.getName() + "'",
+		JudgmentDescription judgmentDescriptionWithTheSameName = helper
+				.judgmentDescriptionWithTheSameName(judgmentDescription);
+		if (judgmentDescriptionWithTheSameName != null) {
+			error("Duplicate judgment '"
+					+ judgmentDescription.getName()
+					+ "'"
+					+ reportContainingSystemName(judgmentDescriptionWithTheSameName),
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_JUDGMENT_NAME);
 		}
@@ -456,7 +461,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					if (typeSystem.equals(tupleType, tupleType2)) {
 						error("Duplicate rule of the same kind with parameters: "
 								+ tupleTypeRepresentation(tupleType)
-								+ ", in system: " + containingSystemName(rule2),
+								+ reportContainingSystemName(rule2),
 								XsemanticsPackage.Literals.RULE__CONCLUSION,
 								IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
 						break;
@@ -466,8 +471,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 	}
 
-	protected String containingSystemName(EObject object) {
-		return xsemanticsUtils.containingTypeSystem(object).getName();
+	protected String reportContainingSystemName(EObject object) {
+		return ", in system: "
+				+ xsemanticsUtils.containingTypeSystem(object).getName();
 	}
 
 	protected JudgmentDescription checkRuleConformantToJudgmentDescription(

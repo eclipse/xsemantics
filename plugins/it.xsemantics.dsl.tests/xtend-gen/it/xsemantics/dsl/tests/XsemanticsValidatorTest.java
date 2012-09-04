@@ -106,6 +106,17 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       "No checkrule to override: CheckEObject");
   }
   
+  @Test
+  public void testInvalidJudgmentWithTheSameNameOfBaseSystem() {
+    XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
+    CharSequence _testInvalidJudgmentWithTheSameNameOfBaseSystem = this.testFiles.testInvalidJudgmentWithTheSameNameOfBaseSystem();
+    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_loadBaseSystems, _testInvalidJudgmentWithTheSameNameOfBaseSystem);
+    EClass _judgmentDescription = XsemanticsPackage.eINSTANCE.getJudgmentDescription();
+    this._validationTestHelper.assertError(_parseWithBaseSystem, _judgmentDescription, 
+      IssueCodes.DUPLICATE_JUDGMENT_NAME, 
+      "Duplicate judgment \'type\', in system: it.xsemantics.test.TypeSystem");
+  }
+  
   public XsemanticsSystem loadBaseSystems() {
     CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
     CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();

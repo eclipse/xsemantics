@@ -3675,4 +3675,27 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testInvalidJudgmentWithTheSameNameOfBaseSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem2 ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// type judgment already defined in inherited system");
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

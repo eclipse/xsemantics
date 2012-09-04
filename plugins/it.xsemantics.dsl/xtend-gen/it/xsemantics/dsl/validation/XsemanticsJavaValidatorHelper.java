@@ -12,6 +12,7 @@ import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
@@ -117,9 +118,9 @@ public class XsemanticsJavaValidatorHelper {
     return _equals;
   }
   
-  public boolean noJudgmentDescriptionsWithTheSameName(final JudgmentDescription j) {
+  public JudgmentDescription judgmentDescriptionWithTheSameName(final JudgmentDescription j) {
     XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(j);
-    EList<JudgmentDescription> _judgmentDescriptions = _containingTypeSystem.getJudgmentDescriptions();
+    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_containingTypeSystem);
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
@@ -135,9 +136,8 @@ public class XsemanticsJavaValidatorHelper {
           return Boolean.valueOf(_and);
         }
       };
-    JudgmentDescription _findFirst = IterableExtensions.<JudgmentDescription>findFirst(_judgmentDescriptions, _function);
-    boolean _equals = Objects.equal(_findFirst, null);
-    return _equals;
+    JudgmentDescription _findFirst = IterableExtensions.<JudgmentDescription>findFirst(_allJudgments, _function);
+    return _findFirst;
   }
   
   public boolean findDuplicateParameter(final RuleParameter param) {

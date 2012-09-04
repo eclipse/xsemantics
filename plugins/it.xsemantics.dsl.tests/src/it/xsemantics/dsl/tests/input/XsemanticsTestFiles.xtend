@@ -1653,4 +1653,16 @@ class XsemanticsTestFiles {
 		
 	}
 	'''
+
+	def testInvalidJudgmentWithTheSameNameOfBaseSystem() '''
+	system it.xsemantics.test.ExtendedTypeSystem2 
+		extends it.xsemantics.test.ExtendedTypeSystem
+	
+	import org.eclipse.emf.ecore.*
+
+	// type judgment already defined in inherited system
+	judgments {
+		type ||- EClass c1 : EClass c2
+	}
+	'''
 }

@@ -38,10 +38,10 @@ class XsemanticsJavaValidatorHelper {
 		] == null
 	}
 	
-	def noJudgmentDescriptionsWithTheSameName(JudgmentDescription j) {
-		j.containingTypeSystem.judgmentDescriptions.findFirst [
+	def judgmentDescriptionWithTheSameName(JudgmentDescription j) {
+		j.containingTypeSystem.allJudgments.findFirst [
 			it != j && it.name == j.name
-		] == null
+		]
 	}
 	
 	def findDuplicateParameter(RuleParameter param) {

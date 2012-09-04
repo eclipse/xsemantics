@@ -113,6 +113,19 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testInvalidJudgmentWithTheSameNameOfBaseSystem() {
+		loadBaseSystems.
+			parseWithBaseSystem(
+				testFiles.testInvalidJudgmentWithTheSameNameOfBaseSystem
+			).
+		assertError(
+			XsemanticsPackage::eINSTANCE.judgmentDescription,
+			IssueCodes::DUPLICATE_JUDGMENT_NAME,
+			"Duplicate judgment 'type', in system: it.xsemantics.test.TypeSystem"
+		)
+	}
+
 	def loadBaseSystems() {
 		testFiles.testJudgmentDescriptionsWithErrorSpecification.
 			parseWithBaseSystemAndAssertNoError
