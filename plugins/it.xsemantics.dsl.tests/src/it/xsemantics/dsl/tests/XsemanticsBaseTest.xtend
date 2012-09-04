@@ -294,4 +294,19 @@ class XsemanticsBaseTest {
 			)
 	}
 
+	def systemExtendsSystemWithJudgmentOverride() {
+		loadBaseSystems.
+			parseWithBaseSystemAndAssertNoError(
+				testFiles.testOverrideJudgment
+			)
+	}
+
+	def loadBaseSystems() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			)
+	}
 }

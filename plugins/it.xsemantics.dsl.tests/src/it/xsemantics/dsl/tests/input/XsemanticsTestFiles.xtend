@@ -1665,4 +1665,59 @@ class XsemanticsTestFiles {
 		type ||- EClass c1 : EClass c2
 	}
 	'''
+
+	def testOverrideJudgment() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+
+	// type judgment already defined in inherited system
+	// and we override it, so that's OK
+	judgments {
+		override type |- EObject obj : output EClass
+		
+		override subtype |- EClass c1 <: EClass c2
+			error stringRep(c1) + " not <: " + stringRep(c2)
+				source c1
+				feature c1.eClass.eContainingFeature
+	}
+	'''
+
+	def testForJudgmentParameters() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type0 |- EClass c : output EObject
+		type1 ||- EClass c : output EObject
+		type2 |~ EClass c : EObject o
+		type3 |~ EClass c 
+	}
+	'''
+
+	def testInvalidJudgmentOverrideWithoutSystemExtends() '''
+	system it.xsemantics.test.TypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		override type |- EObject c : output EClass
+	}
+	'''
+
+	def testInvalidOverrideJudgment() '''
+	system it.xsemantics.test.ExtendedTypeSystem2 
+		extends it.xsemantics.test.ExtendedTypeSystem
+	
+	import org.eclipse.emf.ecore.*
+
+	judgments {
+		// EClass was output in the base system
+		override type |- EObject obj : EClass c
+		// different name of the judgment to override
+		override subtype2 |- EClass c1 <: EClass c2
+	}
+	'''
+
 }

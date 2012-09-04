@@ -258,6 +258,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
+   			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+   			
    			parameters += judgmentDescription.inputParameters
    			
    			body = [
@@ -273,6 +276,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
+   			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
    			
@@ -287,6 +293,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
+			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+   			
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
@@ -344,6 +353,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
+			
+//			if (judgmentDescription.^override)
+//				annotations += judgmentDescription.toAnnotation(typeof(Override))
 
 			exceptions += judgmentDescription.ruleFailedExceptionType
 			
@@ -377,6 +389,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
+			
+			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
 			
 			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam

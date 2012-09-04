@@ -248,6 +248,15 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeSystem.equals(tupleType2, tupleType1)
 		)
 	}
+
+	@Test
+	def testJudgmentDescriptionsEquals() {
+		val judgments =	testFiles.testForJudgmentParameters.
+				parseAndAssertNoError.judgmentDescriptions
+		Assert::assertTrue(typeSystem.equals(judgments.get(0), judgments.get(1)))
+		Assert::assertFalse(typeSystem.equals(judgments.get(0), judgments.get(2)))
+		Assert::assertFalse(typeSystem.equals(judgments.get(0), judgments.get(3)))
+	}
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		Assert::assertTrue(featureCall.toString,

@@ -25,6 +25,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Injected/name"/>
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//JudgmentDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//JudgmentDescription/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//JudgmentDescription/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//JudgmentDescription/judgmentSymbol"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//JudgmentDescription/judgmentParameters"/>

@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl#isOverride <em>Override</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl#getJudgmentSymbol <em>Judgment Symbol</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl#getJudgmentParameters <em>Judgment Parameters</em>}</li>
@@ -43,6 +44,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implements JudgmentDescription
 {
+  /**
+   * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean OVERRIDE_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isOverride()
+   * @generated
+   * @ordered
+   */
+  protected boolean override = OVERRIDE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -132,6 +153,29 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
   protected EClass eStaticClass()
   {
     return XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isOverride()
+  {
+    return override;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOverride(boolean newOverride)
+  {
+    boolean oldOverride = override;
+    override = newOverride;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.JUDGMENT_DESCRIPTION__OVERRIDE, oldOverride, override));
   }
 
   /**
@@ -284,6 +328,8 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
+      case XsemanticsPackage.JUDGMENT_DESCRIPTION__OVERRIDE:
+        return isOverride();
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__NAME:
         return getName();
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL:
@@ -309,6 +355,9 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
+      case XsemanticsPackage.JUDGMENT_DESCRIPTION__OVERRIDE:
+        setOverride((Boolean)newValue);
+        return;
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__NAME:
         setName((String)newValue);
         return;
@@ -340,6 +389,9 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
+      case XsemanticsPackage.JUDGMENT_DESCRIPTION__OVERRIDE:
+        setOverride(OVERRIDE_EDEFAULT);
+        return;
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -369,6 +421,8 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
+      case XsemanticsPackage.JUDGMENT_DESCRIPTION__OVERRIDE:
+        return override != OVERRIDE_EDEFAULT;
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL:
@@ -394,7 +448,9 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (override: ");
+    result.append(override);
+    result.append(", name: ");
     result.append(name);
     result.append(", judgmentSymbol: ");
     result.append(judgmentSymbol);

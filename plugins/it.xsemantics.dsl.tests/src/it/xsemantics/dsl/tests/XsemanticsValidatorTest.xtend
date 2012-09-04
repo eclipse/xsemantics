@@ -126,12 +126,32 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
-	def loadBaseSystems() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-				testFiles.testSystemExtendsExtendedTypeSystem
-			)
+	@Test
+	def void testInvalidJudgmentOverrideWithoutSystemExtends() {
+		val ts = testFiles.testInvalidJudgmentOverrideWithoutSystemExtends.parse
+		ts.assertError(
+			XsemanticsPackage::eINSTANCE.judgmentDescription,
+			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			"Cannot override judgment without system 'extends'"
+		)
 	}
+
+	@Test
+	def void testInvalidOverrideJudgment() {
+		val ts = loadBaseSystems.
+			parseWithBaseSystem(
+				testFiles.testInvalidOverrideJudgment
+			)
+		ts.assertError(
+			XsemanticsPackage::eINSTANCE.judgmentDescription,
+			IssueCodes::NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND,
+			"No judgment of the same kind to override: override type |- EObject obj : EClass c"
+		)
+		ts.assertError(
+			XsemanticsPackage::eINSTANCE.judgmentDescription,
+			IssueCodes::OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME,
+			"Must have the same name of the judgment to override: subtype"
+		)
+	}
+
 }

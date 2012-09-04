@@ -83,7 +83,7 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getInjectedAccess().getGroup(), "rule__Injected__Group__0");
 					put(grammarAccess.getJudgmentDescriptionAccess().getGroup(), "rule__JudgmentDescription__Group__0");
-					put(grammarAccess.getJudgmentDescriptionAccess().getGroup_3(), "rule__JudgmentDescription__Group_3__0");
+					put(grammarAccess.getJudgmentDescriptionAccess().getGroup_4(), "rule__JudgmentDescription__Group_4__0");
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_0(), "rule__JudgmentParameter__Group_0__0");
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_1(), "rule__JudgmentParameter__Group_1__0");
 					put(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup(), "rule__QualifiedNameWithWildcard__Group__0");
@@ -262,12 +262,13 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getInjectedAccess().getTypeAssignment_1(), "rule__Injected__TypeAssignment_1");
 					put(grammarAccess.getInjectedAccess().getNameAssignment_2(), "rule__Injected__NameAssignment_2");
-					put(grammarAccess.getJudgmentDescriptionAccess().getNameAssignment_0(), "rule__JudgmentDescription__NameAssignment_0");
-					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentSymbolAssignment_1(), "rule__JudgmentDescription__JudgmentSymbolAssignment_1");
-					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersAssignment_2(), "rule__JudgmentDescription__JudgmentParametersAssignment_2");
-					put(grammarAccess.getJudgmentDescriptionAccess().getRelationSymbolsAssignment_3_0(), "rule__JudgmentDescription__RelationSymbolsAssignment_3_0");
-					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersAssignment_3_1(), "rule__JudgmentDescription__JudgmentParametersAssignment_3_1");
-					put(grammarAccess.getJudgmentDescriptionAccess().getErrorAssignment_4(), "rule__JudgmentDescription__ErrorAssignment_4");
+					put(grammarAccess.getJudgmentDescriptionAccess().getOverrideAssignment_0(), "rule__JudgmentDescription__OverrideAssignment_0");
+					put(grammarAccess.getJudgmentDescriptionAccess().getNameAssignment_1(), "rule__JudgmentDescription__NameAssignment_1");
+					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentSymbolAssignment_2(), "rule__JudgmentDescription__JudgmentSymbolAssignment_2");
+					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersAssignment_3(), "rule__JudgmentDescription__JudgmentParametersAssignment_3");
+					put(grammarAccess.getJudgmentDescriptionAccess().getRelationSymbolsAssignment_4_0(), "rule__JudgmentDescription__RelationSymbolsAssignment_4_0");
+					put(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersAssignment_4_1(), "rule__JudgmentDescription__JudgmentParametersAssignment_4_1");
+					put(grammarAccess.getJudgmentDescriptionAccess().getErrorAssignment_5(), "rule__JudgmentDescription__ErrorAssignment_5");
 					put(grammarAccess.getJudgmentParameterAccess().getJvmTypeReferenceAssignment_0_2(), "rule__JudgmentParameter__JvmTypeReferenceAssignment_0_2");
 					put(grammarAccess.getJudgmentParameterAccess().getParameterAssignment_1_1(), "rule__JudgmentParameter__ParameterAssignment_1_1");
 					put(grammarAccess.getAxiomAccess().getOverrideAssignment_0(), "rule__Axiom__OverrideAssignment_0");

@@ -290,7 +290,9 @@ class XsemanticsUtils {
 	}
 	
 	def allJudgments(XsemanticsSystem system, String judgmentSymbol, Iterable<String> relationSymbols) {
-		system.allJudgments.filterJudgmentDescriptions(judgmentSymbol, relationSymbols)
+		Lists::newArrayList(
+			system.allJudgments.
+				filterJudgmentDescriptions(judgmentSymbol, relationSymbols))
 	}
 
 	def allRules(XsemanticsSystem system) {

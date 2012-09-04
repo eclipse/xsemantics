@@ -173,7 +173,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			JudgmentDescription judgmentDescription) {
 		JudgmentDescription judgmentDescriptionWithTheSameName = helper
 				.judgmentDescriptionWithTheSameName(judgmentDescription);
-		if (judgmentDescriptionWithTheSameName != null) {
+		if (judgmentDescriptionWithTheSameName != null
+				&& !judgmentDescription.isOverride()) {
 			error("Duplicate judgment '"
 					+ judgmentDescription.getName()
 					+ "'"
@@ -341,6 +342,44 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 								rule,
 								XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
 								IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND);
+				}
+			}
+		}
+	}
+
+	@Check
+	public void checkValidOverride(JudgmentDescription judgment) {
+		XsemanticsSystem system = xsemanticsUtils.containingSystem(judgment);
+		if (system != null) {
+			if (judgment.isOverride()) {
+				XsemanticsSystem superSystem = xsemanticsUtils
+						.superSystemDefinition(system);
+				if (superSystem == null) {
+					error("Cannot override judgment without system 'extends'",
+							judgment, XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+				} else {
+					List<JudgmentDescription> inheritedJudgments = xsemanticsUtils
+							.allJudgments(superSystem, judgment.getJudgmentSymbol(), judgment.getRelationSymbols());
+					JudgmentDescription judgmentToOverride = null;
+					for (JudgmentDescription judgment2 : inheritedJudgments) {
+						if (typeSystem.equals(judgment, judgment2)) {
+							judgmentToOverride = judgment2;
+							break;
+						}
+					}
+					if (judgmentToOverride == null) {
+						error("No judgment of the same kind to override: "
+								+ nodeModelUtils.getProgramText(judgment), judgment,
+								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+								IssueCodes.NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND);
+					} else if (!judgmentToOverride.getName().equals(judgment.getName())) {
+						error("Must have the same name of the judgment to override: "
+								+ judgmentToOverride.getName(),
+								judgment,
+								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+								IssueCodes.OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME);
+					}
 				}
 			}
 		}

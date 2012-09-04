@@ -281,6 +281,25 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     Assert.assertFalse(_equals);
   }
   
+  @Test
+  public void testJudgmentDescriptionsEquals() {
+    CharSequence _testForJudgmentParameters = this.testFiles.testForJudgmentParameters();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testForJudgmentParameters);
+    final EList<JudgmentDescription> judgments = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = judgments.get(0);
+    JudgmentDescription _get_1 = judgments.get(1);
+    boolean _equals = this.typeSystem.equals(_get, _get_1);
+    Assert.assertTrue(_equals);
+    JudgmentDescription _get_2 = judgments.get(0);
+    JudgmentDescription _get_3 = judgments.get(2);
+    boolean _equals_1 = this.typeSystem.equals(_get_2, _get_3);
+    Assert.assertFalse(_equals_1);
+    JudgmentDescription _get_4 = judgments.get(0);
+    JudgmentDescription _get_5 = judgments.get(3);
+    boolean _equals_2 = this.typeSystem.equals(_get_4, _get_5);
+    Assert.assertFalse(_equals_2);
+  }
+  
   public void checkBooleanPremise(final XAbstractFeatureCall featureCall) {
     String _string = featureCall.toString();
     boolean _isBooleanPremise = this.typeSystem.isBooleanPremise(featureCall);

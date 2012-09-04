@@ -117,11 +117,28 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       "Duplicate judgment \'type\', in system: it.xsemantics.test.TypeSystem");
   }
   
-  public XsemanticsSystem loadBaseSystems() {
-    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
-    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
-    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
-    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
-    return _parseWithBaseSystemAndAssertNoError;
+  @Test
+  public void testInvalidJudgmentOverrideWithoutSystemExtends() {
+    CharSequence _testInvalidJudgmentOverrideWithoutSystemExtends = this.testFiles.testInvalidJudgmentOverrideWithoutSystemExtends();
+    final XsemanticsSystem ts = this.parse(_testInvalidJudgmentOverrideWithoutSystemExtends);
+    EClass _judgmentDescription = XsemanticsPackage.eINSTANCE.getJudgmentDescription();
+    this._validationTestHelper.assertError(ts, _judgmentDescription, 
+      IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS, 
+      "Cannot override judgment without system \'extends\'");
+  }
+  
+  @Test
+  public void testInvalidOverrideJudgment() {
+    XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
+    CharSequence _testInvalidOverrideJudgment = this.testFiles.testInvalidOverrideJudgment();
+    final XsemanticsSystem ts = this.parseWithBaseSystem(_loadBaseSystems, _testInvalidOverrideJudgment);
+    EClass _judgmentDescription = XsemanticsPackage.eINSTANCE.getJudgmentDescription();
+    this._validationTestHelper.assertError(ts, _judgmentDescription, 
+      IssueCodes.NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND, 
+      "No judgment of the same kind to override: override type |- EObject obj : EClass c");
+    EClass _judgmentDescription_1 = XsemanticsPackage.eINSTANCE.getJudgmentDescription();
+    this._validationTestHelper.assertError(ts, _judgmentDescription_1, 
+      IssueCodes.OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME, 
+      "Must have the same name of the judgment to override: subtype");
   }
 }

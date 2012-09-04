@@ -461,7 +461,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getJudgmentDescription_Name()
+  public EAttribute getJudgmentDescription_Override()
   {
     return (EAttribute)judgmentDescriptionEClass.getEStructuralFeatures().get(0);
   }
@@ -471,7 +471,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getJudgmentDescription_JudgmentSymbol()
+  public EAttribute getJudgmentDescription_Name()
   {
     return (EAttribute)judgmentDescriptionEClass.getEStructuralFeatures().get(1);
   }
@@ -481,9 +481,19 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getJudgmentDescription_JudgmentSymbol()
+  {
+    return (EAttribute)judgmentDescriptionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getJudgmentDescription_JudgmentParameters()
   {
-    return (EReference)judgmentDescriptionEClass.getEStructuralFeatures().get(2);
+    return (EReference)judgmentDescriptionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -493,7 +503,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    */
   public EAttribute getJudgmentDescription_RelationSymbols()
   {
-    return (EAttribute)judgmentDescriptionEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)judgmentDescriptionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -503,7 +513,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    */
   public EReference getJudgmentDescription_Error()
   {
-    return (EReference)judgmentDescriptionEClass.getEStructuralFeatures().get(4);
+    return (EReference)judgmentDescriptionEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -1144,6 +1154,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     createEAttribute(injectedEClass, INJECTED__NAME);
 
     judgmentDescriptionEClass = createEClass(JUDGMENT_DESCRIPTION);
+    createEAttribute(judgmentDescriptionEClass, JUDGMENT_DESCRIPTION__OVERRIDE);
     createEAttribute(judgmentDescriptionEClass, JUDGMENT_DESCRIPTION__NAME);
     createEAttribute(judgmentDescriptionEClass, JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL);
     createEReference(judgmentDescriptionEClass, JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS);
@@ -1300,6 +1311,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEAttribute(getInjected_Name(), ecorePackage.getEString(), "name", null, 0, 1, Injected.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(judgmentDescriptionEClass, JudgmentDescription.class, "JudgmentDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getJudgmentDescription_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getJudgmentDescription_Name(), ecorePackage.getEString(), "name", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getJudgmentDescription_JudgmentSymbol(), ecorePackage.getEString(), "judgmentSymbol", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getJudgmentDescription_JudgmentParameters(), this.getJudgmentParameter(), null, "judgmentParameters", null, 0, -1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

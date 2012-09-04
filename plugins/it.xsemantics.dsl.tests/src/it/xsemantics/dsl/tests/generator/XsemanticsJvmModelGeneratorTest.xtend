@@ -1410,6 +1410,120 @@ public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSys
 		)
 	}
 
+	@Test
+	def testJudgmentOverride() {
+		systemExtendsSystemWithJudgmentOverride.assertCorrectJavaCodeGeneration(
+"ExtendedTypeSystemWithJudgmentOverride",
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.test.ExtendedTypeSystem2;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
+  
+  public ExtendedTypeSystemWithJudgmentOverride() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+    subtypeDispatcher = buildPolymorphicDispatcher1(
+    	"subtypeImpl", 4, "|-", "<:");
+  }
+  
+  @Override
+  public Result<EClass> type(final EObject obj) {
+    return type(new RuleEnvironment(), null, obj);
+  }
+  
+  @Override
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject obj) {
+    return type(_environment_, null, obj);
+  }
+  
+  @Override
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
+    try {
+    	return typeInternal(_environment_, _trace_, obj);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final EClass c1, final EClass c2) {
+    return subtype(new RuleEnvironment(), null, c1, c2);
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final EClass c1, final EClass c2) {
+    return subtype(_environment_, null, c1, c2);
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	return subtypeInternal(_environment_, _trace_, c1, c2);
+    } catch (Exception _e_subtype) {
+    	return resultForFailure(_e_subtype);
+    }
+  }
+  
+  @Override
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
+    try {
+    	checkParamsNotNull(obj);
+    	return typeDispatcher.invoke(_environment_, _trace_, obj);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  @Override
+  protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	checkParamsNotNull(c1, c2);
+    	return subtypeDispatcher.invoke(_environment_, _trace_, c1, c2);
+    } catch (Exception _e_subtype) {
+    	sneakyThrowRuleFailedException(_e_subtype);
+    	return null;
+    }
+  }
+  
+  protected void subtypeThrowException(final String _issue, final Exception _ex, final EClass c1, final EClass c2) throws RuleFailedException {
+    
+    String _stringRep = this.stringRep(c1);
+    String _plus = (_stringRep + " not <: ");
+    String _stringRep_1 = this.stringRep(c2);
+    String _plus_1 = (_plus + _stringRep_1);
+    String error = _plus_1;
+    EObject source = c1;
+    EClass _eClass = c1.eClass();
+    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, feature));
+  }
+}
+''',
+null
+		)
+	}
+
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		

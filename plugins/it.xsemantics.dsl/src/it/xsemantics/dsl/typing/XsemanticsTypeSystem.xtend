@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
+import it.xsemantics.dsl.xsemantics.JudgmentParameter
 
 class XsemanticsTypeSystem {
 	
@@ -48,6 +50,19 @@ class XsemanticsTypeSystem {
 		val judgmentParametersIt = tupleType1.iterator();
 		for (JvmTypeReference jvmTypeReference : tupleType2) {
 			if (!equals(judgmentParametersIt.next(), jvmTypeReference))
+				return false;
+		}
+		return true;
+	}
+
+	def equals(JudgmentDescription j1, JudgmentDescription j2) {
+		if (j1.judgmentParameters.size != j2.judgmentParameters.size)
+			return false
+		val judgmentParametersIt = j1.judgmentParameters.iterator();
+		for (JudgmentParameter jParam2 : j2.judgmentParameters) {
+			val jParam1 = judgmentParametersIt.next()
+			if (jParam1.eClass != jParam2.eClass ||
+					!equals(getType(jParam1), getType(jParam2)))
 				return false;
 		}
 		return true;

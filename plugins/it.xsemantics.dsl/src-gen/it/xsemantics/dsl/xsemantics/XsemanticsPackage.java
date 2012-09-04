@@ -225,13 +225,22 @@ public interface XsemanticsPackage extends EPackage
   int JUDGMENT_DESCRIPTION = 3;
 
   /**
+   * The feature id for the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int JUDGMENT_DESCRIPTION__OVERRIDE = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION__NAME = 0;
+  int JUDGMENT_DESCRIPTION__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Judgment Symbol</b></em>' attribute.
@@ -240,7 +249,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL = 1;
+  int JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL = 2;
 
   /**
    * The feature id for the '<em><b>Judgment Parameters</b></em>' containment reference list.
@@ -249,7 +258,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS = 2;
+  int JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS = 3;
 
   /**
    * The feature id for the '<em><b>Relation Symbols</b></em>' attribute list.
@@ -258,7 +267,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION__RELATION_SYMBOLS = 3;
+  int JUDGMENT_DESCRIPTION__RELATION_SYMBOLS = 4;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -267,7 +276,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION__ERROR = 4;
+  int JUDGMENT_DESCRIPTION__ERROR = 5;
 
   /**
    * The number of structural features of the '<em>Judgment Description</em>' class.
@@ -276,7 +285,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JUDGMENT_DESCRIPTION_FEATURE_COUNT = 5;
+  int JUDGMENT_DESCRIPTION_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.JudgmentParameterImpl <em>Judgment Parameter</em>}' class.
@@ -1256,6 +1265,17 @@ public interface XsemanticsPackage extends EPackage
   EClass getJudgmentDescription();
 
   /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#isOverride <em>Override</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Override</em>'.
+   * @see it.xsemantics.dsl.xsemantics.JudgmentDescription#isOverride()
+   * @see #getJudgmentDescription()
+   * @generated
+   */
+  EAttribute getJudgmentDescription_Override();
+
+  /**
    * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2086,6 +2106,14 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EClass JUDGMENT_DESCRIPTION = eINSTANCE.getJudgmentDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute JUDGMENT_DESCRIPTION__OVERRIDE = eINSTANCE.getJudgmentDescription_Override();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

@@ -399,4 +399,9 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testRuleOverride() {
 		systemExtendsSystemWithRuleOverride.assertNoErrors
 	}
+
+	@Test
+	def void testOverrideJudgment() {
+		systemExtendsSystemWithJudgmentOverride.assertNoErrors
+	}
 }

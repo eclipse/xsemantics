@@ -441,4 +441,19 @@ public class XsemanticsBaseTest {
     XsemanticsSystem _parseWithBaseSystemAndAssertNoError_1 = this.parseWithBaseSystemAndAssertNoError(_parseWithBaseSystemAndAssertNoError, _testRuleOverride);
     return _parseWithBaseSystemAndAssertNoError_1;
   }
+  
+  public XsemanticsSystem systemExtendsSystemWithJudgmentOverride() {
+    XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
+    CharSequence _testOverrideJudgment = this.testFiles.testOverrideJudgment();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_loadBaseSystems, _testOverrideJudgment);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
+  
+  public XsemanticsSystem loadBaseSystems() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    CharSequence _testSystemExtendsSystemWithJudgmentsReferringToEcore = this.testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore();
+    CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
+    XsemanticsSystem _parseWithBaseSystemAndAssertNoError = this.parseWithBaseSystemAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification, _testSystemExtendsSystemWithJudgmentsReferringToEcore, _testSystemExtendsExtendedTypeSystem);
+    return _parseWithBaseSystemAndAssertNoError;
+  }
 }

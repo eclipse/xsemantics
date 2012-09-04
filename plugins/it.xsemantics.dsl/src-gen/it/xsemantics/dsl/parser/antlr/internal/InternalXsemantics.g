@@ -372,9 +372,24 @@ ruleJudgmentDescription returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		lv_name_0_0=RULE_ID
+		lv_override_0_0=	'override' 
+    {
+        newLeafNode(lv_override_0_0, grammarAccess.getJudgmentDescriptionAccess().getOverrideOverrideKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getJudgmentDescriptionRule());
+	        }
+       		setWithLastConsumed($current, "override", true, "override");
+	    }
+
+)
+)?(
+(
+		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getJudgmentDescriptionAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(lv_name_1_0, grammarAccess.getJudgmentDescriptionAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -383,7 +398,7 @@ ruleJudgmentDescription returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_0_0, 
+        		lv_name_1_0, 
         		"ID");
 	    }
 
@@ -391,16 +406,16 @@ ruleJudgmentDescription returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentSymbolJudgmentSymbolParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentSymbolJudgmentSymbolParserRuleCall_2_0()); 
 	    }
-		lv_judgmentSymbol_1_0=ruleJudgmentSymbol		{
+		lv_judgmentSymbol_2_0=ruleJudgmentSymbol		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getJudgmentDescriptionRule());
 	        }
        		set(
        			$current, 
        			"judgmentSymbol",
-        		lv_judgmentSymbol_1_0, 
+        		lv_judgmentSymbol_2_0, 
         		"JudgmentSymbol");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -409,16 +424,16 @@ ruleJudgmentDescription returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersJudgmentParameterParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersJudgmentParameterParserRuleCall_3_0()); 
 	    }
-		lv_judgmentParameters_2_0=ruleJudgmentParameter		{
+		lv_judgmentParameters_3_0=ruleJudgmentParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getJudgmentDescriptionRule());
 	        }
        		add(
        			$current, 
        			"judgmentParameters",
-        		lv_judgmentParameters_2_0, 
+        		lv_judgmentParameters_3_0, 
         		"JudgmentParameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -427,16 +442,16 @@ ruleJudgmentDescription returns [EObject current=null]
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getRelationSymbolsRelationSymbolParserRuleCall_3_0_0()); 
+	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getRelationSymbolsRelationSymbolParserRuleCall_4_0_0()); 
 	    }
-		lv_relationSymbols_3_0=ruleRelationSymbol		{
+		lv_relationSymbols_4_0=ruleRelationSymbol		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getJudgmentDescriptionRule());
 	        }
        		add(
        			$current, 
        			"relationSymbols",
-        		lv_relationSymbols_3_0, 
+        		lv_relationSymbols_4_0, 
         		"RelationSymbol");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -445,16 +460,16 @@ ruleJudgmentDescription returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersJudgmentParameterParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getJudgmentParametersJudgmentParameterParserRuleCall_4_1_0()); 
 	    }
-		lv_judgmentParameters_4_0=ruleJudgmentParameter		{
+		lv_judgmentParameters_5_0=ruleJudgmentParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getJudgmentDescriptionRule());
 	        }
        		add(
        			$current, 
        			"judgmentParameters",
-        		lv_judgmentParameters_4_0, 
+        		lv_judgmentParameters_5_0, 
         		"JudgmentParameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -463,16 +478,16 @@ ruleJudgmentDescription returns [EObject current=null]
 ))*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getErrorErrorSpecificationParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getJudgmentDescriptionAccess().getErrorErrorSpecificationParserRuleCall_5_0()); 
 	    }
-		lv_error_5_0=ruleErrorSpecification		{
+		lv_error_6_0=ruleErrorSpecification		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getJudgmentDescriptionRule());
 	        }
        		set(
        			$current, 
        			"error",
-        		lv_error_5_0, 
+        		lv_error_6_0, 
         		"ErrorSpecification");
 	        afterParserOrEnumRuleCall();
 	    }

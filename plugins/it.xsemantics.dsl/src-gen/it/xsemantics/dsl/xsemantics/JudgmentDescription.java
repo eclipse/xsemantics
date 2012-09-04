@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#isOverride <em>Override</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#getJudgmentSymbol <em>Judgment Symbol</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#getJudgmentParameters <em>Judgment Parameters</em>}</li>
@@ -28,6 +29,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface JudgmentDescription extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Override</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Override</em>' attribute.
+   * @see #setOverride(boolean)
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getJudgmentDescription_Override()
+   * @model
+   * @generated
+   */
+  boolean isOverride();
+
+  /**
+   * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.JudgmentDescription#isOverride <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Override</em>' attribute.
+   * @see #isOverride()
+   * @generated
+   */
+  void setOverride(boolean value);
+
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->

@@ -12,12 +12,15 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	
 	@Inject extension XsemanticsUtils
+	
+	@Inject XsemanticsNodeModelUtils nodeModelUtils
 	
 	@Test
 	def void testJudgmentDescriptions() {
@@ -318,14 +321,39 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testAllJudgments() {
-		Assert::assertEquals(2, systemExtendsSystemWithAdditionalJudgment.
-				allJudgments.size)
+		systemExtendsSystemWithAdditionalJudgment.
+				allJudgments.assertJudgments(
+'''
+it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2
+it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + c + " made an error!" source c feature c.eClass.eContainingFeature
+'''					
+				)
 	}
 
 	@Test
 	def void testAllJudgments2() {
-		Assert::assertEquals(3, systemExtendsExtendedTypeSystem.
-				allJudgments.size)
+		systemExtendsExtendedTypeSystem.
+				allJudgments.assertJudgments(
+'''
+it.xsemantics.test.ExtendedTypeSystem2 type2 ||- EClass c1 : EClass c2
+it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2
+it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + c + " made an error!" source c feature c.eClass.eContainingFeature
+'''					
+				)
+	}
+
+	@Test
+	def void testAllJudgmentsWithOverride() {
+		systemExtendsSystemWithJudgmentOverride.
+				allJudgments.assertJudgments(
+'''
+it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride override type |- EObject obj : output EClass
+it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride override subtype |- EClass c1 <: EClass c2 error stringRep(c1) + " not <: " + stringRep(c2) source c1 feature c1.eClass.eContainingFeature
+it.xsemantics.test.ExtendedTypeSystem2 type2 ||- EClass c1 : EClass c2
+it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2
+it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + c + " made an error!" source c feature c.eClass.eContainingFeature
+'''					
+				)
 	}
 
 	@Test
@@ -392,5 +420,13 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 		Lists::newArrayList(filterJudgmentDescriptions(ts, judgmentSymbol, 
 			Lists::newArrayList(relationSymbol)
 		))
+	}
+
+	def assertJudgments(List<JudgmentDescription> judgments, CharSequence expected) {
+		expected.assertEqualsStrings(
+			judgments.map[ 
+				it.containingSystem.name + " " +
+				nodeModelUtils.getProgramText(it)
+			].join('\n') + '\n')
 	}
 }

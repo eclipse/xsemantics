@@ -464,6 +464,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
+            boolean _isOverride = judgmentDescription.isOverride();
+            if (_isOverride) {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(judgmentDescription, Override.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+            }
             EList<JvmFormalParameter> _parameters = it.getParameters();
             List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(judgmentDescription);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
@@ -496,6 +502,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       JvmTypeReference _resultType_1 = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
       final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
+            boolean _isOverride = judgmentDescription.isOverride();
+            if (_isOverride) {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(judgmentDescription, Override.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+            }
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmFormalParameter _environmentParam = XsemanticsJvmModelInferrer.this.environmentParam(judgmentDescription);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _environmentParam);
@@ -528,6 +540,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       JvmTypeReference _resultType_2 = this._xsemanticsGeneratorExtensions.resultType(judgmentDescription);
       final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
+            boolean _isOverride = judgmentDescription.isOverride();
+            if (_isOverride) {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(judgmentDescription, Override.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+            }
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmFormalParameter _environmentParam = XsemanticsJvmModelInferrer.this.environmentParam(judgmentDescription);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _environmentParam);
@@ -696,6 +714,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);
+          boolean _isOverride = judgmentDescription.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(judgmentDescription, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           EList<JvmFormalParameter> _parameters = it.getParameters();
           JvmFormalParameter _environmentParam = XsemanticsJvmModelInferrer.this.environmentParam(judgmentDescription);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _environmentParam);

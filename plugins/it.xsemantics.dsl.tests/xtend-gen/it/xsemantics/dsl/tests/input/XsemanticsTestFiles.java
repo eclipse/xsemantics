@@ -3698,4 +3698,118 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testOverrideJudgment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// type judgment already defined in inherited system");
+    _builder.newLine();
+    _builder.append("// and we override it, so that\'s OK");
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override type |- EObject obj : output EClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override subtype |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("error stringRep(c1) + \" not <: \" + stringRep(c2)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("source c1");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("feature c1.eClass.eContainingFeature");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testForJudgmentParameters() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type0 |- EClass c : output EObject");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type1 ||- EClass c : output EObject");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type2 |~ EClass c : EObject o");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type3 |~ EClass c ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testInvalidJudgmentOverrideWithoutSystemExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override type |- EObject c : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testInvalidOverrideJudgment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem2 ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// EClass was output in the base system");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override type |- EObject obj : EClass c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// different name of the judgment to override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override subtype2 |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

@@ -159,7 +159,7 @@ public class XsemanticsUtils {
     JudgmentDescription _xblockexpression = null;
     {
       XsemanticsSystem _containingSystem = this.containingSystem(object);
-      Iterable<JudgmentDescription> _allJudgments = this.allJudgments(_containingSystem, judgmentSymbol, relationSymbols);
+      ArrayList<JudgmentDescription> _allJudgments = this.allJudgments(_containingSystem, judgmentSymbol, relationSymbols);
       final ArrayList<JudgmentDescription> descriptions = Lists.<JudgmentDescription>newArrayList(_allJudgments);
       JudgmentDescription _xifexpression = null;
       int _size = descriptions.size();
@@ -522,10 +522,11 @@ public class XsemanticsUtils {
     return _doubleArrow;
   }
   
-  public Iterable<JudgmentDescription> allJudgments(final XsemanticsSystem system, final String judgmentSymbol, final Iterable<String> relationSymbols) {
+  public ArrayList<JudgmentDescription> allJudgments(final XsemanticsSystem system, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     ArrayList<JudgmentDescription> _allJudgments = this.allJudgments(system);
     Iterable<JudgmentDescription> _filterJudgmentDescriptions = this.filterJudgmentDescriptions(_allJudgments, judgmentSymbol, relationSymbols);
-    return _filterJudgmentDescriptions;
+    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_filterJudgmentDescriptions);
+    return _newArrayList;
   }
   
   public ArrayList<Rule> allRules(final XsemanticsSystem system) {

@@ -195,67 +195,75 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	public class JudgmentDescriptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JudgmentDescription");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Assignment cJudgmentSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cJudgmentSymbolJudgmentSymbolParserRuleCall_1_0 = (RuleCall)cJudgmentSymbolAssignment_1.eContents().get(0);
-		private final Assignment cJudgmentParametersAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cJudgmentParametersJudgmentParameterParserRuleCall_2_0 = (RuleCall)cJudgmentParametersAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cRelationSymbolsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cRelationSymbolsRelationSymbolParserRuleCall_3_0_0 = (RuleCall)cRelationSymbolsAssignment_3_0.eContents().get(0);
-		private final Assignment cJudgmentParametersAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cJudgmentParametersJudgmentParameterParserRuleCall_3_1_0 = (RuleCall)cJudgmentParametersAssignment_3_1.eContents().get(0);
-		private final Assignment cErrorAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cErrorErrorSpecificationParserRuleCall_4_0 = (RuleCall)cErrorAssignment_4.eContents().get(0);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cJudgmentSymbolAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cJudgmentSymbolJudgmentSymbolParserRuleCall_2_0 = (RuleCall)cJudgmentSymbolAssignment_2.eContents().get(0);
+		private final Assignment cJudgmentParametersAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cJudgmentParametersJudgmentParameterParserRuleCall_3_0 = (RuleCall)cJudgmentParametersAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Assignment cRelationSymbolsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cRelationSymbolsRelationSymbolParserRuleCall_4_0_0 = (RuleCall)cRelationSymbolsAssignment_4_0.eContents().get(0);
+		private final Assignment cJudgmentParametersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cJudgmentParametersJudgmentParameterParserRuleCall_4_1_0 = (RuleCall)cJudgmentParametersAssignment_4_1.eContents().get(0);
+		private final Assignment cErrorAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cErrorErrorSpecificationParserRuleCall_5_0 = (RuleCall)cErrorAssignment_5.eContents().get(0);
 		
 		//JudgmentDescription:
-		//	name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter (relationSymbols+=RelationSymbol
-		//	judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?;
+		//	override?="override"? name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter
+		//	(relationSymbols+=RelationSymbol judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter (relationSymbols+=RelationSymbol
-		//judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?
+		//override?="override"? name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter
+		//(relationSymbols+=RelationSymbol judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?
 		public Group getGroup() { return cGroup; }
 
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
 		//name=ID
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
 		//judgmentSymbol=JudgmentSymbol
-		public Assignment getJudgmentSymbolAssignment_1() { return cJudgmentSymbolAssignment_1; }
+		public Assignment getJudgmentSymbolAssignment_2() { return cJudgmentSymbolAssignment_2; }
 
 		//JudgmentSymbol
-		public RuleCall getJudgmentSymbolJudgmentSymbolParserRuleCall_1_0() { return cJudgmentSymbolJudgmentSymbolParserRuleCall_1_0; }
+		public RuleCall getJudgmentSymbolJudgmentSymbolParserRuleCall_2_0() { return cJudgmentSymbolJudgmentSymbolParserRuleCall_2_0; }
 
 		//judgmentParameters+=JudgmentParameter
-		public Assignment getJudgmentParametersAssignment_2() { return cJudgmentParametersAssignment_2; }
+		public Assignment getJudgmentParametersAssignment_3() { return cJudgmentParametersAssignment_3; }
 
 		//JudgmentParameter
-		public RuleCall getJudgmentParametersJudgmentParameterParserRuleCall_2_0() { return cJudgmentParametersJudgmentParameterParserRuleCall_2_0; }
+		public RuleCall getJudgmentParametersJudgmentParameterParserRuleCall_3_0() { return cJudgmentParametersJudgmentParameterParserRuleCall_3_0; }
 
 		//(relationSymbols+=RelationSymbol judgmentParameters+=JudgmentParameter)*
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//relationSymbols+=RelationSymbol
-		public Assignment getRelationSymbolsAssignment_3_0() { return cRelationSymbolsAssignment_3_0; }
+		public Assignment getRelationSymbolsAssignment_4_0() { return cRelationSymbolsAssignment_4_0; }
 
 		//RelationSymbol
-		public RuleCall getRelationSymbolsRelationSymbolParserRuleCall_3_0_0() { return cRelationSymbolsRelationSymbolParserRuleCall_3_0_0; }
+		public RuleCall getRelationSymbolsRelationSymbolParserRuleCall_4_0_0() { return cRelationSymbolsRelationSymbolParserRuleCall_4_0_0; }
 
 		//judgmentParameters+=JudgmentParameter
-		public Assignment getJudgmentParametersAssignment_3_1() { return cJudgmentParametersAssignment_3_1; }
+		public Assignment getJudgmentParametersAssignment_4_1() { return cJudgmentParametersAssignment_4_1; }
 
 		//JudgmentParameter
-		public RuleCall getJudgmentParametersJudgmentParameterParserRuleCall_3_1_0() { return cJudgmentParametersJudgmentParameterParserRuleCall_3_1_0; }
+		public RuleCall getJudgmentParametersJudgmentParameterParserRuleCall_4_1_0() { return cJudgmentParametersJudgmentParameterParserRuleCall_4_1_0; }
 
 		//error=ErrorSpecification?
-		public Assignment getErrorAssignment_4() { return cErrorAssignment_4; }
+		public Assignment getErrorAssignment_5() { return cErrorAssignment_5; }
 
 		//ErrorSpecification
-		public RuleCall getErrorErrorSpecificationParserRuleCall_4_0() { return cErrorErrorSpecificationParserRuleCall_4_0; }
+		public RuleCall getErrorErrorSpecificationParserRuleCall_5_0() { return cErrorErrorSpecificationParserRuleCall_5_0; }
 	}
 
 	public class JudgmentParameterElements extends AbstractParserRuleElementFinder {
@@ -1373,8 +1381,8 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JudgmentDescription:
-	//	name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter (relationSymbols+=RelationSymbol
-	//	judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?;
+	//	override?="override"? name=ID judgmentSymbol=JudgmentSymbol judgmentParameters+=JudgmentParameter
+	//	(relationSymbols+=RelationSymbol judgmentParameters+=JudgmentParameter)* error=ErrorSpecification?;
 	public JudgmentDescriptionElements getJudgmentDescriptionAccess() {
 		return (pJudgmentDescription != null) ? pJudgmentDescription : (pJudgmentDescription = new JudgmentDescriptionElements());
 	}

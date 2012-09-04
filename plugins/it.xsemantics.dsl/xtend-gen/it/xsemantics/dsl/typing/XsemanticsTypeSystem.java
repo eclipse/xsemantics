@@ -1,15 +1,20 @@
 package it.xsemantics.dsl.typing;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystemGen;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.JudgmentDescription;
+import it.xsemantics.dsl.xsemantics.JudgmentParameter;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -73,6 +78,42 @@ public class XsemanticsTypeSystem {
       boolean _not = (!_equals);
       if (_not) {
         return false;
+      }
+    }
+    return true;
+  }
+  
+  public boolean equals(final JudgmentDescription j1, final JudgmentDescription j2) {
+    EList<JudgmentParameter> _judgmentParameters = j1.getJudgmentParameters();
+    int _size = _judgmentParameters.size();
+    EList<JudgmentParameter> _judgmentParameters_1 = j2.getJudgmentParameters();
+    int _size_1 = _judgmentParameters_1.size();
+    boolean _notEquals = (_size != _size_1);
+    if (_notEquals) {
+      return false;
+    }
+    EList<JudgmentParameter> _judgmentParameters_2 = j1.getJudgmentParameters();
+    final Iterator<JudgmentParameter> judgmentParametersIt = _judgmentParameters_2.iterator();
+    EList<JudgmentParameter> _judgmentParameters_3 = j2.getJudgmentParameters();
+    for (final JudgmentParameter jParam2 : _judgmentParameters_3) {
+      {
+        final JudgmentParameter jParam1 = judgmentParametersIt.next();
+        boolean _or = false;
+        EClass _eClass = jParam1.eClass();
+        EClass _eClass_1 = jParam2.eClass();
+        boolean _notEquals_1 = (!Objects.equal(_eClass, _eClass_1));
+        if (_notEquals_1) {
+          _or = true;
+        } else {
+          JvmTypeReference _type = this.getType(jParam1);
+          JvmTypeReference _type_1 = this.getType(jParam2);
+          boolean _equals = this.equals(_type, _type_1);
+          boolean _not = (!_equals);
+          _or = (_notEquals_1 || _not);
+        }
+        if (_or) {
+          return false;
+        }
       }
     }
     return true;

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +42,9 @@ import org.junit.runner.RunWith;
 public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Inject
   private XsemanticsUtils _xsemanticsUtils;
+  
+  @Inject
+  private XsemanticsNodeModelUtils nodeModelUtils;
   
   @Test
   public void testJudgmentDescriptions() {
@@ -472,16 +478,44 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   public void testAllJudgments() {
     XsemanticsSystem _systemExtendsSystemWithAdditionalJudgment = this.systemExtendsSystemWithAdditionalJudgment();
     ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsSystemWithAdditionalJudgment);
-    int _size = _allJudgments.size();
-    Assert.assertEquals(2, _size);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.TypeSystem type |- EObject c : output EClass error \"this \" + c + \" made an error!\" source c feature c.eClass.eContainingFeature");
+    _builder.newLine();
+    this.assertJudgments(_allJudgments, _builder);
   }
   
   @Test
   public void testAllJudgments2() {
     XsemanticsSystem _systemExtendsExtendedTypeSystem = this.systemExtendsExtendedTypeSystem();
     ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsExtendedTypeSystem);
-    int _size = _allJudgments.size();
-    Assert.assertEquals(3, _size);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystem2 type2 ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.TypeSystem type |- EObject c : output EClass error \"this \" + c + \" made an error!\" source c feature c.eClass.eContainingFeature");
+    _builder.newLine();
+    this.assertJudgments(_allJudgments, _builder);
+  }
+  
+  @Test
+  public void testAllJudgmentsWithOverride() {
+    XsemanticsSystem _systemExtendsSystemWithJudgmentOverride = this.systemExtendsSystemWithJudgmentOverride();
+    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_systemExtendsSystemWithJudgmentOverride);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride override type |- EObject obj : output EClass");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride override subtype |- EClass c1 <: EClass c2 error stringRep(c1) + \" not <: \" + stringRep(c2) source c1 feature c1.eClass.eContainingFeature");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystem2 type2 ||- EClass c1 : EClass c2");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.ExtendedTypeSystem subtype |- EClass c1 <: EClass c2");
+    _builder.newLine();
+    _builder.append("it.xsemantics.test.TypeSystem type |- EObject c : output EClass error \"this \" + c + \" made an error!\" source c feature c.eClass.eContainingFeature");
+    _builder.newLine();
+    this.assertJudgments(_allJudgments, _builder);
   }
   
   @Test
@@ -575,5 +609,22 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Iterable<JudgmentDescription> _filterJudgmentDescriptions = this._xsemanticsUtils.filterJudgmentDescriptions(ts, judgmentSymbol, _newArrayList);
     ArrayList<JudgmentDescription> _newArrayList_1 = Lists.<JudgmentDescription>newArrayList(_filterJudgmentDescriptions);
     return _newArrayList_1;
+  }
+  
+  public void assertJudgments(final List<JudgmentDescription> judgments, final CharSequence expected) {
+    final Function1<JudgmentDescription,String> _function = new Function1<JudgmentDescription,String>() {
+        public String apply(final JudgmentDescription it) {
+          XsemanticsSystem _containingSystem = XsemanticsUtilsTest.this._xsemanticsUtils.containingSystem(it);
+          String _name = _containingSystem.getName();
+          String _plus = (_name + " ");
+          String _programText = XsemanticsUtilsTest.this.nodeModelUtils.getProgramText(it);
+          String _plus_1 = (_plus + _programText);
+          return _plus_1;
+        }
+      };
+    List<String> _map = ListExtensions.<JudgmentDescription, String>map(judgments, _function);
+    String _join = IterableExtensions.join(_map, "\n");
+    String _plus = (_join + "\n");
+    this.assertEqualsStrings(expected, _plus);
   }
 }

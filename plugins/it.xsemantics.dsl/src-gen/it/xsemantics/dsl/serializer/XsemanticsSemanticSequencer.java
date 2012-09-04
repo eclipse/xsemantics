@@ -1360,6 +1360,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
+	 *         override?='override'? 
 	 *         name=ID 
 	 *         judgmentSymbol=JudgmentSymbol 
 	 *         judgmentParameters+=JudgmentParameter 
