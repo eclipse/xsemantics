@@ -779,6 +779,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);
+          boolean _isOverride = rule.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           EList<JvmTypeReference> _exceptions = it.getExceptions();
           JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(rule);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
@@ -1032,6 +1038,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);
+          boolean _isOverride = rule.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           EList<JvmTypeReference> _exceptions = it.getExceptions();
           JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(rule);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
@@ -1066,6 +1078,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(rule);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
+          boolean _isOverride = rule.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           EList<JvmFormalParameter> _parameters = it.getParameters();
           RuleParameter _element = rule.getElement();
           JvmFormalParameter _parameter = _element.getParameter();
@@ -1122,9 +1140,15 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, rule);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
-          EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-          JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Check.class);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          boolean _isOverride = rule.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
+          EList<JvmAnnotationReference> _annotations_1 = it.getAnnotations();
+          JvmAnnotationReference _annotation_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Check.class);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations_1, _annotation_1);
           EList<JvmFormalParameter> _parameters = it.getParameters();
           RuleParameter _element = rule.getElement();
           JvmFormalParameter _parameter = _element.getParameter();
@@ -1193,6 +1217,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);
+          boolean _isOverride = rule.isOverride();
+          if (_isOverride) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           EList<JvmTypeReference> _exceptions = it.getExceptions();
           JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(rule);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);

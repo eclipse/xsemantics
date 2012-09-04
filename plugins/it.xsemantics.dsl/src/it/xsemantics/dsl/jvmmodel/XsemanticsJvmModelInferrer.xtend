@@ -416,6 +416,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		[
 			visibility = JvmVisibility::PROTECTED
 			
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
+			
 			exceptions += rule.ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
@@ -500,6 +503,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		[
 			visibility = JvmVisibility::PROTECTED
 			
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
+			
 			exceptions += rule.ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
@@ -519,6 +525,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			rule.resultType
 		) 
 		[
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
+			
    			parameters += rule.element.parameter.
    				toParameter(rule.element.parameter.name,
    					rule.element.parameter.parameterType
@@ -548,6 +557,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			Void::TYPE.getTypeForName(rule)
 		) 
 		[
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
+
 			annotations += rule.toAnnotation(typeof(Check))
 			
    			parameters += rule.element.parameter.
@@ -573,6 +585,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
+			
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
 			
 			exceptions += rule.ruleFailedExceptionType
 			
