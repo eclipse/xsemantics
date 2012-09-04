@@ -1164,8 +1164,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
               public void apply(final ITreeAppendable it) {
                 StringConcatenation _builder = new StringConcatenation();
                 {
-                  XsemanticsSystem _containingTypeSystem = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingTypeSystem(rule);
-                  JvmParameterizedTypeReference _validatorExtends = _containingTypeSystem.getValidatorExtends();
+                  XsemanticsSystem _containingSystem = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingSystem(rule);
+                  JvmParameterizedTypeReference _validatorExtends = _containingSystem.getValidatorExtends();
                   boolean _notEquals = (!Objects.equal(_validatorExtends, null));
                   if (_notEquals) {
                     _builder.append("errorGenerator.");
@@ -1173,8 +1173,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 }
                 _builder.append("generateErrors(");
                 {
-                  XsemanticsSystem _containingTypeSystem_1 = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingTypeSystem(rule);
-                  JvmParameterizedTypeReference _validatorExtends_1 = _containingTypeSystem_1.getValidatorExtends();
+                  XsemanticsSystem _containingSystem_1 = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingSystem(rule);
+                  JvmParameterizedTypeReference _validatorExtends_1 = _containingSystem_1.getValidatorExtends();
                   boolean _notEquals_1 = (!Objects.equal(_validatorExtends_1, null));
                   if (_notEquals_1) {
                     _builder.append("this, ");

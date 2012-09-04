@@ -570,7 +570,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			body = [
    				it.append(
    				'''
-				«IF rule.containingTypeSystem.validatorExtends != null»errorGenerator.«ENDIF»generateErrors(«IF rule.containingTypeSystem.validatorExtends != null»this, «ENDIF»
+				«IF rule.containingSystem.validatorExtends != null»errorGenerator.«ENDIF»generateErrors(«IF rule.containingSystem.validatorExtends != null»this, «ENDIF»
 					xsemanticsSystem.«rule.methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
    				)

@@ -56,7 +56,7 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def toPackage(Rule rule) {
-		val typeSystemPackage = rule.containingTypeSystem.toPackage
+		val typeSystemPackage = rule.containingSystem.toPackage
 		if (typeSystemPackage.length > 0)
 			typeSystemPackage + "." + "rules"
 		else

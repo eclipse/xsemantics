@@ -95,7 +95,7 @@ public class XsemanticsUtils {
     return _allContentsOfType;
   }
   
-  public XsemanticsSystem containingTypeSystem(final EObject element) {
+  public XsemanticsSystem containingSystem(final EObject element) {
     return EcoreUtil2.<XsemanticsSystem>getContainerOfType(element, XsemanticsSystem.class);
   }
   
@@ -158,8 +158,8 @@ public class XsemanticsUtils {
   public JudgmentDescription judgmentDescription(final EObject object, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     JudgmentDescription _xblockexpression = null;
     {
-      XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(object);
-      Iterable<JudgmentDescription> _allJudgments = this.allJudgments(_containingTypeSystem, judgmentSymbol, relationSymbols);
+      XsemanticsSystem _containingSystem = this.containingSystem(object);
+      Iterable<JudgmentDescription> _allJudgments = this.allJudgments(_containingSystem, judgmentSymbol, relationSymbols);
       final ArrayList<JudgmentDescription> descriptions = Lists.<JudgmentDescription>newArrayList(_allJudgments);
       JudgmentDescription _xifexpression = null;
       int _size = descriptions.size();
@@ -174,10 +174,10 @@ public class XsemanticsUtils {
   }
   
   public List<Rule> rulesForJudgmentDescription(final JudgmentDescription judgmentDescription) {
-    XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(judgmentDescription);
+    XsemanticsSystem _containingSystem = this.containingSystem(judgmentDescription);
     String _judgmentSymbol = judgmentDescription.getJudgmentSymbol();
     EList<String> _relationSymbols = judgmentDescription.getRelationSymbols();
-    Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_containingTypeSystem, _judgmentSymbol, _relationSymbols);
+    Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_containingSystem, _judgmentSymbol, _relationSymbols);
     ArrayList<Rule> _newArrayList = Lists.<Rule>newArrayList(_filterRulesByJudgmentDescription);
     return _newArrayList;
   }
@@ -211,8 +211,8 @@ public class XsemanticsUtils {
   }
   
   public List<Rule> allRulesOfTheSameKind(final Rule rule) {
-    XsemanticsSystem _containingTypeSystem = this.containingTypeSystem(rule);
-    List<Rule> _allRulesOfTheSameKind = this.allRulesOfTheSameKind(_containingTypeSystem, rule);
+    XsemanticsSystem _containingSystem = this.containingSystem(rule);
+    List<Rule> _allRulesOfTheSameKind = this.allRulesOfTheSameKind(_containingSystem, rule);
     return _allRulesOfTheSameKind;
   }
   

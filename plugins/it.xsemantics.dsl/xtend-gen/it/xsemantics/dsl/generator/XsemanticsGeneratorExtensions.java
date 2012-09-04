@@ -105,8 +105,8 @@ public class XsemanticsGeneratorExtensions {
   public String toPackage(final Rule rule) {
     String _xblockexpression = null;
     {
-      XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
-      final String typeSystemPackage = this.toPackage(_containingTypeSystem);
+      XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(rule);
+      final String typeSystemPackage = this.toPackage(_containingSystem);
       String _xifexpression = null;
       int _length = typeSystemPackage.length();
       boolean _greaterThan = (_length > 0);

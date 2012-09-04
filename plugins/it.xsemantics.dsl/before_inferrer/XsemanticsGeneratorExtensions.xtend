@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.typing.XsemanticsTypingSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
@@ -73,9 +72,9 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def toPackage(Rule rule) {
-		val typeSystemPackage = rule.containingTypeSystem.toPackage
-		if (typeSystemPackage.length > 0)
-			typeSystemPackage + "." + "rules"
+		val systemPackage = rule.containingTypeSystem.toPackage
+		if (systemPackage.length > 0)
+			systemPackage + "." + "rules"
 		else
 			"rules"
 	}

@@ -27,8 +27,8 @@ public class XsemanticsJavaValidatorHelper {
   private XsemanticsUtils _xsemanticsUtils;
   
   public boolean noRulesWithTheSameNameOfCheckRule(final Rule rule) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
-    EList<CheckRule> _checkrules = _containingTypeSystem.getCheckrules();
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(rule);
+    EList<CheckRule> _checkrules = _containingSystem.getCheckrules();
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
@@ -50,8 +50,8 @@ public class XsemanticsJavaValidatorHelper {
   }
   
   public boolean noRulesWithTheSameName(final Rule rule) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
-    EList<Rule> _rules = _containingTypeSystem.getRules();
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(rule);
+    EList<Rule> _rules = _containingSystem.getRules();
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           boolean _and = false;
@@ -73,8 +73,8 @@ public class XsemanticsJavaValidatorHelper {
   }
   
   public boolean noCheckRulesWithTheSameNameOfRule(final CheckRule rule) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
-    EList<Rule> _rules = _containingTypeSystem.getRules();
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(rule);
+    EList<Rule> _rules = _containingSystem.getRules();
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           boolean _and = false;
@@ -96,8 +96,8 @@ public class XsemanticsJavaValidatorHelper {
   }
   
   public boolean noCheckRulesWithTheSameName(final CheckRule rule) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(rule);
-    EList<CheckRule> _checkrules = _containingTypeSystem.getCheckrules();
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(rule);
+    EList<CheckRule> _checkrules = _containingSystem.getCheckrules();
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
@@ -119,8 +119,8 @@ public class XsemanticsJavaValidatorHelper {
   }
   
   public JudgmentDescription judgmentDescriptionWithTheSameName(final JudgmentDescription j) {
-    XsemanticsSystem _containingTypeSystem = this._xsemanticsUtils.containingTypeSystem(j);
-    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_containingTypeSystem);
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(j);
+    ArrayList<JudgmentDescription> _allJudgments = this._xsemanticsUtils.allJudgments(_containingSystem);
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;

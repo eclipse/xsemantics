@@ -188,7 +188,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		String judgmentSymbol = judgmentDescription.getJudgmentSymbol();
 		List<String> relationSymbols = judgmentDescription.getRelationSymbols();
 		if (xsemanticsUtils.getJudgmentDescriptions(
-				xsemanticsUtils.containingTypeSystem(judgmentDescription),
+				xsemanticsUtils.containingSystem(judgmentDescription),
 				judgmentSymbol, relationSymbols).size() > 1) {
 			error("Duplicate JudgmentDescription symbols: "
 					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
@@ -274,7 +274,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkValidOverride(Rule rule) {
-		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
+		XsemanticsSystem system = xsemanticsUtils.containingSystem(rule);
 		if (system != null) {
 			if (rule.isOverride()) {
 				XsemanticsSystem superSystem = xsemanticsUtils
@@ -314,7 +314,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkValidOverride(CheckRule rule) {
-		XsemanticsSystem system = xsemanticsUtils.containingTypeSystem(rule);
+		XsemanticsSystem system = xsemanticsUtils.containingSystem(rule);
 		if (system != null) {
 			if (rule.isOverride()) {
 				XsemanticsSystem superSystem = xsemanticsUtils
@@ -473,7 +473,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	protected String reportContainingSystemName(EObject object) {
 		return ", in system: "
-				+ xsemanticsUtils.containingTypeSystem(object).getName();
+				+ xsemanticsUtils.containingSystem(object).getName();
 	}
 
 	protected JudgmentDescription checkRuleConformantToJudgmentDescription(

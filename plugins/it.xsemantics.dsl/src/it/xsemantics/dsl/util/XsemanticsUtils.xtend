@@ -23,10 +23,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-
-import static extension org.eclipse.xtext.EcoreUtil2.*
 import java.util.Set
 import com.google.common.collect.Sets
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XsemanticsUtils {
 	
@@ -64,7 +64,7 @@ class XsemanticsUtils {
 		element.getAllContentsOfType(typeof(OrExpression))
 	}
 
-	def containingTypeSystem(EObject element) {
+	def containingSystem(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
 	}
 	
@@ -104,7 +104,7 @@ class XsemanticsUtils {
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
 		val descriptions = Lists::newArrayList(
 			object.
-			containingTypeSystem.
+			containingSystem.
 				allJudgments
 					(judgmentSymbol, relationSymbols))
 		if (descriptions.size > 0)
@@ -112,7 +112,7 @@ class XsemanticsUtils {
 	}
 	
 	def List<Rule> rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
-		Lists::newArrayList(judgmentDescription.containingTypeSystem.
+		Lists::newArrayList(judgmentDescription.containingSystem.
 			filterRulesByJudgmentDescription
 				(judgmentDescription.judgmentSymbol, judgmentDescription.relationSymbols))
 	}
@@ -129,7 +129,7 @@ class XsemanticsUtils {
 	}
 	
 	def allRulesOfTheSameKind(Rule rule) {
-		rule.containingTypeSystem.allRulesOfTheSameKind(rule)
+		rule.containingSystem.allRulesOfTheSameKind(rule)
 	}
 
 	def List<Rule> allRulesOfTheSameKind(XsemanticsSystem system, Rule rule) {
