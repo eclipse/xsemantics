@@ -208,7 +208,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void typeThrowException(final String _issue, final Exception _ex, final Expression expression) throws RuleFailedException {
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(expression);
     String _plus = ("cannot type " + _stringRep);
@@ -228,7 +228,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void vartypeThrowException(final String _issue, final Exception _ex, final Variable variable) throws RuleFailedException {
+  protected void vartypeThrowException(final String _error, final String _issue, final Exception _ex, final Variable variable, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(variable);
     String _plus = ("cannot type " + _stringRep);
@@ -250,7 +250,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void coerceThrowException(final String _issue, final Exception _ex, final Expression expression, final Type expectedType) throws RuleFailedException {
+  protected void coerceThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final Type expectedType, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(expression);
     String _plus = ("cannot convert " + _stringRep);
@@ -274,6 +274,10 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void interpretThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral num) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -282,8 +286,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleNumeralLiteral) {
-      typeThrowException(NUMERALLITERAL,
-      	e_applyRuleNumeralLiteral, num);
+      typeThrowException(ruleName("NumeralLiteral") + stringRepForEnv(G) + " |- " + stringRep(num) + " : " + "IntType",
+      	NUMERALLITERAL,
+      	e_applyRuleNumeralLiteral, num, new ErrorInformation[] {new ErrorInformation(num)});
       return null;
     }
   }
@@ -302,8 +307,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleBooleanLiteral) {
-      typeThrowException(BOOLEANLITERAL,
-      	e_applyRuleBooleanLiteral, bool);
+      typeThrowException(ruleName("BooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " : " + "BooleanType",
+      	BOOLEANLITERAL,
+      	e_applyRuleBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
       return null;
     }
   }
@@ -322,8 +328,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleStringLiteral) {
-      typeThrowException(STRINGLITERAL,
-      	e_applyRuleStringLiteral, str);
+      typeThrowException(ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + "Type",
+      	STRINGLITERAL,
+      	e_applyRuleStringLiteral, str, new ErrorInformation[] {new ErrorInformation(str)});
       return null;
     }
   }
@@ -358,8 +365,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleMultiOrDiv) {
-      typeThrowException(MULTIORDIV,
-      	e_applyRuleMultiOrDiv, multiOrDiv);
+      typeThrowException(ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + "IntType",
+      	MULTIORDIV,
+      	e_applyRuleMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
       return null;
     }
   }
@@ -397,8 +405,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleMinus) {
-      typeThrowException(MINUS,
-      	e_applyRuleMinus, minus);
+      typeThrowException(ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + "IntType",
+      	MINUS,
+      	e_applyRuleMinus, minus, new ErrorInformation[] {new ErrorInformation(minus)});
       return null;
     }
   }
@@ -436,8 +445,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRulePlus) {
-      typeThrowException(PLUS,
-      	e_applyRulePlus, plus);
+      typeThrowException(ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + "Type",
+      	PLUS,
+      	e_applyRulePlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
       return null;
     }
   }
@@ -523,8 +533,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleComparison) {
-      typeThrowException(COMPARISON,
-      	e_applyRuleComparison, comparison);
+      typeThrowException(ruleName("Comparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
+      	COMPARISON,
+      	e_applyRuleComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
       return null;
     }
   }
@@ -581,8 +592,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEquals) {
-      typeThrowException(EQUALS,
-      	e_applyRuleEquals, comparison);
+      typeThrowException(ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
+      	EQUALS,
+      	e_applyRuleEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
       return null;
     }
   }
@@ -624,8 +636,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleBooleanNegation) {
-      typeThrowException(BOOLEANNEGATION,
-      	e_applyRuleBooleanNegation, negation);
+      typeThrowException(ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + "BooleanType",
+      	BOOLEANNEGATION,
+      	e_applyRuleBooleanNegation, negation, new ErrorInformation[] {new ErrorInformation(negation)});
       return null;
     }
   }
@@ -656,8 +669,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleAndOr) {
-      typeThrowException(ANDOR,
-      	e_applyRuleAndOr, andOr);
+      typeThrowException(ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + "BooleanType",
+      	ANDOR,
+      	e_applyRuleAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
       return null;
     }
   }
@@ -696,8 +710,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleArithmeticSigned) {
-      typeThrowException(ARITHMETICSIGNED,
-      	e_applyRuleArithmeticSigned, signed);
+      typeThrowException(ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + "IntType",
+      	ARITHMETICSIGNED,
+      	e_applyRuleArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
       return null;
     }
   }
@@ -727,8 +742,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleStringToInt) {
-      coerceThrowException(STRINGTOINT,
-      	e_applyRuleStringToInt, string, type);
+      coerceThrowException(ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type),
+      	STRINGTOINT,
+      	e_applyRuleStringToInt, string, type, new ErrorInformation[] {new ErrorInformation(string), new ErrorInformation(type)});
       return null;
     }
   }
@@ -748,8 +764,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleStringToBool) {
-      coerceThrowException(STRINGTOBOOL,
-      	e_applyRuleStringToBool, string, type);
+      coerceThrowException(ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type),
+      	STRINGTOBOOL,
+      	e_applyRuleStringToBool, string, type, new ErrorInformation[] {new ErrorInformation(string), new ErrorInformation(type)});
       return null;
     }
   }
@@ -781,8 +798,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleIntToInt) {
-      coerceThrowException(INTTOINT,
-      	e_applyRuleIntToInt, number, type);
+      coerceThrowException(ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type),
+      	INTTOINT,
+      	e_applyRuleIntToInt, number, type, new ErrorInformation[] {new ErrorInformation(number), new ErrorInformation(type)});
       return null;
     }
   }
@@ -800,8 +818,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleBoolToBool) {
-      coerceThrowException(BOOLTOBOOL,
-      	e_applyRuleBoolToBool, bool, type);
+      coerceThrowException(ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type),
+      	BOOLTOBOOL,
+      	e_applyRuleBoolToBool, bool, type, new ErrorInformation[] {new ErrorInformation(bool), new ErrorInformation(type)});
       return null;
     }
   }
@@ -819,8 +838,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleVariableReference) {
-      typeThrowException(VARIABLEREFERENCE,
-      	e_applyRuleVariableReference, varRef);
+      typeThrowException(ruleName("VariableReference") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " : " + "Type",
+      	VARIABLEREFERENCE,
+      	e_applyRuleVariableReference, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
       return null;
     }
   }
@@ -845,8 +865,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleVariable) {
-      vartypeThrowException(VARIABLE,
-      	e_applyRuleVariable, variable);
+      vartypeThrowException(ruleName("Variable") + stringRepForEnv(G) + " ||- " + stringRep(variable) + " : " + "Type",
+      	VARIABLE,
+      	e_applyRuleVariable, variable, new ErrorInformation[] {new ErrorInformation(variable)});
       return null;
     }
   }
@@ -879,9 +900,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretNumberLiteral) {
-      throwRuleFailedException(ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + "int",
+      interpretThrowException(ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + "int",
       	INTERPRETNUMBERLITERAL,
-      	e_applyRuleInterpretNumberLiteral, new ErrorInformation(number));
+      	e_applyRuleInterpretNumberLiteral, number, new ErrorInformation[] {new ErrorInformation(number)});
       return null;
     }
   }
@@ -900,9 +921,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretStringLiteral) {
-      throwRuleFailedException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "Object",
+      interpretThrowException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "Object",
       	INTERPRETSTRINGLITERAL,
-      	e_applyRuleInterpretStringLiteral, new ErrorInformation(string));
+      	e_applyRuleInterpretStringLiteral, string, new ErrorInformation[] {new ErrorInformation(string)});
       return null;
     }
   }
@@ -954,9 +975,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretBooleanLiteral) {
-      throwRuleFailedException(ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + "Boolean",
+      interpretThrowException(ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + "Boolean",
       	INTERPRETBOOLEANLITERAL,
-      	e_applyRuleInterpretBooleanLiteral, new ErrorInformation(bool));
+      	e_applyRuleInterpretBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
       return null;
     }
   }
@@ -976,9 +997,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretMinus) {
-      throwRuleFailedException(ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Integer",
+      interpretThrowException(ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Integer",
       	INTERPRETMINUS,
-      	e_applyRuleInterpretMinus, new ErrorInformation(plus));
+      	e_applyRuleInterpretMinus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
       return null;
     }
   }
@@ -1022,9 +1043,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretMultiOrDiv) {
-      throwRuleFailedException(ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + "Integer",
+      interpretThrowException(ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + "Integer",
       	INTERPRETMULTIORDIV,
-      	e_applyRuleInterpretMultiOrDiv, new ErrorInformation(multiOrDiv));
+      	e_applyRuleInterpretMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
       return null;
     }
   }
@@ -1077,9 +1098,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretArithmeticSigned) {
-      throwRuleFailedException(ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + "Integer",
+      interpretThrowException(ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + "Integer",
       	INTERPRETARITHMETICSIGNED,
-      	e_applyRuleInterpretArithmeticSigned, new ErrorInformation(signed));
+      	e_applyRuleInterpretArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
       return null;
     }
   }
@@ -1112,9 +1133,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretAndOr) {
-      throwRuleFailedException(ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + "Boolean",
+      interpretThrowException(ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + "Boolean",
       	INTERPRETANDOR,
-      	e_applyRuleInterpretAndOr, new ErrorInformation(andOr));
+      	e_applyRuleInterpretAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
       return null;
     }
   }
@@ -1177,9 +1198,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretBooleanNegation) {
-      throwRuleFailedException(ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + "Boolean",
+      interpretThrowException(ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + "Boolean",
       	INTERPRETBOOLEANNEGATION,
-      	e_applyRuleInterpretBooleanNegation, new ErrorInformation(neg));
+      	e_applyRuleInterpretBooleanNegation, neg, new ErrorInformation[] {new ErrorInformation(neg)});
       return null;
     }
   }
@@ -1212,9 +1233,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretComparison) {
-      throwRuleFailedException(ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
+      interpretThrowException(ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
       	INTERPRETCOMPARISON,
-      	e_applyRuleInterpretComparison, new ErrorInformation(comparison));
+      	e_applyRuleInterpretComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
       return null;
     }
   }
@@ -1264,9 +1285,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretEquals) {
-      throwRuleFailedException(ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
+      interpretThrowException(ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
       	INTERPRETEQUALS,
-      	e_applyRuleInterpretEquals, new ErrorInformation(comparison));
+      	e_applyRuleInterpretEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
       return null;
     }
   }
@@ -1305,9 +1326,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretPlus) {
-      throwRuleFailedException(ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Object",
+      interpretThrowException(ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Object",
       	INTERPRETPLUS,
-      	e_applyRuleInterpretPlus, new ErrorInformation(plus));
+      	e_applyRuleInterpretPlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
       return null;
     }
   }
@@ -1363,9 +1384,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretVariableRefenrence) {
-      throwRuleFailedException(ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + "Object",
+      interpretThrowException(ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + "Object",
       	INTERPRETVARIABLEREFENRENCE,
-      	e_applyRuleInterpretVariableRefenrence, new ErrorInformation(varRef));
+      	e_applyRuleInterpretVariableRefenrence, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
       return null;
     }
   }
