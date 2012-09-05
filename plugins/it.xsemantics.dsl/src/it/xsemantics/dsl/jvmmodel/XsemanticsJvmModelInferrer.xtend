@@ -489,26 +489,23 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
 			rule.errorInformationType.serialize(rule, b)
 			b.append('''(«source», «feature»))''')
-		} else if (rule.judgmentDescription.error != null) {
-			b.append('''
-			«rule.judgmentDescription.throwExceptionMethod»("", «rule.ruleIssueString»,
-				e_«rule.applyRuleName», «rule.inputParameterNames», new ''')
-			rule.newTypeRef(typeof(ErrorInformation)).serialize(rule, b)
-			b.append('''[] {})''')
 		} else {
 			b.append('''
-			«throwRuleFailedExceptionMethod»(«rule.errorForRule»,
+			«rule.judgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
 				«rule.ruleIssueString»,
-				e_«rule.applyRuleName»''')
+				e_«rule.applyRuleName», «rule.inputParameterNames»''')
 			rule.errorInformationArgs(b)
 			b.append(''')''')
 		}
 	}
-	
+
 	def errorInformationArgs(Rule rule, ITreeAppendable b) {
 		val inputEObjects = rule.inputEObjectParams
-		if (!inputEObjects.empty)
-			b.append(", ")
+		b.append(", ")
+		b.append('''new ''')
+		rule.newTypeRef(typeof(ErrorInformation)).serialize(rule, b)
+		b.append('''[] {''')
+
 		val iter = inputEObjects.iterator
 		val errInfoType = rule.errorInformationType.type
 		while (iter.hasNext) {
@@ -518,8 +515,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			if (iter.hasNext)
 				b.append(", ")
 		}
+
+		b.append('''}''')
 	}
-	
+
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
 			'''applyRule«rule.toJavaClassName»'''.toString,

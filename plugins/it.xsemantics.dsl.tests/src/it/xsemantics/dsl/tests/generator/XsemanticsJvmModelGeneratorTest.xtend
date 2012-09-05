@@ -1642,8 +1642,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTypeEObject) {
-      typeThrowException("", TYPEEOBJECT,
-      	e_applyRuleTypeEObject, o, new ErrorInformation[] {});
+      typeThrowException(ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+      	TYPEEOBJECT,
+      	e_applyRuleTypeEObject, o, new ErrorInformation[] {new ErrorInformation(o)});
       return null;
     }
   }
@@ -1711,9 +1712,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleSubtypeEClass) {
-      throwRuleFailedException(ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+      subtypeThrowException(ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
       	SUBTYPEECLASS,
-      	e_applyRuleSubtypeEClass, new ErrorInformation(left), new ErrorInformation(right));
+      	e_applyRuleSubtypeEClass, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
       return null;
     }
   }
