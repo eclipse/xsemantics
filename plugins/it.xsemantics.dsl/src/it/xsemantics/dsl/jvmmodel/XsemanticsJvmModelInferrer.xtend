@@ -350,8 +350,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-//			if (judgmentDescription.^override)
-//				annotations += judgmentDescription.toAnnotation(typeof(Override))
+			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
 
 			exceptions += judgmentDescription.ruleFailedExceptionType
 			

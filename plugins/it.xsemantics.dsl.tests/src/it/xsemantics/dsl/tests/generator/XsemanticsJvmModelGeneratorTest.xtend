@@ -1541,6 +1541,7 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
     }
   }
   
+  @Override
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject obj, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
@@ -1556,6 +1557,7 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
     }
   }
   
+  @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c1, final EClass c2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(c1);
