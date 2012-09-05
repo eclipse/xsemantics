@@ -90,7 +90,7 @@ public Result2<EObject,EStructuralFeature> type(final EClass c) {
 	def testThrowExceptionMethodNull() {
 		testFiles.testSimpleRule.
 			parseAndAssertNoError.judgmentDescriptions.get(0).
-				compileThrowExceptionMethod.assertNull
+				compileThrowExceptionMethod.assertNotNull
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public Result2<EObject,EStructuralFeature> type(final EClass c) {
 				assertGeneratedMember
 (
 '''
-protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _plus = ("this " + c);
     String _plus_1 = (_plus + " made an error!");
@@ -236,7 +236,7 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
 	def testErrorInformationArgsWithOneEObjectArg() {
 		testFiles.testRuleWithTwoOutputParams.assertErrorInformationArgs
 (
-''', new ErrorInformation(eClass)'''
+'''new ErrorInformation(eClass)'''
 )
 	}
 	
@@ -244,7 +244,7 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
 	def testErrorInformationArgsWithTwoEObjectArg() {
 		testFiles.testSimpleRule.assertErrorInformationArgs
 (
-''', new ErrorInformation(eClass), new ErrorInformation(object)'''
+'''new ErrorInformation(eClass), new ErrorInformation(object)'''
 )
 	}
 
@@ -261,9 +261,9 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
 		testFiles.testSimpleRule.assertFinalThrow
 (
 '''
-throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
 	ECLASSEOBJECT,
-	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object))'''
+	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)})'''
 )
 	}
 	
@@ -272,8 +272,9 @@ throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- "
 		testFiles.testRuleJudgmentDescriptionsWithErrorSpecification.assertFinalThrow
 (
 '''
-typeThrowException(TESTRULE,
-	e_applyRuleTestRule, o)'''
+typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+	TESTRULE,
+	e_applyRuleTestRule, o, new ErrorInformation[] {new ErrorInformation(o)})'''
 )
 	}
 	
@@ -293,7 +294,7 @@ EClass _eClass_1 = object.eClass();
 EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
 EStructuralFeature feature = _eContainingFeature;
 throwRuleFailedException(error,
-	ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature));'''
+	ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature))'''
 )
 	}
 	
@@ -313,9 +314,9 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
       	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));
+      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
       return null;
     }
   }'''
@@ -358,7 +359,8 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 	def assertErrorInformationArgs(CharSequence prog, CharSequence expected) {
 		val a = createTestAppendable
 		inferrer.errorInformationArgs(prog.parseAndAssertNoError.rules.get(0), a)
-		assertEqualsStrings(expected, a.toString.trim)
+		assertEqualsStrings(
+		''', new ErrorInformation[] {«expected»}''', a.toString.trim)
 	}
 	
 	def assertFinalThrow(CharSequence prog, CharSequence expected) {

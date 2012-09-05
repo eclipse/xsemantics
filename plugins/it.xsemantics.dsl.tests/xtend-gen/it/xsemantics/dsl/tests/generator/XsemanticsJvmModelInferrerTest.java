@@ -144,7 +144,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
     JudgmentDescription _get = _judgmentDescriptions.get(0);
     JvmOperation _compileThrowExceptionMethod = this.inferrer.compileThrowExceptionMethod(_get);
-    Assert.assertNull(_compileThrowExceptionMethod);
+    Assert.assertNotNull(_compileThrowExceptionMethod);
   }
   
   @Test
@@ -155,7 +155,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     JudgmentDescription _get = _judgmentDescriptions.get(0);
     JvmOperation _compileThrowExceptionMethod = this.inferrer.compileThrowExceptionMethod(_get);
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {");
+    _builder.append("protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {");
     _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
@@ -393,7 +393,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   public void testErrorInformationArgsWithOneEObjectArg() {
     CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(", new ErrorInformation(eClass)");
+    _builder.append("new ErrorInformation(eClass)");
     this.assertErrorInformationArgs(_testRuleWithTwoOutputParams, _builder);
   }
   
@@ -401,7 +401,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   public void testErrorInformationArgsWithTwoEObjectArg() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(", new ErrorInformation(eClass), new ErrorInformation(object)");
+    _builder.append("new ErrorInformation(eClass), new ErrorInformation(object)");
     this.assertErrorInformationArgs(_testSimpleRule, _builder);
   }
   
@@ -416,13 +416,13 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   public void testFinalThrowWithNoErrorInformation() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("throwRuleFailedException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
+    _builder.append("typeThrowException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ECLASSEOBJECT,");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object))");
+    _builder.append("e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)})");
     this.assertFinalThrow(_testSimpleRule, _builder);
   }
   
@@ -430,10 +430,13 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   public void testFinalThrowRuleJudgmentErrorInformation() {
     CharSequence _testRuleJudgmentDescriptionsWithErrorSpecification = this.testFiles.testRuleJudgmentDescriptionsWithErrorSpecification();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("typeThrowException(TESTRULE,");
+    _builder.append("typeThrowException(ruleName(\"TestRule\") + stringRepForEnv(G) + \" |- \" + stringRep(o) + \" : \" + \"EClass\",");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("e_applyRuleTestRule, o)");
+    _builder.append("TESTRULE,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("e_applyRuleTestRule, o, new ErrorInformation[] {new ErrorInformation(o)})");
     this.assertFinalThrow(_testRuleJudgmentDescriptionsWithErrorSpecification, _builder);
   }
   
@@ -464,7 +467,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("throwRuleFailedException(error,");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature));");
+    _builder.append("ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature))");
     this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
   }
   
@@ -500,13 +503,13 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("} catch (Exception e_applyRuleEClassEObject) {");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("throwRuleFailedException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
+    _builder.append("typeThrowException(ruleName(\"EClassEObject\") + stringRepForEnv(G) + \" |- \" + stringRep(eClass) + \" : \" + stringRep(object),");
     _builder.newLine();
     _builder.append("      \t");
     _builder.append("ECLASSEOBJECT,");
     _builder.newLine();
     _builder.append("      \t");
-    _builder.append("e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));");
+    _builder.append("e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("return null;");
@@ -571,9 +574,13 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     EList<Rule> _rules = _parseAndAssertNoError.getRules();
     Rule _get = _rules.get(0);
     this.inferrer.errorInformationArgs(_get, a);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(", new ErrorInformation[] {");
+    _builder.append(expected, "");
+    _builder.append("}");
     String _string = a.toString();
     String _trim = _string.trim();
-    this.assertEqualsStrings(expected, _trim);
+    this.assertEqualsStrings(_builder, _trim);
   }
   
   public void assertFinalThrow(final CharSequence prog, final CharSequence expected) {
