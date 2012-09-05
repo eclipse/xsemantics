@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
+import it.xsemantics.runtime.ErrorInformation
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -150,9 +151,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			ts.judgmentDescriptions.forEach [
 				j |
 				members += j.compileInternalMethod
-				val throwExceptionMethod = j.compileThrowExceptionMethod
-				if (throwExceptionMethod != null)
-					members += throwExceptionMethod
+				members += j.compileThrowExceptionMethod
 			]
 			
 			ts.rules.forEach [
@@ -343,9 +342,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compileThrowExceptionMethod(JudgmentDescription judgmentDescription) {
 		val errorSpecification = judgmentDescription.error
-		if (errorSpecification == null) {
-			return null
-		}
 		
 		judgmentDescription.toMethod(
 			judgmentDescription.throwExceptionMethod.toString,
@@ -359,6 +355,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
 			exceptions += judgmentDescription.ruleFailedExceptionType
 			
+			parameters += judgmentDescription.toParameter("_error", 
+				judgmentDescription.newTypeRef(typeof(String))
+			)
 			parameters += judgmentDescription.toParameter("_issue", 
 				judgmentDescription.newTypeRef(typeof(String))
 			)
@@ -367,17 +366,26 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			)
    			parameters += judgmentDescription.inputParameters
    			
+   			parameters += judgmentDescription.toParameter("_errorInformations",
+   				judgmentDescription.newTypeRef(typeof(ErrorInformation)).
+   					addArrayTypeDimension
+   			)
+   			
    			body = [
-   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
-				val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
-				val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
-   				
-   				it.newLine
-   				it.append('''
-   					«throwRuleFailedExceptionMethod»(«error»,
-   						_issue, _ex, new ''')
-				judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
-				it.append('''(«source», «feature»));''')
+   				if (errorSpecification != null) {
+	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
+					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
+					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
+	   				
+	   				it.newLine
+	   				it.append('''
+	   					«throwRuleFailedExceptionMethod»(«error»,
+	   						_issue, _ex, new ''')
+					judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
+					it.append('''(«source», «feature»));''')
+				} else {
+					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+				}
    			]
 		]
 	}
@@ -480,11 +488,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					«throwRuleFailedExceptionMethod»(«error»,
    						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
 			rule.errorInformationType.serialize(rule, b)
-			b.append('''(«source», «feature»));''')
+			b.append('''(«source», «feature»))''')
 		} else if (rule.judgmentDescription.error != null) {
 			b.append('''
-			«rule.judgmentDescription.throwExceptionMethod»(«rule.ruleIssueString»,
-				e_«rule.applyRuleName», «rule.inputParameterNames»)''')
+			«rule.judgmentDescription.throwExceptionMethod»("", «rule.ruleIssueString»,
+				e_«rule.applyRuleName», «rule.inputParameterNames», new ''')
+			rule.newTypeRef(typeof(ErrorInformation)).serialize(rule, b)
+			b.append('''[] {})''')
 		} else {
 			b.append('''
 			«throwRuleFailedExceptionMethod»(«rule.errorForRule»,

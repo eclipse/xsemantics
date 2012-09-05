@@ -1607,7 +1607,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _plus = ("this " + c);
     String _plus_1 = (_plus + " made an error!");
@@ -1630,6 +1630,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EObject left, final EObject right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1638,8 +1642,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTypeEObject) {
-      typeThrowException(TYPEEOBJECT,
-      	e_applyRuleTypeEObject, o);
+      typeThrowException("", TYPEEOBJECT,
+      	e_applyRuleTypeEObject, o, new ErrorInformation[] {});
       return null;
     }
   }
@@ -1665,7 +1669,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
       EStructuralFeature feature = _eContainingFeature;
       throwRuleFailedException(error,
-      	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));;
+      	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));
       return null;
     }
   }
@@ -1687,7 +1691,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       String error = "Unhandled case";
       EObject source = left;
       throwRuleFailedException(error,
-      	SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));;
+      	SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));
       return null;
     }
   }

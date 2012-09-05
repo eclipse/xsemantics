@@ -4032,7 +4032,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {");
+    _builder.append("protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {");
     _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
@@ -4098,6 +4098,17 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
+    _builder.append("protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EObject left, final EObject right, final ErrorInformation[] _errorInformations) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("throwRuleFailedException(_error, _issue, _ex, _errorInformations);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
     _builder.append("protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {");
     _builder.newLine();
     _builder.append("    ");
@@ -4122,10 +4133,10 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("} catch (Exception e_applyRuleTypeEObject) {");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("typeThrowException(TYPEEOBJECT,");
+    _builder.append("typeThrowException(\"\", TYPEEOBJECT,");
     _builder.newLine();
     _builder.append("      \t");
-    _builder.append("e_applyRuleTypeEObject, o);");
+    _builder.append("e_applyRuleTypeEObject, o, new ErrorInformation[] {});");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("return null;");
@@ -4199,7 +4210,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("throwRuleFailedException(error,");
     _builder.newLine();
     _builder.append("      \t");
-    _builder.append("TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));;");
+    _builder.append("TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("return null;");
@@ -4261,7 +4272,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("throwRuleFailedException(error,");
     _builder.newLine();
     _builder.append("      \t");
-    _builder.append("SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));;");
+    _builder.append("SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("return null;");

@@ -18,6 +18,7 @@ import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
+import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
@@ -233,12 +234,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 EList<JvmMember> _members = it.getMembers();
                 JvmOperation _compileInternalMethod = XsemanticsJvmModelInferrer.this.compileInternalMethod(j);
                 XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileInternalMethod);
-                final JvmOperation throwExceptionMethod = XsemanticsJvmModelInferrer.this.compileThrowExceptionMethod(j);
-                boolean _notEquals = (!Objects.equal(throwExceptionMethod, null));
-                if (_notEquals) {
-                  EList<JvmMember> _members_1 = it.getMembers();
-                  XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, throwExceptionMethod);
-                }
+                EList<JvmMember> _members_1 = it.getMembers();
+                JvmOperation _compileThrowExceptionMethod = XsemanticsJvmModelInferrer.this.compileThrowExceptionMethod(j);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileThrowExceptionMethod);
               }
             };
           IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_2, _function_6);
@@ -647,10 +645,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     JvmOperation _xblockexpression = null;
     {
       final ErrorSpecification errorSpecification = judgmentDescription.getError();
-      boolean _equals = Objects.equal(errorSpecification, null);
-      if (_equals) {
-        return null;
-      }
       CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(judgmentDescription);
       String _string = _throwExceptionMethod.toString();
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -661,40 +655,58 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(judgmentDescription, String.class);
-            JvmFormalParameter _parameter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_issue", _newTypeRef);
+            JvmFormalParameter _parameter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_error", _newTypeRef);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
             EList<JvmFormalParameter> _parameters_1 = it.getParameters();
-            JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(judgmentDescription);
-            JvmFormalParameter _parameter_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_ex", _exceptionType);
+            JvmTypeReference _newTypeRef_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(judgmentDescription, String.class);
+            JvmFormalParameter _parameter_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_issue", _newTypeRef_1);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_1);
             EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+            JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(judgmentDescription);
+            JvmFormalParameter _parameter_2 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_ex", _exceptionType);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _parameter_2);
+            EList<JvmFormalParameter> _parameters_3 = it.getParameters();
             List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(judgmentDescription);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _inputParameters);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_3, _inputParameters);
+            EList<JvmFormalParameter> _parameters_4 = it.getParameters();
+            JvmTypeReference _newTypeRef_2 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(judgmentDescription, ErrorInformation.class);
+            JvmTypeReference _addArrayTypeDimension = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef_2);
+            JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(judgmentDescription, "_errorInformations", _addArrayTypeDimension);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_4, _parameter_3);
             final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
                 public void apply(final ITreeAppendable it) {
-                  final String error = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it);
-                  final String source = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it);
-                  final String feature = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it);
-                  it.newLine();
-                  StringConcatenation _builder = new StringConcatenation();
-                  CharSequence _throwRuleFailedExceptionMethod = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
-                  _builder.append(_throwRuleFailedExceptionMethod, "");
-                  _builder.append("(");
-                  _builder.append(error, "");
-                  _builder.append(",");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  _builder.append("_issue, _ex, new ");
-                  it.append(_builder);
-                  JvmTypeReference _errorInformationType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.errorInformationType(judgmentDescription);
-                  XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_errorInformationType, judgmentDescription, it);
-                  StringConcatenation _builder_1 = new StringConcatenation();
-                  _builder_1.append("(");
-                  _builder_1.append(source, "");
-                  _builder_1.append(", ");
-                  _builder_1.append(feature, "");
-                  _builder_1.append("));");
-                  it.append(_builder_1);
+                  boolean _notEquals = (!Objects.equal(errorSpecification, null));
+                  if (_notEquals) {
+                    final String error = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it);
+                    final String source = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it);
+                    final String feature = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it);
+                    it.newLine();
+                    StringConcatenation _builder = new StringConcatenation();
+                    CharSequence _throwRuleFailedExceptionMethod = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+                    _builder.append(_throwRuleFailedExceptionMethod, "");
+                    _builder.append("(");
+                    _builder.append(error, "");
+                    _builder.append(",");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t");
+                    _builder.append("_issue, _ex, new ");
+                    it.append(_builder);
+                    JvmTypeReference _errorInformationType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.errorInformationType(judgmentDescription);
+                    XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_errorInformationType, judgmentDescription, it);
+                    StringConcatenation _builder_1 = new StringConcatenation();
+                    _builder_1.append("(");
+                    _builder_1.append(source, "");
+                    _builder_1.append(", ");
+                    _builder_1.append(feature, "");
+                    _builder_1.append("));");
+                    it.append(_builder_1);
+                  } else {
+                    StringConcatenation _builder_2 = new StringConcatenation();
+                    CharSequence _throwRuleFailedExceptionMethod_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+                    _builder_2.append(_throwRuleFailedExceptionMethod_1, "");
+                    _builder_2.append("(_error, _issue, _ex, _errorInformations);");
+                    it.append(_builder_2);
+                  }
                 }
               };
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
@@ -953,7 +965,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         _builder_1.append(source, "");
         _builder_1.append(", ");
         _builder_1.append(feature, "");
-        _builder_1.append("));");
+        _builder_1.append("))");
         ITreeAppendable _append = b.append(_builder_1);
         _xblockexpression = (_append);
       }
@@ -964,53 +976,62 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       ErrorSpecification _error_1 = _judgmentDescription.getError();
       boolean _notEquals_1 = (!Objects.equal(_error_1, null));
       if (_notEquals_1) {
-        StringConcatenation _builder = new StringConcatenation();
-        JudgmentDescription _judgmentDescription_1 = this._xsemanticsUtils.judgmentDescription(rule);
-        CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(_judgmentDescription_1);
-        _builder.append(_throwExceptionMethod, "");
-        _builder.append("(");
-        String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
-        _builder.append(_ruleIssueString, "");
-        _builder.append(",");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("e_");
-        CharSequence _applyRuleName = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
-        _builder.append(_applyRuleName, "	");
-        _builder.append(", ");
-        String _inputParameterNames = this._xsemanticsGeneratorExtensions.inputParameterNames(rule);
-        _builder.append(_inputParameterNames, "	");
-        _builder.append(")");
-        ITreeAppendable _append = b.append(_builder);
-        _xifexpression_1 = _append;
-      } else {
         ITreeAppendable _xblockexpression_1 = null;
         {
+          StringConcatenation _builder = new StringConcatenation();
+          JudgmentDescription _judgmentDescription_1 = this._xsemanticsUtils.judgmentDescription(rule);
+          CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(_judgmentDescription_1);
+          _builder.append(_throwExceptionMethod, "");
+          _builder.append("(\"\", ");
+          String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
+          _builder.append(_ruleIssueString, "");
+          _builder.append(",");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("e_");
+          CharSequence _applyRuleName = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
+          _builder.append(_applyRuleName, "	");
+          _builder.append(", ");
+          String _inputParameterNames = this._xsemanticsGeneratorExtensions.inputParameterNames(rule);
+          _builder.append(_inputParameterNames, "	");
+          _builder.append(", new ");
+          b.append(_builder);
+          JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(rule, ErrorInformation.class);
+          this._typeReferenceSerializer.serialize(_newTypeRef, rule, b);
           StringConcatenation _builder_1 = new StringConcatenation();
-          CharSequence _throwRuleFailedExceptionMethod = this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
-          _builder_1.append(_throwRuleFailedExceptionMethod, "");
-          _builder_1.append("(");
-          String _errorForRule = this._xsemanticsGeneratorExtensions.errorForRule(rule);
-          _builder_1.append(_errorForRule, "");
-          _builder_1.append(",");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("\t");
-          String _ruleIssueString_1 = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
-          _builder_1.append(_ruleIssueString_1, "	");
-          _builder_1.append(",");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("\t");
-          _builder_1.append("e_");
-          CharSequence _applyRuleName_1 = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
-          _builder_1.append(_applyRuleName_1, "	");
-          b.append(_builder_1);
-          this.errorInformationArgs(rule, b);
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append(")");
-          ITreeAppendable _append_1 = b.append(_builder_2);
-          _xblockexpression_1 = (_append_1);
+          _builder_1.append("[] {})");
+          ITreeAppendable _append = b.append(_builder_1);
+          _xblockexpression_1 = (_append);
         }
         _xifexpression_1 = _xblockexpression_1;
+      } else {
+        ITreeAppendable _xblockexpression_2 = null;
+        {
+          StringConcatenation _builder = new StringConcatenation();
+          CharSequence _throwRuleFailedExceptionMethod = this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+          _builder.append(_throwRuleFailedExceptionMethod, "");
+          _builder.append("(");
+          String _errorForRule = this._xsemanticsGeneratorExtensions.errorForRule(rule);
+          _builder.append(_errorForRule, "");
+          _builder.append(",");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
+          _builder.append(_ruleIssueString, "	");
+          _builder.append(",");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("e_");
+          CharSequence _applyRuleName = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
+          _builder.append(_applyRuleName, "	");
+          b.append(_builder);
+          this.errorInformationArgs(rule, b);
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append(")");
+          ITreeAppendable _append = b.append(_builder_1);
+          _xblockexpression_2 = (_append);
+        }
+        _xifexpression_1 = _xblockexpression_2;
       }
       _xifexpression = _xifexpression_1;
     }
