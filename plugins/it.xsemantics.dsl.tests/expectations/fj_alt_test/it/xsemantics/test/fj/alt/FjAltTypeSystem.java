@@ -378,6 +378,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<ClassType> classtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -388,7 +392,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void classtypeThrowException(final String _issue, final Exception _ex, final Expression expression) throws RuleFailedException {
+  protected void classtypeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(expression);
     String _plus = (_stringRep + " has not a class type");
@@ -408,6 +412,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void typedeclThrowException(final String _error, final String _issue, final Exception _ex, final TypedElement element, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
     	checkParamsNotNull(left, right);
@@ -418,7 +426,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void subtypeThrowException(final String _issue, final Exception _ex, final Type left, final Type right) throws RuleFailedException {
+  protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _stringRep = this.stringRep(left);
     String _plus = (_stringRep + " is not a subtype of ");
@@ -440,6 +448,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void equalstypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Boolean> subtypesequenceInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
     try {
     	checkParamsNotNull(owner, expressions, elements);
@@ -448,6 +460,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     	sneakyThrowRuleFailedException(_e_subtypesequence);
     	return null;
     }
+  }
+  
+  protected void subtypesequenceThrowException(final String _error, final String _issue, final Exception _ex, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   protected Result<Boolean> subclassInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
@@ -460,7 +476,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void subclassThrowException(final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) throws RuleFailedException {
+  protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _name = candidate.getName();
     String _plus = (_name + " is not a subclass of ");
@@ -484,6 +500,10 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void checkThrowException(final String _error, final String _issue, final Exception _ex, final EObject obj, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Type> typedeclImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -492,9 +512,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTTypedElement) {
-      throwRuleFailedException(ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + "Type",
+      typedeclThrowException(ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + "Type",
       	TTYPEDELEMENT,
-      	e_applyRuleTTypedElement, new ErrorInformation(typedElement));
+      	e_applyRuleTTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
       return null;
     }
   }
@@ -513,9 +533,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTThis) {
-      throwRuleFailedException(ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + "ClassType",
+      typeThrowException(ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + "ClassType",
       	TTHIS,
-      	e_applyRuleTThis, new ErrorInformation(_this));
+      	e_applyRuleTThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
       return null;
     }
   }
@@ -535,9 +555,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTNew) {
-      throwRuleFailedException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
+      typeThrowException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
       	TNEW,
-      	e_applyRuleTNew, new ErrorInformation(newExp));
+      	e_applyRuleTNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
       return null;
     }
   }
@@ -556,9 +576,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTParamRef) {
-      throwRuleFailedException(ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + "Type",
+      typeThrowException(ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + "Type",
       	TPARAMREF,
-      	e_applyRuleTParamRef, new ErrorInformation(paramref));
+      	e_applyRuleTParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
       return null;
     }
   }
@@ -583,9 +603,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTStringConstant) {
-      throwRuleFailedException(ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + "BasicType",
+      typeThrowException(ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + "BasicType",
       	TSTRINGCONSTANT,
-      	e_applyRuleTStringConstant, new ErrorInformation(s));
+      	e_applyRuleTStringConstant, s, new ErrorInformation[] {new ErrorInformation(s)});
       return null;
     }
   }
@@ -609,9 +629,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTIntConstant) {
-      throwRuleFailedException(ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + "BasicType",
+      typeThrowException(ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + "BasicType",
       	TINTCONSTANT,
-      	e_applyRuleTIntConstant, new ErrorInformation(i));
+      	e_applyRuleTIntConstant, i, new ErrorInformation[] {new ErrorInformation(i)});
       return null;
     }
   }
@@ -630,9 +650,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTBoolConstant) {
-      throwRuleFailedException(ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + "BasicType",
+      typeThrowException(ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + "BasicType",
       	TBOOLCONSTANT,
-      	e_applyRuleTBoolConstant, new ErrorInformation(b));
+      	e_applyRuleTBoolConstant, b, new ErrorInformation[] {new ErrorInformation(b)});
       return null;
     }
   }
@@ -662,9 +682,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTSelection) {
-      throwRuleFailedException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
+      typeThrowException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
       	TSELECTION,
-      	e_applyRuleTSelection, new ErrorInformation(selection));
+      	e_applyRuleTSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
       return null;
     }
   }
@@ -689,9 +709,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTCast) {
-      throwRuleFailedException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
+      typeThrowException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
       	TCAST,
-      	e_applyRuleTCast, new ErrorInformation(cast));
+      	e_applyRuleTCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
       return null;
     }
   }
@@ -710,8 +730,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTExpressionClassType) {
-      classtypeThrowException(TEXPRESSIONCLASSTYPE,
-      	e_applyRuleTExpressionClassType, expression);
+      classtypeThrowException(ruleName("TExpressionClassType") + stringRepForEnv(G) + " ||~ " + stringRep(expression) + " : " + "ClassType",
+      	TEXPRESSIONCLASSTYPE,
+      	e_applyRuleTExpressionClassType, expression, new ErrorInformation[] {new ErrorInformation(expression)});
       return null;
     }
   }
@@ -735,8 +756,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleBasicSubtyping) {
-      subtypeThrowException(BASICSUBTYPING,
-      	e_applyRuleBasicSubtyping, left, right);
+      subtypeThrowException(ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+      	BASICSUBTYPING,
+      	e_applyRuleBasicSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
       return null;
     }
   }
@@ -761,8 +783,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleClassSubtyping) {
-      subtypeThrowException(CLASSSUBTYPING,
-      	e_applyRuleClassSubtyping, left, right);
+      subtypeThrowException(ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+      	CLASSSUBTYPING,
+      	e_applyRuleClassSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
       return null;
     }
   }
@@ -784,8 +807,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleSubclassing) {
-      subclassThrowException(SUBCLASSING,
-      	e_applyRuleSubclassing, class1, class2);
+      subclassThrowException(ruleName("Subclassing") + stringRepForEnv(G) + " |- " + stringRep(class1) + " <| " + stringRep(class2),
+      	SUBCLASSING,
+      	e_applyRuleSubclassing, class1, class2, new ErrorInformation[] {new ErrorInformation(class1), new ErrorInformation(class2)});
       return null;
     }
   }
@@ -842,7 +866,7 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
         " are not comparable");
       String error = _plus_2;
       throwRuleFailedException(error,
-      	TYPEEQUALS, e_applyRuleTypeEquals, new ErrorInformation(null, null));;
+      	TYPEEQUALS, e_applyRuleTypeEquals, new ErrorInformation(null, null));
       return null;
     }
   }
@@ -862,9 +886,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleBasicEquals) {
-      throwRuleFailedException(ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
+      equalstypeThrowException(ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
       	BASICEQUALS,
-      	e_applyRuleBasicEquals, new ErrorInformation(left), new ErrorInformation(right));
+      	e_applyRuleBasicEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
       return null;
     }
   }
@@ -889,9 +913,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleClassEquals) {
-      throwRuleFailedException(ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
+      equalstypeThrowException(ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
       	CLASSEQUALS,
-      	e_applyRuleClassEquals, new ErrorInformation(left), new ErrorInformation(right));
+      	e_applyRuleClassEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
       return null;
     }
   }
@@ -916,9 +940,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleSubtypeSequence) {
-      throwRuleFailedException(ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(onwer) + " : " + stringRep(expressions) + " << " + stringRep(typedElements),
+      subtypesequenceThrowException(ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(onwer) + " : " + stringRep(expressions) + " << " + stringRep(typedElements),
       	SUBTYPESEQUENCE,
-      	e_applyRuleSubtypeSequence, new ErrorInformation(onwer));
+      	e_applyRuleSubtypeSequence, onwer, expressions, typedElements, new ErrorInformation[] {new ErrorInformation(onwer)});
       return null;
     }
   }
@@ -965,9 +989,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckConstant) {
-      throwRuleFailedException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
+      checkThrowException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
       	CHECKCONSTANT,
-      	e_applyRuleCheckConstant, new ErrorInformation(_const));
+      	e_applyRuleCheckConstant, _const, new ErrorInformation[] {new ErrorInformation(_const)});
       return null;
     }
   }
@@ -985,9 +1009,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckTypedElement) {
-      throwRuleFailedException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
+      checkThrowException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
       	CHECKTYPEDELEMENT,
-      	e_applyRuleCheckTypedElement, new ErrorInformation(typedElement));
+      	e_applyRuleCheckTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
       return null;
     }
   }
@@ -1005,9 +1029,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckParamRef) {
-      throwRuleFailedException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
+      checkThrowException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
       	CHECKPARAMREF,
-      	e_applyRuleCheckParamRef, new ErrorInformation(paramref));
+      	e_applyRuleCheckParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
       return null;
     }
   }
@@ -1025,9 +1049,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckThis) {
-      throwRuleFailedException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
+      checkThrowException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
       	CHECKTHIS,
-      	e_applyRuleCheckThis, new ErrorInformation(_this));
+      	e_applyRuleCheckThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
       return null;
     }
   }
@@ -1052,9 +1076,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckMethod) {
-      throwRuleFailedException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
+      checkThrowException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
       	CHECKMETHOD,
-      	e_applyRuleCheckMethod, new ErrorInformation(method));
+      	e_applyRuleCheckMethod, method, new ErrorInformation[] {new ErrorInformation(method)});
       return null;
     }
   }
@@ -1095,9 +1119,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckNew) {
-      throwRuleFailedException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
+      checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
       	CHECKNEW,
-      	e_applyRuleCheckNew, new ErrorInformation(newExp));
+      	e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
       return null;
     }
   }
@@ -1131,9 +1155,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckSelection) {
-      throwRuleFailedException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
+      checkThrowException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
       	CHECKSELECTION,
-      	e_applyRuleCheckSelection, new ErrorInformation(selection));
+      	e_applyRuleCheckSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
       return null;
     }
   }
@@ -1175,9 +1199,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckCast) {
-      throwRuleFailedException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
+      checkThrowException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
       	CHECKCAST,
-      	e_applyRuleCheckCast, new ErrorInformation(cast));
+      	e_applyRuleCheckCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
       return null;
     }
   }
@@ -1214,9 +1238,9 @@ public class FjAltTypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleCheckClass) {
-      throwRuleFailedException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
+      checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
       	CHECKCLASS,
-      	e_applyRuleCheckClass, new ErrorInformation(cl));
+      	e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
       return null;
     }
   }

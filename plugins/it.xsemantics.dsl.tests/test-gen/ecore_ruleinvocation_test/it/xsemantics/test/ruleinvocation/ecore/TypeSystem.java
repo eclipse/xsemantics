@@ -145,6 +145,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c1, final EObject o1, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<EClass> etypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o2) {
     try {
     	checkParamsNotNull(o2);
@@ -153,6 +157,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	sneakyThrowRuleFailedException(_e_etype);
     	return null;
     }
+  }
+  
+  protected void etypeThrowException(final String _error, final String _issue, final Exception _ex, final EObject o2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   protected Result<EClass> etype2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o3) {
@@ -165,6 +173,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void etype2ThrowException(final String _error, final String _issue, final Exception _ex, final EObject o3, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result2<EClass,EStructuralFeature> etype3Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o4) {
     try {
     	checkParamsNotNull(o4);
@@ -173,6 +185,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	sneakyThrowRuleFailedException(_e_etype3);
     	return null;
     }
+  }
+  
+  protected void etype3ThrowException(final String _error, final String _issue, final Exception _ex, final EObject o4, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   protected Result<EClass> etypeWithVarDeclAsOutputArgInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
@@ -185,6 +201,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void etypeWithVarDeclAsOutputArgThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -193,9 +213,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      throwRuleFailedException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
       	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, new ErrorInformation(eClass), new ErrorInformation(object));
+      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
       return null;
     }
   }
@@ -224,9 +244,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEClassEClass) {
-      throwRuleFailedException(ruleName("EClassEClass") + stringRepForEnv(G) + " |- " + stringRep(eClass1) + " : " + stringRep(eClass2),
+      typeThrowException(ruleName("EClassEClass") + stringRepForEnv(G) + " |- " + stringRep(eClass1) + " : " + stringRep(eClass2),
       	ECLASSECLASS,
-      	e_applyRuleEClassEClass, new ErrorInformation(eClass1), new ErrorInformation(eClass2));
+      	e_applyRuleEClassEClass, eClass1, eClass2, new ErrorInformation[] {new ErrorInformation(eClass1), new ErrorInformation(eClass2)});
       return null;
     }
   }
@@ -261,9 +281,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      throwRuleFailedException(ruleName("EObjectEClass") + stringRepForEnv(G) + " ||- " + stringRep(eObject) + " : " + "EClass",
+      etypeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " ||- " + stringRep(eObject) + " : " + "EClass",
       	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, new ErrorInformation(eObject));
+      	e_applyRuleEObjectEClass, eObject, new ErrorInformation[] {new ErrorInformation(eObject)});
       return null;
     }
   }
@@ -282,9 +302,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEObjectEClass2) {
-      throwRuleFailedException(ruleName("EObjectEClass2") + stringRepForEnv(G) + " |~ " + stringRep(eObject) + " : " + "EClass",
+      etype2ThrowException(ruleName("EObjectEClass2") + stringRepForEnv(G) + " |~ " + stringRep(eObject) + " : " + "EClass",
       	EOBJECTECLASS2,
-      	e_applyRuleEObjectEClass2, new ErrorInformation(eObject));
+      	e_applyRuleEObjectEClass2, eObject, new ErrorInformation[] {new ErrorInformation(eObject)});
       return null;
     }
   }
@@ -308,9 +328,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEObjectEClassEStructuralFeature) {
-      throwRuleFailedException(ruleName("EObjectEClassEStructuralFeature") + stringRepForEnv(G) + " |~ " + stringRep(eObject) + " : " + "EClass" + " : " + "EStructuralFeature",
+      etype3ThrowException(ruleName("EObjectEClassEStructuralFeature") + stringRepForEnv(G) + " |~ " + stringRep(eObject) + " : " + "EClass" + " : " + "EStructuralFeature",
       	EOBJECTECLASSESTRUCTURALFEATURE,
-      	e_applyRuleEObjectEClassEStructuralFeature, new ErrorInformation(eObject));
+      	e_applyRuleEObjectEClassEStructuralFeature, eObject, new ErrorInformation[] {new ErrorInformation(eObject)});
       return null;
     }
   }
@@ -337,9 +357,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleWithVarDeclAsOutputArg) {
-      throwRuleFailedException(ruleName("WithVarDeclAsOutputArg") + stringRepForEnv(G) + " ||~ " + stringRep(o) + " : " + "EClass",
+      etypeWithVarDeclAsOutputArgThrowException(ruleName("WithVarDeclAsOutputArg") + stringRepForEnv(G) + " ||~ " + stringRep(o) + " : " + "EClass",
       	WITHVARDECLASOUTPUTARG,
-      	e_applyRuleWithVarDeclAsOutputArg, new ErrorInformation(o));
+      	e_applyRuleWithVarDeclAsOutputArg, o, new ErrorInformation[] {new ErrorInformation(o)});
       return null;
     }
   }

@@ -75,7 +75,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _plus = ("cannot find " + c);
     String _plus_1 = (_plus + "\'s EClass");
@@ -94,7 +94,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected void subtypeThrowException(final String _issue, final Exception _ex, final EClass left, final EClass right) throws RuleFailedException {
+  protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass left, final EClass right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
     String _name = left.getName();
     String _plus = (_name + " is not a subtype of ");
@@ -116,8 +116,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, obj);
+      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + "EClass",
+      	EOBJECTECLASS,
+      	e_applyRuleEObjectEClass, obj, new ErrorInformation[] {new ErrorInformation(obj)});
       return null;
     }
   }
@@ -146,7 +147,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       EStructuralFeature _eContainingFeature = obj.eContainingFeature();
       EStructuralFeature feature = _eContainingFeature;
       throwRuleFailedException(error,
-      	EOBJECTECLASSWITHERRORSPECIFICATION, e_applyRuleEObjectEClassWithErrorSpecification, new ErrorInformation(source, feature));;
+      	EOBJECTECLASSWITHERRORSPECIFICATION, e_applyRuleEObjectEClassWithErrorSpecification, new ErrorInformation(source, feature));
       return null;
     }
   }
@@ -167,8 +168,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEClassSubtyping) {
-      subtypeThrowException(ECLASSSUBTYPING,
-      	e_applyRuleEClassSubtyping, candidate, superClass);
+      subtypeThrowException(ruleName("EClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(candidate) + " <: " + stringRep(superClass),
+      	ECLASSSUBTYPING,
+      	e_applyRuleEClassSubtyping, candidate, superClass, new ErrorInformation[] {new ErrorInformation(candidate), new ErrorInformation(superClass)});
       return null;
     }
   }
