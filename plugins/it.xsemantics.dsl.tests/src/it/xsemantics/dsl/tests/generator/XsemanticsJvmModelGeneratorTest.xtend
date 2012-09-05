@@ -1524,6 +1524,211 @@ null
 		)
 	}
 
+	@Test
+	def testErrorSpecifications() {
+		testFiles.testErrorSpecifications.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String TYPEEOBJECT = "it.xsemantics.test.rules.TypeEObject";
+  
+  public final static String TYPEECLASS = "it.xsemantics.test.rules.TypeEClass";
+  
+  public final static String SUBTYPEEOBJECT = "it.xsemantics.test.rules.SubtypeEObject";
+  
+  public final static String SUBTYPEECLASS = "it.xsemantics.test.rules.SubtypeEClass";
+  
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+    subtypeDispatcher = buildPolymorphicDispatcher1(
+    	"subtypeImpl", 4, "|-", "<:");
+  }
+  
+  public Result<EClass> type(final EObject c) {
+    return type(new RuleEnvironment(), null, c);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject c) {
+    return type(_environment_, null, c);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
+    try {
+    	return typeInternal(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  public Result<Boolean> subtype(final EObject left, final EObject right) {
+    return subtype(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final EObject left, final EObject right) {
+    return subtype(_environment_, null, left, right);
+  }
+  
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject left, final EObject right) {
+    try {
+    	return subtypeInternal(_environment_, _trace_, left, right);
+    } catch (Exception _e_subtype) {
+    	return resultForFailure(_e_subtype);
+    }
+  }
+  
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
+    try {
+    	checkParamsNotNull(c);
+    	return typeDispatcher.invoke(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _issue, final Exception _ex, final EObject c) throws RuleFailedException {
+    
+    String _plus = ("this " + c);
+    String _plus_1 = (_plus + " made an error!");
+    String error = _plus_1;
+    EObject source = c;
+    EClass _eClass = c.eClass();
+    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, feature));
+  }
+  
+  protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject left, final EObject right) {
+    try {
+    	checkParamsNotNull(left, right);
+    	return subtypeDispatcher.invoke(_environment_, _trace_, left, right);
+    } catch (Exception _e_subtype) {
+    	sneakyThrowRuleFailedException(_e_subtype);
+    	return null;
+    }
+  }
+  
+  protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<EClass> _result_ = applyRuleTypeEObject(G, _subtrace_, o);
+      addToTrace(_trace_, ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleTypeEObject) {
+      typeThrowException(TYPEEOBJECT,
+      	e_applyRuleTypeEObject, o);
+      return null;
+    }
+  }
+  
+  protected Result<EClass> applyRuleTypeEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    
+    EClass _eClass = o.eClass();
+    return new Result<EClass>(_eClass);
+  }
+  
+  protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<EClass> _result_ = applyRuleTypeEClass(G, _subtrace_, c);
+      addToTrace(_trace_, ruleName("TypeEClass") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleTypeEClass) {
+      
+      String error = "unexpected error!";
+      EObject source = c;
+      EClass _eClass = c.eClass();
+      EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+      EStructuralFeature feature = _eContainingFeature;
+      throwRuleFailedException(error,
+      	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));;
+      return null;
+    }
+  }
+  
+  protected Result<EClass> applyRuleTypeEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
+    
+    return new Result<EClass>(c);
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleSubtypeEObject(G, _subtrace_, left, right);
+      addToTrace(_trace_, ruleName("SubtypeEObject") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleSubtypeEObject) {
+      
+      String error = "Unhandled case";
+      EObject source = left;
+      throwRuleFailedException(error,
+      	SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));;
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubtypeEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
+    
+    /* fail */
+    throwForExplicitFail();
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleSubtypeEClass(G, _subtrace_, left, right);
+      addToTrace(_trace_, ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleSubtypeEClass) {
+      throwRuleFailedException(ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+      	SUBTYPEECLASS,
+      	e_applyRuleSubtypeEClass, new ErrorInformation(left), new ErrorInformation(right));
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubtypeEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
+    
+    boolean _isSuperTypeOf = right.isSuperTypeOf(left);
+    /* right.isSuperTypeOf(left) */
+    if (!Boolean.valueOf(_isSuperTypeOf)) {
+      sneakyThrowRuleFailedException("right.isSuperTypeOf(left)");
+    }
+    return new Result<Boolean>(true);
+  }
+}
+''',
+null
+		)
+	}
+
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		

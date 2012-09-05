@@ -1720,4 +1720,40 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testErrorSpecifications() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		// the judgment has an error specification
+		type |- EObject c : output EClass
+			error "this " + c + " made an error!"
+			source c
+			feature c.eClass.eContainingFeature
+		
+		subtype |- EObject left <: EObject right
+	}
+	
+	axiom TypeEObject
+		G |- EObject o : o.eClass
+	
+	// this rule has its own error specification
+	axiom TypeEClass
+		G |- EClass c : c
+			error "unexpected error!"
+			source c
+			feature c.eClass.eContainingFeature
+	
+	// this rule has its own error specification
+	rule SubtypeEObject
+		G |- EObject left <: EObject right
+			error "Unhandled case"
+			source left
+	from { fail }
+	
+	rule SubtypeEClass
+		G |- EClass left <: EClass right
+	from { right.isSuperTypeOf(left) }
+	'''
+	
 }
