@@ -3738,6 +3738,31 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testOverrideJudgmentWithDifferentParamNames() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// type judgment already defined in inherited system");
+    _builder.newLine();
+    _builder.append("// and we override it, with different param names");
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override subtype |- EClass left <: EClass right");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testForJudgmentParameters() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testFileWithImports = this.testFileWithImports();

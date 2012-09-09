@@ -1579,6 +1579,78 @@ null
 	}
 
 	@Test
+	def testOverrideJudgmentWithDifferentParamNames() {
+		loadBaseSystems.
+			parseWithBaseSystemAndAssertNoError(
+				testFiles.testOverrideJudgmentWithDifferentParamNames
+			).
+		assertCorrectJavaCodeGeneration(
+"ExtendedTypeSystemWithJudgmentOverride",
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.test.ExtendedTypeSystem2;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {
+  private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
+  
+  public ExtendedTypeSystemWithJudgmentOverride() {
+    init();
+  }
+  
+  public void init() {
+    subtypeDispatcher = buildPolymorphicDispatcher1(
+    	"subtypeImpl", 4, "|-", "<:");
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final EClass left, final EClass right) {
+    return subtype(new RuleEnvironment(), null, left, right);
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final EClass left, final EClass right) {
+    return subtype(_environment_, null, left, right);
+  }
+  
+  @Override
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
+    try {
+    	return subtypeInternal(_environment_, _trace_, left, right);
+    } catch (Exception _e_subtype) {
+    	return resultForFailure(_e_subtype);
+    }
+  }
+  
+  @Override
+  protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
+    try {
+    	checkParamsNotNull(left, right);
+    	return subtypeDispatcher.invoke(_environment_, _trace_, left, right);
+    } catch (Exception _e_subtype) {
+    	sneakyThrowRuleFailedException(_e_subtype);
+    	return null;
+    }
+  }
+  
+  @Override
+  protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass left, final EClass right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+}
+''',
+null
+		)
+	}
+
+	@Test
 	def testErrorSpecifications() {
 		testFiles.testErrorSpecifications.assertCorrectJavaCodeGeneration(
 '''

@@ -1684,6 +1684,19 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testOverrideJudgmentWithDifferentParamNames() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+
+	// type judgment already defined in inherited system
+	// and we override it, with different param names
+	judgments {
+		override subtype |- EClass left <: EClass right
+	}
+	'''
+
 	def testForJudgmentParameters() '''
 	«testFileWithImports»
 	import org.eclipse.emf.ecore.*
