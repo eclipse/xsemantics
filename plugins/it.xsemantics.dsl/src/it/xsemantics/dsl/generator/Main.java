@@ -57,8 +57,12 @@ public class Main {
 	}
 
 	public List<Issue> runGenerator(String string) {
-		// load the resource
 		ResourceSet set = resourceSetProvider.get();
+		return runGenerator(string, set);
+	}
+
+	public List<Issue> runGenerator(String string, ResourceSet set) {
+		// load the resource
 		Resource resource = set.getResource(URI.createURI(string), true);
 
 		// validate the resource

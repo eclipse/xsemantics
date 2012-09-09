@@ -1,6 +1,6 @@
 // alternative type system for FJ using external auxiliary functions
 
-system it.xsemantics.test.fj.alt.FjAltTypeSystem
+system it.xsemantics.test.fj.alt.FjAltTypeSystem extends it.xsemantics.test.fj.first.FjFirstTypeSystem
 
 import it.xsemantics.example.fj.fj.*
 import it.xsemantics.example.fj.util.*
@@ -19,107 +19,16 @@ import java.util.*
 inject FjAuxiliaryFunctions fjAux
 
 judgments {
-	type |- Expression expression : output Type
-	classtype ||~ Expression expression : output ClassType
+	override classtype ||~ Expression expression : output ClassType
 		error stringRep(expression) + " has not a class type"
 		source expression
-	typedecl ||- TypedElement element : output Type
-	subtype |- Type left <: Type right
+	override subtype |- Type left <: Type right
 		error stringRep(left) + " is not a subtype of " + stringRep(right)
 		source left
-	equalstype |- Type left ~~ Type right
-	subtypesequence |- Expression owner : List<Expression> expressions << List<? extends TypedElement> elements
-	subclass |- Class candidate <| Class superclass
+	override subclass |- Class candidate <| Class superclass
 		error candidate.name + " is not a subclass of " + superclass.name
 		source candidate
 		feature FjPackage::eINSTANCE.class_Name
-	check |- EObject obj
-}
-
-axiom TTypedElement
-	G ||- TypedElement typedElement : typedElement.type
-
-axiom TThis
-	G |- This _this : env(G, 'this', ClassType)
-
-axiom TNew
-	G |- New newExp : newExp.type
-
-rule TParamRef derives
-	G |- ParamRef paramref : Type type
-from {
-	G ||- paramref.parameter : type
-}
-
-// you can manually create the BasicType with EMF FjFactory...
-axiom TStringConstant
-	G |- StringConstant s : { 
-			val result = FjFactory::eINSTANCE.createBasicType();
-			result.basic = 'String'
-			result
-		}
-
-// ...or use static utility methods...
-axiom TIntConstant
-	G |- IntConstant i : FjTypeUtils::createIntType
-
-// ...or closures
-axiom TBoolConstant
-	G |- BoolConstant b : 
-	[ 
-		it.basic='boolean'
-		it
-	].apply(FjFactory::eINSTANCE.createBasicType())
-
-rule TSelection derives
-	G |- Selection selection : Type type
-from {
-	G ||- selection.message : type
-}
-// more direct alternative
-//axiom TSelection
-//	G |- Selection selection : selection.message.type
-
-axiom TCast
-	G |- Cast cast : cast.type
-
-rule TExpressionClassType
-	G ||~ Expression expression : ClassType classType
-from {
-	G |- expression : classType
-}
-
-rule BasicSubtyping
-	derives G |- BasicType left <: BasicType right
-from {
-	left.basic.equals(right.basic)
-}
-
-rule ClassSubtyping
-	derives G |- ClassType left <: ClassType right
-from {
-	G |- left.classref <| right.classref
-}
-
-rule Subclassing
-	derives G |- Class class1 <| Class class2
-from {
-	class1 == class2
-	or
-	// every class is subclass of Object
-	class2.name == "Object"
-	or
-	{
-		class1.superclass != null
-		G |- class1.superclass <| class2
-	}
-	/* 
-	{
-		// variant non recursive
-		val superClasses = new AuxiliaryFunctions().getSuperclasses(class1)
-		superClasses.contains(class2)
-	}
-	*/
 }
 
 rule TypeEquals
@@ -132,63 +41,7 @@ from {
 	fail
 }
 
-rule BasicEquals
-	derives G |- BasicType left ~~ BasicType right
-from {
-	left.basic.equals(right.basic)
-}
-
-rule ClassEquals
-	derives G |- ClassType left ~~ ClassType right
-from {
-	left.classref == right.classref
-}
-
-rule SubtypeSequence derives
-	G |- Expression onwer : List<Expression> expressions << List<TypedElement> typedElements
-from {
-	expressions.size == typedElements.size
-	val typedElementsIterator = typedElements.iterator
-	for (exp : expressions) {
-		var Type expressionType
-		G |- exp : expressionType
-		var Type typedElementType
-		G ||- typedElementsIterator.next : typedElementType
-		G |- expressionType <: typedElementType
-	}
-}
-
-// a Constant is always OK
-axiom CheckConstant
-	G |- Constant _const
-
-// a TypedElement is always OK
-axiom CheckTypedElement
-	G |- TypedElement typedElement
-
-// a ParamRef is always OK
-axiom CheckParamRef
-	G |- ParamRef paramref
-
-rule CheckThis
-	G |- This _this
-from {
-	env(G, 'this', ClassType) != null
-}
-
-rule CheckMethod derives
-	G |- Method method
-from {
-	val typeForThis = FjTypeUtils::createClassType(
-		EcoreUtil2::getContainerOfType(method, typeof(Class))
-	)
-	var Type bodyType
-	G, 'this' <- typeForThis |- method.body.expression : bodyType
-	G |- bodyType <: method.type
-	G, 'this' <- typeForThis |- method.body.expression
-}
-
-rule CheckNew derives
+override rule CheckNew derives
 	G |- New newExp
 from {
 	var fields = fjAux.getFields(newExp.type.classref)
@@ -197,36 +50,7 @@ from {
 	newExp.args.forEach [ G |- it ]
 }
 
-rule CheckSelection derives
-	G |- Selection selection
-from {
-	// check receiver
-	G |- selection.receiver
-	// check message if it's a method call
-	val message = selection.message
-	switch (message) {
-		Method: { 
-			G |- selection : selection.args << message.params
-			// check all subexpressions (arguments)
-			for (arg : selection.args) {
-				G |- arg
-			}
-		}
-	}
-}
-
-rule CheckCast
-	G |- Cast cast
-from {
-	var Type expType
-	G |- cast.expression : expType
-	
-	G |- cast.type <: expType
-	or
-	G |- expType <: cast.type
-}
-
-rule CheckClass
+override rule CheckClass
 	G |- Class cl
 from {
 	if (cl.superclass != null) {

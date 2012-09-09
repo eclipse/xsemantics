@@ -118,11 +118,8 @@ failed: A is not a subtype of B
  BasicEquals: [] |- int ~~ int
  BasicEquals: [] |- String ~~ String'''
 
-	override validateCheckNewWrongArgNum()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new B(20, 'bar', 1) : [20, 'bar', 1] << [int i;, String s;]" at Program.main->New.args[2]->New'''
-
 	override validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new A('foo') : ['foo'] << [int i;]" at Program.main->New'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new A('foo') : ['foo'] << [int i;]" at Program.main->New'''
 
 	override validateCyclicClassHierarchy()
 '''Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'

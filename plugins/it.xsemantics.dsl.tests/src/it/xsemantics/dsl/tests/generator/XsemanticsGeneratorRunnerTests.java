@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.Test;
 
@@ -19,6 +20,8 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	protected static final String VALIDATION_SUBDIR = "validation/";
 
 	Main generator;
+	
+	XtextResourceSet resourceSet;
 
 	static {
 		System.setProperty("line.separator", "\n");
@@ -29,6 +32,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		super.setUp();
 		generator = get(Main.class);
 		generator.setOutputPath(null);
+		resourceSet = get(XtextResourceSet.class);
 	}
 
 	protected void setGeneratorOutputPath(String outputPath) {
@@ -98,6 +102,11 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 
 	@Test
 	public void testGeneratorOnFjAlt() throws Exception {
+		// make sure to load fj_first_test.xsemantics ...
+		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
+				+ "fj_first_test.xsemantics", "fj_first_test/",
+				"it/xsemantics/test/fj/first/", "FjFirstTypeSystem");
+		// since fj_alt_test.xsemantics extends fj_first_test.xsemantics
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "fj_alt_test.xsemantics", "fj_alt_test/",
 				"it/xsemantics/test/fj/alt/", "FjAltTypeSystem");
@@ -180,7 +189,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	}
 
 	protected void runGenerator(String inputFile, boolean expectErrors) {
-		List<Issue> issues = generator.runGenerator(inputFile);
+		List<Issue> issues = generator.runGenerator(inputFile, resourceSet);
 		if (expectErrors)
 			assertTrue("no errors found", !issues.isEmpty());
 		else {

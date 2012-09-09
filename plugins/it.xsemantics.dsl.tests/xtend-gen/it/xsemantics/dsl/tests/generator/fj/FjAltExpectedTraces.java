@@ -299,15 +299,9 @@ public class FjAltExpectedTraces extends FjExpectedTraces {
     return _builder;
   }
   
-  public CharSequence validateCheckNewWrongArgNum() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.SubtypeSequence \"failed: SubtypeSequence: [] |- new B(20, \'bar\', 1) : [20, \'bar\', 1] << [int i;, String s;]\" at Program.main->New.args[2]->New");
-    return _builder;
-  }
-  
   public CharSequence validateCheckNewWrongSubtypeSimpler() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.SubtypeSequence \"failed: SubtypeSequence: [] |- new A(\'foo\') : [\'foo\'] << [int i;]\" at Program.main->New");
+    _builder.append("Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence \"failed: SubtypeSequence: [] |- new A(\'foo\') : [\'foo\'] << [int i;]\" at Program.main->New");
     return _builder;
   }
   
