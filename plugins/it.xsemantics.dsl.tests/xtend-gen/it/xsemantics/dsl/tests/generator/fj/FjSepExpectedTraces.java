@@ -415,7 +415,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("CheckConstant: [this <- B] |- 100");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("CheckMethodOverridePredicate: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }");
+    _builder.append("MethodOverride: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("BasicEquals: [] |- int ~~ int");

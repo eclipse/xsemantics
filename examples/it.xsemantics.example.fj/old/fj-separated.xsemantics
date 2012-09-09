@@ -1,8 +1,8 @@
 /*
- * A version of the FJ system where type computation involves also
- * type checking.
+ * A version of the FJ system where type computation and
+ * checking are separated.
  */
-system it.xsemantics.example.fj.typing.FjTypeSystem
+system it.xsemantics.example.fj.typing.FjSepTypeSystem
 
 import it.xsemantics.example.fj.fj.*
 import it.xsemantics.example.fj.util.*
@@ -40,24 +40,14 @@ judgments {
 	subtypesequence |- Expression owner ~> List<Expression> expressions << List<? extends TypedElement> elements
 		error "invalid arguments for expected parameters"
 		source owner
+	check |- EObject obj
 }
 
 axiom TThis
 	G |- This _this : env(G, 'this', ClassType)
 
-rule TNew
+axiom TNew
 	G |- New newExp : newExp.type
-from {
-	var fields = getAll(
-		newExp.type.classref,
-		FjPackage::eINSTANCE.class_Members,
-		FjPackage::eINSTANCE.class_Superclass,
-		typeof(Field)
-	)
-	// we want the superclasses' fields first
-	Collections::reverse(fields)
-	G |- newExp ~> newExp.args << fields
-}
 
 axiom TParamRef 
 	G |- ParamRef paramref : paramref.parameter.type
@@ -82,28 +72,11 @@ axiom TBoolConstant
 		it
 	].apply(FjFactory::eINSTANCE.createBasicType())
 
-rule TSelection
+axiom TSelection
 	G |- Selection selection : selection.message.type
-from {
-	G |- selection.receiver : var ClassType receiverType
-	// check message if it's a method call
-	val message = selection.message
-	switch (message) {
-		Method: { 
-			G |- selection ~> selection.args << message.params
-		}
-	}
-}
 
-rule TCast
+axiom TCast
 	G |- Cast cast : cast.type
-from {
-	G |- cast.expression : var Type expType
-	
-	G |- cast.type <: expType
-	or
-	G |- expType <: cast.type
-}
 
 rule TExpressionClassType
 	G |~ Expression expression : ClassType classType
@@ -173,8 +146,7 @@ from {
 }
 
 rule SubtypeSequence derives
-	G |- Expression owner ~> 
-		List<Expression> expressions << List<TypedElement> typedElements
+	G |- Expression owner ~> List<Expression> expressions << List<TypedElement> typedElements
 from {
 	expressions.size == typedElements.size
 	or
@@ -182,14 +154,89 @@ from {
 		error "expected " + typedElements.size + " arguments, but got " +
 			expressions.size
 		source owner 
-	
+
 	val typedElementsIterator = typedElements.iterator
 	for (exp : expressions) {
 		G |- exp <| typedElementsIterator.next.type
 	}
 }
 
-rule MethodOverride
+// a Constant is always OK
+axiom CheckConstant
+	G |- Constant _const
+
+// a TypedElement is always OK
+axiom CheckTypedElement
+	G |- TypedElement typedElement
+
+// a ParamRef is always OK
+axiom CheckParamRef
+	G |- ParamRef paramref
+
+rule CheckThis
+	G |- This _this
+from {
+	env(G, 'this', ClassType) != null
+}
+
+rule CheckMethod derives
+	G |- Method method
+from {
+	val typeForThis = FjTypeUtils::createClassType(
+		EcoreUtil2::getContainerOfType(method, typeof(Class))
+	)
+	var Type bodyType
+	G, 'this' <- typeForThis |- method.body.expression : bodyType
+	G |- bodyType <: method.type
+	G, 'this' <- typeForThis |- method.body.expression
+}
+
+rule CheckNew derives
+	G |- New newExp
+from {
+	var fields = getAll(
+		newExp.type.classref,
+		FjPackage::eINSTANCE.class_Members,
+		FjPackage::eINSTANCE.class_Superclass,
+		typeof(Field)
+	)
+	// we want the superclasses' fields first
+	Collections::reverse(fields)
+	G |- newExp ~> newExp.args << fields
+	// check all subexpressions (arguments)
+	newExp.args.forEach [ G |- it ]
+}
+
+rule CheckSelection derives
+	G |- Selection selection
+from {
+	// check receiver
+	G |- selection.receiver
+	// check message if it's a method call
+	val message = selection.message
+	switch (message) {
+		Method: { 
+			G |- selection ~> selection.args << message.params
+			// check all subexpressions (arguments)
+			for (arg : selection.args) {
+				G |- arg
+			}
+		}
+	}
+}
+
+rule CheckCast
+	G |- Cast cast
+from {
+	var Type expType
+	G |- cast.expression : expType
+	
+	G |- cast.type <: expType
+	or
+	G |- expType <: cast.type
+}
+
+rule CheckMethodOverridePredicate
 	G ||- Method current ~~ Method previous
 from {
 	current.name != previous.name
@@ -211,25 +258,14 @@ from {
 	}
 }
 
-// checkrules (for the generated validator)
-
-checkrule CheckMethodBody for
-	Method method
+rule CheckClass
+	G |- Class cl
 from {
-	val typeForThis = FjTypeUtils::createClassType(
-		EcoreUtil2::getContainerOfType(method, typeof(Class))
-	)
-	'this' <- typeForThis |- method.body.expression <| method.type
-}
-
-checkrule CheckField for
-	Field field
-from {
-	val clazz = field.eContainer as Class
+	cl.members.forEach [ G |- it ]
 	
-	if (clazz.superclass != null) {
+	if (cl.superclass != null) {
 		var inheritedFields = getAll(
-			clazz.superclass,
+			cl.superclass,
 			FjPackage::eINSTANCE.class_Members,
 			FjPackage::eINSTANCE.class_Superclass,
 			typeof(Field)
@@ -237,23 +273,13 @@ from {
 		// make sure no duplicate fields in the hierarchy
 		inheritedFields.forEach [
 			inheritedField |
-			if (field.name == inheritedField.name) {
-				fail
-					error "field already defined in superclass " +
-						stringRep(inheritedField.eContainer)
+			for (field : fjAux.selectFields(cl)) {
+				field.name != inheritedField.name
 			}
 		]
-	}
-}
-
-checkrule CheckMethodOverride for
-	Method method
-from {
-	val clazz = method.eContainer as Class
-	
-	if (clazz.superclass != null) {
+		
 		var inheritedMethods = getAll(
-			clazz.superclass,
+			cl.superclass,
 			FjPackage::eINSTANCE.class_Members,
 			FjPackage::eINSTANCE.class_Superclass,
 			typeof(Method)
@@ -261,11 +287,41 @@ from {
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			fjAux.selectMethods(clazz).forEach [
-				empty ||- it ~~ inheritedMethod
+			fjAux.selectMethods(cl).forEach [
+				G ||- it ~~ inheritedMethod
 			]
 		]
 	}
+}
+
+checkrule CheckClassOk for
+	Class clazz
+from {
+	empty |- clazz
+}
+
+checkrule CheckMain for
+	Program program
+from {
+	program.main == null // nothing to check
+	or
+	empty |- program.main
+}
+
+checkrule CheckMethodBody for
+	Method method
+from {
+}
+
+checkrule CheckField for
+	Field field
+from {
+}
+
+checkrule CheckMethodOverride for
+	Method method
+from {
+
 }
 
 checkrule CheckClassHierachyNotCyclic for
@@ -283,12 +339,4 @@ from {
 			error "Cyclic hierarchy for " + cl.name
 			source cl
 	}
-}
-
-checkrule CheckMain for
-	Program program
-from {
-	program.main == null // nothing to check
-	or
-	empty |- program.main : var Type mainType
 }

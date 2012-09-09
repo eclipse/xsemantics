@@ -5,55 +5,59 @@ import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.Program;
 import it.xsemantics.example.fj.typing.FjSepTypeSystem;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
+import it.xsemantics.example.fj.typing.validation.FjTypeSystemValidator;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xtext.validation.Check;
 
 /**
  * A version of the FJ system where type computation and
  * checking are separated.
  */
-public class FjSepTypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
+public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
   @Inject
   protected FjSepTypeSystem xsemanticsSystem;
   
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
   @Check
   public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkClassOk(clazz),
     		clazz);
   }
   
   @Check
   public void checkMain(final Program program) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkMain(program),
     		program);
   }
   
   @Check
   public void checkMethodBody(final Method method) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkMethodBody(method),
     		method);
   }
   
   @Check
   public void checkField(final Field field) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkField(field),
     		field);
   }
   
   @Check
   public void checkMethodOverride(final Method method) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkMethodOverride(method),
     		method);
   }
   
   @Check
   public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkClassHierachyNotCyclic(cl),
     		cl);
   }

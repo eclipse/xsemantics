@@ -166,7 +166,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   TIntConstant: [this <- B] |- 100 : int
   BasicSubtyping: [] |- int <: int
   CheckConstant: [this <- B] |- 100
- CheckMethodOverridePredicate: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }
+ MethodOverride: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }
   BasicEquals: [] |- int ~~ int
   BasicEquals: [] |- String ~~ String'''
 
