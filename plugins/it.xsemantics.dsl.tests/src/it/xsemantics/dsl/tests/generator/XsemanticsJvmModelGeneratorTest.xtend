@@ -1143,7 +1143,9 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
     init();
   }
   
+  @Override
   public void init() {
+    super.init();
     type2Dispatcher = buildPolymorphicDispatcher1(
     	"type2Impl", 4, "||-", ":");
   }
@@ -1331,7 +1333,9 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
     init();
   }
   
+  @Override
   public void init() {
+    super.init();
     
   }
   
@@ -1493,7 +1497,9 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
     init();
   }
   
+  @Override
   public void init() {
+    super.init();
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
     subtypeDispatcher = buildPolymorphicDispatcher1(
@@ -1613,7 +1619,9 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
     init();
   }
   
+  @Override
   public void init() {
+    super.init();
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "|-", "<:");
   }

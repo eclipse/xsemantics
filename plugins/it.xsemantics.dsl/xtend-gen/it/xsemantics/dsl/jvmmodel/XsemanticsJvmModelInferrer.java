@@ -404,8 +404,23 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   public JvmOperation genInit(final XsemanticsSystem ts) {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
+          JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
+          boolean _notEquals = (!Objects.equal(_superSystem, null));
+          if (_notEquals) {
+            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Override.class);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          }
           final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
               public void apply(final ITreeAppendable it) {
+                JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
+                boolean _notEquals = (!Objects.equal(_superSystem, null));
+                if (_notEquals) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("super.init();");
+                  _builder.newLine();
+                  it.append(_builder);
+                }
                 EList<JudgmentDescription> _judgmentDescriptions = ts.getJudgmentDescriptions();
                 final Function1<JudgmentDescription,CharSequence> _function = new Function1<JudgmentDescription,CharSequence>() {
                     public CharSequence apply(final JudgmentDescription desc) {

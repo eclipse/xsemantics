@@ -232,7 +232,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def genInit(XsemanticsSystem ts) {
    		ts.toMethod("init", null) [
+   			if (ts.superSystem != null)
+   				annotations += ts.toAnnotation(typeof(Override))
+   			
    			body = [
+   				if (ts.superSystem != null)
+   					it.append('''
+   					super.init();
+   					''')
+
    				it.append(
 	   				ts.
 	   				judgmentDescriptions.map([ 
