@@ -1280,6 +1280,7 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.ExtendedTypeSystem2;
 import it.xsemantics.test.validation.ExtendedTypeSystemValidator;
 import org.eclipse.emf.ecore.EObject;
@@ -1289,9 +1290,12 @@ public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
   @Inject
   protected ExtendedTypeSystem2 xsemanticsSystem;
   
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
   @Check
   public void checkEObject(final EObject o) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkEObject(o),
     		o);
   }
@@ -1437,6 +1441,7 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.ExtendedTypeSystemWithRuleOverride;
 import it.xsemantics.test.validation.ExtendedTypeSystem2Validator;
 import org.eclipse.emf.ecore.EObject;
@@ -1446,10 +1451,13 @@ public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSys
   @Inject
   protected ExtendedTypeSystemWithRuleOverride xsemanticsSystem;
   
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
   @Override
   @Check
   public void checkEObject(final EObject o) {
-    generateErrors(
+    errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkEObject(o),
     		o);
   }
@@ -1860,6 +1868,52 @@ null
 		)
 	}
 
+	@Test
+	def testSystemExtendsSystemWithValidatorExtends() {
+		testFiles.testBaseSystemWithValidatorExtends.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithValidatorExtends
+			).
+		assertCorrectJavaCodeGeneration(
+"ExtendedTypeSystem",
+null,
+'''
+package it.xsemantics.test.validation;
+
+import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
+import it.xsemantics.test.ExtendedTypeSystem;
+import it.xsemantics.test.validation.TypeSystemValidator;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
+
+public class ExtendedTypeSystemValidator extends TypeSystemValidator {
+  @Inject
+  protected ExtendedTypeSystem xsemanticsSystem;
+  
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
+  @Override
+  @Check
+  public void checkEObject(final EObject o) {
+    errorGenerator.generateErrors(this, 
+    	xsemanticsSystem.checkEObject(o),
+    		o);
+  }
+  
+  @Check
+  public void checkEClass(final EClass o) {
+    errorGenerator.generateErrors(this, 
+    	xsemanticsSystem.checkEClass(o),
+    		o);
+  }
+}
+'''
+		)
+	}
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		

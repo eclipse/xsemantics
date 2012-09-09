@@ -303,7 +303,7 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore).
 				parseWithBaseSystem(testFiles.testSystemExtendsExtendedTypeSystem).
 					allSuperSystemDefinitions
-		// due to the cycle the initial type system appears to
+		// due to the cycle the initial type system appears twice
 		Assert::assertEquals(3, superSystems.size)
 	}
 

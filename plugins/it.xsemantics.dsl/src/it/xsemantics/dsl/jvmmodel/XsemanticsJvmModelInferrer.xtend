@@ -12,11 +12,13 @@ import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
@@ -31,8 +33,6 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
-import it.xsemantics.runtime.ErrorInformation
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -54,7 +54,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension TypeReferenceSerializer
 	
 	@Inject extension TypeReferences
-	
+
 	@Inject XbaseCompiler xbaseCompiler
 	
 	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
@@ -181,7 +181,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				visibility = JvmVisibility::PROTECTED
 			]
 			
-			if (ts.validatorExtends != null)
+			if (ts.extendsAnAbstractDeclarativeValidatorExplicitly)
 				members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
 					annotations += ts.toAnnotation(typeof(Inject))
 					visibility = JvmVisibility::PROTECTED
@@ -193,7 +193,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			]
 		]
    	}
-   	
+
+	def extendsAnAbstractDeclarativeValidatorExplicitly(XsemanticsSystem system) {
+		system.validatorExtends != null || system.superSystem != null
+	}
+
    	def genIssueField(Rule rule) {
    		val issueField = rule.toField(
 				rule.ruleIssueString,
@@ -592,9 +596,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				)
    			
    			body = [
+   				val relyOnErrorGenerator = 
+   					rule.containingSystem.extendsAnAbstractDeclarativeValidatorExplicitly
+   				
    				it.append(
    				'''
-				«IF rule.containingSystem.validatorExtends != null»errorGenerator.«ENDIF»generateErrors(«IF rule.containingSystem.validatorExtends != null»this, «ENDIF»
+				«IF relyOnErrorGenerator»errorGenerator.«ENDIF»generateErrors(«IF relyOnErrorGenerator»this, «ENDIF»
 					xsemanticsSystem.«rule.methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
    				)

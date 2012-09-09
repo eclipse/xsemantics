@@ -1768,5 +1768,41 @@ class XsemanticsTestFiles {
 		G |- EClass left <: EClass right
 	from { right.isSuperTypeOf(left) }
 	'''
+
+	def testBaseSystemWithValidatorExtends() '''
+	system it.xsemantics.test.TypeSystem
 	
+	validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator
+	
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EObject c : output EClass
+	}
+	
+	checkrule CheckEObject for
+		EObject o
+	from {
+		
+	}
+	'''
+
+	def testSystemExtendsSystemWithValidatorExtends() '''
+	system it.xsemantics.test.ExtendedTypeSystem
+		extends it.xsemantics.test.TypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	override checkrule CheckEObject for
+		EObject o
+	from {
+		
+	}
+	
+	checkrule CheckEClass for
+		EClass o
+	from {
+		
+	}
+	'''
 }

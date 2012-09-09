@@ -3919,4 +3919,74 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testBaseSystemWithValidatorExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("validatorExtends org.eclipse.xtext.validation.AbstractDeclarativeValidator");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject c : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testSystemExtendsSystemWithValidatorExtends() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystem");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.TypeSystem");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("override checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("checkrule CheckEClass for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EClass o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }
