@@ -3591,6 +3591,35 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testDuplicateCheckRuleOfTheSameKindFromSuperSystem() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// the checkrule is already defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("// so an \'override\' is mandatory");
+    _builder.newLine();
+    _builder.append("checkrule CheckEObject for");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("EObject o");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testNoRuleOfTheSameKindToOverride() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");

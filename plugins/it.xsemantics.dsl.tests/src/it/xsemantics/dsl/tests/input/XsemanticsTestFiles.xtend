@@ -1610,6 +1610,21 @@ class XsemanticsTestFiles {
 		G |- EObject c : c.eClass
 	'''
 
+	def testDuplicateCheckRuleOfTheSameKindFromSuperSystem() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// the checkrule is already defined in TypeSystem
+	// so an 'override' is mandatory
+	checkrule CheckEObject for
+		EObject o
+	from {
+		
+	}
+	'''
+
 	def testNoRuleOfTheSameKindToOverride() '''
 	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
 		extends it.xsemantics.test.ExtendedTypeSystem2

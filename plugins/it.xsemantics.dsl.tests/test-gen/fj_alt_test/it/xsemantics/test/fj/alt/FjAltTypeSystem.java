@@ -124,6 +124,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     }
   }
   
+  @Override
   public Result<Boolean> checkMain(final Program program) {
     try {
     	return checkMainInternal(null, program);
@@ -132,6 +133,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     
     /* program.main == null or empty |- program.main */
@@ -150,6 +152,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     return new Result<Boolean>(true);
   }
   
+  @Override
   public Result<Boolean> checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
     try {
     	return checkClassOkInternal(null, clazz);
@@ -158,62 +161,11 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkClassOkInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     
     /* empty |- clazz */
     checkInternal(emptyEnvironment(), _trace_, clazz);
-    return new Result<Boolean>(true);
-  }
-  
-  public Result<Boolean> checkMethodBody(final Method method) {
-    try {
-    	return checkMethodBodyInternal(null, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
-    }
-  }
-  
-  protected Result<Boolean> checkMethodBodyInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
-  }
-  
-  public Result<Boolean> checkField(final Field field) {
-    try {
-    	return checkFieldInternal(null, field);
-    } catch (Exception e) {
-    	return resultForFailure(e);
-    }
-  }
-  
-  protected Result<Boolean> checkFieldInternal(final RuleApplicationTrace _trace_, final Field field) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
-  }
-  
-  public Result<Boolean> checkMethodOverride(final Method method) {
-    try {
-    	return checkMethodOverrideInternal(null, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
-    }
-  }
-  
-  protected Result<Boolean> checkMethodOverrideInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
-  }
-  
-  public Result<Boolean> checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	return checkClassHierachyNotCyclicInternal(null, cl);
-    } catch (Exception e) {
-    	return resultForFailure(e);
-    }
-  }
-  
-  protected Result<Boolean> checkClassHierachyNotCyclicInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    
     return new Result<Boolean>(true);
   }
   

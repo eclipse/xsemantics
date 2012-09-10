@@ -1,8 +1,6 @@
 package it.xsemantics.test.fj.alt.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.example.fj.fj.Field;
-import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.Program;
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.fj.alt.FjAltTypeSystem;
@@ -16,6 +14,7 @@ public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
   
+  @Override
   @Check
   public void checkMain(final Program program) {
     errorGenerator.generateErrors(this, 
@@ -23,38 +22,11 @@ public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
     		program);
   }
   
+  @Override
   @Check
   public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
     errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkClassOk(clazz),
     		clazz);
-  }
-  
-  @Check
-  public void checkMethodBody(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodBody(method),
-    		method);
-  }
-  
-  @Check
-  public void checkField(final Field field) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkField(field),
-    		field);
-  }
-  
-  @Check
-  public void checkMethodOverride(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodOverride(method),
-    		method);
-  }
-  
-  @Check
-  public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassHierachyNotCyclic(cl),
-    		cl);
   }
 }

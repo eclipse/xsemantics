@@ -356,11 +356,14 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						.superSystemDefinition(system);
 				if (superSystem == null) {
 					error("Cannot override judgment without system 'extends'",
-							judgment, XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+							judgment,
+							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
 							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 				} else {
 					List<JudgmentDescription> inheritedJudgments = xsemanticsUtils
-							.allJudgments(superSystem, judgment.getJudgmentSymbol(), judgment.getRelationSymbols());
+							.allJudgments(superSystem,
+									judgment.getJudgmentSymbol(),
+									judgment.getRelationSymbols());
 					JudgmentDescription judgmentToOverride = null;
 					for (JudgmentDescription judgment2 : inheritedJudgments) {
 						if (typeSystem.equals(judgment, judgment2)) {
@@ -370,10 +373,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					}
 					if (judgmentToOverride == null) {
 						error("No judgment of the same kind to override: "
-								+ nodeModelUtils.getProgramText(judgment), judgment,
+								+ nodeModelUtils.getProgramText(judgment),
+								judgment,
 								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
 								IssueCodes.NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND);
-					} else if (!judgmentToOverride.getName().equals(judgment.getName())) {
+					} else if (!judgmentToOverride.getName().equals(
+							judgment.getName())) {
 						error("Must have the same name of the judgment to override: "
 								+ judgmentToOverride.getName(),
 								judgment,
@@ -489,7 +494,25 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	}
 
 	@Check
-	protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
+	protected void checkNoDuplicateRulesWithSameArguments(CheckRule rule) {
+		if (rule.isOverride())
+			return;
+		XsemanticsSystem system = xsemanticsUtils
+				.superSystemDefinition(xsemanticsUtils.containingSystem(rule));
+		if (system != null) {
+			List<CheckRule> rulesWithTheSameName = xsemanticsUtils
+					.allCheckRulesByName(system, rule);
+			for (CheckRule checkRule : rulesWithTheSameName) {
+				error("Duplicate checkrule with the same name"
+						+ reportContainingSystemName(checkRule),
+						XsemanticsPackage.Literals.CHECK_RULE__NAME,
+						IssueCodes.DUPLICATE_RULE_NAME);
+			}
+		}
+	}
+
+	@Check
+	protected void checkNoDuplicateCheckRulesWithSameArguments(Rule rule) {
 		List<Rule> rulesOfTheSameKind = xsemanticsUtils
 				.allRulesOfTheSameKind(rule);
 		if (rulesOfTheSameKind.size() > 1) {

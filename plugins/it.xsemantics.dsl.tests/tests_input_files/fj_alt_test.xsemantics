@@ -90,7 +90,7 @@ from {
 	}
 }
 
-checkrule CheckMain for
+override checkrule CheckMain for
 	Program program
 from {
 	program.main == null // nothing to check
@@ -98,31 +98,11 @@ from {
 	empty |- program.main
 }
 
-checkrule CheckClassOk for
+override checkrule CheckClassOk for
 	Class clazz
 from {
 	empty |- clazz
 }
 
-checkrule CheckMethodBody for
-	Method method
-from {
-}
 
-checkrule CheckField for
-	Field field
-from {
-}
-
-checkrule CheckMethodOverride for
-	Method method
-from {
-
-}
-
-checkrule CheckClassHierachyNotCyclic for
-	Class cl
-from {
-
-}
 

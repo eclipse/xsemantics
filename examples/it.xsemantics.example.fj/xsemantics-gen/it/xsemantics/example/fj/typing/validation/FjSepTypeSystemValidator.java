@@ -27,6 +27,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     		clazz);
   }
   
+  @Override
   @Check
   public void checkMain(final Program program) {
     errorGenerator.generateErrors(this, 
@@ -34,6 +35,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     		program);
   }
   
+  @Override
   @Check
   public void checkMethodBody(final Method method) {
     errorGenerator.generateErrors(this, 
@@ -41,6 +43,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     		method);
   }
   
+  @Override
   @Check
   public void checkField(final Field field) {
     errorGenerator.generateErrors(this, 
@@ -48,17 +51,11 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     		field);
   }
   
+  @Override
   @Check
   public void checkMethodOverride(final Method method) {
     errorGenerator.generateErrors(this, 
     	xsemanticsSystem.checkMethodOverride(method),
     		method);
-  }
-  
-  @Check
-  public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassHierachyNotCyclic(cl),
-    		cl);
   }
 }

@@ -121,6 +121,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     return new Result<Boolean>(true);
   }
   
+  @Override
   public Result<Boolean> checkMain(final Program program) {
     try {
     	return checkMainInternal(null, program);
@@ -129,6 +130,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     
     /* program.main == null or empty |- program.main */
@@ -147,6 +149,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     return new Result<Boolean>(true);
   }
   
+  @Override
   public Result<Boolean> checkMethodBody(final Method method) {
     try {
     	return checkMethodBodyInternal(null, method);
@@ -155,11 +158,13 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkMethodBodyInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
   
+  @Override
   public Result<Boolean> checkField(final Field field) {
     try {
     	return checkFieldInternal(null, field);
@@ -168,11 +173,13 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkFieldInternal(final RuleApplicationTrace _trace_, final Field field) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
   
+  @Override
   public Result<Boolean> checkMethodOverride(final Method method) {
     try {
     	return checkMethodOverrideInternal(null, method);
@@ -181,46 +188,9 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   protected Result<Boolean> checkMethodOverrideInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     
-    return new Result<Boolean>(true);
-  }
-  
-  public Result<Boolean> checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	return checkClassHierachyNotCyclicInternal(null, cl);
-    } catch (Exception e) {
-    	return resultForFailure(e);
-    }
-  }
-  
-  protected Result<Boolean> checkClassHierachyNotCyclicInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    
-    it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
-    if (_notEquals) {
-      /* !getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl) or fail error "Cyclic hierarchy for " + cl.name source cl */
-      try {
-        EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-        EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-        List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(
-          cl, _class_Superclass, _class_Superclass_1, 
-          it.xsemantics.example.fj.fj.Class.class);
-        boolean _contains = _all.contains(cl);
-        boolean _not = (!_contains);
-        /* !getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl) */
-        if (!_not) {
-          sneakyThrowRuleFailedException("!getAll( cl, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class) ).contains(cl)");
-        }
-      } catch (Exception e) {
-        /* fail error "Cyclic hierarchy for " + cl.name source cl */
-        String _name = cl.getName();
-        String _plus = ("Cyclic hierarchy for " + _name);
-        String error = _plus;
-        EObject source = cl;
-        throwForExplicitFail(error, new ErrorInformation(source, null));
-      }
-    }
     return new Result<Boolean>(true);
   }
   

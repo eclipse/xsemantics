@@ -577,6 +577,28 @@ public class XsemanticsUtils {
     return _doubleArrow;
   }
   
+  public ArrayList<CheckRule> allCheckRulesByName(final XsemanticsSystem system, final CheckRule rule) {
+    ArrayList<CheckRule> _allCheckRules = this.allCheckRules(system);
+    final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
+        public Boolean apply(final CheckRule it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, rule));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = rule.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    Iterable<CheckRule> _filter = IterableExtensions.<CheckRule>filter(_allCheckRules, _function);
+    ArrayList<CheckRule> _newArrayList = Lists.<CheckRule>newArrayList(_filter);
+    return _newArrayList;
+  }
+  
   public List<JudgmentDescription> superSystemJudgments(final XsemanticsSystem system) {
     XsemanticsSystem _superSystemDefinition = this.superSystemDefinition(system);
     EList<JudgmentDescription> _judgmentDescriptions = _superSystemDefinition==null?(EList<JudgmentDescription>)null:_superSystemDefinition.getJudgmentDescriptions();

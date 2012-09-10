@@ -70,6 +70,17 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
   }
   
   @Test
+  public void testDuplicateCheckRuleOfTheSameKindFromBaseSystem() {
+    XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
+    CharSequence _testDuplicateCheckRuleOfTheSameKindFromSuperSystem = this.testFiles.testDuplicateCheckRuleOfTheSameKindFromSuperSystem();
+    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_loadBaseSystems, _testDuplicateCheckRuleOfTheSameKindFromSuperSystem);
+    EClass _checkRule = XsemanticsPackage.eINSTANCE.getCheckRule();
+    this._validationTestHelper.assertError(_parseWithBaseSystem, _checkRule, 
+      IssueCodes.DUPLICATE_RULE_NAME, 
+      "Duplicate checkrule with the same name, in system: it.xsemantics.test.ExtendedTypeSystem2");
+  }
+  
+  @Test
   public void testNoRuleOfTheSameKindToOverride() {
     XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
     CharSequence _testNoRuleOfTheSameKindToOverride = this.testFiles.testNoRuleOfTheSameKindToOverride();

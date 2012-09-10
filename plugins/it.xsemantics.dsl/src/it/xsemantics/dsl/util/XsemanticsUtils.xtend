@@ -27,6 +27,7 @@ import java.util.Set
 import com.google.common.collect.Sets
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.CheckRule
 
 class XsemanticsUtils {
 	
@@ -312,6 +313,12 @@ class XsemanticsUtils {
 			it += system.allSuperSystemDefinitions.
 				map[checkrules].flatten
 		]
+	}
+
+	def allCheckRulesByName(XsemanticsSystem system, CheckRule rule) {
+		Lists::newArrayList(
+			system.allCheckRules.filter [ it != rule && name == rule.name ]
+		)
 	}
 
 	def superSystemJudgments(XsemanticsSystem system) {

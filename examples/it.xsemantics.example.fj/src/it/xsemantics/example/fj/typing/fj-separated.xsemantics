@@ -150,7 +150,7 @@ from {
 	empty |- clazz
 }
 
-checkrule CheckMain for
+override checkrule CheckMain for
 	Program program
 from {
 	program.main == null // nothing to check
@@ -158,35 +158,19 @@ from {
 	empty |- program.main
 }
 
-checkrule CheckMethodBody for
+override checkrule CheckMethodBody for
 	Method method
 from {
 }
 
-checkrule CheckField for
+override checkrule CheckField for
 	Field field
 from {
 }
 
-checkrule CheckMethodOverride for
+override checkrule CheckMethodOverride for
 	Method method
 from {
 
 }
 
-checkrule CheckClassHierachyNotCyclic for
-	Class cl
-from {
-	if (cl.superclass != null) {
-		!getAll(
-			cl,
-			FjPackage::eINSTANCE.class_Superclass,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Class)
-		).contains(cl)
-		or
-		fail
-			error "Cyclic hierarchy for " + cl.name
-			source cl
-	}
-}

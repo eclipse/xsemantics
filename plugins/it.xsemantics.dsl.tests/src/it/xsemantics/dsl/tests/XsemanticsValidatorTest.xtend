@@ -70,6 +70,19 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testDuplicateCheckRuleOfTheSameKindFromBaseSystem() {
+		loadBaseSystems.
+			parseWithBaseSystem(
+				testFiles.testDuplicateCheckRuleOfTheSameKindFromSuperSystem
+			).
+		assertError(
+			XsemanticsPackage::eINSTANCE.checkRule,
+			IssueCodes::DUPLICATE_RULE_NAME,
+			"Duplicate checkrule with the same name, in system: it.xsemantics.test.ExtendedTypeSystem2"
+		)
+	}
+
+	@Test
 	def void testNoRuleOfTheSameKindToOverride() {
 		loadBaseSystems.
 			parseWithBaseSystem(
