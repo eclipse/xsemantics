@@ -167,4 +167,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def testNoRuleForJudgmentDescriptionOverridden() {
+		systemExtendsSystemWithJudgmentOverride.
+			assertNoIssues
+	}
 }

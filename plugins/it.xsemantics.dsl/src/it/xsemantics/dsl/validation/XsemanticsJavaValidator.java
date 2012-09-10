@@ -138,6 +138,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkJudgmentDescriptionHasRules(
 			JudgmentDescription judgmentDescription) {
+		if (judgmentDescription.isOverride())
+			return;
 		if (enableWarnings
 				&& xsemanticsUtils.rulesForJudgmentDescription(
 						judgmentDescription).isEmpty()) {

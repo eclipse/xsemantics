@@ -152,4 +152,10 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       IssueCodes.OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME, 
       "Must have the same name of the judgment to override: subtype");
   }
+  
+  @Test
+  public void testNoRuleForJudgmentDescriptionOverridden() {
+    XsemanticsSystem _systemExtendsSystemWithJudgmentOverride = this.systemExtendsSystemWithJudgmentOverride();
+    this._validationTestHelper.assertNoIssues(_systemExtendsSystemWithJudgmentOverride);
+  }
 }
