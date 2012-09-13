@@ -97,10 +97,10 @@ for types using plain Java.
 section:ExpressionsTS[Expressions Type System]
 
 Since we will extend the semantics of this language, we will start with
-a first implementation (that is why we use "First" in the name of the system).
+a first implementation.
 
 code[Xsemantics][
-system it.xsemantics.example.expressions.typing.FirstExpressionsSemantics
+system it.xsemantics.example.expressions.typing.ExpressionsSemantics
 
 validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
 
@@ -499,6 +499,19 @@ This way when a codeRef[java.lang.String] has to be represented by Xsemantics
 generated code, it will add quotes around it; this way we are sure that we
 are dealing with an actual string.
 
+Of course, we provide the guice binding for this:
+
+code[Java][
+public class ExpressionsRuntimeModule extends
+		it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule {
+
+	public Class<? extends StringRepresentation> bindStringRepresentation() {
+		return ExpressionsStringRepresentation.class;
+	}
+...
+}
+]
+
 section:MoreInvolvedExpressionsSystem[A more involved Expressions System]
 
 Now, let's complicate things a bit, and make the system for our
@@ -529,11 +542,20 @@ k = 20 * (1 + '5') // has int type, since * requires int types
 // on subexpressions
 ]
 
-Thus, we introduce a new judgment in our system
+Since this more involved system will have most rules in common with
+the first system we presented, we will write this new system as
+an extended system (ref:SystemExtension[]), starting from the previous one:
+
+code[Xsemantics][
+system it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics
+	extends it.xsemantics.example.expressions.typing.ExpressionsSemantics
+]
+
+Thus, we introduce a new judgment in our system (the other ones are simply
+inherited from the super system):
 
 code[Xsemantics][
 judgments{
-	// as above
 	coerce |~ Expression expression |> Type expectedType
 		error "cannot convert " + stringRep(expression) +
 			" to type " + stringRep(expectedType)
@@ -566,11 +588,12 @@ be of a specific type should "communicate" this expectation through the
 rule environment (refer to ref:Environment[]), by mapping the string
 code['expected'] to the expected type.
 
-With this assumption, we change the rule for code[StringLiteral], since its
+We will need then to override some rules of the previous system:
+the rule for code[StringLiteral], since its
 type now depends on the above expectation:
 
 code[Xsemantics][
-rule StringLiteral
+override rule StringLiteral
 	G |- StringLiteral str : Type resultType
 from {
 	{
@@ -593,11 +616,11 @@ ul[
 In any other case the type will be code[string] (which might make invoking
 rules fail).
 
-Now we need to adapt those rules that have expectations on subexpressions,
+Now we need to override those rules that have expectations on subexpressions,
 in order to pass to rule invocation an appropriate environment:
 
 code[Xsemantics][
-rule MultiOrDiv
+override rule MultiOrDiv
 	G |- MultiOrDiv multiOrDiv : IntType intType
 from {
 	intType = ExpressionsFactory::eINSTANCE.createIntType
@@ -605,7 +628,7 @@ from {
 	G, 'expected' <- intType |- multiOrDiv.right : intType
 }
 
-rule AndOr
+override rule AndOr
 	G |- AndOrExpression andOr : BooleanType boolType
 from {
 	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
@@ -620,25 +643,14 @@ types are updated accordingly).
 Note that in cases where no expectation is required, we now need to
 pass an empty environment when typing subexpressions, otherwise we might
 reject well-typed expressions due to expectations that were passed to the
-current rule upon invocation.  This is the case of comparison:
-
-code[Xsemantics][
-rule Comparison
-	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
-from {
-	empty |- comparison.left : var Type leftType
-	empty |- comparison.right : var Type rightType
-	
-	(leftType instanceof IntType && rightType instanceof IntType) ||
-	(leftType instanceof StringType && rightType instanceof StringType)
-}
-]
+current rule upon invocation.  This however was already implemented
+in the super system, so we don't need to override those rules.
 
 The rule for Plus now is a little bit more complex, since it
 has to take care of possible expectations:
 
 code[Xsemantics][
-rule Plus
+override rule Plus
 	G |- Plus plus : Type type
 from {
 	G |- plus.left : var Type leftType
@@ -667,7 +679,7 @@ Now we need to adapt also some interpretation rules to take into
 consideration expectations:
 
 code[Xsemantics][
-rule InterpretStringLiteral
+override rule InterpretStringLiteral
 	G |- StringLiteral string ~> Object result
 from {
 	var Type expected
@@ -684,7 +696,7 @@ from {
 	result = string.value
 }
 
-rule InterpretMultiOrDiv
+override rule InterpretMultiOrDiv
 	G |- MultiOrDiv multiOrDiv ~> Integer result
 from {
 	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
@@ -699,6 +711,9 @@ from {
 
 Again, we only showed some modified rules; now it should be clear what
 other rules need to be adapted and how.
+
+All the other rules which do not require adaption will be simply
+inherited from the super system.
 
 section:ExpressionsCodeGeneration[Generation for Expressions]
 
@@ -737,8 +752,23 @@ class ExpressionsGenerator implements IGenerator {
 }
 ]
 
-code[ExpressionSemantics] is the Java class generated by Xsemantics from
+code[ExpressionsSemantics] is the Java class generated by Xsemantics from
 the system we wrote for the Expressions language.
+
+Actually, we want to use the extended system (ref:MoreInvolvedExpressionsSystem[]),
+thus we will bind code[ExpressionsSemantics] to code[ExtendedExpressionsSemantics]
+in the runtime module:
+
+code[Java][
+public class ExpressionsRuntimeModule extends
+		it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule {
+...
+	public Class<? extends ExpressionsSemantics> bindExpressionsSemantics() {
+		return ExtendedExpressionsSemantics.class;
+	}
+}
+]
+
 Note that code[string] and code[traceAsString] come from
 codeRef[it.xsemantics.runtime.StringRepresentation] and
 codeRef[it.xsemantics.runtime.util.TraceUtils] respectively, and they

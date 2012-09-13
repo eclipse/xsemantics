@@ -32,6 +32,8 @@
 			</topic>
 			<topic href="contents/XsemanticsSyntax.html#CheckRules" label="Rules for Validator: checkrule" >
 			</topic>
+			<topic href="contents/XsemanticsSyntax.html#SystemExtension" label="Extend another System" >
+			</topic>
 			<topic href="contents/XsemanticsSyntax.html#CodeGeneration" label="Generated Code" >
 				<topic href="contents/XsemanticsSyntax.html#GeneratedSystem" label="The Generated Java Rule System" >
 				</topic>

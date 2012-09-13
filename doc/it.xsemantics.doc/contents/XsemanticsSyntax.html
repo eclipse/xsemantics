@@ -661,6 +661,100 @@ Xsemantics will generate a Java validator with a <span class="inlinecode">@Check
 just like in Java validator for Xtext languages, you can have
 many <span class="inlinecode">checkrule</span>s for the same JavaType (provided the rule name is unique).
 </p>
+<a name="SystemExtension"></a>
+<h2>Extend another System</h2>
+<p>
+When defyining a system it is also possible to <em>extend</em> another
+Xsemantics system, using <span class="inlinecode"><span class="keyword">extends</span></span> followed by
+the fully qualified name of the system to extend.
+For instance, given this system
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;my.test.System<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.*<br/>
+<span class="keyword">import</span>&nbsp;java.util.*<br/>
+<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;subtype&nbsp;|-&nbsp;EObject&nbsp;left&nbsp;&lt;:&nbsp;EObject&nbsp;right<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject<br/>
+}<br/>
+<br/>
+<span class="keyword">axiom</span>&nbsp;EObjectType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;obj.eClass<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+one can specify another system in terms of this one:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;my.test.ExtendedSystem&nbsp;<span class="keyword">extends</span>&nbsp;my.test.System<br/>
+<br/>
+...<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+An extended system implicitly <em>inherits</em> from the <em>super</em> system
+all judgments and rules (and check rules).
+</p>
+<p>
+In the extended system one can <span class="inlinecode"><span class="keyword">override</span></span> a judgment and
+any rules and check rules; in all cases the name and the kind of the redefined
+element must be the same.  An axiom in a super system can be turned into
+a rule in the extended system and vice versa.
+</p>
+<p>
+If in an extended system we try to declare a judgment, rule, checkrule
+with the same name of the ones present in the super system, without
+<span class="inlinecode"><span class="keyword">override</span></span>, we will get an error.
+</p>
+<p>
+For instance, we can override a judgment of the super system changing the
+names of parameters and error specifications; similarly for rules and check
+rules (and provide a different implementation):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;my.test.ExtendedSystem&nbsp;<span class="keyword">extends</span>&nbsp;my.test.System<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.*<br/>
+<span class="keyword">import</span>&nbsp;java.util.*<br/>
+<br/>
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;override&nbsp;with&nbsp;different&nbsp;param&nbsp;name&nbsp;and&nbsp;error&nbsp;specification<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;eObject&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eObject<br/>
+}<br/>
+<br/>
+<span class="comment">//&nbsp;we&nbsp;override&nbsp;the&nbsp;axiom&nbsp;in&nbsp;the&nbsp;supersystem<br/>
+</span><span class="comment">//&nbsp;and&nbsp;turn&nbsp;it&nbsp;into&nbsp;a&nbsp;rule&nbsp;with&nbsp;premises<br/>
+</span><span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;EObjectType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
+<span class="keyword">from</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;premises<br/>
+</span>}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+An example of system extension will be shown in
+<a href="Expressions-example.html#MoreInvolvedExpressionsSystem" title="Go to &quot;A more involved Expressions System&quot;" >section MoreInvolvedExpressionsSystem</a>.
+</p>
 <a name="CodeGeneration"></a>
 <h2>Generated Code</h2>
 <p>
@@ -827,6 +921,12 @@ Using this clause (right after the <span class="inlinecode"><span class="keyword
 the generated validator will be already easily usable: all that remains
 to do is to modify your DSL validator in your <span class="inlinecode">src</span> folder
 so that it extends the validator by Xsemantics.
+</p>
+<p>
+Note that <span class="inlinecode"><span class="keyword">validatorExtends</span></span> cannot be used
+together with system extension (<a href="XsemanticsSyntax.html#SystemExtension" title="Go to &quot;Extend another System&quot;" >section SystemExtension</a>): in case of
+system extension, the generated validator will automatically extend
+the generated validator of the super system.
 </p>
 <p>
 The <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause requires a

@@ -471,6 +471,79 @@ code[checkrule] (see also ref:GeneratedValidator[]);
 just like in Java validator for Xtext languages, you can have
 many code[checkrule]s for the same JavaType (provided the rule name is unique).
 
+section:SystemExtension[Extend another System]
+
+When defyining a system it is also possible to e[extend] another
+Xsemantics system, using code[Xsemantics][extends] followed by
+the fully qualified name of the system to extend.
+For instance, given this system
+
+code[Xsemantics][
+system my.test.System
+
+import org.eclipse.emf.ecore.*
+import java.util.*
+
+judgments {
+	type |- EObject obj : output EClassifier
+	subtype |- EObject left <: EObject right
+	interpret |- EObject exp ~> output EObject
+}
+
+axiom EObjectType
+	G |- EObject obj : obj.eClass
+]
+
+one can specify another system in terms of this one:
+
+code[Xsemantics][
+system my.test.ExtendedSystem extends my.test.System
+
+...
+]
+
+An extended system implicitly e[inherits] from the e[super] system
+all judgments and rules (and check rules).
+
+In the extended system one can code[Xsemantics][override] a judgment and
+any rules and check rules; in all cases the name and the kind of the redefined
+element must be the same.  An axiom in a super system can be turned into
+a rule in the extended system and vice versa.
+
+If in an extended system we try to declare a judgment, rule, checkrule
+with the same name of the ones present in the super system, without
+code[Xsemantics][override], we will get an error.
+
+For instance, we can override a judgment of the super system changing the
+names of parameters and error specifications; similarly for rules and check
+rules (and provide a different implementation):
+
+
+code[Xsemantics][
+system my.test.ExtendedSystem extends my.test.System
+
+import org.eclipse.emf.ecore.*
+import java.util.*
+
+judgments {
+	// we override with different param name and error specification
+	override type |- EObject eObject : output EClassifier
+		error "cannot type"
+		source eObject
+}
+
+// we override the axiom in the supersystem
+// and turn it into a rule with premises
+override rule EObjectType
+	G |- EObject o : o.eClass
+from {
+	// some premises
+}
+]
+
+An example of system extension will be shown in
+ref:MoreInvolvedExpressionsSystem[].
+
 section:CodeGeneration[Generated Code]
 
 Xsemantics will generate two Java classes for each xsemantics system:
@@ -596,6 +669,11 @@ Using this clause (right after the code[Xsemantics][system] definition),
 the generated validator will be already easily usable: all that remains
 to do is to modify your DSL validator in your code[src] folder
 so that it extends the validator by Xsemantics.
+
+Note that code[Xsemantics][validatorExtends] cannot be used
+together with system extension (ref:SystemExtension[]): in case of
+system extension, the generated validator will automatically extend
+the generated validator of the super system.
 
 The code[Xsemantics][validatorExtends] clause requires a
 codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator]

@@ -130,13 +130,13 @@ for types using plain Java.
 <h2>Expressions Type System</h2>
 <p>
 Since we will extend the semantics of this language, we will start with
-a first implementation (that is why we use "First" in the name of the system).
+a first implementation.
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.FirstExpressionsSemantics<br/>
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.ExpressionsSemantics<br/>
 <br/>
 <span class="keyword">validatorExtends</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator<br/>
 <br/>
@@ -645,6 +645,25 @@ This way when a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/do
 generated code, it will add quotes around it; this way we are sure that we
 are dealing with an actual string.
 </p>
+<p>
+Of course, we provide the guice binding for this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExpressionsRuntimeModule&nbsp;<span class="keyword">extends</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ExpressionsStringRepresentation.<span class="keyword">class</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+...<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
 <a name="MoreInvolvedExpressionsSystem"></a>
 <h2>A more involved Expressions System</h2>
 <p>
@@ -690,15 +709,30 @@ i&nbsp;=&nbsp;20&nbsp;+&nbsp;<span class="string">&apos;5&apos;</span>&nbsp;<spa
 </div>
 </p>
 <p>
-Thus, we introduce a new judgment in our system
+Since this more involved system will have most rules in common with
+the first system we presented, we will write this new system as
+an extended system (<a href="XsemanticsSyntax.html#SystemExtension" title="Go to &quot;Extend another System&quot;" >section SystemExtension</a>), starting from the previous one:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.expressions.typing.ExpressionsSemantics<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Thus, we introduce a new judgment in our system (the other ones are simply
+inherited from the super system):
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">judgments</span>{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;as&nbsp;above<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;coerce&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;|&gt;&nbsp;Type&nbsp;expectedType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;coerce&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;|&gt;&nbsp;Type&nbsp;expectedType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;convert&nbsp;"</span>&nbsp;+&nbsp;stringRep(expression)&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&nbsp;to&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(expectedType)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
@@ -741,14 +775,15 @@ rule environment (refer to <a href="XsemanticsSyntax.html#Environment" title="Go
 <span class="inlinecode"><span class="string">&apos;expected&apos;</span></span> to the expected type.
 </p>
 <p>
-With this assumption, we change the rule for <span class="inlinecode">StringLiteral</span>, since its
+We will need then to override some rules of the previous system:
+the rule for <span class="inlinecode">StringLiteral</span>, since its
 type now depends on the above expectation:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;StringLiteral<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;StringLiteral<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;str&nbsp;:&nbsp;Type&nbsp;resultType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
@@ -781,14 +816,14 @@ In any other case the type will be <span class="inlinecode">string</span> (which
 rules fail).
 </p>
 <p>
-Now we need to adapt those rules that have expectations on subexpressions,
+Now we need to override those rules that have expectations on subexpressions,
 in order to pass to rule invocation an appropriate environment:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MultiOrDiv<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;MultiOrDiv<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;:&nbsp;IntType&nbsp;intType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
@@ -796,7 +831,7 @@ in order to pass to rule invocation an appropriate environment:
 &nbsp;&nbsp;&nbsp;&nbsp;G,&nbsp;<span class="string">&apos;expected&apos;</span>&nbsp;&lt;-&nbsp;intType&nbsp;|-&nbsp;multiOrDiv.right&nbsp;:&nbsp;intType<br/>
 }<br/>
 <br/>
-<span class="keyword">rule</span>&nbsp;AndOr<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;AndOr<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;AndOrExpression&nbsp;andOr&nbsp;:&nbsp;BooleanType&nbsp;boolType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;boolType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
@@ -815,24 +850,8 @@ types are updated accordingly).
 Note that in cases where no expectation is required, we now need to
 pass an empty environment when typing subexpressions, otherwise we might
 reject well-typed expressions due to expectations that were passed to the
-current rule upon invocation.  This is the case of comparison:
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">rule</span>&nbsp;Comparison<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;StringType)<br/>
-}<br/>
-</p>
-</div>
-</div>
+current rule upon invocation.  This however was already implemented
+in the super system, so we don&apos;t need to override those rules.
 </p>
 <p>
 The rule for Plus now is a little bit more complex, since it
@@ -842,7 +861,7 @@ has to take care of possible expectations:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;Plus<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;Plus<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Plus&nbsp;plus&nbsp;:&nbsp;Type&nbsp;type<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;plus.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
@@ -877,7 +896,7 @@ consideration expectations:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;InterpretStringLiteral<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;InterpretStringLiteral<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;StringLiteral&nbsp;string&nbsp;~&gt;&nbsp;Object&nbsp;result<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expected<br/>
@@ -894,7 +913,7 @@ consideration expectations:
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;string.value<br/>
 }<br/>
 <br/>
-<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">rule</span>&nbsp;InterpretMultiOrDiv<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;MultiOrDiv&nbsp;multiOrDiv&nbsp;~&gt;&nbsp;Integer&nbsp;result<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;IntType&nbsp;intType&nbsp;=&nbsp;ExpressionsFactory::eINSTANCE.createIntType<br/>
@@ -912,6 +931,10 @@ consideration expectations:
 <p>
 Again, we only showed some modified rules; now it should be clear what
 other rules need to be adapted and how.
+</p>
+<p>
+All the other rules which do not require adaption will be simply
+inherited from the super system.
 </p>
 <a name="ExpressionsCodeGeneration"></a>
 <h2>Generation for Expressions</h2>
@@ -958,8 +981,30 @@ The relevant part of the generator (written in Xtend2) is shown:
 </div>
 </p>
 <p>
-<span class="inlinecode">ExpressionSemantics</span> is the Java class generated by Xsemantics from
+<span class="inlinecode">ExpressionsSemantics</span> is the Java class generated by Xsemantics from
 the system we wrote for the Expressions language.
+</p>
+<p>
+Actually, we want to use the extended system (<a href="Expressions-example.html#MoreInvolvedExpressionsSystem" title="Go to &quot;A more involved Expressions System&quot;" >section MoreInvolvedExpressionsSystem</a>),
+thus we will bind <span class="inlinecode">ExpressionsSemantics</span> to <span class="inlinecode">ExtendedExpressionsSemantics</span>
+in the runtime module:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExpressionsRuntimeModule&nbsp;<span class="keyword">extends</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule&nbsp;{<br/>
+...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ExpressionsSemantics&gt;&nbsp;bindExpressionsSemantics()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ExtendedExpressionsSemantics.<span class="keyword">class</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
 Note that <span class="inlinecode">string</span> and <span class="inlinecode">traceAsString</span> come from
 <abbr title="it.xsemantics.runtime.StringRepresentation" >StringRepresentation</abbr> and
 <abbr title="it.xsemantics.runtime.util.TraceUtils" >TraceUtils</abbr> respectively, and they

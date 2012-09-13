@@ -112,7 +112,8 @@ codelanguage-def[Xsemantics][
 	val, var, null,
 	%% from Xsemantics
 	system, judgments, output, axiom, rule, checkrule, derives, from,
-	or, fail, error, source, feature, env, empty, inject, validatorExtends
+	or, fail, error, source, feature, env, empty, inject, validatorExtends,
+	extends, override
 	]
 
 codelanguage-def[Lambda][lambda,int,string]
