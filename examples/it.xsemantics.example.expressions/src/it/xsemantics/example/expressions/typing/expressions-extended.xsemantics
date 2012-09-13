@@ -1,0 +1,179 @@
+/*
+ * This system is more involved:
+ * we want to implicitly convert string literals to numbers 
+ * and to booleans when this is possible
+ */
+system it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics
+	extends it.xsemantics.example.expressions.typing.ExpressionsSemantics
+
+import it.xsemantics.example.expressions.expressions.*
+
+judgments {
+	coerce |~ Expression expression |> Type expectedType
+		error "cannot convert " + stringRep(expression) +
+			" to type " + stringRep(expectedType)
+		source expression
+}
+
+override rule StringLiteral
+	G |- StringLiteral str : Type resultType
+from {
+	{
+		val expected = env(G, 'expected', Type)
+		G |~ str |> expected
+		resultType = expected
+	}
+	or
+		resultType = ExpressionsFactory::eINSTANCE.createStringType
+}
+
+override rule MultiOrDiv
+	G |- MultiOrDiv multiOrDiv : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left : intType
+	G, 'expected' <- intType |- multiOrDiv.right : intType
+}
+
+override rule Minus
+	G |- Minus minus : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- minus.left : intType
+	G, 'expected' <- intType |- minus.right : intType
+}
+
+override rule Plus
+	G |- Plus plus : Type type
+from {
+	G |- plus.left : var Type leftType
+	G |- plus.right : var Type rightType
+	
+	{ 
+		val expected = env(G, 'expected', Type)
+		G |~ plus.left |> expected
+		G |~ plus.right |> expected
+		type = expected
+	}
+	or
+	{
+		(leftType instanceof StringType || rightType instanceof StringType)
+		type = ExpressionsFactory::eINSTANCE.createStringType
+	}
+	or
+	{
+		(leftType instanceof IntType && rightType instanceof IntType)
+		type = leftType // i.e., IntType
+	}
+}
+
+override rule BooleanNegation
+	G |- BooleanNegation negation : BooleanType boolType
+from {
+	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- negation.expression : boolType
+}
+
+override rule AndOr
+	G |- AndOrExpression andOr : BooleanType boolType
+from {
+	boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- andOr.left : boolType
+	G, 'expected' <- boolType |- andOr.right : boolType
+}
+
+override rule ArithmeticSigned
+	G |- ArithmeticSigned signed : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- signed.expression : intType
+}
+
+rule StringToInt
+	G |~ StringLiteral string |> IntType type
+from {
+	Integer::parseInt(string.value)
+}
+
+rule StringToBool
+	G |~ StringLiteral string |> BooleanType type
+from {
+	string.value.equalsIgnoreCase("true") ||
+	string.value.equalsIgnoreCase("false")
+}
+
+axiom IntToInt
+	G |~ NumberLiteral number |> IntType type
+
+axiom BoolToBool
+	G |~ BooleanLiteral bool |> BooleanType type
+
+override rule InterpretStringLiteral
+	G |- StringLiteral string ~> Object result
+from {
+	var Type expected
+	{
+		expected = env(G, 'expected', IntType)
+		result = Integer::parseInt(string.value)
+	}
+	or
+	{
+		expected = env(G, 'expected', BooleanType)
+		result = Boolean::parseBoolean(string.value)
+	}
+	or
+	result = string.value
+}
+
+override rule InterpretMinus
+	G |- Minus plus ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- plus.left ~> var Integer leftResult
+	G, 'expected' <- intType |- plus.right ~> var Integer rightResult
+	result = leftResult.intValue - rightResult.intValue
+}
+
+override rule InterpretMultiOrDiv
+	G |- MultiOrDiv multiOrDiv ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- multiOrDiv.left ~> var Integer leftResult
+	G, 'expected' <- intType |- multiOrDiv.right ~> var Integer rightResult
+	if (multiOrDiv.op == '*')
+		result = leftResult.intValue * rightResult.intValue
+	else
+		result = leftResult.intValue / rightResult.intValue
+}
+
+override rule InterpretArithmeticSigned
+	G |- ArithmeticSigned signed ~> Integer result
+from {
+	var IntType intType = ExpressionsFactory::eINSTANCE.createIntType
+	G, 'expected' <- intType |- signed.expression ~> var Integer expResult
+	result = -(expResult)
+}
+
+override rule InterpretAndOr
+	G |- AndOrExpression andOr ~> Boolean result
+from {
+	var boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- andOr.left ~> var Boolean leftResult
+	G, 'expected' <- boolType |- andOr.right ~> var Boolean rightResult
+	
+	if (andOr.op == "&&")
+		result = leftResult.booleanValue && rightResult.booleanValue
+	else
+		result = leftResult.booleanValue || rightResult.booleanValue
+}
+
+override rule InterpretBooleanNegation
+	G |- BooleanNegation neg ~> Boolean result
+from {
+	var boolType = ExpressionsFactory::eINSTANCE.createBooleanType
+	G, 'expected' <- boolType |- neg.expression ~> var Boolean expResult
+	
+	result = !expResult
+}
+
+

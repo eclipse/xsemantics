@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import it.xsemantics.example.expressions.expressions.ExpressionsPackage;
 import it.xsemantics.example.expressions.expressions.Model;
 import it.xsemantics.example.expressions.tests.ExpressionsBaseTests;
-import it.xsemantics.example.expressions.tests.ExpressionsInjectorProviderCustom;
+import it.xsemantics.example.expressions.tests.ExtendedExpressionsInjectorProviderCustom;
 import it.xsemantics.example.expressions.typing.ExpressionsSemantics;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = ExpressionsInjectorProviderCustom.class)
+@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsValidatorTests extends ExpressionsBaseTests {
   @Inject

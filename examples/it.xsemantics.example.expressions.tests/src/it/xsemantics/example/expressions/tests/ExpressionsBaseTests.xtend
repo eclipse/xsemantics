@@ -8,12 +8,13 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.junit.BeforeClass
+import it.xsemantics.example.expressions.typing.ExpressionsSemantics
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(ExpressionsInjectorProvider))
 class ExpressionsBaseTests {
 
-	@Inject protected IExpressionsSemantics semantics
+	@Inject protected ExpressionsSemantics semantics
 	
 	protected RuleApplicationTrace trace
 	

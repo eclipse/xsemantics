@@ -12,7 +12,7 @@ import it.xsemantics.example.expressions.expressions.MultiOrDiv;
 import it.xsemantics.example.expressions.expressions.Plus;
 import it.xsemantics.example.expressions.expressions.Variable;
 import it.xsemantics.example.expressions.tests.ExpressionsBaseTests;
-import it.xsemantics.example.expressions.tests.ExpressionsInjectorProviderCustom;
+import it.xsemantics.example.expressions.tests.ExtendedExpressionsInjectorProviderCustom;
 import it.xsemantics.runtime.StringRepresentation;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = ExpressionsInjectorProviderCustom.class)
+@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsParserTests extends ExpressionsBaseTests {
   @Inject

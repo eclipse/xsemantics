@@ -3,15 +3,23 @@
  */
 package it.xsemantics.example.expressions;
 
+import it.xsemantics.example.expressions.typing.ExpressionsSemantics;
 import it.xsemantics.example.expressions.typing.ExpressionsStringRepresentation;
+import it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics;
 import it.xsemantics.runtime.StringRepresentation;
 
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
-public class ExpressionsRuntimeModule extends it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule {
+public class ExpressionsRuntimeModule extends
+		it.xsemantics.example.expressions.AbstractExpressionsRuntimeModule {
 
 	public Class<? extends StringRepresentation> bindStringRepresentation() {
 		return ExpressionsStringRepresentation.class;
+	}
+
+	public Class<? extends ExpressionsSemantics> bindExpressionsSemantics() {
+		return ExtendedExpressionsSemantics.class;
 	}
 }

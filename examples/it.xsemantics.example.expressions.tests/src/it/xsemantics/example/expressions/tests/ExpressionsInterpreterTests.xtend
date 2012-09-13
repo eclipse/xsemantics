@@ -11,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(ExpressionsInjectorProviderCustom))
+@InjectWith(typeof(ExtendedExpressionsInjectorProviderCustom))
 class ExpressionsInterpreterTests extends ExpressionsBaseTests {
 
 	@Inject extension ParseHelper<Model>

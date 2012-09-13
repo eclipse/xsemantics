@@ -7,7 +7,7 @@ import it.xsemantics.example.expressions.expressions.Model;
 import it.xsemantics.example.expressions.expressions.Type;
 import it.xsemantics.example.expressions.expressions.Variable;
 import it.xsemantics.example.expressions.tests.ExpressionsBaseTests;
-import it.xsemantics.example.expressions.tests.ExpressionsInjectorProviderCustom;
+import it.xsemantics.example.expressions.tests.ExtendedExpressionsInjectorProviderCustom;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.StringRepresentation;
@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = ExpressionsInjectorProviderCustom.class)
+@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsTypingTests extends ExpressionsBaseTests {
   @Inject

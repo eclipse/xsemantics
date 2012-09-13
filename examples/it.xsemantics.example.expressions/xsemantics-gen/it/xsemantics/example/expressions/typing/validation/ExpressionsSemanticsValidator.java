@@ -7,6 +7,11 @@ import it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValid
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xtext.validation.Check;
 
+/**
+ * This system allows to convert implicitly
+ * integers and booleans to strings, and '+' can
+ * be used also for string concatenations
+ */
 public class ExpressionsSemanticsValidator extends AbstractExpressionsJavaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

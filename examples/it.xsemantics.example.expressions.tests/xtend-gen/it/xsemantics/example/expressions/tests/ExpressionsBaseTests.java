@@ -2,7 +2,7 @@ package it.xsemantics.example.expressions.tests;
 
 import com.google.inject.Inject;
 import it.xsemantics.example.expressions.ExpressionsInjectorProvider;
-import it.xsemantics.example.expressions.tests.IExpressionsSemantics;
+import it.xsemantics.example.expressions.typing.ExpressionsSemantics;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class ExpressionsBaseTests {
   @Inject
-  protected IExpressionsSemantics semantics;
+  protected ExpressionsSemantics semantics;
   
   protected RuleApplicationTrace trace;
   

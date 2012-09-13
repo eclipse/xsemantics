@@ -33,6 +33,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+/**
+ * This system allows to convert implicitly
+ * integers and booleans to strings, and '+' can
+ * be used also for string concatenations
+ */
 public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.rules.NumeralLiteral";
   
@@ -55,14 +60,6 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   public final static String ANDOR = "it.xsemantics.example.expressions.typing.rules.AndOr";
   
   public final static String ARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.rules.ArithmeticSigned";
-  
-  public final static String STRINGTOINT = "it.xsemantics.example.expressions.typing.rules.StringToInt";
-  
-  public final static String STRINGTOBOOL = "it.xsemantics.example.expressions.typing.rules.StringToBool";
-  
-  public final static String INTTOINT = "it.xsemantics.example.expressions.typing.rules.IntToInt";
-  
-  public final static String BOOLTOBOOL = "it.xsemantics.example.expressions.typing.rules.BoolToBool";
   
   public final static String VARIABLEREFERENCE = "it.xsemantics.example.expressions.typing.rules.VariableReference";
   
@@ -96,8 +93,6 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<Type>> vartypeDispatcher;
   
-  private PolymorphicDispatcher<Result<Boolean>> coerceDispatcher;
-  
   private PolymorphicDispatcher<Result<Object>> interpretDispatcher;
   
   public ExpressionsSemantics() {
@@ -109,8 +104,6 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	"typeImpl", 3, "|-", ":");
     vartypeDispatcher = buildPolymorphicDispatcher1(
     	"vartypeImpl", 3, "||-", ":");
-    coerceDispatcher = buildPolymorphicDispatcher1(
-    	"coerceImpl", 4, "|~", "|>");
     interpretDispatcher = buildPolymorphicDispatcher1(
     	"interpretImpl", 3, "|-", "~>");
   }
@@ -144,22 +137,6 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return vartypeInternal(_environment_, _trace_, variable);
     } catch (Exception _e_vartype) {
     	return resultForFailure(_e_vartype);
-    }
-  }
-  
-  public Result<Boolean> coerce(final Expression expression, final Type expectedType) {
-    return coerce(new RuleEnvironment(), null, expression, expectedType);
-  }
-  
-  public Result<Boolean> coerce(final RuleEnvironment _environment_, final Expression expression, final Type expectedType) {
-    return coerce(_environment_, null, expression, expectedType);
-  }
-  
-  public Result<Boolean> coerce(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
-    try {
-    	return coerceInternal(_environment_, _trace_, expression, expectedType);
-    } catch (Exception _e_coerce) {
-    	return resultForFailure(_e_coerce);
     }
   }
   
@@ -240,30 +217,6 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	_issue, _ex, new ErrorInformation(source, feature));
   }
   
-  protected Result<Boolean> coerceInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
-    try {
-    	checkParamsNotNull(expression, expectedType);
-    	return coerceDispatcher.invoke(_environment_, _trace_, expression, expectedType);
-    } catch (Exception _e_coerce) {
-    	sneakyThrowRuleFailedException(_e_coerce);
-    	return null;
-    }
-  }
-  
-  protected void coerceThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final Type expectedType, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
-    String _stringRep = this.stringRep(expression);
-    String _plus = ("cannot convert " + _stringRep);
-    String _plus_1 = (_plus + 
-      " to type ");
-    String _stringRep_1 = this.stringRep(expectedType);
-    String _plus_2 = (_plus_1 + _stringRep_1);
-    String error = _plus_2;
-    EObject source = expression;
-    throwRuleFailedException(error,
-    	_issue, _ex, new ErrorInformation(source, null));
-  }
-  
   protected Result<Object> interpretInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -328,7 +281,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleStringLiteral) {
-      typeThrowException(ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + "Type",
+      typeThrowException(ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + "StringType",
       	STRINGLITERAL,
       	e_applyRuleStringLiteral, str, new ErrorInformation[] {new ErrorInformation(str)});
       return null;
@@ -336,25 +289,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Type> applyRuleStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
-    Type resultType = null; // output parameter
     
-    /* { val expected = env(G, 'expected', Type) G |~ str |> expected resultType = expected } or resultType = ExpressionsFactory::eINSTANCE.createStringType */
-    try {
-      Type _xblockexpression = null;
-      {
-        /* env(G, 'expected', Type) */
-        Type _environmentaccess = environmentAccess(G, "expected", Type.class);
-        final Type expected = _environmentaccess;
-        /* G |~ str |> expected */
-        coerceInternal(G, _trace_, str, expected);
-        Type _resultType = resultType = expected;
-        _xblockexpression = (_resultType);
-      }
-    } catch (Exception e) {
-      StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-      resultType = _createStringType;
-    }
-    return new Result<Type>(resultType);
+    StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
+    return new Result<Type>(_createStringType);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
@@ -373,28 +310,23 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Type> applyRuleMultiOrDiv(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
+    IntType intType = null; // output parameter
     
     {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- multiOrDiv.left : intType */
+      /* G |- multiOrDiv.left : intType */
       Expression _left = multiOrDiv.getLeft();
-      Result<Type> result = typeInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _left);
+      Result<Type> result = typeInternal(G, _trace_, _left);
       checkAssignableTo(result.getFirst(), IntType.class);
       intType = (IntType) result.getFirst();
       
-      /* G, 'expected' <- intType |- multiOrDiv.right : intType */
+      /* G |- multiOrDiv.right : intType */
       Expression _right = multiOrDiv.getRight();
-      Result<Type> result_1 = typeInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _right);
+      Result<Type> result_1 = typeInternal(G, _trace_, _right);
       checkAssignableTo(result_1.getFirst(), IntType.class);
       intType = (IntType) result_1.getFirst();
       
     }
-    IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
-    return new Result<Type>(_createIntType);
+    return new Result<Type>(intType);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
@@ -415,20 +347,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   protected Result<Type> applyRuleMinus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     
     {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- minus.left : intType */
+      IntType intType = null;
+      /* G |- minus.left : intType */
       Expression _left = minus.getLeft();
-      Result<Type> result = typeInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _left);
+      Result<Type> result = typeInternal(G, _trace_, _left);
       checkAssignableTo(result.getFirst(), IntType.class);
       intType = (IntType) result.getFirst();
       
-      /* G, 'expected' <- intType |- minus.right : intType */
+      /* G |- minus.right : intType */
       Expression _right = minus.getRight();
-      Result<Type> result_1 = typeInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _right);
+      Result<Type> result_1 = typeInternal(G, _trace_, _right);
       checkAssignableTo(result_1.getFirst(), IntType.class);
       intType = (IntType) result_1.getFirst();
       
@@ -470,55 +398,37 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       checkAssignableTo(result_1.getFirst(), Type.class);
       rightType = (Type) result_1.getFirst();
       
-      /* { val expected = env(G, 'expected', Type) G |~ plus.left |> expected G |~ plus.right |> expected type = expected } or { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
+      /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
       try {
         Type _xblockexpression = null;
         {
-          /* env(G, 'expected', Type) */
-          Type _environmentaccess = environmentAccess(G, "expected", Type.class);
-          final Type expected = _environmentaccess;
-          /* G |~ plus.left |> expected */
-          Expression _left_1 = plus.getLeft();
-          coerceInternal(G, _trace_, _left_1, expected);
-          /* G |~ plus.right |> expected */
-          Expression _right_1 = plus.getRight();
-          coerceInternal(G, _trace_, _right_1, expected);
-          Type _type = type = expected;
+          boolean _or = false;
+          if ((leftType instanceof StringType)) {
+            _or = true;
+          } else {
+            _or = ((leftType instanceof StringType) || (rightType instanceof StringType));
+          }
+          /* leftType instanceof StringType || rightType instanceof StringType */
+          if (!_or) {
+            sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
+          }
+          StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
+          Type _type = type = _createStringType;
           _xblockexpression = (_type);
         }
       } catch (Exception e) {
-        /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
-        try {
-          Type _xblockexpression_1 = null;
-          {
-            boolean _or = false;
-            if ((leftType instanceof StringType)) {
-              _or = true;
-            } else {
-              _or = ((leftType instanceof StringType) || (rightType instanceof StringType));
-            }
-            /* leftType instanceof StringType || rightType instanceof StringType */
-            if (!_or) {
-              sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
-            }
-            StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-            Type _type_1 = type = _createStringType;
-            _xblockexpression_1 = (_type_1);
+        {
+          boolean _and = false;
+          if (!(leftType instanceof IntType)) {
+            _and = false;
+          } else {
+            _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
           }
-        } catch (Exception e_1) {
-          {
-            boolean _and = false;
-            if (!(leftType instanceof IntType)) {
-              _and = false;
-            } else {
-              _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
-            }
-            /* leftType instanceof IntType && rightType instanceof IntType */
-            if (!_and) {
-              sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
-            }
-            type = leftType;
+          /* leftType instanceof IntType && rightType instanceof IntType */
+          if (!_and) {
+            sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
           }
+          type = leftType;
         }
       }
     }
@@ -646,18 +556,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   protected Result<Type> applyRuleBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
     
-    {
-      BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-      boolType = _createBooleanType;
-      /* G, 'expected' <- boolType |- negation.expression : boolType */
-      Expression _expression = negation.getExpression();
-      Result<Type> result = typeInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _expression);
-      checkAssignableTo(result.getFirst(), BooleanType.class);
-      boolType = (BooleanType) result.getFirst();
-      
-    }
+    /* G |- negation.expression : boolType */
+    Expression _expression = negation.getExpression();
+    Result<Type> result = typeInternal(G, _trace_, _expression);
+    checkAssignableTo(result.getFirst(), BooleanType.class);
+    boolType = (BooleanType) result.getFirst();
+    
     return new Result<Type>(boolType);
   }
   
@@ -680,21 +584,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     BooleanType boolType = null; // output parameter
     
     {
-      BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-      boolType = _createBooleanType;
-      /* G, 'expected' <- boolType |- andOr.left : boolType */
+      /* G |- andOr.left : boolType */
       Expression _left = andOr.getLeft();
-      Result<Type> result = typeInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _left);
+      Result<Type> result = typeInternal(G, _trace_, _left);
       checkAssignableTo(result.getFirst(), BooleanType.class);
       boolType = (BooleanType) result.getFirst();
       
-      /* G, 'expected' <- boolType |- andOr.right : boolType */
+      /* G |- andOr.right : boolType */
       Expression _right = andOr.getRight();
-      Result<Type> result_1 = typeInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _right);
+      Result<Type> result_1 = typeInternal(G, _trace_, _right);
       checkAssignableTo(result_1.getFirst(), BooleanType.class);
       boolType = (BooleanType) result_1.getFirst();
       
@@ -719,115 +617,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleArithmeticSigned(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     
-    {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- signed.expression : intType */
-      Expression _expression = signed.getExpression();
-      Result<Type> result = typeInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _expression);
-      checkAssignableTo(result.getFirst(), IntType.class);
-      intType = (IntType) result.getFirst();
-      
-    }
+    /* G |- signed.expression : var IntType intType */
+    Expression _expression = signed.getExpression();
+    IntType intType = null;
+    Result<Type> result = typeInternal(G, _trace_, _expression);
+    checkAssignableTo(result.getFirst(), IntType.class);
+    intType = (IntType) result.getFirst();
+    
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return new Result<Type>(_createIntType);
-  }
-  
-  protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleStringToInt(G, _subtrace_, string, type);
-      addToTrace(_trace_, ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleStringToInt) {
-      coerceThrowException(ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type),
-      	STRINGTOINT,
-      	e_applyRuleStringToInt, string, type, new ErrorInformation[] {new ErrorInformation(string), new ErrorInformation(type)});
-      return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleStringToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
-    
-    String _value = string.getValue();
-    Integer.parseInt(_value);
-    return new Result<Boolean>(true);
-  }
-  
-  protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleStringToBool(G, _subtrace_, string, type);
-      addToTrace(_trace_, ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleStringToBool) {
-      coerceThrowException(ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type),
-      	STRINGTOBOOL,
-      	e_applyRuleStringToBool, string, type, new ErrorInformation[] {new ErrorInformation(string), new ErrorInformation(type)});
-      return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleStringToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
-    
-    boolean _or = false;
-    String _value = string.getValue();
-    boolean _equalsIgnoreCase = _value.equalsIgnoreCase("true");
-    if (_equalsIgnoreCase) {
-      _or = true;
-    } else {
-      String _value_1 = string.getValue();
-      boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
-      _or = (_equalsIgnoreCase || _equalsIgnoreCase_1);
-    }
-    /* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
-    if (!Boolean.valueOf(_or)) {
-      sneakyThrowRuleFailedException("string.value.equalsIgnoreCase(\"true\") || string.value.equalsIgnoreCase(\"false\")");
-    }
-    return new Result<Boolean>(true);
-  }
-  
-  protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number, final IntType type) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleIntToInt(G, _subtrace_, number, type);
-      addToTrace(_trace_, ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleIntToInt) {
-      coerceThrowException(ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type),
-      	INTTOINT,
-      	e_applyRuleIntToInt, number, type, new ErrorInformation[] {new ErrorInformation(number), new ErrorInformation(type)});
-      return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleIntToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number, final IntType type) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
-  }
-  
-  protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool, final BooleanType type) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleBoolToBool(G, _subtrace_, bool, type);
-      addToTrace(_trace_, ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleBoolToBool) {
-      coerceThrowException(ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type),
-      	BOOLTOBOOL,
-      	e_applyRuleBoolToBool, bool, type, new ErrorInformation[] {new ErrorInformation(bool), new ErrorInformation(type)});
-      return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleBoolToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool, final BooleanType type) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
@@ -921,7 +719,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInterpretStringLiteral) {
-      interpretThrowException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "Object",
+      interpretThrowException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "String",
       	INTERPRETSTRINGLITERAL,
       	e_applyRuleInterpretStringLiteral, string, new ErrorInformation[] {new ErrorInformation(string)});
       return null;
@@ -929,42 +727,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Object> applyRuleInterpretStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
-    Object result = null; // output parameter
     
-    {
-      Type expected = null;
-      /* { expected = env(G, 'expected', IntType) result = Integer::parseInt(string.value) } or { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
-      try {
-        Object _xblockexpression = null;
-        {
-          /* env(G, 'expected', IntType) */
-          IntType _environmentaccess = environmentAccess(G, "expected", IntType.class);
-          expected = _environmentaccess;
-          String _value = string.getValue();
-          int _parseInt = Integer.parseInt(_value);
-          Object _result = result = Integer.valueOf(_parseInt);
-          _xblockexpression = (_result);
-        }
-      } catch (Exception e) {
-        /* { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
-        try {
-          Object _xblockexpression_1 = null;
-          {
-            /* env(G, 'expected', BooleanType) */
-            BooleanType _environmentaccess_1 = environmentAccess(G, "expected", BooleanType.class);
-            expected = _environmentaccess_1;
-            String _value_1 = string.getValue();
-            boolean _parseBoolean = Boolean.parseBoolean(_value_1);
-            Object _result_1 = result = Boolean.valueOf(_parseBoolean);
-            _xblockexpression_1 = (_result_1);
-          }
-        } catch (Exception e_1) {
-          String _value_2 = string.getValue();
-          result = _value_2;
-        }
-      }
-    }
-    return new Result<Object>(result);
+    String _value = string.getValue();
+    return new Result<Object>(_value);
   }
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
@@ -1008,22 +773,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     Integer result = null; // output parameter
     
     {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- plus.left ~> var Integer leftResult */
+      /* G |- plus.left ~> var Integer leftResult */
       Expression _left = plus.getLeft();
       Integer leftResult = null;
-      Result<Object> result_1 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _left);
+      Result<Object> result_1 = interpretInternal(G, _trace_, _left);
       checkAssignableTo(result_1.getFirst(), Integer.class);
       leftResult = (Integer) result_1.getFirst();
       
-      /* G, 'expected' <- intType |- plus.right ~> var Integer rightResult */
+      /* G |- plus.right ~> var Integer rightResult */
       Expression _right = plus.getRight();
       Integer rightResult = null;
-      Result<Object> result_2 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _right);
+      Result<Object> result_2 = interpretInternal(G, _trace_, _right);
       checkAssignableTo(result_2.getFirst(), Integer.class);
       rightResult = (Integer) result_2.getFirst();
       
@@ -1054,22 +814,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     Integer result = null; // output parameter
     
     {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- multiOrDiv.left ~> var Integer leftResult */
+      /* G |- multiOrDiv.left ~> var Integer leftResult */
       Expression _left = multiOrDiv.getLeft();
       Integer leftResult = null;
-      Result<Object> result_1 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _left);
+      Result<Object> result_1 = interpretInternal(G, _trace_, _left);
       checkAssignableTo(result_1.getFirst(), Integer.class);
       leftResult = (Integer) result_1.getFirst();
       
-      /* G, 'expected' <- intType |- multiOrDiv.right ~> var Integer rightResult */
+      /* G |- multiOrDiv.right ~> var Integer rightResult */
       Expression _right = multiOrDiv.getRight();
       Integer rightResult = null;
-      Result<Object> result_2 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _right);
+      Result<Object> result_2 = interpretInternal(G, _trace_, _right);
       checkAssignableTo(result_2.getFirst(), Integer.class);
       rightResult = (Integer) result_2.getFirst();
       
@@ -1109,13 +864,10 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     Integer result = null; // output parameter
     
     {
-      IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
-      /* G, 'expected' <- intType |- signed.expression ~> var Integer expResult */
+      /* G |- signed.expression ~> var Integer expResult */
       Expression _expression = signed.getExpression();
       Integer expResult = null;
-      Result<Object> result_1 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", intType)
-      ), _trace_, _expression);
+      Result<Object> result_1 = interpretInternal(G, _trace_, _expression);
       checkAssignableTo(result_1.getFirst(), Integer.class);
       expResult = (Integer) result_1.getFirst();
       
@@ -1144,22 +896,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     Boolean result = null; // output parameter
     
     {
-      BooleanType boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
-      /* G, 'expected' <- boolType |- andOr.left ~> var Boolean leftResult */
+      /* G |- andOr.left ~> var Boolean leftResult */
       Expression _left = andOr.getLeft();
       Boolean leftResult = null;
-      Result<Object> result_1 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _left);
+      Result<Object> result_1 = interpretInternal(G, _trace_, _left);
       checkAssignableTo(result_1.getFirst(), Boolean.class);
       leftResult = (Boolean) result_1.getFirst();
       
-      /* G, 'expected' <- boolType |- andOr.right ~> var Boolean rightResult */
+      /* G |- andOr.right ~> var Boolean rightResult */
       Expression _right = andOr.getRight();
       Boolean rightResult = null;
-      Result<Object> result_2 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _right);
+      Result<Object> result_2 = interpretInternal(G, _trace_, _right);
       checkAssignableTo(result_2.getFirst(), Boolean.class);
       rightResult = (Boolean) result_2.getFirst();
       
@@ -1209,13 +956,10 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     Boolean result = null; // output parameter
     
     {
-      BooleanType boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
-      /* G, 'expected' <- boolType |- neg.expression ~> var Boolean expResult */
+      /* G |- neg.expression ~> var Boolean expResult */
       Expression _expression = neg.getExpression();
       Boolean expResult = null;
-      Result<Object> result_1 = interpretInternal(environmentComposition(
-        G, environmentEntry("expected", boolType)
-      ), _trace_, _expression);
+      Result<Object> result_1 = interpretInternal(G, _trace_, _expression);
       checkAssignableTo(result_1.getFirst(), Boolean.class);
       expResult = (Boolean) result_1.getFirst();
       

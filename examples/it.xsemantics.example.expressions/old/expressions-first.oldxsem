@@ -1,9 +1,4 @@
-/*
- * This system allows to convert implicitly
- * integers and booleans to strings, and '+' can
- * be used also for string concatenations
- */
-system it.xsemantics.example.expressions.typing.ExpressionsSemantics
+system it.xsemantics.example.expressions.typing.FirstExpressionsSemantics
 
 validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
 
@@ -64,8 +59,8 @@ from {
 rule Comparison
 	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
 from {
-	empty |- comparison.left : var Type leftType
-	empty |- comparison.right : var Type rightType
+	G |- comparison.left : var Type leftType
+	G |- comparison.right : var Type rightType
 	
 	// cannot compare booleans
 	(leftType instanceof IntType && rightType instanceof IntType) ||
@@ -171,8 +166,8 @@ from {
 rule InterpretComparison
 	G |- Comparison comparison ~> Boolean result
 from {
-	empty |- comparison.left ~> var Object leftResult
-	empty |- comparison.right ~> var Object rightResult
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
 	
 	if (leftResult instanceof String && rightResult instanceof String) {
 		result = leftResult.toString < rightResult.toString
@@ -185,8 +180,8 @@ from {
 rule InterpretEquals
 	G |- Equals comparison ~> Boolean result
 from {
-	empty |- comparison.left ~> var Object leftResult
-	empty |- comparison.right ~> var Object rightResult
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
 	
 	result = leftResult.toString == rightResult.toString
 }

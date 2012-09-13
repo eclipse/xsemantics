@@ -263,8 +263,8 @@ Note that we use the operator <span class="inlinecode">or</span>, <a href="Xsema
 <span class="keyword">rule</span>&nbsp;Comparison<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;:&nbsp;ExpressionsFactory::eINSTANCE.createBooleanType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;leftType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;rightType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;cannot&nbsp;compare&nbsp;booleans<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;(leftType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType&nbsp;&amp;&amp;&nbsp;rightType&nbsp;<span class="keyword">instanceof</span>&nbsp;IntType)&nbsp;||<br/>
@@ -554,8 +554,8 @@ assumed to be a <span class="inlinecode">Boolean</span>.
 <span class="keyword">rule</span>&nbsp;InterpretComparison<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Comparison&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(leftResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String&nbsp;&amp;&amp;&nbsp;rightResult&nbsp;<span class="keyword">instanceof</span>&nbsp;String)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;&lt;&nbsp;rightResult.toString<br/>
@@ -568,8 +568,8 @@ assumed to be a <span class="inlinecode">Boolean</span>.
 <span class="keyword">rule</span>&nbsp;InterpretEquals<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;Equals&nbsp;comparison&nbsp;~&gt;&nbsp;Boolean&nbsp;result<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.left&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;leftResult<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;comparison.right&nbsp;~&gt;&nbsp;<span class="keyword">var</span>&nbsp;Object&nbsp;rightResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;leftResult.toString&nbsp;==&nbsp;rightResult.toString<br/>
 }<br/>
