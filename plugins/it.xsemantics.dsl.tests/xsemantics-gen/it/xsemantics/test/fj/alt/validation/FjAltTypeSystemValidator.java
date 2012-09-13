@@ -9,24 +9,29 @@ import org.eclipse.xtext.validation.Check;
 
 public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject
-  protected FjAltTypeSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected FjAltTypeSystem xsemanticsSystem;
+  
+  @Override
+  protected FjAltTypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Override
   @Check
   public void checkMain(final Program program) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMain(program),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMain(program),
     		program);
   }
   
   @Override
   @Check
   public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassOk(clazz),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkClassOk(clazz),
     		clazz);
   }
 }

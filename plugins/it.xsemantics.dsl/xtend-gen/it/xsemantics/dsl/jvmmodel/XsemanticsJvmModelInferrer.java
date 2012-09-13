@@ -23,7 +23,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +44,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -58,6 +58,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -284,12 +285,12 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
               XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _cloneWithProxies);
             } else {
               EList<JvmTypeReference> _superTypes_2 = it.getSuperTypes();
-              JvmTypeReference _newTypeRef_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsBasedDeclarativeValidator.class);
+              JvmTypeReference _newTypeRef_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, AbstractDeclarativeValidator.class);
               XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_2, _newTypeRef_1);
             }
           }
           EList<JvmMember> _members = it.getMembers();
-          JvmParameterizedTypeReference _createTypeRef = XsemanticsJvmModelInferrer.this._typeReferences.createTypeRef(inferredClass);
+          JvmTypeReference _newTypeRef_2 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsValidatorErrorGenerator.class);
           final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
               public void apply(final JvmField it) {
                 EList<JvmAnnotationReference> _annotations = it.getAnnotations();
@@ -298,49 +299,49 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 it.setVisibility(JvmVisibility.PROTECTED);
               }
             };
-          JvmField _field = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "xsemanticsSystem", _createTypeRef, _function);
+          JvmField _field = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "errorGenerator", _newTypeRef_2, _function);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
-          boolean _extendsAnAbstractDeclarativeValidatorExplicitly = XsemanticsJvmModelInferrer.this.extendsAnAbstractDeclarativeValidatorExplicitly(ts);
-          if (_extendsAnAbstractDeclarativeValidatorExplicitly) {
-            EList<JvmMember> _members_1 = it.getMembers();
-            JvmTypeReference _newTypeRef_2 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(ts, XsemanticsValidatorErrorGenerator.class);
-            final Procedure1<JvmField> _function_1 = new Procedure1<JvmField>() {
-                public void apply(final JvmField it) {
+          EList<JvmMember> _members_1 = it.getMembers();
+          JvmParameterizedTypeReference _createTypeRef = XsemanticsJvmModelInferrer.this._typeReferences.createTypeRef(inferredClass);
+          final Procedure1<JvmField> _function_1 = new Procedure1<JvmField>() {
+              public void apply(final JvmField it) {
+                EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+                JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Inject.class);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+                it.setVisibility(JvmVisibility.PROTECTED);
+              }
+            };
+          JvmField _field_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "xsemanticsSystem", _createTypeRef, _function_1);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, _field_1);
+          EList<JvmMember> _members_2 = it.getMembers();
+          JvmParameterizedTypeReference _createTypeRef_1 = XsemanticsJvmModelInferrer.this._typeReferences.createTypeRef(inferredClass);
+          JvmOperation _getter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toGetter(ts, "xsemanticsSystem", _createTypeRef_1);
+          final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
+              public void apply(final JvmOperation it) {
+                it.setVisibility(JvmVisibility.PROTECTED);
+                JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
+                boolean _notEquals = (!Objects.equal(_superSystem, null));
+                if (_notEquals) {
                   EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-                  JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Inject.class);
+                  JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Override.class);
                   XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
-                  it.setVisibility(JvmVisibility.PROTECTED);
                 }
-              };
-            JvmField _field_1 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toField(ts, "errorGenerator", _newTypeRef_2, _function_1);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_1, _field_1);
-          }
+              }
+            };
+          JvmOperation _doubleArrow = ObjectExtensions.<JvmOperation>operator_doubleArrow(_getter, _function_2);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _doubleArrow);
           EList<CheckRule> _checkrules = ts.getCheckrules();
-          final Procedure1<CheckRule> _function_2 = new Procedure1<CheckRule>() {
+          final Procedure1<CheckRule> _function_3 = new Procedure1<CheckRule>() {
               public void apply(final CheckRule rule) {
                 EList<JvmMember> _members = it.getMembers();
                 JvmOperation _compileValidatorCheckRuleMethod = XsemanticsJvmModelInferrer.this.compileValidatorCheckRuleMethod(rule);
                 XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileValidatorCheckRuleMethod);
               }
             };
-          IterableExtensions.<CheckRule>forEach(_checkrules, _function_2);
+          IterableExtensions.<CheckRule>forEach(_checkrules, _function_3);
         }
       };
     _accept_1.initializeLater(_function_1);
-  }
-  
-  public boolean extendsAnAbstractDeclarativeValidatorExplicitly(final XsemanticsSystem system) {
-    boolean _or = false;
-    JvmParameterizedTypeReference _validatorExtends = system.getValidatorExtends();
-    boolean _notEquals = (!Objects.equal(_validatorExtends, null));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      JvmParameterizedTypeReference _superSystem = system.getSuperSystem();
-      boolean _notEquals_1 = (!Objects.equal(_superSystem, null));
-      _or = (_notEquals || _notEquals_1);
-    }
-    return _or;
   }
   
   public JvmField genIssueField(final Rule rule) {
@@ -1221,23 +1222,11 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter_3);
           final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
               public void apply(final ITreeAppendable it) {
-                XsemanticsSystem _containingSystem = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingSystem(rule);
-                final boolean relyOnErrorGenerator = XsemanticsJvmModelInferrer.this.extendsAnAbstractDeclarativeValidatorExplicitly(_containingSystem);
                 StringConcatenation _builder = new StringConcatenation();
-                {
-                  if (relyOnErrorGenerator) {
-                    _builder.append("errorGenerator.");
-                  }
-                }
-                _builder.append("generateErrors(");
-                {
-                  if (relyOnErrorGenerator) {
-                    _builder.append("this, ");
-                  }
-                }
-                _builder.newLineIfNotEmpty();
+                _builder.append("errorGenerator.generateErrors(this,");
+                _builder.newLine();
                 _builder.append("\t");
-                _builder.append("xsemanticsSystem.");
+                _builder.append("getXsemanticsSystem().");
                 String _methodName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.methodName(rule);
                 _builder.append(_methodName, "	");
                 _builder.append("(");

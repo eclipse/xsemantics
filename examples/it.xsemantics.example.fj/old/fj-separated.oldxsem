@@ -236,6 +236,8 @@ from {
 	G |- expType <: cast.type
 }
 
+// you can declare a rule of the same kind of the super system
+// with different name without an override
 rule CheckMethodOverridePredicate
 	G ||- Method current ~~ Method previous
 from {

@@ -70,6 +70,17 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
   }
   
   @Test
+  public void testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName() {
+    XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
+    CharSequence _testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName = this.testFiles.testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName();
+    XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_loadBaseSystems, _testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName);
+    EClass _rule = XsemanticsPackage.eINSTANCE.getRule();
+    this._validationTestHelper.assertError(_parseWithBaseSystem, _rule, 
+      IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS, 
+      "Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2");
+  }
+  
+  @Test
   public void testDuplicateCheckRuleOfTheSameKindFromBaseSystem() {
     XsemanticsSystem _loadBaseSystems = this.loadBaseSystems();
     CharSequence _testDuplicateCheckRuleOfTheSameKindFromSuperSystem = this.testFiles.testDuplicateCheckRuleOfTheSameKindFromSuperSystem();

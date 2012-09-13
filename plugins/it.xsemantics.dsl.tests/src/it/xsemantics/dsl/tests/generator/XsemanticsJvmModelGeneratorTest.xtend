@@ -533,19 +533,27 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.TypeSystem;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
-public class TypeSystemValidator extends XsemanticsBasedDeclarativeValidator {
+public class TypeSystemValidator extends AbstractDeclarativeValidator {
+  @Inject
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  
   @Inject
   protected TypeSystem xsemanticsSystem;
   
+  protected TypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
+  
   @Check
   public void checkEObject(final EObject obj) {
-    generateErrors(
-    	xsemanticsSystem.checkEObject(obj),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(obj),
     		obj);
   }
 }
@@ -1092,15 +1100,19 @@ import org.eclipse.xtext.validation.Check;
 
 public class TypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
-  protected TypeSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected TypeSystem xsemanticsSystem;
+  
+  protected TypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkEObject(final EObject obj) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkEObject(obj),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(obj),
     		obj);
   }
 }
@@ -1290,15 +1302,20 @@ import org.eclipse.xtext.validation.Check;
 
 public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
   @Inject
-  protected ExtendedTypeSystem2 xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected ExtendedTypeSystem2 xsemanticsSystem;
+  
+  @Override
+  protected ExtendedTypeSystem2 getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkEObject(final EObject o) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkEObject(o),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(o),
     		o);
   }
 }
@@ -1453,16 +1470,21 @@ import org.eclipse.xtext.validation.Check;
 
 public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSystem2Validator {
   @Inject
-  protected ExtendedTypeSystemWithRuleOverride xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected ExtendedTypeSystemWithRuleOverride xsemanticsSystem;
+  
+  @Override
+  protected ExtendedTypeSystemWithRuleOverride getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Override
   @Check
   public void checkEObject(final EObject o) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkEObject(o),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(o),
     		o);
   }
 }
@@ -1899,23 +1921,28 @@ import org.eclipse.xtext.validation.Check;
 
 public class ExtendedTypeSystemValidator extends TypeSystemValidator {
   @Inject
-  protected ExtendedTypeSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected ExtendedTypeSystem xsemanticsSystem;
+  
+  @Override
+  protected ExtendedTypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Override
   @Check
   public void checkEObject(final EObject o) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkEObject(o),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(o),
     		o);
   }
   
   @Check
   public void checkEClass(final EClass o) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkEClass(o),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEClass(o),
     		o);
   }
 }

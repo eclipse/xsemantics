@@ -95,6 +95,10 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     }
   }
   
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject exp, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -103,9 +107,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleXExpressionType) {
-      throwRuleFailedException(ruleName("XExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("XExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
       	XEXPRESSIONTYPE,
-      	e_applyRuleXExpressionType, new ErrorInformation(e));
+      	e_applyRuleXExpressionType, e, new ErrorInformation[] {new ErrorInformation(e)});
       return null;
     }
   }
@@ -124,9 +128,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleXVariableDeclarationType) {
-      throwRuleFailedException(ruleName("XVariableDeclarationType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("XVariableDeclarationType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
       	XVARIABLEDECLARATIONTYPE,
-      	e_applyRuleXVariableDeclarationType, new ErrorInformation(e));
+      	e_applyRuleXVariableDeclarationType, e, new ErrorInformation[] {new ErrorInformation(e)});
       return null;
     }
   }
@@ -145,9 +149,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleRuleInvocationExpressionType) {
-      throwRuleFailedException(ruleName("RuleInvocationExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("RuleInvocationExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
       	RULEINVOCATIONEXPRESSIONTYPE,
-      	e_applyRuleRuleInvocationExpressionType, new ErrorInformation(e));
+      	e_applyRuleRuleInvocationExpressionType, e, new ErrorInformation[] {new ErrorInformation(e)});
       return null;
     }
   }
@@ -172,9 +176,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleExpressionInConclusionType) {
-      throwRuleFailedException(ruleName("ExpressionInConclusionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("ExpressionInConclusionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
       	EXPRESSIONINCONCLUSIONTYPE,
-      	e_applyRuleExpressionInConclusionType, new ErrorInformation(e));
+      	e_applyRuleExpressionInConclusionType, e, new ErrorInformation[] {new ErrorInformation(e)});
       return null;
     }
   }
@@ -199,9 +203,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleRuleParameterType) {
-      throwRuleFailedException(ruleName("RuleParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("RuleParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
       	RULEPARAMETERTYPE,
-      	e_applyRuleRuleParameterType, new ErrorInformation(p));
+      	e_applyRuleRuleParameterType, p, new ErrorInformation[] {new ErrorInformation(p)});
       return null;
     }
   }
@@ -221,9 +225,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleInputParameterType) {
-      throwRuleFailedException(ruleName("InputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("InputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
       	INPUTPARAMETERTYPE,
-      	e_applyRuleInputParameterType, new ErrorInformation(p));
+      	e_applyRuleInputParameterType, p, new ErrorInformation[] {new ErrorInformation(p)});
       return null;
     }
   }
@@ -243,9 +247,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleOutputParameterType) {
-      throwRuleFailedException(ruleName("OutputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
+      typeThrowException(ruleName("OutputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
       	OUTPUTPARAMETERTYPE,
-      	e_applyRuleOutputParameterType, new ErrorInformation(p));
+      	e_applyRuleOutputParameterType, p, new ErrorInformation[] {new ErrorInformation(p)});
       return null;
     }
   }

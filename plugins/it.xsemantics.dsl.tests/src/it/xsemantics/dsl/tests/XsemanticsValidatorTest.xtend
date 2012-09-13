@@ -70,6 +70,19 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName() {
+		loadBaseSystems.
+			parseWithBaseSystem(
+				testFiles.testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName
+			).
+		assertError(
+			XsemanticsPackage::eINSTANCE.rule,
+			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+			"Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
+		)
+	}
+
+	@Test
 	def void testDuplicateCheckRuleOfTheSameKindFromBaseSystem() {
 		loadBaseSystems.
 			parseWithBaseSystem(

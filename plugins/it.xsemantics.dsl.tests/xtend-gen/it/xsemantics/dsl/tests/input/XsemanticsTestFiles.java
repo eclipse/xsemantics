@@ -3591,6 +3591,29 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// a rule of the same kind is already defined in TypeSystem");
+    _builder.newLine();
+    _builder.append("// but with a different name!");
+    _builder.newLine();
+    _builder.append("axiom MyRuleWithDifferentName");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject c : c.eClass");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testDuplicateCheckRuleOfTheSameKindFromSuperSystem() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride ");

@@ -333,8 +333,8 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 '''
 @Check
   public void checkEObject(final EObject obj) {
-    generateErrors(
-    	xsemanticsSystem.checkEObject(obj),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkEObject(obj),
     		obj);
   }'''
 )

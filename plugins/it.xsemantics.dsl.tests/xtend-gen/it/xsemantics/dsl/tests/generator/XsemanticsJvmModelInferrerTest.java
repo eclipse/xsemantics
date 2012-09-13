@@ -536,10 +536,10 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("public void checkEObject(final EObject obj) {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("generateErrors(");
+    _builder.append("errorGenerator.generateErrors(this,");
     _builder.newLine();
     _builder.append("    \t");
-    _builder.append("xsemanticsSystem.checkEObject(obj),");
+    _builder.append("getXsemanticsSystem().checkEObject(obj),");
     _builder.newLine();
     _builder.append("    \t\t");
     _builder.append("obj);");

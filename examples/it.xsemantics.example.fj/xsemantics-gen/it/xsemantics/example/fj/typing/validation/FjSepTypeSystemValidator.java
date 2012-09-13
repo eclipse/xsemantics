@@ -15,47 +15,52 @@ import org.eclipse.xtext.validation.Check;
  */
 public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
   @Inject
-  protected FjSepTypeSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected FjSepTypeSystem xsemanticsSystem;
+  
+  @Override
+  protected FjSepTypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassOk(clazz),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkClassOk(clazz),
     		clazz);
   }
   
   @Override
   @Check
   public void checkMain(final Program program) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMain(program),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMain(program),
     		program);
   }
   
   @Override
   @Check
   public void checkMethodBody(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodBody(method),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMethodBody(method),
     		method);
   }
   
   @Override
   @Check
   public void checkField(final Field field) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkField(field),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkField(field),
     		field);
   }
   
   @Override
   @Check
   public void checkMethodOverride(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodOverride(method),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMethodOverride(method),
     		method);
   }
 }

@@ -1610,6 +1610,18 @@ class XsemanticsTestFiles {
 		G |- EObject c : c.eClass
 	'''
 
+	def testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName() '''
+	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
+		extends it.xsemantics.test.ExtendedTypeSystem2
+	
+	import org.eclipse.emf.ecore.*
+	
+	// a rule of the same kind is already defined in TypeSystem
+	// but with a different name!
+	axiom MyRuleWithDifferentName
+		G |- EObject c : c.eClass
+	'''
+
 	def testDuplicateCheckRuleOfTheSameKindFromSuperSystem() '''
 	system it.xsemantics.test.ExtendedTypeSystemWithRuleOverride 
 		extends it.xsemantics.test.ExtendedTypeSystem2

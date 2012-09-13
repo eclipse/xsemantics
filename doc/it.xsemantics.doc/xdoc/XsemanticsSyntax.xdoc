@@ -485,7 +485,7 @@ ul[
 	code[Xsemantics][validatorExtends] clause, ref:validatorExtends[],
 	is not used,
 	then the generated validator inherits from 
-	codeRef[it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator],
+	codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator],
 	otherwise it will inherit from the one specified with code[Xsemantics][validatorExtends]) ; ]
 ]
 

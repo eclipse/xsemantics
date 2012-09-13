@@ -9,15 +9,19 @@ import org.eclipse.xtext.validation.Check;
 
 public class LambdaXsemanticsSystemValidator extends AbstractLambdaJavaValidator {
   @Inject
-  protected LambdaXsemanticsSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected LambdaXsemanticsSystem xsemanticsSystem;
+  
+  protected LambdaXsemanticsSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkProgram(final Program program) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkProgram(program),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkProgram(program),
     		program);
   }
 }

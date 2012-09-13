@@ -11,50 +11,54 @@ import org.eclipse.xtext.validation.Check;
 
 public class FjFirstTypeSystemValidator extends AbstractFJJavaValidator {
   @Inject
-  protected FjFirstTypeSystem xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected FjFirstTypeSystem xsemanticsSystem;
+  
+  protected FjFirstTypeSystem getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkMain(final Program program) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMain(program),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMain(program),
     		program);
   }
   
   @Check
   public void checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassOk(clazz),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkClassOk(clazz),
     		clazz);
   }
   
   @Check
   public void checkMethodBody(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodBody(method),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMethodBody(method),
     		method);
   }
   
   @Check
   public void checkField(final Field field) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkField(field),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkField(field),
     		field);
   }
   
   @Check
   public void checkMethodOverride(final Method method) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkMethodOverride(method),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkMethodOverride(method),
     		method);
   }
   
   @Check
   public void checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkClassHierachyNotCyclic(cl),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkClassHierachyNotCyclic(cl),
     		cl);
   }
 }

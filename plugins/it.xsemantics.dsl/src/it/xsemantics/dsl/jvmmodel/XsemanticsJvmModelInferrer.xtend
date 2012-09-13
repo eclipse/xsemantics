@@ -17,7 +17,6 @@ import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmField
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
@@ -174,18 +174,23 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			else if (ts.validatorExtends != null)
 				superTypes += ts.validatorExtends.cloneWithProxies
 			else
-				superTypes += ts.newTypeRef(typeof(XsemanticsBasedDeclarativeValidator))
-			
+				superTypes += ts.newTypeRef(typeof(AbstractDeclarativeValidator))
+
+			members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
+				annotations += ts.toAnnotation(typeof(Inject))
+				visibility = JvmVisibility::PROTECTED
+			]
+						
 			members += ts.toField("xsemanticsSystem", inferredClass.createTypeRef) [
 				annotations += ts.toAnnotation(typeof(Inject))
 				visibility = JvmVisibility::PROTECTED
 			]
 			
-			if (ts.extendsAnAbstractDeclarativeValidatorExplicitly)
-				members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
-					annotations += ts.toAnnotation(typeof(Inject))
-					visibility = JvmVisibility::PROTECTED
-				]
+			members += ts.toGetter("xsemanticsSystem", inferredClass.createTypeRef) => [
+				visibility = JvmVisibility::PROTECTED
+				if (ts.superSystem != null)
+   					annotations += ts.toAnnotation(typeof(Override))
+			]
 			
 			ts.checkrules.forEach [
 				rule |
@@ -193,10 +198,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			]
 		]
    	}
-
-	def extendsAnAbstractDeclarativeValidatorExplicitly(XsemanticsSystem system) {
-		system.validatorExtends != null || system.superSystem != null
-	}
 
    	def genIssueField(Rule rule) {
    		val issueField = rule.toField(
@@ -604,13 +605,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				)
    			
    			body = [
-   				val relyOnErrorGenerator = 
-   					rule.containingSystem.extendsAnAbstractDeclarativeValidatorExplicitly
-   				
    				it.append(
    				'''
-				«IF relyOnErrorGenerator»errorGenerator.«ENDIF»generateErrors(«IF relyOnErrorGenerator»this, «ENDIF»
-					xsemanticsSystem.«rule.methodName»(«rule.element.parameter.name»),
+				errorGenerator.generateErrors(this,
+					getXsemanticsSystem().«rule.methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
    				)
    			]

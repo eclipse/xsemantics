@@ -9,15 +9,19 @@ import org.eclipse.xtext.validation.Check;
 
 public class ExpressionsSemanticsValidator extends AbstractExpressionsJavaValidator {
   @Inject
-  protected ExpressionsSemantics xsemanticsSystem;
+  protected XsemanticsValidatorErrorGenerator errorGenerator;
   
   @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
+  protected ExpressionsSemantics xsemanticsSystem;
+  
+  protected ExpressionsSemantics getXsemanticsSystem() {
+    return this.xsemanticsSystem;
+  }
   
   @Check
   public void checkVariable(final Variable variable) {
-    errorGenerator.generateErrors(this, 
-    	xsemanticsSystem.checkVariable(variable),
+    errorGenerator.generateErrors(this,
+    	getXsemanticsSystem().checkVariable(variable),
     		variable);
   }
 }

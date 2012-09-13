@@ -1,5 +1,7 @@
 system it.xsemantics.dsl.typing.XsemanticsTypeSystemGen
 
+validatorExtends it.xsemantics.dsl.validation.AbstractXsemanticsJavaValidator
+
 import org.eclipse.xtext.xbase.*
 import org.eclipse.xtext.common.types.*
 import it.xsemantics.dsl.xsemantics.*

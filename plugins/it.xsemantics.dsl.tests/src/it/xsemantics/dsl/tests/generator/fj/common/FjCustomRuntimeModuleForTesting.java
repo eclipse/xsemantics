@@ -2,7 +2,6 @@ package it.xsemantics.dsl.tests.generator.fj.common;
 
 import it.xsemantics.example.fj.FJRuntimeModule;
 import it.xsemantics.runtime.StringRepresentation;
-import it.xsemantics.runtime.validation.XsemanticsBasedDeclarativeValidator;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
@@ -29,6 +28,6 @@ public class FjCustomRuntimeModuleForTesting extends FJRuntimeModule {
 	}
 
 	public java.lang.Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
-		return XsemanticsBasedDeclarativeValidator.class;
+		return NullTestValidator.class;
 	}
 }
