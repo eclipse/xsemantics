@@ -3,6 +3,9 @@
  */
 package it.xsemantics.example.fj;
 
+import it.xsemantics.example.fj.typing.FjStringRepresentation;
+import it.xsemantics.runtime.StringRepresentation;
+
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -36,4 +39,7 @@ public class FJRuntimeModule extends it.xsemantics.example.fj.AbstractFJRuntimeM
 	}
 	*/
 	
+	public Class<? extends StringRepresentation> bindStringRepresentation() {
+		return FjStringRepresentation.class;
+	}
 }

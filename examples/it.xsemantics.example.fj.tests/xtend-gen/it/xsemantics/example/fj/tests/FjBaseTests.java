@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import it.xsemantics.example.fj.FJInjectorProvider;
 import it.xsemantics.example.fj.fj.Program;
 import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.StringRepresentation;
+import it.xsemantics.runtime.util.TraceUtils;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -24,6 +26,12 @@ public class FjBaseTests {
   
   @Inject
   private ValidationTestHelper _validationTestHelper;
+  
+  @Inject
+  protected TraceUtils traceUtils;
+  
+  @Inject
+  protected StringRepresentation stringRep;
   
   protected RuleApplicationTrace trace;
   

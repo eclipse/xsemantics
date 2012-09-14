@@ -11,6 +11,8 @@ import com.google.inject.Inject
 import org.eclipse.xtext.junit4.util.ParseHelper
 import it.xsemantics.example.fj.fj.Program
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.StringRepresentation
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FJInjectorProvider))
@@ -19,6 +21,10 @@ class FjBaseTests {
 	@Inject extension ParseHelper<Program>
 	
 	@Inject extension ValidationTestHelper
+	
+	@Inject protected TraceUtils traceUtils
+	
+	@Inject protected StringRepresentation stringRep
 	
 	protected RuleApplicationTrace trace
 	
