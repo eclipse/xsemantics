@@ -7,11 +7,19 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.runner.RunWith
+import com.google.inject.Inject
+import org.eclipse.xtext.junit4.util.ParseHelper
+import it.xsemantics.example.fj.fj.Program
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FJInjectorProvider))
 class FjBaseTests {
 
+	@Inject extension ParseHelper<Program>
+	
+	@Inject extension ValidationTestHelper
+	
 	protected RuleApplicationTrace trace
 	
 	@BeforeClass
@@ -22,6 +30,12 @@ class FjBaseTests {
 	@Before
 	def void setUp() {
 		trace = new RuleApplicationTrace()
+	}
+	
+	def parseAndAssertNoError(CharSequence prog) {
+		prog.parse => [
+			it.assertNoErrors
+		]
 	}
 
 }
