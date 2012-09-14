@@ -26,6 +26,7 @@ Workflow {
     component = Generator {
         pathRtProject = runtimeProject
         pathUiProject = "${runtimeProject}.ui"
+        pathTestProject = "${runtimeProject}.tests"
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
         language = {
@@ -96,6 +97,9 @@ Workflow {
                 //    backtrack = true
                 //}
             }
+            
+            // generates junit test support classes into Generator#pathTestProject
+            fragment = junit.Junit4Fragment {}
 
             // project wizard (optional)
             fragment = projectWizard.SimpleProjectWizardFragment {

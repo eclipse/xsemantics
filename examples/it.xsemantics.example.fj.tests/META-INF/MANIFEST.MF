@@ -8,7 +8,8 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.example.fj.tests,
- it.xsemantics.example.fj.tests.loader
+ it.xsemantics.example.fj.tests.loader,
+ it.xsemantics.example.fj
 Require-Bundle: org.eclipse.core.runtime,
  it.xsemantics.example.fj;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
@@ -22,5 +23,17 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.junit;bundle-version="1.0.0"
+ org.eclipse.xtext.junit;bundle-version="1.0.0",
+ it.xsemantics.example.fj.ui,
+ org.eclipse.xtext.junit4,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtend.lib,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
+Import-Package: org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
