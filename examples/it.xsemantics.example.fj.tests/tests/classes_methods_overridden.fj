@@ -1,17 +1,17 @@
 // each subclass overrides a method
 
 class A {
-	A a;
-	A m() { return new A(); }
-	A n() { return new A(); }
+	Object a;
+	A m() { return new A(new Object()); }
+	A n() { return new A(new Object()); }
 }
 
 class B extends A {
 	Object b;
-	A m() { return new B(); }
+	A m() { return new B(new Object(), new Object()); }
 }
 
 class C extends B {
 	Object c;
-	A n() { return new C(); }
+	A n() { return new C(new Object(), new Object(), new Object()); }
 }
