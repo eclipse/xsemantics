@@ -1,12 +1,15 @@
 package it.xsemantics.example.fj.tests
 
+import it.xsemantics.example.fj.fj.Cast
+import it.xsemantics.example.fj.fj.Field
+import it.xsemantics.example.fj.fj.Method
+import it.xsemantics.example.fj.fj.New
+import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.typing.FjStringRepresentation
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import it.xsemantics.example.fj.fj.New
-import it.xsemantics.example.fj.fj.Selection
-import it.xsemantics.example.fj.fj.Field
-import it.xsemantics.example.fj.fj.Method
+import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.BasicType
 
 class FjStringRepresentationForTests extends FjStringRepresentation {
 	override stringRep(EObject eObject) {
@@ -42,5 +45,16 @@ class FjStringRepresentationForTests extends FjStringRepresentation {
 			}
 		}
 	}
+	
+	def dispatch customRep(Cast cast) {
+		'''(«cast.type.classref.name») «cast.expression.string»'''
+	}
+	
+	def dispatch customRep(ClassType c) {
+		c.classref.name
+	}
 
+	def dispatch customRep(BasicType c) {
+		c.basic
+	}
 }

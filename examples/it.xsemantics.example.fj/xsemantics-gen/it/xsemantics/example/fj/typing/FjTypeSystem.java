@@ -91,6 +91,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String RSELECTION = "it.xsemantics.example.fj.typing.rules.RSelection";
   
+  public final static String RCAST = "it.xsemantics.example.fj.typing.rules.RCast";
+  
   @Inject
   private FjAuxiliaryFunctions fjAux;
   
@@ -1408,6 +1410,54 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
               }
             }
           }
+        }
+      }
+    }
+    return new Result<Expression>(exp1);
+  }
+  
+  protected Result<Expression> reduceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast exp) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Expression> _result_ = applyRuleRCast(G, _subtrace_, exp);
+      addToTrace(_trace_, ruleName("RCast") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleRCast) {
+      reduceThrowException(ruleName("RCast") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + "Expression",
+      	RCAST,
+      	e_applyRuleRCast, exp, new ErrorInformation[] {new ErrorInformation(exp)});
+      return null;
+    }
+  }
+  
+  protected Result<Expression> applyRuleRCast(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast exp) throws RuleFailedException {
+    Expression exp1 = null; // output parameter
+    
+    {
+      final Cast cast = this.<Cast>clone(exp);
+      Expression _expression = cast.getExpression();
+      boolean _isValue = this.semanticsUtils.isValue(_expression);
+      if (_isValue) {
+        {
+          /* G |- cast.expression <| cast.type */
+          Expression _expression_1 = cast.getExpression();
+          ClassType _type = cast.getType();
+          assignableInternal(G, _trace_, _expression_1, _type);
+          Expression _expression_2 = cast.getExpression();
+          exp1 = _expression_2;
+        }
+      } else {
+        {
+          /* G |- cast.expression ~> var Expression expi */
+          Expression _expression_3 = cast.getExpression();
+          Expression expi = null;
+          Result<Expression> result = reduceInternal(G, _trace_, _expression_3);
+          checkAssignableTo(result.getFirst(), Expression.class);
+          expi = (Expression) result.getFirst();
+          
+          cast.setExpression(expi);
+          exp1 = cast;
         }
       }
     }

@@ -280,6 +280,20 @@ from {
 	}
 }
 
+rule RCast
+	G |- Cast exp ~> Expression exp1
+from {
+	val cast = clone(exp)
+	if (semanticsUtils.isValue(cast.expression)) {
+		G |- cast.expression <| cast.type
+		exp1 = cast.expression
+	} else {
+		G |- cast.expression ~> var Expression expi
+		cast.expression = expi
+		exp1 = cast
+	}
+}
+
 // checkrules (for the generated validator)
 
 checkrule CheckMethodBody for

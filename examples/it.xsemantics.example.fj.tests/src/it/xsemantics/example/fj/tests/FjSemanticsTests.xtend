@@ -135,6 +135,37 @@ class FjSemanticsTests extends FjBaseTests {
 	}
 
 	@Test
+	def void testReduceCast() {
+		'''
+		class A {
+			int i;
+		}
+		
+		class B extends A { }
+		
+		(A) new B(10)
+		'''.assertReduceOneStep("new B(10)", null)
+	}
+
+	@Test
+	def void testReduceCastWrong() {
+		'''
+		class A {
+			int i;
+		}
+		
+		class B extends A { }
+		
+		(B) new A(10)
+		'''.assertReduceWrong(
+'''failed: RCast: [] |- (B) new A(10) ~> Expression
+ failed: new A(10) is not assignable for B
+  failed: A is not a subtype of B
+   failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+)
+	}
+
+	@Test
 	def void testCongruenceReduceFieldSelection() {
 		'''
 		class A {
@@ -167,6 +198,22 @@ RSelection: [] |- new A(new A(10, 'a').i, 'b').i ~> new A(10, 'b').i
 '''
 RSelection: [] |- new A(10, 'b').m(new A(20, 'c').i) ~> new A(10, 'b').m(20)
  RSelection: [] |- new A(20, 'c').i ~> 20''')
+	}
+
+	@Test
+	def void testCongruenceReduceCast() {
+		'''
+		class A {
+			int i;
+			B createB() { return new B(100); }
+		}
+		
+		class B extends A { 
+			
+		}
+		
+		(A) (new A(10).createB())
+		'''.assertReduceOneStep("(A) new B(100)", null)
 	}
 
 	@Test
@@ -218,6 +265,33 @@ RSelection: [] |- new A().o.getS() ~> new B('foo').getS()
  RSelection: [] |- new A(new B('foo')).o ~> new B('foo')
 RSelection: [] |- new B('foo').getS() ~> new B('foo').s
 RSelection: [] |- new B('foo').s ~> 'foo' ''')
+	}
+
+	@Test
+	def void testReduceAllCast() {
+		'''
+		class A {
+			int i;
+			B createB() { return new B(100); }
+		}
+		
+		class B extends A { 
+			
+		}
+		
+		(A) (new A(10).createB())
+		'''.assertReduceAll(
+'''
+RCast: [] |- (A) new A(10).createB() ~> (A) new B(100)
+ RSelection: [] |- new A(10).createB() ~> new B(100)
+RCast: [] |- (A) new B(100) ~> new B(100)
+ ExpressionAssignableToType: [] |- new B(100) <| A
+  TNew: [] |- new B(100) : B
+   SubtypeSequence: [] |- new B(100) ~> [100] << [int i;]
+    ExpressionAssignableToType: [] |- 100 <| int
+     TIntConstant: [] |- 100 : int
+     BasicSubtyping: [] |- int <: int
+  ClassSubtyping: [] |- B <: A''')
 	}
 
 	def private assertValue(CharSequence prog) {
@@ -279,5 +353,19 @@ RSelection: [] |- new B('foo').s ~> 'foo' ''')
 			Assert::fail
 		}
 		result
+	}
+
+	def private assertReduceWrong(CharSequence prog, CharSequence expectedTrace) {
+		val exp = prog.parseAndAssertNoError.main.copy
+		val result = fjSystem.reduce(null, trace, exp)
+		if (result.failed) {
+			Assert::assertEquals(
+				expectedTrace.toString,
+				traceUtils.failureTraceAsString
+					(result.ruleFailedException)
+			)
+		} else {
+			Assert::fail("unexpected success: " + stringRep.string(result.value))
+		}
 	}
 }

@@ -1,6 +1,8 @@
 package it.xsemantics.example.fj.tests;
 
 import com.google.common.base.Objects;
+import it.xsemantics.example.fj.fj.BasicType;
+import it.xsemantics.example.fj.fj.Cast;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
@@ -28,17 +30,17 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     if (_notEquals) {
       return super.stringRep(eObject);
     } else {
-      String _customRep = this.customRep(eObject);
+      CharSequence _customRep = this.customRep(eObject);
       return _customRep.toString();
     }
   }
   
-  protected String _customRep(final EObject eObject) {
+  protected CharSequence _customRep(final EObject eObject) {
     String _stringRep = super.stringRep(eObject);
     return _stringRep;
   }
   
-  protected String _customRep(final New exp) {
+  protected CharSequence _customRep(final New exp) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("new ");
     ClassType _type = exp.getType();
@@ -62,7 +64,7 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     return _plus_1;
   }
   
-  protected String _customRep(final Selection exp) {
+  protected CharSequence _customRep(final Selection exp) {
     StringConcatenation _builder = new StringConcatenation();
     Expression _receiver = exp.getReceiver();
     String _string = this.string(_receiver);
@@ -107,16 +109,47 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     return _plus;
   }
   
-  public String customRep(final EObject exp) {
-    if (exp instanceof New) {
-      return _customRep((New)exp);
-    } else if (exp instanceof Selection) {
-      return _customRep((Selection)exp);
-    } else if (exp != null) {
-      return _customRep(exp);
+  protected CharSequence _customRep(final Cast cast) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    ClassType _type = cast.getType();
+    it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
+    String _name = _classref.getName();
+    _builder.append(_name, "");
+    _builder.append(") ");
+    Expression _expression = cast.getExpression();
+    String _string = this.string(_expression);
+    _builder.append(_string, "");
+    return _builder;
+  }
+  
+  protected CharSequence _customRep(final ClassType c) {
+    it.xsemantics.example.fj.fj.Class _classref = c.getClassref();
+    String _name = _classref.getName();
+    return _name;
+  }
+  
+  protected CharSequence _customRep(final BasicType c) {
+    String _basic = c.getBasic();
+    return _basic;
+  }
+  
+  public CharSequence customRep(final EObject c) {
+    if (c instanceof BasicType) {
+      return _customRep((BasicType)c);
+    } else if (c instanceof Cast) {
+      return _customRep((Cast)c);
+    } else if (c instanceof ClassType) {
+      return _customRep((ClassType)c);
+    } else if (c instanceof New) {
+      return _customRep((New)c);
+    } else if (c instanceof Selection) {
+      return _customRep((Selection)c);
+    } else if (c != null) {
+      return _customRep(c);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(exp).toString());
+        Arrays.<Object>asList(c).toString());
     }
   }
 }

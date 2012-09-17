@@ -211,6 +211,55 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   @Test
+  public void testReduceCast() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A { }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("(A) new B(10)");
+    _builder.newLine();
+    this.assertReduceOneStep(_builder, "new B(10)", null);
+  }
+  
+  @Test
+  public void testReduceCastWrong() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A { }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("(B) new A(10)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("failed: RCast: [] |- (B) new A(10) ~> Expression");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("failed: new A(10) is not assignable for B");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("failed: A is not a subtype of B");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)");
+    this.assertReduceWrong(_builder, _builder_1);
+  }
+  
+  @Test
   public void testCongruenceReduceFieldSelection() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
@@ -264,6 +313,32 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("RSelection: [] |- new A(20, \'c\').i ~> 20");
     this.assertReduceOneStep(_builder, 
       "new A(10, \'b\').m(20)", _builder_1);
+  }
+  
+  @Test
+  public void testCongruenceReduceCast() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B createB() { return new B(100); }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("(A) (new A(10).createB())");
+    _builder.newLine();
+    this.assertReduceOneStep(_builder, "(A) new B(100)", null);
   }
   
   @Test
@@ -359,6 +434,60 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("RSelection: [] |- new B(\'foo\').getS() ~> new B(\'foo\').s");
     _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new B(\'foo\').s ~> \'foo\' ");
+    this.assertReduceAll(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testReduceAllCast() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B createB() { return new B(100); }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("(A) (new A(10).createB())");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("RCast: [] |- (A) new A(10).createB() ~> (A) new B(100)");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("RSelection: [] |- new A(10).createB() ~> new B(100)");
+    _builder_1.newLine();
+    _builder_1.append("RCast: [] |- (A) new B(100) ~> new B(100)");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("ExpressionAssignableToType: [] |- new B(100) <| A");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("TNew: [] |- new B(100) : B");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("SubtypeSequence: [] |- new B(100) ~> [100] << [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("ExpressionAssignableToType: [] |- 100 <| int");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("TIntConstant: [] |- 100 : int");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("BasicSubtyping: [] |- int <: int");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("ClassSubtyping: [] |- B <: A");
     this.assertReduceAll(_builder, _builder_1);
   }
   
@@ -476,5 +605,24 @@ public class FjSemanticsTests extends FjBaseTests {
       _xblockexpression = (result);
     }
     return _xblockexpression;
+  }
+  
+  private void assertReduceWrong(final CharSequence prog, final CharSequence expectedTrace) {
+    Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+    Expression _main = _parseAndAssertNoError.getMain();
+    final Expression exp = EcoreUtil.<Expression>copy(_main);
+    final Result<Expression> result = this.fjSystem.reduce(null, this.trace, exp);
+    boolean _failed = result.failed();
+    if (_failed) {
+      String _string = expectedTrace.toString();
+      RuleFailedException _ruleFailedException = result.getRuleFailedException();
+      String _failureTraceAsString = this.traceUtils.failureTraceAsString(_ruleFailedException);
+      Assert.assertEquals(_string, _failureTraceAsString);
+    } else {
+      Expression _value = result.getValue();
+      String _string_1 = this.stringRep.string(_value);
+      String _plus = ("unexpected success: " + _string_1);
+      Assert.fail(_plus);
+    }
   }
 }
