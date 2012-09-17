@@ -151,13 +151,22 @@ axiom Superclasses
 rule Fields derives
 	G ||- Class cl >> java.util.List<Field> fields
 from {
-	fields = getAll(cl, 
-		FjPackage::eINSTANCE.class_Members, 
-		FjPackage::eINSTANCE.class_Superclass,
+	G ||- cl |> var List<Class> superclasses
+	// so that upper classes come first
+	Collections::reverse(superclasses)
+	fields = newArrayList()
+	for (superclass : superclasses)
+		fields += EcoreUtil2::typeSelect(
+			superclass.members,
+			typeof(Field)
+		)
+	fields += EcoreUtil2::typeSelect(
+		cl.members,
 		typeof(Field)
 	)
-	// so that inherited fields come first
-	Collections::reverse(fields)
+	or
+	true // remember that Collections.add
+	// returns false if the collection does not change
 }
 
 rule Methods derives

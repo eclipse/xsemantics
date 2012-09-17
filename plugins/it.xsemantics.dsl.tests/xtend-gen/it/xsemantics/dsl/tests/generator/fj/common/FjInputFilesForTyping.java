@@ -255,6 +255,22 @@ public class FjInputFilesForTyping {
     return _builder;
   }
   
+  public CharSequence testClassHierarchyForFields2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A { int i; boolean b; }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A { String s; }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class C extends B { A c; }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class D {}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testClassHierarchyForMethods() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A { String i() { return \'A.i\'; } }");
@@ -294,6 +310,17 @@ public class FjInputFilesForTyping {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("new C(10, \'foo\', new B(20, \'bar\'))");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testNewOk2() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testClassHierarchyForFields2 = this.testClassHierarchyForFields2();
+    _builder.append(_testClassHierarchyForFields2, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("new C(10, true, \'foo\', new B(20, false, \'bar\'))");
     _builder.newLine();
     return _builder;
   }

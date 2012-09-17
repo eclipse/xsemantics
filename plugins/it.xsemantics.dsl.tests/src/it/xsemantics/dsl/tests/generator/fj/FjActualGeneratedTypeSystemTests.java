@@ -175,6 +175,13 @@ public class FjActualGeneratedTypeSystemTests extends
 	}
 
 	@Override
+	public void testCheckNewOk2() throws Exception {
+		assertCheck(fjTypeSystem.type(fjTestsUtils
+				.mainExpression(getProgram(testFiles.testNewOk2()))), true,
+				trace, "", "");
+	}
+
+	@Override
 	public void testCastOk1() throws Exception {
 		assertCheck(fjTypeSystem.type(fjTestsUtils
 				.mainExpression(getProgram(testFiles.testCastOk1()))), true,

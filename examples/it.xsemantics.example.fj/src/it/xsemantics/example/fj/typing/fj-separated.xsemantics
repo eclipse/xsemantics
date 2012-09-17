@@ -66,14 +66,8 @@ from {
 rule CheckNew derives
 	G |- New newExp
 from {
-	var fields = getAll(
-		newExp.type.classref,
-		FjPackage::eINSTANCE.class_Members,
-		FjPackage::eINSTANCE.class_Superclass,
-		typeof(Field)
-	)
+	var fields = fjAux.getFields(newExp.type.classref)
 	// we want the superclasses' fields first
-	Collections::reverse(fields)
 	G |- newExp ~> newExp.args << fields
 	// check all subexpressions (arguments)
 	newExp.args.forEach [ G |- it ]

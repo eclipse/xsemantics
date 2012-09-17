@@ -143,6 +143,17 @@ class C extends B { A c; }
 class D {}
 '''
 
+	def testClassHierarchyForFields2()
+'''
+class A { int i; boolean b; }
+
+class B extends A { String s; }
+
+class C extends B { A c; }
+
+class D {}
+'''
+
 	def testClassHierarchyForMethods()
 '''
 class A { String i() { return 'A.i'; } }
@@ -165,6 +176,13 @@ class D {}
 «testClassHierarchyForFields»
 
 new C(10, 'foo', new B(20, 'bar'))
+'''
+
+	def testNewOk2()
+'''
+«testClassHierarchyForFields2»
+
+new C(10, true, 'foo', new B(20, false, 'bar'))
 '''
 
 	def testNewWrongArgNum()

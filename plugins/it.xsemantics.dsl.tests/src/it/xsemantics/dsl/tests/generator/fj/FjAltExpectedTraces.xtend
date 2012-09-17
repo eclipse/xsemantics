@@ -106,6 +106,41 @@ failed: A is not a subtype of B
   CheckConstant: [] |- 20
   CheckConstant: [] |- 'bar' '''
 
+	override newCheckOk2()
+'''CheckNew: [] |- new C(10, true, 'foo', new B(20, false, ...
+ SubtypeSequence: [] |- new C(10, true, 'foo', new B(20, false, ... : [10, true, 'foo', new B(20, false, 'bar')] << [int i;, boolean b;, String s;, A c;]
+  TIntConstant: [] |- 10 : int
+  TTypedElement: [] ||- int i; : int
+  BasicSubtyping: [] |- int <: int
+  TBoolConstant: [] |- true : boolean
+  TTypedElement: [] ||- boolean b; : boolean
+  BasicSubtyping: [] |- boolean <: boolean
+  TStringConstant: [] |- 'foo' : String
+  TTypedElement: [] ||- String s; : String
+  BasicSubtyping: [] |- String <: String
+  TNew: [] |- new B(20, false, 'bar') : B
+  TTypedElement: [] ||- A c; : A
+  ClassSubtyping: [] |- B <: A
+   Subclassing: [] |- class B extends A { String s; } <| class A { int i; boolean b; }
+    Subclassing: [] |- class A { int i; boolean b; } <| class A { int i; boolean b; }
+ CheckConstant: [] |- 10
+ CheckConstant: [] |- true
+ CheckConstant: [] |- 'foo'
+ CheckNew: [] |- new B(20, false, 'bar')
+  SubtypeSequence: [] |- new B(20, false, 'bar') : [20, false, 'bar'] << [int i;, boolean b;, String s;]
+   TIntConstant: [] |- 20 : int
+   TTypedElement: [] ||- int i; : int
+   BasicSubtyping: [] |- int <: int
+   TBoolConstant: [] |- false : boolean
+   TTypedElement: [] ||- boolean b; : boolean
+   BasicSubtyping: [] |- boolean <: boolean
+   TStringConstant: [] |- 'bar' : String
+   TTypedElement: [] ||- String s; : String
+   BasicSubtyping: [] |- String <: String
+  CheckConstant: [] |- 20
+  CheckConstant: [] |- false
+  CheckConstant: [] |- 'bar' '''
+
    override subclassDeclaresSameFieldOfSuperClass()
 '''failed: CheckClass: [] |- class B extends A { String s; int i; }
  field already defined in superclass class A { int i; }'''

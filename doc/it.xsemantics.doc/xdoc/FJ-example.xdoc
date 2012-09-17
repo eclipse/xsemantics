@@ -206,14 +206,8 @@ code[Xsemantics][
 rule TNew
 	G |- New newExp : newExp.type
 from {
-	var fields = getAll(
-		newExp.type.classref,
-		FjPackage::eINSTANCE.class_Members,
-		FjPackage::eINSTANCE.class_Superclass,
-		typeof(Field)
-	)
+	var fields = fjAux.getFields(newExp.type.classref)
 	// we want the superclasses' fields first
-	Collections::reverse(fields)
 	G |- newExp ~> newExp.args << fields
 }
 ]
@@ -224,15 +218,11 @@ However, we must also check that the expression is well-typed, i.e., that
 all the arguments passed to the new expression are subtypes of the corresponding
 fields of the classtype (see ref:FJInANutshell[] for the syntax of constructors
 in our implementation of FJ).  In order to collect all the fields of the
-given class (including the inherited ones), we use the predefined
-function code[getAll] (see ref:GetAll[]).  The above invocation of code[getAll]
-requires to collect all the code[Member]s in the class specified in the new
-expressions, and recursively the ones found following the superclass, and
-filter them in order to get only the code[Member]s which are code[Field].
-Remember that code[getAll] avoids possible loops in the class hierarchy
-(see also ref:FJValidation[]).  Once we collected the fields we reverse
-the list (using codeRef[java.util.Collections] standard static method) so
-that the superclass fields appear first in the list, and we check that
+given class (including the inherited ones), we use 
+the method of the injected field (ref:InjectedFields[])
+of type codeRef[it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions];
+(note that this method will return the inherited fields first).
+Now, we can check that
 the types of the arguments are subtypes of the types of these fields
 (we use the judgment code[subtypesequence], described in ref:FJSubTyping[]).
 
@@ -568,8 +558,13 @@ For a code[Field] we must check that a field with the same name
 is not defined in the superclasses (for fields with the same name in the
 same class this check is already done by Xtext predefined
 codeRef[org.eclipse.xtext.validation.NamesAreUniqueValidator]).
-Again, to get all the fields in a class hierarchy we use code[getAll]
-(ref:GetAll[]).
+We use the predefined
+function code[getAll] (see ref:GetAll[]).  The above invocation of code[getAll]
+requires to collect all the code[Member]s in the superclass
+(and recursively the ones found following the superclass), and
+filter them in order to get only the code[Member]s which are code[Field].
+Remember that code[getAll] avoids possible loops in the class hierarchy
+(see also ref:FJValidation[]).
 
 For methods we cannot execute the same check, since subclasses
 are allowed to redefine methods, provided they keep the same signature

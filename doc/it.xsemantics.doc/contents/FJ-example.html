@@ -253,15 +253,9 @@ class for each basic type.
 <span class="keyword">rule</span>&nbsp;TNew<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;New&nbsp;newExp&nbsp;:&nbsp;newExp.type<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newExp.type.classref,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Field)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;fjAux.getFields(newExp.type.classref)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;want&nbsp;the&nbsp;superclasses&apos;&nbsp;fields&nbsp;first<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;Collections::reverse(fields)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields<br/>
 }<br/>
 </p>
 </div>
@@ -274,15 +268,11 @@ However, we must also check that the expression is well-typed, i.e., that
 all the arguments passed to the new expression are subtypes of the corresponding
 fields of the classtype (see <a href="FJ-example.html#FJInANutshell" title="Go to &quot;FJ in a nutshell&quot;" >section FJInANutshell</a> for the syntax of constructors
 in our implementation of FJ).  In order to collect all the fields of the
-given class (including the inherited ones), we use the predefined
-function <span class="inlinecode">getAll</span> (see <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>).  The above invocation of <span class="inlinecode">getAll</span>
-requires to collect all the <span class="inlinecode">Member</span>s in the class specified in the new
-expressions, and recursively the ones found following the superclass, and
-filter them in order to get only the <span class="inlinecode">Member</span>s which are <span class="inlinecode">Field</span>.
-Remember that <span class="inlinecode">getAll</span> avoids possible loops in the class hierarchy
-(see also <a href="FJ-example.html#FJValidation" title="Go to &quot;FJ Validation&quot;" >section FJValidation</a>).  Once we collected the fields we reverse
-the list (using <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Collections.html" title="View JavaDoc"><abbr title="java.util.Collections" >Collections</abbr></a> standard static method) so
-that the superclass fields appear first in the list, and we check that
+given class (including the inherited ones), we use 
+the method of the injected field (<a href="XsemanticsSyntax.html#InjectedFields" title="Go to &quot;Injected Fields&quot;" >section InjectedFields</a>)
+of type <abbr title="it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions" >FjAuxiliaryFunctions</abbr>;
+(note that this method will return the inherited fields first).
+Now, we can check that
 the types of the arguments are subtypes of the types of these fields
 (we use the judgment <span class="inlinecode">subtypesequence</span>, described in <a href="FJ-example.html#FJSubTyping" title="Go to &quot;FJ Subtyping&quot;" >section FJSubTyping</a>).
 </p>
@@ -704,8 +694,13 @@ For a <span class="inlinecode">Field</span> we must check that a field with the 
 is not defined in the superclasses (for fields with the same name in the
 same class this check is already done by Xtext predefined
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/NamesAreUniqueValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.NamesAreUniqueValidator" >NamesAreUniqueValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/NamesAreUniqueValidator.java" title="View Source Code" >(src)</a>).
-Again, to get all the fields in a class hierarchy we use <span class="inlinecode">getAll</span>
-(<a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>).
+We use the predefined
+function <span class="inlinecode">getAll</span> (see <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>).  The above invocation of <span class="inlinecode">getAll</span>
+requires to collect all the <span class="inlinecode">Member</span>s in the superclass
+(and recursively the ones found following the superclass), and
+filter them in order to get only the <span class="inlinecode">Member</span>s which are <span class="inlinecode">Field</span>.
+Remember that <span class="inlinecode">getAll</span> avoids possible loops in the class hierarchy
+(see also <a href="FJ-example.html#FJValidation" title="Go to &quot;FJ Validation&quot;" >section FJValidation</a>).
 </p>
 <p>
 For methods we cannot execute the same check, since subclasses

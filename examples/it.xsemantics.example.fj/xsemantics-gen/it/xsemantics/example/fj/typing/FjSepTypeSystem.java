@@ -27,7 +27,6 @@ import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
-import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -428,11 +427,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     {
       ClassType _type = newExp.getType();
       it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-      EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
-      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-      List<Field> fields = this.<Field>getAll(_classref, _class_Members, _class_Superclass, 
-        Field.class);
-      Collections.reverse(fields);
+      List<Field> fields = this.fjAux.getFields(_classref);
       /* G |- newExp ~> newExp.args << fields */
       EList<Expression> _args = newExp.getArgs();
       subtypesequenceInternal(G, _trace_, newExp, _args, fields);

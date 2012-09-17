@@ -408,6 +408,13 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 	}
 
 	@Test
+	public void testCheckNewOk2() throws Exception {
+		assertCheck(null,
+				fjTestsUtils.mainExpression(getProgram(testFiles.testNewOk2())),
+				true, trace, expectedTraces.newCheckOk2(), "");
+	}
+
+	@Test
 	public void testCheckNewWrongSubtypeSimpler() throws Exception {
 		assertCheck(null, fjTestsUtils.mainExpression(getProgram(testFiles
 				.testNewWrongArgSubtypeSimpler())), false, trace,

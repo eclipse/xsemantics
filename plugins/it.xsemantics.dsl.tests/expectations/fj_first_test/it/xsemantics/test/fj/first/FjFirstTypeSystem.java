@@ -1,6 +1,7 @@
 package it.xsemantics.test.fj.first;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -30,6 +31,7 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,6 +41,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -1065,12 +1068,37 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     List<Field> fields = null; // output parameter
     
     {
-      EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
-      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-      List<Field> _all = this.<Field>getAll(cl, _class_Members, _class_Superclass, 
-        Field.class);
-      fields = _all;
-      Collections.reverse(fields);
+      /* G ||- cl |> var List<Class> superclasses */
+      List<it.xsemantics.example.fj.fj.Class> superclasses = null;
+      Result<List<it.xsemantics.example.fj.fj.Class>> result = superclassesInternal(G, _trace_, cl);
+      checkAssignableTo(result.getFirst(), List.class);
+      superclasses = (List<it.xsemantics.example.fj.fj.Class>) result.getFirst();
+      
+      Collections.reverse(superclasses);
+      ArrayList<Field> _newArrayList = CollectionLiterals.<Field>newArrayList();
+      fields = _newArrayList;
+      for (final it.xsemantics.example.fj.fj.Class superclass : superclasses) {
+        EList<Member> _members = superclass.getMembers();
+        List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, 
+          Field.class);
+        Iterables.<Field>addAll(fields, _typeSelect);
+      }
+      /* fields += EcoreUtil2::typeSelect( cl.members, typeof(Field) ) or true */
+      try {
+        EList<Member> _members_1 = cl.getMembers();
+        List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(_members_1, 
+          Field.class);
+        boolean _add = Iterables.<Field>addAll(fields, _typeSelect_1);
+        /* fields += EcoreUtil2::typeSelect( cl.members, typeof(Field) ) */
+        if (!_add) {
+          sneakyThrowRuleFailedException("fields += EcoreUtil2::typeSelect( cl.members, typeof(Field) )");
+        }
+      } catch (Exception e) {
+        /* true */
+        if (!true) {
+          sneakyThrowRuleFailedException("true");
+        }
+      }
     }
     return new Result<List<Field>>(fields);
   }

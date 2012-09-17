@@ -140,6 +140,39 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   CheckConstant: [] |- 20
   CheckConstant: [] |- 'bar' '''
 
+	override newCheckOk2()
+'''CheckNew: [] |- new C(10, true, 'foo', new B(20, false, ...
+ SubtypeSequence: [] |- new C(10, true, 'foo', new B(20, false, ... ~> [10, true, 'foo', new B(20, false, 'bar')] << [int i;, boolean b;, String s;, A c;]
+  ExpressionAssignableToType: [] |- 10 <| int
+   TIntConstant: [] |- 10 : int
+   BasicSubtyping: [] |- int <: int
+  ExpressionAssignableToType: [] |- true <| boolean
+   TBoolConstant: [] |- true : boolean
+   BasicSubtyping: [] |- boolean <: boolean
+  ExpressionAssignableToType: [] |- 'foo' <| String
+   TStringConstant: [] |- 'foo' : String
+   BasicSubtyping: [] |- String <: String
+  ExpressionAssignableToType: [] |- new B(20, false, 'bar') <| A
+   TNew: [] |- new B(20, false, 'bar') : B
+   ClassSubtyping: [] |- B <: A
+ CheckConstant: [] |- 10
+ CheckConstant: [] |- true
+ CheckConstant: [] |- 'foo'
+ CheckNew: [] |- new B(20, false, 'bar')
+  SubtypeSequence: [] |- new B(20, false, 'bar') ~> [20, false, 'bar'] << [int i;, boolean b;, String s;]
+   ExpressionAssignableToType: [] |- 20 <| int
+    TIntConstant: [] |- 20 : int
+    BasicSubtyping: [] |- int <: int
+   ExpressionAssignableToType: [] |- false <| boolean
+    TBoolConstant: [] |- false : boolean
+    BasicSubtyping: [] |- boolean <: boolean
+   ExpressionAssignableToType: [] |- 'bar' <| String
+    TStringConstant: [] |- 'bar' : String
+    BasicSubtyping: [] |- String <: String
+  CheckConstant: [] |- 20
+  CheckConstant: [] |- false
+  CheckConstant: [] |- 'bar' '''
+
 	override castOk1()
 '''CheckCast: [] |- (C) new A()
  TNew: [] |- new A() : A
