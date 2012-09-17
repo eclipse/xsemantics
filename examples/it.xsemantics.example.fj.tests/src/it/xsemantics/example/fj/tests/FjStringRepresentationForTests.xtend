@@ -6,6 +6,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import it.xsemantics.example.fj.fj.New
 import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.fj.Field
+import it.xsemantics.example.fj.fj.Method
 
 class FjStringRepresentationForTests extends FjStringRepresentation {
 	override stringRep(EObject eObject) {
@@ -14,10 +15,6 @@ class FjStringRepresentationForTests extends FjStringRepresentation {
 			return super.stringRep(eObject)
 		else
 			return customRep(eObject).toString
-	}
-	
-	def stringRep(Field f) {
-		f.name
 	}
 	
 	def dispatch customRep(EObject eObject) {
@@ -33,7 +30,17 @@ class FjStringRepresentationForTests extends FjStringRepresentation {
 	}
 	
 	def dispatch customRep(Selection exp) {
-		'''«exp.receiver.string».«exp.message.string»'''
+		'''«exp.receiver.string».''' +
+		switch (exp.message) {
+			Field : {
+				exp.message.name
+			}
+			Method : {
+				exp.message.name + "(" +
+				exp.args.map[it.string].join(", ") +
+				")"
+			}
+		}
 	}
 
 }

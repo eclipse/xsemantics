@@ -26,8 +26,8 @@ import it.xsemantics.example.fj.fj.This;
 import it.xsemantics.example.fj.fj.Type;
 import it.xsemantics.example.fj.fj.TypedElement;
 import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions;
+import it.xsemantics.example.fj.util.FjSemanticsUtils;
 import it.xsemantics.example.fj.util.FjTypeUtils;
-import it.xsemantics.example.fj.util.FjValueUtils;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -95,7 +95,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   private FjAuxiliaryFunctions fjAux;
   
   @Inject
-  private FjValueUtils valueUtils;
+  private FjSemanticsUtils semanticsUtils;
   
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
@@ -144,12 +144,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     this.fjAux = fjAux;
   }
   
-  public FjValueUtils getValueUtils() {
-    return this.valueUtils;
+  public FjSemanticsUtils getSemanticsUtils() {
+    return this.semanticsUtils;
   }
   
-  public void setValueUtils(final FjValueUtils valueUtils) {
-    this.valueUtils = valueUtils;
+  public void setSemanticsUtils(final FjSemanticsUtils semanticsUtils) {
+    this.semanticsUtils = semanticsUtils;
   }
   
   public Result<Type> type(final Expression expression) {
@@ -1238,7 +1238,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       EList<Expression> _args = exp1.getArgs();
       final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
           public Boolean apply(final Expression it) {
-            boolean _isValue = FjTypeSystem.this.valueUtils.isValue(it);
+            boolean _isValue = FjTypeSystem.this.semanticsUtils.isValue(it);
             boolean _not = (!_isValue);
             return _not;
           }
@@ -1291,17 +1291,17 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Expression> applyRuleRSelection(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection exp) throws RuleFailedException {
     Expression exp1 = null; // output parameter
     
-    /* { val sel = clone(exp) !valueUtils.isValue(exp.receiver) G |- exp.receiver ~> var Expression expi sel.receiver = expi exp1 = sel } or { val receiver = exp.receiver as New val message = exp.message switch (message) { Field: { val fieldIndex = Iterables::indexOf( fjAux.getFields(receiver.type.classref)) [ name == message.name ] exp1 = receiver.args.get(fieldIndex) } } } */
+    /* { val sel = clone(exp) !semanticsUtils.isValue(exp.receiver) G |- exp.receiver ~> var Expression expi sel.receiver = expi exp1 = sel } or { val receiver = exp.receiver as New val message = exp.message switch (message) { Field: { val fieldIndex = Iterables::indexOf( fjAux.getFields(receiver.type.classref)) [ name == message.name ] exp1 = receiver.args.get(fieldIndex) } Method: { val indexOfNextToReduce = Iterables::indexOf(exp.args) [ !semanticsUtils.isValue(it) ] { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThis(method.body.expression, receiver) semanticsUtils.replaceParams (method.body.expression, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } } } } */
     try {
       Expression _xblockexpression = null;
       {
         final Selection sel = this.<Selection>clone(exp);
         Expression _receiver = exp.getReceiver();
-        boolean _isValue = this.valueUtils.isValue(_receiver);
+        boolean _isValue = this.semanticsUtils.isValue(_receiver);
         boolean _not = (!_isValue);
-        /* !valueUtils.isValue(exp.receiver) */
+        /* !semanticsUtils.isValue(exp.receiver) */
         if (!_not) {
-          sneakyThrowRuleFailedException("!valueUtils.isValue(exp.receiver)");
+          sneakyThrowRuleFailedException("!semanticsUtils.isValue(exp.receiver)");
         }
         /* G |- exp.receiver ~> var Expression expi */
         Expression _receiver_1 = exp.getReceiver();
@@ -1344,6 +1344,68 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
               EList<Expression> _args = receiver.getArgs();
               Expression _get = _args.get(fieldIndex);
               exp1 = _get;
+            }
+          }
+        }
+        if (!_matched) {
+          if (message instanceof Method) {
+            final Method _method = (Method)message;
+            _matched=true;
+            {
+              EList<Expression> _args = exp.getArgs();
+              final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
+                  public Boolean apply(final Expression it) {
+                    boolean _isValue = FjTypeSystem.this.semanticsUtils.isValue(it);
+                    boolean _not = (!_isValue);
+                    return _not;
+                  }
+                };
+              final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, new Predicate<Expression>() {
+                  public boolean apply(Expression input) {
+                    return _function.apply(input);
+                  }
+              });
+              /* { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThis(method.body.expression, receiver) semanticsUtils.replaceParams (method.body.expression, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
+              try {
+                Expression _xblockexpression_1 = null;
+                {
+                  boolean _lessThan = (indexOfNextToReduce < 0);
+                  /* indexOfNextToReduce < 0 */
+                  if (!_lessThan) {
+                    sneakyThrowRuleFailedException("indexOfNextToReduce < 0");
+                  }
+                  Member _message = exp.getMessage();
+                  Member _clone = this.<Member>clone(_message);
+                  final Method method = ((Method) _clone);
+                  MethodBody _body = method.getBody();
+                  Expression _expression = _body.getExpression();
+                  this.semanticsUtils.replaceThis(_expression, receiver);
+                  MethodBody _body_1 = method.getBody();
+                  Expression _expression_1 = _body_1.getExpression();
+                  EList<Parameter> _params = method.getParams();
+                  EList<Expression> _args_1 = exp.getArgs();
+                  this.semanticsUtils.replaceParams(_expression_1, _params, _args_1);
+                  MethodBody _body_2 = method.getBody();
+                  Expression _expression_2 = _body_2.getExpression();
+                  Expression _exp1_1 = exp1 = _expression_2;
+                  _xblockexpression_1 = (_exp1_1);
+                }
+              } catch (Exception e_1) {
+                {
+                  final Selection sel_1 = this.<Selection>clone(exp);
+                  EList<Expression> _args_2 = sel_1.getArgs();
+                  final Expression nextToReduce = _args_2.get(indexOfNextToReduce);
+                  /* G |- nextToReduce ~> var Expression argi */
+                  Expression argi = null;
+                  Result<Expression> result_1 = reduceInternal(G, _trace_, nextToReduce);
+                  checkAssignableTo(result_1.getFirst(), Expression.class);
+                  argi = (Expression) result_1.getFirst();
+                  
+                  EList<Expression> _args_3 = sel_1.getArgs();
+                  _args_3.set(indexOfNextToReduce, argi);
+                  exp1 = sel_1;
+                }
+              }
             }
           }
         }

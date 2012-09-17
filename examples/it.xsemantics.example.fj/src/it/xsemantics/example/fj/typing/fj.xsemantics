@@ -19,7 +19,7 @@ import com.google.common.collect.*
 import java.util.*
 
 inject FjAuxiliaryFunctions fjAux
-inject FjValueUtils valueUtils
+inject FjSemanticsUtils semanticsUtils
 
 judgments {
 	type |- Expression expression : output Type
@@ -212,13 +212,15 @@ rule RNew
 from {
 	exp1 = clone(exp)
 	val indexOfNextToReduce = Iterables::indexOf(exp1.args) [
-		!valueUtils.isValue(it)
+		!semanticsUtils.isValue(it)
 	]
 	{
+		// all constructor's arguments are values
 		indexOfNextToReduce < 0
 	}
 	or
 	{
+		// we need to evaluate an argument
 		val nextToReduce = exp1.args.get(indexOfNextToReduce)
 		G |- nextToReduce ~> var Expression expi
 		exp1.args.set(indexOfNextToReduce, expi)
@@ -229,8 +231,9 @@ rule RSelection
 	G |- Selection exp ~> Expression exp1
 from {
 	{
+		// the receiver is not a value yet
 		val sel = clone(exp)
-		!valueUtils.isValue(exp.receiver)
+		!semanticsUtils.isValue(exp.receiver)
 		G |- exp.receiver ~> var Expression expi
 		sel.receiver = expi
 		exp1 = sel
@@ -240,13 +243,38 @@ from {
 		val receiver = exp.receiver as New
 		val message = exp.message
 		switch (message) {
-			Field: { 
+			Field: {
+				// find the value's field corresponding
+				// to the requested field
 				val fieldIndex = Iterables::indexOf(
 					fjAux.getFields(receiver.type.classref))
 				[
 					name == message.name
 				]
 				exp1 = receiver.args.get(fieldIndex)
+			}
+			Method: {
+				val indexOfNextToReduce = Iterables::indexOf(exp.args) [
+					!semanticsUtils.isValue(it)
+				]
+				{
+					// all invocation's arguments are values
+					indexOfNextToReduce < 0
+					val method = clone(exp.message) as Method
+					semanticsUtils.replaceThis(method.body.expression, receiver)
+					semanticsUtils.replaceParams
+						(method.body.expression, method.params, exp.args)
+					exp1 = method.body.expression
+				}
+				or
+				{
+					// we need to evaluate an argument
+					val sel = clone(exp)
+					val nextToReduce = sel.args.get(indexOfNextToReduce)
+					G |- nextToReduce ~> var Expression argi
+					sel.args.set(indexOfNextToReduce, argi)
+					exp1 = sel
+				}
 			}
 		}
 	}

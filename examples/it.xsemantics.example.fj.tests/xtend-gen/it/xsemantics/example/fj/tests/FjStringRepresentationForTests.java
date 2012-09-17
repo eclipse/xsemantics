@@ -5,6 +5,7 @@ import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Member;
+import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.New;
 import it.xsemantics.example.fj.fj.Selection;
 import it.xsemantics.example.fj.typing.FjStringRepresentation;
@@ -27,22 +28,17 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     if (_notEquals) {
       return super.stringRep(eObject);
     } else {
-      CharSequence _customRep = this.customRep(eObject);
+      String _customRep = this.customRep(eObject);
       return _customRep.toString();
     }
   }
   
-  public String stringRep(final Field f) {
-    String _name = f.getName();
-    return _name;
-  }
-  
-  protected CharSequence _customRep(final EObject eObject) {
+  protected String _customRep(final EObject eObject) {
     String _stringRep = super.stringRep(eObject);
     return _stringRep;
   }
   
-  protected CharSequence _customRep(final New exp) {
+  protected String _customRep(final New exp) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("new ");
     ClassType _type = exp.getType();
@@ -66,19 +62,52 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     return _plus_1;
   }
   
-  protected CharSequence _customRep(final Selection exp) {
+  protected String _customRep(final Selection exp) {
     StringConcatenation _builder = new StringConcatenation();
     Expression _receiver = exp.getReceiver();
     String _string = this.string(_receiver);
     _builder.append(_string, "");
     _builder.append(".");
+    String _switchResult = null;
     Member _message = exp.getMessage();
-    String _string_1 = this.string(_message);
-    _builder.append(_string_1, "");
-    return _builder;
+    final Member _switchValue = _message;
+    boolean _matched = false;
+    if (!_matched) {
+      if (_switchValue instanceof Field) {
+        final Field _field = (Field)_switchValue;
+        _matched=true;
+        Member _message_1 = exp.getMessage();
+        String _name = _message_1.getName();
+        _switchResult = _name;
+      }
+    }
+    if (!_matched) {
+      if (_switchValue instanceof Method) {
+        final Method _method = (Method)_switchValue;
+        _matched=true;
+        Member _message_1 = exp.getMessage();
+        String _name = _message_1.getName();
+        String _plus = (_name + "(");
+        EList<Expression> _args = exp.getArgs();
+        final Function1<Expression,String> _function = new Function1<Expression,String>() {
+            public String apply(final Expression it) {
+              String _string = FjStringRepresentationForTests.this.string(it);
+              return _string;
+            }
+          };
+        List<String> _map = ListExtensions.<Expression, String>map(_args, _function);
+        String _join = IterableExtensions.join(_map, ", ");
+        String _plus_1 = (_plus + _join);
+        String _plus_2 = (_plus_1 + 
+          ")");
+        _switchResult = _plus_2;
+      }
+    }
+    String _plus = (_builder + _switchResult);
+    return _plus;
   }
   
-  public CharSequence customRep(final EObject exp) {
+  public String customRep(final EObject exp) {
     if (exp instanceof New) {
       return _customRep((New)exp);
     } else if (exp instanceof Selection) {

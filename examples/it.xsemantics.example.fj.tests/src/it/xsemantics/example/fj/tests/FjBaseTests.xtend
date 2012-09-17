@@ -13,6 +13,8 @@ import it.xsemantics.example.fj.fj.Program
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.runtime.StringRepresentation
+import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.example.fj.fj.Method
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FJInjectorProvider))
@@ -41,6 +43,12 @@ class FjBaseTests {
 	def parseAndAssertNoError(CharSequence prog) {
 		prog.parse => [
 			it.assertNoErrors
+		]
+	}
+	
+	def methodByName(Program p, String methodName) {
+		p.getAllContentsOfType(typeof(Method)).findFirst [
+			name == methodName
 		]
 	}
 
