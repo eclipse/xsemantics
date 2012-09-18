@@ -760,6 +760,26 @@ e = (EClass) result.getFirst();
 			)
 	}
 
+	@Test
+	def void testRuleInvocationWithDuplicateVarDeclarationAsOutputArg() {
+		checkCompilationOfPremises(
+			testFiles.testDuplicateVariableDeclarationAsOutputArgument,
+'''
+
+/* var temp = c or { G |- o : var EClass temp } */
+try {
+  EClass temp = c;
+} catch (Exception e) {
+  /* G |- o : var EClass temp */
+  EClass temp_1 = null;
+  Result<EClass> result = typeInternal(G, _trace_, o);
+  checkAssignableTo(result.getFirst(), EClass.class);
+  temp_1 = (EClass) result.getFirst();
+  
+}'''
+			)
+	}
+
 	def void checkCompilationOfRightExpression(CharSequence inputCode, 
 		String expectedExpName, CharSequence expected) {
 		checkCompilationOfRightExpression(inputCode, expectedExpName, expected,

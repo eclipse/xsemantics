@@ -1112,6 +1112,20 @@ class XsemanticsTestFiles {
 		G |- o : var EClass e
 	}
 	'''
+
+	def testDuplicateVariableDeclarationAsOutputArgument() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		var temp = c
+		or
+		{
+			G |- o : var EClass temp
+		}
+	}
+	'''
 	
 	def testScopingForVariableDeclarationAsOutputArgument() '''
 	«testJudgmentDescriptionsEObjectEClass»

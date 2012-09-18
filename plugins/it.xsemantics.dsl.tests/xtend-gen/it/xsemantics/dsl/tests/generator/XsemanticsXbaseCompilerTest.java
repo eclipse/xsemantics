@@ -1415,6 +1415,41 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     this.checkCompilationOfRuleInvocation(_testVariableDeclarationAsOutputArgument, 0, _builder);
   }
   
+  @Test
+  public void testRuleInvocationWithDuplicateVarDeclarationAsOutputArg() {
+    CharSequence _testDuplicateVariableDeclarationAsOutputArgument = this.testFiles.testDuplicateVariableDeclarationAsOutputArgument();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("/* var temp = c or { G |- o : var EClass temp } */");
+    _builder.newLine();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("EClass temp = c;");
+    _builder.newLine();
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("/* G |- o : var EClass temp */");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("EClass temp_1 = null;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("Result<EClass> result = typeInternal(G, _trace_, o);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("checkAssignableTo(result.getFirst(), EClass.class);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("temp_1 = (EClass) result.getFirst();");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("}");
+    this.checkCompilationOfPremises(_testDuplicateVariableDeclarationAsOutputArgument, _builder);
+  }
+  
   public void checkCompilationOfRightExpression(final CharSequence inputCode, final String expectedExpName, final CharSequence expected) {
     FakeTreeAppendable _createAppendable = this.createAppendable();
     this.checkCompilationOfRightExpression(inputCode, expectedExpName, expected, _createAppendable);

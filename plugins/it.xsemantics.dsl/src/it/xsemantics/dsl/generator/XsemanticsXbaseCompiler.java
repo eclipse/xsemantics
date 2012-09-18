@@ -341,7 +341,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 			if (expression instanceof XVariableDeclaration) {
 				// this is not contemplated by xbase compiler
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
-				b.append(varDecl.getName());
+				b.append(b.getName(varDecl));
 			} else {
 				toJavaExpression(expression, b);
 			}
