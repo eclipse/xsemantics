@@ -42,14 +42,14 @@
                name="it.xsemantics.example.fj">
          </projectDescriptor>
          <projectDescriptor
-               contentURI="contents/it.xsemantics.example.fj.tests.zip"
-               description="A test suite for the language."
-               name="it.xsemantics.example.fj.tests">
-         </projectDescriptor>
-         <projectDescriptor
                contentURI="contents/it.xsemantics.example.fj.ui.zip"
                description="A smart editor for the language."
                name="it.xsemantics.example.fj.ui">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fj.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.fj.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -85,14 +85,14 @@
                name="it.xsemantics.example.expressions">
          </projectDescriptor>
          <projectDescriptor
-               contentURI="contents/it.xsemantics.example.expressions.tests.zip"
-               description="A test suite for the language."
-               name="it.xsemantics.example.expressions.tests">
-         </projectDescriptor>
-         <projectDescriptor
                contentURI="contents/it.xsemantics.example.expressions.ui.zip"
                description="A smart editor for the language."
                name="it.xsemantics.example.expressions.ui">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.expressions.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.expressions.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -128,14 +128,14 @@
                name="it.xsemantics.example.lambda">
          </projectDescriptor>
          <projectDescriptor
-               contentURI="contents/it.xsemantics.example.lambda.tests.zip"
-               description="A test suite for the language."
-               name="it.xsemantics.example.lambda.tests">
-         </projectDescriptor>
-         <projectDescriptor
                contentURI="contents/it.xsemantics.example.lambda.ui.zip"
                description="A smart editor for the language."
                name="it.xsemantics.example.lambda.ui">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.lambda.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.lambda.tests">
          </projectDescriptor>
       </example>
    </extension>
