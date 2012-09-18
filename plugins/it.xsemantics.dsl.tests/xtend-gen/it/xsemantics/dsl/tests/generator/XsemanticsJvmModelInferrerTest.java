@@ -276,15 +276,26 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
     EList<CheckRule> _checkrules = _parseAndAssertNoError.getCheckrules();
     CheckRule _get = _checkrules.get(0);
-    JvmOperation _compileCheckRuleMethod = this.inferrer.compileCheckRuleMethod(_get);
+    ArrayList<JvmOperation> _compileCheckRuleMethods = this.inferrer.compileCheckRuleMethods(_get);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public Result<Boolean> checkEObject(final EObject obj) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return checkEObject(null, obj);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject obj) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("try {");
     _builder.newLine();
     _builder.append("    \t");
-    _builder.append("return checkEObjectInternal(null, obj);");
+    _builder.append("return checkEObjectInternal(_trace_, obj);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("} catch (Exception e) {");
@@ -297,7 +308,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
-    this.assertGeneratedMember(_compileCheckRuleMethod, _builder);
+    this.assertGeneratedMembers(_compileCheckRuleMethods, _builder);
   }
   
   @Test

@@ -193,8 +193,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkProgram(final Program program) {
+    return checkProgram(null, program);
+  }
+  
+  public Result<Boolean> checkProgram(final RuleApplicationTrace _trace_, final Program program) {
     try {
-    	return checkProgramInternal(null, program);
+    	return checkProgramInternal(_trace_, program);
     } catch (Exception e) {
     	return resultForFailure(e);
     }

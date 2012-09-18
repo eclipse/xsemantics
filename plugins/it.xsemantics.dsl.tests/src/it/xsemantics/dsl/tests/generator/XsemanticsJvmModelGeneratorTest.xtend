@@ -562,8 +562,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkEObject(final EObject obj) {
+    return checkEObject(null, obj);
+  }
+  
+  public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject obj) {
     try {
-    	return checkEObjectInternal(null, obj);
+    	return checkEObjectInternal(_trace_, obj);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -1275,8 +1279,12 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   }
   
   public Result<Boolean> checkEObject(final EObject o) {
+    return checkEObject(null, o);
+  }
+  
+  public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
     try {
-    	return checkEObjectInternal(null, o);
+    	return checkEObjectInternal(_trace_, o);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -1454,8 +1462,13 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   
   @Override
   public Result<Boolean> checkEObject(final EObject o) {
+    return checkEObject(null, o);
+  }
+  
+  @Override
+  public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
     try {
-    	return checkEObjectInternal(null, o);
+    	return checkEObjectInternal(_trace_, o);
     } catch (Exception e) {
     	return resultForFailure(e);
     }

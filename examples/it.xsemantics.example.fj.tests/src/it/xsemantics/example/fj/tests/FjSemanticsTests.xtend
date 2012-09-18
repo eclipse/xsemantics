@@ -393,4 +393,16 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 			Assert::fail("unexpected success: " + stringRep.string(result.value))
 		}
 	}
+
+	def private assertWellTypedAfterSubstitution(CharSequence prog, CharSequence expectedTrace) {
+		val p = prog.parseAndAssertNoError
+		val m = p.methodByName("m")
+		val mBodyExp = m.body.expression.copy
+		
+		mBodyExp.replaceThisAndParams(
+			(p.main as Selection).receiver, 
+			m.params, (p.main as Selection).args
+		)
+		
+	}
 }

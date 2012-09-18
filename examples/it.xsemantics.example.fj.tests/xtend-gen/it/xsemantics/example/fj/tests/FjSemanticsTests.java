@@ -665,4 +665,18 @@ public class FjSemanticsTests extends FjBaseTests {
       Assert.fail(_plus);
     }
   }
+  
+  private void assertWellTypedAfterSubstitution(final CharSequence prog, final CharSequence expectedTrace) {
+    final Program p = this.parseAndAssertNoError(prog);
+    final Method m = this.methodByName(p, "m");
+    MethodBody _body = m.getBody();
+    Expression _expression = _body.getExpression();
+    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
+    Expression _main = p.getMain();
+    Expression _receiver = ((Selection) _main).getReceiver();
+    EList<Parameter> _params = m.getParams();
+    Expression _main_1 = p.getMain();
+    EList<Expression> _args = ((Selection) _main_1).getArgs();
+    this._fjSemanticsUtils.replaceThisAndParams(mBodyExp, _receiver, _params, _args);
+  }
 }

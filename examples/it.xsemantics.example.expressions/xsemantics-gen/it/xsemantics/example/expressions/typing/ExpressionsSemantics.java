@@ -157,8 +157,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkVariable(final Variable variable) {
+    return checkVariable(null, variable);
+  }
+  
+  public Result<Boolean> checkVariable(final RuleApplicationTrace _trace_, final Variable variable) {
     try {
-    	return checkVariableInternal(null, variable);
+    	return checkVariableInternal(_trace_, variable);
     } catch (Exception e) {
     	return resultForFailure(e);
     }

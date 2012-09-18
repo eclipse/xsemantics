@@ -283,8 +283,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkMethodBody(final Method method) {
+    return checkMethodBody(null, method);
+  }
+  
+  public Result<Boolean> checkMethodBody(final RuleApplicationTrace _trace_, final Method method) {
     try {
-    	return checkMethodBodyInternal(null, method);
+    	return checkMethodBodyInternal(_trace_, method);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -305,8 +309,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkField(final Field field) {
+    return checkField(null, field);
+  }
+  
+  public Result<Boolean> checkField(final RuleApplicationTrace _trace_, final Field field) {
     try {
-    	return checkFieldInternal(null, field);
+    	return checkFieldInternal(_trace_, field);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -349,8 +357,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkMethodOverride(final Method method) {
+    return checkMethodOverride(null, method);
+  }
+  
+  public Result<Boolean> checkMethodOverride(final RuleApplicationTrace _trace_, final Method method) {
     try {
-    	return checkMethodOverrideInternal(null, method);
+    	return checkMethodOverrideInternal(_trace_, method);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -390,8 +402,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkClassHierachyNotCyclic(final it.xsemantics.example.fj.fj.Class cl) {
+    return checkClassHierachyNotCyclic(null, cl);
+  }
+  
+  public Result<Boolean> checkClassHierachyNotCyclic(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     try {
-    	return checkClassHierachyNotCyclicInternal(null, cl);
+    	return checkClassHierachyNotCyclicInternal(_trace_, cl);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -428,8 +444,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<Boolean> checkMain(final Program program) {
+    return checkMain(null, program);
+  }
+  
+  public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
-    	return checkMainInternal(null, program);
+    	return checkMainInternal(_trace_, program);
     } catch (Exception e) {
     	return resultForFailure(e);
     }

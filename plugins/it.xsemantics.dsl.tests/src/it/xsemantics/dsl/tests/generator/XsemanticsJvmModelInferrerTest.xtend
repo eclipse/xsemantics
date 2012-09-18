@@ -163,13 +163,17 @@ protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace
 	def testCheckRuleMethod() {
 		testFiles.testCheckRule.
 			parseAndAssertNoError.checkrules.get(0).
-				compileCheckRuleMethod.
-				assertGeneratedMember
+				compileCheckRuleMethods.
+				assertGeneratedMembers
 (
 '''
 public Result<Boolean> checkEObject(final EObject obj) {
+    return checkEObject(null, obj);
+  }
+  
+  public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject obj) {
     try {
-    	return checkEObjectInternal(null, obj);
+    	return checkEObjectInternal(_trace_, obj);
     } catch (Exception e) {
     	return resultForFailure(e);
     }

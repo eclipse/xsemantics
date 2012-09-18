@@ -144,7 +144,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			ts.checkrules.forEach [
 				r |
-				members += r.compileCheckRuleMethod
+				members += r.compileCheckRuleMethods
 				members += r.compileInternalMethod
 			]
 			
@@ -556,8 +556,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
 	}
 
-	def compileCheckRuleMethod(CheckRule rule) {
-		rule.toMethod(
+	def compileCheckRuleMethods(CheckRule rule) {
+		val checkMethods = <JvmOperation>newArrayList()
+		
+		checkMethods += rule.toMethod(
 			'''«rule.methodName»''',
 			rule.resultType
 		) 
@@ -572,9 +574,30 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			body = [
    				it.append(
+   				'''return «rule.methodName»(null, «rule.element.parameter.name»);'''
+   				)
+   			]
+		]
+		
+		checkMethods += rule.toMethod(
+			'''«rule.methodName»''',
+			rule.resultType
+		) 
+		[
+			if (rule.^override)
+				annotations += rule.toAnnotation(typeof(Override))
+			
+			parameters += rule.ruleApplicationTraceParam
+   			parameters += rule.element.parameter.
+   				toParameter(rule.element.parameter.name,
+   					rule.element.parameter.parameterType
+   				)
+   			
+   			body = [
+   				it.append(
    				'''
 				try {
-					return «rule.methodName»Internal(null, «rule.element.parameter.name»);
+					return «rule.methodName»Internal(«ruleApplicationTraceName.toString», «rule.element.parameter.name»);
 				} catch ('''
    				)
    				rule.exceptionType.serialize(rule, it)
@@ -586,6 +609,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				)
    			]
 		]
+		
+		checkMethods
 	}
 
 	def compileValidatorCheckRuleMethod(CheckRule rule) {

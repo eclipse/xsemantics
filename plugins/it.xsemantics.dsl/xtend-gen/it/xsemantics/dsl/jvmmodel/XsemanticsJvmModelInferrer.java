@@ -221,8 +221,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           final Procedure1<CheckRule> _function_5 = new Procedure1<CheckRule>() {
               public void apply(final CheckRule r) {
                 EList<JvmMember> _members = it.getMembers();
-                JvmOperation _compileCheckRuleMethod = XsemanticsJvmModelInferrer.this.compileCheckRuleMethod(r);
-                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileCheckRuleMethod);
+                ArrayList<JvmOperation> _compileCheckRuleMethods = XsemanticsJvmModelInferrer.this.compileCheckRuleMethods(r);
+                XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileCheckRuleMethods);
                 EList<JvmMember> _members_1 = it.getMembers();
                 JvmOperation _compileInternalMethod = XsemanticsJvmModelInferrer.this.compileInternalMethod(r);
                 XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileInternalMethod);
@@ -1131,66 +1131,122 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _method;
   }
   
-  public JvmOperation compileCheckRuleMethod(final CheckRule rule) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _methodName = this._xsemanticsGeneratorExtensions.methodName(rule);
-    _builder.append(_methodName, "");
-    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(rule);
-    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          boolean _isOverride = rule.isOverride();
-          if (_isOverride) {
-            EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-            JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+  public ArrayList<JvmOperation> compileCheckRuleMethods(final CheckRule rule) {
+    ArrayList<JvmOperation> _xblockexpression = null;
+    {
+      final ArrayList<JvmOperation> checkMethods = CollectionLiterals.<JvmOperation>newArrayList();
+      StringConcatenation _builder = new StringConcatenation();
+      String _methodName = this._xsemanticsGeneratorExtensions.methodName(rule);
+      _builder.append(_methodName, "");
+      JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(rule);
+      final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          public void apply(final JvmOperation it) {
+            boolean _isOverride = rule.isOverride();
+            if (_isOverride) {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+            }
+            EList<JvmFormalParameter> _parameters = it.getParameters();
+            RuleParameter _element = rule.getElement();
+            JvmFormalParameter _parameter = _element.getParameter();
+            RuleParameter _element_1 = rule.getElement();
+            JvmFormalParameter _parameter_1 = _element_1.getParameter();
+            String _name = _parameter_1.getName();
+            RuleParameter _element_2 = rule.getElement();
+            JvmFormalParameter _parameter_2 = _element_2.getParameter();
+            JvmTypeReference _parameterType = _parameter_2.getParameterType();
+            JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter_3);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("return ");
+                  String _methodName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.methodName(rule);
+                  _builder.append(_methodName, "");
+                  _builder.append("(null, ");
+                  RuleParameter _element = rule.getElement();
+                  JvmFormalParameter _parameter = _element.getParameter();
+                  String _name = _parameter.getName();
+                  _builder.append(_name, "");
+                  _builder.append(");");
+                  it.append(_builder);
+                }
+              };
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
           }
-          EList<JvmFormalParameter> _parameters = it.getParameters();
-          RuleParameter _element = rule.getElement();
-          JvmFormalParameter _parameter = _element.getParameter();
-          RuleParameter _element_1 = rule.getElement();
-          JvmFormalParameter _parameter_1 = _element_1.getParameter();
-          String _name = _parameter_1.getName();
-          RuleParameter _element_2 = rule.getElement();
-          JvmFormalParameter _parameter_2 = _element_2.getParameter();
-          JvmTypeReference _parameterType = _parameter_2.getParameterType();
-          JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter_3);
-          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("try {");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("return ");
-                String _methodName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.methodName(rule);
-                _builder.append(_methodName, "	");
-                _builder.append("Internal(null, ");
-                RuleParameter _element = rule.getElement();
-                JvmFormalParameter _parameter = _element.getParameter();
-                String _name = _parameter.getName();
-                _builder.append(_name, "	");
-                _builder.append(");");
-                _builder.newLineIfNotEmpty();
-                _builder.append("} catch (");
-                it.append(_builder);
-                JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(rule);
-                XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_exceptionType, rule, it);
-                StringConcatenation _builder_1 = new StringConcatenation();
-                _builder_1.append(" ");
-                _builder_1.append("e) {");
-                _builder_1.newLine();
-                _builder_1.append("\t");
-                _builder_1.append("return resultForFailure(e);");
-                _builder_1.newLine();
-                _builder_1.append("}");
-                it.append(_builder_1);
-              }
-            };
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
-        }
-      };
-    JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _builder.toString(), _resultType, _function);
-    return _method;
+        };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _builder.toString(), _resultType, _function);
+      checkMethods.add(_method);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      String _methodName_1 = this._xsemanticsGeneratorExtensions.methodName(rule);
+      _builder_1.append(_methodName_1, "");
+      JvmTypeReference _resultType_1 = this._xsemanticsGeneratorExtensions.resultType(rule);
+      final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+          public void apply(final JvmOperation it) {
+            boolean _isOverride = rule.isOverride();
+            if (_isOverride) {
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(rule, Override.class);
+              XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+            }
+            EList<JvmFormalParameter> _parameters = it.getParameters();
+            JvmFormalParameter _ruleApplicationTraceParam = XsemanticsJvmModelInferrer.this.ruleApplicationTraceParam(rule);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _ruleApplicationTraceParam);
+            EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+            RuleParameter _element = rule.getElement();
+            JvmFormalParameter _parameter = _element.getParameter();
+            RuleParameter _element_1 = rule.getElement();
+            JvmFormalParameter _parameter_1 = _element_1.getParameter();
+            String _name = _parameter_1.getName();
+            RuleParameter _element_2 = rule.getElement();
+            JvmFormalParameter _parameter_2 = _element_2.getParameter();
+            JvmTypeReference _parameterType = _parameter_2.getParameterType();
+            JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_3);
+            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("try {");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("return ");
+                  String _methodName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.methodName(rule);
+                  _builder.append(_methodName, "	");
+                  _builder.append("Internal(");
+                  CharSequence _ruleApplicationTraceName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                  String _string = _ruleApplicationTraceName.toString();
+                  _builder.append(_string, "	");
+                  _builder.append(", ");
+                  RuleParameter _element = rule.getElement();
+                  JvmFormalParameter _parameter = _element.getParameter();
+                  String _name = _parameter.getName();
+                  _builder.append(_name, "	");
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("} catch (");
+                  it.append(_builder);
+                  JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(rule);
+                  XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_exceptionType, rule, it);
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  _builder_1.append(" ");
+                  _builder_1.append("e) {");
+                  _builder_1.newLine();
+                  _builder_1.append("\t");
+                  _builder_1.append("return resultForFailure(e);");
+                  _builder_1.newLine();
+                  _builder_1.append("}");
+                  it.append(_builder_1);
+                }
+              };
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+          }
+        };
+      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(rule, _builder_1.toString(), _resultType_1, _function_1);
+      checkMethods.add(_method_1);
+      _xblockexpression = (checkMethods);
+    }
+    return _xblockexpression;
   }
   
   public JvmOperation compileValidatorCheckRuleMethod(final CheckRule rule) {

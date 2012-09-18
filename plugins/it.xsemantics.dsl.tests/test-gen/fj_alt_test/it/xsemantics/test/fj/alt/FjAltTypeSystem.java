@@ -126,8 +126,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<Boolean> checkMain(final Program program) {
+    return checkMain(null, program);
+  }
+  
+  @Override
+  public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
-    	return checkMainInternal(null, program);
+    	return checkMainInternal(_trace_, program);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
@@ -154,8 +159,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<Boolean> checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
+    return checkClassOk(null, clazz);
+  }
+  
+  @Override
+  public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) {
     try {
-    	return checkClassOkInternal(null, clazz);
+    	return checkClassOkInternal(_trace_, clazz);
     } catch (Exception e) {
     	return resultForFailure(e);
     }
