@@ -45,7 +45,7 @@ public class FjSemanticsUtils {
   }
   
   public void replaceThis(final Expression exp, final Expression thisReplacement) {
-    List<This> _allContentsOfType = EcoreUtil2.<This>getAllContentsOfType(exp, This.class);
+    List<This> _eAllOfType = EcoreUtil2.<This>eAllOfType(exp, This.class);
     final Procedure1<This> _function = new Procedure1<This>() {
         public void apply(final This it) {
           EObject _eContainer = it.eContainer();
@@ -54,11 +54,11 @@ public class FjSemanticsUtils {
           EcoreUtil.replace(_eContainer, _eContainingFeature, it, _copy);
         }
       };
-    IterableExtensions.<This>forEach(_allContentsOfType, _function);
+    IterableExtensions.<This>forEach(_eAllOfType, _function);
   }
   
   public void replaceParams(final Expression exp, final List<Parameter> params, final List<Expression> args) {
-    List<ParamRef> _allContentsOfType = EcoreUtil2.<ParamRef>getAllContentsOfType(exp, ParamRef.class);
+    List<ParamRef> _eAllOfType = EcoreUtil2.<ParamRef>eAllOfType(exp, ParamRef.class);
     final Procedure1<ParamRef> _function = new Procedure1<ParamRef>() {
         public void apply(final ParamRef it) {
           Parameter _parameter = it.getParameter();
@@ -70,7 +70,7 @@ public class FjSemanticsUtils {
           EcoreUtil.replace(_eContainer, _eContainingFeature, it, _copy);
         }
       };
-    IterableExtensions.<ParamRef>forEach(_allContentsOfType, _function);
+    IterableExtensions.<ParamRef>forEach(_eAllOfType, _function);
   }
   
   public boolean isValue(final Expression exp) {

@@ -2,21 +2,26 @@ package it.xsemantics.example.fj.tests;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.MethodBody;
 import it.xsemantics.example.fj.fj.Parameter;
 import it.xsemantics.example.fj.fj.Program;
 import it.xsemantics.example.fj.fj.Selection;
+import it.xsemantics.example.fj.fj.Type;
 import it.xsemantics.example.fj.tests.FjBaseTests;
 import it.xsemantics.example.fj.tests.FjInjectorProviderCustom;
 import it.xsemantics.example.fj.typing.FjTypeSystem;
 import it.xsemantics.example.fj.util.FjSemanticsUtils;
+import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -168,6 +173,171 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder.newLine();
     this.assertThisAndParamsReplacement(_builder, 
       "new A(new B()).m(new A(new B()), new A(new B()).o, 10, \'foo\')");
+  }
+  
+  @Test
+  public void testWellTypedAfterSubstitutionParam() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Base { }");
+    _builder.newLine();
+    _builder.append("class B extends Base { }");
+    _builder.newLine();
+    _builder.append("class C extends B {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B o;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Base m(B b, int i) { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return b;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("new A(new B()).m(new C(), 10)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("WELLTYPED METHOD BODY");
+    _builder_1.newLine();
+    _builder_1.append("TParamRef: [this <- A] |- b : B");
+    _builder_1.newLine();
+    _builder_1.append("WELLTYPED AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("TNew: [] |- new C() : C");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("SubtypeSequence: [] |- new C() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("SUBTYPE AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("ClassSubtyping: [] |- C <: B");
+    this.assertSubstitutionLemma(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testWellTypedAfterSubstitutionThis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("A m() { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return this;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class C extends B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("new C().m()");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("WELLTYPED METHOD BODY");
+    _builder_1.newLine();
+    _builder_1.append("TThis: [this <- B] |- this : B");
+    _builder_1.newLine();
+    _builder_1.append("WELLTYPED AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("TNew: [] |- new C() : C");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("SubtypeSequence: [] |- new C() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("SUBTYPE AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("ClassSubtyping: [] |- C <: B");
+    this.assertSubstitutionLemma(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testWellTypedAfterSubstitutionFieldSelection() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int m() { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return this.i;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class C extends B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("new C(10).m()");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("WELLTYPED METHOD BODY");
+    _builder_1.newLine();
+    _builder_1.append("TSelection: [this <- B] |- this.i : int");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TThis: [this <- B] |- this : B");
+    _builder_1.newLine();
+    _builder_1.append("WELLTYPED AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("TSelection: [] |- new C(10).i : int");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TNew: [] |- new C(10) : C");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("SubtypeSequence: [] |- new C(10) ~> [10] << [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("ExpressionAssignableToType: [] |- 10 <| int");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("TIntConstant: [] |- 10 : int");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("BasicSubtyping: [] |- int <: int");
+    _builder_1.newLine();
+    _builder_1.append("SUBTYPE AFTER SUBSTITUTION");
+    _builder_1.newLine();
+    _builder_1.append("BasicSubtyping: [] |- int <: int");
+    this.assertSubstitutionLemma(_builder, _builder_1);
   }
   
   @Test
@@ -666,17 +836,49 @@ public class FjSemanticsTests extends FjBaseTests {
     }
   }
   
-  private void assertWellTypedAfterSubstitution(final CharSequence prog, final CharSequence expectedTrace) {
+  private void assertSubstitutionLemma(final CharSequence prog, final CharSequence expectedTrace) {
     final Program p = this.parseAndAssertNoError(prog);
     final Method m = this.methodByName(p, "m");
+    this.trace.addToTrace("WELLTYPED METHOD BODY");
+    it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(m, it.xsemantics.example.fj.fj.Class.class);
+    final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+    RuleEnvironment _environmentEntry = this.fjSystem.environmentEntry("this", typeForThis);
+    RuleEnvironment _ruleEnvironment = new RuleEnvironment(_environmentEntry);
     MethodBody _body = m.getBody();
     Expression _expression = _body.getExpression();
-    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
+    final Result<Type> methodBodyType = this.fjSystem.type(_ruleEnvironment, 
+      this.trace, _expression);
+    this.<Type>assertResult(methodBodyType);
+    MethodBody _body_1 = m.getBody();
+    final MethodBody mBody = EcoreUtil.<MethodBody>copy(_body_1);
+    Expression _expression_1 = mBody.getExpression();
     Expression _main = p.getMain();
     Expression _receiver = ((Selection) _main).getReceiver();
     EList<Parameter> _params = m.getParams();
     Expression _main_1 = p.getMain();
     EList<Expression> _args = ((Selection) _main_1).getArgs();
-    this._fjSemanticsUtils.replaceThisAndParams(mBodyExp, _receiver, _params, _args);
+    this._fjSemanticsUtils.replaceThisAndParams(_expression_1, _receiver, _params, _args);
+    this.trace.addToTrace("WELLTYPED AFTER SUBSTITUTION");
+    Expression _expression_2 = mBody.getExpression();
+    final Result<Type> substType = this.fjSystem.type(null, this.trace, _expression_2);
+    this.<Type>assertResult(substType);
+    this.trace.addToTrace("SUBTYPE AFTER SUBSTITUTION");
+    Type _value = substType.getValue();
+    Type _value_1 = methodBodyType.getValue();
+    final Result<Boolean> isSubtype = this.fjSystem.subtype(null, this.trace, _value, _value_1);
+    this.<Boolean>assertResult(isSubtype);
+    String _string = expectedTrace.toString();
+    String _traceAsString = this.traceUtils.traceAsString(this.trace);
+    Assert.assertEquals(_string, _traceAsString);
+  }
+  
+  private <T extends Object> void assertResult(final Result<T> result) {
+    boolean _failed = result.failed();
+    if (_failed) {
+      RuleFailedException _ruleFailedException = result.getRuleFailedException();
+      String _failureTraceAsString = this.traceUtils.failureTraceAsString(_ruleFailedException);
+      InputOutput.<String>println(_failureTraceAsString);
+      Assert.fail();
+    }
   }
 }

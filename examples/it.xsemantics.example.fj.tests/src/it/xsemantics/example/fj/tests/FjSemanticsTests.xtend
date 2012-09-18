@@ -9,9 +9,13 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.example.fj.fj.Selection
+import it.xsemantics.example.fj.util.FjTypeUtils
+import it.xsemantics.runtime.RuleEnvironment
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import it.xsemantics.example.fj.fj.Selection
+import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.runtime.Result
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjInjectorProviderCustom))
@@ -107,6 +111,95 @@ class FjSemanticsTests extends FjBaseTests {
 		new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')
 		'''.assertThisAndParamsReplacement(
 		"new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')")
+	}
+
+	@Test
+	def void testWellTypedAfterSubstitutionParam() {
+		'''
+		class Base { }
+		class B extends Base { }
+		class C extends B {}
+		
+		class A {
+			B o;
+			Base m(B b, int i) { 
+				return b;
+			}
+		}
+		
+		new A(new B()).m(new C(), 10)
+		'''.assertSubstitutionLemma(
+'''
+WELLTYPED METHOD BODY
+TParamRef: [this <- A] |- b : B
+WELLTYPED AFTER SUBSTITUTION
+TNew: [] |- new C() : C
+ SubtypeSequence: [] |- new C() ~> [] << []
+SUBTYPE AFTER SUBSTITUTION
+ClassSubtyping: [] |- C <: B''')
+	}
+
+	@Test
+	def void testWellTypedAfterSubstitutionThis() {
+		'''
+		class A {
+			
+		}
+		
+		class B extends A {
+			A m() { 
+				return this;
+			}
+		}
+		
+		class C extends B {
+			
+		}
+		
+		new C().m()
+		'''.assertSubstitutionLemma(
+'''
+WELLTYPED METHOD BODY
+TThis: [this <- B] |- this : B
+WELLTYPED AFTER SUBSTITUTION
+TNew: [] |- new C() : C
+ SubtypeSequence: [] |- new C() ~> [] << []
+SUBTYPE AFTER SUBSTITUTION
+ClassSubtyping: [] |- C <: B''')
+	}
+
+	@Test
+	def void testWellTypedAfterSubstitutionFieldSelection() {
+		'''
+		class A {
+			int i;
+		}
+		
+		class B extends A {
+			int m() { 
+				return this.i;
+			}
+		}
+		
+		class C extends B {
+			
+		}
+		
+		new C(10).m()
+		'''.assertSubstitutionLemma(
+'''
+WELLTYPED METHOD BODY
+TSelection: [this <- B] |- this.i : int
+ TThis: [this <- B] |- this : B
+WELLTYPED AFTER SUBSTITUTION
+TSelection: [] |- new C(10).i : int
+ TNew: [] |- new C(10) : C
+  SubtypeSequence: [] |- new C(10) ~> [10] << [int i;]
+   ExpressionAssignableToType: [] |- 10 <| int
+    TIntConstant: [] |- 10 : int
+    BasicSubtyping: [] |- int <: int
+SUBTYPE AFTER SUBSTITUTION
+BasicSubtyping: [] |- int <: int''')
 	}
 
 	@Test
@@ -394,15 +487,47 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 		}
 	}
 
-	def private assertWellTypedAfterSubstitution(CharSequence prog, CharSequence expectedTrace) {
+	def private assertSubstitutionLemma(CharSequence prog, CharSequence expectedTrace) {
 		val p = prog.parseAndAssertNoError
 		val m = p.methodByName("m")
-		val mBodyExp = m.body.expression.copy
 		
-		mBodyExp.replaceThisAndParams(
+		trace.addToTrace("WELLTYPED METHOD BODY")
+		
+		val typeForThis = FjTypeUtils::createClassType(
+			m.getContainerOfType(typeof(it.xsemantics.example.fj.fj.Class))
+		)
+		val methodBodyType = fjSystem.type(
+			new RuleEnvironment(fjSystem.environmentEntry("this", typeForThis)),
+			trace, m.body.expression
+		)
+		methodBodyType.assertResult
+		
+		val mBody = m.body.copy
+		
+		mBody.expression.replaceThisAndParams(
 			(p.main as Selection).receiver, 
 			m.params, (p.main as Selection).args
 		)
 		
+		trace.addToTrace("WELLTYPED AFTER SUBSTITUTION")
+		
+		val substType = fjSystem.type(null, trace, mBody.expression)
+		substType.assertResult
+		
+		trace.addToTrace("SUBTYPE AFTER SUBSTITUTION")
+		val isSubtype = fjSystem.subtype
+			(null, trace, substType.value, methodBodyType.value)
+		isSubtype.assertResult
+		
+		Assert::assertEquals(expectedTrace.toString, 
+			traceUtils.traceAsString(trace)
+		)
+	}
+
+	def private <T> assertResult(Result<T> result) {
+		if (result.failed) {
+			println(traceUtils.failureTraceAsString(result.ruleFailedException))
+			Assert::fail
+		}
 	}
 }

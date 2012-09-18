@@ -28,7 +28,7 @@ class FjSemanticsUtils {
 	}
 
 	def replaceThis(Expression exp, Expression thisReplacement) {
-		exp.getAllContentsOfType(typeof(This)).forEach [
+		exp.eAllOfType(typeof(This)).forEach [
 			eContainer.replace(
 				eContainingFeature,
 				it,
@@ -38,7 +38,7 @@ class FjSemanticsUtils {
 	}
 
 	def replaceParams(Expression exp, List<Parameter> params, List<Expression> args) {
-		exp.getAllContentsOfType(typeof(ParamRef)).forEach [
+		exp.eAllOfType(typeof(ParamRef)).forEach [
 			val paramIndex = params.indexOf(it.parameter)
 			eContainer.replace(
 				eContainingFeature,
