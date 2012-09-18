@@ -12,10 +12,10 @@ import org.junit.runner.RunWith
 import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.util.FjTypeUtils
 import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.Result
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.runtime.Result
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjInjectorProviderCustom))
@@ -402,6 +402,74 @@ RCast: [] |- (A) new B(100) ~> new B(100)
   ClassSubtyping: [] |- B <: A''')
 	}
 
+	@Test
+	def void testSubjectReductionCast() {
+		'''
+		class A {
+			int i;
+		}
+		
+		class B extends A { }
+		
+		(A) new B(10)
+		'''.assertSubjectReduction(
+'''
+WELLTYPED MAIN
+TCast: [] |- (A) new B(10) : A
+ TNew: [] |- new B(10) : B
+  SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
+   ExpressionAssignableToType: [] |- 10 <| int
+    TIntConstant: [] |- 10 : int
+    BasicSubtyping: [] |- int <: int
+ ClassSubtyping: [] |- B <: A
+REDUCTION
+RCast: [] |- (A) new B(10) ~> new B(10)
+ ExpressionAssignableToType: [] |- new B(10) <| A
+  TNew: [] |- new B(10) : B
+   SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
+    ExpressionAssignableToType: [] |- 10 <| int
+     TIntConstant: [] |- 10 : int
+     BasicSubtyping: [] |- int <: int
+  ClassSubtyping: [] |- B <: A
+WELLTYPED AFTER REDUCTION
+TNew: [] |- new B(10) : B
+ SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
+  ExpressionAssignableToType: [] |- 10 <| int
+   TIntConstant: [] |- 10 : int
+   BasicSubtyping: [] |- int <: int
+SUBTYPE AFTER REDUCTION
+ClassSubtyping: [] |- B <: A'''			
+		)
+	}
+
+	@Test
+	def void testSubjectReductionMethodSelection() {
+		'''
+		class A {
+			A m() { return this; }
+		}
+		
+		class B extends A{
+			
+		}
+		
+		new B().m()
+		'''.assertSubjectReduction(
+'''WELLTYPED MAIN
+TSelection: [] |- new B().m() : A
+ TNew: [] |- new B() : B
+  SubtypeSequence: [] |- new B() ~> [] << []
+ SubtypeSequence: [] |- new B().m() ~> [] << []
+REDUCTION
+RSelection: [] |- new B().m() ~> new B()
+WELLTYPED AFTER REDUCTION
+TNew: [] |- new B() : B
+ SubtypeSequence: [] |- new B() ~> [] << []
+SUBTYPE AFTER REDUCTION
+ClassSubtyping: [] |- B <: A'''
+)
+	}
+
 	def private assertValue(CharSequence prog) {
 		Assert::assertTrue(prog.parseAndAssertNoError.main.isValue)
 	}
@@ -517,6 +585,34 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 		trace.addToTrace("SUBTYPE AFTER SUBSTITUTION")
 		val isSubtype = fjSystem.subtype
 			(null, trace, substType.value, methodBodyType.value)
+		isSubtype.assertResult
+		
+		Assert::assertEquals(expectedTrace.toString, 
+			traceUtils.traceAsString(trace)
+		)
+	}
+
+	def private assertSubjectReduction(CharSequence prog, CharSequence expectedTrace) {
+		val p = prog.parseAndAssertNoError
+		val m = p.main
+		
+		trace.addToTrace("WELLTYPED MAIN")
+		
+		val mainType = fjSystem.type(null, trace, m)
+		mainType.assertResult
+		
+		trace.addToTrace("REDUCTION")
+		
+		val reduced = m.assertReduce
+		
+		trace.addToTrace("WELLTYPED AFTER REDUCTION")
+		
+		val reducedType = fjSystem.type(null, trace, reduced.value)
+		reducedType.assertResult
+		
+		trace.addToTrace("SUBTYPE AFTER REDUCTION")
+		val isSubtype = fjSystem.subtype
+			(null, trace, reducedType.value, mainType.value)
 		isSubtype.assertResult
 		
 		Assert::assertEquals(expectedTrace.toString, 
