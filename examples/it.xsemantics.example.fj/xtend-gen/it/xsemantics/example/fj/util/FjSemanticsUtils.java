@@ -39,13 +39,18 @@ public class FjSemanticsUtils {
     return _forall;
   }
   
-  public void replaceThis(final Expression exp, final Expression replacement) {
+  public void replaceThisAndParams(final Expression exp, final Expression thisReplacement, final List<Parameter> params, final List<Expression> args) {
+    this.replaceThis(exp, thisReplacement);
+    this.replaceParams(exp, params, args);
+  }
+  
+  public void replaceThis(final Expression exp, final Expression thisReplacement) {
     List<This> _allContentsOfType = EcoreUtil2.<This>getAllContentsOfType(exp, This.class);
     final Procedure1<This> _function = new Procedure1<This>() {
         public void apply(final This it) {
           EObject _eContainer = it.eContainer();
           EStructuralFeature _eContainingFeature = it.eContainingFeature();
-          Expression _copy = EcoreUtil.<Expression>copy(replacement);
+          Expression _copy = EcoreUtil.<Expression>copy(thisReplacement);
           EcoreUtil.replace(_eContainer, _eContainingFeature, it, _copy);
         }
       };

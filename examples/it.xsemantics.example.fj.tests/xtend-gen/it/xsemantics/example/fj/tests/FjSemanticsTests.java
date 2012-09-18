@@ -148,6 +148,29 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   @Test
+  public void testReplaceThisAndParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B { }");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B o;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("A m(A a, B b, int i, String s) { return this.m(a, b, i, s); }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("new A(new B()).m(new A(new B()), new A(new B()).o, 10, \'foo\')");
+    _builder.newLine();
+    this.assertThisAndParamsReplacement(_builder, 
+      "new A(new B()).m(new A(new B()), new A(new B()).o, 10, \'foo\')");
+  }
+  
+  @Test
   public void testReduceNew() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
@@ -528,6 +551,23 @@ public class FjSemanticsTests extends FjBaseTests {
     Expression _main = p.getMain();
     EList<Expression> _args = ((Selection) _main).getArgs();
     this._fjSemanticsUtils.replaceParams(mBodyExp, _params, _args);
+    String _string = expected.toString();
+    String _string_1 = this.stringRep.string(mBodyExp);
+    Assert.assertEquals(_string, _string_1);
+  }
+  
+  private void assertThisAndParamsReplacement(final CharSequence prog, final CharSequence expected) {
+    final Program p = this.parseAndAssertNoError(prog);
+    final Method m = this.methodByName(p, "m");
+    MethodBody _body = m.getBody();
+    Expression _expression = _body.getExpression();
+    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
+    Expression _main = p.getMain();
+    Expression _receiver = ((Selection) _main).getReceiver();
+    EList<Parameter> _params = m.getParams();
+    Expression _main_1 = p.getMain();
+    EList<Expression> _args = ((Selection) _main_1).getArgs();
+    this._fjSemanticsUtils.replaceThisAndParams(mBodyExp, _receiver, _params, _args);
     String _string = expected.toString();
     String _string_1 = this.stringRep.string(mBodyExp);
     Assert.assertEquals(_string, _string_1);

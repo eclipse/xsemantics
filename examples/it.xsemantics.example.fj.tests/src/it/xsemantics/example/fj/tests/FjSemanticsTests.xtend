@@ -95,6 +95,21 @@ class FjSemanticsTests extends FjBaseTests {
 	}
 
 	@Test
+	def void testReplaceThisAndParams() {
+		'''
+		class B { }
+		
+		class A {
+			B o;
+			A m(A a, B b, int i, String s) { return this.m(a, b, i, s); }
+		}
+		
+		new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')
+		'''.assertThisAndParamsReplacement(
+		"new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')")
+	}
+
+	@Test
 	def void testReduceNew() {
 		'''
 		class A {
@@ -317,6 +332,16 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 		Assert::assertEquals(expected.toString, stringRep.string(mBodyExp))
 	}
 
+	def private assertThisAndParamsReplacement(CharSequence prog, CharSequence expected) {
+		val p = prog.parseAndAssertNoError
+		val m = p.methodByName("m")
+		val mBodyExp = m.body.expression.copy
+		mBodyExp.replaceThisAndParams(
+			(p.main as Selection).receiver, 
+			m.params, (p.main as Selection).args
+		)
+		Assert::assertEquals(expected.toString, stringRep.string(mBodyExp))
+	}
 	def private assertReduceAll(CharSequence prog, CharSequence expectedTrace) {
 		var exp = prog.parseAndAssertNoError.main.copy
 		var result = exp.assertReduce

@@ -1293,7 +1293,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Expression> applyRuleRSelection(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection exp) throws RuleFailedException {
     Expression exp1 = null; // output parameter
     
-    /* { val sel = clone(exp) !semanticsUtils.isValue(exp.receiver) G |- exp.receiver ~> var Expression expi sel.receiver = expi exp1 = sel } or { val receiver = exp.receiver as New val message = exp.message switch (message) { Field: { val fieldIndex = Iterables::indexOf( fjAux.getFields(receiver.type.classref)) [ name == message.name ] exp1 = receiver.args.get(fieldIndex) } Method: { val indexOfNextToReduce = Iterables::indexOf(exp.args) [ !semanticsUtils.isValue(it) ] { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThis(method.body.expression, receiver) semanticsUtils.replaceParams (method.body.expression, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } } } } */
+    /* { val sel = clone(exp) !semanticsUtils.isValue(exp.receiver) G |- exp.receiver ~> var Expression expi sel.receiver = expi exp1 = sel } or { val receiver = exp.receiver as New val message = exp.message switch (message) { Field: { val fieldIndex = Iterables::indexOf( fjAux.getFields(receiver.type.classref)) [ name == message.name ] exp1 = receiver.args.get(fieldIndex) } Method: { val indexOfNextToReduce = Iterables::indexOf(exp.args) [ !semanticsUtils.isValue(it) ] { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThisAndParams( method.body.expression, receiver, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } } } } */
     try {
       Expression _xblockexpression = null;
       {
@@ -1367,7 +1367,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
                     return _function.apply(input);
                   }
               });
-              /* { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThis(method.body.expression, receiver) semanticsUtils.replaceParams (method.body.expression, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
+              /* { indexOfNextToReduce < 0 val method = clone(exp.message) as Method semanticsUtils.replaceThisAndParams( method.body.expression, receiver, method.params, exp.args) exp1 = method.body.expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
               try {
                 Expression _xblockexpression_1 = null;
                 {
@@ -1381,15 +1381,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
                   final Method method = ((Method) _clone);
                   MethodBody _body = method.getBody();
                   Expression _expression = _body.getExpression();
-                  this.semanticsUtils.replaceThis(_expression, receiver);
-                  MethodBody _body_1 = method.getBody();
-                  Expression _expression_1 = _body_1.getExpression();
                   EList<Parameter> _params = method.getParams();
                   EList<Expression> _args_1 = exp.getArgs();
-                  this.semanticsUtils.replaceParams(_expression_1, _params, _args_1);
-                  MethodBody _body_2 = method.getBody();
-                  Expression _expression_2 = _body_2.getExpression();
-                  Expression _exp1_1 = exp1 = _expression_2;
+                  this.semanticsUtils.replaceThisAndParams(_expression, receiver, _params, _args_1);
+                  MethodBody _body_1 = method.getBody();
+                  Expression _expression_1 = _body_1.getExpression();
+                  Expression _exp1_1 = exp1 = _expression_1;
                   _xblockexpression_1 = (_exp1_1);
                 }
               } catch (Exception e_1) {

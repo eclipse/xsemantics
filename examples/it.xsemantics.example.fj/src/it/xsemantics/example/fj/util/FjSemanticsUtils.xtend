@@ -3,12 +3,12 @@ package it.xsemantics.example.fj.util
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.New
 import it.xsemantics.example.fj.fj.Constant
-
-import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.example.fj.fj.This
 import it.xsemantics.example.fj.fj.Parameter
 import java.util.List
 import it.xsemantics.example.fj.fj.ParamRef
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class FjSemanticsUtils {
 	
@@ -22,12 +22,17 @@ class FjSemanticsUtils {
 		]
 	}
 	
-	def replaceThis(Expression exp, Expression replacement) {
+	def replaceThisAndParams(Expression exp, Expression thisReplacement, List<Parameter> params, List<Expression> args) {
+		exp.replaceThis(thisReplacement)
+		exp.replaceParams(params, args)
+	}
+
+	def replaceThis(Expression exp, Expression thisReplacement) {
 		exp.getAllContentsOfType(typeof(This)).forEach [
 			eContainer.replace(
 				eContainingFeature,
 				it,
-				replacement.copy
+				thisReplacement.copy
 			)
 		]
 	}

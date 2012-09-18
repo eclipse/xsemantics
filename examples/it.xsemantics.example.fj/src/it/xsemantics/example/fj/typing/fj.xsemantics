@@ -261,9 +261,9 @@ from {
 					// all invocation's arguments are values
 					indexOfNextToReduce < 0
 					val method = clone(exp.message) as Method
-					semanticsUtils.replaceThis(method.body.expression, receiver)
-					semanticsUtils.replaceParams
-						(method.body.expression, method.params, exp.args)
+					semanticsUtils.replaceThisAndParams(
+						method.body.expression, receiver,
+						method.params, exp.args)
 					exp1 = method.body.expression
 				}
 				or
