@@ -28,6 +28,7 @@ import com.google.common.collect.Sets
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsUtils {
 	
@@ -110,6 +111,13 @@ class XsemanticsUtils {
 					(judgmentSymbol, relationSymbols))
 		if (descriptions.size > 0)
 			descriptions.get(0)
+	}
+	
+	def auxiliaryDescription(AuxiliaryFunction fun) {
+		fun.containingSystem.
+			auxiliaryDescriptions.findFirst [
+				name == fun.name
+			]
 	}
 	
 	def List<Rule> rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {

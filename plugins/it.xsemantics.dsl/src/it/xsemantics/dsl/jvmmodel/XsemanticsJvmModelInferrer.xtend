@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -171,6 +172,14 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				elem |
 				members += elem.compileInternalMethod
 				members += elem.compileThrowExceptionMethod
+			]
+			
+			ts.auxiliaryFunctions.forEach [
+				aux |
+				if (aux.auxiliaryDescription != null) {
+					//members += rule.compileImplMethod
+					members += aux.compileApplyAuxiliaryFunction
+				}
 			]
 			
 			ts.rules.forEach [
@@ -439,6 +448,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 
    	def inputParameters(AuxiliaryDescription aux) {
+		aux.parameters.map([
+			it.toParameter(
+				it.name,
+				it.parameterType
+			)
+		])
+	}
+
+   	def inputParameters(AuxiliaryFunction aux) {
 		aux.parameters.map([
 			it.toParameter(
 				it.name,
@@ -739,6 +757,23 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				rule.declareVariablesForOutputParams(it) 
    				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
    			]
+		]
+	}
+
+	def compileApplyAuxiliaryFunction(AuxiliaryFunction auxfun) {
+		auxfun.toMethod(
+			'''applyAuxFun«auxfun.toJavaClassName»'''.toString,
+			auxfun.auxiliaryDescription.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+
+			exceptions += auxfun.ruleFailedExceptionType
+			
+   			parameters += auxfun.ruleApplicationTraceParam
+   			parameters += auxfun.inputParameters
+   			
+   			body = auxfun.body
 		]
 	}
 

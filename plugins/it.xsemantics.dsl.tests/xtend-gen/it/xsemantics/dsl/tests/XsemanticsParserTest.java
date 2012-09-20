@@ -669,4 +669,15 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testAuxiliaryFunctions() {
+    try {
+      CharSequence _testAuxiliaryFunctions = this.testFiles.testAuxiliaryFunctions();
+      XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctions);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

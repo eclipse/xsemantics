@@ -1868,4 +1868,12 @@ class XsemanticsTestFiles {
 		foo(EClass o) : EClass
 	}
 	'''
+
+	def testAuxiliaryFunctions() '''
+	«testAuxiliaryDescriptions»
+	
+	auxiliary isValue(EObject eO, EClass eC) {
+		eO.eClass == eC
+	}
+	'''
 }

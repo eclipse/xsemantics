@@ -16,6 +16,7 @@ XsemanticsSystem:
 	('judgments' '{'
 		judgmentDescriptions += JudgmentDescription+
 	'}')?
+	auxiliaryFunctions+=AuxiliaryFunction*
 	rules+=Rule*
 	checkrules+=CheckRule*
 ;
@@ -56,6 +57,17 @@ JudgmentParameter:
 
 QualifiedNameWithWildcard:
 	QualifiedName '.*'?
+;
+
+AuxiliaryFunction:
+	'auxiliary'
+	name=ID 
+	'('
+	(parameters+=FullJvmFormalParameter
+		(',' parameters+=FullJvmFormalParameter)*
+	)?
+	')'
+	body = XExpression
 ;
 
 Rule:

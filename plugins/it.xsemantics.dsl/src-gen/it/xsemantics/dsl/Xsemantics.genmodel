@@ -15,6 +15,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/injections"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/auxiliaryDescriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/judgmentDescriptions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/auxiliaryFunctions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/checkrules"/>
     </genClasses>
@@ -40,6 +41,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//JudgmentDescription/error"/>
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//JudgmentParameter"/>
+    <genClasses ecoreClass="Xsemantics.ecore#//AuxiliaryFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//AuxiliaryFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//AuxiliaryFunction/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//AuxiliaryFunction/body"/>
+    </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//Rule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Rule/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Rule/name"/>

@@ -5182,11 +5182,13 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testAuxiliaryDescriptions() {
-    CharSequence _testAuxiliaryDescriptions = this.testFiles.testAuxiliaryDescriptions();
+  public void testAuxiliaryFunctions() {
+    CharSequence _testAuxiliaryFunctions = this.testFiles.testAuxiliaryFunctions();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("import com.google.common.base.Objects;");
     _builder.newLine();
     _builder.append("import it.xsemantics.runtime.ErrorInformation;");
     _builder.newLine();
@@ -5413,9 +5415,38 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("EClass _eClass = eO.eClass();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("boolean _equals = Objects.equal(_eClass, eC);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("/* eO.eClass == eC */");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("if (!Boolean.valueOf(_equals)) {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("sneakyThrowRuleFailedException(\"eO.eClass == eC\");");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    this.assertCorrectJavaCodeGeneration(_testAuxiliaryDescriptions, _builder);
+    _builder.append("    ");
+    _builder.append("return Boolean.valueOf(_equals);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCorrectJavaCodeGeneration(_testAuxiliaryFunctions, _builder);
   }
   
   private void assertCorrectJavaCodeGeneration(final CharSequence input, final CharSequence expected) {

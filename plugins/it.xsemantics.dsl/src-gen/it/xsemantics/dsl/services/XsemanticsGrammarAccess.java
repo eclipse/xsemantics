@@ -50,22 +50,24 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cJudgmentDescriptionsAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
 		private final RuleCall cJudgmentDescriptionsJudgmentDescriptionParserRuleCall_7_2_0 = (RuleCall)cJudgmentDescriptionsAssignment_7_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7_3 = (Keyword)cGroup_7.eContents().get(3);
-		private final Assignment cRulesAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cRulesRuleParserRuleCall_8_0 = (RuleCall)cRulesAssignment_8.eContents().get(0);
-		private final Assignment cCheckrulesAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cCheckrulesCheckRuleParserRuleCall_9_0 = (RuleCall)cCheckrulesAssignment_9.eContents().get(0);
+		private final Assignment cAuxiliaryFunctionsAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cAuxiliaryFunctionsAuxiliaryFunctionParserRuleCall_8_0 = (RuleCall)cAuxiliaryFunctionsAssignment_8.eContents().get(0);
+		private final Assignment cRulesAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cRulesRuleParserRuleCall_9_0 = (RuleCall)cRulesAssignment_9.eContents().get(0);
+		private final Assignment cCheckrulesAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cCheckrulesCheckRuleParserRuleCall_10_0 = (RuleCall)cCheckrulesAssignment_10.eContents().get(0);
 		
 		//XsemanticsSystem:
 		//	"system" name=QualifiedName ("extends" superSystem=JvmParameterizedTypeReference)? ("validatorExtends"
 		//	validatorExtends=JvmParameterizedTypeReference)? imports+=Import* injections+=Injected* ("auxiliary" "{"
 		//	auxiliaryDescriptions+=AuxiliaryDescription+ "}")? ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-		//	rules+=Rule* checkrules+=CheckRule*;
+		//	auxiliaryFunctions+=AuxiliaryFunction* rules+=Rule* checkrules+=CheckRule*;
 		public ParserRule getRule() { return rule; }
 
 		//"system" name=QualifiedName ("extends" superSystem=JvmParameterizedTypeReference)? ("validatorExtends"
 		//validatorExtends=JvmParameterizedTypeReference)? imports+=Import* injections+=Injected* ("auxiliary" "{"
 		//auxiliaryDescriptions+=AuxiliaryDescription+ "}")? ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-		//rules+=Rule* checkrules+=CheckRule*
+		//auxiliaryFunctions+=AuxiliaryFunction* rules+=Rule* checkrules+=CheckRule*
 		public Group getGroup() { return cGroup; }
 
 		//"system"
@@ -149,17 +151,23 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_7_3() { return cRightCurlyBracketKeyword_7_3; }
 
+		//auxiliaryFunctions+=AuxiliaryFunction*
+		public Assignment getAuxiliaryFunctionsAssignment_8() { return cAuxiliaryFunctionsAssignment_8; }
+
+		//AuxiliaryFunction
+		public RuleCall getAuxiliaryFunctionsAuxiliaryFunctionParserRuleCall_8_0() { return cAuxiliaryFunctionsAuxiliaryFunctionParserRuleCall_8_0; }
+
 		//rules+=Rule*
-		public Assignment getRulesAssignment_8() { return cRulesAssignment_8; }
+		public Assignment getRulesAssignment_9() { return cRulesAssignment_9; }
 
 		//Rule
-		public RuleCall getRulesRuleParserRuleCall_8_0() { return cRulesRuleParserRuleCall_8_0; }
+		public RuleCall getRulesRuleParserRuleCall_9_0() { return cRulesRuleParserRuleCall_9_0; }
 
 		//checkrules+=CheckRule*
-		public Assignment getCheckrulesAssignment_9() { return cCheckrulesAssignment_9; }
+		public Assignment getCheckrulesAssignment_10() { return cCheckrulesAssignment_10; }
 
 		//CheckRule
-		public RuleCall getCheckrulesCheckRuleParserRuleCall_9_0() { return cCheckrulesCheckRuleParserRuleCall_9_0; }
+		public RuleCall getCheckrulesCheckRuleParserRuleCall_10_0() { return cCheckrulesCheckRuleParserRuleCall_10_0; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -440,6 +448,76 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//".*"?
 		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
+	}
+
+	public class AuxiliaryFunctionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AuxiliaryFunction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAuxiliaryKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cParametersAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cParametersFullJvmFormalParameterParserRuleCall_3_0_0 = (RuleCall)cParametersAssignment_3_0.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cParametersAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cParametersFullJvmFormalParameterParserRuleCall_3_1_1_0 = (RuleCall)cParametersAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cBodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cBodyXExpressionParserRuleCall_5_0 = (RuleCall)cBodyAssignment_5.eContents().get(0);
+		
+		//AuxiliaryFunction:
+		//	"auxiliary" name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")"
+		//	body=XExpression;
+		public ParserRule getRule() { return rule; }
+
+		//"auxiliary" name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")"
+		//body=XExpression
+		public Group getGroup() { return cGroup; }
+
+		//"auxiliary"
+		public Keyword getAuxiliaryKeyword_0() { return cAuxiliaryKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+
+		//(parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//parameters+=FullJvmFormalParameter
+		public Assignment getParametersAssignment_3_0() { return cParametersAssignment_3_0; }
+
+		//FullJvmFormalParameter
+		public RuleCall getParametersFullJvmFormalParameterParserRuleCall_3_0_0() { return cParametersFullJvmFormalParameterParserRuleCall_3_0_0; }
+
+		//("," parameters+=FullJvmFormalParameter)*
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//","
+		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+
+		//parameters+=FullJvmFormalParameter
+		public Assignment getParametersAssignment_3_1_1() { return cParametersAssignment_3_1_1; }
+
+		//FullJvmFormalParameter
+		public RuleCall getParametersFullJvmFormalParameterParserRuleCall_3_1_1_0() { return cParametersFullJvmFormalParameterParserRuleCall_3_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+
+		//body=XExpression
+		public Assignment getBodyAssignment_5() { return cBodyAssignment_5; }
+
+		//XExpression
+		public RuleCall getBodyXExpressionParserRuleCall_5_0() { return cBodyXExpressionParserRuleCall_5_0; }
 	}
 
 	public class RuleElements extends AbstractParserRuleElementFinder {
@@ -1393,6 +1471,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	private JudgmentDescriptionElements pJudgmentDescription;
 	private JudgmentParameterElements pJudgmentParameter;
 	private QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
+	private AuxiliaryFunctionElements pAuxiliaryFunction;
 	private RuleElements pRule;
 	private AxiomElements pAxiom;
 	private RuleWithPremisesElements pRuleWithPremises;
@@ -1461,7 +1540,7 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	//	"system" name=QualifiedName ("extends" superSystem=JvmParameterizedTypeReference)? ("validatorExtends"
 	//	validatorExtends=JvmParameterizedTypeReference)? imports+=Import* injections+=Injected* ("auxiliary" "{"
 	//	auxiliaryDescriptions+=AuxiliaryDescription+ "}")? ("judgments" "{" judgmentDescriptions+=JudgmentDescription+ "}")?
-	//	rules+=Rule* checkrules+=CheckRule*;
+	//	auxiliaryFunctions+=AuxiliaryFunction* rules+=Rule* checkrules+=CheckRule*;
 	public XsemanticsSystemElements getXsemanticsSystemAccess() {
 		return (pXsemanticsSystem != null) ? pXsemanticsSystem : (pXsemanticsSystem = new XsemanticsSystemElements());
 	}
@@ -1530,6 +1609,17 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getQualifiedNameWithWildcardRule() {
 		return getQualifiedNameWithWildcardAccess().getRule();
+	}
+
+	//AuxiliaryFunction:
+	//	"auxiliary" name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")"
+	//	body=XExpression;
+	public AuxiliaryFunctionElements getAuxiliaryFunctionAccess() {
+		return (pAuxiliaryFunction != null) ? pAuxiliaryFunction : (pAuxiliaryFunction = new AuxiliaryFunctionElements());
+	}
+	
+	public ParserRule getAuxiliaryFunctionRule() {
+		return getAuxiliaryFunctionAccess().getRule();
 	}
 
 	//Rule:

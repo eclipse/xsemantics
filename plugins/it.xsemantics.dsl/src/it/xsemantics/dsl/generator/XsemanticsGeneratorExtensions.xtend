@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsGeneratorExtensions {
 	
@@ -66,6 +67,10 @@ class XsemanticsGeneratorExtensions {
 	
 	def toJavaClassName(Rule rule) {
 		rule.name.toFirstUpper
+	}
+
+	def toJavaClassName(AuxiliaryFunction aux) {
+		aux.name.toFirstUpper
 	}
 
 	def toJavaFullyQualifiedName(AuxiliaryDescription desc) {

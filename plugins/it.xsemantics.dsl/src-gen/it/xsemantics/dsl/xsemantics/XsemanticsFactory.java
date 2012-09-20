@@ -77,6 +77,15 @@ public interface XsemanticsFactory extends EFactory
   JudgmentParameter createJudgmentParameter();
 
   /**
+   * Returns a new object of class '<em>Auxiliary Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Auxiliary Function</em>'.
+   * @generated
+   */
+  AuxiliaryFunction createAuxiliaryFunction();
+
+  /**
    * Returns a new object of class '<em>Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

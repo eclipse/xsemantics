@@ -8,6 +8,7 @@ import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
@@ -278,8 +279,21 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           IterableExtensions.<JudgmentDescription>forEach(_judgmentDescriptions_2, _function_10);
+          EList<AuxiliaryFunction> _auxiliaryFunctions = ts.getAuxiliaryFunctions();
+          final Procedure1<AuxiliaryFunction> _function_11 = new Procedure1<AuxiliaryFunction>() {
+              public void apply(final AuxiliaryFunction aux) {
+                AuxiliaryDescription _auxiliaryDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.auxiliaryDescription(aux);
+                boolean _notEquals = (!Objects.equal(_auxiliaryDescription, null));
+                if (_notEquals) {
+                  EList<JvmMember> _members = it.getMembers();
+                  JvmOperation _compileApplyAuxiliaryFunction = XsemanticsJvmModelInferrer.this.compileApplyAuxiliaryFunction(aux);
+                  XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileApplyAuxiliaryFunction);
+                }
+              }
+            };
+          IterableExtensions.<AuxiliaryFunction>forEach(_auxiliaryFunctions, _function_11);
           EList<Rule> _rules_1 = ts.getRules();
-          final Procedure1<Rule> _function_11 = new Procedure1<Rule>() {
+          final Procedure1<Rule> _function_12 = new Procedure1<Rule>() {
               public void apply(final Rule rule) {
                 JudgmentDescription _judgmentDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
                 boolean _notEquals = (!Objects.equal(_judgmentDescription, null));
@@ -293,7 +307,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 }
               }
             };
-          IterableExtensions.<Rule>forEach(_rules_1, _function_11);
+          IterableExtensions.<Rule>forEach(_rules_1, _function_12);
         }
       };
     _accept.initializeLater(_function);
@@ -855,6 +869,20 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public List<JvmFormalParameter> inputParameters(final AuxiliaryDescription aux) {
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    final Function1<JvmFormalParameter,JvmFormalParameter> _function = new Function1<JvmFormalParameter,JvmFormalParameter>() {
+        public JvmFormalParameter apply(final JvmFormalParameter it) {
+          String _name = it.getName();
+          JvmTypeReference _parameterType = it.getParameterType();
+          JvmFormalParameter _parameter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(it, _name, _parameterType);
+          return _parameter;
+        }
+      };
+    List<JvmFormalParameter> _map = ListExtensions.<JvmFormalParameter, JvmFormalParameter>map(_parameters, _function);
+    return _map;
+  }
+  
+  public List<JvmFormalParameter> inputParameters(final AuxiliaryFunction aux) {
     EList<JvmFormalParameter> _parameters = aux.getParameters();
     final Function1<JvmFormalParameter,JvmFormalParameter> _function = new Function1<JvmFormalParameter,JvmFormalParameter>() {
         public JvmFormalParameter apply(final JvmFormalParameter it) {
@@ -1491,6 +1519,34 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
         }
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _string, _resultType, _function);
+    return _method;
+  }
+  
+  public JvmOperation compileApplyAuxiliaryFunction(final AuxiliaryFunction auxfun) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("applyAuxFun");
+    String _javaClassName = this._xsemanticsGeneratorExtensions.toJavaClassName(auxfun);
+    _builder.append(_javaClassName, "");
+    String _string = _builder.toString();
+    AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(auxfun);
+    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription);
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          it.setVisibility(JvmVisibility.PROTECTED);
+          EList<JvmTypeReference> _exceptions = it.getExceptions();
+          JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(auxfun);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
+          EList<JvmFormalParameter> _parameters = it.getParameters();
+          JvmFormalParameter _ruleApplicationTraceParam = XsemanticsJvmModelInferrer.this.ruleApplicationTraceParam(auxfun);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _ruleApplicationTraceParam);
+          EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+          List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(auxfun);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _inputParameters);
+          XExpression _body = auxfun.getBody();
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
+        }
+      };
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(auxfun, _string, _resultType, _function);
     return _method;
   }
   

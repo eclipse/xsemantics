@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -171,6 +173,21 @@ public class XsemanticsUtils {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public AuxiliaryDescription auxiliaryDescription(final AuxiliaryFunction fun) {
+    XsemanticsSystem _containingSystem = this.containingSystem(fun);
+    EList<AuxiliaryDescription> _auxiliaryDescriptions = _containingSystem.getAuxiliaryDescriptions();
+    final Function1<AuxiliaryDescription,Boolean> _function = new Function1<AuxiliaryDescription,Boolean>() {
+        public Boolean apply(final AuxiliaryDescription it) {
+          String _name = it.getName();
+          String _name_1 = fun.getName();
+          boolean _equals = Objects.equal(_name, _name_1);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    AuxiliaryDescription _findFirst = IterableExtensions.<AuxiliaryDescription>findFirst(_auxiliaryDescriptions, _function);
+    return _findFirst;
   }
   
   public List<Rule> rulesForJudgmentDescription(final JudgmentDescription judgmentDescription) {

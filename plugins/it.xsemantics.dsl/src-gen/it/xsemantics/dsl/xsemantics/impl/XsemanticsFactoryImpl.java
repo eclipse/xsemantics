@@ -70,6 +70,7 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
       case XsemanticsPackage.AUXILIARY_DESCRIPTION: return createAuxiliaryDescription();
       case XsemanticsPackage.JUDGMENT_DESCRIPTION: return createJudgmentDescription();
       case XsemanticsPackage.JUDGMENT_PARAMETER: return createJudgmentParameter();
+      case XsemanticsPackage.AUXILIARY_FUNCTION: return createAuxiliaryFunction();
       case XsemanticsPackage.RULE: return createRule();
       case XsemanticsPackage.AXIOM: return createAxiom();
       case XsemanticsPackage.RULE_WITH_PREMISES: return createRuleWithPremises();
@@ -161,6 +162,17 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     JudgmentParameterImpl judgmentParameter = new JudgmentParameterImpl();
     return judgmentParameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AuxiliaryFunction createAuxiliaryFunction()
+  {
+    AuxiliaryFunctionImpl auxiliaryFunction = new AuxiliaryFunctionImpl();
+    return auxiliaryFunction;
   }
 
   /**

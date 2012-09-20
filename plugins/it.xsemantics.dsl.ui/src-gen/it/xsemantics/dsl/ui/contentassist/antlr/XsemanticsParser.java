@@ -92,6 +92,9 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_0(), "rule__JudgmentParameter__Group_0__0");
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_1(), "rule__JudgmentParameter__Group_1__0");
 					put(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup(), "rule__QualifiedNameWithWildcard__Group__0");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup(), "rule__AuxiliaryFunction__Group__0");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup_3(), "rule__AuxiliaryFunction__Group_3__0");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup_3_1(), "rule__AuxiliaryFunction__Group_3_1__0");
 					put(grammarAccess.getAxiomAccess().getGroup(), "rule__Axiom__Group__0");
 					put(grammarAccess.getRuleWithPremisesAccess().getGroup(), "rule__RuleWithPremises__Group__0");
 					put(grammarAccess.getCheckRuleAccess().getGroup(), "rule__CheckRule__Group__0");
@@ -263,8 +266,9 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXsemanticsSystemAccess().getInjectionsAssignment_5(), "rule__XsemanticsSystem__InjectionsAssignment_5");
 					put(grammarAccess.getXsemanticsSystemAccess().getAuxiliaryDescriptionsAssignment_6_2(), "rule__XsemanticsSystem__AuxiliaryDescriptionsAssignment_6_2");
 					put(grammarAccess.getXsemanticsSystemAccess().getJudgmentDescriptionsAssignment_7_2(), "rule__XsemanticsSystem__JudgmentDescriptionsAssignment_7_2");
-					put(grammarAccess.getXsemanticsSystemAccess().getRulesAssignment_8(), "rule__XsemanticsSystem__RulesAssignment_8");
-					put(grammarAccess.getXsemanticsSystemAccess().getCheckrulesAssignment_9(), "rule__XsemanticsSystem__CheckrulesAssignment_9");
+					put(grammarAccess.getXsemanticsSystemAccess().getAuxiliaryFunctionsAssignment_8(), "rule__XsemanticsSystem__AuxiliaryFunctionsAssignment_8");
+					put(grammarAccess.getXsemanticsSystemAccess().getRulesAssignment_9(), "rule__XsemanticsSystem__RulesAssignment_9");
+					put(grammarAccess.getXsemanticsSystemAccess().getCheckrulesAssignment_10(), "rule__XsemanticsSystem__CheckrulesAssignment_10");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getInjectedAccess().getTypeAssignment_1(), "rule__Injected__TypeAssignment_1");
 					put(grammarAccess.getInjectedAccess().getNameAssignment_2(), "rule__Injected__NameAssignment_2");
@@ -282,6 +286,10 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJudgmentDescriptionAccess().getErrorAssignment_5(), "rule__JudgmentDescription__ErrorAssignment_5");
 					put(grammarAccess.getJudgmentParameterAccess().getJvmTypeReferenceAssignment_0_2(), "rule__JudgmentParameter__JvmTypeReferenceAssignment_0_2");
 					put(grammarAccess.getJudgmentParameterAccess().getParameterAssignment_1_1(), "rule__JudgmentParameter__ParameterAssignment_1_1");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getNameAssignment_1(), "rule__AuxiliaryFunction__NameAssignment_1");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getParametersAssignment_3_0(), "rule__AuxiliaryFunction__ParametersAssignment_3_0");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getParametersAssignment_3_1_1(), "rule__AuxiliaryFunction__ParametersAssignment_3_1_1");
+					put(grammarAccess.getAuxiliaryFunctionAccess().getBodyAssignment_5(), "rule__AuxiliaryFunction__BodyAssignment_5");
 					put(grammarAccess.getAxiomAccess().getOverrideAssignment_0(), "rule__Axiom__OverrideAssignment_0");
 					put(grammarAccess.getAxiomAccess().getNameAssignment_2(), "rule__Axiom__NameAssignment_2");
 					put(grammarAccess.getAxiomAccess().getConclusionAssignment_3(), "rule__Axiom__ConclusionAssignment_3");

@@ -6,6 +6,7 @@ import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
@@ -126,6 +127,12 @@ public class XsemanticsGeneratorExtensions {
   
   public String toJavaClassName(final Rule rule) {
     String _name = rule.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    return _firstUpper;
+  }
+  
+  public String toJavaClassName(final AuxiliaryFunction aux) {
+    String _name = aux.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name);
     return _firstUpper;
   }

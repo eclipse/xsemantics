@@ -2060,12 +2060,13 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 	}
 
 	@Test
-	def testAuxiliaryDescriptions() {
-		testFiles.testAuxiliaryDescriptions.
+	def testAuxiliaryFunctions() {
+		testFiles.testAuxiliaryFunctions.
 		assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleFailedException;
@@ -2148,6 +2149,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EObject source = o;
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
+  }
+  
+  protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
+    EClass _eClass = eO.eClass();
+    boolean _equals = Objects.equal(_eClass, eC);
+    /* eO.eClass == eC */
+    if (!Boolean.valueOf(_equals)) {
+      sneakyThrowRuleFailedException("eO.eClass == eC");
+    }
+    return Boolean.valueOf(_equals);
   }
 }
 '''

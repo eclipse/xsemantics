@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryFunctions <em>Auxiliary Functions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getRules <em>Rules</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getCheckrules <em>Checkrules</em>}</li>
  * </ul>
@@ -175,6 +176,22 @@ public interface XsemanticsSystem extends EObject
    * @generated
    */
   EList<JudgmentDescription> getJudgmentDescriptions();
+
+  /**
+   * Returns the value of the '<em><b>Auxiliary Functions</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.AuxiliaryFunction}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Auxiliary Functions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Auxiliary Functions</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_AuxiliaryFunctions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AuxiliaryFunction> getAuxiliaryFunctions();
 
   /**
    * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
