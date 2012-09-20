@@ -4898,9 +4898,9 @@ rule__AuxiliaryDescription__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2()); }
-(rule__AuxiliaryDescription__ParametersAssignment_2)*
-{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2()); }
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2()); }
+(rule__AuxiliaryDescription__Group_2__0)?
+{ after(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2()); }
 )
 
 ;
@@ -5003,6 +5003,130 @@ finally {
 
 
 
+
+
+
+
+
+
+rule__AuxiliaryDescription__Group_2__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AuxiliaryDescription__Group_2__0__Impl
+	rule__AuxiliaryDescription__Group_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AuxiliaryDescription__Group_2__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_0()); }
+(rule__AuxiliaryDescription__ParametersAssignment_2_0)
+{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__AuxiliaryDescription__Group_2__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AuxiliaryDescription__Group_2__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AuxiliaryDescription__Group_2__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2_1()); }
+(rule__AuxiliaryDescription__Group_2_1__0)*
+{ after(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__AuxiliaryDescription__Group_2_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AuxiliaryDescription__Group_2_1__0__Impl
+	rule__AuxiliaryDescription__Group_2_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AuxiliaryDescription__Group_2_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getCommaKeyword_2_1_0()); }
+
+	',' 
+
+{ after(grammarAccess.getAuxiliaryDescriptionAccess().getCommaKeyword_2_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__AuxiliaryDescription__Group_2_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AuxiliaryDescription__Group_2_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AuxiliaryDescription__Group_2_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_1_1()); }
+(rule__AuxiliaryDescription__ParametersAssignment_2_1_1)
+{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -18604,14 +18728,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__AuxiliaryDescription__ParametersAssignment_2
+rule__AuxiliaryDescription__ParametersAssignment_2_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0()); }
-	ruleFullJvmFormalParameter{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0()); }
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0_0()); }
+	ruleFullJvmFormalParameter{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AuxiliaryDescription__ParametersAssignment_2_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_1_1_0()); }
+	ruleFullJvmFormalParameter{ after(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_1_1_0()); }
 )
 
 ;

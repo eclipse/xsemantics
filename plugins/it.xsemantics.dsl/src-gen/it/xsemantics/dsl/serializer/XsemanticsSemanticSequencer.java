@@ -1215,7 +1215,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID parameters+=FullJvmFormalParameter* type=JvmTypeReference? error=ErrorSpecification?)
+	 *     (name=ID (parameters+=FullJvmFormalParameter parameters+=FullJvmFormalParameter*)? type=JvmTypeReference? error=ErrorSpecification?)
 	 */
 	protected void sequence_AuxiliaryDescription(EObject context, AuxiliaryDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -2059,6 +2059,101 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 		)
 	}
 
+	@Test
+	def testAuxiliaryDescriptions() {
+		testFiles.testAuxiliaryDescriptions.
+		assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ISVALUE = "it.xsemantics.test.auxiliary.IsValue";
+  
+  public final static String OBJECTCLASS = "it.xsemantics.test.auxiliary.ObjectClass";
+  
+  private PolymorphicDispatcher<Boolean> isValueDispatcher;
+  
+  private PolymorphicDispatcher<EClass> objectClassDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    isValueDispatcher = buildPolymorphicDispatcher(
+    	"isValueImpl", 3);
+    objectClassDispatcher = buildPolymorphicDispatcher(
+    	"objectClassImpl", 2);
+  }
+  
+  public Boolean isValue(final EObject o, final EClass c) throws RuleFailedException {
+    return isValue(null, o, c);
+  }
+  
+  public Boolean isValue(final RuleApplicationTrace _trace_, final EObject o, final EClass c) throws RuleFailedException {
+    try {
+    	return isValueInternal(_trace_, o, c);
+    } catch (Exception _e_isValue) {
+    	throw extractRuleFailedException(_e_isValue);
+    }
+  }
+  
+  public EClass objectClass(final EObject o) throws RuleFailedException {
+    return objectClass(null, o);
+  }
+  
+  public EClass objectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	return objectClassInternal(_trace_, o);
+    } catch (Exception _e_objectClass) {
+    	throw extractRuleFailedException(_e_objectClass);
+    }
+  }
+  
+  protected Boolean isValueInternal(final RuleApplicationTrace _trace_, final EObject o, final EClass c) {
+    try {
+    	checkParamsNotNull(o, c);
+    	return isValueDispatcher.invoke(_trace_, o, c);
+    } catch (Exception _e_isValue) {
+    	sneakyThrowRuleFailedException(_e_isValue);
+    	return null;
+    }
+  }
+  
+  protected void isValueThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected EClass objectClassInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	checkParamsNotNull(o);
+    	return objectClassDispatcher.invoke(_trace_, o);
+    } catch (Exception _e_objectClass) {
+    	sneakyThrowRuleFailedException(_e_objectClass);
+    	return null;
+    }
+  }
+  
+  protected void objectClassThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    
+    String error = "error in objectClass";
+    EObject source = o;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, null));
+  }
+}
+'''
+		)
+	}
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}

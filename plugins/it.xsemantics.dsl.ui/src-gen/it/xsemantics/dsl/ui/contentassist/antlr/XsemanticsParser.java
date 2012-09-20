@@ -84,6 +84,8 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getInjectedAccess().getGroup(), "rule__Injected__Group__0");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup(), "rule__AuxiliaryDescription__Group__0");
+					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2(), "rule__AuxiliaryDescription__Group_2__0");
+					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2_1(), "rule__AuxiliaryDescription__Group_2_1__0");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_4(), "rule__AuxiliaryDescription__Group_4__0");
 					put(grammarAccess.getJudgmentDescriptionAccess().getGroup(), "rule__JudgmentDescription__Group__0");
 					put(grammarAccess.getJudgmentDescriptionAccess().getGroup_4(), "rule__JudgmentDescription__Group_4__0");
@@ -267,7 +269,8 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInjectedAccess().getTypeAssignment_1(), "rule__Injected__TypeAssignment_1");
 					put(grammarAccess.getInjectedAccess().getNameAssignment_2(), "rule__Injected__NameAssignment_2");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getNameAssignment_0(), "rule__AuxiliaryDescription__NameAssignment_0");
-					put(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2(), "rule__AuxiliaryDescription__ParametersAssignment_2");
+					put(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_0(), "rule__AuxiliaryDescription__ParametersAssignment_2_0");
+					put(grammarAccess.getAuxiliaryDescriptionAccess().getParametersAssignment_2_1_1(), "rule__AuxiliaryDescription__ParametersAssignment_2_1_1");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getTypeAssignment_4_1(), "rule__AuxiliaryDescription__TypeAssignment_4_1");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getErrorAssignment_5(), "rule__AuxiliaryDescription__ErrorAssignment_5");
 					put(grammarAccess.getJudgmentDescriptionAccess().getOverrideAssignment_0(), "rule__JudgmentDescription__OverrideAssignment_0");

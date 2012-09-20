@@ -5,6 +5,7 @@ import it.xsemantics.dsl.generator.UniqueNames;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -128,6 +130,40 @@ public class XsemanticsGeneratorExtensions {
     return _firstUpper;
   }
   
+  public String toJavaFullyQualifiedName(final AuxiliaryDescription desc) {
+    String _package = this.toPackage(desc);
+    String _plus = (_package + ".");
+    String _javaClassName = this.toJavaClassName(desc);
+    String _plus_1 = (_plus + _javaClassName);
+    return _plus_1;
+  }
+  
+  public String toPackage(final AuxiliaryDescription desc) {
+    String _xblockexpression = null;
+    {
+      XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(desc);
+      final String typeSystemPackage = this.toPackage(_containingSystem);
+      String _xifexpression = null;
+      int _length = typeSystemPackage.length();
+      boolean _greaterThan = (_length > 0);
+      if (_greaterThan) {
+        String _plus = (typeSystemPackage + ".");
+        String _plus_1 = (_plus + "auxiliary");
+        _xifexpression = _plus_1;
+      } else {
+        _xifexpression = "auxiliary";
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public String toJavaClassName(final AuxiliaryDescription desc) {
+    String _name = desc.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    return _firstUpper;
+  }
+  
   public String toValidatorPackage(final XsemanticsSystem ts) {
     String _xblockexpression = null;
     {
@@ -168,9 +204,23 @@ public class XsemanticsGeneratorExtensions {
     return _upperCase;
   }
   
+  public String ruleIssueString(final AuxiliaryDescription aux) {
+    String _name = aux.getName();
+    String _upperCase = _name.toUpperCase();
+    return _upperCase;
+  }
+  
   public CharSequence polymorphicDispatcherField(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = judgmentDescription.getName();
+    _builder.append(_name, "");
+    _builder.append("Dispatcher");
+    return _builder;
+  }
+  
+  public CharSequence polymorphicDispatcherField(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = aux.getName();
     _builder.append(_name, "");
     _builder.append("Dispatcher");
     return _builder;
@@ -223,6 +273,14 @@ public class XsemanticsGeneratorExtensions {
     return _xifexpression;
   }
   
+  public CharSequence polymorphicDispatcherImpl(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = aux.getName();
+    _builder.append(_name, "");
+    _builder.append("Impl");
+    return _builder;
+  }
+  
   public CharSequence polymorphicDispatcherNumOfArgs(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     List<InputParameter> _inputParams = this._xsemanticsUtils.inputParams(judgmentDescription);
@@ -232,9 +290,25 @@ public class XsemanticsGeneratorExtensions {
     return _builder;
   }
   
+  public CharSequence polymorphicDispatcherNumOfArgs(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    int _size = _parameters.size();
+    int _plus = (_size + 1);
+    _builder.append(_plus, "");
+    return _builder;
+  }
+  
   public CharSequence entryPointMethodName(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = judgmentDescription.getName();
+    _builder.append(_name, "");
+    return _builder;
+  }
+  
+  public CharSequence entryPointMethodName(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = aux.getName();
     _builder.append(_name, "");
     return _builder;
   }
@@ -261,6 +335,19 @@ public class XsemanticsGeneratorExtensions {
     return _xblockexpression;
   }
   
+  public String inputArgs(final AuxiliaryDescription aux) {
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
+        public String apply(final JvmFormalParameter it) {
+          String _name = it.getName();
+          return _name;
+        }
+      };
+    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    return _join;
+  }
+  
   public String inputParameterName(final InputParameter param) {
     JvmFormalParameter _parameter = param.getParameter();
     String _name = _parameter.getName();
@@ -276,6 +363,14 @@ public class XsemanticsGeneratorExtensions {
   public CharSequence entryPointInternalMethodName(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _entryPointMethodName = this.entryPointMethodName(judgmentDescription);
+    _builder.append(_entryPointMethodName, "");
+    _builder.append("Internal");
+    return _builder;
+  }
+  
+  public CharSequence entryPointInternalMethodName(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _entryPointMethodName = this.entryPointMethodName(aux);
     _builder.append(_entryPointMethodName, "");
     _builder.append("Internal");
     return _builder;
@@ -311,6 +406,14 @@ public class XsemanticsGeneratorExtensions {
     return _builder;
   }
   
+  public CharSequence exceptionVarName(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("_e_");
+    String _name = aux.getName();
+    _builder.append(_name, "");
+    return _builder;
+  }
+  
   public String suffixStartingFrom2(final JudgmentDescription judgmentDescription) {
     String _xblockexpression = null;
     {
@@ -332,6 +435,15 @@ public class XsemanticsGeneratorExtensions {
   public CharSequence throwExceptionMethod(final JudgmentDescription judgmentDescription) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = judgmentDescription.getName();
+    String _firstLower = StringExtensions.toFirstLower(_name);
+    _builder.append(_firstLower, "");
+    _builder.append("ThrowException");
+    return _builder;
+  }
+  
+  public CharSequence throwExceptionMethod(final AuxiliaryDescription aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = aux.getName();
     String _firstLower = StringExtensions.toFirstLower(_name);
     _builder.append(_firstLower, "");
     _builder.append("ThrowException");
@@ -663,6 +775,13 @@ public class XsemanticsGeneratorExtensions {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public JvmTypeReference resultType(final AuxiliaryDescription e) {
+    JvmTypeReference _type = e.getType();
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, Boolean.class);
+    JvmTypeReference _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _newTypeRef);
+    return _elvis;
   }
   
   public List<JvmTypeReference> resultJvmTypeReferences(final JudgmentDescription e) {

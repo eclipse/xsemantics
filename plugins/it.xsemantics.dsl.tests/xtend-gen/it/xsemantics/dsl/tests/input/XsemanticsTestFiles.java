@@ -4086,10 +4086,16 @@ public class XsemanticsTestFiles {
     _builder.append("auxiliary {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("isValue(EObject o)");
+    _builder.append("isValue(EObject o, EClass c)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("objectClass(EObject o) : EClass");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("error \"error in objectClass\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("source o");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

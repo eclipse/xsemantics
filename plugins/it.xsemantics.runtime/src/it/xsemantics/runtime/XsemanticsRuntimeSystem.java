@@ -32,6 +32,9 @@ public class XsemanticsRuntimeSystem {
 	// The first two params are RuleEnvironment and RuleApplicationTrace
 	protected static final int INDEX_OF_RULE_PARAMETERS = 2;
 
+	// The first param is the RuleApplicationTrace
+	protected static final int INDEX_OF_AUX_PARAMETERS = 1;
+
 	@Inject
 	protected StringRepresentation stringRepresentation;
 
@@ -46,6 +49,21 @@ public class XsemanticsRuntimeSystem {
 
 	protected Predicate<Method> getPredicate(String methodName, int numOfArgs) {
 		return PolymorphicDispatcher.Predicates.forName(methodName, numOfArgs);
+	}
+
+	protected <T> PolymorphicDispatcher<T> buildPolymorphicDispatcher(
+			final String methodName, int numOfArgs) {
+		PolymorphicDispatcher<T> dispatcher = new PolymorphicDispatcher<T>(
+				Collections.singletonList(this), getPredicate(methodName,
+						numOfArgs)) {
+			@Override
+			protected T handleNoSuchMethod(Object... params) {
+				return org.eclipse.xtext.util.Exceptions
+						.throwUncheckedException(noSuchMethodException(
+								methodName, params));
+			}
+		};
+		return dispatcher;
 	}
 
 	protected <T> PolymorphicDispatcher<Result<T>> buildPolymorphicDispatcher1(
@@ -129,12 +147,28 @@ public class XsemanticsRuntimeSystem {
 		return builder.toString();
 	}
 
+	protected String stringRepForParams(Object[] params) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = INDEX_OF_AUX_PARAMETERS; i < params.length; i++) {
+			if (builder.length() > 0)
+				builder.append(", ");
+			builder.append(stringRep(params[i]));
+		}
+		return builder.toString();
+	}
+
 	protected RuleFailedException noSuchMethodException(
 			final String judgmentSymbol,
 			final Iterable<String> relationSymbols, Object... params) {
 		return new RuleFailedException("cannot find a rule for "
 				+ judgmentSymbol + " "
 				+ stringRepForParams(params, relationSymbols));
+	}
+
+	protected RuleFailedException noSuchMethodException(final String name,
+			Object... params) {
+		return new RuleFailedException("cannot find an implementation for "
+				+ name + "(" + stringRepForParams(params) + ")");
 	}
 
 	public void sneakyThrowRuleFailedException(Exception e) {

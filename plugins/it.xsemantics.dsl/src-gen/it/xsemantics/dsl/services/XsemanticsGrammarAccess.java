@@ -224,8 +224,13 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cParametersAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cParametersFullJvmFormalParameterParserRuleCall_2_0 = (RuleCall)cParametersAssignment_2.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cParametersAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cParametersFullJvmFormalParameterParserRuleCall_2_0_0 = (RuleCall)cParametersAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cParametersAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cParametersFullJvmFormalParameterParserRuleCall_2_1_1_0 = (RuleCall)cParametersAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cColonKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
@@ -235,10 +240,12 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cErrorErrorSpecificationParserRuleCall_5_0 = (RuleCall)cErrorAssignment_5.eContents().get(0);
 		
 		//AuxiliaryDescription:
-		//	name=ID "(" parameters+=FullJvmFormalParameter* ")" (":" type=JvmTypeReference)? error=ErrorSpecification?;
+		//	name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")" (":"
+		//	type=JvmTypeReference)? error=ErrorSpecification?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "(" parameters+=FullJvmFormalParameter* ")" (":" type=JvmTypeReference)? error=ErrorSpecification?
+		//name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")" (":"
+		//type=JvmTypeReference)? error=ErrorSpecification?
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -250,11 +257,26 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//parameters+=FullJvmFormalParameter*
-		public Assignment getParametersAssignment_2() { return cParametersAssignment_2; }
+		//(parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//parameters+=FullJvmFormalParameter
+		public Assignment getParametersAssignment_2_0() { return cParametersAssignment_2_0; }
 
 		//FullJvmFormalParameter
-		public RuleCall getParametersFullJvmFormalParameterParserRuleCall_2_0() { return cParametersFullJvmFormalParameterParserRuleCall_2_0; }
+		public RuleCall getParametersFullJvmFormalParameterParserRuleCall_2_0_0() { return cParametersFullJvmFormalParameterParserRuleCall_2_0_0; }
+
+		//("," parameters+=FullJvmFormalParameter)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//","
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+
+		//parameters+=FullJvmFormalParameter
+		public Assignment getParametersAssignment_2_1_1() { return cParametersAssignment_2_1_1; }
+
+		//FullJvmFormalParameter
+		public RuleCall getParametersFullJvmFormalParameterParserRuleCall_2_1_1_0() { return cParametersFullJvmFormalParameterParserRuleCall_2_1_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
@@ -1469,7 +1491,8 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AuxiliaryDescription:
-	//	name=ID "(" parameters+=FullJvmFormalParameter* ")" (":" type=JvmTypeReference)? error=ErrorSpecification?;
+	//	name=ID "(" (parameters+=FullJvmFormalParameter ("," parameters+=FullJvmFormalParameter)*)? ")" (":"
+	//	type=JvmTypeReference)? error=ErrorSpecification?;
 	public AuxiliaryDescriptionElements getAuxiliaryDescriptionAccess() {
 		return (pAuxiliaryDescription != null) ? pAuxiliaryDescription : (pAuxiliaryDescription = new AuxiliaryDescriptionElements());
 	}

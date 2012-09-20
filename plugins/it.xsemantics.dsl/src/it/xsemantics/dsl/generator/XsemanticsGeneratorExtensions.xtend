@@ -22,6 +22,7 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation
 import org.eclipse.emf.ecore.EObject
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 
 class XsemanticsGeneratorExtensions {
 	
@@ -66,6 +67,22 @@ class XsemanticsGeneratorExtensions {
 	def toJavaClassName(Rule rule) {
 		rule.name.toFirstUpper
 	}
+
+	def toJavaFullyQualifiedName(AuxiliaryDescription desc) {
+		desc.toPackage + "." + desc.toJavaClassName
+	}
+	
+	def toPackage(AuxiliaryDescription desc) {
+		val typeSystemPackage = desc.containingSystem.toPackage
+		if (typeSystemPackage.length > 0)
+			typeSystemPackage + "." + "auxiliary"
+		else
+			"auxiliary"
+	}
+	
+	def toJavaClassName(AuxiliaryDescription desc) {
+		desc.name.toFirstUpper
+	}
 	
 	def toValidatorPackage(XsemanticsSystem ts) {
 		val typeSystemPackage = ts.toPackage
@@ -86,9 +103,17 @@ class XsemanticsGeneratorExtensions {
 	def ruleIssueString(Rule rule) {
 		rule.name.toUpperCase
 	}
+
+	def ruleIssueString(AuxiliaryDescription aux) {
+		aux.name.toUpperCase
+	}
 	
 	def polymorphicDispatcherField(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.name»Dispatcher'''
+	}
+
+	def polymorphicDispatcherField(AuxiliaryDescription aux) {
+		'''«aux.name»Dispatcher'''
 	}
 	
 	def relationSymbolsArgs(JudgmentDescription judgmentDescription) {
@@ -110,13 +135,27 @@ class XsemanticsGeneratorExtensions {
 			judgmentDescription.outputJudgmentParameters.size()
 	}
 
+	def polymorphicDispatcherImpl(AuxiliaryDescription aux) {
+		'''«aux.name»Impl'''
+	}
+
+
 	def polymorphicDispatcherNumOfArgs(JudgmentDescription judgmentDescription) {
 		// add 2 for the environment to be passed and the RuleApplicationTrace
 		'''«judgmentDescription.inputParams.size + 2»'''
 	}
 
+	def polymorphicDispatcherNumOfArgs(AuxiliaryDescription aux) {
+		// add 1 for the RuleApplicationTrace
+		'''«aux.parameters.size + 1»'''
+	}
+
 	def entryPointMethodName(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.name»'''
+	}
+
+	def entryPointMethodName(AuxiliaryDescription aux) {
+		'''«aux.name»'''
 	}
 
 	def inputArgs(JudgmentDescription judgmentDescription) {
@@ -124,6 +163,10 @@ class XsemanticsGeneratorExtensions {
 		judgmentDescription.inputParams.map([ 
 			'''«names.createName(it.inputParameterName)»'''
 		]).join(", ")
+	}
+
+	def inputArgs(AuxiliaryDescription aux) {
+		aux.parameters.map[name].join(", ")
 	}
 
 	def inputParameterName(InputParameter param) {
@@ -134,6 +177,10 @@ class XsemanticsGeneratorExtensions {
 
 	def entryPointInternalMethodName(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.entryPointMethodName»Internal'''
+	}
+
+	def entryPointInternalMethodName(AuxiliaryDescription aux) {
+		'''«aux.entryPointMethodName»Internal'''
 	}
 
 	def additionalArgs() {
@@ -148,6 +195,10 @@ class XsemanticsGeneratorExtensions {
 		'''_e_«j.name»'''
 	}
 
+	def exceptionVarName(AuxiliaryDescription aux) {
+		'''_e_«aux.name»'''
+	}
+
 	def suffixStartingFrom2(JudgmentDescription judgmentDescription) {
 		val numOfOutputParams = judgmentDescription.outputJudgmentParameters.size();
 		if (numOfOutputParams > 1)
@@ -158,6 +209,10 @@ class XsemanticsGeneratorExtensions {
 
 	def throwExceptionMethod(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.name.toFirstLower»ThrowException'''
+	}
+
+	def throwExceptionMethod(AuxiliaryDescription aux) {
+		'''«aux.name.toFirstLower»ThrowException'''
 	}
 
 	def throwRuleFailedExceptionMethod() {
@@ -284,7 +339,11 @@ class XsemanticsGeneratorExtensions {
 				resultTypeArguments.get(0), resultTypeArguments.get(1)
 			)
 	}
-	
+
+	def resultType(AuxiliaryDescription e) {
+		e.type ?: e.newTypeRef(typeof(Boolean))
+	}
+
 	def resultJvmTypeReferences(JudgmentDescription e) {
 		val outputParams = e.outputJudgmentParameters
 		if (outputParams.size == 0) {

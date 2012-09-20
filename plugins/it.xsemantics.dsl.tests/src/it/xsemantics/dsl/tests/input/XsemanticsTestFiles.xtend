@@ -1852,8 +1852,10 @@ class XsemanticsTestFiles {
 	import org.eclipse.emf.ecore.*
 	
 	auxiliary {
-		isValue(EObject o)
+		isValue(EObject o, EClass c)
 		objectClass(EObject o) : EClass
+			error "error in objectClass"
+			source o
 	}
 	'''
 

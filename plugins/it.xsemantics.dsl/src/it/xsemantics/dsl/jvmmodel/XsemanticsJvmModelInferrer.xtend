@@ -5,6 +5,7 @@ import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -19,7 +20,6 @@ import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
@@ -100,11 +100,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			else
 				superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
 
-			val issues = <JvmField>newArrayList()
-			ts.rules.forEach [
-				issues += genIssueField
+			ts.auxiliaryDescriptions.forEach [
+				elem |
+				members += elem.genIssueField
 			]
-			members += issues
+			
+			ts.rules.forEach [
+				elem |
+				members += elem.genIssueField
+			]
 			
 			ts.injections.forEach [
 				injectedField |
@@ -118,11 +122,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				]
 			]
 			
-			val polymorphicDispatchers = <JvmField>newArrayList()
-			ts.judgmentDescriptions.forEach [
-				polymorphicDispatchers += genPolymorphicDispatcherField
+			ts.auxiliaryDescriptions.forEach [
+				elem |
+				members += elem.genPolymorphicDispatcherField
 			]
-			members += polymorphicDispatchers
+			
+			ts.judgmentDescriptions.forEach [
+				elem |
+				members += elem.genPolymorphicDispatcherField
+			]
 			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += ts.genConstructor
@@ -137,9 +145,14 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					(injectedField.name, injectedField.type)
 			]
 			
+			ts.auxiliaryDescriptions.forEach [
+				elem |
+				members += elem.genEntryPointMethods
+			]
+
 			ts.judgmentDescriptions.forEach [
-				j |
-				members += j.genEntryPointMethods
+				elem |
+				members += elem.genEntryPointMethods
 			]
 			
 			ts.checkrules.forEach [
@@ -147,11 +160,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				members += r.compileCheckRuleMethods
 				members += r.compileInternalMethod
 			]
+
+			ts.auxiliaryDescriptions.forEach [
+				elem |
+				members += elem.compileInternalMethod
+				members += elem.compileThrowExceptionMethod
+			]
 			
 			ts.judgmentDescriptions.forEach [
-				j |
-				members += j.compileInternalMethod
-				members += j.compileThrowExceptionMethod
+				elem |
+				members += elem.compileInternalMethod
+				members += elem.compileThrowExceptionMethod
 			]
 			
 			ts.rules.forEach [
@@ -213,6 +232,21 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
 		issueField
    	}
+
+   	def genIssueField(AuxiliaryDescription aux) {
+   		val issueField = aux.toField(
+				aux.ruleIssueString,
+				aux.newTypeRef(typeof(String))
+			) [
+				visibility = JvmVisibility::PUBLIC
+				^static = true
+				final = true
+			]
+		issueField.setInitializer [
+			it.append('''"«aux.toJavaFullyQualifiedName»"''')
+		]
+		issueField
+   	}
    	
    	def genConstructor(XsemanticsSystem ts) {
    		ts.toConstructor() [
@@ -227,7 +261,18 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		)
 	}
 
+	def genPolymorphicDispatcherField(AuxiliaryDescription e) {
+		e.toField(
+			e.polymorphicDispatcherField.toString,
+			e.polymorphicDispatcherType
+		)
+	}
+
 	def polymorphicDispatcherType(JudgmentDescription e) {
+		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
+	}
+
+	def polymorphicDispatcherType(AuxiliaryDescription e) {
 		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
 	}
 	
@@ -243,8 +288,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					''')
 
    				it.append(
-	   				ts.
-	   				judgmentDescriptions.map([ 
+	   				(ts.judgmentDescriptions.map [ 
+	   					desc | desc.genPolymorphicDispatcherInit
+	   				] 
+	   				+ 
+	   				ts.auxiliaryDescriptions.map [ 
 	   					desc | desc.genPolymorphicDispatcherInit
 	   				]).join("\n")
    				)
@@ -261,6 +309,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			»«judgmentDescription.polymorphicDispatcherNumOfArgs», «
 			»"«judgmentDescription.judgmentSymbol»"«
 			»«relationSymbolArgs»);'''
+   	}
+
+   	def genPolymorphicDispatcherInit(AuxiliaryDescription aux) {
+   		'''
+		«aux.polymorphicDispatcherField» = buildPolymorphicDispatcher(
+			"«aux.polymorphicDispatcherImpl»", «
+			»«aux.polymorphicDispatcherNumOfArgs»);'''
    	}
    	
    	def genEntryPointMethods(JudgmentDescription judgmentDescription) {
@@ -328,6 +383,50 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		
    		entryPointMethods
    	}
+
+   	def genEntryPointMethods(AuxiliaryDescription aux) {
+   		val entryPointMethods = <JvmOperation>newArrayList()
+   		// main entry point method
+   		entryPointMethods += aux.toMethod(
+   			aux.entryPointMethodName.toString,
+   			aux.resultType
+   		) [
+   			exceptions += aux.ruleFailedExceptionType
+   			
+   			parameters += aux.inputParameters
+   			
+   			body = [
+   				it.append(
+   				'''return «aux.entryPointMethodName»(null, «aux.inputArgs»);''')
+   			]
+   		]
+   		
+   		// entry point method with rule application trace
+   		entryPointMethods += aux.toMethod(
+   			aux.entryPointMethodName.toString,
+   			aux.resultType
+   		) [
+   			exceptions += aux.ruleFailedExceptionType
+   			
+   			parameters += aux.ruleApplicationTraceParam
+   			parameters += aux.inputParameters
+   			
+   			body = [
+   				it.append('''
+				try {
+					return «aux.entryPointInternalMethodName»(«ruleApplicationTraceName», «aux.inputArgs»);
+				} catch (''')
+				aux.exceptionType.serialize(aux, it)
+				it.append(" ")
+				it.append('''
+				«aux.exceptionVarName») {
+					throw extractRuleFailedException(«aux.exceptionVarName»);
+				}''')
+   			]
+   		]
+   		
+   		entryPointMethods
+   	}
    	
    	def inputParameters(JudgmentDescription judgmentDescription) {
 		val names = new UniqueNames()
@@ -338,7 +437,16 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			)
 		])
 	}
-	
+
+   	def inputParameters(AuxiliaryDescription aux) {
+		aux.parameters.map([
+			it.toParameter(
+				it.name,
+				it.parameterType
+			)
+		])
+	}
+
 	def environmentParam(JudgmentDescription e) {
 		e.toParameter(
 			environmentName.toString,
@@ -403,6 +511,53 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
 	}
 	
+	def compileThrowExceptionMethod(AuxiliaryDescription aux) {
+		val errorSpecification = aux.error
+		
+		aux.toMethod(
+			aux.throwExceptionMethod.toString,
+			null
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			exceptions += aux.ruleFailedExceptionType
+			
+			parameters += aux.toParameter("_error", 
+				aux.newTypeRef(typeof(String))
+			)
+			parameters += aux.toParameter("_issue", 
+				aux.newTypeRef(typeof(String))
+			)
+   			parameters += aux.toParameter("_ex",
+   				aux.exceptionType
+   			)
+   			parameters += aux.inputParameters
+   			
+   			parameters += aux.toParameter("_errorInformations",
+   				aux.newTypeRef(typeof(ErrorInformation)).
+   					addArrayTypeDimension
+   			)
+   			
+   			body = [
+   				if (errorSpecification != null) {
+	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
+					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
+					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
+	   				
+	   				it.newLine
+	   				it.append('''
+	   					«throwRuleFailedExceptionMethod»(«error»,
+	   						_issue, _ex, new ''')
+					aux.errorInformationType.serialize(aux, it)
+					it.append('''(«source», «feature»));''')
+				} else {
+					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+				}
+   			]
+		]
+	}
+
 	def compileInternalMethod(JudgmentDescription judgmentDescription) {
 		judgmentDescription.toMethod(
 			judgmentDescription.entryPointInternalMethodName.toString,
@@ -436,6 +591,37 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
 	}
 	
+	def compileInternalMethod(AuxiliaryDescription aux) {
+		aux.toMethod(
+			aux.entryPointInternalMethodName.toString,
+			aux.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+   			parameters += aux.ruleApplicationTraceParam
+   			for (p : aux.parameters) {
+				parameters += p.toParameter(p.name, p.parameterType)
+			}
+   			
+   			body = [
+   				it.append('''
+					try {
+						checkParamsNotNull(«aux.inputArgs»);
+						return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «aux.inputArgs»);
+					} catch (''')
+				aux.exceptionType.serialize(aux, it)
+				it.append(" ")
+				it.append('''
+					«aux.exceptionVarName») {
+						sneakyThrowRuleFailedException(«aux.exceptionVarName»);
+						return null;
+					}'''
+				)
+   			]
+		]
+	}
+
 	def ruleFailedExceptionType(EObject o) {
 		o.newTypeRef(typeof(RuleFailedException))
 	}

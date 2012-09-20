@@ -422,10 +422,10 @@ ruleAuxiliaryDescription returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getAuxiliaryDescriptionAccess().getLeftParenthesisKeyword_1());
     }
-(
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_0_0()); 
 	    }
 		lv_parameters_2_0=ruleFullJvmFormalParameter		{
 	        if ($current==null) {
@@ -440,27 +440,49 @@ ruleAuxiliaryDescription returns [EObject current=null]
 	    }
 
 )
-)*	otherlv_3=')' 
+)(	otherlv_3=',' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getAuxiliaryDescriptionAccess().getRightParenthesisKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getAuxiliaryDescriptionAccess().getCommaKeyword_2_1_0());
     }
-(	otherlv_4=':' 
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAuxiliaryDescriptionAccess().getParametersFullJvmFormalParameterParserRuleCall_2_1_1_0()); 
+	    }
+		lv_parameters_4_0=ruleFullJvmFormalParameter		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAuxiliaryDescriptionRule());
+	        }
+       		add(
+       			$current, 
+       			"parameters",
+        		lv_parameters_4_0, 
+        		"FullJvmFormalParameter");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?	otherlv_5=')' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getAuxiliaryDescriptionAccess().getColonKeyword_4_0());
+    	newLeafNode(otherlv_5, grammarAccess.getAuxiliaryDescriptionAccess().getRightParenthesisKeyword_3());
+    }
+(	otherlv_6=':' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getAuxiliaryDescriptionAccess().getColonKeyword_4_0());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getAuxiliaryDescriptionAccess().getTypeJvmTypeReferenceParserRuleCall_4_1_0()); 
 	    }
-		lv_type_5_0=ruleJvmTypeReference		{
+		lv_type_7_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAuxiliaryDescriptionRule());
 	        }
        		set(
        			$current, 
        			"type",
-        		lv_type_5_0, 
+        		lv_type_7_0, 
         		"JvmTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -471,14 +493,14 @@ ruleAuxiliaryDescription returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getAuxiliaryDescriptionAccess().getErrorErrorSpecificationParserRuleCall_5_0()); 
 	    }
-		lv_error_6_0=ruleErrorSpecification		{
+		lv_error_8_0=ruleErrorSpecification		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAuxiliaryDescriptionRule());
 	        }
        		set(
        			$current, 
        			"error",
-        		lv_error_6_0, 
+        		lv_error_8_0, 
         		"ErrorSpecification");
 	        afterParserOrEnumRuleCall();
 	    }

@@ -31,7 +31,9 @@ Injected:
 AuxiliaryDescription:
 	name=ID 
 	'('
-	parameters+=FullJvmFormalParameter*
+	(parameters+=FullJvmFormalParameter
+		(',' parameters+=FullJvmFormalParameter)*
+	)?
 	')'
 	(':' type=JvmTypeReference)?
 	(error=ErrorSpecification)?
