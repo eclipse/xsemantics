@@ -404,4 +404,9 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testOverrideJudgment() {
 		systemExtendsSystemWithJudgmentOverride.assertNoErrors
 	}
+
+	@Test
+	def void testAuxiliaryDescriptions() {
+		parser.parse(testFiles.testAuxiliaryDescriptions).assertNoErrors
+	}
 }

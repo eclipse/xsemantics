@@ -95,6 +95,13 @@ public class XsemanticsSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XsemanticsPackage.AUXILIARY_DESCRIPTION:
+      {
+        AuxiliaryDescription auxiliaryDescription = (AuxiliaryDescription)theEObject;
+        T result = caseAuxiliaryDescription(auxiliaryDescription);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XsemanticsPackage.JUDGMENT_DESCRIPTION:
       {
         JudgmentDescription judgmentDescription = (JudgmentDescription)theEObject;
@@ -325,6 +332,22 @@ public class XsemanticsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseInjected(Injected object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Auxiliary Description</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Auxiliary Description</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAuxiliaryDescription(AuxiliaryDescription object)
   {
     return null;
   }

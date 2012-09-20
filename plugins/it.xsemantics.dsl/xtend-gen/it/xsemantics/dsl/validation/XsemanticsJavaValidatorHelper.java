@@ -3,6 +3,7 @@ package it.xsemantics.dsl.validation;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -137,6 +138,28 @@ public class XsemanticsJavaValidatorHelper {
         }
       };
     JudgmentDescription _findFirst = IterableExtensions.<JudgmentDescription>findFirst(_allJudgments, _function);
+    return _findFirst;
+  }
+  
+  public AuxiliaryDescription auxiliaryDescriptionWithTheSameName(final AuxiliaryDescription aux) {
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(aux);
+    EList<AuxiliaryDescription> _auxiliaryDescriptions = _containingSystem.getAuxiliaryDescriptions();
+    final Function1<AuxiliaryDescription,Boolean> _function = new Function1<AuxiliaryDescription,Boolean>() {
+        public Boolean apply(final AuxiliaryDescription it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, aux));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = aux.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    AuxiliaryDescription _findFirst = IterableExtensions.<AuxiliaryDescription>findFirst(_auxiliaryDescriptions, _function);
     return _findFirst;
   }
   

@@ -13,6 +13,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/validatorExtends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/injections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/auxiliaryDescriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/judgmentDescriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/checkrules"/>
@@ -23,6 +24,12 @@
     <genClasses ecoreClass="Xsemantics.ecore#//Injected">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//Injected/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Injected/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xsemantics.ecore#//AuxiliaryDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//AuxiliaryDescription/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//AuxiliaryDescription/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//AuxiliaryDescription/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//AuxiliaryDescription/error"/>
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//JudgmentDescription">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//JudgmentDescription/override"/>

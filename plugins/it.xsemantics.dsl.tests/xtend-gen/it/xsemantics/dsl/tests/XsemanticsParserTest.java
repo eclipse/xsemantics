@@ -658,4 +658,15 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
     XsemanticsSystem _systemExtendsSystemWithJudgmentOverride = this.systemExtendsSystemWithJudgmentOverride();
     this._validationTestHelper.assertNoErrors(_systemExtendsSystemWithJudgmentOverride);
   }
+  
+  @Test
+  public void testAuxiliaryDescriptions() {
+    try {
+      CharSequence _testAuxiliaryDescriptions = this.testFiles.testAuxiliaryDescriptions();
+      XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryDescriptions);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

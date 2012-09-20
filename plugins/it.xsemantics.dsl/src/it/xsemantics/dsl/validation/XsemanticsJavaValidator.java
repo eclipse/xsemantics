@@ -5,6 +5,7 @@ import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -532,6 +533,16 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					}
 				}
 			}
+		}
+	}
+
+	@Check
+	public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
+		if (helper.auxiliaryDescriptionWithTheSameName(aux) != null) {
+			error("Duplicate auxiliary description '" + aux.getName()
+					+ "'",
+					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
+					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
 	}
 

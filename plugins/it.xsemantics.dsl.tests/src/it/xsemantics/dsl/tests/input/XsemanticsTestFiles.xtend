@@ -1846,4 +1846,24 @@ class XsemanticsTestFiles {
 		
 	}
 	'''
+
+	def testAuxiliaryDescriptions() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		isValue(EObject o)
+		objectClass(EObject o) : EClass
+	}
+	'''
+
+	def testDuplicateAuxiliaryDescriptions() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		foo(EObject o)
+		foo(EClass o) : EClass
+	}
+	'''
 }

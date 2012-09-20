@@ -4074,4 +4074,46 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testAuxiliaryDescriptions() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("auxiliary {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("isValue(EObject o)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("objectClass(EObject o) : EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testDuplicateAuxiliaryDescriptions() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("auxiliary {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo(EObject o)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo(EClass o) : EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

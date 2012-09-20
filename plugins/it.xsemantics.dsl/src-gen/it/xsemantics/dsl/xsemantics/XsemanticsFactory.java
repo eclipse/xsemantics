@@ -50,6 +50,15 @@ public interface XsemanticsFactory extends EFactory
   Injected createInjected();
 
   /**
+   * Returns a new object of class '<em>Auxiliary Description</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Auxiliary Description</em>'.
+   * @generated
+   */
+  AuxiliaryDescription createAuxiliaryDescription();
+
+  /**
    * Returns a new object of class '<em>Judgment Description</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

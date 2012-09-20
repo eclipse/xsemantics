@@ -10,6 +10,7 @@ import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 
 class XsemanticsJavaValidatorHelper {
 	
@@ -42,6 +43,12 @@ class XsemanticsJavaValidatorHelper {
 	def judgmentDescriptionWithTheSameName(JudgmentDescription j) {
 		j.containingSystem.allJudgments.findFirst [
 			it != j && it.name == j.name
+		]
+	}
+
+	def auxiliaryDescriptionWithTheSameName(AuxiliaryDescription aux) {
+		aux.containingSystem.auxiliaryDescriptions.findFirst [
+			it != aux && it.name == aux.name
 		]
 	}
 	

@@ -92,6 +92,11 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
         return createInjectedAdapter();
       }
       @Override
+      public Adapter caseAuxiliaryDescription(AuxiliaryDescription object)
+      {
+        return createAuxiliaryDescriptionAdapter();
+      }
+      @Override
       public Adapter caseJudgmentDescription(JudgmentDescription object)
       {
         return createJudgmentDescriptionAdapter();
@@ -279,6 +284,21 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createInjectedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription <em>Auxiliary Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+   * @generated
+   */
+  public Adapter createAuxiliaryDescriptionAdapter()
   {
     return null;
   }

@@ -114,13 +114,22 @@ public interface XsemanticsPackage extends EPackage
   int XSEMANTICS_SYSTEM__INJECTIONS = 4;
 
   /**
+   * The feature id for the '<em><b>Auxiliary Descriptions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS = 5;
+
+  /**
    * The feature id for the '<em><b>Judgment Descriptions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 5;
+  int XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS = 6;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -129,7 +138,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__RULES = 6;
+  int XSEMANTICS_SYSTEM__RULES = 7;
 
   /**
    * The feature id for the '<em><b>Checkrules</b></em>' containment reference list.
@@ -138,7 +147,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__CHECKRULES = 7;
+  int XSEMANTICS_SYSTEM__CHECKRULES = 8;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -147,7 +156,7 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 8;
+  int XSEMANTICS_SYSTEM_FEATURE_COUNT = 9;
 
   /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ImportImpl <em>Import</em>}' class.
@@ -215,6 +224,61 @@ public interface XsemanticsPackage extends EPackage
   int INJECTED_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.AuxiliaryDescriptionImpl <em>Auxiliary Description</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see it.xsemantics.dsl.xsemantics.impl.AuxiliaryDescriptionImpl
+   * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAuxiliaryDescription()
+   * @generated
+   */
+  int AUXILIARY_DESCRIPTION = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUXILIARY_DESCRIPTION__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUXILIARY_DESCRIPTION__PARAMETERS = 1;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUXILIARY_DESCRIPTION__TYPE = 2;
+
+  /**
+   * The feature id for the '<em><b>Error</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUXILIARY_DESCRIPTION__ERROR = 3;
+
+  /**
+   * The number of structural features of the '<em>Auxiliary Description</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUXILIARY_DESCRIPTION_FEATURE_COUNT = 4;
+
+  /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl <em>Judgment Description</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -222,7 +286,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getJudgmentDescription()
    * @generated
    */
-  int JUDGMENT_DESCRIPTION = 3;
+  int JUDGMENT_DESCRIPTION = 4;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -295,7 +359,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getJudgmentParameter()
    * @generated
    */
-  int JUDGMENT_PARAMETER = 4;
+  int JUDGMENT_PARAMETER = 5;
 
   /**
    * The number of structural features of the '<em>Judgment Parameter</em>' class.
@@ -314,7 +378,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRule()
    * @generated
    */
-  int RULE = 5;
+  int RULE = 6;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -360,7 +424,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAxiom()
    * @generated
    */
-  int AXIOM = 6;
+  int AXIOM = 7;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -406,7 +470,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleWithPremises()
    * @generated
    */
-  int RULE_WITH_PREMISES = 7;
+  int RULE_WITH_PREMISES = 8;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -461,7 +525,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getCheckRule()
    * @generated
    */
-  int CHECK_RULE = 8;
+  int CHECK_RULE = 9;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -516,7 +580,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusion()
    * @generated
    */
-  int RULE_CONCLUSION = 9;
+  int RULE_CONCLUSION = 10;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' containment reference.
@@ -580,7 +644,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocation()
    * @generated
    */
-  int RULE_INVOCATION = 10;
+  int RULE_INVOCATION = 11;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' containment reference.
@@ -635,7 +699,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocationExpression()
    * @generated
    */
-  int RULE_INVOCATION_EXPRESSION = 11;
+  int RULE_INVOCATION_EXPRESSION = 12;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -663,7 +727,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentSpecification()
    * @generated
    */
-  int ENVIRONMENT_SPECIFICATION = 12;
+  int ENVIRONMENT_SPECIFICATION = 13;
 
   /**
    * The number of structural features of the '<em>Environment Specification</em>' class.
@@ -682,7 +746,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentReference()
    * @generated
    */
-  int ENVIRONMENT_REFERENCE = 13;
+  int ENVIRONMENT_REFERENCE = 14;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -710,7 +774,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironment()
    * @generated
    */
-  int ENVIRONMENT = 14;
+  int ENVIRONMENT = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -738,7 +802,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
    * @generated
    */
-  int ERROR_SPECIFICATION = 15;
+  int ERROR_SPECIFICATION = 16;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -784,7 +848,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusionElement()
    * @generated
    */
-  int RULE_CONCLUSION_ELEMENT = 16;
+  int RULE_CONCLUSION_ELEMENT = 17;
 
   /**
    * The number of structural features of the '<em>Rule Conclusion Element</em>' class.
@@ -803,7 +867,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleParameter()
    * @generated
    */
-  int RULE_PARAMETER = 17;
+  int RULE_PARAMETER = 18;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -831,7 +895,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getExpressionInConclusion()
    * @generated
    */
-  int EXPRESSION_IN_CONCLUSION = 18;
+  int EXPRESSION_IN_CONCLUSION = 19;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -859,7 +923,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOutputParameter()
    * @generated
    */
-  int OUTPUT_PARAMETER = 19;
+  int OUTPUT_PARAMETER = 20;
 
   /**
    * The feature id for the '<em><b>Jvm Type Reference</b></em>' containment reference.
@@ -887,7 +951,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getInputParameter()
    * @generated
    */
-  int INPUT_PARAMETER = 20;
+  int INPUT_PARAMETER = 21;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -915,7 +979,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOrExpression()
    * @generated
    */
-  int OR_EXPRESSION = 21;
+  int OR_EXPRESSION = 22;
 
   /**
    * The feature id for the '<em><b>Branches</b></em>' containment reference list.
@@ -943,7 +1007,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getFail()
    * @generated
    */
-  int FAIL = 22;
+  int FAIL = 23;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -971,7 +1035,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentAccess()
    * @generated
    */
-  int ENVIRONMENT_ACCESS = 23;
+  int ENVIRONMENT_ACCESS = 24;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -1017,7 +1081,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentComposition()
    * @generated
    */
-  int ENVIRONMENT_COMPOSITION = 24;
+  int ENVIRONMENT_COMPOSITION = 25;
 
   /**
    * The feature id for the '<em><b>Current Environment</b></em>' containment reference.
@@ -1054,7 +1118,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEmptyEnvironment()
    * @generated
    */
-  int EMPTY_ENVIRONMENT = 25;
+  int EMPTY_ENVIRONMENT = 26;
 
   /**
    * The number of structural features of the '<em>Empty Environment</em>' class.
@@ -1073,7 +1137,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentMapping()
    * @generated
    */
-  int ENVIRONMENT_MAPPING = 26;
+  int ENVIRONMENT_MAPPING = 27;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' containment reference.
@@ -1169,6 +1233,17 @@ public interface XsemanticsPackage extends EPackage
   EReference getXsemanticsSystem_Injections();
 
   /**
+   * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Auxiliary Descriptions</em>'.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryDescriptions()
+   * @see #getXsemanticsSystem()
+   * @generated
+   */
+  EReference getXsemanticsSystem_AuxiliaryDescriptions();
+
+  /**
    * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1253,6 +1328,60 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   EAttribute getInjected_Name();
+
+  /**
+   * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription <em>Auxiliary Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Auxiliary Description</em>'.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+   * @generated
+   */
+  EClass getAuxiliaryDescription();
+
+  /**
+   * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getName()
+   * @see #getAuxiliaryDescription()
+   * @generated
+   */
+  EAttribute getAuxiliaryDescription_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getParameters()
+   * @see #getAuxiliaryDescription()
+   * @generated
+   */
+  EReference getAuxiliaryDescription_Parameters();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getType()
+   * @see #getAuxiliaryDescription()
+   * @generated
+   */
+  EReference getAuxiliaryDescription_Type();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getError <em>Error</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Error</em>'.
+   * @see it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getError()
+   * @see #getAuxiliaryDescription()
+   * @generated
+   */
+  EReference getAuxiliaryDescription_Error();
 
   /**
    * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.JudgmentDescription <em>Judgment Description</em>}'.
@@ -2030,6 +2159,14 @@ public interface XsemanticsPackage extends EPackage
     EReference XSEMANTICS_SYSTEM__INJECTIONS = eINSTANCE.getXsemanticsSystem_Injections();
 
     /**
+     * The meta object literal for the '<em><b>Auxiliary Descriptions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS = eINSTANCE.getXsemanticsSystem_AuxiliaryDescriptions();
+
+    /**
      * The meta object literal for the '<em><b>Judgment Descriptions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2096,6 +2233,48 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EAttribute INJECTED__NAME = eINSTANCE.getInjected_Name();
+
+    /**
+     * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.AuxiliaryDescriptionImpl <em>Auxiliary Description</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see it.xsemantics.dsl.xsemantics.impl.AuxiliaryDescriptionImpl
+     * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAuxiliaryDescription()
+     * @generated
+     */
+    EClass AUXILIARY_DESCRIPTION = eINSTANCE.getAuxiliaryDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AUXILIARY_DESCRIPTION__NAME = eINSTANCE.getAuxiliaryDescription_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AUXILIARY_DESCRIPTION__PARAMETERS = eINSTANCE.getAuxiliaryDescription_Parameters();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AUXILIARY_DESCRIPTION__TYPE = eINSTANCE.getAuxiliaryDescription_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Error</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AUXILIARY_DESCRIPTION__ERROR = eINSTANCE.getAuxiliaryDescription_Error();
 
     /**
      * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.JudgmentDescriptionImpl <em>Judgment Description</em>}' class.

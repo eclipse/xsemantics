@@ -185,4 +185,14 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		systemExtendsSystemWithJudgmentOverride.
 			assertNoIssues
 	}
+
+	@Test
+	def testDuplicateAuxiliaryDescriptions() {
+		parser.parse(testFiles.testDuplicateAuxiliaryDescriptions).
+		assertError(
+			XsemanticsPackage::eINSTANCE.auxiliaryDescription,
+			IssueCodes::DUPLICATE_AUXILIARY_NAME,
+			"Duplicate auxiliary description 'foo'"
+		)
+	}
 }

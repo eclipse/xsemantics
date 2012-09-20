@@ -3,6 +3,7 @@ package it.xsemantics.dsl.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import it.xsemantics.dsl.services.XsemanticsGrammarAccess;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.Axiom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
@@ -1002,6 +1003,12 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == XsemanticsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case XsemanticsPackage.AUXILIARY_DESCRIPTION:
+				if(context == grammarAccess.getAuxiliaryDescriptionRule()) {
+					sequence_AuxiliaryDescription(context, (AuxiliaryDescription) semanticObject); 
+					return; 
+				}
+				else break;
 			case XsemanticsPackage.AXIOM:
 				if(context == grammarAccess.getAxiomRule() ||
 				   context == grammarAccess.getRuleRule()) {
@@ -1205,6 +1212,15 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     (name=ID parameters+=FullJvmFormalParameter* type=JvmTypeReference? error=ErrorSpecification?)
+	 */
+	protected void sequence_AuxiliaryDescription(EObject context, AuxiliaryDescription semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:
@@ -1522,6 +1538,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	 *         validatorExtends=JvmParameterizedTypeReference? 
 	 *         imports+=Import* 
 	 *         injections+=Injected* 
+	 *         auxiliaryDescriptions+=AuxiliaryDescription* 
 	 *         judgmentDescriptions+=JudgmentDescription* 
 	 *         rules+=Rule* 
 	 *         checkrules+=CheckRule*

@@ -65,4 +65,6 @@ public interface IssueCodes {
 	String NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND = PREFIX + "NoJudgmentToOverrideOfTheSameKind";
 
 	String OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME = PREFIX + "OverrideJudgmentMustHaveTheSameName";
+
+	String DUPLICATE_AUXILIARY_NAME = PREFIX + "DuplicateAuxiliaryDescription";
 }

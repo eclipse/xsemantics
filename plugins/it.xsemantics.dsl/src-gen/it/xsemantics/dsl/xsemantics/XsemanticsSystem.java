@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getRules <em>Rules</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getCheckrules <em>Checkrules</em>}</li>
@@ -142,6 +143,22 @@ public interface XsemanticsSystem extends EObject
    * @generated
    */
   EList<Injected> getInjections();
+
+  /**
+   * Returns the value of the '<em><b>Auxiliary Descriptions</b></em>' containment reference list.
+   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Auxiliary Descriptions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Auxiliary Descriptions</em>' containment reference list.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_AuxiliaryDescriptions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AuxiliaryDescription> getAuxiliaryDescriptions();
 
   /**
    * Returns the value of the '<em><b>Judgment Descriptions</b></em>' containment reference list.

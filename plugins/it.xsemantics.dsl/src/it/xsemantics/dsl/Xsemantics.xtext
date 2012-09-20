@@ -10,6 +10,9 @@ XsemanticsSystem:
 	('validatorExtends' validatorExtends=JvmParameterizedTypeReference)?
 	imports += Import*
 	injections += Injected*
+	('auxiliary' '{'
+		auxiliaryDescriptions += AuxiliaryDescription+
+	'}')?
 	('judgments' '{'
 		judgmentDescriptions += JudgmentDescription+
 	'}')?
@@ -23,6 +26,15 @@ Import:
 
 Injected:
 	'inject' type=JvmTypeReference name=ValidID
+;
+
+AuxiliaryDescription:
+	name=ID 
+	'('
+	parameters+=FullJvmFormalParameter*
+	')'
+	(':' type=JvmTypeReference)?
+	(error=ErrorSpecification)?
 ;
 
 JudgmentDescription:

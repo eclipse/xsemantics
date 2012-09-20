@@ -2,6 +2,7 @@
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Import;
 import it.xsemantics.dsl.xsemantics.Injected;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getValidatorExtends <em>Validator Extends</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getInjections <em>Injections</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getCheckrules <em>Checkrules</em>}</li>
@@ -109,6 +111,16 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected EList<Injected> injections;
+
+  /**
+   * The cached value of the '{@link #getAuxiliaryDescriptions() <em>Auxiliary Descriptions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAuxiliaryDescriptions()
+   * @generated
+   * @ordered
+   */
+  protected EList<AuxiliaryDescription> auxiliaryDescriptions;
 
   /**
    * The cached value of the '{@link #getJudgmentDescriptions() <em>Judgment Descriptions</em>}' containment reference list.
@@ -313,6 +325,20 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<AuxiliaryDescription> getAuxiliaryDescriptions()
+  {
+    if (auxiliaryDescriptions == null)
+    {
+      auxiliaryDescriptions = new EObjectContainmentEList<AuxiliaryDescription>(AuxiliaryDescription.class, this, XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS);
+    }
+    return auxiliaryDescriptions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<JudgmentDescription> getJudgmentDescriptions()
   {
     if (judgmentDescriptions == null)
@@ -368,6 +394,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return ((InternalEList<?>)getInjections()).basicRemove(otherEnd, msgs);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
+        return ((InternalEList<?>)getAuxiliaryDescriptions()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return ((InternalEList<?>)getJudgmentDescriptions()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:
@@ -398,6 +426,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return getImports();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return getInjections();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
+        return getAuxiliaryDescriptions();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return getJudgmentDescriptions();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:
@@ -435,6 +465,10 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         getInjections().clear();
         getInjections().addAll((Collection<? extends Injected>)newValue);
+        return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
+        getAuxiliaryDescriptions().clear();
+        getAuxiliaryDescriptions().addAll((Collection<? extends AuxiliaryDescription>)newValue);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         getJudgmentDescriptions().clear();
@@ -477,6 +511,9 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         getInjections().clear();
         return;
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
+        getAuxiliaryDescriptions().clear();
+        return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         getJudgmentDescriptions().clear();
         return;
@@ -510,6 +547,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return imports != null && !imports.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return injections != null && !injections.isEmpty();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
+        return auxiliaryDescriptions != null && !auxiliaryDescriptions.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS:
         return judgmentDescriptions != null && !judgmentDescriptions.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__RULES:

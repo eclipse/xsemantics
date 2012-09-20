@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -168,5 +169,19 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
   public void testNoRuleForJudgmentDescriptionOverridden() {
     XsemanticsSystem _systemExtendsSystemWithJudgmentOverride = this.systemExtendsSystemWithJudgmentOverride();
     this._validationTestHelper.assertNoIssues(_systemExtendsSystemWithJudgmentOverride);
+  }
+  
+  @Test
+  public void testDuplicateAuxiliaryDescriptions() {
+    try {
+      CharSequence _testDuplicateAuxiliaryDescriptions = this.testFiles.testDuplicateAuxiliaryDescriptions();
+      XsemanticsSystem _parse = this.parser.parse(_testDuplicateAuxiliaryDescriptions);
+      EClass _auxiliaryDescription = XsemanticsPackage.eINSTANCE.getAuxiliaryDescription();
+      this._validationTestHelper.assertError(_parse, _auxiliaryDescription, 
+        IssueCodes.DUPLICATE_AUXILIARY_NAME, 
+        "Duplicate auxiliary description \'foo\'");
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
