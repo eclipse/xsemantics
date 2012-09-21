@@ -25,10 +25,10 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import java.util.Set
 import com.google.common.collect.Sets
-
-import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XsemanticsUtils {
 	
@@ -189,6 +189,12 @@ class XsemanticsUtils {
 	def List<RuleParameter> inputEObjectParams(Rule rule) {
 		Lists::newArrayList(rule.inputParams.filter [
 			it.parameter.parameterType.isEObject(rule)
+		])
+	}
+
+	def List<JvmFormalParameter> inputEObjectParams(AuxiliaryFunction aux) {
+		Lists::newArrayList(aux.parameters.filter [
+			parameterType.isEObject(aux)
 		])
 	}
 	

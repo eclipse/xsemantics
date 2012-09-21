@@ -474,8 +474,16 @@ public class XsemanticsGeneratorExtensions {
   public CharSequence applyRuleName(final Rule rule) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("applyRule");
-    String _name = rule.getName();
-    _builder.append(_name, "");
+    String _javaClassName = this.toJavaClassName(rule);
+    _builder.append(_javaClassName, "");
+    return _builder;
+  }
+  
+  public CharSequence applyAuxFunName(final AuxiliaryFunction aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("applyAuxFun");
+    String _javaClassName = this.toJavaClassName(aux);
+    _builder.append(_javaClassName, "");
     return _builder;
   }
   
@@ -610,6 +618,17 @@ public class XsemanticsGeneratorExtensions {
     return _xblockexpression;
   }
   
+  public String traceStringForAuxiliaryFun(final AuxiliaryFunction aux) {
+    String _errorForAuxiliaryFun = this.errorForAuxiliaryFun(aux);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(" ");
+    _builder.append("+ \" = \" + ");
+    String _plus = (_errorForAuxiliaryFun + _builder.toString());
+    CharSequence _wrapInStringRepr = this.wrapInStringRepr("_result_");
+    String _plus_1 = (_plus + _wrapInStringRepr);
+    return _plus_1;
+  }
+  
   public CharSequence ruleNameInvocation(final String ruleName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ruleName(\"");
@@ -702,6 +721,19 @@ public class XsemanticsGeneratorExtensions {
     return _join;
   }
   
+  public String inputParameterNames(final AuxiliaryFunction aux) {
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
+        public String apply(final JvmFormalParameter it) {
+          String _name = it.getName();
+          return _name;
+        }
+      };
+    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    return _join;
+  }
+  
   public String errorForRule(final Rule rule) {
     final Function1<RuleConclusionElement,CharSequence> _function = new Function1<RuleConclusionElement,CharSequence>() {
         public CharSequence apply(final RuleConclusionElement it) {
@@ -722,6 +754,32 @@ public class XsemanticsGeneratorExtensions {
       };
     String _stringForRule = this.stringForRule(rule, _function, _function_1);
     return _stringForRule;
+  }
+  
+  public String errorForAuxiliaryFun(final AuxiliaryFunction aux) {
+    AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(aux);
+    String _name = _auxiliaryDescription.getName();
+    CharSequence _ruleNameInvocation = this.ruleNameInvocation(_name);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(" ");
+    _builder.append("+ \"(\" + ");
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    final Function1<JvmFormalParameter,CharSequence> _function = new Function1<JvmFormalParameter,CharSequence>() {
+        public CharSequence apply(final JvmFormalParameter it) {
+          String _name = it.getName();
+          CharSequence _wrapInStringRepr = XsemanticsGeneratorExtensions.this.wrapInStringRepr(_name);
+          return _wrapInStringRepr;
+        }
+      };
+    List<CharSequence> _map = ListExtensions.<JvmFormalParameter, CharSequence>map(_parameters, _function);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("+ \", \" + ");
+    String _join = IterableExtensions.join(_map, _builder_1);
+    _builder.append(_join, " ");
+    _builder.append("+ \")\"");
+    String _plus = (_ruleNameInvocation + _builder.toString());
+    return _plus;
   }
   
   public String ruleConclusionOutputParamForError(final RuleConclusionElement element) {

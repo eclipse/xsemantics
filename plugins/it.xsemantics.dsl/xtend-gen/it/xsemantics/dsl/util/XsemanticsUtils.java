@@ -332,6 +332,20 @@ public class XsemanticsUtils {
     return _newArrayList;
   }
   
+  public List<JvmFormalParameter> inputEObjectParams(final AuxiliaryFunction aux) {
+    EList<JvmFormalParameter> _parameters = aux.getParameters();
+    final Function1<JvmFormalParameter,Boolean> _function = new Function1<JvmFormalParameter,Boolean>() {
+        public Boolean apply(final JvmFormalParameter it) {
+          JvmTypeReference _parameterType = it.getParameterType();
+          boolean _isEObject = XsemanticsUtils.this._xsemanticsTypeSystem.isEObject(_parameterType, aux);
+          return Boolean.valueOf(_isEObject);
+        }
+      };
+    Iterable<JvmFormalParameter> _filter = IterableExtensions.<JvmFormalParameter>filter(_parameters, _function);
+    ArrayList<JvmFormalParameter> _newArrayList = Lists.<JvmFormalParameter>newArrayList(_filter);
+    return _newArrayList;
+  }
+  
   public boolean isInputParam(final RuleParameter ruleParameter) {
     Rule _containingRule = this.containingRule(ruleParameter);
     List<RuleParameter> _inputParams = this.inputParams(_containingRule);

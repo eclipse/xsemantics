@@ -1875,5 +1875,9 @@ class XsemanticsTestFiles {
 	auxiliary isValue(EObject eO, EClass eC) {
 		eO.eClass == eC
 	}
+	
+	auxiliary objectClass(EObject o) {
+		o.eClass
+	}
 	'''
 }

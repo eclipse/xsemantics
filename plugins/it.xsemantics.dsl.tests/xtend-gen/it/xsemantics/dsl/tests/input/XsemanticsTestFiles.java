@@ -4136,6 +4136,14 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("auxiliary objectClass(EObject o) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("o.eClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
 }

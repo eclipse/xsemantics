@@ -177,7 +177,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			ts.auxiliaryFunctions.forEach [
 				aux |
 				if (aux.auxiliaryDescription != null) {
-					//members += rule.compileImplMethod
+					members += aux.compileImplMethod
 					members += aux.compileApplyAuxiliaryFunction
 				}
 			]
@@ -688,6 +688,43 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			]
 		]
 	}
+
+	def compileImplMethod(AuxiliaryFunction aux) {
+		aux.toMethod(
+			'''«aux.auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
+			aux.auxiliaryDescription.resultType
+		) 
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			exceptions += aux.ruleFailedExceptionType
+			
+   			parameters += aux.auxiliaryDescription.ruleApplicationTraceParam
+   			parameters += aux.inputParameters
+   			
+   			body = [
+   				it.append('''try {''').increaseIndentation.newLine
+				it.append(aux.ruleApplicationTraceType.type)
+				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
+				it.append(aux.auxiliaryDescription.resultType.type)
+				it.append(" ")
+				it.append('''
+					_result_ = «aux.applyAuxFunName»(«ruleApplicationTraceName», «aux.inputParameterNames»);
+					«addToTraceMethod(ruleApplicationTraceName(), aux.traceStringForAuxiliaryFun)»;
+					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
+					return _result_;''').decreaseIndentation.newLine
+				it.append('''} catch (''')
+				aux.exceptionType.serialize(aux, it)
+				it.append(" ")
+				it.append('''''')
+				it.append('''e_«aux.applyAuxFunName») {''').increaseIndentation.newLine
+   				aux.compileFinalThrow(it)
+   				it.append(''';''').newLine
+   				it.append('''return null;''').decreaseIndentation.newLine
+   				it.append('''}''')
+   			]
+		]
+	}
 	
 	def ruleApplicationTraceType(EObject o) {
 		o.newTypeRef(typeof(RuleApplicationTrace))
@@ -716,6 +753,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		}
 	}
 
+	def compileFinalThrow(AuxiliaryFunction aux, ITreeAppendable b) {
+		b.append('''
+		«aux.auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
+			«aux.auxiliaryDescription.ruleIssueString»,
+			e_«aux.applyAuxFunName», «aux.inputParameterNames»''')
+		aux.errorInformationArgs(b)
+		b.append(''')''')
+	}
+
 	def errorInformationArgs(Rule rule, ITreeAppendable b) {
 		val inputEObjects = rule.inputEObjectParams
 		b.append(", ")
@@ -736,9 +782,29 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		b.append('''}''')
 	}
 
+	def errorInformationArgs(AuxiliaryFunction aux, ITreeAppendable b) {
+		val inputEObjects = aux.inputEObjectParams
+		b.append(", ")
+		b.append('''new ''')
+		aux.newTypeRef(typeof(ErrorInformation)).serialize(aux, b)
+		b.append('''[] {''')
+
+		val iter = inputEObjects.iterator
+		val errInfoType = aux.errorInformationType.type
+		while (iter.hasNext) {
+			b.append("new ")
+			b.append(errInfoType)
+			b.append('''(«iter.next.name»)''')
+			if (iter.hasNext)
+				b.append(", ")
+		}
+
+		b.append('''}''')
+	}
+
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
-			'''applyRule«rule.toJavaClassName»'''.toString,
+			rule.applyRuleName.toString,
 			rule.judgmentDescription.resultType
 		) 
 		[
@@ -762,7 +828,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
 	def compileApplyAuxiliaryFunction(AuxiliaryFunction auxfun) {
 		auxfun.toMethod(
-			'''applyAuxFun«auxfun.toJavaClassName»'''.toString,
+			auxfun.applyAuxFunName.toString,
 			auxfun.auxiliaryDescription.resultType
 		) 
 		[

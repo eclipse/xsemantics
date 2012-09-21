@@ -286,8 +286,11 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 boolean _notEquals = (!Objects.equal(_auxiliaryDescription, null));
                 if (_notEquals) {
                   EList<JvmMember> _members = it.getMembers();
+                  JvmOperation _compileImplMethod = XsemanticsJvmModelInferrer.this.compileImplMethod(aux);
+                  XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileImplMethod);
+                  EList<JvmMember> _members_1 = it.getMembers();
                   JvmOperation _compileApplyAuxiliaryFunction = XsemanticsJvmModelInferrer.this.compileApplyAuxiliaryFunction(aux);
-                  XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileApplyAuxiliaryFunction);
+                  XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileApplyAuxiliaryFunction);
                 }
               }
             };
@@ -1350,6 +1353,119 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _method;
   }
   
+  public JvmOperation compileImplMethod(final AuxiliaryFunction aux) {
+    StringConcatenation _builder = new StringConcatenation();
+    AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(aux);
+    CharSequence _polymorphicDispatcherImpl = this._xsemanticsGeneratorExtensions.polymorphicDispatcherImpl(_auxiliaryDescription);
+    _builder.append(_polymorphicDispatcherImpl, "");
+    String _string = _builder.toString();
+    AuxiliaryDescription _auxiliaryDescription_1 = this._xsemanticsUtils.auxiliaryDescription(aux);
+    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription_1);
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          it.setVisibility(JvmVisibility.PROTECTED);
+          EList<JvmTypeReference> _exceptions = it.getExceptions();
+          JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(aux);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
+          EList<JvmFormalParameter> _parameters = it.getParameters();
+          AuxiliaryDescription _auxiliaryDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.auxiliaryDescription(aux);
+          JvmFormalParameter _ruleApplicationTraceParam = XsemanticsJvmModelInferrer.this.ruleApplicationTraceParam(_auxiliaryDescription);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _ruleApplicationTraceParam);
+          EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+          List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(aux);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _inputParameters);
+          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+              public void apply(final ITreeAppendable it) {
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("try {");
+                ITreeAppendable _append = it.append(_builder);
+                ITreeAppendable _increaseIndentation = _append.increaseIndentation();
+                _increaseIndentation.newLine();
+                JvmTypeReference _ruleApplicationTraceType = XsemanticsJvmModelInferrer.this.ruleApplicationTraceType(aux);
+                JvmType _type = _ruleApplicationTraceType.getType();
+                it.append(_type);
+                StringConcatenation _builder_1 = new StringConcatenation();
+                _builder_1.append(" ");
+                CharSequence _ruleApplicationSubtraceName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationSubtraceName();
+                _builder_1.append(_ruleApplicationSubtraceName, " ");
+                _builder_1.append(" = ");
+                CharSequence _ruleApplicationTraceName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                CharSequence _newTraceMethod = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.newTraceMethod(_ruleApplicationTraceName);
+                _builder_1.append(_newTraceMethod, " ");
+                _builder_1.append(";");
+                ITreeAppendable _append_1 = it.append(_builder_1);
+                _append_1.newLine();
+                AuxiliaryDescription _auxiliaryDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.auxiliaryDescription(aux);
+                JvmTypeReference _resultType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription);
+                JvmType _type_1 = _resultType.getType();
+                it.append(_type_1);
+                it.append(" ");
+                StringConcatenation _builder_2 = new StringConcatenation();
+                _builder_2.append("_result_ = ");
+                CharSequence _applyAuxFunName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.applyAuxFunName(aux);
+                _builder_2.append(_applyAuxFunName, "");
+                _builder_2.append("(");
+                CharSequence _ruleApplicationTraceName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                _builder_2.append(_ruleApplicationTraceName_1, "");
+                _builder_2.append(", ");
+                String _inputParameterNames = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.inputParameterNames(aux);
+                _builder_2.append(_inputParameterNames, "");
+                _builder_2.append(");");
+                _builder_2.newLineIfNotEmpty();
+                CharSequence _ruleApplicationTraceName_2 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                String _traceStringForAuxiliaryFun = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.traceStringForAuxiliaryFun(aux);
+                CharSequence _addToTraceMethod = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.addToTraceMethod(_ruleApplicationTraceName_2, _traceStringForAuxiliaryFun);
+                _builder_2.append(_addToTraceMethod, "");
+                _builder_2.append(";");
+                _builder_2.newLineIfNotEmpty();
+                CharSequence _ruleApplicationTraceName_3 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+                CharSequence _ruleApplicationSubtraceName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.ruleApplicationSubtraceName();
+                CharSequence _addAsSubtraceMethod = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.addAsSubtraceMethod(_ruleApplicationTraceName_3, _ruleApplicationSubtraceName_1);
+                _builder_2.append(_addAsSubtraceMethod, "");
+                _builder_2.append(";");
+                _builder_2.newLineIfNotEmpty();
+                _builder_2.append("return _result_;");
+                ITreeAppendable _append_2 = it.append(_builder_2);
+                ITreeAppendable _decreaseIndentation = _append_2.decreaseIndentation();
+                _decreaseIndentation.newLine();
+                StringConcatenation _builder_3 = new StringConcatenation();
+                _builder_3.append("} catch (");
+                it.append(_builder_3);
+                JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(aux);
+                XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_exceptionType, aux, it);
+                it.append(" ");
+                StringConcatenation _builder_4 = new StringConcatenation();
+                it.append(_builder_4);
+                StringConcatenation _builder_5 = new StringConcatenation();
+                _builder_5.append("e_");
+                CharSequence _applyAuxFunName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.applyAuxFunName(aux);
+                _builder_5.append(_applyAuxFunName_1, "");
+                _builder_5.append(") {");
+                ITreeAppendable _append_3 = it.append(_builder_5);
+                ITreeAppendable _increaseIndentation_1 = _append_3.increaseIndentation();
+                _increaseIndentation_1.newLine();
+                XsemanticsJvmModelInferrer.this.compileFinalThrow(aux, it);
+                StringConcatenation _builder_6 = new StringConcatenation();
+                _builder_6.append(";");
+                ITreeAppendable _append_4 = it.append(_builder_6);
+                _append_4.newLine();
+                StringConcatenation _builder_7 = new StringConcatenation();
+                _builder_7.append("return null;");
+                ITreeAppendable _append_5 = it.append(_builder_7);
+                ITreeAppendable _decreaseIndentation_1 = _append_5.decreaseIndentation();
+                _decreaseIndentation_1.newLine();
+                StringConcatenation _builder_8 = new StringConcatenation();
+                _builder_8.append("}");
+                it.append(_builder_8);
+              }
+            };
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+        }
+      };
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(aux, _string, _resultType, _function);
+    return _method;
+  }
+  
   public JvmTypeReference ruleApplicationTraceType(final EObject o) {
     JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(o, RuleApplicationTrace.class);
     return _newTypeRef;
@@ -1432,6 +1548,41 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _xifexpression;
   }
   
+  public ITreeAppendable compileFinalThrow(final AuxiliaryFunction aux, final ITreeAppendable b) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(aux);
+      CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(_auxiliaryDescription);
+      _builder.append(_throwExceptionMethod, "");
+      _builder.append("(");
+      String _errorForAuxiliaryFun = this._xsemanticsGeneratorExtensions.errorForAuxiliaryFun(aux);
+      _builder.append(_errorForAuxiliaryFun, "");
+      _builder.append(",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      AuxiliaryDescription _auxiliaryDescription_1 = this._xsemanticsUtils.auxiliaryDescription(aux);
+      String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(_auxiliaryDescription_1);
+      _builder.append(_ruleIssueString, "	");
+      _builder.append(",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("e_");
+      CharSequence _applyAuxFunName = this._xsemanticsGeneratorExtensions.applyAuxFunName(aux);
+      _builder.append(_applyAuxFunName, "	");
+      _builder.append(", ");
+      String _inputParameterNames = this._xsemanticsGeneratorExtensions.inputParameterNames(aux);
+      _builder.append(_inputParameterNames, "	");
+      b.append(_builder);
+      this.errorInformationArgs(aux, b);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(")");
+      ITreeAppendable _append = b.append(_builder_1);
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
+  }
+  
   public ITreeAppendable errorInformationArgs(final Rule rule, final ITreeAppendable b) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -1478,12 +1629,54 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _xblockexpression;
   }
   
+  public ITreeAppendable errorInformationArgs(final AuxiliaryFunction aux, final ITreeAppendable b) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      final List<JvmFormalParameter> inputEObjects = this._xsemanticsUtils.inputEObjectParams(aux);
+      b.append(", ");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new ");
+      b.append(_builder);
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(aux, ErrorInformation.class);
+      this._typeReferenceSerializer.serialize(_newTypeRef, aux, b);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("[] {");
+      b.append(_builder_1);
+      final Iterator<JvmFormalParameter> iter = inputEObjects.iterator();
+      JvmTypeReference _errorInformationType = this._xsemanticsGeneratorExtensions.errorInformationType(aux);
+      final JvmType errInfoType = _errorInformationType.getType();
+      boolean _hasNext = iter.hasNext();
+      boolean _while = _hasNext;
+      while (_while) {
+        {
+          b.append("new ");
+          b.append(errInfoType);
+          StringConcatenation _builder_2 = new StringConcatenation();
+          _builder_2.append("(");
+          JvmFormalParameter _next = iter.next();
+          String _name = _next.getName();
+          _builder_2.append(_name, "");
+          _builder_2.append(")");
+          b.append(_builder_2);
+          boolean _hasNext_1 = iter.hasNext();
+          if (_hasNext_1) {
+            b.append(", ");
+          }
+        }
+        boolean _hasNext_1 = iter.hasNext();
+        _while = _hasNext_1;
+      }
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("}");
+      ITreeAppendable _append = b.append(_builder_2);
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
+  }
+  
   public JvmOperation compileApplyMethod(final Rule rule) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("applyRule");
-    String _javaClassName = this._xsemanticsGeneratorExtensions.toJavaClassName(rule);
-    _builder.append(_javaClassName, "");
-    String _string = _builder.toString();
+    CharSequence _applyRuleName = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
+    String _string = _applyRuleName.toString();
     JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(rule);
     JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -1523,11 +1716,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public JvmOperation compileApplyAuxiliaryFunction(final AuxiliaryFunction auxfun) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("applyAuxFun");
-    String _javaClassName = this._xsemanticsGeneratorExtensions.toJavaClassName(auxfun);
-    _builder.append(_javaClassName, "");
-    String _string = _builder.toString();
+    CharSequence _applyAuxFunName = this._xsemanticsGeneratorExtensions.applyAuxFunName(auxfun);
+    String _string = _applyAuxFunName.toString();
     AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(auxfun);
     JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {

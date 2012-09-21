@@ -227,7 +227,11 @@ class XsemanticsGeneratorExtensions {
 	def newTraceMethod(CharSequence trace) '''newTrace(«trace»)'''
 
 	def applyRuleName(Rule rule) {
-		'''applyRule«rule.name»'''
+		'''applyRule«rule.toJavaClassName»'''
+	}
+
+	def applyAuxFunName(AuxiliaryFunction aux) {
+		'''applyAuxFun«aux.toJavaClassName»'''
 	}
 
 	def additionalArgsForRule(Rule rule) {
@@ -277,6 +281,11 @@ class XsemanticsGeneratorExtensions {
 		buffer.toString
 	}
 
+	def traceStringForAuxiliaryFun(AuxiliaryFunction aux) {
+		aux.errorForAuxiliaryFun + ''' + " = " + ''' +
+			"_result_".wrapInStringRepr
+	}
+
 	def ruleNameInvocation(String ruleName) '''ruleName("«ruleName»")'''
 
 	def wrapInStringReprForEnv(CharSequence s) {
@@ -309,7 +318,11 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def inputParameterNames(Rule rule) {
-		rule.inputParams.map([ it.parameter.name ]).join(", ")
+		rule.inputParams.map[parameter.name].join(", ")
+	}
+
+	def inputParameterNames(AuxiliaryFunction aux) {
+		aux.parameters.map[name].join(", ")
 	}
 
 	def errorForRule(Rule rule) {
@@ -317,6 +330,11 @@ class XsemanticsGeneratorExtensions {
 			['''"«it.ruleConclusionOutputParamForError»"'''],
 			[wrapInStringRepr(it.ruleConclusionInputParamForError)]
 		)
+	}
+
+	def errorForAuxiliaryFun(AuxiliaryFunction aux) {
+		aux.auxiliaryDescription.name.ruleNameInvocation + 
+		''' + "(" + «aux.parameters.map[name.wrapInStringRepr].join(''' + ", " + ''')»+ ")"'''
 	}
 
 	def ruleConclusionOutputParamForError(RuleConclusionElement element) {

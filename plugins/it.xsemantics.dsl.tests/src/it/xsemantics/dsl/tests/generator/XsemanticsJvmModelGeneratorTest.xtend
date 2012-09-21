@@ -2151,6 +2151,21 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	_issue, _ex, new ErrorInformation(source, null));
   }
   
+  protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Boolean _result_ = applyAuxFunIsValue(_trace_, eO, eC);
+      addToTrace(_trace_, ruleName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunIsValue) {
+      isValueThrowException(ruleName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
+      	ISVALUE,
+      	e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
+      return null;
+    }
+  }
+  
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     EClass _eClass = eO.eClass();
     boolean _equals = Objects.equal(_eClass, eC);
@@ -2159,6 +2174,26 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       sneakyThrowRuleFailedException("eO.eClass == eC");
     }
     return Boolean.valueOf(_equals);
+  }
+  
+  protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      EClass _result_ = applyAuxFunObjectClass(_trace_, o);
+      addToTrace(_trace_, ruleName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunObjectClass) {
+      objectClassThrowException(ruleName("objectClass") + "(" + stringRep(o)+ ")",
+      	OBJECTCLASS,
+      	e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+      return null;
+    }
+  }
+  
+  protected EClass applyAuxFunObjectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    EClass _eClass = o.eClass();
+    return _eClass;
   }
 }
 '''
