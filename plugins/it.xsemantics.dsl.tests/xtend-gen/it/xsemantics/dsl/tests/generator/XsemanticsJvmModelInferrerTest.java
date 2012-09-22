@@ -77,23 +77,23 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   
   @Test
   public void testPolymorphicDispatcherField() {
-    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
+    CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith3OutputParams);
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
     JudgmentDescription _get = _judgmentDescriptions.get(0);
     JvmField _genPolymorphicDispatcherField = this.inferrer.genPolymorphicDispatcherField(_get);
-    this.assertGeneratedMember(_genPolymorphicDispatcherField, "private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;");
+    this.assertGeneratedMember(_genPolymorphicDispatcherField, "private PolymorphicDispatcher<Result3<EObject,EStructuralFeature,String>> typeDispatcher;");
   }
   
   @Test
   public void testEntryPointMethods() {
-    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
+    CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith3OutputParams);
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
     JudgmentDescription _get = _judgmentDescriptions.get(0);
     ArrayList<JvmOperation> _genEntryPointMethods = this.inferrer.genEntryPointMethods(_get);
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public Result2<EObject,EStructuralFeature> type(final EClass c) {");
+    _builder.append("public Result3<EObject,EStructuralFeature,String> type(final EClass c) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return type(new RuleEnvironment(), null, c);");
@@ -104,7 +104,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {");
+    _builder.append("public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final EClass c) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return type(_environment_, null, c);");
@@ -115,7 +115,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {");
+    _builder.append("public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("try {");
@@ -127,7 +127,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     _builder.append("} catch (Exception _e_type) {");
     _builder.newLine();
     _builder.append("    \t");
-    _builder.append("return resultForFailure2(_e_type);");
+    _builder.append("return resultForFailure3(_e_type);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");

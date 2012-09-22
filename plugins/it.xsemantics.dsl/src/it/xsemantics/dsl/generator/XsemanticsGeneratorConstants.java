@@ -17,6 +17,7 @@ public class XsemanticsGeneratorConstants {
 		resultGetMethods = new ArrayList<String>();
 		resultGetMethods.add("getFirst()");
 		resultGetMethods.add("getSecond()");
+		resultGetMethods.add("getThird()");
 	}
 
 	public static Iterable<String> getResultGetMethods() {

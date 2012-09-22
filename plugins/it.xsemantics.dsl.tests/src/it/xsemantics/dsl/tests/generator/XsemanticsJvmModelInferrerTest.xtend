@@ -53,34 +53,34 @@ class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
 	
 	@Test
 	def testPolymorphicDispatcherField() {
-		testFiles.testJudgmentDescriptionsWith2OutputParams.
+		testFiles.testJudgmentDescriptionsWith3OutputParams.
 			parseAndAssertNoError.judgmentDescriptions.get(0).
 				genPolymorphicDispatcherField.
 				assertGeneratedMember
-("private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;")
+("private PolymorphicDispatcher<Result3<EObject,EStructuralFeature,String>> typeDispatcher;")
 	}
 	
 	@Test
 	def testEntryPointMethods() {
-		testFiles.testJudgmentDescriptionsWith2OutputParams.
+		testFiles.testJudgmentDescriptionsWith3OutputParams.
 			parseAndAssertNoError.judgmentDescriptions.get(0).
 				genEntryPointMethods.
 				assertGeneratedMembers
 (
 '''
-public Result2<EObject,EStructuralFeature> type(final EClass c) {
+public Result3<EObject,EStructuralFeature,String> type(final EClass c) {
     return type(new RuleEnvironment(), null, c);
   }
   
-  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {
+  public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final EClass c) {
     return type(_environment_, null, c);
   }
   
-  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+  public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return typeInternal(_environment_, _trace_, c);
     } catch (Exception _e_type) {
-    	return resultForFailure2(_e_type);
+    	return resultForFailure3(_e_type);
     }
   }'''
 )

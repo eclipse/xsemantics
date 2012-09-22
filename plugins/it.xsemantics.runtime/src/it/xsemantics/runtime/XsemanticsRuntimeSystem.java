@@ -101,6 +101,24 @@ public class XsemanticsRuntimeSystem {
 		return dispatcher;
 	}
 
+	protected <FirstT, SecondT, ThirdT> PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>> buildPolymorphicDispatcher3(
+			String methodName, int numOfArgs, final String judgmentSymbol,
+			final String... relationSymbols) {
+		PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>> dispatcher = new PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>>(
+				Collections.singletonList(this), getPredicate(methodName,
+						numOfArgs)) {
+			@Override
+			protected Result3<FirstT, SecondT, ThirdT> handleNoSuchMethod(
+					Object... params) {
+				return org.eclipse.xtext.util.Exceptions
+						.throwUncheckedException(noSuchMethodException(
+								judgmentSymbol, Arrays.asList(relationSymbols),
+								params));
+			}
+		};
+		return dispatcher;
+	}
+
 	public boolean isResultAssignableTo(Object result, Class<?> destinationClass) {
 		return destinationClass.isAssignableFrom(result.getClass());
 	}
@@ -230,6 +248,11 @@ public class XsemanticsRuntimeSystem {
 	protected <FirstT, SecondT> Result2<FirstT, SecondT> resultForFailure2(
 			Exception e) {
 		return new Result2<FirstT, SecondT>(extractRuleFailedException(e));
+	}
+
+	protected <FirstT, SecondT, ThirdT> Result3<FirstT, SecondT, ThirdT> resultForFailure3(
+			Exception e) {
+		return new Result3<FirstT, SecondT, ThirdT>(extractRuleFailedException(e));
 	}
 
 	protected String failed(String message) {

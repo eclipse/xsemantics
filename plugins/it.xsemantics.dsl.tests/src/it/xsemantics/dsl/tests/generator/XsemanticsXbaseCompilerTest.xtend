@@ -163,6 +163,24 @@ feat = (EStructuralFeature) result.getSecond();
 '''
 			)
 	}
+
+	@Test
+	def void testRuleInvokingAnotherRuleWithThreeOutputParams() {
+		checkCompilationOfPremises(
+			testFiles.testRuleWith3OutputParams,
+'''
+
+/* G |- eClass : object : feat : s */
+Result3<EObject,EStructuralFeature,String> result = typeInternal(G, _trace_, eClass);
+checkAssignableTo(result.getFirst(), EObject.class);
+object = (EObject) result.getFirst();
+checkAssignableTo(result.getSecond(), EStructuralFeature.class);
+feat = (EStructuralFeature) result.getSecond();
+checkAssignableTo(result.getThird(), String.class);
+s = (String) result.getThird();
+'''
+			)
+	}
 	
 	@Test
 	def void testRuleWithOutputParamAsLocalVariable() {

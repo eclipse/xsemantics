@@ -57,9 +57,9 @@ judgments {
 }
 ]
 
-A judgment can have at least one input parameter, and at most two output
+A judgment can have at least one input parameter, and at most three output
 parameters (the latter limitation does not seem to have an impact, since
-it is rare to want more than two ouput parameters, but of course, it is
+it is rare to want more than three ouput parameters, but of course, it is
 easy to remove this limitation in case).
 
 Once you declared the judgments of your system, you can start declaring the rules.
@@ -612,7 +612,9 @@ the rule failures (also already formatted as an indented string).
 In case the judgment has two output parameters, the class
 codeRef[it.xsemantics.runtime.Result2] will be used which acts as a pair
 (thus the two values can be obtained with methods code[getFirst()] and
-code[getSecond()], respectively).
+code[getSecond()], respectively); similarly for three output
+parameters, codeRef[it.xsemantics.runtime.Result3] (with the
+additional method code[getThird()]).
 
 If the judgment has no output parameter, the type of the result will
 be codeRef[java.lang.Boolean], i.e., code[Result<Boolean>].

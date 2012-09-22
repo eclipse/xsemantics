@@ -174,7 +174,19 @@ class XsemanticsTestFiles {
 	import org.eclipse.emf.ecore.*
 	
 	judgments {
-		type |- EClass c : output EObject : output EStructuralFeature : output String
+		type |- EClass c : output EObject : 
+			output EStructuralFeature : output String
+	}
+	'''
+
+	def testJudgmentDescriptionsWith4OutputParams() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	import org.eclipse.emf.common.notify.*
+	
+	judgments {
+		type |- EClass c : output EObject : 
+			output EStructuralFeature : output String : output Notifier
 	}
 	'''
 	
@@ -214,6 +226,17 @@ class XsemanticsTestFiles {
 		G ||- EClass eClass : EObject object : EStructuralFeature feat
 	from {
 		G ||- eClass : object : feat
+	}
+	'''
+
+	def testRuleWith3OutputParams() '''
+	«testJudgmentDescriptionsWith3OutputParams»
+	
+	rule EClassEObjectEStructuralFeatureString derives
+		G |- EClass eClass : EObject object : 
+			EStructuralFeature feat : String s
+	from {
+		G |- eClass : object : feat : s
 	}
 	'''
 	

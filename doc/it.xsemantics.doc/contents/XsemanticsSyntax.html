@@ -96,9 +96,9 @@ classes from EMF Ecore, and other Java classes
 </div>
 </p>
 <p>
-A judgment can have at least one input parameter, and at most two output
+A judgment can have at least one input parameter, and at most three output
 parameters (the latter limitation does not seem to have an impact, since
-it is rare to want more than two ouput parameters, but of course, it is
+it is rare to want more than three ouput parameters, but of course, it is
 easy to remove this limitation in case).
 </p>
 <p>
@@ -853,7 +853,9 @@ the rule failures (also already formatted as an indented string).
 In case the judgment has two output parameters, the class
 <abbr title="it.xsemantics.runtime.Result2" >Result2</abbr> will be used which acts as a pair
 (thus the two values can be obtained with methods <span class="inlinecode">getFirst()</span> and
-<span class="inlinecode">getSecond()</span>, respectively).
+<span class="inlinecode">getSecond()</span>, respectively); similarly for three output
+parameters, <abbr title="it.xsemantics.runtime.Result3" >Result3</abbr> (with the
+additional method <span class="inlinecode">getThird()</span>).
 </p>
 <p>
 If the judgment has no output parameter, the type of the result will

@@ -264,6 +264,30 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   }
   
   @Test
+  public void testRuleInvokingAnotherRuleWithThreeOutputParams() {
+    CharSequence _testRuleWith3OutputParams = this.testFiles.testRuleWith3OutputParams();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("/* G |- eClass : object : feat : s */");
+    _builder.newLine();
+    _builder.append("Result3<EObject,EStructuralFeature,String> result = typeInternal(G, _trace_, eClass);");
+    _builder.newLine();
+    _builder.append("checkAssignableTo(result.getFirst(), EObject.class);");
+    _builder.newLine();
+    _builder.append("object = (EObject) result.getFirst();");
+    _builder.newLine();
+    _builder.append("checkAssignableTo(result.getSecond(), EStructuralFeature.class);");
+    _builder.newLine();
+    _builder.append("feat = (EStructuralFeature) result.getSecond();");
+    _builder.newLine();
+    _builder.append("checkAssignableTo(result.getThird(), String.class);");
+    _builder.newLine();
+    _builder.append("s = (String) result.getThird();");
+    _builder.newLine();
+    this.checkCompilationOfPremises(_testRuleWith3OutputParams, _builder);
+  }
+  
+  @Test
   public void testRuleWithOutputParamAsLocalVariable() {
     CharSequence _testRuleWithOutputArgAsLocalVariable = this.testFiles.testRuleWithOutputArgAsLocalVariable();
     StringConcatenation _builder = new StringConcatenation();

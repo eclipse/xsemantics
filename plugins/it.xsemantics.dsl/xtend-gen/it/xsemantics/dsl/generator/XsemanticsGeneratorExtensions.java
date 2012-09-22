@@ -25,6 +25,7 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.Result3;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -844,9 +845,22 @@ public class XsemanticsGeneratorExtensions {
           JvmTypeReference _resultT_1 = resultT = _newTypeRef_1;
           _xifexpression_1 = _resultT_1;
         } else {
-          JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, Result.class);
-          JvmTypeReference _resultT_2 = resultT = _newTypeRef_2;
-          _xifexpression_1 = _resultT_2;
+          JvmTypeReference _xifexpression_2 = null;
+          int _size_2 = resultTypeArguments.size();
+          boolean _equals_2 = (_size_2 == 3);
+          if (_equals_2) {
+            JvmTypeReference _get_3 = resultTypeArguments.get(0);
+            JvmTypeReference _get_4 = resultTypeArguments.get(1);
+            JvmTypeReference _get_5 = resultTypeArguments.get(2);
+            JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, Result3.class, _get_3, _get_4, _get_5);
+            JvmTypeReference _resultT_2 = resultT = _newTypeRef_2;
+            _xifexpression_2 = _resultT_2;
+          } else {
+            JvmTypeReference _newTypeRef_3 = this._jvmTypesBuilder.newTypeRef(e, Result.class);
+            JvmTypeReference _resultT_3 = resultT = _newTypeRef_3;
+            _xifexpression_2 = _resultT_3;
+          }
+          _xifexpression_1 = _xifexpression_2;
         }
         _xifexpression = _xifexpression_1;
       }

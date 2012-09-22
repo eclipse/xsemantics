@@ -59,7 +59,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Inject
 	protected XsemanticsNodeModelUtils nodeModelUtils;
 
-	public final static int maxOfOutputParams = 2;
+	public final static int maxOfOutputParams = 3;
 
 	protected boolean enableWarnings = true;
 

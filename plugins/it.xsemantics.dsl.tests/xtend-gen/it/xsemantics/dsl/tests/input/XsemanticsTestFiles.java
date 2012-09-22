@@ -358,7 +358,33 @@ public class XsemanticsTestFiles {
     _builder.append("judgments {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("type |- EClass c : output EObject : output EStructuralFeature : output String");
+    _builder.append("type |- EClass c : output EObject : ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("output EStructuralFeature : output String");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testJudgmentDescriptionsWith4OutputParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.common.notify.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EClass c : output EObject : ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("output EStructuralFeature : output String : output Notifier");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -440,6 +466,30 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("G ||- eClass : object : feat");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleWith3OutputParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testJudgmentDescriptionsWith3OutputParams();
+    _builder.append(_testJudgmentDescriptionsWith3OutputParams, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObjectEStructuralFeatureString derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object : ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("EStructuralFeature feat : String s");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- eClass : object : feat : s");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

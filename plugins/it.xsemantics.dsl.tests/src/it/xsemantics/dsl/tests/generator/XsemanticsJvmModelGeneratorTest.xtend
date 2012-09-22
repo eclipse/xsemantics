@@ -348,6 +348,103 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	}
 
 	@Test
+	def testRuleWith3OutputParams() {
+		testFiles.testRuleWith3OutputParams.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result3;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ECLASSEOBJECTESTRUCTURALFEATURESTRING = "it.xsemantics.test.rules.EClassEObjectEStructuralFeatureString";
+  
+  private PolymorphicDispatcher<Result3<EObject,EStructuralFeature,String>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher3(
+    	"typeImpl", 3, "|-", ":", ":", ":");
+  }
+  
+  public Result3<EObject,EStructuralFeature,String> type(final EClass c) {
+    return type(new RuleEnvironment(), null, c);
+  }
+  
+  public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final EClass c) {
+    return type(_environment_, null, c);
+  }
+  
+  public Result3<EObject,EStructuralFeature,String> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    try {
+    	return typeInternal(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	return resultForFailure3(_e_type);
+    }
+  }
+  
+  protected Result3<EObject,EStructuralFeature,String> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    try {
+    	checkParamsNotNull(c);
+    	return typeDispatcher.invoke(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result3<EObject,EStructuralFeature,String> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result3<EObject,EStructuralFeature,String> _result_ = applyRuleEClassEObjectEStructuralFeatureString(G, _subtrace_, eClass);
+      addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " : " + stringRep(_result_.getThird()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEClassEObjectEStructuralFeatureString) {
+      typeThrowException(ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature" + " : " + "String",
+      	ECLASSEOBJECTESTRUCTURALFEATURESTRING,
+      	e_applyRuleEClassEObjectEStructuralFeatureString, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
+      return null;
+    }
+  }
+  
+  protected Result3<EObject,EStructuralFeature,String> applyRuleEClassEObjectEStructuralFeatureString(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
+    EObject object = null; // output parameter
+    EStructuralFeature feat = null; // output parameter
+    String s = null; // output parameter
+    
+    /* G |- eClass : object : feat : s */
+    Result3<EObject,EStructuralFeature,String> result = typeInternal(G, _trace_, eClass);
+    checkAssignableTo(result.getFirst(), EObject.class);
+    object = (EObject) result.getFirst();
+    checkAssignableTo(result.getSecond(), EStructuralFeature.class);
+    feat = (EStructuralFeature) result.getSecond();
+    checkAssignableTo(result.getThird(), String.class);
+    s = (String) result.getThird();
+    
+    return new Result3<EObject,EStructuralFeature,String>(object, feat, s);
+  }
+}
+'''
+		)
+	}
+
+	@Test
 	def testRuleInvocationWithVariableDeclarationAsOutputParameter() {
 		testFiles.testDuplicateVariableDeclarationAsOutputArgument.assertCorrectJavaCodeGeneration(
 '''

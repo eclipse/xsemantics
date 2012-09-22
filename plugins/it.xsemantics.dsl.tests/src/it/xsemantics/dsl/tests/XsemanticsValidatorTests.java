@@ -294,12 +294,12 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testMoreThan2OutputParams() throws Exception {
+	public void testMoreThan3OutputParams() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testJudgmentDescriptionsWith3OutputParams());
+				.testJudgmentDescriptionsWith4OutputParams());
 		validate.assertAll(AssertableDiagnostics.error(
 				IssueCodes.TOO_MANY_OUTPUT_PARAMS,
-				"No more than 2 output parameters are handled at the moment"));
+				"No more than 3 output parameters are handled at the moment"));
 	}
 
 	@Test

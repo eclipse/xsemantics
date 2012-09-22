@@ -108,7 +108,15 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testSuffixStartingFrom2WithTwoOutputs() {
+	def void testSuffixStartingFrom2With3Outputs() {
+		Assert::assertEquals("3",
+				testFiles.testJudgmentDescriptionsWith3OutputParams.
+				parseAndAssertNoError.getJudgmentDescriptions.get(0).
+				suffixStartingFrom2)
+	}
+
+	@Test
+	def void testSuffixStartingFrom2With2Outputs() {
 		Assert::assertEquals("2",
 				testFiles.testJudgmentDescriptionsWith2OutputParams.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
@@ -116,7 +124,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 	
 	@Test
-	def void testSuffixStartingFrom2WithOneOutput() {
+	def void testSuffixStartingFrom2With1Output() {
 		Assert::assertEquals("",
 				testFiles.testJudgmentDescriptionsEObjectEClass.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
@@ -204,9 +212,15 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	}
 
 	@Test
-	def void testResultTypeWithTwoOutputParameters() {
+	def void testResultTypeWith2OutputParameters() {
 		testFiles.testJudgmentDescriptionsWith2OutputParams.
 			assertResultType("Result2<EObject,EStructuralFeature>")
+	}
+
+	@Test
+	def void testResultTypeWith3OutputParameters() {
+		testFiles.testJudgmentDescriptionsWith3OutputParams.
+			assertResultType("Result3<EObject,EStructuralFeature,String>")
 	}
 
 	@Test

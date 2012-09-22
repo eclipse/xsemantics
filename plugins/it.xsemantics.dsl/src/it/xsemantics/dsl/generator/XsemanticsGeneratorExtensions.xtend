@@ -25,6 +25,7 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import com.google.common.collect.Lists
+import it.xsemantics.runtime.Result3
 
 class XsemanticsGeneratorExtensions {
 	
@@ -361,6 +362,12 @@ class XsemanticsGeneratorExtensions {
 		else if (resultTypeArguments.size == 2)
 			resultT = e.newTypeRef(typeof(Result2),
 				resultTypeArguments.get(0), resultTypeArguments.get(1)
+			)
+		else if (resultTypeArguments.size == 3)
+			resultT = e.newTypeRef(typeof(Result3),
+				resultTypeArguments.get(0),
+				resultTypeArguments.get(1),
+				resultTypeArguments.get(2)
 			)
 		else // safe default
 			resultT = e.newTypeRef(typeof(Result)) 

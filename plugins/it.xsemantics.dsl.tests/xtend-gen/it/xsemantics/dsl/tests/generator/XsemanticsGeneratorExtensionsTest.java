@@ -148,7 +148,17 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testSuffixStartingFrom2WithTwoOutputs() {
+  public void testSuffixStartingFrom2With3Outputs() {
+    CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
+    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith3OutputParams);
+    EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
+    JudgmentDescription _get = _judgmentDescriptions.get(0);
+    String _suffixStartingFrom2 = this._xsemanticsGeneratorExtensions.suffixStartingFrom2(_get);
+    Assert.assertEquals("3", _suffixStartingFrom2);
+  }
+  
+  @Test
+  public void testSuffixStartingFrom2With2Outputs() {
     CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
@@ -158,7 +168,7 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testSuffixStartingFrom2WithOneOutput() {
+  public void testSuffixStartingFrom2With1Output() {
     CharSequence _testJudgmentDescriptionsEObjectEClass = this.testFiles.testJudgmentDescriptionsEObjectEClass();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsEObjectEClass);
     EList<JudgmentDescription> _judgmentDescriptions = _parseAndAssertNoError.getJudgmentDescriptions();
@@ -274,9 +284,15 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
   }
   
   @Test
-  public void testResultTypeWithTwoOutputParameters() {
+  public void testResultTypeWith2OutputParameters() {
     CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
     this.assertResultType(_testJudgmentDescriptionsWith2OutputParams, "Result2<EObject,EStructuralFeature>");
+  }
+  
+  @Test
+  public void testResultTypeWith3OutputParameters() {
+    CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
+    this.assertResultType(_testJudgmentDescriptionsWith3OutputParams, "Result3<EObject,EStructuralFeature,String>");
   }
   
   @Test
