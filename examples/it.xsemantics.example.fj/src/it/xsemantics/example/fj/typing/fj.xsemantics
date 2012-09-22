@@ -42,6 +42,7 @@ judgments {
 		error "invalid arguments for expected parameters"
 		source owner
 	reduce |- Expression exp ~> output Expression
+	subjred |= Expression exp ~> output Expression : output Type
 }
 
 axiom TThis
@@ -292,6 +293,15 @@ from {
 		cast.expression = expi
 		exp1 = cast
 	}
+}
+
+rule SubjRed
+	G |= Expression e ~> Expression e1 : Type T1
+from {
+	G |- e : var Type T
+	G |- e ~> e1
+	G |- e1 : T1
+	G |- T1 <: T
 }
 
 // checkrules (for the generated validator)

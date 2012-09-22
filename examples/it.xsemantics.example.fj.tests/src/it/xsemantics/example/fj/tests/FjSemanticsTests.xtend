@@ -403,7 +403,7 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 	}
 
 	@Test
-	def void testSubjectReductionCast() {
+	def void testSubjectReductionManualCast() {
 		'''
 		class A {
 			int i;
@@ -412,7 +412,7 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 		class B extends A { }
 		
 		(A) new B(10)
-		'''.assertSubjectReduction(
+		'''.assertSubjectReductionManual(
 '''
 WELLTYPED MAIN
 TCast: [] |- (A) new B(10) : A
@@ -443,7 +443,7 @@ ClassSubtyping: [] |- B <: A'''
 	}
 
 	@Test
-	def void testSubjectReductionMethodSelection() {
+	def void testSubjectReductionManualMethodSelection() {
 		'''
 		class A {
 			A m() { return this; }
@@ -454,7 +454,7 @@ ClassSubtyping: [] |- B <: A'''
 		}
 		
 		new B().m()
-		'''.assertSubjectReduction(
+		'''.assertSubjectReductionManual(
 '''WELLTYPED MAIN
 TSelection: [] |- new B().m() : A
  TNew: [] |- new B() : B
@@ -467,6 +467,60 @@ TNew: [] |- new B() : B
  SubtypeSequence: [] |- new B() ~> [] << []
 SUBTYPE AFTER REDUCTION
 ClassSubtyping: [] |- B <: A'''
+)
+	}
+
+	@Test
+	def void testSubjectReductionMethodSelection() {
+		'''
+		class A {
+			A m() { return this; }
+		}
+		
+		class B extends A{
+			
+		}
+		
+		new B().m()
+		'''.assertSubjectReduction(
+'''SubjRed: [] |= new B().m() ~> new B() : B
+ TSelection: [] |- new B().m() : A
+  TNew: [] |- new B() : B
+   SubtypeSequence: [] |- new B() ~> [] << []
+  SubtypeSequence: [] |- new B().m() ~> [] << []
+ RSelection: [] |- new B().m() ~> new B()
+ TNew: [] |- new B() : B
+  SubtypeSequence: [] |- new B() ~> [] << []
+ ClassSubtyping: [] |- B <: A'''
+)
+	}
+
+	@Test
+	def void testSubjectReductionMethodSelection2() {
+		'''
+		class Object {}
+		class A { 
+			Object m() { return this.n(new B()); } 
+			A n(A o) { return new A(); } 
+		}
+		class B extends A {}
+		new A().m()
+		'''.assertSubjectReduction(
+'''SubjRed: [] |= new A().m() ~> new A().n(new B()) : A
+ TSelection: [] |- new A().m() : Object
+  TNew: [] |- new A() : A
+   SubtypeSequence: [] |- new A() ~> [] << []
+  SubtypeSequence: [] |- new A().m() ~> [] << []
+ RSelection: [] |- new A().m() ~> new A().n(new B())
+ TSelection: [] |- new A().n(new B()) : A
+  TNew: [] |- new A() : A
+   SubtypeSequence: [] |- new A() ~> [] << []
+  SubtypeSequence: [] |- new A().n(new B()) ~> [new B()] << [A o]
+   ExpressionAssignableToType: [] |- new B() <| A
+    TNew: [] |- new B() : B
+     SubtypeSequence: [] |- new B() ~> [] << []
+    ClassSubtyping: [] |- B <: A
+ ClassSubtyping: [] |- A <: Object'''
 )
 	}
 
@@ -592,7 +646,7 @@ ClassSubtyping: [] |- B <: A'''
 		)
 	}
 
-	def private assertSubjectReduction(CharSequence prog, CharSequence expectedTrace) {
+	def private assertSubjectReductionManual(CharSequence prog, CharSequence expectedTrace) {
 		val p = prog.parseAndAssertNoError
 		val m = p.main
 		
@@ -615,6 +669,18 @@ ClassSubtyping: [] |- B <: A'''
 			(null, trace, reducedType.value, mainType.value)
 		isSubtype.assertResult
 		
+		Assert::assertEquals(expectedTrace.toString, 
+			traceUtils.traceAsString(trace)
+		)
+	}
+
+	def private assertSubjectReduction(CharSequence prog, CharSequence expectedTrace) {
+		val p = prog.parseAndAssertNoError
+		val m = p.main
+		
+		val result = fjSystem.subjred(null, trace, m)
+		result.assertResult
+	
 		Assert::assertEquals(expectedTrace.toString, 
 			traceUtils.traceAsString(trace)
 		)

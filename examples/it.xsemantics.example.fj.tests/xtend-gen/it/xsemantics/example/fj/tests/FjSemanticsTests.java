@@ -16,6 +16,7 @@ import it.xsemantics.example.fj.typing.FjTypeSystem;
 import it.xsemantics.example.fj.util.FjSemanticsUtils;
 import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import org.eclipse.emf.common.util.EList;
@@ -685,7 +686,7 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   @Test
-  public void testSubjectReductionCast() {
+  public void testSubjectReductionManualCast() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -767,11 +768,11 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("SUBTYPE AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- B <: A");
-    this.assertSubjectReduction(_builder, _builder_1);
+    this.assertSubjectReductionManual(_builder, _builder_1);
   }
   
   @Test
-  public void testSubjectReductionMethodSelection() {
+  public void testSubjectReductionManualMethodSelection() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -818,6 +819,121 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("SUBTYPE AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    this.assertSubjectReductionManual(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSubjectReductionMethodSelection() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("A m() { return this; }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("new B().m()");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("SubjRed: [] |= new B().m() ~> new B() : B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TSelection: [] |- new B().m() : A");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("TNew: [] |- new B() : B");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("SubtypeSequence: [] |- new B().m() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("RSelection: [] |- new B().m() ~> new B()");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TNew: [] |- new B() : B");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("ClassSubtyping: [] |- B <: A");
+    this.assertSubjectReduction(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSubjectReductionMethodSelection2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Object {}");
+    _builder.newLine();
+    _builder.append("class A { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Object m() { return this.n(new B()); } ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("A n(A o) { return new A(); } ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {}");
+    _builder.newLine();
+    _builder.append("new A().m()");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("SubjRed: [] |= new A().m() ~> new A().n(new B()) : A");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TSelection: [] |- new A().m() : Object");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("TNew: [] |- new A() : A");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("SubtypeSequence: [] |- new A() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("SubtypeSequence: [] |- new A().m() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("RSelection: [] |- new A().m() ~> new A().n(new B())");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("TSelection: [] |- new A().n(new B()) : A");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("TNew: [] |- new A() : A");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("SubtypeSequence: [] |- new A() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("SubtypeSequence: [] |- new A().n(new B()) ~> [new B()] << [A o]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("ExpressionAssignableToType: [] |- new B() <| A");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("TNew: [] |- new B() : B");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("ClassSubtyping: [] |- A <: Object");
     this.assertSubjectReduction(_builder, _builder_1);
   }
   
@@ -1009,7 +1125,7 @@ public class FjSemanticsTests extends FjBaseTests {
     Assert.assertEquals(_string, _traceAsString);
   }
   
-  private void assertSubjectReduction(final CharSequence prog, final CharSequence expectedTrace) {
+  private void assertSubjectReductionManual(final CharSequence prog, final CharSequence expectedTrace) {
     final Program p = this.parseAndAssertNoError(prog);
     final Expression m = p.getMain();
     this.trace.addToTrace("WELLTYPED MAIN");
@@ -1026,6 +1142,16 @@ public class FjSemanticsTests extends FjBaseTests {
     Type _value_2 = mainType.getValue();
     final Result<Boolean> isSubtype = this.fjSystem.subtype(null, this.trace, _value_1, _value_2);
     this.<Boolean>assertResult(isSubtype);
+    String _string = expectedTrace.toString();
+    String _traceAsString = this.traceUtils.traceAsString(this.trace);
+    Assert.assertEquals(_string, _traceAsString);
+  }
+  
+  private void assertSubjectReduction(final CharSequence prog, final CharSequence expectedTrace) {
+    final Program p = this.parseAndAssertNoError(prog);
+    final Expression m = p.getMain();
+    final Result2<Expression,Type> result = this.fjSystem.subjred(null, this.trace, m);
+    this.<Expression>assertResult(result);
     String _string = expectedTrace.toString();
     String _traceAsString = this.traceUtils.traceAsString(this.trace);
     Assert.assertEquals(_string, _traceAsString);

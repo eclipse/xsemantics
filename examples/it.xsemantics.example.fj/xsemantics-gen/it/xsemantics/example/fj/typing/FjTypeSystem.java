@@ -30,6 +30,7 @@ import it.xsemantics.example.fj.util.FjSemanticsUtils;
 import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
@@ -93,6 +94,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String RCAST = "it.xsemantics.example.fj.typing.rules.RCast";
   
+  public final static String SUBJRED = "it.xsemantics.example.fj.typing.rules.SubjRed";
+  
   @Inject
   private FjAuxiliaryFunctions fjAux;
   
@@ -115,6 +118,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<Expression>> reduceDispatcher;
   
+  private PolymorphicDispatcher<Result2<Expression,Type>> subjredDispatcher;
+  
   public FjTypeSystem() {
     init();
   }
@@ -136,6 +141,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	"subtypesequenceImpl", 5, "|-", "~>", "<<");
     reduceDispatcher = buildPolymorphicDispatcher1(
     	"reduceImpl", 3, "|-", "~>");
+    subjredDispatcher = buildPolymorphicDispatcher2(
+    	"subjredImpl", 3, "|=", "~>", ":");
   }
   
   public FjAuxiliaryFunctions getFjAux() {
@@ -279,6 +286,22 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	return reduceInternal(_environment_, _trace_, exp);
     } catch (Exception _e_reduce) {
     	return resultForFailure(_e_reduce);
+    }
+  }
+  
+  public Result2<Expression,Type> subjred(final Expression exp) {
+    return subjred(new RuleEnvironment(), null, exp);
+  }
+  
+  public Result2<Expression,Type> subjred(final RuleEnvironment _environment_, final Expression exp) {
+    return subjred(_environment_, null, exp);
+  }
+  
+  public Result2<Expression,Type> subjred(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
+    try {
+    	return subjredInternal(_environment_, _trace_, exp);
+    } catch (Exception _e_subjred) {
+    	return resultForFailure2(_e_subjred);
     }
   }
   
@@ -630,6 +653,20 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void reduceThrowException(final String _error, final String _issue, final Exception _ex, final Expression exp, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result2<Expression,Type> subjredInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
+    try {
+    	checkParamsNotNull(exp);
+    	return subjredDispatcher.invoke(_environment_, _trace_, exp);
+    } catch (Exception _e_subjred) {
+    	sneakyThrowRuleFailedException(_e_subjred);
+    	return null;
+    }
+  }
+  
+  protected void subjredThrowException(final String _error, final String _issue, final Exception _ex, final Expression exp, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
@@ -1479,5 +1516,47 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       }
     }
     return new Result<Expression>(exp1);
+  }
+  
+  protected Result2<Expression,Type> subjredImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result2<Expression,Type> _result_ = applyRuleSubjRed(G, _subtrace_, e);
+      addToTrace(_trace_, ruleName("SubjRed") + stringRepForEnv(G) + " |= " + stringRep(e) + " ~> " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleSubjRed) {
+      subjredThrowException(ruleName("SubjRed") + stringRepForEnv(G) + " |= " + stringRep(e) + " ~> " + "Expression" + " : " + "Type",
+      	SUBJRED,
+      	e_applyRuleSubjRed, e, new ErrorInformation[] {new ErrorInformation(e)});
+      return null;
+    }
+  }
+  
+  protected Result2<Expression,Type> applyRuleSubjRed(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
+    Expression e1 = null; // output parameter
+    Type T1 = null; // output parameter
+    
+    {
+      /* G |- e : var Type T */
+      Type T = null;
+      Result<Type> result = typeInternal(G, _trace_, e);
+      checkAssignableTo(result.getFirst(), Type.class);
+      T = (Type) result.getFirst();
+      
+      /* G |- e ~> e1 */
+      Result<Expression> result_1 = reduceInternal(G, _trace_, e);
+      checkAssignableTo(result_1.getFirst(), Expression.class);
+      e1 = (Expression) result_1.getFirst();
+      
+      /* G |- e1 : T1 */
+      Result<Type> result_2 = typeInternal(G, _trace_, e1);
+      checkAssignableTo(result_2.getFirst(), Type.class);
+      T1 = (Type) result_2.getFirst();
+      
+      /* G |- T1 <: T */
+      subtypeInternal(G, _trace_, T1, T);
+    }
+    return new Result2<Expression,Type>(e1, T1);
   }
 }
