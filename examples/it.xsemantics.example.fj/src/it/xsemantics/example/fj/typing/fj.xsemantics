@@ -42,7 +42,7 @@ judgments {
 		error "invalid arguments for expected parameters"
 		source owner
 	reduce |- Expression exp ~> output Expression
-	subjred |= Expression exp ~> output Expression : output Type
+	subjred |= Expression exp ~> output Expression : output Type <: output Type
 }
 
 axiom TThis
@@ -296,9 +296,9 @@ from {
 }
 
 rule SubjRed
-	G |= Expression e ~> Expression e1 : Type T1
+	G |= Expression e ~> Expression e1 : Type T1 <: Type T
 from {
-	G |- e : var Type T
+	G |- e : T
 	G |- e ~> e1
 	G |- e1 : T1
 	G |- T1 <: T

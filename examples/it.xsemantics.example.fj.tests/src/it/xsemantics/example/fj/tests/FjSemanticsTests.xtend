@@ -483,7 +483,7 @@ ClassSubtyping: [] |- B <: A'''
 		
 		new B().m()
 		'''.assertSubjectReduction(
-'''SubjRed: [] |= new B().m() ~> new B() : B
+'''SubjRed: [] |= new B().m() ~> new B() : B <: A
  TSelection: [] |- new B().m() : A
   TNew: [] |- new B() : B
    SubtypeSequence: [] |- new B() ~> [] << []
@@ -506,7 +506,7 @@ ClassSubtyping: [] |- B <: A'''
 		class B extends A {}
 		new A().m()
 		'''.assertSubjectReduction(
-'''SubjRed: [] |= new A().m() ~> new A().n(new B()) : A
+'''SubjRed: [] |= new A().m() ~> new A().n(new B()) : A <: Object
  TSelection: [] |- new A().m() : Object
   TNew: [] |- new A() : A
    SubtypeSequence: [] |- new A() ~> [] << []

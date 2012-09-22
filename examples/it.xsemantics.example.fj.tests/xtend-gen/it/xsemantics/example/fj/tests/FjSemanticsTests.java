@@ -16,7 +16,7 @@ import it.xsemantics.example.fj.typing.FjTypeSystem;
 import it.xsemantics.example.fj.util.FjSemanticsUtils;
 import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.Result;
-import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.Result3;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import org.eclipse.emf.common.util.EList;
@@ -843,7 +843,7 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder.append("new B().m()");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("SubjRed: [] |= new B().m() ~> new B() : B");
+    _builder_1.append("SubjRed: [] |= new B().m() ~> new B() : B <: A");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("TSelection: [] |- new B().m() : A");
@@ -891,7 +891,7 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder.append("new A().m()");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("SubjRed: [] |= new A().m() ~> new A().n(new B()) : A");
+    _builder_1.append("SubjRed: [] |= new A().m() ~> new A().n(new B()) : A <: Object");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("TSelection: [] |- new A().m() : Object");
@@ -1150,7 +1150,7 @@ public class FjSemanticsTests extends FjBaseTests {
   private void assertSubjectReduction(final CharSequence prog, final CharSequence expectedTrace) {
     final Program p = this.parseAndAssertNoError(prog);
     final Expression m = p.getMain();
-    final Result2<Expression,Type> result = this.fjSystem.subjred(null, this.trace, m);
+    final Result3<Expression,Type,Type> result = this.fjSystem.subjred(null, this.trace, m);
     this.<Expression>assertResult(result);
     String _string = expectedTrace.toString();
     String _traceAsString = this.traceUtils.traceAsString(this.trace);
