@@ -126,7 +126,7 @@ public class XsemanticsUtils {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
           String _judgmentSymbol = it.getJudgmentSymbol();
-          boolean _equals = _judgmentSymbol.equals(judgmentSymbol);
+          boolean _equals = _judgmentSymbol==null?false:_judgmentSymbol.equals(judgmentSymbol);
           if (!_equals) {
             _and = false;
           } else {
@@ -386,12 +386,20 @@ public class XsemanticsUtils {
     List<RuleParameter> _xblockexpression = null;
     {
       final JudgmentDescription judgmentDescription = this.judgmentDescription(rule);
+      boolean _or = false;
       boolean _equals = Objects.equal(judgmentDescription, null);
       if (_equals) {
+        _or = true;
+      } else {
+        EList<JudgmentParameter> _judgmentParameters = judgmentDescription.getJudgmentParameters();
+        boolean _isEmpty = _judgmentParameters.isEmpty();
+        _or = (_equals || _isEmpty);
+      }
+      if (_or) {
         return Lists.<RuleParameter>newArrayList();
       }
-      EList<JudgmentParameter> _judgmentParameters = judgmentDescription.getJudgmentParameters();
-      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
+      EList<JudgmentParameter> _judgmentParameters_1 = judgmentDescription.getJudgmentParameters();
+      final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters_1.iterator();
       RuleConclusion _conclusion = rule.getConclusion();
       EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
       final Function1<RuleConclusionElement,Boolean> _function = new Function1<RuleConclusionElement,Boolean>() {

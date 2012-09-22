@@ -88,7 +88,7 @@ class XsemanticsUtils {
 
 	def filterJudgmentDescriptions(Iterable<JudgmentDescription> desc, String judgmentSymbol, Iterable<String> relationSymbols) {
 		desc.filter
-			[ it.judgmentSymbol.equals(judgmentSymbol) && 
+			[ it.judgmentSymbol?.equals(judgmentSymbol) && 
 				it.relationSymbols.elementsEqual(relationSymbols) ]
 	}
 	
@@ -219,9 +219,9 @@ class XsemanticsUtils {
 	
 	def List<RuleParameter> outputParams(Rule rule) {
 		val judgmentDescription = rule.judgmentDescription
-		if (judgmentDescription == null)
+		if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
 			return Lists::newArrayList
-		val judgmentParameters = judgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = judgmentDescription.judgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
 			rule.conclusion.conclusionElements.filter(

@@ -24,6 +24,7 @@ import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import com.google.common.collect.Lists
 
 class XsemanticsGeneratorExtensions {
 	
@@ -357,10 +358,12 @@ class XsemanticsGeneratorExtensions {
 		var JvmTypeReference resultT
 		if (resultTypeArguments.size == 1)
 			resultT = e.newTypeRef(typeof(Result), resultTypeArguments.get(0)) 
-		else
+		else if (resultTypeArguments.size == 2)
 			resultT = e.newTypeRef(typeof(Result2),
 				resultTypeArguments.get(0), resultTypeArguments.get(1)
 			)
+		else // safe default
+			resultT = e.newTypeRef(typeof(Result)) 
 	}
 
 	def resultType(AuxiliaryDescription e) {
@@ -372,7 +375,9 @@ class XsemanticsGeneratorExtensions {
 		if (outputParams.size == 0) {
 			<JvmTypeReference>newArrayList(e.newTypeRef(typeof(Boolean)))
 		} else {
-			outputParams.map [ it.jvmTypeReference ]
+			Lists::newArrayList(outputParams.
+				filter[it.jvmTypeReference != null && it.jvmTypeReference.type != null].
+				map [ it.jvmTypeReference ])
 		}
 	}
 	

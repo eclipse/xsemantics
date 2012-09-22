@@ -1,5 +1,7 @@
 package it.xsemantics.dsl.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
@@ -30,6 +32,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -820,7 +823,7 @@ public class XsemanticsGeneratorExtensions {
   public JvmTypeReference resultType(final JudgmentDescription e) {
     JvmTypeReference _xblockexpression = null;
     {
-      final List<JvmTypeReference> resultTypeArguments = this.resultJvmTypeReferences(e);
+      final ArrayList<JvmTypeReference> resultTypeArguments = this.resultJvmTypeReferences(e);
       JvmTypeReference resultT = null;
       JvmTypeReference _xifexpression = null;
       int _size = resultTypeArguments.size();
@@ -831,11 +834,21 @@ public class XsemanticsGeneratorExtensions {
         JvmTypeReference _resultT = resultT = _newTypeRef;
         _xifexpression = _resultT;
       } else {
-        JvmTypeReference _get_1 = resultTypeArguments.get(0);
-        JvmTypeReference _get_2 = resultTypeArguments.get(1);
-        JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result2.class, _get_1, _get_2);
-        JvmTypeReference _resultT_1 = resultT = _newTypeRef_1;
-        _xifexpression = _resultT_1;
+        JvmTypeReference _xifexpression_1 = null;
+        int _size_1 = resultTypeArguments.size();
+        boolean _equals_1 = (_size_1 == 2);
+        if (_equals_1) {
+          JvmTypeReference _get_1 = resultTypeArguments.get(0);
+          JvmTypeReference _get_2 = resultTypeArguments.get(1);
+          JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(e, Result2.class, _get_1, _get_2);
+          JvmTypeReference _resultT_1 = resultT = _newTypeRef_1;
+          _xifexpression_1 = _resultT_1;
+        } else {
+          JvmTypeReference _newTypeRef_2 = this._jvmTypesBuilder.newTypeRef(e, Result.class);
+          JvmTypeReference _resultT_2 = resultT = _newTypeRef_2;
+          _xifexpression_1 = _resultT_2;
+        }
+        _xifexpression = _xifexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -849,11 +862,11 @@ public class XsemanticsGeneratorExtensions {
     return _elvis;
   }
   
-  public List<JvmTypeReference> resultJvmTypeReferences(final JudgmentDescription e) {
-    List<JvmTypeReference> _xblockexpression = null;
+  public ArrayList<JvmTypeReference> resultJvmTypeReferences(final JudgmentDescription e) {
+    ArrayList<JvmTypeReference> _xblockexpression = null;
     {
       final List<OutputParameter> outputParams = this._xsemanticsUtils.outputJudgmentParameters(e);
-      List<JvmTypeReference> _xifexpression = null;
+      ArrayList<JvmTypeReference> _xifexpression = null;
       int _size = outputParams.size();
       boolean _equals = (_size == 0);
       if (_equals) {
@@ -861,14 +874,32 @@ public class XsemanticsGeneratorExtensions {
         ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_newTypeRef);
         _xifexpression = _newArrayList;
       } else {
-        final Function1<OutputParameter,JvmTypeReference> _function = new Function1<OutputParameter,JvmTypeReference>() {
+        final Function1<OutputParameter,Boolean> _function = new Function1<OutputParameter,Boolean>() {
+            public Boolean apply(final OutputParameter it) {
+              boolean _and = false;
+              JvmTypeReference _jvmTypeReference = it.getJvmTypeReference();
+              boolean _notEquals = (!Objects.equal(_jvmTypeReference, null));
+              if (!_notEquals) {
+                _and = false;
+              } else {
+                JvmTypeReference _jvmTypeReference_1 = it.getJvmTypeReference();
+                JvmType _type = _jvmTypeReference_1.getType();
+                boolean _notEquals_1 = (!Objects.equal(_type, null));
+                _and = (_notEquals && _notEquals_1);
+              }
+              return Boolean.valueOf(_and);
+            }
+          };
+        Iterable<OutputParameter> _filter = IterableExtensions.<OutputParameter>filter(outputParams, _function);
+        final Function1<OutputParameter,JvmTypeReference> _function_1 = new Function1<OutputParameter,JvmTypeReference>() {
             public JvmTypeReference apply(final OutputParameter it) {
               JvmTypeReference _jvmTypeReference = it.getJvmTypeReference();
               return _jvmTypeReference;
             }
           };
-        List<JvmTypeReference> _map = ListExtensions.<OutputParameter, JvmTypeReference>map(outputParams, _function);
-        _xifexpression = _map;
+        Iterable<JvmTypeReference> _map = IterableExtensions.<OutputParameter, JvmTypeReference>map(_filter, _function_1);
+        ArrayList<JvmTypeReference> _newArrayList_1 = Lists.<JvmTypeReference>newArrayList(_map);
+        _xifexpression = _newArrayList_1;
       }
       _xblockexpression = (_xifexpression);
     }
