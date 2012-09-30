@@ -56,7 +56,6 @@
       <import plugin="it.xsemantics.example.expressions.tests" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="it.xsemantics.example.lambda.tests" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.junit" version="4.8.2" match="greaterOrEqual"/>
-      <import plugin="org.slf4j.jcl"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.hamcrest.core"/>
       <import plugin="org.eclipse.core.resources" version="3.7.100" match="greaterOrEqual"/>
@@ -142,12 +141,9 @@
       <import plugin="org.eclipse.equinox.p2.ui" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.p2.core" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.p2.director" version="2.0.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.p2.artifact.repository" version="1.1.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.p2.metadata.repository" version="1.1.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.p2.operations" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.p2.repository" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.frameworkadmin" version="2.0.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.frameworkadmin.equinox" version="1.1.0" match="compatible"/>
       <import plugin="org.eclipse.pde.launching" version="3.6.0" match="compatible"/>
       <import plugin="org.eclipse.ui.console" version="3.5.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.simpleconfigurator" version="1.0.200" match="compatible"/>
@@ -180,7 +176,6 @@
       <import plugin="org.antlr.runtime" version="3.2.0" match="perfect"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.lib" version="2.3.0" match="greaterOrEqual"/>
-      <import plugin="com.google.guava" version="10.0.0" match="compatible"/>
       <import plugin="org.eclipse.xtext.xbase" version="2.3.0" match="compatible"/>
       <import plugin="org.eclipse.xtext.ui" version="2.3.0" match="compatible"/>
       <import plugin="org.eclipse.xtext.builder" version="2.3.0" match="compatible"/>
@@ -205,6 +200,11 @@
       <import plugin="org.eclipse.core.commands"/>
       <import plugin="org.eclipse.core.jobs"/>
       <import plugin="org.eclipse.equinox.preferences"/>
+      <import plugin="org.apache.commons.logging"/>
+      <import plugin="org.eclipse.equinox.p2.artifact.repository" version="1.0.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.metadata.repository" version="1.0.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.frameworkadmin.equinox" version="1.0.100" match="compatible"/>
+      <import plugin="com.google.guava" version="10.0.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
