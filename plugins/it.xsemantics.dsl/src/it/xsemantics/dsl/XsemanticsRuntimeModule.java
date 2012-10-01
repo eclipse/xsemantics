@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-@SuppressWarnings("restriction")
 public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemanticsRuntimeModule {
 
 	@Override

@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.inject.Inject;
 
-@SuppressWarnings("restriction")
 public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Inject

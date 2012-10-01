@@ -12,7 +12,6 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
-@SuppressWarnings("restriction")
 public class XsemanticsXExpressionHelper extends XExpressionHelper {
 
 	@Inject

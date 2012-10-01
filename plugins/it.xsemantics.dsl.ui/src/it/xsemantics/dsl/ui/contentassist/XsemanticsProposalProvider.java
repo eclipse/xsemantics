@@ -25,7 +25,6 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
  * http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on
  * how to customize content assistant
  */
-@SuppressWarnings("restriction")
 public class XsemanticsProposalProvider extends
 		AbstractXsemanticsProposalProvider {
 

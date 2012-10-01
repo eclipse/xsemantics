@@ -39,7 +39,6 @@ import com.google.inject.Inject;
  * how and when to use it
  * 
  */
-@SuppressWarnings("restriction")
 public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	@Inject
 	protected XsemanticsUtils utils;
