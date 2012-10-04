@@ -33,7 +33,7 @@ class XsemanticsGeneratorExtensions {
 	
 	@Inject extension XsemanticsUtils
 	
-	@Inject extension XsemanticsTypeSystem
+	@Inject extension XsemanticsTypeSystem typeSystem
 	
 	@Inject extension TypeReferenceSerializer
 	
@@ -374,7 +374,11 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def resultType(AuxiliaryDescription e) {
-		e.type ?: e.newTypeRef(typeof(Boolean))
+		typeSystem.getType(e)
+	}
+
+	def resultType(AuxiliaryFunction e) {
+		typeSystem.getType(e.auxiliaryDescription)
 	}
 
 	def resultJvmTypeReferences(JudgmentDescription e) {

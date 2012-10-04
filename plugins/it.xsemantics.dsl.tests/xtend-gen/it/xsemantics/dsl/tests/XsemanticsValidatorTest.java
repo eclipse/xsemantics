@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -180,6 +181,20 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _auxiliaryDescription, 
         IssueCodes.DUPLICATE_AUXILIARY_NAME, 
         "Duplicate auxiliary description \'foo\'");
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAuxiliaryFunctionWithWrongReturnExpression() {
+    try {
+      CharSequence _testAuxiliaryFunctionWithWrongReturnExpression = this.testFiles.testAuxiliaryFunctionWithWrongReturnExpression();
+      XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctionWithWrongReturnExpression);
+      EClass _xBlockExpression = XbasePackage.eINSTANCE.getXBlockExpression();
+      this._validationTestHelper.assertError(_parse, _xBlockExpression, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
+        "Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass");
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -1,6 +1,8 @@
 package it.xsemantics.dsl.typing;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.OutputParameter;
@@ -15,10 +17,10 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
@@ -36,8 +38,10 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   public final static String OUTPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.OutputParameterType";
   
+  public final static String AUXILIARYDESCRIPTIONTYPE = "it.xsemantics.dsl.typing.rules.AuxiliaryDescriptionType";
+  
   @Inject
-  private TypeReferences typeReferences;
+  private JvmTypesBuilder typesBuilder;
   
   @Inject
   private ITypeProvider typeProvider;
@@ -53,12 +57,12 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     	"typeImpl", 3, "|-", ":");
   }
   
-  public TypeReferences getTypeReferences() {
-    return this.typeReferences;
+  public JvmTypesBuilder getTypesBuilder() {
+    return this.typesBuilder;
   }
   
-  public void setTypeReferences(final TypeReferences typeReferences) {
-    this.typeReferences = typeReferences;
+  public void setTypesBuilder(final JvmTypesBuilder typesBuilder) {
+    this.typesBuilder = typesBuilder;
   }
   
   public ITypeProvider getTypeProvider() {
@@ -258,5 +262,44 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     
     JvmTypeReference _jvmTypeReference = p.getJvmTypeReference();
     return new Result<JvmTypeReference>(_jvmTypeReference);
+  }
+  
+  protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<JvmTypeReference> _result_ = applyRuleAuxiliaryDescriptionType(G, _subtrace_, aux);
+      addToTrace(_trace_, ruleName("AuxiliaryDescriptionType") + stringRepForEnv(G) + " |- " + stringRep(aux) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleAuxiliaryDescriptionType) {
+      typeThrowException(ruleName("AuxiliaryDescriptionType") + stringRepForEnv(G) + " |- " + stringRep(aux) + " : " + "JvmTypeReference",
+      	AUXILIARYDESCRIPTIONTYPE,
+      	e_applyRuleAuxiliaryDescriptionType, aux, new ErrorInformation[] {new ErrorInformation(aux)});
+      return null;
+    }
+  }
+  
+  protected Result<JvmTypeReference> applyRuleAuxiliaryDescriptionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {
+    JvmTypeReference type = null; // output parameter
+    
+    /* { aux.type != null type = aux.type } or type = typesBuilder.newTypeRef(aux, typeof(Boolean)) */
+    try {
+      JvmTypeReference _xblockexpression = null;
+      {
+        JvmTypeReference _type = aux.getType();
+        boolean _notEquals = (!Objects.equal(_type, null));
+        /* aux.type != null */
+        if (!_notEquals) {
+          sneakyThrowRuleFailedException("aux.type != null");
+        }
+        JvmTypeReference _type_1 = aux.getType();
+        JvmTypeReference _type_2 = type = _type_1;
+        _xblockexpression = (_type_2);
+      }
+    } catch (Exception e) {
+      JvmTypeReference _newTypeRef = this.typesBuilder.newTypeRef(aux, Boolean.class);
+      type = _newTypeRef;
+    }
+    return new Result<JvmTypeReference>(type);
   }
 }

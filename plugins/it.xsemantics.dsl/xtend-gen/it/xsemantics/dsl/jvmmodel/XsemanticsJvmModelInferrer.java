@@ -1359,8 +1359,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     CharSequence _polymorphicDispatcherImpl = this._xsemanticsGeneratorExtensions.polymorphicDispatcherImpl(_auxiliaryDescription);
     _builder.append(_polymorphicDispatcherImpl, "");
     String _string = _builder.toString();
-    AuxiliaryDescription _auxiliaryDescription_1 = this._xsemanticsUtils.auxiliaryDescription(aux);
-    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription_1);
+    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(aux);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);
@@ -1395,8 +1394,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 _builder_1.append(";");
                 ITreeAppendable _append_1 = it.append(_builder_1);
                 _append_1.newLine();
-                AuxiliaryDescription _auxiliaryDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.auxiliaryDescription(aux);
-                JvmTypeReference _resultType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription);
+                JvmTypeReference _resultType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(aux);
                 JvmType _type_1 = _resultType.getType();
                 it.append(_type_1);
                 it.append(" ");
@@ -1718,8 +1716,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   public JvmOperation compileApplyAuxiliaryFunction(final AuxiliaryFunction auxfun) {
     CharSequence _applyAuxFunName = this._xsemanticsGeneratorExtensions.applyAuxFunName(auxfun);
     String _string = _applyAuxFunName.toString();
-    AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(auxfun);
-    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_auxiliaryDescription);
+    JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(auxfun);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PROTECTED);

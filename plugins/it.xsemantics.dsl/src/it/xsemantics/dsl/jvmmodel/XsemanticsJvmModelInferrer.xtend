@@ -692,7 +692,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileImplMethod(AuxiliaryFunction aux) {
 		aux.toMethod(
 			'''«aux.auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
-			aux.auxiliaryDescription.resultType
+			aux.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -706,7 +706,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				it.append('''try {''').increaseIndentation.newLine
 				it.append(aux.ruleApplicationTraceType.type)
 				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
-				it.append(aux.auxiliaryDescription.resultType.type)
+				it.append(aux.resultType.type)
 				it.append(" ")
 				it.append('''
 					_result_ = «aux.applyAuxFunName»(«ruleApplicationTraceName», «aux.inputParameterNames»);
@@ -829,7 +829,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileApplyAuxiliaryFunction(AuxiliaryFunction auxfun) {
 		auxfun.toMethod(
 			auxfun.applyAuxFunName.toString,
-			auxfun.auxiliaryDescription.resultType
+			auxfun.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED

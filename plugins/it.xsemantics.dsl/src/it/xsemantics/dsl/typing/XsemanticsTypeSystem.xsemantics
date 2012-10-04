@@ -7,7 +7,7 @@ import org.eclipse.xtext.common.types.*
 import it.xsemantics.dsl.xsemantics.*
 import org.eclipse.emf.ecore.EObject
 
-inject util.TypeReferences typeReferences
+inject jvmmodel.JvmTypesBuilder typesBuilder
 inject typing.ITypeProvider typeProvider
 
 judgments {
@@ -41,3 +41,14 @@ axiom InputParameterType
 
 axiom OutputParameterType
 	G |- OutputParameter p : p.jvmTypeReference
+
+rule AuxiliaryDescriptionType
+	G |- AuxiliaryDescription aux : JvmTypeReference type
+from {
+	{
+		aux.type != null
+		type = aux.type
+	}
+	or
+		type = typesBuilder.newTypeRef(aux, typeof(Boolean))
+}

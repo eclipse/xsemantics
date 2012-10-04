@@ -1903,4 +1903,13 @@ class XsemanticsTestFiles {
 		o.eClass
 	}
 	'''
+
+	def testAuxiliaryFunctionWithWrongReturnExpression() '''
+	«testAuxiliaryDescriptions»
+	
+	auxiliary isValue(EObject eO, EClass eC) {
+		eO.eClass
+	}
+	'''
+
 }

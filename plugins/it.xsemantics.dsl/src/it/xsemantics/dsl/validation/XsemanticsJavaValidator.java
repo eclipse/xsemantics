@@ -6,6 +6,7 @@ import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -90,8 +92,16 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Override
 	@Check
 	public void checkImplicitReturn(XExpression expr) {
+		if (isContainedInAuxiliaryFunction(expr)) {
+			super.checkImplicitReturn(expr);
+		}
+
 		// we will deal with this during generation
 		return;
+	}
+
+	protected boolean isContainedInAuxiliaryFunction(XExpression expr) {
+		return EcoreUtil2.getContainerOfType(expr, AuxiliaryFunction.class) != null;
 	}
 
 	@Check
@@ -538,8 +548,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
 		if (helper.auxiliaryDescriptionWithTheSameName(aux) != null) {
-			error("Duplicate auxiliary description '" + aux.getName()
-					+ "'",
+			error("Duplicate auxiliary description '" + aux.getName() + "'",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}

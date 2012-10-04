@@ -45,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -58,7 +57,7 @@ public class XsemanticsGeneratorExtensions {
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
-  private XsemanticsTypeSystem _xsemanticsTypeSystem;
+  private XsemanticsTypeSystem typeSystem;
   
   @Inject
   private TypeReferenceSerializer _typeReferenceSerializer;
@@ -703,7 +702,7 @@ public class XsemanticsGeneratorExtensions {
       if (element instanceof ExpressionInConclusion) {
         final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)element;
         _matched=true;
-        JvmTypeReference _type = this._xsemanticsTypeSystem.getType(_expressionInConclusion);
+        JvmTypeReference _type = this.typeSystem.getType(_expressionInConclusion);
         String _simpleName = _type.getSimpleName();
         _switchResult = _simpleName;
       }
@@ -803,7 +802,7 @@ public class XsemanticsGeneratorExtensions {
       if (element instanceof ExpressionInConclusion) {
         final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)element;
         _matched=true;
-        JvmTypeReference _type = this._xsemanticsTypeSystem.getType(_expressionInConclusion);
+        JvmTypeReference _type = this.typeSystem.getType(_expressionInConclusion);
         String _simpleName = _type.getSimpleName();
         _switchResult = _simpleName;
       }
@@ -870,10 +869,14 @@ public class XsemanticsGeneratorExtensions {
   }
   
   public JvmTypeReference resultType(final AuxiliaryDescription e) {
-    JvmTypeReference _type = e.getType();
-    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(e, Boolean.class);
-    JvmTypeReference _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _newTypeRef);
-    return _elvis;
+    JvmTypeReference _type = this.typeSystem.getType(e);
+    return _type;
+  }
+  
+  public JvmTypeReference resultType(final AuxiliaryFunction e) {
+    AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(e);
+    JvmTypeReference _type = this.typeSystem.getType(_auxiliaryDescription);
+    return _type;
   }
   
   public ArrayList<JvmTypeReference> resultJvmTypeReferences(final JudgmentDescription e) {

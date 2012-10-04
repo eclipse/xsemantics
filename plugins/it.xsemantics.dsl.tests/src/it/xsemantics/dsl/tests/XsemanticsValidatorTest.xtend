@@ -8,6 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.validation.IssueCodes
+import org.eclipse.xtext.xbase.XbasePackage
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -193,6 +194,16 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			XsemanticsPackage::eINSTANCE.auxiliaryDescription,
 			IssueCodes::DUPLICATE_AUXILIARY_NAME,
 			"Duplicate auxiliary description 'foo'"
+		)
+	}
+
+	@Test
+	def testAuxiliaryFunctionWithWrongReturnExpression() {
+		parser.parse(testFiles.testAuxiliaryFunctionWithWrongReturnExpression).
+			assertError(
+			XbasePackage::eINSTANCE.XBlockExpression,
+			org::eclipse::xtext::xbase::validation::IssueCodes::INCOMPATIBLE_RETURN_TYPE,
+			"Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass"
 		)
 	}
 }
