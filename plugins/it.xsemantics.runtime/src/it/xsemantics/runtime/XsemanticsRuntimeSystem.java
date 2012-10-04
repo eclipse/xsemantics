@@ -266,6 +266,10 @@ public class XsemanticsRuntimeSystem {
 	protected String ruleName(String ruleName) {
 		return trimIfNotNull(ruleName) + ": ";
 	}
+	
+	protected String auxFunName(String ruleName) {
+		return trimIfNotNull(ruleName);
+	}
 
 	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
 			Object traceElement) {

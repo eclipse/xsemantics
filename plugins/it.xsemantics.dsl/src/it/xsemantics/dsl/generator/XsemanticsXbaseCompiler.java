@@ -3,6 +3,7 @@ package it.xsemantics.dsl.generator;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition;
@@ -22,18 +23,28 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 
 import com.google.inject.Inject;
 
 public class XsemanticsXbaseCompiler extends XbaseCompiler {
+
+	@Inject
+	private FeatureCallToJavaMapping featureCallToJavaMapping;
 
 	@Inject
 	protected XsemanticsNodeModelUtils nodeModelUtils;
@@ -117,6 +128,34 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 				}
 			}
 			b.decreaseIndentation().append("\n}");
+		}
+	}
+	
+	@Override
+	protected void appendFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
+		JvmIdentifiableElement feature = call.getFeature();
+		AuxiliaryDescription auxiliaryDescription = generatorExtensions.associatedAuxiliaryDescription(feature);
+		if (auxiliaryDescription == null) {
+			super.appendFeatureCall(call, b);
+			return;
+		}
+			
+		CharSequence name = generatorExtensions.entryPointInternalMethodName(auxiliaryDescription);
+		
+		// copied from FeatureCallCompiler
+		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
+		if (feature instanceof JvmExecutable) {
+			b.append("(");
+			// add the trace argument
+			b.append(generatorExtensions.ruleApplicationTraceName());
+			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
+			if (!arguments.isEmpty()) {
+				b.append(", ");
+				XExpression receiver = (call instanceof XMemberFeatureCall) ? ((XMemberFeatureCall)call).getMemberCallTarget() : null;
+				boolean shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
+				appendArguments(arguments, b, shouldBreakFirstArgument);
+			}
+			b.append(")");
 		}
 	}
 

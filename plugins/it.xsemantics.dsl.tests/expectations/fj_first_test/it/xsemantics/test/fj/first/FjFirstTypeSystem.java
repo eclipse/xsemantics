@@ -601,11 +601,11 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
       List _result_ = applyAuxFunSuperclasses(_trace_, cl);
-      addToTrace(_trace_, ruleName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
+      addToTrace(_trace_, auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyAuxFunSuperclasses) {
-      superclassesThrowException(ruleName("superclasses") + "(" + stringRep(cl)+ ")",
+      superclassesThrowException(auxFunName("superclasses") + "(" + stringRep(cl)+ ")",
       	SUPERCLASSES,
       	e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
       return null;
@@ -1087,7 +1087,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     List<Field> fields = null; // output parameter
     
     {
-      final List<it.xsemantics.example.fj.fj.Class> superclasses = this.superclasses(cl);
+      final List<it.xsemantics.example.fj.fj.Class> superclasses = this.superclassesInternal(_trace_, cl);
       Collections.reverse(superclasses);
       ArrayList<Field> _newArrayList = CollectionLiterals.<Field>newArrayList();
       fields = _newArrayList;
@@ -1441,7 +1441,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     if (_notEquals) {
       {
         List<it.xsemantics.example.fj.fj.Class> superClasses = null;
-        List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclasses(cl);
+        List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, cl);
         superClasses = _superclasses;
         boolean _contains = superClasses.contains(cl);
         boolean _not = (!_contains);

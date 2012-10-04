@@ -33,6 +33,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -64,6 +66,9 @@ public class XsemanticsGeneratorExtensions {
   
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
+  
+  @Inject
+  protected IJvmModelAssociations associations;
   
   public String toJavaFullyQualifiedName(final XsemanticsSystem ts) {
     String _xblockexpression = null;
@@ -640,6 +645,14 @@ public class XsemanticsGeneratorExtensions {
     return _builder;
   }
   
+  public CharSequence auxFunNameInvocation(final String ruleName) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("auxFunName(\"");
+    _builder.append(ruleName, "");
+    _builder.append("\")");
+    return _builder;
+  }
+  
   public CharSequence wrapInStringReprForEnv(final CharSequence s) {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _stringRepresentationForEnv = this.stringRepresentationForEnv();
@@ -762,7 +775,7 @@ public class XsemanticsGeneratorExtensions {
   public String errorForAuxiliaryFun(final AuxiliaryFunction aux) {
     AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(aux);
     String _name = _auxiliaryDescription.getName();
-    CharSequence _ruleNameInvocation = this.ruleNameInvocation(_name);
+    CharSequence _auxFunNameInvocation = this.auxFunNameInvocation(_name);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(" ");
     _builder.append("+ \"(\" + ");
@@ -781,7 +794,7 @@ public class XsemanticsGeneratorExtensions {
     String _join = IterableExtensions.join(_map, _builder_1);
     _builder.append(_join, " ");
     _builder.append("+ \")\"");
-    String _plus = (_ruleNameInvocation + _builder.toString());
+    String _plus = (_auxFunNameInvocation + _builder.toString());
     return _plus;
   }
   
@@ -960,5 +973,20 @@ public class XsemanticsGeneratorExtensions {
     String _name = rule.getName();
     String _firstLower = StringExtensions.toFirstLower(_name);
     return _firstLower;
+  }
+  
+  public AuxiliaryDescription associatedAuxiliaryDescription(final JvmIdentifiableElement e) {
+    AuxiliaryDescription _xblockexpression = null;
+    {
+      final EObject associated = this.associations.getPrimarySourceElement(e);
+      AuxiliaryDescription _xifexpression = null;
+      if ((associated instanceof AuxiliaryDescription)) {
+        _xifexpression = ((AuxiliaryDescription) associated);
+      } else {
+        _xifexpression = null;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
 }

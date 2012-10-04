@@ -5,6 +5,7 @@ import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -13,8 +14,11 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -304,6 +308,21 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     CheckRule _get = _checkrules.get(0);
     this._xsemanticsGeneratorExtensions.resultType(_get, a);
     this.assertEqualsStrings("Result<Boolean>", a);
+  }
+  
+  @Test
+  public void testAssociatedToAuxiliaryFunction() {
+    CharSequence _testAuxiliaryFunctionsInvocation = this.testFiles.testAuxiliaryFunctionsInvocation();
+    final XsemanticsSystem system = this.parseAndAssertNoError(_testAuxiliaryFunctionsInvocation);
+    Rule _rule = this.getRule(system, 0);
+    EList<XExpression> _rulePremises = this.getRulePremises(_rule);
+    XExpression _get = _rulePremises.get(0);
+    final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _get);
+    EList<AuxiliaryDescription> _auxiliaryDescriptions = system.getAuxiliaryDescriptions();
+    AuxiliaryDescription _get_1 = _auxiliaryDescriptions.get(0);
+    JvmIdentifiableElement _feature = featureCall.getFeature();
+    AuxiliaryDescription _associatedAuxiliaryDescription = this._xsemanticsGeneratorExtensions.associatedAuxiliaryDescription(_feature);
+    Assert.assertEquals(_get_1, _associatedAuxiliaryDescription);
   }
   
   public void assertResultType(final CharSequence prog, final CharSequence expected) {

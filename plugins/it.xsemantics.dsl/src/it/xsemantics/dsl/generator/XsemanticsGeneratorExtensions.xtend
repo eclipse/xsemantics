@@ -1,31 +1,33 @@
 package it.xsemantics.dsl.generator
 
+import com.google.common.collect.Lists
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
+import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.Result2
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import it.xsemantics.dsl.xsemantics.RuleInvocation
-import org.eclipse.emf.ecore.EObject
-import it.xsemantics.runtime.ErrorInformation
-import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
-import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
-import com.google.common.collect.Lists
 import it.xsemantics.runtime.Result3
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.compiler.IAppendable
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 class XsemanticsGeneratorExtensions {
 	
@@ -38,6 +40,9 @@ class XsemanticsGeneratorExtensions {
 	@Inject extension TypeReferenceSerializer
 	
 	@Inject extension JvmTypesBuilder
+	
+	@Inject
+	protected IJvmModelAssociations associations
 	
 	def toJavaFullyQualifiedName(XsemanticsSystem ts) {
 		val packageString = ts.toPackage?.toString
@@ -290,6 +295,8 @@ class XsemanticsGeneratorExtensions {
 
 	def ruleNameInvocation(String ruleName) '''ruleName("«ruleName»")'''
 
+	def auxFunNameInvocation(String ruleName) '''auxFunName("«ruleName»")'''
+
 	def wrapInStringReprForEnv(CharSequence s) {
 		'''«stringRepresentationForEnv»(«s»)'''
 	}
@@ -335,7 +342,7 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def errorForAuxiliaryFun(AuxiliaryFunction aux) {
-		aux.auxiliaryDescription.name.ruleNameInvocation + 
+		aux.auxiliaryDescription.name.auxFunNameInvocation + 
 		''' + "(" + «aux.parameters.map[name.wrapInStringRepr].join(''' + ", " + ''')»+ ")"'''
 	}
 
@@ -424,5 +431,13 @@ class XsemanticsGeneratorExtensions {
 
 	def methodName(CheckRule rule) {
 		rule.name.toFirstLower
+	}
+
+	def associatedAuxiliaryDescription(JvmIdentifiableElement e) {
+		val associated = associations.getPrimarySourceElement(e)
+		if (associated instanceof AuxiliaryDescription)
+			associated as AuxiliaryDescription
+		else
+			null
 	}
 }

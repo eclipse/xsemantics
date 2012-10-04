@@ -2158,14 +2158,15 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 
 	@Test
 	def testAuxiliaryFunctions() {
-		testFiles.testAuxiliaryFunctions.
+		testFiles.testAuxiliaryFunctionsInvocation.
 		assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
@@ -2173,35 +2174,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ISVALUE = "it.xsemantics.test.auxiliary.IsValue";
-  
   public final static String OBJECTCLASS = "it.xsemantics.test.auxiliary.ObjectClass";
   
-  private PolymorphicDispatcher<Boolean> isValueDispatcher;
+  public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
   private PolymorphicDispatcher<EClass> objectClassDispatcher;
+  
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
   public TypeSystem() {
     init();
   }
   
   public void init() {
-    isValueDispatcher = buildPolymorphicDispatcher(
-    	"isValueImpl", 3);
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
     objectClassDispatcher = buildPolymorphicDispatcher(
     	"objectClassImpl", 2);
-  }
-  
-  public Boolean isValue(final EObject o, final EClass c) throws RuleFailedException {
-    return isValue(null, o, c);
-  }
-  
-  public Boolean isValue(final RuleApplicationTrace _trace_, final EObject o, final EClass c) throws RuleFailedException {
-    try {
-    	return isValueInternal(_trace_, o, c);
-    } catch (Exception _e_isValue) {
-    	throw extractRuleFailedException(_e_isValue);
-    }
   }
   
   public EClass objectClass(final EObject o) throws RuleFailedException {
@@ -2216,18 +2205,37 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected Boolean isValueInternal(final RuleApplicationTrace _trace_, final EObject o, final EClass c) {
+  public Result<EClass> type(final EObject o) {
+    return type(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject o) {
+    return type(_environment_, null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     try {
-    	checkParamsNotNull(o, c);
-    	return isValueDispatcher.invoke(_trace_, o, c);
-    } catch (Exception _e_isValue) {
-    	sneakyThrowRuleFailedException(_e_isValue);
-    	return null;
+    	return typeInternal(_environment_, _trace_, o);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
     }
   }
   
-  protected void isValueThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  public Result<Boolean> checkEObject(final EObject o) {
+    return checkEObject(null, o);
+  }
+  
+  public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	return checkEObjectInternal(_trace_, o);
+    } catch (Exception e) {
+    	return resultForFailure(e);
+    }
+  }
+  
+  protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    
+    return new Result<Boolean>(true);
   }
   
   protected EClass objectClassInternal(final RuleApplicationTrace _trace_, final EObject o) {
@@ -2242,46 +2250,35 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected void objectClassThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     
-    String error = "error in objectClass";
+    String error = "error in objectClass()";
     EObject source = o;
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
   
-  protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Boolean _result_ = applyAuxFunIsValue(_trace_, eO, eC);
-      addToTrace(_trace_, ruleName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyAuxFunIsValue) {
-      isValueThrowException(ruleName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
-      	ISVALUE,
-      	e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
-      return null;
+    	checkParamsNotNull(o);
+    	return typeDispatcher.invoke(_environment_, _trace_, o);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
     }
   }
   
-  protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
-    EClass _eClass = eO.eClass();
-    boolean _equals = Objects.equal(_eClass, eC);
-    /* eO.eClass == eC */
-    if (!Boolean.valueOf(_equals)) {
-      sneakyThrowRuleFailedException("eO.eClass == eC");
-    }
-    return Boolean.valueOf(_equals);
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
       EClass _result_ = applyAuxFunObjectClass(_trace_, o);
-      addToTrace(_trace_, ruleName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+      addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyAuxFunObjectClass) {
-      objectClassThrowException(ruleName("objectClass") + "(" + stringRep(o)+ ")",
+      objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
       	OBJECTCLASS,
       	e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
       return null;
@@ -2291,6 +2288,32 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected EClass applyAuxFunObjectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass _eClass = o.eClass();
     return _eClass;
+  }
+  
+  protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEObjectEClass) {
+      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+      	EOBJECTECLASS,
+      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+      return null;
+    }
+  }
+  
+  protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    EClass c = null; // output parameter
+    
+    {
+      this.objectClassInternal(_trace_, o);
+      EClass _objectClass = this.objectClassInternal(_trace_, o);
+      c = _objectClass;
+    }
+    return new Result<EClass>(c);
   }
 }
 '''

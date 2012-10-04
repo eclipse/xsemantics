@@ -10,6 +10,7 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -229,6 +230,17 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		testFiles.testCheckRule.parseAndAssertNoError.
 			checkrules.get(0).resultType(a)
 		assertEqualsStrings("Result<Boolean>", a)
+	}
+
+	@Test
+	def void testAssociatedToAuxiliaryFunction() {
+		val system = testFiles.testAuxiliaryFunctionsInvocation.parseAndAssertNoError
+		val featureCall = system.getRule(0).
+			rulePremises.get(0) as XAbstractFeatureCall
+		Assert::assertEquals(
+			system.auxiliaryDescriptions.get(0),
+			featureCall.feature.associatedAuxiliaryDescription
+		)
 	}
 	
 	def assertResultType(CharSequence prog, CharSequence expected) {

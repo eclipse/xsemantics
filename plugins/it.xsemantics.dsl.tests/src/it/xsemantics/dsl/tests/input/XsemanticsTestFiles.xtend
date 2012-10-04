@@ -1912,4 +1912,35 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testAuxiliaryFunctionsInvocation() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		objectClass(EObject o) : EClass
+			error "error in objectClass()"
+			source o
+	}
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	auxiliary objectClass(EObject o) {
+		o.eClass
+	}
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		objectClass(o)
+		c = objectClass(o)
+	}
+	
+	checkrule CheckEObject
+		for EObject o
+	from {
+		//objectClass(o) != null
+	}
+	'''
 }

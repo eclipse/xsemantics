@@ -280,6 +280,9 @@ public class FjExpectedTraces {
     _builder.append("  ");
     _builder.append("Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []");
     _builder.newLine();
+    _builder.append("   ");
+    _builder.append("superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]");
+    _builder.newLine();
     _builder.append("  ");
     _builder.append("SubtypeSequence: [] |- new B() : [] << []");
     _builder.newLine();
@@ -328,6 +331,9 @@ public class FjExpectedTraces {
     _builder.append("  ");
     _builder.append("Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []");
     _builder.newLine();
+    _builder.append("   ");
+    _builder.append("superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]");
+    _builder.newLine();
     _builder.append("  ");
     _builder.append("SubtypeSequence: [] |- new B() : [] << []");
     _builder.newLine();
@@ -336,6 +342,9 @@ public class FjExpectedTraces {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("SubtypeSequence: [] |- new B() : [] << []");
@@ -351,6 +360,9 @@ public class FjExpectedTraces {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Fields: [] ||- class C extends B { A c; } >> [int i;, String s;, A c;]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class C extends B { A c; }) = [class B extends A { String s; }, class A { int i; }]");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("SubtypeSequence: [] |- new C(10, \'foo\', new B(20, \'bar\')) : [10, \'foo\', new B(20, \'bar\')] << [int i;, String s;, A c;]");
@@ -400,6 +412,9 @@ public class FjExpectedTraces {
     _builder.append("  ");
     _builder.append("Fields: [] ||- class B extends A { String s; } >> [int i;, String s;]");
     _builder.newLine();
+    _builder.append("   ");
+    _builder.append("superclasses(class B extends A { String s; }) = [class A { int i; }]");
+    _builder.newLine();
     _builder.append("  ");
     _builder.append("SubtypeSequence: [] |- new B(20, \'bar\') : [20, \'bar\'] << [int i;, String s;]");
     _builder.newLine();
@@ -435,6 +450,9 @@ public class FjExpectedTraces {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Fields: [] ||- class C extends B { A c; } >> [int i;, boolean b;, String s;, A c;]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class C extends B { A c; }) = [class B extends A { String s; }, class A { int i; boolean b; }]");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("SubtypeSequence: [] |- new C(10, true, \'foo\', new B(20, false, ... : [10, true, \'foo\', new B(20, false, \'bar\')] << [int i;, boolean b;, String s;, A c;]");
@@ -495,6 +513,9 @@ public class FjExpectedTraces {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("Fields: [] ||- class B extends A { String s; } >> [int i;, boolean b;, String s;]");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("superclasses(class B extends A { String s; }) = [class A { int i; boolean b; }]");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("SubtypeSequence: [] |- new B(20, false, \'bar\') : [20, false, \'bar\'] << [int i;, boolean b;, String s;]");
@@ -617,7 +638,13 @@ public class FjExpectedTraces {
     _builder.append("CheckClass: [] |- class B extends A { String s; }");
     _builder.newLine();
     _builder.append(" ");
+    _builder.append("superclasses(class B extends A { String s; }) = [class A { int i; }]");
+    _builder.newLine();
+    _builder.append(" ");
     _builder.append("Fields: [] ||- class A { int i; } >> [int i;]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class A { int i; }) = []");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Methods: [] ||~ class A { int i; } >> []");
@@ -704,7 +731,13 @@ public class FjExpectedTraces {
     _builder.append("CheckClass: [] |- class B extends A { int m(String s) { re...");
     _builder.newLine();
     _builder.append(" ");
+    _builder.append("superclasses(class B extends A { int m(String s) { re...) = [class A { int m(String s) { return 10; }...]");
+    _builder.newLine();
+    _builder.append(" ");
     _builder.append("Fields: [] ||- class A { int m(String s) { return 10; }... >> []");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class A { int m(String s) { return 10; }...) = []");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("Methods: [] ||~ class A { int m(String s) { return 10; }... >> [int m(String s) { return 10; }]");
