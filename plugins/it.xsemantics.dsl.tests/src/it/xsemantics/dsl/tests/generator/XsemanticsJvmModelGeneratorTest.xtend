@@ -2163,6 +2163,7 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 '''
 package it.xsemantics.test;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2235,6 +2236,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
+    EClass _objectClass = this.objectClassInternal(_trace_, o);
+    boolean _notEquals = (!Objects.equal(_objectClass, null));
+    /* objectClass(o) != null */
+    if (!Boolean.valueOf(_notEquals)) {
+      sneakyThrowRuleFailedException("objectClass(o) != null");
+    }
     return new Result<Boolean>(true);
   }
   

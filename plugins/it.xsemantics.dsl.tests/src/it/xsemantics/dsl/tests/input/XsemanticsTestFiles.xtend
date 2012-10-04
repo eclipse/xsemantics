@@ -1940,7 +1940,7 @@ class XsemanticsTestFiles {
 	checkrule CheckEObject
 		for EObject o
 	from {
-		//objectClass(o) != null
+		objectClass(o) != null
 	}
 	'''
 }

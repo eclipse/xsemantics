@@ -4275,7 +4275,7 @@ public class XsemanticsTestFiles {
     _builder.append("from {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("//objectClass(o) != null");
+    _builder.append("objectClass(o) != null");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
