@@ -88,6 +88,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		error("Return statements are not allowed here", expr, null,
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
+	
+	@Override
+	protected boolean supportsCheckedExceptions() {
+		// we generate Java code which already handles exceptions
+		return false;
+	}
 
 	@Override
 	@Check
