@@ -47,6 +47,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
+  public final static String SUPERCLASSES = "it.xsemantics.test.fj.first.auxiliary.Superclasses";
+  
   public final static String TTYPEDELEMENT = "it.xsemantics.test.fj.first.rules.TTypedElement";
   
   public final static String TTHIS = "it.xsemantics.test.fj.first.rules.TThis";
@@ -79,8 +81,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String SUBTYPESEQUENCE = "it.xsemantics.test.fj.first.rules.SubtypeSequence";
   
-  public final static String SUPERCLASSES = "it.xsemantics.test.fj.first.rules.Superclasses";
-  
   public final static String FIELDS = "it.xsemantics.test.fj.first.rules.Fields";
   
   public final static String METHODS = "it.xsemantics.test.fj.first.rules.Methods";
@@ -103,6 +103,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String CHECKCLASS = "it.xsemantics.test.fj.first.rules.CheckClass";
   
+  private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<ClassType>> classtypeDispatcher;
@@ -116,8 +118,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   private PolymorphicDispatcher<Result<Boolean>> subtypesequenceDispatcher;
   
   private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
-  
-  private PolymorphicDispatcher<Result<List<it.xsemantics.example.fj.fj.Class>>> superclassesDispatcher;
   
   private PolymorphicDispatcher<Result<List<Field>>> fieldsDispatcher;
   
@@ -144,14 +144,26 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	"subtypesequenceImpl", 5, "|-", ":", "<<");
     subclassDispatcher = buildPolymorphicDispatcher1(
     	"subclassImpl", 4, "|-", "<|");
-    superclassesDispatcher = buildPolymorphicDispatcher1(
-    	"superclassesImpl", 3, "||-", "|>");
     fieldsDispatcher = buildPolymorphicDispatcher1(
     	"fieldsImpl", 3, "||-", ">>");
     methodsDispatcher = buildPolymorphicDispatcher1(
     	"methodsImpl", 3, "||~", ">>");
     checkDispatcher = buildPolymorphicDispatcher1(
     	"checkImpl", 3, "|-");
+    superclassesDispatcher = buildPolymorphicDispatcher(
+    	"superclassesImpl", 2);
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    return superclasses(null, cl);
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    try {
+    	return superclassesInternal(_trace_, cl);
+    } catch (Exception _e_superclasses) {
+    	throw extractRuleFailedException(_e_superclasses);
+    }
   }
   
   public Result<Type> type(final Expression expression) {
@@ -263,22 +275,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	return subclassInternal(_environment_, _trace_, candidate, superclass);
     } catch (Exception _e_subclass) {
     	return resultForFailure(_e_subclass);
-    }
-  }
-  
-  public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(final it.xsemantics.example.fj.fj.Class cl) {
-    return superclasses(new RuleEnvironment(), null, cl);
-  }
-  
-  public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(final RuleEnvironment _environment_, final it.xsemantics.example.fj.fj.Class cl) {
-    return superclasses(_environment_, null, cl);
-  }
-  
-  public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	return superclassesInternal(_environment_, _trace_, cl);
-    } catch (Exception _e_superclasses) {
-    	return resultForFailure(_e_superclasses);
     }
   }
   
@@ -447,6 +443,20 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     return new Result<Boolean>(true);
   }
   
+  protected List<it.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
+    try {
+    	checkParamsNotNull(cl);
+    	return superclassesDispatcher.invoke(_trace_, cl);
+    } catch (Exception _e_superclasses) {
+    	sneakyThrowRuleFailedException(_e_superclasses);
+    	return null;
+    }
+  }
+  
+  protected void superclassesThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -545,20 +555,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected Result<List<it.xsemantics.example.fj.fj.Class>> superclassesInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	checkParamsNotNull(cl);
-    	return superclassesDispatcher.invoke(_environment_, _trace_, cl);
-    } catch (Exception _e_superclasses) {
-    	sneakyThrowRuleFailedException(_e_superclasses);
-    	return null;
-    }
-  }
-  
-  protected void superclassesThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
-  }
-  
   protected Result<List<Field>> fieldsInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     try {
     	checkParamsNotNull(cl);
@@ -599,6 +595,29 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected void checkThrowException(final String _error, final String _issue, final Exception _ex, final EObject obj, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected List<it.xsemantics.example.fj.fj.Class> superclassesImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      List _result_ = applyAuxFunSuperclasses(_trace_, cl);
+      addToTrace(_trace_, ruleName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunSuperclasses) {
+      superclassesThrowException(ruleName("superclasses") + "(" + stringRep(cl)+ ")",
+      	SUPERCLASSES,
+      	e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+      return null;
+    }
+  }
+  
+  protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
+    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
+    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+      it.xsemantics.example.fj.fj.Class.class);
+    return _all;
   }
   
   protected Result<Type> typedeclImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
@@ -1049,30 +1068,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     return new Result<Boolean>(true);
   }
   
-  protected Result<List<it.xsemantics.example.fj.fj.Class>> superclassesImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<List<it.xsemantics.example.fj.fj.Class>> _result_ = applyRuleSuperclasses(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("Superclasses") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " |> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleSuperclasses) {
-      superclassesThrowException(ruleName("Superclasses") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " |> " + "List<Class>",
-      	SUPERCLASSES,
-      	e_applyRuleSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
-    }
-  }
-  
-  protected Result<List<it.xsemantics.example.fj.fj.Class>> applyRuleSuperclasses(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    
-    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
-      it.xsemantics.example.fj.fj.Class.class);
-    return new Result<List<it.xsemantics.example.fj.fj.Class>>(_all);
-  }
-  
   protected Result<List<Field>> fieldsImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1092,12 +1087,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     List<Field> fields = null; // output parameter
     
     {
-      /* G ||- cl |> var List<Class> superclasses */
-      List<it.xsemantics.example.fj.fj.Class> superclasses = null;
-      Result<List<it.xsemantics.example.fj.fj.Class>> result = superclassesInternal(G, _trace_, cl);
-      checkAssignableTo(result.getFirst(), List.class);
-      superclasses = (List<it.xsemantics.example.fj.fj.Class>) result.getFirst();
-      
+      final List<it.xsemantics.example.fj.fj.Class> superclasses = this.superclasses(cl);
       Collections.reverse(superclasses);
       ArrayList<Field> _newArrayList = CollectionLiterals.<Field>newArrayList();
       fields = _newArrayList;
@@ -1451,11 +1441,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     if (_notEquals) {
       {
         List<it.xsemantics.example.fj.fj.Class> superClasses = null;
-        /* G ||- cl |> superClasses */
-        Result<List<it.xsemantics.example.fj.fj.Class>> result = superclassesInternal(G, _trace_, cl);
-        checkAssignableTo(result.getFirst(), List.class);
-        superClasses = (List<it.xsemantics.example.fj.fj.Class>) result.getFirst();
-        
+        List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclasses(cl);
+        superClasses = _superclasses;
         boolean _contains = superClasses.contains(cl);
         boolean _not = (!_contains);
         /* !superClasses.contains(cl) */
@@ -1465,9 +1452,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
         List<Field> inheritedFields = null;
         /* G ||- cl.superclass >> inheritedFields */
         it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
-        Result<List<Field>> result_1 = fieldsInternal(G, _trace_, _superclass_1);
-        checkAssignableTo(result_1.getFirst(), List.class);
-        inheritedFields = (List<Field>) result_1.getFirst();
+        Result<List<Field>> result = fieldsInternal(G, _trace_, _superclass_1);
+        checkAssignableTo(result.getFirst(), List.class);
+        inheritedFields = (List<Field>) result.getFirst();
         
         final Procedure1<Field> _function = new Procedure1<Field>() {
             public void apply(final Field inheritedField) {
@@ -1488,9 +1475,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
         List<Method> inheritedMethods = null;
         /* G ||~ cl.superclass >> inheritedMethods */
         it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
-        Result<List<Method>> result_2 = methodsInternal(G, _trace_, _superclass_2);
-        checkAssignableTo(result_2.getFirst(), List.class);
-        inheritedMethods = (List<Method>) result_2.getFirst();
+        Result<List<Method>> result_1 = methodsInternal(G, _trace_, _superclass_2);
+        checkAssignableTo(result_1.getFirst(), List.class);
+        inheritedMethods = (List<Method>) result_1.getFirst();
         
         final Procedure1<Method> _function_1 = new Procedure1<Method>() {
             public void apply(final Method inheritedMethod) {

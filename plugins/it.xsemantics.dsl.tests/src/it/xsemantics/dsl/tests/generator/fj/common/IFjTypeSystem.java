@@ -10,6 +10,7 @@ import it.xsemantics.example.fj.fj.TypedElement;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
 
 import java.util.List;
 
@@ -72,13 +73,12 @@ public interface IFjTypeSystem {
 			final it.xsemantics.example.fj.fj.Class _Class,
 			final it.xsemantics.example.fj.fj.Class _Class_1);
 
-	public abstract Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			final it.xsemantics.example.fj.fj.Class _Class);
+	public abstract List<it.xsemantics.example.fj.fj.Class> superclasses(
+			final it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException;
 
-	public abstract Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			final RuleEnvironment _environment_,
+	public abstract List<it.xsemantics.example.fj.fj.Class> superclasses(
 			final RuleApplicationTrace _trace_,
-			final it.xsemantics.example.fj.fj.Class _Class);
+			final it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException;
 
 	public abstract Result<List<Field>> fields(
 			final it.xsemantics.example.fj.fj.Class _Class);

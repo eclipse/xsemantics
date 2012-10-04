@@ -10,6 +10,7 @@ import it.xsemantics.example.fj.typing.FjSepTypeSystem;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
 
 import java.util.List;
 
@@ -17,16 +18,14 @@ public class FjSepTypeSystemWrapper extends FjSepTypeSystem
 		implements IFjTypeSystem {
 
 	
-	public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			it.xsemantics.example.fj.fj.Class _Class) {
+	public List<it.xsemantics.example.fj.fj.Class> superclasses(
+			final it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException {
 		return null;
 	}
 
-	
-	public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			RuleEnvironment _environment_,
+	public List<it.xsemantics.example.fj.fj.Class> superclasses(
 			RuleApplicationTrace _trace_,
-			it.xsemantics.example.fj.fj.Class _Class) {
+			it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException {
 		return null;
 	}
 

@@ -141,7 +141,6 @@ TSelection: [] |- new A(10).f : int
 '''CheckSelection: [] |- new B().m(new B(), new B(), 10)
  CheckNew: [] |- new B()
   Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []
-   Superclasses: [] ||- class B extends A { int m(B b, A a, int ... |> [class A { }]
   SubtypeSequence: [] |- new B() : [] << []
  SubtypeSequence: [] |- new B().m(new B(), new B(), 10) : [new B(), new B(), 10] << [B b, A a, int i]
   TNew: [] |- new B() : B
@@ -158,18 +157,15 @@ TSelection: [] |- new A(10).f : int
   BasicSubtyping: [] |- int <: int
  CheckNew: [] |- new B()
   Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []
-   Superclasses: [] ||- class B extends A { int m(B b, A a, int ... |> [class A { }]
   SubtypeSequence: [] |- new B() : [] << []
  CheckNew: [] |- new B()
   Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []
-   Superclasses: [] ||- class B extends A { int m(B b, A a, int ... |> [class A { }]
   SubtypeSequence: [] |- new B() : [] << []
  CheckConstant: [] |- 10'''
 
 	def newCheckOk() {
 '''CheckNew: [] |- new C(10, 'foo', new B(20, 'bar'))
  Fields: [] ||- class C extends B { A c; } >> [int i;, String s;, A c;]
-  Superclasses: [] ||- class C extends B { A c; } |> [class B extends A { String s; }, class A { int i; }]
  SubtypeSequence: [] |- new C(10, 'foo', new B(20, 'bar')) : [10, 'foo', new B(20, 'bar')] << [int i;, String s;, A c;]
   TIntConstant: [] |- 10 : int
   TTypedElement: [] ||- int i; : int
@@ -186,7 +182,6 @@ TSelection: [] |- new A(10).f : int
  CheckConstant: [] |- 'foo'
  CheckNew: [] |- new B(20, 'bar')
   Fields: [] ||- class B extends A { String s; } >> [int i;, String s;]
-   Superclasses: [] ||- class B extends A { String s; } |> [class A { int i; }]
   SubtypeSequence: [] |- new B(20, 'bar') : [20, 'bar'] << [int i;, String s;]
    TIntConstant: [] |- 20 : int
    TTypedElement: [] ||- int i; : int
@@ -201,7 +196,6 @@ TSelection: [] |- new A(10).f : int
 	def newCheckOk2() {
 '''CheckNew: [] |- new C(10, true, 'foo', new B(20, false, ...
  Fields: [] ||- class C extends B { A c; } >> [int i;, boolean b;, String s;, A c;]
-  Superclasses: [] ||- class C extends B { A c; } |> [class B extends A { String s; }, class A { int i; boolean b; }]
  SubtypeSequence: [] |- new C(10, true, 'foo', new B(20, false, ... : [10, true, 'foo', new B(20, false, 'bar')] << [int i;, boolean b;, String s;, A c;]
   TIntConstant: [] |- 10 : int
   TTypedElement: [] ||- int i; : int
@@ -222,7 +216,6 @@ TSelection: [] |- new A(10).f : int
  CheckConstant: [] |- 'foo'
  CheckNew: [] |- new B(20, false, 'bar')
   Fields: [] ||- class B extends A { String s; } >> [int i;, boolean b;, String s;]
-   Superclasses: [] ||- class B extends A { String s; } |> [class A { int i; boolean b; }]
   SubtypeSequence: [] |- new B(20, false, 'bar') : [20, false, 'bar'] << [int i;, boolean b;, String s;]
    TIntConstant: [] |- 20 : int
    TTypedElement: [] ||- int i; : int
@@ -270,9 +263,7 @@ TSelection: [] |- new A(10).f : int
 
 	def subclassOkWRTFields()
 '''CheckClass: [] |- class B extends A { String s; }
- Superclasses: [] ||- class B extends A { String s; } |> [class A { int i; }]
  Fields: [] ||- class A { int i; } >> [int i;]
-  Superclasses: [] ||- class A { int i; } |> []
  Methods: [] ||~ class A { int i; } >> []'''
 
 	def castOk1()
@@ -306,9 +297,7 @@ TSelection: [] |- new A(10).f : int
 
 	def subclassOverrideMethod()
 '''CheckClass: [] |- class B extends A { int m(String s) { re...
- Superclasses: [] ||- class B extends A { int m(String s) { re... |> [class A { int m(String s) { return 10; }...]
  Fields: [] ||- class A { int m(String s) { return 10; }... >> []
-  Superclasses: [] ||- class A { int m(String s) { return 10; }... |> []
  Methods: [] ||~ class A { int m(String s) { return 10; }... >> [int m(String s) { return 10; }]
  BasicEquals: [] |- int ~~ int
  BasicEquals: [] |- String ~~ String'''

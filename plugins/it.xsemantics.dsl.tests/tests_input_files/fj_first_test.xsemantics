@@ -15,6 +15,10 @@ import com.google.common.collect.Lists
 
 import java.util.*
 
+auxiliary {
+	superclasses(Class cl) : List<Class>
+}
+
 judgments {
 	type |- Expression expression : output Type
 	classtype ||~ Expression expression : output ClassType
@@ -23,10 +27,17 @@ judgments {
 	equalstype |- Type left ~~ Type right
 	subtypesequence |- Expression owner : List<Expression> expressions << List<? extends TypedElement> elements
 	subclass |- Class candidate <| Class superclass
-	superclasses ||- Class cl |> output java.util.List<Class>
 	fields ||- Class cl >> output java.util.List<Field>
 	methods ||~ Class cl >> output java.util.List<Method>
 	check |- EObject obj
+}
+
+auxiliary superclasses(Class cl) {
+	getAll(cl,
+		FjPackage::eINSTANCE.class_Superclass,
+		FjPackage::eINSTANCE.class_Superclass,
+		typeof(Class)
+	)
 }
 
 axiom TTypedElement
@@ -141,17 +152,10 @@ from {
 	}
 }
 
-axiom Superclasses 
-	G ||- Class cl |> getAll(cl,
-		FjPackage::eINSTANCE.class_Superclass,
-		FjPackage::eINSTANCE.class_Superclass,
-		typeof(Class)
-	)
-
 rule Fields derives
 	G ||- Class cl >> java.util.List<Field> fields
 from {
-	G ||- cl |> var List<Class> superclasses
+	val superclasses = superclasses(cl)
 	// so that upper classes come first
 	Collections::reverse(superclasses)
 	fields = newArrayList()
@@ -260,7 +264,7 @@ rule CheckClass
 from {
 	if (cl.superclass != null) {
 		var List<Class> superClasses
-		G ||- cl |> superClasses
+		superClasses = superclasses(cl)
 		!superClasses.contains(cl)
 		
 		var List<Field> inheritedFields

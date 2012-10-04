@@ -52,6 +52,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * type checking.
  */
 public class FjTypeSystem extends XsemanticsRuntimeSystem {
+  public final static String SUPERCLASSES = "it.xsemantics.example.fj.typing.auxiliary.Superclasses";
+  
   public final static String TTHIS = "it.xsemantics.example.fj.typing.rules.TThis";
   
   public final static String TNEW = "it.xsemantics.example.fj.typing.rules.TNew";
@@ -102,6 +104,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   @Inject
   private FjSemanticsUtils semanticsUtils;
   
+  private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<ClassType>> classtypeDispatcher;
@@ -143,6 +147,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	"reduceImpl", 3, "|-", "~>");
     subjredDispatcher = buildPolymorphicDispatcher3(
     	"subjredImpl", 3, "|=", "~>", ":", "<:");
+    superclassesDispatcher = buildPolymorphicDispatcher(
+    	"superclassesImpl", 2);
   }
   
   public FjAuxiliaryFunctions getFjAux() {
@@ -159,6 +165,18 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   public void setSemanticsUtils(final FjSemanticsUtils semanticsUtils) {
     this.semanticsUtils = semanticsUtils;
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    return superclasses(null, cl);
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    try {
+    	return superclassesInternal(_trace_, cl);
+    } catch (Exception _e_superclasses) {
+    	throw extractRuleFailedException(_e_superclasses);
+    }
   }
   
   public Result<Type> type(final Expression expression) {
@@ -500,6 +518,20 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     return new Result<Boolean>(true);
   }
   
+  protected List<it.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
+    try {
+    	checkParamsNotNull(cl);
+    	return superclassesDispatcher.invoke(_trace_, cl);
+    } catch (Exception _e_superclasses) {
+    	sneakyThrowRuleFailedException(_e_superclasses);
+    	return null;
+    }
+  }
+  
+  protected void superclassesThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -668,6 +700,29 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected void subjredThrowException(final String _error, final String _issue, final Exception _ex, final Expression exp, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected List<it.xsemantics.example.fj.fj.Class> superclassesImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      List _result_ = applyAuxFunSuperclasses(_trace_, cl);
+      addToTrace(_trace_, ruleName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunSuperclasses) {
+      superclassesThrowException(ruleName("superclasses") + "(" + stringRep(cl)+ ")",
+      	SUPERCLASSES,
+      	e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+      return null;
+    }
+  }
+  
+  protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
+    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
+    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+      it.xsemantics.example.fj.fj.Class.class);
+    return _all;
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {

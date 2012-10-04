@@ -21,6 +21,10 @@ import java.util.*
 inject FjAuxiliaryFunctions fjAux
 inject FjSemanticsUtils semanticsUtils
 
+auxiliary {
+	superclasses(Class cl) : List<Class>
+}
+
 judgments {
 	type |- Expression expression : output Type
 		error "cannot type " + stringRep(expression)
@@ -43,6 +47,14 @@ judgments {
 		source owner
 	reduce |- Expression exp ~> output Expression
 	subjred |= Expression exp ~> output Expression : output Type <: output Type
+}
+
+auxiliary superclasses(Class cl) {
+	getAll(cl,
+		FjPackage::eINSTANCE.class_Superclass,
+		FjPackage::eINSTANCE.class_Superclass,
+		typeof(Class)
+	)
 }
 
 axiom TThis

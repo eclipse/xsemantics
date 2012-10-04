@@ -9,6 +9,7 @@ import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.StringRepresentation;
 import it.xsemantics.runtime.util.TraceUtils;
 
@@ -521,9 +522,9 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 	}
 
 	protected void assertSuperclasses(FjClassForTests classes, Class class1,
-			String expectedListRepresentation) {
+			String expectedListRepresentation) throws RuleFailedException {
 		assertEquals(expectedListRepresentation,
-				stringRep.string(fjTypeSystem.superclasses(class1).getValue()));
+				stringRep.string(fjTypeSystem.superclasses(class1)));
 	}
 
 	protected void assertFields(FjClassForTests classes, Class class1,

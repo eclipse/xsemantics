@@ -6,6 +6,7 @@ import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.test.fj.alt.FjAltTypeSystem;
 
 import java.util.List;
@@ -14,16 +15,14 @@ public class FjAltTypeSystemWrapper extends FjAltTypeSystem
 		implements IFjTypeSystem {
 
 	
-	public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			it.xsemantics.example.fj.fj.Class _Class) {
+	public List<it.xsemantics.example.fj.fj.Class> superclasses(
+			final it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException {
 		return null;
 	}
-
 	
-	public Result<List<it.xsemantics.example.fj.fj.Class>> superclasses(
-			RuleEnvironment _environment_,
+	public List<it.xsemantics.example.fj.fj.Class> superclasses(
 			RuleApplicationTrace _trace_,
-			it.xsemantics.example.fj.fj.Class _Class) {
+			it.xsemantics.example.fj.fj.Class _Class) throws RuleFailedException {
 		return null;
 	}
 
