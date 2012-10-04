@@ -29,7 +29,6 @@ import com.google.inject.Inject;
  * @author Lorenzo Bettini
  * 
  */
-@SuppressWarnings("restriction")
 public class XsemanticsOnTheFlyJavaCompiler extends OnTheFlyJavaCompiler {
 	
 	static class DelegateOutStream extends OutputStream {
@@ -124,6 +123,7 @@ public class XsemanticsOnTheFlyJavaCompiler extends OnTheFlyJavaCompiler {
 						+ File.separator);
 	}
 	
+	@Override
 	protected Main getMain() {
 		return new PatchedMain(new PrintWriter(new OutputStreamWriter(
 				System.out)), new PrintWriter(new OutputStreamWriter(
@@ -150,6 +150,7 @@ public class XsemanticsOnTheFlyJavaCompiler extends OnTheFlyJavaCompiler {
 		return tempDir;
 	}
 	
+	@Override
 	public Class<?> compileToClass(String classname, String code) {
 		File tempDir = createTempDir();
 		final String classNameAsPath = classname.replace('.',

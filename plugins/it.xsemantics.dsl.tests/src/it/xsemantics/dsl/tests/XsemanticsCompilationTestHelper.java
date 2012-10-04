@@ -27,7 +27,6 @@ import com.google.inject.Inject;
  * @author Lorenzo Bettini
  * 
  */
-@SuppressWarnings("restriction")
 public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 	@Inject
 	private XsemanticsOnTheFlyJavaCompiler javaCompiler;
@@ -84,7 +83,7 @@ public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 			acceptor.accept(new Result() {
 
 				public Resource getSource() {
-					return (Resource) parsed.eResource();
+					return parsed.eResource();
 				}
 
 				public void compileToJava() {

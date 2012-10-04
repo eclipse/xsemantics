@@ -13,7 +13,6 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.junit.Test;
 
-@SuppressWarnings("restriction")
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 
 	private static final String IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM = ", in system: it.xsemantics.test.TypeSystem";

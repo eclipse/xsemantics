@@ -18,7 +18,6 @@ import com.google.inject.Injector;
  * @author bettini
  * 
  */
-@SuppressWarnings("restriction")
 public class XsemanticsProposalProviderTest extends
 		AbstractContentAssistProcessorTest {
 
