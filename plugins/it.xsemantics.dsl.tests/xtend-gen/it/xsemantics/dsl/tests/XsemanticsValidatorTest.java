@@ -199,4 +199,18 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testAuxiliaryDescriptionWithTheSameNameOfJudgment() {
+    try {
+      CharSequence _testAuxiliaryDescriptionWithTheSameNameOfJudgment = this.testFiles.testAuxiliaryDescriptionWithTheSameNameOfJudgment();
+      XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryDescriptionWithTheSameNameOfJudgment);
+      EClass _auxiliaryDescription = XsemanticsPackage.eINSTANCE.getAuxiliaryDescription();
+      this._validationTestHelper.assertError(_parse, _auxiliaryDescription, 
+        IssueCodes.DUPLICATE_AUXILIARY_NAME, 
+        "Duplicate judgment with the same name \'foo\'");
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

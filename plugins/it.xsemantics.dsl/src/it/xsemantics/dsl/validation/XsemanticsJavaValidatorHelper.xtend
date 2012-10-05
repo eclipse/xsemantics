@@ -52,6 +52,12 @@ class XsemanticsJavaValidatorHelper {
 		]
 	}
 	
+	def auxiliaryDescriptionWithTheSameNameOfJudgment(AuxiliaryDescription aux) {
+		aux.containingSystem.judgmentDescriptions.findFirst [
+			it != aux && it.name == aux.name
+		]
+	}
+	
 	def findDuplicateParameter(RuleParameter param) {
 		param.containingRule.conclusion.
 			conclusionElements.typeSelect(typeof(RuleParameter)).

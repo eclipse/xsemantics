@@ -163,6 +163,28 @@ public class XsemanticsJavaValidatorHelper {
     return _findFirst;
   }
   
+  public JudgmentDescription auxiliaryDescriptionWithTheSameNameOfJudgment(final AuxiliaryDescription aux) {
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(aux);
+    EList<JudgmentDescription> _judgmentDescriptions = _containingSystem.getJudgmentDescriptions();
+    final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
+        public Boolean apply(final JudgmentDescription it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, aux));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = aux.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    JudgmentDescription _findFirst = IterableExtensions.<JudgmentDescription>findFirst(_judgmentDescriptions, _function);
+    return _findFirst;
+  }
+  
   public boolean findDuplicateParameter(final RuleParameter param) {
     Rule _containingRule = this._xsemanticsUtils.containingRule(param);
     RuleConclusion _conclusion = _containingRule.getConclusion();

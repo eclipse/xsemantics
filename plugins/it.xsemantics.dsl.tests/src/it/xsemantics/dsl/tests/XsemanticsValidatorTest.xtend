@@ -206,4 +206,14 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass"
 		)
 	}
+
+	@Test
+	def testAuxiliaryDescriptionWithTheSameNameOfJudgment() {
+		parser.parse(testFiles.testAuxiliaryDescriptionWithTheSameNameOfJudgment).
+			assertError(
+			XsemanticsPackage::eINSTANCE.auxiliaryDescription,
+			IssueCodes::DUPLICATE_AUXILIARY_NAME,
+			"Duplicate judgment with the same name 'foo'"
+		)
+	}
 }

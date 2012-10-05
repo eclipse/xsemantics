@@ -1949,4 +1949,17 @@ class XsemanticsTestFiles {
 		objectClass(o) != null
 	}
 	'''
+
+	def testAuxiliaryDescriptionWithTheSameNameOfJudgment() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		foo(EObject o)
+	}
+	
+	judgments {
+		foo |- EClass c
+	}
+	'''
 }

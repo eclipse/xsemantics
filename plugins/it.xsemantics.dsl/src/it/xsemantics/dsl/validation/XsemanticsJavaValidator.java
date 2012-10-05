@@ -558,6 +558,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
+		
+		if (helper.auxiliaryDescriptionWithTheSameNameOfJudgment(aux) != null) {
+			error("Duplicate judgment with the same name '" + aux.getName() + "'",
+					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
+					IssueCodes.DUPLICATE_AUXILIARY_NAME);
+		}
 	}
 
 	protected String reportContainingSystemName(EObject object) {
