@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -610,8 +611,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
                 List<Method> _selectMethods = FjSepTypeSystem.this.fjAux.selectMethods(cl);
                 final Procedure1<Method> _function = new Procedure1<Method>() {
                     public void apply(final Method it) {
-                      /* G ||- it ~~ inheritedMethod */
-                      overridesInternal(G, _trace_, it, inheritedMethod);
+                      try {
+                        Boolean _overrides = FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
+                      } catch (Exception _e) {
+                        throw Exceptions.sneakyThrow(_e);
+                      }
                     }
                   };
                 IterableExtensions.<Method>forEach(_selectMethods, _function);

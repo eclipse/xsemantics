@@ -8,6 +8,7 @@ import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Member;
 import it.xsemantics.example.fj.fj.Method;
+import it.xsemantics.example.fj.fj.MethodBody;
 import it.xsemantics.example.fj.fj.New;
 import it.xsemantics.example.fj.fj.Selection;
 import it.xsemantics.example.fj.typing.FjStringRepresentation;
@@ -134,6 +135,12 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     return _basic;
   }
   
+  protected CharSequence _customRep(final MethodBody m) {
+    Expression _expression = m.getExpression();
+    String _stringRep = this.stringRep(_expression);
+    return _stringRep;
+  }
+  
   public CharSequence customRep(final EObject c) {
     if (c instanceof BasicType) {
       return _customRep((BasicType)c);
@@ -145,6 +152,8 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
       return _customRep((New)c);
     } else if (c instanceof Selection) {
       return _customRep((Selection)c);
+    } else if (c instanceof MethodBody) {
+      return _customRep((MethodBody)c);
     } else if (c != null) {
       return _customRep(c);
     } else {

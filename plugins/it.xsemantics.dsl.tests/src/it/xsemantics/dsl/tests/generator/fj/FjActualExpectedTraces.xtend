@@ -5,11 +5,12 @@ import it.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces
 class FjActualExpectedTraces extends FjExpectedTraces {
 
 	override okSubtypesClasses()
-'''ClassSubtyping: [] |- B <: A'''
+'''ClassSubtyping: [] |- B <: A
+ superclasses(class B extends A { }) = [class A { }]'''
 
 	override failSubtypesClasses()
 '''failed: A is not a subtype of B
- failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+ failed: superclasses(left.classref).contains(right.classref)'''
 
 	override failSubtypesBasic()
 '''failed: String is not a subtype of int
@@ -38,7 +39,7 @@ class FjActualExpectedTraces extends FjExpectedTraces {
     failed: invalid arguments for expected parameters
      failed: new D() is not assignable for A
       failed: D is not a subtype of A
-       failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+       failed: superclasses(left.classref).contains(right.classref)'''
 
 	override newCheckWrongSubtypeBasic()
 '''failed: cannot type new C(10, 10, new B(20, 'bar'))
@@ -74,6 +75,8 @@ class FjActualExpectedTraces extends FjExpectedTraces {
 	override methodCallType()
 '''TSelection: [] |- new A().m('foo') : String
  TNew: [] |- new A() : A
+  fields(class A { String m(String param) { retur...) = []
+   superclasses(class A { String m(String param) { retur...) = []
   SubtypeSequence: [] |- new A() ~> [] << []
  SubtypeSequence: [] |- new A().m('foo') ~> ['foo'] << [String param]
   ExpressionAssignableToType: [] |- 'foo' <| String
@@ -83,6 +86,8 @@ class FjActualExpectedTraces extends FjExpectedTraces {
 	override fieldSelectionType()
 '''TSelection: [] |- new A(10).f : int
  TNew: [] |- new A(10) : A
+  fields(class A { int f; }) = [int f;]
+   superclasses(class A { int f; }) = []
   SubtypeSequence: [] |- new A(10) ~> [10] << [int f;]
    ExpressionAssignableToType: [] |- 10 <| int
     TIntConstant: [] |- 10 : int
@@ -95,17 +100,24 @@ class FjActualExpectedTraces extends FjExpectedTraces {
 	override classType()
 '''TExpressionClassType: [] |~ new A() : A
  TNew: [] |- new A() : A
+  fields(class A {}) = []
+   superclasses(class A {}) = []
   SubtypeSequence: [] |- new A() ~> [] << []'''
 
 	override newType()
 '''TNew: [] |- new B() : B
+ fields(class B extends A { }) = []
+  superclasses(class B extends A { }) = [class A { }]
  SubtypeSequence: [] |- new B() ~> [] << []'''
 
 	override castType()
 '''TCast: [] |- (B) new A() : B
  TNew: [] |- new A() : A
+  fields(class A { }) = []
+   superclasses(class A { }) = []
   SubtypeSequence: [] |- new A() ~> [] << []
- ClassSubtyping: [] |- B <: A'''
+ ClassSubtyping: [] |- B <: A
+  superclasses(class B extends A { }) = [class A { }]'''
 
 	override methodCheckOk()
 '''CheckMethod: [] |- String m(String param) { return param; }
@@ -206,7 +218,7 @@ class FjActualExpectedTraces extends FjExpectedTraces {
 	override castWrong()
 '''failed: cannot type (D) new C()
  failed: C is not a subtype of D
-  failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+  failed: superclasses(left.classref).contains(right.classref)'''
 
 	override validateSubclassNotOverrideMethodChangingReturnType()
 '''Diagnostic ERROR "cannot change return type of inherited method: B" at Program.classes[2]->Class'C'.members[0]->Method'm'.type==((instanceof ClassType: it.xsemantics.example.fj.fj.impl.ClassTypeImpl)'''

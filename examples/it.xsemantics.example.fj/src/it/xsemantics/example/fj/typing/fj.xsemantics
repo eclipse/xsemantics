@@ -18,11 +18,21 @@ import com.google.common.collect.*
 
 import java.util.*
 
-inject FjAuxiliaryFunctions fjAux
-inject FjSemanticsUtils semanticsUtils
-
 auxiliary {
 	superclasses(Class cl) : List<Class>
+	fields(Class cl) : List<Field>
+	methods(Class cl) : List<Method>
+	overrides(Method current, Method previous)
+		error current.name + " does not override the superclass method"
+		source current
+	isValue(Expression e) : Boolean
+	/* replaces in a copy of the body's expression:
+	 * 'this' with thisReplacement 
+	 * param references with args */ 
+	replaceThisAndParams(MethodBody body,
+			Expression thisReplacement, 
+			List<Parameter> params, List<Expression> args
+		) : MethodBody
 }
 
 judgments {
@@ -39,9 +49,6 @@ judgments {
 		source expression
 	equalstype |- Type left ~~ Type right
 		error stringRep(left) + " is not the same type as " + stringRep(right)
-	overrides ||- Method current ~~ Method previous
-		error current.name + " does not override the superclass method"
-		source current
 	subtypesequence |- Expression owner ~> List<Expression> expressions << List<? extends TypedElement> elements
 		error "invalid arguments for expected parameters"
 		source owner
@@ -57,13 +64,79 @@ auxiliary superclasses(Class cl) {
 	)
 }
 
+auxiliary fields(Class clazz) {
+	var Iterable<Field> fields = new ArrayList<Field>
+	
+	// inherited fields must come first
+	for (superclass : superclasses(clazz)) {
+		fields = 
+			(EcoreUtil2::typeSelect(superclass.members, typeof(Field)) 
+				+ fields)
+	}
+	fields = fields + EcoreUtil2::typeSelect(clazz.members, typeof(Field))
+	Lists::newArrayList(fields)
+}
+
+auxiliary methods(Class clazz) {
+	val methods = EcoreUtil2::typeSelect(clazz.members, typeof(Method))
+	superclasses(clazz).forEach [ 
+		c | 
+		methods.addAll(EcoreUtil2::typeSelect(c.members, typeof(Method)))
+	]
+	methods
+}
+
+auxiliary overrides(Method current, Method previous) {
+	current.name != previous.name
+	or
+	{
+		empty |- current.type ~~ previous.type
+		or
+		fail error 
+		"cannot change return type of inherited method: " +
+			stringRep(previous.type)
+		source current
+		feature FjPackage::eINSTANCE.typedElement_Type
+		
+		current.params.size == previous.params.size
+		val previousParamsIt = previous.params.iterator
+		for (param : current.params) {
+			empty |- param.type ~~ previousParamsIt.next.type
+		}
+	}
+}
+
+auxiliary isValue(Expression e) { false }
+auxiliary isValue(Constant exp) { true }
+auxiliary isValue(New exp) { exp.args.forall[isValue(it)] }
+
+auxiliary replaceThisAndParams(MethodBody body, Expression thisReplacement, List<Parameter> params, List<Expression> args) {
+	clone(body) => [
+		EcoreUtil2::eAllOfType(it, typeof(This)).forEach [
+			EcoreUtil2::replace(eContainer,
+				eContainingFeature,
+				it,
+				clone(thisReplacement)
+			)
+		]
+		EcoreUtil2::eAllOfType(it, typeof(ParamRef)).forEach [
+			val paramIndex = params.indexOf(it.parameter)
+			EcoreUtil2::replace(eContainer,
+				eContainingFeature,
+				it,
+				clone(args.get(paramIndex))
+			)
+		]
+	]
+}
+
 axiom TThis
 	G |- This _this : env(G, 'this', ClassType)
 
 rule TNew
 	G |- New newExp : newExp.type
 from {
-	var fields = fjAux.getFields(newExp.type.classref)
+	var fields = fields(newExp.type.classref)
 	// we want the superclasses' fields first
 	G |- newExp ~> newExp.args << fields
 }
@@ -143,11 +216,7 @@ from {
 	or
 	right.classref.name == "Object"
 	or {
-		getAll(left.classref, 
-			FjPackage::eINSTANCE.class_Superclass,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Class))
-		.contains(right.classref)
+		superclasses(left.classref).contains(right.classref)
 	}
 }
 
@@ -198,34 +267,12 @@ from {
 	}
 }
 
-rule MethodOverride
-	G ||- Method current ~~ Method previous
-from {
-	current.name != previous.name
-	or
-	{
-		G |- current.type ~~ previous.type
-		or
-		fail error 
-		"cannot change return type of inherited method: " +
-			stringRep(previous.type)
-		source current
-		feature FjPackage::eINSTANCE.typedElement_Type
-		
-		current.params.size == previous.params.size
-		val previousParamsIt = previous.params.iterator
-		for (param : current.params) {
-			G |- param.type ~~ previousParamsIt.next.type
-		}
-	}
-}
-
 rule RNew
 	G |- New exp ~> New exp1
 from {
 	exp1 = clone(exp)
 	val indexOfNextToReduce = Iterables::indexOf(exp1.args) [
-		!semanticsUtils.isValue(it)
+		!isValue(it)
 	]
 	{
 		// all constructor's arguments are values
@@ -246,7 +293,7 @@ from {
 	{
 		// the receiver is not a value yet
 		val sel = clone(exp)
-		!semanticsUtils.isValue(exp.receiver)
+		!isValue(exp.receiver)
 		G |- exp.receiver ~> var Expression expi
 		sel.receiver = expi
 		exp1 = sel
@@ -259,8 +306,8 @@ from {
 			Field: {
 				// find the value's field corresponding
 				// to the requested field
-				val fieldIndex = Iterables::indexOf(
-					fjAux.getFields(receiver.type.classref))
+				val fieldIndex = 
+					Iterables::indexOf(fields(receiver.type.classref))
 				[
 					name == message.name
 				]
@@ -268,16 +315,15 @@ from {
 			}
 			Method: {
 				val indexOfNextToReduce = Iterables::indexOf(exp.args) [
-					!semanticsUtils.isValue(it)
+					!isValue(it)
 				]
 				{
 					// all invocation's arguments are values
 					indexOfNextToReduce < 0
-					val method = clone(exp.message) as Method
-					semanticsUtils.replaceThisAndParams(
-						method.body.expression, receiver,
-						method.params, exp.args)
-					exp1 = method.body.expression
+					val method = exp.message as Method
+					exp1 = replaceThisAndParams(
+						method.body, receiver,
+						method.params, exp.args).expression
 				}
 				or
 				{
@@ -297,7 +343,7 @@ rule RCast
 	G |- Cast exp ~> Expression exp1
 from {
 	val cast = clone(exp)
-	if (semanticsUtils.isValue(cast.expression)) {
+	if (isValue(cast.expression)) {
 		G |- cast.expression <| cast.type
 		exp1 = cast.expression
 	} else {
@@ -333,12 +379,7 @@ from {
 	val clazz = field.eContainer as Class
 	
 	if (clazz.superclass != null) {
-		var inheritedFields = getAll(
-			clazz.superclass,
-			FjPackage::eINSTANCE.class_Members,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Field)
-		)
+		var inheritedFields = fields(clazz.superclass)
 		// make sure no duplicate fields in the hierarchy
 		inheritedFields.forEach [
 			inheritedField |
@@ -366,8 +407,8 @@ from {
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			fjAux.selectMethods(clazz).forEach [
-				empty ||- it ~~ inheritedMethod
+			methods(clazz).forEach [
+				overrides(it, inheritedMethod)
 			]
 		]
 	}
@@ -377,12 +418,7 @@ checkrule CheckClassHierachyNotCyclic for
 	Class cl
 from {
 	if (cl.superclass != null) {
-		!getAll(
-			cl,
-			FjPackage::eINSTANCE.class_Superclass,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Class)
-		).contains(cl)
+		!superclasses(cl).contains(cl)
 		or
 		fail
 			error "Cyclic hierarchy for " + cl.name

@@ -13,7 +13,6 @@ import it.xsemantics.example.fj.fj.Type;
 import it.xsemantics.example.fj.tests.FjBaseTests;
 import it.xsemantics.example.fj.tests.FjInjectorProviderCustom;
 import it.xsemantics.example.fj.typing.FjTypeSystem;
-import it.xsemantics.example.fj.util.FjSemanticsUtils;
 import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result3;
@@ -25,6 +24,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,9 +34,6 @@ import org.junit.runner.RunWith;
 @InjectWith(value = FjInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class FjSemanticsTests extends FjBaseTests {
-  @Inject
-  private FjSemanticsUtils _fjSemanticsUtils;
-  
   @Inject
   private FjTypeSystem fjSystem;
   
@@ -109,51 +106,6 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   @Test
-  public void testReplaceThis() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class B { }");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class A {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("B o;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("A m(A a, int i) { return this.m(this, 10); }");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("new A(new B())");
-    _builder.newLine();
-    this.assertThisReplacement(_builder, "new A(new B()).m(new A(new B()), 10)");
-  }
-  
-  @Test
-  public void testReplaceParams() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class B { }");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class A {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("B o;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("A m(A a, B b, int i, String s) { return a.m(a, b, i, s); }");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("new A(new B()).m(new A(new B()), new A(new B()).o, 10, \'foo\')");
-    _builder.newLine();
-    this.assertParamsReplacement(_builder, 
-      "new A(new B()).m(new A(new B()), new A(new B()).o, 10, \'foo\')");
-  }
-  
-  @Test
   public void testReplaceThisAndParams() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class B { }");
@@ -215,11 +167,20 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new C() : C");
     _builder_1.newLine();
     _builder_1.append(" ");
+    _builder_1.append("fields(class C extends B {}) = []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class C extends B {}) = [class B extends Base { }, class Base { }]");
+    _builder_1.newLine();
+    _builder_1.append(" ");
     _builder_1.append("SubtypeSequence: [] |- new C() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append("SUBTYPE AFTER SUBSTITUTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- C <: B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("superclasses(class C extends B {}) = [class B extends Base { }, class Base { }]");
     this.assertSubstitutionLemma(_builder, _builder_1);
   }
   
@@ -266,11 +227,20 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new C() : C");
     _builder_1.newLine();
     _builder_1.append(" ");
+    _builder_1.append("fields(class C extends B { }) = []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class C extends B { }) = [class B extends A { A m() { return this;..., class A { }]");
+    _builder_1.newLine();
+    _builder_1.append(" ");
     _builder_1.append("SubtypeSequence: [] |- new C() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append("SUBTYPE AFTER SUBSTITUTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- C <: B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("superclasses(class C extends B { }) = [class B extends A { A m() { return this;..., class A { }]");
     this.assertSubstitutionLemma(_builder, _builder_1);
   }
   
@@ -322,6 +292,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("TNew: [] |- new C(10) : C");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("fields(class C extends B { }) = [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class C extends B { }) = [class B extends A { int m() { return thi..., class A { int i; }]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("SubtypeSequence: [] |- new C(10) ~> [10] << [int i;]");
@@ -449,7 +425,7 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("failed: A is not a subtype of B");
     _builder_1.newLine();
     _builder_1.append("   ");
-    _builder_1.append("failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)");
+    _builder_1.append("failed: superclasses(left.classref).contains(right.classref)");
     this.assertReduceWrong(_builder, _builder_1);
   }
   
@@ -477,6 +453,21 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("RSelection: [] |- new A(10, \'a\').i ~> 10");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(new A(10, \'a\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(10) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(\'a\') = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("fields(class A { int i; String s; }) = [int i;, String s;]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class A { int i; String s; }) = []");
     this.assertReduceOneStep(_builder, 
       "new A(10, \'b\').i", _builder_1);
   }
@@ -504,7 +495,31 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("RSelection: [] |- new A(10, \'b\').m(new A(20, \'c\').i) ~> new A(10, \'b\').m(20)");
     _builder_1.newLine();
     _builder_1.append(" ");
+    _builder_1.append("isValue(new A(10, \'b\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(10) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'b\') = true");
+    _builder_1.newLine();
+    _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A(20, \'c\').i ~> 20");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A(20, \'c\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(20) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(\'c\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("fields(class A { int i; String s; int m(int arg...) = [int i;, String s;]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class A { int i; String s; int m(int arg...) = []");
     this.assertReduceOneStep(_builder, 
       "new A(10, \'b\').m(20)", _builder_1);
   }
@@ -563,7 +578,43 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("  ");
     _builder_1.append("RSelection: [] |- new A(10, true, \'a\').i ~> 10");
     _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(new A(10, true, \'a\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(10) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(true) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(\'a\') = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("fields(class A { int i; boolean b; String s; }) = [int i;, boolean b;, String s;]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class A { int i; boolean b; String s; }) = []");
+    _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new A(10, false, \'b\').b ~> false");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new A(10, false, \'b\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(10) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(false) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'b\') = true");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("fields(class A { int i; boolean b; String s; }) = [int i;, boolean b;, String s;]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class A { int i; boolean b; String s; }) = []");
     this.assertReduceAll(_builder, _builder_1);
   }
   
@@ -615,19 +666,91 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A(new B(\'foo\')).m(new B(\'bar\'), \'aaa\') ~> new A(new B(\'foo\')).getB(\'aaa\')");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A(new B(\'foo\'))) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(new B(\'foo\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(\'foo\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new B(\'bar\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(\'bar\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'aaa\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("replaceThisAndParams(return this.getB(s);, new A(new B(\'foo\')), [B b, String s], [new B(\'bar\'), \'aaa\']) = new A(new B(\'foo\')).getB(\'aaa\')");
+    _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new A(new B(\'foo\')).getB(\'aaa\').getS() ~> new A(new B(\'foo\')).o.getS()");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A(new B(\'foo\')).getB(\'aaa\') ~> new A(new B(\'foo\')).o");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A(new B(\'foo\'))) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(new B(\'foo\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(\'foo\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'aaa\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("replaceThisAndParams(return this.o;, new A(new B(\'foo\')), [String s], [\'aaa\']) = new A(new B(\'foo\')).o");
     _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new A().o.getS() ~> new B(\'foo\').getS()");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A(new B(\'foo\')).o ~> new B(\'foo\')");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A(new B(\'foo\'))) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(new B(\'foo\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("isValue(\'foo\') = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("fields(class A { B o; B m(B b, String s) { retu...) = [B o;]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class A { B o; B m(B b, String s) { retu...) = []");
+    _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new B(\'foo\').getS() ~> new B(\'foo\').s");
     _builder_1.newLine();
-    _builder_1.append("RSelection: [] |- new B(\'foo\').s ~> \'foo\' ");
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new B(\'foo\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'foo\') = true");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("replaceThisAndParams(return this.s;, new B(\'foo\'), [], []) = new B(\'foo\').s");
+    _builder_1.newLine();
+    _builder_1.append("RSelection: [] |- new B(\'foo\').s ~> \'foo\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new B(\'foo\')) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(\'foo\') = true");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("fields(class B { String s; String getS() { retu...) = [String s;]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class B { String s; String getS() { retu...) = []");
     this.assertReduceAll(_builder, _builder_1);
   }
   
@@ -660,13 +783,34 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A(10).createB() ~> new B(100)");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A(10)) = true");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("isValue(10) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("replaceThisAndParams(return new B(100);, new A(10), [], []) = new B(100)");
+    _builder_1.newLine();
     _builder_1.append("RCast: [] |- (A) new B(100) ~> new B(100)");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new B(100)) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(100) = true");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("ExpressionAssignableToType: [] |- new B(100) <| A");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("TNew: [] |- new B(100) : B");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("fields(class B extends A { }) = [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; B createB() { return ne...]");
     _builder_1.newLine();
     _builder_1.append("   ");
     _builder_1.append("SubtypeSequence: [] |- new B(100) ~> [100] << [int i;]");
@@ -682,6 +826,9 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; B createB() { return ne...]");
     this.assertReduceAll(_builder, _builder_1);
   }
   
@@ -710,6 +857,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new B(10) : B");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("fields(class B extends A { }) = [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]");
     _builder_1.newLine();
     _builder_1.append("   ");
@@ -724,9 +877,18 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append(" ");
     _builder_1.append("ClassSubtyping: [] |- B <: A");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
+    _builder_1.newLine();
     _builder_1.append("REDUCTION");
     _builder_1.newLine();
     _builder_1.append("RCast: [] |- (A) new B(10) ~> new B(10)");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new B(10)) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(10) = true");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("ExpressionAssignableToType: [] |- new B(10) <| A");
@@ -735,6 +897,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new B(10) : B");
     _builder_1.newLine();
     _builder_1.append("   ");
+    _builder_1.append("fields(class B extends A { }) = [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
     _builder_1.append("SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]");
     _builder_1.newLine();
     _builder_1.append("    ");
@@ -749,9 +917,18 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("  ");
     _builder_1.append("ClassSubtyping: [] |- B <: A");
     _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
+    _builder_1.newLine();
     _builder_1.append("WELLTYPED AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("TNew: [] |- new B(10) : B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("fields(class B extends A { }) = [int i;]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]");
@@ -768,6 +945,9 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("SUBTYPE AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("superclasses(class B extends A { }) = [class A { int i; }]");
     this.assertSubjectReductionManual(_builder, _builder_1);
   }
   
@@ -800,6 +980,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new B() : B");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("fields(class B extends A{ }) = []");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -809,9 +995,21 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.newLine();
     _builder_1.append("RSelection: [] |- new B().m() ~> new B()");
     _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("isValue(new B()) = true");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("replaceThisAndParams(return this;, new B(), [], []) = new B()");
+    _builder_1.newLine();
     _builder_1.append("WELLTYPED AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("TNew: [] |- new B() : B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("fields(class B extends A{ }) = []");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
@@ -819,6 +1017,9 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("SUBTYPE AFTER REDUCTION");
     _builder_1.newLine();
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
     this.assertSubjectReductionManual(_builder, _builder_1);
   }
   
@@ -852,6 +1053,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new B() : B");
     _builder_1.newLine();
     _builder_1.append("   ");
+    _builder_1.append("fields(class B extends A{ }) = []");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
+    _builder_1.newLine();
+    _builder_1.append("   ");
     _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -860,14 +1067,29 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new B().m() ~> new B()");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new B()) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("replaceThisAndParams(return this;, new B(), [], []) = new B()");
+    _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("TNew: [] |- new B() : B");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("fields(class B extends A{ }) = []");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("superclasses(class B extends A{ }) = [class A { A m() { return this; } }]");
     this.assertSubjectReduction(_builder, _builder_1);
   }
   
@@ -900,6 +1122,12 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new A() : A");
     _builder_1.newLine();
     _builder_1.append("   ");
+    _builder_1.append("fields(class A { Object m() { return this.n(new...) = []");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class A { Object m() { return this.n(new...) = []");
+    _builder_1.newLine();
+    _builder_1.append("   ");
     _builder_1.append("SubtypeSequence: [] |- new A() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -908,11 +1136,23 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append(" ");
     _builder_1.append("RSelection: [] |- new A().m() ~> new A().n(new B())");
     _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("isValue(new A()) = true");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("replaceThisAndParams(return this.n(new B());, new A(), [], []) = new A().n(new B())");
+    _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("TSelection: [] |- new A().n(new B()) : A");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("TNew: [] |- new A() : A");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("fields(class A { Object m() { return this.n(new...) = []");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("superclasses(class A { Object m() { return this.n(new...) = []");
     _builder_1.newLine();
     _builder_1.append("   ");
     _builder_1.append("SubtypeSequence: [] |- new A() ~> [] << []");
@@ -927,10 +1167,19 @@ public class FjSemanticsTests extends FjBaseTests {
     _builder_1.append("TNew: [] |- new B() : B");
     _builder_1.newLine();
     _builder_1.append("     ");
+    _builder_1.append("fields(class B extends A {}) = []");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("superclasses(class B extends A {}) = [class A { Object m() { return this.n(new...]");
+    _builder_1.newLine();
+    _builder_1.append("     ");
     _builder_1.append("SubtypeSequence: [] |- new B() ~> [] << []");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("ClassSubtyping: [] |- B <: A");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("superclasses(class B extends A {}) = [class A { Object m() { return this.n(new...]");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("ClassSubtyping: [] |- A <: Object");
@@ -938,89 +1187,76 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   private void assertValue(final CharSequence prog) {
-    Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
-    Expression _main = _parseAndAssertNoError.getMain();
-    boolean _isValue = this._fjSemanticsUtils.isValue(_main);
-    Assert.assertTrue(_isValue);
+    try {
+      Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+      Expression _main = _parseAndAssertNoError.getMain();
+      Boolean _isValue = this.fjSystem.isValue(_main);
+      Assert.assertTrue((_isValue).booleanValue());
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private void assertNotValue(final CharSequence prog) {
-    Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
-    Expression _main = _parseAndAssertNoError.getMain();
-    boolean _isValue = this._fjSemanticsUtils.isValue(_main);
-    Assert.assertFalse(_isValue);
-  }
-  
-  private void assertThisReplacement(final CharSequence prog, final CharSequence expected) {
-    final Program p = this.parseAndAssertNoError(prog);
-    Method _methodByName = this.methodByName(p, "m");
-    MethodBody _body = _methodByName.getBody();
-    Expression _expression = _body.getExpression();
-    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
-    Expression _main = p.getMain();
-    this._fjSemanticsUtils.replaceThis(mBodyExp, _main);
-    String _string = expected.toString();
-    String _string_1 = this.stringRep.string(mBodyExp);
-    Assert.assertEquals(_string, _string_1);
-  }
-  
-  private void assertParamsReplacement(final CharSequence prog, final CharSequence expected) {
-    final Program p = this.parseAndAssertNoError(prog);
-    final Method m = this.methodByName(p, "m");
-    MethodBody _body = m.getBody();
-    Expression _expression = _body.getExpression();
-    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
-    EList<Parameter> _params = m.getParams();
-    Expression _main = p.getMain();
-    EList<Expression> _args = ((Selection) _main).getArgs();
-    this._fjSemanticsUtils.replaceParams(mBodyExp, _params, _args);
-    String _string = expected.toString();
-    String _string_1 = this.stringRep.string(mBodyExp);
-    Assert.assertEquals(_string, _string_1);
+    try {
+      Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+      Expression _main = _parseAndAssertNoError.getMain();
+      Boolean _isValue = this.fjSystem.isValue(_main);
+      Assert.assertFalse((_isValue).booleanValue());
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private void assertThisAndParamsReplacement(final CharSequence prog, final CharSequence expected) {
-    final Program p = this.parseAndAssertNoError(prog);
-    final Method m = this.methodByName(p, "m");
-    MethodBody _body = m.getBody();
-    Expression _expression = _body.getExpression();
-    final Expression mBodyExp = EcoreUtil.<Expression>copy(_expression);
-    Expression _main = p.getMain();
-    Expression _receiver = ((Selection) _main).getReceiver();
-    EList<Parameter> _params = m.getParams();
-    Expression _main_1 = p.getMain();
-    EList<Expression> _args = ((Selection) _main_1).getArgs();
-    this._fjSemanticsUtils.replaceThisAndParams(mBodyExp, _receiver, _params, _args);
-    String _string = expected.toString();
-    String _string_1 = this.stringRep.string(mBodyExp);
-    Assert.assertEquals(_string, _string_1);
+    try {
+      final Program p = this.parseAndAssertNoError(prog);
+      final Method m = this.methodByName(p, "m");
+      MethodBody _body = m.getBody();
+      Expression _main = p.getMain();
+      Expression _receiver = ((Selection) _main).getReceiver();
+      EList<Parameter> _params = m.getParams();
+      Expression _main_1 = p.getMain();
+      EList<Expression> _args = ((Selection) _main_1).getArgs();
+      MethodBody _replaceThisAndParams = this.fjSystem.replaceThisAndParams(_body, _receiver, _params, _args);
+      final Expression replaced = _replaceThisAndParams.getExpression();
+      String _string = expected.toString();
+      String _string_1 = this.stringRep.string(replaced);
+      Assert.assertEquals(_string, _string_1);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private void assertReduceAll(final CharSequence prog, final CharSequence expectedTrace) {
-    Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
-    Expression _main = _parseAndAssertNoError.getMain();
-    Expression exp = EcoreUtil.<Expression>copy(_main);
-    Result<Expression> result = this.assertReduce(exp);
-    Expression _value = result.getValue();
-    boolean _isValue = this._fjSemanticsUtils.isValue(_value);
-    boolean _not = (!_isValue);
-    boolean _while = _not;
-    while (_while) {
-      {
+    try {
+      Program _parseAndAssertNoError = this.parseAndAssertNoError(prog);
+      Expression _main = _parseAndAssertNoError.getMain();
+      Expression exp = EcoreUtil.<Expression>copy(_main);
+      Result<Expression> result = this.assertReduce(exp);
+      Expression _value = result.getValue();
+      Boolean _isValue = this.fjSystem.isValue(_value);
+      boolean _not = (!_isValue);
+      boolean _while = _not;
+      while (_while) {
+        {
+          Expression _value_1 = result.getValue();
+          exp = _value_1;
+          Result<Expression> _assertReduce = this.assertReduce(exp);
+          result = _assertReduce;
+        }
         Expression _value_1 = result.getValue();
-        exp = _value_1;
-        Result<Expression> _assertReduce = this.assertReduce(exp);
-        result = _assertReduce;
+        Boolean _isValue_1 = this.fjSystem.isValue(_value_1);
+        boolean _not_1 = (!_isValue_1);
+        _while = _not_1;
       }
-      Expression _value_1 = result.getValue();
-      boolean _isValue_1 = this._fjSemanticsUtils.isValue(_value_1);
-      boolean _not_1 = (!_isValue_1);
-      _while = _not_1;
+      String _string = expectedTrace.toString();
+      String _trim = _string.trim();
+      String _traceAsString = this.traceUtils.traceAsString(this.trace);
+      Assert.assertEquals(_trim, _traceAsString);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    String _string = expectedTrace.toString();
-    String _trim = _string.trim();
-    String _traceAsString = this.traceUtils.traceAsString(this.trace);
-    Assert.assertEquals(_trim, _traceAsString);
   }
   
   private Expression assertReduceOneStep(final CharSequence prog, final CharSequence expected, final CharSequence expectedTrace) {
@@ -1090,39 +1326,41 @@ public class FjSemanticsTests extends FjBaseTests {
   }
   
   private void assertSubstitutionLemma(final CharSequence prog, final CharSequence expectedTrace) {
-    final Program p = this.parseAndAssertNoError(prog);
-    final Method m = this.methodByName(p, "m");
-    this.trace.addToTrace("WELLTYPED METHOD BODY");
-    it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(m, it.xsemantics.example.fj.fj.Class.class);
-    final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
-    RuleEnvironment _environmentEntry = this.fjSystem.environmentEntry("this", typeForThis);
-    RuleEnvironment _ruleEnvironment = new RuleEnvironment(_environmentEntry);
-    MethodBody _body = m.getBody();
-    Expression _expression = _body.getExpression();
-    final Result<Type> methodBodyType = this.fjSystem.type(_ruleEnvironment, 
-      this.trace, _expression);
-    this.<Type>assertResult(methodBodyType);
-    MethodBody _body_1 = m.getBody();
-    final MethodBody mBody = EcoreUtil.<MethodBody>copy(_body_1);
-    Expression _expression_1 = mBody.getExpression();
-    Expression _main = p.getMain();
-    Expression _receiver = ((Selection) _main).getReceiver();
-    EList<Parameter> _params = m.getParams();
-    Expression _main_1 = p.getMain();
-    EList<Expression> _args = ((Selection) _main_1).getArgs();
-    this._fjSemanticsUtils.replaceThisAndParams(_expression_1, _receiver, _params, _args);
-    this.trace.addToTrace("WELLTYPED AFTER SUBSTITUTION");
-    Expression _expression_2 = mBody.getExpression();
-    final Result<Type> substType = this.fjSystem.type(null, this.trace, _expression_2);
-    this.<Type>assertResult(substType);
-    this.trace.addToTrace("SUBTYPE AFTER SUBSTITUTION");
-    Type _value = substType.getValue();
-    Type _value_1 = methodBodyType.getValue();
-    final Result<Boolean> isSubtype = this.fjSystem.subtype(null, this.trace, _value, _value_1);
-    this.<Boolean>assertResult(isSubtype);
-    String _string = expectedTrace.toString();
-    String _traceAsString = this.traceUtils.traceAsString(this.trace);
-    Assert.assertEquals(_string, _traceAsString);
+    try {
+      final Program p = this.parseAndAssertNoError(prog);
+      final Method m = this.methodByName(p, "m");
+      this.trace.addToTrace("WELLTYPED METHOD BODY");
+      it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(m, it.xsemantics.example.fj.fj.Class.class);
+      final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+      RuleEnvironment _environmentEntry = this.fjSystem.environmentEntry("this", typeForThis);
+      RuleEnvironment _ruleEnvironment = new RuleEnvironment(_environmentEntry);
+      MethodBody _body = m.getBody();
+      Expression _expression = _body.getExpression();
+      final Result<Type> methodBodyType = this.fjSystem.type(_ruleEnvironment, 
+        this.trace, _expression);
+      this.<Type>assertResult(methodBodyType);
+      MethodBody _body_1 = m.getBody();
+      Expression _main = p.getMain();
+      Expression _receiver = ((Selection) _main).getReceiver();
+      EList<Parameter> _params = m.getParams();
+      Expression _main_1 = p.getMain();
+      EList<Expression> _args = ((Selection) _main_1).getArgs();
+      MethodBody _replaceThisAndParams = this.fjSystem.replaceThisAndParams(_body_1, _receiver, _params, _args);
+      final Expression replaced = _replaceThisAndParams.getExpression();
+      this.trace.addToTrace("WELLTYPED AFTER SUBSTITUTION");
+      final Result<Type> substType = this.fjSystem.type(null, this.trace, replaced);
+      this.<Type>assertResult(substType);
+      this.trace.addToTrace("SUBTYPE AFTER SUBSTITUTION");
+      Type _value = substType.getValue();
+      Type _value_1 = methodBodyType.getValue();
+      final Result<Boolean> isSubtype = this.fjSystem.subtype(null, this.trace, _value, _value_1);
+      this.<Boolean>assertResult(isSubtype);
+      String _string = expectedTrace.toString();
+      String _traceAsString = this.traceUtils.traceAsString(this.trace);
+      Assert.assertEquals(_string, _traceAsString);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private void assertSubjectReductionManual(final CharSequence prog, final CharSequence expectedTrace) {

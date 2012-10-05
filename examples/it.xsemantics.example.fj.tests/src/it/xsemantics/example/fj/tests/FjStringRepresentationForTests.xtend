@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import it.xsemantics.example.fj.fj.ClassType
 import it.xsemantics.example.fj.fj.BasicType
+import it.xsemantics.example.fj.fj.MethodBody
 
 class FjStringRepresentationForTests extends FjStringRepresentation {
 	override stringRep(EObject eObject) {
@@ -56,5 +57,9 @@ class FjStringRepresentationForTests extends FjStringRepresentation {
 
 	def dispatch customRep(BasicType c) {
 		c.basic
+	}
+	
+	def dispatch customRep(MethodBody m) {
+		m.expression.stringRep
 	}
 }

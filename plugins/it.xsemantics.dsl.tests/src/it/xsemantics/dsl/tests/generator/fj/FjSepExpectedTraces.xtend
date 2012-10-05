@@ -5,11 +5,12 @@ import it.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces
 class FjSepExpectedTraces extends FjExpectedTraces {
 
 	override okSubtypesClasses()
-'''ClassSubtyping: [] |- B <: A'''
+'''ClassSubtyping: [] |- B <: A
+ superclasses(class B extends A { }) = [class A { }]'''
 
 	override failSubtypesClasses()
 '''failed: A is not a subtype of B
- failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+ failed: superclasses(left.classref).contains(right.classref)'''
 
 	override failSubtypesBasic()
 '''failed: String is not a subtype of int
@@ -34,7 +35,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   failed: invalid arguments for expected parameters
    failed: new D() is not assignable for A
     failed: D is not a subtype of A
-     failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+     failed: superclasses(left.classref).contains(right.classref)'''
 
 	override newCheckWrongSubtypeBasic()
 '''failed: CheckNew: [] |- new C(10, 10, new B(20, 'bar'))
@@ -91,6 +92,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 '''CheckMethod: [] |- A m() { return this.n(); }
  TSelection: [this <- B] |- this.n() : B
  ClassSubtyping: [] |- B <: A
+  superclasses(class B extends A { A m() { return this....) = [class A { }]
  CheckSelection: [this <- B] |- this.n()
   CheckThis: [this <- B] |- this
   SubtypeSequence: [this <- B] |- this.n() ~> [] << []'''
@@ -106,6 +108,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   ExpressionAssignableToType: [] |- new B() <| A
    TNew: [] |- new B() : B
    ClassSubtyping: [] |- B <: A
+    superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]
   ExpressionAssignableToType: [] |- 10 <| int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
@@ -127,6 +130,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   ExpressionAssignableToType: [] |- new B(20, 'bar') <| A
    TNew: [] |- new B(20, 'bar') : B
    ClassSubtyping: [] |- B <: A
+    superclasses(class B extends A { String s; }) = [class A { int i; }]
  CheckConstant: [] |- 10
  CheckConstant: [] |- 'foo'
  CheckNew: [] |- new B(20, 'bar')
@@ -155,6 +159,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   ExpressionAssignableToType: [] |- new B(20, false, 'bar') <| A
    TNew: [] |- new B(20, false, 'bar') : B
    ClassSubtyping: [] |- B <: A
+    superclasses(class B extends A { String s; }) = [class A { int i; boolean b; }]
  CheckConstant: [] |- 10
  CheckConstant: [] |- true
  CheckConstant: [] |- 'foo'
@@ -176,12 +181,14 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 	override castOk1()
 '''CheckCast: [] |- (C) new A()
  TNew: [] |- new A() : A
- ClassSubtyping: [] |- C <: A'''
+ ClassSubtyping: [] |- C <: A
+  superclasses(class C extends B { }) = [class B extends A { }, class A { }]'''
 
 	override castOk2()
 '''CheckCast: [] |- (A) new C()
  TNew: [] |- new C() : C
- ClassSubtyping: [] |- C <: A'''
+ ClassSubtyping: [] |- C <: A
+  superclasses(class C extends B { }) = [class B extends A { }, class A { }]'''
 
 	override subclassOkWRTFields()
 '''CheckClass: [] |- class B extends A { String s; }
@@ -199,7 +206,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
   TIntConstant: [this <- B] |- 100 : int
   BasicSubtyping: [] |- int <: int
   CheckConstant: [this <- B] |- 100
- MethodOverride: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }
+ overrides(int m(String s) { return 100; }, int m(String s) { return 10; }) = null
   BasicEquals: [] |- int ~~ int
   BasicEquals: [] |- String ~~ String'''
 
@@ -212,7 +219,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 	override castWrong()
 '''failed: CheckCast: [] |- (D) new C()
  failed: C is not a subtype of D
-  failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+  failed: superclasses(left.classref).contains(right.classref)'''
 
 	override validateSubclassNotOverrideMethodChangingReturnType()
 '''Diagnostic ERROR "cannot change return type of inherited method: B" at Program.classes[2]->Class'C'.members[0]->Method'm'.type==((instanceof ClassType: it.xsemantics.example.fj.fj.impl.ClassTypeImpl)'''

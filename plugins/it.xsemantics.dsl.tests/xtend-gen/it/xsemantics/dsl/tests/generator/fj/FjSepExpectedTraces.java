@@ -8,6 +8,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
   public CharSequence okSubtypesClasses() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ClassSubtyping: [] |- B <: A");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("superclasses(class B extends A { }) = [class A { }]");
     return _builder;
   }
   
@@ -16,7 +19,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("failed: A is not a subtype of B");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)");
+    _builder.append("failed: superclasses(left.classref).contains(right.classref)");
     return _builder;
   }
   
@@ -79,7 +82,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("failed: D is not a subtype of A");
     _builder.newLine();
     _builder.append("     ");
-    _builder.append("failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)");
+    _builder.append("failed: superclasses(left.classref).contains(right.classref)");
     return _builder;
   }
   
@@ -210,6 +213,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append(" ");
     _builder.append("ClassSubtyping: [] |- B <: A");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class B extends A { A m() { return this....) = [class A { }]");
+    _builder.newLine();
     _builder.append(" ");
     _builder.append("CheckSelection: [this <- B] |- this.n()");
     _builder.newLine();
@@ -251,6 +257,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.newLine();
     _builder.append("   ");
     _builder.append("ClassSubtyping: [] |- B <: A");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("ExpressionAssignableToType: [] |- 10 <| int");
@@ -311,6 +320,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.newLine();
     _builder.append("   ");
     _builder.append("ClassSubtyping: [] |- B <: A");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("superclasses(class B extends A { String s; }) = [class A { int i; }]");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("CheckConstant: [] |- 10");
@@ -393,6 +405,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("   ");
     _builder.append("ClassSubtyping: [] |- B <: A");
     _builder.newLine();
+    _builder.append("    ");
+    _builder.append("superclasses(class B extends A { String s; }) = [class A { int i; boolean b; }]");
+    _builder.newLine();
     _builder.append(" ");
     _builder.append("CheckConstant: [] |- 10");
     _builder.newLine();
@@ -455,6 +470,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("ClassSubtyping: [] |- C <: A");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class C extends B { }) = [class B extends A { }, class A { }]");
     return _builder;
   }
   
@@ -467,6 +485,9 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("ClassSubtyping: [] |- C <: A");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("superclasses(class C extends B { }) = [class B extends A { }, class A { }]");
     return _builder;
   }
   
@@ -511,7 +532,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("CheckConstant: [this <- B] |- 100");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("MethodOverride: [] ||- int m(String s) { return 100; } ~~ int m(String s) { return 10; }");
+    _builder.append("overrides(int m(String s) { return 100; }, int m(String s) { return 10; }) = null");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("BasicEquals: [] |- int ~~ int");
@@ -541,7 +562,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("failed: C is not a subtype of D");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)");
+    _builder.append("failed: superclasses(left.classref).contains(right.classref)");
     return _builder;
   }
   

@@ -2,17 +2,16 @@ package it.xsemantics.example.fj.tests
 
 import com.google.inject.Inject
 import it.xsemantics.example.fj.fj.Expression
+import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.typing.FjTypeSystem
-import it.xsemantics.example.fj.util.FjSemanticsUtils
+import it.xsemantics.example.fj.util.FjTypeUtils
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.RuleEnvironment
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.example.fj.fj.Selection
-import it.xsemantics.example.fj.util.FjTypeUtils
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.Result
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -21,8 +20,6 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 @InjectWith(typeof(FjInjectorProviderCustom))
 class FjSemanticsTests extends FjBaseTests {
 
-	@Inject extension FjSemanticsUtils
-	
 	@Inject FjTypeSystem fjSystem
 
 	@Test
@@ -70,35 +67,6 @@ class FjSemanticsTests extends FjBaseTests {
 	}
 
 	@Test
-	def void testReplaceThis() {
-		'''
-		class B { }
-		
-		class A {
-			B o;
-			A m(A a, int i) { return this.m(this, 10); }
-		}
-		
-		new A(new B())
-		'''.assertThisReplacement("new A(new B()).m(new A(new B()), 10)")
-	}
-
-	@Test
-	def void testReplaceParams() {
-		'''
-		class B { }
-		
-		class A {
-			B o;
-			A m(A a, B b, int i, String s) { return a.m(a, b, i, s); }
-		}
-		
-		new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')
-		'''.assertParamsReplacement(
-		"new A(new B()).m(new A(new B()), new A(new B()).o, 10, 'foo')")
-	}
-
-	@Test
 	def void testReplaceThisAndParams() {
 		'''
 		class B { }
@@ -134,9 +102,12 @@ WELLTYPED METHOD BODY
 TParamRef: [this <- A] |- b : B
 WELLTYPED AFTER SUBSTITUTION
 TNew: [] |- new C() : C
+ fields(class C extends B {}) = []
+  superclasses(class C extends B {}) = [class B extends Base { }, class Base { }]
  SubtypeSequence: [] |- new C() ~> [] << []
 SUBTYPE AFTER SUBSTITUTION
-ClassSubtyping: [] |- C <: B''')
+ClassSubtyping: [] |- C <: B
+ superclasses(class C extends B {}) = [class B extends Base { }, class Base { }]''')
 	}
 
 	@Test
@@ -163,9 +134,12 @@ WELLTYPED METHOD BODY
 TThis: [this <- B] |- this : B
 WELLTYPED AFTER SUBSTITUTION
 TNew: [] |- new C() : C
+ fields(class C extends B { }) = []
+  superclasses(class C extends B { }) = [class B extends A { A m() { return this;..., class A { }]
  SubtypeSequence: [] |- new C() ~> [] << []
 SUBTYPE AFTER SUBSTITUTION
-ClassSubtyping: [] |- C <: B''')
+ClassSubtyping: [] |- C <: B
+ superclasses(class C extends B { }) = [class B extends A { A m() { return this;..., class A { }]''')
 	}
 
 	@Test
@@ -194,6 +168,8 @@ TSelection: [this <- B] |- this.i : int
 WELLTYPED AFTER SUBSTITUTION
 TSelection: [] |- new C(10).i : int
  TNew: [] |- new C(10) : C
+  fields(class C extends B { }) = [int i;]
+   superclasses(class C extends B { }) = [class B extends A { int m() { return thi..., class A { int i; }]
   SubtypeSequence: [] |- new C(10) ~> [10] << [int i;]
    ExpressionAssignableToType: [] |- 10 <| int
     TIntConstant: [] |- 10 : int
@@ -269,7 +245,7 @@ BasicSubtyping: [] |- int <: int''')
 '''failed: RCast: [] |- (B) new A(10) ~> Expression
  failed: new A(10) is not assignable for B
   failed: A is not a subtype of B
-   failed: getAll(left.classref, FjPackage::eINSTANCE.class_Superclass, FjPackage::eINSTANCE.class_Superclass, typeof(Class)) .contains(right.classref)'''
+   failed: superclasses(left.classref).contains(right.classref)'''
 )
 	}
 
@@ -287,7 +263,12 @@ BasicSubtyping: [] |- int <: int''')
 '''
 RSelection: [] |- new A(new A(10, 'a').i, 'b').i ~> new A(10, 'b').i
  RNew: [] |- new A(new A(10, 'a').i, 'b') ~> new A(10, 'b')
-  RSelection: [] |- new A(10, 'a').i ~> 10'''
+  RSelection: [] |- new A(10, 'a').i ~> 10
+   isValue(new A(10, 'a')) = true
+    isValue(10) = true
+    isValue('a') = true
+   fields(class A { int i; String s; }) = [int i;, String s;]
+    superclasses(class A { int i; String s; }) = []'''
 		)
 	}
 
@@ -305,7 +286,15 @@ RSelection: [] |- new A(new A(10, 'a').i, 'b').i ~> new A(10, 'b').i
 "new A(10, 'b').m(20)",
 '''
 RSelection: [] |- new A(10, 'b').m(new A(20, 'c').i) ~> new A(10, 'b').m(20)
- RSelection: [] |- new A(20, 'c').i ~> 20''')
+ isValue(new A(10, 'b')) = true
+  isValue(10) = true
+  isValue('b') = true
+ RSelection: [] |- new A(20, 'c').i ~> 20
+  isValue(new A(20, 'c')) = true
+   isValue(20) = true
+   isValue('c') = true
+  fields(class A { int i; String s; int m(int arg...) = [int i;, String s;]
+   superclasses(class A { int i; String s; int m(int arg...) = []''')
 	}
 
 	@Test
@@ -340,7 +329,19 @@ assertReduceAll(
 RSelection: [] |- new A(new A(10, true, 'a').i, false, 'b').b ~> new A(10, false, 'b').b
  RNew: [] |- new A(new A(10, true, 'a').i, false, 'b') ~> new A(10, false, 'b')
   RSelection: [] |- new A(10, true, 'a').i ~> 10
-RSelection: [] |- new A(10, false, 'b').b ~> false'''
+   isValue(new A(10, true, 'a')) = true
+    isValue(10) = true
+    isValue(true) = true
+    isValue('a') = true
+   fields(class A { int i; boolean b; String s; }) = [int i;, boolean b;, String s;]
+    superclasses(class A { int i; boolean b; String s; }) = []
+RSelection: [] |- new A(10, false, 'b').b ~> false
+ isValue(new A(10, false, 'b')) = true
+  isValue(10) = true
+  isValue(false) = true
+  isValue('b') = true
+ fields(class A { int i; boolean b; String s; }) = [int i;, boolean b;, String s;]
+  superclasses(class A { int i; boolean b; String s; }) = []'''
 )
 	}
 
@@ -367,12 +368,36 @@ RSelection: [] |- new A(10, false, 'b').b ~> false'''
 '''
 RSelection: [] |- new A(new B('foo')).m(new B('bar'), 'aaa').getS() ~> new A(new B('foo')).getB('aaa').getS()
  RSelection: [] |- new A(new B('foo')).m(new B('bar'), 'aaa') ~> new A(new B('foo')).getB('aaa')
+  isValue(new A(new B('foo'))) = true
+   isValue(new B('foo')) = true
+    isValue('foo') = true
+  isValue(new B('bar')) = true
+   isValue('bar') = true
+  isValue('aaa') = true
+  replaceThisAndParams(return this.getB(s);, new A(new B('foo')), [B b, String s], [new B('bar'), 'aaa']) = new A(new B('foo')).getB('aaa')
 RSelection: [] |- new A(new B('foo')).getB('aaa').getS() ~> new A(new B('foo')).o.getS()
  RSelection: [] |- new A(new B('foo')).getB('aaa') ~> new A(new B('foo')).o
+  isValue(new A(new B('foo'))) = true
+   isValue(new B('foo')) = true
+    isValue('foo') = true
+  isValue('aaa') = true
+  replaceThisAndParams(return this.o;, new A(new B('foo')), [String s], ['aaa']) = new A(new B('foo')).o
 RSelection: [] |- new A().o.getS() ~> new B('foo').getS()
  RSelection: [] |- new A(new B('foo')).o ~> new B('foo')
+  isValue(new A(new B('foo'))) = true
+   isValue(new B('foo')) = true
+    isValue('foo') = true
+  fields(class A { B o; B m(B b, String s) { retu...) = [B o;]
+   superclasses(class A { B o; B m(B b, String s) { retu...) = []
 RSelection: [] |- new B('foo').getS() ~> new B('foo').s
-RSelection: [] |- new B('foo').s ~> 'foo' ''')
+ isValue(new B('foo')) = true
+  isValue('foo') = true
+ replaceThisAndParams(return this.s;, new B('foo'), [], []) = new B('foo').s
+RSelection: [] |- new B('foo').s ~> 'foo'
+ isValue(new B('foo')) = true
+  isValue('foo') = true
+ fields(class B { String s; String getS() { retu...) = [String s;]
+  superclasses(class B { String s; String getS() { retu...) = []''')
 	}
 
 	@Test
@@ -392,14 +417,22 @@ RSelection: [] |- new B('foo').s ~> 'foo' ''')
 '''
 RCast: [] |- (A) new A(10).createB() ~> (A) new B(100)
  RSelection: [] |- new A(10).createB() ~> new B(100)
+  isValue(new A(10)) = true
+   isValue(10) = true
+  replaceThisAndParams(return new B(100);, new A(10), [], []) = new B(100)
 RCast: [] |- (A) new B(100) ~> new B(100)
+ isValue(new B(100)) = true
+  isValue(100) = true
  ExpressionAssignableToType: [] |- new B(100) <| A
   TNew: [] |- new B(100) : B
+   fields(class B extends A { }) = [int i;]
+    superclasses(class B extends A { }) = [class A { int i; B createB() { return ne...]
    SubtypeSequence: [] |- new B(100) ~> [100] << [int i;]
     ExpressionAssignableToType: [] |- 100 <| int
      TIntConstant: [] |- 100 : int
      BasicSubtyping: [] |- int <: int
-  ClassSubtyping: [] |- B <: A''')
+  ClassSubtyping: [] |- B <: A
+   superclasses(class B extends A { }) = [class A { int i; B createB() { return ne...]''')
 	}
 
 	@Test
@@ -417,28 +450,39 @@ RCast: [] |- (A) new B(100) ~> new B(100)
 WELLTYPED MAIN
 TCast: [] |- (A) new B(10) : A
  TNew: [] |- new B(10) : B
+  fields(class B extends A { }) = [int i;]
+   superclasses(class B extends A { }) = [class A { int i; }]
   SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
    ExpressionAssignableToType: [] |- 10 <| int
     TIntConstant: [] |- 10 : int
     BasicSubtyping: [] |- int <: int
  ClassSubtyping: [] |- B <: A
+  superclasses(class B extends A { }) = [class A { int i; }]
 REDUCTION
 RCast: [] |- (A) new B(10) ~> new B(10)
+ isValue(new B(10)) = true
+  isValue(10) = true
  ExpressionAssignableToType: [] |- new B(10) <| A
   TNew: [] |- new B(10) : B
+   fields(class B extends A { }) = [int i;]
+    superclasses(class B extends A { }) = [class A { int i; }]
    SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
     ExpressionAssignableToType: [] |- 10 <| int
      TIntConstant: [] |- 10 : int
      BasicSubtyping: [] |- int <: int
   ClassSubtyping: [] |- B <: A
+   superclasses(class B extends A { }) = [class A { int i; }]
 WELLTYPED AFTER REDUCTION
 TNew: [] |- new B(10) : B
+ fields(class B extends A { }) = [int i;]
+  superclasses(class B extends A { }) = [class A { int i; }]
  SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
   ExpressionAssignableToType: [] |- 10 <| int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
 SUBTYPE AFTER REDUCTION
-ClassSubtyping: [] |- B <: A'''			
+ClassSubtyping: [] |- B <: A
+ superclasses(class B extends A { }) = [class A { int i; }]'''			
 		)
 	}
 
@@ -458,15 +502,22 @@ ClassSubtyping: [] |- B <: A'''
 '''WELLTYPED MAIN
 TSelection: [] |- new B().m() : A
  TNew: [] |- new B() : B
+  fields(class B extends A{ }) = []
+   superclasses(class B extends A{ }) = [class A { A m() { return this; } }]
   SubtypeSequence: [] |- new B() ~> [] << []
  SubtypeSequence: [] |- new B().m() ~> [] << []
 REDUCTION
 RSelection: [] |- new B().m() ~> new B()
+ isValue(new B()) = true
+ replaceThisAndParams(return this;, new B(), [], []) = new B()
 WELLTYPED AFTER REDUCTION
 TNew: [] |- new B() : B
+ fields(class B extends A{ }) = []
+  superclasses(class B extends A{ }) = [class A { A m() { return this; } }]
  SubtypeSequence: [] |- new B() ~> [] << []
 SUBTYPE AFTER REDUCTION
-ClassSubtyping: [] |- B <: A'''
+ClassSubtyping: [] |- B <: A
+ superclasses(class B extends A{ }) = [class A { A m() { return this; } }]'''
 )
 	}
 
@@ -486,12 +537,19 @@ ClassSubtyping: [] |- B <: A'''
 '''SubjRed: [] |= new B().m() ~> new B() : B <: A
  TSelection: [] |- new B().m() : A
   TNew: [] |- new B() : B
+   fields(class B extends A{ }) = []
+    superclasses(class B extends A{ }) = [class A { A m() { return this; } }]
    SubtypeSequence: [] |- new B() ~> [] << []
   SubtypeSequence: [] |- new B().m() ~> [] << []
  RSelection: [] |- new B().m() ~> new B()
+  isValue(new B()) = true
+  replaceThisAndParams(return this;, new B(), [], []) = new B()
  TNew: [] |- new B() : B
+  fields(class B extends A{ }) = []
+   superclasses(class B extends A{ }) = [class A { A m() { return this; } }]
   SubtypeSequence: [] |- new B() ~> [] << []
- ClassSubtyping: [] |- B <: A'''
+ ClassSubtyping: [] |- B <: A
+  superclasses(class B extends A{ }) = [class A { A m() { return this; } }]'''
 )
 	}
 
@@ -509,58 +567,51 @@ ClassSubtyping: [] |- B <: A'''
 '''SubjRed: [] |= new A().m() ~> new A().n(new B()) : A <: Object
  TSelection: [] |- new A().m() : Object
   TNew: [] |- new A() : A
+   fields(class A { Object m() { return this.n(new...) = []
+    superclasses(class A { Object m() { return this.n(new...) = []
    SubtypeSequence: [] |- new A() ~> [] << []
   SubtypeSequence: [] |- new A().m() ~> [] << []
  RSelection: [] |- new A().m() ~> new A().n(new B())
+  isValue(new A()) = true
+  replaceThisAndParams(return this.n(new B());, new A(), [], []) = new A().n(new B())
  TSelection: [] |- new A().n(new B()) : A
   TNew: [] |- new A() : A
+   fields(class A { Object m() { return this.n(new...) = []
+    superclasses(class A { Object m() { return this.n(new...) = []
    SubtypeSequence: [] |- new A() ~> [] << []
   SubtypeSequence: [] |- new A().n(new B()) ~> [new B()] << [A o]
    ExpressionAssignableToType: [] |- new B() <| A
     TNew: [] |- new B() : B
+     fields(class B extends A {}) = []
+      superclasses(class B extends A {}) = [class A { Object m() { return this.n(new...]
      SubtypeSequence: [] |- new B() ~> [] << []
     ClassSubtyping: [] |- B <: A
+     superclasses(class B extends A {}) = [class A { Object m() { return this.n(new...]
  ClassSubtyping: [] |- A <: Object'''
 )
 	}
 
 	def private assertValue(CharSequence prog) {
-		Assert::assertTrue(prog.parseAndAssertNoError.main.isValue)
+		Assert::assertTrue(fjSystem.isValue(prog.parseAndAssertNoError.main))
 	}
 
 	def private assertNotValue(CharSequence prog) {
-		Assert::assertFalse(prog.parseAndAssertNoError.main.isValue)
-	}
-
-	def private assertThisReplacement(CharSequence prog, CharSequence expected) {
-		val p = prog.parseAndAssertNoError
-		val mBodyExp = p.methodByName("m").body.expression.copy
-		mBodyExp.replaceThis(p.main)
-		Assert::assertEquals(expected.toString, stringRep.string(mBodyExp))
-	}
-
-	def private assertParamsReplacement(CharSequence prog, CharSequence expected) {
-		val p = prog.parseAndAssertNoError
-		val m = p.methodByName("m")
-		val mBodyExp = m.body.expression.copy
-		mBodyExp.replaceParams(m.params, (p.main as Selection).args)
-		Assert::assertEquals(expected.toString, stringRep.string(mBodyExp))
+		Assert::assertFalse(fjSystem.isValue(prog.parseAndAssertNoError.main))
 	}
 
 	def private assertThisAndParamsReplacement(CharSequence prog, CharSequence expected) {
 		val p = prog.parseAndAssertNoError
 		val m = p.methodByName("m")
-		val mBodyExp = m.body.expression.copy
-		mBodyExp.replaceThisAndParams(
+		val replaced = fjSystem.replaceThisAndParams(m.body,
 			(p.main as Selection).receiver, 
 			m.params, (p.main as Selection).args
-		)
-		Assert::assertEquals(expected.toString, stringRep.string(mBodyExp))
+		).expression
+		Assert::assertEquals(expected.toString, stringRep.string(replaced))
 	}
 	def private assertReduceAll(CharSequence prog, CharSequence expectedTrace) {
 		var exp = prog.parseAndAssertNoError.main.copy
 		var result = exp.assertReduce
-		while (!result.value.value) {
+		while (!fjSystem.isValue(result.value)) {
 			exp = result.value
 			result = exp.assertReduce
 		}
@@ -624,16 +675,15 @@ ClassSubtyping: [] |- B <: A'''
 		)
 		methodBodyType.assertResult
 		
-		val mBody = m.body.copy
-		
-		mBody.expression.replaceThisAndParams(
+		val replaced = fjSystem.replaceThisAndParams(
+			m.body,
 			(p.main as Selection).receiver, 
 			m.params, (p.main as Selection).args
-		)
+		).expression
 		
 		trace.addToTrace("WELLTYPED AFTER SUBSTITUTION")
 		
-		val substType = fjSystem.type(null, trace, mBody.expression)
+		val substType = fjSystem.type(null, trace, replaced)
 		substType.assertResult
 		
 		trace.addToTrace("SUBTYPE AFTER SUBSTITUTION")
