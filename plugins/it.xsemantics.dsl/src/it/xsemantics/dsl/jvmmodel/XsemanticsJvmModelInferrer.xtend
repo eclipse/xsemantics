@@ -709,7 +709,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				it.append(aux.resultType.type)
 				it.append(" ")
 				it.append('''
-					_result_ = «aux.applyAuxFunName»(«ruleApplicationTraceName», «aux.inputParameterNames»);
+					_result_ = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), aux.traceStringForAuxiliaryFun)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
 					return _result_;''').decreaseIndentation.newLine

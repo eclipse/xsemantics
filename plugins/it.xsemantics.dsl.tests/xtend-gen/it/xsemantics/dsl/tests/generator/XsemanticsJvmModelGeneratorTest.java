@@ -5752,7 +5752,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("RuleApplicationTrace _subtrace_ = newTrace(_trace_);");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("EClass _result_ = applyAuxFunObjectClass(_trace_, o);");
+    _builder.append("EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("addToTrace(_trace_, auxFunName(\"objectClass\") + \"(\" + stringRep(o)+ \")\" + \" = \" + stringRep(_result_));");

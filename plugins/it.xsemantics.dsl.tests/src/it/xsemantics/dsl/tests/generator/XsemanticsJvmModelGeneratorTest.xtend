@@ -2280,7 +2280,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      EClass _result_ = applyAuxFunObjectClass(_trace_, o);
+      EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
       addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
