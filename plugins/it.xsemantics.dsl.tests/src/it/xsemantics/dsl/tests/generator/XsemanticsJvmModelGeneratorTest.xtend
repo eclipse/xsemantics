@@ -2158,6 +2158,207 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 
 	@Test
 	def testAuxiliaryFunctions() {
+		testFiles.testAuxiliaryFunctions.
+		assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import com.google.common.base.Objects;
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ISVALUE = "it.xsemantics.test.auxiliary.IsValue";
+  
+  public final static String VOIDFUN = "it.xsemantics.test.auxiliary.VoidFun";
+  
+  public final static String OBJECTCLASS = "it.xsemantics.test.auxiliary.ObjectClass";
+  
+  private PolymorphicDispatcher<Boolean> isValueDispatcher;
+  
+  private PolymorphicDispatcher<Boolean> voidFunDispatcher;
+  
+  private PolymorphicDispatcher<EClass> objectClassDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    isValueDispatcher = buildPolymorphicDispatcher(
+    	"isValueImpl", 3);
+    voidFunDispatcher = buildPolymorphicDispatcher(
+    	"voidFunImpl", 2);
+    objectClassDispatcher = buildPolymorphicDispatcher(
+    	"objectClassImpl", 2);
+  }
+  
+  public Boolean isValue(final EObject o, final EClass c) throws RuleFailedException {
+    return isValue(null, o, c);
+  }
+  
+  public Boolean isValue(final RuleApplicationTrace _trace_, final EObject o, final EClass c) throws RuleFailedException {
+    try {
+    	return isValueInternal(_trace_, o, c);
+    } catch (Exception _e_isValue) {
+    	throw extractRuleFailedException(_e_isValue);
+    }
+  }
+  
+  public Boolean voidFun(final EObject o) throws RuleFailedException {
+    return voidFun(null, o);
+  }
+  
+  public Boolean voidFun(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	return voidFunInternal(_trace_, o);
+    } catch (Exception _e_voidFun) {
+    	throw extractRuleFailedException(_e_voidFun);
+    }
+  }
+  
+  public EClass objectClass(final EObject o) throws RuleFailedException {
+    return objectClass(null, o);
+  }
+  
+  public EClass objectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	return objectClassInternal(_trace_, o);
+    } catch (Exception _e_objectClass) {
+    	throw extractRuleFailedException(_e_objectClass);
+    }
+  }
+  
+  protected Boolean isValueInternal(final RuleApplicationTrace _trace_, final EObject o, final EClass c) {
+    try {
+    	checkParamsNotNull(o, c);
+    	return isValueDispatcher.invoke(_trace_, o, c);
+    } catch (Exception _e_isValue) {
+    	return false;
+    }
+  }
+  
+  protected void isValueThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Boolean voidFunInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	checkParamsNotNull(o);
+    	return voidFunDispatcher.invoke(_trace_, o);
+    } catch (Exception _e_voidFun) {
+    	sneakyThrowRuleFailedException(_e_voidFun);
+    	return null;
+    }
+  }
+  
+  protected void voidFunThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected EClass objectClassInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	checkParamsNotNull(o);
+    	return objectClassDispatcher.invoke(_trace_, o);
+    } catch (Exception _e_objectClass) {
+    	sneakyThrowRuleFailedException(_e_objectClass);
+    	return null;
+    }
+  }
+  
+  protected void objectClassThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    
+    String error = "error in objectClass";
+    EObject source = o;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(source, null));
+  }
+  
+  protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Boolean _result_ = applyAuxFunIsValue(_subtrace_, eO, eC);
+      addToTrace(_trace_, auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunIsValue) {
+      isValueThrowException(auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
+      	ISVALUE,
+      	e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
+      return null;
+    }
+  }
+  
+  protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
+    EClass _eClass = eO.eClass();
+    boolean _equals = Objects.equal(_eClass, eC);
+    /* eO.eClass == eC */
+    if (!Boolean.valueOf(_equals)) {
+      sneakyThrowRuleFailedException("eO.eClass == eC");
+    }
+    return Boolean.valueOf(_equals);
+  }
+  
+  protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
+      addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunObjectClass) {
+      objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
+      	OBJECTCLASS,
+      	e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+      return null;
+    }
+  }
+  
+  protected EClass applyAuxFunObjectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    EClass _eClass = o.eClass();
+    return _eClass;
+  }
+  
+  protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+      addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunVoidFun) {
+      voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
+      	VOIDFUN,
+      	e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
+      return null;
+    }
+  }
+  
+  protected Boolean applyAuxFunVoidFun(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    boolean _xblockexpression = false;
+    {
+      InputOutput.<EObject>println(o);
+      /* true */
+      if (!Boolean.valueOf(true)) {
+        sneakyThrowRuleFailedException("true");
+      }
+      _xblockexpression = (true);
+    }
+    return Boolean.valueOf(_xblockexpression);
+  }
+}
+'''
+		)
+	}
+
+	@Test
+	def testAuxiliaryFunctionsInvocation() {
 		testFiles.testAuxiliaryFunctionsInvocation.
 		assertCorrectJavaCodeGeneration(
 '''

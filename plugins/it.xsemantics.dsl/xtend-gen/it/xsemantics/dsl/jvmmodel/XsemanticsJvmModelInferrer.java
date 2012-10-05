@@ -63,6 +63,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -89,6 +90,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private XbaseTypeConformanceComputer _xbaseTypeConformanceComputer;
   
   @Inject
   private XbaseCompiler xbaseCompiler;
@@ -1170,6 +1174,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             JvmFormalParameter _parameter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _parameterType);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _parameter);
           }
+          JvmTypeReference _newTypeRef = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(aux, Boolean.class);
+          JvmTypeReference _type = aux.getType();
+          final boolean isBoolean = XsemanticsJvmModelInferrer.this._xbaseTypeConformanceComputer.isConformant(_newTypeRef, _type);
           final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
               public void apply(final ITreeAppendable it) {
                 StringConcatenation _builder = new StringConcatenation();
@@ -1198,22 +1205,35 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(aux);
                 XsemanticsJvmModelInferrer.this._typeReferenceSerializer.serialize(_exceptionType, aux, it);
                 it.append(" ");
-                StringConcatenation _builder_1 = new StringConcatenation();
-                CharSequence _exceptionVarName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(aux);
-                _builder_1.append(_exceptionVarName, "");
-                _builder_1.append(") {");
-                _builder_1.newLineIfNotEmpty();
-                _builder_1.append("\t");
-                _builder_1.append("sneakyThrowRuleFailedException(");
-                CharSequence _exceptionVarName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(aux);
-                _builder_1.append(_exceptionVarName_1, "	");
-                _builder_1.append(");");
-                _builder_1.newLineIfNotEmpty();
-                _builder_1.append("\t");
-                _builder_1.append("return null;");
-                _builder_1.newLine();
-                _builder_1.append("}");
-                it.append(_builder_1);
+                if (isBoolean) {
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  CharSequence _exceptionVarName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(aux);
+                  _builder_1.append(_exceptionVarName, "");
+                  _builder_1.append(") {");
+                  _builder_1.newLineIfNotEmpty();
+                  _builder_1.append("\t");
+                  _builder_1.append("return false;");
+                  _builder_1.newLine();
+                  _builder_1.append("}");
+                  it.append(_builder_1);
+                } else {
+                  StringConcatenation _builder_2 = new StringConcatenation();
+                  CharSequence _exceptionVarName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(aux);
+                  _builder_2.append(_exceptionVarName_1, "");
+                  _builder_2.append(") {");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t");
+                  _builder_2.append("sneakyThrowRuleFailedException(");
+                  CharSequence _exceptionVarName_2 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(aux);
+                  _builder_2.append(_exceptionVarName_2, "	");
+                  _builder_2.append(");");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t");
+                  _builder_2.append("return null;");
+                  _builder_2.newLine();
+                  _builder_2.append("}");
+                  it.append(_builder_2);
+                }
               }
             };
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);

@@ -705,12 +705,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<it.xsemantics.example.fj.fj.Class> superclassesImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
       RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      List _result_ = applyAuxFunSuperclasses(_trace_, cl);
-      addToTrace(_trace_, ruleName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
+      List _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
+      addToTrace(_trace_, auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyAuxFunSuperclasses) {
-      superclassesThrowException(ruleName("superclasses") + "(" + stringRep(cl)+ ")",
+      superclassesThrowException(auxFunName("superclasses") + "(" + stringRep(cl)+ ")",
       	SUPERCLASSES,
       	e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
       return null;

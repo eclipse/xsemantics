@@ -1875,7 +1875,8 @@ class XsemanticsTestFiles {
 	import org.eclipse.emf.ecore.*
 	
 	auxiliary {
-		isValue(EObject o, EClass c)
+		isValue(EObject o, EClass c) : Boolean
+		voidFun(EObject o)
 		objectClass(EObject o) : EClass
 			error "error in objectClass"
 			source o
@@ -1901,6 +1902,11 @@ class XsemanticsTestFiles {
 	
 	auxiliary objectClass(EObject o) {
 		o.eClass
+	}
+	
+	auxiliary voidFun(EObject o) {
+		println(o)
+		true
 	}
 	'''
 

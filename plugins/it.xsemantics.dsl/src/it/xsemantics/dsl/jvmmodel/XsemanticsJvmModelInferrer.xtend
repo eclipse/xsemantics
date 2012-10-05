@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -55,6 +56,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension TypeReferenceSerializer
 	
 	@Inject extension TypeReferences
+	
+	@Inject extension XbaseTypeConformanceComputer
 
 	@Inject XbaseCompiler xbaseCompiler
 	
@@ -621,6 +624,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			for (p : aux.parameters) {
 				parameters += p.toParameter(p.name, p.parameterType)
 			}
+			
+			// check the original declared type (which can be null)
+			val isBoolean = aux.newTypeRef(typeof(Boolean)).
+				isConformant(aux.type)
    			
    			body = [
    				it.append('''
@@ -630,12 +637,19 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					} catch (''')
 				aux.exceptionType.serialize(aux, it)
 				it.append(" ")
-				it.append('''
-					«aux.exceptionVarName») {
-						sneakyThrowRuleFailedException(«aux.exceptionVarName»);
-						return null;
-					}'''
-				)
+				if (isBoolean)
+					it.append('''
+						«aux.exceptionVarName») {
+							return false;
+						}'''
+					)
+				else
+					it.append('''
+						«aux.exceptionVarName») {
+							sneakyThrowRuleFailedException(«aux.exceptionVarName»);
+							return null;
+						}'''
+					)
    			]
 		]
 	}
