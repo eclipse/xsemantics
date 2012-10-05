@@ -45,7 +45,9 @@ public interface IssueCodes {
 	String ASSIGNMENT_TO_INPUT_PARAM = PREFIX + "AssignmentToInputParam";
 
 	String NO_RULE_FOR_JUDGMENT_DESCRIPTION = PREFIX + "NoRuleForJudgmentDescription";
-	
+
+	String NO_AUXFUN_FOR_AUX_DESCRIPTION = PREFIX + "NoAuxFunForAuxiliaryDescription";
+
 	String RETURN_NOT_ALLOWED = PREFIX + "ReturnNotAllowed";
 
 	String THROW_NOT_ALLOWED = PREFIX + "ThrowNotAllowed";

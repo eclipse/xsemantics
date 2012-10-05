@@ -457,6 +457,20 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						"Not an Xsemantics system: it.xsemantics.dsl.tests.input.TestInvalidBaseSystem"));
 	}
 
+	@Test
+	public void testNoAuxFunForAuxiliaryDescription() throws Exception {
+		validator.setEnableWarnings(true);
+		AssertableDiagnostics validate = loadModelAndValidate(testFiles
+				.testAuxiliaryDescriptions());
+		validate.assertAll(
+				AssertableDiagnostics
+						.warningMsg("No function defined for the auxiliary description"),
+				AssertableDiagnostics
+						.warningMsg("No function defined for the auxiliary description"),
+				AssertableDiagnostics
+						.warningMsg("No function defined for the auxiliary description"));
+	}
+
 	protected AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
 		return tester.validate(getModel(testFileContents.toString()));

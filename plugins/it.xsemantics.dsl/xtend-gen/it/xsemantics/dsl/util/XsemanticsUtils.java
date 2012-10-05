@@ -199,6 +199,22 @@ public class XsemanticsUtils {
     return _newArrayList;
   }
   
+  public List<AuxiliaryFunction> functionsForAuxiliaryDescrition(final AuxiliaryDescription aux) {
+    XsemanticsSystem _containingSystem = this.containingSystem(aux);
+    EList<AuxiliaryFunction> _auxiliaryFunctions = _containingSystem.getAuxiliaryFunctions();
+    final Function1<AuxiliaryFunction,Boolean> _function = new Function1<AuxiliaryFunction,Boolean>() {
+        public Boolean apply(final AuxiliaryFunction it) {
+          String _name = it.getName();
+          String _name_1 = aux.getName();
+          boolean _equals = Objects.equal(_name, _name_1);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    Iterable<AuxiliaryFunction> _filter = IterableExtensions.<AuxiliaryFunction>filter(_auxiliaryFunctions, _function);
+    ArrayList<AuxiliaryFunction> _newArrayList = Lists.<AuxiliaryFunction>newArrayList(_filter);
+    return _newArrayList;
+  }
+  
   public Iterable<Rule> filterRulesByJudgmentDescription(final XsemanticsSystem ts, final String judgmentSymbol, final Iterable<String> relationSymbols) {
     EList<Rule> _rules = ts.getRules();
     Iterable<Rule> _filterRulesByJudgmentDescription = this.filterRulesByJudgmentDescription(_rules, judgmentSymbol, relationSymbols);

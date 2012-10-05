@@ -29,6 +29,7 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 
 class XsemanticsUtils {
 	
@@ -124,6 +125,11 @@ class XsemanticsUtils {
 		Lists::newArrayList(judgmentDescription.containingSystem.
 			filterRulesByJudgmentDescription
 				(judgmentDescription.judgmentSymbol, judgmentDescription.relationSymbols))
+	}
+
+	def List<AuxiliaryFunction> functionsForAuxiliaryDescrition(AuxiliaryDescription aux) {
+		Lists::newArrayList(aux.containingSystem.auxiliaryFunctions.
+			filter[name == aux.name])
 	}
 	
 	def filterRulesByJudgmentDescription(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
