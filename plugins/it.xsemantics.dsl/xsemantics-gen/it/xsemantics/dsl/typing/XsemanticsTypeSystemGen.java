@@ -38,6 +38,8 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   public final static String OUTPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.OutputParameterType";
   
+  public final static String JVMFORMALPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.JvmFormalParameterType";
+  
   public final static String AUXILIARYDESCRIPTIONTYPE = "it.xsemantics.dsl.typing.rules.AuxiliaryDescriptionType";
   
   @Inject
@@ -262,6 +264,27 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     
     JvmTypeReference _jvmTypeReference = p.getJvmTypeReference();
     return new Result<JvmTypeReference>(_jvmTypeReference);
+  }
+  
+  protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final JvmFormalParameter p) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<JvmTypeReference> _result_ = applyRuleJvmFormalParameterType(G, _subtrace_, p);
+      addToTrace(_trace_, ruleName("JvmFormalParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleJvmFormalParameterType) {
+      typeThrowException(ruleName("JvmFormalParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + "JvmTypeReference",
+      	JVMFORMALPARAMETERTYPE,
+      	e_applyRuleJvmFormalParameterType, p, new ErrorInformation[] {new ErrorInformation(p)});
+      return null;
+    }
+  }
+  
+  protected Result<JvmTypeReference> applyRuleJvmFormalParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final JvmFormalParameter p) throws RuleFailedException {
+    
+    JvmTypeReference _parameterType = p.getParameterType();
+    return new Result<JvmTypeReference>(_parameterType);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {

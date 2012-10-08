@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -88,7 +89,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		error("Return statements are not allowed here", expr, null,
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
-	
+
 	@Override
 	protected boolean supportsCheckedExceptions() {
 		// we generate Java code which already handles exceptions
@@ -558,9 +559,10 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
-		
+
 		if (helper.auxiliaryDescriptionWithTheSameNameOfJudgment(aux) != null) {
-			error("Duplicate judgment with the same name '" + aux.getName() + "'",
+			error("Duplicate judgment with the same name '" + aux.getName()
+					+ "'",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
@@ -570,8 +572,8 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	public void checkAuxiliaryDescriptionHasAuxiliaryFunctions(
 			AuxiliaryDescription aux) {
 		if (enableWarnings
-				&& xsemanticsUtils.functionsForAuxiliaryDescrition(
-						aux).isEmpty()) {
+				&& xsemanticsUtils.functionsForAuxiliaryDescrition(aux)
+						.isEmpty()) {
 			warning("No function defined for the auxiliary description",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION
 							.getEIDAttribute(),
@@ -582,11 +584,47 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	@Check
 	public void checkAuxiliaryFunctionHasAuxiliaryDescription(
 			AuxiliaryFunction aux) {
-		if (xsemanticsUtils.auxiliaryDescription(aux) == null)
+		AuxiliaryDescription auxiliaryDescription = xsemanticsUtils
+				.auxiliaryDescription(aux);
+		if (auxiliaryDescription == null)
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",
 					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__NAME,
 					IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION);
+		else
+			checkConformanceOfAuxiliaryFunction(aux, auxiliaryDescription);
+	}
+
+	protected void checkConformanceOfAuxiliaryFunction(AuxiliaryFunction aux,
+			AuxiliaryDescription auxiliaryDescription) {
+		List<JvmFormalParameter> funParams = aux.getParameters();
+		List<JvmFormalParameter> descParams = auxiliaryDescription
+				.getParameters();
+
+		if (funParams.size() != descParams.size())
+			error("expected " + descParams.size() + " parameter(s), but was "
+					+ funParams.size(),
+					aux,
+					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
+					IssueCodes.PARAMS_SIZE_DONT_MATCH);
+		else {
+			Iterator<JvmFormalParameter> funParamsIt = funParams.iterator();
+			for (JvmFormalParameter jvmFormalParameter : descParams) {
+				JvmTypeReference expected = typeSystem
+						.getType(jvmFormalParameter);
+				JvmFormalParameter funParam = funParamsIt.next();
+				JvmTypeReference actual = typeSystem.getType(funParam);
+				if (!typeSystem.isConformant(expected, actual)) {
+					error("parameter type "
+							+ getNameOfTypes(actual)
+							+ " is not subtype of AuxiliaryDescription declared type "
+							+ getNameOfTypes(expected),
+							funParam,
+							TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
+							IssueCodes.NOT_SUBTYPE);
+				}
+			}
+		}
 	}
 
 	protected String reportContainingSystemName(EObject object) {

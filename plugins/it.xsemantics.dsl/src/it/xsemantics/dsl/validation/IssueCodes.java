@@ -71,4 +71,6 @@ public interface IssueCodes {
 	String DUPLICATE_AUXILIARY_NAME = PREFIX + "DuplicateAuxiliaryDescription";
 
 	String NO_AUXDESC_FOR_AUX_FUNCTION = PREFIX + "NoAuxDescForAuxiliaryFunction";
+
+	String PARAMS_SIZE_DONT_MATCH = PREFIX + "ParamsSizeDontMatch";
 }

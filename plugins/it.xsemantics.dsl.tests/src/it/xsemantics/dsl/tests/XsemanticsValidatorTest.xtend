@@ -9,6 +9,7 @@ import org.junit.runner.RunWith
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.validation.IssueCodes
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.common.types.TypesPackage
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -224,6 +225,21 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			XsemanticsPackage::eINSTANCE.auxiliaryFunction,
 			IssueCodes::NO_AUXDESC_FOR_AUX_FUNCTION,
 			"No auxiliary description for auxiliary function 'foobar'"
+		)
+	}
+
+	@Test
+	def testNonConformantAuxiliaryFunction() {
+		val s = parser.parse(testFiles.testNonConformantAuxiliaryFunction)
+		s.assertError(
+			XsemanticsPackage::eINSTANCE.auxiliaryFunction,
+			IssueCodes::PARAMS_SIZE_DONT_MATCH,
+			"expected 1 parameter(s), but was 2"
+		)
+		s.assertError(
+			TypesPackage::eINSTANCE.jvmFormalParameter,
+			IssueCodes::NOT_SUBTYPE,
+			"parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass"
 		)
 	}
 }

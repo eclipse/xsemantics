@@ -42,6 +42,9 @@ axiom InputParameterType
 axiom OutputParameterType
 	G |- OutputParameter p : p.jvmTypeReference
 
+axiom JvmFormalParameterType
+	G |- JvmFormalParameter p : p.parameterType
+
 rule AuxiliaryDescriptionType
 	G |- AuxiliaryDescription aux : JvmTypeReference type
 from {

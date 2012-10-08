@@ -7,6 +7,7 @@ import it.xsemantics.dsl.validation.IssueCodes;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -223,6 +224,24 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _auxiliaryFunction, 
         IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION, 
         "No auxiliary description for auxiliary function \'foobar\'");
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNonConformantAuxiliaryFunction() {
+    try {
+      CharSequence _testNonConformantAuxiliaryFunction = this.testFiles.testNonConformantAuxiliaryFunction();
+      final XsemanticsSystem s = this.parser.parse(_testNonConformantAuxiliaryFunction);
+      EClass _auxiliaryFunction = XsemanticsPackage.eINSTANCE.getAuxiliaryFunction();
+      this._validationTestHelper.assertError(s, _auxiliaryFunction, 
+        IssueCodes.PARAMS_SIZE_DONT_MATCH, 
+        "expected 1 parameter(s), but was 2");
+      EClass _jvmFormalParameter = TypesPackage.eINSTANCE.getJvmFormalParameter();
+      this._validationTestHelper.assertError(s, _jvmFormalParameter, 
+        IssueCodes.NOT_SUBTYPE, 
+        "parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass");
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -4337,4 +4337,33 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testNonConformantAuxiliaryFunction() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testAuxiliaryDescriptions = this.testAuxiliaryDescriptions();
+    _builder.append(_testAuxiliaryDescriptions, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("// the second param EObject is not subtype of");
+    _builder.newLine();
+    _builder.append("// EClass as specified in the description");
+    _builder.newLine();
+    _builder.append("auxiliary isValue(EClass eO, EObject eC) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eO == eC");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// wrong number of parameters w.r.t. auxiliary description");
+    _builder.newLine();
+    _builder.append("auxiliary voidFun(EObject o, String s) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

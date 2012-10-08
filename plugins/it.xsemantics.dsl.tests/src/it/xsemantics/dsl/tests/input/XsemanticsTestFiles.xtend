@@ -1970,4 +1970,19 @@ class XsemanticsTestFiles {
 		eO.eClass == eC
 	}
 	'''
+
+	def testNonConformantAuxiliaryFunction() '''
+	«testAuxiliaryDescriptions»
+	
+	// the second param EObject is not subtype of
+	// EClass as specified in the description
+	auxiliary isValue(EClass eO, EObject eC) {
+		eO == eC
+	}
+	
+	// wrong number of parameters w.r.t. auxiliary description
+	auxiliary voidFun(EObject o, String s) {
+		
+	}
+	'''
 }
