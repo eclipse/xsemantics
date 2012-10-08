@@ -6,14 +6,16 @@ package it.xsemantics.example.fj.scoping;
 import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
-import it.xsemantics.example.fj.fj.FjPackage;
+import it.xsemantics.example.fj.fj.Member;
 import it.xsemantics.example.fj.fj.Selection;
-import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions;
 import it.xsemantics.example.fj.typing.FjTypeSystem;
 import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
 
-import org.eclipse.emf.ecore.EObject;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.IScope;
@@ -33,32 +35,28 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	FjTypeSystem typeSystem;
-	
-	@Inject
-	FjAuxiliaryFunctions fjAux;
-	
+
 	@Inject
 	FjTypeUtils fjTypeUtils;
 
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		if (reference == FjPackage.Literals.SELECTION__MESSAGE) {
-			if (context instanceof Selection) {
-				Selection selection = (Selection) context;
-				return Scopes
-						.scopeFor(fjAux.getMembers(getExpressionClass(selection
-								.getReceiver())));
-			}
-			return IScope.NULLSCOPE;
-		}
+	// @Override
+	// public IScope getScope(EObject context, EReference reference) {
+	// if (reference == FjPackage.Literals.SELECTION__MESSAGE) {
+	// if (context instanceof Selection) {
+	// Selection selection = (Selection) context;
+	// return Scopes.scopeFor(getMembers(getExpressionClass(selection
+	// .getReceiver())));
+	// }
+	// return IScope.NULLSCOPE;
+	// }
+	//
+	// return super.getScope(context, reference);
+	// }
 
-		return super.getScope(context, reference);
+	public IScope scope_Member(Selection sel, EReference ref) {
+		return Scopes
+				.scopeFor(getMembers(getExpressionClass(sel.getReceiver())));
 	}
-
-//	public IScope scope_Member(Selection sel, EReference ref) {
-//		return Scopes.scopeFor(FjAuxiliaryFunctions
-//				.getMembers(getExpressionClass(sel.getReceiver())));
-//	}
 
 	protected Class getExpressionClass(Expression receiver) {
 		ClassType classType = typeSystem.classtype(
@@ -77,4 +75,14 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 		return null;
 	}
 
+	public List<Member> getMembers(Class cl) {
+		List<Member> allMembers = new LinkedList<Member>();
+		try {
+			allMembers.addAll(typeSystem.fields(cl));
+			allMembers.addAll(typeSystem.methods(cl));
+		} catch (RuleFailedException e) {
+			// the list will be empty
+		}
+		return allMembers;
+	}
 }
