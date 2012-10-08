@@ -29,7 +29,7 @@ auxiliary {
 		source current
 	isValue(Expression e) : Boolean
 	/* replaces in a copy of the body's expression:
-	 * 'this' with thisReplacement 
+	 * 'this' with thisReplacement and
 	 * param references with args */ 
 	replaceThisAndParams(MethodBody body,
 			Expression thisReplacement, 
@@ -154,7 +154,7 @@ axiom TStringConstant
 			result
 		}
 
-// ...or use static utility methods...
+// ...or use an utility class...
 axiom TIntConstant
 	G |- IntConstant i : fjTypeUtils.createIntType
 
@@ -400,16 +400,12 @@ from {
 	val clazz = method.eContainer as Class
 	
 	if (clazz.superclass != null) {
-		var inheritedMethods = getAll(
-			clazz.superclass,
-			FjPackage::eINSTANCE.class_Members,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Method)
-		)
+		var inheritedMethods = methods(clazz.superclass)
+		val methods = EcoreUtil2::typeSelect(clazz.members, typeof(Method))
 		// check override predicate
 		inheritedMethods.forEach [
 			inheritedMethod |
-			methods(clazz).forEach [
+			methods.forEach [
 				overrides(it, inheritedMethod)
 			]
 		]

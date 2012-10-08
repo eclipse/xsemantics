@@ -486,6 +486,8 @@ The body of an auxiliary function uses the same syntax of rule premises
 An auxiliary function can then be called in premises as a standard
 Java method.
 
+Auxiliary functions are used in the FJ example (ref:FJTypeSystem[]).
+
 section:CheckRules[Rules for Validator: checkrule]
 
 In a Xsemantics system you can also write special rules, e[checkrule]s, which

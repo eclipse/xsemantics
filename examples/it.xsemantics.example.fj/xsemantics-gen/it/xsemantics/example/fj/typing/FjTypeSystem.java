@@ -476,27 +476,21 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       if (_notEquals) {
         {
           it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
-          EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
-          EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-          List<Method> inheritedMethods = this.<Method>getAll(_superclass_1, _class_Members, _class_Superclass, 
-            Method.class);
+          List<Method> inheritedMethods = this.methodsInternal(_trace_, _superclass_1);
+          EList<Member> _members = clazz.getMembers();
+          final List<Method> methods = EcoreUtil2.<Method>typeSelect(_members, Method.class);
           final Procedure1<Method> _function = new Procedure1<Method>() {
               public void apply(final Method inheritedMethod) {
-                try {
-                  List<Method> _methods = FjTypeSystem.this.methodsInternal(_trace_, clazz);
-                  final Procedure1<Method> _function = new Procedure1<Method>() {
-                      public void apply(final Method it) {
-                        try {
-                          Boolean _overrides = FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
-                        } catch (Exception _e) {
-                          throw Exceptions.sneakyThrow(_e);
-                        }
+                final Procedure1<Method> _function = new Procedure1<Method>() {
+                    public void apply(final Method it) {
+                      try {
+                        Boolean _overrides = FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
+                      } catch (Exception _e) {
+                        throw Exceptions.sneakyThrow(_e);
                       }
-                    };
-                  IterableExtensions.<Method>forEach(_methods, _function);
-                } catch (Exception _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
+                    }
+                  };
+                IterableExtensions.<Method>forEach(methods, _function);
               }
             };
           IterableExtensions.<Method>forEach(inheritedMethods, _function);
@@ -1044,12 +1038,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EList<Expression> _args = exp.getArgs();
     final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
         public Boolean apply(final Expression it) {
-          try {
-            Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-            return _isValue;
-          } catch (Exception _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+          Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
+          return _isValue;
         }
       };
     boolean _forall = IterableExtensions.<Expression>forall(_args, _function);

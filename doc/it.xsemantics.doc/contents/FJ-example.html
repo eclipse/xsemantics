@@ -158,9 +158,10 @@ BoolConstant:&nbsp;constant&nbsp;=&nbsp;(<span class="string">&apos;true&apos;</
 <a name="FJTypeSystem"></a>
 <h2>FJ Type System</h2>
 <p>
-We start by defining the name (we skip imports) and the judgments
+We start by defining the name (we skip imports), the auxiliary descriptions
+(which will be used for auxiliary functions, <a href="XsemanticsSyntax.html#Auxiliary" title="Go to &quot;Auxiliary Functions&quot;" >section Auxiliary</a>) and the judgments
 (<a href="XsemanticsSyntax.html#Judgments" title="Go to &quot;Judgments&quot;" >section Judgments</a>); we also use an injected field (<a href="XsemanticsSyntax.html#InjectedFields" title="Go to &quot;Injected Fields&quot;" >section InjectedFields</a>)
-of type <abbr title="it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions" >FjAuxiliaryFunctions</abbr>
+of type <abbr title="it.xsemantics.example.fj.util.FjTypeUtils" >FjTypeUtils</abbr>
 which contains some auxiliary functions that we will use in the rules.
 </p>
 <p>
@@ -169,7 +170,24 @@ which contains some auxiliary functions that we will use in the rules.
 <p class="code">
 <span class="keyword">system</span>&nbsp;<span class="keyword">it</span>.xsemantics.example.fj.typing.FjTypeSystem<br/>
 <br/>
-<span class="keyword">inject</span>&nbsp;FjAuxiliaryFunctions&nbsp;fjAux<br/>
+<span class="keyword">inject</span>&nbsp;FjTypeUtils&nbsp;fjTypeUtils<br/>
+<br/>
+<span class="keyword">auxiliary</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;superclasses(Class&nbsp;cl)&nbsp;:&nbsp;List&lt;Class&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fields(Class&nbsp;cl)&nbsp;:&nbsp;List&lt;Field&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;methods(Class&nbsp;cl)&nbsp;:&nbsp;List&lt;Method&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;overrides(Method&nbsp;current,&nbsp;Method&nbsp;previous)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;current.name&nbsp;+&nbsp;<span class="string">"&nbsp;does&nbsp;not&nbsp;override&nbsp;the&nbsp;superclass&nbsp;method"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;current<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;isValue(Expression&nbsp;e)&nbsp;:&nbsp;Boolean<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;replaces&nbsp;in&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;body&apos;s&nbsp;expression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&apos;this&apos;&nbsp;with&nbsp;thisReplacement&nbsp;and<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;param&nbsp;references&nbsp;with&nbsp;args&nbsp;*/</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;replaceThisAndParams(MethodBody&nbsp;body,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;thisReplacement,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Parameter&gt;&nbsp;params,&nbsp;List&lt;Expression&gt;&nbsp;args<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:&nbsp;MethodBody<br/>
+}<br/>
 <br/>
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
@@ -185,9 +203,6 @@ which contains some auxiliary functions that we will use in the rules.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;expression<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;equalstype&nbsp;|-&nbsp;Type&nbsp;left&nbsp;~~&nbsp;Type&nbsp;right<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(left)&nbsp;+&nbsp;<span class="string">"&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;"</span>&nbsp;+&nbsp;stringRep(right)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;overrides&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;current.name&nbsp;+&nbsp;<span class="string">"&nbsp;does&nbsp;not&nbsp;override&nbsp;the&nbsp;superclass&nbsp;method"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;current<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;subtypesequence&nbsp;|-&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;owner&nbsp;~&gt;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;TypedElement&gt;&nbsp;elements<br/>
@@ -197,6 +212,13 @@ which contains some auxiliary functions that we will use in the rules.
 </p>
 </div>
 </div>
+</p>
+<p>
+In the following we explain the rules of these judgments.
+Note that auxiliary functions corresponding to the above defined auxiliary
+descriptions must be defined before implementing the rules.  However, in this
+document, we will concentrate on the implementations of the rules, and show
+the auxiliary functions when they are used by the rules. 
 </p>
 <a name="FJTyping"></a>
 <h3>Typing FJ Expressions</h3>
@@ -218,9 +240,9 @@ Let&apos;s start with simple expressions
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
-<span class="comment">//&nbsp;...or&nbsp;use&nbsp;static&nbsp;utility&nbsp;methods...<br/>
+<span class="comment">//&nbsp;...or&nbsp;use&nbsp;an&nbsp;utility&nbsp;class...<br/>
 </span><span class="keyword">axiom</span>&nbsp;TIntConstant<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;IntConstant&nbsp;i&nbsp;:&nbsp;FjTypeUtils::createIntType<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;IntConstant&nbsp;i&nbsp;:&nbsp;fjTypeUtils.createIntType<br/>
 <br/>
 <span class="comment">//&nbsp;...or&nbsp;closures<br/>
 </span><span class="keyword">axiom</span>&nbsp;TBoolConstant<br/>
@@ -242,7 +264,7 @@ Just to show the syntax of rules in Xsemantics which rely on Xbase,
 we present above three different ways of creating the basic types (initialized
 with the corresponding string).  This is just a demonstration: probably, the
 best way is relying on static utility methods implemented for your DSL
-(as we did with <span class="inlinecode">FjTypeUtils</span>).  Alternatively, as we did with the
+(as we did with <abbr title="it.xsemantics.example.fj.util.FjTypeUtils" >FjTypeUtils</abbr>).  Alternatively, as we did with the
 Expressions example (see <a href="Expressions-example.html#Expressions" title="Go to &quot;An Expression Language&quot;" >section Expressions</a>), we could have a different
 class for each basic type.
 </p>
@@ -253,7 +275,7 @@ class for each basic type.
 <span class="keyword">rule</span>&nbsp;TNew<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;New&nbsp;newExp&nbsp;:&nbsp;newExp.type<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;fjAux.getFields(newExp.type.classref)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;fields(newExp.type.classref)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;want&nbsp;the&nbsp;superclasses&apos;&nbsp;fields&nbsp;first<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields<br/>
 }<br/>
@@ -269,10 +291,43 @@ all the arguments passed to the new expression are subtypes of the corresponding
 fields of the classtype (see <a href="FJ-example.html#FJInANutshell" title="Go to &quot;FJ in a nutshell&quot;" >section FJInANutshell</a> for the syntax of constructors
 in our implementation of FJ).  In order to collect all the fields of the
 given class (including the inherited ones), we use 
-the method of the injected field (<a href="XsemanticsSyntax.html#InjectedFields" title="Go to &quot;Injected Fields&quot;" >section InjectedFields</a>)
-of type <abbr title="it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions" >FjAuxiliaryFunctions</abbr>;
-(note that this method will return the inherited fields first).
-Now, we can check that
+the auxiliary function <span class="inlinecode">fields</span> (which, in turns, rely on
+the auxiliary function <span class="inlinecode">superclasses</span>):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">auxiliary</span>&nbsp;superclasses(Class&nbsp;cl)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;getAll(cl,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+}<br/>
+<br/>
+<span class="keyword">auxiliary</span>&nbsp;fields(Class&nbsp;clazz)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Iterable&lt;Field&gt;&nbsp;fields&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;Field&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;inherited&nbsp;fields&nbsp;must&nbsp;come&nbsp;first<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(superclass&nbsp;:&nbsp;superclasses(clazz))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(EcoreUtil2::typeSelect(superclass.members,&nbsp;<span class="keyword">typeof</span>(Field))&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;fields)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fields&nbsp;=&nbsp;fields&nbsp;+&nbsp;EcoreUtil2::typeSelect(clazz.members,&nbsp;<span class="keyword">typeof</span>(Field))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Lists::newArrayList(fields)<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that, in order to get all the superclasses of a class
+we use <span class="inlinecode">getAll</span>, <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>.
+</p>
+<p>
+Now that we have all the fields, we can check that
 the types of the arguments are subtypes of the types of these fields
 (we use the judgment <span class="inlinecode">subtypesequence</span>, described in <a href="FJ-example.html#FJSubTyping" title="Go to &quot;FJ Subtyping&quot;" >section FJSubTyping</a>).
 </p>
@@ -367,23 +422,12 @@ know which members are visible in that selection expression:
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FJScopeProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeScopeProvider&nbsp;{<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;FjTypeSystem&nbsp;typeSystem;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;&nbsp;&nbsp;&nbsp;FjAuxiliaryFunctions&nbsp;fjAux;<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(reference&nbsp;==&nbsp;FjPackage.Literals.SELECTION__MESSAGE)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(context&nbsp;<span class="keyword">instanceof</span>&nbsp;Selection)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selection&nbsp;selection&nbsp;=&nbsp;(Selection)&nbsp;context;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Scopes<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.scopeFor(fjAux<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getMembers(getExpressionClass(selection<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getReceiver())));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;IScope.NULLSCOPE;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;FjTypeUtils&nbsp;fjTypeUtils;<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.getScope(context,&nbsp;reference);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;IScope&nbsp;scope_Member(Selection&nbsp;sel,&nbsp;EReference&nbsp;ref)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Scopes<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.scopeFor(getMembers(getExpressionClass(sel.getReceiver())));<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;Class&nbsp;getExpressionClass(Expression&nbsp;receiver)&nbsp;{<br/>
@@ -396,13 +440,23 @@ know which members are visible in that selection expression:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;containingClass&nbsp;=&nbsp;EcoreUtil2.getContainerOfType(expression,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class.<span class="keyword">class</span>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(containingClass&nbsp;!=&nbsp;null)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassType&nbsp;thisType&nbsp;=&nbsp;FjTypeUtils.createClassType(containingClass);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassType&nbsp;thisType&nbsp;=&nbsp;fjTypeUtils.createClassType(containingClass);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;RuleEnvironment(typeSystem.environmentEntry(<span class="string">"this"</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisType));<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;null;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;Member&gt;&nbsp;getMembers(Class&nbsp;cl)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Member&gt;&nbsp;allMembers&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;LinkedList&lt;Member&gt;();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allMembers.addAll(typeSystem.fields(cl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allMembers.addAll(typeSystem.methods(cl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(RuleFailedException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;list&nbsp;will&nbsp;be&nbsp;empty<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;allMembers;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -415,6 +469,10 @@ a binding for <span class="inlinecode"><span class="keyword">this</span></span> 
 thus we build a <abbr title="it.xsemantics.runtime.RuleEnvironment" >RuleEnvironment</abbr> (see
 also <a href="XsemanticsSyntax.html#Environment" title="Go to &quot;Rule Environment&quot;" >section Environment</a>) where we associate the string <span class="inlinecode"><span class="string">"this"</span></span> to
 the class which contains the current selection expression.
+</p>
+<p>
+We also use the generated methods corresponding to the
+auxiliary functions <span class="inlinecode">fields</span> and <span class="inlinecode">methods</span>.
 </p>
 <p>
 Note that we do not use the <span class="inlinecode">type</span> judgment, but the judgment
@@ -473,13 +531,8 @@ rules for this judgment:
 &nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;right.classref.name&nbsp;==&nbsp;<span class="string">"Object"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getAll(left.classref,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.contains(right.classref)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;superclasses(left.classref).contains(right.classref)<br/>
 }<br/>
 </p>
 </div>
@@ -501,8 +554,8 @@ cases:
 	</li>
 	<li>
 		The right class is a parent of the left class (class subtyping is transitive);
-		in order to check this last case, we get all the classes in the class
-		hierarchy of the left class (using <span class="inlinecode">getAll</span>, <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>), and use the
+		in order to check this last case, we get all the superclasses (using
+		the <span class="inlinecode">superclasses</span> auxiliary function shown before), and use the
 		standard Java <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" >List</abbr></a> <span class="inlinecode">contains</span> method
 	</li>
 </ol>
@@ -669,20 +722,16 @@ containing the method).  This is similar to what we do for FJ scoping
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;field.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedFields&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Field)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedFields&nbsp;=&nbsp;fields(clazz.superclass)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;make&nbsp;sure&nbsp;no&nbsp;duplicate&nbsp;fields&nbsp;in&nbsp;the&nbsp;hierarchy<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(inheritedField&nbsp;:&nbsp;inheritedFields)&nbsp;{<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedFields.forEach&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedField&nbsp;|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(field.name&nbsp;==&nbsp;inheritedField.name)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"field&nbsp;already&nbsp;declared&nbsp;in&nbsp;superclass&nbsp;"</span>&nbsp;+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringRep(inheritedField.eContainer)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"field&nbsp;already&nbsp;defined&nbsp;in&nbsp;superclass&nbsp;"</span>&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringRep(inheritedField.eContainer)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
@@ -694,32 +743,24 @@ For a <span class="inlinecode">Field</span> we must check that a field with the 
 is not defined in the superclasses (for fields with the same name in the
 same class this check is already done by Xtext predefined
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/NamesAreUniqueValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.NamesAreUniqueValidator" >NamesAreUniqueValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/NamesAreUniqueValidator.java" title="View Source Code" >(src)</a>).
-We use the predefined
-function <span class="inlinecode">getAll</span> (see <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>).  The above invocation of <span class="inlinecode">getAll</span>
-requires to collect all the <span class="inlinecode">Member</span>s in the superclass
-(and recursively the ones found following the superclass), and
-filter them in order to get only the <span class="inlinecode">Member</span>s which are <span class="inlinecode">Field</span>.
-Remember that <span class="inlinecode">getAll</span> avoids possible loops in the class hierarchy
-(see also <a href="FJ-example.html#FJValidation" title="Go to &quot;FJ Validation&quot;" >section FJValidation</a>).
+Again, we rely on the auxiliary function <span class="inlinecode">fields</span>.
 </p>
 <p>
 For methods we cannot execute the same check, since subclasses
 are allowed to redefine methods, provided they keep the same signature
-(in FJ covariance of return type is not allowed); thus we defined a
-specific judgment, <span class="inlinecode">overrides</span>, whose only rule is defined
+(in FJ covariance of return type is not allowed); thus we defined an
+auxiliary function, <span class="inlinecode">overrides</span>, defined
 as follows:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">rule</span>&nbsp;MethodOverride<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;||-&nbsp;Method&nbsp;current&nbsp;~~&nbsp;Method&nbsp;previous<br/>
-<span class="keyword">from</span>&nbsp;{<br/>
+<span class="keyword">auxiliary</span>&nbsp;overrides(Method&nbsp;current,&nbsp;Method&nbsp;previous)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;current.name&nbsp;!=&nbsp;previous.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;current.type&nbsp;~~&nbsp;previous.type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;current.type&nbsp;~~&nbsp;previous.type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span>&nbsp;<span class="keyword">error</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"cannot&nbsp;change&nbsp;return&nbsp;type&nbsp;of&nbsp;inherited&nbsp;method:&nbsp;"</span>&nbsp;+<br/>
@@ -730,7 +771,7 @@ as follows:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.params.size&nbsp;==&nbsp;previous.params.size<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;previousParamsIt&nbsp;=&nbsp;previous.params.iterator<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(param&nbsp;:&nbsp;current.params)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;param.type&nbsp;~~&nbsp;previousParamsIt.next.type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;param.type&nbsp;~~&nbsp;previousParamsIt.next.type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>

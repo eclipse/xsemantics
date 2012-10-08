@@ -127,15 +127,33 @@ BoolConstant: constant = ('true' | 'false');
 
 section:FJTypeSystem[FJ Type System]
 
-We start by defining the name (we skip imports) and the judgments
+We start by defining the name (we skip imports), the auxiliary descriptions
+(which will be used for auxiliary functions, ref:Auxiliary[]) and the judgments
 (ref:Judgments[]); we also use an injected field (ref:InjectedFields[])
-of type codeRef[it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions]
+of type codeRef[it.xsemantics.example.fj.util.FjTypeUtils]
 which contains some auxiliary functions that we will use in the rules.
 
 code[Xsemantics][
 system it.xsemantics.example.fj.typing.FjTypeSystem
 
-inject FjAuxiliaryFunctions fjAux
+inject FjTypeUtils fjTypeUtils
+
+auxiliary {
+	superclasses(Class cl) : List<Class>
+	fields(Class cl) : List<Field>
+	methods(Class cl) : List<Method>
+	overrides(Method current, Method previous)
+		error current.name + " does not override the superclass method"
+		source current
+	isValue(Expression e) : Boolean
+	/* replaces in a copy of the body's expression:
+	 * 'this' with thisReplacement and
+	 * param references with args */ 
+	replaceThisAndParams(MethodBody body,
+			Expression thisReplacement, 
+			List<Parameter> params, List<Expression> args
+		) : MethodBody
+}
 
 judgments {
 	type |- Expression expression : output Type
@@ -151,9 +169,6 @@ judgments {
 		source expression
 	equalstype |- Type left ~~ Type right
 		error stringRep(left) + " is not the same type as " + stringRep(right)
-	overrides ||- Method current ~~ Method previous
-		error current.name + " does not override the superclass method"
-		source current
 	subtypesequence |- 
 		Expression owner ~> 
 			List<Expression> expressions << List<? extends TypedElement> elements
@@ -161,6 +176,12 @@ judgments {
 		source owner
 }
 ]
+
+In the following we explain the rules of these judgments.
+Note that auxiliary functions corresponding to the above defined auxiliary
+descriptions must be defined before implementing the rules.  However, in this
+document, we will concentrate on the implementations of the rules, and show
+the auxiliary functions when they are used by the rules. 
 
 section2:FJTyping[Typing FJ Expressions]
 
@@ -178,9 +199,9 @@ axiom TStringConstant
 			result
 		}
 
-// ...or use static utility methods...
+// ...or use an utility class...
 axiom TIntConstant
-	G |- IntConstant i : FjTypeUtils::createIntType
+	G |- IntConstant i : fjTypeUtils.createIntType
 
 // ...or closures
 axiom TBoolConstant
@@ -198,7 +219,7 @@ Just to show the syntax of rules in Xsemantics which rely on Xbase,
 we present above three different ways of creating the basic types (initialized
 with the corresponding string).  This is just a demonstration: probably, the
 best way is relying on static utility methods implemented for your DSL
-(as we did with code[FjTypeUtils]).  Alternatively, as we did with the
+(as we did with codeRef[it.xsemantics.example.fj.util.FjTypeUtils]).  Alternatively, as we did with the
 Expressions example (see ref:Expressions[]), we could have a different
 class for each basic type.
 
@@ -206,7 +227,7 @@ code[Xsemantics][
 rule TNew
 	G |- New newExp : newExp.type
 from {
-	var fields = fjAux.getFields(newExp.type.classref)
+	var fields = fields(newExp.type.classref)
 	// we want the superclasses' fields first
 	G |- newExp ~> newExp.args << fields
 }
@@ -219,10 +240,36 @@ all the arguments passed to the new expression are subtypes of the corresponding
 fields of the classtype (see ref:FJInANutshell[] for the syntax of constructors
 in our implementation of FJ).  In order to collect all the fields of the
 given class (including the inherited ones), we use 
-the method of the injected field (ref:InjectedFields[])
-of type codeRef[it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions];
-(note that this method will return the inherited fields first).
-Now, we can check that
+the auxiliary function code[fields] (which, in turns, rely on
+the auxiliary function code[superclasses]):
+
+code[Xsemantics][
+auxiliary superclasses(Class cl) {
+	getAll(cl,
+		FjPackage::eINSTANCE.class_Superclass,
+		FjPackage::eINSTANCE.class_Superclass,
+		typeof(Class)
+	)
+}
+
+auxiliary fields(Class clazz) {
+	var Iterable<Field> fields = new ArrayList<Field>
+	
+	// inherited fields must come first
+	for (superclass : superclasses(clazz)) {
+		fields = 
+			(EcoreUtil2::typeSelect(superclass.members, typeof(Field)) 
+				+ fields)
+	}
+	fields = fields + EcoreUtil2::typeSelect(clazz.members, typeof(Field))
+	Lists::newArrayList(fields)
+}
+]
+
+Note that, in order to get all the superclasses of a class
+we use code[getAll], ref:GetAll[].
+
+Now that we have all the fields, we can check that
 the types of the arguments are subtypes of the types of these fields
 (we use the judgment code[subtypesequence], described in ref:FJSubTyping[]).
 
@@ -294,23 +341,12 @@ code[Java][
 public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject FjTypeSystem typeSystem;
-	
-	@Inject	FjAuxiliaryFunctions fjAux;
 
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		if (reference == FjPackage.Literals.SELECTION__MESSAGE) {
-			if (context instanceof Selection) {
-				Selection selection = (Selection) context;
-				return Scopes
-						.scopeFor(fjAux
-								.getMembers(getExpressionClass(selection
-										.getReceiver())));
-			}
-			return IScope.NULLSCOPE;
-		}
+	@Inject FjTypeUtils fjTypeUtils;
 
-		return super.getScope(context, reference);
+	public IScope scope_Member(Selection sel, EReference ref) {
+		return Scopes
+				.scopeFor(getMembers(getExpressionClass(sel.getReceiver())));
 	}
 
 	protected Class getExpressionClass(Expression receiver) {
@@ -323,13 +359,23 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 		Class containingClass = EcoreUtil2.getContainerOfType(expression,
 				Class.class);
 		if (containingClass != null) {
-			ClassType thisType = FjTypeUtils.createClassType(containingClass);
+			ClassType thisType = fjTypeUtils.createClassType(containingClass);
 			return new RuleEnvironment(typeSystem.environmentEntry("this",
 					thisType));
 		}
 		return null;
 	}
 
+	public List<Member> getMembers(Class cl) {
+		List<Member> allMembers = new LinkedList<Member>();
+		try {
+			allMembers.addAll(typeSystem.fields(cl));
+			allMembers.addAll(typeSystem.methods(cl));
+		} catch (RuleFailedException e) {
+			// the list will be empty
+		}
+		return allMembers;
+	}
 }
 ]
 
@@ -339,6 +385,9 @@ a binding for code[Java][this] in the environment (see ref:FJTyping[]),
 thus we build a codeRef[it.xsemantics.runtime.RuleEnvironment] (see
 also ref:Environment[]) where we associate the string code["this"] to
 the class which contains the current selection expression.
+
+We also use the generated methods corresponding to the
+auxiliary functions code[fields] and code[methods].
 
 Note that we do not use the code[type] judgment, but the judgment
 code[classtype] (refer to ref:FJTypeSystem[]) which already returns
@@ -386,13 +435,8 @@ from {
 	left.classref == right.classref
 	or
 	right.classref.name == "Object"
-	or {
-		getAll(left.classref, 
-			FjPackage::eINSTANCE.class_Superclass,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Class))
-		.contains(right.classref)
-	}
+	or
+	superclasses(left.classref).contains(right.classref)
 }
 ]
 
@@ -405,8 +449,8 @@ ol[
 item[the two classes are the same (class subtyping is reflexive)]
 item[the right class is code[Object] (every class is implicitly subclass of code[Object])]
 item[The right class is a parent of the left class (class subtyping is transitive);
-in order to check this last case, we get all the classes in the class
-hierarchy of the left class (using code[getAll], ref:GetAll[]), and use the
+in order to check this last case, we get all the superclasses (using
+the code[superclasses] auxiliary function shown before), and use the
 standard Java codeRef[java.util.List] code[contains] method]
 ]
 
@@ -536,20 +580,16 @@ from {
 	val clazz = field.eContainer as Class
 	
 	if (clazz.superclass != null) {
-		var inheritedFields = getAll(
-			clazz.superclass,
-			FjPackage::eINSTANCE.class_Members,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Field)
-		)
+		var inheritedFields = fields(clazz.superclass)
 		// make sure no duplicate fields in the hierarchy
-		for (inheritedField : inheritedFields) {
+		inheritedFields.forEach \[
+			inheritedField |
 			if (field.name == inheritedField.name) {
 				fail
-					error "field already declared in superclass " +
-						stringRep(inheritedField.eContainer)						
+					error "field already defined in superclass " +
+						stringRep(inheritedField.eContainer)
 			}
-		}
+		\]
 	}
 }
 ]
@@ -558,28 +598,20 @@ For a code[Field] we must check that a field with the same name
 is not defined in the superclasses (for fields with the same name in the
 same class this check is already done by Xtext predefined
 codeRef[org.eclipse.xtext.validation.NamesAreUniqueValidator]).
-We use the predefined
-function code[getAll] (see ref:GetAll[]).  The above invocation of code[getAll]
-requires to collect all the code[Member]s in the superclass
-(and recursively the ones found following the superclass), and
-filter them in order to get only the code[Member]s which are code[Field].
-Remember that code[getAll] avoids possible loops in the class hierarchy
-(see also ref:FJValidation[]).
+Again, we rely on the auxiliary function code[fields].
 
 For methods we cannot execute the same check, since subclasses
 are allowed to redefine methods, provided they keep the same signature
-(in FJ covariance of return type is not allowed); thus we defined a
-specific judgment, code[overrides], whose only rule is defined
+(in FJ covariance of return type is not allowed); thus we defined an
+auxiliary function, code[overrides], defined
 as follows:
 
 code[Xsemantics][
-rule MethodOverride
-	G ||- Method current ~~ Method previous
-from {
+auxiliary overrides(Method current, Method previous) {
 	current.name != previous.name
 	or
 	{
-		G |- current.type ~~ previous.type
+		empty |- current.type ~~ previous.type
 		or
 		fail error 
 		"cannot change return type of inherited method: " +
@@ -590,7 +622,7 @@ from {
 		current.params.size == previous.params.size
 		val previousParamsIt = previous.params.iterator
 		for (param : current.params) {
-			G |- param.type ~~ previousParamsIt.next.type
+			empty |- param.type ~~ previousParamsIt.next.type
 		}
 	}
 }
