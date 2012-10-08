@@ -54,7 +54,7 @@ from {
 rule CheckMethod derives
 	G |- Method method
 from {
-	val typeForThis = FjTypeUtils::createClassType(
+	val typeForThis = fjTypeUtils.createClassType(
 		EcoreUtil2::getContainerOfType(method, typeof(Class))
 	)
 	var Type bodyType

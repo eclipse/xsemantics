@@ -41,6 +41,8 @@ public class FormattingTest extends TestWithLoader {
 	 * @generated
 	 */
 	protected Program fixture = null;
+	
+	FjTypeUtils fjTypeUtils;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -91,6 +93,7 @@ public class FormattingTest extends TestWithLoader {
 	protected void setUp() throws Exception {
 		super.setUp();
 		setFixture(FjFactory.eINSTANCE.createProgram());
+		fjTypeUtils = getInjector().getInstance(FjTypeUtils.class);
 	}
 
 	/**
@@ -134,7 +137,7 @@ public class FormattingTest extends TestWithLoader {
 		Class cl = ClassFactory.createClass("A");
 		fixture.getClasses().add(cl);
 
-		Type clType = FjTypeUtils.createClassType(cl);
+		Type clType = fjTypeUtils.createClassType(cl);
 
 		Field field = FjFactory.eINSTANCE.createField();
 		field.setName("f1");
@@ -142,20 +145,20 @@ public class FormattingTest extends TestWithLoader {
 		cl.getMembers().add(field);
 		field = FjFactory.eINSTANCE.createField();
 		field.setName("f2");
-		clType = FjTypeUtils.createClassType(cl);
+		clType = fjTypeUtils.createClassType(cl);
 		field.setType(clType);
 		cl.getMembers().add(field);
 
-		clType = FjTypeUtils.createClassType(cl);
+		clType = fjTypeUtils.createClassType(cl);
 		Method method = FjFactory.eINSTANCE.createMethod();
 		method.setName("myMeth");
 		method.setType(clType);
-		clType = FjTypeUtils.createClassType(cl);
+		clType = fjTypeUtils.createClassType(cl);
 		Parameter parameter = FjFactory.eINSTANCE.createParameter();
 		parameter.setName("p1");
 		parameter.setType(clType);
 		method.getParams().add(parameter);
-		clType = FjTypeUtils.createClassType(cl);
+		clType = fjTypeUtils.createClassType(cl);
 		parameter = FjFactory.eINSTANCE.createParameter();
 		parameter.setName("p2");
 		parameter.setType(clType);

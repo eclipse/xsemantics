@@ -21,6 +21,8 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		FjAbstractTests {
 
 	protected IFjTypeSystem fjTypeSystem;
+	
+	protected FjTypeUtils fjTypeUtils;
 
 	protected FjExpectedTraces expectedTraces;
 
@@ -91,6 +93,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		super.setUp();
 		with(fjCustomStandaloneSetupClass());
 		fjTypeSystem = get(IFjTypeSystem.class);
+		fjTypeUtils = get(FjTypeUtils.class);
 		expectedTraces = get(FjExpectedTraces.class);
 		trace = new RuleApplicationTrace();
 		stringRep = get(FjTestsStringRepresentation.class);
@@ -517,7 +520,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 
 	@Test
 	public void testNoRuleFound() throws Exception {
-		assertCheck(null, FjTypeUtils.createStringType(), false, trace,
+		assertCheck(null, fjTypeUtils.createStringType(), false, trace,
 				"cannot find a rule for |- String", "");
 	}
 

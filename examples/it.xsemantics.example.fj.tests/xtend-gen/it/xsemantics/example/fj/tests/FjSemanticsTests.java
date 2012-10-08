@@ -1330,8 +1330,9 @@ public class FjSemanticsTests extends FjBaseTests {
       final Program p = this.parseAndAssertNoError(prog);
       final Method m = this.methodByName(p, "m");
       this.trace.addToTrace("WELLTYPED METHOD BODY");
+      FjTypeUtils _fjTypeUtils = this.fjSystem.getFjTypeUtils();
       it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(m, it.xsemantics.example.fj.fj.Class.class);
-      final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+      final ClassType typeForThis = _fjTypeUtils.createClassType(_containerOfType);
       RuleEnvironment _environmentEntry = this.fjSystem.environmentEntry("this", typeForThis);
       RuleEnvironment _ruleEnvironment = new RuleEnvironment(_environmentEntry);
       MethodBody _body = m.getBody();

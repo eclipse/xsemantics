@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.typing.FjTypeSystem
-import it.xsemantics.example.fj.util.FjTypeUtils
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleEnvironment
 import org.eclipse.xtext.junit4.InjectWith
@@ -666,7 +665,7 @@ ClassSubtyping: [] |- B <: A
 		
 		trace.addToTrace("WELLTYPED METHOD BODY")
 		
-		val typeForThis = FjTypeUtils::createClassType(
+		val typeForThis = fjSystem.fjTypeUtils.createClassType(
 			m.getContainerOfType(typeof(it.xsemantics.example.fj.fj.Class))
 		)
 		val methodBodyType = fjSystem.type(

@@ -36,6 +36,9 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	@Inject
 	FjAuxiliaryFunctions fjAux;
+	
+	@Inject
+	FjTypeUtils fjTypeUtils;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -67,7 +70,7 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 		Class containingClass = EcoreUtil2.getContainerOfType(expression,
 				Class.class);
 		if (containingClass != null) {
-			ClassType thisType = FjTypeUtils.createClassType(containingClass);
+			ClassType thisType = fjTypeUtils.createClassType(containingClass);
 			return new RuleEnvironment(typeSystem.environmentEntry("this",
 					thisType));
 		}

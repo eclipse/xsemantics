@@ -407,8 +407,9 @@ public class FjSepTypeSystem extends FjTypeSystem {
   protected Result<Boolean> applyRuleCheckMethod(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     
     {
+      FjTypeUtils _fjTypeUtils = this.getFjTypeUtils();
       it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-      final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+      final ClassType typeForThis = _fjTypeUtils.createClassType(_containerOfType);
       Type bodyType = null;
       /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
       MethodBody _body = method.getBody();

@@ -18,6 +18,8 @@ import com.google.common.collect.*
 
 import java.util.*
 
+inject FjTypeUtils fjTypeUtils
+
 auxiliary {
 	superclasses(Class cl) : List<Class>
 	fields(Class cl) : List<Field>
@@ -154,7 +156,7 @@ axiom TStringConstant
 
 // ...or use static utility methods...
 axiom TIntConstant
-	G |- IntConstant i : FjTypeUtils::createIntType
+	G |- IntConstant i : fjTypeUtils.createIntType
 
 // ...or closures
 axiom TBoolConstant
@@ -367,7 +369,7 @@ from {
 checkrule CheckMethodBody for
 	Method method
 from {
-	val typeForThis = FjTypeUtils::createClassType(
+	val typeForThis = fjTypeUtils.createClassType(
 		EcoreUtil2::getContainerOfType(method, typeof(Class))
 	)
 	'this' <- typeForThis |- method.body.expression <| method.type

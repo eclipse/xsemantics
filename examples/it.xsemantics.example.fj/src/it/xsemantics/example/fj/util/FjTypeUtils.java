@@ -23,28 +23,28 @@ public class FjTypeUtils {
 	 * @param typedElement
 	 * @param cl
 	 */
-	public static void setTypeClassReference(TypedElement typedElement, Class cl) {
+	public void setTypeClassReference(TypedElement typedElement, Class cl) {
 		ClassType type = createClassType(cl);
 		typedElement.setType(type);
 	}
 
-	public static ClassType createClassType(Class cl) {
+	public ClassType createClassType(Class cl) {
 		ClassType type = FjFactory.eINSTANCE.createClassType();
 		type.setClassref(cl);
 		return type;
 	}
 
-	public static BasicType createBasicType(String basic) {
+	public BasicType createBasicType(String basic) {
 		BasicType type = FjFactory.eINSTANCE.createBasicType();
 		type.setBasic(basic);
 		return type;
 	}
 	
-	public static BasicType createStringType() {
+	public BasicType createStringType() {
 		return createBasicType("String");
 	}
 	
-	public static BasicType createIntType() {
+	public BasicType createIntType() {
 		return createBasicType("int");
 	}
 

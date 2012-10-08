@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -108,6 +109,9 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String SUBJRED = "it.xsemantics.example.fj.typing.rules.SubjRed";
   
+  @Inject
+  private FjTypeUtils fjTypeUtils;
+  
   private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
   
   private PolymorphicDispatcher<List<Field>> fieldsDispatcher;
@@ -169,6 +173,14 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	"isValueImpl", 2);
     replaceThisAndParamsDispatcher = buildPolymorphicDispatcher(
     	"replaceThisAndParamsImpl", 5);
+  }
+  
+  public FjTypeUtils getFjTypeUtils() {
+    return this.fjTypeUtils;
+  }
+  
+  public void setFjTypeUtils(final FjTypeUtils fjTypeUtils) {
+    this.fjTypeUtils = fjTypeUtils;
   }
   
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
@@ -387,7 +399,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     
     {
       it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-      final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+      final ClassType typeForThis = this.fjTypeUtils.createClassType(_containerOfType);
       /* 'this' <- typeForThis |- method.body.expression <| method.type */
       MethodBody _body = method.getBody();
       Expression _expression = _body.getExpression();
@@ -1032,8 +1044,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EList<Expression> _args = exp.getArgs();
     final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
         public Boolean apply(final Expression it) {
-          Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-          return _isValue;
+          try {
+            Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
+            return _isValue;
+          } catch (Exception _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
         }
       };
     boolean _forall = IterableExtensions.<Expression>forall(_args, _function);
@@ -1208,7 +1224,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTIntConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
     
-    BasicType _createIntType = FjTypeUtils.createIntType();
+    BasicType _createIntType = this.fjTypeUtils.createIntType();
     return new Result<Type>(_createIntType);
   }
   

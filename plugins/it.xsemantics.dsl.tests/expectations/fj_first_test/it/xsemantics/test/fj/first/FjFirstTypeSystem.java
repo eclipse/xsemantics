@@ -2,6 +2,7 @@ package it.xsemantics.test.fj.first;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.BoolConstant;
 import it.xsemantics.example.fj.fj.Cast;
@@ -103,6 +104,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String CHECKCLASS = "it.xsemantics.test.fj.first.rules.CheckClass";
   
+  @Inject
+  private FjTypeUtils fjTypeUtils;
+  
   private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
   
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
@@ -152,6 +156,14 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	"checkImpl", 3, "|-");
     superclassesDispatcher = buildPolymorphicDispatcher(
     	"superclassesImpl", 2);
+  }
+  
+  public FjTypeUtils getFjTypeUtils() {
+    return this.fjTypeUtils;
+  }
+  
+  public void setFjTypeUtils(final FjTypeUtils fjTypeUtils) {
+    this.fjTypeUtils = fjTypeUtils;
   }
   
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
@@ -754,7 +766,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleTIntConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
     
-    BasicType _createIntType = FjTypeUtils.createIntType();
+    BasicType _createIntType = this.fjTypeUtils.createIntType();
     return new Result<Type>(_createIntType);
   }
   
@@ -1271,7 +1283,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     
     {
       it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-      final ClassType typeForThis = FjTypeUtils.createClassType(_containerOfType);
+      final ClassType typeForThis = this.fjTypeUtils.createClassType(_containerOfType);
       Type bodyType = null;
       /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
       MethodBody _body = method.getBody();

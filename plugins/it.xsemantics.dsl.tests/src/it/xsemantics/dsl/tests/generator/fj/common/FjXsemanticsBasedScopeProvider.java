@@ -32,6 +32,9 @@ public class FjXsemanticsBasedScopeProvider extends
 	@Inject
 	FjAuxiliaryFunctions fjAux;
 
+	@Inject
+	FjTypeUtils fjTypeUtils;
+
 	public IScope scope_Member(Selection sel, EReference ref) {
 		return Scopes.scopeFor(fjAux.getMembers(getExpressionClass(sel
 				.getReceiver())));
@@ -47,7 +50,7 @@ public class FjXsemanticsBasedScopeProvider extends
 		Class containingClass = EcoreUtil2.getContainerOfType(expression,
 				Class.class);
 		if (containingClass != null) {
-			ClassType thisType = FjTypeUtils.createClassType(containingClass);
+			ClassType thisType = fjTypeUtils.createClassType(containingClass);
 			return new RuleEnvironment(typeSystem.environmentEntry("this",
 					thisType));
 		}
