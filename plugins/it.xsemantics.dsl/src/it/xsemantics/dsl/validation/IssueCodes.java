@@ -69,4 +69,6 @@ public interface IssueCodes {
 	String OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME = PREFIX + "OverrideJudgmentMustHaveTheSameName";
 
 	String DUPLICATE_AUXILIARY_NAME = PREFIX + "DuplicateAuxiliaryDescription";
+
+	String NO_AUXDESC_FOR_AUX_FUNCTION = PREFIX + "NoAuxDescForAuxiliaryFunction";
 }

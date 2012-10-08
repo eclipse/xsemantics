@@ -216,4 +216,14 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"Duplicate judgment with the same name 'foo'"
 		)
 	}
+
+	@Test
+	def testAuxiliaryFunctionWithoutAuxiliaryDescription() {
+		parser.parse(testFiles.testAuxiliaryFunctionWithoutAuxiliaryDescription).
+			assertError(
+			XsemanticsPackage::eINSTANCE.auxiliaryFunction,
+			IssueCodes::NO_AUXDESC_FOR_AUX_FUNCTION,
+			"No auxiliary description for auxiliary function 'foobar'"
+		)
+	}
 }

@@ -213,4 +213,18 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testAuxiliaryFunctionWithoutAuxiliaryDescription() {
+    try {
+      CharSequence _testAuxiliaryFunctionWithoutAuxiliaryDescription = this.testFiles.testAuxiliaryFunctionWithoutAuxiliaryDescription();
+      XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctionWithoutAuxiliaryDescription);
+      EClass _auxiliaryFunction = XsemanticsPackage.eINSTANCE.getAuxiliaryFunction();
+      this._validationTestHelper.assertError(_parse, _auxiliaryFunction, 
+        IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION, 
+        "No auxiliary description for auxiliary function \'foobar\'");
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

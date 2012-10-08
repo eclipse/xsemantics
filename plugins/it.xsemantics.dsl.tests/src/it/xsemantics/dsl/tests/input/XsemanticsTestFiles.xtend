@@ -1962,4 +1962,12 @@ class XsemanticsTestFiles {
 		foo |- EClass c
 	}
 	'''
+
+	def testAuxiliaryFunctionWithoutAuxiliaryDescription() '''
+	«testAuxiliaryDescriptions»
+	
+	auxiliary foobar(EObject eO, EClass eC) {
+		eO.eClass == eC
+	}
+	'''
 }

@@ -579,6 +579,15 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		}
 	}
 
+	@Check
+	public void checkAuxiliaryFunctionHasAuxiliaryDescription(
+			AuxiliaryFunction aux) {
+		if (xsemanticsUtils.auxiliaryDescription(aux) == null)
+			error("No auxiliary description for auxiliary function '"
+					+ aux.getName() + "'",
+					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__NAME,
+					IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION);
+	}
 
 	protected String reportContainingSystemName(EObject object) {
 		return ", in system: "

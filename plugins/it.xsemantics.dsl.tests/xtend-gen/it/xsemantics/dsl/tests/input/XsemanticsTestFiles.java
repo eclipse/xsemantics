@@ -4321,4 +4321,20 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testAuxiliaryFunctionWithoutAuxiliaryDescription() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testAuxiliaryDescriptions = this.testAuxiliaryDescriptions();
+    _builder.append(_testAuxiliaryDescriptions, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("auxiliary foobar(EObject eO, EClass eC) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("eO.eClass == eC");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }
