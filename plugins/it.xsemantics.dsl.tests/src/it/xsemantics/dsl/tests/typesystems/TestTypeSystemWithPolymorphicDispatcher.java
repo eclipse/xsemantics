@@ -33,6 +33,8 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 
 	protected PolymorphicDispatcher<Result2<BaseClass1, BaseClass2>> testAssignableResultDispatcher;
 
+	protected PolymorphicDispatcher<BaseClass1> nonExistentAuxiliaryDispatcher;
+
 	public TestTypeSystemWithPolymorphicDispatcher() {
 		init();
 	}
@@ -48,6 +50,8 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 		testAssignableResultDispatcher = buildPolymorphicDispatcher2(
 				"testAssignableResultImpl", 2 + INDEX_OF_RULE_PARAMETERS, "|-",
 				":");
+		nonExistentAuxiliaryDispatcher = buildPolymorphicDispatcher(
+				"testAuxiliaryImpl", 2 + INDEX_OF_AUX_PARAMETERS);
 	}
 
 	/**
@@ -57,6 +61,10 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 
 	public void callNonExistentMethod(String foo, Integer bar) {
 		nonExistentMethodDispatcher.invoke(dummy, dummy, foo, bar);
+	}
+
+	public void callNonExistentAuxiliary(String foo, Integer bar) {
+		nonExistentAuxiliaryDispatcher.invoke(dummy, foo, bar);
 	}
 
 	public Result2<String, Integer> stringIntegerMethod(String foo, Integer bar) {

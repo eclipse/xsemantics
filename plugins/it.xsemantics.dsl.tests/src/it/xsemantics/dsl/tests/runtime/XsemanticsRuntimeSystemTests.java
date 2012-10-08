@@ -97,6 +97,17 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
+	public void testNoSuchMethodForAuxiliary() throws RuleFailedException {
+		try {
+			ts.callNonExistentAuxiliary("foo", 10);
+			fail("should get an exception due to missing method");
+		} catch (Exception e) {
+			assertWrappedRuleFailedException(e,
+					"cannot find an implementation for testAuxiliaryImpl(foo, 10)");
+		}
+	}
+
+	@Test
 	public void testStringInteger() throws RuleFailedException {
 		assertLeftRightPair(ts.stringIntegerMethod("foo", 10), "foo", 10);
 	}
