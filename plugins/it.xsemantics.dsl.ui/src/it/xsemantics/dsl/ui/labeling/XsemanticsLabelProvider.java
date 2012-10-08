@@ -4,6 +4,8 @@
 package it.xsemantics.dsl.ui.labeling;
 
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.Axiom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Import;
@@ -21,8 +23,7 @@ import com.google.inject.Inject;
 /**
  * Provides labels for a EObjects.
  * 
- * see
- * http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 
@@ -35,16 +36,18 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(Rule rule) {
-		JudgmentDescription judgmentDescription = utils
-				.judgmentDescription(rule);
+		JudgmentDescription judgmentDescription = utils.judgmentDescription(rule);
 		return rule.getName()
-				+ (judgmentDescription != null ? " ("
-						+ Strings.emptyIfNull(judgmentDescription.getName())
-						+ ")" : "");
+				+ (judgmentDescription != null ? " (" + Strings.emptyIfNull(judgmentDescription.getName()) + ")" : "");
 	}
 
 	public String text(CheckRule rule) {
 		return rule.getName();
+	}
+
+	public String text(AuxiliaryFunction aux) {
+		AuxiliaryDescription desc = utils.auxiliaryDescription(aux);
+		return aux.getName() + (desc != null ? " (" + Strings.emptyIfNull(desc.getName()) + ")" : "");
 	}
 
 	public String image(Axiom axiom) {
@@ -69,5 +72,13 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 
 	public String image(JudgmentDescription desc) {
 		return "judgment.gif";
+	}
+
+	public String image(AuxiliaryFunction aux) {
+		return "auxfun.gif";
+	}
+
+	public String image(AuxiliaryDescription aux) {
+		return "auxdesc.gif";
 	}
 }

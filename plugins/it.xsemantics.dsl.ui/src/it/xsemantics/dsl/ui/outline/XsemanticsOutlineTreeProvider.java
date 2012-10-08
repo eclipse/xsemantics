@@ -3,6 +3,8 @@
  */
 package it.xsemantics.dsl.ui.outline;
 
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -24,6 +26,14 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected boolean _isLeaf(JudgmentDescription desc) {
+		return true;
+	}
+
+	protected boolean _isLeaf(AuxiliaryDescription desc) {
+		return true;
+	}
+
+	protected boolean _isLeaf(AuxiliaryFunction aux) {
 		return true;
 	}
 }
