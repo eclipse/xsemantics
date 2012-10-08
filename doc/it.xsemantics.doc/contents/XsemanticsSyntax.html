@@ -628,6 +628,61 @@ representing the AST.
 An example of use of this predefined function can be found in
 <a href="FJ-example.html#FJTyping" title="Go to &quot;Typing FJ Expressions&quot;" >section FJTyping</a>.
 </p>
+<a name="Auxiliary"></a>
+<h2>Auxiliary Functions</h2>
+<p>
+Before declaring judgments, one can also declare some auxiliary
+function signatures (<em>auxiliary descriptions</em>), which have the following shape:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;auxiliary&nbsp;descriptions<br/>
+</span><span class="keyword">auxiliary</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;myFun(&lt;parameters&gt;)&nbsp;:&nbsp;&lt;returntype&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;myFun2(&lt;parameters&gt;)&nbsp;<span class="comment">/*&nbsp;no&nbsp;return&nbsp;type&nbsp;*/</span><br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Then, before defining the rules for your system, you can specify
+auxiliary function implementations for the corresponding
+auxiliary descriptions.
+</p>
+<p>
+In an auxiliary function definition the return type must not be declared
+(the one specified in the corresponding auxiliary description will be used).
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;auxiliary&nbsp;functions&nbsp;examples<br/>
+</span><span class="keyword">auxiliary</span>&nbsp;myFun(EObject&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
+<span class="keyword">auxiliary</span>&nbsp;myFun(EClass&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The things that make an auxiliary function belong to a specific auxiliary
+description are the name and
+the types of the parameters, which must be (Java) subtypes of the
+corresponding types of the description (or exactly the same Java types).
+Two auxiliary functions belonging to the same description 
+must differ for at least one parameter&apos;s type.
+</p>
+<p>
+The body of an auxiliary function uses the same syntax of rule premises
+(<a href="XsemanticsSyntax.html#Premises" title="Go to &quot;Premises&quot;" >section Premises</a>).
+</p>
+<p>
+An auxiliary function can then be called in premises as a standard
+Java method.
+</p>
 <a name="CheckRules"></a>
 <h2>Rules for Validator: checkrule</h2>
 <p>
@@ -764,7 +819,7 @@ Xsemantics will generate two Java classes for each xsemantics system:
 <ul>
 	<li>
 		A Java class with the same name of the system, containing
-			all the implementations of the system&apos;s rules;
+			all the implementations of the system&apos;s rules and auxiliary functions;
 	</li>
 	<li>
 		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
@@ -793,7 +848,8 @@ not need to depend on the whole Xsemantics SDK.
 <h3>The Generated Java Rule System</h3>
 <p>
 The generated Java class containing the rules of your system will have
-public methods for the judgments of your system.  For instance, if you have
+public methods for the judgments and auxiliary functions of your system.
+For instance, if you have
 </p>
 <p>
 <ul>
@@ -841,6 +897,12 @@ The class <abbr title="it.xsemantics.runtime.Result" >Result</abbr> is part of X
 and it is a wrapper for the actual result value (that can be retrieved
 with method <span class="inlinecode">getValue()</span>) and a possible failure
 (in the shape of a <abbr title="it.xsemantics.runtime.RuleFailedException" >RuleFailedException</abbr>).
+</p>
+<p>
+A similar generation patterns is used for auxiliary descriptions
+(but the returned type will NOT be wrapped into a 
+<abbr title="it.xsemantics.runtime.Result" >Result</abbr> and 
+<abbr title="it.xsemantics.runtime.RuleFailedException" >RuleFailedException</abbr> is declared to be thrown).
 </p>
 <p>
 The value in the result will be <span class="inlinecode">null</span> if the judgment rule failed;

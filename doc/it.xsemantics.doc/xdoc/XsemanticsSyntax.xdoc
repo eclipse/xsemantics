@@ -447,6 +447,45 @@ representing the AST.
 An example of use of this predefined function can be found in
 ref:FJTyping[].
 
+section:Auxiliary[Auxiliary Functions]
+
+Before declaring judgments, one can also declare some auxiliary
+function signatures (e[auxiliary descriptions]), which have the following shape:
+
+code[Xsemantics][
+// auxiliary descriptions
+auxiliary {
+	myFun(<parameters>) : <returntype>
+	myFun2(<parameters>) /* no return type */
+}
+]
+
+Then, before defining the rules for your system, you can specify
+auxiliary function implementations for the corresponding
+auxiliary descriptions.
+
+In an auxiliary function definition the return type must not be declared
+(the one specified in the corresponding auxiliary description will be used).
+
+code[Xsemantics][
+// auxiliary functions examples
+auxiliary myFun(EObject o, String s) { ... }
+auxiliary myFun(EClass o, String s) { ... }
+]
+
+The things that make an auxiliary function belong to a specific auxiliary
+description are the name and
+the types of the parameters, which must be (Java) subtypes of the
+corresponding types of the description (or exactly the same Java types).
+Two auxiliary functions belonging to the same description 
+must differ for at least one parameter's type.
+
+The body of an auxiliary function uses the same syntax of rule premises
+(ref:Premises[]).
+
+An auxiliary function can then be called in premises as a standard
+Java method.
+
 section:CheckRules[Rules for Validator: checkrule]
 
 In a Xsemantics system you can also write special rules, e[checkrule]s, which
@@ -550,7 +589,7 @@ Xsemantics will generate two Java classes for each xsemantics system:
 
 ul[
 	item[A Java class with the same name of the system, containing
-	all the implementations of the system's rules;]
+	all the implementations of the system's rules and auxiliary functions;]
 	item[A codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator]
 	subclass,
 	with the same name of the system with suffix code[Validator] 
@@ -573,7 +612,8 @@ not need to depend on the whole Xsemantics SDK.
 section2:GeneratedSystem[The Generated Java Rule System]
 
 The generated Java class containing the rules of your system will have
-public methods for the judgments of your system.  For instance, if you have
+public methods for the judgments and auxiliary functions of your system.
+For instance, if you have
 
 ul[
 	item[a judgment called e[myjudgment]]
@@ -602,6 +642,11 @@ The class codeRef[it.xsemantics.runtime.Result] is part of Xsemantics runtime,
 and it is a wrapper for the actual result value (that can be retrieved
 with method code[getValue()]) and a possible failure
 (in the shape of a codeRef[it.xsemantics.runtime.RuleFailedException]).
+
+A similar generation patterns is used for auxiliary descriptions
+(but the returned type will NOT be wrapped into a 
+codeRef[it.xsemantics.runtime.Result] and 
+codeRef[it.xsemantics.runtime.RuleFailedException] is declared to be thrown).
 
 The value in the result will be code[null] if the judgment rule failed;
 in that case you might want to inspect the codeRef[it.xsemantics.runtime.RuleFailedException].
