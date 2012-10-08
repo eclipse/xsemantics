@@ -267,7 +267,8 @@ auxiliary fields(Class clazz) {
 ]
 
 Note that, in order to get all the superclasses of a class
-we use code[getAll], ref:GetAll[].
+we use code[getAll], ref:GetAll[] (Remember that using code[getAll]
+avoids infinite loops in cases of cycles in the AST).
 
 Now that we have all the fields, we can check that
 the types of the arguments are subtypes of the types of these fields
@@ -642,17 +643,13 @@ from {
 	val clazz = method.eContainer as Class
 	
 	if (clazz.superclass != null) {
-		var inheritedMethods = getAll(
-			clazz.superclass,
-			FjPackage::eINSTANCE.class_Members,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Method)
-		)
+		var inheritedMethods = methods(clazz.superclass)
+		val methods = EcoreUtil2::typeSelect(clazz.members, typeof(Method))
 		// check override predicate
 		inheritedMethods.forEach \[
 			inheritedMethod |
-			fjAux.selectMethods(clazz).forEach \[
-				empty ||- it ~~ inheritedMethod
+			methods.forEach \[
+				overrides(it, inheritedMethod)
 			\]
 		\]
 	}
@@ -661,8 +658,7 @@ from {
 
 Note the use of Xbase closure (please refer to ref:ExpressionsInPremises[]
 for the way Xsemantics interprets boolean expressions inside premises and
-closures).  We also use the injected field (ref:InjectedFields[]) code[fjAux]
-that we declared at the beginning in the system.
+closures).
 
 For a code[Class] we need to check that its superclass hierarchy is
 not cyclic:
@@ -672,12 +668,7 @@ checkrule CheckClassHierachyNotCyclic for
 	Class cl
 from {
 	if (cl.superclass != null) {
-		!getAll(
-			cl,
-			FjPackage::eINSTANCE.class_Superclass,
-			FjPackage::eINSTANCE.class_Superclass,
-			typeof(Class)
-		).contains(cl)
+		!superclasses(cl).contains(cl)
 		or
 		fail
 			error "Cyclic hierarchy for " + cl.name
@@ -687,8 +678,7 @@ from {
 ]
 
 which basically checks that the current class is not in the
-superclasses of itself.  Remember that using code[getAll] (ref:GetAll[])
-avoids infinite loops in cases of cycles in the AST.
+superclasses of itself.
 
 Finally, we check that we can give a type to the main expression
 of an FJ program, in the empty environment:
@@ -702,3 +692,8 @@ from {
 	empty |- program.main : var Type mainType
 }
 ]
+
+section:FJReduction[FJ Operational Semantics]
+
+todo[The operational semantics, i.e., reduction rules, are implemented, but
+documentation for this part has to be written yet.]

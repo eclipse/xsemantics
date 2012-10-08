@@ -324,7 +324,8 @@ the auxiliary function <span class="inlinecode">superclasses</span>):
 </p>
 <p>
 Note that, in order to get all the superclasses of a class
-we use <span class="inlinecode">getAll</span>, <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>.
+we use <span class="inlinecode">getAll</span>, <a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a> (Remember that using <span class="inlinecode">getAll</span>
+avoids infinite loops in cases of cycles in the AST).
 </p>
 <p>
 Now that we have all the fields, we can check that
@@ -798,17 +799,13 @@ Thus, the checkrule for <span class="inlinecode">Method</span> is
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;clazz&nbsp;=&nbsp;method.eContainer&nbsp;<span class="keyword">as</span>&nbsp;Class<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedMethods&nbsp;=&nbsp;getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clazz.superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Members,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Method)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;inheritedMethods&nbsp;=&nbsp;methods(clazz.superclass)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;methods&nbsp;=&nbsp;EcoreUtil2::typeSelect(clazz.members,&nbsp;<span class="keyword">typeof</span>(Method))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;check&nbsp;override&nbsp;predicate<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedMethods.forEach&nbsp;[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inheritedMethod&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fjAux.selectMethods(clazz).forEach&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;||-&nbsp;<span class="keyword">it</span>&nbsp;~~&nbsp;inheritedMethod<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods.forEach&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overrides(<span class="keyword">it</span>,&nbsp;inheritedMethod)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
@@ -820,8 +817,7 @@ Thus, the checkrule for <span class="inlinecode">Method</span> is
 <p>
 Note the use of Xbase closure (please refer to <a href="XsemanticsSyntax.html#ExpressionsInPremises" title="Go to &quot;Expressions in Premises&quot;" >section ExpressionsInPremises</a>
 for the way Xsemantics interprets boolean expressions inside premises and
-closures).  We also use the injected field (<a href="XsemanticsSyntax.html#InjectedFields" title="Go to &quot;Injected Fields&quot;" >section InjectedFields</a>) <span class="inlinecode">fjAux</span>
-that we declared at the beginning in the system.
+closures).
 </p>
 <p>
 For a <span class="inlinecode">Class</span> we need to check that its superclass hierarchy is
@@ -835,12 +831,7 @@ not cyclic:
 &nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;cl<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(cl.superclass&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!getAll(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cl,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FjPackage::eINSTANCE.class_Superclass,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">typeof</span>(Class)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).contains(cl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!superclasses(cl).contains(cl)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fail</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"Cyclic&nbsp;hierarchy&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;cl.name<br/>
@@ -853,8 +844,7 @@ not cyclic:
 </p>
 <p>
 which basically checks that the current class is not in the
-superclasses of itself.  Remember that using <span class="inlinecode">getAll</span> (<a href="XsemanticsSyntax.html#GetAll" title="Go to &quot;Graph Closures (getAll)&quot;" >section GetAll</a>)
-avoids infinite loops in cases of cycles in the AST.
+superclasses of itself.
 </p>
 <p>
 Finally, we check that we can give a type to the main expression
@@ -873,6 +863,14 @@ of an FJ program, in the empty environment:
 }<br/>
 </p>
 </div>
+</div>
+</p>
+<a name="FJReduction"></a>
+<h2>FJ Operational Semantics</h2>
+<p>
+<div class="todo" >
+The operational semantics, i.e., reduction rules, are implemented, but
+documentation for this part has to be written yet.
 </div>
 
 </p>

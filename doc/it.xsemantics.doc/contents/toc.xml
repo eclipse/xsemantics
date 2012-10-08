@@ -84,6 +84,8 @@
 			</topic>
 			<topic href="contents/FJ-example.html#FJValidation" label="FJ Validation" >
 			</topic>
+			<topic href="contents/FJ-example.html#FJReduction" label="FJ Operational Semantics" >
+			</topic>
 		</topic>
 		<topic href="contents/Lambda-example.html#Lambda" label="Lambda" >
 			<topic href="contents/Lambda-example.html#LambdaInANutshell" label="Lambda in a nutshell" >
