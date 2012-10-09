@@ -16,11 +16,11 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.2.1";visibility:=reexport,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
- it.xsemantics.runtime;visibility:=reexport
+ it.xsemantics.runtime;visibility:=reexport,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional
 Import-Package: org.apache.log4j,
- org.apache.commons.logging,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend2.lib
+ org.eclipse.xtend2.lib,
+ org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.example.lambda,
  it.xsemantics.example.lambda.formatting,
