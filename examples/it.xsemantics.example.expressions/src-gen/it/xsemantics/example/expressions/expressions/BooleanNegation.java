@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package it.xsemantics.example.expressions.expressions;
 
