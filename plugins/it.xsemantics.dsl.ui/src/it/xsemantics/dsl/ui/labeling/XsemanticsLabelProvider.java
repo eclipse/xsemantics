@@ -9,6 +9,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.Axiom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Import;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
@@ -80,5 +81,9 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 
 	public String image(AuxiliaryDescription aux) {
 		return "auxdesc.gif";
+	}
+
+	public String image(Injected inj) {
+		return "field_public_obj.gif";
 	}
 }
