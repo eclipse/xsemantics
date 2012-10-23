@@ -26,7 +26,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.junit;bundle-version="1.0.0",
  it.xsemantics.example.fj.ui,
  org.eclipse.xtext.junit4,
- org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib
