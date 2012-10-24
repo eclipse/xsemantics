@@ -7,10 +7,10 @@ Bundle-SymbolicName: it.xsemantics.example.expressions.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.expressions;visibility:=reexport,
  org.eclipse.xtext.ui,
- org.eclipse.ui.editors,
- org.eclipse.ui.ide,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
  org.eclipse.xtext.ui.shared,
- org.eclipse.ui,
+ org.eclipse.ui;bundle-version="3.5.0",
  org.eclipse.xtext.builder,
  org.antlr.runtime,
  org.eclipse.xtext.common.types.ui,
