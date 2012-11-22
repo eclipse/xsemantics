@@ -10,42 +10,42 @@
 		<rm:provider componentTypes="eclipse.feature,buckminster" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/releng/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="eclipse.feature" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/features/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/plugins/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/doc/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/examples/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local"
 			mutable="false">
 			<rm:uri format="{0}/tests/{1}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="projects.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>

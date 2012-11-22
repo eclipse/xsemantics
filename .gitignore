@@ -8,3 +8,5 @@ logs.zip
 target/
 *.java._trace
 *.smap
+
+buildroot

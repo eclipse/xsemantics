@@ -11,6 +11,7 @@
   <rm:locator pattern="^org\.antlr.*" searchPathRef="xtext"/>
   <rm:locator pattern="javax.inject" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.hamcrest*" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.apache*" searchPathRef="orbit" />
   <rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$" searchPathRef="swtbot"/>
   <rm:locator searchPathRef="eclipse"/>
   <rm:searchPath name="xtext">
