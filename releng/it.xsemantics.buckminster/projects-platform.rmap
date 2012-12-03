@@ -6,8 +6,8 @@
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/helios/dev-build/update-site"/>
   <rm:property key="orbit.repository" value="${eclipse.download}/tools/orbit/downloads/drops/R20120526062928/repository/"/>
   
-  <rm:redirect pattern="it.xsemantics.buckminster" href="project.rmap"/>
-  	<rm:redirect pattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$"
+  <rm:redirect pattern="^it\.xsemantics(?:\..+)?$" href="project.rmap"/>
+  <rm:redirect pattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$"
 		href="project.rmap" />
 
   <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>
