@@ -5,7 +5,11 @@
   <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/juno"/>
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/helios/dev-build/update-site"/>
   <rm:property key="orbit.repository" value="${eclipse.download}/tools/orbit/downloads/drops/R20120526062928/repository/"/>
+  
   <rm:redirect pattern="it.xsemantics.buckminster" href="project.rmap"/>
+  	<rm:redirect pattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$"
+		href="project.rmap" />
+
   <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>
   <rm:locator pattern="^com\.google.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.antlr.*" searchPathRef="xtext"/>
