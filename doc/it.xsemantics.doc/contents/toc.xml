@@ -104,4 +104,18 @@
 			</topic>
 		</topic>
 	</topic>
+	<topic href="contents/00-Main_14.html#XSemantics%20Documentation_14" label="Appendix" >
+		<topic href="contents/GettingSources.html#GettingSources" label="Getting Sources" >
+			<topic href="contents/GettingSources.html#InstallBuckminster" label="Install Buckminster in the IDE" >
+			</topic>
+			<topic href="contents/GettingSources.html#PrepareTP" label="Prepare an empty target platform" >
+			</topic>
+			<topic href="contents/GettingSources.html#MaterializeWP" label="Materialize the Workspace" >
+				<topic href="contents/GettingSources.html#CustomizeProperties" label="(Optional) Customize some Properties" >
+				</topic>
+				<topic href="contents/GettingSources.html#StartMaterialization" label="Start Materialization" >
+				</topic>
+			</topic>
+		</topic>
+	</topic>
 </toc>

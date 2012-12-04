@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Getting Sources</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="GettingSources"></a>
+<h1>Getting Sources</h1>
+<p>
+If you want to get the sources of Xsemantics,
+for instance, to contribute new features and patches, you can get them
+via Git.
+</p>
+<p>
+We use <a href="http://www.eclipse.org/buckminster/">Buckminster</a> as the
+building and materialization infrastructure; this will let you
+automatically materialize the sources in the workspace and setup
+the target platform, so that you will have everything that is necessary
+to have a working workspace with Xsemantics sources.
+</p>
+<a name="InstallBuckminster"></a>
+<h2>Install Buckminster in the IDE</h2>
+<p>
+First of all, you need to install Buckminster in your Eclipse;
+you can do that using the update site
+</p>
+<p>
+<em>http://download.eclipse.org/tools/buckminster/updates-4.2</em>
+</p>
+<p>
+You need to install the core, git and pde features.
+</p>
+<p>
+<div class="image" >
+<img src="images/install-buckminster.png" class=" " 
+ style="width:90%" />
+<div class="caption">
+Install Buckminster features
+</div>
+</div>
+</p>
+<a name="PrepareTP"></a>
+<h2>Prepare an empty target platform</h2>
+<p>
+It is better to start with an empty target platform in your IDE
+(then Buckminster will materialize the required features and
+bundles starting from that empty target);
+you then need to create an empty target platform manually that contains 
+one single and empty directory and set this target platform active.
+A subsequent resolution/materialization will use that platform.
+Here are the detailed steps:
+</p>
+<p>
+<ol>
+	<li>
+		Create a new general project named TP 
+			(or some name of your preference)
+	</li>
+	<li>
+		Open "Window" =&gt; "Preferences" and expand "Plug-in Development"
+	</li>
+	<li>
+		Select "Target Platform"
+	</li>
+	<li>
+		Click "Add..."
+	</li>
+	<li>
+		Click "Next&gt;" (i.e. start with nothing)
+	</li>
+	<li>
+		Enter TP in the Name: field
+	</li>
+	<li>
+		Click "Add..."
+	</li>
+	<li>
+		Select "Directory" and click "Next"
+	</li>
+	<li>
+		Click on "Variables..."
+	</li>
+	<li>
+		Scroll down and select "workspace_loc" and then type TP in the Argument: field.
+	</li>
+	<li>
+		Click "OK" and then "Finish" and then "Finish" again.
+	</li>
+	<li>
+		Set your new target definition active by checking it in the list of Target definitions: and click "OK"
+	</li>
+</ol>
+</p>
+<a name="MaterializeWP"></a>
+<h2>Materialize the Workspace</h2>
+<p>
+From the File menu choose <em>Open a Component Query...</em> and
+use this URL
+</p>
+<p>
+<a href="http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw">http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw</a>
+</p>
+<p>
+<div class="image" >
+<img src="images/open-cquery.png" class=" " 
+ style="width:90%" />
+<div class="caption">
+The component query opened
+</div>
+</div>
+</p>
+<a name="CustomizeProperties"></a>
+<h3>(Optional) Customize some Properties</h3>
+<p>
+Before starting the materialization, you might want to customize
+some properties; you can do that in the <em>Properties</em> tab of
+the opened component query:
+</p>
+<p>
+<div class="image" >
+<img src="images/open-cquery1.png" class=" " 
+ style="width:90%" />
+<div class="caption">
+The properties tab
+</div>
+</div>
+</p>
+<p>
+You can add a property by pressing
+the <em>New</em> button.
+</p>
+<p>
+The main properties you can customize is the main eclipse
+base repository, which defaults to <a href="http://download.eclipse.org">http://download.eclipse.org</a>;
+this can be useful you have a local eclipse mirror
+(see also this <a href="http://www.lorenzobettini.it/2012/11/mirror-eclipse-repositories-with-p2-mirror-ant-task/">blog post</a>
+for details about mirror eclipse repositories).
+</p>
+<p>
+For instance, here&apos;s a possible customization
+</p>
+<p>
+<div class="image" >
+<img src="images/open-cquery-new-property.png" class=" " 
+ style="width:50%" />
+<div class="caption">
+Property customization
+</div>
+</div>
+</p>
+<p>
+Similarly, you can customize the path in your system where
+the git repository will be cloned, which defaults to
+<em>${user.home}/git/xsemantics</em>); for instance, you can change it
+to something else, for instance, <em>${user.home}/repositories/xsemantics</em> 
+</p>
+<a name="StartMaterialization"></a>
+<h3>Start Materialization</h3>
+<p>
+You can now press the button in the opened query <em>Resolve and Materialize</em>.
+This will start the materialization process which will consist of
+cloning the git repository, materialize the target platform and importing
+all the projects into the workspace.
+</p>
+<p>
+Materializing the target platform may take sometime (depending on your
+network connection), so you might want to go and get a coffee 
+in the meantime ;)
+</p>
+<p>
+When the whole process terminates, you will have a working
+workspace with Xsemantics projects and the needed target platform
+(thus, you should have no error!).
+</p>
+</body>
+</html>

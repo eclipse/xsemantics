@@ -1,0 +1,98 @@
+chapter:GettingSources[Getting Sources]
+
+If you want to get the sources of Xsemantics,
+for instance, to contribute new features and patches, you can get them
+via Git.
+
+We use link[http://www.eclipse.org/buckminster/][Buckminster] as the
+building and materialization infrastructure; this will let you
+automatically materialize the sources in the workspace and setup
+the target platform, so that you will have everything that is necessary
+to have a working workspace with Xsemantics sources.
+
+section:InstallBuckminster[Install Buckminster in the IDE]
+
+First of all, you need to install Buckminster in your Eclipse;
+you can do that using the update site
+
+e[http://download.eclipse.org/tools/buckminster/updates-4.2]
+
+You need to install the core, git and pde features.
+
+img[images/install-buckminster.png][Install Buckminster features][ ][width:90%]
+
+section:PrepareTP[Prepare an empty target platform]
+
+It is better to start with an empty target platform in your IDE
+(then Buckminster will materialize the required features and
+bundles starting from that empty target);
+you then need to create an empty target platform manually that contains 
+one single and empty directory and set this target platform active.
+A subsequent resolution/materialization will use that platform.
+Here are the detailed steps:
+
+ol[
+	item[Create a new general project named TP 
+	(or some name of your preference)]
+	item[Open "Window" => "Preferences" and expand "Plug-in Development"]
+	item[Select "Target Platform"]
+	item[Click "Add..."]
+	item[Click "Next>" (i.e. start with nothing)]
+	item[Enter TP in the Name: field]
+	item[Click "Add..."]
+	item[Select "Directory" and click "Next"]
+	item[Click on "Variables..."]
+	item[Scroll down and select "workspace_loc" and then type TP in the Argument: field.]
+	item[Click "OK" and then "Finish" and then "Finish" again.]
+	item[Set your new target definition active by checking it in the list of Target definitions: and click "OK"]
+]
+
+section:MaterializeWP[Materialize the Workspace]
+
+From the File menu choose e[Open a Component Query...] and
+use this URL
+
+link[http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw][http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw]
+
+img[images/open-cquery.png][The component query opened][ ][width:90%]
+
+section2:CustomizeProperties[(Optional) Customize some Properties]
+
+Before starting the materialization, you might want to customize
+some properties; you can do that in the e[Properties] tab of
+the opened component query:
+
+img[images/open-cquery1.png][The properties tab][ ][width:90%]
+
+You can add a property by pressing
+the e[New] button.
+
+The main properties you can customize is the main eclipse
+base repository, which defaults to link[http://download.eclipse.org][http://download.eclipse.org];
+this can be useful you have a local eclipse mirror
+(see also this link[http://www.lorenzobettini.it/2012/11/mirror-eclipse-repositories-with-p2-mirror-ant-task/][blog post]
+for details about mirror eclipse repositories).
+
+For instance, here's a possible customization
+
+img[images/open-cquery-new-property.png][Property customization][ ][width:50%]
+
+Similarly, you can customize the path in your system where
+the git repository will be cloned, which defaults to
+e[${user.home}/git/xsemantics]); for instance, you can change it
+to something else, for instance, e[${user.home}/repositories/xsemantics] 
+
+section2:StartMaterialization[Start Materialization]
+
+You can now press the button in the opened query e[Resolve and Materialize].
+This will start the materialization process which will consist of
+cloning the git repository, materialize the target platform and importing
+all the projects into the workspace.
+
+Materializing the target platform may take sometime (depending on your
+network connection), so you might want to go and get a coffee 
+in the meantime ;)
+
+When the whole process terminates, you will have a working
+workspace with Xsemantics projects and the needed target platform
+(thus, you should have no error!).

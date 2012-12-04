@@ -27,6 +27,10 @@ Sources of Xsemantics (and the examples, ref:Examples[]) are available
 from the git repository, please visit
 link[https://sourceforge.net/p/xsemantics/code][https://sourceforge.net/p/xsemantics/code].
 
+You might want to consider using link[http://www.eclipse.org/buckminster/][Buckminster]
+to easily materialize Xsemantics sources into your workspace, together with all
+the needed bundles in the target platform, as illustrated in ref:GettingSources[].
+
 section:UsingXsemantics[Using Xsemantics]
 
 Before you start using Xsemantics for your Xtext language, you
