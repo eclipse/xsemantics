@@ -1,6 +1,5 @@
 package it.xsemantics.example.fj.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1271,14 +1271,14 @@ public class FjSemanticsTests extends FjBaseTests {
     Expression _xblockexpression = null;
     {
       final Result<Expression> result = this.assertReduce(exp);
-      boolean _notEquals = (!Objects.equal(expected, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(expected, null);
       if (_notEquals) {
         String _string = expected.toString();
         Expression _value = result.getValue();
         String _string_1 = this.stringRep.string(_value);
         Assert.assertEquals(_string, _string_1);
       }
-      boolean _notEquals_1 = (!Objects.equal(expectedTrace, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expectedTrace, null);
       if (_notEquals_1) {
         String _string_2 = expectedTrace.toString();
         String _traceAsString = this.traceUtils.traceAsString(this.trace);

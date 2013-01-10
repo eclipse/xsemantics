@@ -76,12 +76,12 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmArgumentTypeReferenceAccess().getAlternatives(), "rule__JvmArgumentTypeReference__Alternatives");
 					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2(), "rule__JvmWildcardTypeReference__Alternatives_2");
 					put(grammarAccess.getJvmTypeParameterAccess().getAlternatives_1(), "rule__JvmTypeParameter__Alternatives_1");
+					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
 					put(grammarAccess.getXsemanticsSystemAccess().getGroup(), "rule__XsemanticsSystem__Group__0");
 					put(grammarAccess.getXsemanticsSystemAccess().getGroup_2(), "rule__XsemanticsSystem__Group_2__0");
 					put(grammarAccess.getXsemanticsSystemAccess().getGroup_3(), "rule__XsemanticsSystem__Group_3__0");
 					put(grammarAccess.getXsemanticsSystemAccess().getGroup_6(), "rule__XsemanticsSystem__Group_6__0");
 					put(grammarAccess.getXsemanticsSystemAccess().getGroup_7(), "rule__XsemanticsSystem__Group_7__0");
-					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getInjectedAccess().getGroup(), "rule__Injected__Group__0");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup(), "rule__AuxiliaryDescription__Group__0");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getGroup_2(), "rule__AuxiliaryDescription__Group_2__0");
@@ -91,7 +91,6 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJudgmentDescriptionAccess().getGroup_4(), "rule__JudgmentDescription__Group_4__0");
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_0(), "rule__JudgmentParameter__Group_0__0");
 					put(grammarAccess.getJudgmentParameterAccess().getGroup_1(), "rule__JudgmentParameter__Group_1__0");
-					put(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup(), "rule__QualifiedNameWithWildcard__Group__0");
 					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup(), "rule__AuxiliaryFunction__Group__0");
 					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup_3(), "rule__AuxiliaryFunction__Group_3__0");
 					put(grammarAccess.getAuxiliaryFunctionAccess().getGroup_3_1(), "rule__AuxiliaryFunction__Group_3_1__0");
@@ -246,6 +245,7 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0(), "rule__JvmTypeReference__Group_0__0");
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0_1(), "rule__JvmTypeReference__Group_0_1__0");
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0_1_0(), "rule__JvmTypeReference__Group_0_1_0__0");
+					put(grammarAccess.getArrayBracketsAccess().getGroup(), "rule__ArrayBrackets__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup(), "rule__XFunctionTypeRef__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0(), "rule__XFunctionTypeRef__Group_0__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0_1(), "rule__XFunctionTypeRef__Group_0_1__0");
@@ -259,17 +259,19 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmLowerBoundAccess().getGroup(), "rule__JvmLowerBound__Group__0");
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup(), "rule__JvmTypeParameter__Group__0");
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup_1_0(), "rule__JvmTypeParameter__Group_1_0__0");
+					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
+					put(grammarAccess.getXImportDeclarationAccess().getGroup(), "rule__XImportDeclaration__Group__0");
+					put(grammarAccess.getXImportDeclarationAccess().getGroup_1_0(), "rule__XImportDeclaration__Group_1_0__0");
 					put(grammarAccess.getXsemanticsSystemAccess().getNameAssignment_1(), "rule__XsemanticsSystem__NameAssignment_1");
 					put(grammarAccess.getXsemanticsSystemAccess().getSuperSystemAssignment_2_1(), "rule__XsemanticsSystem__SuperSystemAssignment_2_1");
 					put(grammarAccess.getXsemanticsSystemAccess().getValidatorExtendsAssignment_3_1(), "rule__XsemanticsSystem__ValidatorExtendsAssignment_3_1");
-					put(grammarAccess.getXsemanticsSystemAccess().getImportsAssignment_4(), "rule__XsemanticsSystem__ImportsAssignment_4");
+					put(grammarAccess.getXsemanticsSystemAccess().getImportSectionAssignment_4(), "rule__XsemanticsSystem__ImportSectionAssignment_4");
 					put(grammarAccess.getXsemanticsSystemAccess().getInjectionsAssignment_5(), "rule__XsemanticsSystem__InjectionsAssignment_5");
 					put(grammarAccess.getXsemanticsSystemAccess().getAuxiliaryDescriptionsAssignment_6_2(), "rule__XsemanticsSystem__AuxiliaryDescriptionsAssignment_6_2");
 					put(grammarAccess.getXsemanticsSystemAccess().getJudgmentDescriptionsAssignment_7_2(), "rule__XsemanticsSystem__JudgmentDescriptionsAssignment_7_2");
 					put(grammarAccess.getXsemanticsSystemAccess().getAuxiliaryFunctionsAssignment_8(), "rule__XsemanticsSystem__AuxiliaryFunctionsAssignment_8");
 					put(grammarAccess.getXsemanticsSystemAccess().getRulesAssignment_9(), "rule__XsemanticsSystem__RulesAssignment_9");
 					put(grammarAccess.getXsemanticsSystemAccess().getCheckrulesAssignment_10(), "rule__XsemanticsSystem__CheckrulesAssignment_10");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getInjectedAccess().getTypeAssignment_1(), "rule__Injected__TypeAssignment_1");
 					put(grammarAccess.getInjectedAccess().getNameAssignment_2(), "rule__Injected__NameAssignment_2");
 					put(grammarAccess.getAuxiliaryDescriptionAccess().getNameAssignment_0(), "rule__AuxiliaryDescription__NameAssignment_0");
@@ -420,6 +422,7 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXNumberLiteralAccess().getValueAssignment_1(), "rule__XNumberLiteral__ValueAssignment_1");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_1(), "rule__XStringLiteral__ValueAssignment_1");
 					put(grammarAccess.getXTypeLiteralAccess().getTypeAssignment_3(), "rule__XTypeLiteral__TypeAssignment_3");
+					put(grammarAccess.getXTypeLiteralAccess().getArrayDimensionsAssignment_4(), "rule__XTypeLiteral__ArrayDimensionsAssignment_4");
 					put(grammarAccess.getXThrowExpressionAccess().getExpressionAssignment_2(), "rule__XThrowExpression__ExpressionAssignment_2");
 					put(grammarAccess.getXReturnExpressionAccess().getExpressionAssignment_2(), "rule__XReturnExpression__ExpressionAssignment_2");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionAssignment_2(), "rule__XTryCatchFinallyExpression__ExpressionAssignment_2");
@@ -443,6 +446,12 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_0(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_0");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_1");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_1");
+					put(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment(), "rule__XImportSection__ImportDeclarationsAssignment");
+					put(grammarAccess.getXImportDeclarationAccess().getStaticAssignment_1_0_0(), "rule__XImportDeclaration__StaticAssignment_1_0_0");
+					put(grammarAccess.getXImportDeclarationAccess().getExtensionAssignment_1_0_1(), "rule__XImportDeclaration__ExtensionAssignment_1_0_1");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_0_2(), "rule__XImportDeclaration__ImportedTypeAssignment_1_0_2");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_1(), "rule__XImportDeclaration__ImportedTypeAssignment_1_1");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceAssignment_1_2(), "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2");
 				}
 			};
 		}

@@ -1,0 +1,11 @@
+	@Test
+	def void testParsingAndLinkingWithImports() {
+		'''
+			import java.util.List
+			package example {
+			  entity MyEntity {
+			    p : List<String>
+			  }
+			}
+		'''.parse.assertNoErrors
+	}

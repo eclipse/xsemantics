@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 
+import org.eclipse.xtext.xtype.XImportSection;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>System</b></em>'.
@@ -19,7 +21,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getSuperSystem <em>Super System</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getValidatorExtends <em>Validator Extends</em>}</li>
- *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
@@ -114,20 +116,30 @@ public interface XsemanticsSystem extends EObject
   void setValidatorExtends(JvmParameterizedTypeReference value);
 
   /**
-   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.Import}.
+   * Returns the value of the '<em><b>Import Section</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Import Section</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Imports</em>' containment reference list.
-   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_Imports()
+   * @return the value of the '<em>Import Section</em>' containment reference.
+   * @see #setImportSection(XImportSection)
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getXsemanticsSystem_ImportSection()
    * @model containment="true"
    * @generated
    */
-  EList<Import> getImports();
+  XImportSection getImportSection();
+
+  /**
+   * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImportSection <em>Import Section</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Import Section</em>' containment reference.
+   * @see #getImportSection()
+   * @generated
+   */
+  void setImportSection(XImportSection value);
 
   /**
    * Returns the value of the '<em><b>Injections</b></em>' containment reference list.

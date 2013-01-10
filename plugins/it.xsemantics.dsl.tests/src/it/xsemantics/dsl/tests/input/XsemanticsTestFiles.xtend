@@ -54,10 +54,10 @@ class XsemanticsTestFiles {
 	def testJudgmentDescriptionsRelatedToXsemantics() '''
 	«testFileWithImports»
 	
-	import it.xsemantics.dsl.xsemantics.Import
+	import it.xsemantics.dsl.xsemantics.Rule
 	
 	judgments {
-		type |- List<Import> list : 
+		type |- List<Rule> list : 
 			java.util.Set<it.xsemantics.dsl.xsemantics.JudgmentDescription> set
 	}
 	'''

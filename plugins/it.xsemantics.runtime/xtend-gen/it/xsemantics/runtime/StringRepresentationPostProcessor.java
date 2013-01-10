@@ -1,6 +1,6 @@
 package it.xsemantics.runtime;
 
-import com.google.common.base.Objects;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class StringRepresentationPostProcessor {
@@ -10,7 +10,7 @@ public class StringRepresentationPostProcessor {
   
   public String process(final String string) {
     String _xifexpression = null;
-    boolean _equals = Objects.equal(string, null);
+    boolean _equals = ObjectExtensions.operator_equals(string, null);
     if (_equals) {
       _xifexpression = "";
     } else {

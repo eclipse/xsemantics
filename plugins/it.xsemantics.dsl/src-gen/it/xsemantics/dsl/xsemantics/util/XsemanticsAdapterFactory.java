@@ -82,11 +82,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
         return createXsemanticsSystemAdapter();
       }
       @Override
-      public Adapter caseImport(Import object)
-      {
-        return createImportAdapter();
-      }
-      @Override
       public Adapter caseInjected(Injected object)
       {
         return createInjectedAdapter();
@@ -259,21 +254,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXsemanticsSystemAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.Import <em>Import</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see it.xsemantics.dsl.xsemantics.Import
-   * @generated
-   */
-  public Adapter createImportAdapter()
   {
     return null;
   }

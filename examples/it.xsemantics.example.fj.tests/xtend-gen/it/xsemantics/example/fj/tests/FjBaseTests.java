@@ -1,6 +1,5 @@
 package it.xsemantics.example.fj.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.FJInjectorProvider;
 import it.xsemantics.example.fj.fj.Method;
@@ -72,7 +71,7 @@ public class FjBaseTests {
     final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
-          boolean _equals = Objects.equal(_name, methodName);
+          boolean _equals = ObjectExtensions.operator_equals(_name, methodName);
           return Boolean.valueOf(_equals);
         }
       };

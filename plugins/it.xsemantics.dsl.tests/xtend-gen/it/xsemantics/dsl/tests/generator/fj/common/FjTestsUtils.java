@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.tests.generator.fj.common;
 
-import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Member;
@@ -15,6 +14,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class FjTestsUtils {
@@ -44,7 +44,7 @@ public class FjTestsUtils {
         };
       final Field field = IterableExtensions.<Field>findFirst(_allContentsOfType, _function);
       String _plus = ("field not found: " + fieldName);
-      boolean _notEquals = (!Objects.equal(field, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(field, null);
       Assert.assertTrue(_plus, _notEquals);
       _xblockexpression = (field);
     }
@@ -64,7 +64,7 @@ public class FjTestsUtils {
         };
       final Method method = IterableExtensions.<Method>findFirst(_allContentsOfType, _function);
       String _plus = ("method not found: " + methodName);
-      boolean _notEquals = (!Objects.equal(method, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(method, null);
       Assert.assertTrue(_plus, _notEquals);
       _xblockexpression = (method);
     }

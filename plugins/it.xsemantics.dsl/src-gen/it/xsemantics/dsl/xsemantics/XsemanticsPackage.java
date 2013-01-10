@@ -96,13 +96,13 @@ public interface XsemanticsPackage extends EPackage
   int XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = 2;
 
   /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Import Section</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XSEMANTICS_SYSTEM__IMPORTS = 3;
+  int XSEMANTICS_SYSTEM__IMPORT_SECTION = 3;
 
   /**
    * The feature id for the '<em><b>Injections</b></em>' containment reference list.
@@ -168,34 +168,6 @@ public interface XsemanticsPackage extends EPackage
   int XSEMANTICS_SYSTEM_FEATURE_COUNT = 10;
 
   /**
-   * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ImportImpl <em>Import</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see it.xsemantics.dsl.xsemantics.impl.ImportImpl
-   * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getImport()
-   * @generated
-   */
-  int IMPORT = 1;
-
-  /**
-   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT__IMPORTED_NAMESPACE = 0;
-
-  /**
-   * The number of structural features of the '<em>Import</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.InjectedImpl <em>Injected</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -203,7 +175,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getInjected()
    * @generated
    */
-  int INJECTED = 2;
+  int INJECTED = 1;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -240,7 +212,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAuxiliaryDescription()
    * @generated
    */
-  int AUXILIARY_DESCRIPTION = 3;
+  int AUXILIARY_DESCRIPTION = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -295,7 +267,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getJudgmentDescription()
    * @generated
    */
-  int JUDGMENT_DESCRIPTION = 4;
+  int JUDGMENT_DESCRIPTION = 3;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -368,7 +340,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getJudgmentParameter()
    * @generated
    */
-  int JUDGMENT_PARAMETER = 5;
+  int JUDGMENT_PARAMETER = 4;
 
   /**
    * The number of structural features of the '<em>Judgment Parameter</em>' class.
@@ -387,7 +359,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAuxiliaryFunction()
    * @generated
    */
-  int AUXILIARY_FUNCTION = 6;
+  int AUXILIARY_FUNCTION = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -433,7 +405,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRule()
    * @generated
    */
-  int RULE = 7;
+  int RULE = 6;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -479,7 +451,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getAxiom()
    * @generated
    */
-  int AXIOM = 8;
+  int AXIOM = 7;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -525,7 +497,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleWithPremises()
    * @generated
    */
-  int RULE_WITH_PREMISES = 9;
+  int RULE_WITH_PREMISES = 8;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -580,7 +552,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getCheckRule()
    * @generated
    */
-  int CHECK_RULE = 10;
+  int CHECK_RULE = 9;
 
   /**
    * The feature id for the '<em><b>Override</b></em>' attribute.
@@ -635,7 +607,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusion()
    * @generated
    */
-  int RULE_CONCLUSION = 11;
+  int RULE_CONCLUSION = 10;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' containment reference.
@@ -699,7 +671,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocation()
    * @generated
    */
-  int RULE_INVOCATION = 12;
+  int RULE_INVOCATION = 11;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' containment reference.
@@ -754,7 +726,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocationExpression()
    * @generated
    */
-  int RULE_INVOCATION_EXPRESSION = 13;
+  int RULE_INVOCATION_EXPRESSION = 12;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -782,7 +754,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentSpecification()
    * @generated
    */
-  int ENVIRONMENT_SPECIFICATION = 14;
+  int ENVIRONMENT_SPECIFICATION = 13;
 
   /**
    * The number of structural features of the '<em>Environment Specification</em>' class.
@@ -801,7 +773,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentReference()
    * @generated
    */
-  int ENVIRONMENT_REFERENCE = 15;
+  int ENVIRONMENT_REFERENCE = 14;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -829,7 +801,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironment()
    * @generated
    */
-  int ENVIRONMENT = 16;
+  int ENVIRONMENT = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -857,7 +829,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
    * @generated
    */
-  int ERROR_SPECIFICATION = 17;
+  int ERROR_SPECIFICATION = 16;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -903,7 +875,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusionElement()
    * @generated
    */
-  int RULE_CONCLUSION_ELEMENT = 18;
+  int RULE_CONCLUSION_ELEMENT = 17;
 
   /**
    * The number of structural features of the '<em>Rule Conclusion Element</em>' class.
@@ -922,7 +894,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleParameter()
    * @generated
    */
-  int RULE_PARAMETER = 19;
+  int RULE_PARAMETER = 18;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -950,7 +922,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getExpressionInConclusion()
    * @generated
    */
-  int EXPRESSION_IN_CONCLUSION = 20;
+  int EXPRESSION_IN_CONCLUSION = 19;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -978,7 +950,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOutputParameter()
    * @generated
    */
-  int OUTPUT_PARAMETER = 21;
+  int OUTPUT_PARAMETER = 20;
 
   /**
    * The feature id for the '<em><b>Jvm Type Reference</b></em>' containment reference.
@@ -1006,7 +978,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getInputParameter()
    * @generated
    */
-  int INPUT_PARAMETER = 22;
+  int INPUT_PARAMETER = 21;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -1034,7 +1006,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOrExpression()
    * @generated
    */
-  int OR_EXPRESSION = 23;
+  int OR_EXPRESSION = 22;
 
   /**
    * The feature id for the '<em><b>Branches</b></em>' containment reference list.
@@ -1062,7 +1034,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getFail()
    * @generated
    */
-  int FAIL = 24;
+  int FAIL = 23;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -1090,7 +1062,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentAccess()
    * @generated
    */
-  int ENVIRONMENT_ACCESS = 25;
+  int ENVIRONMENT_ACCESS = 24;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -1136,7 +1108,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentComposition()
    * @generated
    */
-  int ENVIRONMENT_COMPOSITION = 26;
+  int ENVIRONMENT_COMPOSITION = 25;
 
   /**
    * The feature id for the '<em><b>Current Environment</b></em>' containment reference.
@@ -1173,7 +1145,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEmptyEnvironment()
    * @generated
    */
-  int EMPTY_ENVIRONMENT = 27;
+  int EMPTY_ENVIRONMENT = 26;
 
   /**
    * The number of structural features of the '<em>Empty Environment</em>' class.
@@ -1192,7 +1164,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentMapping()
    * @generated
    */
-  int ENVIRONMENT_MAPPING = 28;
+  int ENVIRONMENT_MAPPING = 27;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' containment reference.
@@ -1266,15 +1238,15 @@ public interface XsemanticsPackage extends EPackage
   EReference getXsemanticsSystem_ValidatorExtends();
 
   /**
-   * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports <em>Imports</em>}'.
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImportSection <em>Import Section</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImports()
+   * @return the meta object for the containment reference '<em>Import Section</em>'.
+   * @see it.xsemantics.dsl.xsemantics.XsemanticsSystem#getImportSection()
    * @see #getXsemanticsSystem()
    * @generated
    */
-  EReference getXsemanticsSystem_Imports();
+  EReference getXsemanticsSystem_ImportSection();
 
   /**
    * Returns the meta object for the containment reference list '{@link it.xsemantics.dsl.xsemantics.XsemanticsSystem#getInjections <em>Injections</em>}'.
@@ -1341,27 +1313,6 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   EReference getXsemanticsSystem_Checkrules();
-
-  /**
-   * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.Import <em>Import</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import</em>'.
-   * @see it.xsemantics.dsl.xsemantics.Import
-   * @generated
-   */
-  EClass getImport();
-
-  /**
-   * Returns the meta object for the attribute '{@link it.xsemantics.dsl.xsemantics.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-   * @see it.xsemantics.dsl.xsemantics.Import#getImportedNamespace()
-   * @see #getImport()
-   * @generated
-   */
-  EAttribute getImport_ImportedNamespace();
 
   /**
    * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.Injected <em>Injected</em>}'.
@@ -2252,12 +2203,12 @@ public interface XsemanticsPackage extends EPackage
     EReference XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS = eINSTANCE.getXsemanticsSystem_ValidatorExtends();
 
     /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Import Section</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference XSEMANTICS_SYSTEM__IMPORTS = eINSTANCE.getXsemanticsSystem_Imports();
+    EReference XSEMANTICS_SYSTEM__IMPORT_SECTION = eINSTANCE.getXsemanticsSystem_ImportSection();
 
     /**
      * The meta object literal for the '<em><b>Injections</b></em>' containment reference list feature.
@@ -2306,24 +2257,6 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EReference XSEMANTICS_SYSTEM__CHECKRULES = eINSTANCE.getXsemanticsSystem_Checkrules();
-
-    /**
-     * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.ImportImpl <em>Import</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see it.xsemantics.dsl.xsemantics.impl.ImportImpl
-     * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getImport()
-     * @generated
-     */
-    EClass IMPORT = eINSTANCE.getImport();
-
-    /**
-     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
     /**
      * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.InjectedImpl <em>Injected</em>}' class.

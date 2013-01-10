@@ -375,14 +375,14 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {
 		val a = createTestAppendable
-		generator.generateMember(member, a, true)
+		generator.generateMember(member, a)
 		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
 	def assertGeneratedMembers(Iterable<? extends JvmMember> members, CharSequence expected) {
 		val a = createTestAppendable
 		members.forEach [
-			generator.generateMember(it, a, false)
+			generator.generateMember(it, a)
 		]
 		assertEqualsStrings(expected, a.toString.trim)
 	}

@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.tests.generator;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper;
@@ -15,6 +14,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6435,7 +6435,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
           Set<Entry<String,CharSequence>> _entrySet = _allGeneratedResources.entrySet();
           for (final Entry<String,CharSequence> e : _entrySet) {
             boolean _or = false;
-            boolean _equals = Objects.equal(prefix, null);
+            boolean _equals = ObjectExtensions.operator_equals(prefix, null);
             if (_equals) {
               _or = true;
             } else {
@@ -6450,7 +6450,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
               if (!_endsWith) {
                 _and = false;
               } else {
-                boolean _notEquals = (!Objects.equal(expectedValidator, null));
+                boolean _notEquals = ObjectExtensions.operator_notEquals(expectedValidator, null);
                 _and = (_endsWith && _notEquals);
               }
               if (_and) {
@@ -6466,7 +6466,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
                 if (!_not) {
                   _and_1 = false;
                 } else {
-                  boolean _notEquals_1 = (!Objects.equal(expected, null));
+                  boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expected, null);
                   _and_1 = (_not && _notEquals_1);
                 }
                 if (_and_1) {

@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.typing;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.TupleType;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystemGen;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -101,7 +101,7 @@ public class XsemanticsTypeSystem {
         boolean _or = false;
         EClass _eClass = jParam1.eClass();
         EClass _eClass_1 = jParam2.eClass();
-        boolean _notEquals_1 = (!Objects.equal(_eClass, _eClass_1));
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_eClass, _eClass_1);
         if (_notEquals_1) {
           _or = true;
         } else {

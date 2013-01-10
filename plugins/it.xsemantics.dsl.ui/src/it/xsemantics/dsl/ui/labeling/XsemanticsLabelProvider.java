@@ -8,7 +8,6 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.Axiom;
 import it.xsemantics.dsl.xsemantics.CheckRule;
-import it.xsemantics.dsl.xsemantics.Import;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -65,10 +64,6 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 
 	public String image(XsemanticsSystem ts) {
 		return "system.gif";
-	}
-
-	public String image(Import imp) {
-		return "import.gif";
 	}
 
 	public String image(JudgmentDescription desc) {

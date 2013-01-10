@@ -1,6 +1,5 @@
 package it.xsemantics.runtime.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import it.xsemantics.runtime.ErrorInformation;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -26,19 +26,19 @@ public class TraceUtils {
     {
       final LinkedList<RuleFailedException> list = CollectionLiterals.<RuleFailedException>newLinkedList(e);
       RuleFailedException ex = e.getPrevious();
-      boolean _notEquals = (!Objects.equal(ex, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(ex, null);
       boolean _while = _notEquals;
       while (_while) {
         {
           String _message = ex.getMessage();
-          boolean _notEquals_1 = (!Objects.equal(_message, null));
+          boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_message, null);
           if (_notEquals_1) {
             list.add(ex);
           }
           RuleFailedException _previous = ex.getPrevious();
           ex = _previous;
         }
-        boolean _notEquals_1 = (!Objects.equal(ex, null));
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(ex, null);
         _while = _notEquals_1;
       }
       _xblockexpression = (list);
@@ -146,7 +146,7 @@ public class TraceUtils {
       List<ErrorInformation> _errorInformations = e.getErrorInformations();
       final LinkedList<ErrorInformation> list = Lists.<ErrorInformation>newLinkedList(_errorInformations);
       RuleFailedException ex = e.getPrevious();
-      boolean _notEquals = (!Objects.equal(ex, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(ex, null);
       boolean _while = _notEquals;
       while (_while) {
         {
@@ -155,7 +155,7 @@ public class TraceUtils {
           RuleFailedException _previous = ex.getPrevious();
           ex = _previous;
         }
-        boolean _notEquals_1 = (!Objects.equal(ex, null));
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(ex, null);
         _while = _notEquals_1;
       }
       _xblockexpression = (list);
@@ -175,13 +175,13 @@ public class TraceUtils {
                   boolean _and = false;
                   EObject _source = it.getSource();
                   EObject _source_1 = errorInformation.getSource();
-                  boolean _equals = Objects.equal(_source, _source_1);
+                  boolean _equals = ObjectExtensions.operator_equals(_source, _source_1);
                   if (!_equals) {
                     _and = false;
                   } else {
                     EStructuralFeature _feature = it.getFeature();
                     EStructuralFeature _feature_1 = errorInformation.getFeature();
-                    boolean _equals_1 = Objects.equal(_feature, _feature_1);
+                    boolean _equals_1 = ObjectExtensions.operator_equals(_feature, _feature_1);
                     _and = (_equals && _equals_1);
                   }
                   return Boolean.valueOf(_and);
@@ -205,7 +205,7 @@ public class TraceUtils {
         public Boolean apply(final ErrorInformation it) {
           EObject _source = it.getSource();
           ICompositeNode _node = NodeModelUtils.getNode(_source);
-          boolean _notEquals = (!Objects.equal(_node, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_node, null);
           return Boolean.valueOf(_notEquals);
         }
       };

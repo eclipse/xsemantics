@@ -8,7 +8,7 @@ XsemanticsSystem:
 	'system' name=QualifiedName
 	('extends' superSystem=JvmParameterizedTypeReference)?
 	('validatorExtends' validatorExtends=JvmParameterizedTypeReference)?
-	imports += Import*
+	importSection=XImportSection?
 	injections += Injected*
 	('auxiliary' '{'
 		auxiliaryDescriptions += AuxiliaryDescription+
@@ -19,10 +19,6 @@ XsemanticsSystem:
 	auxiliaryFunctions+=AuxiliaryFunction*
 	rules+=Rule*
 	checkrules+=CheckRule*
-;
-
-Import:
-	'import' importedNamespace = QualifiedNameWithWildcard
 ;
 
 Injected:
@@ -53,10 +49,6 @@ JudgmentDescription:
 JudgmentParameter:
 	{OutputParameter} 'output' jvmTypeReference=JvmTypeReference |
 	{InputParameter} parameter=FullJvmFormalParameter
-;
-
-QualifiedNameWithWildcard:
-	QualifiedName '.*'?
 ;
 
 AuxiliaryFunction:

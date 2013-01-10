@@ -16,7 +16,6 @@ import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
-import it.xsemantics.dsl.xsemantics.Import;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -45,6 +44,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xtype.XtypePackage;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -59,13 +60,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * @generated
    */
   private EClass xsemanticsSystemEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass importEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -306,6 +300,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
 
     // Initialize simple dependencies
     XbasePackage.eINSTANCE.eClass();
+    XtypePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theXsemanticsPackage.createPackageContents();
@@ -367,7 +362,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getXsemanticsSystem_Imports()
+  public EReference getXsemanticsSystem_ImportSection()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(3);
   }
@@ -430,26 +425,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
   public EReference getXsemanticsSystem_Checkrules()
   {
     return (EReference)xsemanticsSystemEClass.getEStructuralFeatures().get(9);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getImport()
-  {
-    return importEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getImport_ImportedNamespace()
-  {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1266,16 +1241,13 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     createEAttribute(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__NAME);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__SUPER_SYSTEM);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS);
-    createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__IMPORTS);
+    createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__IMPORT_SECTION);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__INJECTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__JUDGMENT_DESCRIPTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__AUXILIARY_FUNCTIONS);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__RULES);
     createEReference(xsemanticsSystemEClass, XSEMANTICS_SYSTEM__CHECKRULES);
-
-    importEClass = createEClass(IMPORT);
-    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
     injectedEClass = createEClass(INJECTED);
     createEReference(injectedEClass, INJECTED__TYPE);
@@ -1409,6 +1381,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
 
     // Obtain other dependent packages
     TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+    XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
     XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
@@ -1436,16 +1409,13 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEAttribute(getXsemanticsSystem_Name(), ecorePackage.getEString(), "name", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_SuperSystem(), theTypesPackage.getJvmParameterizedTypeReference(), null, "superSystem", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_ValidatorExtends(), theTypesPackage.getJvmParameterizedTypeReference(), null, "validatorExtends", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getXsemanticsSystem_Imports(), this.getImport(), null, "imports", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getXsemanticsSystem_ImportSection(), theXtypePackage.getXImportSection(), null, "importSection", null, 0, 1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Injections(), this.getInjected(), null, "injections", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_AuxiliaryDescriptions(), this.getAuxiliaryDescription(), null, "auxiliaryDescriptions", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_JudgmentDescriptions(), this.getJudgmentDescription(), null, "judgmentDescriptions", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_AuxiliaryFunctions(), this.getAuxiliaryFunction(), null, "auxiliaryFunctions", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Rules(), this.getRule(), null, "rules", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXsemanticsSystem_Checkrules(), this.getCheckRule(), null, "checkrules", null, 0, -1, XsemanticsSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(injectedEClass, Injected.class, "Injected", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInjected_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, Injected.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

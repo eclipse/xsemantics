@@ -5,7 +5,6 @@ package it.xsemantics.dsl.xsemantics.impl;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
-import it.xsemantics.dsl.xsemantics.Import;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -30,6 +29,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 
+import org.eclipse.xtext.xtype.XImportSection;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>System</b></em>'.
@@ -40,7 +41,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getName <em>Name</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getSuperSystem <em>Super System</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getValidatorExtends <em>Validator Extends</em>}</li>
- *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getInjections <em>Injections</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getAuxiliaryDescriptions <em>Auxiliary Descriptions</em>}</li>
  *   <li>{@link it.xsemantics.dsl.xsemantics.impl.XsemanticsSystemImpl#getJudgmentDescriptions <em>Judgment Descriptions</em>}</li>
@@ -95,14 +96,14 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
   protected JvmParameterizedTypeReference validatorExtends;
 
   /**
-   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * The cached value of the '{@link #getImportSection() <em>Import Section</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImports()
+   * @see #getImportSection()
    * @generated
    * @ordered
    */
-  protected EList<Import> imports;
+  protected XImportSection importSection;
 
   /**
    * The cached value of the '{@link #getInjections() <em>Injections</em>}' containment reference list.
@@ -309,13 +310,47 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Import> getImports()
+  public XImportSection getImportSection()
   {
-    if (imports == null)
+    return importSection;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetImportSection(XImportSection newImportSection, NotificationChain msgs)
+  {
+    XImportSection oldImportSection = importSection;
+    importSection = newImportSection;
+    if (eNotificationRequired())
     {
-      imports = new EObjectContainmentEList<Import>(Import.class, this, XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION, oldImportSection, newImportSection);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return imports;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setImportSection(XImportSection newImportSection)
+  {
+    if (newImportSection != importSection)
+    {
+      NotificationChain msgs = null;
+      if (importSection != null)
+        msgs = ((InternalEObject)importSection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION, null, msgs);
+      if (newImportSection != null)
+        msgs = ((InternalEObject)newImportSection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION, null, msgs);
+      msgs = basicSetImportSection(newImportSection, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION, newImportSection, newImportSection));
   }
 
   /**
@@ -416,8 +451,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return basicSetSuperSystem(null, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return basicSetValidatorExtends(null, msgs);
-      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
-        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION:
+        return basicSetImportSection(null, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return ((InternalEList<?>)getInjections()).basicRemove(otherEnd, msgs);
       case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
@@ -450,8 +485,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return getSuperSystem();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return getValidatorExtends();
-      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
-        return getImports();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION:
+        return getImportSection();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return getInjections();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:
@@ -488,9 +523,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         setValidatorExtends((JvmParameterizedTypeReference)newValue);
         return;
-      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
-        getImports().clear();
-        getImports().addAll((Collection<? extends Import>)newValue);
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION:
+        setImportSection((XImportSection)newValue);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         getInjections().clear();
@@ -539,8 +573,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         setValidatorExtends((JvmParameterizedTypeReference)null);
         return;
-      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
-        getImports().clear();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION:
+        setImportSection((XImportSection)null);
         return;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         getInjections().clear();
@@ -580,8 +614,8 @@ public class XsemanticsSystemImpl extends MinimalEObjectImpl.Container implement
         return superSystem != null;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS:
         return validatorExtends != null;
-      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORTS:
-        return imports != null && !imports.isEmpty();
+      case XsemanticsPackage.XSEMANTICS_SYSTEM__IMPORT_SECTION:
+        return importSection != null;
       case XsemanticsPackage.XSEMANTICS_SYSTEM__INJECTIONS:
         return injections != null && !injections.isEmpty();
       case XsemanticsPackage.XSEMANTICS_SYSTEM__AUXILIARY_DESCRIPTIONS:

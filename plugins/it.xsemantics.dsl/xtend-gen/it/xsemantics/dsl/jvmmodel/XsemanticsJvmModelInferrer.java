@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
@@ -127,7 +126,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    */
   protected void _infer(final XsemanticsSystem ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     String _javaFullyQualifiedName = this._xsemanticsGeneratorExtensions.toJavaFullyQualifiedName(ts);
-    boolean _equals = Objects.equal(_javaFullyQualifiedName, null);
+    boolean _equals = ObjectExtensions.operator_equals(_javaFullyQualifiedName, null);
     if (_equals) {
       return;
     }
@@ -139,7 +138,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
           JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
-          boolean _notEquals = (!Objects.equal(_superSystem, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_superSystem, null);
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
             JvmParameterizedTypeReference _superSystem_1 = ts.getSuperSystem();
@@ -287,7 +286,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           final Procedure1<AuxiliaryFunction> _function_11 = new Procedure1<AuxiliaryFunction>() {
               public void apply(final AuxiliaryFunction aux) {
                 AuxiliaryDescription _auxiliaryDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.auxiliaryDescription(aux);
-                boolean _notEquals = (!Objects.equal(_auxiliaryDescription, null));
+                boolean _notEquals = ObjectExtensions.operator_notEquals(_auxiliaryDescription, null);
                 if (_notEquals) {
                   EList<JvmMember> _members = it.getMembers();
                   JvmOperation _compileImplMethod = XsemanticsJvmModelInferrer.this.compileImplMethod(aux);
@@ -303,7 +302,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           final Procedure1<Rule> _function_12 = new Procedure1<Rule>() {
               public void apply(final Rule rule) {
                 JudgmentDescription _judgmentDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
-                boolean _notEquals = (!Objects.equal(_judgmentDescription, null));
+                boolean _notEquals = ObjectExtensions.operator_notEquals(_judgmentDescription, null);
                 if (_notEquals) {
                   EList<JvmMember> _members = it.getMembers();
                   JvmOperation _compileImplMethod = XsemanticsJvmModelInferrer.this.compileImplMethod(rule);
@@ -326,7 +325,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           String _documentation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(ts);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
           XsemanticsSystem _superSystemDefinition = XsemanticsJvmModelInferrer.this._xsemanticsUtils.superSystemDefinition(ts);
-          boolean _notEquals = (!Objects.equal(_superSystemDefinition, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_superSystemDefinition, null);
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
             XsemanticsSystem _superSystemDefinition_1 = XsemanticsJvmModelInferrer.this._xsemanticsUtils.superSystemDefinition(ts);
@@ -335,7 +334,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
           } else {
             JvmParameterizedTypeReference _validatorExtends = ts.getValidatorExtends();
-            boolean _notEquals_1 = (!Objects.equal(_validatorExtends, null));
+            boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_validatorExtends, null);
             if (_notEquals_1) {
               EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
               JvmParameterizedTypeReference _validatorExtends_1 = ts.getValidatorExtends();
@@ -378,7 +377,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
               public void apply(final JvmOperation it) {
                 it.setVisibility(JvmVisibility.PROTECTED);
                 JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
-                boolean _notEquals = (!Objects.equal(_superSystem, null));
+                boolean _notEquals = ObjectExtensions.operator_notEquals(_superSystem, null);
                 if (_notEquals) {
                   EList<JvmAnnotationReference> _annotations = it.getAnnotations();
                   JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Override.class);
@@ -507,7 +506,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
-          boolean _notEquals = (!Objects.equal(_superSystem, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_superSystem, null);
           if (_notEquals) {
             EList<JvmAnnotationReference> _annotations = it.getAnnotations();
             JvmAnnotationReference _annotation = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(ts, Override.class);
@@ -516,7 +515,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
               public void apply(final ITreeAppendable it) {
                 JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
-                boolean _notEquals = (!Objects.equal(_superSystem, null));
+                boolean _notEquals = ObjectExtensions.operator_notEquals(_superSystem, null);
                 if (_notEquals) {
                   StringConcatenation _builder = new StringConcatenation();
                   _builder.append("super.init();");
@@ -959,7 +958,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_4, _parameter_3);
             final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
                 public void apply(final ITreeAppendable it) {
-                  boolean _notEquals = (!Objects.equal(errorSpecification, null));
+                  boolean _notEquals = ObjectExtensions.operator_notEquals(errorSpecification, null);
                   if (_notEquals) {
                     final String error = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it);
                     final String source = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it);
@@ -1037,7 +1036,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_4, _parameter_3);
             final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
                 public void apply(final ITreeAppendable it) {
-                  boolean _notEquals = (!Objects.equal(errorSpecification, null));
+                  boolean _notEquals = ObjectExtensions.operator_notEquals(errorSpecification, null);
                   if (_notEquals) {
                     final String error = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it);
                     final String source = XsemanticsJvmModelInferrer.this.errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it);
@@ -1493,7 +1492,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     ITreeAppendable _xifexpression = null;
     RuleConclusion _conclusion = rule.getConclusion();
     ErrorSpecification _error = _conclusion.getError();
-    boolean _notEquals = (!Objects.equal(_error, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_error, null);
     if (_notEquals) {
       ITreeAppendable _xblockexpression = null;
       {

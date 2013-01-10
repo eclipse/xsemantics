@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.validation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XsemanticsJavaValidatorHelper {
@@ -33,20 +33,20 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, rule));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
         }
       };
     CheckRule _findFirst = IterableExtensions.<CheckRule>findFirst(_checkrules, _function);
-    boolean _equals = Objects.equal(_findFirst, null);
+    boolean _equals = ObjectExtensions.operator_equals(_findFirst, null);
     return _equals;
   }
   
@@ -56,20 +56,20 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, rule));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
         }
       };
     Rule _findFirst = IterableExtensions.<Rule>findFirst(_rules, _function);
-    boolean _equals = Objects.equal(_findFirst, null);
+    boolean _equals = ObjectExtensions.operator_equals(_findFirst, null);
     return _equals;
   }
   
@@ -79,20 +79,20 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, rule));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
         }
       };
     Rule _findFirst = IterableExtensions.<Rule>findFirst(_rules, _function);
-    boolean _equals = Objects.equal(_findFirst, null);
+    boolean _equals = ObjectExtensions.operator_equals(_findFirst, null);
     return _equals;
   }
   
@@ -102,20 +102,20 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, rule));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
         }
       };
     CheckRule _findFirst = IterableExtensions.<CheckRule>findFirst(_checkrules, _function);
-    boolean _equals = Objects.equal(_findFirst, null);
+    boolean _equals = ObjectExtensions.operator_equals(_findFirst, null);
     return _equals;
   }
   
@@ -125,13 +125,13 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, j));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, j);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = j.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -147,13 +147,13 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<AuxiliaryDescription,Boolean> _function = new Function1<AuxiliaryDescription,Boolean>() {
         public Boolean apply(final AuxiliaryDescription it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, aux));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, aux);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = aux.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -169,13 +169,13 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<JudgmentDescription,Boolean> _function = new Function1<JudgmentDescription,Boolean>() {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, aux));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, aux);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = aux.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -222,13 +222,13 @@ public class XsemanticsJavaValidatorHelper {
     final Function1<JvmFormalParameter,Boolean> _function = new Function1<JvmFormalParameter,Boolean>() {
         public Boolean apply(final JvmFormalParameter it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, param));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, param);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = param.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);

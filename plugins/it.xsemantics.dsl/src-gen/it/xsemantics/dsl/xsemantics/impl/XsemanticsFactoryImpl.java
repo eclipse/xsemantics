@@ -30,7 +30,7 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     try
     {
-      XsemanticsFactory theXsemanticsFactory = (XsemanticsFactory)EPackage.Registry.INSTANCE.getEFactory("http://xsemantics.sf.net/Xsemantics"); 
+      XsemanticsFactory theXsemanticsFactory = (XsemanticsFactory)EPackage.Registry.INSTANCE.getEFactory(XsemanticsPackage.eNS_URI);
       if (theXsemanticsFactory != null)
       {
         return theXsemanticsFactory;
@@ -65,7 +65,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
     switch (eClass.getClassifierID())
     {
       case XsemanticsPackage.XSEMANTICS_SYSTEM: return createXsemanticsSystem();
-      case XsemanticsPackage.IMPORT: return createImport();
       case XsemanticsPackage.INJECTED: return createInjected();
       case XsemanticsPackage.AUXILIARY_DESCRIPTION: return createAuxiliaryDescription();
       case XsemanticsPackage.JUDGMENT_DESCRIPTION: return createJudgmentDescription();
@@ -107,17 +106,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     XsemanticsSystemImpl xsemanticsSystem = new XsemanticsSystemImpl();
     return xsemanticsSystem;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Import createImport()
-  {
-    ImportImpl import_ = new ImportImpl();
-    return import_;
   }
 
   /**

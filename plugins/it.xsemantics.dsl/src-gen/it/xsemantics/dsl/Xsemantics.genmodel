@@ -4,23 +4,20 @@
     editorDirectory="/it.xsemantics.dsl.editor/src" modelPluginID="it.xsemantics.dsl"
     forceOverwrite="true" modelName="Xsemantics" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.dsl.edit"
-    editorPluginID="it.xsemantics.dsl.editor" runtimeVersion="2.8" usedGenPackages="../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    editorPluginID="it.xsemantics.dsl.editor" runtimeVersion="2.5" usedGenPackages="../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="Xsemantics" basePackage="it.xsemantics.dsl" disposableProviderFactory="true"
       ecorePackage="Xsemantics.ecore#/">
     <genClasses ecoreClass="Xsemantics.ecore#//XsemanticsSystem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//XsemanticsSystem/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/superSystem"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/validatorExtends"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/importSection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/injections"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/auxiliaryDescriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/judgmentDescriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/auxiliaryFunctions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//XsemanticsSystem/checkrules"/>
-    </genClasses>
-    <genClasses ecoreClass="Xsemantics.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Import/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//Injected">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//Injected/type"/>

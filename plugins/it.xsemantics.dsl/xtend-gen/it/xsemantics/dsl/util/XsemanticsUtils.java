@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -182,7 +181,7 @@ public class XsemanticsUtils {
         public Boolean apply(final AuxiliaryDescription it) {
           String _name = it.getName();
           String _name_1 = fun.getName();
-          boolean _equals = Objects.equal(_name, _name_1);
+          boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -206,7 +205,7 @@ public class XsemanticsUtils {
         public Boolean apply(final AuxiliaryFunction it) {
           String _name = it.getName();
           String _name_1 = aux.getName();
-          boolean _equals = Objects.equal(_name, _name_1);
+          boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -374,7 +373,7 @@ public class XsemanticsUtils {
     {
       final RuleParameter ruleParameter = EcoreUtil2.<RuleParameter>getContainerOfType(jvmFormalParameter, RuleParameter.class);
       boolean _xifexpression = false;
-      boolean _notEquals = (!Objects.equal(ruleParameter, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(ruleParameter, null);
       if (_notEquals) {
         boolean _isInputParam = this.isInputParam(ruleParameter);
         _xifexpression = _isInputParam;
@@ -403,7 +402,7 @@ public class XsemanticsUtils {
     {
       final JudgmentDescription judgmentDescription = this.judgmentDescription(rule);
       boolean _or = false;
-      boolean _equals = Objects.equal(judgmentDescription, null);
+      boolean _equals = ObjectExtensions.operator_equals(judgmentDescription, null);
       if (_equals) {
         _or = true;
       } else {
@@ -520,7 +519,7 @@ public class XsemanticsUtils {
           _and = false;
         } else {
           XExpression _right = _xVariableDeclaration.getRight();
-          boolean _equals = Objects.equal(_right, null);
+          boolean _equals = ObjectExtensions.operator_equals(_right, null);
           _and = (_isWriteable && _equals);
         }
         return _and;
@@ -637,13 +636,13 @@ public class XsemanticsUtils {
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, rule));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
+            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -680,7 +679,7 @@ public class XsemanticsUtils {
       final Procedure1<ArrayList<XsemanticsSystem>> _function = new Procedure1<ArrayList<XsemanticsSystem>>() {
           public void apply(final ArrayList<XsemanticsSystem> it) {
             final XsemanticsSystem superS = XsemanticsUtils.this.superSystemDefinition(system);
-            boolean _notEquals = (!Objects.equal(superS, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(superS, null);
             if (_notEquals) {
               it.add(superS);
               ArrayList<XsemanticsSystem> _allSuperSystemDefinitionsInternal = XsemanticsUtils.this.allSuperSystemDefinitionsInternal(superS, visited);
@@ -712,7 +711,7 @@ public class XsemanticsUtils {
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           String _name = it.getName();
-          boolean _equals = Objects.equal(_name, n);
+          boolean _equals = ObjectExtensions.operator_equals(_name, n);
           return Boolean.valueOf(_equals);
         }
       };

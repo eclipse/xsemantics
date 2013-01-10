@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.tests.generator.fj.common;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -16,6 +15,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class FjExpectedTraces {
@@ -41,7 +41,7 @@ public class FjExpectedTraces {
           String _string = FjExpectedTraces.this._stringRepresentation.string(_source);
           String _xifexpression = null;
           EStructuralFeature _feature = it.getFeature();
-          boolean _notEquals = (!Objects.equal(_feature, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_feature, null);
           if (_notEquals) {
             EStructuralFeature _feature_1 = it.getFeature();
             String _name = _feature_1.getName();

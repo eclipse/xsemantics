@@ -1,6 +1,5 @@
 package it.xsemantics.example.fj.tests;
 
-import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.Cast;
 import it.xsemantics.example.fj.fj.ClassType;
@@ -22,12 +21,13 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class FjStringRepresentationForTests extends FjStringRepresentation {
   public String stringRep(final EObject eObject) {
     final ICompositeNode node = NodeModelUtils.getNode(eObject);
-    boolean _notEquals = (!Objects.equal(node, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
     if (_notEquals) {
       return super.stringRep(eObject);
     } else {

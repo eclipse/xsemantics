@@ -110,13 +110,13 @@ public class XsemanticsTestFiles {
     _builder.append(_testFileWithImports, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import it.xsemantics.dsl.xsemantics.Import");
+    _builder.append("import it.xsemantics.dsl.xsemantics.Rule");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("type |- List<Import> list : ");
+    _builder.append("type |- List<Rule> list : ");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("java.util.Set<it.xsemantics.dsl.xsemantics.JudgmentDescription> set");

@@ -16,7 +16,6 @@ import it.xsemantics.dsl.xsemantics.EnvironmentReference;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
-import it.xsemantics.dsl.xsemantics.Import;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -76,10 +75,12 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
+public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 
 	@Inject
 	private XsemanticsGrammarAccess grammarAccess;
@@ -1126,12 +1127,6 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 					return; 
 				}
 				else break;
-			case XsemanticsPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
 			case XsemanticsPackage.INJECTED:
 				if(context == grammarAccess.getInjectedRule()) {
 					sequence_Injected(context, (Injected) semanticObject); 
@@ -1213,6 +1208,18 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_DECLARATION:
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_SECTION:
+				if(context == grammarAccess.getXImportSectionRule()) {
+					sequence_XImportSection(context, (XImportSection) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1350,22 +1357,6 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getExpressionInConclusionAccess().getExpressionXExpressionParserRuleCall_0(), semanticObject.getExpression());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     importedNamespace=QualifiedNameWithWildcard
-	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XsemanticsPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XsemanticsPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
@@ -1552,7 +1543,7 @@ public class XsemanticsSemanticSequencer extends XbaseSemanticSequencer {
 	 *         name=QualifiedName 
 	 *         superSystem=JvmParameterizedTypeReference? 
 	 *         validatorExtends=JvmParameterizedTypeReference? 
-	 *         imports+=Import* 
+	 *         importSection=XImportSection? 
 	 *         injections+=Injected* 
 	 *         auxiliaryDescriptions+=AuxiliaryDescription* 
 	 *         judgmentDescriptions+=JudgmentDescription* 

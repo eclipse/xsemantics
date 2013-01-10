@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
@@ -47,6 +46,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -908,13 +908,13 @@ public class XsemanticsGeneratorExtensions {
             public Boolean apply(final OutputParameter it) {
               boolean _and = false;
               JvmTypeReference _jvmTypeReference = it.getJvmTypeReference();
-              boolean _notEquals = (!Objects.equal(_jvmTypeReference, null));
+              boolean _notEquals = ObjectExtensions.operator_notEquals(_jvmTypeReference, null);
               if (!_notEquals) {
                 _and = false;
               } else {
                 JvmTypeReference _jvmTypeReference_1 = it.getJvmTypeReference();
                 JvmType _type = _jvmTypeReference_1.getType();
-                boolean _notEquals_1 = (!Objects.equal(_type, null));
+                boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_type, null);
                 _and = (_notEquals && _notEquals_1);
               }
               return Boolean.valueOf(_and);

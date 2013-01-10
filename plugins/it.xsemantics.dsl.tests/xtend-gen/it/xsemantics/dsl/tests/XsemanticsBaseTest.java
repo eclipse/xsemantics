@@ -1,6 +1,5 @@
 package it.xsemantics.dsl.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
@@ -43,6 +42,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
@@ -316,7 +316,7 @@ public class XsemanticsBaseTest {
         public Boolean apply(final RuleParameter it) {
           JvmFormalParameter _parameter = it.getParameter();
           String _name = _parameter.getName();
-          boolean _equals = Objects.equal(_name, name);
+          boolean _equals = ObjectExtensions.operator_equals(_name, name);
           return Boolean.valueOf(_equals);
         }
       };
