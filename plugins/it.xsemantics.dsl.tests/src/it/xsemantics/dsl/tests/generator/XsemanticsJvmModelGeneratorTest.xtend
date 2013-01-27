@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -86,7 +87,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -97,8 +97,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
   
@@ -164,14 +166,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       String _string = new String();
       String _firstUpper = StringExtensions.toFirstUpper("bar");
       String _plus = (_string + _firstUpper);
-      boolean _equals = Objects.equal("foo", _plus);
+      boolean _equals = ObjectExtensions.operator_equals(
+        "foo", _plus);
       /* 'foo' == new String() + "bar".toFirstUpper */
       if (!_equals) {
         sneakyThrowRuleFailedException("\'foo\' == new String() + \"bar\".toFirstUpper");
       }
       final EClass eC = EcoreFactory.eINSTANCE.createEClass();
       eC.setName("MyEClass");
-      boolean _equals_1 = Objects.equal(eClass, eC);
+      boolean _equals_1 = ObjectExtensions.operator_equals(
+        eClass, eC);
       /* eClass == eC */
       if (!Boolean.valueOf(_equals_1)) {
         sneakyThrowRuleFailedException("eClass == eC");
@@ -202,6 +206,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECTESTRUCTURALFEATURE = "it.xsemantics.test.rules.EClassEObjectEStructuralFeature";
   
@@ -364,6 +369,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECTESTRUCTURALFEATURESTRING = "it.xsemantics.test.rules.EClassEObjectEStructuralFeatureString";
   
@@ -460,6 +466,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
@@ -557,6 +564,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -628,6 +636,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
@@ -736,6 +745,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class TypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
@@ -777,6 +787,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
@@ -930,6 +941,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String TWOEXPRESSIONSINCONCLUSION = "it.xsemantics.test.rules.TwoExpressionsInConclusion";
   
@@ -1019,6 +1031,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
@@ -1162,6 +1175,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.rules.EObjectEClass";
   
@@ -1295,6 +1309,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class TypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
@@ -1339,6 +1354,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   public final static String FROMTYPESYSTEM = "it.xsemantics.test.rules.FromTypeSystem";
   
@@ -1501,6 +1517,7 @@ import it.xsemantics.test.validation.ExtendedTypeSystemValidator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
@@ -1540,6 +1557,7 @@ import it.xsemantics.test.ExtendedTypeSystem2;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   public final static String FROMTYPESYSTEM = "it.xsemantics.test.rules.FromTypeSystem";
   
@@ -1674,6 +1692,7 @@ import it.xsemantics.test.validation.ExtendedTypeSystem2Validator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSystem2Validator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
@@ -1716,6 +1735,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -1840,6 +1860,7 @@ import it.xsemantics.test.ExtendedTypeSystem2;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
   
@@ -1911,6 +1932,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String TYPEEOBJECT = "it.xsemantics.test.rules.TypeEObject";
   
@@ -2125,6 +2147,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class ExtendedTypeSystemValidator extends TypeSystemValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
@@ -2163,7 +2186,6 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 '''
 package it.xsemantics.test;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleFailedException;
@@ -2172,7 +2194,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ISVALUE = "it.xsemantics.test.auxiliary.IsValue";
   
@@ -2297,7 +2321,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     EClass _eClass = eO.eClass();
-    boolean _equals = Objects.equal(_eClass, eC);
+    boolean _equals = ObjectExtensions.operator_equals(_eClass, eC);
     /* eO.eClass == eC */
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("eO.eClass == eC");
@@ -2364,7 +2388,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2374,7 +2397,9 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String OBJECTCLASS = "it.xsemantics.test.auxiliary.ObjectClass";
   
@@ -2438,7 +2463,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
     EClass _objectClass = this.objectClassInternal(_trace_, o);
-    boolean _notEquals = (!Objects.equal(_objectClass, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_objectClass, null);
     /* objectClass(o) != null */
     if (!Boolean.valueOf(_notEquals)) {
       sneakyThrowRuleFailedException("objectClass(o) != null");

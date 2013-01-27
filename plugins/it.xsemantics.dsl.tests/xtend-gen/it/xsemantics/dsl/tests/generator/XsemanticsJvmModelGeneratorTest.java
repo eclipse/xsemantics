@@ -52,6 +52,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
@@ -179,8 +181,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import com.google.common.base.Objects;");
-    _builder.newLine();
     _builder.append("import it.xsemantics.runtime.ErrorInformation;");
     _builder.newLine();
     _builder.append("import it.xsemantics.runtime.Result;");
@@ -201,8 +201,12 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder.newLine();
     _builder.append("import org.eclipse.xtext.xbase.lib.StringExtensions;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -388,7 +392,10 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("String _plus = (_string + _firstUpper);");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _equals = Objects.equal(\"foo\", _plus);");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("\"foo\", _plus);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* \'foo\' == new String() + \"bar\".toFirstUpper */");
@@ -409,7 +416,10 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("eC.setName(\"MyEClass\");");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _equals_1 = Objects.equal(eClass, eC);");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("eClass, eC);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* eClass == eC */");
@@ -466,6 +476,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -895,6 +907,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
@@ -1137,6 +1151,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -1383,6 +1399,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
@@ -1554,6 +1572,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -1830,6 +1850,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.validation.Check;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystemValidator extends AbstractDeclarativeValidator {");
     _builder.newLine();
     _builder.append("  ");
@@ -1914,6 +1936,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -2315,6 +2339,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
@@ -2534,6 +2560,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -2906,6 +2934,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
     _builder.append("  ");
@@ -3249,6 +3279,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.validation.Check;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class TypeSystemValidator extends AbstractDeclarativeValidator {");
     _builder.newLine();
     _builder.append("  ");
@@ -3330,6 +3362,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class ExtendedTypeSystem2 extends ExtendedTypeSystem {");
     _builder.newLine();
@@ -3774,6 +3808,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder_1.append("import org.eclipse.xtext.validation.Check;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -3853,6 +3889,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {");
     _builder.newLine();
@@ -4218,6 +4256,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder_1.append("import org.eclipse.xtext.validation.Check;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSystem2Validator {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -4304,6 +4344,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {");
     _builder.newLine();
@@ -4617,6 +4659,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 {");
     _builder.newLine();
     _builder.append("  ");
@@ -4787,6 +4831,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -5346,6 +5392,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.xtext.validation.Check;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
     _builder.append("public class ExtendedTypeSystemValidator extends TypeSystemValidator {");
     _builder.newLine();
     _builder.append("  ");
@@ -5433,8 +5481,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import com.google.common.base.Objects;");
-    _builder.newLine();
     _builder.append("import it.xsemantics.runtime.ErrorInformation;");
     _builder.newLine();
     _builder.append("import it.xsemantics.runtime.RuleApplicationTrace;");
@@ -5451,6 +5497,10 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -5802,7 +5852,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("EClass _eClass = eO.eClass();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals = Objects.equal(_eClass, eC);");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(_eClass, eC);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* eO.eClass == eC */");
@@ -5974,8 +6024,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import com.google.common.base.Objects;");
-    _builder.newLine();
     _builder.append("import it.xsemantics.runtime.ErrorInformation;");
     _builder.newLine();
     _builder.append("import it.xsemantics.runtime.Result;");
@@ -5994,6 +6042,10 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
     _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
     _builder.append("public class TypeSystem extends XsemanticsRuntimeSystem {");
     _builder.newLine();
@@ -6170,7 +6222,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("EClass _objectClass = this.objectClassInternal(_trace_, o);");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _notEquals = (!Objects.equal(_objectClass, null));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(_objectClass, null);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* objectClass(o) != null */");

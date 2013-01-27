@@ -1,6 +1,5 @@
 package it.xsemantics.test.particular.ecore;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
@@ -17,9 +16,11 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.particular.ecore.rules.EClassEObject";
   
@@ -372,7 +373,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
     String _plus = (_string + _firstUpper);
-    boolean _equals = Objects.equal("foo", _plus);
+    boolean _equals = ObjectExtensions.operator_equals(
+      "foo", _plus);
     /* 'foo' == new String() + 'bar'.toFirstUpper */
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
@@ -402,7 +404,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
     String _plus = (_string + _firstUpper);
-    boolean _equals = Objects.equal("foo", _plus);
+    boolean _equals = ObjectExtensions.operator_equals(
+      "foo", _plus);
     /* 'foo' == new String() + 'bar'.toFirstUpper */
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
@@ -509,7 +512,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
         public void apply(final EStructuralFeature it) {
           String _name = it.getName();
-          boolean _notEquals = (!Objects.equal(_name, "foo"));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_name, "foo");
         }
       };
     IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
@@ -573,7 +576,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
           public Boolean apply(final EStructuralFeature it) {
             String _name = it.getName();
-            boolean _notEquals = (!Objects.equal(_name, "foo"));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_name, "foo");
             return Boolean.valueOf(_notEquals);
           }
         };
@@ -585,7 +588,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
       EStructuralFeature _get = _eStructuralFeatures_1.get(0);
       String _name = _get.getName();
-      boolean _notEquals = (!Objects.equal(_name, "foo"));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_name, "foo");
       /* eClass.EStructuralFeatures.get(0).name != 'foo' */
       if (!Boolean.valueOf(_notEquals)) {
         sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");

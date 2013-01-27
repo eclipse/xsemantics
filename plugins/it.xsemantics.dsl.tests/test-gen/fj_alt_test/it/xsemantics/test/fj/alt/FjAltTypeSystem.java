@@ -1,6 +1,5 @@
 package it.xsemantics.test.fj.alt;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
@@ -26,8 +25,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+@SuppressWarnings("all")
 public class FjAltTypeSystem extends FjFirstTypeSystem {
   public final static String TYPEEQUALS = "it.xsemantics.test.fj.alt.rules.TypeEquals";
   
@@ -144,7 +145,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     /* program.main == null or empty |- program.main */
     try {
       Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
+      boolean _equals = ObjectExtensions.operator_equals(_main, null);
       /* program.main == null */
       if (!_equals) {
         sneakyThrowRuleFailedException("program.main == null");
@@ -338,7 +339,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     
     it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
     if (_notEquals) {
       {
         List<it.xsemantics.example.fj.fj.Class> superClasses = this.fjAux.getSuperclasses(cl);
@@ -358,7 +359,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
                 try {
                   String _name = field.getName();
                   String _name_1 = inheritedField.getName();
-                  boolean _notEquals = (!Objects.equal(_name, _name_1));
+                  boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
                   /* field.name != inheritedField.name */
                   if (!_notEquals) {
                     sneakyThrowRuleFailedException("field.name != inheritedField.name");
@@ -386,7 +387,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
                     try {
                       String _name = it.getName();
                       String _name_1 = inheritedMethod.getName();
-                      boolean _notEquals = (!Objects.equal(_name, _name_1));
+                      boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
                       /* it.name != inheritedMethod.name */
                       if (!_notEquals) {
                         sneakyThrowRuleFailedException("it.name != inheritedMethod.name");

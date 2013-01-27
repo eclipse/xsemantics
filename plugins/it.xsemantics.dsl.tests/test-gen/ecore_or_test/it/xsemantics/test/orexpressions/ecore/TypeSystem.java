@@ -1,6 +1,5 @@
 package it.xsemantics.test.orexpressions.ecore;
 
-import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -10,7 +9,9 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.orexpressions.ecore.rules.EClassEObject";
   
@@ -112,7 +113,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     /* eClass.name == 'foo' or object.eClass.name == 'bar' */
     try {
       String _name = eClass.getName();
-      boolean _equals = Objects.equal(_name, "foo");
+      boolean _equals = ObjectExtensions.operator_equals(_name, "foo");
       /* eClass.name == 'foo' */
       if (!_equals) {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
@@ -120,7 +121,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } catch (Exception e) {
       EClass _eClass = object.eClass();
       String _name_1 = _eClass.getName();
-      boolean _equals_1 = Objects.equal(_name_1, "bar");
+      boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, "bar");
       /* object.eClass.name == 'bar' */
       if (!_equals_1) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
@@ -150,7 +151,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     /* eClass.name == 'foo' or object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
     try {
       String _name = eClass.getName();
-      boolean _equals = Objects.equal(_name, "foo");
+      boolean _equals = ObjectExtensions.operator_equals(_name, "foo");
       /* eClass.name == 'foo' */
       if (!_equals) {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
@@ -160,7 +161,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       try {
         EClass _eClass = object.eClass();
         String _name_1 = _eClass.getName();
-        boolean _equals_1 = Objects.equal(_name_1, "bar");
+        boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, "bar");
         /* object.eClass.name == 'bar' */
         if (!_equals_1) {
           sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
@@ -170,13 +171,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
           final String foo = "foo";
           EClass _eClass_1 = object.eClass();
           String _name_2 = _eClass_1.getName();
-          boolean _equals_2 = Objects.equal(_name_2, "bar2");
+          boolean _equals_2 = ObjectExtensions.operator_equals(_name_2, "bar2");
           /* object.eClass.name == 'bar2' */
           if (!_equals_2) {
             sneakyThrowRuleFailedException("object.eClass.name == \'bar2\'");
           }
           String _name_3 = eClass.getName();
-          boolean _equals_3 = Objects.equal(_name_3, foo);
+          boolean _equals_3 = ObjectExtensions.operator_equals(_name_3, foo);
           /* eClass.name == foo */
           if (!_equals_3) {
             sneakyThrowRuleFailedException("eClass.name == foo");

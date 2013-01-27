@@ -112,7 +112,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _plus = (_string + _firstUpper);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals = Objects.equal(\"foo\", _plus);");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\", _plus);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' == new String() + \"bar\".toFirstUpper */");
@@ -154,7 +157,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = eC.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_1 = Objects.equal(_name, \"MyEClass2\");");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(_name, \"MyEClass2\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("boolean _not = (!_equals_1);");
@@ -193,7 +196,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_2 = Objects.equal(eClass, eC);");
+    _builder.append("boolean _equals_2 = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("eClass, eC);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass == eC */");
@@ -448,7 +454,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.name == \'foo\' */");
@@ -471,7 +477,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_1 = _eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -502,7 +508,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.name == \'foo\' */");
@@ -525,7 +531,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_1 = _eClass.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -562,7 +568,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals = Objects.equal(_name, \"foo\");");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* eClass.name == \'foo\' */");
@@ -580,7 +586,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_1 = eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"foo\");");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, \"foo\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* eClass.name == \'foo\' */");
@@ -612,7 +618,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_2 = _eClass.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals_2 = Objects.equal(_name_2, \"bar\");");
+    _builder.append("boolean _equals_2 = ObjectExtensions.operator_equals(_name_2, \"bar\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -633,7 +639,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_3 = _eClass_1.getName();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals_3 = Objects.equal(_name_3, \"bar\");");
+    _builder.append("boolean _equals_3 = ObjectExtensions.operator_equals(_name_3, \"bar\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -720,7 +726,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = _eClass_3.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _equals = Objects.equal(_name, \"bar\");");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(_name, \"bar\");");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -750,7 +756,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name_1 = _eClass_4.getName();");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _equals_1 = Objects.equal(_name_1, \"bar\");");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, \"bar\");");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* object.eClass.name == \'bar\' */");
@@ -797,7 +803,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _string = new String();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals = Objects.equal(\"foo\", _string);");
+    _builder.append("boolean _equals = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\", _string);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("if (_equals) {");
@@ -812,7 +821,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _string_1 = new String();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals_1 = Objects.equal(\"bar\", _string_1);");
+    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(\"bar\", _string_1);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("_or = (_equals || _equals_1);");
@@ -839,7 +848,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _string_2 = new String();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_2 = Objects.equal(\"foo\", _string_2);");
+    _builder.append("boolean _equals_2 = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\", _string_2);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("if (!_equals_2) {");
@@ -854,7 +866,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _string_3 = new String();");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("boolean _equals_3 = Objects.equal(\"bar\", _string_3);");
+    _builder.append("boolean _equals_3 = ObjectExtensions.operator_equals(\"bar\", _string_3);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("_and = (_equals_2 && _equals_3);");
@@ -884,7 +896,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _plus = (_string_4 + _firstUpper);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _equals_4 = Objects.equal(\"foo\", _plus);");
+    _builder.append("boolean _equals_4 = ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\", _plus);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' == new String() + \'bar\'.toFirstUpper */");
@@ -908,7 +923,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _plus_1 = (_string_5 + _firstUpper_1);");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _notEquals = (!Objects.equal(\"foo\", _plus_1));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\", _plus_1);");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* \'foo\' != new String() + \'bar\'.toFirstUpper */");
@@ -1011,7 +1029,10 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.newLine();
     _builder.append("String _instanceClassName = _environmentaccess.getInstanceClassName();");
     _builder.newLine();
-    _builder.append("Objects.equal(\"foo\", _instanceClassName);");
+    _builder.append("/* ObjectExtensions.operator_equals(");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"foo\", _instanceClassName); */");
     this.checkCompilationOfXExpression(_testWithEnvironmentAccess, 4, _builder);
   }
   
@@ -1194,7 +1215,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = it.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return Boolean.valueOf(_notEquals);");
@@ -1233,7 +1254,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = it.getName();");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("/* it.name != \'foo\' */");
@@ -1320,7 +1341,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = _get.getName();");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("/* eClass.EStructuralFeatures.get(0).name != \'foo\' */");
@@ -1354,7 +1375,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.append("String _name = it.getName();");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _notEquals = (!Objects.equal(_name, \"foo\"));");
+    _builder.append("boolean _notEquals = ObjectExtensions.operator_notEquals(_name, \"foo\");");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");

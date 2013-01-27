@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class TypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

@@ -857,7 +857,7 @@ public class XsemanticsTestFiles {
     _builder.append("rule EClassEObject derives");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("G |- EClass _createEObject : EcoreFactory::eINSTANCE.createEObject()");
+    _builder.append("G |- EClass _createEObject : org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEObject()");
     _builder.newLine();
     _builder.append("from {");
     _builder.newLine();

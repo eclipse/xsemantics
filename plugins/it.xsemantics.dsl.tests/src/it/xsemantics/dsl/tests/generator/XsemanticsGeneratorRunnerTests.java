@@ -236,7 +236,8 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		// This filter only returns files
 		FileFilter fileFilter = new FileFilter() {
 			public boolean accept(File file) {
-				return file.isFile();
+				return file.isFile() && 
+						!file.getName().endsWith(".java._trace");
 			}
 		};
 		File[] listFiles = dirFile.listFiles(fileFilter);

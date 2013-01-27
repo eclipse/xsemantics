@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+@SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String EOBJECTECLASS = "it.xsemantics.test.errspecification.ecore.rules.EObjectEClass";
   

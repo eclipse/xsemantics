@@ -413,7 +413,7 @@ class XsemanticsTestFiles {
 	«testJudgmentDescriptionsReferringToEcoreWithOutput»
 	
 	rule EClassEObject derives
-		G |- EClass _createEObject : EcoreFactory::eINSTANCE.createEObject()
+		G |- EClass _createEObject : org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEObject()
 	from {
 		// some expressions from Xbase
 		'foo' == new String() + 'bar'.toFirstUpper

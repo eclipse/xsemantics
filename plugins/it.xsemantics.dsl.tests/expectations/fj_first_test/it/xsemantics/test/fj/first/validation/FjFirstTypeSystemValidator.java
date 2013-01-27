@@ -9,6 +9,7 @@ import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.fj.first.FjFirstTypeSystem;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class FjFirstTypeSystemValidator extends AbstractFJJavaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

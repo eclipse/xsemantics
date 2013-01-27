@@ -7,6 +7,7 @@ import it.xsemantics.test.fj.alt.FjAltTypeSystem;
 import it.xsemantics.test.fj.first.validation.FjFirstTypeSystemValidator;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
