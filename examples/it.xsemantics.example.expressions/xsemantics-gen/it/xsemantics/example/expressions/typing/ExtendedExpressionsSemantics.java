@@ -1,6 +1,5 @@
 package it.xsemantics.example.expressions.typing;
 
-import com.google.common.base.Objects;
 import it.xsemantics.example.expressions.expressions.AndOrExpression;
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned;
 import it.xsemantics.example.expressions.expressions.BooleanLiteral;
@@ -24,12 +23,14 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * This system is more involved:
  * we want to implicitly convert string literals to numbers
  * and to booleans when this is possible
  */
+@SuppressWarnings("all")
 public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   public final static String STRINGLITERAL = "it.xsemantics.example.expressions.typing.rules.StringLiteral";
   
@@ -684,7 +685,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
       rightResult = (Integer) result_2.getFirst();
       
       String _op = multiOrDiv.getOp();
-      boolean _equals = Objects.equal(_op, "*");
+      boolean _equals = ObjectExtensions.operator_equals(_op, "*");
       if (_equals) {
         int _intValue = leftResult.intValue();
         int _intValue_1 = rightResult.intValue();
@@ -778,7 +779,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
       rightResult = (Boolean) result_2.getFirst();
       
       String _op = andOr.getOp();
-      boolean _equals = Objects.equal(_op, "&&");
+      boolean _equals = ObjectExtensions.operator_equals(_op, "&&");
       if (_equals) {
         boolean _and = false;
         boolean _booleanValue = leftResult.booleanValue();

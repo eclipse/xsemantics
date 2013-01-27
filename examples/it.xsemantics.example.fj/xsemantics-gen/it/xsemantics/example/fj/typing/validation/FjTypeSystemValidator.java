@@ -13,6 +13,7 @@ import org.eclipse.xtext.validation.Check;
  * A version of the FJ system where type computation involves also
  * type checking.
  */
+@SuppressWarnings("all")
 public class FjTypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

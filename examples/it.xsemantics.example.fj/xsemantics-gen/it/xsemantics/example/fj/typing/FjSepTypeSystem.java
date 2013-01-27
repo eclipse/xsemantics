@@ -1,6 +1,5 @@
 package it.xsemantics.example.fj.typing;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.Cast;
 import it.xsemantics.example.fj.fj.ClassType;
@@ -35,12 +34,14 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A version of the FJ system where type computation and
  * checking are separated.
  */
+@SuppressWarnings("all")
 public class FjSepTypeSystem extends FjTypeSystem {
   public final static String TNEW = "it.xsemantics.example.fj.typing.rules.TNew";
   
@@ -145,7 +146,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     /* program.main == null or empty |- program.main */
     try {
       Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
+      boolean _equals = ObjectExtensions.operator_equals(_main, null);
       /* program.main == null */
       if (!_equals) {
         sneakyThrowRuleFailedException("program.main == null");
@@ -381,7 +382,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     
     /* env(G, 'this', ClassType) */
     ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    boolean _notEquals = (!Objects.equal(_environmentaccess, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_environmentaccess, null);
     /* env(G, 'this', ClassType) != null */
     if (!Boolean.valueOf(_notEquals)) {
       sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
@@ -579,7 +580,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
         };
       IterableExtensions.<Member>forEach(_members, _function);
       it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-      boolean _notEquals = (!Objects.equal(_superclass, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
       if (_notEquals) {
         {
           it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
@@ -593,7 +594,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
                 for (final Field field : _selectFields) {
                   String _name = field.getName();
                   String _name_1 = inheritedField.getName();
-                  boolean _notEquals = (!Objects.equal(_name, _name_1));
+                  boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
                   /* field.name != inheritedField.name */
                   if (!_notEquals) {
                     sneakyThrowRuleFailedException("field.name != inheritedField.name");
@@ -614,7 +615,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
                     public void apply(final Method it) {
                       try {
                         Boolean _overrides = FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
-                      } catch (Exception _e) {
+                      } catch (Throwable _e) {
                         throw Exceptions.sneakyThrow(_e);
                       }
                     }

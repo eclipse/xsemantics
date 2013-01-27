@@ -93,7 +93,7 @@ public class LambdaBaseTest {
     try {
       Program _parse = this._parseHelper.parse(prog);
       return _parse;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -107,7 +107,7 @@ public class LambdaBaseTest {
         _xblockexpression = (model);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

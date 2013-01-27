@@ -33,7 +33,7 @@ public class ExpressionsValidatorTests extends ExpressionsBaseTests {
       _builder.append("i = 10 - 5 - 1");
       Model _parse = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -47,7 +47,7 @@ public class ExpressionsValidatorTests extends ExpressionsBaseTests {
       EClass _arithmeticSigned = ExpressionsPackage.eINSTANCE.getArithmeticSigned();
       this._validationTestHelper.assertError(_parse, _arithmeticSigned, 
         ExpressionsSemantics.ARITHMETICSIGNED);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

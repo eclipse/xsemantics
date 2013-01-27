@@ -229,7 +229,7 @@ public class ExpressionsTypingTests extends ExpressionsBaseTests {
           Assert.assertEquals(_string_2, _failureTraceAsString_1);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

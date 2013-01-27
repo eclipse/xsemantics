@@ -1,6 +1,5 @@
 package it.xsemantics.example.expressions.typing;
 
-import com.google.common.base.Objects;
 import it.xsemantics.example.expressions.expressions.AndOrExpression;
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned;
 import it.xsemantics.example.expressions.expressions.BooleanLiteral;
@@ -32,12 +31,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * This system allows to convert implicitly
  * integers and booleans to strings, and '+' can
  * be used also for string concatenations
  */
+@SuppressWarnings("all")
 public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.rules.NumeralLiteral";
   
@@ -532,7 +533,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       
       EClass _eClass = leftType.eClass();
       EClass _eClass_1 = rightType.eClass();
-      boolean _equals = Objects.equal(_eClass, _eClass_1);
+      boolean _equals = ObjectExtensions.operator_equals(_eClass, _eClass_1);
       /* leftType.eClass == rightType.eClass */
       if (!Boolean.valueOf(_equals)) {
         sneakyThrowRuleFailedException("leftType.eClass == rightType.eClass");
@@ -679,7 +680,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     {
       Expression _expression = variable.getExpression();
-      boolean _notEquals = (!Objects.equal(_expression, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_expression, null);
       /* variable.expression != null */
       if (!_notEquals) {
         sneakyThrowRuleFailedException("variable.expression != null");
@@ -833,7 +834,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       rightResult = (Integer) result_2.getFirst();
       
       String _op = multiOrDiv.getOp();
-      boolean _equals = Objects.equal(_op, "*");
+      boolean _equals = ObjectExtensions.operator_equals(_op, "*");
       if (_equals) {
         int _intValue = leftResult.intValue();
         int _intValue_1 = rightResult.intValue();
@@ -915,7 +916,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       rightResult = (Boolean) result_2.getFirst();
       
       String _op = andOr.getOp();
-      boolean _equals = Objects.equal(_op, "&&");
+      boolean _equals = ObjectExtensions.operator_equals(_op, "&&");
       if (_equals) {
         boolean _and = false;
         boolean _booleanValue = leftResult.booleanValue();
@@ -1060,7 +1061,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       
       String _string = leftResult.toString();
       String _string_1 = rightResult.toString();
-      boolean _equals = Objects.equal(_string, _string_1);
+      boolean _equals = ObjectExtensions.operator_equals(_string, _string_1);
       result = Boolean.valueOf(_equals);
     }
     return new Result<Object>(result);

@@ -315,7 +315,7 @@ public class ExpressionsInterpreterTests extends ExpressionsBaseTests {
         String _traceAsString = this._traceUtils.traceAsString(this.trace);
         Assert.assertEquals(_string_2, _traceAsString);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

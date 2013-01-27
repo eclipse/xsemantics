@@ -12,6 +12,7 @@ import org.eclipse.xtext.validation.Check;
  * integers and booleans to strings, and '+' can
  * be used also for string concatenations
  */
+@SuppressWarnings("all")
 public class ExpressionsSemanticsValidator extends AbstractExpressionsJavaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

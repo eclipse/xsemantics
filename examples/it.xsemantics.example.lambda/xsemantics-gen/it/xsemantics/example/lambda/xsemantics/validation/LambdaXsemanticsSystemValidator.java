@@ -7,6 +7,7 @@ import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem;
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xtext.validation.Check;
 
+@SuppressWarnings("all")
 public class LambdaXsemanticsSystemValidator extends AbstractLambdaJavaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

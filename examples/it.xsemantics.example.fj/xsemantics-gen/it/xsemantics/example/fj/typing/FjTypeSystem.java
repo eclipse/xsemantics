@@ -1,6 +1,5 @@
 package it.xsemantics.example.fj.typing;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -54,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * A version of the FJ system where type computation involves also
  * type checking.
  */
+@SuppressWarnings("all")
 public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public final static String SUPERCLASSES = "it.xsemantics.example.fj.typing.auxiliary.Superclasses";
   
@@ -427,7 +427,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       EObject _eContainer = field.eContainer();
       final it.xsemantics.example.fj.fj.Class clazz = ((it.xsemantics.example.fj.fj.Class) _eContainer);
       it.xsemantics.example.fj.fj.Class _superclass = clazz.getSuperclass();
-      boolean _notEquals = (!Objects.equal(_superclass, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
       if (_notEquals) {
         {
           it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
@@ -436,7 +436,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
               public void apply(final Field inheritedField) {
                 String _name = field.getName();
                 String _name_1 = inheritedField.getName();
-                boolean _equals = Objects.equal(_name, _name_1);
+                boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
                 if (_equals) {
                   /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
                   EObject _eContainer = inheritedField.eContainer();
@@ -472,7 +472,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       EObject _eContainer = method.eContainer();
       final it.xsemantics.example.fj.fj.Class clazz = ((it.xsemantics.example.fj.fj.Class) _eContainer);
       it.xsemantics.example.fj.fj.Class _superclass = clazz.getSuperclass();
-      boolean _notEquals = (!Objects.equal(_superclass, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
       if (_notEquals) {
         {
           it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
@@ -485,7 +485,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
                     public void apply(final Method it) {
                       try {
                         Boolean _overrides = FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
-                      } catch (Exception _e) {
+                      } catch (Throwable _e) {
                         throw Exceptions.sneakyThrow(_e);
                       }
                     }
@@ -515,7 +515,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> checkClassHierachyNotCyclicInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     
     it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
     if (_notEquals) {
       /* !superclasses(cl).contains(cl) or fail error "Cyclic hierarchy for " + cl.name source cl */
       try {
@@ -555,7 +555,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     /* program.main == null or empty |- program.main : var Type mainType */
     try {
       Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
+      boolean _equals = ObjectExtensions.operator_equals(_main, null);
       /* program.main == null */
       if (!_equals) {
         sneakyThrowRuleFailedException("program.main == null");
@@ -925,7 +925,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     try {
       String _name = current.getName();
       String _name_1 = previous.getName();
-      boolean _notEquals = (!Objects.equal(_name, _name_1));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
       /* current.name != previous.name */
       if (!_notEquals) {
         sneakyThrowRuleFailedException("current.name != previous.name");
@@ -1437,7 +1437,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     try {
       it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
       it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-      boolean _equals = Objects.equal(_classref, _classref_1);
+      boolean _equals = ObjectExtensions.operator_equals(_classref, _classref_1);
       /* left.classref == right.classref */
       if (!_equals) {
         sneakyThrowRuleFailedException("left.classref == right.classref");
@@ -1447,7 +1447,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       try {
         it.xsemantics.example.fj.fj.Class _classref_2 = right.getClassref();
         String _name = _classref_2.getName();
-        boolean _equals_1 = Objects.equal(_name, "Object");
+        boolean _equals_1 = ObjectExtensions.operator_equals(_name, "Object");
         /* right.classref.name == "Object" */
         if (!_equals_1) {
           sneakyThrowRuleFailedException("right.classref.name == \"Object\"");
@@ -1572,7 +1572,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     
     it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
     it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-    boolean _equals = Objects.equal(_classref, _classref_1);
+    boolean _equals = ObjectExtensions.operator_equals(_classref, _classref_1);
     /* left.classref == right.classref */
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("left.classref == right.classref");
@@ -1747,7 +1747,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
                   public Boolean apply(final Field it) {
                     String _name = it.getName();
                     String _name_1 = _field.getName();
-                    boolean _equals = Objects.equal(_name, _name_1);
+                    boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
                     return _equals;
                   }
                 };

@@ -10,6 +10,7 @@ import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
  * we want to implicitly convert string literals to numbers
  * and to booleans when this is possible
  */
+@SuppressWarnings("all")
 public class ExtendedExpressionsSemanticsValidator extends ExpressionsSemanticsValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

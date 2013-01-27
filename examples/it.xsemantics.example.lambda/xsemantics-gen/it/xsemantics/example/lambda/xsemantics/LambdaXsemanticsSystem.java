@@ -1,6 +1,5 @@
 package it.xsemantics.example.lambda.xsemantics;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.lambda.lambda.Abstraction;
 import it.xsemantics.example.lambda.lambda.Application;
@@ -28,7 +27,9 @@ import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+@SuppressWarnings("all")
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.rules.SubstituteType";
   
@@ -343,7 +344,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       {
         String _typevarName = variable.getTypevarName();
         Type mapped = substitutions.mapped(_typevarName);
-        boolean _notEquals = (!Objects.equal(mapped, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(mapped, null);
         /* mapped != null */
         if (!_notEquals) {
           sneakyThrowRuleFailedException("mapped != null");
@@ -442,7 +443,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     
     String _typevarName = variable.getTypevarName();
     String _typevarName_1 = other.getTypevarName();
-    boolean _notEquals = (!Objects.equal(_typevarName, _typevarName_1));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_typevarName, _typevarName_1);
     /* variable.typevarName != other.typevarName */
     if (!Boolean.valueOf(_notEquals)) {
       sneakyThrowRuleFailedException("variable.typevarName != other.typevarName");
@@ -767,7 +768,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       Type _xblockexpression = null;
       {
         Type _type = param.getType();
-        boolean _notEquals = (!Objects.equal(_type, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(_type, null);
         /* param.type != null */
         if (!_notEquals) {
           sneakyThrowRuleFailedException("param.type != null");

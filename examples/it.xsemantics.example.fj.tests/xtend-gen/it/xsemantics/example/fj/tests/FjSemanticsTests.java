@@ -1192,7 +1192,7 @@ public class FjSemanticsTests extends FjBaseTests {
       Expression _main = _parseAndAssertNoError.getMain();
       Boolean _isValue = this.fjSystem.isValue(_main);
       Assert.assertTrue((_isValue).booleanValue());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1203,7 +1203,7 @@ public class FjSemanticsTests extends FjBaseTests {
       Expression _main = _parseAndAssertNoError.getMain();
       Boolean _isValue = this.fjSystem.isValue(_main);
       Assert.assertFalse((_isValue).booleanValue());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1223,7 +1223,7 @@ public class FjSemanticsTests extends FjBaseTests {
       String _string = expected.toString();
       String _string_1 = this.stringRep.string(replaced);
       Assert.assertEquals(_string, _string_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1254,7 +1254,7 @@ public class FjSemanticsTests extends FjBaseTests {
       String _trim = _string.trim();
       String _traceAsString = this.traceUtils.traceAsString(this.trace);
       Assert.assertEquals(_trim, _traceAsString);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1359,7 +1359,7 @@ public class FjSemanticsTests extends FjBaseTests {
       String _string = expectedTrace.toString();
       String _traceAsString = this.traceUtils.traceAsString(this.trace);
       Assert.assertEquals(_string, _traceAsString);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
