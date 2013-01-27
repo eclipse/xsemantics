@@ -45,7 +45,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertIssueField(_testSimpleRule, _builder);
   }
   
-  @Test
   public void testConstructor() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     StringConcatenation _builder = new StringConcatenation();
@@ -59,7 +58,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertConstructor(_testSimpleRule, _builder);
   }
   
-  @Test
   public void testInit() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     StringConcatenation _builder = new StringConcatenation();
@@ -86,7 +84,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_genPolymorphicDispatcherField, "private PolymorphicDispatcher<Result3<EObject,EStructuralFeature,String>> typeDispatcher;");
   }
   
-  @Test
   public void testEntryPointMethods() {
     CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith3OutputParams);
@@ -148,7 +145,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     Assert.assertNotNull(_compileThrowExceptionMethod);
   }
   
-  @Test
   public void testThrowExceptionMethod() {
     CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWithErrorSpecification);
@@ -192,7 +188,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileThrowExceptionMethod, _builder);
   }
   
-  @Test
   public void testInternalMethod() {
     CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testFiles.testJudgmentDescriptionsWith2OutputParams();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testJudgmentDescriptionsWith2OutputParams);
@@ -228,7 +223,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileInternalMethod, _builder);
   }
   
-  @Test
   public void testCheckRuleInternalMethod() {
     CharSequence _testCheckRule = this.testFiles.testCheckRule();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
@@ -271,7 +265,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileInternalMethod, _builder);
   }
   
-  @Test
   public void testCheckRuleMethod() {
     CharSequence _testCheckRule = this.testFiles.testCheckRule();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
@@ -312,7 +305,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMembers(_compileCheckRuleMethods, _builder);
   }
   
-  @Test
   public void testApplyMethodForAxiom() {
     CharSequence _testSimpleAxiom = this.testFiles.testSimpleAxiom();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleAxiom);
@@ -332,7 +324,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileApplyMethod, _builder);
   }
   
-  @Test
   public void testApplyMethodForAxiomWithExpressionInConclusion() {
     CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testAxiomWithExpressionInConclusion);
@@ -355,7 +346,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileApplyMethod, _builder);
   }
   
-  @Test
   public void testApplyMethodForRuleWithPremise() {
     CharSequence _testRuleWithTwoOutputParams = this.testFiles.testRuleWithTwoOutputParams();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testRuleWithTwoOutputParams);
@@ -483,7 +473,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
   }
   
-  @Test
   public void testCompileImplMethod() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
@@ -534,7 +523,6 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
     this.assertGeneratedMember(_compileImplMethod, _builder);
   }
   
-  @Test
   public void testCompileValidatorCheckRuleMethod() {
     CharSequence _testCheckRule = this.testFiles.testCheckRule();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testCheckRule);
