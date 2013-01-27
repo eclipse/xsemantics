@@ -15,7 +15,12 @@ class FjTypeSystemFiles extends XsemanticsTestFiles {
 	'''
 	
 	def fjJudgmentDescriptions() '''
-	«fjTypeSystemWithImports»
+	«fjTypeSystem»
+	
+	import it.xsemantics.example.fj.fj.Expression
+	import it.xsemantics.example.fj.fj.Type
+	import it.xsemantics.example.fj.fj.New
+	import it.xsemantics.example.fj.fj.BasicType
 	
 	judgments {
 		type |- Expression expression : output Type

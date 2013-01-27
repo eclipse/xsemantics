@@ -17,7 +17,9 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptions() '''
-	«testFileWithImports»
+	«typeSystemQualifiedName»
+	
+	import java.util.List
 	
 	judgments {
 		type |- List<String> list : java.util.Set<Integer> set
@@ -33,7 +35,9 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsWithDuplicates() '''
-	«testFileWithImports»
+	«typeSystemQualifiedName»
+	
+	import java.util.List
 	
 	judgments {
 		type |- List<String> list : java.util.Set<Integer> set
@@ -42,7 +46,9 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsWithDuplicateSymbols() '''
-	«testFileWithImports»
+	«typeSystemQualifiedName»
+	
+	import java.util.List
 	
 	judgments {
 		type |- List<String> list : java.util.Set<Integer> set
@@ -71,8 +77,22 @@ class XsemanticsTestFiles {
 	'''
 
 	def testJudgmentDescriptionsReferringToEcore() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EcoreFactory
+	
+	judgments {
+		type |- EClass c : EObject o
+	}
+	'''
+	
+	def testJudgmentDescriptionsReferringToEClassEObject() '''
+	«typeSystemQualifiedName»
+	
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
 	
 	judgments {
 		type |- EClass c : EObject o
@@ -80,8 +100,10 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsReferringToEcoreWithOutput() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
 	
 	judgments {
 		type |- EClass c : output EObject
@@ -89,8 +111,10 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsEObjectEClass() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
 	
 	judgments {
 		type |- EObject c : output EClass
@@ -150,8 +174,10 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsReferringToEcore3WithOutput() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EStructuralFeature
 	
 	judgments {
 		type |- EClass c : output EObject : EStructuralFeature f
@@ -180,9 +206,11 @@ class XsemanticsTestFiles {
 	'''
 
 	def testJudgmentDescriptionsWith4OutputParams() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
-	import org.eclipse.emf.common.notify.*
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EStructuralFeature
+	import org.eclipse.emf.common.notify.Notifier
 	
 	judgments {
 		type |- EClass c : output EObject : 
@@ -191,8 +219,9 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testJudgmentDescriptionsWithNoInputParam() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
 	
 	judgments {
 		type |- output EClass : output EObject
@@ -316,7 +345,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testDuplicateRuleNames() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	axiom Foo
 		G |- EClass eClass : EObject object
@@ -326,7 +355,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testDuplicateCheckRuleNames() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	checkrule Foo for
 		EObject o1
@@ -338,7 +367,7 @@ class XsemanticsTestFiles {
 	'''
 
 	def testDuplicateRuleAndCheckRuleNames() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	axiom Foo
 		G |- EClass eClass : EObject object
@@ -370,11 +399,11 @@ class XsemanticsTestFiles {
 	«testJudgmentDescriptionsReferringToEcoreWithOutput»
 	
 	rule EClassEObject derives
-		G |- EClass eClass : EcoreFactory::eINSTANCE.createEObject()
+		G |- EClass eClass : org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEObject()
 	from {
 		// some expressions from Xbase
 		'foo' == new String() + 'bar'.toFirstUpper
-		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+		val EClass eC = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass()
 		eC.name = 'MyEClass'
 		eClass == eC
 	}
@@ -396,14 +425,14 @@ class XsemanticsTestFiles {
 	
 	rule EClassEObject derives
 		G |- EClass eClass : { 
-			val result = EcoreFactory::eINSTANCE.createEClass();
+			val result = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass();
 			result.name = 'MyEClass'
 			result
 		}
 	from {
 		// some expressions from Xbase
 		'foo' == new String() + 'bar'.toFirstUpper
-		val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+		val EClass eC = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass()
 		eC.name = 'MyEClass'
 		eClass == eC
 	}
@@ -423,7 +452,7 @@ class XsemanticsTestFiles {
 	'''
 
 	def testRulesWithSameEnvironmentNames() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	axiom Foo
 		G |- EClass eClass : EObject object
@@ -654,7 +683,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testRuleInvocationWithoutJudgmentDescription() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule NoJudgmentDescription derives
 		G  |- EClass eClass : EObject object
@@ -736,8 +765,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testRulesOfTheSameKindWithSameArgumentTypes() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
 	
 	judgments {
 		type |- Object o1 : Object o2
@@ -758,8 +786,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testRulesOfTheSameKindWithSameInputArgumentTypes() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
 	
 	judgments {
 		type |- Object o1 : output Object
@@ -775,7 +802,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testRuleWithErrorSpecifications() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -789,7 +816,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testErrorSpecificationSourceNotEObject() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -800,7 +827,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testErrorSpecificationFeatureNotEStructuralFeature() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -1306,8 +1333,8 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testForClosureWithExpressionWithNoSideEffect()
-	'''«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	'''«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
 	
 	judgments {
 		type |- EClass c
@@ -1386,7 +1413,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testNoSideEffectButNoError() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -1396,7 +1423,7 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testErrorNoSideEffect() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	«testJudgmentDescriptionsReferringToEClassEObject»
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
@@ -1734,7 +1761,8 @@ class XsemanticsTestFiles {
 	system it.xsemantics.test.ExtendedTypeSystemWithJudgmentOverride
 		extends it.xsemantics.test.ExtendedTypeSystem2
 	
-	import org.eclipse.emf.ecore.*
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
 
 	// type judgment already defined in inherited system
 	// and we override it, so that's OK
@@ -1871,8 +1899,9 @@ class XsemanticsTestFiles {
 	'''
 
 	def testAuxiliaryDescriptions() '''
-	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
 	
 	auxiliary {
 		isValue(EObject o, EClass c) : Boolean

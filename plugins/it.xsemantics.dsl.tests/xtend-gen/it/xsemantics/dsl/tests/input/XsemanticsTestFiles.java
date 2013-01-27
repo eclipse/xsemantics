@@ -33,9 +33,12 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptions() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
@@ -65,9 +68,12 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsWithDuplicates() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
@@ -84,9 +90,12 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsWithDuplicateSymbols() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
@@ -144,10 +153,36 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsReferringToEcore() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EcoreFactory");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EClass c : EObject o");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testJudgmentDescriptionsReferringToEClassEObject() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -162,10 +197,13 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsReferringToEcoreWithOutput() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -180,10 +218,13 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsEObjectEClass() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -307,10 +348,14 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsReferringToEcore3WithOutput() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EStructuralFeature");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -370,12 +415,16 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsWith4OutputParams() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
     _builder.newLine();
-    _builder.append("import org.eclipse.emf.common.notify.*");
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EStructuralFeature");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.common.notify.Notifier");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -393,10 +442,12 @@ public class XsemanticsTestFiles {
   
   public CharSequence testJudgmentDescriptionsWithNoInputParam() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
@@ -664,8 +715,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testDuplicateRuleNames() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("axiom Foo");
@@ -684,8 +735,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testDuplicateCheckRuleNames() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("checkrule Foo for");
@@ -708,8 +759,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testDuplicateRuleAndCheckRuleNames() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("axiom Foo");
@@ -773,7 +824,7 @@ public class XsemanticsTestFiles {
     _builder.append("rule EClassEObject derives");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("G |- EClass eClass : EcoreFactory::eINSTANCE.createEObject()");
+    _builder.append("G |- EClass eClass : org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEObject()");
     _builder.newLine();
     _builder.append("from {");
     _builder.newLine();
@@ -784,7 +835,7 @@ public class XsemanticsTestFiles {
     _builder.append("\'foo\' == new String() + \'bar\'.toFirstUpper");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val EClass eC = EcoreFactory::eINSTANCE.createEClass()");
+    _builder.append("val EClass eC = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass()");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("eC.name = \'MyEClass\'");
@@ -833,7 +884,7 @@ public class XsemanticsTestFiles {
     _builder.append("G |- EClass eClass : { ");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("val result = EcoreFactory::eINSTANCE.createEClass();");
+    _builder.append("val result = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("result.name = \'MyEClass\'");
@@ -853,7 +904,7 @@ public class XsemanticsTestFiles {
     _builder.append("\'foo\' == new String() + \'bar\'.toFirstUpper");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val EClass eC = EcoreFactory::eINSTANCE.createEClass()");
+    _builder.append("val EClass eC = org::eclipse::emf::ecore::EcoreFactory::eINSTANCE.createEClass()");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("eC.name = \'MyEClass\'");
@@ -898,8 +949,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testRulesWithSameEnvironmentNames() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("axiom Foo");
@@ -1479,8 +1530,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testRuleInvocationWithoutJudgmentDescription() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule NoJudgmentDescription derives");
@@ -1657,11 +1708,9 @@ public class XsemanticsTestFiles {
   
   public CharSequence testRulesOfTheSameKindWithSameArgumentTypes() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
@@ -1702,11 +1751,9 @@ public class XsemanticsTestFiles {
   
   public CharSequence testRulesOfTheSameKindWithSameInputArgumentTypes() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();
@@ -1735,8 +1782,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testRuleWithErrorSpecifications() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule EClassEObject derives");
@@ -1768,8 +1815,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testErrorSpecificationSourceNotEObject() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule EClassEObject derives");
@@ -1792,8 +1839,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testErrorSpecificationFeatureNotEStructuralFeature() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule EClassEObject derives");
@@ -2936,11 +2983,11 @@ public class XsemanticsTestFiles {
   
   public CharSequence testForClosureWithExpressionWithNoSideEffect() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -3143,8 +3190,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testNoSideEffectButNoError() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule EClassEObject derives");
@@ -3164,8 +3211,8 @@ public class XsemanticsTestFiles {
   
   public CharSequence testErrorNoSideEffect() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
-    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("rule EClassEObject derives");
@@ -3842,7 +3889,9 @@ public class XsemanticsTestFiles {
     _builder.append("extends it.xsemantics.test.ExtendedTypeSystem2");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
     _builder.newLine();
     _builder.append("// type judgment already defined in inherited system");
@@ -4127,10 +4176,12 @@ public class XsemanticsTestFiles {
   
   public CharSequence testAuxiliaryDescriptions() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _testFileWithImports = this.testFileWithImports();
-    _builder.append(_testFileWithImports, "");
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
     _builder.newLine();
     _builder.append("auxiliary {");

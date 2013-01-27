@@ -25,9 +25,18 @@ public class FjTypeSystemFiles extends XsemanticsTestFiles {
   
   public CharSequence fjJudgmentDescriptions() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _fjTypeSystemWithImports = this.fjTypeSystemWithImports();
-    _builder.append(_fjTypeSystemWithImports, "");
+    CharSequence _fjTypeSystem = this.fjTypeSystem();
+    _builder.append(_fjTypeSystem, "");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import it.xsemantics.example.fj.fj.Expression");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.example.fj.fj.Type");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.example.fj.fj.New");
+    _builder.newLine();
+    _builder.append("import it.xsemantics.example.fj.fj.BasicType");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("judgments {");
     _builder.newLine();

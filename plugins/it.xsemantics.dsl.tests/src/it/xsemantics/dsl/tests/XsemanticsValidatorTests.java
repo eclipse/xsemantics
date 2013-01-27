@@ -423,9 +423,10 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testErrorNoSideEffect() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testErrorNoSideEffect());
-		validate.assertAll(AssertableDiagnostics
-				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
-						"This expression is not allowed in this context"));
+		assertOk(validate);
+//		validate.assertAll(AssertableDiagnostics
+//				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
+//						"This expression is not allowed in this context"));
 	}
 
 	@Test
