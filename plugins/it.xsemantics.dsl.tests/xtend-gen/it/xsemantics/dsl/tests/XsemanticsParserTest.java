@@ -48,7 +48,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _typeSystemQualifiedName = this.testFiles.typeSystemQualifiedName();
       XsemanticsSystem _parse = this.parser.parse(_typeSystemQualifiedName);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -59,7 +59,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testFileWithImports = this.testFiles.testFileWithImports();
       XsemanticsSystem _parse = this.parser.parse(_testFileWithImports);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -70,7 +70,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptions = this.testFiles.testJudgmentDescriptions();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptions);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -81,7 +81,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptions3 = this.testFiles.testJudgmentDescriptions3();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptions3);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -92,7 +92,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptionsReferringToEcore3WithOutput = this.testFiles.testJudgmentDescriptionsReferringToEcore3WithOutput();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsReferringToEcore3WithOutput);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -103,7 +103,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptionsRelatedToXsemantics = this.testFiles.testJudgmentDescriptionsRelatedToXsemantics();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsRelatedToXsemantics);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -114,7 +114,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsWithErrorSpecification);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -128,7 +128,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _jvmParameterizedTypeReference, 
         Diagnostic.LINKING_DIAGNOSTIC, 
         "Couldn\'t resolve reference to JvmType \'foo.bar.FooBar\'");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -148,7 +148,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       JvmTypeReference _get_1 = jvmReferences.get(1);
       String _identifier_1 = _get_1.getIdentifier();
       Assert.assertEquals(_name_1, _identifier_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -159,7 +159,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptionsReferringToEcore = this.testFiles.testJudgmentDescriptionsReferringToEcore();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsReferringToEcore);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -170,7 +170,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testSimpleAxiom = this.testFiles.testSimpleAxiom();
       XsemanticsSystem _parse = this.parser.parse(_testSimpleAxiom);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -181,7 +181,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
       XsemanticsSystem _parse = this.parser.parse(_testAxiomWithExpressionInConclusion);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -192,7 +192,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
       XsemanticsSystem _parse = this.parser.parse(_testSimpleRule);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -203,7 +203,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
       XsemanticsSystem _parse = this.parser.parse(_testRuleWithExpressionInConclusion);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -214,7 +214,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testRuleWithBlockExpressionInConclusion = this.testFiles.testRuleWithBlockExpressionInConclusion();
       XsemanticsSystem _parse = this.parser.parse(_testRuleWithBlockExpressionInConclusion);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -496,7 +496,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testRuleWithBooleanExpressionsWithNoSideEffect = this.testFiles.testRuleWithBooleanExpressionsWithNoSideEffect();
       XsemanticsSystem _parse = this.parser.parse(_testRuleWithBooleanExpressionsWithNoSideEffect);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -507,7 +507,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testRuleWithBooleanExpressionsWithNoSideEffectInFor = this.testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInFor();
       XsemanticsSystem _parse = this.parser.parse(_testRuleWithBooleanExpressionsWithNoSideEffectInFor);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -518,7 +518,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testFailSideEffect = this.testFiles.testFailSideEffect();
       XsemanticsSystem _parse = this.parser.parse(_testFailSideEffect);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -529,7 +529,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testFailInsideClosureSideEffect = this.testFiles.testFailInsideClosureSideEffect();
       XsemanticsSystem _parse = this.parser.parse(_testFailInsideClosureSideEffect);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -540,7 +540,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testFailWithErrorSpecificationInsideClosureSideEffect = this.testFiles.testFailWithErrorSpecificationInsideClosureSideEffect();
       XsemanticsSystem _parse = this.parser.parse(_testFailWithErrorSpecificationInsideClosureSideEffect);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -551,7 +551,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testBooleanExpressionsInIf = this.testFiles.testBooleanExpressionsInIf();
       XsemanticsSystem _parse = this.parser.parse(_testBooleanExpressionsInIf);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -562,7 +562,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testSystemWithInjections = this.testFiles.testSystemWithInjections();
       XsemanticsSystem _parse = this.parser.parse(_testSystemWithInjections);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -573,7 +573,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAccessToInjectedFields = this.testFiles.testAccessToInjectedFields();
       XsemanticsSystem _parse = this.parser.parse(_testAccessToInjectedFields);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -584,7 +584,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAccessToInjectedFieldsInExpressionInConclusion = this.testFiles.testAccessToInjectedFieldsInExpressionInConclusion();
       XsemanticsSystem _parse = this.parser.parse(_testAccessToInjectedFieldsInExpressionInConclusion);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -595,7 +595,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAccessToThisInExpressionInConclusion = this.testFiles.testAccessToThisInExpressionInConclusion();
       XsemanticsSystem _parse = this.parser.parse(_testAccessToThisInExpressionInConclusion);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -606,7 +606,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testSystemWithValidatorExtends = this.testFiles.testSystemWithValidatorExtends();
       XsemanticsSystem _parse = this.parser.parse(_testSystemWithValidatorExtends);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -617,7 +617,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testSystemExtends = this.testFiles.testSystemExtends();
       XsemanticsSystem _parse = this.parser.parse(_testSystemExtends);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -665,7 +665,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAuxiliaryDescriptions = this.testFiles.testAuxiliaryDescriptions();
       XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryDescriptions);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -676,7 +676,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAuxiliaryFunctions = this.testFiles.testAuxiliaryFunctions();
       XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctions);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -687,7 +687,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testJudgmentDescriptionsWith3OutputParams = this.testFiles.testJudgmentDescriptionsWith3OutputParams();
       XsemanticsSystem _parse = this.parser.parse(_testJudgmentDescriptionsWith3OutputParams);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -698,7 +698,7 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       CharSequence _testAuxiliaryFunctionsInvocation = this.testFiles.testAuxiliaryFunctionsInvocation();
       XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctionsInvocation);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

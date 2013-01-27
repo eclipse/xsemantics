@@ -2,8 +2,8 @@ package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer;
-import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
@@ -29,7 +30,7 @@ import org.junit.runner.RunWith;
 @InjectWith(value = XsemanticsInjectorProviderCustom.class)
 @RunWith(value = XtextRunner.class)
 @SuppressWarnings("all")
-public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
+public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest {
   @Inject
   protected JvmModelGenerator generator;
   
@@ -607,7 +608,8 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
   
   public void assertGeneratedMember(final JvmMember member, final CharSequence expected) {
     final FakeTreeAppendable a = this.createTestAppendable();
-    this.generator.generateMember(member, a);
+    GeneratorConfig _generatorConfig = this.generatorConfig();
+    this.generator.generateMember(member, a, _generatorConfig);
     String _string = a.toString();
     String _trim = _string.trim();
     this.assertEqualsStrings(expected, _trim);
@@ -617,7 +619,8 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
     final FakeTreeAppendable a = this.createTestAppendable();
     final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
         public void apply(final JvmMember it) {
-          XsemanticsJvmModelInferrerTest.this.generator.generateMember(it, a);
+          GeneratorConfig _generatorConfig = XsemanticsJvmModelInferrerTest.this.generatorConfig();
+          XsemanticsJvmModelInferrerTest.this.generator.generateMember(it, a, _generatorConfig);
         }
       };
     IterableExtensions.forEach(members, _function);

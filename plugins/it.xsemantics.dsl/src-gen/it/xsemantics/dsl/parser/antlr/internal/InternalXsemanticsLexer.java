@@ -2062,10 +2062,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__105;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:103:8: ( 'super' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:103:10: 'super'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:103:8: ( 'static' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:103:10: 'static'
             {
-            match("super"); 
+            match("static"); 
 
 
             }
@@ -2083,10 +2083,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__106;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:104:8: ( '::' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:104:10: '::'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:104:8: ( 'import' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:104:10: 'import'
             {
-            match("::"); 
+            match("import"); 
 
 
             }
@@ -2104,10 +2104,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__107;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:105:8: ( 'new' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:105:10: 'new'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:105:8: ( 'extension' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:105:10: 'extension'
             {
-            match("new"); 
+            match("extension"); 
 
 
             }
@@ -2125,10 +2125,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__108;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:106:8: ( 'false' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:106:10: 'false'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:106:8: ( 'super' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:106:10: 'super'
             {
-            match("false"); 
+            match("super"); 
 
 
             }
@@ -2146,10 +2146,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__109;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:107:8: ( 'true' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:107:10: 'true'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:107:8: ( '::' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:107:10: '::'
             {
-            match("true"); 
+            match("::"); 
 
 
             }
@@ -2167,10 +2167,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__110;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:108:8: ( 'null' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:108:10: 'null'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:108:8: ( 'new' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:108:10: 'new'
             {
-            match("null"); 
+            match("new"); 
 
 
             }
@@ -2188,10 +2188,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__111;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:109:8: ( 'typeof' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:109:10: 'typeof'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:109:8: ( 'false' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:109:10: 'false'
             {
-            match("typeof"); 
+            match("false"); 
 
 
             }
@@ -2209,10 +2209,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__112;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:110:8: ( 'throw' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:110:10: 'throw'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:110:8: ( 'true' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:110:10: 'true'
             {
-            match("throw"); 
+            match("true"); 
 
 
             }
@@ -2230,10 +2230,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__113;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:111:8: ( 'return' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:111:10: 'return'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:111:8: ( 'null' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:111:10: 'null'
             {
-            match("return"); 
+            match("null"); 
 
 
             }
@@ -2251,10 +2251,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__114;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:112:8: ( 'try' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:112:10: 'try'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:112:8: ( 'typeof' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:112:10: 'typeof'
             {
-            match("try"); 
+            match("typeof"); 
 
 
             }
@@ -2272,10 +2272,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__115;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:113:8: ( 'finally' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:113:10: 'finally'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:113:8: ( 'throw' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:113:10: 'throw'
             {
-            match("finally"); 
+            match("throw"); 
 
 
             }
@@ -2293,10 +2293,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__116;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:114:8: ( 'catch' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:114:10: 'catch'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:114:8: ( 'return' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:114:10: 'return'
             {
-            match("catch"); 
+            match("return"); 
 
 
             }
@@ -2314,10 +2314,11 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__117;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:115:8: ( '?' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:115:10: '?'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:115:8: ( 'try' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:115:10: 'try'
             {
-            match('?'); 
+            match("try"); 
+
 
             }
 
@@ -2334,10 +2335,11 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__118;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:116:8: ( '&' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:116:10: '&'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:116:8: ( 'finally' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:116:10: 'finally'
             {
-            match('&'); 
+            match("finally"); 
+
 
             }
 
@@ -2354,10 +2356,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__119;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:117:8: ( 'import' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:117:10: 'import'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:117:8: ( 'catch' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:117:10: 'catch'
             {
-            match("import"); 
+            match("catch"); 
 
 
             }
@@ -2375,11 +2377,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__120;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:118:8: ( 'static' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:118:10: 'static'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:118:8: ( '?' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:118:10: '?'
             {
-            match("static"); 
-
+            match('?'); 
 
             }
 
@@ -2396,11 +2397,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = T__121;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:119:8: ( 'extension' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:119:10: 'extension'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:119:8: ( '&' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:119:10: '&'
             {
-            match("extension"); 
-
+            match('&'); 
 
             }
 
@@ -2417,10 +2417,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:12: ( '0x' | '0X' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -2448,7 +2448,7 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:13: '0x'
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:13: '0x'
                     {
                     match("0x"); 
 
@@ -2456,7 +2456,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:18: '0X'
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:18: '0X'
                     {
                     match("0X"); 
 
@@ -2466,7 +2466,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
             }
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -2504,7 +2504,7 @@ public class InternalXsemanticsLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -2513,10 +2513,10 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -2534,7 +2534,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -2558,7 +2558,7 @@ public class InternalXsemanticsLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7438:84: ( 'l' | 'L' )
+                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7498:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -2597,11 +2597,11 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7440:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7440:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7500:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7500:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7440:21: ( '0' .. '9' | '_' )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7500:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -2650,11 +2650,11 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2663,7 +2663,7 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -2674,7 +2674,7 @@ public class InternalXsemanticsLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:36: ( '+' | '-' )?
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2707,7 +2707,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
             }
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -2719,7 +2719,7 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2743,7 +2743,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7442:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7502:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2776,10 +2776,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7444:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7444:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7504:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7504:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7444:11: ( '^' )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7504:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2788,7 +2788,7 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7444:11: '^'
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7504:11: '^'
                     {
                     match('^'); 
 
@@ -2806,7 +2806,7 @@ public class InternalXsemanticsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7444:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7504:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2855,10 +2855,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2876,10 +2876,10 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2895,7 +2895,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2911,7 +2911,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2936,10 +2936,10 @@ public class InternalXsemanticsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop12:
                     do {
                         int alt12=3;
@@ -2955,7 +2955,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2971,7 +2971,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7446:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7506:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3014,12 +3014,12 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7448:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7448:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7508:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7508:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7448:24: ( options {greedy=false; } : . )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7508:24: ( options {greedy=false; } : . )*
             loop14:
             do {
                 int alt14=2;
@@ -3044,7 +3044,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7448:52: .
+            	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7508:52: .
             	    {
             	    matchAny(); 
 
@@ -3074,12 +3074,12 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -3092,7 +3092,7 @@ public class InternalXsemanticsLexer extends Lexer {
 
                 switch (alt15) {
             	case 1 :
-            	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3112,7 +3112,7 @@ public class InternalXsemanticsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:40: ( ( '\\r' )? '\\n' )?
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:40: ( ( '\\r' )? '\\n' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -3121,9 +3121,9 @@ public class InternalXsemanticsLexer extends Lexer {
             }
             switch (alt17) {
                 case 1 :
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:41: ( '\\r' )? '\\n'
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:41: ( '\\r' )? '\\n'
                     {
-                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:41: ( '\\r' )?
+                    // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:41: ( '\\r' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -3132,7 +3132,7 @@ public class InternalXsemanticsLexer extends Lexer {
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7450:41: '\\r'
+                            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7510:41: '\\r'
                             {
                             match('\r'); 
 
@@ -3164,10 +3164,10 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7452:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7452:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7512:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7512:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7452:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7512:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt18=0;
             loop18:
             do {
@@ -3221,8 +3221,8 @@ public class InternalXsemanticsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7454:16: ( . )
-            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7454:18: .
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7514:16: ( . )
+            // ../it.xsemantics.dsl/src-gen/it/xsemantics/dsl/parser/antlr/internal/InternalXsemantics.g:7514:18: .
             {
             matchAny(); 
 
@@ -4085,9 +4085,9 @@ public class InternalXsemanticsLexer extends Lexer {
         "\4\63\1\uffff\1\63\1\u00e7\7\63\15\uffff\1\63\1\u00f0\2\63\1\u00f3"+
         "\10\63\1\uffff\2\63\1\u00fe\1\63\2\uffff\10\63\1\u0108\3\63\1\u010c"+
         "\1\uffff\1\u010d\4\63\1\u0112\2\63\1\uffff\1\u0115\1\u0116\1\uffff"+
-        "\5\63\1\u011c\2\63\1\u0120\1\u0121\1\uffff\2\63\1\u0124\6\63\1\uffff"+
+        "\6\63\1\u011d\1\63\1\u0120\1\u0121\1\uffff\2\63\1\u0124\6\63\1\uffff"+
         "\3\63\2\uffff\1\u012e\3\63\1\uffff\1\u0132\1\u0133\2\uffff\1\63"+
-        "\1\u0135\1\u0136\1\u0137\1\u0138\1\uffff\1\u0139\2\63\2\uffff\2"+
+        "\1\u0135\1\u0136\1\u0137\1\u0138\1\u0139\1\uffff\2\63\2\uffff\2"+
         "\63\1\uffff\1\63\1\u013f\1\63\1\u0141\1\63\1\u0143\1\u0144\2\63"+
         "\1\uffff\3\63\2\uffff\1\u014a\5\uffff\1\u014b\4\63\1\uffff\1\63"+
         "\1\uffff\1\63\2\uffff\1\u0152\1\u0153\1\u0154\1\u0155\1\63\2\uffff"+
@@ -4100,75 +4100,75 @@ public class InternalXsemanticsLexer extends Lexer {
         "\1\0\1\157\1\154\1\141\1\163\2\uffff\1\165\1\146\3\uffff\1\72\1"+
         "\162\2\145\2\141\1\41\1\55\2\75\1\76\1\55\2\75\1\46\2\56\2\52\4"+
         "\uffff\1\150\1\145\1\150\2\60\1\44\1\uffff\2\0\2\uffff\1\163\1\165"+
-        "\1\151\1\160\1\141\1\uffff\1\164\1\166\1\160\1\162\1\163\1\154\1"+
+        "\1\151\1\141\1\160\1\uffff\1\164\1\166\1\160\1\162\1\163\1\154\1"+
         "\170\1\151\1\44\2\uffff\1\144\1\152\1\44\1\160\6\uffff\1\145\1\164"+
         "\1\44\1\154\1\164\1\146\1\44\1\157\1\162\1\151\1\141\1\156\1\145"+
         "\1\163\2\uffff\2\41\2\uffff\1\76\2\uffff\1\55\5\uffff\1\76\41\uffff"+
         "\1\151\1\167\1\154\1\165\1\160\1\162\1\uffff\1\60\4\uffff\1\164"+
-        "\1\162\1\164\1\145\1\164\1\145\1\44\1\164\1\157\1\145\2\44\1\151"+
-        "\1\157\1\uffff\1\147\1\145\1\164\1\uffff\1\157\1\162\1\160\1\uffff"+
-        "\1\145\1\165\1\151\1\141\1\uffff\1\155\1\44\1\154\1\163\1\164\1"+
-        "\141\1\143\1\145\1\143\15\uffff\1\154\1\44\1\154\1\145\1\44\1\145"+
-        "\1\157\1\145\2\143\1\162\1\151\1\156\1\uffff\1\171\1\162\1\44\1"+
-        "\144\2\uffff\1\154\2\155\1\143\1\141\2\162\1\165\1\44\1\162\1\166"+
-        "\1\165\1\44\1\uffff\1\44\1\145\1\165\1\154\1\153\1\44\1\150\1\145"+
-        "\1\uffff\2\44\1\uffff\1\157\1\167\1\155\1\145\1\150\1\44\1\143\1"+
-        "\144\2\44\1\uffff\1\141\1\151\1\44\1\145\1\164\1\156\1\164\1\151"+
-        "\1\164\1\uffff\1\156\1\145\1\154\2\uffff\1\44\1\162\1\154\1\162"+
-        "\1\uffff\2\44\2\uffff\1\146\4\44\1\uffff\1\44\1\163\1\151\2\uffff"+
-        "\1\164\1\141\1\uffff\1\156\1\44\1\143\1\44\1\144\2\44\1\163\1\164"+
-        "\1\uffff\1\145\1\171\1\165\2\uffff\1\44\5\uffff\1\44\2\157\1\162"+
-        "\1\164\1\uffff\1\145\1\uffff\1\145\2\uffff\4\44\1\154\2\uffff\1"+
-        "\156\1\162\1\171\1\163\1\157\1\44\4\uffff\1\145\1\44\1\105\2\44"+
-        "\1\146\1\uffff\1\44\1\uffff\1\170\2\uffff\1\44\1\uffff\1\164\1\uffff"+
-        "\1\145\1\156\1\144\1\163\1\44\1\uffff";
+        "\1\162\2\164\2\145\1\44\1\164\1\157\1\145\2\44\1\151\1\157\1\uffff"+
+        "\1\147\1\145\1\164\1\uffff\1\157\1\162\1\160\1\uffff\1\145\1\165"+
+        "\1\151\1\141\1\uffff\1\155\1\44\1\154\1\163\1\164\1\141\1\143\1"+
+        "\145\1\143\15\uffff\1\154\1\44\1\154\1\145\1\44\1\145\1\157\1\145"+
+        "\2\143\1\151\1\162\1\156\1\uffff\1\171\1\162\1\44\1\144\2\uffff"+
+        "\1\154\2\155\1\143\1\141\2\162\1\165\1\44\1\162\1\166\1\165\1\44"+
+        "\1\uffff\1\44\1\145\1\165\1\154\1\153\1\44\1\150\1\145\1\uffff\2"+
+        "\44\1\uffff\1\157\1\167\1\155\1\145\1\150\1\143\1\44\1\144\2\44"+
+        "\1\uffff\1\141\1\151\1\44\1\145\1\164\1\156\1\164\1\151\1\164\1"+
+        "\uffff\1\156\1\145\1\154\2\uffff\1\44\1\162\1\154\1\162\1\uffff"+
+        "\2\44\2\uffff\1\146\5\44\1\uffff\1\163\1\151\2\uffff\1\164\1\141"+
+        "\1\uffff\1\156\1\44\1\143\1\44\1\144\2\44\1\163\1\164\1\uffff\1"+
+        "\145\1\171\1\165\2\uffff\1\44\5\uffff\1\44\2\157\1\162\1\164\1\uffff"+
+        "\1\145\1\uffff\1\145\2\uffff\4\44\1\154\2\uffff\1\156\1\162\1\171"+
+        "\1\163\1\157\1\44\4\uffff\1\145\1\44\1\105\2\44\1\146\1\uffff\1"+
+        "\44\1\uffff\1\170\2\uffff\1\44\1\uffff\1\164\1\uffff\1\145\1\156"+
+        "\1\144\1\163\1\44\1\uffff";
     static final String DFA19_maxS =
         "\1\uffff\1\171\1\170\1\141\1\170\2\uffff\1\165\1\156\3\uffff\1\76"+
         "\1\166\1\165\1\157\1\162\1\150\3\176\1\76\1\176\2\76\1\75\1\46\1"+
         "\56\1\72\1\56\1\57\4\uffff\1\150\1\165\1\171\1\170\1\154\1\172\1"+
-        "\uffff\2\uffff\2\uffff\1\163\1\165\1\151\1\160\1\141\1\uffff\1\164"+
+        "\uffff\2\uffff\2\uffff\1\163\1\165\1\151\1\141\1\160\1\uffff\1\164"+
         "\1\166\1\160\1\162\1\163\1\162\1\170\1\151\1\172\2\uffff\1\144\1"+
         "\163\1\172\1\160\6\uffff\1\145\1\164\1\172\1\154\1\164\1\162\1\172"+
         "\1\157\1\162\1\154\1\141\1\156\1\145\1\164\2\uffff\2\41\2\uffff"+
         "\1\76\2\uffff\1\176\5\uffff\1\76\41\uffff\1\151\1\167\1\154\1\171"+
-        "\1\160\1\162\1\uffff\1\154\4\uffff\1\164\1\162\1\164\1\145\1\164"+
-        "\1\145\1\172\1\164\1\157\1\145\2\172\1\151\1\157\1\uffff\1\147\1"+
-        "\145\1\164\1\uffff\1\157\1\162\1\160\1\uffff\1\145\1\165\1\151\1"+
-        "\141\1\uffff\1\155\1\172\1\154\1\163\1\164\1\141\1\143\1\145\1\143"+
-        "\15\uffff\1\154\1\172\1\154\1\145\1\172\1\145\1\157\1\145\2\143"+
-        "\1\162\1\151\1\156\1\uffff\1\171\1\162\1\172\1\144\2\uffff\1\154"+
-        "\2\155\1\143\1\141\2\162\1\165\1\172\1\162\1\166\1\165\1\172\1\uffff"+
-        "\1\172\1\145\1\165\1\154\1\153\1\172\1\150\1\145\1\uffff\2\172\1"+
-        "\uffff\1\157\1\167\1\155\1\145\1\150\1\172\1\143\1\163\2\172\1\uffff"+
-        "\1\141\1\151\1\172\1\145\1\164\1\156\1\164\1\151\1\164\1\uffff\1"+
-        "\156\1\145\1\154\2\uffff\1\172\1\162\1\154\1\162\1\uffff\2\172\2"+
-        "\uffff\1\146\4\172\1\uffff\1\172\1\163\1\151\2\uffff\1\164\1\141"+
-        "\1\uffff\1\156\1\172\1\143\1\172\1\144\2\172\1\163\1\164\1\uffff"+
-        "\1\145\1\171\1\165\2\uffff\1\172\5\uffff\1\172\2\157\1\162\1\164"+
-        "\1\uffff\1\145\1\uffff\1\145\2\uffff\4\172\1\154\2\uffff\1\156\1"+
-        "\162\1\171\1\163\1\157\1\172\4\uffff\1\145\1\172\1\105\2\172\1\146"+
-        "\1\uffff\1\172\1\uffff\1\170\2\uffff\1\172\1\uffff\1\164\1\uffff"+
-        "\1\145\1\156\1\144\1\163\1\172\1\uffff";
+        "\1\160\1\162\1\uffff\1\154\4\uffff\1\164\1\162\2\164\2\145\1\172"+
+        "\1\164\1\157\1\145\2\172\1\151\1\157\1\uffff\1\147\1\145\1\164\1"+
+        "\uffff\1\157\1\162\1\160\1\uffff\1\145\1\165\1\151\1\141\1\uffff"+
+        "\1\155\1\172\1\154\1\163\1\164\1\141\1\143\1\145\1\143\15\uffff"+
+        "\1\154\1\172\1\154\1\145\1\172\1\145\1\157\1\145\2\143\1\151\1\162"+
+        "\1\156\1\uffff\1\171\1\162\1\172\1\144\2\uffff\1\154\2\155\1\143"+
+        "\1\141\2\162\1\165\1\172\1\162\1\166\1\165\1\172\1\uffff\1\172\1"+
+        "\145\1\165\1\154\1\153\1\172\1\150\1\145\1\uffff\2\172\1\uffff\1"+
+        "\157\1\167\1\155\1\145\1\150\1\143\1\172\1\163\2\172\1\uffff\1\141"+
+        "\1\151\1\172\1\145\1\164\1\156\1\164\1\151\1\164\1\uffff\1\156\1"+
+        "\145\1\154\2\uffff\1\172\1\162\1\154\1\162\1\uffff\2\172\2\uffff"+
+        "\1\146\5\172\1\uffff\1\163\1\151\2\uffff\1\164\1\141\1\uffff\1\156"+
+        "\1\172\1\143\1\172\1\144\2\172\1\163\1\164\1\uffff\1\145\1\171\1"+
+        "\165\2\uffff\1\172\5\uffff\1\172\2\157\1\162\1\164\1\uffff\1\145"+
+        "\1\uffff\1\145\2\uffff\4\172\1\154\2\uffff\1\156\1\162\1\171\1\163"+
+        "\1\157\1\172\4\uffff\1\145\1\172\1\105\2\172\1\146\1\uffff\1\172"+
+        "\1\uffff\1\170\2\uffff\1\172\1\uffff\1\164\1\uffff\1\145\1\156\1"+
+        "\144\1\163\1\172\1\uffff";
     static final String DFA19_acceptS =
         "\5\uffff\1\5\1\6\2\uffff\1\11\1\12\1\13\23\uffff\1\112\1\120\1\122"+
         "\1\123\6\uffff\1\161\2\uffff\1\165\1\166\5\uffff\1\161\11\uffff"+
-        "\1\5\1\6\4\uffff\1\11\1\12\1\13\1\54\1\136\1\14\16\uffff\1\31\1"+
+        "\1\5\1\6\4\uffff\1\11\1\12\1\13\1\54\1\141\1\14\16\uffff\1\31\1"+
         "\45\2\uffff\1\53\1\60\1\uffff\1\102\1\76\1\uffff\1\36\1\40\1\42"+
         "\1\44\1\121\1\uffff\1\52\1\71\1\113\1\56\1\73\1\75\1\57\1\63\1\61"+
-        "\1\77\1\106\1\70\1\101\1\64\1\65\1\105\1\67\1\152\1\100\1\115\1"+
-        "\103\1\116\1\151\1\110\1\117\1\107\1\163\1\164\1\111\1\112\1\120"+
+        "\1\77\1\106\1\70\1\101\1\64\1\65\1\105\1\67\1\155\1\100\1\115\1"+
+        "\103\1\116\1\154\1\110\1\117\1\107\1\163\1\164\1\111\1\112\1\120"+
         "\1\122\1\123\6\uffff\1\156\1\uffff\1\157\1\160\1\162\1\165\16\uffff"+
         "\1\114\3\uffff\1\124\3\uffff\1\25\4\uffff\1\132\11\uffff\1\47\1"+
         "\55\1\51\1\62\1\104\1\74\1\35\1\37\1\41\1\43\1\66\1\50\1\46\15\uffff"+
-        "\1\27\4\uffff\1\134\1\133\15\uffff\1\24\10\uffff\1\137\2\uffff\1"+
-        "\146\12\uffff\1\125\11\uffff\1\20\3\uffff\1\22\1\26\4\uffff\1\130"+
-        "\2\uffff\1\142\1\141\5\uffff\1\135\3\uffff\1\30\1\32\2\uffff\1\17"+
-        "\11\uffff\1\140\3\uffff\1\150\1\131\1\uffff\1\144\1\1\1\33\1\126"+
-        "\1\154\5\uffff\1\10\1\uffff\1\153\1\uffff\1\16\1\145\5\uffff\1\143"+
-        "\1\2\6\uffff\1\21\1\127\1\34\1\147\6\uffff\1\15\1\uffff\1\155\1"+
+        "\1\27\4\uffff\1\134\1\133\15\uffff\1\24\10\uffff\1\142\2\uffff\1"+
+        "\151\12\uffff\1\125\11\uffff\1\20\3\uffff\1\22\1\26\4\uffff\1\130"+
+        "\2\uffff\1\145\1\144\6\uffff\1\140\2\uffff\1\30\1\32\2\uffff\1\17"+
+        "\11\uffff\1\143\3\uffff\1\153\1\131\1\uffff\1\147\1\1\1\33\1\126"+
+        "\1\135\5\uffff\1\10\1\uffff\1\136\1\uffff\1\16\1\150\5\uffff\1\146"+
+        "\1\2\6\uffff\1\21\1\127\1\34\1\152\6\uffff\1\15\1\uffff\1\137\1"+
         "\uffff\1\4\1\7\1\uffff\1\23\1\uffff\1\72\5\uffff\1\3";
     static final String DFA19_specialS =
-        "\1\0\51\uffff\1\1\1\2\u0140\uffff}>";
+        "\1\1\51\uffff\1\0\1\2\u0140\uffff}>";
     static final String[] DFA19_transitionS = {
             "\11\55\2\54\2\55\1\54\22\55\1\54\1\24\1\52\1\55\1\51\1\37\1"+
             "\32\1\53\1\11\1\13\1\35\1\31\1\12\1\27\1\33\1\36\1\46\11\47"+
@@ -4176,7 +4176,7 @@ public class InternalXsemanticsLexer extends Lexer {
             "\1\51\1\55\1\4\1\51\1\21\1\17\1\2\1\20\2\51\1\10\1\7\3\51\1"+
             "\44\1\15\2\51\1\16\1\1\1\45\1\51\1\3\1\43\3\51\1\5\1\23\1\6"+
             "\1\26\uff81\55",
-            "\1\57\4\uffff\1\62\1\61\1\uffff\1\60\1\uffff\1\56",
+            "\1\57\4\uffff\1\61\1\62\1\uffff\1\60\1\uffff\1\56",
             "\1\70\1\66\1\65\3\uffff\1\67\5\uffff\1\64",
             "\1\71",
             "\1\74\1\uffff\1\72\2\uffff\1\73",
@@ -4449,9 +4449,9 @@ public class InternalXsemanticsLexer extends Lexer {
             "\1\u0119",
             "\1\u011a",
             "\1\u011b",
+            "\1\u011c",
             "\1\63\13\uffff\12\63\7\uffff\32\63\4\uffff\1\63\1\uffff\32"+
             "\63",
-            "\1\u011d",
             "\1\u011e\16\uffff\1\u011f",
             "\1\63\13\uffff\12\63\7\uffff\32\63\4\uffff\1\63\1\uffff\32"+
             "\63",
@@ -4495,9 +4495,9 @@ public class InternalXsemanticsLexer extends Lexer {
             "\63",
             "\1\63\13\uffff\12\63\7\uffff\32\63\4\uffff\1\63\1\uffff\32"+
             "\63",
-            "",
             "\1\63\13\uffff\12\63\7\uffff\32\63\4\uffff\1\63\1\uffff\32"+
             "\63",
+            "",
             "\1\u013a",
             "\1\u013b",
             "",
@@ -4632,6 +4632,16 @@ public class InternalXsemanticsLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA19_42 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA19_42>='\u0000' && LA19_42<='\uFFFF')) ) {s = 146;}
+
+                        else s = 45;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA19_0 = input.LA(1);
 
                         s = -1;
@@ -4724,16 +4734,6 @@ public class InternalXsemanticsLexer extends Lexer {
                         else if ( ((LA19_0>='\t' && LA19_0<='\n')||LA19_0=='\r'||LA19_0==' ') ) {s = 44;}
 
                         else if ( ((LA19_0>='\u0000' && LA19_0<='\b')||(LA19_0>='\u000B' && LA19_0<='\f')||(LA19_0>='\u000E' && LA19_0<='\u001F')||LA19_0=='#'||LA19_0=='@'||LA19_0=='\\'||LA19_0=='`'||(LA19_0>='\u007F' && LA19_0<='\uFFFF')) ) {s = 45;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA19_42 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA19_42>='\u0000' && LA19_42<='\uFFFF')) ) {s = 146;}
-
-                        else s = 45;
 
                         if ( s>=0 ) return s;
                         break;

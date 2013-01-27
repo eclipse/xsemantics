@@ -32,7 +32,7 @@ public class QualifiedNameTest extends XsemanticsBaseTest {
       QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(rule);
       String _string = _fullyQualifiedName.toString();
       Assert.assertEquals("it.xsemantics.test.TypeSystem.EClassEObject", _string);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

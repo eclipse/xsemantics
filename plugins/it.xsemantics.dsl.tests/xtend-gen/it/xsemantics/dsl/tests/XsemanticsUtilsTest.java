@@ -54,7 +54,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
       final List<JudgmentDescription> descriptions = this.getJudgmentDescriptions(_parse, "|-", ":");
       int _size = descriptions.size();
       Assert.assertEquals(2, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

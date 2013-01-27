@@ -182,7 +182,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _auxiliaryDescription, 
         IssueCodes.DUPLICATE_AUXILIARY_NAME, 
         "Duplicate auxiliary description \'foo\'");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -196,7 +196,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _xBlockExpression, 
         org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
         "Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -210,7 +210,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _auxiliaryDescription, 
         IssueCodes.DUPLICATE_AUXILIARY_NAME, 
         "Duplicate judgment with the same name \'foo\'");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -224,7 +224,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _auxiliaryFunction, 
         IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION, 
         "No auxiliary description for auxiliary function \'foobar\'");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -242,7 +242,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(s, _jvmFormalParameter, 
         IssueCodes.NOT_SUBTYPE, 
         "parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

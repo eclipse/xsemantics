@@ -2,7 +2,6 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.jvmmodel.XsemanticsJvmModelInferrer
-import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.junit4.InjectWith
@@ -17,7 +16,7 @@ import static extension junit.framework.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
-class XsemanticsJvmModelInferrerTest extends XsemanticsBaseTest {
+class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest {
 	
 	@Inject
 	protected JvmModelGenerator generator
@@ -375,14 +374,14 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {
 		val a = createTestAppendable
-		generator.generateMember(member, a)
+		generator.generateMember(member, a, generatorConfig)
 		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
 	def assertGeneratedMembers(Iterable<? extends JvmMember> members, CharSequence expected) {
 		val a = createTestAppendable
 		members.forEach [
-			generator.generateMember(it, a)
+			generator.generateMember(it, a, generatorConfig)
 		]
 		assertEqualsStrings(expected, a.toString.trim)
 	}

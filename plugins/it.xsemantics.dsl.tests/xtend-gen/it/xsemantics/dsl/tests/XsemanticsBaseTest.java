@@ -76,7 +76,7 @@ public class XsemanticsBaseTest {
         _xblockexpression = (ts);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -106,7 +106,7 @@ public class XsemanticsBaseTest {
         _xblockexpression = (ts);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -130,7 +130,7 @@ public class XsemanticsBaseTest {
         _xblockexpression = (_parseWithBaseSystem);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -141,7 +141,7 @@ public class XsemanticsBaseTest {
       ResourceSet _resourceSet = _eResource.getResourceSet();
       XsemanticsSystem _parse = this.parser.parse(s, _resourceSet);
       return _parse;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -150,7 +150,7 @@ public class XsemanticsBaseTest {
     try {
       XsemanticsSystem _parse = this.parser.parse(s);
       return _parse;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

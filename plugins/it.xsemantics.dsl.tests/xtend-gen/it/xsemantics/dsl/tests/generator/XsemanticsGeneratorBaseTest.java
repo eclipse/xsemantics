@@ -13,6 +13,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
@@ -35,6 +37,9 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
   
   @Inject
   private JvmModelAssociator associator;
+  
+  @Inject
+  private GeneratorConfigProvider generatorConfigProvider;
   
   public ITreeAppendable createAppendable(final Rule rule) {
     ImportManager _createImportManager = this.createImportManager();
@@ -100,7 +105,8 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
     {
       final JvmIdentifiableElement container = this.associator.getNearestLogicalContainer(context);
       ImportManager _createImportManager = this.createImportManager();
-      TreeAppendable _createAppendable = this.jvmModelGenerator.createAppendable(container, _createImportManager);
+      GeneratorConfig _generatorConfig = this.generatorConfig();
+      TreeAppendable _createAppendable = this.jvmModelGenerator.createAppendable(container, _createImportManager, _generatorConfig);
       _xblockexpression = (_createAppendable);
     }
     return _xblockexpression;
@@ -115,5 +121,10 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
   public ImportManager createImportManager() {
     ImportManager _importManager = new ImportManager(true);
     return _importManager;
+  }
+  
+  public GeneratorConfig generatorConfig() {
+    GeneratorConfig _get = this.generatorConfigProvider.get(null);
+    return _get;
   }
 }
