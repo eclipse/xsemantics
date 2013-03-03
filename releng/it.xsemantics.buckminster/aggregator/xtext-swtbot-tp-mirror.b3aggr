@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" description="Mirror for Xtext and SWTBOT Target Platform" label="Mirror for Xtext and SWTBOT Target Platform" buildRoot="${user.home}/mirror/xtext-swtbot-tp">
+  <validationSets label="main">
+    <contributions label="Juno RCP">
+      <repositories location="http://download.eclipse.org/releases/juno">
+        <features name="org.eclipse.emf.sdk.feature.group"/>
+        <features name="org.eclipse.sdk.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="Xtext Releases" label="Xtext Releases">
+      <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
+        <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.3.1,2.4.0]"/>
+        <features name="org.eclipse.xtend.sdk.feature.group" versionRange="[2.3.1,2.4.0]"/>
+        <features name="org.eclipse.xpand.sdk.feature.group" versionRange="[1.2.1,1.3.0]"/>
+      </repositories>
+    </contributions>
+    <contributions description="SwtBot" label="SwtBot">
+      <repositories location="http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site">
+        <features name="org.eclipse.swtbot.eclipse.feature.group"/>
+        <features name="org.eclipse.swtbot.eclipse.test.junit4.feature.group"/>
+        <features name="org.eclipse.swtbot.ide.feature.group"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations/>
+  <configurations architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="ppc64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="s390"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="s390x"/>
+  <configurations operatingSystem="solaris" windowSystem="gtk" architecture="sparc"/>
+  <configurations operatingSystem="solaris" windowSystem="gtk"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <configurations operatingSystem="aix" windowSystem="gtk" architecture="ppc64"/>
+  <configurations operatingSystem="aix" windowSystem="gtk" architecture="ppc"/>
+  <configurations operatingSystem="hpux" windowSystem="gtk" architecture="ia64_32"/>
+  <customCategories identifier="custom.rcp.components" label="Custom RCP Components"/>
+</aggregator:Aggregation>
