@@ -16,6 +16,8 @@
 							Default: http://download.eclipse.org
 -->
 <project name="Buckminster Headless" default="buckminster">
+	<import file="common.ant" as="common" />
+	
 	<property name="WORKSPACE" location="${ant.file}/../../../" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
 	<property name="projects.location" location="${WORKSPACE}" />
@@ -52,6 +54,19 @@
 		<echo message="Updatesite output in: ${build.root}/buckminster.output/it.xsemantics.site_*-eclipse.feature/site.p2/" />
 	</target>
 
+	<target name="b3_aggregation" depends="install.b3.headless" description="description">
+
+		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/xtext-swtbot-tp-mirror.b3aggr" />
+		
+		<echo message="IMPORTANT: Mirror aggregation may took over 10 minutes." />
+		<echo message="build.model: ${build.model}" />
+
+		<run_b3_aggregator buildmodel="${build.model}" />
+
+		<echo message=" " />
+		<echo message="Aggregated mirror in: ${user.home}/mirror/xtext-swtbot-tp/final" />
+	</target>
+	
 	<target name="cleanup">
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${build.root}" defaultexcludes="false">
