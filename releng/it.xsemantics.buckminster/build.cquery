@@ -4,5 +4,6 @@
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
+    <cq:advisorNode namePattern="\.ppc(?:\..+)?" skipComponent="true"/>
     <cq:advisorNode namePattern=".*" useTargetPlatform="false"/>
 </cq:componentQuery>
