@@ -11,8 +11,6 @@
 	<rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/juno" />
 	<rm:property key="swtbot.repository"
 		value="${eclipse.download}/technology/swtbot/helios/dev-build/update-site" />
-	<rm:property key="orbit.repository"
-		value="${eclipse.download}/tools/orbit/downloads/drops/R20120526062928/repository" />
 
 	<rm:locator pattern="^it\.xsemantics(?:\..+)?$"
 		searchPathRef="xsemantics" />
@@ -25,8 +23,7 @@
 	<rm:locator pattern="^com\.google.*" searchPathRef="xtext" />
 	<rm:locator pattern="^org\.antlr.*" searchPathRef="xtext" />
 	<rm:locator pattern="javax.inject" searchPathRef="xtext" />
-	<rm:locator pattern="^org\.hamcrest*" searchPathRef="orbit" />
-	<rm:locator pattern="^org\.apache*" searchPathRef="orbit" />
+	<rm:locator pattern="^org\.hamcrest*" searchPathRef="swtbot" />
 	<rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$"
 		searchPathRef="swtbot" />
 	<rm:locator searchPathRef="eclipse" />
@@ -46,15 +43,6 @@
 			<rm:property key="buckminster.source" value="false" />
 			<rm:uri format="{0}">
 				<bc:propertyRef key="swtbot.repository" />
-			</rm:uri>
-		</rm:provider>
-	</rm:searchPath>
-	<rm:searchPath name="orbit">
-		<rm:provider componentTypes="osgi.bundle,eclipse.feature"
-			readerType="p2" source="false">
-			<rm:property key="buckminster.source" value="false" />
-			<rm:uri format="{0}">
-				<bc:propertyRef key="orbit.repository" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
