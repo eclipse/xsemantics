@@ -67,19 +67,9 @@ img[images/open-cquery1.png][The properties tab][ ][width:90%]
 You can add a property by pressing
 the e[New] button.
 
-The main properties you can customize is the main eclipse
-base repository, which defaults to link[http://download.eclipse.org][http://download.eclipse.org];
-this can be useful you have a local eclipse mirror
-(see also this link[http://www.lorenzobettini.it/2012/11/mirror-eclipse-repositories-with-p2-mirror-ant-task/][blog post]
-for details about mirror eclipse repositories).
-
-For instance, here's a possible customization
-
-img[images/open-cquery-new-property.png][Property customization][ ][width:50%]
-
-Similarly, you can customize the path in your system where
-the git repository will be cloned, which defaults to
-e[${user.home}/git/xsemantics]); for instance, you can change it
+You can customize the path in your system where
+the git repository will be cloned (property e[git.clone.dest]), 
+which defaults to e[${user.home}/git/xsemantics]): you can change it
 to something else, for instance, e[${user.home}/repositories/xsemantics] 
 
 section2:StartMaterialization[Start Materialization]
