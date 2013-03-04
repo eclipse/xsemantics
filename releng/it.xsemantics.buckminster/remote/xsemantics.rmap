@@ -139,7 +139,7 @@
 			readerType="p2" source="false">
 			<rm:property key="buckminster.source" value="false" />
 			<rm:uri
-				format="http://emf-components.eclipselabs.org.codespot.com/git/devtools/xdoc/site">
+				format="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.3">
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
