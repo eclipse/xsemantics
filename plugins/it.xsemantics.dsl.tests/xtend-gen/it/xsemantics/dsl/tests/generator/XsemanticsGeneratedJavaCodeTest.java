@@ -97,8 +97,8 @@ public class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
         }
       };
     this._xsemanticsCompilationTestHelper.compileAll(system, new IAcceptor<Result>() {
-        public void accept(Result t) {
-          _function.apply(t);
+        public void accept(Result arg0) {
+          _function.apply(arg0);
         }
     });
   }

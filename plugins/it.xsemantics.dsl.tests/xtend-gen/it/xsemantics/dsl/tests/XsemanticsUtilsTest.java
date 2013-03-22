@@ -361,7 +361,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testIterateIfThenElse() {
     String[] _split = "a,B,c".split(",");
-    final List<String> stringList = IterableExtensions.<String>toList(((Iterable<? extends String>)Conversions.doWrapArray(_split)));
+    final List<String> stringList = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(_split)));
     final ArrayList<Object> toUpper = CollectionLiterals.<Object>newArrayList();
     final ArrayList<Object> toLower = CollectionLiterals.<Object>newArrayList();
     final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
