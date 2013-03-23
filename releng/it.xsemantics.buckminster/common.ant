@@ -30,6 +30,9 @@
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
+	<property name="eclipse.p2.mirrors" value="true" />
+	<property name="java.net.preferIPv4Stack" value="true" />
+	
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: replace_win_slashes          
          = = = = = = = = = = = = = = = = = -->
@@ -77,6 +80,8 @@
 				<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
 				<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
 				<sysproperty key="eclipse.download" value="${eclipse-download}" />
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
 				<jvmarg line=" -Xms256m -Xmx512m" />
 			</java>
 		</sequential>
@@ -90,6 +95,8 @@
 		<attribute name="buildmodel" default="default" />
 		<sequential>
 			<java fork="true" dir="${b3.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
 				<classpath>
 					<fileset dir="${b3.home}/plugins">
 						<include name="org.eclipse.equinox.launcher_*.jar" />
