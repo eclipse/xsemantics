@@ -90,21 +90,20 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				IssueCodes.RETURN_NOT_ALLOWED);
 	}
 
-	@Override
-	protected boolean supportsCheckedExceptions() {
-		// we generate Java code which already handles exceptions
-		return false;
-	}
+//	@Override
+//	protected boolean supportsCheckedExceptions() {
+//		// we generate Java code which already handles exceptions
+//		return false;
+//	}
 
 	@Override
-	@Check
-	public void checkImplicitReturn(XExpression expr) {
+	protected boolean isImplicitReturn(XExpression expr) {
 		if (isContainedInAuxiliaryFunction(expr)) {
-			super.checkImplicitReturn(expr);
+			return super.isImplicitReturn(expr);
 		}
 
 		// we will deal with this during generation
-		return;
+		return false;
 	}
 
 	protected boolean isContainedInAuxiliaryFunction(XExpression expr) {
@@ -708,6 +707,10 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				builder.append(", ");
 		}
 		return builder.toString();
+	}
+
+	private Object getNameOfTypes(JvmTypeReference typeRef) {
+		return (typeRef == null) ? "<null>" : typeRef.getSimpleName();
 	}
 
 	public boolean isEnableWarnings() {
