@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.LocalVariableAcceptor;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -50,10 +51,11 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Override
-	protected IScope createLocalVarScope(IScope parentScope,
-			LocalVariableScopeContext scopeContext) {
-		if (scopeContext == null || scopeContext.getContext() == null)
-			return parentScope;
+	protected void createLocalVarScope(LocalVariableAcceptor acceptor, LocalVariableScopeContext scopeContext) {
+		if (scopeContext == null || scopeContext.getContext() == null) {
+			super.createLocalVarScope(acceptor, scopeContext);
+			return;
+		}
 		EObject context = scopeContext.getContext();
 
 		// The inferrer associates to a Rule both field(s) and methods
@@ -62,16 +64,16 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 		JvmOperation jvmOperation = getJvmOperationAssociatedToSourceElement(context);
 
 		if (jvmOperation == null)
-			return super.createLocalVarScope(parentScope, scopeContext);
+			super.createLocalVarScope(acceptor, scopeContext);
 		else {
 			if (jvmOperation.getDeclaringType() != null) {
 				JvmDeclaredType declaredType = jvmOperation.getDeclaringType();
 				if (!jvmOperation.isStatic()) {
-					parentScope = createLocalVarScopeForJvmDeclaredType(
-							declaredType, parentScope);
+					createLocalVarScopeForJvmDeclaredType(
+							declaredType, acceptor);
 				}
 			}
-			return createLocalVarScopeForJvmOperation(jvmOperation, parentScope);
+			createLocalVarScopeForJvmOperation(jvmOperation, acceptor);
 		}
 
 	}
@@ -102,12 +104,11 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 	}
 
 	@Override
-	protected IScope createLocalVarScopeForBlock(XBlockExpression block,
-			int indexOfContextExpressionInBlock, boolean referredFromClosure,
-			IScope parentScope) {
-		parentScope = super.createLocalVarScopeForBlock(block,
+	protected void createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
+			boolean referredFromClosure, LocalVariableAcceptor acceptor) {
+		super.createLocalVarScopeForBlock(block,
 				indexOfContextExpressionInBlock, referredFromClosure,
-				parentScope);
+				acceptor);
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		EObject container = block.eContainer();
 		// add the output parameters as variable declarations
@@ -130,9 +131,8 @@ public class XsemanticsScopeProvider extends XbaseScopeProvider {
 			}
 		}
 		if (descriptions.isEmpty())
-			return parentScope;
-		return new JvmFeatureScope(parentScope, "XBlockExpression",
-				descriptions);
+			return;
+		acceptor.accept("XBlockExpression", descriptions);
 	}
 
 	private void addRuleParamsInDescriptions(List<RuleParameter> params,
