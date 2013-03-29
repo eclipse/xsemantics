@@ -89,7 +89,7 @@ class XsemanticsUtils {
 
 	def filterJudgmentDescriptions(Iterable<JudgmentDescription> desc, String judgmentSymbol, Iterable<String> relationSymbols) {
 		desc.filter
-			[ it.judgmentSymbol?.equals(judgmentSymbol) && 
+			[ it.judgmentSymbol== judgmentSymbol && 
 				it.relationSymbols.elementsEqual(relationSymbols) ]
 	}
 	
@@ -351,7 +351,7 @@ class XsemanticsUtils {
 			allSuperSystemDefinitionsInternal(Sets::newHashSet)
 	}
 
-	def protected allSuperSystemDefinitionsInternal(XsemanticsSystem system, Set<XsemanticsSystem> visited) {
+	def protected List<XsemanticsSystem> allSuperSystemDefinitionsInternal(XsemanticsSystem system, Set<XsemanticsSystem> visited) {
 		if (visited.contains(system))
 			return Lists::<XsemanticsSystem>newArrayList()
 		
