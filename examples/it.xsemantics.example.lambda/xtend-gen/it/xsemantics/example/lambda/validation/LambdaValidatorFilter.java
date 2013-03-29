@@ -1,20 +1,22 @@
 package it.xsemantics.example.lambda.validation;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.util.TraceUtils;
 import it.xsemantics.runtime.validation.XsemanticsValidatorFilter;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class LambdaValidatorFilter extends XsemanticsValidatorFilter {
   @Inject
+  @Extension
   private TraceUtils _traceUtils;
   
   public Iterable<RuleFailedException> filterRuleFailedExceptions(final RuleFailedException e) {
     final RuleFailedException inner = this._traceUtils.innermostRuleFailedExceptionWithNodeModelSources(e);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(inner, null);
+    boolean _notEquals = (!Objects.equal(inner, null));
     if (_notEquals) {
       return this._traceUtils.failureAsList(inner);
     } else {

@@ -13,14 +13,16 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderCustom.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsValidatorTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Test

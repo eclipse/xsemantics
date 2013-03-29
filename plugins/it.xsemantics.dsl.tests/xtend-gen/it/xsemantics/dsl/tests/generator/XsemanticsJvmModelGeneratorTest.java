@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests.generator;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper;
@@ -14,16 +15,16 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderCustom.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private XsemanticsCompilationTestHelper _xsemanticsCompilationTestHelper;
   
   @Test
@@ -6481,13 +6482,13 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   }
   
   private void assertCorrectJavaCodeGeneration(final XsemanticsSystem system, final String prefix, final CharSequence expected, final CharSequence expectedValidator) {
-    final Procedure1<Result> _function = new Procedure1<Result>() {
-        public void apply(final Result it) {
+    final IAcceptor<Result> _function = new IAcceptor<Result>() {
+        public void accept(final Result it) {
           Map<String,CharSequence> _allGeneratedResources = it.getAllGeneratedResources();
           Set<Entry<String,CharSequence>> _entrySet = _allGeneratedResources.entrySet();
           for (final Entry<String,CharSequence> e : _entrySet) {
             boolean _or = false;
-            boolean _equals = ObjectExtensions.operator_equals(prefix, null);
+            boolean _equals = Objects.equal(prefix, null);
             if (_equals) {
               _or = true;
             } else {
@@ -6502,7 +6503,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
               if (!_endsWith) {
                 _and = false;
               } else {
-                boolean _notEquals = ObjectExtensions.operator_notEquals(expectedValidator, null);
+                boolean _notEquals = (!Objects.equal(expectedValidator, null));
                 _and = (_endsWith && _notEquals);
               }
               if (_and) {
@@ -6518,7 +6519,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
                 if (!_not) {
                   _and_1 = false;
                 } else {
-                  boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expected, null);
+                  boolean _notEquals_1 = (!Objects.equal(expected, null));
                   _and_1 = (_not && _notEquals_1);
                 }
                 if (_and_1) {
@@ -6533,10 +6534,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
           it.compileToJava();
         }
       };
-    this._xsemanticsCompilationTestHelper.compileAll(system, new IAcceptor<Result>() {
-        public void accept(Result t) {
-          _function.apply(t);
-        }
-    });
+    this._xsemanticsCompilationTestHelper.compileAll(system, _function);
   }
 }

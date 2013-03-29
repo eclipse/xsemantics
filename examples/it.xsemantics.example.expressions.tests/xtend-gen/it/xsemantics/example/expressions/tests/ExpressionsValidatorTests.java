@@ -13,17 +13,20 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
+@InjectWith(ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsValidatorTests extends ExpressionsBaseTests {
   @Inject
+  @Extension
   private ParseHelper<Model> _parseHelper;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Test

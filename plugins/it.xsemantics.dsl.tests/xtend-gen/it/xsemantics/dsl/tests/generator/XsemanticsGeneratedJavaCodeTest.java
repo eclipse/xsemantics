@@ -15,19 +15,21 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderCustom.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private XsemanticsCompilationTestHelper _xsemanticsCompilationTestHelper;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Inject
@@ -91,15 +93,11 @@ public class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
     EList<EObject> _contents = resource.getContents();
     final EObject system = _contents.get(0);
     this._validationTestHelper.assertNoErrors(system);
-    final Procedure1<Result> _function = new Procedure1<Result>() {
-        public void apply(final Result it) {
+    final IAcceptor<Result> _function = new IAcceptor<Result>() {
+        public void accept(final Result it) {
           it.compileToJava();
         }
       };
-    this._xsemanticsCompilationTestHelper.compileAll(system, new IAcceptor<Result>() {
-        public void accept(Result t) {
-          _function.apply(t);
-        }
-    });
+    this._xsemanticsCompilationTestHelper.compileAll(system, _function);
   }
 }

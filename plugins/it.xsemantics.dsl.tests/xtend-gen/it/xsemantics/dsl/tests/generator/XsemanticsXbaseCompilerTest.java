@@ -25,15 +25,17 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   @Inject
+  @Extension
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject

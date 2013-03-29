@@ -8,8 +8,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = ExpressionsInjectorProviderFirst.class)
+@RunWith(XtextRunner.class)
+@InjectWith(ExpressionsInjectorProviderFirst.class)
 @SuppressWarnings("all")
 public class ExpressionsFirstInterpreterTests extends ExpressionsInterpreterTests {
   @Test

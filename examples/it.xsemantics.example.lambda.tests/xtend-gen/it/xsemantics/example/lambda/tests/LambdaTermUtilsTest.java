@@ -11,8 +11,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = LambdaInjectorWithNonBeautifiedTypesProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(LambdaInjectorWithNonBeautifiedTypesProvider.class)
 @SuppressWarnings("all")
 public class LambdaTermUtilsTest extends LambdaBaseTest {
   @Test

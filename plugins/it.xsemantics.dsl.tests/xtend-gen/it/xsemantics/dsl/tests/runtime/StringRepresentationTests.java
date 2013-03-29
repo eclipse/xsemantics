@@ -14,14 +14,16 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class StringRepresentationTests extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private CustomStringRepresentation _customStringRepresentation;
   
   @Test
@@ -83,7 +85,7 @@ public class StringRepresentationTests extends XsemanticsBaseTest {
     _builder.newLine();
     _builder.append("lines");
     _builder.newLine();
-    final CharSequence testString = _builder;
+    final String testString = _builder.toString();
     String _string = testString.toString();
     String _string_1 = this._customStringRepresentation.string(_string);
     this.assertEqualsStrings(testString, _string_1);

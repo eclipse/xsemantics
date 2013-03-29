@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
@@ -13,15 +14,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsNodeModelUtilsTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
@@ -46,7 +48,7 @@ public class XsemanticsNodeModelUtilsTest extends XsemanticsBaseTest {
   public void testNoNodeForObject() {
     final EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     String _programText = this.nodeModelUtils.getProgramText(eClass);
-    boolean _equals = ObjectExtensions.operator_equals(_programText, null);
+    boolean _equals = Objects.equal(_programText, null);
     Assert.assertTrue(_equals);
   }
 }

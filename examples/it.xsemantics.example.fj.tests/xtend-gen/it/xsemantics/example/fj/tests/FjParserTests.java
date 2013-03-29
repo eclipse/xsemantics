@@ -8,8 +8,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = FJInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(FJInjectorProvider.class)
 @SuppressWarnings("all")
 public class FjParserTests extends FjBaseTests {
   @Test

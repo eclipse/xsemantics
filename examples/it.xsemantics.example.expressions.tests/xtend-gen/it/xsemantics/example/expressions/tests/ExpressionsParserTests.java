@@ -21,17 +21,20 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
+@InjectWith(ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsParserTests extends ExpressionsBaseTests {
   @Inject
+  @Extension
   private ParseHelper<Model> _parseHelper;
   
   @Inject
+  @Extension
   private StringRepresentation _stringRepresentation;
   
   @Test
@@ -86,13 +89,13 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
       Expression _expression = _get.getExpression();
       String _expressionToString = this.expressionToString(_expression);
       Assert.assertEquals(_string, _expressionToString);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   public String expressionToString(final Expression expression) {
-    CharSequence _switchResult = null;
+    String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (expression instanceof AndOrExpression) {
@@ -104,15 +107,15 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _left = _andOrExpression.getLeft();
-        String _expressionToString = this.expressionToString(_left);
+        Object _expressionToString = this.expressionToString(_left);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _right = _andOrExpression.getRight();
-        String _expressionToString_1 = this.expressionToString(_right);
+        Object _expressionToString_1 = this.expressionToString(_right);
         _builder.append(_expressionToString_1, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -125,15 +128,15 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _left = _comparison.getLeft();
-        String _expressionToString = this.expressionToString(_left);
+        Object _expressionToString = this.expressionToString(_left);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _right = _comparison.getRight();
-        String _expressionToString_1 = this.expressionToString(_right);
+        Object _expressionToString_1 = this.expressionToString(_right);
         _builder.append(_expressionToString_1, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -145,15 +148,15 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLine();
         _builder.append("\t");
         Expression _left = _plus.getLeft();
-        String _expressionToString = this.expressionToString(_left);
+        Object _expressionToString = this.expressionToString(_left);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _right = _plus.getRight();
-        String _expressionToString_1 = this.expressionToString(_right);
+        Object _expressionToString_1 = this.expressionToString(_right);
         _builder.append(_expressionToString_1, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -165,15 +168,15 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLine();
         _builder.append("\t");
         Expression _left = _minus.getLeft();
-        String _expressionToString = this.expressionToString(_left);
+        Object _expressionToString = this.expressionToString(_left);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _right = _minus.getRight();
-        String _expressionToString_1 = this.expressionToString(_right);
+        Object _expressionToString_1 = this.expressionToString(_right);
         _builder.append(_expressionToString_1, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -186,15 +189,15 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _left = _multiOrDiv.getLeft();
-        String _expressionToString = this.expressionToString(_left);
+        Object _expressionToString = this.expressionToString(_left);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Expression _right = _multiOrDiv.getRight();
-        String _expressionToString_1 = this.expressionToString(_right);
+        Object _expressionToString_1 = this.expressionToString(_right);
         _builder.append(_expressionToString_1, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -206,10 +209,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLine();
         _builder.append("\t");
         Expression _expression = _booleanNegation.getExpression();
-        String _expressionToString = this.expressionToString(_expression);
+        Object _expressionToString = this.expressionToString(_expression);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {
@@ -221,10 +224,10 @@ public class ExpressionsParserTests extends ExpressionsBaseTests {
         _builder.newLine();
         _builder.append("\t");
         Expression _expression = _arithmeticSigned.getExpression();
-        String _expressionToString = this.expressionToString(_expression);
+        Object _expressionToString = this.expressionToString(_expression);
         _builder.append(_expressionToString, "	");
         _builder.newLineIfNotEmpty();
-        _switchResult = _builder;
+        _switchResult = _builder.toString();
       }
     }
     if (!_matched) {

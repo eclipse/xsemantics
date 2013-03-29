@@ -29,17 +29,20 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderCustom.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsParserTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Inject
+  @Extension
   private XsemanticsUtils _xsemanticsUtils;
   
   @Test

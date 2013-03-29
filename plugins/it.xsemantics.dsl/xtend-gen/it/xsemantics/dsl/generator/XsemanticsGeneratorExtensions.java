@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
@@ -43,28 +44,33 @@ import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class XsemanticsGeneratorExtensions {
   @Inject
+  @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
   @Inject
+  @Extension
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
+  @Extension
   private XsemanticsTypeSystem typeSystem;
   
   @Inject
+  @Extension
   private TypeReferenceSerializer _typeReferenceSerializer;
   
   @Inject
+  @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject
@@ -243,16 +249,16 @@ public class XsemanticsGeneratorExtensions {
   
   public String relationSymbolsArgs(final JudgmentDescription judgmentDescription) {
     EList<String> _relationSymbols = judgmentDescription.getRelationSymbols();
-    final Function1<String,CharSequence> _function = new Function1<String,CharSequence>() {
-        public CharSequence apply(final String it) {
+    final Function1<String,String> _function = new Function1<String,String>() {
+        public String apply(final String it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("\"");
           _builder.append(it, "");
           _builder.append("\"");
-          return _builder;
+          return _builder.toString();
         }
       };
-    List<CharSequence> _map = ListExtensions.<String, CharSequence>map(_relationSymbols, _function);
+    List<String> _map = ListExtensions.<String, String>map(_relationSymbols, _function);
     String _join = IterableExtensions.join(_map, ", ");
     return _join;
   }
@@ -334,16 +340,16 @@ public class XsemanticsGeneratorExtensions {
       UniqueNames _uniqueNames = new UniqueNames();
       final UniqueNames names = _uniqueNames;
       List<InputParameter> _inputParams = this._xsemanticsUtils.inputParams(judgmentDescription);
-      final Function1<InputParameter,CharSequence> _function = new Function1<InputParameter,CharSequence>() {
-          public CharSequence apply(final InputParameter it) {
+      final Function1<InputParameter,String> _function = new Function1<InputParameter,String>() {
+          public String apply(final InputParameter it) {
             StringConcatenation _builder = new StringConcatenation();
             String _inputParameterName = XsemanticsGeneratorExtensions.this.inputParameterName(it);
             String _createName = names.createName(_inputParameterName);
             _builder.append(_createName, "");
-            return _builder;
+            return _builder.toString();
           }
         };
-      List<CharSequence> _map = ListExtensions.<InputParameter, CharSequence>map(_inputParams, _function);
+      List<String> _map = ListExtensions.<InputParameter, String>map(_inputParams, _function);
       String _join = IterableExtensions.join(_map, ", ");
       _xblockexpression = (_join);
     }
@@ -585,7 +591,7 @@ public class XsemanticsGeneratorExtensions {
       String _judgmentSymbol = _conclusion.getJudgmentSymbol();
       _builder.append(_judgmentSymbol, "");
       _builder.append(" \"");
-      StringBuffer _stringBuffer = new StringBuffer(_builder.toString());
+      StringBuffer _stringBuffer = new StringBuffer(_builder);
       final StringBuffer buffer = _stringBuffer;
       JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(rule);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
@@ -615,7 +621,7 @@ public class XsemanticsGeneratorExtensions {
               String _next_1 = relationSymbols.next();
               _builder.append(_next_1, " ");
               _builder.append(" \"");
-              buffer.append(_builder.toString());
+              buffer.append(_builder);
             }
           }
         };
@@ -631,7 +637,7 @@ public class XsemanticsGeneratorExtensions {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(" ");
     _builder.append("+ \" = \" + ");
-    String _plus = (_errorForAuxiliaryFun + _builder.toString());
+    String _plus = (_errorForAuxiliaryFun + _builder);
     CharSequence _wrapInStringRepr = this.wrapInStringRepr("_result_");
     String _plus_1 = (_plus + _wrapInStringRepr);
     return _plus_1;
@@ -751,14 +757,14 @@ public class XsemanticsGeneratorExtensions {
   }
   
   public String errorForRule(final Rule rule) {
-    final Function1<RuleConclusionElement,CharSequence> _function = new Function1<RuleConclusionElement,CharSequence>() {
-        public CharSequence apply(final RuleConclusionElement it) {
+    final Function1<RuleConclusionElement,String> _function = new Function1<RuleConclusionElement,String>() {
+        public String apply(final RuleConclusionElement it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("\"");
           String _ruleConclusionOutputParamForError = XsemanticsGeneratorExtensions.this.ruleConclusionOutputParamForError(it);
           _builder.append(_ruleConclusionOutputParamForError, "");
           _builder.append("\"");
-          return _builder;
+          return _builder.toString();
         }
       };
     final Function1<RuleConclusionElement,CharSequence> _function_1 = new Function1<RuleConclusionElement,CharSequence>() {
@@ -908,13 +914,13 @@ public class XsemanticsGeneratorExtensions {
             public Boolean apply(final OutputParameter it) {
               boolean _and = false;
               JvmTypeReference _jvmTypeReference = it.getJvmTypeReference();
-              boolean _notEquals = ObjectExtensions.operator_notEquals(_jvmTypeReference, null);
+              boolean _notEquals = (!Objects.equal(_jvmTypeReference, null));
               if (!_notEquals) {
                 _and = false;
               } else {
                 JvmTypeReference _jvmTypeReference_1 = it.getJvmTypeReference();
                 JvmType _type = _jvmTypeReference_1.getType();
-                boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_type, null);
+                boolean _notEquals_1 = (!Objects.equal(_type, null));
                 _and = (_notEquals && _notEquals_1);
               }
               return Boolean.valueOf(_and);

@@ -21,9 +21,11 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -65,6 +67,10 @@ public class XsemanticsTypeProvider extends XbaseTypeProvider {
   public JvmTypeReference type(final XExpression featureCall, final JvmTypeReference rawExpectation, final boolean rawType) {
     if (featureCall instanceof XFeatureCall) {
       return _type((XFeatureCall)featureCall, rawExpectation, rawType);
+    } else if (featureCall instanceof XListLiteral) {
+      return _type((XListLiteral)featureCall, rawExpectation, rawType);
+    } else if (featureCall instanceof XSetLiteral) {
+      return _type((XSetLiteral)featureCall, rawExpectation, rawType);
     } else if (featureCall instanceof EnvironmentAccess) {
       return _type((EnvironmentAccess)featureCall, rawExpectation, rawType);
     } else if (featureCall instanceof Fail) {

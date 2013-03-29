@@ -1,5 +1,6 @@
 package it.xsemantics.example.fj.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.FJInjectorProvider;
 import it.xsemantics.example.fj.fj.Method;
@@ -14,6 +15,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -22,14 +24,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = FJInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(FJInjectorProvider.class)
 @SuppressWarnings("all")
 public class FjBaseTests {
   @Inject
+  @Extension
   private ParseHelper<Program> _parseHelper;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Inject
@@ -61,7 +65,7 @@ public class FjBaseTests {
         };
       Program _doubleArrow = ObjectExtensions.<Program>operator_doubleArrow(_parse, _function);
       return _doubleArrow;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -71,7 +75,7 @@ public class FjBaseTests {
     final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, methodName);
+          boolean _equals = Objects.equal(_name, methodName);
           return Boolean.valueOf(_equals);
         }
       };

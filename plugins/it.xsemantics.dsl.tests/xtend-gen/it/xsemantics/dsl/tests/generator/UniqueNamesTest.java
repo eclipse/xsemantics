@@ -9,8 +9,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class UniqueNamesTest extends XsemanticsGeneratorBaseTest {
   @Test

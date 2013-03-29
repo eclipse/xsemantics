@@ -29,6 +29,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -36,11 +37,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProviderCustom.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
@@ -361,9 +363,9 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testIterateIfThenElse() {
     String[] _split = "a,B,c".split(",");
-    final List<String> stringList = IterableExtensions.<String>toList(((Iterable<? extends String>)Conversions.doWrapArray(_split)));
-    final ArrayList<Object> toUpper = CollectionLiterals.<Object>newArrayList();
-    final ArrayList<Object> toLower = CollectionLiterals.<Object>newArrayList();
+    final List<String> stringList = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(_split)));
+    final ArrayList<String> toUpper = CollectionLiterals.<String>newArrayList();
+    final ArrayList<String> toLower = CollectionLiterals.<String>newArrayList();
     final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
           String _lowerCase = it.toLowerCase();
@@ -425,7 +427,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testAllSuperSystemDefinitions() {
     XsemanticsSystem _systemExtendsSystemWithJudgments = this.systemExtendsSystemWithJudgments();
-    ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsSystemWithJudgments);
+    List<XsemanticsSystem> _allSuperSystemDefinitions = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsSystemWithJudgments);
     XsemanticsSystem _head = IterableExtensions.<XsemanticsSystem>head(_allSuperSystemDefinitions);
     String _name = _head.getName();
     this.assertEqualsStrings(_name, "it.xsemantics.test.TypeSystem");
@@ -434,7 +436,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   @Test
   public void testAllSuperSystemDefinitions2() {
     XsemanticsSystem _systemExtendsExtendedTypeSystem = this.systemExtendsExtendedTypeSystem();
-    final ArrayList<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsExtendedTypeSystem);
+    final List<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_systemExtendsExtendedTypeSystem);
     int _size = superSystems.size();
     Assert.assertEquals(2, _size);
     XsemanticsSystem _get = superSystems.get(0);
@@ -452,7 +454,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     XsemanticsSystem _parseWithBaseSystem = this.parseWithBaseSystem(_testSystemBaseWithCycle, _testSystemExtendsSystemWithJudgmentsReferringToEcore);
     CharSequence _testSystemExtendsExtendedTypeSystem = this.testFiles.testSystemExtendsExtendedTypeSystem();
     XsemanticsSystem _parseWithBaseSystem_1 = this.parseWithBaseSystem(_parseWithBaseSystem, _testSystemExtendsExtendedTypeSystem);
-    final ArrayList<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_parseWithBaseSystem_1);
+    final List<XsemanticsSystem> superSystems = this._xsemanticsUtils.allSuperSystemDefinitions(_parseWithBaseSystem_1);
     int _size = superSystems.size();
     Assert.assertEquals(3, _size);
   }
@@ -461,7 +463,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   public void testAllSuperSystemDefinitionsWithNoSuperSystem() {
     CharSequence _testSimpleRule = this.testFiles.testSimpleRule();
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testSimpleRule);
-    ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = this._xsemanticsUtils.allSuperSystemDefinitions(_parseAndAssertNoError);
+    List<XsemanticsSystem> _allSuperSystemDefinitions = this._xsemanticsUtils.allSuperSystemDefinitions(_parseAndAssertNoError);
     int _size = _allSuperSystemDefinitions.size();
     Assert.assertEquals(0, _size);
   }

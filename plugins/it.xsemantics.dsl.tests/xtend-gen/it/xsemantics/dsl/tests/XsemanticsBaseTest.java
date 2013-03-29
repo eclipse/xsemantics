@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
@@ -40,14 +41,14 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsBaseTest {
   @Inject
@@ -60,6 +61,7 @@ public class XsemanticsBaseTest {
   protected ParseHelper<XsemanticsSystem> parser;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @BeforeClass
@@ -316,7 +318,7 @@ public class XsemanticsBaseTest {
         public Boolean apply(final RuleParameter it) {
           JvmFormalParameter _parameter = it.getParameter();
           String _name = _parameter.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           return Boolean.valueOf(_equals);
         }
       };

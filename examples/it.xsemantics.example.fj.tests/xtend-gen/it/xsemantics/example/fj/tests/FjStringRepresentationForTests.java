@@ -1,5 +1,6 @@
 package it.xsemantics.example.fj.tests;
 
+import com.google.common.base.Objects;
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.Cast;
 import it.xsemantics.example.fj.fj.ClassType;
@@ -21,13 +22,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class FjStringRepresentationForTests extends FjStringRepresentation {
   public String stringRep(final EObject eObject) {
     final ICompositeNode node = NodeModelUtils.getNode(eObject);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+    boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       return super.stringRep(eObject);
     } else {
@@ -58,10 +58,10 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
       };
     List<String> _map = ListExtensions.<Expression, String>map(_args, _function);
     String _join = IterableExtensions.join(_map, ", ");
-    String _plus = (_builder + _join);
+    String _plus = (_builder.toString() + _join);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(")");
-    String _plus_1 = (_plus + _builder_1.toString());
+    String _plus_1 = (_plus + _builder_1);
     return _plus_1;
   }
   
@@ -106,7 +106,7 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
         _switchResult = _plus_2;
       }
     }
-    String _plus = (_builder + _switchResult);
+    String _plus = (_builder.toString() + _switchResult);
     return _plus;
   }
   

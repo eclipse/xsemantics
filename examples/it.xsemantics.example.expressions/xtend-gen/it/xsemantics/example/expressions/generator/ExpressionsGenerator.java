@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -31,9 +32,11 @@ public class ExpressionsGenerator implements IGenerator {
   private ExpressionsSemantics semantics;
   
   @Inject
+  @Extension
   private TraceUtils _traceUtils;
   
   @Inject
+  @Extension
   private StringRepresentation _stringRepresentation;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {

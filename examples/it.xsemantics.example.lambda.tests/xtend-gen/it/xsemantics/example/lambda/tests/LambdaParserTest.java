@@ -8,8 +8,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = LambdaInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(LambdaInjectorProvider.class)
 @SuppressWarnings("all")
 public class LambdaParserTest extends LambdaBaseTest {
   @Test

@@ -30,7 +30,7 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     try
     {
-      XsemanticsFactory theXsemanticsFactory = (XsemanticsFactory)EPackage.Registry.INSTANCE.getEFactory(XsemanticsPackage.eNS_URI);
+      XsemanticsFactory theXsemanticsFactory = (XsemanticsFactory)EPackage.Registry.INSTANCE.getEFactory("http://xsemantics.sf.net/Xsemantics"); 
       if (theXsemanticsFactory != null)
       {
         return theXsemanticsFactory;

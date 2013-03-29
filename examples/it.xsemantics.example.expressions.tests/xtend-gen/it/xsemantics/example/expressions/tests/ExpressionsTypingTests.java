@@ -1,5 +1,6 @@
 package it.xsemantics.example.expressions.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.expressions.expressions.Expression;
 import it.xsemantics.example.expressions.expressions.Model;
@@ -18,21 +19,24 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = ExtendedExpressionsInjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
+@InjectWith(ExtendedExpressionsInjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ExpressionsTypingTests extends ExpressionsBaseTests {
   @Inject
+  @Extension
   private ParseHelper<Model> _parseHelper;
   
   @Inject
+  @Extension
   private TraceUtils _traceUtils;
   
   @Inject
+  @Extension
   private StringRepresentation _stringRepresentation;
   
   @Test
@@ -195,7 +199,7 @@ public class ExpressionsTypingTests extends ExpressionsBaseTests {
       Variable _get = _variables.get(variableIndex);
       final Expression expression = _get.getExpression();
       final Result<Type> result = this.semantics.type(null, this.trace, expression);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(expectedResult, null);
+      boolean _notEquals = (!Objects.equal(expectedResult, null));
       if (_notEquals) {
         boolean _failed = result.failed();
         if (_failed) {
@@ -207,7 +211,7 @@ public class ExpressionsTypingTests extends ExpressionsBaseTests {
         Type _value = result.getValue();
         String _string = this._stringRepresentation.string(_value);
         Assert.assertEquals(expectedResult, _string);
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expectedTrace, null);
+        boolean _notEquals_1 = (!Objects.equal(expectedTrace, null));
         if (_notEquals_1) {
           String _string_1 = expectedTrace.toString();
           String _traceAsString = this._traceUtils.traceAsString(this.trace);
@@ -221,7 +225,7 @@ public class ExpressionsTypingTests extends ExpressionsBaseTests {
           String _plus_1 = ("unexpected success: " + _traceAsString_1);
           Assert.fail(_plus_1);
         }
-        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(expectedTrace, null);
+        boolean _notEquals_2 = (!Objects.equal(expectedTrace, null));
         if (_notEquals_2) {
           String _string_2 = expectedTrace.toString();
           RuleFailedException _ruleFailedException_1 = result.getRuleFailedException();

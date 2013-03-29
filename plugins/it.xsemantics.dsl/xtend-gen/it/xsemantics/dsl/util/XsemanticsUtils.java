@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.util;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class XsemanticsUtils {
   @Inject
+  @Extension
   private XsemanticsTypeSystem _xsemanticsTypeSystem;
   
   @Inject
@@ -125,7 +128,7 @@ public class XsemanticsUtils {
         public Boolean apply(final JudgmentDescription it) {
           boolean _and = false;
           String _judgmentSymbol = it.getJudgmentSymbol();
-          boolean _equals = _judgmentSymbol==null?false:_judgmentSymbol.equals(judgmentSymbol);
+          boolean _equals = Objects.equal(_judgmentSymbol, judgmentSymbol);
           if (!_equals) {
             _and = false;
           } else {
@@ -181,7 +184,7 @@ public class XsemanticsUtils {
         public Boolean apply(final AuxiliaryDescription it) {
           String _name = it.getName();
           String _name_1 = fun.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
+          boolean _equals = Objects.equal(_name, _name_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -205,7 +208,7 @@ public class XsemanticsUtils {
         public Boolean apply(final AuxiliaryFunction it) {
           String _name = it.getName();
           String _name_1 = aux.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
+          boolean _equals = Objects.equal(_name, _name_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -373,7 +376,7 @@ public class XsemanticsUtils {
     {
       final RuleParameter ruleParameter = EcoreUtil2.<RuleParameter>getContainerOfType(jvmFormalParameter, RuleParameter.class);
       boolean _xifexpression = false;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(ruleParameter, null);
+      boolean _notEquals = (!Objects.equal(ruleParameter, null));
       if (_notEquals) {
         boolean _isInputParam = this.isInputParam(ruleParameter);
         _xifexpression = _isInputParam;
@@ -402,7 +405,7 @@ public class XsemanticsUtils {
     {
       final JudgmentDescription judgmentDescription = this.judgmentDescription(rule);
       boolean _or = false;
-      boolean _equals = ObjectExtensions.operator_equals(judgmentDescription, null);
+      boolean _equals = Objects.equal(judgmentDescription, null);
       if (_equals) {
         _or = true;
       } else {
@@ -519,7 +522,7 @@ public class XsemanticsUtils {
           _and = false;
         } else {
           XExpression _right = _xVariableDeclaration.getRight();
-          boolean _equals = ObjectExtensions.operator_equals(_right, null);
+          boolean _equals = Objects.equal(_right, null);
           _and = (_isWriteable && _equals);
         }
         return _and;
@@ -560,7 +563,7 @@ public class XsemanticsUtils {
     ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList(_judgmentDescriptions);
     final Procedure1<ArrayList<JudgmentDescription>> _function = new Procedure1<ArrayList<JudgmentDescription>>() {
         public void apply(final ArrayList<JudgmentDescription> it) {
-          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          List<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
           final Function1<XsemanticsSystem,EList<JudgmentDescription>> _function = new Function1<XsemanticsSystem,EList<JudgmentDescription>>() {
               public EList<JudgmentDescription> apply(final XsemanticsSystem it) {
                 EList<JudgmentDescription> _judgmentDescriptions = it.getJudgmentDescriptions();
@@ -588,7 +591,7 @@ public class XsemanticsUtils {
     ArrayList<Rule> _newArrayList = Lists.<Rule>newArrayList(_rules);
     final Procedure1<ArrayList<Rule>> _function = new Procedure1<ArrayList<Rule>>() {
         public void apply(final ArrayList<Rule> it) {
-          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          List<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
           final Function1<XsemanticsSystem,EList<Rule>> _function = new Function1<XsemanticsSystem,EList<Rule>>() {
               public EList<Rule> apply(final XsemanticsSystem it) {
                 EList<Rule> _rules = it.getRules();
@@ -615,7 +618,7 @@ public class XsemanticsUtils {
     ArrayList<CheckRule> _newArrayList = Lists.<CheckRule>newArrayList(_checkrules);
     final Procedure1<ArrayList<CheckRule>> _function = new Procedure1<ArrayList<CheckRule>>() {
         public void apply(final ArrayList<CheckRule> it) {
-          ArrayList<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
+          List<XsemanticsSystem> _allSuperSystemDefinitions = XsemanticsUtils.this.allSuperSystemDefinitions(system);
           final Function1<XsemanticsSystem,EList<CheckRule>> _function = new Function1<XsemanticsSystem,EList<CheckRule>>() {
               public EList<CheckRule> apply(final XsemanticsSystem it) {
                 EList<CheckRule> _checkrules = it.getCheckrules();
@@ -636,13 +639,13 @@ public class XsemanticsUtils {
     final Function1<CheckRule,Boolean> _function = new Function1<CheckRule,Boolean>() {
         public Boolean apply(final CheckRule it) {
           boolean _and = false;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(it, rule);
+          boolean _notEquals = (!Objects.equal(it, rule));
           if (!_notEquals) {
             _and = false;
           } else {
             String _name = it.getName();
             String _name_1 = rule.getName();
-            boolean _equals = ObjectExtensions.operator_equals(_name, _name_1);
+            boolean _equals = Objects.equal(_name, _name_1);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -654,20 +657,25 @@ public class XsemanticsUtils {
   }
   
   public List<JudgmentDescription> superSystemJudgments(final XsemanticsSystem system) {
+    List<JudgmentDescription> _elvis = null;
     XsemanticsSystem _superSystemDefinition = this.superSystemDefinition(system);
     EList<JudgmentDescription> _judgmentDescriptions = _superSystemDefinition==null?(EList<JudgmentDescription>)null:_superSystemDefinition.getJudgmentDescriptions();
-    ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList();
-    List<JudgmentDescription> _elvis = ObjectExtensions.<List<JudgmentDescription>>operator_elvis(_judgmentDescriptions, _newArrayList);
+    if (_judgmentDescriptions != null) {
+      _elvis = _judgmentDescriptions;
+    } else {
+      ArrayList<JudgmentDescription> _newArrayList = Lists.<JudgmentDescription>newArrayList();
+      _elvis = ObjectExtensions.<List<JudgmentDescription>>operator_elvis(_judgmentDescriptions, _newArrayList);
+    }
     return _elvis;
   }
   
-  public ArrayList<XsemanticsSystem> allSuperSystemDefinitions(final XsemanticsSystem system) {
+  public List<XsemanticsSystem> allSuperSystemDefinitions(final XsemanticsSystem system) {
     HashSet<XsemanticsSystem> _newHashSet = Sets.<XsemanticsSystem>newHashSet();
-    ArrayList<XsemanticsSystem> _allSuperSystemDefinitionsInternal = this.allSuperSystemDefinitionsInternal(system, _newHashSet);
+    List<XsemanticsSystem> _allSuperSystemDefinitionsInternal = this.allSuperSystemDefinitionsInternal(system, _newHashSet);
     return _allSuperSystemDefinitionsInternal;
   }
   
-  protected ArrayList<XsemanticsSystem> allSuperSystemDefinitionsInternal(final XsemanticsSystem system, final Set<XsemanticsSystem> visited) {
+  protected List<XsemanticsSystem> allSuperSystemDefinitionsInternal(final XsemanticsSystem system, final Set<XsemanticsSystem> visited) {
     ArrayList<XsemanticsSystem> _xblockexpression = null;
     {
       boolean _contains = visited.contains(system);
@@ -679,10 +687,10 @@ public class XsemanticsUtils {
       final Procedure1<ArrayList<XsemanticsSystem>> _function = new Procedure1<ArrayList<XsemanticsSystem>>() {
           public void apply(final ArrayList<XsemanticsSystem> it) {
             final XsemanticsSystem superS = XsemanticsUtils.this.superSystemDefinition(system);
-            boolean _notEquals = ObjectExtensions.operator_notEquals(superS, null);
+            boolean _notEquals = (!Objects.equal(superS, null));
             if (_notEquals) {
               it.add(superS);
-              ArrayList<XsemanticsSystem> _allSuperSystemDefinitionsInternal = XsemanticsUtils.this.allSuperSystemDefinitionsInternal(superS, visited);
+              List<XsemanticsSystem> _allSuperSystemDefinitionsInternal = XsemanticsUtils.this.allSuperSystemDefinitionsInternal(superS, visited);
               Iterables.<XsemanticsSystem>addAll(it, _allSuperSystemDefinitionsInternal);
             }
           }
@@ -711,7 +719,7 @@ public class XsemanticsUtils {
     final Function1<Rule,Boolean> _function = new Function1<Rule,Boolean>() {
         public Boolean apply(final Rule it) {
           String _name = it.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, n);
+          boolean _equals = Objects.equal(_name, n);
           return Boolean.valueOf(_equals);
         }
       };

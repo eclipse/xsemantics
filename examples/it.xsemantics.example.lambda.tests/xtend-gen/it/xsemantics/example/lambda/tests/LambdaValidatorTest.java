@@ -15,18 +15,20 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = LambdaInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(LambdaInjectorProvider.class)
 @SuppressWarnings("all")
 public class LambdaValidatorTest extends LambdaBaseTest {
   private ValidatorTester<LambdaJavaValidator> tester;
   
   @Inject
+  @Extension
   private ParseHelper<Program> _parseHelper;
   
   @Before
@@ -72,7 +74,7 @@ public class LambdaValidatorTest extends LambdaBaseTest {
       Program _parse = this._parseHelper.parse(program);
       AssertableDiagnostics _validate = this.tester.validate(_parse);
       this.assertOk(_validate);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -98,7 +100,7 @@ public class LambdaValidatorTest extends LambdaBaseTest {
       Program _parse = this._parseHelper.parse(program);
       AssertableDiagnostics _validate = this.tester.validate(_parse);
       this.assertAll(_validate, expectedErrors);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

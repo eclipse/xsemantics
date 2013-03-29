@@ -12,14 +12,16 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@InjectWith(value = XsemanticsInjectorProvider.class)
-@RunWith(value = XtextRunner.class)
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class QualifiedNameTest extends XsemanticsBaseTest {
   @Inject
+  @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
   @Test
