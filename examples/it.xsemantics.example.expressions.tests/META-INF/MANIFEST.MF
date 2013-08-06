@@ -13,7 +13,8 @@ Require-Bundle: it.xsemantics.example.expressions,
  org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  com.google.inject,
  com.google.guava,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.junit;bundle-version="4.11.0"
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
  org.junit.runner;version="4.5.0",
