@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,6 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class GeneratorUtils {
@@ -15,7 +15,7 @@ public class GeneratorUtils {
     final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
-          boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+          boolean _equals = Objects.equal(_severity, Severity.ERROR);
           return Boolean.valueOf(_equals);
         }
       };

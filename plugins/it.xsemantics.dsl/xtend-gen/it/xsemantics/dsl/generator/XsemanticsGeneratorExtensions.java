@@ -80,9 +80,16 @@ public class XsemanticsGeneratorExtensions {
     String _xblockexpression = null;
     {
       String _package = this.toPackage(ts);
-      final String packageString = _package==null?(String)null:_package.toString();
+      String _string = null;
+      if (_package!=null) {
+        _string=_package.toString();
+      }
+      final String packageString = _string;
       String _xifexpression = null;
-      int _length = packageString==null?0:packageString.length();
+      int _length = 0;
+      if (packageString!=null) {
+        _length=packageString.length();
+      }
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         String _plus = (packageString + ".");
@@ -100,14 +107,23 @@ public class XsemanticsGeneratorExtensions {
   
   public String toPackage(final XsemanticsSystem ts) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(ts);
-    QualifiedName _skipLast = _fullyQualifiedName==null?(QualifiedName)null:_fullyQualifiedName.skipLast(1);
-    String _string = _skipLast==null?(String)null:_skipLast.toString();
+    QualifiedName _skipLast = null;
+    if (_fullyQualifiedName!=null) {
+      _skipLast=_fullyQualifiedName.skipLast(1);
+    }
+    String _string = null;
+    if (_skipLast!=null) {
+      _string=_skipLast.toString();
+    }
     return _string;
   }
   
   public String toJavaClassName(final XsemanticsSystem ts) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(ts);
-    String _lastSegment = _fullyQualifiedName==null?(String)null:_fullyQualifiedName.getLastSegment();
+    String _lastSegment = null;
+    if (_fullyQualifiedName!=null) {
+      _lastSegment=_fullyQualifiedName.getLastSegment();
+    }
     return _lastSegment;
   }
   
@@ -190,7 +206,10 @@ public class XsemanticsGeneratorExtensions {
     {
       final String typeSystemPackage = this.toPackage(ts);
       String _xifexpression = null;
-      int _length = typeSystemPackage==null?0:typeSystemPackage.length();
+      int _length = 0;
+      if (typeSystemPackage!=null) {
+        _length=typeSystemPackage.length();
+      }
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         String _plus = (typeSystemPackage + ".");
@@ -206,7 +225,10 @@ public class XsemanticsGeneratorExtensions {
   
   public String toValidatorJavaClassName(final XsemanticsSystem ts) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(ts);
-    String _lastSegment = _fullyQualifiedName==null?(String)null:_fullyQualifiedName.getLastSegment();
+    String _lastSegment = null;
+    if (_fullyQualifiedName!=null) {
+      _lastSegment=_fullyQualifiedName.getLastSegment();
+    }
     String _plus = (_lastSegment + "Validator");
     return _plus;
   }

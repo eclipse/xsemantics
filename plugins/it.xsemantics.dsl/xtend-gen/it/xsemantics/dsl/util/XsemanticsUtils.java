@@ -659,7 +659,10 @@ public class XsemanticsUtils {
   public List<JudgmentDescription> superSystemJudgments(final XsemanticsSystem system) {
     List<JudgmentDescription> _elvis = null;
     XsemanticsSystem _superSystemDefinition = this.superSystemDefinition(system);
-    EList<JudgmentDescription> _judgmentDescriptions = _superSystemDefinition==null?(EList<JudgmentDescription>)null:_superSystemDefinition.getJudgmentDescriptions();
+    EList<JudgmentDescription> _judgmentDescriptions = null;
+    if (_superSystemDefinition!=null) {
+      _judgmentDescriptions=_superSystemDefinition.getJudgmentDescriptions();
+    }
     if (_judgmentDescriptions != null) {
       _elvis = _judgmentDescriptions;
     } else {
@@ -702,8 +705,11 @@ public class XsemanticsUtils {
   }
   
   public XsemanticsSystem superSystemDefinition(final XsemanticsSystem system) {
+    XsemanticsSystem _originalSystemDefinition = null;
     JvmParameterizedTypeReference _superSystem = system.getSuperSystem();
-    XsemanticsSystem _originalSystemDefinition = _superSystem==null?(XsemanticsSystem)null:this.originalSystemDefinition(_superSystem);
+    if (_superSystem!=null) {
+      _originalSystemDefinition=this.originalSystemDefinition(_superSystem);
+    }
     return _originalSystemDefinition;
   }
   

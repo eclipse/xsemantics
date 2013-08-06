@@ -90,11 +90,17 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
     final Procedure1<ErrorSpecification> _function = new Procedure1<ErrorSpecification>() {
         public void apply(final ErrorSpecification it) {
           XExpression _error = it.getError();
-          if (_error!=null) XsemanticsTypeComputer.this.computeTypes(_error, state);
+          if (_error!=null) {
+            XsemanticsTypeComputer.this.computeTypes(_error, state);
+          }
           XExpression _source = it.getSource();
-          if (_source!=null) XsemanticsTypeComputer.this.computeTypes(_source, state);
+          if (_source!=null) {
+            XsemanticsTypeComputer.this.computeTypes(_source, state);
+          }
           XExpression _feature = it.getFeature();
-          if (_feature!=null) XsemanticsTypeComputer.this.computeTypes(_feature, state);
+          if (_feature!=null) {
+            XsemanticsTypeComputer.this.computeTypes(_feature, state);
+          }
         }
       };
     ObjectExtensions.<ErrorSpecification>operator_doubleArrow(_error, _function);
