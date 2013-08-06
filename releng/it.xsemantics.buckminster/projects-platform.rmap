@@ -16,6 +16,7 @@
   <rm:locator pattern="^org\.hamcrest*" searchPathRef="swtbot"/>
   <rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$" searchPathRef="swtbot"/>
   <rm:locator searchPathRef="eclipse"/>
+
   <rm:searchPath name="xtext">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
       <rm:property key="buckminster.source" value="false"/>

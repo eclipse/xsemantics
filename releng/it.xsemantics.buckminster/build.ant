@@ -16,6 +16,8 @@
 							Default: http://download.eclipse.org
 -->
 <project name="Buckminster Headless" default="buckminster">
+	<import file="common.ant" as="common" />
+	
 	<property name="WORKSPACE" location="${ant.file}/../../../" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
 	<property name="projects.location" location="${WORKSPACE}" />
@@ -27,8 +29,10 @@
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
+		<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
+		
 		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
-		<echo message="eclipse.download: ${eclipse.download}" />
+		<echo message="properties file: ${build.properties}" />
 
 		<java fork="true" dir="${buckminster.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
 			<classpath>
@@ -39,12 +43,12 @@
 			<arg line='-update' />
 			<arg line='-data "${build.root}/buckminster.workspace"' />
 			<arg line='-configuration "${build.root}/configuration"' />
+			<arg line='--properties "${build.properties}"' />
 			<arg line='--script "${commands.file}"' />
 			<sysproperty key="projects.location" value="${projects.location}" />
 			<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
 			<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
 			<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
-			<sysproperty key="eclipse.download" value="${eclipse.download}" />
 			<jvmarg line=" -Xms256m -Xmx512m" />
 		</java>
 
@@ -52,6 +56,19 @@
 		<echo message="Updatesite output in: ${build.root}/buckminster.output/it.xsemantics.site_*-eclipse.feature/site.p2/" />
 	</target>
 
+	<target name="b3_aggregation" depends="install.b3.headless" description="description">
+
+		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/xtext-swtbot-tp-mirror.b3aggr" />
+		
+		<echo message="IMPORTANT: Mirror aggregation may took over 10 minutes." />
+		<echo message="build.model: ${build.model}" />
+
+		<run_b3_aggregator buildmodel="${build.model}" />
+
+		<echo message=" " />
+		<echo message="Aggregated mirror in: ${user.home}/mirror/xtext-swtbot-tp/final" />
+	</target>
+	
 	<target name="cleanup">
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${build.root}" defaultexcludes="false">

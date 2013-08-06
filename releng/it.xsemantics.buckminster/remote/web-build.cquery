@@ -3,5 +3,12 @@
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
+    <cq:advisorNode namePattern="org\.eclipse\.xtext\.xbase*" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="org\.eclipse\.emf\.mwe2\.*" versionOverride="[2.3.0,2.4.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext$" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.ui*" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.builder*" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.common*" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util*" versionOverride="[2.3.1,2.4.0)"/>
     <cq:advisorNode namePattern=".*" useTargetPlatform="false"/>
 </cq:componentQuery>
