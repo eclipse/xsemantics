@@ -25,7 +25,7 @@
 	<property name="target.platform" value="target.platform" />
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
-	<target name="buckminster" depends="cleanup" description="description">
+	<target name="buckminster" depends="cleanup,install.buckminster.headless" description="description">
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
@@ -34,23 +34,7 @@
 		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
 		<echo message="properties file: ${build.properties}" />
 
-		<java fork="true" dir="${buckminster.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
-			<classpath>
-				<fileset dir="${buckminster.home}/plugins">
-					<include name="org.eclipse.equinox.launcher_*.jar" />
-				</fileset>
-			</classpath>
-			<arg line='-update' />
-			<arg line='-data "${build.root}/buckminster.workspace"' />
-			<arg line='-configuration "${build.root}/configuration"' />
-			<arg line='--properties "${build.properties}"' />
-			<arg line='--script "${commands.file}"' />
-			<sysproperty key="projects.location" value="${projects.location}" />
-			<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
-			<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
-			<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
-			<jvmarg line=" -Xms256m -Xmx512m" />
-		</java>
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}"/>
 
 		<echo message=" " />
 		<echo message="Updatesite output in: ${build.root}/buckminster.output/it.xsemantics.site_*-eclipse.feature/site.p2/" />
