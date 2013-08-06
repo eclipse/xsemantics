@@ -109,9 +109,9 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <requires>
-      <import plugin="org.eclipse.xtext.util" version="2.3.1" match="equivalent"/>
-      <import plugin="org.eclipse.xtext.xbase.lib" version="2.3.1" match="equivalent"/>
-      <import plugin="org.eclipse.xtext" version="2.3.1" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.util" version="2.4.2" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.xbase.lib" version="2.4.2" match="equivalent"/>
+      <import plugin="org.eclipse.xtext" version="2.4.2" match="equivalent"/>
    </requires>
 
    <plugin
