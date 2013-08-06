@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
@@ -44,6 +45,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   @Inject
   private JvmTypesBuilder typesBuilder;
+  
+  @Inject
+  private IBatchTypeResolver typeResolver;
   
   @Inject
   private ITypeProvider typeProvider;
@@ -122,7 +126,8 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleXExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     
-    JvmTypeReference _type = this.typeProvider.getType(e);
+    //JvmTypeReference _type = this.typeProvider.resolveTypes(e).getActualType(e).toTypeReference();
+	JvmTypeReference _type = this.typeProvider.getType(e);
     return new Result<JvmTypeReference>(_type);
   }
   
