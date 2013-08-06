@@ -49,7 +49,7 @@ Here&apos;s an example of an FJ program:
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
 <br/>
-<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">new</span>&nbsp;A(),&nbsp;<span class="keyword">new</span>&nbsp;B()).setfst(<span class="keyword">new</span>&nbsp;A()).fst
+<span class="keyword">new</span>&nbsp;Pair(<span class="keyword">new</span>&nbsp;A(),&nbsp;<span class="keyword">new</span>&nbsp;B()).setfst(<span class="keyword">new</span>&nbsp;A()).fst<br/>
 </p>
 </div>
 </div>
@@ -66,7 +66,7 @@ Thus, if we have the following classes
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;A&nbsp;{&nbsp;<span class="keyword">int</span>&nbsp;i;&nbsp;<span class="keyword">boolean</span>&nbsp;b;&nbsp;}<br/>
-<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;A&nbsp;{&nbsp;String&nbsp;s;&nbsp;}
+<span class="keyword">class</span>&nbsp;B&nbsp;<span class="keyword">extends</span>&nbsp;A&nbsp;{&nbsp;String&nbsp;s;&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -150,7 +150,7 @@ StringConstant:&nbsp;constant=STRING;<br/>
 <br/>
 IntConstant:&nbsp;constant=INT;<br/>
 <br/>
-BoolConstant:&nbsp;constant&nbsp;=&nbsp;(<span class="string">&apos;true&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;false&apos;</span>);
+BoolConstant:&nbsp;constant&nbsp;=&nbsp;(<span class="string">&apos;true&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;false&apos;</span>);<br/>
 </p>
 </div>
 </div>
@@ -208,7 +208,7 @@ which contains some auxiliary functions that we will use in the rules.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;TypedElement&gt;&nbsp;elements<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;owner<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -250,7 +250,7 @@ Let&apos;s start with simple expressions
 &nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span>.basic=<span class="string">&apos;boolean&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;].apply(FjFactory::eINSTANCE.createBasicType())
+&nbsp;&nbsp;&nbsp;&nbsp;].apply(FjFactory::eINSTANCE.createBasicType())<br/>
 </p>
 </div>
 </div>
@@ -278,7 +278,7 @@ class for each basic type.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;fields&nbsp;=&nbsp;fields(newExp.type.classref)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;we&nbsp;want&nbsp;the&nbsp;superclasses&apos;&nbsp;fields&nbsp;first<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;newExp&nbsp;~&gt;&nbsp;newExp.args&nbsp;&lt;&lt;&nbsp;fields<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -317,7 +317,7 @@ the auxiliary function <span class="inlinecode">superclasses</span>):
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;fields&nbsp;=&nbsp;fields&nbsp;+&nbsp;EcoreUtil2::typeSelect(clazz.members,&nbsp;<span class="keyword">typeof</span>(Field))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Lists::newArrayList(fields)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -344,7 +344,7 @@ the types of the arguments are subtypes of the types of these fields
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;cast.type&nbsp;&lt;:&nbsp;expType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expType&nbsp;&lt;:&nbsp;cast.type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -368,7 +368,7 @@ and has the type of the type we cast to.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;selection&nbsp;~&gt;&nbsp;selection.args&nbsp;&lt;&lt;&nbsp;message.params<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -392,7 +392,7 @@ check that the arguments types are subtypes of the method parameters
 <div class="incode">
 <p class="code">
 <span class="keyword">axiom</span>&nbsp;TThis<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;This&nbsp;_this&nbsp;:&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;this&apos;</span>,&nbsp;ClassType)
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;This&nbsp;_this&nbsp;:&nbsp;<span class="keyword">env</span>(G,&nbsp;<span class="string">&apos;this&apos;</span>,&nbsp;ClassType)<br/>
 </p>
 </div>
 </div>
@@ -458,7 +458,7 @@ know which members are visible in that selection expression:
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;allMembers;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -490,7 +490,7 @@ the <span class="inlinecode">type</span> judgment, but using as the output argum
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;Expression&nbsp;expression&nbsp;:&nbsp;ClassType&nbsp;classType<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;classType<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -534,7 +534,7 @@ rules for this judgment:
 &nbsp;&nbsp;&nbsp;&nbsp;right.classref.name&nbsp;==&nbsp;<span class="string">"Object"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;superclasses(left.classref).contains(right.classref)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -580,7 +580,7 @@ of the expression and then checking the subtyping:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;expressionType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expression&nbsp;:&nbsp;expressionType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;expressionType&nbsp;&lt;:&nbsp;right<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -602,7 +602,7 @@ have to check whether arguments are subtypes of parameters (in the
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Expression&gt;&nbsp;expressions&nbsp;&lt;&lt;&nbsp;List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;TypedElement&gt;&nbsp;elements<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"invalid&nbsp;arguments&nbsp;for&nbsp;expected&nbsp;parameters"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;owner<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -629,7 +629,7 @@ whose (single rule) is implemented as follows:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(exp&nbsp;:&nbsp;expressions)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;exp&nbsp;&lt;|&nbsp;typedElementsIterator.next.type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -677,7 +677,7 @@ validation (<a href="FJ-example.html#FJValidation" title="Go to &quot;FJ Validat
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">derives</span>&nbsp;G&nbsp;|-&nbsp;ClassType&nbsp;left&nbsp;~~&nbsp;ClassType&nbsp;right<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;left.classref&nbsp;==&nbsp;right.classref<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -698,7 +698,7 @@ We define some checkrules (<a href="XsemanticsSyntax.html#CheckRules" title="Go 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil2::getContainerOfType(method,&nbsp;<span class="keyword">typeof</span>(Class))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;this&apos;</span>&nbsp;&lt;-&nbsp;typeForThis&nbsp;|-&nbsp;method.body.expression&nbsp;&lt;|&nbsp;method.type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -734,7 +734,7 @@ containing the method).  This is similar to what we do for FJ scoping
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -743,7 +743,7 @@ containing the method).  This is similar to what we do for FJ scoping
 For a <span class="inlinecode">Field</span> we must check that a field with the same name
 is not defined in the superclasses (for fields with the same name in the
 same class this check is already done by Xtext predefined
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/NamesAreUniqueValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.NamesAreUniqueValidator" >NamesAreUniqueValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/NamesAreUniqueValidator.java" title="View Source Code" >(src)</a>).
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/NamesAreUniqueValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.NamesAreUniqueValidator" >NamesAreUniqueValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/NamesAreUniqueValidator.java" title="View Source Code" >(src)</a>).
 Again, we rely on the auxiliary function <span class="inlinecode">fields</span>.
 </p>
 <p>
@@ -775,7 +775,7 @@ as follows:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;param.type&nbsp;~~&nbsp;previousParamsIt.next.type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -809,7 +809,7 @@ Thus, the checkrule for <span class="inlinecode">Method</span> is
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -837,7 +837,7 @@ not cyclic:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"Cyclic&nbsp;hierarchy&nbsp;for&nbsp;"</span>&nbsp;+&nbsp;cl.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;cl<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -860,7 +860,7 @@ of an FJ program, in the empty environment:
 &nbsp;&nbsp;&nbsp;&nbsp;program.main&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;<span class="comment">//&nbsp;nothing&nbsp;to&nbsp;check<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;program.main&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;mainType<br/>
-}
+}<br/>
 </p>
 </div>
 </div>

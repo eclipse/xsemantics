@@ -56,7 +56,13 @@ You can think of lambda abstraction as a function definition
 one single parameter) and a body, such as
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x.&nbsp;x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;x<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 which is the identity function (given an argument it returns the same argument). 
@@ -77,7 +83,7 @@ the parameter are correct:
 <div class="incode">
 <p class="code">
 <span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">string</span>&nbsp;.&nbsp;x<br/>
-<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">int</span>&nbsp;.&nbsp;x
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;<span class="keyword">int</span>&nbsp;.&nbsp;x<br/>
 </p>
 </div>
 </div>
@@ -94,7 +100,13 @@ Indeed, we can be more general and say that the parameter
 <span class="inlinecode">x</span> can be "any" type, using a type variable (similar to Java generics):
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;a&nbsp;.&nbsp;x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;:&nbsp;a&nbsp;.&nbsp;x<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 This function then has type <span class="inlinecode">a&nbsp;-&gt;&nbsp;a</span>; note that since we return the 
@@ -107,7 +119,13 @@ language we have the unary operator <span class="inlinecode">-</span> which can 
 Then, the function
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;-x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;-x<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 imposes <span class="inlinecode">x</span> to be an integer, thus this function has type 
@@ -118,7 +136,13 @@ Other functions can be partially generic, like the following one
 (which makes a little sense, it&apos;s used only as an example)
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;10</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;10<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 which has type <span class="inlinecode">a&nbsp;-&gt;&nbsp;<span class="keyword">int</span></span>.
@@ -132,7 +156,13 @@ For non trivial cases the type inference is more interesting than the
 examples we saw so far; for instance, consider this lambda abstraction
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;<span class="keyword">lambda</span>&nbsp;y.&nbsp;x&nbsp;y</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;<span class="keyword">lambda</span>&nbsp;y.&nbsp;x&nbsp;y<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 which has type <span class="inlinecode">(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b</span>: how can this be inferred? 
@@ -187,7 +217,13 @@ Note that there are functions which cannot be typed (at least with
 simple type systems we&apos;re used to), e.g.,
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;x&nbsp;x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x&nbsp;.&nbsp;x&nbsp;x<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 cannot be typed, since <span class="inlinecode">x</span> should be a function, say with type 
@@ -246,7 +282,7 @@ BasicType:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{StringType}&nbsp;<span class="string">&apos;string&apos;</span><br/>
 ;<br/>
 <br/>
-TypeVariable:&nbsp;typevarName=ID;
+TypeVariable:&nbsp;typevarName=ID;<br/>
 </p>
 </div>
 </div>
@@ -281,7 +317,7 @@ We start with the judgments:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;stringRep(type)&nbsp;+&nbsp;<span class="string">"&nbsp;occurs&nbsp;in&nbsp;"</span>&nbsp;+&nbsp;stringRep(other)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -316,7 +352,7 @@ and unification
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Set&lt;Entry&lt;String,&nbsp;Type&gt;&gt;&nbsp;getSubstitutions()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;substitutions.entrySet();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -343,7 +379,7 @@ in another type term (judgment <em>notoccur</em>, which takes two input paramete
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.left<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;variable&nbsp;:&gt;&nbsp;arrowType.right<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -392,7 +428,7 @@ substitutions.
 &nbsp;&nbsp;&nbsp;&nbsp;result.left&nbsp;=&nbsp;subResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;subResult<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result.right&nbsp;=&nbsp;subResult<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -436,7 +472,7 @@ The judgment for unification
 <div class="incode">
 <p class="code">
 unify&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type
+&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;originalLeft&nbsp;~~&nbsp;Type&nbsp;originalRight&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;Type&nbsp;~~&nbsp;<span class="keyword">output</span>&nbsp;Type<br/>
 </p>
 </div>
 </div>
@@ -486,7 +522,7 @@ simpler ones:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&gt;&nbsp;BasicType&nbsp;resultForVar&nbsp;~~&nbsp;BasicType&nbsp;resultForBasic<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;typeVar&nbsp;~~&nbsp;basicType&nbsp;~&gt;&nbsp;resultForVar&nbsp;~~&nbsp;resultForBasic<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -510,7 +546,7 @@ symmetric case.
 &nbsp;&nbsp;&nbsp;&nbsp;newRight&nbsp;=&nbsp;EcoreUtil::copy(newLeft)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalLeft.typevarName,&nbsp;newLeft)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;substitutions.add(originalRight.typevarName,&nbsp;newRight)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -554,7 +590,7 @@ and we map both variables to that new fresh variable.
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrow1.right&nbsp;~~&nbsp;arrow2.right&nbsp;~&gt;&nbsp;temp1&nbsp;~~&nbsp;temp2<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;newArrow1.right&nbsp;=&nbsp;temp1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;newArrow2.right&nbsp;=&nbsp;temp2<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -585,7 +621,7 @@ not a subclass of <span class="inlinecode">Term</span>:
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">or</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;lambdaUtils.createFreshTypeVariable<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -610,7 +646,7 @@ apply the possible substitutions computed so far.
 <br/>
 <span class="keyword">axiom</span>&nbsp;IntConstantType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;TypeSubstitutions&nbsp;substitutions&nbsp;|&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntConstant&nbsp;intConstant&nbsp;:&nbsp;lambdaUtils.createIntType
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntConstant&nbsp;intConstant&nbsp;:&nbsp;lambdaUtils.createIntType<br/>
 </p>
 </div>
 </div>
@@ -631,7 +667,7 @@ For the typing of a variable, one might be tempted to write
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|~&nbsp;variable.ref&nbsp;:&nbsp;type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -654,7 +690,7 @@ possible substitutions, that is:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable&nbsp;variable&nbsp;:&nbsp;Type&nbsp;type<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;EcoreUtil::copy(<span class="keyword">env</span>(G,&nbsp;variable.ref,&nbsp;Type))&nbsp;~&gt;&nbsp;type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -676,7 +712,7 @@ later in the typing rule for abstraction).
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arithmetics.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;termType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;term&nbsp;type&nbsp;must&nbsp;be&nbsp;unifiable&nbsp;with&nbsp;int&nbsp;type<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~~&nbsp;intType&nbsp;~&gt;&nbsp;intType&nbsp;~~&nbsp;intType<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -699,7 +735,7 @@ unified with <span class="inlinecode">IntType</span>.
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;paramType&nbsp;~&gt;&nbsp;paramType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;termType&nbsp;~&gt;&nbsp;termType<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;lambdaUtils.createArrowType(paramType,&nbsp;termType)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -731,7 +767,7 @@ and we return a brand new arrow type, using the two components.
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;result&nbsp;is&nbsp;the&nbsp;arrow&nbsp;right&nbsp;after&nbsp;substitutions<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;substitutions&nbsp;|&gt;&nbsp;arrowType.right&nbsp;~&gt;&nbsp;type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -748,7 +784,13 @@ If also this unification succeeds, the resulting type is the right part of the a
 Let&apos;s see, informally, how these rules infer the type for
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 To avoid ambiguities with the <span class="inlinecode">-&gt;</span> of <span class="inlinecode">ArrowType</span> in the following example we use 
@@ -792,7 +834,7 @@ This is informally the trace of the rules:
 **&nbsp;apply&nbsp;the&nbsp;substitution&nbsp;to&nbsp;the&nbsp;type&nbsp;of&nbsp;param&nbsp;and&nbsp;body<br/>
 **&nbsp;x&nbsp;of&nbsp;type&nbsp;X1&nbsp;becomes&nbsp;x&nbsp;of&nbsp;type&nbsp;<span class="keyword">int</span><br/>
 **&nbsp;the&nbsp;body&nbsp;has&nbsp;type&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
-**&nbsp;the&nbsp;type&nbsp;of&nbsp;our&nbsp;term&nbsp;is&nbsp;<span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4
+**&nbsp;the&nbsp;type&nbsp;of&nbsp;our&nbsp;term&nbsp;is&nbsp;<span class="keyword">int</span>&nbsp;-&gt;&nbsp;(<span class="keyword">int</span>&nbsp;-&gt;&nbsp;X4)&nbsp;-&gt;&nbsp;X4<br/>
 </p>
 </div>
 </div>
@@ -810,7 +852,7 @@ Thus the following lambda application terms are well typed
 <div class="incode">
 <p class="code">
 (<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(10)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;-y)<br/>
-(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(1)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;<span class="string">"foo"</span>)
+(<span class="keyword">lambda</span>&nbsp;x.&nbsp;<span class="keyword">lambda</span>&nbsp;f.&nbsp;f&nbsp;-x)&nbsp;(1)&nbsp;(<span class="keyword">lambda</span>&nbsp;y.&nbsp;<span class="string">"foo"</span>)<br/>
 </p>
 </div>
 </div>
@@ -843,7 +885,7 @@ is correct if we can assign a type to the term (starting from an empty environme
 &nbsp;&nbsp;&nbsp;&nbsp;lambdaUtils.resetCounter<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;we&nbsp;can&nbsp;type&nbsp;the&nbsp;program&nbsp;term<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">empty</span>&nbsp;|-&nbsp;<span class="keyword">new</span>&nbsp;TypeSubstitutions()&nbsp;|&gt;&nbsp;program.term&nbsp;:&nbsp;<span class="keyword">var</span>&nbsp;Type&nbsp;type<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -872,7 +914,13 @@ For instance, due to the way error markers are generated
 (<a href="XsemanticsSyntax.html#ErrorGeneration" title="Go to &quot;Error Marker Generation&quot;" >section ErrorGeneration</a>), if we have the following code
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">lambda</span>&nbsp;f&nbsp;.&nbsp;-<span class="string">&apos;f&apos;</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">lambda</span>&nbsp;f&nbsp;.&nbsp;-<span class="string">&apos;f&apos;</span><br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 we would get an error since the rule <em>ArithmeticsType</em>
@@ -945,7 +993,7 @@ This is done in the class <abbr title="it.xsemantics.example.lambda.xsemantics.L
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;beautifyType(Type&nbsp;paramType)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambdaTypeBeautifierProvider.get().beautifyTypeVariables(paramType);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -957,9 +1005,9 @@ Note that before we "beautify" the type variable names.
 </p>
 <p>
 As explained in the Xtext documentation, since we need to modify the EMF model of the program 
-in the open editor, we need to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/model/IXtextDocument.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.IXtextDocument" >IXtextDocument</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/IXtextDocument.java" title="View Source Code" >(src)</a> 
+in the open editor, we need to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/model/IXtextDocument.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.IXtextDocument" >IXtextDocument</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/IXtextDocument.java" title="View Source Code" >(src)</a> 
 and its <span class="inlinecode">modify</span> method, with a
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/concurrent/IUnitOfWork.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.util.concurrent.IUnitOfWork" >IUnitOfWork</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java" title="View Source Code" >(src)</a>; this is done by the class 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/util/concurrent/IUnitOfWork.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.util.concurrent.IUnitOfWork" >IUnitOfWork</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java" title="View Source Code" >(src)</a>; this is done by the class 
 <abbr title="it.xsemantics.example.lambda.ui.typing.LambdaTermModifier" >LambdaTermModifier</abbr>:
 </p>
 <p>
@@ -980,7 +1028,7 @@ and its <span class="inlinecode">modify</span> method, with a
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1015,7 +1063,7 @@ Then we have the code implementing the editor action (<abbr title="it.xsemantics
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.editor&nbsp;=&nbsp;targetEditor;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1031,7 +1079,7 @@ Let&apos;s see this editor action in action: suppose you have the following open
 <span class="keyword">lambda</span>&nbsp;f&nbsp;.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;g&nbsp;.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">lambda</span>&nbsp;x&nbsp;.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;(g&nbsp;x)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;(g&nbsp;x)<br/>
 </p>
 </div>
 </div>

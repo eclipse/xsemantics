@@ -27,7 +27,7 @@ in all the rules of your system.
 <div class="incode">
 <p class="code">
 <span class="keyword">inject</span>&nbsp;MyClass&nbsp;foo<br/>
-<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar
+<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar<br/>
 </p>
 </div>
 </div>
@@ -90,7 +90,7 @@ classes from EMF Ecore, and other Java classes
 &nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;nonsense&nbsp;judgment,&nbsp;just&nbsp;a&nbsp;demo<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;foobar&nbsp;||-&nbsp;List&lt;EObject&gt;&nbsp;objects&nbsp;|&gt;&nbsp;<span class="keyword">output</span>&nbsp;String&nbsp;&lt;~&nbsp;EClass&nbsp;context<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -181,7 +181,7 @@ parameter&apos;s type.
 <br/>
 <span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -223,7 +223,7 @@ For instance, consider these implementations:
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;o.eClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -240,7 +240,7 @@ is not null, and the assigns the output parameter <span class="inlinecode">resul
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;&lt;:&nbsp;o2.eClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -259,7 +259,7 @@ arguments (note that arguments can be any Xbase expression).
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;EClass&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;:&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1Type&nbsp;&lt;:&nbsp;c2<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -277,7 +277,7 @@ the output result of the invoked rule.  Then, it will invoke another rule.
 <p class="code">
 <span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -295,7 +295,7 @@ the above code for the same rule).
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -310,7 +310,7 @@ form of rules, called indeed <em>axiom</em>s
 <p class="code">
 <span class="comment">//&nbsp;assuming&nbsp;we&nbsp;don&apos;t&nbsp;want&nbsp;to&nbsp;do&nbsp;any&nbsp;check<br/>
 </span><span class="keyword">axiom</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 </p>
 </div>
 </div>
@@ -356,7 +356,7 @@ as a premise since when a premise fails the whole rule fails.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;a&nbsp;!=&nbsp;b&nbsp;}&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -409,7 +409,7 @@ for instance,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;search&nbsp;for&nbsp;the&nbsp;mapping&nbsp;for&nbsp;o.eClass.name<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;request&nbsp;it&nbsp;to&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;EClassifier<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;o.eClass.name,&nbsp;EClassifier)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -487,7 +487,7 @@ Error specifications can appear
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;EClass&nbsp;"</span>&nbsp;+&nbsp;eClass.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eClass<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;EcorePackage::eINSTANCE.ENamedElement_Name<br/>
-<span class="keyword">from</span>&nbsp;{...}
+<span class="keyword">from</span>&nbsp;{...}<br/>
 </p>
 </div>
 </div>
@@ -509,7 +509,7 @@ o.eClass.EAllSuperTypes.contains(s)<br/>
 <span class="keyword">or</span><br/>
 <span class="keyword">fail</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"my&nbsp;custom&nbsp;error"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o<br/>
 </p>
 </div>
 </div>
@@ -522,7 +522,7 @@ the class <abbr title="it.xsemantics.runtime.StringRepresentation" >StringRepres
 a string corresponding to an object.  This will do its best to generate
 a good string representation; in particular, if the object to represent
 is an EObject which actually corresponds to a node in the model of the AST,
-it will rely on <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/nodemodel/util/NodeModelUtils.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.nodemodel.util.NodeModelUtils" >NodeModelUtils</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java" title="View Source Code" >(src)</a> Xtext
+it will rely on <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/nodemodel/util/NodeModelUtils.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.nodemodel.util.NodeModelUtils" >NodeModelUtils</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java" title="View Source Code" >(src)</a> Xtext
 class to use the string which corresponds to the object in the program.
 </p>
 <p>
@@ -535,7 +535,7 @@ in the runtime module
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslStringRepresentation.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -563,7 +563,7 @@ for specific classes of your model (actually for any Java class), e.g.,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -586,7 +586,7 @@ calling <span class="inlinecode">stringRep()</span>; this is useful for error sp
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -609,7 +609,13 @@ which allows to collect nodes in a graph according to EMF features avoiding
 loops:
 </p>
 <p>
-<span class="inlinecode">getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 An invocation of <span class="inlinecode">getAll</span> will return a list of ``expected
@@ -636,7 +642,7 @@ function signatures (<em>auxiliary descriptions</em>), which have the following 
 </span><span class="keyword">auxiliary</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myFun(&lt;parameters&gt;)&nbsp;:&nbsp;&lt;returntype&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myFun2(&lt;parameters&gt;)&nbsp;<span class="comment">/*&nbsp;no&nbsp;return&nbsp;type&nbsp;*/</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -656,7 +662,7 @@ In an auxiliary function definition the return type must not be declared
 <p class="code">
 <span class="comment">//&nbsp;auxiliary&nbsp;functions&nbsp;examples<br/>
 </span><span class="keyword">auxiliary</span>&nbsp;myFun(EObject&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
-<span class="keyword">auxiliary</span>&nbsp;myFun(EClass&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}
+<span class="keyword">auxiliary</span>&nbsp;myFun(EClass&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -698,7 +704,7 @@ Such rules are of the shape
 &nbsp;&nbsp;&nbsp;&nbsp;JavaType&nbsp;objectToCheck<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;premises<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -737,7 +743,7 @@ For instance, given this system
 }<br/>
 <br/>
 <span class="keyword">axiom</span>&nbsp;EObjectType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;obj.eClass
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;obj.eClass<br/>
 </p>
 </div>
 </div>
@@ -751,7 +757,7 @@ one can specify another system in terms of this one:
 <p class="code">
 <span class="keyword">system</span>&nbsp;my.test.ExtendedSystem&nbsp;<span class="keyword">extends</span>&nbsp;my.test.System<br/>
 <br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -798,7 +804,7 @@ rules (and provide a different implementation):
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;premises<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -819,14 +825,14 @@ Xsemantics will generate two Java classes for each xsemantics system:
 			all the implementations of the system&apos;s rules and auxiliary functions;
 	</li>
 	<li>
-		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
 			subclass,
 			with the same name of the system with suffix <span class="inlinecode">Validator</span> 
 			(in particular, if the
 			<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause, <a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>,
 			is not used,
 			then the generated validator inherits from 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>,
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>,
 			otherwise it will inherit from the one specified with <span class="inlinecode"><span class="keyword">validatorExtends</span></span>) ; 
 	</li>
 </ul>
@@ -867,7 +873,7 @@ For instance, if you have
 <p class="code">
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;MyOutputClass<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -884,7 +890,7 @@ the generated Java system will feature three public methods
 &nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 <span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 </p>
 </div>
 </div>
@@ -944,7 +950,7 @@ final&nbsp;result&nbsp;provided&nbsp;by&nbsp;rule&nbsp;MyRule<br/>
 &nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;rule&nbsp;1a&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result<br/>
 &nbsp;&nbsp;rule&nbsp;2a&nbsp;used&nbsp;by&nbsp;rule&nbsp;1a<br/>
-&nbsp;&nbsp;...
+&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -962,7 +968,7 @@ This can be useful to then implement quickfixes for specific failures.
 <h3>The Generated Java Validator</h3>
 <p>
 From a system definition Xsemantics also generates a Java
-class (which extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>).
+class (which extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>).
 If you plan to use this generated validator, because you defined
 some <em>checkrule</em>s (<a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;Rules for Validator: checkrule&quot;" >section CheckRules</a>), it is better to specify
 the <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause in order to have
@@ -991,7 +997,7 @@ the generated validator of the super system.
 </p>
 <p>
 The <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause requires a
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
 subclass (the content assist will filter completions accordingly).
 The class which should be specified is the class which Xtext
 generated for you in the <span class="inlinecode">src-gen</span> folder
@@ -1003,7 +1009,13 @@ so that it extends the validator class generated by Xsemantics.
 For instance, if your validator initially looks like:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslJavaValidator&nbsp;{</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslJavaValidator&nbsp;{<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 In your system definition you should specify
@@ -1014,7 +1026,7 @@ In your system definition you should specify
 <p class="code">
 <span class="keyword">system</span>&nbsp;org.my.dsl.MyDslSemantics<br/>
 <br/>
-<span class="keyword">validatorExtends</span>&nbsp;org.my.dsl.validation.AbstractMyDslJavaValidator
+<span class="keyword">validatorExtends</span>&nbsp;org.my.dsl.validation.AbstractMyDslJavaValidator<br/>
 </p>
 </div>
 </div>
@@ -1025,7 +1037,13 @@ should be modified so that it
 extends the validator generated by Xsemantics:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSemanticsValidator&nbsp;{</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSemanticsValidator&nbsp;{<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The examples described in <a href="Expressions-example.html#Expressions" title="Go to &quot;An Expression Language&quot;" >section Expressions</a> and in
@@ -1058,7 +1076,7 @@ Summarizing, for this example your validator should look like this:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1080,7 +1098,7 @@ according to the error information found in the trace of a failure
 </p>
 <p>
 When generating error markers the validator will use only the error information
-that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> which corresponds to
+that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> which corresponds to
 an actual node in the AST.  Note that this error information can be customized in
 a Xsemantics system by explicit error specifications (see <a href="XsemanticsSyntax.html#ErrorSpecification" title="Go to &quot;Error Specification&quot;" >section ErrorSpecification</a>
 and <a href="XsemanticsSyntax.html#ExplicitFailure" title="Go to &quot;Explicit Failure&quot;" >section ExplicitFailure</a>), thus, you should keep in mind the above strategy when
@@ -1098,7 +1116,13 @@ For instance, if you consider the example of expressions (<a href="Expressions-e
 and the following expression which cannot be typed
 </p>
 <p>
-<span class="inlinecode">i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the generated validator will generated an error marker to the inner most
