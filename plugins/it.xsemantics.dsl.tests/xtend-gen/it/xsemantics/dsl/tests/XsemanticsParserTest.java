@@ -13,7 +13,6 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Type;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

@@ -1187,6 +1187,17 @@ class XsemanticsTestFiles {
 		e.name == 'foo'
 	}
 	'''
+
+	def testScopingForParameters() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		c.name != null
+		o.eContainer != null
+	}
+	'''
 	
 	def testForBooleanVariableDeclaration() '''
 	«testJudgmentDescriptionsEObjectEClass»

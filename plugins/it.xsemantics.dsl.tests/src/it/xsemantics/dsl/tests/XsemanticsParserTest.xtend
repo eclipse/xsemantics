@@ -8,7 +8,6 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Type
-import junit.framework.Assert
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.junit4.InjectWith
@@ -18,6 +17,7 @@ import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 

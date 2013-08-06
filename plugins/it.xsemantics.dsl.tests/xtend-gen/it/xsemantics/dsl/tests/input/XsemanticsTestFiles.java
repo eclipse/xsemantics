@@ -2663,6 +2663,30 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testScopingForParameters() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("c.name != null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("o.eContainer != null");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testForBooleanVariableDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
