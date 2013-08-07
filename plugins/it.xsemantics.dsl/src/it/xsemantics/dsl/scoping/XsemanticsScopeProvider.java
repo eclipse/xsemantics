@@ -21,6 +21,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
@@ -40,7 +41,7 @@ import com.google.inject.Inject;
  * how and when to use it
  * 
  */
-public class XsemanticsScopeProvider extends XbaseScopeProvider {
+public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	@Inject
 	protected XsemanticsUtils utils;
 

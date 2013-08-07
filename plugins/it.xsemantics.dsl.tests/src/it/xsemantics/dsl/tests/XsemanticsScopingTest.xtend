@@ -20,16 +20,16 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 	@Test
 	def void testScopingForParameters() {
 		val system = testFiles.testScopingForParameters.parse
-		system.validate
+		system.assertNoErrors
 		val xBlockExpression = (system.rules.head as RuleWithPremises).premises as XBlockExpression
 		val leftOperandReferringToOutputParam = ((xBlockExpression).expressions.head as XBinaryOperation).leftOperand
-		println((leftOperandReferringToOutputParam as XMemberFeatureCall).feature)
+		//println((leftOperandReferringToOutputParam as XMemberFeatureCall).feature)
 		val leftOperandReferringToInputParam = ((xBlockExpression).expressions.get(1) as XBinaryOperation).leftOperand
-		println((leftOperandReferringToInputParam as XMemberFeatureCall).feature)
+		//println((leftOperandReferringToInputParam as XMemberFeatureCall).feature)
 		"org.eclipse.emf.ecore.EObject.eContainer()".assertEqualsStrings((leftOperandReferringToInputParam as XMemberFeatureCall).
 			feature.identifier
 		)
-		"name".assertEqualsStrings((leftOperandReferringToOutputParam as XMemberFeatureCall).
+		"org.eclipse.emf.ecore.ENamedElement.getName()".assertEqualsStrings((leftOperandReferringToOutputParam as XMemberFeatureCall).
 			feature.identifier
 		)
 	}

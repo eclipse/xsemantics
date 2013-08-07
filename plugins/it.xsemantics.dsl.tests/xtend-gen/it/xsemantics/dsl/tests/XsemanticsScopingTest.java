@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +32,7 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
   public void testScopingForParameters() {
     CharSequence _testScopingForParameters = this.testFiles.testScopingForParameters();
     final XsemanticsSystem system = this.parse(_testScopingForParameters);
-    this._validationTestHelper.validate(system);
+    this._validationTestHelper.assertNoErrors(system);
     EList<Rule> _rules = system.getRules();
     Rule _head = IterableExtensions.<Rule>head(_rules);
     XExpression _premises = ((RuleWithPremises) _head).getPremises();
@@ -41,18 +40,14 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     EList<XExpression> _expressions = xBlockExpression.getExpressions();
     XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
     final XExpression leftOperandReferringToOutputParam = ((XBinaryOperation) _head_1).getLeftOperand();
-    JvmIdentifiableElement _feature = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
-    InputOutput.<JvmIdentifiableElement>println(_feature);
     EList<XExpression> _expressions_1 = xBlockExpression.getExpressions();
     XExpression _get = _expressions_1.get(1);
     final XExpression leftOperandReferringToInputParam = ((XBinaryOperation) _get).getLeftOperand();
-    JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall) leftOperandReferringToInputParam).getFeature();
-    InputOutput.<JvmIdentifiableElement>println(_feature_1);
-    JvmIdentifiableElement _feature_2 = ((XMemberFeatureCall) leftOperandReferringToInputParam).getFeature();
-    String _identifier = _feature_2.getIdentifier();
+    JvmIdentifiableElement _feature = ((XMemberFeatureCall) leftOperandReferringToInputParam).getFeature();
+    String _identifier = _feature.getIdentifier();
     this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eContainer()", _identifier);
-    JvmIdentifiableElement _feature_3 = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
-    String _identifier_1 = _feature_3.getIdentifier();
-    this.assertEqualsStrings("name", _identifier_1);
+    JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
+    String _identifier_1 = _feature_1.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.ENamedElement.getName()", _identifier_1);
   }
 }
