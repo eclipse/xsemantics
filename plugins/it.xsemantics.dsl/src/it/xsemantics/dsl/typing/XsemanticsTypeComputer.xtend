@@ -48,9 +48,12 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected def _computeTypes(RuleInvocation e, ITypeComputationState state) {
-		e.expressions.forEach[
-			it.expression.computeTypes(state)
-		]
+		for (ruleInvkExp : e.expressions) {
+			ruleInvkExp.expression.computeTypes(state)
+		}
+//		for (varDecl : e.variableDeclarations) {
+//			addLocalToCurrentScope(varDecl, state)
+//		}
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 

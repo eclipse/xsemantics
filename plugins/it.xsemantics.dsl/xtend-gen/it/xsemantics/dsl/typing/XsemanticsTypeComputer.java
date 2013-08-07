@@ -92,13 +92,10 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   
   protected void _computeTypes(final RuleInvocation e, final ITypeComputationState state) {
     EList<RuleInvocationExpression> _expressions = e.getExpressions();
-    final Procedure1<RuleInvocationExpression> _function = new Procedure1<RuleInvocationExpression>() {
-        public void apply(final RuleInvocationExpression it) {
-          XExpression _expression = it.getExpression();
-          XsemanticsTypeComputer.this.computeTypes(_expression, state);
-        }
-      };
-    IterableExtensions.<RuleInvocationExpression>forEach(_expressions, _function);
+    for (final RuleInvocationExpression ruleInvkExp : _expressions) {
+      XExpression _expression = ruleInvkExp.getExpression();
+      this.computeTypes(_expression, state);
+    }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);
   }
