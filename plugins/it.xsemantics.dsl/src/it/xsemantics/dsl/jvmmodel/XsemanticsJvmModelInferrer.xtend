@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import org.eclipse.xtext.common.types.JvmExecutable
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -832,12 +833,24 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			parameters += rule.paramForEnvironment
    			parameters += rule.ruleApplicationTraceParam
    			parameters += rule.inputParameters
-   			
-   			body = [
-   				rule.declareVariablesForOutputParams(it) 
-   				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
-   			]
+
+			assignBody(rule)    			
+//   			body = [
+//   				rule.declareVariablesForOutputParams(it) 
+//   				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
+//   			]
 		]
+	}
+	
+	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
+		logicalContainer.body = [
+			// TODO this is duplicate also in xbase compiler
+	   		rule.declareVariablesForOutputParams(it)
+	   	]
+	}
+
+	def dispatch assignBody(JvmExecutable logicalContainer, RuleWithPremises rule) {
+		logicalContainer.body = rule.premises
 	}
 
 	def compileApplyAuxiliaryFunction(AuxiliaryFunction auxfun) {

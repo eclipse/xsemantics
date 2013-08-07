@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -1725,19 +1726,25 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           EList<JvmFormalParameter> _parameters_2 = it.getParameters();
           List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(rule);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_2, _inputParameters);
-          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                XsemanticsJvmModelInferrer.this.declareVariablesForOutputParams(rule, it);
-                JudgmentDescription _judgmentDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
-                JvmTypeReference _resultType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
-                XsemanticsJvmModelInferrer.this.compileRuleBody(rule, _resultType, it);
-              }
-            };
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+          XsemanticsJvmModelInferrer.this.assignBody(it, rule);
         }
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _string, _resultType, _function);
     return _method;
+  }
+  
+  protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          XsemanticsJvmModelInferrer.this.declareVariablesForOutputParams(rule, it);
+        }
+      };
+    this._jvmTypesBuilder.setBody(logicalContainer, _function);
+  }
+  
+  protected void _assignBody(final JvmExecutable logicalContainer, final RuleWithPremises rule) {
+    XExpression _premises = rule.getPremises();
+    this._jvmTypesBuilder.setBody(logicalContainer, _premises);
   }
   
   public JvmOperation compileApplyAuxiliaryFunction(final AuxiliaryFunction auxfun) {
@@ -2166,6 +2173,19 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ts, acceptor, isPreIndexingPhase).toString());
+    }
+  }
+  
+  public void assignBody(final JvmExecutable logicalContainer, final Rule rule) {
+    if (rule instanceof RuleWithPremises) {
+      _assignBody(logicalContainer, (RuleWithPremises)rule);
+      return;
+    } else if (rule != null) {
+      _assignBody(logicalContainer, rule);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(logicalContainer, rule).toString());
     }
   }
   
