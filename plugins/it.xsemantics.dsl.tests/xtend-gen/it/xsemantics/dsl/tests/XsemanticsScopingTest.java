@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.tests;
 
+import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -9,10 +10,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
@@ -22,11 +25,16 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class XsemanticsScopingTest extends XsemanticsBaseTest {
+  @Inject
+  @Extension
+  private ValidationTestHelper _validationTestHelper;
+  
   @Test
   public void testScopingForParameters() {
     CharSequence _testScopingForParameters = this.testFiles.testScopingForParameters();
-    XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(_testScopingForParameters);
-    EList<Rule> _rules = _parseAndAssertNoError.getRules();
+    final XsemanticsSystem system = this.parse(_testScopingForParameters);
+    this._validationTestHelper.validate(system);
+    EList<Rule> _rules = system.getRules();
     Rule _head = IterableExtensions.<Rule>head(_rules);
     XExpression _premises = ((RuleWithPremises) _head).getPremises();
     final XBlockExpression xBlockExpression = ((XBlockExpression) _premises);
@@ -36,9 +44,15 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     JvmIdentifiableElement _feature = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
     InputOutput.<JvmIdentifiableElement>println(_feature);
     EList<XExpression> _expressions_1 = xBlockExpression.getExpressions();
-    XExpression _head_2 = IterableExtensions.<XExpression>head(_expressions_1);
-    final XExpression leftOperandReferringToInputParam = ((XBinaryOperation) _head_2).getLeftOperand();
+    XExpression _get = _expressions_1.get(1);
+    final XExpression leftOperandReferringToInputParam = ((XBinaryOperation) _get).getLeftOperand();
     JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall) leftOperandReferringToInputParam).getFeature();
     InputOutput.<JvmIdentifiableElement>println(_feature_1);
+    JvmIdentifiableElement _feature_2 = ((XMemberFeatureCall) leftOperandReferringToInputParam).getFeature();
+    String _identifier = _feature_2.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eContainer()", _identifier);
+    JvmIdentifiableElement _feature_3 = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
+    String _identifier_1 = _feature_3.getIdentifier();
+    this.assertEqualsStrings("name", _identifier_1);
   }
 }

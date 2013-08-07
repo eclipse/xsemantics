@@ -27,7 +27,7 @@ in all the rules of your system.
 <div class="incode">
 <p class="code">
 <span class="keyword">inject</span>&nbsp;MyClass&nbsp;foo<br/>
-<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar<br/>
+<span class="keyword">inject</span>&nbsp;MyOtherUtilityClass&nbsp;bar
 </p>
 </div>
 </div>
@@ -90,7 +90,7 @@ classes from EMF Ecore, and other Java classes
 &nbsp;&nbsp;&nbsp;&nbsp;interpret&nbsp;|-&nbsp;EObject&nbsp;exp&nbsp;~&gt;&nbsp;<span class="keyword">output</span>&nbsp;EObject<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;nonsense&nbsp;judgment,&nbsp;just&nbsp;a&nbsp;demo<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;foobar&nbsp;||-&nbsp;List&lt;EObject&gt;&nbsp;objects&nbsp;|&gt;&nbsp;<span class="keyword">output</span>&nbsp;String&nbsp;&lt;~&nbsp;EClass&nbsp;context<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -181,7 +181,7 @@ parameter&apos;s type.
 <br/>
 <span class="keyword">rule</span>&nbsp;MyThirdSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -223,7 +223,7 @@ For instance, consider these implementations:
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;o.eClass<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -240,7 +240,7 @@ is not null, and the assigns the output parameter <span class="inlinecode">resul
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o1&nbsp;&lt;:&nbsp;EObject&nbsp;o2<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;&lt;:&nbsp;o2.eClass<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -259,7 +259,7 @@ arguments (note that arguments can be any Xbase expression).
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;EClass&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1&nbsp;:&nbsp;o1Type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;o1Type&nbsp;&lt;:&nbsp;c2<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -277,7 +277,7 @@ the output result of the invoked rule.  Then, it will invoke another rule.
 <p class="code">
 <span class="keyword">rule</span>&nbsp;MySecondSubtypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;subtype&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EClass&nbsp;c1&nbsp;&lt;:&nbsp;EClass&nbsp;c2<br/>
-<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}<br/>
+<span class="keyword">from</span>&nbsp;{&nbsp;<span class="comment">/*&nbsp;premises&nbsp;*/</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -295,7 +295,7 @@ the above code for the same rule).
 </span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;o.eClass&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -310,7 +310,7 @@ form of rules, called indeed <em>axiom</em>s
 <p class="code">
 <span class="comment">//&nbsp;assuming&nbsp;we&nbsp;don&apos;t&nbsp;want&nbsp;to&nbsp;do&nbsp;any&nbsp;check<br/>
 </span><span class="keyword">axiom</span>&nbsp;MyFirstTypeRule&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;rule&nbsp;for&nbsp;the&nbsp;judgment&nbsp;&apos;type&apos;<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass
 </p>
 </div>
 </div>
@@ -356,7 +356,7 @@ as a premise since when a premise fails the whole rule fails.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;!=&nbsp;b&nbsp;<span class="comment">//&nbsp;NOT&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;a&nbsp;!=&nbsp;b&nbsp;}&nbsp;<span class="comment">//&nbsp;boolean&nbsp;premise<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -409,7 +409,7 @@ for instance,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;search&nbsp;for&nbsp;the&nbsp;mapping&nbsp;for&nbsp;o.eClass.name<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;request&nbsp;it&nbsp;to&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;EClassifier<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;<span class="keyword">env</span>(G,&nbsp;o.eClass.name,&nbsp;EClassifier)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -487,7 +487,7 @@ Error specifications can appear
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;EClass&nbsp;"</span>&nbsp;+&nbsp;eClass.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;eClass<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">feature</span>&nbsp;EcorePackage::eINSTANCE.ENamedElement_Name<br/>
-<span class="keyword">from</span>&nbsp;{...}<br/>
+<span class="keyword">from</span>&nbsp;{...}
 </p>
 </div>
 </div>
@@ -509,7 +509,7 @@ o.eClass.EAllSuperTypes.contains(s)<br/>
 <span class="keyword">or</span><br/>
 <span class="keyword">fail</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"my&nbsp;custom&nbsp;error"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">source</span>&nbsp;o
 </p>
 </div>
 </div>
@@ -535,7 +535,7 @@ in the runtime module
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;StringRepresentation&gt;&nbsp;bindStringRepresentation()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslStringRepresentation.<span class="keyword">class</span>;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -563,7 +563,7 @@ for specific classes of your model (actually for any Java class), e.g.,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;stringRep(String&nbsp;s)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"&apos;"</span>&nbsp;+&nbsp;s&nbsp;+&nbsp;<span class="string">"&apos;"</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -586,7 +586,7 @@ calling <span class="inlinecode">stringRep()</span>; this is useful for error sp
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;EClassifier<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">error</span>&nbsp;<span class="string">"cannot&nbsp;type&nbsp;"</span>&nbsp;+&nbsp;stringRep(obj)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -609,13 +609,7 @@ which allows to collect nodes in a graph according to EMF features avoiding
 loops:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">getAll(eObject,&nbsp;feature&nbsp;to&nbsp;collect,&nbsp;feature&nbsp;to&nbsp;follow,&nbsp;expected&nbsp;type)</span>
 </p>
 <p>
 An invocation of <span class="inlinecode">getAll</span> will return a list of ``expected
@@ -642,7 +636,7 @@ function signatures (<em>auxiliary descriptions</em>), which have the following 
 </span><span class="keyword">auxiliary</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myFun(&lt;parameters&gt;)&nbsp;:&nbsp;&lt;returntype&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myFun2(&lt;parameters&gt;)&nbsp;<span class="comment">/*&nbsp;no&nbsp;return&nbsp;type&nbsp;*/</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -662,7 +656,7 @@ In an auxiliary function definition the return type must not be declared
 <p class="code">
 <span class="comment">//&nbsp;auxiliary&nbsp;functions&nbsp;examples<br/>
 </span><span class="keyword">auxiliary</span>&nbsp;myFun(EObject&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
-<span class="keyword">auxiliary</span>&nbsp;myFun(EClass&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}<br/>
+<span class="keyword">auxiliary</span>&nbsp;myFun(EClass&nbsp;o,&nbsp;String&nbsp;s)&nbsp;{&nbsp;...&nbsp;}
 </p>
 </div>
 </div>
@@ -704,7 +698,7 @@ Such rules are of the shape
 &nbsp;&nbsp;&nbsp;&nbsp;JavaType&nbsp;objectToCheck<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;premises<br/>
-</span>}<br/>
+</span>}
 </p>
 </div>
 </div>
@@ -743,7 +737,7 @@ For instance, given this system
 }<br/>
 <br/>
 <span class="keyword">axiom</span>&nbsp;EObjectType<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;obj.eClass<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;obj&nbsp;:&nbsp;obj.eClass
 </p>
 </div>
 </div>
@@ -757,7 +751,7 @@ one can specify another system in terms of this one:
 <p class="code">
 <span class="keyword">system</span>&nbsp;my.test.ExtendedSystem&nbsp;<span class="keyword">extends</span>&nbsp;my.test.System<br/>
 <br/>
-...<br/>
+...
 </p>
 </div>
 </div>
@@ -804,7 +798,7 @@ rules (and provide a different implementation):
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;EObject&nbsp;o&nbsp;:&nbsp;o.eClass<br/>
 <span class="keyword">from</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;premises<br/>
-</span>}<br/>
+</span>}
 </p>
 </div>
 </div>
@@ -873,7 +867,7 @@ For instance, if you have
 <p class="code">
 <span class="keyword">judgments</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;:&nbsp;<span class="keyword">output</span>&nbsp;MyOutputClass<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -890,7 +884,7 @@ the generated Java system will feature three public methods
 &nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
 <span class="keyword">public</span>&nbsp;Result&lt;MyOutputClass&gt;&nbsp;myjudgment(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)
 </p>
 </div>
 </div>
@@ -950,7 +944,7 @@ final&nbsp;result&nbsp;provided&nbsp;by&nbsp;rule&nbsp;MyRule<br/>
 &nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;rule&nbsp;1a&nbsp;used&nbsp;by&nbsp;MyRule&nbsp;to&nbsp;get&nbsp;to&nbsp;the&nbsp;result<br/>
 &nbsp;&nbsp;rule&nbsp;2a&nbsp;used&nbsp;by&nbsp;rule&nbsp;1a<br/>
-&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;...
 </p>
 </div>
 </div>
@@ -1009,13 +1003,7 @@ so that it extends the validator class generated by Xsemantics.
 For instance, if your validator initially looks like:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslJavaValidator&nbsp;{<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslJavaValidator&nbsp;{</span>
 </p>
 <p>
 In your system definition you should specify
@@ -1026,7 +1014,7 @@ In your system definition you should specify
 <p class="code">
 <span class="keyword">system</span>&nbsp;org.my.dsl.MyDslSemantics<br/>
 <br/>
-<span class="keyword">validatorExtends</span>&nbsp;org.my.dsl.validation.AbstractMyDslJavaValidator<br/>
+<span class="keyword">validatorExtends</span>&nbsp;org.my.dsl.validation.AbstractMyDslJavaValidator
 </p>
 </div>
 </div>
@@ -1037,13 +1025,7 @@ should be modified so that it
 extends the validator generated by Xsemantics:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSemanticsValidator&nbsp;{<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslJavaValidator&nbsp;<span class="keyword">extends</span>&nbsp;MyDslSemanticsValidator&nbsp;{</span>
 </p>
 <p>
 The examples described in <a href="Expressions-example.html#Expressions" title="Go to &quot;An Expression Language&quot;" >section Expressions</a> and in
@@ -1076,7 +1058,7 @@ Summarizing, for this example your validator should look like this:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.add(org.xtext.example.mydsl.myDsl.MyDslPackage.eINSTANCE);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -1116,13 +1098,7 @@ For instance, if you consider the example of expressions (<a href="Expressions-e
 and the following expression which cannot be typed
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">i&nbsp;=&nbsp;(1&nbsp;+&nbsp;5)&nbsp;-&nbsp;(10&nbsp;*&nbsp;true)</span>
 </p>
 <p>
 the generated validator will generated an error marker to the inner most
