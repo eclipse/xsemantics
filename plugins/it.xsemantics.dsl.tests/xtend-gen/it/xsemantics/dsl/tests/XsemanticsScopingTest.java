@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,5 +50,20 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
     String _identifier_1 = _feature_1.getIdentifier();
     this.assertEqualsStrings("org.eclipse.emf.ecore.ENamedElement.getName()", _identifier_1);
+  }
+  
+  @Test
+  public void testScopingForVariableAsOutputParam() {
+    CharSequence _testScopingForVariableDeclarationAsOutputArgument = this.testFiles.testScopingForVariableDeclarationAsOutputArgument();
+    final XsemanticsSystem system = this.parse(_testScopingForVariableDeclarationAsOutputArgument);
+    EList<Rule> _rules = system.getRules();
+    Rule _head = IterableExtensions.<Rule>head(_rules);
+    XExpression _premises = ((RuleWithPremises) _head).getPremises();
+    final XBlockExpression xBlockExpression = ((XBlockExpression) _premises);
+    EList<XExpression> _expressions = xBlockExpression.getExpressions();
+    XExpression _get = _expressions.get(1);
+    final XExpression leftOperandReferringToOutputParam = ((XBinaryOperation) _get).getLeftOperand();
+    JvmIdentifiableElement _feature = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
+    InputOutput.<JvmIdentifiableElement>println(_feature);
   }
 }

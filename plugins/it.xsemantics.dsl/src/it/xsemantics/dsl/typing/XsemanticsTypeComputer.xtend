@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
+import org.eclipse.xtext.xbase.XVariableDeclaration
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -48,8 +49,15 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected def _computeTypes(RuleInvocation e, ITypeComputationState state) {
-		for (ruleInvkExp : e.expressions) {
-			ruleInvkExp.computeTypes(state)
+//		for (ruleInvkExp : e.expressions) {
+//			ruleInvkExp.computeTypes(state)
+//		}
+		for(expression: e.expressions) {
+			val expressionState = state.withoutExpectation();
+			expressionState.computeTypes(expression);
+			if (expression instanceof XVariableDeclaration) {
+				addLocalToCurrentScope(expression as XVariableDeclaration, state);
+			}
 		}
 //		for (varDecl : e.variableDeclarations) {
 //			addLocalToCurrentScope(varDecl, state)

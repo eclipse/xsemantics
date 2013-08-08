@@ -34,4 +34,13 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testScopingForVariableAsOutputParam() {
+		val system = testFiles.testScopingForVariableDeclarationAsOutputArgument.parse
+		//system.assertNoErrors
+		val xBlockExpression = (system.rules.head as RuleWithPremises).premises as XBlockExpression
+		val leftOperandReferringToOutputParam = ((xBlockExpression).expressions.get(1) as XBinaryOperation).leftOperand
+		println((leftOperandReferringToOutputParam as XMemberFeatureCall).feature)
+	}
+
 }

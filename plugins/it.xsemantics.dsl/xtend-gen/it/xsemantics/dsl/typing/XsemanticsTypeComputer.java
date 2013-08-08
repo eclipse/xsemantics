@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -91,8 +92,14 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   
   protected void _computeTypes(final RuleInvocation e, final ITypeComputationState state) {
     EList<XExpression> _expressions = e.getExpressions();
-    for (final XExpression ruleInvkExp : _expressions) {
-      this.computeTypes(ruleInvkExp, state);
+    for (final XExpression expression : _expressions) {
+      {
+        final ITypeComputationState expressionState = state.withoutExpectation();
+        expressionState.computeTypes(expression);
+        if ((expression instanceof XVariableDeclaration)) {
+          this.addLocalToCurrentScope(((XVariableDeclaration) expression), state);
+        }
+      }
     }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);
