@@ -40,7 +40,9 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 		//system.assertNoErrors
 		val xBlockExpression = (system.rules.head as RuleWithPremises).premises as XBlockExpression
 		val leftOperandReferringToOutputParam = ((xBlockExpression).expressions.get(1) as XBinaryOperation).leftOperand
-		println((leftOperandReferringToOutputParam as XMemberFeatureCall).feature)
+		"org.eclipse.emf.ecore.ENamedElement.getName()".assertEqualsStrings((leftOperandReferringToOutputParam as XMemberFeatureCall).
+			feature.identifier
+		)
 	}
 
 }

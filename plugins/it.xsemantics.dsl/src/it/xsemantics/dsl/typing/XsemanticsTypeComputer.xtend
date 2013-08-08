@@ -13,6 +13,8 @@ import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeCo
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -33,7 +35,8 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		}
 	}
 	
-	override void _computeTypes(XBlockExpression b, ITypeComputationState state) {
+	override void _computeTypes(XBlockExpression b, ITypeComputationState typeState) {
+		var state = typeState
 		if (b.eContainer instanceof RuleWithPremises) {
 			val rule = b.eContainer as RuleWithPremises
 
@@ -42,26 +45,65 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 				state.addLocalToCurrentScope(outputParam.parameter)				
 			}
 
-			super._computeTypes(b, state.withoutRootExpectation)
-		} else {
-			super._computeTypes(b, state)
+			// the premises block should not be checked against
+			// return type
+			state = state.withoutRootExpectation
+		}
+		
+		//super._computeTypes(b, state)
+		
+		// this is copied (and translated to Xtend) from the base class
+		for (expectation: state.getExpectations()) {
+			val expectedType = expectation.getExpectedType();
+			if (expectedType != null && expectedType.isPrimitiveVoid()) {
+				val expressions = b.getExpressions();
+				if (!expressions.isEmpty()) {
+					for(XExpression expression: expressions) {
+						val expressionState = state.withoutExpectation(); // no expectation
+						expressionState.computeTypes(expression);
+						expression.addVariableDeclarationsToScope(state);
+					}
+				}
+				expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+			} else {
+				val expressions = b.getExpressions();
+				if (!expressions.isEmpty()) {
+					for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
+						val expressionState = state.withoutExpectation();
+						expressionState.computeTypes(expression);
+						expression.addVariableDeclarationsToScope(state);
+					}
+					val lastExpression = IterableExtensions.last(expressions);
+					state.computeTypes(lastExpression);
+					// add the last expression to the scope, too in order validate for duplicate names, even
+					// though the variable declaration could be removed automatically to keep only the side effect
+					// of the initializer
+					lastExpression.addVariableDeclarationsToScope(state);
+				} else {
+					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
+				}
+			}
+		}
+	}
+	
+	protected def void addVariableDeclarationsToScope(XExpression e, ITypeComputationState state) {
+		switch (e) {
+			XVariableDeclaration : addLocalToCurrentScope(e, state)
+			RuleInvocation : {
+				for (exp : e.expressions) {
+					if (exp instanceof XVariableDeclaration) {
+						addLocalToCurrentScope(exp as XVariableDeclaration, state);
+					}
+				}
+			}
 		}
 	}
 	
 	protected def _computeTypes(RuleInvocation e, ITypeComputationState state) {
-//		for (ruleInvkExp : e.expressions) {
-//			ruleInvkExp.computeTypes(state)
-//		}
 		for(expression: e.expressions) {
 			val expressionState = state.withoutExpectation();
 			expressionState.computeTypes(expression);
-			if (expression instanceof XVariableDeclaration) {
-				addLocalToCurrentScope(expression as XVariableDeclaration, state);
-			}
 		}
-//		for (varDecl : e.variableDeclarations) {
-//			addLocalToCurrentScope(varDecl, state)
-//		}
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 

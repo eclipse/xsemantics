@@ -1,5 +1,6 @@
 package it.xsemantics.dsl.typing;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import it.xsemantics.dsl.util.XsemanticsUtils;
@@ -24,6 +25,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -73,7 +78,8 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
     }
   }
   
-  public void _computeTypes(final XBlockExpression b, final ITypeComputationState state) {
+  public void _computeTypes(final XBlockExpression b, final ITypeComputationState typeState) {
+    ITypeComputationState state = typeState;
     EObject _eContainer = b.eContainer();
     if ((_eContainer instanceof RuleWithPremises)) {
       EObject _eContainer_1 = b.eContainer();
@@ -84,9 +90,83 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
         state.addLocalToCurrentScope(_parameter);
       }
       ITypeComputationState _withoutRootExpectation = state.withoutRootExpectation();
-      super._computeTypes(b, _withoutRootExpectation);
-    } else {
-      super._computeTypes(b, state);
+      state = _withoutRootExpectation;
+    }
+    List<? extends ITypeExpectation> _expectations = state.getExpectations();
+    for (final ITypeExpectation expectation : _expectations) {
+      {
+        final LightweightTypeReference expectedType = expectation.getExpectedType();
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(expectedType, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          boolean _isPrimitiveVoid = expectedType.isPrimitiveVoid();
+          _and = (_notEquals && _isPrimitiveVoid);
+        }
+        if (_and) {
+          final EList<XExpression> expressions = b.getExpressions();
+          boolean _isEmpty = expressions.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            for (final XExpression expression : expressions) {
+              {
+                final ITypeComputationState expressionState = state.withoutExpectation();
+                expressionState.computeTypes(expression);
+                this.addVariableDeclarationsToScope(expression, state);
+              }
+            }
+          }
+          LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
+          expectation.acceptActualType(_primitiveVoid, ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+        } else {
+          final EList<XExpression> expressions_1 = b.getExpressions();
+          boolean _isEmpty_1 = expressions_1.isEmpty();
+          boolean _not_1 = (!_isEmpty_1);
+          if (_not_1) {
+            int _size = expressions_1.size();
+            int _minus = (_size - 1);
+            List<XExpression> _subList = expressions_1.subList(0, _minus);
+            for (final XExpression expression_1 : _subList) {
+              {
+                final ITypeComputationState expressionState = state.withoutExpectation();
+                expressionState.computeTypes(expression_1);
+                this.addVariableDeclarationsToScope(expression_1, state);
+              }
+            }
+            final XExpression lastExpression = IterableExtensions.<XExpression>last(expressions_1);
+            state.computeTypes(lastExpression);
+            this.addVariableDeclarationsToScope(lastExpression, state);
+          } else {
+            ITypeReferenceOwner _referenceOwner = expectation.getReferenceOwner();
+            AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
+            expectation.acceptActualType(_anyTypeReference, ConformanceHint.UNCHECKED);
+          }
+        }
+      }
+    }
+  }
+  
+  protected void addVariableDeclarationsToScope(final XExpression e, final ITypeComputationState state) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (e instanceof XVariableDeclaration) {
+        final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)e;
+        _matched=true;
+        this.addLocalToCurrentScope(_xVariableDeclaration, state);
+      }
+    }
+    if (!_matched) {
+      if (e instanceof RuleInvocation) {
+        final RuleInvocation _ruleInvocation = (RuleInvocation)e;
+        _matched=true;
+        EList<XExpression> _expressions = _ruleInvocation.getExpressions();
+        for (final XExpression exp : _expressions) {
+          if ((exp instanceof XVariableDeclaration)) {
+            this.addLocalToCurrentScope(((XVariableDeclaration) exp), state);
+          }
+        }
+      }
     }
   }
   
@@ -96,9 +176,6 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
       {
         final ITypeComputationState expressionState = state.withoutExpectation();
         expressionState.computeTypes(expression);
-        if ((expression instanceof XVariableDeclaration)) {
-          this.addLocalToCurrentScope(((XVariableDeclaration) expression), state);
-        }
       }
     }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
