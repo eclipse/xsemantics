@@ -71,9 +71,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//RuleInvocation/expressions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//RuleInvocation/relationSymbols"/>
     </genClasses>
-    <genClasses ecoreClass="Xsemantics.ecore#//RuleInvocationExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//RuleInvocationExpression/expression"/>
-    </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//EnvironmentSpecification"/>
     <genClasses ecoreClass="Xsemantics.ecore#//EnvironmentReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//EnvironmentReference/environment"/>

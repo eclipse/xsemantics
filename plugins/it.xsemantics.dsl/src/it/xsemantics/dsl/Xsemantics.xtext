@@ -132,8 +132,8 @@ RuleInvocation:
 //	(error=ErrorSpecification)? we don't need it: we can use or fail error...
 ;
 
-RuleInvocationExpression:
-	=>expression=(XVariableDeclaration | XExpression)
+RuleInvocationExpression returns xbase::XExpression:
+	XVariableDeclaration | XExpression
 ;
 
 EnvironmentSpecification:

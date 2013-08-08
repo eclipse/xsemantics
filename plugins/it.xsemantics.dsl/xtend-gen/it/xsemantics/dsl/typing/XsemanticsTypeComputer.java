@@ -8,7 +8,6 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import java.util.List;
@@ -91,10 +90,9 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   }
   
   protected void _computeTypes(final RuleInvocation e, final ITypeComputationState state) {
-    EList<RuleInvocationExpression> _expressions = e.getExpressions();
-    for (final RuleInvocationExpression ruleInvkExp : _expressions) {
-      XExpression _expression = ruleInvkExp.getExpression();
-      this.computeTypes(_expression, state);
+    EList<XExpression> _expressions = e.getExpressions();
+    for (final XExpression ruleInvkExp : _expressions) {
+      this.computeTypes(ruleInvkExp, state);
     }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);

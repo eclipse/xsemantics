@@ -76,7 +76,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
       case XsemanticsPackage.CHECK_RULE: return createCheckRule();
       case XsemanticsPackage.RULE_CONCLUSION: return createRuleConclusion();
       case XsemanticsPackage.RULE_INVOCATION: return createRuleInvocation();
-      case XsemanticsPackage.RULE_INVOCATION_EXPRESSION: return createRuleInvocationExpression();
       case XsemanticsPackage.ENVIRONMENT_SPECIFICATION: return createEnvironmentSpecification();
       case XsemanticsPackage.ENVIRONMENT_REFERENCE: return createEnvironmentReference();
       case XsemanticsPackage.ENVIRONMENT: return createEnvironment();
@@ -227,17 +226,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     RuleInvocationImpl ruleInvocation = new RuleInvocationImpl();
     return ruleInvocation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RuleInvocationExpression createRuleInvocationExpression()
-  {
-    RuleInvocationExpressionImpl ruleInvocationExpression = new RuleInvocationExpressionImpl();
-    return ruleInvocationExpression;
   }
 
   /**

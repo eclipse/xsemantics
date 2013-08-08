@@ -19,7 +19,6 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.ArrayList;
@@ -72,15 +71,8 @@ public class XsemanticsUtils {
   }
   
   public List<XVariableDeclaration> getVariableDeclarations(final RuleInvocation ruleInvocation) {
-    EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-    final Function1<RuleInvocationExpression,XExpression> _function = new Function1<RuleInvocationExpression,XExpression>() {
-        public XExpression apply(final RuleInvocationExpression it) {
-          XExpression _expression = it.getExpression();
-          return _expression;
-        }
-      };
-    List<XExpression> _map = ListExtensions.<RuleInvocationExpression, XExpression>map(_expressions, _function);
-    List<XVariableDeclaration> _typeSelect = EcoreUtil2.<XVariableDeclaration>typeSelect(_map, XVariableDeclaration.class);
+    EList<XExpression> _expressions = ruleInvocation.getExpressions();
+    List<XVariableDeclaration> _typeSelect = EcoreUtil2.<XVariableDeclaration>typeSelect(_expressions, XVariableDeclaration.class);
     return _typeSelect;
   }
   
@@ -476,29 +468,28 @@ public class XsemanticsUtils {
     return _allContentsOfType;
   }
   
-  public List<RuleInvocationExpression> outputArgsExpressions(final RuleInvocation ruleInvocation) {
-    ArrayList<RuleInvocationExpression> _xblockexpression = null;
+  public List<XExpression> outputArgsExpressions(final RuleInvocation ruleInvocation) {
+    ArrayList<XExpression> _xblockexpression = null;
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(ruleInvocation);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
       final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
-      EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-      final Function1<RuleInvocationExpression,Boolean> _function = new Function1<RuleInvocationExpression,Boolean>() {
-          public Boolean apply(final RuleInvocationExpression it) {
+      EList<XExpression> _expressions = ruleInvocation.getExpressions();
+      final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+          public Boolean apply(final XExpression it) {
             JudgmentParameter _next = judgmentParameters.next();
             boolean _isOutputParameter = XsemanticsUtils.this.isOutputParameter(_next);
             return Boolean.valueOf(_isOutputParameter);
           }
         };
-      Iterable<RuleInvocationExpression> _filter = IterableExtensions.<RuleInvocationExpression>filter(_expressions, _function);
-      ArrayList<RuleInvocationExpression> _newArrayList = Lists.<RuleInvocationExpression>newArrayList(_filter);
+      Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_expressions, _function);
+      ArrayList<XExpression> _newArrayList = Lists.<XExpression>newArrayList(_filter);
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;
   }
   
-  public boolean validOutputArgExpression(final RuleInvocationExpression ruleInvocationExpression) {
-    final XExpression xexp = ruleInvocationExpression.getExpression();
+  public boolean validOutputArgExpression(final XExpression xexp) {
     boolean _matched = false;
     if (!_matched) {
       if (xexp instanceof XFeatureCall) {
@@ -531,28 +522,27 @@ public class XsemanticsUtils {
     return false;
   }
   
-  public boolean validInputArgExpression(final RuleInvocationExpression ruleInvocationExpression) {
-    XExpression _expression = ruleInvocationExpression.getExpression();
-    return (!(_expression instanceof XVariableDeclaration));
+  public boolean validInputArgExpression(final XExpression ruleInvocationExpression) {
+    return (!(ruleInvocationExpression instanceof XVariableDeclaration));
   }
   
-  public List<RuleInvocationExpression> inputArgsExpressions(final RuleInvocation ruleInvocation) {
-    ArrayList<RuleInvocationExpression> _xblockexpression = null;
+  public List<XExpression> inputArgsExpressions(final RuleInvocation ruleInvocation) {
+    ArrayList<XExpression> _xblockexpression = null;
     {
       JudgmentDescription _judgmentDescription = this.judgmentDescription(ruleInvocation);
       EList<JudgmentParameter> _judgmentParameters = _judgmentDescription.getJudgmentParameters();
       final Iterator<JudgmentParameter> judgmentParameters = _judgmentParameters.iterator();
-      EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-      final Function1<RuleInvocationExpression,Boolean> _function = new Function1<RuleInvocationExpression,Boolean>() {
-          public Boolean apply(final RuleInvocationExpression it) {
+      EList<XExpression> _expressions = ruleInvocation.getExpressions();
+      final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+          public Boolean apply(final XExpression it) {
             JudgmentParameter _next = judgmentParameters.next();
             boolean _isOutputParameter = XsemanticsUtils.this.isOutputParameter(_next);
             boolean _not = (!_isOutputParameter);
             return Boolean.valueOf(_not);
           }
         };
-      Iterable<RuleInvocationExpression> _filter = IterableExtensions.<RuleInvocationExpression>filter(_expressions, _function);
-      ArrayList<RuleInvocationExpression> _newArrayList = Lists.<RuleInvocationExpression>newArrayList(_filter);
+      Iterable<XExpression> _filter = IterableExtensions.<XExpression>filter(_expressions, _function);
+      ArrayList<XExpression> _newArrayList = Lists.<XExpression>newArrayList(_filter);
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;

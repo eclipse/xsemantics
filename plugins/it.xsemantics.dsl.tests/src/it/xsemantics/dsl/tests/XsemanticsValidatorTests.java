@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
 
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
@@ -181,7 +182,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validationTestHelper
 				.assertError(
 						model,
-						XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION,
+						null,
 						IssueCodes.NOT_SUBTYPE,
 						"Rule invocation type boolean or java.lang.Boolean "
 								+ "is not subtype of JudgmentDescription declared type "
@@ -277,7 +278,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		EObject model = getModel(testFiles
 				.testRuleInvocationWithWrongOutputArg().toString());
 		validationTestHelper.assertError(model,
-				XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION,
+				XbasePackage.eINSTANCE.getXMemberFeatureCall(),
 				IssueCodes.NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
@@ -287,7 +288,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		EObject model = getModel(testFiles
 				.testWrongVariableDeclarationAsOutputArgument().toString());
 		validationTestHelper.assertError(model,
-				XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION,
+				XbasePackage.eINSTANCE.getXVariableDeclaration(),
 				IssueCodes.NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
@@ -332,7 +333,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		EObject model = getModel(testFiles
 				.testRuleInvocationWithInputParamPassedAsOutput().toString());
 		validationTestHelper.assertError(model,
-				XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION,
+				XbasePackage.eINSTANCE.getXFeatureCall(),
 				IssueCodes.NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}

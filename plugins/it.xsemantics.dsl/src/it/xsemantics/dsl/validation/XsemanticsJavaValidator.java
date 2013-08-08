@@ -16,7 +16,6 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -118,7 +117,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Override
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
-		if (containerToFindUsage instanceof RuleInvocationExpression) {
+		if (containerToFindUsage instanceof RuleInvocation) {
 			// we don't want warning when a variable declaration appears as
 			// output argument: it is implicitly used for the result
 			return true;
@@ -414,13 +413,13 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 		if (judgmentDescription != null) {
 			List<JudgmentParameter> judgmentParameters = judgmentDescription
 					.getJudgmentParameters();
-			List<RuleInvocationExpression> invocationExpressions = ruleInvocation
+			List<XExpression> invocationExpressions = ruleInvocation
 					.getExpressions();
 			// judgmentParamters.size() == conclusionElements.size())
 			// otherwise we could not find a JudgmentDescription for the rule
 			Iterator<JudgmentParameter> judgmentParametersIt = judgmentParameters
 					.iterator();
-			for (RuleInvocationExpression ruleInvocationExpression : invocationExpressions) {
+			for (XExpression ruleInvocationExpression : invocationExpressions) {
 				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt
 						.next())) {
 					if (!xsemanticsUtils
@@ -429,7 +428,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 								+ nodeModelUtils
 										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
-								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
+								null,
 								IssueCodes.NOT_VALID_OUTPUT_ARG);
 					}
 				} else {
@@ -439,7 +438,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 								+ nodeModelUtils
 										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
-								XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION,
+								null,
 								IssueCodes.NOT_VALID_INPUT_ARG);
 					}
 				}
@@ -652,7 +651,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				ruleInvocation.getExpressions(),
 				"Rule invocation",
 				XsemanticsPackage.Literals.RULE_INVOCATION.getEIDAttribute(),
-				XsemanticsPackage.Literals.RULE_INVOCATION_EXPRESSION__EXPRESSION);
+				null);
 	}
 
 	protected JudgmentDescription checkConformanceAgainstJudgmentDescription(

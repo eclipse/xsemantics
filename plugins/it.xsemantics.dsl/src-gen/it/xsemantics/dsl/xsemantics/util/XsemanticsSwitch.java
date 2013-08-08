@@ -181,13 +181,6 @@ public class XsemanticsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XsemanticsPackage.RULE_INVOCATION_EXPRESSION:
-      {
-        RuleInvocationExpression ruleInvocationExpression = (RuleInvocationExpression)theEObject;
-        T result = caseRuleInvocationExpression(ruleInvocationExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XsemanticsPackage.ENVIRONMENT_SPECIFICATION:
       {
         EnvironmentSpecification environmentSpecification = (EnvironmentSpecification)theEObject;
@@ -496,22 +489,6 @@ public class XsemanticsSwitch<T>
    * @generated
    */
   public T caseRuleInvocation(RuleInvocation object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Rule Invocation Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Rule Invocation Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRuleInvocationExpression(RuleInvocationExpression object)
   {
     return null;
   }

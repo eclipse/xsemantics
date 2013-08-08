@@ -26,7 +26,6 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsFactory;
@@ -137,13 +136,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * @generated
    */
   private EClass ruleInvocationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass ruleInvocationExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -862,26 +854,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleInvocationExpression()
-  {
-    return ruleInvocationExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getRuleInvocationExpression_Expression()
-  {
-    return (EReference)ruleInvocationExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getEnvironmentSpecification()
   {
     return environmentSpecificationEClass;
@@ -1303,9 +1275,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     createEReference(ruleInvocationEClass, RULE_INVOCATION__EXPRESSIONS);
     createEAttribute(ruleInvocationEClass, RULE_INVOCATION__RELATION_SYMBOLS);
 
-    ruleInvocationExpressionEClass = createEClass(RULE_INVOCATION_EXPRESSION);
-    createEReference(ruleInvocationExpressionEClass, RULE_INVOCATION_EXPRESSION__EXPRESSION);
-
     environmentSpecificationEClass = createEClass(ENVIRONMENT_SPECIFICATION);
 
     environmentReferenceEClass = createEClass(ENVIRONMENT_REFERENCE);
@@ -1468,11 +1437,8 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEClass(ruleInvocationEClass, RuleInvocation.class, "RuleInvocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRuleInvocation_Environment(), this.getEnvironmentSpecification(), null, "environment", null, 0, 1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRuleInvocation_JudgmentSymbol(), ecorePackage.getEString(), "judgmentSymbol", null, 0, 1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRuleInvocation_Expressions(), this.getRuleInvocationExpression(), null, "expressions", null, 0, -1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleInvocation_Expressions(), theXbasePackage.getXExpression(), null, "expressions", null, 0, -1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRuleInvocation_RelationSymbols(), ecorePackage.getEString(), "relationSymbols", null, 0, -1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(ruleInvocationExpressionEClass, RuleInvocationExpression.class, "RuleInvocationExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRuleInvocationExpression_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, RuleInvocationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(environmentSpecificationEClass, EnvironmentSpecification.class, "EnvironmentSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

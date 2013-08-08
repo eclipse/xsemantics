@@ -131,15 +131,6 @@ public interface XsemanticsFactory extends EFactory
   RuleInvocation createRuleInvocation();
 
   /**
-   * Returns a new object of class '<em>Rule Invocation Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule Invocation Expression</em>'.
-   * @generated
-   */
-  RuleInvocationExpression createRuleInvocationExpression();
-
-  /**
    * Returns a new object of class '<em>Environment Specification</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

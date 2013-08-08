@@ -1,12 +1,9 @@
 package it.xsemantics.dsl.typing;
 
-import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.OutputParameter;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
@@ -14,6 +11,7 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -23,6 +21,9 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
 
 public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   public final static String XEXPRESSIONTYPE = "it.xsemantics.dsl.typing.rules.XExpressionType";
@@ -152,26 +153,11 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     return new Result<JvmTypeReference>(_type);
   }
   
-  protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final RuleInvocationExpression e) throws RuleFailedException {
-    try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<JvmTypeReference> _result_ = applyRuleRuleInvocationExpressionType(G, _subtrace_, e);
-      addToTrace(_trace_, ruleName("RuleInvocationExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
-    } catch (Exception e_applyRuleRuleInvocationExpressionType) {
-      typeThrowException(ruleName("RuleInvocationExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + "JvmTypeReference",
-      	RULEINVOCATIONEXPRESSIONTYPE,
-      	e_applyRuleRuleInvocationExpressionType, e, new ErrorInformation[] {new ErrorInformation(e)});
-      return null;
-    }
-  }
-  
-  protected Result<JvmTypeReference> applyRuleRuleInvocationExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final RuleInvocationExpression e) throws RuleFailedException {
+  protected Result<JvmTypeReference> applyRuleRuleInvocationExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     JvmTypeReference type = null; // output parameter
     
-    /* G |- e.expression : type */
-    XExpression _expression = e.getExpression();
+    /* G |- e : type */
+    XExpression _expression = e;
     Result<JvmTypeReference> result = typeInternal(G, _trace_, _expression);
     checkAssignableTo(result.getFirst(), JvmTypeReference.class);
     type = (JvmTypeReference) result.getFirst();

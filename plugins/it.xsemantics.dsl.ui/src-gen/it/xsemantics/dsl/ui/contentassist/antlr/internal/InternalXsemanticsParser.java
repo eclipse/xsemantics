@@ -1660,26 +1660,26 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "ruleRuleInvocationExpression"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:546:1: ruleRuleInvocationExpression : ( ( rule__RuleInvocationExpression__ExpressionAssignment ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:546:1: ruleRuleInvocationExpression : ( ( rule__RuleInvocationExpression__Alternatives ) ) ;
     public final void ruleRuleInvocationExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:550:2: ( ( ( rule__RuleInvocationExpression__ExpressionAssignment ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:551:1: ( ( rule__RuleInvocationExpression__ExpressionAssignment ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:550:2: ( ( ( rule__RuleInvocationExpression__Alternatives ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:551:1: ( ( rule__RuleInvocationExpression__Alternatives ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:551:1: ( ( rule__RuleInvocationExpression__ExpressionAssignment ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:552:1: ( rule__RuleInvocationExpression__ExpressionAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:551:1: ( ( rule__RuleInvocationExpression__Alternatives ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:552:1: ( rule__RuleInvocationExpression__Alternatives )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAssignment()); 
+               before(grammarAccess.getRuleInvocationExpressionAccess().getAlternatives()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:553:1: ( rule__RuleInvocationExpression__ExpressionAssignment )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:553:2: rule__RuleInvocationExpression__ExpressionAssignment
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:553:1: ( rule__RuleInvocationExpression__Alternatives )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:553:2: rule__RuleInvocationExpression__Alternatives
             {
-            pushFollow(FOLLOW_rule__RuleInvocationExpression__ExpressionAssignment_in_ruleRuleInvocationExpression1119);
-            rule__RuleInvocationExpression__ExpressionAssignment();
+            pushFollow(FOLLOW_rule__RuleInvocationExpression__Alternatives_in_ruleRuleInvocationExpression1119);
+            rule__RuleInvocationExpression__Alternatives();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1687,7 +1687,7 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAssignment()); 
+               after(grammarAccess.getRuleInvocationExpressionAccess().getAlternatives()); 
             }
 
             }
@@ -8607,11 +8607,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA3_1 = input.LA(2);
 
-                if ( (LA3_1==84) ) {
-                    alt3=1;
-                }
-                else if ( (LA3_1==85) ) {
+                if ( (LA3_1==85) ) {
                     alt3=2;
+                }
+                else if ( (LA3_1==84) ) {
+                    alt3=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -9077,9 +9077,9 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__XLiteral__Alternatives"
 
 
-    // $ANTLR start "rule__RuleInvocationExpression__ExpressionAlternatives_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:2966:1: rule__RuleInvocationExpression__ExpressionAlternatives_0 : ( ( ruleXVariableDeclaration ) | ( ruleXExpression ) );
-    public final void rule__RuleInvocationExpression__ExpressionAlternatives_0() throws RecognitionException {
+    // $ANTLR start "rule__RuleInvocationExpression__Alternatives"
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:2966:1: rule__RuleInvocationExpression__Alternatives : ( ( ruleXVariableDeclaration ) | ( ruleXExpression ) );
+    public final void rule__RuleInvocationExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -9109,15 +9109,15 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                     // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:2972:1: ruleXVariableDeclaration
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXVariableDeclarationParserRuleCall_0_0()); 
+                       before(grammarAccess.getRuleInvocationExpressionAccess().getXVariableDeclarationParserRuleCall_0()); 
                     }
-                    pushFollow(FOLLOW_ruleXVariableDeclaration_in_rule__RuleInvocationExpression__ExpressionAlternatives_06316);
+                    pushFollow(FOLLOW_ruleXVariableDeclaration_in_rule__RuleInvocationExpression__Alternatives6316);
                     ruleXVariableDeclaration();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXVariableDeclarationParserRuleCall_0_0()); 
+                       after(grammarAccess.getRuleInvocationExpressionAccess().getXVariableDeclarationParserRuleCall_0()); 
                     }
 
                     }
@@ -9132,15 +9132,15 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                     // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:2978:1: ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXExpressionParserRuleCall_0_1()); 
+                       before(grammarAccess.getRuleInvocationExpressionAccess().getXExpressionParserRuleCall_1()); 
                     }
-                    pushFollow(FOLLOW_ruleXExpression_in_rule__RuleInvocationExpression__ExpressionAlternatives_06333);
+                    pushFollow(FOLLOW_ruleXExpression_in_rule__RuleInvocationExpression__Alternatives6333);
                     ruleXExpression();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXExpressionParserRuleCall_0_1()); 
+                       after(grammarAccess.getRuleInvocationExpressionAccess().getXExpressionParserRuleCall_1()); 
                     }
 
                     }
@@ -9162,7 +9162,7 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__RuleInvocationExpression__ExpressionAlternatives_0"
+    // $ANTLR end "rule__RuleInvocationExpression__Alternatives"
 
 
     // $ANTLR start "rule__TerminalEnvironmentSpecification__Alternatives"
@@ -9184,11 +9184,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA7_2 = input.LA(2);
 
-                if ( ((LA7_2>=14 && LA7_2<=17)||(LA7_2>=42 && LA7_2<=64)||LA7_2==66||LA7_2==81||(LA7_2>=97 && LA7_2<=98)||LA7_2==100||(LA7_2>=121 && LA7_2<=122)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_2==EOF||LA7_2==13||(LA7_2>=18 && LA7_2<=25)) ) {
+                if ( (LA7_2==EOF||LA7_2==13||(LA7_2>=18 && LA7_2<=25)) ) {
                     alt7=3;
+                }
+                else if ( ((LA7_2>=14 && LA7_2<=17)||(LA7_2>=42 && LA7_2<=64)||LA7_2==66||LA7_2==81||(LA7_2>=97 && LA7_2<=98)||LA7_2==100||(LA7_2>=121 && LA7_2<=122)) ) {
+                    alt7=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -10130,11 +10130,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA11_1 = input.LA(2);
 
-                if ( (LA11_1==15) ) {
-                    alt11=1;
-                }
-                else if ( (LA11_1==EOF||(LA11_1>=RULE_ID && LA11_1<=RULE_STRING)||(LA11_1>=13 && LA11_1<=14)||(LA11_1>=16 && LA11_1<=73)||(LA11_1>=76 && LA11_1<=78)||(LA11_1>=81 && LA11_1<=82)||(LA11_1>=84 && LA11_1<=85)||(LA11_1>=87 && LA11_1<=98)||(LA11_1>=100 && LA11_1<=117)||(LA11_1>=120 && LA11_1<=122)||(LA11_1>=124 && LA11_1<=125)) ) {
+                if ( (LA11_1==EOF||(LA11_1>=RULE_ID && LA11_1<=RULE_STRING)||(LA11_1>=13 && LA11_1<=14)||(LA11_1>=16 && LA11_1<=73)||(LA11_1>=76 && LA11_1<=78)||(LA11_1>=81 && LA11_1<=82)||(LA11_1>=84 && LA11_1<=85)||(LA11_1>=87 && LA11_1<=98)||(LA11_1>=100 && LA11_1<=117)||(LA11_1>=120 && LA11_1<=122)||(LA11_1>=124 && LA11_1<=125)) ) {
                     alt11=2;
+                }
+                else if ( (LA11_1==15) ) {
+                    alt11=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -10168,11 +10168,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA11_3 = input.LA(2);
 
-                if ( (LA11_3==15) ) {
-                    alt11=1;
-                }
-                else if ( (LA11_3==EOF||(LA11_3>=RULE_ID && LA11_3<=RULE_STRING)||(LA11_3>=13 && LA11_3<=14)||(LA11_3>=16 && LA11_3<=73)||(LA11_3>=76 && LA11_3<=78)||(LA11_3>=81 && LA11_3<=82)||(LA11_3>=84 && LA11_3<=85)||(LA11_3>=87 && LA11_3<=98)||(LA11_3>=100 && LA11_3<=117)||(LA11_3>=120 && LA11_3<=122)||(LA11_3>=124 && LA11_3<=125)) ) {
+                if ( (LA11_3==EOF||(LA11_3>=RULE_ID && LA11_3<=RULE_STRING)||(LA11_3>=13 && LA11_3<=14)||(LA11_3>=16 && LA11_3<=73)||(LA11_3>=76 && LA11_3<=78)||(LA11_3>=81 && LA11_3<=82)||(LA11_3>=84 && LA11_3<=85)||(LA11_3>=87 && LA11_3<=98)||(LA11_3>=100 && LA11_3<=117)||(LA11_3>=120 && LA11_3<=122)||(LA11_3>=124 && LA11_3<=125)) ) {
                     alt11=2;
+                }
+                else if ( (LA11_3==15) ) {
+                    alt11=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -10187,11 +10187,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA11_4 = input.LA(2);
 
-                if ( (LA11_4==EOF||(LA11_4>=RULE_ID && LA11_4<=RULE_STRING)||(LA11_4>=13 && LA11_4<=14)||(LA11_4>=16 && LA11_4<=73)||(LA11_4>=76 && LA11_4<=78)||(LA11_4>=81 && LA11_4<=82)||(LA11_4>=84 && LA11_4<=85)||(LA11_4>=87 && LA11_4<=98)||(LA11_4>=100 && LA11_4<=117)||(LA11_4>=120 && LA11_4<=122)||(LA11_4>=124 && LA11_4<=125)) ) {
-                    alt11=2;
-                }
-                else if ( (LA11_4==15) ) {
+                if ( (LA11_4==15) ) {
                     alt11=1;
+                }
+                else if ( (LA11_4==EOF||(LA11_4>=RULE_ID && LA11_4<=RULE_STRING)||(LA11_4>=13 && LA11_4<=14)||(LA11_4>=16 && LA11_4<=73)||(LA11_4>=76 && LA11_4<=78)||(LA11_4>=81 && LA11_4<=82)||(LA11_4>=84 && LA11_4<=85)||(LA11_4>=87 && LA11_4<=98)||(LA11_4>=100 && LA11_4<=117)||(LA11_4>=120 && LA11_4<=122)||(LA11_4>=124 && LA11_4<=125)) ) {
+                    alt11=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -10206,11 +10206,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 {
                 int LA11_5 = input.LA(2);
 
-                if ( (LA11_5==15) ) {
-                    alt11=1;
-                }
-                else if ( (LA11_5==EOF||(LA11_5>=RULE_ID && LA11_5<=RULE_STRING)||(LA11_5>=13 && LA11_5<=14)||(LA11_5>=16 && LA11_5<=73)||(LA11_5>=76 && LA11_5<=78)||(LA11_5>=81 && LA11_5<=82)||(LA11_5>=84 && LA11_5<=85)||(LA11_5>=87 && LA11_5<=98)||(LA11_5>=100 && LA11_5<=117)||(LA11_5>=120 && LA11_5<=122)||(LA11_5>=124 && LA11_5<=125)) ) {
+                if ( (LA11_5==EOF||(LA11_5>=RULE_ID && LA11_5<=RULE_STRING)||(LA11_5>=13 && LA11_5<=14)||(LA11_5>=16 && LA11_5<=73)||(LA11_5>=76 && LA11_5<=78)||(LA11_5>=81 && LA11_5<=82)||(LA11_5>=84 && LA11_5<=85)||(LA11_5>=87 && LA11_5<=98)||(LA11_5>=100 && LA11_5<=117)||(LA11_5>=120 && LA11_5<=122)||(LA11_5>=124 && LA11_5<=125)) ) {
                     alt11=2;
+                }
+                else if ( (LA11_5==15) ) {
+                    alt11=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -12468,11 +12468,11 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                 if ( (LA28_2==RULE_ID) ) {
                     int LA28_3 = input.LA(3);
 
-                    if ( ((LA28_3>=15 && LA28_3<=17)||(LA28_3>=42 && LA28_3<=64)||LA28_3==66||(LA28_3>=81 && LA28_3<=82)||(LA28_3>=97 && LA28_3<=98)||LA28_3==100||(LA28_3>=121 && LA28_3<=122)) ) {
-                        alt28=1;
-                    }
-                    else if ( (LA28_3==32) ) {
+                    if ( (LA28_3==32) ) {
                         alt28=2;
+                    }
+                    else if ( ((LA28_3>=15 && LA28_3<=17)||(LA28_3>=42 && LA28_3<=64)||LA28_3==66||(LA28_3>=81 && LA28_3<=82)||(LA28_3>=97 && LA28_3<=98)||LA28_3==100||(LA28_3>=121 && LA28_3<=122)) ) {
+                        alt28=1;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -59995,74 +59995,23 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__RuleInvocation__ExpressionsAssignment_3_1"
 
 
-    // $ANTLR start "rule__RuleInvocationExpression__ExpressionAssignment"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20899:1: rule__RuleInvocationExpression__ExpressionAssignment : ( ( rule__RuleInvocationExpression__ExpressionAlternatives_0 ) ) ;
-    public final void rule__RuleInvocationExpression__ExpressionAssignment() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20903:1: ( ( ( rule__RuleInvocationExpression__ExpressionAlternatives_0 ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20904:1: ( ( rule__RuleInvocationExpression__ExpressionAlternatives_0 ) )
-            {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20904:1: ( ( rule__RuleInvocationExpression__ExpressionAlternatives_0 ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20905:1: ( rule__RuleInvocationExpression__ExpressionAlternatives_0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAlternatives_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20906:1: ( rule__RuleInvocationExpression__ExpressionAlternatives_0 )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20906:2: rule__RuleInvocationExpression__ExpressionAlternatives_0
-            {
-            pushFollow(FOLLOW_rule__RuleInvocationExpression__ExpressionAlternatives_0_in_rule__RuleInvocationExpression__ExpressionAssignment42144);
-            rule__RuleInvocationExpression__ExpressionAlternatives_0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAlternatives_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__RuleInvocationExpression__ExpressionAssignment"
-
-
     // $ANTLR start "rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20915:1: rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_2 : ( ruleEnvironmentSpecification ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20899:1: rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_2 : ( ruleEnvironmentSpecification ) ;
     public final void rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20919:1: ( ( ruleEnvironmentSpecification ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20920:1: ( ruleEnvironmentSpecification )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20903:1: ( ( ruleEnvironmentSpecification ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20904:1: ( ruleEnvironmentSpecification )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20920:1: ( ruleEnvironmentSpecification )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20921:1: ruleEnvironmentSpecification
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20904:1: ( ruleEnvironmentSpecification )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20905:1: ruleEnvironmentSpecification
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnvironmentSpecificationAccess().getSubEnvironmentEnvironmentSpecificationParserRuleCall_1_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleEnvironmentSpecification_in_rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_242177);
+            pushFollow(FOLLOW_ruleEnvironmentSpecification_in_rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_242144);
             ruleEnvironmentSpecification();
 
             state._fsp--;
@@ -60092,22 +60041,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__TerminalEnvironmentSpecification__KeyAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20930:1: rule__TerminalEnvironmentSpecification__KeyAssignment_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20914:1: rule__TerminalEnvironmentSpecification__KeyAssignment_1_1 : ( ruleXExpression ) ;
     public final void rule__TerminalEnvironmentSpecification__KeyAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20934:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20935:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20918:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20919:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20935:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20936:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20919:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20920:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTerminalEnvironmentSpecificationAccess().getKeyXExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__KeyAssignment_1_142208);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__KeyAssignment_1_142175);
             ruleXExpression();
 
             state._fsp--;
@@ -60137,22 +60086,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__TerminalEnvironmentSpecification__ValueAssignment_1_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20945:1: rule__TerminalEnvironmentSpecification__ValueAssignment_1_3 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20929:1: rule__TerminalEnvironmentSpecification__ValueAssignment_1_3 : ( ruleXExpression ) ;
     public final void rule__TerminalEnvironmentSpecification__ValueAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20949:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20950:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20933:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20934:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20950:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20951:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20934:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20935:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTerminalEnvironmentSpecificationAccess().getValueXExpressionParserRuleCall_1_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__ValueAssignment_1_342239);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__ValueAssignment_1_342206);
             ruleXExpression();
 
             state._fsp--;
@@ -60182,28 +60131,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EnvironmentReference__EnvironmentAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20960:1: rule__EnvironmentReference__EnvironmentAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20944:1: rule__EnvironmentReference__EnvironmentAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__EnvironmentReference__EnvironmentAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20964:1: ( ( ( RULE_ID ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20965:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20948:1: ( ( ( RULE_ID ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20949:1: ( ( RULE_ID ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20965:1: ( ( RULE_ID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20966:1: ( RULE_ID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20949:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20950:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnvironmentReferenceAccess().getEnvironmentEnvironmentCrossReference_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20967:1: ( RULE_ID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20968:1: RULE_ID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20951:1: ( RULE_ID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20952:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnvironmentReferenceAccess().getEnvironmentEnvironmentIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnvironmentReference__EnvironmentAssignment_142274); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnvironmentReference__EnvironmentAssignment_142241); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnvironmentReferenceAccess().getEnvironmentEnvironmentIDTerminalRuleCall_1_0_1()); 
             }
@@ -60235,22 +60184,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__Environment__NameAssignment"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20979:1: rule__Environment__NameAssignment : ( RULE_ID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20963:1: rule__Environment__NameAssignment : ( RULE_ID ) ;
     public final void rule__Environment__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20983:1: ( ( RULE_ID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20984:1: ( RULE_ID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20967:1: ( ( RULE_ID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20968:1: ( RULE_ID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20984:1: ( RULE_ID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20985:1: RULE_ID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20968:1: ( RULE_ID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20969:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnvironmentAccess().getNameIDTerminalRuleCall_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__NameAssignment42309); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Environment__NameAssignment42276); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnvironmentAccess().getNameIDTerminalRuleCall_0()); 
             }
@@ -60276,22 +60225,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ErrorSpecification__ErrorAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20994:1: rule__ErrorSpecification__ErrorAssignment_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20978:1: rule__ErrorSpecification__ErrorAssignment_1 : ( ruleXExpression ) ;
     public final void rule__ErrorSpecification__ErrorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20998:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20999:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20982:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20983:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20999:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21000:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20983:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20984:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getErrorSpecificationAccess().getErrorXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__ErrorAssignment_142340);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__ErrorAssignment_142307);
             ruleXExpression();
 
             state._fsp--;
@@ -60321,22 +60270,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ErrorSpecification__SourceAssignment_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21009:1: rule__ErrorSpecification__SourceAssignment_2_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20993:1: rule__ErrorSpecification__SourceAssignment_2_1 : ( ruleXExpression ) ;
     public final void rule__ErrorSpecification__SourceAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21013:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21014:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20997:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20998:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21014:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21015:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20998:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:20999:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getErrorSpecificationAccess().getSourceXExpressionParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__SourceAssignment_2_142371);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__SourceAssignment_2_142338);
             ruleXExpression();
 
             state._fsp--;
@@ -60366,22 +60315,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ErrorSpecification__FeatureAssignment_3_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21024:1: rule__ErrorSpecification__FeatureAssignment_3_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21008:1: rule__ErrorSpecification__FeatureAssignment_3_1 : ( ruleXExpression ) ;
     public final void rule__ErrorSpecification__FeatureAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21028:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21029:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21012:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21013:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21029:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21030:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21013:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21014:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getErrorSpecificationAccess().getFeatureXExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__FeatureAssignment_3_142402);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__ErrorSpecification__FeatureAssignment_3_142369);
             ruleXExpression();
 
             state._fsp--;
@@ -60411,22 +60360,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__RuleParameter__ParameterAssignment"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21039:1: rule__RuleParameter__ParameterAssignment : ( ruleFullJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21023:1: rule__RuleParameter__ParameterAssignment : ( ruleFullJvmFormalParameter ) ;
     public final void rule__RuleParameter__ParameterAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21043:1: ( ( ruleFullJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21044:1: ( ruleFullJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21027:1: ( ( ruleFullJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21028:1: ( ruleFullJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21044:1: ( ruleFullJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21045:1: ruleFullJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21028:1: ( ruleFullJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21029:1: ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRuleParameterAccess().getParameterFullJvmFormalParameterParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__RuleParameter__ParameterAssignment42433);
+            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__RuleParameter__ParameterAssignment42400);
             ruleFullJvmFormalParameter();
 
             state._fsp--;
@@ -60456,22 +60405,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ExpressionInConclusion__ExpressionAssignment"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21054:1: rule__ExpressionInConclusion__ExpressionAssignment : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21038:1: rule__ExpressionInConclusion__ExpressionAssignment : ( ruleXExpression ) ;
     public final void rule__ExpressionInConclusion__ExpressionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21058:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21059:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21042:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21043:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21059:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21060:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21043:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21044:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExpressionInConclusionAccess().getExpressionXExpressionParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__ExpressionInConclusion__ExpressionAssignment42464);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__ExpressionInConclusion__ExpressionAssignment42431);
             ruleXExpression();
 
             state._fsp--;
@@ -60501,28 +60450,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21069:1: rule__XAssignment__FeatureAssignment_0_1 : ( ( ruleFeatureCallID ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21053:1: rule__XAssignment__FeatureAssignment_0_1 : ( ( ruleFeatureCallID ) ) ;
     public final void rule__XAssignment__FeatureAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21073:1: ( ( ( ruleFeatureCallID ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21074:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21057:1: ( ( ( ruleFeatureCallID ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21058:1: ( ( ruleFeatureCallID ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21074:1: ( ( ruleFeatureCallID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21075:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21058:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21059:1: ( ruleFeatureCallID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21076:1: ( ruleFeatureCallID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21077:1: ruleFeatureCallID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21060:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21061:1: ruleFeatureCallID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_142499);
+            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_142466);
             ruleFeatureCallID();
 
             state._fsp--;
@@ -60558,22 +60507,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAssignment__ValueAssignment_0_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21088:1: rule__XAssignment__ValueAssignment_0_3 : ( ruleXAssignment ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21072:1: rule__XAssignment__ValueAssignment_0_3 : ( ruleXAssignment ) ;
     public final void rule__XAssignment__ValueAssignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21092:1: ( ( ruleXAssignment ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21093:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21076:1: ( ( ruleXAssignment ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21077:1: ( ruleXAssignment )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21093:1: ( ruleXAssignment )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21094:1: ruleXAssignment
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21077:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21078:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_0_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_342534);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_342501);
             ruleXAssignment();
 
             state._fsp--;
@@ -60603,28 +60552,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_1_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21103:1: rule__XAssignment__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpMultiAssign ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21087:1: rule__XAssignment__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpMultiAssign ) ) ;
     public final void rule__XAssignment__FeatureAssignment_1_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21107:1: ( ( ( ruleOpMultiAssign ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21108:1: ( ( ruleOpMultiAssign ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21091:1: ( ( ( ruleOpMultiAssign ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21092:1: ( ( ruleOpMultiAssign ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21108:1: ( ( ruleOpMultiAssign ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21109:1: ( ruleOpMultiAssign )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21092:1: ( ( ruleOpMultiAssign ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21093:1: ( ruleOpMultiAssign )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21110:1: ( ruleOpMultiAssign )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21111:1: ruleOpMultiAssign
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21094:1: ( ruleOpMultiAssign )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21095:1: ruleOpMultiAssign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_142569);
+            pushFollow(FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_142536);
             ruleOpMultiAssign();
 
             state._fsp--;
@@ -60660,22 +60609,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAssignment__RightOperandAssignment_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21122:1: rule__XAssignment__RightOperandAssignment_1_1_1 : ( ruleXAssignment ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21106:1: rule__XAssignment__RightOperandAssignment_1_1_1 : ( ruleXAssignment ) ;
     public final void rule__XAssignment__RightOperandAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21126:1: ( ( ruleXAssignment ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21127:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21110:1: ( ( ruleXAssignment ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21111:1: ( ruleXAssignment )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21127:1: ( ruleXAssignment )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21128:1: ruleXAssignment
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21111:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21112:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_142604);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_142571);
             ruleXAssignment();
 
             state._fsp--;
@@ -60705,28 +60654,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XOrExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21137:1: rule__XOrExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOr ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21121:1: rule__XOrExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOr ) ) ;
     public final void rule__XOrExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21141:1: ( ( ( ruleOpOr ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21142:1: ( ( ruleOpOr ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21125:1: ( ( ( ruleOpOr ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21126:1: ( ( ruleOpOr ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21142:1: ( ( ruleOpOr ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21143:1: ( ruleOpOr )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21126:1: ( ( ruleOpOr ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21127:1: ( ruleOpOr )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21144:1: ( ruleOpOr )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21145:1: ruleOpOr
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21128:1: ( ruleOpOr )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21129:1: ruleOpOr
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementOpOrParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_142639);
+            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_142606);
             ruleOpOr();
 
             state._fsp--;
@@ -60762,22 +60711,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XOrExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21156:1: rule__XOrExpression__RightOperandAssignment_1_1 : ( ruleXAndExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21140:1: rule__XOrExpression__RightOperandAssignment_1_1 : ( ruleXAndExpression ) ;
     public final void rule__XOrExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21160:1: ( ( ruleXAndExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21161:1: ( ruleXAndExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21144:1: ( ( ruleXAndExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21145:1: ( ruleXAndExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21161:1: ( ruleXAndExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21162:1: ruleXAndExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21145:1: ( ruleXAndExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21146:1: ruleXAndExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getRightOperandXAndExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_142674);
+            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_142641);
             ruleXAndExpression();
 
             state._fsp--;
@@ -60807,28 +60756,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAndExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21171:1: rule__XAndExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAnd ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21155:1: rule__XAndExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAnd ) ) ;
     public final void rule__XAndExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21175:1: ( ( ( ruleOpAnd ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21176:1: ( ( ruleOpAnd ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21159:1: ( ( ( ruleOpAnd ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21160:1: ( ( ruleOpAnd ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21176:1: ( ( ruleOpAnd ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21177:1: ( ruleOpAnd )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21160:1: ( ( ruleOpAnd ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21161:1: ( ruleOpAnd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21178:1: ( ruleOpAnd )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21179:1: ruleOpAnd
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21162:1: ( ruleOpAnd )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21163:1: ruleOpAnd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementOpAndParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_142709);
+            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_142676);
             ruleOpAnd();
 
             state._fsp--;
@@ -60864,22 +60813,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAndExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21190:1: rule__XAndExpression__RightOperandAssignment_1_1 : ( ruleXEqualityExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21174:1: rule__XAndExpression__RightOperandAssignment_1_1 : ( ruleXEqualityExpression ) ;
     public final void rule__XAndExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21194:1: ( ( ruleXEqualityExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21195:1: ( ruleXEqualityExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21178:1: ( ( ruleXEqualityExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21179:1: ( ruleXEqualityExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21195:1: ( ruleXEqualityExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21196:1: ruleXEqualityExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21179:1: ( ruleXEqualityExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21180:1: ruleXEqualityExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getRightOperandXEqualityExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_142744);
+            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_142711);
             ruleXEqualityExpression();
 
             state._fsp--;
@@ -60909,28 +60858,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XEqualityExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21205:1: rule__XEqualityExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpEquality ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21189:1: rule__XEqualityExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpEquality ) ) ;
     public final void rule__XEqualityExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21209:1: ( ( ( ruleOpEquality ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21210:1: ( ( ruleOpEquality ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21193:1: ( ( ( ruleOpEquality ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21194:1: ( ( ruleOpEquality ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21210:1: ( ( ruleOpEquality ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21211:1: ( ruleOpEquality )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21194:1: ( ( ruleOpEquality ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21195:1: ( ruleOpEquality )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21212:1: ( ruleOpEquality )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21213:1: ruleOpEquality
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21196:1: ( ruleOpEquality )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21197:1: ruleOpEquality
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementOpEqualityParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_142779);
+            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_142746);
             ruleOpEquality();
 
             state._fsp--;
@@ -60966,22 +60915,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XEqualityExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21224:1: rule__XEqualityExpression__RightOperandAssignment_1_1 : ( ruleXRelationalExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21208:1: rule__XEqualityExpression__RightOperandAssignment_1_1 : ( ruleXRelationalExpression ) ;
     public final void rule__XEqualityExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21228:1: ( ( ruleXRelationalExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21229:1: ( ruleXRelationalExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21212:1: ( ( ruleXRelationalExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21213:1: ( ruleXRelationalExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21229:1: ( ruleXRelationalExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21230:1: ruleXRelationalExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21213:1: ( ruleXRelationalExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21214:1: ruleXRelationalExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getRightOperandXRelationalExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_142814);
+            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_142781);
             ruleXRelationalExpression();
 
             state._fsp--;
@@ -61011,22 +60960,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XRelationalExpression__TypeAssignment_1_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21239:1: rule__XRelationalExpression__TypeAssignment_1_0_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21223:1: rule__XRelationalExpression__TypeAssignment_1_0_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XRelationalExpression__TypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21243:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21244:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21227:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21228:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21244:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21245:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21228:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21229:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_142845);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_142812);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -61056,28 +61005,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21254:1: rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpCompare ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21238:1: rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpCompare ) ) ;
     public final void rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21258:1: ( ( ( ruleOpCompare ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21259:1: ( ( ruleOpCompare ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21242:1: ( ( ( ruleOpCompare ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21243:1: ( ( ruleOpCompare ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21259:1: ( ( ruleOpCompare ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21260:1: ( ruleOpCompare )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21243:1: ( ( ruleOpCompare ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21244:1: ( ruleOpCompare )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21261:1: ( ruleOpCompare )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21262:1: ruleOpCompare
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21245:1: ( ruleOpCompare )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21246:1: ruleOpCompare
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementOpCompareParserRuleCall_1_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_142880);
+            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_142847);
             ruleOpCompare();
 
             state._fsp--;
@@ -61113,22 +61062,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XRelationalExpression__RightOperandAssignment_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21273:1: rule__XRelationalExpression__RightOperandAssignment_1_1_1 : ( ruleXOtherOperatorExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21257:1: rule__XRelationalExpression__RightOperandAssignment_1_1_1 : ( ruleXOtherOperatorExpression ) ;
     public final void rule__XRelationalExpression__RightOperandAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21277:1: ( ( ruleXOtherOperatorExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21278:1: ( ruleXOtherOperatorExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21261:1: ( ( ruleXOtherOperatorExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21262:1: ( ruleXOtherOperatorExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21278:1: ( ruleXOtherOperatorExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21279:1: ruleXOtherOperatorExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21262:1: ( ruleXOtherOperatorExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21263:1: ruleXOtherOperatorExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_142915);
+            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_142882);
             ruleXOtherOperatorExpression();
 
             state._fsp--;
@@ -61158,28 +61107,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21288:1: rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOther ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21272:1: rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOther ) ) ;
     public final void rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21292:1: ( ( ( ruleOpOther ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21293:1: ( ( ruleOpOther ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21276:1: ( ( ( ruleOpOther ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21277:1: ( ( ruleOpOther ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21293:1: ( ( ruleOpOther ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21294:1: ( ruleOpOther )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21277:1: ( ( ruleOpOther ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21278:1: ( ruleOpOther )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21295:1: ( ruleOpOther )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21296:1: ruleOpOther
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21279:1: ( ruleOpOther )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21280:1: ruleOpOther
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementOpOtherParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_142950);
+            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_142917);
             ruleOpOther();
 
             state._fsp--;
@@ -61215,22 +61164,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21307:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_1 : ( ruleXAdditiveExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21291:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_1 : ( ruleXAdditiveExpression ) ;
     public final void rule__XOtherOperatorExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21311:1: ( ( ruleXAdditiveExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21312:1: ( ruleXAdditiveExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21295:1: ( ( ruleXAdditiveExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21296:1: ( ruleXAdditiveExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21312:1: ( ruleXAdditiveExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21313:1: ruleXAdditiveExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21296:1: ( ruleXAdditiveExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21297:1: ruleXAdditiveExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getRightOperandXAdditiveExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_142985);
+            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_142952);
             ruleXAdditiveExpression();
 
             state._fsp--;
@@ -61260,28 +61209,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAdditiveExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21322:1: rule__XAdditiveExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAdd ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21306:1: rule__XAdditiveExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAdd ) ) ;
     public final void rule__XAdditiveExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21326:1: ( ( ( ruleOpAdd ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21327:1: ( ( ruleOpAdd ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21310:1: ( ( ( ruleOpAdd ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21311:1: ( ( ruleOpAdd ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21327:1: ( ( ruleOpAdd ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21328:1: ( ruleOpAdd )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21311:1: ( ( ruleOpAdd ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21312:1: ( ruleOpAdd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21329:1: ( ruleOpAdd )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21330:1: ruleOpAdd
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21313:1: ( ruleOpAdd )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21314:1: ruleOpAdd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementOpAddParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_143020);
+            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_142987);
             ruleOpAdd();
 
             state._fsp--;
@@ -61317,22 +61266,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XAdditiveExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21341:1: rule__XAdditiveExpression__RightOperandAssignment_1_1 : ( ruleXMultiplicativeExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21325:1: rule__XAdditiveExpression__RightOperandAssignment_1_1 : ( ruleXMultiplicativeExpression ) ;
     public final void rule__XAdditiveExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21345:1: ( ( ruleXMultiplicativeExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21346:1: ( ruleXMultiplicativeExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21329:1: ( ( ruleXMultiplicativeExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21330:1: ( ruleXMultiplicativeExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21346:1: ( ruleXMultiplicativeExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21347:1: ruleXMultiplicativeExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21330:1: ( ruleXMultiplicativeExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21331:1: ruleXMultiplicativeExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getRightOperandXMultiplicativeExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_143055);
+            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_143022);
             ruleXMultiplicativeExpression();
 
             state._fsp--;
@@ -61362,28 +61311,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21356:1: rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpMulti ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21340:1: rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpMulti ) ) ;
     public final void rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21360:1: ( ( ( ruleOpMulti ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21361:1: ( ( ruleOpMulti ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21344:1: ( ( ( ruleOpMulti ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21345:1: ( ( ruleOpMulti ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21361:1: ( ( ruleOpMulti ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21362:1: ( ruleOpMulti )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21345:1: ( ( ruleOpMulti ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21346:1: ( ruleOpMulti )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21363:1: ( ruleOpMulti )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21364:1: ruleOpMulti
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21347:1: ( ruleOpMulti )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21348:1: ruleOpMulti
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementOpMultiParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_143090);
+            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_143057);
             ruleOpMulti();
 
             state._fsp--;
@@ -61419,22 +61368,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__RightOperandAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21375:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_1 : ( ruleXUnaryOperation ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21359:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_1 : ( ruleXUnaryOperation ) ;
     public final void rule__XMultiplicativeExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21379:1: ( ( ruleXUnaryOperation ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21380:1: ( ruleXUnaryOperation )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21363:1: ( ( ruleXUnaryOperation ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21364:1: ( ruleXUnaryOperation )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21380:1: ( ruleXUnaryOperation )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21381:1: ruleXUnaryOperation
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21364:1: ( ruleXUnaryOperation )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21365:1: ruleXUnaryOperation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getRightOperandXUnaryOperationParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_143125);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_143092);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -61464,28 +61413,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XUnaryOperation__FeatureAssignment_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21390:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21374:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
     public final void rule__XUnaryOperation__FeatureAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21394:1: ( ( ( ruleOpUnary ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21395:1: ( ( ruleOpUnary ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21378:1: ( ( ( ruleOpUnary ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21379:1: ( ( ruleOpUnary ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21395:1: ( ( ruleOpUnary ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21396:1: ( ruleOpUnary )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21379:1: ( ( ruleOpUnary ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21380:1: ( ruleOpUnary )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21397:1: ( ruleOpUnary )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21398:1: ruleOpUnary
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21381:1: ( ruleOpUnary )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21382:1: ruleOpUnary
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_143160);
+            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_143127);
             ruleOpUnary();
 
             state._fsp--;
@@ -61521,22 +61470,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XUnaryOperation__OperandAssignment_0_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21409:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXUnaryOperation ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21393:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXUnaryOperation ) ;
     public final void rule__XUnaryOperation__OperandAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21413:1: ( ( ruleXUnaryOperation ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21414:1: ( ruleXUnaryOperation )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21397:1: ( ( ruleXUnaryOperation ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21398:1: ( ruleXUnaryOperation )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21414:1: ( ruleXUnaryOperation )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21415:1: ruleXUnaryOperation
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21398:1: ( ruleXUnaryOperation )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21399:1: ruleXUnaryOperation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getOperandXUnaryOperationParserRuleCall_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_243195);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_243162);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -61566,22 +61515,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCastedExpression__TypeAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21424:1: rule__XCastedExpression__TypeAssignment_1_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21408:1: rule__XCastedExpression__TypeAssignment_1_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XCastedExpression__TypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21428:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21429:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21412:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21413:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21429:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21430:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21413:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21414:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_143226);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_143193);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -61611,28 +61560,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21439:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1 : ( ( '::' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21423:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1 : ( ( '::' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21443:1: ( ( ( '::' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21444:1: ( ( '::' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21427:1: ( ( ( '::' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21428:1: ( ( '::' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21444:1: ( ( '::' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21445:1: ( '::' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21446:1: ( '::' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21447:1: '::'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21428:1: ( ( '::' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21429:1: ( '::' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
             }
-            match(input,121,FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_143262); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21430:1: ( '::' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21431:1: '::'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
+            }
+            match(input,121,FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_143229); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
             }
@@ -61664,28 +61613,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21462:1: rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2 : ( ( ruleFeatureCallID ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21446:1: rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2 : ( ( ruleFeatureCallID ) ) ;
     public final void rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21466:1: ( ( ( ruleFeatureCallID ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21467:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21450:1: ( ( ( ruleFeatureCallID ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21451:1: ( ( ruleFeatureCallID ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21467:1: ( ( ruleFeatureCallID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21468:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21451:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21452:1: ( ruleFeatureCallID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21469:1: ( ruleFeatureCallID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21470:1: ruleFeatureCallID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21453:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21454:1: ruleFeatureCallID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_0_0_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_243305);
+            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_243272);
             ruleFeatureCallID();
 
             state._fsp--;
@@ -61721,22 +61670,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ValueAssignment_1_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21481:1: rule__XMemberFeatureCall__ValueAssignment_1_0_1 : ( ruleXAssignment ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21465:1: rule__XMemberFeatureCall__ValueAssignment_1_0_1 : ( ruleXAssignment ) ;
     public final void rule__XMemberFeatureCall__ValueAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21485:1: ( ( ruleXAssignment ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21486:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21469:1: ( ( ruleXAssignment ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21470:1: ( ruleXAssignment )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21486:1: ( ruleXAssignment )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21487:1: ruleXAssignment
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21470:1: ( ruleXAssignment )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21471:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getValueXAssignmentParserRuleCall_1_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_143340);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_143307);
             ruleXAssignment();
 
             state._fsp--;
@@ -61766,28 +61715,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21496:1: rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1 : ( ( '?.' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21480:1: rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1 : ( ( '?.' ) ) ;
     public final void rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21500:1: ( ( ( '?.' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21501:1: ( ( '?.' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21484:1: ( ( ( '?.' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21485:1: ( ( '?.' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21501:1: ( ( '?.' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21502:1: ( '?.' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21503:1: ( '?.' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21504:1: '?.'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21485:1: ( ( '?.' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21486:1: ( '?.' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
-            match(input,122,FOLLOW_122_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_143376); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21487:1: ( '?.' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21488:1: '?.'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
+            }
+            match(input,122,FOLLOW_122_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_143343); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
@@ -61819,28 +61768,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21519:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2 : ( ( '::' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21503:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2 : ( ( '::' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21523:1: ( ( ( '::' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21524:1: ( ( '::' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21507:1: ( ( ( '::' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21508:1: ( ( '::' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21524:1: ( ( '::' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21525:1: ( '::' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21526:1: ( '::' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21527:1: '::'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21508:1: ( ( '::' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21509:1: ( '::' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
             }
-            match(input,121,FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_243420); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21510:1: ( '::' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21511:1: '::'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
+            }
+            match(input,121,FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_243387); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
             }
@@ -61872,22 +61821,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21542:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21526:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21546:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21547:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21530:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21531:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21547:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21548:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21531:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21532:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_143459);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_143426);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -61917,22 +61866,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21557:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21541:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21561:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21562:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21545:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21546:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21562:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21563:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21546:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21547:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_143490);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_143457);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -61962,28 +61911,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__FeatureAssignment_1_1_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21572:1: rule__XMemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleFeatureCallID ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21556:1: rule__XMemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleFeatureCallID ) ) ;
     public final void rule__XMemberFeatureCall__FeatureAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21576:1: ( ( ( ruleFeatureCallID ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21577:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21560:1: ( ( ( ruleFeatureCallID ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21561:1: ( ( ruleFeatureCallID ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21577:1: ( ( ruleFeatureCallID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21578:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21561:1: ( ( ruleFeatureCallID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21562:1: ( ruleFeatureCallID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21579:1: ( ruleFeatureCallID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21580:1: ruleFeatureCallID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21563:1: ( ruleFeatureCallID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21564:1: ruleFeatureCallID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_1_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_243525);
+            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_243492);
             ruleFeatureCallID();
 
             state._fsp--;
@@ -62019,28 +61968,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21591:1: rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0 : ( ( '(' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21575:1: rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0 : ( ( '(' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21595:1: ( ( ( '(' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21596:1: ( ( '(' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21579:1: ( ( ( '(' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21580:1: ( ( '(' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21596:1: ( ( '(' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21597:1: ( '(' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21598:1: ( '(' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21599:1: '('
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21580:1: ( ( '(' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21581:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
             }
-            match(input,81,FOLLOW_81_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_043565); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21582:1: ( '(' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21583:1: '('
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
+            }
+            match(input,81,FOLLOW_81_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_043532); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
             }
@@ -62072,22 +62021,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21614:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 : ( ruleXShortClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21598:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21618:1: ( ( ruleXShortClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21619:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21602:1: ( ( ruleXShortClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21603:1: ( ruleXShortClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21619:1: ( ruleXShortClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21620:1: ruleXShortClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21603:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21604:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_043604);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_043571);
             ruleXShortClosure();
 
             state._fsp--;
@@ -62117,22 +62066,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21629:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21613:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21633:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21634:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21617:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21618:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21634:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21635:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21618:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21619:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_043635);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_043602);
             ruleXExpression();
 
             state._fsp--;
@@ -62162,22 +62111,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21644:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21628:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21648:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21649:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21632:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21633:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21649:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21650:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21633:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21634:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_143666);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_143633);
             ruleXExpression();
 
             state._fsp--;
@@ -62207,22 +62156,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21659:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 : ( ruleXClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21643:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 : ( ruleXClosure ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21663:1: ( ( ruleXClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21664:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21647:1: ( ( ruleXClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21648:1: ( ruleXClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21664:1: ( ruleXClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21665:1: ruleXClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21648:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21649:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_443697);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_443664);
             ruleXClosure();
 
             state._fsp--;
@@ -62252,22 +62201,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSetLiteral__ElementsAssignment_3_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21674:1: rule__XSetLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21658:1: rule__XSetLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
     public final void rule__XSetLiteral__ElementsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21678:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21679:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21662:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21663:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21679:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21680:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21663:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21664:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSetLiteralAccess().getElementsXExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_043728);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_043695);
             ruleXExpression();
 
             state._fsp--;
@@ -62297,22 +62246,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSetLiteral__ElementsAssignment_3_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21689:1: rule__XSetLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21673:1: rule__XSetLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XSetLiteral__ElementsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21693:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21694:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21677:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21678:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21694:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21695:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21678:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21679:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSetLiteralAccess().getElementsXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_143759);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_143726);
             ruleXExpression();
 
             state._fsp--;
@@ -62342,22 +62291,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XListLiteral__ElementsAssignment_3_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21704:1: rule__XListLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21688:1: rule__XListLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
     public final void rule__XListLiteral__ElementsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21708:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21709:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21692:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21693:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21709:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21710:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21693:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21694:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXListLiteralAccess().getElementsXExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_043790);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_043757);
             ruleXExpression();
 
             state._fsp--;
@@ -62387,22 +62336,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XListLiteral__ElementsAssignment_3_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21719:1: rule__XListLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21703:1: rule__XListLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XListLiteral__ElementsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21723:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21724:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21707:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21708:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21724:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21725:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21708:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21709:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXListLiteralAccess().getElementsXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_143821);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_143788);
             ruleXExpression();
 
             state._fsp--;
@@ -62432,22 +62381,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21734:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0 : ( ruleJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21718:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21738:1: ( ( ruleJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21739:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21722:1: ( ( ruleJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21723:1: ( ruleJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21739:1: ( ruleJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21740:1: ruleJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21723:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21724:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_043852);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_043819);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -62477,22 +62426,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21749:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1 : ( ruleJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21733:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21753:1: ( ( ruleJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21754:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21737:1: ( ( ruleJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21738:1: ( ruleJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21754:1: ( ruleJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21755:1: ruleJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21738:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21739:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_143883);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_143850);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -62522,28 +62471,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XClosure__ExplicitSyntaxAssignment_1_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21764:1: rule__XClosure__ExplicitSyntaxAssignment_1_0_1 : ( ( '|' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21748:1: rule__XClosure__ExplicitSyntaxAssignment_1_0_1 : ( ( '|' ) ) ;
     public final void rule__XClosure__ExplicitSyntaxAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21768:1: ( ( ( '|' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21769:1: ( ( '|' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21752:1: ( ( ( '|' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21753:1: ( ( '|' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21769:1: ( ( '|' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21770:1: ( '|' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21771:1: ( '|' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21772:1: '|'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21753:1: ( ( '|' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21754:1: ( '|' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
             }
-            match(input,123,FOLLOW_123_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_143919); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21755:1: ( '|' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21756:1: '|'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
+            }
+            match(input,123,FOLLOW_123_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_143886); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
             }
@@ -62575,22 +62524,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XClosure__ExpressionAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21787:1: rule__XClosure__ExpressionAssignment_2 : ( ruleXExpressionInClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21771:1: rule__XClosure__ExpressionAssignment_2 : ( ruleXExpressionInClosure ) ;
     public final void rule__XClosure__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21791:1: ( ( ruleXExpressionInClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21792:1: ( ruleXExpressionInClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21775:1: ( ( ruleXExpressionInClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21776:1: ( ruleXExpressionInClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21792:1: ( ruleXExpressionInClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21793:1: ruleXExpressionInClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21776:1: ( ruleXExpressionInClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21777:1: ruleXExpressionInClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExpressionXExpressionInClosureParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_243958);
+            pushFollow(FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_243925);
             ruleXExpressionInClosure();
 
             state._fsp--;
@@ -62620,22 +62569,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XExpressionInClosure__ExpressionsAssignment_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21802:1: rule__XExpressionInClosure__ExpressionsAssignment_1_0 : ( ruleXExpressionInsideBlock ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21786:1: rule__XExpressionInClosure__ExpressionsAssignment_1_0 : ( ruleXExpressionInsideBlock ) ;
     public final void rule__XExpressionInClosure__ExpressionsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21806:1: ( ( ruleXExpressionInsideBlock ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21807:1: ( ruleXExpressionInsideBlock )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21790:1: ( ( ruleXExpressionInsideBlock ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21791:1: ( ruleXExpressionInsideBlock )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21807:1: ( ruleXExpressionInsideBlock )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21808:1: ruleXExpressionInsideBlock
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21791:1: ( ruleXExpressionInsideBlock )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21792:1: ruleXExpressionInsideBlock
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXExpressionInClosureAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XExpressionInClosure__ExpressionsAssignment_1_043989);
+            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XExpressionInClosure__ExpressionsAssignment_1_043956);
             ruleXExpressionInsideBlock();
 
             state._fsp--;
@@ -62665,22 +62614,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21817:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0 : ( ruleJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21801:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21821:1: ( ( ruleJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21822:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21805:1: ( ( ruleJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21806:1: ( ruleJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21822:1: ( ruleJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21823:1: ruleJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21806:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21807:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_044020);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_043987);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -62710,22 +62659,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21832:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1 : ( ruleJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21816:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21836:1: ( ( ruleJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21837:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21820:1: ( ( ruleJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21821:1: ( ruleJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21837:1: ( ruleJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21838:1: ruleJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21821:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21822:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_144051);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_144018);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -62755,28 +62704,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21847:1: rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2 : ( ( '|' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21831:1: rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2 : ( ( '|' ) ) ;
     public final void rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21851:1: ( ( ( '|' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21852:1: ( ( '|' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21835:1: ( ( ( '|' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21836:1: ( ( '|' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21852:1: ( ( '|' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21853:1: ( '|' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21854:1: ( '|' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21855:1: '|'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21836:1: ( ( '|' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21837:1: ( '|' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
             }
-            match(input,123,FOLLOW_123_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_244087); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21838:1: ( '|' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21839:1: '|'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
+            }
+            match(input,123,FOLLOW_123_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_244054); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
             }
@@ -62808,22 +62757,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XShortClosure__ExpressionAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21870:1: rule__XShortClosure__ExpressionAssignment_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21854:1: rule__XShortClosure__ExpressionAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XShortClosure__ExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21874:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21875:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21858:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21859:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21875:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21876:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21859:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21860:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_144126);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_144093);
             ruleXExpression();
 
             state._fsp--;
@@ -62853,22 +62802,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XIfExpression__IfAssignment_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21885:1: rule__XIfExpression__IfAssignment_3 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21869:1: rule__XIfExpression__IfAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__IfAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21889:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21890:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21873:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21874:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21890:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21891:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21874:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21875:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getIfXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_344157);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_344124);
             ruleXExpression();
 
             state._fsp--;
@@ -62898,22 +62847,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XIfExpression__ThenAssignment_5"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21900:1: rule__XIfExpression__ThenAssignment_5 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21884:1: rule__XIfExpression__ThenAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ThenAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21904:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21905:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21888:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21889:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21905:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21906:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21889:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21890:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getThenXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_544188);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_544155);
             ruleXExpression();
 
             state._fsp--;
@@ -62943,22 +62892,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XIfExpression__ElseAssignment_6_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21915:1: rule__XIfExpression__ElseAssignment_6_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21899:1: rule__XIfExpression__ElseAssignment_6_1 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ElseAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21919:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21920:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21903:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21904:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21920:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21921:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21904:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21905:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getElseXExpressionParserRuleCall_6_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_144219);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_144186);
             ruleXExpression();
 
             state._fsp--;
@@ -62988,22 +62937,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21930:1: rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21914:1: rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 : ( ruleValidID ) ;
     public final void rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21934:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21935:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21918:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21919:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21935:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21936:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21919:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21920:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_0_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_044250);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_044217);
             ruleValidID();
 
             state._fsp--;
@@ -63033,22 +62982,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21945:1: rule__XSwitchExpression__SwitchAssignment_2_0_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21929:1: rule__XSwitchExpression__SwitchAssignment_2_0_1 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__SwitchAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21949:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21950:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21933:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21934:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21950:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21951:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21934:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21935:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_2_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_144281);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_144248);
             ruleXExpression();
 
             state._fsp--;
@@ -63078,22 +63027,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21960:1: rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21944:1: rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 : ( ruleValidID ) ;
     public final void rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21964:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21965:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21948:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21949:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21965:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21966:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21949:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21950:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_1_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_144312);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_144279);
             ruleValidID();
 
             state._fsp--;
@@ -63123,22 +63072,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21975:1: rule__XSwitchExpression__SwitchAssignment_2_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21959:1: rule__XSwitchExpression__SwitchAssignment_2_1_1 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__SwitchAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21979:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21980:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21963:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21964:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21980:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21981:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21964:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21965:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_144343);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_144310);
             ruleXExpression();
 
             state._fsp--;
@@ -63168,22 +63117,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__CasesAssignment_4"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21990:1: rule__XSwitchExpression__CasesAssignment_4 : ( ruleXCasePart ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21974:1: rule__XSwitchExpression__CasesAssignment_4 : ( ruleXCasePart ) ;
     public final void rule__XSwitchExpression__CasesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21994:1: ( ( ruleXCasePart ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21995:1: ( ruleXCasePart )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21978:1: ( ( ruleXCasePart ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21979:1: ( ruleXCasePart )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21995:1: ( ruleXCasePart )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21996:1: ruleXCasePart
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21979:1: ( ruleXCasePart )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21980:1: ruleXCasePart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getCasesXCasePartParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_444374);
+            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_444341);
             ruleXCasePart();
 
             state._fsp--;
@@ -63213,22 +63162,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XSwitchExpression__DefaultAssignment_5_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22005:1: rule__XSwitchExpression__DefaultAssignment_5_2 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21989:1: rule__XSwitchExpression__DefaultAssignment_5_2 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__DefaultAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22009:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22010:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21993:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21994:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22010:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22011:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21994:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:21995:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_5_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_244405);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_244372);
             ruleXExpression();
 
             state._fsp--;
@@ -63258,22 +63207,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCasePart__TypeGuardAssignment_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22020:1: rule__XCasePart__TypeGuardAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22004:1: rule__XCasePart__TypeGuardAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XCasePart__TypeGuardAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22024:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22025:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22008:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22009:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22025:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22026:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22009:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22010:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_044436);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_044403);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -63303,22 +63252,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCasePart__CaseAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22035:1: rule__XCasePart__CaseAssignment_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22019:1: rule__XCasePart__CaseAssignment_1_1 : ( ruleXExpression ) ;
     public final void rule__XCasePart__CaseAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22039:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22040:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22023:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22024:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22040:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22041:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22024:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22025:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_144467);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_144434);
             ruleXExpression();
 
             state._fsp--;
@@ -63348,22 +63297,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCasePart__ThenAssignment_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22050:1: rule__XCasePart__ThenAssignment_3 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22034:1: rule__XCasePart__ThenAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XCasePart__ThenAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22054:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22055:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22038:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22039:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22055:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22056:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22039:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22040:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_344498);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_344465);
             ruleXExpression();
 
             state._fsp--;
@@ -63393,22 +63342,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XForLoopExpression__DeclaredParamAssignment_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22065:1: rule__XForLoopExpression__DeclaredParamAssignment_3 : ( ruleJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22049:1: rule__XForLoopExpression__DeclaredParamAssignment_3 : ( ruleJvmFormalParameter ) ;
     public final void rule__XForLoopExpression__DeclaredParamAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22069:1: ( ( ruleJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22070:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22053:1: ( ( ruleJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22054:1: ( ruleJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22070:1: ( ruleJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22071:1: ruleJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22054:1: ( ruleJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22055:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_344529);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_344496);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -63438,22 +63387,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XForLoopExpression__ForExpressionAssignment_5"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22080:1: rule__XForLoopExpression__ForExpressionAssignment_5 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22064:1: rule__XForLoopExpression__ForExpressionAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__ForExpressionAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22084:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22085:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22068:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22069:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22085:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22086:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22069:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22070:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getForExpressionXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_544560);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_544527);
             ruleXExpression();
 
             state._fsp--;
@@ -63483,22 +63432,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XForLoopExpression__EachExpressionAssignment_7"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22095:1: rule__XForLoopExpression__EachExpressionAssignment_7 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22079:1: rule__XForLoopExpression__EachExpressionAssignment_7 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__EachExpressionAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22099:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22100:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22083:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22084:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22100:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22101:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22084:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22085:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getEachExpressionXExpressionParserRuleCall_7_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_744591);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_744558);
             ruleXExpression();
 
             state._fsp--;
@@ -63528,22 +63477,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XWhileExpression__PredicateAssignment_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22110:1: rule__XWhileExpression__PredicateAssignment_3 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22094:1: rule__XWhileExpression__PredicateAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__PredicateAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22114:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22115:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22098:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22099:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22115:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22116:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22099:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22100:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getPredicateXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_344622);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_344589);
             ruleXExpression();
 
             state._fsp--;
@@ -63573,22 +63522,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XWhileExpression__BodyAssignment_5"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22125:1: rule__XWhileExpression__BodyAssignment_5 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22109:1: rule__XWhileExpression__BodyAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__BodyAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22129:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22130:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22113:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22114:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22130:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22131:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22114:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22115:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getBodyXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_544653);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_544620);
             ruleXExpression();
 
             state._fsp--;
@@ -63618,22 +63567,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XDoWhileExpression__BodyAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22140:1: rule__XDoWhileExpression__BodyAssignment_2 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22124:1: rule__XDoWhileExpression__BodyAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__BodyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22144:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22145:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22128:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22129:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22145:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22146:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22129:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22130:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getBodyXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_244684);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_244651);
             ruleXExpression();
 
             state._fsp--;
@@ -63663,22 +63612,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XDoWhileExpression__PredicateAssignment_5"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22155:1: rule__XDoWhileExpression__PredicateAssignment_5 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22139:1: rule__XDoWhileExpression__PredicateAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__PredicateAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22159:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22160:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22143:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22144:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22160:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22161:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22144:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22145:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getPredicateXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_544715);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_544682);
             ruleXExpression();
 
             state._fsp--;
@@ -63708,22 +63657,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XBlockExpression__ExpressionsAssignment_2_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22170:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionInsideBlock ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22154:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionInsideBlock ) ;
     public final void rule__XBlockExpression__ExpressionsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22174:1: ( ( ruleXExpressionInsideBlock ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22175:1: ( ruleXExpressionInsideBlock )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22158:1: ( ( ruleXExpressionInsideBlock ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22159:1: ( ruleXExpressionInsideBlock )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22175:1: ( ruleXExpressionInsideBlock )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22176:1: ruleXExpressionInsideBlock
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22159:1: ( ruleXExpressionInsideBlock )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22160:1: ruleXExpressionInsideBlock
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_044746);
+            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_044713);
             ruleXExpressionInsideBlock();
 
             state._fsp--;
@@ -63753,28 +63702,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XVariableDeclaration__WriteableAssignment_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22185:1: rule__XVariableDeclaration__WriteableAssignment_1_0 : ( ( 'var' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22169:1: rule__XVariableDeclaration__WriteableAssignment_1_0 : ( ( 'var' ) ) ;
     public final void rule__XVariableDeclaration__WriteableAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22189:1: ( ( ( 'var' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22190:1: ( ( 'var' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22173:1: ( ( ( 'var' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22174:1: ( ( 'var' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22190:1: ( ( 'var' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22191:1: ( 'var' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22192:1: ( 'var' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22193:1: 'var'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22174:1: ( ( 'var' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22175:1: ( 'var' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
-            match(input,124,FOLLOW_124_in_rule__XVariableDeclaration__WriteableAssignment_1_044782); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22176:1: ( 'var' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22177:1: 'var'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
+            }
+            match(input,124,FOLLOW_124_in_rule__XVariableDeclaration__WriteableAssignment_1_044749); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
@@ -63806,22 +63755,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XVariableDeclaration__TypeAssignment_2_0_0_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22208:1: rule__XVariableDeclaration__TypeAssignment_2_0_0_0 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22192:1: rule__XVariableDeclaration__TypeAssignment_2_0_0_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XVariableDeclaration__TypeAssignment_2_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22212:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22213:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22196:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22197:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22213:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22214:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22197:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22198:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_044821);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_044788);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -63851,22 +63800,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XVariableDeclaration__NameAssignment_2_0_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22223:1: rule__XVariableDeclaration__NameAssignment_2_0_0_1 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22207:1: rule__XVariableDeclaration__NameAssignment_2_0_0_1 : ( ruleValidID ) ;
     public final void rule__XVariableDeclaration__NameAssignment_2_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22227:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22228:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22211:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22212:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22228:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22229:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22212:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22213:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_144852);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_144819);
             ruleValidID();
 
             state._fsp--;
@@ -63896,22 +63845,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XVariableDeclaration__NameAssignment_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22238:1: rule__XVariableDeclaration__NameAssignment_2_1 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22222:1: rule__XVariableDeclaration__NameAssignment_2_1 : ( ruleValidID ) ;
     public final void rule__XVariableDeclaration__NameAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22242:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22243:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22226:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22227:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22243:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22244:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22227:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22228:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_144883);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_144850);
             ruleValidID();
 
             state._fsp--;
@@ -63941,22 +63890,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XVariableDeclaration__RightAssignment_3_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22253:1: rule__XVariableDeclaration__RightAssignment_3_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22237:1: rule__XVariableDeclaration__RightAssignment_3_1 : ( ruleXExpression ) ;
     public final void rule__XVariableDeclaration__RightAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22257:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22258:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22241:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22242:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22258:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22259:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22242:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22243:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_144914);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_144881);
             ruleXExpression();
 
             state._fsp--;
@@ -63986,22 +63935,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmFormalParameter__ParameterTypeAssignment_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22268:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22252:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmFormalParameter__ParameterTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22272:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22273:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22256:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22257:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22273:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22274:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22257:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22258:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_044945);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_044912);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -64031,22 +63980,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmFormalParameter__NameAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22283:1: rule__JvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22267:1: rule__JvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__JvmFormalParameter__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22287:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22288:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22271:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22272:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22288:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22289:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22272:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22273:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_144976);
+            pushFollow(FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_144943);
             ruleValidID();
 
             state._fsp--;
@@ -64076,22 +64025,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__FullJvmFormalParameter__ParameterTypeAssignment_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22298:1: rule__FullJvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22282:1: rule__FullJvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__FullJvmFormalParameter__ParameterTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22302:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22303:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22286:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22287:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22303:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22304:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22287:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22288:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_045007);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_044974);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -64121,22 +64070,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__FullJvmFormalParameter__NameAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22313:1: rule__FullJvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22297:1: rule__FullJvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__FullJvmFormalParameter__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22317:1: ( ( ruleValidID ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22318:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22301:1: ( ( ruleValidID ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22302:1: ( ruleValidID )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22318:1: ( ruleValidID )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22319:1: ruleValidID
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22302:1: ( ruleValidID )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22303:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFullJvmFormalParameterAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_145038);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_145005);
             ruleValidID();
 
             state._fsp--;
@@ -64166,22 +64115,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22328:1: rule__XFeatureCall__TypeArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22312:1: rule__XFeatureCall__TypeArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22332:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22333:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22316:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22317:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22333:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22334:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22317:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22318:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_145069);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_145036);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -64211,22 +64160,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_1_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22343:1: rule__XFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22327:1: rule__XFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22347:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22348:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22331:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22332:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22348:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22349:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22332:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22333:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_145100);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_145067);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -64256,28 +64205,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22358:1: rule__XFeatureCall__FeatureAssignment_2 : ( ( ruleIdOrSuper ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22342:1: rule__XFeatureCall__FeatureAssignment_2 : ( ( ruleIdOrSuper ) ) ;
     public final void rule__XFeatureCall__FeatureAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22362:1: ( ( ( ruleIdOrSuper ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22363:1: ( ( ruleIdOrSuper ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22346:1: ( ( ( ruleIdOrSuper ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22347:1: ( ( ruleIdOrSuper ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22363:1: ( ( ruleIdOrSuper ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22364:1: ( ruleIdOrSuper )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22347:1: ( ( ruleIdOrSuper ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22348:1: ( ruleIdOrSuper )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22365:1: ( ruleIdOrSuper )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22366:1: ruleIdOrSuper
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22349:1: ( ruleIdOrSuper )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22350:1: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_245135);
+            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_245102);
             ruleIdOrSuper();
 
             state._fsp--;
@@ -64313,28 +64262,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__ExplicitOperationCallAssignment_3_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22377:1: rule__XFeatureCall__ExplicitOperationCallAssignment_3_0 : ( ( '(' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22361:1: rule__XFeatureCall__ExplicitOperationCallAssignment_3_0 : ( ( '(' ) ) ;
     public final void rule__XFeatureCall__ExplicitOperationCallAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22381:1: ( ( ( '(' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22382:1: ( ( '(' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22365:1: ( ( ( '(' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22366:1: ( ( '(' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22382:1: ( ( '(' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22383:1: ( '(' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22384:1: ( '(' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22385:1: '('
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22366:1: ( ( '(' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22367:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
             }
-            match(input,81,FOLLOW_81_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_045175); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22368:1: ( '(' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22369:1: '('
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
+            }
+            match(input,81,FOLLOW_81_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_045142); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
             }
@@ -64366,22 +64315,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22400:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 : ( ruleXShortClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22384:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22404:1: ( ( ruleXShortClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22405:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22388:1: ( ( ruleXShortClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22389:1: ( ruleXShortClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22405:1: ( ruleXShortClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22406:1: ruleXShortClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22389:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22390:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_045214);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_045181);
             ruleXShortClosure();
 
             state._fsp--;
@@ -64411,22 +64360,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22415:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22399:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22419:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22420:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22403:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22404:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22420:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22421:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22404:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22405:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_045245);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_045212);
             ruleXExpression();
 
             state._fsp--;
@@ -64456,22 +64405,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22430:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22414:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22434:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22435:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22418:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22419:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22435:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22436:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22419:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22420:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_145276);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_145243);
             ruleXExpression();
 
             state._fsp--;
@@ -64501,22 +64450,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_4"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22445:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_4 : ( ruleXClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22429:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_4 : ( ruleXClosure ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22449:1: ( ( ruleXClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22450:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22433:1: ( ( ruleXClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22434:1: ( ruleXClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22450:1: ( ruleXClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22451:1: ruleXClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22434:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22435:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_445307);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_445274);
             ruleXClosure();
 
             state._fsp--;
@@ -64546,28 +64495,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__ConstructorAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22460:1: rule__XConstructorCall__ConstructorAssignment_2 : ( ( ruleQualifiedName ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22444:1: rule__XConstructorCall__ConstructorAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XConstructorCall__ConstructorAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22464:1: ( ( ( ruleQualifiedName ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22465:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22448:1: ( ( ( ruleQualifiedName ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22449:1: ( ( ruleQualifiedName ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22465:1: ( ( ruleQualifiedName ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22466:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22449:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22450:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorCrossReference_2_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22467:1: ( ruleQualifiedName )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22468:1: ruleQualifiedName
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22451:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22452:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorQualifiedNameParserRuleCall_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_245342);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_245309);
             ruleQualifiedName();
 
             state._fsp--;
@@ -64603,22 +64552,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_3_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22479:1: rule__XConstructorCall__TypeArgumentsAssignment_3_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22463:1: rule__XConstructorCall__TypeArgumentsAssignment_3_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XConstructorCall__TypeArgumentsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22483:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22484:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22467:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22468:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22484:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22485:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22468:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22469:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_145377);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_145344);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -64648,22 +64597,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_3_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22494:1: rule__XConstructorCall__TypeArgumentsAssignment_3_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22478:1: rule__XConstructorCall__TypeArgumentsAssignment_3_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XConstructorCall__TypeArgumentsAssignment_3_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22498:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22499:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22482:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22483:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22499:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22500:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22483:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22484:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_145408);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_145375);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -64693,22 +64642,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22509:1: rule__XConstructorCall__ArgumentsAssignment_4_1_0 : ( ruleXShortClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22493:1: rule__XConstructorCall__ArgumentsAssignment_4_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22513:1: ( ( ruleXShortClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22514:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22497:1: ( ( ruleXShortClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22498:1: ( ruleXShortClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22514:1: ( ruleXShortClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22515:1: ruleXShortClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22498:1: ( ruleXShortClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22499:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_4_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_045439);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_045406);
             ruleXShortClosure();
 
             state._fsp--;
@@ -64738,22 +64687,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22524:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_0 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22508:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22528:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22529:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22512:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22513:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22529:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22530:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22513:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22514:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_045470);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_045437);
             ruleXExpression();
 
             state._fsp--;
@@ -64783,22 +64732,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22539:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22523:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22543:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22544:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22527:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22528:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22544:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22545:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22528:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22529:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_145501);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_145468);
             ruleXExpression();
 
             state._fsp--;
@@ -64828,22 +64777,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_5"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22554:1: rule__XConstructorCall__ArgumentsAssignment_5 : ( ruleXClosure ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22538:1: rule__XConstructorCall__ArgumentsAssignment_5 : ( ruleXClosure ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22558:1: ( ( ruleXClosure ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22559:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22542:1: ( ( ruleXClosure ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22543:1: ( ruleXClosure )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22559:1: ( ruleXClosure )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22560:1: ruleXClosure
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22543:1: ( ruleXClosure )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22544:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_545532);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_545499);
             ruleXClosure();
 
             state._fsp--;
@@ -64873,28 +64822,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XBooleanLiteral__IsTrueAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22569:1: rule__XBooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22553:1: rule__XBooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
     public final void rule__XBooleanLiteral__IsTrueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22573:1: ( ( ( 'true' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22574:1: ( ( 'true' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22557:1: ( ( ( 'true' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22558:1: ( ( 'true' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22574:1: ( ( 'true' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22575:1: ( 'true' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22576:1: ( 'true' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22577:1: 'true'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22558:1: ( ( 'true' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22559:1: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
-            match(input,125,FOLLOW_125_in_rule__XBooleanLiteral__IsTrueAssignment_1_145568); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22560:1: ( 'true' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22561:1: 'true'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
+            }
+            match(input,125,FOLLOW_125_in_rule__XBooleanLiteral__IsTrueAssignment_1_145535); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
@@ -64926,22 +64875,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XNumberLiteral__ValueAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22592:1: rule__XNumberLiteral__ValueAssignment_1 : ( ruleNumber ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22576:1: rule__XNumberLiteral__ValueAssignment_1 : ( ruleNumber ) ;
     public final void rule__XNumberLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22596:1: ( ( ruleNumber ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22597:1: ( ruleNumber )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22580:1: ( ( ruleNumber ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22581:1: ( ruleNumber )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22597:1: ( ruleNumber )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22598:1: ruleNumber
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22581:1: ( ruleNumber )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22582:1: ruleNumber
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXNumberLiteralAccess().getValueNumberParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_145607);
+            pushFollow(FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_145574);
             ruleNumber();
 
             state._fsp--;
@@ -64971,22 +64920,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XStringLiteral__ValueAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22607:1: rule__XStringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22591:1: rule__XStringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
     public final void rule__XStringLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22611:1: ( ( RULE_STRING ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22612:1: ( RULE_STRING )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22595:1: ( ( RULE_STRING ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22596:1: ( RULE_STRING )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22612:1: ( RULE_STRING )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22613:1: RULE_STRING
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22596:1: ( RULE_STRING )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22597:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_145638); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_145605); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             }
@@ -65012,28 +64961,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTypeLiteral__TypeAssignment_3"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22622:1: rule__XTypeLiteral__TypeAssignment_3 : ( ( ruleQualifiedName ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22606:1: rule__XTypeLiteral__TypeAssignment_3 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XTypeLiteral__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22626:1: ( ( ( ruleQualifiedName ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22627:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22610:1: ( ( ( ruleQualifiedName ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22611:1: ( ( ruleQualifiedName ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22627:1: ( ( ruleQualifiedName ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22628:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22611:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22612:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_3_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22629:1: ( ruleQualifiedName )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22630:1: ruleQualifiedName
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22613:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22614:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_3_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_345673);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_345640);
             ruleQualifiedName();
 
             state._fsp--;
@@ -65069,22 +65018,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTypeLiteral__ArrayDimensionsAssignment_4"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22641:1: rule__XTypeLiteral__ArrayDimensionsAssignment_4 : ( ruleArrayBrackets ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22625:1: rule__XTypeLiteral__ArrayDimensionsAssignment_4 : ( ruleArrayBrackets ) ;
     public final void rule__XTypeLiteral__ArrayDimensionsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22645:1: ( ( ruleArrayBrackets ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22646:1: ( ruleArrayBrackets )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22629:1: ( ( ruleArrayBrackets ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22630:1: ( ruleArrayBrackets )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22646:1: ( ruleArrayBrackets )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22647:1: ruleArrayBrackets
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22630:1: ( ruleArrayBrackets )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22631:1: ruleArrayBrackets
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getArrayDimensionsArrayBracketsParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_445708);
+            pushFollow(FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_445675);
             ruleArrayBrackets();
 
             state._fsp--;
@@ -65114,22 +65063,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XThrowExpression__ExpressionAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22656:1: rule__XThrowExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22640:1: rule__XThrowExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XThrowExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22660:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22661:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22644:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22645:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22661:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22662:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22645:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22646:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_245739);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_245706);
             ruleXExpression();
 
             state._fsp--;
@@ -65159,22 +65108,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XReturnExpression__ExpressionAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22671:1: rule__XReturnExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22655:1: rule__XReturnExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XReturnExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22675:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22676:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22659:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22660:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22676:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22677:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22660:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22661:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXReturnExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_245770);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_245737);
             ruleXExpression();
 
             state._fsp--;
@@ -65204,22 +65153,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__ExpressionAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22686:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22670:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22690:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22691:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22674:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22675:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22691:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22692:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22675:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22676:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_245801);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_245768);
             ruleXExpression();
 
             state._fsp--;
@@ -65249,22 +65198,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22701:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0 : ( ruleXCatchClause ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22685:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0 : ( ruleXCatchClause ) ;
     public final void rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22705:1: ( ( ruleXCatchClause ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22706:1: ( ruleXCatchClause )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22689:1: ( ( ruleXCatchClause ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22690:1: ( ruleXCatchClause )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22706:1: ( ruleXCatchClause )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22707:1: ruleXCatchClause
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22690:1: ( ruleXCatchClause )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22691:1: ruleXCatchClause
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_3_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_045832);
+            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_045799);
             ruleXCatchClause();
 
             state._fsp--;
@@ -65294,22 +65243,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22716:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22700:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22720:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22721:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22704:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22705:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22721:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22722:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22705:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22706:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_145863);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_145830);
             ruleXExpression();
 
             state._fsp--;
@@ -65339,22 +65288,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22731:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22715:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22735:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22736:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22719:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22720:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22736:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22737:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22720:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22721:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_145894);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_145861);
             ruleXExpression();
 
             state._fsp--;
@@ -65384,22 +65333,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCatchClause__DeclaredParamAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22746:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleFullJvmFormalParameter ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22730:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleFullJvmFormalParameter ) ;
     public final void rule__XCatchClause__DeclaredParamAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22750:1: ( ( ruleFullJvmFormalParameter ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22751:1: ( ruleFullJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22734:1: ( ( ruleFullJvmFormalParameter ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22735:1: ( ruleFullJvmFormalParameter )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22751:1: ( ruleFullJvmFormalParameter )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22752:1: ruleFullJvmFormalParameter
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22735:1: ( ruleFullJvmFormalParameter )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22736:1: ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getDeclaredParamFullJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_245925);
+            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_245892);
             ruleFullJvmFormalParameter();
 
             state._fsp--;
@@ -65429,22 +65378,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XCatchClause__ExpressionAssignment_4"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22761:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22745:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XCatchClause__ExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22765:1: ( ( ruleXExpression ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22766:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22749:1: ( ( ruleXExpression ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22750:1: ( ruleXExpression )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22766:1: ( ruleXExpression )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22767:1: ruleXExpression
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22750:1: ( ruleXExpression )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22751:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_445956);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_445923);
             ruleXExpression();
 
             state._fsp--;
@@ -65474,22 +65423,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22776:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22760:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22780:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22781:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22764:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22765:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22781:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22782:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22765:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22766:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_045987);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_045954);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65519,22 +65468,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22791:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22775:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22795:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22796:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22779:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22780:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22796:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22797:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22780:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22781:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_146018);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_145985);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65564,22 +65513,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ReturnTypeAssignment_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22806:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22790:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ReturnTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22810:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22811:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22794:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22795:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22811:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22812:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22795:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22796:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_246049);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_246016);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65609,28 +65558,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__TypeAssignment_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22821:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22805:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__JvmParameterizedTypeReference__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22825:1: ( ( ( ruleQualifiedName ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22826:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22809:1: ( ( ( ruleQualifiedName ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22810:1: ( ( ruleQualifiedName ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22826:1: ( ( ruleQualifiedName ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22827:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22810:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22811:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22828:1: ( ruleQualifiedName )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22829:1: ruleQualifiedName
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22812:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22813:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_046084);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_046051);
             ruleQualifiedName();
 
             state._fsp--;
@@ -65666,22 +65615,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22840:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22824:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22844:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22845:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22828:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22829:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22845:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22846:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22829:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22830:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_146119);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_146086);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -65711,22 +65660,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22855:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22839:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22859:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22860:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22843:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22844:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22860:1: ( ruleJvmArgumentTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22861:1: ruleJvmArgumentTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22844:1: ( ruleJvmArgumentTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22845:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_146150);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_146117);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -65756,22 +65705,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22870:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22854:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22874:1: ( ( ruleJvmUpperBound ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22875:1: ( ruleJvmUpperBound )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22858:1: ( ( ruleJvmUpperBound ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22859:1: ( ruleJvmUpperBound )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22875:1: ( ruleJvmUpperBound )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22876:1: ruleJvmUpperBound
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22859:1: ( ruleJvmUpperBound )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22860:1: ruleJvmUpperBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_046181);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_046148);
             ruleJvmUpperBound();
 
             state._fsp--;
@@ -65801,22 +65750,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22885:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22869:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22889:1: ( ( ruleJvmLowerBound ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22890:1: ( ruleJvmLowerBound )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22873:1: ( ( ruleJvmLowerBound ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22874:1: ( ruleJvmLowerBound )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22890:1: ( ruleJvmLowerBound )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22891:1: ruleJvmLowerBound
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22874:1: ( ruleJvmLowerBound )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22875:1: ruleJvmLowerBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_146212);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_146179);
             ruleJvmLowerBound();
 
             state._fsp--;
@@ -65846,22 +65795,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmUpperBound__TypeReferenceAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22900:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22884:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBound__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22904:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22905:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22888:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22889:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22905:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22906:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22889:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22890:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_146243);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_146210);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65891,22 +65840,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__TypeReferenceAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22915:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22899:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBoundAnded__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22919:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22920:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22903:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22904:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22920:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22921:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22904:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22905:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_146274);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_146241);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65936,22 +65885,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__JvmLowerBound__TypeReferenceAssignment_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22930:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22914:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmLowerBound__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22934:1: ( ( ruleJvmTypeReference ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22935:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22918:1: ( ( ruleJvmTypeReference ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22919:1: ( ruleJvmTypeReference )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22935:1: ( ruleJvmTypeReference )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22936:1: ruleJvmTypeReference
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22919:1: ( ruleJvmTypeReference )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22920:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_146305);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_146272);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -65981,22 +65930,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportSection__ImportDeclarationsAssignment"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22949:1: rule__XImportSection__ImportDeclarationsAssignment : ( ruleXImportDeclaration ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22933:1: rule__XImportSection__ImportDeclarationsAssignment : ( ruleXImportDeclaration ) ;
     public final void rule__XImportSection__ImportDeclarationsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22953:1: ( ( ruleXImportDeclaration ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22954:1: ( ruleXImportDeclaration )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22937:1: ( ( ruleXImportDeclaration ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22938:1: ( ruleXImportDeclaration )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22954:1: ( ruleXImportDeclaration )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22955:1: ruleXImportDeclaration
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22938:1: ( ruleXImportDeclaration )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22939:1: ruleXImportDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportSectionAccess().getImportDeclarationsXImportDeclarationParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment46340);
+            pushFollow(FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment46307);
             ruleXImportDeclaration();
 
             state._fsp--;
@@ -66026,28 +65975,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportDeclaration__StaticAssignment_1_0_0"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22964:1: rule__XImportDeclaration__StaticAssignment_1_0_0 : ( ( 'static' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22948:1: rule__XImportDeclaration__StaticAssignment_1_0_0 : ( ( 'static' ) ) ;
     public final void rule__XImportDeclaration__StaticAssignment_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22968:1: ( ( ( 'static' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22969:1: ( ( 'static' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22952:1: ( ( ( 'static' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22953:1: ( ( 'static' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22969:1: ( ( 'static' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22970:1: ( 'static' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22971:1: ( 'static' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22972:1: 'static'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22953:1: ( ( 'static' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22954:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
             }
-            match(input,69,FOLLOW_69_in_rule__XImportDeclaration__StaticAssignment_1_0_046376); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22955:1: ( 'static' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22956:1: 'static'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
+            }
+            match(input,69,FOLLOW_69_in_rule__XImportDeclaration__StaticAssignment_1_0_046343); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
             }
@@ -66079,28 +66028,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportDeclaration__ExtensionAssignment_1_0_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22987:1: rule__XImportDeclaration__ExtensionAssignment_1_0_1 : ( ( 'extension' ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22971:1: rule__XImportDeclaration__ExtensionAssignment_1_0_1 : ( ( 'extension' ) ) ;
     public final void rule__XImportDeclaration__ExtensionAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22991:1: ( ( ( 'extension' ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22992:1: ( ( 'extension' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22975:1: ( ( ( 'extension' ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22976:1: ( ( 'extension' ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22992:1: ( ( 'extension' ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22993:1: ( 'extension' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
-            }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22994:1: ( 'extension' )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22995:1: 'extension'
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22976:1: ( ( 'extension' ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22977:1: ( 'extension' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
             }
-            match(input,71,FOLLOW_71_in_rule__XImportDeclaration__ExtensionAssignment_1_0_146420); if (state.failed) return ;
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22978:1: ( 'extension' )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22979:1: 'extension'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
+            }
+            match(input,71,FOLLOW_71_in_rule__XImportDeclaration__ExtensionAssignment_1_0_146387); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
             }
@@ -66132,28 +66081,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedTypeAssignment_1_0_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23010:1: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 : ( ( ruleQualifiedName ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22994:1: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XImportDeclaration__ImportedTypeAssignment_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23014:1: ( ( ( ruleQualifiedName ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23015:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22998:1: ( ( ( ruleQualifiedName ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22999:1: ( ( ruleQualifiedName ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23015:1: ( ( ruleQualifiedName ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23016:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:22999:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23000:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23017:1: ( ruleQualifiedName )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23018:1: ruleQualifiedName
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23001:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23002:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_246463);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_246430);
             ruleQualifiedName();
 
             state._fsp--;
@@ -66189,28 +66138,28 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedTypeAssignment_1_1"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23029:1: rule__XImportDeclaration__ImportedTypeAssignment_1_1 : ( ( ruleQualifiedName ) ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23013:1: rule__XImportDeclaration__ImportedTypeAssignment_1_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XImportDeclaration__ImportedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23033:1: ( ( ( ruleQualifiedName ) ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23034:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23017:1: ( ( ( ruleQualifiedName ) ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23018:1: ( ( ruleQualifiedName ) )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23034:1: ( ( ruleQualifiedName ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23035:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23018:1: ( ( ruleQualifiedName ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23019:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0()); 
             }
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23036:1: ( ruleQualifiedName )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23037:1: ruleQualifiedName
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23020:1: ( ruleQualifiedName )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23021:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_146502);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_146469);
             ruleQualifiedName();
 
             state._fsp--;
@@ -66246,22 +66195,22 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2"
-    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23048:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
+    // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23032:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
     public final void rule__XImportDeclaration__ImportedNamespaceAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23052:1: ( ( ruleQualifiedNameWithWildcard ) )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23053:1: ( ruleQualifiedNameWithWildcard )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23036:1: ( ( ruleQualifiedNameWithWildcard ) )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23037:1: ( ruleQualifiedNameWithWildcard )
             {
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23053:1: ( ruleQualifiedNameWithWildcard )
-            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23054:1: ruleQualifiedNameWithWildcard
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23037:1: ( ruleQualifiedNameWithWildcard )
+            // ../it.xsemantics.dsl.ui/src-gen/it/xsemantics/dsl/ui/contentassist/antlr/internal/InternalXsemantics.g:23038:1: ruleQualifiedNameWithWildcard
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_246537);
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_246504);
             ruleQualifiedNameWithWildcard();
 
             state._fsp--;
@@ -68103,14 +68052,14 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     static final String DFA16_maxS =
         "\1\72\2\uffff\1\66\10\uffff";
     static final String DFA16_acceptS =
-        "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\12\1\3\1\6";
+        "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\12\1\6\1\3";
     static final String DFA16_specialS =
         "\14\uffff}>";
     static final String[] DFA16_transitionS = {
             "\1\3\1\6\1\1\1\2\1\4\1\5\1\7\1\10\1\11",
             "",
             "",
-            "\1\13\3\uffff\1\12",
+            "\1\12\3\uffff\1\13",
             "",
             "",
             "",
@@ -68663,7 +68612,7 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     static final String DFA81_acceptS =
         "\1\uffff\1\2\11\uffff\1\1";
     static final String DFA81_specialS =
-        "\2\uffff\1\3\1\1\1\10\1\4\1\7\1\6\1\5\1\0\1\2\1\uffff}>";
+        "\2\uffff\1\3\1\10\1\7\1\4\1\5\1\6\1\2\1\0\1\1\1\uffff}>";
     static final String[] DFA81_transitionS = {
             "\5\1\4\uffff\2\1\1\uffff\42\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1"+
             "\11\1\12\17\1\2\uffff\3\1\2\uffff\2\1\1\uffff\2\1\1\uffff\14"+
@@ -68733,21 +68682,6 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA81_3 = input.LA(1);
-
-                         
-                        int index81_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred142_InternalXsemantics()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index81_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA81_10 = input.LA(1);
 
                          
@@ -68760,6 +68694,21 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
                          
                         input.seek(index81_10);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA81_8 = input.LA(1);
+
+                         
+                        int index81_8 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred142_InternalXsemantics()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index81_8);
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
@@ -68793,10 +68742,10 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA81_8 = input.LA(1);
+                        int LA81_6 = input.LA(1);
 
                          
-                        int index81_8 = input.index();
+                        int index81_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred142_InternalXsemantics()) ) {s = 11;}
@@ -68804,7 +68753,7 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index81_8);
+                        input.seek(index81_6);
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
@@ -68823,21 +68772,6 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA81_6 = input.LA(1);
-
-                         
-                        int index81_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred142_InternalXsemantics()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index81_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
                         int LA81_4 = input.LA(1);
 
                          
@@ -68850,6 +68784,21 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
 
                          
                         input.seek(index81_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA81_3 = input.LA(1);
+
+                         
+                        int index81_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred142_InternalXsemantics()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index81_3);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -71171,7 +71120,7 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_rule__RuleInvocation__Group__0_in_ruleRuleInvocation1059 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRuleInvocationExpression_in_entryRuleRuleInvocationExpression1086 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRuleInvocationExpression1093 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RuleInvocationExpression__ExpressionAssignment_in_ruleRuleInvocationExpression1119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RuleInvocationExpression__Alternatives_in_ruleRuleInvocationExpression1119 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnvironmentSpecification_in_entryRuleEnvironmentSpecification1146 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEnvironmentSpecification1153 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnvironmentSpecification__Group__0_in_ruleEnvironmentSpecification1179 = new BitSet(new long[]{0x0000000000000002L});
@@ -71428,8 +71377,8 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_ruleXNullLiteral_in_rule__XLiteral__Alternatives6250 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXStringLiteral_in_rule__XLiteral__Alternatives6267 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXTypeLiteral_in_rule__XLiteral__Alternatives6284 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXVariableDeclaration_in_rule__RuleInvocationExpression__ExpressionAlternatives_06316 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__RuleInvocationExpression__ExpressionAlternatives_06333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXVariableDeclaration_in_rule__RuleInvocationExpression__Alternatives6316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__RuleInvocationExpression__Alternatives6333 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TerminalEnvironmentSpecification__Group_0__0_in_rule__TerminalEnvironmentSpecification__Alternatives6365 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TerminalEnvironmentSpecification__Group_1__0_in_rule__TerminalEnvironmentSpecification__Alternatives6383 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnvironmentReference_in_rule__TerminalEnvironmentSpecification__Alternatives6401 = new BitSet(new long[]{0x0000000000000002L});
@@ -72886,139 +72835,138 @@ public class InternalXsemanticsParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_ruleRuleInvocationExpression_in_rule__RuleInvocation__ExpressionsAssignment_242051 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRelationSymbol_in_rule__RuleInvocation__RelationSymbolsAssignment_3_042082 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRuleInvocationExpression_in_rule__RuleInvocation__ExpressionsAssignment_3_142113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RuleInvocationExpression__ExpressionAlternatives_0_in_rule__RuleInvocationExpression__ExpressionAssignment42144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnvironmentSpecification_in_rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_242177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__KeyAssignment_1_142208 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__ValueAssignment_1_342239 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EnvironmentReference__EnvironmentAssignment_142274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__NameAssignment42309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__ErrorAssignment_142340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__SourceAssignment_2_142371 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__FeatureAssignment_3_142402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__RuleParameter__ParameterAssignment42433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__ExpressionInConclusion__ExpressionAssignment42464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_142499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_342534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_142569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_142604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_142639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_142674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_142709 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_142744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_142779 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_142814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_142845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_142880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_142915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_142950 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_142985 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_143020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_143055 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_143090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_143125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_143160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_243195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_143226 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_143262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_243305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_143340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_122_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_143376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_243420 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_143459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_143490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_243525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_81_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_043565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_043604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_043635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_143666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_443697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_043728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_143759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_043790 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_143821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_043852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_143883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_123_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_143919 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_243958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XExpressionInClosure__ExpressionsAssignment_1_043989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_044020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_144051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_123_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_244087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_144126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_344157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_544188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_144219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_044250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_144281 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_144312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_144343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_444374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_244405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_044436 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_144467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_344498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_344529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_544560 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_744591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_344622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_544653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_244684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_544715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_044746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_124_in_rule__XVariableDeclaration__WriteableAssignment_1_044782 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_044821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_144852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_144883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_144914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_044945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_144976 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_045007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_145038 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_145069 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_145100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_245135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_81_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_045175 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_045214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_045245 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_145276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_445307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_245342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_145377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_145408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_045439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_045470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_145501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_545532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_125_in_rule__XBooleanLiteral__IsTrueAssignment_1_145568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_145607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_145638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_345673 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_445708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_245739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_245770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_245801 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_045832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_145863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_145894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_245925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_445956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_045987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_146018 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_246049 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_046084 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_146119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_146150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_046181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_146212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_146243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_146274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_146305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment46340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_69_in_rule__XImportDeclaration__StaticAssignment_1_0_046376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_71_in_rule__XImportDeclaration__ExtensionAssignment_1_0_146420 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_246463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_146502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_246537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnvironmentSpecification_in_rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_242144 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__KeyAssignment_1_142175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__TerminalEnvironmentSpecification__ValueAssignment_1_342206 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__EnvironmentReference__EnvironmentAssignment_142241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Environment__NameAssignment42276 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__ErrorAssignment_142307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__SourceAssignment_2_142338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__ErrorSpecification__FeatureAssignment_3_142369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__RuleParameter__ParameterAssignment42400 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__ExpressionInConclusion__ExpressionAssignment42431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_142466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_342501 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_142536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_142571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_142606 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_142641 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_142676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_142711 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_142746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_142781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_142812 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_142847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_142882 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_142917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_142952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_142987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_143022 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_143057 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_143092 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_143127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_243162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_143193 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_143229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_243272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_143307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_122_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_143343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_121_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_243387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_143426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_143457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_243492 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_81_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_043532 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_043571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_043602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_143633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_443664 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_043695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_143726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_043757 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_143788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_043819 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_143850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_123_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_143886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_243925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XExpressionInClosure__ExpressionsAssignment_1_043956 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_043987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_144018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_123_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_244054 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_144093 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_344124 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_544155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_144186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_044217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_144248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_144279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_144310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_444341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_244372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_044403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_144434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_344465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_344496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_544527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_744558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_344589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_544620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_244651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_544682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_044713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_124_in_rule__XVariableDeclaration__WriteableAssignment_1_044749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_044788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_144819 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_144850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_144881 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_044912 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_144943 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_044974 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_145005 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_145036 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_145067 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_245102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_81_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_045142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_045181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_045212 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_145243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_445274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_245309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_145344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_145375 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_045406 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_045437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_145468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_545499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_125_in_rule__XBooleanLiteral__IsTrueAssignment_1_145535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_145574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_145605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_345640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_445675 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_245706 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_245737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_245768 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_045799 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_145830 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_145861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_245892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_445923 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_045954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_145985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_246016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_046051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_146086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_146117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_046148 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_146179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_146210 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_146241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_146272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment46307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_69_in_rule__XImportDeclaration__StaticAssignment_1_0_046343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_71_in_rule__XImportDeclaration__ExtensionAssignment_1_0_146387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_246430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_146469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_246504 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRuleInvocation_in_synpred4_InternalXsemantics6095 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RuleConclusionElement__Group_0__0_in_synpred40_InternalXsemantics6983 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__OpOther__Group_6_1_0__0_in_synpred60_InternalXsemantics7642 = new BitSet(new long[]{0x0000000000000002L});

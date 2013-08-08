@@ -719,34 +719,6 @@ public interface XsemanticsPackage extends EPackage
   int RULE_INVOCATION_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 4;
 
   /**
-   * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.RuleInvocationExpressionImpl <em>Rule Invocation Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see it.xsemantics.dsl.xsemantics.impl.RuleInvocationExpressionImpl
-   * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocationExpression()
-   * @generated
-   */
-  int RULE_INVOCATION_EXPRESSION = 12;
-
-  /**
-   * The feature id for the '<em><b>Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_INVOCATION_EXPRESSION__EXPRESSION = 0;
-
-  /**
-   * The number of structural features of the '<em>Rule Invocation Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_INVOCATION_EXPRESSION_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.EnvironmentSpecificationImpl <em>Environment Specification</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -754,7 +726,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentSpecification()
    * @generated
    */
-  int ENVIRONMENT_SPECIFICATION = 13;
+  int ENVIRONMENT_SPECIFICATION = 12;
 
   /**
    * The number of structural features of the '<em>Environment Specification</em>' class.
@@ -773,7 +745,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentReference()
    * @generated
    */
-  int ENVIRONMENT_REFERENCE = 14;
+  int ENVIRONMENT_REFERENCE = 13;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -801,7 +773,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironment()
    * @generated
    */
-  int ENVIRONMENT = 15;
+  int ENVIRONMENT = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -829,7 +801,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
    * @generated
    */
-  int ERROR_SPECIFICATION = 16;
+  int ERROR_SPECIFICATION = 15;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -875,7 +847,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusionElement()
    * @generated
    */
-  int RULE_CONCLUSION_ELEMENT = 17;
+  int RULE_CONCLUSION_ELEMENT = 16;
 
   /**
    * The number of structural features of the '<em>Rule Conclusion Element</em>' class.
@@ -894,7 +866,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleParameter()
    * @generated
    */
-  int RULE_PARAMETER = 18;
+  int RULE_PARAMETER = 17;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -922,7 +894,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getExpressionInConclusion()
    * @generated
    */
-  int EXPRESSION_IN_CONCLUSION = 19;
+  int EXPRESSION_IN_CONCLUSION = 18;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -950,7 +922,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOutputParameter()
    * @generated
    */
-  int OUTPUT_PARAMETER = 20;
+  int OUTPUT_PARAMETER = 19;
 
   /**
    * The feature id for the '<em><b>Jvm Type Reference</b></em>' containment reference.
@@ -978,7 +950,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getInputParameter()
    * @generated
    */
-  int INPUT_PARAMETER = 21;
+  int INPUT_PARAMETER = 20;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -1006,7 +978,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOrExpression()
    * @generated
    */
-  int OR_EXPRESSION = 22;
+  int OR_EXPRESSION = 21;
 
   /**
    * The feature id for the '<em><b>Branches</b></em>' containment reference list.
@@ -1034,7 +1006,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getFail()
    * @generated
    */
-  int FAIL = 23;
+  int FAIL = 22;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -1062,7 +1034,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentAccess()
    * @generated
    */
-  int ENVIRONMENT_ACCESS = 24;
+  int ENVIRONMENT_ACCESS = 23;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -1108,7 +1080,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentComposition()
    * @generated
    */
-  int ENVIRONMENT_COMPOSITION = 25;
+  int ENVIRONMENT_COMPOSITION = 24;
 
   /**
    * The feature id for the '<em><b>Current Environment</b></em>' containment reference.
@@ -1145,7 +1117,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEmptyEnvironment()
    * @generated
    */
-  int EMPTY_ENVIRONMENT = 26;
+  int EMPTY_ENVIRONMENT = 25;
 
   /**
    * The number of structural features of the '<em>Empty Environment</em>' class.
@@ -1164,7 +1136,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentMapping()
    * @generated
    */
-  int ENVIRONMENT_MAPPING = 27;
+  int ENVIRONMENT_MAPPING = 26;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' containment reference.
@@ -1775,27 +1747,6 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   EAttribute getRuleInvocation_RelationSymbols();
-
-  /**
-   * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.RuleInvocationExpression <em>Rule Invocation Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Rule Invocation Expression</em>'.
-   * @see it.xsemantics.dsl.xsemantics.RuleInvocationExpression
-   * @generated
-   */
-  EClass getRuleInvocationExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.RuleInvocationExpression#getExpression <em>Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expression</em>'.
-   * @see it.xsemantics.dsl.xsemantics.RuleInvocationExpression#getExpression()
-   * @see #getRuleInvocationExpression()
-   * @generated
-   */
-  EReference getRuleInvocationExpression_Expression();
 
   /**
    * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.EnvironmentSpecification <em>Environment Specification</em>}'.
@@ -2623,24 +2574,6 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EAttribute RULE_INVOCATION__RELATION_SYMBOLS = eINSTANCE.getRuleInvocation_RelationSymbols();
-
-    /**
-     * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.RuleInvocationExpressionImpl <em>Rule Invocation Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see it.xsemantics.dsl.xsemantics.impl.RuleInvocationExpressionImpl
-     * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleInvocationExpression()
-     * @generated
-     */
-    EClass RULE_INVOCATION_EXPRESSION = eINSTANCE.getRuleInvocationExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE_INVOCATION_EXPRESSION__EXPRESSION = eINSTANCE.getRuleInvocationExpression_Expression();
 
     /**
      * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.EnvironmentSpecificationImpl <em>Environment Specification</em>}' class.

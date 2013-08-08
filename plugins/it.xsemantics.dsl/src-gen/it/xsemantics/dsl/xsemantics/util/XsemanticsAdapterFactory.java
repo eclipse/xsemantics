@@ -137,11 +137,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
         return createRuleInvocationAdapter();
       }
       @Override
-      public Adapter caseRuleInvocationExpression(RuleInvocationExpression object)
-      {
-        return createRuleInvocationExpressionAdapter();
-      }
-      @Override
       public Adapter caseEnvironmentSpecification(EnvironmentSpecification object)
       {
         return createEnvironmentSpecificationAdapter();
@@ -419,21 +414,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRuleInvocationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.RuleInvocationExpression <em>Rule Invocation Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see it.xsemantics.dsl.xsemantics.RuleInvocationExpression
-   * @generated
-   */
-  public Adapter createRuleInvocationExpressionAdapter()
   {
     return null;
   }

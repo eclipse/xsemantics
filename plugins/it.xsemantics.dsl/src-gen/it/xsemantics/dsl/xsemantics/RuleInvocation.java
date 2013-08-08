@@ -81,7 +81,7 @@ public interface RuleInvocation extends XExpression
 
   /**
    * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-   * The list contents are of type {@link it.xsemantics.dsl.xsemantics.RuleInvocationExpression}.
+   * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
@@ -93,7 +93,7 @@ public interface RuleInvocation extends XExpression
    * @model containment="true"
    * @generated
    */
-  EList<RuleInvocationExpression> getExpressions();
+  EList<XExpression> getExpressions();
 
   /**
    * Returns the value of the '<em><b>Relation Symbols</b></em>' attribute list.

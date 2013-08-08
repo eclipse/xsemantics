@@ -549,9 +549,9 @@ ruleRuleInvocationExpression
     }
 	:
 (
-{ before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAssignment()); }
-(rule__RuleInvocationExpression__ExpressionAssignment)
-{ after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAssignment()); }
+{ before(grammarAccess.getRuleInvocationExpressionAccess().getAlternatives()); }
+(rule__RuleInvocationExpression__Alternatives)
+{ after(grammarAccess.getRuleInvocationExpressionAccess().getAlternatives()); }
 )
 
 ;
@@ -2963,21 +2963,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RuleInvocationExpression__ExpressionAlternatives_0
+rule__RuleInvocationExpression__Alternatives
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXVariableDeclarationParserRuleCall_0_0()); }
+{ before(grammarAccess.getRuleInvocationExpressionAccess().getXVariableDeclarationParserRuleCall_0()); }
 	ruleXVariableDeclaration
-{ after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXVariableDeclarationParserRuleCall_0_0()); }
+{ after(grammarAccess.getRuleInvocationExpressionAccess().getXVariableDeclarationParserRuleCall_0()); }
 )
 
     |(
-{ before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXExpressionParserRuleCall_0_1()); }
+{ before(grammarAccess.getRuleInvocationExpressionAccess().getXExpressionParserRuleCall_1()); }
 	ruleXExpression
-{ after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXExpressionParserRuleCall_0_1()); }
+{ after(grammarAccess.getRuleInvocationExpressionAccess().getXExpressionParserRuleCall_1()); }
 )
 
 ;
@@ -20889,22 +20889,6 @@ rule__RuleInvocation__ExpressionsAssignment_3_1
 (
 { before(grammarAccess.getRuleInvocationAccess().getExpressionsRuleInvocationExpressionParserRuleCall_3_1_0()); }
 	ruleRuleInvocationExpression{ after(grammarAccess.getRuleInvocationAccess().getExpressionsRuleInvocationExpressionParserRuleCall_3_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__RuleInvocationExpression__ExpressionAssignment
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAlternatives_0()); }
-(rule__RuleInvocationExpression__ExpressionAlternatives_0)
-{ after(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAlternatives_0()); }
 )
 
 ;

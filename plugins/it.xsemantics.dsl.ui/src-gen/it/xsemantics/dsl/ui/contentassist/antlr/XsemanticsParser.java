@@ -41,7 +41,7 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRuleAccess().getAlternatives(), "rule__Rule__Alternatives");
 					put(grammarAccess.getTerminalPremiseExpressionAccess().getAlternatives(), "rule__TerminalPremiseExpression__Alternatives");
 					put(grammarAccess.getXLiteralAccess().getAlternatives(), "rule__XLiteral__Alternatives");
-					put(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAlternatives_0(), "rule__RuleInvocationExpression__ExpressionAlternatives_0");
+					put(grammarAccess.getRuleInvocationExpressionAccess().getAlternatives(), "rule__RuleInvocationExpression__Alternatives");
 					put(grammarAccess.getTerminalEnvironmentSpecificationAccess().getAlternatives(), "rule__TerminalEnvironmentSpecification__Alternatives");
 					put(grammarAccess.getJudgmentSymbolAccess().getAlternatives(), "rule__JudgmentSymbol__Alternatives");
 					put(grammarAccess.getRelationSymbolAccess().getAlternatives(), "rule__RelationSymbol__Alternatives");
@@ -330,7 +330,6 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRuleInvocationAccess().getExpressionsAssignment_2(), "rule__RuleInvocation__ExpressionsAssignment_2");
 					put(grammarAccess.getRuleInvocationAccess().getRelationSymbolsAssignment_3_0(), "rule__RuleInvocation__RelationSymbolsAssignment_3_0");
 					put(grammarAccess.getRuleInvocationAccess().getExpressionsAssignment_3_1(), "rule__RuleInvocation__ExpressionsAssignment_3_1");
-					put(grammarAccess.getRuleInvocationExpressionAccess().getExpressionAssignment(), "rule__RuleInvocationExpression__ExpressionAssignment");
 					put(grammarAccess.getEnvironmentSpecificationAccess().getSubEnvironmentAssignment_1_0_2(), "rule__EnvironmentSpecification__SubEnvironmentAssignment_1_0_2");
 					put(grammarAccess.getTerminalEnvironmentSpecificationAccess().getKeyAssignment_1_1(), "rule__TerminalEnvironmentSpecification__KeyAssignment_1_1");
 					put(grammarAccess.getTerminalEnvironmentSpecificationAccess().getValueAssignment_1_3(), "rule__TerminalEnvironmentSpecification__ValueAssignment_1_3");

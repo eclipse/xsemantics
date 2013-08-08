@@ -974,26 +974,22 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class RuleInvocationExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleInvocationExpression");
-		private final Assignment cExpressionAssignment = (Assignment)rule.eContents().get(1);
-		private final Alternatives cExpressionAlternatives_0 = (Alternatives)cExpressionAssignment.eContents().get(0);
-		private final RuleCall cExpressionXVariableDeclarationParserRuleCall_0_0 = (RuleCall)cExpressionAlternatives_0.eContents().get(0);
-		private final RuleCall cExpressionXExpressionParserRuleCall_0_1 = (RuleCall)cExpressionAlternatives_0.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cXVariableDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//RuleInvocationExpression:
-		//	=> expression=(XVariableDeclaration | XExpression);
+		//RuleInvocationExpression returns xbase::XExpression:
+		//	XVariableDeclaration | XExpression;
 		public ParserRule getRule() { return rule; }
 
-		//=> expression=(XVariableDeclaration | XExpression)
-		public Assignment getExpressionAssignment() { return cExpressionAssignment; }
-
 		//XVariableDeclaration | XExpression
-		public Alternatives getExpressionAlternatives_0() { return cExpressionAlternatives_0; }
+		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XVariableDeclaration
-		public RuleCall getExpressionXVariableDeclarationParserRuleCall_0_0() { return cExpressionXVariableDeclarationParserRuleCall_0_0; }
+		public RuleCall getXVariableDeclarationParserRuleCall_0() { return cXVariableDeclarationParserRuleCall_0; }
 
 		//XExpression
-		public RuleCall getExpressionXExpressionParserRuleCall_0_1() { return cExpressionXExpressionParserRuleCall_0_1; }
+		public RuleCall getXExpressionParserRuleCall_1() { return cXExpressionParserRuleCall_1; }
 	}
 
 	public class EnvironmentSpecificationElements extends AbstractParserRuleElementFinder {
@@ -1668,8 +1664,8 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleInvocationAccess().getRule();
 	}
 
-	//RuleInvocationExpression:
-	//	=> expression=(XVariableDeclaration | XExpression);
+	//RuleInvocationExpression returns xbase::XExpression:
+	//	XVariableDeclaration | XExpression;
 	public RuleInvocationExpressionElements getRuleInvocationExpressionAccess() {
 		return (pRuleInvocationExpression != null) ? pRuleInvocationExpression : (pRuleInvocationExpression = new RuleInvocationExpressionElements());
 	}

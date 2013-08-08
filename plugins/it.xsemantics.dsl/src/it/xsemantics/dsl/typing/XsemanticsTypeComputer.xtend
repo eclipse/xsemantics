@@ -49,7 +49,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	protected def _computeTypes(RuleInvocation e, ITypeComputationState state) {
 		for (ruleInvkExp : e.expressions) {
-			ruleInvkExp.expression.computeTypes(state)
+			ruleInvkExp.computeTypes(state)
 		}
 //		for (varDecl : e.variableDeclarations) {
 //			addLocalToCurrentScope(varDecl, state)

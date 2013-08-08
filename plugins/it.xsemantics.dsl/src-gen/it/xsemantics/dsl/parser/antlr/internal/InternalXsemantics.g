@@ -1758,50 +1758,25 @@ ruleRuleInvocationExpression returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
 (
-(
-ruleXVariableDeclaration
-    |ruleXExpression
-)
+    { 
+        newCompositeNode(grammarAccess.getRuleInvocationExpressionAccess().getXVariableDeclarationParserRuleCall_0()); 
+    }
+    this_XVariableDeclaration_0=ruleXVariableDeclaration
+    { 
+        $current = $this_XVariableDeclaration_0.current; 
+        afterParserOrEnumRuleCall();
+    }
 
-)
-)=>
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXVariableDeclarationParserRuleCall_0_0()); 
-	    }
-		lv_expression_0_1=ruleXVariableDeclaration		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRuleInvocationExpressionRule());
-	        }
-       		set(
-       			$current, 
-       			"expression",
-        		lv_expression_0_1, 
-        		"XVariableDeclaration");
-	        afterParserOrEnumRuleCall();
-	    }
-
-    |		{ 
-	        newCompositeNode(grammarAccess.getRuleInvocationExpressionAccess().getExpressionXExpressionParserRuleCall_0_1()); 
-	    }
-		lv_expression_0_2=ruleXExpression		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRuleInvocationExpressionRule());
-	        }
-       		set(
-       			$current, 
-       			"expression",
-        		lv_expression_0_2, 
-        		"XExpression");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-
-)
+    |
+    { 
+        newCompositeNode(grammarAccess.getRuleInvocationExpressionAccess().getXExpressionParserRuleCall_1()); 
+    }
+    this_XExpression_1=ruleXExpression
+    { 
+        $current = $this_XExpression_1.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 

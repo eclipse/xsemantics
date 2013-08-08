@@ -1,8 +1,12 @@
 package it.xsemantics.dsl.util
 
 import com.google.common.collect.Lists
+import com.google.common.collect.Sets
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -12,24 +16,20 @@ import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import java.util.Set
-import com.google.common.collect.Sets
-import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 
 class XsemanticsUtils {
 	
@@ -51,8 +51,7 @@ class XsemanticsUtils {
 	}
 	
 	def getVariableDeclarations(RuleInvocation ruleInvocation) {
-		ruleInvocation.expressions.
-			map([ it.expression ]).typeSelect(typeof(XVariableDeclaration))
+		ruleInvocation.expressions.typeSelect(typeof(XVariableDeclaration))
 	}
 	
 	def getJvmParameters(JudgmentDescription jd) {
@@ -263,7 +262,7 @@ class XsemanticsUtils {
 		rule.conclusion.getAllContentsOfType(typeof(ExpressionInConclusion))
 	}
 	
-	def List<RuleInvocationExpression> outputArgsExpressions(RuleInvocation ruleInvocation) {
+	def List<XExpression> outputArgsExpressions(RuleInvocation ruleInvocation) {
 		val judgmentParameters = ruleInvocation.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
@@ -273,8 +272,7 @@ class XsemanticsUtils {
 		)
 	}
 	
-	def validOutputArgExpression(RuleInvocationExpression ruleInvocationExpression) {
-		val xexp = ruleInvocationExpression.expression
+	def validOutputArgExpression(XExpression xexp) {
 		switch (xexp) {
 			XFeatureCall : {
 				val feature = xexp.feature
@@ -289,11 +287,11 @@ class XsemanticsUtils {
 		return false;
 	}
 	
-	def validInputArgExpression(RuleInvocationExpression ruleInvocationExpression) {
-		return !(ruleInvocationExpression.expression instanceof XVariableDeclaration);
+	def validInputArgExpression(XExpression ruleInvocationExpression) {
+		return !(ruleInvocationExpression instanceof XVariableDeclaration);
 	}
 	
-	def List<RuleInvocationExpression> inputArgsExpressions(RuleInvocation ruleInvocation) {
+	def List<XExpression> inputArgsExpressions(RuleInvocation ruleInvocation) {
 		val judgmentParameters = ruleInvocation.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must not be output
 		Lists::newArrayList(

@@ -23,7 +23,6 @@ import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.OutputParameter;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
@@ -150,6 +149,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XASSIGNMENT:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -185,6 +185,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XBINARY_OPERATION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -220,6 +221,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XBLOCK_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -260,6 +262,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XBOOLEAN_LITERAL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -303,6 +306,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XCASTED_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -344,6 +348,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XCLOSURE:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -385,6 +390,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XCONSTRUCTOR_CALL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -421,6 +427,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XDO_WHILE_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -457,6 +464,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XFEATURE_CALL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -493,6 +501,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XFOR_LOOP_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -529,6 +538,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XIF_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -565,6 +575,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XINSTANCE_OF_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -607,6 +618,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XMEMBER_FEATURE_CALL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -642,6 +654,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XNULL_LITERAL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -679,6 +692,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XNUMBER_LITERAL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -716,6 +730,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XRETURN_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -759,6 +774,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XSTRING_LITERAL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -796,6 +812,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XSWITCH_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -832,6 +849,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XTHROW_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -868,6 +886,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -904,6 +923,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XTYPE_LITERAL:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -941,6 +961,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XUNARY_OPERATION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -976,6 +997,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XVARIABLE_DECLARATION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule() ||
 				   context == grammarAccess.getXVariableDeclarationRule()) {
@@ -986,6 +1008,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 			case XbasePackage.XWHILE_EXPRESSION:
 				if(context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -1064,6 +1087,7 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 				if(context == grammarAccess.getEnvironmentAccessRule() ||
 				   context == grammarAccess.getPremiseExpressionRule() ||
 				   context == grammarAccess.getPremiseExpressionAccess().getOrExpressionBranchesAction_1_0_0() ||
+				   context == grammarAccess.getRuleInvocationExpressionRule() ||
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -1188,12 +1212,6 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 				   context == grammarAccess.getTerminalPremiseExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_RuleInvocation(context, (RuleInvocation) semanticObject); 
-					return; 
-				}
-				else break;
-			case XsemanticsPackage.RULE_INVOCATION_EXPRESSION:
-				if(context == grammarAccess.getRuleInvocationExpressionRule()) {
-					sequence_RuleInvocationExpression(context, (RuleInvocationExpression) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1464,15 +1482,6 @@ public abstract class AbstractXsemanticsSemanticSequencer extends XbaseSemanticS
 	 *     )
 	 */
 	protected void sequence_RuleConclusion(EObject context, RuleConclusion semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (expression=XVariableDeclaration | expression=XExpression)
-	 */
-	protected void sequence_RuleInvocationExpression(EObject context, RuleInvocationExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

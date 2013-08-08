@@ -14,7 +14,6 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -285,7 +285,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
-    final List<RuleInvocationExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    final List<XExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
     int _size = outputArgs.size();
     Assert.assertEquals(0, _size);
   }
@@ -296,7 +296,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation ruleInvocation = _ruleInvocations.get(1);
-    final List<RuleInvocationExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    final List<XExpression> outputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
     int _size = outputArgs.size();
     Assert.assertEquals(0, _size);
   }
@@ -307,7 +307,7 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Rule _firstRule = this.getFirstRule(_testRuleInvokingAnotherRule);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
-    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
+    final List<XExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
     int _size = inputArgs.size();
     Assert.assertEquals(2, _size);
   }
@@ -318,16 +318,16 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
-    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
+    final List<XExpression> inputArgs = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
     int _size = inputArgs.size();
     Assert.assertEquals(2, _size);
-    EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-    RuleInvocationExpression _get = _expressions.get(0);
-    RuleInvocationExpression _get_1 = inputArgs.get(0);
+    EList<XExpression> _expressions = ruleInvocation.getExpressions();
+    XExpression _get = _expressions.get(0);
+    XExpression _get_1 = inputArgs.get(0);
     Assert.assertEquals(_get, _get_1);
-    EList<RuleInvocationExpression> _expressions_1 = ruleInvocation.getExpressions();
-    RuleInvocationExpression _get_2 = _expressions_1.get(2);
-    RuleInvocationExpression _get_3 = inputArgs.get(1);
+    EList<XExpression> _expressions_1 = ruleInvocation.getExpressions();
+    XExpression _get_2 = _expressions_1.get(2);
+    XExpression _get_3 = inputArgs.get(1);
     Assert.assertEquals(_get_2, _get_3);
   }
   
@@ -337,12 +337,12 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     Rule _firstRule = this.getFirstRule(_testRuleWithOutputParams);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation ruleInvocation = _ruleInvocations.get(0);
-    final List<RuleInvocationExpression> inputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    final List<XExpression> inputArgs = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
     int _size = inputArgs.size();
     Assert.assertEquals(1, _size);
-    EList<RuleInvocationExpression> _expressions = ruleInvocation.getExpressions();
-    RuleInvocationExpression _get = _expressions.get(1);
-    RuleInvocationExpression _get_1 = inputArgs.get(0);
+    EList<XExpression> _expressions = ruleInvocation.getExpressions();
+    XExpression _get = _expressions.get(1);
+    XExpression _get_1 = inputArgs.get(0);
     Assert.assertEquals(_get, _get_1);
   }
   

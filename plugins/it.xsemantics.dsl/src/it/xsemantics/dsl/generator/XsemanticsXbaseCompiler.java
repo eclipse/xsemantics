@@ -15,7 +15,6 @@ import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 
 import java.util.Iterator;
 import java.util.List;
@@ -221,7 +220,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 				.judgmentDescription(ruleInvocation,
 						ruleInvocation.getJudgmentSymbol(),
 						ruleInvocation.getRelationSymbols());
-		final EList<RuleInvocationExpression> ruleInvocationExpressions = ruleInvocation
+		final EList<XExpression> ruleInvocationExpressions = ruleInvocation
 				.getExpressions();
 
 		ruleInvocationExpressionsToJavaStatements(b, ruleInvocationExpressions);
@@ -324,9 +323,9 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 	}
 
 	protected void ruleInvocationExpressionsToJavaStatements(ITreeAppendable b,
-			final EList<RuleInvocationExpression> ruleInvocationExpressions) {
-		for (RuleInvocationExpression ruleInvocationExpression : ruleInvocationExpressions) {
-			toJavaStatement(ruleInvocationExpression.getExpression(), b, true);
+			final EList<XExpression> ruleInvocationExpressions) {
+		for (XExpression ruleInvocationExpression : ruleInvocationExpressions) {
+			toJavaStatement(ruleInvocationExpression, b, true);
 		}
 	}
 
@@ -338,11 +337,11 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	protected void ruleInvocationExpressionsToJavaExpressions(
 			ITreeAppendable b,
-			final List<RuleInvocationExpression> inputArgsExpressions) {
-		Iterator<RuleInvocationExpression> expIt = inputArgsExpressions
+			final List<XExpression> inputArgsExpressions) {
+		Iterator<XExpression> expIt = inputArgsExpressions
 				.iterator();
 		while (expIt.hasNext()) {
-			toJavaExpression(expIt.next().getExpression(), b);
+			toJavaExpression(expIt.next(), b);
 			if (expIt.hasNext())
 				comma(b);
 		}
@@ -351,16 +350,14 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 	protected void reassignResults(ITreeAppendable b,
 			RuleInvocation ruleInvocation, String resultVariable,
 			boolean checkAssignable) {
-		List<RuleInvocationExpression> expIt = xsemanticsUtils
+		List<XExpression> expIt = xsemanticsUtils
 				.outputArgsExpressions(ruleInvocation);
 		if (expIt.isEmpty())
 			return;
 		newLine(b);
 		Iterator<String> getMethods = XsemanticsGeneratorConstants
 				.getResultGetMethods().iterator();
-		for (RuleInvocationExpression ruleInvocationExpression : expIt) {
-			final XExpression expression = ruleInvocationExpression
-					.getExpression();
+		for (XExpression expression : expIt) {
 			final JvmTypeReference expressionType = typeSystem.getType(
 					expression);
 			final String getMethod = getMethods.next();

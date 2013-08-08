@@ -4,7 +4,6 @@ package it.xsemantics.dsl.xsemantics.impl;
 
 import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
-import it.xsemantics.dsl.xsemantics.RuleInvocationExpression;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 import java.util.Collection;
@@ -22,6 +21,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xbase.impl.XExpressionImpl;
 
@@ -81,7 +82,7 @@ public class RuleInvocationImpl extends XExpressionImpl implements RuleInvocatio
    * @generated
    * @ordered
    */
-  protected EList<RuleInvocationExpression> expressions;
+  protected EList<XExpression> expressions;
 
   /**
    * The cached value of the '{@link #getRelationSymbols() <em>Relation Symbols</em>}' attribute list.
@@ -190,11 +191,11 @@ public class RuleInvocationImpl extends XExpressionImpl implements RuleInvocatio
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RuleInvocationExpression> getExpressions()
+  public EList<XExpression> getExpressions()
   {
     if (expressions == null)
     {
-      expressions = new EObjectContainmentEList<RuleInvocationExpression>(RuleInvocationExpression.class, this, XsemanticsPackage.RULE_INVOCATION__EXPRESSIONS);
+      expressions = new EObjectContainmentEList<XExpression>(XExpression.class, this, XsemanticsPackage.RULE_INVOCATION__EXPRESSIONS);
     }
     return expressions;
   }
@@ -272,7 +273,7 @@ public class RuleInvocationImpl extends XExpressionImpl implements RuleInvocatio
         return;
       case XsemanticsPackage.RULE_INVOCATION__EXPRESSIONS:
         getExpressions().clear();
-        getExpressions().addAll((Collection<? extends RuleInvocationExpression>)newValue);
+        getExpressions().addAll((Collection<? extends XExpression>)newValue);
         return;
       case XsemanticsPackage.RULE_INVOCATION__RELATION_SYMBOLS:
         getRelationSymbols().clear();
