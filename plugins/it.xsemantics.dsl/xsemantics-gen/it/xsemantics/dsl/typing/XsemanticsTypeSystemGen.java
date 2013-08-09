@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.base.Objects;
@@ -125,10 +126,15 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     }
   }
   
+	protected LightweightTypeReference getActualType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+  
   protected Result<JvmTypeReference> applyRuleXExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     
     //JvmTypeReference _type = this.typeProvider.resolveTypes(e).getActualType(e).toTypeReference();
-	JvmTypeReference _type = this.typeProvider.getType(e);
+	//JvmTypeReference _type = this.typeProvider.getType(e);
+	  JvmTypeReference _type = getActualType(e).toTypeReference();
     return new Result<JvmTypeReference>(_type);
   }
   

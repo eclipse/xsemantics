@@ -15,6 +15,7 @@ import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
+import it.xsemantics.dsl.xsemantics.Rule
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -37,6 +38,19 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	override void _computeTypes(XBlockExpression b, ITypeComputationState typeState) {
 		var state = typeState
+		
+		if (b.eContainer instanceof Rule) {
+			val rule = b.eContainer as Rule
+
+			// the premises block should not be checked against
+			// return type
+			state = state.withoutRootExpectation
+			
+			for (expInConcl : rule.expressionsInConclusion) {
+				expInConcl.expression.computeTypes(state)
+			}
+		}
+		
 		if (b.eContainer instanceof RuleWithPremises) {
 			val rule = b.eContainer as RuleWithPremises
 
@@ -44,10 +58,6 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 				// insert the output parameter in the scope
 				state.addLocalToCurrentScope(outputParam.parameter)				
 			}
-
-			// the premises block should not be checked against
-			// return type
-			state = state.withoutRootExpectation
 		}
 		
 		//super._computeTypes(b, state)

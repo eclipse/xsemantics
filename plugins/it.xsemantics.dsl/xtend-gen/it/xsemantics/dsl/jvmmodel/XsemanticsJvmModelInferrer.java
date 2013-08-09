@@ -11,13 +11,11 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
-import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
-import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -2070,97 +2068,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _join;
   }
   
-  public ITreeAppendable compileRuleBody(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      this.compilePremises(rule, result);
-      this.compileRuleConclusionElements(rule, result);
-      ITreeAppendable _compileReturnResult = this.compileReturnResult(rule, resultType, result);
-      _xblockexpression = (_compileReturnResult);
-    }
-    return _xblockexpression;
-  }
-  
-  protected void _compilePremises(final Rule rule, final ITreeAppendable result) {
-    return;
-  }
-  
-  protected void _compilePremises(final RuleWithPremises rule, final ITreeAppendable result) {
+  public void compilePremises(final CheckRule rule, final ITreeAppendable result) {
     XExpression _premises = rule.getPremises();
     this.xbaseCompiler.toJavaStatement(_premises, result, false);
-  }
-  
-  protected void _compilePremises(final CheckRule rule, final ITreeAppendable result) {
-    XExpression _premises = rule.getPremises();
-    this.xbaseCompiler.toJavaStatement(_premises, result, false);
-  }
-  
-  public void compileRuleConclusionElements(final Rule rule, final ITreeAppendable result) {
-    List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
-    final Procedure1<ExpressionInConclusion> _function = new Procedure1<ExpressionInConclusion>() {
-        public void apply(final ExpressionInConclusion it) {
-          XExpression _expression = it.getExpression();
-          XsemanticsJvmModelInferrer.this.xbaseCompiler.toJavaStatement(_expression, result, true);
-        }
-      };
-    IterableExtensions.<ExpressionInConclusion>forEach(_expressionsInConclusion, _function);
-  }
-  
-  public ITreeAppendable compileReturnResult(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      final List<RuleConclusionElement> expressions = this._xsemanticsUtils.outputConclusionElements(rule);
-      String _string = result.toString();
-      boolean _isEmpty = _string.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        result.append("\n");
-      }
-      result.append("return new ");
-      this._typeReferenceSerializer.serialize(resultType, rule, result);
-      result.append("(");
-      int _size = expressions.size();
-      boolean _equals = (_size == 0);
-      if (_equals) {
-        result.append("true");
-      } else {
-        final Iterator<RuleConclusionElement> iterator = expressions.iterator();
-        boolean _hasNext = iterator.hasNext();
-        boolean _while = _hasNext;
-        while (_while) {
-          {
-            final RuleConclusionElement elem = iterator.next();
-            boolean _matched = false;
-            if (!_matched) {
-              if (elem instanceof RuleParameter) {
-                final RuleParameter _ruleParameter = (RuleParameter)elem;
-                _matched=true;
-                JvmFormalParameter _parameter = _ruleParameter.getParameter();
-                String _name = result.getName(_parameter);
-                result.append(_name);
-              }
-            }
-            if (!_matched) {
-              if (elem instanceof ExpressionInConclusion) {
-                final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)elem;
-                _matched=true;
-                XExpression _expression = _expressionInConclusion.getExpression();
-                this.xbaseCompiler.toJavaExpression(_expression, result);
-              }
-            }
-            boolean _hasNext_1 = iterator.hasNext();
-            if (_hasNext_1) {
-              result.append(", ");
-            }
-          }
-          boolean _hasNext_1 = iterator.hasNext();
-          _while = _hasNext_1;
-        }
-      }
-      ITreeAppendable _append = result.append(");");
-      _xblockexpression = (_append);
-    }
-    return _xblockexpression;
   }
   
   public void infer(final EObject ts, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
@@ -2186,22 +2096,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(logicalContainer, rule).toString());
-    }
-  }
-  
-  public void compilePremises(final EObject rule, final ITreeAppendable result) {
-    if (rule instanceof RuleWithPremises) {
-      _compilePremises((RuleWithPremises)rule, result);
-      return;
-    } else if (rule instanceof CheckRule) {
-      _compilePremises((CheckRule)rule, result);
-      return;
-    } else if (rule instanceof Rule) {
-      _compilePremises((Rule)rule, result);
-      return;
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(rule, result).toString());
     }
   }
 }

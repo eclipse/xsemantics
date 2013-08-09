@@ -1,15 +1,15 @@
 package it.xsemantics.dsl.tests
 
+import com.google.inject.Inject
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.google.inject.Inject
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -43,6 +43,17 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 		"org.eclipse.emf.ecore.ENamedElement.getName()".assertEqualsStrings((leftOperandReferringToOutputParam as XMemberFeatureCall).
 			feature.identifier
 		)
+	}
+	
+	@Test
+	def void testScopingForExpressionInConclusion() {
+		val expInConcl = 
+			testFiles.testAxiomWithExpressionInConclusion.
+				getRuleWithoutValidation(0).
+					expressionInConclusion(0).expression
+		//system.assertNoErrors
+		val feature = (expInConcl as XMemberFeatureCall).feature
+		println(feature)
 	}
 
 }

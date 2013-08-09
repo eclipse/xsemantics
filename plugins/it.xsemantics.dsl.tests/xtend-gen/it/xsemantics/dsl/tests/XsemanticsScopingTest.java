@@ -3,6 +3,7 @@ package it.xsemantics.dsl.tests;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,5 +67,15 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     JvmIdentifiableElement _feature = ((XMemberFeatureCall) leftOperandReferringToOutputParam).getFeature();
     String _identifier = _feature.getIdentifier();
     this.assertEqualsStrings("org.eclipse.emf.ecore.ENamedElement.getName()", _identifier);
+  }
+  
+  @Test
+  public void testScopingForExpressionInConclusion() {
+    CharSequence _testAxiomWithExpressionInConclusion = this.testFiles.testAxiomWithExpressionInConclusion();
+    Rule _ruleWithoutValidation = this.getRuleWithoutValidation(_testAxiomWithExpressionInConclusion, 0);
+    ExpressionInConclusion _expressionInConclusion = this.expressionInConclusion(_ruleWithoutValidation, 0);
+    final XExpression expInConcl = _expressionInConclusion.getExpression();
+    final JvmIdentifiableElement feature = ((XMemberFeatureCall) expInConcl).getFeature();
+    InputOutput.<JvmIdentifiableElement>println(feature);
   }
 }

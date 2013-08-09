@@ -6,8 +6,10 @@ import com.google.inject.Singleton;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
+import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
@@ -81,16 +83,26 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   public void _computeTypes(final XBlockExpression b, final ITypeComputationState typeState) {
     ITypeComputationState state = typeState;
     EObject _eContainer = b.eContainer();
-    if ((_eContainer instanceof RuleWithPremises)) {
+    if ((_eContainer instanceof Rule)) {
       EObject _eContainer_1 = b.eContainer();
-      final RuleWithPremises rule = ((RuleWithPremises) _eContainer_1);
-      List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
+      final Rule rule = ((Rule) _eContainer_1);
+      ITypeComputationState _withoutRootExpectation = state.withoutRootExpectation();
+      state = _withoutRootExpectation;
+      List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
+      for (final ExpressionInConclusion expInConcl : _expressionsInConclusion) {
+        XExpression _expression = expInConcl.getExpression();
+        this.computeTypes(_expression, state);
+      }
+    }
+    EObject _eContainer_2 = b.eContainer();
+    if ((_eContainer_2 instanceof RuleWithPremises)) {
+      EObject _eContainer_3 = b.eContainer();
+      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_3);
+      List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule_1);
       for (final RuleParameter outputParam : _outputParams) {
         JvmFormalParameter _parameter = outputParam.getParameter();
         state.addLocalToCurrentScope(_parameter);
       }
-      ITypeComputationState _withoutRootExpectation = state.withoutRootExpectation();
-      state = _withoutRootExpectation;
     }
     List<? extends ITypeExpectation> _expectations = state.getExpectations();
     for (final ITypeExpectation expectation : _expectations) {

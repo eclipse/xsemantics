@@ -6,8 +6,8 @@ import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleParameter
@@ -20,8 +20,8 @@ import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
@@ -33,9 +33,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import org.eclipse.xtext.common.types.JvmExecutable
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -1016,57 +1014,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		].join(", ")
 	}	
 	
-	def compileRuleBody(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
-		compilePremises(rule, result)
-		compileRuleConclusionElements(rule, result)
-		compileReturnResult(rule, resultType, result)
-	}
-	
-	def dispatch compilePremises(Rule rule, ITreeAppendable result) {
-		return
-	}
 
-	def dispatch compilePremises(RuleWithPremises rule, ITreeAppendable result) {
-		xbaseCompiler.toJavaStatement(rule.premises, result, false)
-	}
 
-	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
+	def void compilePremises(CheckRule rule, ITreeAppendable result) {
 		xbaseCompiler.toJavaStatement(rule.premises, result, false)
 	}
 	
-	def compileRuleConclusionElements(Rule rule, ITreeAppendable result) {
-		rule.expressionsInConclusion.forEach([
-			xbaseCompiler.toJavaStatement(it.expression, result, true)
-		])
-	}
-	
-	def compileReturnResult(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
-		val expressions = rule.outputConclusionElements
-		
-		if (!result.toString.empty)
-			result.append("\n")
-		result.append("return new ")
-		resultType.serialize(rule, result)
-		result.append("(")
-		
-		if (expressions.size() == 0)
-			result.append("true")
-		else {
-			val iterator = expressions.iterator()
-			while (iterator.hasNext) {
-				val elem = iterator.next
-				switch elem {
-					RuleParameter: 
-						result.append(result.getName(elem.parameter))
-					ExpressionInConclusion: 
-						xbaseCompiler.toJavaExpression(elem.expression, result)
-				}
-				if (iterator.hasNext)
-					result.append(", ")
-			}
-		}
-		result.append(");")
-	}
+
 
 }
 
