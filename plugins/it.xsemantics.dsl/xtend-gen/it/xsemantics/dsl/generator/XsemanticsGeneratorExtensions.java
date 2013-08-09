@@ -1011,4 +1011,21 @@ public class XsemanticsGeneratorExtensions {
     }
     return _xblockexpression;
   }
+  
+  public String expressionInConclusionMethodName(final ExpressionInConclusion e) {
+    String _xblockexpression = null;
+    {
+      final Rule containingRule = this._xsemanticsUtils.containingRule(e);
+      CharSequence _applyRuleName = this.applyRuleName(containingRule);
+      String _plus = ("_" + _applyRuleName);
+      String _plus_1 = (_plus + 
+        "_");
+      RuleConclusion _conclusion = containingRule.getConclusion();
+      EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
+      int _indexOf = _conclusionElements.indexOf(e);
+      String _plus_2 = (_plus_1 + Integer.valueOf(_indexOf));
+      _xblockexpression = (_plus_2);
+    }
+    return _xblockexpression;
+  }
 }

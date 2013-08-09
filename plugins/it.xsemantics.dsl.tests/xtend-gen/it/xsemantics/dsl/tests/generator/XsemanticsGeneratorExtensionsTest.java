@@ -7,11 +7,12 @@ import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
-import junit.framework.Assert;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -21,6 +22,10 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -326,6 +331,26 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     JvmIdentifiableElement _feature = featureCall.getFeature();
     AuxiliaryDescription _associatedAuxiliaryDescription = this._xsemanticsGeneratorExtensions.associatedAuxiliaryDescription(_feature);
     Assert.assertEquals(_get_1, _associatedAuxiliaryDescription);
+  }
+  
+  @Test
+  public void testExpressionInConclusionMethodName() {
+    CharSequence _testExpressionsInConclusion = this.testFiles.testExpressionsInConclusion();
+    XsemanticsSystem _parse = this.parse(_testExpressionsInConclusion);
+    EList<Rule> _rules = _parse.getRules();
+    Rule _head = IterableExtensions.<Rule>head(_rules);
+    List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(_head);
+    final Procedure1<List<ExpressionInConclusion>> _function = new Procedure1<List<ExpressionInConclusion>>() {
+        public void apply(final List<ExpressionInConclusion> it) {
+          ExpressionInConclusion _get = it.get(0);
+          String _expressionInConclusionMethodName = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get);
+          Assert.assertEquals("_applyRuleTestRule_1", _expressionInConclusionMethodName);
+          ExpressionInConclusion _get_1 = it.get(1);
+          String _expressionInConclusionMethodName_1 = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get_1);
+          Assert.assertEquals("_applyRuleTestRule_2", _expressionInConclusionMethodName_1);
+        }
+      };
+    ObjectExtensions.<List<ExpressionInConclusion>>operator_doubleArrow(_expressionsInConclusion, _function);
   }
   
   public void assertResultType(final CharSequence prog, final CharSequence expected) {

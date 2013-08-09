@@ -4441,4 +4441,18 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testExpressionsInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore3WithOutput = this.testJudgmentDescriptionsReferringToEcore3WithOutput();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore3WithOutput, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G ||- EClass c : c.getEIDAttribute : c.getEAllStructuralFeatures.get(0)");
+    _builder.newLine();
+    return _builder;
+  }
 }

@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest
 import it.xsemantics.dsl.util.XsemanticsUtils
-import junit.framework.Assert
+import static extension org.junit.Assert.*
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
@@ -22,95 +22,95 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 
 	@Test
 	def void testTypeSystemToPackageWithNullName() {
-		Assert::assertEquals(null,
+		assertEquals(null,
 			'system '.parse.toPackage)
 	}
 	
 	@Test
 	def void testTypeSystemToPackage() {
-		Assert::assertEquals("it.xsemantics.test",
+		assertEquals("it.xsemantics.test",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toPackage)
 	}
 	
 	@Test
 	def void testTypeSystemToJavaFullyQualifiedName() {
-		Assert::assertEquals("it.xsemantics.test.TypeSystem",
+		assertEquals("it.xsemantics.test.TypeSystem",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaFullyQualifiedName)
 	}
 	
 	@Test
 	def void testTypeSystemToJavaClassName() {
-		Assert::assertEquals("TypeSystem",
+		assertEquals("TypeSystem",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaClassName)
 	}
 	
 	@Test
 	def void testTypeSystemToValidatorPackage() {
-		Assert::assertEquals("it.xsemantics.test.validation",
+		assertEquals("it.xsemantics.test.validation",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorPackage)
 	}
 	
 	@Test
 	def void testTypeSystemToValidatorJavaFullyQualifiedName() {
-		Assert::assertEquals("it.xsemantics.test.validation.TypeSystemValidator",
+		assertEquals("it.xsemantics.test.validation.TypeSystemValidator",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorJavaFullyQualifiedName)
 	}
 	
 	@Test
 	def void testRuleToPackage() {
-		Assert::assertEquals("it.xsemantics.test.rules",
+		assertEquals("it.xsemantics.test.rules",
 			testFiles.testSimpleRule.firstRule.toPackage)
 	}
 	
 	@Test
 	def void testRuleToFullyQualifiedName() {
-		Assert::assertEquals("it.xsemantics.test.rules.EClassEObject",
+		assertEquals("it.xsemantics.test.rules.EClassEObject",
 			testFiles.testSimpleRule.firstRule.toJavaFullyQualifiedName)
 	}
 	
 	@Test
 	def void testRuleToJavaName() {
-		Assert::assertEquals("EClassEObject",
+		assertEquals("EClassEObject",
 			testFiles.testSimpleRule.firstRule.toJavaClassName)
 	}
 	
 	@Test
 	def void testRuleToJavaNameFirstToUpper() {
-		Assert::assertEquals("EClassEObject",
+		assertEquals("EClassEObject",
 			testFiles.testSimpleAxiom.firstRule.toJavaClassName)
 	}
 
 	@Test
 	def void testJudgmentDescriptionInputArgs() {
-		Assert::assertEquals("c, o",
+		assertEquals("c, o",
 				testFiles.testSimpleRule.firstRule.judgmentDescription.
 				inputArgs().toString)
 	}
 	
 	@Test
 	def void testRuleInputParameterNames() {
-		Assert::assertEquals("eClass, object",
+		assertEquals("eClass, object",
 				testFiles.testSimpleRule.firstRule.
 				inputParameterNames().toString)
 	}
 	
 	@Test
 	def void testPolymorphicDispatcherNumOfArgs() {
-		Assert::assertEquals("4",
+		assertEquals("4",
 				testFiles.testSimpleRule.firstRule.judgmentDescription.
 				polymorphicDispatcherNumOfArgs().toString)
 	}
 	
 	@Test
 	def void testPolymorphicDispatcherNumOfArgs2() {
-		Assert::assertEquals("4",
+		assertEquals("4",
 				testFiles.testRuleWithOutputParams.firstRule.judgmentDescription.
 				polymorphicDispatcherNumOfArgs().toString)
 	}
 	
 	@Test
 	def void testSuffixStartingFrom2With3Outputs() {
-		Assert::assertEquals("3",
+		assertEquals("3",
 				testFiles.testJudgmentDescriptionsWith3OutputParams.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
 				suffixStartingFrom2)
@@ -118,7 +118,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 
 	@Test
 	def void testSuffixStartingFrom2With2Outputs() {
-		Assert::assertEquals("2",
+		assertEquals("2",
 				testFiles.testJudgmentDescriptionsWith2OutputParams.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
 				suffixStartingFrom2)
@@ -126,7 +126,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	
 	@Test
 	def void testSuffixStartingFrom2With1Output() {
-		Assert::assertEquals("",
+		assertEquals("",
 				testFiles.testJudgmentDescriptionsEObjectEClass.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
 				suffixStartingFrom2)
@@ -134,7 +134,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	
 	@Test
 	def void testSuffixStartingFrom2WithoutOutput() {
-		Assert::assertEquals("",
+		assertEquals("",
 				testFiles.testJudgmentDescriptionsReferringToEcore.
 				parseAndAssertNoError.getJudgmentDescriptions.get(0).
 				suffixStartingFrom2)
@@ -142,28 +142,28 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	
 	@Test
 	def void testAdditionalArgs() {
-		Assert::assertEquals("_environment_, _trace_",
+		assertEquals("_environment_, _trace_",
 				additionalArgs.toString)
 	}
 	
 	@Test
 	def void testAdditionalArgsForRule() {
-		Assert::assertEquals("G, _subtrace_",
+		assertEquals("G, _subtrace_",
 				testFiles.testSimpleRule.firstRule.additionalArgsForRule.toString)
 	}
 
 	@Test
 	def void testAdditionalArgsForRuleInvocation() {
-		Assert::assertEquals("_trace_",
+		assertEquals("_trace_",
 				testFiles.testRuleOnlyInvokingRules.firstRule.
 				ruleInvocationFromPremises.additionalArgsForRuleInvocation.toString)
 	}
 
 	@Test
 	def void testJavaString() {
-		Assert::assertEquals("foo", "foo".javaString)
-		Assert::assertEquals("\\'foo\\'", "'foo'".javaString)
-		Assert::assertEquals('\\"foo\\"', '"foo"'.javaString)
+		assertEquals("foo", "foo".javaString)
+		assertEquals("\\'foo\\'", "'foo'".javaString)
+		assertEquals('\\"foo\\"', '"foo"'.javaString)
 	}
 	
 	@Test
@@ -237,10 +237,21 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 		val system = testFiles.testAuxiliaryFunctionsInvocation.parseAndAssertNoError
 		val featureCall = system.getRule(0).
 			rulePremises.get(0) as XAbstractFeatureCall
-		Assert::assertEquals(
+		assertEquals(
 			system.auxiliaryDescriptions.get(0),
 			featureCall.feature.associatedAuxiliaryDescription
 		)
+	}
+
+	@Test
+	def void testExpressionInConclusionMethodName() {
+		testFiles.testExpressionsInConclusion.parse.rules.head.
+			expressionsInConclusion => [
+				"_applyRuleTestRule_1".
+				assertEquals(get(0).expressionInConclusionMethodName)
+				"_applyRuleTestRule_2".
+				assertEquals(get(1).expressionInConclusionMethodName)
+			]
 	}
 	
 	def assertResultType(CharSequence prog, CharSequence expected) {

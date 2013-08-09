@@ -440,4 +440,12 @@ class XsemanticsGeneratorExtensions {
 		else
 			null
 	}
+
+	def expressionInConclusionMethodName(ExpressionInConclusion e) {
+		val containingRule = e.containingRule
+		"_" +
+		containingRule.applyRuleName +
+		"_" +
+		containingRule.conclusion.conclusionElements.indexOf(e)
+	}
 }

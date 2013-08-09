@@ -2025,4 +2025,11 @@ class XsemanticsTestFiles {
 		
 	}
 	'''
+
+	def testExpressionsInConclusion() '''
+	«testJudgmentDescriptionsReferringToEcore3WithOutput»
+	
+	axiom TestRule
+		G ||- EClass c : c.getEIDAttribute : c.getEAllStructuralFeatures.get(0)
+	'''
 }
