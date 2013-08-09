@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
@@ -270,7 +270,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		)
 	}
 	
-	def void assertRuleConclusionTypes(CharSequence source, Class leftClass, Class rightClass) {
+	def void assertRuleConclusionTypes(CharSequence source, Class<?> leftClass, Class<?> rightClass) {
 		val conclusion = source.getFirstRule.conclusion
 		Assert::assertEquals(leftClass.name, 
 			typeSystem.getType(conclusion.conclusionElements.get(0)).identifier
@@ -280,7 +280,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		)
 	}
 	
-	def void assertRuleInvocationExpressionsTypes(CharSequence source, int index, Class leftClass, Class rightClass) {
+	def void assertRuleInvocationExpressionsTypes(CharSequence source, int index, Class<?> leftClass, Class<?> rightClass) {
 		val invocation = source.firstRule.ruleInvocations.get(index)
 		Assert::assertEquals(leftClass.name, typeSystem.getType(invocation.expressions.get(0)).identifier)
 		Assert::assertEquals(rightClass.name, typeSystem.getType(invocation.expressions.get(1)).identifier)
@@ -296,7 +296,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		assertEqualsStrings(expected, type.identifier)
 	}
 	
-	def typeForName(Class clazz) {
+	def typeForName(Class<?> clazz) {
 		// getTypeForName requires an EObject context
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
 		typeReferences.getTypeForName(clazz, ts)
@@ -309,7 +309,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		tupleType
 	}
 	
-	def assertSubtyping(Class expected, Class actual) {
+	def assertSubtyping(Class<?> expected, Class<?> actual) {
 		// getTypeForName requires an EObject context
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
 		Assert::assertTrue(typeSystem.isConformant(
@@ -318,7 +318,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		))
 	}
 	
-	def assertEquals(Class left, Class right, boolean expectedEquals) {
+	def assertEquals(Class<?> left, Class<?> right, boolean expectedEquals) {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
 		assertEquals(typeReferences.getTypeForName(left, ts),
 				typeReferences.getTypeForName(right, ts), expectedEquals)

@@ -22,7 +22,6 @@ import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
@@ -339,7 +339,7 @@ public class XsemanticsBaseTest {
     return ((ExpressionInConclusion) ruleConclusionElement);
   }
   
-  public void assertIsInstance(final Class superClass, final Object o) {
+  public void assertIsInstance(final Class<? extends Object> superClass, final Object o) {
     Class<? extends Object> _class = o.getClass();
     String _name = _class.getName();
     String _plus = (_name + " is not an instance of ");

@@ -15,7 +15,6 @@ import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -313,7 +313,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     Assert.assertFalse(_string, _isBooleanPremise);
   }
   
-  public void assertRuleConclusionTypes(final CharSequence source, final Class leftClass, final Class rightClass) {
+  public void assertRuleConclusionTypes(final CharSequence source, final Class<? extends Object> leftClass, final Class<? extends Object> rightClass) {
     Rule _firstRule = this.getFirstRule(source);
     final RuleConclusion conclusion = _firstRule.getConclusion();
     String _name = leftClass.getName();
@@ -330,7 +330,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     Assert.assertEquals(_name_1, _identifier_1);
   }
   
-  public void assertRuleInvocationExpressionsTypes(final CharSequence source, final int index, final Class leftClass, final Class rightClass) {
+  public void assertRuleInvocationExpressionsTypes(final CharSequence source, final int index, final Class<? extends Object> leftClass, final Class<? extends Object> rightClass) {
     Rule _firstRule = this.getFirstRule(source);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_firstRule);
     final RuleInvocation invocation = _ruleInvocations.get(index);
@@ -360,7 +360,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     this.assertEqualsStrings(expected, _identifier);
   }
   
-  public JvmTypeReference typeForName(final Class clazz) {
+  public JvmTypeReference typeForName(final Class<? extends Object> clazz) {
     JvmTypeReference _xblockexpression = null;
     {
       CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
@@ -383,7 +383,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     return _xblockexpression;
   }
   
-  public void assertSubtyping(final Class expected, final Class actual) {
+  public void assertSubtyping(final Class<? extends Object> expected, final Class<? extends Object> actual) {
     CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
     final XsemanticsSystem ts = this.parse(_testRuleWithExpressionInConclusion);
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(expected, ts);
@@ -392,7 +392,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     Assert.assertTrue(_isConformant);
   }
   
-  public void assertEquals(final Class left, final Class right, final boolean expectedEquals) {
+  public void assertEquals(final Class<? extends Object> left, final Class<? extends Object> right, final boolean expectedEquals) {
     CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
     final XsemanticsSystem ts = this.parse(_testRuleWithExpressionInConclusion);
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(left, ts);

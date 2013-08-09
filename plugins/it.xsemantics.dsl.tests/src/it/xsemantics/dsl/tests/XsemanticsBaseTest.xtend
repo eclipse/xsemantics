@@ -19,7 +19,7 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -215,7 +215,7 @@ class XsemanticsBaseTest {
 		(ruleConclusionElement as ExpressionInConclusion)
 	}
 	
-	def assertIsInstance(Class superClass, Object o) {
+	def assertIsInstance(Class<?> superClass, Object o) {
 		Assert::assertTrue(o.getClass.name + " is not an instance of " + superClass.name,
 			superClass.isAssignableFrom(o.getClass))
 	}
