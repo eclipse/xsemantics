@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -48,7 +49,9 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -1732,12 +1735,16 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
-    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-        public void apply(final ITreeAppendable it) {
-          XsemanticsJvmModelInferrer.this.declareVariablesForOutputParams(rule, it);
+    XBlockExpression _createXBlockExpression = XbaseFactory.eINSTANCE.createXBlockExpression();
+    final Procedure1<XBlockExpression> _function = new Procedure1<XBlockExpression>() {
+        public void apply(final XBlockExpression it) {
+          Resource _eResource = rule.eResource();
+          EList<EObject> _contents = _eResource.getContents();
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<XBlockExpression>operator_add(_contents, it);
         }
       };
-    this._jvmTypesBuilder.setBody(logicalContainer, _function);
+    XBlockExpression _doubleArrow = ObjectExtensions.<XBlockExpression>operator_doubleArrow(_createXBlockExpression, _function);
+    this._jvmTypesBuilder.setBody(logicalContainer, _doubleArrow);
   }
   
   protected void _assignBody(final JvmExecutable logicalContainer, final RuleWithPremises rule) {

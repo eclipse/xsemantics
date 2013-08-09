@@ -82,22 +82,33 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   
   public void _computeTypes(final XBlockExpression b, final ITypeComputationState typeState) {
     ITypeComputationState state = typeState;
+    boolean _or = false;
     EObject _eContainer = b.eContainer();
-    if ((_eContainer instanceof Rule)) {
+    boolean _equals = Objects.equal(_eContainer, null);
+    if (_equals) {
+      _or = true;
+    } else {
       EObject _eContainer_1 = b.eContainer();
-      final Rule rule = ((Rule) _eContainer_1);
+      _or = (_equals || (_eContainer_1 instanceof Rule));
+    }
+    if (_or) {
       ITypeComputationState _withoutRootExpectation = state.withoutRootExpectation();
       state = _withoutRootExpectation;
+    }
+    EObject _eContainer_2 = b.eContainer();
+    if ((_eContainer_2 instanceof Rule)) {
+      EObject _eContainer_3 = b.eContainer();
+      final Rule rule = ((Rule) _eContainer_3);
       List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
       for (final ExpressionInConclusion expInConcl : _expressionsInConclusion) {
         XExpression _expression = expInConcl.getExpression();
         this.computeTypes(_expression, state);
       }
     }
-    EObject _eContainer_2 = b.eContainer();
-    if ((_eContainer_2 instanceof RuleWithPremises)) {
-      EObject _eContainer_3 = b.eContainer();
-      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_3);
+    EObject _eContainer_4 = b.eContainer();
+    if ((_eContainer_4 instanceof RuleWithPremises)) {
+      EObject _eContainer_5 = b.eContainer();
+      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_5);
       List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule_1);
       for (final RuleParameter outputParam : _outputParams) {
         JvmFormalParameter _parameter = outputParam.getParameter();

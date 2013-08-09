@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import org.eclipse.xtext.xbase.XbaseFactory
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -841,10 +842,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
-		logicalContainer.body = [
-			// TODO this is duplicate also in xbase compiler
-	   		rule.declareVariablesForOutputParams(it)
-	   	]
+//		logicalContainer.body = [
+//			// TODO this is duplicate also in xbase compiler
+//	   		rule.declareVariablesForOutputParams(it)
+//	   	]
+		logicalContainer.body = XbaseFactory.eINSTANCE.createXBlockExpression => [
+			rule.eResource.contents += it
+		]
 	}
 
 	def dispatch assignBody(JvmExecutable logicalContainer, RuleWithPremises rule) {
