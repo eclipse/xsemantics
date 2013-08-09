@@ -86,10 +86,7 @@ public class XsemanticsGeneratorExtensions {
       }
       final String packageString = _string;
       String _xifexpression = null;
-      int _length = 0;
-      if (packageString!=null) {
-        _length=packageString.length();
-      }
+      int _length = packageString.length();
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         String _plus = (packageString + ".");
@@ -206,10 +203,7 @@ public class XsemanticsGeneratorExtensions {
     {
       final String typeSystemPackage = this.toPackage(ts);
       String _xifexpression = null;
-      int _length = 0;
-      if (typeSystemPackage!=null) {
-        _length=typeSystemPackage.length();
-      }
+      int _length = typeSystemPackage.length();
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         String _plus = (typeSystemPackage + ".");

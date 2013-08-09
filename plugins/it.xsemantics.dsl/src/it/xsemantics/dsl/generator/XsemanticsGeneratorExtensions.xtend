@@ -46,7 +46,7 @@ class XsemanticsGeneratorExtensions {
 	
 	def toJavaFullyQualifiedName(XsemanticsSystem ts) {
 		val packageString = ts.toPackage?.toString
-		if (packageString?.length > 0)
+		if (packageString.length > 0)
 			packageString + "." + ts.toJavaClassName
 		else
 			ts.toJavaClassName
@@ -98,7 +98,7 @@ class XsemanticsGeneratorExtensions {
 	
 	def toValidatorPackage(XsemanticsSystem ts) {
 		val typeSystemPackage = ts.toPackage
-		if (typeSystemPackage?.length > 0)
+		if (typeSystemPackage.length > 0)
 			typeSystemPackage + "." + "validation"
 		else
 			"validation"
