@@ -53,7 +53,9 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 					expressionInConclusion(0).expression
 		//system.assertNoErrors
 		val feature = (expInConcl as XMemberFeatureCall).feature
-		println(feature)
+		"org.eclipse.emf.ecore.EObject.eClass()".assertEqualsStrings(
+			feature.identifier
+		)
 	}
 
 }

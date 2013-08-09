@@ -11,6 +11,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -31,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -49,9 +49,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -320,6 +318,15 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                   EList<JvmMember> _members_1 = it.getMembers();
                   JvmOperation _compileApplyMethod = XsemanticsJvmModelInferrer.this.compileApplyMethod(rule);
                   XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _compileApplyMethod);
+                  List<ExpressionInConclusion> _expressionsInConclusion = XsemanticsJvmModelInferrer.this._xsemanticsUtils.expressionsInConclusion(rule);
+                  final Procedure1<ExpressionInConclusion> _function = new Procedure1<ExpressionInConclusion>() {
+                      public void apply(final ExpressionInConclusion e) {
+                        EList<JvmMember> _members = it.getMembers();
+                        JvmOperation _compileExpressionInConclusionMethod = XsemanticsJvmModelInferrer.this.compileExpressionInConclusionMethod(e);
+                        XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _compileExpressionInConclusionMethod);
+                      }
+                    };
+                  IterableExtensions.<ExpressionInConclusion>forEach(_expressionsInConclusion, _function);
                 }
               }
             };
@@ -1734,17 +1741,32 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _method;
   }
   
-  protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
-    XBlockExpression _createXBlockExpression = XbaseFactory.eINSTANCE.createXBlockExpression();
-    final Procedure1<XBlockExpression> _function = new Procedure1<XBlockExpression>() {
-        public void apply(final XBlockExpression it) {
-          Resource _eResource = rule.eResource();
-          EList<EObject> _contents = _eResource.getContents();
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<XBlockExpression>operator_add(_contents, it);
+  public JvmOperation compileExpressionInConclusionMethod(final ExpressionInConclusion e) {
+    String _expressionInConclusionMethodName = this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(e);
+    XExpression _expression = e.getExpression();
+    JvmTypeReference _inferredType = this._jvmTypesBuilder.inferredType(_expression);
+    final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        public void apply(final JvmOperation it) {
+          it.setVisibility(JvmVisibility.PRIVATE);
+          EList<JvmFormalParameter> _parameters = it.getParameters();
+          Rule _containingRule = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingRule(e);
+          List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(_containingRule);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
+          XExpression _expression = e.getExpression();
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _expression);
         }
       };
-    XBlockExpression _doubleArrow = ObjectExtensions.<XBlockExpression>operator_doubleArrow(_createXBlockExpression, _function);
-    this._jvmTypesBuilder.setBody(logicalContainer, _doubleArrow);
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(e, _expressionInConclusionMethodName, _inferredType, _function);
+    return _method;
+  }
+  
+  protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          XsemanticsJvmModelInferrer.this.declareVariablesForOutputParams(rule, it);
+        }
+      };
+    this._jvmTypesBuilder.setBody(logicalContainer, _function);
   }
   
   protected void _assignBody(final JvmExecutable logicalContainer, final RuleWithPremises rule) {

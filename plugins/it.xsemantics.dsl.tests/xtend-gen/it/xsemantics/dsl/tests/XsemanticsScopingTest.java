@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,6 +75,7 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     ExpressionInConclusion _expressionInConclusion = this.expressionInConclusion(_ruleWithoutValidation, 0);
     final XExpression expInConcl = _expressionInConclusion.getExpression();
     final JvmIdentifiableElement feature = ((XMemberFeatureCall) expInConcl).getFeature();
-    InputOutput.<JvmIdentifiableElement>println(feature);
+    String _identifier = feature.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eClass()", _identifier);
   }
 }
