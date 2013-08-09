@@ -86,9 +86,16 @@ public class XsemanticsGeneratorExtensions {
       }
       final String packageString = _string;
       String _xifexpression = null;
-      int _length = packageString.length();
-      boolean _greaterThan = (_length > 0);
-      if (_greaterThan) {
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(packageString, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        int _length = packageString.length();
+        boolean _greaterThan = (_length > 0);
+        _and = (_notEquals && _greaterThan);
+      }
+      if (_and) {
         String _plus = (packageString + ".");
         String _javaClassName = this.toJavaClassName(ts);
         String _plus_1 = (_plus + _javaClassName);
@@ -203,9 +210,16 @@ public class XsemanticsGeneratorExtensions {
     {
       final String typeSystemPackage = this.toPackage(ts);
       String _xifexpression = null;
-      int _length = typeSystemPackage.length();
-      boolean _greaterThan = (_length > 0);
-      if (_greaterThan) {
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(typeSystemPackage, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        int _length = typeSystemPackage.length();
+        boolean _greaterThan = (_length > 0);
+        _and = (_notEquals && _greaterThan);
+      }
+      if (_and) {
         String _plus = (typeSystemPackage + ".");
         String _plus_1 = (_plus + "validation");
         _xifexpression = _plus_1;
