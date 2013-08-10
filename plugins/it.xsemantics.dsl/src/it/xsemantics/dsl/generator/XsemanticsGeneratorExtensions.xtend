@@ -26,6 +26,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
@@ -260,7 +261,7 @@ class XsemanticsGeneratorExtensions {
 		addAsSubtrace(«trace», «subtrace»)'''
 
 	def traceStringForRule(Rule rule) {
-		val getMethods = it::xsemantics::dsl::generator::XsemanticsGeneratorConstants::getResultGetMethods.iterator
+		val getMethods = XsemanticsGeneratorConstants::getResultGetMethods.iterator
 		rule.stringForRule(
 			[wrapInStringRepr('''«resultVariableForTrace».«getMethods.next»''')],
 			[wrapInStringRepr(it.ruleConclusionInputParamForError)])
@@ -441,6 +442,19 @@ class XsemanticsGeneratorExtensions {
 			null
 	}
 
+	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
+		rule.outputParams.forEach([
+			it.declareVariableForOutputParam(appendable).append("\n")
+		])
+	}
+	
+	def declareVariableForOutputParam(RuleParameter ruleParam, ITreeAppendable appendable) {
+		val outputVarName = appendable.declareVariable(ruleParam.parameter, ruleParam.parameter.simpleName)
+   		val childAppendable = appendable.trace(ruleParam.parameter, true)
+		ruleParam.parameter.parameterType.serialize(ruleParam.parameter, childAppendable)
+		childAppendable.append(" " + outputVarName + " = null; // output parameter")
+	}
+
 	def expressionInConclusionMethodName(ExpressionInConclusion e) {
 		val containingRule = e.containingRule
 		"_" +
@@ -448,4 +462,5 @@ class XsemanticsGeneratorExtensions {
 		"_" +
 		containingRule.conclusion.conclusionElements.indexOf(e)
 	}
+
 }

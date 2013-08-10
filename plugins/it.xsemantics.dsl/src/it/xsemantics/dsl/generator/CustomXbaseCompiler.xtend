@@ -30,19 +30,6 @@ class CustomXbaseCompiler extends XbaseCompiler {
 		return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
 	}
 	
-	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
-		rule.outputParams.forEach([
-			it.declareVariableForOutputParam(appendable).append("\n")
-		])
-	}
-	
-	def declareVariableForOutputParam(RuleParameter ruleParam, ITreeAppendable appendable) {
-		val outputVarName = appendable.declareVariable(ruleParam.parameter, ruleParam.parameter.simpleName)
-   		val childAppendable = appendable.trace(ruleParam.parameter, true)
-		ruleParam.parameter.parameterType.serialize(ruleParam.parameter, childAppendable)
-		childAppendable.append(" " + outputVarName + " = null; // output parameter")
-	}
-	
 	def compileRuleBody(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
 		compilePremises(rule, result)
 		compileRuleConclusionElements(rule, result)

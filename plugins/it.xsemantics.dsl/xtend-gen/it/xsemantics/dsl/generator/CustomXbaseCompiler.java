@@ -39,45 +39,13 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     if ((_eContainer instanceof RuleWithPremises)) {
       EObject _eContainer_1 = obj.eContainer();
       final RuleWithPremises rule = ((RuleWithPremises) _eContainer_1);
-      this.declareVariablesForOutputParams(rule, appendable);
+      this._xsemanticsGeneratorExtensions.declareVariablesForOutputParams(rule, appendable);
       JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(rule);
       JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
       this.compileRuleBody(rule, _resultType, appendable);
       return appendable;
     }
     return super.compile(obj, appendable, expectedReturnType, declaredExceptions);
-  }
-  
-  public void declareVariablesForOutputParams(final Rule rule, final ITreeAppendable appendable) {
-    List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
-    final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
-        public void apply(final RuleParameter it) {
-          ITreeAppendable _declareVariableForOutputParam = CustomXbaseCompiler.this.declareVariableForOutputParam(it, appendable);
-          _declareVariableForOutputParam.append("\n");
-        }
-      };
-    IterableExtensions.<RuleParameter>forEach(_outputParams, _function);
-  }
-  
-  public ITreeAppendable declareVariableForOutputParam(final RuleParameter ruleParam, final ITreeAppendable appendable) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      JvmFormalParameter _parameter = ruleParam.getParameter();
-      JvmFormalParameter _parameter_1 = ruleParam.getParameter();
-      String _simpleName = _parameter_1.getSimpleName();
-      final String outputVarName = appendable.declareVariable(_parameter, _simpleName);
-      JvmFormalParameter _parameter_2 = ruleParam.getParameter();
-      final ITreeAppendable childAppendable = appendable.trace(_parameter_2, true);
-      JvmFormalParameter _parameter_3 = ruleParam.getParameter();
-      JvmTypeReference _parameterType = _parameter_3.getParameterType();
-      JvmFormalParameter _parameter_4 = ruleParam.getParameter();
-      this.serialize(_parameterType, _parameter_4, childAppendable);
-      String _plus = (" " + outputVarName);
-      String _plus_1 = (_plus + " = null; // output parameter");
-      ITreeAppendable _append = childAppendable.append(_plus_1);
-      _xblockexpression = (_append);
-    }
-    return _xblockexpression;
   }
   
   public ITreeAppendable compileRuleBody(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {

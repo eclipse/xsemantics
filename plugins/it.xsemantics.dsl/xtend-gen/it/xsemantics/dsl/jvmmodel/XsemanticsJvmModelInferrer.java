@@ -1741,6 +1741,20 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     return _method;
   }
   
+  protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.declareVariablesForOutputParams(rule, it);
+        }
+      };
+    this._jvmTypesBuilder.setBody(logicalContainer, _function);
+  }
+  
+  protected void _assignBody(final JvmExecutable logicalContainer, final RuleWithPremises rule) {
+    XExpression _premises = rule.getPremises();
+    this._jvmTypesBuilder.setBody(logicalContainer, _premises);
+  }
+  
   public JvmOperation compileExpressionInConclusionMethod(final ExpressionInConclusion e) {
     String _expressionInConclusionMethodName = this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(e);
     XExpression _expression = e.getExpression();
@@ -1758,20 +1772,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(e, _expressionInConclusionMethodName, _inferredType, _function);
     return _method;
-  }
-  
-  protected void _assignBody(final JvmExecutable logicalContainer, final Rule rule) {
-    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-        public void apply(final ITreeAppendable it) {
-          XsemanticsJvmModelInferrer.this.declareVariablesForOutputParams(rule, it);
-        }
-      };
-    this._jvmTypesBuilder.setBody(logicalContainer, _function);
-  }
-  
-  protected void _assignBody(final JvmExecutable logicalContainer, final RuleWithPremises rule) {
-    XExpression _premises = rule.getPremises();
-    this._jvmTypesBuilder.setBody(logicalContainer, _premises);
   }
   
   public JvmOperation compileApplyAuxiliaryFunction(final AuxiliaryFunction auxfun) {
@@ -2033,38 +2033,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(rule, RuleEnvironment.class);
     JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(rule, _ruleEnvName, _newTypeRef);
     return _parameter;
-  }
-  
-  public void declareVariablesForOutputParams(final Rule rule, final ITreeAppendable appendable) {
-    List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
-    final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
-        public void apply(final RuleParameter it) {
-          ITreeAppendable _declareVariableForOutputParam = XsemanticsJvmModelInferrer.this.declareVariableForOutputParam(it, appendable);
-          _declareVariableForOutputParam.append("\n");
-        }
-      };
-    IterableExtensions.<RuleParameter>forEach(_outputParams, _function);
-  }
-  
-  public ITreeAppendable declareVariableForOutputParam(final RuleParameter ruleParam, final ITreeAppendable appendable) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      JvmFormalParameter _parameter = ruleParam.getParameter();
-      JvmFormalParameter _parameter_1 = ruleParam.getParameter();
-      String _simpleName = _parameter_1.getSimpleName();
-      final String outputVarName = appendable.declareVariable(_parameter, _simpleName);
-      JvmFormalParameter _parameter_2 = ruleParam.getParameter();
-      final ITreeAppendable childAppendable = appendable.trace(_parameter_2, true);
-      JvmFormalParameter _parameter_3 = ruleParam.getParameter();
-      JvmTypeReference _parameterType = _parameter_3.getParameterType();
-      JvmFormalParameter _parameter_4 = ruleParam.getParameter();
-      this._typeReferenceSerializer.serialize(_parameterType, _parameter_4, childAppendable);
-      String _plus = (" " + outputVarName);
-      String _plus_1 = (_plus + " = null; // output parameter");
-      ITreeAppendable _append = childAppendable.append(_plus_1);
-      _xblockexpression = (_append);
-    }
-    return _xblockexpression;
   }
   
   public List<JvmFormalParameter> inputParameters(final Rule rule) {

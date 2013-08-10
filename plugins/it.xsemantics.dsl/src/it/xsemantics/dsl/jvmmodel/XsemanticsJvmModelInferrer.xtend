@@ -11,7 +11,6 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
-import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.runtime.ErrorInformation
@@ -838,11 +837,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += rule.inputParameters
 
 			assignBody(rule)    			
-//   			body = [
-//   				rule.declareVariablesForOutputParams(it) 
-//   				rule.compileRuleBody(rule.judgmentDescription.resultType, it)
-//   			]
 		]
+	}
+
+	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
+		logicalContainer.body = [
+	   		rule.declareVariablesForOutputParams(it)
+	   	]
+	}
+
+	def dispatch assignBody(JvmExecutable logicalContainer, RuleWithPremises rule) {
+		logicalContainer.body = rule.premises
 	}
 
 	def compileExpressionInConclusionMethod(ExpressionInConclusion e) {
@@ -857,20 +862,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 
 			body = e.expression
 		]
-	}
-	
-	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
-		logicalContainer.body = [
-			// TODO this is duplicate also in xbase compiler
-	   		rule.declareVariablesForOutputParams(it)
-	   	]
-//		logicalContainer.body = XbaseFactory.eINSTANCE.createXBlockExpression => [
-//			rule.eResource.contents += it
-//		]
-	}
-
-	def dispatch assignBody(JvmExecutable logicalContainer, RuleWithPremises rule) {
-		logicalContainer.body = rule.premises
 	}
 
 	def compileApplyAuxiliaryFunction(AuxiliaryFunction auxfun) {
@@ -1006,19 +997,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def paramForEnvironment(Rule rule) {
 		rule.toParameter(rule.ruleEnvName, rule.newTypeRef(typeof(RuleEnvironment)))
-	}
-	
-	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
-		rule.outputParams.forEach([
-			it.declareVariableForOutputParam(appendable).append("\n")
-		])
-	}
-	
-	def declareVariableForOutputParam(RuleParameter ruleParam, ITreeAppendable appendable) {
-		val outputVarName = appendable.declareVariable(ruleParam.parameter, ruleParam.parameter.simpleName)
-   		val childAppendable = appendable.trace(ruleParam.parameter, true)
-		ruleParam.parameter.parameterType.serialize(ruleParam.parameter, childAppendable)
-		childAppendable.append(" " + outputVarName + " = null; // output parameter")
 	}
 	
 	def inputParameters(Rule rule) {

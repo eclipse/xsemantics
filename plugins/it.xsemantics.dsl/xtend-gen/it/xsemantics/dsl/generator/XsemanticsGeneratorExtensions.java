@@ -41,6 +41,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -1022,6 +1023,38 @@ public class XsemanticsGeneratorExtensions {
         _xifexpression = null;
       }
       _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public void declareVariablesForOutputParams(final Rule rule, final ITreeAppendable appendable) {
+    List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
+    final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
+        public void apply(final RuleParameter it) {
+          ITreeAppendable _declareVariableForOutputParam = XsemanticsGeneratorExtensions.this.declareVariableForOutputParam(it, appendable);
+          _declareVariableForOutputParam.append("\n");
+        }
+      };
+    IterableExtensions.<RuleParameter>forEach(_outputParams, _function);
+  }
+  
+  public ITreeAppendable declareVariableForOutputParam(final RuleParameter ruleParam, final ITreeAppendable appendable) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      JvmFormalParameter _parameter = ruleParam.getParameter();
+      JvmFormalParameter _parameter_1 = ruleParam.getParameter();
+      String _simpleName = _parameter_1.getSimpleName();
+      final String outputVarName = appendable.declareVariable(_parameter, _simpleName);
+      JvmFormalParameter _parameter_2 = ruleParam.getParameter();
+      final ITreeAppendable childAppendable = appendable.trace(_parameter_2, true);
+      JvmFormalParameter _parameter_3 = ruleParam.getParameter();
+      JvmTypeReference _parameterType = _parameter_3.getParameterType();
+      JvmFormalParameter _parameter_4 = ruleParam.getParameter();
+      this._typeReferenceSerializer.serialize(_parameterType, _parameter_4, childAppendable);
+      String _plus = (" " + outputVarName);
+      String _plus_1 = (_plus + " = null; // output parameter");
+      ITreeAppendable _append = childAppendable.append(_plus_1);
+      _xblockexpression = (_append);
     }
     return _xblockexpression;
   }
