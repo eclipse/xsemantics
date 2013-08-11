@@ -99,6 +99,10 @@ public class XsemanticsUtils {
     return EcoreUtil2.<Rule>getContainerOfType(element, Rule.class);
   }
   
+  public CheckRule containingCheckRule(final EObject element) {
+    return EcoreUtil2.<CheckRule>getContainerOfType(element, CheckRule.class);
+  }
+  
   public JudgmentDescription containingJudgmentDescription(final EObject element) {
     return EcoreUtil2.<JudgmentDescription>getContainerOfType(element, JudgmentDescription.class);
   }

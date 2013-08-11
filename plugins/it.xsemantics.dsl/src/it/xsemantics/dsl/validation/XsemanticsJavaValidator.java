@@ -167,6 +167,9 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 
 	@Check
 	public void checkRuleParameter(RuleParameter param) {
+		if (xsemanticsUtils.containingCheckRule(param) != null)
+			return; // a check rule has only one parameter
+		
 		if (helper.findDuplicateParameter(param)) {
 			error("Duplicate parameter '" + param.getParameter().getName()
 					+ "'",

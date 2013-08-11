@@ -73,6 +73,10 @@ class XsemanticsUtils {
 	def containingRule(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
+
+	def containingCheckRule(EObject element) {
+		return EcoreUtil2::getContainerOfType(element, typeof(CheckRule))
+	}
 	
 	def containingJudgmentDescription(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(JudgmentDescription))
