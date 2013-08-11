@@ -2,7 +2,6 @@
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
-import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
@@ -23,6 +22,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -132,7 +133,7 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
    * @generated
    * @ordered
    */
-  protected ErrorSpecification error;
+  protected XExpression error;
 
   /**
    * <!-- begin-user-doc -->
@@ -257,7 +258,7 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public ErrorSpecification getError()
+  public XExpression getError()
   {
     return error;
   }
@@ -267,9 +268,9 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetError(ErrorSpecification newError, NotificationChain msgs)
+  public NotificationChain basicSetError(XExpression newError, NotificationChain msgs)
   {
-    ErrorSpecification oldError = error;
+    XExpression oldError = error;
     error = newError;
     if (eNotificationRequired())
     {
@@ -284,7 +285,7 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setError(ErrorSpecification newError)
+  public void setError(XExpression newError)
   {
     if (newError != error)
     {
@@ -373,7 +374,7 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
         getRelationSymbols().addAll((Collection<? extends String>)newValue);
         return;
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__ERROR:
-        setError((ErrorSpecification)newValue);
+        setError((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -405,7 +406,7 @@ public class JudgmentDescriptionImpl extends MinimalEObjectImpl.Container implem
         getRelationSymbols().clear();
         return;
       case XsemanticsPackage.JUDGMENT_DESCRIPTION__ERROR:
-        setError((ErrorSpecification)null);
+        setError((XExpression)null);
         return;
     }
     super.eUnset(featureID);

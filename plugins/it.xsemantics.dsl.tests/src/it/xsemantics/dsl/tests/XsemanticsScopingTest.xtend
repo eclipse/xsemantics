@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.dsl.xsemantics.ErrorSpecification
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -54,6 +55,17 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 		//system.assertNoErrors
 		val feature = (expInConcl as XMemberFeatureCall).feature
 		"org.eclipse.emf.ecore.EObject.eClass()".assertEqualsStrings(
+			feature.identifier
+		)
+	}
+	
+	@Test
+	def void testScopingForErrorSpecification() {
+		val errSpec = testFiles.
+			testJudgmentDescriptionsWithErrorSpecification.
+				parse.judgmentDescriptions.head.error as ErrorSpecification
+		val feature = (errSpec.feature as XMemberFeatureCall).feature
+		"org.eclipse.emf.ecore.EObject.eContainingFeature()".assertEqualsStrings(
 			feature.identifier
 		)
 	}

@@ -404,30 +404,35 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 	public void _toJavaStatement(Fail fail, ITreeAppendable b,
 			boolean isReference) {
 		generateCommentWithOriginalCode(fail, b);
-		final ErrorSpecification errorSpecification = fail.getError();
+		final XExpression errorSpecification = fail.getError();
 		if (errorSpecification == null) {
 			newLine(b);
 			b.append("throwForExplicitFail();");
 		} else {
-			String errorMessageVar = compileErrorOfErrorSpecification(
-					errorSpecification, b);
-			String sourceVar = compileSourceOfErrorSpecification(
-					errorSpecification, b);
-			String featureVar = compileFeatureOfErrorSpecification(
-					errorSpecification, b);
-			newLine(b);
-			b.append("throwForExplicitFail(");
-			b.append(errorMessageVar);
-			comma(b);
-			b.append("new ");
-			b.append(generatorExtensions.errorInformationType(fail).getType());
-			b.append("(");
-			b.append(sourceVar);
-			comma(b);
-			b.append(featureVar);
-			b.append(")");
-			b.append(");");
+			toJavaStatement(errorSpecification, b, isReference);
 		}
+	}
+
+	public void _toJavaStatement(ErrorSpecification errorSpecification, ITreeAppendable b,
+			boolean isReference) {
+		String errorMessageVar = compileErrorOfErrorSpecification(
+				errorSpecification, b);
+		String sourceVar = compileSourceOfErrorSpecification(
+				errorSpecification, b);
+		String featureVar = compileFeatureOfErrorSpecification(
+				errorSpecification, b);
+		newLine(b);
+		b.append("throwForExplicitFail(");
+		b.append(errorMessageVar);
+		comma(b);
+		b.append("new ");
+		b.append(generatorExtensions.errorInformationType(errorSpecification).getType());
+		b.append("(");
+		b.append(sourceVar);
+		comma(b);
+		b.append(featureVar);
+		b.append(")");
+		b.append(");");
 	}
 
 	protected void generateCommentWithOriginalCode(EObject modelElement,

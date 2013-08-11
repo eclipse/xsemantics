@@ -117,8 +117,8 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTerminalEnvironmentSpecificationAccess().getGroup_1(), "rule__TerminalEnvironmentSpecification__Group_1__0");
 					put(grammarAccess.getEnvironmentReferenceAccess().getGroup(), "rule__EnvironmentReference__Group__0");
 					put(grammarAccess.getErrorSpecificationAccess().getGroup(), "rule__ErrorSpecification__Group__0");
-					put(grammarAccess.getErrorSpecificationAccess().getGroup_2(), "rule__ErrorSpecification__Group_2__0");
 					put(grammarAccess.getErrorSpecificationAccess().getGroup_3(), "rule__ErrorSpecification__Group_3__0");
+					put(grammarAccess.getErrorSpecificationAccess().getGroup_4(), "rule__ErrorSpecification__Group_4__0");
 					put(grammarAccess.getRuleConclusionElementAccess().getGroup_0(), "rule__RuleConclusionElement__Group_0__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
@@ -335,9 +335,9 @@ public class XsemanticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTerminalEnvironmentSpecificationAccess().getValueAssignment_1_3(), "rule__TerminalEnvironmentSpecification__ValueAssignment_1_3");
 					put(grammarAccess.getEnvironmentReferenceAccess().getEnvironmentAssignment_1(), "rule__EnvironmentReference__EnvironmentAssignment_1");
 					put(grammarAccess.getEnvironmentAccess().getNameAssignment(), "rule__Environment__NameAssignment");
-					put(grammarAccess.getErrorSpecificationAccess().getErrorAssignment_1(), "rule__ErrorSpecification__ErrorAssignment_1");
-					put(grammarAccess.getErrorSpecificationAccess().getSourceAssignment_2_1(), "rule__ErrorSpecification__SourceAssignment_2_1");
-					put(grammarAccess.getErrorSpecificationAccess().getFeatureAssignment_3_1(), "rule__ErrorSpecification__FeatureAssignment_3_1");
+					put(grammarAccess.getErrorSpecificationAccess().getErrorAssignment_2(), "rule__ErrorSpecification__ErrorAssignment_2");
+					put(grammarAccess.getErrorSpecificationAccess().getSourceAssignment_3_1(), "rule__ErrorSpecification__SourceAssignment_3_1");
+					put(grammarAccess.getErrorSpecificationAccess().getFeatureAssignment_4_1(), "rule__ErrorSpecification__FeatureAssignment_4_1");
 					put(grammarAccess.getRuleParameterAccess().getParameterAssignment(), "rule__RuleParameter__ParameterAssignment");
 					put(grammarAccess.getExpressionInConclusionAccess().getExpressionAssignment(), "rule__ExpressionInConclusion__ExpressionAssignment");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");

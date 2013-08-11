@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Rule Conclusion</b></em>'.
@@ -121,12 +123,12 @@ public interface RuleConclusion extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Error</em>' containment reference.
-   * @see #setError(ErrorSpecification)
+   * @see #setError(XExpression)
    * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getRuleConclusion_Error()
    * @model containment="true"
    * @generated
    */
-  ErrorSpecification getError();
+  XExpression getError();
 
   /**
    * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.RuleConclusion#getError <em>Error</em>}' containment reference.
@@ -136,6 +138,6 @@ public interface RuleConclusion extends EObject
    * @see #getError()
    * @generated
    */
-  void setError(ErrorSpecification value);
+  void setError(XExpression value);
 
 } // RuleConclusion

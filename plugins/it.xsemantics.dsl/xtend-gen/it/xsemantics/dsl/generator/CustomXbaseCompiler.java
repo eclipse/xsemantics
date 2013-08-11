@@ -1,9 +1,11 @@
 package it.xsemantics.dsl.generator;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -15,8 +17,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -139,6 +143,46 @@ public class CustomXbaseCompiler extends XbaseCompiler {
       _xblockexpression = (_append);
     }
     return _xblockexpression;
+  }
+  
+  public String compileErrorOfErrorSpecification(final ErrorSpecification errorSpecification, final ITreeAppendable b) {
+    XExpression _error = errorSpecification.getError();
+    TypeReferences _typeReferences = this.getTypeReferences();
+    JvmTypeReference _typeForName = _typeReferences.getTypeForName(String.class, errorSpecification);
+    return this.compileAndAssignToLocalVariable(_error, b, _typeForName, "error");
+  }
+  
+  public String compileSourceOfErrorSpecification(final ErrorSpecification errorSpecification, final ITreeAppendable b) {
+    XExpression _source = errorSpecification.getSource();
+    TypeReferences _typeReferences = this.getTypeReferences();
+    JvmTypeReference _typeForName = _typeReferences.getTypeForName(EObject.class, errorSpecification);
+    return this.compileAndAssignToLocalVariable(_source, b, _typeForName, "source");
+  }
+  
+  public String compileFeatureOfErrorSpecification(final ErrorSpecification errorSpecification, final ITreeAppendable b) {
+    XExpression _feature = errorSpecification.getFeature();
+    TypeReferences _typeReferences = this.getTypeReferences();
+    JvmTypeReference _typeForName = _typeReferences.getTypeForName(EStructuralFeature.class, errorSpecification);
+    return this.compileAndAssignToLocalVariable(_feature, b, _typeForName, "feature");
+  }
+  
+  protected String compileAndAssignToLocalVariable(final XExpression expression, final ITreeAppendable b, final JvmTypeReference expectedType, final String proposedVariable) {
+    boolean _equals = Objects.equal(expression, null);
+    if (_equals) {
+      return "null";
+    }
+    this.toJavaStatement(expression, b, true);
+    Object _object = new Object();
+    final Object syntheticObject = _object;
+    final String varName = b.declareSyntheticVariable(syntheticObject, proposedVariable);
+    b.append("\n");
+    this.serialize(expectedType, expression, b);
+    ITreeAppendable _append = b.append(" ");
+    ITreeAppendable _append_1 = _append.append(varName);
+    _append_1.append(" = ");
+    this.toJavaExpression(expression, b);
+    b.append(";");
+    return b.getName(syntheticObject);
   }
   
   public void compilePremises(final EObject rule, final ITreeAppendable result) {

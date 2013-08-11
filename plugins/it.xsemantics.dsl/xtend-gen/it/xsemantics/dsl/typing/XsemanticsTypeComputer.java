@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -66,6 +65,13 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
         final Fail _fail = (Fail)expression;
         _matched=true;
         this._computeTypes(_fail, state);
+      }
+    }
+    if (!_matched) {
+      if (expression instanceof ErrorSpecification) {
+        final ErrorSpecification _errorSpecification = (ErrorSpecification)expression;
+        _matched=true;
+        this._computeTypes(_errorSpecification, state);
       }
     }
     if (!_matched) {
@@ -218,24 +224,27 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   }
   
   protected void _computeTypes(final Fail e, final ITypeComputationState state) {
-    ErrorSpecification _error = e.getError();
-    final Procedure1<ErrorSpecification> _function = new Procedure1<ErrorSpecification>() {
-        public void apply(final ErrorSpecification it) {
-          XExpression _error = it.getError();
-          if (_error!=null) {
-            XsemanticsTypeComputer.this.computeTypes(_error, state);
-          }
-          XExpression _source = it.getSource();
-          if (_source!=null) {
-            XsemanticsTypeComputer.this.computeTypes(_source, state);
-          }
-          XExpression _feature = it.getFeature();
-          if (_feature!=null) {
-            XsemanticsTypeComputer.this.computeTypes(_feature, state);
-          }
-        }
-      };
-    ObjectExtensions.<ErrorSpecification>operator_doubleArrow(_error, _function);
+    XExpression _error = e.getError();
+    if (_error!=null) {
+      this.computeTypes(_error, state);
+    }
+    LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
+    state.acceptActualType(_primitiveVoid);
+  }
+  
+  protected void _computeTypes(final ErrorSpecification e, final ITypeComputationState state) {
+    XExpression _error = e.getError();
+    if (_error!=null) {
+      this.computeTypes(_error, state);
+    }
+    XExpression _source = e.getSource();
+    if (_source!=null) {
+      this.computeTypes(_source, state);
+    }
+    XExpression _feature = e.getFeature();
+    if (_feature!=null) {
+      this.computeTypes(_feature, state);
+    }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);
   }

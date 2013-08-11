@@ -152,11 +152,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
         return createEnvironmentAdapter();
       }
       @Override
-      public Adapter caseErrorSpecification(ErrorSpecification object)
-      {
-        return createErrorSpecificationAdapter();
-      }
-      @Override
       public Adapter caseRuleConclusionElement(RuleConclusionElement object)
       {
         return createRuleConclusionElementAdapter();
@@ -210,6 +205,11 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEnvironmentMapping(EnvironmentMapping object)
       {
         return createEnvironmentMappingAdapter();
+      }
+      @Override
+      public Adapter caseErrorSpecification(ErrorSpecification object)
+      {
+        return createErrorSpecificationAdapter();
       }
       @Override
       public Adapter caseXExpression(XExpression object)
@@ -464,21 +464,6 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification <em>Error Specification</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification
-   * @generated
-   */
-  public Adapter createErrorSpecificationAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.RuleConclusionElement <em>Rule Conclusion Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -639,6 +624,21 @@ public class XsemanticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEnvironmentMappingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification <em>Error Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification
+   * @generated
+   */
+  public Adapter createErrorSpecificationAdapter()
   {
     return null;
   }

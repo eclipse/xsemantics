@@ -203,13 +203,6 @@ public class XsemanticsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XsemanticsPackage.ERROR_SPECIFICATION:
-      {
-        ErrorSpecification errorSpecification = (ErrorSpecification)theEObject;
-        T result = caseErrorSpecification(errorSpecification);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XsemanticsPackage.RULE_CONCLUSION_ELEMENT:
       {
         RuleConclusionElement ruleConclusionElement = (RuleConclusionElement)theEObject;
@@ -294,6 +287,14 @@ public class XsemanticsSwitch<T>
         EnvironmentMapping environmentMapping = (EnvironmentMapping)theEObject;
         T result = caseEnvironmentMapping(environmentMapping);
         if (result == null) result = caseEnvironmentSpecification(environmentMapping);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XsemanticsPackage.ERROR_SPECIFICATION:
+      {
+        ErrorSpecification errorSpecification = (ErrorSpecification)theEObject;
+        T result = caseErrorSpecification(errorSpecification);
+        if (result == null) result = caseXExpression(errorSpecification);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -542,22 +543,6 @@ public class XsemanticsSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Error Specification</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Error Specification</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseErrorSpecification(ErrorSpecification object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Rule Conclusion Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -729,6 +714,22 @@ public class XsemanticsSwitch<T>
    * @generated
    */
   public T caseEnvironmentMapping(EnvironmentMapping object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Error Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Error Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseErrorSpecification(ErrorSpecification object)
   {
     return null;
   }

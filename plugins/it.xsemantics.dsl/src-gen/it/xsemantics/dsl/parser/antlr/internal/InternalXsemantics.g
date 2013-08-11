@@ -2122,67 +2122,73 @@ ruleErrorSpecification returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='error' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getErrorSpecificationAccess().getErrorKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getErrorSpecificationAccess().getErrorSpecificationAction_0(),
+            $current);
+    }
+)	otherlv_1='error' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getErrorSpecificationAccess().getErrorKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getErrorXExpressionParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getErrorXExpressionParserRuleCall_2_0()); 
 	    }
-		lv_error_1_0=ruleXExpression		{
+		lv_error_2_0=ruleXExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getErrorSpecificationRule());
 	        }
        		set(
        			$current, 
        			"error",
-        		lv_error_1_0, 
+        		lv_error_2_0, 
         		"XExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_2='source' 
+)(	otherlv_3='source' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getErrorSpecificationAccess().getSourceKeyword_2_0());
+    	newLeafNode(otherlv_3, grammarAccess.getErrorSpecificationAccess().getSourceKeyword_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getSourceXExpressionParserRuleCall_2_1_0()); 
+	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getSourceXExpressionParserRuleCall_3_1_0()); 
 	    }
-		lv_source_3_0=ruleXExpression		{
+		lv_source_4_0=ruleXExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getErrorSpecificationRule());
 	        }
        		set(
        			$current, 
        			"source",
-        		lv_source_3_0, 
+        		lv_source_4_0, 
         		"XExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?(	otherlv_4='feature' 
+))?(	otherlv_5='feature' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getErrorSpecificationAccess().getFeatureKeyword_3_0());
+    	newLeafNode(otherlv_5, grammarAccess.getErrorSpecificationAccess().getFeatureKeyword_4_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getFeatureXExpressionParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getErrorSpecificationAccess().getFeatureXExpressionParserRuleCall_4_1_0()); 
 	    }
-		lv_feature_5_0=ruleXExpression		{
+		lv_feature_6_0=ruleXExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getErrorSpecificationRule());
 	        }
        		set(
        			$current, 
        			"feature",
-        		lv_feature_5_0, 
+        		lv_feature_6_0, 
         		"XExpression");
 	        afterParserOrEnumRuleCall();
 	    }

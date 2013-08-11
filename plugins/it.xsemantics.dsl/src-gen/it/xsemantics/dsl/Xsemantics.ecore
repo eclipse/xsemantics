@@ -34,7 +34,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="#//ErrorSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JudgmentDescription">
@@ -45,7 +45,7 @@
         eType="#//JudgmentParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationSymbols" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="#//ErrorSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JudgmentParameter"/>
@@ -84,7 +84,7 @@
         eType="#//RuleConclusionElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationSymbols" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="#//ErrorSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleInvocation" eSuperTypes="../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
@@ -103,14 +103,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Environment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ErrorSpecification">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleConclusionElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="RuleParameter" eSuperTypes="#//RuleConclusionElement">
@@ -135,7 +127,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fail" eSuperTypes="../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="#//ErrorSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnvironmentAccess" eSuperTypes="../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
@@ -156,6 +148,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorSpecification" eSuperTypes="../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

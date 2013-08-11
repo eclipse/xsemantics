@@ -3,7 +3,9 @@ package it.xsemantics.dsl.tests;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
+import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
@@ -77,5 +79,19 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     final JvmIdentifiableElement feature = ((XMemberFeatureCall) expInConcl).getFeature();
     String _identifier = feature.getIdentifier();
     this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eClass()", _identifier);
+  }
+  
+  @Test
+  public void testScopingForErrorSpecification() {
+    CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
+    XsemanticsSystem _parse = this.parse(_testJudgmentDescriptionsWithErrorSpecification);
+    EList<JudgmentDescription> _judgmentDescriptions = _parse.getJudgmentDescriptions();
+    JudgmentDescription _head = IterableExtensions.<JudgmentDescription>head(_judgmentDescriptions);
+    XExpression _error = _head.getError();
+    final ErrorSpecification errSpec = ((ErrorSpecification) _error);
+    XExpression _feature = errSpec.getFeature();
+    final JvmIdentifiableElement feature = ((XMemberFeatureCall) _feature).getFeature();
+    String _identifier = feature.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eContainingFeature()", _identifier);
   }
 }

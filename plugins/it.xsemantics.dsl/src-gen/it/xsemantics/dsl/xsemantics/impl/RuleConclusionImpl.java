@@ -3,7 +3,6 @@
 package it.xsemantics.dsl.xsemantics.impl;
 
 import it.xsemantics.dsl.xsemantics.Environment;
-import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
@@ -24,6 +23,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,7 +103,7 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected ErrorSpecification error;
+  protected XExpression error;
 
   /**
    * <!-- begin-user-doc -->
@@ -229,7 +230,7 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public ErrorSpecification getError()
+  public XExpression getError()
   {
     return error;
   }
@@ -239,9 +240,9 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetError(ErrorSpecification newError, NotificationChain msgs)
+  public NotificationChain basicSetError(XExpression newError, NotificationChain msgs)
   {
-    ErrorSpecification oldError = error;
+    XExpression oldError = error;
     error = newError;
     if (eNotificationRequired())
     {
@@ -256,7 +257,7 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setError(ErrorSpecification newError)
+  public void setError(XExpression newError)
   {
     if (newError != error)
     {
@@ -342,7 +343,7 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
         getRelationSymbols().addAll((Collection<? extends String>)newValue);
         return;
       case XsemanticsPackage.RULE_CONCLUSION__ERROR:
-        setError((ErrorSpecification)newValue);
+        setError((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -371,7 +372,7 @@ public class RuleConclusionImpl extends MinimalEObjectImpl.Container implements 
         getRelationSymbols().clear();
         return;
       case XsemanticsPackage.RULE_CONCLUSION__ERROR:
-        setError((ErrorSpecification)null);
+        setError((XExpression)null);
         return;
     }
     super.eUnset(featureID);

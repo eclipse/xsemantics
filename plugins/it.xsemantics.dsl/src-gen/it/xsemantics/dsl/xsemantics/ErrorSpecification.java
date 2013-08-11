@@ -2,8 +2,6 @@
  */
 package it.xsemantics.dsl.xsemantics;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -24,7 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @model
  * @generated
  */
-public interface ErrorSpecification extends EObject
+public interface ErrorSpecification extends XExpression
 {
   /**
    * Returns the value of the '<em><b>Error</b></em>' containment reference.

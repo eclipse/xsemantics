@@ -31,12 +31,12 @@ public interface Fail extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Error</em>' containment reference.
-   * @see #setError(ErrorSpecification)
+   * @see #setError(XExpression)
    * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getFail_Error()
    * @model containment="true"
    * @generated
    */
-  ErrorSpecification getError();
+  XExpression getError();
 
   /**
    * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.Fail#getError <em>Error</em>}' containment reference.
@@ -46,6 +46,6 @@ public interface Fail extends XExpression
    * @see #getError()
    * @generated
    */
-  void setError(ErrorSpecification value);
+  void setError(XExpression value);
 
 } // Fail

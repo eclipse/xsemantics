@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.xsemantics.ErrorSpecification
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -31,6 +32,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			RuleInvocation: expression._computeTypes(state)
 			OrExpression: expression._computeTypes(state)
 			Fail: expression._computeTypes(state)
+			ErrorSpecification: expression._computeTypes(state)
 			EnvironmentAccess: expression._computeTypes(state)
 			default: super.computeTypes(expression, state)
 		}
@@ -129,11 +131,14 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def _computeTypes(Fail e, ITypeComputationState state) {
-		e.error => [
-			error?.computeTypes(state)
-			source?.computeTypes(state)
-			feature?.computeTypes(state)
-		]
+		e.error?.computeTypes(state)
+		state.acceptActualType(getPrimitiveVoid(state))
+	}
+
+	protected def _computeTypes(ErrorSpecification e, ITypeComputationState state) {
+		e.error?.computeTypes(state)
+		e.source?.computeTypes(state)
+		e.feature?.computeTypes(state)
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	

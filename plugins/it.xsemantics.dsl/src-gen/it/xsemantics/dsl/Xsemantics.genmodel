@@ -78,11 +78,6 @@
     <genClasses ecoreClass="Xsemantics.ecore#//Environment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xsemantics.ecore#//Environment/name"/>
     </genClasses>
-    <genClasses ecoreClass="Xsemantics.ecore#//ErrorSpecification">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/error"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/source"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/feature"/>
-    </genClasses>
     <genClasses ecoreClass="Xsemantics.ecore#//RuleConclusionElement"/>
     <genClasses ecoreClass="Xsemantics.ecore#//RuleParameter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//RuleParameter/parameter"/>
@@ -115,6 +110,11 @@
     <genClasses ecoreClass="Xsemantics.ecore#//EnvironmentMapping">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//EnvironmentMapping/key"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//EnvironmentMapping/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xsemantics.ecore#//ErrorSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/error"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xsemantics.ecore#//ErrorSpecification/feature"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

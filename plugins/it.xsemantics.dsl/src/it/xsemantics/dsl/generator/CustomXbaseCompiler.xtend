@@ -12,6 +12,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import it.xsemantics.dsl.xsemantics.ErrorSpecification
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 
 class CustomXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -80,5 +83,50 @@ class CustomXbaseCompiler extends XbaseCompiler {
 			}
 		}
 		result.append(");")
+	}
+
+	def String compileErrorOfErrorSpecification(
+			ErrorSpecification errorSpecification, ITreeAppendable b) {
+		return compileAndAssignToLocalVariable(
+				errorSpecification.getError(),
+				b,
+				getTypeReferences().getTypeForName(typeof(String),
+						errorSpecification), "error");
+	}
+
+	def String compileSourceOfErrorSpecification(
+			ErrorSpecification errorSpecification, ITreeAppendable b) {
+		return compileAndAssignToLocalVariable(
+				errorSpecification.getSource(),
+				b,
+				getTypeReferences().getTypeForName(typeof(EObject),
+						errorSpecification), "source");
+	}
+
+	def String compileFeatureOfErrorSpecification(
+			ErrorSpecification errorSpecification, ITreeAppendable b) {
+		return compileAndAssignToLocalVariable(
+				errorSpecification.getFeature(),
+				b,
+				getTypeReferences().getTypeForName(typeof(EStructuralFeature),
+						errorSpecification), "feature");
+	}
+
+	def protected String compileAndAssignToLocalVariable(
+			XExpression expression, ITreeAppendable b,
+			JvmTypeReference expectedType, String proposedVariable) {
+		if (expression == null)
+			return "null";
+
+		toJavaStatement(expression, b, true);
+		val syntheticObject = new Object();
+		val varName = b.declareSyntheticVariable(syntheticObject,
+				proposedVariable);
+		b.append("\n");
+		serialize(expectedType, expression, b);
+		b.append(" ").append(varName).append(" = ");
+		toJavaExpression(expression, b);
+		b.append(";");
+		return b.getName(syntheticObject);
 	}
 }

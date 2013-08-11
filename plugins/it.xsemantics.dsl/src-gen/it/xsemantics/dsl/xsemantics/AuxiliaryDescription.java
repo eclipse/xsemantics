@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Auxiliary Description</b></em>'.
@@ -107,12 +109,12 @@ public interface AuxiliaryDescription extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Error</em>' containment reference.
-   * @see #setError(ErrorSpecification)
+   * @see #setError(XExpression)
    * @see it.xsemantics.dsl.xsemantics.XsemanticsPackage#getAuxiliaryDescription_Error()
    * @model containment="true"
    * @generated
    */
-  ErrorSpecification getError();
+  XExpression getError();
 
   /**
    * Sets the value of the '{@link it.xsemantics.dsl.xsemantics.AuxiliaryDescription#getError <em>Error</em>}' containment reference.
@@ -122,6 +124,6 @@ public interface AuxiliaryDescription extends EObject
    * @see #getError()
    * @generated
    */
-  void setError(ErrorSpecification value);
+  void setError(XExpression value);
 
 } // AuxiliaryDescription

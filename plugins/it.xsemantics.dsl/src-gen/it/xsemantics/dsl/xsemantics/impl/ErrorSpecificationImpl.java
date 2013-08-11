@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.xbase.XExpression;
+
+import org.eclipse.xtext.xbase.impl.XExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * @generated
  */
-public class ErrorSpecificationImpl extends MinimalEObjectImpl.Container implements ErrorSpecification
+public class ErrorSpecificationImpl extends XExpressionImpl implements ErrorSpecification
 {
   /**
    * The cached value of the '{@link #getError() <em>Error</em>}' containment reference.

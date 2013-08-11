@@ -163,13 +163,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass errorSpecificationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass ruleConclusionElementEClass = null;
 
   /**
@@ -241,6 +234,13 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * @generated
    */
   private EClass environmentMappingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass errorSpecificationEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -904,46 +904,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getErrorSpecification()
-  {
-    return errorSpecificationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getErrorSpecification_Error()
-  {
-    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getErrorSpecification_Source()
-  {
-    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getErrorSpecification_Feature()
-  {
-    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getRuleConclusionElement()
   {
     return ruleConclusionElementEClass;
@@ -1184,6 +1144,46 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getErrorSpecification()
+  {
+    return errorSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getErrorSpecification_Error()
+  {
+    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getErrorSpecification_Source()
+  {
+    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getErrorSpecification_Feature()
+  {
+    return (EReference)errorSpecificationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public XsemanticsFactory getXsemanticsFactory()
   {
     return (XsemanticsFactory)getEFactoryInstance();
@@ -1283,11 +1283,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     environmentEClass = createEClass(ENVIRONMENT);
     createEAttribute(environmentEClass, ENVIRONMENT__NAME);
 
-    errorSpecificationEClass = createEClass(ERROR_SPECIFICATION);
-    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__ERROR);
-    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__SOURCE);
-    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__FEATURE);
-
     ruleConclusionElementEClass = createEClass(RULE_CONCLUSION_ELEMENT);
 
     ruleParameterEClass = createEClass(RULE_PARAMETER);
@@ -1322,6 +1317,11 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     environmentMappingEClass = createEClass(ENVIRONMENT_MAPPING);
     createEReference(environmentMappingEClass, ENVIRONMENT_MAPPING__KEY);
     createEReference(environmentMappingEClass, ENVIRONMENT_MAPPING__VALUE);
+
+    errorSpecificationEClass = createEClass(ERROR_SPECIFICATION);
+    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__ERROR);
+    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__SOURCE);
+    createEReference(errorSpecificationEClass, ERROR_SPECIFICATION__FEATURE);
   }
 
   /**
@@ -1372,6 +1372,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     environmentCompositionEClass.getESuperTypes().add(this.getEnvironmentSpecification());
     emptyEnvironmentEClass.getESuperTypes().add(this.getEnvironmentSpecification());
     environmentMappingEClass.getESuperTypes().add(this.getEnvironmentSpecification());
+    errorSpecificationEClass.getESuperTypes().add(theXbasePackage.getXExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(xsemanticsSystemEClass, XsemanticsSystem.class, "XsemanticsSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1394,7 +1395,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEAttribute(getAuxiliaryDescription_Name(), ecorePackage.getEString(), "name", null, 0, 1, AuxiliaryDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAuxiliaryDescription_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, AuxiliaryDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAuxiliaryDescription_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, AuxiliaryDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAuxiliaryDescription_Error(), this.getErrorSpecification(), null, "error", null, 0, 1, AuxiliaryDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAuxiliaryDescription_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, AuxiliaryDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(judgmentDescriptionEClass, JudgmentDescription.class, "JudgmentDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getJudgmentDescription_Override(), ecorePackage.getEBoolean(), "override", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1402,7 +1403,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEAttribute(getJudgmentDescription_JudgmentSymbol(), ecorePackage.getEString(), "judgmentSymbol", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getJudgmentDescription_JudgmentParameters(), this.getJudgmentParameter(), null, "judgmentParameters", null, 0, -1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getJudgmentDescription_RelationSymbols(), ecorePackage.getEString(), "relationSymbols", null, 0, -1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getJudgmentDescription_Error(), this.getErrorSpecification(), null, "error", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getJudgmentDescription_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, JudgmentDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(judgmentParameterEClass, JudgmentParameter.class, "JudgmentParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1432,7 +1433,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEAttribute(getRuleConclusion_JudgmentSymbol(), ecorePackage.getEString(), "judgmentSymbol", null, 0, 1, RuleConclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRuleConclusion_ConclusionElements(), this.getRuleConclusionElement(), null, "conclusionElements", null, 0, -1, RuleConclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRuleConclusion_RelationSymbols(), ecorePackage.getEString(), "relationSymbols", null, 0, -1, RuleConclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRuleConclusion_Error(), this.getErrorSpecification(), null, "error", null, 0, 1, RuleConclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleConclusion_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, RuleConclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleInvocationEClass, RuleInvocation.class, "RuleInvocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRuleInvocation_Environment(), this.getEnvironmentSpecification(), null, "environment", null, 0, 1, RuleInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1447,11 +1448,6 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
 
     initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnvironment_Name(), ecorePackage.getEString(), "name", null, 0, 1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(errorSpecificationEClass, ErrorSpecification.class, "ErrorSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getErrorSpecification_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getErrorSpecification_Source(), theXbasePackage.getXExpression(), null, "source", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getErrorSpecification_Feature(), theXbasePackage.getXExpression(), null, "feature", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleConclusionElementEClass, RuleConclusionElement.class, "RuleConclusionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1471,7 +1467,7 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEReference(getOrExpression_Branches(), theXbasePackage.getXExpression(), null, "branches", null, 0, -1, OrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(failEClass, Fail.class, "Fail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFail_Error(), this.getErrorSpecification(), null, "error", null, 0, 1, Fail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFail_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, Fail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(environmentAccessEClass, EnvironmentAccess.class, "EnvironmentAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEnvironmentAccess_Environment(), this.getEnvironment(), null, "environment", null, 0, 1, EnvironmentAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1487,6 +1483,11 @@ public class XsemanticsPackageImpl extends EPackageImpl implements XsemanticsPac
     initEClass(environmentMappingEClass, EnvironmentMapping.class, "EnvironmentMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEnvironmentMapping_Key(), theXbasePackage.getXExpression(), null, "key", null, 0, 1, EnvironmentMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEnvironmentMapping_Value(), theXbasePackage.getXExpression(), null, "value", null, 0, 1, EnvironmentMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(errorSpecificationEClass, ErrorSpecification.class, "ErrorSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getErrorSpecification_Error(), theXbasePackage.getXExpression(), null, "error", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getErrorSpecification_Source(), theXbasePackage.getXExpression(), null, "source", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getErrorSpecification_Feature(), theXbasePackage.getXExpression(), null, "feature", null, 0, 1, ErrorSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

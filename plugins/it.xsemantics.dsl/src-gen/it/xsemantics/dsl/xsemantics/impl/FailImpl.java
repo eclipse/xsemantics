@@ -2,7 +2,6 @@
  */
 package it.xsemantics.dsl.xsemantics.impl;
 
-import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
@@ -13,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xbase.impl.XExpressionImpl;
 
@@ -39,7 +40,7 @@ public class FailImpl extends XExpressionImpl implements Fail
    * @generated
    * @ordered
    */
-  protected ErrorSpecification error;
+  protected XExpression error;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,7 +68,7 @@ public class FailImpl extends XExpressionImpl implements Fail
    * <!-- end-user-doc -->
    * @generated
    */
-  public ErrorSpecification getError()
+  public XExpression getError()
   {
     return error;
   }
@@ -77,9 +78,9 @@ public class FailImpl extends XExpressionImpl implements Fail
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetError(ErrorSpecification newError, NotificationChain msgs)
+  public NotificationChain basicSetError(XExpression newError, NotificationChain msgs)
   {
-    ErrorSpecification oldError = error;
+    XExpression oldError = error;
     error = newError;
     if (eNotificationRequired())
     {
@@ -94,7 +95,7 @@ public class FailImpl extends XExpressionImpl implements Fail
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setError(ErrorSpecification newError)
+  public void setError(XExpression newError)
   {
     if (newError != error)
     {
@@ -153,7 +154,7 @@ public class FailImpl extends XExpressionImpl implements Fail
     switch (featureID)
     {
       case XsemanticsPackage.FAIL__ERROR:
-        setError((ErrorSpecification)newValue);
+        setError((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,7 +171,7 @@ public class FailImpl extends XExpressionImpl implements Fail
     switch (featureID)
     {
       case XsemanticsPackage.FAIL__ERROR:
-        setError((ErrorSpecification)null);
+        setError((XExpression)null);
         return;
     }
     super.eUnset(featureID);

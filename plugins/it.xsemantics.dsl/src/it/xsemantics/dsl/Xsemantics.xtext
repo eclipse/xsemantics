@@ -167,7 +167,8 @@ EnvironmentMapsTo:
 	'<-'
 ;
 
-ErrorSpecification:
+ErrorSpecification returns xbase::XExpression:
+	{ErrorSpecification}
 	'error' error=XExpression
 	('source' source=XExpression)?
 	('feature' feature=XExpression)?

@@ -1175,57 +1175,61 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 	public class ErrorSpecificationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ErrorSpecification");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cErrorKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cErrorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cErrorXExpressionParserRuleCall_1_0 = (RuleCall)cErrorAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cSourceKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cSourceAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cSourceXExpressionParserRuleCall_2_1_0 = (RuleCall)cSourceAssignment_2_1.eContents().get(0);
+		private final Action cErrorSpecificationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cErrorKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cErrorAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cErrorXExpressionParserRuleCall_2_0 = (RuleCall)cErrorAssignment_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cFeatureKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cFeatureAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cFeatureXExpressionParserRuleCall_3_1_0 = (RuleCall)cFeatureAssignment_3_1.eContents().get(0);
+		private final Keyword cSourceKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cSourceAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cSourceXExpressionParserRuleCall_3_1_0 = (RuleCall)cSourceAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cFeatureKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cFeatureAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cFeatureXExpressionParserRuleCall_4_1_0 = (RuleCall)cFeatureAssignment_4_1.eContents().get(0);
 		
-		//ErrorSpecification:
-		//	"error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?;
+		//ErrorSpecification returns xbase::XExpression:
+		//	{ErrorSpecification} "error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?;
 		public ParserRule getRule() { return rule; }
 
-		//"error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?
+		//{ErrorSpecification} "error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?
 		public Group getGroup() { return cGroup; }
 
+		//{ErrorSpecification}
+		public Action getErrorSpecificationAction_0() { return cErrorSpecificationAction_0; }
+
 		//"error"
-		public Keyword getErrorKeyword_0() { return cErrorKeyword_0; }
+		public Keyword getErrorKeyword_1() { return cErrorKeyword_1; }
 
 		//error=XExpression
-		public Assignment getErrorAssignment_1() { return cErrorAssignment_1; }
+		public Assignment getErrorAssignment_2() { return cErrorAssignment_2; }
 
 		//XExpression
-		public RuleCall getErrorXExpressionParserRuleCall_1_0() { return cErrorXExpressionParserRuleCall_1_0; }
+		public RuleCall getErrorXExpressionParserRuleCall_2_0() { return cErrorXExpressionParserRuleCall_2_0; }
 
 		//("source" source=XExpression)?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//"source"
-		public Keyword getSourceKeyword_2_0() { return cSourceKeyword_2_0; }
-
-		//source=XExpression
-		public Assignment getSourceAssignment_2_1() { return cSourceAssignment_2_1; }
-
-		//XExpression
-		public RuleCall getSourceXExpressionParserRuleCall_2_1_0() { return cSourceXExpressionParserRuleCall_2_1_0; }
-
-		//("feature" feature=XExpression)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"feature"
-		public Keyword getFeatureKeyword_3_0() { return cFeatureKeyword_3_0; }
+		//"source"
+		public Keyword getSourceKeyword_3_0() { return cSourceKeyword_3_0; }
 
-		//feature=XExpression
-		public Assignment getFeatureAssignment_3_1() { return cFeatureAssignment_3_1; }
+		//source=XExpression
+		public Assignment getSourceAssignment_3_1() { return cSourceAssignment_3_1; }
 
 		//XExpression
-		public RuleCall getFeatureXExpressionParserRuleCall_3_1_0() { return cFeatureXExpressionParserRuleCall_3_1_0; }
+		public RuleCall getSourceXExpressionParserRuleCall_3_1_0() { return cSourceXExpressionParserRuleCall_3_1_0; }
+
+		//("feature" feature=XExpression)?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"feature"
+		public Keyword getFeatureKeyword_4_0() { return cFeatureKeyword_4_0; }
+
+		//feature=XExpression
+		public Assignment getFeatureAssignment_4_1() { return cFeatureAssignment_4_1; }
+
+		//XExpression
+		public RuleCall getFeatureXExpressionParserRuleCall_4_1_0() { return cFeatureXExpressionParserRuleCall_4_1_0; }
 	}
 
 	public class JudgmentSymbolElements extends AbstractParserRuleElementFinder {
@@ -1746,8 +1750,8 @@ public class XsemanticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnvironmentMapsToAccess().getRule();
 	}
 
-	//ErrorSpecification:
-	//	"error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?;
+	//ErrorSpecification returns xbase::XExpression:
+	//	{ErrorSpecification} "error" error=XExpression ("source" source=XExpression)? ("feature" feature=XExpression)?;
 	public ErrorSpecificationElements getErrorSpecificationAccess() {
 		return (pErrorSpecification != null) ? pErrorSpecification : (pErrorSpecification = new ErrorSpecificationElements());
 	}

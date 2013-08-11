@@ -158,15 +158,6 @@ public interface XsemanticsFactory extends EFactory
   Environment createEnvironment();
 
   /**
-   * Returns a new object of class '<em>Error Specification</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Error Specification</em>'.
-   * @generated
-   */
-  ErrorSpecification createErrorSpecification();
-
-  /**
    * Returns a new object of class '<em>Rule Conclusion Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -264,6 +255,15 @@ public interface XsemanticsFactory extends EFactory
    * @generated
    */
   EnvironmentMapping createEnvironmentMapping();
+
+  /**
+   * Returns a new object of class '<em>Error Specification</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Error Specification</em>'.
+   * @generated
+   */
+  ErrorSpecification createErrorSpecification();
 
   /**
    * Returns the package supported by this factory.

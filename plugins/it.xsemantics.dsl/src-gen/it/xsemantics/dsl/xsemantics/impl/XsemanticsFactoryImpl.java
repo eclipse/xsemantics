@@ -79,7 +79,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
       case XsemanticsPackage.ENVIRONMENT_SPECIFICATION: return createEnvironmentSpecification();
       case XsemanticsPackage.ENVIRONMENT_REFERENCE: return createEnvironmentReference();
       case XsemanticsPackage.ENVIRONMENT: return createEnvironment();
-      case XsemanticsPackage.ERROR_SPECIFICATION: return createErrorSpecification();
       case XsemanticsPackage.RULE_CONCLUSION_ELEMENT: return createRuleConclusionElement();
       case XsemanticsPackage.RULE_PARAMETER: return createRuleParameter();
       case XsemanticsPackage.EXPRESSION_IN_CONCLUSION: return createExpressionInConclusion();
@@ -91,6 +90,7 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
       case XsemanticsPackage.ENVIRONMENT_COMPOSITION: return createEnvironmentComposition();
       case XsemanticsPackage.EMPTY_ENVIRONMENT: return createEmptyEnvironment();
       case XsemanticsPackage.ENVIRONMENT_MAPPING: return createEnvironmentMapping();
+      case XsemanticsPackage.ERROR_SPECIFICATION: return createErrorSpecification();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -266,17 +266,6 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
    * <!-- end-user-doc -->
    * @generated
    */
-  public ErrorSpecification createErrorSpecification()
-  {
-    ErrorSpecificationImpl errorSpecification = new ErrorSpecificationImpl();
-    return errorSpecification;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RuleConclusionElement createRuleConclusionElement()
   {
     RuleConclusionElementImpl ruleConclusionElement = new RuleConclusionElementImpl();
@@ -391,6 +380,17 @@ public class XsemanticsFactoryImpl extends EFactoryImpl implements XsemanticsFac
   {
     EnvironmentMappingImpl environmentMapping = new EnvironmentMappingImpl();
     return environmentMapping;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ErrorSpecification createErrorSpecification()
+  {
+    ErrorSpecificationImpl errorSpecification = new ErrorSpecificationImpl();
+    return errorSpecification;
   }
 
   /**

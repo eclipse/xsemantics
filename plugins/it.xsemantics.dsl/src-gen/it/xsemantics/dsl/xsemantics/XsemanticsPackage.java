@@ -794,52 +794,6 @@ public interface XsemanticsPackage extends EPackage
   int ENVIRONMENT_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl <em>Error Specification</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl
-   * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
-   * @generated
-   */
-  int ERROR_SPECIFICATION = 15;
-
-  /**
-   * The feature id for the '<em><b>Error</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERROR_SPECIFICATION__ERROR = 0;
-
-  /**
-   * The feature id for the '<em><b>Source</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERROR_SPECIFICATION__SOURCE = 1;
-
-  /**
-   * The feature id for the '<em><b>Feature</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERROR_SPECIFICATION__FEATURE = 2;
-
-  /**
-   * The number of structural features of the '<em>Error Specification</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERROR_SPECIFICATION_FEATURE_COUNT = 3;
-
-  /**
    * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.RuleConclusionElementImpl <em>Rule Conclusion Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -847,7 +801,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleConclusionElement()
    * @generated
    */
-  int RULE_CONCLUSION_ELEMENT = 16;
+  int RULE_CONCLUSION_ELEMENT = 15;
 
   /**
    * The number of structural features of the '<em>Rule Conclusion Element</em>' class.
@@ -866,7 +820,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getRuleParameter()
    * @generated
    */
-  int RULE_PARAMETER = 17;
+  int RULE_PARAMETER = 16;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -894,7 +848,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getExpressionInConclusion()
    * @generated
    */
-  int EXPRESSION_IN_CONCLUSION = 18;
+  int EXPRESSION_IN_CONCLUSION = 17;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -922,7 +876,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOutputParameter()
    * @generated
    */
-  int OUTPUT_PARAMETER = 19;
+  int OUTPUT_PARAMETER = 18;
 
   /**
    * The feature id for the '<em><b>Jvm Type Reference</b></em>' containment reference.
@@ -950,7 +904,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getInputParameter()
    * @generated
    */
-  int INPUT_PARAMETER = 20;
+  int INPUT_PARAMETER = 19;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -978,7 +932,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getOrExpression()
    * @generated
    */
-  int OR_EXPRESSION = 21;
+  int OR_EXPRESSION = 20;
 
   /**
    * The feature id for the '<em><b>Branches</b></em>' containment reference list.
@@ -1006,7 +960,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getFail()
    * @generated
    */
-  int FAIL = 22;
+  int FAIL = 21;
 
   /**
    * The feature id for the '<em><b>Error</b></em>' containment reference.
@@ -1034,7 +988,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentAccess()
    * @generated
    */
-  int ENVIRONMENT_ACCESS = 23;
+  int ENVIRONMENT_ACCESS = 22;
 
   /**
    * The feature id for the '<em><b>Environment</b></em>' reference.
@@ -1080,7 +1034,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentComposition()
    * @generated
    */
-  int ENVIRONMENT_COMPOSITION = 24;
+  int ENVIRONMENT_COMPOSITION = 23;
 
   /**
    * The feature id for the '<em><b>Current Environment</b></em>' containment reference.
@@ -1117,7 +1071,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEmptyEnvironment()
    * @generated
    */
-  int EMPTY_ENVIRONMENT = 25;
+  int EMPTY_ENVIRONMENT = 24;
 
   /**
    * The number of structural features of the '<em>Empty Environment</em>' class.
@@ -1136,7 +1090,7 @@ public interface XsemanticsPackage extends EPackage
    * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getEnvironmentMapping()
    * @generated
    */
-  int ENVIRONMENT_MAPPING = 26;
+  int ENVIRONMENT_MAPPING = 25;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' containment reference.
@@ -1164,6 +1118,52 @@ public interface XsemanticsPackage extends EPackage
    * @ordered
    */
   int ENVIRONMENT_MAPPING_FEATURE_COUNT = ENVIRONMENT_SPECIFICATION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl <em>Error Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl
+   * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
+   * @generated
+   */
+  int ERROR_SPECIFICATION = 26;
+
+  /**
+   * The feature id for the '<em><b>Error</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ERROR_SPECIFICATION__ERROR = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Source</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ERROR_SPECIFICATION__SOURCE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ERROR_SPECIFICATION__FEATURE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Error Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ERROR_SPECIFICATION_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
 
 
   /**
@@ -1801,49 +1801,6 @@ public interface XsemanticsPackage extends EPackage
   EAttribute getEnvironment_Name();
 
   /**
-   * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification <em>Error Specification</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Error Specification</em>'.
-   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification
-   * @generated
-   */
-  EClass getErrorSpecification();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getError <em>Error</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Error</em>'.
-   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getError()
-   * @see #getErrorSpecification()
-   * @generated
-   */
-  EReference getErrorSpecification_Error();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getSource <em>Source</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Source</em>'.
-   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getSource()
-   * @see #getErrorSpecification()
-   * @generated
-   */
-  EReference getErrorSpecification_Source();
-
-  /**
-   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getFeature <em>Feature</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Feature</em>'.
-   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getFeature()
-   * @see #getErrorSpecification()
-   * @generated
-   */
-  EReference getErrorSpecification_Feature();
-
-  /**
    * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.RuleConclusionElement <em>Rule Conclusion Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2095,6 +2052,49 @@ public interface XsemanticsPackage extends EPackage
    * @generated
    */
   EReference getEnvironmentMapping_Value();
+
+  /**
+   * Returns the meta object for class '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification <em>Error Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Error Specification</em>'.
+   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification
+   * @generated
+   */
+  EClass getErrorSpecification();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getError <em>Error</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Error</em>'.
+   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getError()
+   * @see #getErrorSpecification()
+   * @generated
+   */
+  EReference getErrorSpecification_Error();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getSource <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Source</em>'.
+   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getSource()
+   * @see #getErrorSpecification()
+   * @generated
+   */
+  EReference getErrorSpecification_Source();
+
+  /**
+   * Returns the meta object for the containment reference '{@link it.xsemantics.dsl.xsemantics.ErrorSpecification#getFeature <em>Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Feature</em>'.
+   * @see it.xsemantics.dsl.xsemantics.ErrorSpecification#getFeature()
+   * @see #getErrorSpecification()
+   * @generated
+   */
+  EReference getErrorSpecification_Feature();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2622,40 +2622,6 @@ public interface XsemanticsPackage extends EPackage
     EAttribute ENVIRONMENT__NAME = eINSTANCE.getEnvironment_Name();
 
     /**
-     * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl <em>Error Specification</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl
-     * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
-     * @generated
-     */
-    EClass ERROR_SPECIFICATION = eINSTANCE.getErrorSpecification();
-
-    /**
-     * The meta object literal for the '<em><b>Error</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ERROR_SPECIFICATION__ERROR = eINSTANCE.getErrorSpecification_Error();
-
-    /**
-     * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ERROR_SPECIFICATION__SOURCE = eINSTANCE.getErrorSpecification_Source();
-
-    /**
-     * The meta object literal for the '<em><b>Feature</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ERROR_SPECIFICATION__FEATURE = eINSTANCE.getErrorSpecification_Feature();
-
-    /**
      * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.RuleConclusionElementImpl <em>Rule Conclusion Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2868,6 +2834,40 @@ public interface XsemanticsPackage extends EPackage
      * @generated
      */
     EReference ENVIRONMENT_MAPPING__VALUE = eINSTANCE.getEnvironmentMapping_Value();
+
+    /**
+     * The meta object literal for the '{@link it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl <em>Error Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see it.xsemantics.dsl.xsemantics.impl.ErrorSpecificationImpl
+     * @see it.xsemantics.dsl.xsemantics.impl.XsemanticsPackageImpl#getErrorSpecification()
+     * @generated
+     */
+    EClass ERROR_SPECIFICATION = eINSTANCE.getErrorSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Error</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ERROR_SPECIFICATION__ERROR = eINSTANCE.getErrorSpecification_Error();
+
+    /**
+     * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ERROR_SPECIFICATION__SOURCE = eINSTANCE.getErrorSpecification_Source();
+
+    /**
+     * The meta object literal for the '<em><b>Feature</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ERROR_SPECIFICATION__FEATURE = eINSTANCE.getErrorSpecification_Feature();
 
   }
 

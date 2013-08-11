@@ -516,22 +516,30 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					addArrayTypeDimension
    			)
    			
-   			body = [
-   				if (errorSpecification != null) {
-	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
-					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
-					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
-	   				
-	   				it.newLine
-	   				it.append('''
-	   					«throwRuleFailedExceptionMethod»(«error»,
-	   						_issue, _ex, new ''')
-					judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
-					it.append('''(«source», «feature»));''')
-				} else {
-					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-				}
-   			]
+   			if (errorSpecification != null) {
+   				body = errorSpecification
+   			} else {
+   				body = [
+   					append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+   				]
+   			}
+   			
+//   			body = [
+//   				if (errorSpecification != null) {
+//	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
+//					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
+//					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
+//	   				
+//	   				it.newLine
+//	   				it.append('''
+//	   					«throwRuleFailedExceptionMethod»(«error»,
+//	   						_issue, _ex, new ''')
+//					judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
+//					it.append('''(«source», «feature»));''')
+//				} else {
+//					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+//				}
+//   			]
 		]
 	}
 	
@@ -563,22 +571,30 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					addArrayTypeDimension
    			)
    			
-   			body = [
-   				if (errorSpecification != null) {
-	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
-					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
-					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
-	   				
-	   				it.newLine
-	   				it.append('''
-	   					«throwRuleFailedExceptionMethod»(«error»,
-	   						_issue, _ex, new ''')
-					aux.errorInformationType.serialize(aux, it)
-					it.append('''(«source», «feature»));''')
-				} else {
-					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-				}
-   			]
+   			if (errorSpecification != null) {
+   				body = errorSpecification
+   			} else {
+   				body = [
+   					append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+   				]
+   			}
+   			
+//   			body = [
+//   				if (errorSpecification != null) {
+//	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
+//					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
+//					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
+//	   				
+//	   				it.newLine
+//	   				it.append('''
+//	   					«throwRuleFailedExceptionMethod»(«error»,
+//	   						_issue, _ex, new ''')
+//					aux.errorInformationType.serialize(aux, it)
+//					it.append('''(«source», «feature»));''')
+//				} else {
+//					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
+//				}
+//   			]
 		]
 	}
 
@@ -749,17 +765,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compileFinalThrow(Rule rule, ITreeAppendable b) {
 		if (rule.conclusion.error != null) {
-			val errorSpecification = rule.conclusion.error
-			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
-			val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b)
-			val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b)
-			b.newLine()
-			
-			b.append('''
-   					«throwRuleFailedExceptionMethod»(«error»,
-   						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
-			rule.errorInformationType.serialize(rule, b)
-			b.append('''(«source», «feature»))''')
+//			val errorSpecification = rule.conclusion.error
+//			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
+//			val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b)
+//			val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b)
+//			b.newLine()
+//			
+//			b.append('''
+//   					«throwRuleFailedExceptionMethod»(«error»,
+//   						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
+//			rule.errorInformationType.serialize(rule, b)
+//			b.append('''(«source», «feature»))''')
 		} else {
 			b.append('''
 			«rule.judgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
