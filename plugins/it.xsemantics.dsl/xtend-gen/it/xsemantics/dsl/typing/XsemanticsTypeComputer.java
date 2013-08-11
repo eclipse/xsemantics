@@ -7,7 +7,6 @@ import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
-import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -111,20 +110,10 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
       state = _withoutRootExpectation;
     }
     EObject _eContainer_3 = b.eContainer();
-    if ((_eContainer_3 instanceof Rule)) {
+    if ((_eContainer_3 instanceof RuleWithPremises)) {
       EObject _eContainer_4 = b.eContainer();
-      final Rule rule = ((Rule) _eContainer_4);
-      List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
-      for (final ExpressionInConclusion expInConcl : _expressionsInConclusion) {
-        XExpression _expression = expInConcl.getExpression();
-        this.computeTypes(_expression, state);
-      }
-    }
-    EObject _eContainer_5 = b.eContainer();
-    if ((_eContainer_5 instanceof RuleWithPremises)) {
-      EObject _eContainer_6 = b.eContainer();
-      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_6);
-      List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule_1);
+      final RuleWithPremises rule = ((RuleWithPremises) _eContainer_4);
+      List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
       for (final RuleParameter outputParam : _outputParams) {
         JvmFormalParameter _parameter = outputParam.getParameter();
         state.addLocalToCurrentScope(_parameter);

@@ -51,14 +51,6 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			state = state.withoutRootExpectation
 		}
 		
-		if (b.eContainer instanceof Rule) {
-			val rule = b.eContainer as Rule
-
-			for (expInConcl : rule.expressionsInConclusion) {
-				expInConcl.expression.computeTypes(state)
-			}
-		}
-		
 		if (b.eContainer instanceof RuleWithPremises) {
 			val rule = b.eContainer as RuleWithPremises
 
