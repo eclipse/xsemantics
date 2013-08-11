@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.UniqueNames;
-import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
@@ -102,9 +101,6 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private XbaseCompiler xbaseCompiler;
-  
-  @Inject
-  private XsemanticsErrorSpecificationGenerator errSpecGenerator;
   
   /**
    * The dispatch method {@code infer} is called for each instance of the
@@ -1967,21 +1963,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           JvmTypeReference _parameterType = _parameter_2.getParameterType();
           JvmFormalParameter _parameter_3 = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(_parameter, _name, _parameterType);
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_3);
-          final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                XsemanticsJvmModelInferrer.this.compilePremises(rule, it);
-                String _string = it.toString();
-                boolean _isEmpty = _string.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  it.newLine();
-                }
-                it.append("return new ");
-                XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(rule, it);
-                it.append("(true);");
-              }
-            };
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+          XExpression _premises = rule.getPremises();
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _premises);
         }
       };
     JvmOperation _method = this._jvmTypesBuilder.toMethod(rule, _builder.toString(), _resultType, _function);

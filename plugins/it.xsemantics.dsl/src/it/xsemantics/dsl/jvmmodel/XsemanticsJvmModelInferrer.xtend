@@ -2,7 +2,6 @@ package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.generator.UniqueNames
-import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
@@ -59,8 +58,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XbaseTypeConformanceComputer
 
 	@Inject XbaseCompiler xbaseCompiler
-	
-	@Inject XsemanticsErrorSpecificationGenerator errSpecGenerator
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -1020,15 +1017,16 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				toParameter(rule.element.parameter.name,
    					rule.element.parameter.parameterType
    				)
-   			
-   			body = [
-   				rule.compilePremises(it)
-   				if (!it.toString.empty)
-					it.newLine
-				it.append("return new ")
-				rule.resultType(it)
-				it.append("(true);")
-   			]
+
+   			body = rule.premises
+//   			body = [
+//   				rule.compilePremises(it)
+//   				if (!it.toString.empty)
+//					it.newLine
+//				it.append("return new ")
+//				rule.resultType(it)
+//				it.append("(true);")
+//   			]
 		]
 	}
 	

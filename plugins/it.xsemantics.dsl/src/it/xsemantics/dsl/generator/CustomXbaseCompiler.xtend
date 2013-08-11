@@ -21,13 +21,22 @@ class CustomXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsGeneratorExtensions
 	
 	override compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
-		if (obj.eContainer instanceof RuleWithPremises) {
-			val rule = obj.eContainer as RuleWithPremises
+		val rule = obj.eContainer
+		switch (rule) {
+			RuleWithPremises: {
+				rule.declareVariablesForOutputParams(appendable) 
+   				rule.compileRuleBody(rule.judgmentDescription.resultType, appendable)
 			
-			rule.declareVariablesForOutputParams(appendable) 
-   			rule.compileRuleBody(rule.judgmentDescription.resultType, appendable)
-			
-			return appendable
+				return appendable
+			}
+			CheckRule: {
+				rule.compilePremises(appendable)
+   				if (!appendable.toString.empty)
+					appendable.newLine
+				appendable.append("return new ")
+				rule.resultType(appendable)
+				appendable.append("(true);")
+			}			
 		}
 		
 		return super.compile(obj, appendable, expectedReturnType, declaredExceptions)

@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
@@ -89,32 +90,40 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   public void _computeTypes(final XBlockExpression b, final ITypeComputationState typeState) {
     ITypeComputationState state = typeState;
     boolean _or = false;
+    boolean _or_1 = false;
     EObject _eContainer = b.eContainer();
     boolean _equals = Objects.equal(_eContainer, null);
     if (_equals) {
-      _or = true;
+      _or_1 = true;
     } else {
       EObject _eContainer_1 = b.eContainer();
-      _or = (_equals || (_eContainer_1 instanceof Rule));
+      _or_1 = (_equals || (_eContainer_1 instanceof Rule));
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      EObject _eContainer_2 = b.eContainer();
+      _or = (_or_1 || 
+        (_eContainer_2 instanceof CheckRule));
     }
     if (_or) {
       ITypeComputationState _withoutRootExpectation = state.withoutRootExpectation();
       state = _withoutRootExpectation;
     }
-    EObject _eContainer_2 = b.eContainer();
-    if ((_eContainer_2 instanceof Rule)) {
-      EObject _eContainer_3 = b.eContainer();
-      final Rule rule = ((Rule) _eContainer_3);
+    EObject _eContainer_3 = b.eContainer();
+    if ((_eContainer_3 instanceof Rule)) {
+      EObject _eContainer_4 = b.eContainer();
+      final Rule rule = ((Rule) _eContainer_4);
       List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(rule);
       for (final ExpressionInConclusion expInConcl : _expressionsInConclusion) {
         XExpression _expression = expInConcl.getExpression();
         this.computeTypes(_expression, state);
       }
     }
-    EObject _eContainer_4 = b.eContainer();
-    if ((_eContainer_4 instanceof RuleWithPremises)) {
-      EObject _eContainer_5 = b.eContainer();
-      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_5);
+    EObject _eContainer_5 = b.eContainer();
+    if ((_eContainer_5 instanceof RuleWithPremises)) {
+      EObject _eContainer_6 = b.eContainer();
+      final RuleWithPremises rule_1 = ((RuleWithPremises) _eContainer_6);
       List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule_1);
       for (final RuleParameter outputParam : _outputParams) {
         JvmFormalParameter _parameter = outputParam.getParameter();

@@ -39,15 +39,34 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
   
   public ITreeAppendable compile(final XExpression obj, final ITreeAppendable appendable, final JvmTypeReference expectedReturnType, final Set<JvmTypeReference> declaredExceptions) {
-    EObject _eContainer = obj.eContainer();
-    if ((_eContainer instanceof RuleWithPremises)) {
-      EObject _eContainer_1 = obj.eContainer();
-      final RuleWithPremises rule = ((RuleWithPremises) _eContainer_1);
-      this._xsemanticsGeneratorExtensions.declareVariablesForOutputParams(rule, appendable);
-      JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(rule);
-      JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
-      this.compileRuleBody(rule, _resultType, appendable);
-      return appendable;
+    final EObject rule = obj.eContainer();
+    boolean _matched = false;
+    if (!_matched) {
+      if (rule instanceof RuleWithPremises) {
+        final RuleWithPremises _ruleWithPremises = (RuleWithPremises)rule;
+        _matched=true;
+        this._xsemanticsGeneratorExtensions.declareVariablesForOutputParams(_ruleWithPremises, appendable);
+        JudgmentDescription _judgmentDescription = this._xsemanticsUtils.judgmentDescription(_ruleWithPremises);
+        JvmTypeReference _resultType = this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
+        this.compileRuleBody(_ruleWithPremises, _resultType, appendable);
+        return appendable;
+      }
+    }
+    if (!_matched) {
+      if (rule instanceof CheckRule) {
+        final CheckRule _checkRule = (CheckRule)rule;
+        _matched=true;
+        this.compilePremises(_checkRule, appendable);
+        String _string = appendable.toString();
+        boolean _isEmpty = _string.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          appendable.newLine();
+        }
+        appendable.append("return new ");
+        this._xsemanticsGeneratorExtensions.resultType(_checkRule, appendable);
+        appendable.append("(true);");
+      }
     }
     return super.compile(obj, appendable, expectedReturnType, declaredExceptions);
   }

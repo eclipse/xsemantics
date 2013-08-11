@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
+import it.xsemantics.dsl.xsemantics.CheckRule
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -43,7 +44,8 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		
 		// the container is null for axioms, since we created
 		// an empty block for them in the inferrer
-		if (b.eContainer == null || b.eContainer instanceof Rule) {
+		if (b.eContainer == null || b.eContainer instanceof Rule ||
+				b.eContainer instanceof CheckRule) {
 			// the premises block should not be checked against
 			// return type
 			state = state.withoutRootExpectation
