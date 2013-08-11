@@ -7,6 +7,7 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
+import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import org.eclipse.emf.common.util.EList;
@@ -82,12 +83,27 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
   }
   
   @Test
-  public void testScopingForErrorSpecification() {
+  public void testScopingForErrorSpecificationInJudgment() {
     CharSequence _testJudgmentDescriptionsWithErrorSpecification = this.testFiles.testJudgmentDescriptionsWithErrorSpecification();
     XsemanticsSystem _parse = this.parse(_testJudgmentDescriptionsWithErrorSpecification);
     EList<JudgmentDescription> _judgmentDescriptions = _parse.getJudgmentDescriptions();
     JudgmentDescription _head = IterableExtensions.<JudgmentDescription>head(_judgmentDescriptions);
     XExpression _error = _head.getError();
+    final ErrorSpecification errSpec = ((ErrorSpecification) _error);
+    XExpression _feature = errSpec.getFeature();
+    final JvmIdentifiableElement feature = ((XMemberFeatureCall) _feature).getFeature();
+    String _identifier = feature.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eContainingFeature()", _identifier);
+  }
+  
+  @Test
+  public void testScopingForErrorSpecificationInRule() {
+    CharSequence _testRuleWithErrorSpecifications = this.testFiles.testRuleWithErrorSpecifications();
+    XsemanticsSystem _parse = this.parse(_testRuleWithErrorSpecifications);
+    EList<Rule> _rules = _parse.getRules();
+    Rule _head = IterableExtensions.<Rule>head(_rules);
+    RuleConclusion _conclusion = _head.getConclusion();
+    XExpression _error = _conclusion.getError();
     final ErrorSpecification errSpec = ((ErrorSpecification) _error);
     XExpression _feature = errSpec.getFeature();
     final JvmIdentifiableElement feature = ((XMemberFeatureCall) _feature).getFeature();

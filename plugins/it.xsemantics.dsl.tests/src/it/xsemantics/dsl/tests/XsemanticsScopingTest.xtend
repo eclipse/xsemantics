@@ -60,10 +60,21 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testScopingForErrorSpecification() {
+	def void testScopingForErrorSpecificationInJudgment() {
 		val errSpec = testFiles.
 			testJudgmentDescriptionsWithErrorSpecification.
 				parse.judgmentDescriptions.head.error as ErrorSpecification
+		val feature = (errSpec.feature as XMemberFeatureCall).feature
+		"org.eclipse.emf.ecore.EObject.eContainingFeature()".assertEqualsStrings(
+			feature.identifier
+		)
+	}
+
+	@Test
+	def void testScopingForErrorSpecificationInRule() {
+		val errSpec = testFiles.
+			testRuleWithErrorSpecifications.
+				parse.rules.head.conclusion.error as ErrorSpecification
 		val feature = (errSpec.feature as XMemberFeatureCall).feature
 		"org.eclipse.emf.ecore.EObject.eContainingFeature()".assertEqualsStrings(
 			feature.identifier

@@ -136,9 +136,9 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def _computeTypes(ErrorSpecification e, ITypeComputationState state) {
-		e.error?.computeTypes(state)
-		e.source?.computeTypes(state)
-		e.feature?.computeTypes(state)
+		e.error?.computeTypes(state.withoutExpectation)
+		e.source?.computeTypes(state.withoutExpectation)
+		e.feature?.computeTypes(state.withoutExpectation)
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	

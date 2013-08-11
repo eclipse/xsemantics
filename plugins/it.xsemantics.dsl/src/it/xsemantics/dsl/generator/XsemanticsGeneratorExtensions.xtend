@@ -228,6 +228,10 @@ class XsemanticsGeneratorExtensions {
 		'''«aux.name.toFirstLower»ThrowException'''
 	}
 
+	def throwExceptionMethod(Rule rule) {
+		'''«rule.name.toFirstLower»ThrowException'''
+	}
+
 	def throwRuleFailedExceptionMethod() {
 		'''throwRuleFailedException'''
 	}

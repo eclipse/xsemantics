@@ -235,15 +235,18 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   protected void _computeTypes(final ErrorSpecification e, final ITypeComputationState state) {
     XExpression _error = e.getError();
     if (_error!=null) {
-      this.computeTypes(_error, state);
+      ITypeComputationState _withoutExpectation = state.withoutExpectation();
+      this.computeTypes(_error, _withoutExpectation);
     }
     XExpression _source = e.getSource();
     if (_source!=null) {
-      this.computeTypes(_source, state);
+      ITypeComputationState _withoutExpectation_1 = state.withoutExpectation();
+      this.computeTypes(_source, _withoutExpectation_1);
     }
     XExpression _feature = e.getFeature();
     if (_feature!=null) {
-      this.computeTypes(_feature, state);
+      ITypeComputationState _withoutExpectation_2 = state.withoutExpectation();
+      this.computeTypes(_feature, _withoutExpectation_2);
     }
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);

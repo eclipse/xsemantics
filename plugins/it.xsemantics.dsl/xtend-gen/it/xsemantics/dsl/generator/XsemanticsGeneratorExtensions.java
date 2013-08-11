@@ -502,6 +502,15 @@ public class XsemanticsGeneratorExtensions {
     return _builder;
   }
   
+  public CharSequence throwExceptionMethod(final Rule rule) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = rule.getName();
+    String _firstLower = StringExtensions.toFirstLower(_name);
+    _builder.append(_firstLower, "");
+    _builder.append("ThrowException");
+    return _builder;
+  }
+  
   public CharSequence throwRuleFailedExceptionMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("throwRuleFailedException");

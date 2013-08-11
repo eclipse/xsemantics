@@ -193,6 +193,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 						e |
 						members += e.compileExpressionInConclusionMethod
 					]
+					if (rule.conclusion.error != null)
+						members += rule.compileErrorSpecificationMethod
 				}
 			]
 		]
@@ -765,6 +767,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compileFinalThrow(Rule rule, ITreeAppendable b) {
 		if (rule.conclusion.error != null) {
+			b.append(
+			'''«rule.throwExceptionMethod»(«rule.inputParameterNames»)'''
+			)
 //			val errorSpecification = rule.conclusion.error
 //			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
 //			val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b)
@@ -877,6 +882,22 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += e.containingRule.inputParameters
 
 			body = e.expression
+		]
+	}
+
+	def compileErrorSpecificationMethod(Rule rule) {
+		val errSpec = rule.conclusion.error
+		
+		errSpec.toMethod(
+			rule.throwExceptionMethod.toString,
+			Void::TYPE.getTypeForName(rule)
+		) 
+		[
+			visibility = JvmVisibility::PRIVATE
+			
+   			parameters += rule.inputParameters
+
+			body = errSpec
 		]
 	}
 
