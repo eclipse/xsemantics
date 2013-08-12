@@ -170,9 +170,9 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						model,
 						XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT,
 						IssueCodes.NOT_SUBTYPE,
-						"Rule conclusion type org.eclipse.emf.ecore.EObject "
+						"Rule conclusion type EObject "
 								+ "is not subtype of JudgmentDescription declared type "
-								+ "org.eclipse.emf.ecore.EClass");
+								+ "EClass");
 	}
 
 	@Test
@@ -182,11 +182,11 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validationTestHelper
 				.assertError(
 						model,
-						null,
+						XbasePackage.eINSTANCE.getXBinaryOperation(),
 						IssueCodes.NOT_SUBTYPE,
-						"Rule invocation type boolean or java.lang.Boolean "
+						"Rule invocation type boolean "
 								+ "is not subtype of JudgmentDescription declared type "
-								+ "org.eclipse.emf.ecore.EObject");
+								+ "EObject");
 	}
 
 	@Test
@@ -196,14 +196,14 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validate.assertAll(
 				AssertableDiagnostics
 						.error(IssueCodes.NOT_SUBTYPE,
-								"Rule conclusion type org.eclipse.emf.ecore.EObject "
+								"Rule conclusion type EObject "
 										+ "is not subtype of JudgmentDescription declared type "
-										+ "org.eclipse.emf.ecore.EClass"),
+										+ "EClass"),
 				AssertableDiagnostics
 						.error(IssueCodes.NOT_SUBTYPE,
-								"Rule conclusion type java.lang.String "
+								"Rule conclusion type String "
 										+ "is not subtype of JudgmentDescription declared type "
-										+ "org.eclipse.emf.ecore.EObject"));
+										+ "EObject"));
 	}
 
 	@Test
@@ -218,19 +218,19 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		validate.assertAll(
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String, java.lang.Integer or int"
+								"Duplicate rule of the same kind with parameters: String, Integer"
 										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.String, int or java.lang.Integer"
+								"Duplicate rule of the same kind with parameters: String, int"
 										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"
+								"Duplicate rule of the same kind with parameters: Object, Integer"
 										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics
 						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: java.lang.Object, java.lang.Integer or int"
+								"Duplicate rule of the same kind with parameters: Object, Integer"
 										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
 	}
 
@@ -241,11 +241,11 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testRulesOfTheSameKindWithSameInputArgumentTypes());
 		validate.assertAll(AssertableDiagnostics.error(
 				IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-				"Duplicate rule of the same kind with parameters: java.lang.String"
+				"Duplicate rule of the same kind with parameters: String"
 						+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics.error(
 						IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-						"Duplicate rule of the same kind with parameters: java.lang.String"
+						"Duplicate rule of the same kind with parameters: String"
 								+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
 	}
 
@@ -260,7 +260,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testErrorSpecificationSourceNotEObject());
 		validate.assertAll(AssertableDiagnostics.error(IssueCodes.NOT_EOBJECT,
-				"Not an EObject: java.lang.String"));
+				"Not an EObject: String"));
 	}
 
 	@Test
@@ -270,7 +270,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testErrorSpecificationFeatureNotEStructuralFeature());
 		validate.assertAll(AssertableDiagnostics.error(
 				IssueCodes.NOT_ESTRUCTURALFEATURE,
-				"Not an EStructuralFeature: org.eclipse.emf.ecore.EClass"));
+				"Not an EStructuralFeature: EClass"));
 	}
 
 	@Test
@@ -447,7 +447,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testSystemWithValidatorExtendsNotAbstractDeclarativeValidator());
 		validate.assertAll(AssertableDiagnostics
 				.error(IssueCodes.NOT_VALIDATOR,
-						"Not an AbstractDeclarativeValidator: org.eclipse.emf.ecore.EClass"));
+						"Not an AbstractDeclarativeValidator: EClass"));
 	}
 
 	@Test
@@ -456,7 +456,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testSystemExtendsInvalidBaseSystem());
 		validate.assertAll(AssertableDiagnostics
 				.error(IssueCodes.NOT_VALID_SUPER_SYSTEM,
-						"Not an Xsemantics system: it.xsemantics.dsl.tests.input.TestInvalidBaseSystem"));
+						"Not an Xsemantics system: TestInvalidBaseSystem"));
 	}
 
 	@Test
