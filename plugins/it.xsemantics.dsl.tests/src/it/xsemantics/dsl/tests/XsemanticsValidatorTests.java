@@ -387,10 +387,11 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testWrongReturnInPremises());
 		validate.assertAll(
 				AssertableDiagnostics.error(IssueCodes.RETURN_NOT_ALLOWED,
-						"Return statements are not allowed here"),
-				AssertableDiagnostics
-						.error(org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
-								"Incompatible types"));
+						"Return statements are not allowed here"));
+		// in 2.4 the next error is not issued
+//				AssertableDiagnostics
+//						.error(org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+//								"Incompatible types"));
 	}
 
 	@Test
