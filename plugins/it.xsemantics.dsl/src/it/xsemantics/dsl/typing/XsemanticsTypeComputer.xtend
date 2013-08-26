@@ -119,7 +119,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
 	protected def _computeTypes(OrExpression e, ITypeComputationState state) {
 		e.branches.forEach[
-			it.computeTypes(state)
+			it.computeTypes(state.withoutExpectation)
 		]
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
