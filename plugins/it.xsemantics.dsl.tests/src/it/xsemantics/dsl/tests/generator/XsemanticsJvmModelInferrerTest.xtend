@@ -285,19 +285,7 @@ typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRe
 	def testFinalThrowRuleErrorInformation() {
 		testFiles.testRuleWithErrorSpecifications.assertFinalThrow
 (
-'''
-TypeSystem _TypeSystem = TypeSystem;
-String _stringRep = _TypeSystem.stringRep(object);
-String _plus = ("this " + _stringRep);
-String _plus_1 = (_plus + " made an error!");
-String error = _plus_1;
-EClass _eClass = object.eClass();
-EObject source = _eClass;
-EClass _eClass_1 = object.eClass();
-EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
-EStructuralFeature feature = _eContainingFeature;
-throwRuleFailedException(error,
-	ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature))'''
+'''eClassEObjectThrowException(eClass, object)'''
 )
 	}
 	

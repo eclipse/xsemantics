@@ -448,30 +448,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
   public void testFinalThrowRuleErrorInformation() {
     CharSequence _testRuleWithErrorSpecifications = this.testFiles.testRuleWithErrorSpecifications();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("TypeSystem _TypeSystem = TypeSystem;");
-    _builder.newLine();
-    _builder.append("String _stringRep = _TypeSystem.stringRep(object);");
-    _builder.newLine();
-    _builder.append("String _plus = (\"this \" + _stringRep);");
-    _builder.newLine();
-    _builder.append("String _plus_1 = (_plus + \" made an error!\");");
-    _builder.newLine();
-    _builder.append("String error = _plus_1;");
-    _builder.newLine();
-    _builder.append("EClass _eClass = object.eClass();");
-    _builder.newLine();
-    _builder.append("EObject source = _eClass;");
-    _builder.newLine();
-    _builder.append("EClass _eClass_1 = object.eClass();");
-    _builder.newLine();
-    _builder.append("EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();");
-    _builder.newLine();
-    _builder.append("EStructuralFeature feature = _eContainingFeature;");
-    _builder.newLine();
-    _builder.append("throwRuleFailedException(error,");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("ECLASSEOBJECT, e_applyRuleEClassEObject, new ErrorInformation(source, feature))");
+    _builder.append("eClassEObjectThrowException(eClass, object)");
     this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
   }
   
