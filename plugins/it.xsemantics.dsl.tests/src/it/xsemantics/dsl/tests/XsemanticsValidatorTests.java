@@ -79,13 +79,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testDuplicateParamNamesInRule() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testDuplicateParamsInRule());
-		assertContains(validate, "Duplicate parameter 'eClass'");
-	}
-
-	@Test
 	public void testDuplicateParamNamesInJudgmentDescription() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testDuplicateParamsInJudgmentDescription());
@@ -364,15 +357,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testAccessToVarInsideClosure() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testAccessToVarInsideClosure());
-		validate.assertAll(AssertableDiagnostics
-				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
-						"Cannot refer to a non-final variable s from within a closure"));
-	}
-
-	@Test
 	public void testAccessToOutputParamInsideClosure() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testAccessToOutputParamInsideClosure());
@@ -429,16 +413,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 //		validate.assertAll(AssertableDiagnostics
 //				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
 //						"This expression is not allowed in this context"));
-	}
-
-	@Test
-	public void testVarDeclInRuleInvokationShadowsPreviousVariable()
-			throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testVarDeclInRuleInvokationShadowsPreviousVariable());
-		validate.assertAll(AssertableDiagnostics
-				.error(org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
-						"Duplicate variable name 's'"));
 	}
 
 	@Test

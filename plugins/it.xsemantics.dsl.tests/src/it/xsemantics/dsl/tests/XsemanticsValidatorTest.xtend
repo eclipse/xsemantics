@@ -252,4 +252,39 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"Type mismatch: cannot convert from void to Boolean"
 		)
 	}
+
+	@Test
+	def void testAccessToVarInsideClosure() {
+		parser.parse(testFiles
+				.testAccessToVarInsideClosure()).
+		assertError(
+			XbasePackage::eINSTANCE.XFeatureCall,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
+			"Cannot refer to the non-final variable s inside a lambda expression"
+		)
+	}
+
+	@Test
+	def void testVarDeclInRuleInvokationShadowsPreviousVariable() {
+		parser.parse(testFiles
+				.testVarDeclInRuleInvokationShadowsPreviousVariable()).
+		assertError(
+			XbasePackage::eINSTANCE.XVariableDeclaration,
+			org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
+			"Duplicate local variable s"
+		)
+	}
+
+	@Test
+	def void testDuplicateParamNamesInRule() {
+		parser.parse(testFiles
+				.testDuplicateParamsInRule()).
+		assertError(
+			XsemanticsPackage::eINSTANCE.ruleParameter,
+			org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
+			"Duplicate local variable eClass"
+		)
+	}
+
+
 }

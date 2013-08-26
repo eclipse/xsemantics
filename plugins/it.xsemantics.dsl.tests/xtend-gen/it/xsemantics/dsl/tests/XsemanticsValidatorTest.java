@@ -262,4 +262,46 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testAccessToVarInsideClosure() {
+    try {
+      CharSequence _testAccessToVarInsideClosure = this.testFiles.testAccessToVarInsideClosure();
+      XsemanticsSystem _parse = this.parser.parse(_testAccessToVarInsideClosure);
+      EClass _xFeatureCall = XbasePackage.eINSTANCE.getXFeatureCall();
+      this._validationTestHelper.assertError(_parse, _xFeatureCall, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, 
+        "Cannot refer to the non-final variable s inside a lambda expression");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVarDeclInRuleInvokationShadowsPreviousVariable() {
+    try {
+      CharSequence _testVarDeclInRuleInvokationShadowsPreviousVariable = this.testFiles.testVarDeclInRuleInvokationShadowsPreviousVariable();
+      XsemanticsSystem _parse = this.parser.parse(_testVarDeclInRuleInvokationShadowsPreviousVariable);
+      EClass _xVariableDeclaration = XbasePackage.eINSTANCE.getXVariableDeclaration();
+      this._validationTestHelper.assertError(_parse, _xVariableDeclaration, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING, 
+        "Duplicate local variable s");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateParamNamesInRule() {
+    try {
+      CharSequence _testDuplicateParamsInRule = this.testFiles.testDuplicateParamsInRule();
+      XsemanticsSystem _parse = this.parser.parse(_testDuplicateParamsInRule);
+      EClass _ruleParameter = XsemanticsPackage.eINSTANCE.getRuleParameter();
+      this._validationTestHelper.assertError(_parse, _ruleParameter, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING, 
+        "Duplicate local variable eClass");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
