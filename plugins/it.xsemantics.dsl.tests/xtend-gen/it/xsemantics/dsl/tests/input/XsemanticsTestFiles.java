@@ -1813,6 +1813,33 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testRuleWithSimpleErrorSpecifications() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();
+    _builder.append(_testJudgmentDescriptionsReferringToEClassEObject, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("error \"this made an error!\"");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// some expressions from Xbase");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' == new String() + \'bar\'.toFirstUpper");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testErrorSpecificationSourceNotEObject() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsReferringToEClassEObject = this.testJudgmentDescriptionsReferringToEClassEObject();

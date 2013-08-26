@@ -2,6 +2,7 @@ package it.xsemantics.dsl.util;
 
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
+import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
@@ -35,6 +36,8 @@ public class XsemanticsXExpressionHelper extends XExpressionHelper {
 	public boolean isXsemanticsXExpression(EObject eObject) {
 		return eObject instanceof EnvironmentAccess
 				|| eObject instanceof RuleInvocation
-				|| eObject instanceof OrExpression || eObject instanceof Fail;
+				|| eObject instanceof OrExpression 
+				|| eObject instanceof Fail
+				|| eObject instanceof ErrorSpecification;
 	}
 }

@@ -308,6 +308,12 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
   }
   
   @Test
+  public void testRuleWithSimpleErrorSpecifications() {
+    CharSequence _testRuleWithSimpleErrorSpecifications = this.testFiles.testRuleWithSimpleErrorSpecifications();
+    this.parseAndAssertNoError(_testRuleWithSimpleErrorSpecifications);
+  }
+  
+  @Test
   public void testOrExpression() {
     CharSequence _testOrExpression = this.testFiles.testOrExpression();
     Rule _firstRule = this.getFirstRule(_testOrExpression);

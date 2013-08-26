@@ -169,6 +169,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testRuleWithErrorSpecifications() {
 		testFiles.testRuleWithErrorSpecifications.parseAndAssertNoError
 	}
+
+	@Test
+	def void testRuleWithSimpleErrorSpecifications() {
+		testFiles.testRuleWithSimpleErrorSpecifications.parseAndAssertNoError
+	}
 	
 	@Test
 	def void testOrExpression() {

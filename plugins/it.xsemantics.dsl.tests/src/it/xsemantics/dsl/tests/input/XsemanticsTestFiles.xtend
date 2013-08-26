@@ -814,6 +814,18 @@ class XsemanticsTestFiles {
 		'foo' == new String() + 'bar'.toFirstUpper
 	}
 	'''
+
+	def testRuleWithSimpleErrorSpecifications() '''
+	«testJudgmentDescriptionsReferringToEClassEObject»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+			error "this made an error!"
+	from {
+		// some expressions from Xbase
+		'foo' == new String() + 'bar'.toFirstUpper
+	}
+	'''
 	
 	def testErrorSpecificationSourceNotEObject() '''
 	«testJudgmentDescriptionsReferringToEClassEObject»
