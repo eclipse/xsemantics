@@ -71,7 +71,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
     EClass _rule = XsemanticsPackage.eINSTANCE.getRule();
     this._validationTestHelper.assertError(_parseWithBaseSystem, _rule, 
       IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS, 
-      "Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2");
+      "Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2");
   }
   
   @Test
@@ -82,7 +82,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
     EClass _rule = XsemanticsPackage.eINSTANCE.getRule();
     this._validationTestHelper.assertError(_parseWithBaseSystem, _rule, 
       IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS, 
-      "Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2");
+      "Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2");
   }
   
   @Test
@@ -104,7 +104,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
     EClass _rule = XsemanticsPackage.eINSTANCE.getRule();
     this._validationTestHelper.assertError(_parseWithBaseSystem, _rule, 
       IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND, 
-      "No rule of the same kind to override: org.eclipse.emf.ecore.EClass");
+      "No rule of the same kind to override: EClass");
   }
   
   @Test
@@ -194,10 +194,10 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
     try {
       CharSequence _testAuxiliaryFunctionWithWrongReturnExpression = this.testFiles.testAuxiliaryFunctionWithWrongReturnExpression();
       XsemanticsSystem _parse = this.parser.parse(_testAuxiliaryFunctionWithWrongReturnExpression);
-      EClass _xBlockExpression = XbasePackage.eINSTANCE.getXBlockExpression();
-      this._validationTestHelper.assertError(_parse, _xBlockExpression, 
-        org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
-        "Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass");
+      EClass _xMemberFeatureCall = XbasePackage.eINSTANCE.getXMemberFeatureCall();
+      this._validationTestHelper.assertError(_parse, _xMemberFeatureCall, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, 
+        "Type mismatch: cannot convert from EClass to Boolean");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -243,7 +243,7 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       EClass _jvmFormalParameter = TypesPackage.eINSTANCE.getJvmFormalParameter();
       this._validationTestHelper.assertError(s, _jvmFormalParameter, 
         IssueCodes.NOT_SUBTYPE, 
-        "parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass");
+        "parameter type EObject is not subtype of AuxiliaryDescription declared type EClass");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -1,15 +1,15 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.validation.IssueCodes
+import it.xsemantics.dsl.xsemantics.XsemanticsPackage
+import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.xbase.XbasePackage
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.xsemantics.XsemanticsPackage
-import it.xsemantics.dsl.validation.IssueCodes
-import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.common.types.TypesPackage
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -67,7 +67,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-			"Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
+			"Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
 
@@ -80,7 +80,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-			"Duplicate rule of the same kind with parameters: org.eclipse.emf.ecore.EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
+			"Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
 
@@ -106,7 +106,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND,
-			"No rule of the same kind to override: org.eclipse.emf.ecore.EClass"
+			"No rule of the same kind to override: EClass"
 		)
 	}
 	
@@ -202,9 +202,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	def testAuxiliaryFunctionWithWrongReturnExpression() {
 		parser.parse(testFiles.testAuxiliaryFunctionWithWrongReturnExpression).
 			assertError(
-			XbasePackage::eINSTANCE.XBlockExpression,
-			org::eclipse::xtext::xbase::validation::IssueCodes::INCOMPATIBLE_RETURN_TYPE,
-			"Incompatible implicit return type. Expected java.lang.Boolean or boolean but was org.eclipse.emf.ecore.EClass"
+			XbasePackage::eINSTANCE.XMemberFeatureCall,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from EClass to Boolean"
 		)
 	}
 
@@ -239,7 +239,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		s.assertError(
 			TypesPackage::eINSTANCE.jvmFormalParameter,
 			IssueCodes::NOT_SUBTYPE,
-			"parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass"
+			"parameter type EObject is not subtype of AuxiliaryDescription declared type EClass"
 		)
 	}
 
