@@ -210,6 +210,10 @@ class XsemanticsUtils {
 	def isInputParam(RuleParameter ruleParameter) {
 		ruleParameter.containingRule.inputParams.contains(ruleParameter)
 	}
+
+	def isOutputParam(RuleParameter ruleParameter) {
+		ruleParameter.containingRule.outputParams.contains(ruleParameter)
+	}
 	
 	def isInputParam(JvmFormalParameter jvmFormalParameter) {
 		val ruleParameter = jvmFormalParameter.getContainerOfType(typeof(RuleParameter))

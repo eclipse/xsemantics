@@ -73,4 +73,6 @@ public interface IssueCodes {
 	String NO_AUXDESC_FOR_AUX_FUNCTION = PREFIX + "NoAuxDescForAuxiliaryFunction";
 
 	String PARAMS_SIZE_DONT_MATCH = PREFIX + "ParamsSizeDontMatch";
+	
+	String ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE = PREFIX + "AccessToOutputParamWithinClosure";
 }

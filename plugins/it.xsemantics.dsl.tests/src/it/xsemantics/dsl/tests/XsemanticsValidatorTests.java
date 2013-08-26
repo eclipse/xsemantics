@@ -359,8 +359,8 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleInvocationWithOutputArgInsideClosure());
 		validate.assertAll(AssertableDiagnostics
-				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
-						"Cannot refer to a non-final variable eC from within a closure"));
+				.error(IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
+						"Cannot refer to an output parameter eC from within a closure"));
 	}
 
 	@Test
@@ -377,8 +377,8 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testAccessToOutputParamInsideClosure());
 		validate.assertAll(AssertableDiagnostics
-				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
-						"Cannot refer to a non-final variable eC from within a closure"));
+				.error(IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
+						"Cannot refer to an output parameter eC from within a closure"));
 	}
 
 	@Test

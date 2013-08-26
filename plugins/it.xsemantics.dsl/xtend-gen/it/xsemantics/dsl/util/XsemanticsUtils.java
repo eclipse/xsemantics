@@ -367,6 +367,13 @@ public class XsemanticsUtils {
     return _contains;
   }
   
+  public boolean isOutputParam(final RuleParameter ruleParameter) {
+    Rule _containingRule = this.containingRule(ruleParameter);
+    List<RuleParameter> _outputParams = this.outputParams(_containingRule);
+    boolean _contains = _outputParams.contains(ruleParameter);
+    return _contains;
+  }
+  
   public boolean isInputParam(final JvmFormalParameter jvmFormalParameter) {
     boolean _xblockexpression = false;
     {

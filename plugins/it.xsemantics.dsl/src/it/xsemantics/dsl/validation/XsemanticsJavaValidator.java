@@ -35,7 +35,9 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -594,6 +596,29 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION);
 		else
 			checkConformanceOfAuxiliaryFunction(aux, auxiliaryDescription);
+	}
+
+	@Check
+	public void checkOutputParamAccessWithinClosure(XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature instanceof JvmFormalParameter) {
+			EObject container = feature.eContainer();
+			if (container instanceof RuleParameter) {
+				if (xsemanticsUtils.isOutputParam((RuleParameter) container)
+						&& insideClosure(featureCall)) {
+					error("Cannot refer to an output parameter "
+							+ feature.getIdentifier()
+							+ " from within a closure", featureCall, null,
+							IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE);
+				}
+			}
+			return;
+		}
+	}
+
+	private boolean insideClosure(XFeatureCall featureCall) {
+		return EcoreUtil2.getContainerOfType(featureCall,
+				XClosure.class) != null;
 	}
 
 	protected void checkConformanceOfAuxiliaryFunction(AuxiliaryFunction aux,
