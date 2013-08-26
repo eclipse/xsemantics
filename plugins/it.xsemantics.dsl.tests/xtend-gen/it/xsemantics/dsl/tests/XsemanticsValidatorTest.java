@@ -248,4 +248,18 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testInvalidRuleInvocationIsVoidInClosures() {
+    try {
+      CharSequence _testRuleInvocationIsVoidInClosures = this.testFiles.testRuleInvocationIsVoidInClosures();
+      final XsemanticsSystem s = this.parser.parse(_testRuleInvocationIsVoidInClosures);
+      EClass _ruleInvocation = XsemanticsPackage.eINSTANCE.getRuleInvocation();
+      this._validationTestHelper.assertError(s, _ruleInvocation, 
+        org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, 
+        "Type mismatch: cannot convert from void to Boolean");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -242,4 +242,14 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			"parameter type org.eclipse.emf.ecore.EObject is not subtype of AuxiliaryDescription declared type org.eclipse.emf.ecore.EClass"
 		)
 	}
+
+	@Test
+	def testInvalidRuleInvocationIsVoidInClosures() {
+		val s = parser.parse(testFiles.testRuleInvocationIsVoidInClosures)
+		s.assertError(
+			XsemanticsPackage::eINSTANCE.ruleInvocation,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from void to Boolean"
+		)
+	}
 }

@@ -1056,7 +1056,8 @@ class XsemanticsTestFiles {
 	'''
 	
 	def testForClosures()
-	'''«testFileWithImports»
+	'''
+	«testFileWithImports»
 	import org.eclipse.emf.ecore.*
 	
 	judgments {
@@ -1081,6 +1082,35 @@ class XsemanticsTestFiles {
 		
 		// rule invocations inside closures will still
 		// throw exception if they fail
+		eClass.EStructuralFeatures.forEach [
+			G ||- it
+		]
+		
+		eClass.EStructuralFeatures.get(0).name != 'foo'
+	}
+	
+	rule Useless
+		G ||- EStructuralFeature feat
+	from {
+		fail
+	}
+	'''
+
+	def testRuleInvocationIsVoidInClosures()
+	'''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+		useless ||- EStructuralFeature f
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// rule invocations inside closures still have void type
+		// so the forall will complain since it expects a boolean type
 		eClass.EStructuralFeatures.forall [
 			G ||- it
 		]
