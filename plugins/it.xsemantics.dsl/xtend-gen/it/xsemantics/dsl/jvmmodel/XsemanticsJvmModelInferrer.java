@@ -1699,10 +1699,16 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           it.setVisibility(JvmVisibility.PRIVATE);
+          final Rule rule = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingRule(e);
+          EList<JvmTypeReference> _exceptions = it.getExceptions();
+          JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(rule);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
           EList<JvmFormalParameter> _parameters = it.getParameters();
-          Rule _containingRule = XsemanticsJvmModelInferrer.this._xsemanticsUtils.containingRule(e);
-          List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(_containingRule);
-          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
+          JvmFormalParameter _paramForEnvironment = XsemanticsJvmModelInferrer.this.paramForEnvironment(rule);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _paramForEnvironment);
+          EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+          List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(rule);
+          XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _inputParameters);
           XExpression _expression = e.getExpression();
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _expression);
         }

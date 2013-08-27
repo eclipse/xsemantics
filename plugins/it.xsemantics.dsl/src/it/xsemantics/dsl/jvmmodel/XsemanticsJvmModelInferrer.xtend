@@ -877,7 +877,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		[
 			visibility = JvmVisibility::PRIVATE
 			
-   			parameters += e.containingRule.inputParameters
+			val rule = e.containingRule
+
+			exceptions += rule.ruleFailedExceptionType
+
+			parameters += rule.paramForEnvironment
+   			parameters += rule.inputParameters
 
 			body = e.expression
 		]

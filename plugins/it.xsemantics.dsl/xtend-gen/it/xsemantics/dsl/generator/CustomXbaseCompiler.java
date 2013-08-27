@@ -3,8 +3,11 @@ package it.xsemantics.dsl.generator;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.Environment;
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
@@ -13,9 +16,11 @@ import java.util.Arrays;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -29,6 +34,10 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   @Inject
   @Extension
   private XsemanticsGeneratorExtensions _xsemanticsGeneratorExtensions;
+  
+  @Inject
+  @Extension
+  private XsemanticsNodeModelUtils _xsemanticsNodeModelUtils;
   
   public ITreeAppendable compile(final XExpression obj, final ITreeAppendable appendable, final JvmTypeReference expectedReturnType, final Set<JvmTypeReference> declaredExceptions) {
     final EObject rule = obj.eContainer();
@@ -122,6 +131,75 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     return b.getName(syntheticObject);
   }
   
+  protected void _doInternalToJavaStatement(final XExpression e, final ITreeAppendable b, final boolean isReferenced) {
+    super.doInternalToJavaStatement(e, b, isReferenced);
+  }
+  
+  protected void _internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable) {
+    super.internalToConvertedExpression(obj, appendable);
+  }
+  
+  protected void _doInternalToJavaStatement(final EnvironmentAccess environmentAccess, final ITreeAppendable b, final boolean isReferenced) {
+    this.generateCommentWithOriginalCode(environmentAccess, b);
+    XExpression _argument = environmentAccess.getArgument();
+    this.toJavaStatement(_argument, b, true);
+    if (isReferenced) {
+      final Later _function = new Later() {
+          public void exec(final ITreeAppendable app) {
+            CustomXbaseCompiler.this.compileEnvironmentAccess(environmentAccess, app);
+          }
+        };
+      this.declareFreshLocalVariable(environmentAccess, b, _function);
+    } else {
+      this.newLine(b);
+      this.compileEnvironmentAccess(environmentAccess, b);
+      b.append(";");
+    }
+  }
+  
+  protected void _internalToConvertedExpression(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
+    String _name = b.getName(environmentAccess);
+    b.append(_name);
+  }
+  
+  public void generateCommentWithOriginalCode(final EObject modelElement, final ITreeAppendable b) {
+    ITreeAppendable _append = b.append("\n");
+    ITreeAppendable _append_1 = _append.append("/* ");
+    String _programText = this._xsemanticsNodeModelUtils.getProgramText(modelElement);
+    ITreeAppendable _append_2 = _append_1.append(_programText);
+    _append_2.append(" */");
+  }
+  
+  public void compileEnvironmentAccess(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
+    String _environmentAccessMethod = this._xsemanticsGeneratorExtensions.environmentAccessMethod();
+    b.append(_environmentAccessMethod);
+    b.append("(");
+    Environment _environment = environmentAccess.getEnvironment();
+    String _name = _environment.getName();
+    b.append(_name);
+    this.comma(b);
+    XExpression _argument = environmentAccess.getArgument();
+    this.toJavaExpression(_argument, b);
+    this.comma(b);
+    JvmTypeReference _type = environmentAccess.getType();
+    this.generateJavaClassReference(_type, environmentAccess, b);
+    b.append(")");
+  }
+  
+  public void comma(final ITreeAppendable b) {
+    b.append(", ");
+  }
+  
+  public void newLine(final ITreeAppendable b) {
+    b.append("\n");
+  }
+  
+  public void generateJavaClassReference(final JvmTypeReference expressionType, final XExpression expression, final ITreeAppendable b) {
+    JvmType _type = expressionType.getType();
+    b.append(_type);
+    b.append(".class");
+  }
+  
   public void compilePremises(final EObject rule, final ITreeAppendable result) {
     if (rule instanceof RuleWithPremises) {
       _compilePremises((RuleWithPremises)rule, result);
@@ -135,6 +213,32 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(rule, result).toString());
+    }
+  }
+  
+  public void doInternalToJavaStatement(final XExpression environmentAccess, final ITreeAppendable b, final boolean isReferenced) {
+    if (environmentAccess instanceof EnvironmentAccess) {
+      _doInternalToJavaStatement((EnvironmentAccess)environmentAccess, b, isReferenced);
+      return;
+    } else if (environmentAccess != null) {
+      _doInternalToJavaStatement(environmentAccess, b, isReferenced);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(environmentAccess, b, isReferenced).toString());
+    }
+  }
+  
+  public void internalToConvertedExpression(final XExpression environmentAccess, final ITreeAppendable b) {
+    if (environmentAccess instanceof EnvironmentAccess) {
+      _internalToConvertedExpression((EnvironmentAccess)environmentAccess, b);
+      return;
+    } else if (environmentAccess != null) {
+      _internalToConvertedExpression(environmentAccess, b);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(environmentAccess, b).toString());
     }
   }
 }

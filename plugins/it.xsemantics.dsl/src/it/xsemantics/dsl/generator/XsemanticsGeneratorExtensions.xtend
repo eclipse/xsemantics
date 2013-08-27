@@ -486,11 +486,17 @@ class XsemanticsGeneratorExtensions {
 				switch elem {
 					RuleParameter: 
 						result.append(result.getName(elem.parameter))
-					ExpressionInConclusion: 
+					ExpressionInConclusion: {
+						val inputParams = rule.inputParameterNames 
 						result.append(
 						elem.expressionInConclusionMethodName +
-						"(" + rule.inputParameterNames + ")"
+						"(" + 
+						rule.ruleEnvName +
+						if (!inputParams.empty)
+							", " + inputParams
+						+ ")"
 						)
+					}
 				}
 				if (iterator.hasNext)
 					result.append(", ")

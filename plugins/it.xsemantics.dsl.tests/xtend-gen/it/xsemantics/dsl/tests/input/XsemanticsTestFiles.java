@@ -680,6 +680,20 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testEnvInExpressionInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsEObjectEClass = this.testJudgmentDescriptionsEObjectEClass();
+    _builder.append(_testJudgmentDescriptionsEObjectEClass, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("axiom EObjectEClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject object : env(G, \"this\", EClass)");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testSimpleRule() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();

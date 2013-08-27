@@ -330,6 +330,13 @@ class XsemanticsTestFiles {
 		G |- EObject object : object.eClass
 	'''
 
+	def testEnvInExpressionInConclusion() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	axiom EObjectEClass
+		G |- EObject object : env(G, "this", EClass)
+	'''
+
 	def testSimpleRule() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	

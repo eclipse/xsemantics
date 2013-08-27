@@ -13,10 +13,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 
 class CustomXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
 	@Inject extension XsemanticsGeneratorExtensions
+	@Inject extension XsemanticsNodeModelUtils
 	
 	override compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
 		val rule = obj.eContainer
@@ -101,5 +104,70 @@ class CustomXbaseCompiler extends XbaseCompiler {
 		toJavaExpression(expression, b);
 		b.append(";");
 		return b.getName(syntheticObject);
+	}
+
+	def dispatch void doInternalToJavaStatement(XExpression e,
+			ITreeAppendable b, boolean isReferenced) {
+		super.doInternalToJavaStatement(e, b, isReferenced)
+	}
+
+	def dispatch void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
+		super.internalToConvertedExpression(obj, appendable);
+	}
+
+	def dispatch void doInternalToJavaStatement(EnvironmentAccess environmentAccess,
+			ITreeAppendable b, boolean isReferenced) {
+		generateCommentWithOriginalCode(environmentAccess, b);
+
+		toJavaStatement(environmentAccess.getArgument(), b, true);
+
+		if (isReferenced) {
+			declareFreshLocalVariable(environmentAccess, b)
+				[ app | compileEnvironmentAccess(environmentAccess, app) ]
+		} else {
+			newLine(b);
+			compileEnvironmentAccess(environmentAccess, b);
+			b.append(";");
+		}
+	}
+
+	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,
+			ITreeAppendable b) {
+		b.append(b.getName(environmentAccess));
+	}
+
+	def void generateCommentWithOriginalCode(EObject modelElement,
+			ITreeAppendable b) {
+		b.append("\n").append("/* ")
+				.append(modelElement.getProgramText())
+				.append(" */");
+	}
+
+	def void compileEnvironmentAccess(
+			EnvironmentAccess environmentAccess, ITreeAppendable b) {
+		b.append(environmentAccessMethod());
+		b.append("(");
+		b.append(environmentAccess.getEnvironment().getName());
+		comma(b);
+		toJavaExpression(environmentAccess.getArgument(), b);
+		comma(b);
+		generateJavaClassReference(environmentAccess.getType(),
+				environmentAccess, b);
+		b.append(")");
+	}
+
+	def void comma(ITreeAppendable b) {
+		b.append(", ");
+	}
+
+	def void newLine(ITreeAppendable b) {
+		b.append("\n");
+	}
+
+	def void generateJavaClassReference(
+			JvmTypeReference expressionType,
+			XExpression expression, ITreeAppendable b) {
+		b.append(expressionType.getType());
+		b.append(".class");
 	}
 }

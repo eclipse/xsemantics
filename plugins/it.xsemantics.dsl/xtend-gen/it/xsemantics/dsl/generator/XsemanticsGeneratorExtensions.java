@@ -1123,13 +1123,22 @@ public class XsemanticsGeneratorExtensions {
               if (elem instanceof ExpressionInConclusion) {
                 final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)elem;
                 _matched=true;
+                final String inputParams = this.inputParameterNames(rule);
                 String _expressionInConclusionMethodName = this.expressionInConclusionMethodName(_expressionInConclusion);
                 String _plus = (_expressionInConclusionMethodName + 
                   "(");
-                String _inputParameterNames = this.inputParameterNames(rule);
-                String _plus_1 = (_plus + _inputParameterNames);
-                String _plus_2 = (_plus_1 + ")");
-                result.append(_plus_2);
+                String _ruleEnvName = this.ruleEnvName(rule);
+                String _plus_1 = (_plus + _ruleEnvName);
+                String _xifexpression = null;
+                boolean _isEmpty_1 = inputParams.isEmpty();
+                boolean _not_1 = (!_isEmpty_1);
+                if (_not_1) {
+                  String _plus_2 = (", " + inputParams);
+                  String _plus_3 = (_plus_2 + ")");
+                  _xifexpression = _plus_3;
+                }
+                String _plus_4 = (_plus_1 + _xifexpression);
+                result.append(_plus_4);
               }
             }
             boolean _hasNext_1 = iterator.hasNext();
