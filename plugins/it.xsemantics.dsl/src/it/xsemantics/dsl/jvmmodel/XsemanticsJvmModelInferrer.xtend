@@ -291,7 +291,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def genInit(XsemanticsSystem ts) {
-   		ts.toMethod("init", null) [
+   		ts.toMethod("init", Void::TYPE.getTypeForName(ts)) [
    			if (ts.superSystem != null)
    				annotations += ts.toAnnotation(typeof(Override))
    			
@@ -489,7 +489,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		
 		judgmentDescription.toMethod(
 			judgmentDescription.throwExceptionMethod.toString,
-			null
+			Void::TYPE.getTypeForName(judgmentDescription)
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED

@@ -523,6 +523,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public JvmOperation genInit(final XsemanticsSystem ts) {
+    JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, ts);
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         public void apply(final JvmOperation it) {
           JvmParameterizedTypeReference _superSystem = ts.getSuperSystem();
@@ -566,7 +567,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
           XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
         }
       };
-    JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", null, _function);
+    JvmOperation _method = this._jvmTypesBuilder.toMethod(ts, "init", _typeForName, _function);
     return _method;
   }
   
@@ -944,6 +945,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       final XExpression errorSpecification = judgmentDescription.getError();
       CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(judgmentDescription);
       String _string = _throwExceptionMethod.toString();
+      JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, judgmentDescription);
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
             it.setVisibility(JvmVisibility.PROTECTED);
@@ -993,8 +995,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmOperation _method = this._jvmTypesBuilder.toMethod(judgmentDescription, _string, 
-        null, _function);
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(judgmentDescription, _string, _typeForName, _function);
       _xblockexpression = (_method);
     }
     return _xblockexpression;
