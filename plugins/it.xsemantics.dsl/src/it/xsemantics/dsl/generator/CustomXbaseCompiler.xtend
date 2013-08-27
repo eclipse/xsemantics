@@ -6,31 +6,35 @@ import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
+import it.xsemantics.dsl.xsemantics.EnvironmentComposition
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping
+import it.xsemantics.dsl.xsemantics.EnvironmentReference
+import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusion
+import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
+import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import it.xsemantics.dsl.xsemantics.RuleInvocation
-import java.util.List
-import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
-import it.xsemantics.dsl.xsemantics.EnvironmentMapping
-import it.xsemantics.dsl.xsemantics.EnvironmentComposition
-import it.xsemantics.dsl.xsemantics.EmptyEnvironment
-import it.xsemantics.dsl.xsemantics.EnvironmentReference
-import org.eclipse.xtext.xbase.XVariableDeclaration
 
 class CustomXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -263,6 +267,41 @@ class CustomXbaseCompiler extends XbaseCompiler {
 			newLine(b);
 			throwNewRuleFailedException(expression, b);
 			closeBracket(b);
+		}
+	}
+
+	/**
+	 * When we invoke an auxiliary function we must also add the
+	 * trace argument.
+	 */
+	override protected void appendFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
+		val feature = call.getFeature();
+		val auxiliaryDescription = feature.associatedAuxiliaryDescription();
+		if (auxiliaryDescription == null) {
+			super.appendFeatureCall(call, b);
+			return;
+		}
+			
+		val name = auxiliaryDescription.entryPointInternalMethodName();
+		
+		// copied from FeatureCallCompiler
+		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
+		if (feature instanceof JvmExecutable) {
+			b.append("(");
+			// add the trace argument
+			b.append(ruleApplicationTraceName());
+			val arguments = call.getActualArguments();
+			if (!arguments.isEmpty()) {
+				b.append(", ");
+				val receiver = 
+					if (call instanceof XMemberFeatureCall)
+						(call as XMemberFeatureCall).getMemberCallTarget()
+					else
+						null;
+				val shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
+				appendArguments(arguments, b, shouldBreakFirstArgument);
+			}
+			b.append(")");
 		}
 	}
 

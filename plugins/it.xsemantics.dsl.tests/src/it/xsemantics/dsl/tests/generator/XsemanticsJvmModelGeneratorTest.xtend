@@ -2730,6 +2730,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2739,7 +2740,6 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -2803,11 +2803,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
-    
     EClass _objectClass = this.objectClassInternal(_trace_, o);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_objectClass, null);
+    boolean _notEquals = (!Objects.equal(_objectClass, null));
     /* objectClass(o) != null */
-    if (!Boolean.valueOf(_notEquals)) {
+    if (!_notEquals) {
       sneakyThrowRuleFailedException("objectClass(o) != null");
     }
     return new Result<Boolean>(true);
@@ -2824,7 +2823,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void objectClassThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String error = "error in objectClass()";
     EObject source = o;
     throwRuleFailedException(error,
@@ -2882,12 +2880,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass c = null; // output parameter
-    
-    {
-      this.objectClassInternal(_trace_, o);
-      EClass _objectClass = this.objectClassInternal(_trace_, o);
-      c = _objectClass;
-    }
+    this.objectClassInternal(_trace_, o);
+    EClass _objectClass = this.objectClassInternal(_trace_, o);
+    c = _objectClass;
     return new Result<EClass>(c);
   }
 }

@@ -32,13 +32,18 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -373,6 +378,54 @@ public class CustomXbaseCompiler extends XbaseCompiler {
       this.newLine(b);
       this.throwNewRuleFailedException(expression, b);
       this.closeBracket(b);
+    }
+  }
+  
+  /**
+   * When we invoke an auxiliary function we must also add the
+   * trace argument.
+   */
+  protected void appendFeatureCall(final XAbstractFeatureCall call, final ITreeAppendable b) {
+    final JvmIdentifiableElement feature = call.getFeature();
+    final AuxiliaryDescription auxiliaryDescription = this._xsemanticsGeneratorExtensions.associatedAuxiliaryDescription(feature);
+    boolean _equals = Objects.equal(auxiliaryDescription, null);
+    if (_equals) {
+      super.appendFeatureCall(call, b);
+      return;
+    }
+    final CharSequence name = this._xsemanticsGeneratorExtensions.entryPointInternalMethodName(auxiliaryDescription);
+    ITreeAppendable _trace = b.trace(call, Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+    _trace.append(name);
+    if ((feature instanceof JvmExecutable)) {
+      b.append("(");
+      CharSequence _ruleApplicationTraceName = this._xsemanticsGeneratorExtensions.ruleApplicationTraceName();
+      b.append(_ruleApplicationTraceName);
+      final EList<XExpression> arguments = call.getActualArguments();
+      boolean _isEmpty = arguments.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        b.append(", ");
+        XExpression _xifexpression = null;
+        if ((call instanceof XMemberFeatureCall)) {
+          XExpression _memberCallTarget = ((XMemberFeatureCall) call).getMemberCallTarget();
+          _xifexpression = _memberCallTarget;
+        } else {
+          _xifexpression = null;
+        }
+        final XExpression receiver = _xifexpression;
+        boolean _or = false;
+        boolean _equals_1 = Objects.equal(receiver, null);
+        if (_equals_1) {
+          _or = true;
+        } else {
+          XExpression _get = arguments.get(0);
+          boolean _notEquals = (!Objects.equal(_get, receiver));
+          _or = (_equals_1 || _notEquals);
+        }
+        final boolean shouldBreakFirstArgument = _or;
+        this.appendArguments(arguments, b, shouldBreakFirstArgument);
+      }
+      b.append(")");
     }
   }
   
