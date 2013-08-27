@@ -332,7 +332,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     EStructuralFeature feat = null; // output parameter
-    
     /* G ||- eClass : object : feat */
     Result2<EObject,EStructuralFeature> result = type2Internal(G, _trace_, eClass);
     checkAssignableTo(result.getFirst(), EObject.class);
@@ -428,7 +427,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EObject object = null; // output parameter
     EStructuralFeature feat = null; // output parameter
     String s = null; // output parameter
-    
     /* G |- eClass : object : feat : s */
     Result3<EObject,EStructuralFeature,String> result = typeInternal(G, _trace_, eClass);
     checkAssignableTo(result.getFirst(), EObject.class);
@@ -523,7 +521,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass c = null; // output parameter
-    
     /* var temp = c or { G |- o : var EClass temp } */
     try {
       EClass temp = c;
@@ -674,15 +671,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
+    EClass result = null;
+    /* empty |- obj : result */
+    Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
+    checkAssignableTo(result_1.getFirst(), EClass.class);
+    result = (EClass) result_1.getFirst();
     
-    {
-      EClass result = null;
-      /* empty |- obj : result */
-      Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
-      checkAssignableTo(result_1.getFirst(), EClass.class);
-      result = (EClass) result_1.getFirst();
-      
-    }
     return new Result<Boolean>(true);
   }
   
@@ -717,8 +711,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleEObjectEClass_1(G, object));
+  }
+  
+  private EClass _applyRuleEObjectEClass_1(final RuleEnvironment G, final EObject object) throws RuleFailedException {
     EClass _eClass = object.eClass();
-    return new Result<EClass>(_eClass);
+    return _eClass;
   }
 }
 '''
@@ -1717,18 +1715,15 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   }
   
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    /* empty |- o : var EClass c */
+    EClass c = null;
+    Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, o);
+    checkAssignableTo(result.getFirst(), EClass.class);
+    c = (EClass) result.getFirst();
     
-    {
-      /* empty |- o : var EClass c */
-      EClass c = null;
-      Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, o);
-      checkAssignableTo(result.getFirst(), EClass.class);
-      c = (EClass) result.getFirst();
-      
-      /* empty |- o.eClass <: c */
-      EClass _eClass = o.eClass();
-      subtypeInternal(emptyEnvironment(), _trace_, _eClass, c);
-    }
+    /* empty |- o.eClass <: c */
+    EClass _eClass = o.eClass();
+    subtypeInternal(emptyEnvironment(), _trace_, _eClass, c);
     return new Result<Boolean>(true);
   }
   
@@ -1762,13 +1757,16 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   }
   
   protected Result<EClass> applyRuleFromTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
-    
     /* G |- c.eClass <: c.eClass */
     EClass _eClass = c.eClass();
     EClass _eClass_1 = c.eClass();
     subtypeInternal(G, _trace_, _eClass, _eClass_1);
-    EClass _eClass_2 = c.eClass();
-    return new Result<EClass>(_eClass_2);
+    return new Result<EClass>(_applyRuleFromTypeSystem_1(G, c));
+  }
+  
+  private EClass _applyRuleFromTypeSystem_1(final RuleEnvironment G, final EObject c) throws RuleFailedException {
+    EClass _eClass = c.eClass();
+    return _eClass;
   }
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
@@ -1787,7 +1785,6 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   }
   
   protected Result<Boolean> applyRuleFromExtendedTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
-    
     /* G ||- c1 : c2 */
     type2Internal(G, _trace_, c1, c2);
     return new Result<Boolean>(true);
@@ -1809,7 +1806,6 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   }
   
   protected Result<Boolean> applyRuleFromThisTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
-    
     /* G |- c1 : var EClass o */
     EClass o = null;
     Result<EClass> result = typeInternal(G, _trace_, c1);
@@ -1904,18 +1900,15 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   
   @Override
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    /* empty |- o : var EClass c */
+    EClass c = null;
+    Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, o);
+    checkAssignableTo(result.getFirst(), EClass.class);
+    c = (EClass) result.getFirst();
     
-    {
-      /* empty |- o : var EClass c */
-      EClass c = null;
-      Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, o);
-      checkAssignableTo(result.getFirst(), EClass.class);
-      c = (EClass) result.getFirst();
-      
-      /* empty |- o.eClass <: c */
-      EClass _eClass = o.eClass();
-      subtypeInternal(emptyEnvironment(), _trace_, _eClass, c);
-    }
+    /* empty |- o.eClass <: c */
+    EClass _eClass = o.eClass();
+    subtypeInternal(emptyEnvironment(), _trace_, _eClass, c);
     return new Result<Boolean>(true);
   }
   
@@ -1938,8 +1931,12 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<EClass> applyRuleFromTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleFromTypeSystem_1(G, c));
+  }
+  
+  private EClass _applyRuleFromTypeSystem_1(final RuleEnvironment G, final EObject c) throws RuleFailedException {
     EClass _eClass = c.eClass();
-    return new Result<EClass>(_eClass);
+    return _eClass;
   }
   
   @Override
@@ -1960,7 +1957,6 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   
   @Override
   protected Result<Boolean> applyRuleFromExtendedTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
-    
     /* G ||- c1 : c2 */
     type2Internal(G, _trace_, c1, c2);
     return new Result<Boolean>(true);
@@ -1984,7 +1980,6 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   
   @Override
   protected Result<Boolean> applyRuleFromThisTypeSystem(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
-    
     /* G |- c1 : var EClass o */
     EClass o = null;
     Result<EClass> result = typeInternal(G, _trace_, c1);
@@ -2134,7 +2129,6 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
   
   @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c1, final EClass c2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _stringRep = this.stringRep(c1);
     String _plus = (_stringRep + " not <: ");
     String _stringRep_1 = this.stringRep(c2);

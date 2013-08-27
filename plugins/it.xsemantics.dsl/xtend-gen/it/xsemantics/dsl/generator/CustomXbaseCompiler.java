@@ -2,22 +2,31 @@ package it.xsemantics.dsl.generator;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import it.xsemantics.dsl.generator.XsemanticsGeneratorConstants;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
 import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
+import it.xsemantics.dsl.xsemantics.EnvironmentComposition;
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping;
+import it.xsemantics.dsl.xsemantics.EnvironmentReference;
+import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
+import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -29,6 +38,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -50,7 +60,7 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   
   @Inject
   @Extension
-  private XsemanticsTypeSystem _xsemanticsTypeSystem;
+  private XsemanticsTypeSystem typeSystem;
   
   public ITreeAppendable compile(final XExpression obj, final ITreeAppendable appendable, final JvmTypeReference expectedReturnType, final Set<JvmTypeReference> declaredExceptions) {
     final EObject rule = obj.eContainer();
@@ -271,7 +281,7 @@ public class CustomXbaseCompiler extends XbaseCompiler {
         } else {
           EList<XExpression> _expressions_1 = expr.getExpressions();
           XExpression _get = _expressions_1.get(0);
-          boolean _isBooleanPremise = this._xsemanticsTypeSystem.isBooleanPremise(_get);
+          boolean _isBooleanPremise = this.typeSystem.isBooleanPremise(_get);
           _and = (_equals && _isBooleanPremise);
         }
         _or = (isReferenced || _and);
@@ -348,7 +358,7 @@ public class CustomXbaseCompiler extends XbaseCompiler {
       this.internalToJavaStatement(expression, b, hasToBeReferenced);
       return;
     }
-    final boolean isBoolean = this._xsemanticsTypeSystem.isBooleanPremise(expression);
+    final boolean isBoolean = this.typeSystem.isBooleanPremise(expression);
     if (isBoolean) {
       hasToBeReferenced = true;
     }
@@ -445,6 +455,187 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     b.append(");");
   }
   
+  protected void _doInternalToJavaStatement(final RuleInvocation ruleInvocation, final ITreeAppendable b, final boolean isReferenced) {
+    this.generateCommentWithOriginalCode(ruleInvocation, b);
+    String _judgmentSymbol = ruleInvocation.getJudgmentSymbol();
+    EList<String> _relationSymbols = ruleInvocation.getRelationSymbols();
+    final JudgmentDescription judgmentDescription = this._xsemanticsUtils.judgmentDescription(ruleInvocation, _judgmentSymbol, _relationSymbols);
+    final EList<XExpression> ruleInvocationExpressions = ruleInvocation.getExpressions();
+    this.ruleInvocationExpressionsToJavaStatements(b, ruleInvocationExpressions);
+    EnvironmentSpecification _environment = ruleInvocation.getEnvironment();
+    this.generateEnvironmentSpecificationAsStatements(_environment, b);
+    final boolean hasOutputParams = this._xsemanticsUtils.hasOutputParams(ruleInvocation);
+    this.newLine(b);
+    String resultVariable = "";
+    if (hasOutputParams) {
+      this._xsemanticsGeneratorExtensions.resultType(judgmentDescription, b);
+      this.space(b);
+      String _generateResultVariable = this.generateResultVariable(ruleInvocation, b);
+      resultVariable = _generateResultVariable;
+      this.assign(b);
+    }
+    CharSequence _entryPointInternalMethodName = this._xsemanticsGeneratorExtensions.entryPointInternalMethodName(judgmentDescription);
+    String _string = _entryPointInternalMethodName.toString();
+    b.append(_string);
+    b.append("(");
+    EnvironmentSpecification _environment_1 = ruleInvocation.getEnvironment();
+    this.generateEnvironmentSpecificationAsExpression(_environment_1, b);
+    this.comma(b);
+    CharSequence _additionalArgsForRuleInvocation = this._xsemanticsGeneratorExtensions.additionalArgsForRuleInvocation(ruleInvocation);
+    String _string_1 = _additionalArgsForRuleInvocation.toString();
+    b.append(_string_1);
+    this.comma(b);
+    this.ruleInvocationExpressionsToJavaExpressions(b, ruleInvocation);
+    b.append(");");
+    if (hasOutputParams) {
+      this.reassignResults(b, ruleInvocation, resultVariable, true);
+    }
+  }
+  
+  protected void ruleInvocationExpressionsToJavaStatements(final ITreeAppendable b, final List<XExpression> ruleInvocationExpressions) {
+    for (final XExpression ruleInvocationExpression : ruleInvocationExpressions) {
+      this.toJavaStatement(ruleInvocationExpression, b, true);
+    }
+  }
+  
+  protected void generateEnvironmentSpecificationAsStatements(final EnvironmentSpecification environmentSpecification, final ITreeAppendable b) {
+    if ((environmentSpecification instanceof EnvironmentMapping)) {
+      final EnvironmentMapping mapping = ((EnvironmentMapping) environmentSpecification);
+      XExpression _key = mapping.getKey();
+      this.toJavaStatement(_key, b, true);
+      XExpression _value = mapping.getValue();
+      this.toJavaStatement(_value, b, true);
+    } else {
+      if ((environmentSpecification instanceof EnvironmentComposition)) {
+        final EnvironmentComposition composition = ((EnvironmentComposition) environmentSpecification);
+        EnvironmentSpecification _currentEnvironment = composition.getCurrentEnvironment();
+        this.generateEnvironmentSpecificationAsStatements(_currentEnvironment, b);
+        EnvironmentSpecification _subEnvironment = composition.getSubEnvironment();
+        this.generateEnvironmentSpecificationAsStatements(_subEnvironment, b);
+      }
+    }
+  }
+  
+  public void generateEnvironmentSpecificationAsExpression(final EnvironmentSpecification environmentSpecification, final ITreeAppendable b) {
+    if ((environmentSpecification instanceof EmptyEnvironment)) {
+      String _emptyEnvironmentInvocation = this._xsemanticsGeneratorExtensions.emptyEnvironmentInvocation();
+      b.append(_emptyEnvironmentInvocation);
+    } else {
+      if ((environmentSpecification instanceof EnvironmentReference)) {
+        Environment _environment = ((EnvironmentReference) environmentSpecification).getEnvironment();
+        String _name = _environment.getName();
+        b.append(_name);
+      }
+    }
+    if ((environmentSpecification instanceof EnvironmentMapping)) {
+      final EnvironmentMapping mapping = ((EnvironmentMapping) environmentSpecification);
+      String _environmentEntryInvocation = this._xsemanticsGeneratorExtensions.environmentEntryInvocation();
+      b.append(_environmentEntryInvocation);
+      b.append("(");
+      XExpression _key = mapping.getKey();
+      this.toJavaExpression(_key, b);
+      this.comma(b);
+      XExpression _value = mapping.getValue();
+      this.toJavaExpression(_value, b);
+      b.append(")");
+    } else {
+      if ((environmentSpecification instanceof EnvironmentComposition)) {
+        final EnvironmentComposition composition = ((EnvironmentComposition) environmentSpecification);
+        String _environmentCompositionInvocation = this._xsemanticsGeneratorExtensions.environmentCompositionInvocation();
+        b.append(_environmentCompositionInvocation);
+        b.append("(");
+        b.increaseIndentation();
+        this.newLine(b);
+        EnvironmentSpecification _currentEnvironment = composition.getCurrentEnvironment();
+        this.generateEnvironmentSpecificationAsExpression(_currentEnvironment, b);
+        this.comma(b);
+        EnvironmentSpecification _subEnvironment = composition.getSubEnvironment();
+        this.generateEnvironmentSpecificationAsExpression(_subEnvironment, b);
+        b.decreaseIndentation();
+        this.newLine(b);
+        b.append(")");
+      }
+    }
+  }
+  
+  protected String generateResultVariable(final RuleInvocation ruleInvocation, final ITreeAppendable b) {
+    final String declareResultVariable = this.declareResultVariable(ruleInvocation, b);
+    b.append(declareResultVariable);
+    return declareResultVariable;
+  }
+  
+  public String declareResultVariable(final RuleInvocation ruleInvocation, final ITreeAppendable b) {
+    return b.declareSyntheticVariable(ruleInvocation, "result");
+  }
+  
+  protected void ruleInvocationExpressionsToJavaExpressions(final ITreeAppendable b, final RuleInvocation ruleInvocation) {
+    List<XExpression> _inputArgsExpressions = this._xsemanticsUtils.inputArgsExpressions(ruleInvocation);
+    this.ruleInvocationExpressionsToJavaExpressions(b, _inputArgsExpressions);
+  }
+  
+  protected void ruleInvocationExpressionsToJavaExpressions(final ITreeAppendable b, final List<XExpression> inputArgsExpressions) {
+    final Iterator<XExpression> expIt = inputArgsExpressions.iterator();
+    boolean _hasNext = expIt.hasNext();
+    boolean _while = _hasNext;
+    while (_while) {
+      {
+        XExpression _next = expIt.next();
+        this.toJavaExpression(_next, b);
+        boolean _hasNext_1 = expIt.hasNext();
+        if (_hasNext_1) {
+          this.comma(b);
+        }
+      }
+      boolean _hasNext_1 = expIt.hasNext();
+      _while = _hasNext_1;
+    }
+  }
+  
+  protected void reassignResults(final ITreeAppendable b, final RuleInvocation ruleInvocation, final String resultVariable, final boolean checkAssignable) {
+    final List<XExpression> expIt = this._xsemanticsUtils.outputArgsExpressions(ruleInvocation);
+    boolean _isEmpty = expIt.isEmpty();
+    if (_isEmpty) {
+      return;
+    }
+    this.newLine(b);
+    Iterable<String> _resultGetMethods = XsemanticsGeneratorConstants.getResultGetMethods();
+    final Iterator<String> getMethods = _resultGetMethods.iterator();
+    for (final XExpression expression : expIt) {
+      {
+        final JvmTypeReference expressionType = this.typeSystem.getType(expression);
+        final String getMethod = getMethods.next();
+        if (checkAssignable) {
+          b.append("checkAssignableTo");
+          b.append("(");
+          String _plus = (resultVariable + ".");
+          String _plus_1 = (_plus + getMethod);
+          b.append(_plus_1);
+          this.comma(b);
+          this.generateJavaClassReference(expressionType, expression, b);
+          b.append(");");
+          this.newLine(b);
+        }
+        if ((expression instanceof XVariableDeclaration)) {
+          final XVariableDeclaration varDecl = ((XVariableDeclaration) expression);
+          String _name = b.getName(varDecl);
+          b.append(_name);
+        } else {
+          this.toJavaExpression(expression, b);
+        }
+        this.assign(b);
+        b.append("(");
+        this.serialize(expressionType, expression, b);
+        b.append(")");
+        this.space(b);
+        String _plus_2 = (resultVariable + ".");
+        String _plus_3 = (_plus_2 + getMethod);
+        b.append(_plus_3);
+        b.append(";");
+        this.newLine(b);
+      }
+    }
+  }
+  
   protected void _internalToConvertedExpression(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
     String _name = b.getName(environmentAccess);
     b.append(_name);
@@ -488,6 +679,16 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   
   public void newLine(final ITreeAppendable b) {
     b.append("\n");
+  }
+  
+  public void space(final ITreeAppendable b) {
+    b.append(" ");
+  }
+  
+  public void assign(final ITreeAppendable b) {
+    this.space(b);
+    b.append("=");
+    this.space(b);
   }
   
   public void closeBracket(final ITreeAppendable b) {
@@ -582,6 +783,9 @@ public class CustomXbaseCompiler extends XbaseCompiler {
       return;
     } else if (environmentAccess instanceof OrExpression) {
       _doInternalToJavaStatement((OrExpression)environmentAccess, b, isReferenced);
+      return;
+    } else if (environmentAccess instanceof RuleInvocation) {
+      _doInternalToJavaStatement((RuleInvocation)environmentAccess, b, isReferenced);
       return;
     } else if (environmentAccess != null) {
       _doInternalToJavaStatement(environmentAccess, b, isReferenced);
