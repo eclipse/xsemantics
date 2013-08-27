@@ -3,6 +3,7 @@ package it.xsemantics.dsl.generator;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -14,11 +15,14 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import java.util.Arrays;
 import java.util.Set;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -38,6 +42,10 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   @Inject
   @Extension
   private XsemanticsNodeModelUtils _xsemanticsNodeModelUtils;
+  
+  @Inject
+  @Extension
+  private XsemanticsTypeSystem _xsemanticsTypeSystem;
   
   public ITreeAppendable compile(final XExpression obj, final ITreeAppendable appendable, final JvmTypeReference expectedReturnType, final Set<JvmTypeReference> declaredExceptions) {
     final EObject rule = obj.eContainer();
@@ -131,6 +139,120 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     return b.getName(syntheticObject);
   }
   
+  /**
+   * We need to wrap boolean expressions with try-catch-throw RuleFailedException,
+   * since in Xsemantics a boolean expression is an assertion
+   */
+  protected void _toJavaStatement(final XBlockExpression expr, final ITreeAppendable b, final boolean isReferenced) {
+    boolean _insideClosure = this.insideClosure(expr);
+    if (_insideClosure) {
+      boolean _or = false;
+      if (isReferenced) {
+        _or = true;
+      } else {
+        boolean _and = false;
+        EList<XExpression> _expressions = expr.getExpressions();
+        int _size = _expressions.size();
+        boolean _equals = (_size == 1);
+        if (!_equals) {
+          _and = false;
+        } else {
+          EList<XExpression> _expressions_1 = expr.getExpressions();
+          XExpression _get = _expressions_1.get(0);
+          boolean _isBooleanPremise = this._xsemanticsTypeSystem.isBooleanPremise(_get);
+          _and = (_equals && _isBooleanPremise);
+        }
+        _or = (isReferenced || _and);
+      }
+      super._toJavaStatement(expr, b, _or);
+    } else {
+      EList<XExpression> _expressions_2 = expr.getExpressions();
+      boolean _isEmpty = _expressions_2.isEmpty();
+      if (_isEmpty) {
+        return;
+      }
+      EList<XExpression> _expressions_3 = expr.getExpressions();
+      int _size_1 = _expressions_3.size();
+      boolean _equals_1 = (_size_1 == 1);
+      if (_equals_1) {
+        EList<XExpression> _expressions_4 = expr.getExpressions();
+        XExpression _get_1 = _expressions_4.get(0);
+        this.compileBooleanXExpression(_get_1, b, isReferenced);
+        return;
+      }
+      if (isReferenced) {
+        this.declareSyntheticVariable(expr, b);
+      }
+      ITreeAppendable _append = b.append("\n{");
+      _append.increaseIndentation();
+      final EList<XExpression> expressions = expr.getExpressions();
+      int i = 0;
+      for (final XExpression ex : expressions) {
+        {
+          boolean hasToBeReferenced = isReferenced;
+          int _size_2 = expressions.size();
+          int _minus = (_size_2 - 1);
+          boolean _lessThan = (i < _minus);
+          if (_lessThan) {
+            hasToBeReferenced = false;
+          }
+          this.compileBooleanXExpression(ex, b, hasToBeReferenced);
+          if (hasToBeReferenced) {
+            ITreeAppendable _append_1 = b.append("\n");
+            String _varName = this.getVarName(expr, b);
+            ITreeAppendable _append_2 = _append_1.append(_varName);
+            _append_2.append(" = (");
+            this.internalToConvertedExpression(ex, b, null);
+            b.append(");");
+          }
+          int _plus = (i + 1);
+          i = _plus;
+        }
+      }
+      ITreeAppendable _decreaseIndentation = b.decreaseIndentation();
+      _decreaseIndentation.append("\n}");
+    }
+  }
+  
+  /**
+   * If it's boolean, wraps in an if with throw RuleFailedException
+   * 
+   * @param expression
+   * @param b
+   * @param hasToBeReferenced
+   */
+  public void compileBooleanXExpression(final XExpression expression, final ITreeAppendable b, final boolean toBeReferenced) {
+    boolean hasToBeReferenced = toBeReferenced;
+    if ((expression instanceof XBlockExpression)) {
+      this.internalToJavaStatement(expression, b, hasToBeReferenced);
+      return;
+    }
+    final boolean isBoolean = this._xsemanticsTypeSystem.isBooleanPremise(expression);
+    if (isBoolean) {
+      hasToBeReferenced = true;
+    }
+    this.internalToJavaStatement(expression, b, hasToBeReferenced);
+    if (isBoolean) {
+      this.generateCommentWithOriginalCode(expression, b);
+      this.newLine(b);
+      b.append("if (!");
+      this.toJavaExpression(expression, b);
+      b.append(") {");
+      b.increaseIndentation();
+      this.newLine(b);
+      this.throwNewRuleFailedException(expression, b);
+      this.closeBracket(b);
+    }
+  }
+  
+  public void throwNewRuleFailedException(final XExpression expression, final ITreeAppendable b) {
+    String _sneakyThrowRuleFailedException = this._xsemanticsGeneratorExtensions.sneakyThrowRuleFailedException();
+    b.append(_sneakyThrowRuleFailedException);
+    b.append("(");
+    this.generateStringWithOriginalCode(expression, b);
+    b.append(");");
+  }
+  
   protected void _doInternalToJavaStatement(final XExpression e, final ITreeAppendable b, final boolean isReferenced) {
     super.doInternalToJavaStatement(e, b, isReferenced);
   }
@@ -170,6 +292,14 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     _append_2.append(" */");
   }
   
+  public void generateStringWithOriginalCode(final EObject modelElement, final ITreeAppendable b) {
+    ITreeAppendable _append = b.append("\"");
+    String _programText = this._xsemanticsNodeModelUtils.getProgramText(modelElement);
+    String _javaString = this._xsemanticsGeneratorExtensions.javaString(_programText);
+    ITreeAppendable _append_1 = _append.append(_javaString);
+    _append_1.append("\"");
+  }
+  
   public void compileEnvironmentAccess(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
     String _environmentAccessMethod = this._xsemanticsGeneratorExtensions.environmentAccessMethod();
     b.append(_environmentAccessMethod);
@@ -194,10 +324,21 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     b.append("\n");
   }
   
+  public void closeBracket(final ITreeAppendable b) {
+    b.decreaseIndentation();
+    this.newLine(b);
+    b.append("}");
+  }
+  
   public void generateJavaClassReference(final JvmTypeReference expressionType, final XExpression expression, final ITreeAppendable b) {
     JvmType _type = expressionType.getType();
     b.append(_type);
     b.append(".class");
+  }
+  
+  public boolean insideClosure(final XBlockExpression expr) {
+    EObject _eContainer = expr.eContainer();
+    return (_eContainer instanceof XClosure);
   }
   
   public void compilePremises(final EObject rule, final ITreeAppendable result) {

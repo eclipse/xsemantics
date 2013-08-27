@@ -87,6 +87,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -97,7 +98,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -161,23 +161,20 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
-    
     {
       String _string = new String();
       String _firstUpper = StringExtensions.toFirstUpper("bar");
       String _plus = (_string + _firstUpper);
-      boolean _equals = ObjectExtensions.operator_equals(
-        "foo", _plus);
+      boolean _equals = Objects.equal("foo", _plus);
       /* 'foo' == new String() + "bar".toFirstUpper */
       if (!_equals) {
         sneakyThrowRuleFailedException("\'foo\' == new String() + \"bar\".toFirstUpper");
       }
       final EClass eC = EcoreFactory.eINSTANCE.createEClass();
       eC.setName("MyEClass");
-      boolean _equals_1 = ObjectExtensions.operator_equals(
-        eClass, eC);
+      boolean _equals_1 = Objects.equal(eClass, eC);
       /* eClass == eC */
-      if (!Boolean.valueOf(_equals_1)) {
+      if (!_equals_1) {
         sneakyThrowRuleFailedException("eClass == eC");
       }
     }
@@ -899,7 +896,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass c = null; // output parameter
-    
     {
       InputOutput.<EObject>println(o);
       InputOutput.<String>println(this.myString);
@@ -911,7 +907,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       EClass _eClass = o.eClass();
       boolean _add_1 = this.eClasses.add(_eClass);
       /* eClasses.add(o.eClass) */
-      if (!Boolean.valueOf(_add_1)) {
+      if (!_add_1) {
         sneakyThrowRuleFailedException("eClasses.add(o.eClass)");
       }
     }

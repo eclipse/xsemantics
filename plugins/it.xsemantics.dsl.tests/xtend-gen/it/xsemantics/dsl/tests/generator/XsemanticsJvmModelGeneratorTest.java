@@ -182,6 +182,8 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("package it.xsemantics.test;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("import com.google.common.base.Objects;");
+    _builder.newLine();
     _builder.append("import it.xsemantics.runtime.ErrorInformation;");
     _builder.newLine();
     _builder.append("import it.xsemantics.runtime.Result;");
@@ -201,8 +203,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("import org.eclipse.emf.ecore.EcoreFactory;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.PolymorphicDispatcher;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xbase.lib.StringExtensions;");
     _builder.newLine();
@@ -379,8 +379,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.newLine();
-    _builder.append("    ");
     _builder.append("{");
     _builder.newLine();
     _builder.append("      ");
@@ -393,10 +391,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("String _plus = (_string + _firstUpper);");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _equals = ObjectExtensions.operator_equals(");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("\"foo\", _plus);");
+    _builder.append("boolean _equals = Objects.equal(\"foo\", _plus);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* \'foo\' == new String() + \"bar\".toFirstUpper */");
@@ -417,16 +412,13 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("eC.setName(\"MyEClass\");");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("boolean _equals_1 = ObjectExtensions.operator_equals(");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("eClass, eC);");
+    _builder.append("boolean _equals_1 = Objects.equal(eClass, eC);");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("/* eClass == eC */");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("if (!Boolean.valueOf(_equals_1)) {");
+    _builder.append("if (!_equals_1) {");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("sneakyThrowRuleFailedException(\"eClass == eC\");");
@@ -2251,8 +2243,6 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("EClass c = null; // output parameter");
     _builder.newLine();
     _builder.append("    ");
-    _builder.newLine();
-    _builder.append("    ");
     _builder.append("{");
     _builder.newLine();
     _builder.append("      ");
@@ -2286,7 +2276,7 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
     _builder.append("/* eClasses.add(o.eClass) */");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("if (!Boolean.valueOf(_add_1)) {");
+    _builder.append("if (!_add_1) {");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("sneakyThrowRuleFailedException(\"eClasses.add(o.eClass)\");");
