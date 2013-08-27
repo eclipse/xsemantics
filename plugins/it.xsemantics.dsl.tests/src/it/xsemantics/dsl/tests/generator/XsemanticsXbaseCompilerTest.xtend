@@ -80,42 +80,40 @@ EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();''',
 			testFiles.testRuleInvokingAnotherRule,
 '''
 
-{
-  String _string = new String();
-  String _firstUpper = StringExtensions.toFirstUpper("bar");
-  String _plus = (_string + _firstUpper);
-  boolean _equals = Objects.equal("foo", _plus);
-  /* 'foo' == new String() + "bar".toFirstUpper */
-  if (!_equals) {
-    sneakyThrowRuleFailedException("\'foo\' == new String() + \"bar\".toFirstUpper");
-  }
-  /* G |- object.eClass : eClass */
-  EClass _eClass = object.eClass();
-  typeInternal(G, _trace_, _eClass, eClass);
-  /* G |- eClass : object.eClass */
-  EClass _eClass_1 = object.eClass();
-  typeInternal(G, _trace_, eClass, _eClass_1);
-  final EClass eC = EcoreFactory.eINSTANCE.createEClass();
-  eC.setName("MyEClass");
-  String _name = eC.getName();
-  boolean _equals_1 = Objects.equal(_name, "MyEClass2");
-  boolean _not = (!_equals_1);
-  /* !(eC.name == 'MyEClass2') */
-  if (!_not) {
-    sneakyThrowRuleFailedException("!(eC.name == \'MyEClass2\')");
-  }
-  String _name_1 = eC.getName();
-  int _length = _name_1.length();
-  boolean _lessThan = (_length < 10);
-  /* eC.name.length < 10 */
-  if (!_lessThan) {
-    sneakyThrowRuleFailedException("eC.name.length < 10");
-  }
-  boolean _equals_2 = Objects.equal(eClass, eC);
-  /* eClass == eC */
-  if (!_equals_2) {
-    sneakyThrowRuleFailedException("eClass == eC");
-  }
+String _string = new String();
+String _firstUpper = StringExtensions.toFirstUpper("bar");
+String _plus = (_string + _firstUpper);
+boolean _equals = Objects.equal("foo", _plus);
+/* 'foo' == new String() + "bar".toFirstUpper */
+if (!_equals) {
+  sneakyThrowRuleFailedException("\'foo\' == new String() + \"bar\".toFirstUpper");
+}
+/* G |- object.eClass : eClass */
+EClass _eClass = object.eClass();
+typeInternal(G, _trace_, _eClass, eClass);
+/* G |- eClass : object.eClass */
+EClass _eClass_1 = object.eClass();
+typeInternal(G, _trace_, eClass, _eClass_1);
+final EClass eC = EcoreFactory.eINSTANCE.createEClass();
+eC.setName("MyEClass");
+String _name = eC.getName();
+boolean _equals_1 = Objects.equal(_name, "MyEClass2");
+boolean _not = (!_equals_1);
+/* !(eC.name == 'MyEClass2') */
+if (!_not) {
+  sneakyThrowRuleFailedException("!(eC.name == \'MyEClass2\')");
+}
+String _name_1 = eC.getName();
+int _length = _name_1.length();
+boolean _lessThan = (_length < 10);
+/* eC.name.length < 10 */
+if (!_lessThan) {
+  sneakyThrowRuleFailedException("eC.name.length < 10");
+}
+boolean _equals_2 = Objects.equal(eClass, eC);
+/* eClass == eC */
+if (!_equals_2) {
+  sneakyThrowRuleFailedException("eClass == eC");
 }'''
 			)
 	}
@@ -188,16 +186,14 @@ s = (String) result.getThird();
 			testFiles.testRuleWithOutputArgAsLocalVariable,
 '''
 
-{
-  EObject objectResult = null;
-  /* G |- eClass : objectResult : feat */
-  Result<EObject> result = typeInternal(G, _trace_, eClass, feat);
-  checkAssignableTo(result.getFirst(), EObject.class);
-  objectResult = (EObject) result.getFirst();
-  
-  EObject myObject = null;
-  myObject = objectResult;
-}'''
+EObject objectResult = null;
+/* G |- eClass : objectResult : feat */
+Result<EObject> result = typeInternal(G, _trace_, eClass, feat);
+checkAssignableTo(result.getFirst(), EObject.class);
+objectResult = (EObject) result.getFirst();
+
+EObject myObject = null;
+myObject = objectResult;'''
 			)
 	}
 	
@@ -207,15 +203,13 @@ s = (String) result.getThird();
 			testFiles.testRuleWithOutputParamsAndExplicitAssignment,
 '''
 
-{
-  EObject objectResult = null;
-  /* G |- eClass : object : feat */
-  Result<EObject> result = typeInternal(G, _trace_, eClass, feat);
-  checkAssignableTo(result.getFirst(), EObject.class);
-  object = (EObject) result.getFirst();
-  
-  object = objectResult;
-}'''
+EObject objectResult = null;
+/* G |- eClass : object : feat */
+Result<EObject> result = typeInternal(G, _trace_, eClass, feat);
+checkAssignableTo(result.getFirst(), EObject.class);
+object = (EObject) result.getFirst();
+
+object = objectResult;'''
 			)
 	}
 	
@@ -225,14 +219,12 @@ s = (String) result.getThird();
 			testFiles.testRuleOnlyInvokingRules,
 '''
 
-{
-  /* G |- object.eClass : eClass */
-  EClass _eClass = object.eClass();
-  typeInternal(G, _trace_, _eClass, eClass);
-  /* G |- eClass : object.eClass */
-  EClass _eClass_1 = object.eClass();
-  typeInternal(G, _trace_, eClass, _eClass_1);
-}'''
+/* G |- object.eClass : eClass */
+EClass _eClass = object.eClass();
+typeInternal(G, _trace_, _eClass, eClass);
+/* G |- eClass : object.eClass */
+EClass _eClass_1 = object.eClass();
+typeInternal(G, _trace_, eClass, _eClass_1);'''
 			)
 	}
 
@@ -242,14 +234,12 @@ s = (String) result.getThird();
 			testFiles.testCheckRule,
 '''
 
-{
-  EClass result = null;
-  /* empty |- obj : result */
-  Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
-  checkAssignableTo(result_1.getFirst(), EClass.class);
-  result = (EClass) result_1.getFirst();
-  
-}'''
+EClass result = null;
+/* empty |- obj : result */
+Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
+checkAssignableTo(result_1.getFirst(), EClass.class);
+result = (EClass) result_1.getFirst();
+'''
 			)
 	}
 	
@@ -328,6 +318,57 @@ try {
 }'''
 			)
 	}
+
+	@Test
+	def void testOrExpressionWithRuleInvocations() {
+		checkCompilationOfOr(
+			testFiles.testOrExpressionWithRuleInvocations, 0,
+'''
+
+/* {eClass.name == 'foo' G |- object.eClass : eClass} or {G |- object.eClass : eClass object.eClass.name == 'bar'} */
+try {
+  String _name = eClass.getName();
+  boolean _equals = Objects.equal(_name, "foo");
+  /* eClass.name == 'foo' */
+  if (!_equals) {
+    sneakyThrowRuleFailedException("eClass.name == \'foo\'");
+  }
+  /* G |- object.eClass : eClass */
+  EClass _eClass = object.eClass();
+  typeInternal(G, _trace_, _eClass, eClass);
+} catch (Exception e) {
+  /* G |- object.eClass : eClass */
+  EClass _eClass_1 = object.eClass();
+  typeInternal(G, _trace_, _eClass_1, eClass);
+  EClass _eClass_2 = object.eClass();
+  String _name_1 = _eClass_2.getName();
+  boolean _equals_1 = Objects.equal(_name_1, "bar");
+  /* object.eClass.name == 'bar' */
+  if (!_equals_1) {
+    sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+  }
+}'''
+			)
+	}
+
+	@Test
+	def void testOrExpressionWithRuleInvocations2() {
+		checkCompilationOfOr(
+			testFiles.testOrExpressionWithRuleInvocations2, 0,
+'''
+
+/* G |- object.eClass : eClass or G |- object.eClass : eClass */
+try {
+  /* G |- object.eClass : eClass */
+  EClass _eClass = object.eClass();
+  typeInternal(G, _trace_, _eClass, eClass);
+} catch (Exception e) {
+  /* G |- object.eClass : eClass */
+  EClass _eClass_1 = object.eClass();
+  typeInternal(G, _trace_, _eClass_1, eClass);
+}'''
+			)
+	}
 	
 	@Test
 	def void testOrExpressionWithBlocks() {
@@ -337,38 +378,32 @@ try {
 
 /* {eClass.name == 'foo' eClass.name == 'foo'} or {object.eClass.name == 'bar' object.eClass.name == 'bar'} */
 try {
-  boolean _xblockexpression = false;
-  {
-    String _name = eClass.getName();
-    boolean _equals = ObjectExtensions.operator_equals(_name, "foo");
-    /* eClass.name == 'foo' */
-    if (!_equals) {
-      sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-    }
-    String _name_1 = eClass.getName();
-    boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, "foo");
-    /* eClass.name == 'foo' */
-    if (!_equals_1) {
-      sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-    }
-    _xblockexpression = (_equals_1);
+  String _name = eClass.getName();
+  boolean _equals = Objects.equal(_name, "foo");
+  /* eClass.name == 'foo' */
+  if (!_equals) {
+    sneakyThrowRuleFailedException("eClass.name == \'foo\'");
+  }
+  String _name_1 = eClass.getName();
+  boolean _equals_1 = Objects.equal(_name_1, "foo");
+  /* eClass.name == 'foo' */
+  if (!_equals_1) {
+    sneakyThrowRuleFailedException("eClass.name == \'foo\'");
   }
 } catch (Exception e) {
-  {
-    EClass _eClass = object.eClass();
-    String _name_2 = _eClass.getName();
-    boolean _equals_2 = ObjectExtensions.operator_equals(_name_2, "bar");
-    /* object.eClass.name == 'bar' */
-    if (!_equals_2) {
-      sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
-    }
-    EClass _eClass_1 = object.eClass();
-    String _name_3 = _eClass_1.getName();
-    boolean _equals_3 = ObjectExtensions.operator_equals(_name_3, "bar");
-    /* object.eClass.name == 'bar' */
-    if (!_equals_3) {
-      sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
-    }
+  EClass _eClass = object.eClass();
+  String _name_2 = _eClass.getName();
+  boolean _equals_2 = Objects.equal(_name_2, "bar");
+  /* object.eClass.name == 'bar' */
+  if (!_equals_2) {
+    sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+  }
+  EClass _eClass_1 = object.eClass();
+  String _name_3 = _eClass_1.getName();
+  boolean _equals_3 = Objects.equal(_name_3, "bar");
+  /* object.eClass.name == 'bar' */
+  if (!_equals_3) {
+    sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
   }
 }'''
 			)
@@ -394,24 +429,20 @@ try {
   } catch (Exception e_1) {
     /* {G |- object.eClass : eClass object.eClass.name == 'bar'} or object.eClass.name == 'bar' */
     try {
-      boolean _xblockexpression = false;
-      {
-        /* G |- object.eClass : eClass */
-        EClass _eClass_2 = object.eClass();
-        typeInternal(G, _trace_, _eClass_2, eClass);
-        EClass _eClass_3 = object.eClass();
-        String _name = _eClass_3.getName();
-        boolean _equals = ObjectExtensions.operator_equals(_name, "bar");
-        /* object.eClass.name == 'bar' */
-        if (!_equals) {
-          sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
-        }
-        _xblockexpression = (_equals);
+      /* G |- object.eClass : eClass */
+      EClass _eClass_2 = object.eClass();
+      typeInternal(G, _trace_, _eClass_2, eClass);
+      EClass _eClass_3 = object.eClass();
+      String _name = _eClass_3.getName();
+      boolean _equals = Objects.equal(_name, "bar");
+      /* object.eClass.name == 'bar' */
+      if (!_equals) {
+        sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
     } catch (Exception e_2) {
       EClass _eClass_4 = object.eClass();
       String _name_1 = _eClass_4.getName();
-      boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, "bar");
+      boolean _equals_1 = Objects.equal(_name_1, "bar");
       /* object.eClass.name == 'bar' */
       if (!_equals_1) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
@@ -437,68 +468,66 @@ try {
 			testFiles.testRuleWithFeatureCalls,
 '''
 
-{
-  boolean _or = false;
-  String _string = new String();
-  boolean _equals = Objects.equal("foo", _string);
-  if (_equals) {
-    _or = true;
-  } else {
-    String _string_1 = new String();
-    boolean _equals_1 = Objects.equal("bar", _string_1);
-    _or = (_equals || _equals_1);
-  }
-  /* 'foo' == new String() || 'bar' == new String() */
-  if (!_or) {
-    sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");
-  }
-  boolean _and = false;
-  String _string_2 = new String();
-  boolean _equals_2 = Objects.equal("foo", _string_2);
-  if (!_equals_2) {
-    _and = false;
-  } else {
-    String _string_3 = new String();
-    boolean _equals_3 = Objects.equal("bar", _string_3);
-    _and = (_equals_2 && _equals_3);
-  }
-  /* 'foo' == new String() && 'bar' == new String() */
-  if (!_and) {
-    sneakyThrowRuleFailedException("\'foo\' == new String() && \'bar\' == new String()");
-  }
-  String _string_4 = new String();
-  String _firstUpper = StringExtensions.toFirstUpper("bar");
-  String _plus = (_string_4 + _firstUpper);
-  boolean _equals_4 = Objects.equal("foo", _plus);
-  /* 'foo' == new String() + 'bar'.toFirstUpper */
-  if (!_equals_4) {
-    sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
-  }
-  String _string_5 = new String();
-  String _firstUpper_1 = StringExtensions.toFirstUpper("bar");
-  String _plus_1 = (_string_5 + _firstUpper_1);
-  boolean _notEquals = (!Objects.equal("foo", _plus_1));
-  /* 'foo' != new String() + 'bar'.toFirstUpper */
-  if (!_notEquals) {
-    sneakyThrowRuleFailedException("\'foo\' != new String() + \'bar\'.toFirstUpper");
-  }
-  String _string_6 = new String();
-  String _firstUpper_2 = StringExtensions.toFirstUpper("bar");
-  final String temp = (_string_6 + _firstUpper_2);
-  boolean _contains = "foo".contains("f");
-  /* 'foo'.contains('f') */
-  if (!_contains) {
-    sneakyThrowRuleFailedException("\'foo\'.contains(\'f\')");
-  }
-  "foo".concat("f");
-  boolean _contains_1 = "foo".contains("f");
-  boolean _not = (!_contains_1);
-  /* !('foo'.contains('f')) */
-  if (!_not) {
-    sneakyThrowRuleFailedException("!(\'foo\'.contains(\'f\'))");
-  }
-  final EClass eC = EcoreFactory.eINSTANCE.createEClass();
-}'''
+boolean _or = false;
+String _string = new String();
+boolean _equals = Objects.equal("foo", _string);
+if (_equals) {
+  _or = true;
+} else {
+  String _string_1 = new String();
+  boolean _equals_1 = Objects.equal("bar", _string_1);
+  _or = (_equals || _equals_1);
+}
+/* 'foo' == new String() || 'bar' == new String() */
+if (!_or) {
+  sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");
+}
+boolean _and = false;
+String _string_2 = new String();
+boolean _equals_2 = Objects.equal("foo", _string_2);
+if (!_equals_2) {
+  _and = false;
+} else {
+  String _string_3 = new String();
+  boolean _equals_3 = Objects.equal("bar", _string_3);
+  _and = (_equals_2 && _equals_3);
+}
+/* 'foo' == new String() && 'bar' == new String() */
+if (!_and) {
+  sneakyThrowRuleFailedException("\'foo\' == new String() && \'bar\' == new String()");
+}
+String _string_4 = new String();
+String _firstUpper = StringExtensions.toFirstUpper("bar");
+String _plus = (_string_4 + _firstUpper);
+boolean _equals_4 = Objects.equal("foo", _plus);
+/* 'foo' == new String() + 'bar'.toFirstUpper */
+if (!_equals_4) {
+  sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
+}
+String _string_5 = new String();
+String _firstUpper_1 = StringExtensions.toFirstUpper("bar");
+String _plus_1 = (_string_5 + _firstUpper_1);
+boolean _notEquals = (!Objects.equal("foo", _plus_1));
+/* 'foo' != new String() + 'bar'.toFirstUpper */
+if (!_notEquals) {
+  sneakyThrowRuleFailedException("\'foo\' != new String() + \'bar\'.toFirstUpper");
+}
+String _string_6 = new String();
+String _firstUpper_2 = StringExtensions.toFirstUpper("bar");
+final String temp = (_string_6 + _firstUpper_2);
+boolean _contains = "foo".contains("f");
+/* 'foo'.contains('f') */
+if (!_contains) {
+  sneakyThrowRuleFailedException("\'foo\'.contains(\'f\')");
+}
+"foo".concat("f");
+boolean _contains_1 = "foo".contains("f");
+boolean _not = (!_contains_1);
+/* !('foo'.contains('f')) */
+if (!_not) {
+  sneakyThrowRuleFailedException("!(\'foo\'.contains(\'f\'))");
+}
+final EClass eC = EcoreFactory.eINSTANCE.createEClass();'''
 			)
 	}
 	
@@ -612,15 +641,13 @@ typeInternal(environmentComposition(
 			testFiles.testForFail,
 '''
 
-{
-  /* empty |- obj : eClass */
-  Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, obj);
-  checkAssignableTo(result.getFirst(), EClass.class);
-  eClass = (EClass) result.getFirst();
-  
-  /* fail */
-  throwForExplicitFail();
-}'''
+/* empty |- obj : eClass */
+Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, obj);
+checkAssignableTo(result.getFirst(), EClass.class);
+eClass = (EClass) result.getFirst();
+
+/* fail */
+throwForExplicitFail();'''
 			)
 	}
 	
@@ -650,53 +677,51 @@ typeInternal(environmentComposition(
 			testFiles.testForClosures,
 '''
 
-{
-  EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-  final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
-      public Boolean apply(final EStructuralFeature it) {
-        String _name = it.getName();
-        boolean _notEquals = (!Objects.equal(_name, "foo"));
-        return Boolean.valueOf(_notEquals);
+EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+    public Boolean apply(final EStructuralFeature it) {
+      String _name = it.getName();
+      boolean _notEquals = (!Objects.equal(_name, "foo"));
+      return Boolean.valueOf(_notEquals);
+    }
+  };
+boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
+/* eClass.EStructuralFeatures.forall [ it.name != 'foo' ] */
+if (!_forall) {
+  sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ it.name != \'foo\' ]");
+}
+EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
+final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
+    public Boolean apply(final EStructuralFeature it) {
+      String _name = it.getName();
+      boolean _notEquals = (!Objects.equal(_name, "foo"));
+      /* it.name != 'foo' */
+      if (!Boolean.valueOf(_notEquals)) {
+        sneakyThrowRuleFailedException("it.name != \'foo\'");
       }
-    };
-  boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
-  /* eClass.EStructuralFeatures.forall [ it.name != 'foo' ] */
-  if (!_forall) {
-    sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ it.name != \'foo\' ]");
-  }
-  EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-  final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
-      public Boolean apply(final EStructuralFeature it) {
-        String _name = it.getName();
-        boolean _notEquals = (!Objects.equal(_name, "foo"));
-        /* it.name != 'foo' */
-        if (!Boolean.valueOf(_notEquals)) {
-          sneakyThrowRuleFailedException("it.name != \'foo\'");
-        }
-        return Boolean.valueOf(_notEquals);
-      }
-    };
-  boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures_1, _function_1);
-  /* eClass.EStructuralFeatures.forall [ { it.name != 'foo' } ] */
-  if (!_forall_1) {
-    sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ { it.name != \'foo\' } ]");
-  }
-  EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
-  final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
-        /* G ||- it */
-        uselessInternal(G, _trace_, it);
-      }
-    };
-  IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);
-  EList<EStructuralFeature> _eStructuralFeatures_3 = eClass.getEStructuralFeatures();
-  EStructuralFeature _get = _eStructuralFeatures_3.get(0);
-  String _name = _get.getName();
-  boolean _notEquals = (!Objects.equal(_name, "foo"));
-  /* eClass.EStructuralFeatures.get(0).name != 'foo' */
-  if (!_notEquals) {
-    sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");
-  }
+      return Boolean.valueOf(_notEquals);
+    }
+  };
+boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures_1, _function_1);
+/* eClass.EStructuralFeatures.forall [ { it.name != 'foo' } ] */
+if (!_forall_1) {
+  sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ { it.name != \'foo\' } ]");
+}
+EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
+    public void apply(final EStructuralFeature it) {
+      /* G ||- it */
+      uselessInternal(G, _trace_, it);
+    }
+  };
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);
+EList<EStructuralFeature> _eStructuralFeatures_3 = eClass.getEStructuralFeatures();
+EStructuralFeature _get = _eStructuralFeatures_3.get(0);
+String _name = _get.getName();
+boolean _notEquals = (!Objects.equal(_name, "foo"));
+/* eClass.EStructuralFeatures.get(0).name != 'foo' */
+if (!_notEquals) {
+  sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");
 }'''
 			)
 	}

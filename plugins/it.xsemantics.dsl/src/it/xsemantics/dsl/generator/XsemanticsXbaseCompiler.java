@@ -110,7 +110,11 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 			}
 			if (isReferenced)
 				declareSyntheticVariable(expr, b);
-			b.append("\n{").increaseIndentation();
+			boolean needsBraces = isReferenced;
+			if (needsBraces) {
+				b.newLine().append("{").increaseIndentation();
+				b.openPseudoScope();
+			}
 			final EList<XExpression> expressions = expr.getExpressions();
 			for (int i = 0; i < expressions.size(); i++) {
 				XExpression ex = expressions.get(i);
@@ -125,7 +129,10 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 					b.append(");");
 				}
 			}
-			b.decreaseIndentation().append("\n}");
+			if (needsBraces) {
+				b.closeScope();
+				b.decreaseIndentation().newLine().append("}");
+			}
 		}
 	}
 	
@@ -304,7 +311,7 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
 		tryStmnt(b);
 
 		// make it referenced
-		compileBooleanXExpression(left, b, true);
+		compileBooleanXExpression(left, b, false);
 
 		catchStmnt(b, orExpression);
 

@@ -11,6 +11,7 @@ import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
+import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import java.util.Arrays;
@@ -183,8 +184,13 @@ public class CustomXbaseCompiler extends XbaseCompiler {
       if (isReferenced) {
         this.declareSyntheticVariable(expr, b);
       }
-      ITreeAppendable _append = b.append("\n{");
-      _append.increaseIndentation();
+      final boolean needsBraces = isReferenced;
+      if (needsBraces) {
+        ITreeAppendable _newLine = b.newLine();
+        ITreeAppendable _append = _newLine.append("{");
+        _append.increaseIndentation();
+        b.openPseudoScope();
+      }
       final EList<XExpression> expressions = expr.getExpressions();
       int i = 0;
       for (final XExpression ex : expressions) {
@@ -209,8 +215,12 @@ public class CustomXbaseCompiler extends XbaseCompiler {
           i = _plus;
         }
       }
-      ITreeAppendable _decreaseIndentation = b.decreaseIndentation();
-      _decreaseIndentation.append("\n}");
+      if (needsBraces) {
+        b.closeScope();
+        ITreeAppendable _decreaseIndentation = b.decreaseIndentation();
+        ITreeAppendable _newLine_1 = _decreaseIndentation.newLine();
+        _newLine_1.append("}");
+      }
     }
   }
   
@@ -279,6 +289,19 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     }
   }
   
+  protected void _doInternalToJavaStatement(final OrExpression orExpression, final ITreeAppendable b, final boolean isReferenced) {
+    this.generateCommentWithOriginalCode(orExpression, b);
+    EList<XExpression> _branches = orExpression.getBranches();
+    final XExpression left = _branches.get(0);
+    EList<XExpression> _branches_1 = orExpression.getBranches();
+    final XExpression right = _branches_1.get(1);
+    this.tryStmnt(b);
+    this.compileBooleanXExpression(left, b, false);
+    this.catchStmnt(b, orExpression);
+    this.compileBooleanXExpression(right, b, false);
+    this.closeBracket(b);
+  }
+  
   protected void _internalToConvertedExpression(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
     String _name = b.getName(environmentAccess);
     b.append(_name);
@@ -330,6 +353,38 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     b.append("}");
   }
   
+  public void tryStmnt(final ITreeAppendable b) {
+    this.newLine(b);
+    b.append("try {");
+    b.increaseIndentation();
+  }
+  
+  /**
+   * Also declares a RuleFailedException variable for the passed expressions
+   * 
+   * @param b
+   * @param expression
+   * @return
+   */
+  public String catchStmnt(final ITreeAppendable b, final XExpression expression) {
+    b.decreaseIndentation();
+    this.newLine(b);
+    b.append("} catch (");
+    JvmTypeReference _exceptionType = this._xsemanticsGeneratorExtensions.exceptionType(expression);
+    JvmType _type = _exceptionType.getType();
+    b.append(_type);
+    b.append(" ");
+    final String declareExceptionVariable = this.declareExceptionVariable(expression, b);
+    b.append(declareExceptionVariable);
+    b.append(") {");
+    b.increaseIndentation();
+    return declareExceptionVariable;
+  }
+  
+  public String declareExceptionVariable(final XExpression expression, final ITreeAppendable b) {
+    return b.declareSyntheticVariable(expression, "e");
+  }
+  
   public void generateJavaClassReference(final JvmTypeReference expressionType, final XExpression expression, final ITreeAppendable b) {
     JvmType _type = expressionType.getType();
     b.append(_type);
@@ -360,6 +415,9 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   public void doInternalToJavaStatement(final XExpression environmentAccess, final ITreeAppendable b, final boolean isReferenced) {
     if (environmentAccess instanceof EnvironmentAccess) {
       _doInternalToJavaStatement((EnvironmentAccess)environmentAccess, b, isReferenced);
+      return;
+    } else if (environmentAccess instanceof OrExpression) {
+      _doInternalToJavaStatement((OrExpression)environmentAccess, b, isReferenced);
       return;
     } else if (environmentAccess != null) {
       _doInternalToJavaStatement(environmentAccess, b, isReferenced);

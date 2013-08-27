@@ -7,6 +7,7 @@ import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
+import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import java.util.Set
@@ -137,7 +138,11 @@ class CustomXbaseCompiler extends XbaseCompiler {
 			}
 			if (isReferenced)
 				declareSyntheticVariable(expr, b);
-			b.append("\n{").increaseIndentation();
+			val needsBraces = isReferenced;
+			if (needsBraces) {
+				b.newLine().append("{").increaseIndentation();
+				b.openPseudoScope();
+			}
 			val expressions = expr.getExpressions();
 			var i = 0
 			for (ex : expressions) {
@@ -153,7 +158,10 @@ class CustomXbaseCompiler extends XbaseCompiler {
 				}
 				i = i + 1
 			}
-			b.decreaseIndentation().append("\n}");
+			if (needsBraces) {
+				b.closeScope();
+				b.decreaseIndentation().newLine().append("}");
+			}
 		}
 	}
 
@@ -229,6 +237,26 @@ class CustomXbaseCompiler extends XbaseCompiler {
 		}
 	}
 
+	def dispatch void doInternalToJavaStatement(OrExpression orExpression,
+			ITreeAppendable b, boolean isReferenced) {
+		generateCommentWithOriginalCode(orExpression, b);
+
+		val left = orExpression.getBranches().get(0);
+		val right = orExpression.getBranches().get(1);
+
+		tryStmnt(b);
+
+		// don't make it referenced: for blocks the type will be null
+		compileBooleanXExpression(left, b, false);
+
+		catchStmnt(b, orExpression);
+
+		// don't make it referenced: for blocks the type will be null
+		compileBooleanXExpression(right, b, false);
+
+		closeBracket(b);
+	}
+
 	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,
 			ITreeAppendable b) {
 		b.append(b.getName(environmentAccess));
@@ -272,6 +300,38 @@ class CustomXbaseCompiler extends XbaseCompiler {
 		b.decreaseIndentation();
 		newLine(b);
 		b.append("}");
+	}
+
+	def void tryStmnt(ITreeAppendable b) {
+		newLine(b);
+		b.append("try {");
+		b.increaseIndentation();
+	}
+
+	/**
+	 * Also declares a RuleFailedException variable for the passed expressions
+	 * 
+	 * @param b
+	 * @param expression
+	 * @return
+	 */
+	def String catchStmnt(ITreeAppendable b, XExpression expression) {
+		b.decreaseIndentation();
+		newLine(b);
+		b.append("} catch (");
+		b.append(expression.exceptionType().getType());
+		b.append(" ");
+		val declareExceptionVariable = declareExceptionVariable(
+				expression, b);
+		b.append(declareExceptionVariable);
+		b.append(") {");
+		b.increaseIndentation();
+		return declareExceptionVariable;
+	}
+
+	def String declareExceptionVariable(XExpression expression,
+			ITreeAppendable b) {
+		return b.declareSyntheticVariable(expression, "e");
 	}
 
 	def void generateJavaClassReference(
