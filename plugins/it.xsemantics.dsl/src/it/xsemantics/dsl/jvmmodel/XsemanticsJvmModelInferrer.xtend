@@ -547,7 +547,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		
 		aux.toMethod(
 			aux.throwExceptionMethod.toString,
-			null
+			Void::TYPE.getTypeForName(aux)
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -712,7 +712,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				rule.exceptionType.serialize(rule, it)
 				it.append(" ")
 				it.append('''''')
-				it.append('''e_«rule.applyRuleName») {''').increaseIndentation.newLine
+				it.append('''«rule.exceptionVarName») {''').increaseIndentation.newLine
    				rule.compileFinalThrow(it)
    				it.append(''';''').newLine
    				it.append('''return null;''').decreaseIndentation.newLine
@@ -765,7 +765,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileFinalThrow(Rule rule, ITreeAppendable b) {
 		if (rule.conclusion.error != null) {
 			b.append(
-			'''«rule.throwExceptionMethod»(«rule.inputParameterNames»)'''
+			'''«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»)'''
 			)
 //			val errorSpecification = rule.conclusion.error
 //			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
@@ -897,6 +897,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		) 
 		[
 			visibility = JvmVisibility::PRIVATE
+			
+			exceptions += rule.ruleFailedExceptionType
+			
+			parameters += rule.toParameter(rule.exceptionVarName,
+   				rule.exceptionType
+   			)
 			
    			parameters += rule.inputParameters
 

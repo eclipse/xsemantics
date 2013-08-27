@@ -1007,6 +1007,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       final XExpression errorSpecification = aux.getError();
       CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(aux);
       String _string = _throwExceptionMethod.toString();
+      JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, aux);
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
             it.setVisibility(JvmVisibility.PROTECTED);
@@ -1050,8 +1051,7 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmOperation _method = this._jvmTypesBuilder.toMethod(aux, _string, 
-        null, _function);
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(aux, _string, _typeForName, _function);
       _xblockexpression = (_method);
     }
     return _xblockexpression;
@@ -1320,9 +1320,8 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
                 StringConcatenation _builder_4 = new StringConcatenation();
                 it.append(_builder_4);
                 StringConcatenation _builder_5 = new StringConcatenation();
-                _builder_5.append("e_");
-                CharSequence _applyRuleName_1 = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.applyRuleName(rule);
-                _builder_5.append(_applyRuleName_1, "");
+                String _exceptionVarName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(rule);
+                _builder_5.append(_exceptionVarName, "");
                 _builder_5.append(") {");
                 ITreeAppendable _append_3 = it.append(_builder_5);
                 ITreeAppendable _increaseIndentation_1 = _append_3.increaseIndentation();
@@ -1475,6 +1474,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       CharSequence _throwExceptionMethod = this._xsemanticsGeneratorExtensions.throwExceptionMethod(rule);
       _builder.append(_throwExceptionMethod, "");
       _builder.append("(");
+      String _exceptionVarName = this._xsemanticsGeneratorExtensions.exceptionVarName(rule);
+      _builder.append(_exceptionVarName, "");
+      _builder.append(", ");
       String _inputParameterNames = this._xsemanticsGeneratorExtensions.inputParameterNames(rule);
       _builder.append(_inputParameterNames, "");
       _builder.append(")");
@@ -1728,9 +1730,17 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
             it.setVisibility(JvmVisibility.PRIVATE);
+            EList<JvmTypeReference> _exceptions = it.getExceptions();
+            JvmTypeReference _ruleFailedExceptionType = XsemanticsJvmModelInferrer.this.ruleFailedExceptionType(rule);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _ruleFailedExceptionType);
             EList<JvmFormalParameter> _parameters = it.getParameters();
+            String _exceptionVarName = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionVarName(rule);
+            JvmTypeReference _exceptionType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.exceptionType(rule);
+            JvmFormalParameter _parameter = XsemanticsJvmModelInferrer.this._jvmTypesBuilder.toParameter(rule, _exceptionVarName, _exceptionType);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+            EList<JvmFormalParameter> _parameters_1 = it.getParameters();
             List<JvmFormalParameter> _inputParameters = XsemanticsJvmModelInferrer.this.inputParameters(rule);
-            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _inputParameters);
+            XsemanticsJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters_1, _inputParameters);
             XsemanticsJvmModelInferrer.this._jvmTypesBuilder.setBody(it, errSpec);
           }
         };

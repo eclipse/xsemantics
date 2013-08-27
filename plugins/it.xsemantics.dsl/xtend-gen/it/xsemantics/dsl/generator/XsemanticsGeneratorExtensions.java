@@ -466,6 +466,14 @@ public class XsemanticsGeneratorExtensions {
     return _builder;
   }
   
+  public String exceptionVarName(final Rule rule) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("e_");
+    CharSequence _applyRuleName = this.applyRuleName(rule);
+    _builder.append(_applyRuleName, "");
+    return _builder.toString();
+  }
+  
   public String suffixStartingFrom2(final JudgmentDescription judgmentDescription) {
     String _xblockexpression = null;
     {

@@ -6,19 +6,23 @@ import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Environment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
+import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.OrExpression;
 import it.xsemantics.dsl.xsemantics.Rule;
+import it.xsemantics.dsl.xsemantics.RuleConclusion;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import java.util.Arrays;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -76,6 +80,21 @@ public class CustomXbaseCompiler extends XbaseCompiler {
         appendable.append("return new ");
         this._xsemanticsGeneratorExtensions.resultType(_checkRule, appendable);
         appendable.append("(true);");
+        return appendable;
+      }
+    }
+    boolean _matched_1 = false;
+    if (!_matched_1) {
+      if (obj instanceof ErrorSpecification) {
+        final ErrorSpecification _errorSpecification = (ErrorSpecification)obj;
+        _matched_1=true;
+        final String error = this.compileErrorOfErrorSpecification(_errorSpecification, appendable);
+        final String source = this.compileSourceOfErrorSpecification(_errorSpecification, appendable);
+        final String feature = this.compileFeatureOfErrorSpecification(_errorSpecification, appendable);
+        appendable.newLine();
+        EObject _eContainer = _errorSpecification.eContainer();
+        this.compileFinalPartOfThrowExceptionMethod(_eContainer, appendable, error, source, feature);
+        return appendable;
       }
     }
     return super.compile(obj, appendable, expectedReturnType, declaredExceptions);
@@ -98,6 +117,98 @@ public class CustomXbaseCompiler extends XbaseCompiler {
   protected void _compilePremises(final CheckRule rule, final ITreeAppendable result) {
     XExpression _premises = rule.getPremises();
     this.toJavaStatement(_premises, result, false);
+  }
+  
+  protected ITreeAppendable _compileFinalPartOfThrowExceptionMethod(final EObject o, final ITreeAppendable a, final String error, final String source, final String feature) {
+    ITreeAppendable _append = a.append("/* NOT IMPLEMENTED */");
+    return _append;
+  }
+  
+  protected ITreeAppendable _compileFinalPartOfThrowExceptionMethod(final JudgmentDescription judgmentDescription, final ITreeAppendable a, final String error, final String source, final String feature) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      CharSequence _throwRuleFailedExceptionMethod = this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+      _builder.append(_throwRuleFailedExceptionMethod, "");
+      _builder.append("(");
+      _builder.append(error, "");
+      _builder.append(",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("_issue, _ex, new ");
+      a.append(_builder);
+      JvmTypeReference _errorInformationType = this._xsemanticsGeneratorExtensions.errorInformationType(judgmentDescription);
+      this.serialize(_errorInformationType, judgmentDescription, a);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("(");
+      _builder_1.append(source, "");
+      _builder_1.append(", ");
+      _builder_1.append(feature, "");
+      _builder_1.append("));");
+      ITreeAppendable _append = a.append(_builder_1);
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
+  }
+  
+  protected ITreeAppendable _compileFinalPartOfThrowExceptionMethod(final RuleConclusion ruleConclusion, final ITreeAppendable a, final String error, final String source, final String feature) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      final Rule rule = this._xsemanticsUtils.containingRule(ruleConclusion);
+      StringConcatenation _builder = new StringConcatenation();
+      CharSequence _throwRuleFailedExceptionMethod = this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+      _builder.append(_throwRuleFailedExceptionMethod, "");
+      _builder.append("(");
+      _builder.append(error, "");
+      _builder.append(",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      String _ruleIssueString = this._xsemanticsGeneratorExtensions.ruleIssueString(rule);
+      _builder.append(_ruleIssueString, "	");
+      _builder.append(", e_");
+      CharSequence _applyRuleName = this._xsemanticsGeneratorExtensions.applyRuleName(rule);
+      _builder.append(_applyRuleName, "	");
+      _builder.append(", new ");
+      a.append(_builder);
+      JvmTypeReference _errorInformationType = this._xsemanticsGeneratorExtensions.errorInformationType(rule);
+      this.serialize(_errorInformationType, rule, a);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("(");
+      _builder_1.append(source, "");
+      _builder_1.append(", ");
+      _builder_1.append(feature, "");
+      _builder_1.append("));");
+      ITreeAppendable _append = a.append(_builder_1);
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
+  }
+  
+  protected ITreeAppendable _compileFinalPartOfThrowExceptionMethod(final AuxiliaryDescription aux, final ITreeAppendable a, final String error, final String source, final String feature) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      CharSequence _throwRuleFailedExceptionMethod = this._xsemanticsGeneratorExtensions.throwRuleFailedExceptionMethod();
+      _builder.append(_throwRuleFailedExceptionMethod, "");
+      _builder.append("(");
+      _builder.append(error, "");
+      _builder.append(",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("_issue, _ex, new ");
+      a.append(_builder);
+      JvmTypeReference _errorInformationType = this._xsemanticsGeneratorExtensions.errorInformationType(aux);
+      this.serialize(_errorInformationType, aux, a);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("(");
+      _builder_1.append(source, "");
+      _builder_1.append(", ");
+      _builder_1.append(feature, "");
+      _builder_1.append("));");
+      ITreeAppendable _append = a.append(_builder_1);
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
   }
   
   public String compileErrorOfErrorSpecification(final ErrorSpecification errorSpecification, final ITreeAppendable b) {
@@ -302,6 +413,38 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     this.closeBracket(b);
   }
   
+  protected void _doInternalToJavaStatement(final Fail fail, final ITreeAppendable b, final boolean isReference) {
+    this.generateCommentWithOriginalCode(fail, b);
+    final XExpression errorSpecification = fail.getError();
+    boolean _equals = Objects.equal(errorSpecification, null);
+    if (_equals) {
+      this.newLine(b);
+      b.append("throwForExplicitFail();");
+    } else {
+      this.toJavaStatement(errorSpecification, b, isReference);
+    }
+  }
+  
+  protected void _doInternalToJavaStatement(final ErrorSpecification errorSpecification, final ITreeAppendable b, final boolean isReference) {
+    final String errorMessageVar = this.compileErrorOfErrorSpecification(errorSpecification, b);
+    final String sourceVar = this.compileSourceOfErrorSpecification(errorSpecification, b);
+    final String featureVar = this.compileFeatureOfErrorSpecification(errorSpecification, b);
+    this.newLine(b);
+    b.append("throwForExplicitFail(");
+    b.append(errorMessageVar);
+    this.comma(b);
+    b.append("new ");
+    JvmTypeReference _errorInformationType = this._xsemanticsGeneratorExtensions.errorInformationType(errorSpecification);
+    JvmType _type = _errorInformationType.getType();
+    b.append(_type);
+    b.append("(");
+    b.append(sourceVar);
+    this.comma(b);
+    b.append(featureVar);
+    b.append(")");
+    b.append(");");
+  }
+  
   protected void _internalToConvertedExpression(final EnvironmentAccess environmentAccess, final ITreeAppendable b) {
     String _name = b.getName(environmentAccess);
     b.append(_name);
@@ -412,9 +555,30 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     }
   }
   
+  public ITreeAppendable compileFinalPartOfThrowExceptionMethod(final EObject aux, final ITreeAppendable a, final String error, final String source, final String feature) {
+    if (aux instanceof AuxiliaryDescription) {
+      return _compileFinalPartOfThrowExceptionMethod((AuxiliaryDescription)aux, a, error, source, feature);
+    } else if (aux instanceof JudgmentDescription) {
+      return _compileFinalPartOfThrowExceptionMethod((JudgmentDescription)aux, a, error, source, feature);
+    } else if (aux instanceof RuleConclusion) {
+      return _compileFinalPartOfThrowExceptionMethod((RuleConclusion)aux, a, error, source, feature);
+    } else if (aux != null) {
+      return _compileFinalPartOfThrowExceptionMethod(aux, a, error, source, feature);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(aux, a, error, source, feature).toString());
+    }
+  }
+  
   public void doInternalToJavaStatement(final XExpression environmentAccess, final ITreeAppendable b, final boolean isReferenced) {
     if (environmentAccess instanceof EnvironmentAccess) {
       _doInternalToJavaStatement((EnvironmentAccess)environmentAccess, b, isReferenced);
+      return;
+    } else if (environmentAccess instanceof ErrorSpecification) {
+      _doInternalToJavaStatement((ErrorSpecification)environmentAccess, b, isReferenced);
+      return;
+    } else if (environmentAccess instanceof Fail) {
+      _doInternalToJavaStatement((Fail)environmentAccess, b, isReferenced);
       return;
     } else if (environmentAccess instanceof OrExpression) {
       _doInternalToJavaStatement((OrExpression)environmentAccess, b, isReferenced);

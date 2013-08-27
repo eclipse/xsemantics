@@ -4,11 +4,15 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
+import it.xsemantics.dsl.xsemantics.Fail
+import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.xsemantics.RuleConclusion
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
@@ -42,7 +46,24 @@ class CustomXbaseCompiler extends XbaseCompiler {
 				appendable.append("return new ")
 				rule.resultType(appendable)
 				appendable.append("(true);")
-			}			
+				
+				return appendable
+			}
+		}
+		
+		switch (obj) {
+			ErrorSpecification: {
+				val error = compileErrorOfErrorSpecification(obj, appendable)
+				val source = compileSourceOfErrorSpecification(obj, appendable)
+				val feature = compileFeatureOfErrorSpecification(obj, appendable)
+   				
+   				appendable.newLine
+
+   				obj.eContainer.compileFinalPartOfThrowExceptionMethod
+   					(appendable, error, source, feature)
+   				
+   				return appendable
+			}	
 		}
 		
 		return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
@@ -64,6 +85,39 @@ class CustomXbaseCompiler extends XbaseCompiler {
 
 	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
 		toJavaStatement(rule.premises, result, false)
+	}
+	
+	def dispatch compileFinalPartOfThrowExceptionMethod(EObject o, 
+			ITreeAppendable a, String error, String source, String feature) {
+		a.append("/* NOT IMPLEMENTED */")
+	}
+
+	def dispatch compileFinalPartOfThrowExceptionMethod(JudgmentDescription judgmentDescription, 
+			ITreeAppendable a, String error, String source, String feature) {
+		a.append('''
+			«throwRuleFailedExceptionMethod»(«error»,
+				_issue, _ex, new ''')
+		judgmentDescription.errorInformationType.serialize(judgmentDescription, a)
+		a.append('''(«source», «feature»));''')
+	}
+
+	def dispatch compileFinalPartOfThrowExceptionMethod(RuleConclusion ruleConclusion,
+			ITreeAppendable a, String error, String source, String feature) {
+		val rule = ruleConclusion.containingRule
+		a.append('''
+   					«throwRuleFailedExceptionMethod»(«error»,
+   						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
+		rule.errorInformationType.serialize(rule, a)
+		a.append('''(«source», «feature»));''')
+	}
+
+	def dispatch compileFinalPartOfThrowExceptionMethod(AuxiliaryDescription aux,
+			ITreeAppendable a, String error, String source, String feature) {
+		a.append('''
+			«throwRuleFailedExceptionMethod»(«error»,
+				_issue, _ex, new ''')
+		aux.errorInformationType.serialize(aux, a)
+		a.append('''(«source», «feature»));''')
 	}
 	
 	def String compileErrorOfErrorSpecification(
@@ -255,6 +309,40 @@ class CustomXbaseCompiler extends XbaseCompiler {
 		compileBooleanXExpression(right, b, false);
 
 		closeBracket(b);
+	}
+
+	def dispatch void doInternalToJavaStatement(Fail fail, ITreeAppendable b,
+			boolean isReference) {
+		generateCommentWithOriginalCode(fail, b);
+		val errorSpecification = fail.getError();
+		if (errorSpecification == null) {
+			newLine(b);
+			b.append("throwForExplicitFail();");
+		} else {
+			toJavaStatement(errorSpecification, b, isReference);
+		}
+	}
+
+	def dispatch void doInternalToJavaStatement(ErrorSpecification errorSpecification, ITreeAppendable b,
+			boolean isReference) {
+		val errorMessageVar = compileErrorOfErrorSpecification(
+				errorSpecification, b);
+		val sourceVar = compileSourceOfErrorSpecification(
+				errorSpecification, b);
+		val featureVar = compileFeatureOfErrorSpecification(
+				errorSpecification, b);
+		newLine(b);
+		b.append("throwForExplicitFail(");
+		b.append(errorMessageVar);
+		comma(b);
+		b.append("new ");
+		b.append(errorSpecification.errorInformationType().getType());
+		b.append("(");
+		b.append(sourceVar);
+		comma(b);
+		b.append(featureVar);
+		b.append(")");
+		b.append(");");
 	}
 
 	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,

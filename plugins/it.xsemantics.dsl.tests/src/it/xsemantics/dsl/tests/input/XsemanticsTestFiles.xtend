@@ -1926,6 +1926,15 @@ class XsemanticsTestFiles {
 			source left
 	from { fail }
 	
+	// this rule fails with its own error specification
+	rule SubtypeEStructuralFeature
+		G |- EStructuralFeature left <: EObject right
+	from { 
+		fail
+			error "Unhandled case"
+			source left
+	}
+	
 	rule SubtypeEClass
 		G |- EClass left <: EClass right
 	from { right.isSuperTypeOf(left) }

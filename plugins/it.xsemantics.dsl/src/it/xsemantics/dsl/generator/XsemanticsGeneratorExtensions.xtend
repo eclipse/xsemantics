@@ -212,6 +212,10 @@ class XsemanticsGeneratorExtensions {
 		'''_e_«aux.name»'''
 	}
 
+	def String exceptionVarName(Rule rule) {
+		'''e_«rule.applyRuleName»'''
+	}
+
 	def suffixStartingFrom2(JudgmentDescription judgmentDescription) {
 		val numOfOutputParams = judgmentDescription.outputJudgmentParameters.size();
 		if (numOfOutputParams > 1)

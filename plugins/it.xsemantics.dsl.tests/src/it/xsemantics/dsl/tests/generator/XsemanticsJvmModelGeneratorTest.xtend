@@ -599,7 +599,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _plus = ("this " + c);
     String _plus_1 = (_plus + " made an error!");
     String error = _plus_1;
@@ -2254,6 +2253,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   public final static String SUBTYPEEOBJECT = "it.xsemantics.test.rules.SubtypeEObject";
   
+  public final static String SUBTYPEESTRUCTURALFEATURE = "it.xsemantics.test.rules.SubtypeEStructuralFeature";
+  
   public final static String SUBTYPEECLASS = "it.xsemantics.test.rules.SubtypeEClass";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
@@ -2314,7 +2315,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _plus = ("this " + c);
     String _plus_1 = (_plus + " made an error!");
     String error = _plus_1;
@@ -2357,8 +2357,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleTypeEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleTypeEObject_1(G, o));
+  }
+  
+  private EClass _applyRuleTypeEObject_1(final RuleEnvironment G, final EObject o) throws RuleFailedException {
     EClass _eClass = o.eClass();
-    return new Result<EClass>(_eClass);
+    return _eClass;
   }
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
@@ -2369,21 +2373,28 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTypeEClass) {
-      
-      String error = "unexpected error!";
-      EObject source = c;
-      EClass _eClass = c.eClass();
-      EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
-      EStructuralFeature feature = _eContainingFeature;
-      throwRuleFailedException(error,
-      	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));
+      typeEClassThrowException(e_applyRuleTypeEClass, c);
       return null;
     }
   }
   
   protected Result<EClass> applyRuleTypeEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
     
-    return new Result<EClass>(c);
+    return new Result<EClass>(_applyRuleTypeEClass_1(G, c));
+  }
+  
+  private EClass _applyRuleTypeEClass_1(final RuleEnvironment G, final EClass c) throws RuleFailedException {
+    return c;
+  }
+  
+  private void typeEClassThrowException(final Exception e_applyRuleTypeEClass, final EClass c) throws RuleFailedException {
+    String error = "unexpected error!";
+    EObject source = c;
+    EClass _eClass = c.eClass();
+    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));
   }
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
@@ -2394,19 +2405,44 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleSubtypeEObject) {
-      
-      String error = "Unhandled case";
-      EObject source = left;
-      throwRuleFailedException(error,
-      	SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));
+      subtypeEObjectThrowException(e_applyRuleSubtypeEObject, left, right);
       return null;
     }
   }
   
   protected Result<Boolean> applyRuleSubtypeEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
-    
     /* fail */
     throwForExplicitFail();
+    return new Result<Boolean>(true);
+  }
+  
+  private void subtypeEObjectThrowException(final Exception e_applyRuleSubtypeEObject, final EObject left, final EObject right) throws RuleFailedException {
+    String error = "Unhandled case";
+    EObject source = left;
+    throwRuleFailedException(error,
+    	SUBTYPEEOBJECT, e_applyRuleSubtypeEObject, new ErrorInformation(source, null));
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EStructuralFeature left, final EObject right) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleSubtypeEStructuralFeature(G, _subtrace_, left, right);
+      addToTrace(_trace_, ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleSubtypeEStructuralFeature) {
+      subtypeThrowException(ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+      	SUBTYPEESTRUCTURALFEATURE,
+      	e_applyRuleSubtypeEStructuralFeature, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubtypeEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EStructuralFeature left, final EObject right) throws RuleFailedException {
+    /* fail error "Unhandled case" source left */
+    String error = "Unhandled case";
+    EObject source = left;
+    throwForExplicitFail(error, new ErrorInformation(source, null));
     return new Result<Boolean>(true);
   }
   
@@ -2426,10 +2462,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleSubtypeEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
-    
     boolean _isSuperTypeOf = right.isSuperTypeOf(left);
     /* right.isSuperTypeOf(left) */
-    if (!Boolean.valueOf(_isSuperTypeOf)) {
+    if (!_isSuperTypeOf) {
       sneakyThrowRuleFailedException("right.isSuperTypeOf(left)");
     }
     return new Result<Boolean>(true);
@@ -2500,6 +2535,7 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 '''
 package it.xsemantics.test;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleFailedException;
@@ -2508,7 +2544,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -2611,7 +2646,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void objectClassThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String error = "error in objectClass";
     EObject source = o;
     throwRuleFailedException(error,
@@ -2635,7 +2669,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     EClass _eClass = eO.eClass();
-    boolean _equals = ObjectExtensions.operator_equals(_eClass, eC);
+    boolean _equals = Objects.equal(_eClass, eC);
     /* eO.eClass == eC */
     if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("eO.eClass == eC");
