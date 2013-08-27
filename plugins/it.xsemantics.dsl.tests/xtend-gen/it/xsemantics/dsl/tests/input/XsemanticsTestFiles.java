@@ -3437,7 +3437,7 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
-  public CharSequence testTwoExpressionsInConclusion() {
+  public CharSequence testAxiomWithTwoExpressionsInConclusion() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testJudgmentDescriptionsWith2OutputParams();
     _builder.append(_testJudgmentDescriptionsWith2OutputParams, "");
@@ -3447,6 +3447,27 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("G |- EClass cl : cl : cl.EAllStructuralFeatures.head");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testRuleWithTwoExpressionsInConclusion() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsWith2OutputParams = this.testJudgmentDescriptionsWith2OutputParams();
+    _builder.append(_testJudgmentDescriptionsWith2OutputParams, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule TwoExpressionsInConclusion");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass cl : cl : cl.EAllStructuralFeatures.head");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(cl.name)");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     return _builder;
   }

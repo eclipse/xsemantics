@@ -1679,6 +1679,9 @@ public class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
         public void apply(final ITreeAppendable it) {
           XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.declareVariablesForOutputParams(rule, it);
+          JudgmentDescription _judgmentDescription = XsemanticsJvmModelInferrer.this._xsemanticsUtils.judgmentDescription(rule);
+          JvmTypeReference _resultType = XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.resultType(_judgmentDescription);
+          XsemanticsJvmModelInferrer.this._xsemanticsGeneratorExtensions.compileReturnResult(rule, _resultType, it);
         }
       };
     this._jvmTypesBuilder.setBody(logicalContainer, _function);

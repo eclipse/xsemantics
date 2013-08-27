@@ -861,6 +861,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
 		logicalContainer.body = [
 	   		rule.declareVariablesForOutputParams(it)
+	   		rule.compileReturnResult(rule.judgmentDescription.resultType, it)
 	   	]
 	}
 

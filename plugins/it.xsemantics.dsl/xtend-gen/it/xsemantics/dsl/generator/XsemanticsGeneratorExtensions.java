@@ -1084,4 +1084,66 @@ public class XsemanticsGeneratorExtensions {
     }
     return _xblockexpression;
   }
+  
+  public ITreeAppendable compileReturnResult(final Rule rule, final JvmTypeReference resultType, final ITreeAppendable result) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      final List<RuleConclusionElement> expressions = this._xsemanticsUtils.outputConclusionElements(rule);
+      String _string = result.toString();
+      boolean _isEmpty = _string.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        result.append("\n");
+      }
+      result.append("return new ");
+      this._typeReferenceSerializer.serialize(resultType, rule, result);
+      result.append("(");
+      int _size = expressions.size();
+      boolean _equals = (_size == 0);
+      if (_equals) {
+        result.append("true");
+      } else {
+        final Iterator<RuleConclusionElement> iterator = expressions.iterator();
+        boolean _hasNext = iterator.hasNext();
+        boolean _while = _hasNext;
+        while (_while) {
+          {
+            final RuleConclusionElement elem = iterator.next();
+            boolean _matched = false;
+            if (!_matched) {
+              if (elem instanceof RuleParameter) {
+                final RuleParameter _ruleParameter = (RuleParameter)elem;
+                _matched=true;
+                JvmFormalParameter _parameter = _ruleParameter.getParameter();
+                String _name = result.getName(_parameter);
+                result.append(_name);
+              }
+            }
+            if (!_matched) {
+              if (elem instanceof ExpressionInConclusion) {
+                final ExpressionInConclusion _expressionInConclusion = (ExpressionInConclusion)elem;
+                _matched=true;
+                String _expressionInConclusionMethodName = this.expressionInConclusionMethodName(_expressionInConclusion);
+                String _plus = (_expressionInConclusionMethodName + 
+                  "(");
+                String _inputParameterNames = this.inputParameterNames(rule);
+                String _plus_1 = (_plus + _inputParameterNames);
+                String _plus_2 = (_plus_1 + ")");
+                result.append(_plus_2);
+              }
+            }
+            boolean _hasNext_1 = iterator.hasNext();
+            if (_hasNext_1) {
+              result.append(", ");
+            }
+          }
+          boolean _hasNext_1 = iterator.hasNext();
+          _while = _hasNext_1;
+        }
+      }
+      ITreeAppendable _append = result.append(");");
+      _xblockexpression = (_append);
+    }
+    return _xblockexpression;
+  }
 }

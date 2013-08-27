@@ -923,8 +923,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	}
 
 	@Test
-	def testExpressionsInConclusion() {
-		testFiles.testTwoExpressionsInConclusion.assertCorrectJavaCodeGeneration(
+	def testAxiomWithTwoExpressionsInConclusion() {
+		testFiles.testAxiomWithTwoExpressionsInConclusion.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
@@ -1003,9 +1003,117 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject,EStructuralFeature> applyRuleTwoExpressionsInConclusion(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
     
+    return new Result2<EObject,EStructuralFeature>(_applyRuleTwoExpressionsInConclusion_1(cl), _applyRuleTwoExpressionsInConclusion_2(cl));
+  }
+  
+  private EClass _applyRuleTwoExpressionsInConclusion_1(final EClass cl) {
+    return cl;
+  }
+  
+  private EStructuralFeature _applyRuleTwoExpressionsInConclusion_2(final EClass cl) {
     EList<EStructuralFeature> _eAllStructuralFeatures = cl.getEAllStructuralFeatures();
     EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eAllStructuralFeatures);
-    return new Result2<EObject,EStructuralFeature>(cl, _head);
+    return _head;
+  }
+}
+'''
+		)
+	}
+
+	@Test
+	def testRuleWithTwoExpressionsInConclusion() {
+		testFiles.testRuleWithTwoExpressionsInConclusion.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String TWOEXPRESSIONSINCONCLUSION = "it.xsemantics.test.rules.TwoExpressionsInConclusion";
+  
+  private PolymorphicDispatcher<Result2<EObject,EStructuralFeature>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher2(
+    	"typeImpl", 3, "|-", ":", ":");
+  }
+  
+  public Result2<EObject,EStructuralFeature> type(final EClass c) {
+    return type(new RuleEnvironment(), null, c);
+  }
+  
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final EClass c) {
+    return type(_environment_, null, c);
+  }
+  
+  public Result2<EObject,EStructuralFeature> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    try {
+    	return typeInternal(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	return resultForFailure2(_e_type);
+    }
+  }
+  
+  protected Result2<EObject,EStructuralFeature> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
+    try {
+    	checkParamsNotNull(c);
+    	return typeDispatcher.invoke(_environment_, _trace_, c);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result2<EObject,EStructuralFeature> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result2<EObject,EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
+      addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleTwoExpressionsInConclusion) {
+      typeThrowException(ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + "EClass" + " : " + "EStructuralFeature",
+      	TWOEXPRESSIONSINCONCLUSION,
+      	e_applyRuleTwoExpressionsInConclusion, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+      return null;
+    }
+  }
+  
+  protected Result2<EObject,EStructuralFeature> applyRuleTwoExpressionsInConclusion(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
+    String _name = cl.getName();
+    InputOutput.<String>println(_name);
+    return new Result2<EObject,EStructuralFeature>(_applyRuleTwoExpressionsInConclusion_1(cl), _applyRuleTwoExpressionsInConclusion_2(cl));
+  }
+  
+  private EClass _applyRuleTwoExpressionsInConclusion_1(final EClass cl) {
+    return cl;
+  }
+  
+  private EStructuralFeature _applyRuleTwoExpressionsInConclusion_2(final EClass cl) {
+    EList<EStructuralFeature> _eAllStructuralFeatures = cl.getEAllStructuralFeatures();
+    EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eAllStructuralFeatures);
+    return _head;
   }
 }
 '''
@@ -1143,6 +1251,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleEObjectEClass_1(o));
+  }
+  
+  private EClass _applyRuleEObjectEClass_1(final EObject o) {
     EClass _xblockexpression = null;
     {
       InputOutput.<TypeSystem>println(this);
@@ -1150,7 +1262,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       EClass _eClass = _clone.eClass();
       _xblockexpression = (_eClass);
     }
-    return new Result<EClass>(_xblockexpression);
+    return _xblockexpression;
   }
 }
 '''
@@ -1287,8 +1399,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleEObjectEClass_1(o));
+  }
+  
+  private EClass _applyRuleEObjectEClass_1(final EObject o) {
     EClass _get = this.classes.get(0);
-    return new Result<EClass>(_get);
+    return _get;
   }
 }
 '''

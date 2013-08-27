@@ -1533,11 +1533,21 @@ class XsemanticsTestFiles {
 		}
 	'''
 
-	def testTwoExpressionsInConclusion() '''
+	def testAxiomWithTwoExpressionsInConclusion() '''
 	«testJudgmentDescriptionsWith2OutputParams»
 	
 	axiom TwoExpressionsInConclusion
 		G |- EClass cl : cl : cl.EAllStructuralFeatures.head
+	'''
+
+	def testRuleWithTwoExpressionsInConclusion() '''
+	«testJudgmentDescriptionsWith2OutputParams»
+	
+	rule TwoExpressionsInConclusion
+		G |- EClass cl : cl : cl.EAllStructuralFeatures.head
+	from {
+		println(cl.name)
+	}
 	'''
 
 	def testSystemWithValidatorExtends() '''

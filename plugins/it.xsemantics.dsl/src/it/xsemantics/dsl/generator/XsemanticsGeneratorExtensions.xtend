@@ -467,4 +467,36 @@ class XsemanticsGeneratorExtensions {
 		containingRule.conclusion.conclusionElements.indexOf(e)
 	}
 
+	def compileReturnResult(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
+		val expressions = rule.outputConclusionElements
+		
+		if (!result.toString.empty)
+			result.append("\n")
+		result.append("return new ")
+		resultType.serialize(rule, result)
+		result.append("(")
+		
+		if (expressions.size() == 0)
+			result.append("true")
+		else {
+			val iterator = expressions.iterator()
+			while (iterator.hasNext) {
+				val elem = iterator.next
+				switch elem {
+					RuleParameter: 
+						result.append(result.getName(elem.parameter))
+					ExpressionInConclusion: 
+						result.append(
+						elem.expressionInConclusionMethodName +
+						"(" + rule.inputParameterNames + ")"
+						)
+				}
+				if (iterator.hasNext)
+					result.append(", ")
+			}
+		}
+		result.append(");")
+	}
+
+
 }
