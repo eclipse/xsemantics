@@ -1040,8 +1040,8 @@ public class XsemanticsGeneratorExtensions {
     List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
     final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
         public void apply(final RuleParameter it) {
-          ITreeAppendable _declareVariableForOutputParam = XsemanticsGeneratorExtensions.this.declareVariableForOutputParam(it, appendable);
-          _declareVariableForOutputParam.append("\n");
+          appendable.append("\n");
+          XsemanticsGeneratorExtensions.this.declareVariableForOutputParam(it, appendable);
         }
       };
     IterableExtensions.<RuleParameter>forEach(_outputParams, _function);

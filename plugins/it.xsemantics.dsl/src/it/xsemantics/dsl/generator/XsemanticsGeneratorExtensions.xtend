@@ -448,7 +448,8 @@ class XsemanticsGeneratorExtensions {
 
 	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
 		rule.outputParams.forEach([
-			it.declareVariableForOutputParam(appendable).append("\n")
+			appendable.append("\n")
+			it.declareVariableForOutputParam(appendable)
 		])
 	}
 	
