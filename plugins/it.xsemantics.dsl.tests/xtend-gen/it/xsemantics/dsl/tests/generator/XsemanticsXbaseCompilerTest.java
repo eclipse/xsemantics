@@ -960,10 +960,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     _builder.newLine();
     _builder.append("String _instanceClassName = _environmentaccess.getInstanceClassName();");
     _builder.newLine();
-    _builder.append("/* ObjectExtensions.operator_equals(");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("\"foo\", _instanceClassName); */");
+    _builder.append("/* Objects.equal(\"foo\", _instanceClassName); */");
     this.checkCompilationOfXExpression(_testWithEnvironmentAccess, 4, _builder);
   }
   

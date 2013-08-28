@@ -560,8 +560,7 @@ environmentAccess(G, _name, EClass.class);'''
 String _name = eClass.getName();
 EClass _environmentaccess = environmentAccess(G, _name, EClass.class);
 String _instanceClassName = _environmentaccess.getInstanceClassName();
-/* ObjectExtensions.operator_equals(
-  "foo", _instanceClassName); */'''
+/* Objects.equal("foo", _instanceClassName); */'''
 		)
 	}
 	

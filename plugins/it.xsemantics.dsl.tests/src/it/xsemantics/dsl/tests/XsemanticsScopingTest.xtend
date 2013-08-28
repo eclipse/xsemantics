@@ -14,6 +14,7 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import org.eclipse.xtext.xbase.XFeatureCall
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -93,6 +94,18 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 		val envMapping = ruleInvk.environment as EnvironmentMapping
 		val feature = (envMapping.value as XFeatureCall).feature
 		"object".assertEqualsStrings(
+			feature.identifier
+		)
+	}
+
+	@Test
+	def void testScopingForEnvironmentAccess() {
+		val system = testFiles.
+			testWithEnvironmentAccess.parse
+		val xBlockExpression = (system.rules.head as RuleWithPremises).premises as XBlockExpression
+		val envAccess = xBlockExpression.expressions.get(3) as EnvironmentAccess
+		val feature = (envAccess.argument as XMemberFeatureCall).feature
+		"org.eclipse.emf.ecore.ENamedElement.getName()".assertEqualsStrings(
 			feature.identifier
 		)
 	}

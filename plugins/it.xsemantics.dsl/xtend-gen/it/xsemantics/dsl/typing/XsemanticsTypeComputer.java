@@ -281,6 +281,9 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   }
   
   protected void _computeTypes(final EnvironmentAccess exp, final ITypeComputationState state) {
+    XExpression _argument = exp.getArgument();
+    ITypeComputationState _withoutExpectation = state.withoutExpectation();
+    this.computeTypes(_argument, _withoutExpectation);
     OwnedConverter _converter = state.getConverter();
     JvmTypeReference _type = exp.getType();
     LightweightTypeReference _lightweightReference = _converter.toLightweightReference(_type);

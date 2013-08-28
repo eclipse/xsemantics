@@ -3,6 +3,7 @@ package it.xsemantics.dsl.tests;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping;
 import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
@@ -132,5 +133,22 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     final JvmIdentifiableElement feature = ((XFeatureCall) _value).getFeature();
     String _identifier = feature.getIdentifier();
     this.assertEqualsStrings("object", _identifier);
+  }
+  
+  @Test
+  public void testScopingForEnvironmentAccess() {
+    CharSequence _testWithEnvironmentAccess = this.testFiles.testWithEnvironmentAccess();
+    final XsemanticsSystem system = this.parse(_testWithEnvironmentAccess);
+    EList<Rule> _rules = system.getRules();
+    Rule _head = IterableExtensions.<Rule>head(_rules);
+    XExpression _premises = ((RuleWithPremises) _head).getPremises();
+    final XBlockExpression xBlockExpression = ((XBlockExpression) _premises);
+    EList<XExpression> _expressions = xBlockExpression.getExpressions();
+    XExpression _get = _expressions.get(3);
+    final EnvironmentAccess envAccess = ((EnvironmentAccess) _get);
+    XExpression _argument = envAccess.getArgument();
+    final JvmIdentifiableElement feature = ((XMemberFeatureCall) _argument).getFeature();
+    String _identifier = feature.getIdentifier();
+    this.assertEqualsStrings("org.eclipse.emf.ecore.ENamedElement.getName()", _identifier);
   }
 }

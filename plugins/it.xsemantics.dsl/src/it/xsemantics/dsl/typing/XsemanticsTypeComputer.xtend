@@ -161,6 +161,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected def _computeTypes(EnvironmentAccess exp, ITypeComputationState state) {
+		exp.argument.computeTypes(state.withoutExpectation)
 		state.acceptActualType(state.converter.
 			toLightweightReference(exp.type))
 	}
