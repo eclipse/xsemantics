@@ -24,7 +24,7 @@ auxiliary {
 	superclasses(Class cl) : List<Class>
 	fields(Class cl) : List<Field>
 	methods(Class cl) : List<Method>
-	overrides(Method current, Method previous)
+	overrides(Method current, Method previous) 
 		error current.name + " does not override the superclass method"
 		source current
 	isValue(Expression e) : Boolean
@@ -162,8 +162,9 @@ axiom TIntConstant
 axiom TBoolConstant
 	G |- BoolConstant b : 
 	[ 
-		it.basic='boolean'
-		it
+	    BasicType t |
+		t.basic='boolean'
+		t
 	].apply(FjFactory::eINSTANCE.createBasicType())
 
 rule TSelection
