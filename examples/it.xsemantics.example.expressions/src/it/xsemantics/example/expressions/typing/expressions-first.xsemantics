@@ -7,7 +7,26 @@ system it.xsemantics.example.expressions.typing.ExpressionsSemantics
 
 validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
 
-import it.xsemantics.example.expressions.expressions.*
+import it.xsemantics.example.expressions.expressions.AndOrExpression
+import it.xsemantics.example.expressions.expressions.ArithmeticSigned
+import it.xsemantics.example.expressions.expressions.BooleanLiteral
+import it.xsemantics.example.expressions.expressions.BooleanNegation
+import it.xsemantics.example.expressions.expressions.BooleanType
+import it.xsemantics.example.expressions.expressions.Comparison
+import it.xsemantics.example.expressions.expressions.Equals
+import it.xsemantics.example.expressions.expressions.Expression
+import it.xsemantics.example.expressions.expressions.ExpressionsFactory
+import it.xsemantics.example.expressions.expressions.ExpressionsPackage
+import it.xsemantics.example.expressions.expressions.IntType
+import it.xsemantics.example.expressions.expressions.Minus
+import it.xsemantics.example.expressions.expressions.MultiOrDiv
+import it.xsemantics.example.expressions.expressions.NumberLiteral
+import it.xsemantics.example.expressions.expressions.Plus
+import it.xsemantics.example.expressions.expressions.StringLiteral
+import it.xsemantics.example.expressions.expressions.StringType
+import it.xsemantics.example.expressions.expressions.Type
+import it.xsemantics.example.expressions.expressions.Variable
+import it.xsemantics.example.expressions.expressions.VariableReference
 
 judgments {
 	type |- Expression expression : output Type

@@ -6,7 +6,21 @@
 system it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics
 	extends it.xsemantics.example.expressions.typing.ExpressionsSemantics
 
-import it.xsemantics.example.expressions.expressions.*
+import it.xsemantics.example.expressions.expressions.AndOrExpression
+import it.xsemantics.example.expressions.expressions.ArithmeticSigned
+import it.xsemantics.example.expressions.expressions.BooleanLiteral
+import it.xsemantics.example.expressions.expressions.BooleanNegation
+import it.xsemantics.example.expressions.expressions.BooleanType
+import it.xsemantics.example.expressions.expressions.Expression
+import it.xsemantics.example.expressions.expressions.ExpressionsFactory
+import it.xsemantics.example.expressions.expressions.IntType
+import it.xsemantics.example.expressions.expressions.Minus
+import it.xsemantics.example.expressions.expressions.MultiOrDiv
+import it.xsemantics.example.expressions.expressions.NumberLiteral
+import it.xsemantics.example.expressions.expressions.Plus
+import it.xsemantics.example.expressions.expressions.StringLiteral
+import it.xsemantics.example.expressions.expressions.StringType
+import it.xsemantics.example.expressions.expressions.Type
 
 judgments {
 	coerce |~ Expression expression |> Type expectedType
