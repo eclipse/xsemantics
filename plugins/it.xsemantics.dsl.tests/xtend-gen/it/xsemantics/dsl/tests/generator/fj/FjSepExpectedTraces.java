@@ -532,7 +532,7 @@ public class FjSepExpectedTraces extends FjExpectedTraces {
     _builder.append("CheckConstant: [this <- B] |- 100");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("overrides(int m(String s) { return 100; }, int m(String s) { return 10; }) = null");
+    _builder.append("overrides(int m(String s) { return 100; }, int m(String s) { return 10; }) = true");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("BasicEquals: [] |- int ~~ int");

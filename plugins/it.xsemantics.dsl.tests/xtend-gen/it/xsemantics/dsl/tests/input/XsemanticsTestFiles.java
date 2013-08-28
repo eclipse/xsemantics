@@ -4382,6 +4382,38 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testAuxiliaryDescriptionsWithoutAuxFun() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("auxiliary {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("isValue(EObject o, EClass c) : Boolean");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("voidFun(EObject o)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("objectClass(EObject o) : EClass");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("error \"error in objectClass\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("source o");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testAuxiliaryDescriptions() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();

@@ -438,7 +438,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testNoAuxFunForAuxiliaryDescription() throws Exception {
 		validator.setEnableWarnings(true);
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testAuxiliaryDescriptions());
+				.testAuxiliaryDescriptionsWithoutAuxFun());
 		validate.assertAll(
 				AssertableDiagnostics
 						.warningMsg("No function defined for the auxiliary description"),

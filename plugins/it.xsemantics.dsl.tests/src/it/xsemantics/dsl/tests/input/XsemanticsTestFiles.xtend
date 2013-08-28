@@ -1998,6 +1998,20 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testAuxiliaryDescriptionsWithoutAuxFun() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	
+	auxiliary {
+		isValue(EObject o, EClass c) : Boolean
+		voidFun(EObject o)
+		objectClass(EObject o) : EClass
+			error "error in objectClass"
+			source o
+	}
+	'''
+
 	def testAuxiliaryDescriptions() '''
 	«typeSystemQualifiedName»
 	import org.eclipse.emf.ecore.EClass
