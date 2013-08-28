@@ -2,6 +2,7 @@
 bin/
 *~
 logs.zip
+*.log
 *.orig
 # we need xtend generated Java files for tycho building in Jenkins
 # xtend-gen/
