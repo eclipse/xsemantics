@@ -11,12 +11,11 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-public class LambdaProjectCreator extends AbstractPluginProjectCreator {
+public class LambdaProjectCreator extends org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator {
 
 	protected static final String DSL_GENERATOR_PROJECT_NAME = "it.xsemantics.example.lambda";
 

@@ -4,7 +4,7 @@
     editorDirectory="/it.xsemantics.example.fj.editor/src" modelPluginID="it.xsemantics.example.fj"
     forceOverwrite="true" modelName="FJ" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.example.fj.edit"
-    editorPluginID="it.xsemantics.example.fj.editor" runtimeVersion="2.8">
+    editorPluginID="it.xsemantics.example.fj.editor" runtimeVersion="2.9">
   <genPackages prefix="Fj" basePackage="it.xsemantics.example.fj" disposableProviderFactory="true"
       ecorePackage="FJ.ecore#/">
     <genClasses ecoreClass="FJ.ecore#//Program">

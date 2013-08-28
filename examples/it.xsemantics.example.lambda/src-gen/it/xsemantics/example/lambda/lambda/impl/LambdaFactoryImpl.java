@@ -30,7 +30,7 @@ public class LambdaFactoryImpl extends EFactoryImpl implements LambdaFactory
   {
     try
     {
-      LambdaFactory theLambdaFactory = (LambdaFactory)EPackage.Registry.INSTANCE.getEFactory("http://xsemantics.sf.net/example/lambda/Lambda"); 
+      LambdaFactory theLambdaFactory = (LambdaFactory)EPackage.Registry.INSTANCE.getEFactory(LambdaPackage.eNS_URI);
       if (theLambdaFactory != null)
       {
         return theLambdaFactory;

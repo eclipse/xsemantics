@@ -4,7 +4,7 @@
     editorDirectory="/it.xsemantics.example.lambda.editor/src" modelPluginID="it.xsemantics.example.lambda"
     forceOverwrite="true" modelName="Lambda" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.example.lambda.edit"
-    editorPluginID="it.xsemantics.example.lambda.editor" runtimeVersion="2.8">
+    editorPluginID="it.xsemantics.example.lambda.editor" runtimeVersion="2.9">
   <genPackages prefix="Lambda" basePackage="it.xsemantics.example.lambda" disposableProviderFactory="true"
       ecorePackage="Lambda.ecore#/">
     <genClasses ecoreClass="Lambda.ecore#//Program">

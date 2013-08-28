@@ -4,7 +4,7 @@
     editorDirectory="/it.xsemantics.example.expressions.editor/src" modelPluginID="it.xsemantics.example.expressions"
     forceOverwrite="true" modelName="Expressions" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="it.xsemantics.example.expressions.edit"
-    editorPluginID="it.xsemantics.example.expressions.editor" runtimeVersion="2.8">
+    editorPluginID="it.xsemantics.example.expressions.editor" runtimeVersion="2.9">
   <genPackages prefix="Expressions" basePackage="it.xsemantics.example.expressions"
       disposableProviderFactory="true" ecorePackage="Expressions.ecore#/">
     <genClasses ecoreClass="Expressions.ecore#//Model">

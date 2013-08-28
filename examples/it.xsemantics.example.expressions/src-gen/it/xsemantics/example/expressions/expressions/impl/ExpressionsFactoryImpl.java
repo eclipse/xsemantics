@@ -30,7 +30,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     try
     {
-      ExpressionsFactory theExpressionsFactory = (ExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://xsemantics.sf.net/example/expressions/Expressions"); 
+      ExpressionsFactory theExpressionsFactory = (ExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory(ExpressionsPackage.eNS_URI);
       if (theExpressionsFactory != null)
       {
         return theExpressionsFactory;

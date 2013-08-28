@@ -51,7 +51,7 @@ public class FjFactoryImpl extends EFactoryImpl implements FjFactory
   {
     try
     {
-      FjFactory theFjFactory = (FjFactory)EPackage.Registry.INSTANCE.getEFactory("http://xsemantics.sf.net/example/fj/FJ"); 
+      FjFactory theFjFactory = (FjFactory)EPackage.Registry.INSTANCE.getEFactory(FjPackage.eNS_URI);
       if (theFjFactory != null)
       {
         return theFjFactory;

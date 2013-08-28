@@ -2,11 +2,10 @@ package it.xsemantics.example.fj.ui.wizard;
 
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
-import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import com.google.inject.Inject;
 
-public class FJNewProjectWizard extends XtextNewProjectWizard {
+public class FJNewProjectWizard extends org.eclipse.xtext.ui.wizard.XtextNewProjectWizard {
 
 	private WizardNewProjectCreationPage mainPage;
 
