@@ -2,30 +2,39 @@ system it.xsemantics.dsl.typing.XsemanticsTypeSystemGen
 
 validatorExtends it.xsemantics.dsl.validation.AbstractXsemanticsJavaValidator
 
-import org.eclipse.xtext.xbase.*
-import org.eclipse.xtext.common.types.*
-import it.xsemantics.dsl.xsemantics.*
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
+import it.xsemantics.dsl.xsemantics.InputParameter
+import it.xsemantics.dsl.xsemantics.OutputParameter
+import it.xsemantics.dsl.xsemantics.RuleParameter
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 
-inject jvmmodel.JvmTypesBuilder typesBuilder
-inject typing.ITypeProvider typeProvider
+inject JvmTypesBuilder typesBuilder
+inject IBatchTypeResolver typeResolver
 
 judgments {
 	type |- EObject exp : output JvmTypeReference
 }
 
+/* 
+ * for the case of an XExpression we delegate to Xbase
+ * type system
+ */
 axiom XExpressionType
-	G |- XExpression e : typeProvider.getType(e)
+	G |- XExpression e : 
+	typeResolver.resolveTypes(e).
+		getActualType(e).toTypeReference
 
 /* xbase type provider does not seem to return the type for var decl */
 axiom XVariableDeclarationType
 	G |- XVariableDeclaration e : e.type
-
-rule RuleInvocationExpressionType
-	G |- RuleInvocationExpression e : JvmTypeReference type
-from {
-	G |- e.expression : type
-}
 
 rule ExpressionInConclusionType
 	G |- ExpressionInConclusion e : JvmTypeReference type

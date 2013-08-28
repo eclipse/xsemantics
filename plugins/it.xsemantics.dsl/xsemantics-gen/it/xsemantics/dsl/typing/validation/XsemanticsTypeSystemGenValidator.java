@@ -5,6 +5,7 @@ import it.xsemantics.dsl.typing.XsemanticsTypeSystemGen;
 import it.xsemantics.dsl.validation.AbstractXsemanticsJavaValidator;
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 
+@SuppressWarnings("all")
 public class XsemanticsTypeSystemGenValidator extends AbstractXsemanticsJavaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;

@@ -1,7 +1,5 @@
 package it.xsemantics.dsl.typing;
 
-import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -13,6 +11,7 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -21,14 +20,17 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
-@SuppressWarnings("all")
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+
 public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   public final static String XEXPRESSIONTYPE = "it.xsemantics.dsl.typing.rules.XExpressionType";
   
   public final static String XVARIABLEDECLARATIONTYPE = "it.xsemantics.dsl.typing.rules.XVariableDeclarationType";
+  
+  public final static String RULEINVOCATIONEXPRESSIONTYPE = "it.xsemantics.dsl.typing.rules.RuleInvocationExpressionType";
   
   public final static String EXPRESSIONINCONCLUSIONTYPE = "it.xsemantics.dsl.typing.rules.ExpressionInConclusionType";
   
@@ -65,14 +67,6 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   public void setTypesBuilder(final JvmTypesBuilder typesBuilder) {
     this.typesBuilder = typesBuilder;
-  }
-  
-  public IBatchTypeResolver getTypeResolver() {
-    return this.typeResolver;
-  }
-  
-  public void setTypeResolver(final IBatchTypeResolver typeResolver) {
-    this.typeResolver = typeResolver;
   }
   
   public Result<JvmTypeReference> type(final EObject exp) {
@@ -120,16 +114,16 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
     }
   }
   
+	protected LightweightTypeReference getActualType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+  
   protected Result<JvmTypeReference> applyRuleXExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleXExpressionType_1(G, e));
-  }
-  
-  private JvmTypeReference _applyRuleXExpressionType_1(final RuleEnvironment G, final XExpression e) throws RuleFailedException {
-    IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(e);
-    LightweightTypeReference _actualType = _resolveTypes.getActualType(e);
-    JvmTypeReference _typeReference = _actualType.toTypeReference();
-    return _typeReference;
+    //JvmTypeReference _type = this.typeProvider.resolveTypes(e).getActualType(e).toTypeReference();
+	//JvmTypeReference _type = this.typeProvider.getType(e);
+	  JvmTypeReference _type = getActualType(e).toTypeReference();
+    return new Result<JvmTypeReference>(_type);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XVariableDeclaration e) throws RuleFailedException {
@@ -149,12 +143,20 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleXVariableDeclarationType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XVariableDeclaration e) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleXVariableDeclarationType_1(G, e));
+    JvmTypeReference _type = e.getType();
+    return new Result<JvmTypeReference>(_type);
   }
   
-  private JvmTypeReference _applyRuleXVariableDeclarationType_1(final RuleEnvironment G, final XVariableDeclaration e) throws RuleFailedException {
-    JvmTypeReference _type = e.getType();
-    return _type;
+  protected Result<JvmTypeReference> applyRuleRuleInvocationExpressionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
+    JvmTypeReference type = null; // output parameter
+    
+    /* G |- e : type */
+    XExpression _expression = e;
+    Result<JvmTypeReference> result = typeInternal(G, _trace_, _expression);
+    checkAssignableTo(result.getFirst(), JvmTypeReference.class);
+    type = (JvmTypeReference) result.getFirst();
+    
+    return new Result<JvmTypeReference>(type);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ExpressionInConclusion e) throws RuleFailedException {
@@ -174,6 +176,7 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleExpressionInConclusionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ExpressionInConclusion e) throws RuleFailedException {
     JvmTypeReference type = null; // output parameter
+    
     /* G |- e.expression : type */
     XExpression _expression = e.getExpression();
     Result<JvmTypeReference> result = typeInternal(G, _trace_, _expression);
@@ -200,13 +203,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleRuleParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final RuleParameter p) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleRuleParameterType_1(G, p));
-  }
-  
-  private JvmTypeReference _applyRuleRuleParameterType_1(final RuleEnvironment G, final RuleParameter p) throws RuleFailedException {
     JvmFormalParameter _parameter = p.getParameter();
     JvmTypeReference _parameterType = _parameter.getParameterType();
-    return _parameterType;
+    return new Result<JvmTypeReference>(_parameterType);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final InputParameter p) throws RuleFailedException {
@@ -226,13 +225,9 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleInputParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final InputParameter p) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleInputParameterType_1(G, p));
-  }
-  
-  private JvmTypeReference _applyRuleInputParameterType_1(final RuleEnvironment G, final InputParameter p) throws RuleFailedException {
     JvmFormalParameter _parameter = p.getParameter();
     JvmTypeReference _parameterType = _parameter.getParameterType();
-    return _parameterType;
+    return new Result<JvmTypeReference>(_parameterType);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final OutputParameter p) throws RuleFailedException {
@@ -252,12 +247,8 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleOutputParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final OutputParameter p) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleOutputParameterType_1(G, p));
-  }
-  
-  private JvmTypeReference _applyRuleOutputParameterType_1(final RuleEnvironment G, final OutputParameter p) throws RuleFailedException {
     JvmTypeReference _jvmTypeReference = p.getJvmTypeReference();
-    return _jvmTypeReference;
+    return new Result<JvmTypeReference>(_jvmTypeReference);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final JvmFormalParameter p) throws RuleFailedException {
@@ -277,12 +268,8 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleJvmFormalParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final JvmFormalParameter p) throws RuleFailedException {
     
-    return new Result<JvmTypeReference>(_applyRuleJvmFormalParameterType_1(G, p));
-  }
-  
-  private JvmTypeReference _applyRuleJvmFormalParameterType_1(final RuleEnvironment G, final JvmFormalParameter p) throws RuleFailedException {
     JvmTypeReference _parameterType = p.getParameterType();
-    return _parameterType;
+    return new Result<JvmTypeReference>(_parameterType);
   }
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {
@@ -302,16 +289,21 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> applyRuleAuxiliaryDescriptionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {
     JvmTypeReference type = null; // output parameter
+    
     /* { aux.type != null type = aux.type } or type = typesBuilder.newTypeRef(aux, typeof(Boolean)) */
     try {
-      JvmTypeReference _type = aux.getType();
-      boolean _notEquals = (!Objects.equal(_type, null));
-      /* aux.type != null */
-      if (!_notEquals) {
-        sneakyThrowRuleFailedException("aux.type != null");
+      JvmTypeReference _xblockexpression = null;
+      {
+        JvmTypeReference _type = aux.getType();
+        boolean _notEquals = (!Objects.equal(_type, null));
+        /* aux.type != null */
+        if (!_notEquals) {
+          sneakyThrowRuleFailedException("aux.type != null");
+        }
+        JvmTypeReference _type_1 = aux.getType();
+        JvmTypeReference _type_2 = type = _type_1;
+        _xblockexpression = (_type_2);
       }
-      JvmTypeReference _type_1 = aux.getType();
-      type = _type_1;
     } catch (Exception e) {
       JvmTypeReference _newTypeRef = this.typesBuilder.newTypeRef(aux, Boolean.class);
       type = _newTypeRef;
