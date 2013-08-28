@@ -3,11 +3,14 @@ package it.xsemantics.dsl.tests;
 import com.google.inject.Inject;
 import it.xsemantics.dsl.tests.XsemanticsBaseTest;
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom;
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping;
+import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleConclusion;
+import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import org.eclipse.emf.common.util.EList;
@@ -18,6 +21,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -109,5 +113,24 @@ public class XsemanticsScopingTest extends XsemanticsBaseTest {
     final JvmIdentifiableElement feature = ((XMemberFeatureCall) _feature).getFeature();
     String _identifier = feature.getIdentifier();
     this.assertEqualsStrings("org.eclipse.emf.ecore.EObject.eContainingFeature()", _identifier);
+  }
+  
+  @Test
+  public void testScopingForEnvironmentMapping() {
+    CharSequence _testSingleEnvironmentMapping = this.testFiles.testSingleEnvironmentMapping();
+    final XsemanticsSystem system = this.parse(_testSingleEnvironmentMapping);
+    EList<Rule> _rules = system.getRules();
+    Rule _head = IterableExtensions.<Rule>head(_rules);
+    XExpression _premises = ((RuleWithPremises) _head).getPremises();
+    final XBlockExpression xBlockExpression = ((XBlockExpression) _premises);
+    EList<XExpression> _expressions = xBlockExpression.getExpressions();
+    XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+    final RuleInvocation ruleInvk = ((RuleInvocation) _head_1);
+    EnvironmentSpecification _environment = ruleInvk.getEnvironment();
+    final EnvironmentMapping envMapping = ((EnvironmentMapping) _environment);
+    XExpression _value = envMapping.getValue();
+    final JvmIdentifiableElement feature = ((XFeatureCall) _value).getFeature();
+    String _identifier = feature.getIdentifier();
+    this.assertEqualsStrings("object", _identifier);
   }
 }

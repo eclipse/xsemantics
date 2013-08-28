@@ -3,21 +3,26 @@ package it.xsemantics.dsl.typing
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
+import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
+import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.OrExpression
+import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleInvocation
+import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
-import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer
+import org.eclipse.xtext.xbase.lib.IterableExtensions
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import it.xsemantics.dsl.xsemantics.Rule
-import it.xsemantics.dsl.xsemantics.ErrorSpecification
-import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.EnvironmentComposition
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -114,6 +119,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			val expressionState = state.withoutExpectation();
 			expressionState.computeTypes(expression);
 		}
+		e.environment.handleEnvironmentSpecification(state)
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 
@@ -122,6 +128,24 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			it.computeTypes(state.withoutExpectation)
 		]
 		state.acceptActualType(getPrimitiveVoid(state))
+	}
+	
+	protected def dispatch void handleEnvironmentSpecification(EnvironmentSpecification e, ITypeComputationState state) {
+		
+	}
+
+	protected def dispatch void handleEnvironmentSpecification(EmptyEnvironment e, ITypeComputationState state) {
+		
+	}
+
+	protected def dispatch void handleEnvironmentSpecification(EnvironmentComposition e, ITypeComputationState state) {
+		e.currentEnvironment.handleEnvironmentSpecification(state)
+		e.subEnvironment.handleEnvironmentSpecification(state)
+	}
+
+	protected def dispatch void handleEnvironmentSpecification(EnvironmentMapping e, ITypeComputationState state) {
+		e.key.computeTypes(state.withoutExpectation)
+		e.value.computeTypes(state.withoutExpectation)
 	}
 
 	protected def _computeTypes(Fail e, ITypeComputationState state) {

@@ -11,6 +11,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
+import it.xsemantics.dsl.xsemantics.RuleInvocation
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping
+import org.eclipse.xtext.xbase.XFeatureCall
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -77,6 +80,19 @@ class XsemanticsScopingTest extends XsemanticsBaseTest {
 				parse.rules.head.conclusion.error as ErrorSpecification
 		val feature = (errSpec.feature as XMemberFeatureCall).feature
 		"org.eclipse.emf.ecore.EObject.eContainingFeature()".assertEqualsStrings(
+			feature.identifier
+		)
+	}
+
+	@Test
+	def void testScopingForEnvironmentMapping() {
+		val system = testFiles.
+			testSingleEnvironmentMapping.parse
+		val xBlockExpression = (system.rules.head as RuleWithPremises).premises as XBlockExpression
+		val ruleInvk = xBlockExpression.expressions.head as RuleInvocation
+		val envMapping = ruleInvk.environment as EnvironmentMapping
+		val feature = (envMapping.value as XFeatureCall).feature
+		"object".assertEqualsStrings(
 			feature.identifier
 		)
 	}

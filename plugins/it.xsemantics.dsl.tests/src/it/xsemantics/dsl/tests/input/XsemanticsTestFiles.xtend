@@ -999,6 +999,27 @@ class XsemanticsTestFiles {
 		|- object.eClass : eClass
 	}
 	'''
+
+	def testEnvironmentCompositions() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		empty |- object.eClass : eClass
+		
+		empty, G |- object.eClass : eClass
+		
+		empty, G, empty, G |- object.eClass : eClass
+		
+		'this' <- object |- object.eClass : eClass
+		
+		G, 'this' <- object |- object.eClass : eClass
+		
+		G, 'this' <- object, object <- EcoreFactory::eINSTANCE.createEClass()
+		|- object.eClass : eClass
+	}
+	'''
 	
 	def testRulesWithNonEObjectParams() '''
 	«testFileWithImports»

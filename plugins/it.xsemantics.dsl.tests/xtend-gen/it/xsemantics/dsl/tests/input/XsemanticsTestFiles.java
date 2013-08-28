@@ -2226,6 +2226,55 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testEnvironmentCompositions() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testJudgmentDescriptionsReferringToEcore = this.testJudgmentDescriptionsReferringToEcore();
+    _builder.append(_testJudgmentDescriptionsReferringToEcore, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("rule EClassEObject derives");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EClass eClass : EObject object");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty |- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty, G |- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("empty, G, empty, G |- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'this\' <- object |- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G, \'this\' <- object |- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G, \'this\' <- object, object <- EcoreFactory::eINSTANCE.createEClass()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|- object.eClass : eClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testRulesWithNonEObjectParams() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testFileWithImports = this.testFileWithImports();

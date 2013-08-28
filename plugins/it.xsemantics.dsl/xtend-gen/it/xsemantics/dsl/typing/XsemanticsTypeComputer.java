@@ -5,7 +5,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
+import it.xsemantics.dsl.xsemantics.EnvironmentComposition;
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping;
+import it.xsemantics.dsl.xsemantics.EnvironmentSpecification;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Fail;
 import it.xsemantics.dsl.xsemantics.OrExpression;
@@ -13,6 +17,7 @@ import it.xsemantics.dsl.xsemantics.Rule;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.RuleParameter;
 import it.xsemantics.dsl.xsemantics.RuleWithPremises;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -205,6 +210,8 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
         expressionState.computeTypes(expression);
       }
     }
+    EnvironmentSpecification _environment = e.getEnvironment();
+    this.handleEnvironmentSpecification(_environment, state);
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);
   }
@@ -220,6 +227,28 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
     IterableExtensions.<XExpression>forEach(_branches, _function);
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);
+  }
+  
+  protected void _handleEnvironmentSpecification(final EnvironmentSpecification e, final ITypeComputationState state) {
+  }
+  
+  protected void _handleEnvironmentSpecification(final EmptyEnvironment e, final ITypeComputationState state) {
+  }
+  
+  protected void _handleEnvironmentSpecification(final EnvironmentComposition e, final ITypeComputationState state) {
+    EnvironmentSpecification _currentEnvironment = e.getCurrentEnvironment();
+    this.handleEnvironmentSpecification(_currentEnvironment, state);
+    EnvironmentSpecification _subEnvironment = e.getSubEnvironment();
+    this.handleEnvironmentSpecification(_subEnvironment, state);
+  }
+  
+  protected void _handleEnvironmentSpecification(final EnvironmentMapping e, final ITypeComputationState state) {
+    XExpression _key = e.getKey();
+    ITypeComputationState _withoutExpectation = state.withoutExpectation();
+    this.computeTypes(_key, _withoutExpectation);
+    XExpression _value = e.getValue();
+    ITypeComputationState _withoutExpectation_1 = state.withoutExpectation();
+    this.computeTypes(_value, _withoutExpectation_1);
   }
   
   protected void _computeTypes(final Fail e, final ITypeComputationState state) {
@@ -256,5 +285,24 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
     JvmTypeReference _type = exp.getType();
     LightweightTypeReference _lightweightReference = _converter.toLightweightReference(_type);
     state.acceptActualType(_lightweightReference);
+  }
+  
+  protected void handleEnvironmentSpecification(final EnvironmentSpecification e, final ITypeComputationState state) {
+    if (e instanceof EmptyEnvironment) {
+      _handleEnvironmentSpecification((EmptyEnvironment)e, state);
+      return;
+    } else if (e instanceof EnvironmentComposition) {
+      _handleEnvironmentSpecification((EnvironmentComposition)e, state);
+      return;
+    } else if (e instanceof EnvironmentMapping) {
+      _handleEnvironmentSpecification((EnvironmentMapping)e, state);
+      return;
+    } else if (e != null) {
+      _handleEnvironmentSpecification(e, state);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(e, state).toString());
+    }
   }
 }
