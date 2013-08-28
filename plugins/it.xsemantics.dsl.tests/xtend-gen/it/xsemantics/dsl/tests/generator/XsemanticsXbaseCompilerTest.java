@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
-import it.xsemantics.dsl.generator.CustomXbaseCompiler;
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -39,7 +39,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
-  private CustomXbaseCompiler compiler;
+  private XsemanticsXbaseCompiler compiler;
   
   @Test
   public void testXbaseCompilationOfXBlock() {

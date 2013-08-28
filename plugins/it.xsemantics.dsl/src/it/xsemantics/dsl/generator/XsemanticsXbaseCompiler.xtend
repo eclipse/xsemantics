@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
-class CustomXbaseCompiler extends XbaseCompiler {
+class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
 	@Inject extension XsemanticsGeneratorExtensions
 	@Inject extension XsemanticsNodeModelUtils

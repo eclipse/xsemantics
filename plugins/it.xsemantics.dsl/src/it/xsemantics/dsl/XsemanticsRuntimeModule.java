@@ -3,8 +3,8 @@
  */
 package it.xsemantics.dsl;
 
-import it.xsemantics.dsl.generator.CustomXbaseCompiler;
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.scoping.XsemanticsScopeProvider;
 import it.xsemantics.dsl.typing.XsemanticsTypeComputer;
 import it.xsemantics.dsl.typing.XsemanticsTypeProvider;
@@ -51,7 +51,7 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 	}
 
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
-		return CustomXbaseCompiler.class;
+		return XsemanticsXbaseCompiler.class;
 	}
 
 //	public Class<? extends XbaseCompiler> bindXbaseCompiler() {

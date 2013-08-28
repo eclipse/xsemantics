@@ -2,7 +2,6 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.dsl.generator.CustomXbaseCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -10,6 +9,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -17,7 +17,7 @@ class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
 
 	@Inject extension XsemanticsUtils
 
-	@Inject CustomXbaseCompiler compiler
+	@Inject XsemanticsXbaseCompiler compiler
 
 	@Test
 	def void testXbaseCompilationOfXBlock() {

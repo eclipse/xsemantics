@@ -50,7 +50,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
-public class CustomXbaseCompiler extends XbaseCompiler {
+public class XsemanticsXbaseCompiler extends XbaseCompiler {
   @Inject
   @Extension
   private XsemanticsUtils _xsemanticsUtils;
@@ -452,7 +452,7 @@ public class CustomXbaseCompiler extends XbaseCompiler {
     if (isReferenced) {
       final Later _function = new Later() {
           public void exec(final ITreeAppendable app) {
-            CustomXbaseCompiler.this.compileEnvironmentAccess(environmentAccess, app);
+            XsemanticsXbaseCompiler.this.compileEnvironmentAccess(environmentAccess, app);
           }
         };
       this.declareFreshLocalVariable(environmentAccess, b, _function);
