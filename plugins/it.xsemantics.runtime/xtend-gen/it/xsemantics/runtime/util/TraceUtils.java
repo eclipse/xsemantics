@@ -91,8 +91,7 @@ public class TraceUtils {
     return _xblockexpression;
   }
   
-  public Boolean buildTrace(final List<String> trace, final Object element, final int inc) {
-    boolean _xifexpression = false;
+  public void buildTrace(final List<String> trace, final Object element, final int inc) {
     if ((element instanceof RuleApplicationTrace)) {
       List<Object> _trace = ((RuleApplicationTrace) element).getTrace();
       for (final Object e : _trace) {
@@ -104,10 +103,8 @@ public class TraceUtils {
       String _string = element.toString();
       String _removeLeadingWhitespace = Strings.removeLeadingWhitespace(_string);
       String _plus_1 = (_increment + _removeLeadingWhitespace);
-      boolean _add = trace.add(_plus_1);
-      _xifexpression = _add;
+      trace.add(_plus_1);
     }
-    return _xifexpression;
   }
   
   public String traceAsString(final RuleApplicationTrace ruleTrace) {

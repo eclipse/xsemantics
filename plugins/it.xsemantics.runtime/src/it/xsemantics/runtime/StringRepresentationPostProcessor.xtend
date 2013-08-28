@@ -1,7 +1,5 @@
 package it.xsemantics.runtime
 
-import static extension org.eclipse.xtext.util.Strings.*
-
 class StringRepresentationPostProcessor {
 	
 	public static int MAX_CHARS = 40
