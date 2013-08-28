@@ -89,7 +89,7 @@ public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 				public void compileToJava() {
 					Map<String, String> toCompile = new HashMap<String, String>();
 					
-					for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
+					for (final Entry<String, CharSequence> e : access.getTextFiles().entrySet()) {
 						String name = e.getKey().substring(
 								"DEFAULT_OUTPUT".length(),
 								e.getKey().length() - ".java".length());
@@ -101,7 +101,7 @@ public class XsemanticsCompilationTestHelper extends CompilationTestHelper {
 				}
 
 				public Map<String, CharSequence> getAllGeneratedResources() {
-					return access.getFiles();
+					return access.getTextFiles();
 				}
 
 			});
