@@ -2,10 +2,22 @@ system it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 
 validatorExtends it.xsemantics.example.lambda.validation.AbstractLambdaJavaValidator
 
-import it.xsemantics.example.lambda.lambda.*
-import it.xsemantics.example.lambda.xsemantics.*
-
-import org.eclipse.emf.ecore.util.*
+import it.xsemantics.example.lambda.lambda.Abstraction
+import it.xsemantics.example.lambda.lambda.Application
+import it.xsemantics.example.lambda.lambda.Arithmetics
+import it.xsemantics.example.lambda.lambda.ArrowType
+import it.xsemantics.example.lambda.lambda.BasicType
+import it.xsemantics.example.lambda.lambda.IntConstant
+import it.xsemantics.example.lambda.lambda.IntType
+import it.xsemantics.example.lambda.lambda.Parameter
+import it.xsemantics.example.lambda.lambda.Program
+import it.xsemantics.example.lambda.lambda.StringConstant
+import it.xsemantics.example.lambda.lambda.StringType
+import it.xsemantics.example.lambda.lambda.Term
+import it.xsemantics.example.lambda.lambda.Type
+import it.xsemantics.example.lambda.lambda.TypeVariable
+import it.xsemantics.example.lambda.lambda.Variable
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 inject LambdaUtils lambdaUtils
 
