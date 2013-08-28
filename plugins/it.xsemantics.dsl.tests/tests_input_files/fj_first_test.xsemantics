@@ -73,8 +73,9 @@ axiom TIntConstant
 axiom TBoolConstant
 	G |- BoolConstant b : 
 	[ 
-		it.basic='boolean'
-		it
+		BasicType t |
+		t.basic='boolean'
+		t
 	].apply(FjFactory::eINSTANCE.createBasicType())
 
 rule TSelection derives
