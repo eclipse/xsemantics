@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.XsemanticsInjectorProvider;
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
+import it.xsemantics.dsl.generator.CustomXbaseCompiler;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.CheckRule;
@@ -39,7 +39,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   private XsemanticsUtils _xsemanticsUtils;
   
   @Inject
-  private XsemanticsXbaseCompiler xbaseCompiler;
+  private CustomXbaseCompiler compiler;
   
   @Test
   public void testXbaseCompilationOfXBlock() {
@@ -927,7 +927,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
   public void testThrowRuleFailedException() {
     final FakeTreeAppendable a = this.createAppendable();
     XAbstractFeatureCall _xAbstractFeatureCall = this.getXAbstractFeatureCall(0);
-    this.xbaseCompiler.throwNewRuleFailedException(_xAbstractFeatureCall, a);
+    this.compiler.throwNewRuleFailedException(_xAbstractFeatureCall, a);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("sneakyThrowRuleFailedException(\"\\\'foo\\\' == new String() || \\\'bar\\\' == new String()\");");
     String _string = a.toString();
@@ -1083,35 +1083,22 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     CharSequence _testForFailWithErrorSpecification = this.testFiles.testForFailWithErrorSpecification();
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("{");
-    _builder.newLine();
-    _builder.append("  ");
     _builder.append("/* empty |- obj : eClass */");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, obj);");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("checkAssignableTo(result.getFirst(), EClass.class);");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("eClass = (EClass) result.getFirst();");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("/* fail error \"this is the error\" source obj */");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("String error = \"this is the error\";");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("EObject source = obj;");
     _builder.newLine();
-    _builder.append("  ");
     _builder.append("throwForExplicitFail(error, new ErrorInformation(source, null));");
-    _builder.newLine();
-    _builder.append("}");
     this.checkCompilationOfAllPremises(_testForFailWithErrorSpecification, _builder);
   }
   
@@ -1386,7 +1373,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     RuleConclusionElement _get = _conclusionElements.get(1);
     ExpressionInConclusion _ruleExpression = this.ruleExpression(_get);
     final XExpression xexp = _ruleExpression.getExpression();
-    this.xbaseCompiler.toJavaStatement(xexp, appendable, true);
+    this.compiler.toJavaStatement(xexp, appendable, true);
     String _string = expected.toString();
     String _string_1 = appendable.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1398,7 +1385,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     final Rule rule = this.getFirstRule(inputCode);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
     final ITreeAppendable appendable = this.createAppendable(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, appendable, false);
+    this.compiler.toJavaStatement(xexp, appendable, false);
     String _string = expected.toString();
     String _string_1 = appendable.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1408,7 +1395,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     CheckRule _firstCheckRule = this.getFirstCheckRule(inputCode);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(_firstCheckRule);
     final FakeTreeAppendable appendable = this.createAppendable();
-    this.xbaseCompiler.toJavaStatement(xexp, appendable, false);
+    this.compiler.toJavaStatement(xexp, appendable, false);
     String _string = expected.toString();
     String _string_1 = appendable.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1419,7 +1406,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(rule);
     final RuleInvocation xexp = _ruleInvocations.get(index);
     final ITreeAppendable result = this.createAppendable(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    this.compiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1430,7 +1417,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     List<OrExpression> _ors = this._xsemanticsUtils.getOrs(rule);
     final OrExpression xexp = _ors.get(index);
     final ITreeAppendable result = this.createAppendable(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    this.compiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1440,7 +1427,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     XsemanticsSystem _parseAndAssertNoError = this.parseAndAssertNoError(inputCode);
     List<RuleInvocation> _ruleInvocations = this._xsemanticsUtils.getRuleInvocations(_parseAndAssertNoError);
     final RuleInvocation xexp = _ruleInvocations.get(index);
-    final String variable = this.xbaseCompiler.declareResultVariable(xexp, appendable);
+    final String variable = this.compiler.declareResultVariable(xexp, appendable);
     Assert.assertEquals(expectedVariableName, variable);
   }
   
@@ -1448,7 +1435,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     final Rule rule = this.getFirstRule(inputCode);
     final TreeAppendable result = this.createJvmModelGeneratorConfiguredAppendable(rule);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    this.compiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1458,7 +1445,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     final CheckRule rule = this.getFirstCheckRule(inputCode);
     final ITreeAppendable result = this.createAppendable(rule);
     final XBlockExpression xexp = this.getRulePremisesAsBlock(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    this.compiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1469,7 +1456,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     EList<XExpression> _rulePremises = this.getRulePremises(rule);
     final XExpression xexp = _rulePremises.get(index);
     final ITreeAppendable result = this.createAppendable(rule);
-    this.xbaseCompiler.toJavaStatement(xexp, result, false);
+    this.compiler.toJavaStatement(xexp, result, false);
     String _string = expected.toString();
     String _string_1 = result.toString();
     Assert.assertEquals(_string, _string_1);
@@ -1479,7 +1466,7 @@ public class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
     final Rule rule = this.getFirstRule(inputCode);
     final EnvironmentSpecification xexp = this.getEnvironmentSpecificationOfRuleInvocation(rule);
     final ITreeAppendable result = this.createAppendable(rule);
-    this.xbaseCompiler.generateEnvironmentSpecificationAsExpression(xexp, result);
+    this.compiler.generateEnvironmentSpecificationAsExpression(xexp, result);
     this.assertEqualsStrings(expected, result);
   }
 }

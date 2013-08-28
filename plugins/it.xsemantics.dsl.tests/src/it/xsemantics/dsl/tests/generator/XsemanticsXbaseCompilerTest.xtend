@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
+import it.xsemantics.dsl.generator.CustomXbaseCompiler
 import it.xsemantics.dsl.util.XsemanticsUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -17,7 +17,7 @@ class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
 
 	@Inject extension XsemanticsUtils
 
-	@Inject XsemanticsXbaseCompiler xbaseCompiler
+	@Inject CustomXbaseCompiler compiler
 
 	@Test
 	def void testXbaseCompilationOfXBlock() {
@@ -534,7 +534,7 @@ final EClass eC = EcoreFactory.eINSTANCE.createEClass();'''
 	@Test
 	def void testThrowRuleFailedException() {
 		val a = createAppendable
-		xbaseCompiler.throwNewRuleFailedException(getXAbstractFeatureCall(0), a)
+		compiler.throwNewRuleFailedException(getXAbstractFeatureCall(0), a)
 		assertEqualsStrings('''sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");''', 
 			a.toString
 		)
@@ -657,17 +657,15 @@ throwForExplicitFail();'''
 			testFiles.testForFailWithErrorSpecification,
 '''
 
-{
-  /* empty |- obj : eClass */
-  Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, obj);
-  checkAssignableTo(result.getFirst(), EClass.class);
-  eClass = (EClass) result.getFirst();
-  
-  /* fail error "this is the error" source obj */
-  String error = "this is the error";
-  EObject source = obj;
-  throwForExplicitFail(error, new ErrorInformation(source, null));
-}'''
+/* empty |- obj : eClass */
+Result<EClass> result = typeInternal(emptyEnvironment(), _trace_, obj);
+checkAssignableTo(result.getFirst(), EClass.class);
+eClass = (EClass) result.getFirst();
+
+/* fail error "this is the error" source obj */
+String error = "this is the error";
+EObject source = obj;
+throwForExplicitFail(error, new ErrorInformation(source, null));'''
 			)
 	}
 
@@ -829,7 +827,7 @@ try {
 		String expectedExpName, CharSequence expected, ITreeAppendable appendable) {
 		val xexp = inputCode.
 			firstRule.conclusion.conclusionElements.get(1).ruleExpression.expression
-		xbaseCompiler.toJavaStatement(xexp, appendable, true)
+		compiler.toJavaStatement(xexp, appendable, true)
 		Assert::assertEquals(expected.toString, appendable.toString)
 		val expName = appendable.getName(xexp)
 		Assert::assertEquals(expectedExpName, expName)
@@ -840,7 +838,7 @@ try {
 		val rule = inputCode.firstRule
 		val xexp = rule.rulePremisesAsBlock
 		val appendable = rule.createAppendable
-		xbaseCompiler.toJavaStatement(xexp, appendable, false)
+		compiler.toJavaStatement(xexp, appendable, false)
 		Assert::assertEquals(expected.toString, appendable.toString)
 	}
 	
@@ -849,7 +847,7 @@ try {
 		val xexp = inputCode.
 			firstCheckRule.rulePremisesAsBlock
 		val appendable = createAppendable
-		xbaseCompiler.toJavaStatement(xexp, appendable, false)
+		compiler.toJavaStatement(xexp, appendable, false)
 		Assert::assertEquals(expected.toString, appendable.toString)
 	}
 
@@ -858,7 +856,7 @@ try {
 		val rule = inputCode.firstRule
 		val xexp = rule.ruleInvocations.get(index)
 		val result = rule.createAppendable
-		xbaseCompiler.toJavaStatement(xexp, result, false)
+		compiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)
 	}
 	
@@ -867,7 +865,7 @@ try {
 		val rule = inputCode.firstRule
 		val xexp = rule.ors.get(index)
 		val result = rule.createAppendable
-		xbaseCompiler.toJavaStatement(xexp, result, false)
+		compiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)
 	}
 	
@@ -875,7 +873,7 @@ try {
 		ITreeAppendable appendable, String expectedVariableName) {
 		val xexp = inputCode.
 			parseAndAssertNoError.ruleInvocations.get(index)
-		val variable = xbaseCompiler.declareResultVariable(xexp, appendable)
+		val variable = compiler.declareResultVariable(xexp, appendable)
 		Assert::assertEquals(expectedVariableName, variable)
 	}
 	
@@ -883,7 +881,7 @@ try {
 		val rule = inputCode.firstRule
 		val result = rule.createJvmModelGeneratorConfiguredAppendable
 		val xexp = rule.rulePremisesAsBlock
-		xbaseCompiler.toJavaStatement(xexp, result, false)
+		compiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)
 	}
 	
@@ -891,7 +889,7 @@ try {
 		val rule = inputCode.firstCheckRule
 		val result = rule.createAppendable
 		val xexp = rule.rulePremisesAsBlock
-		xbaseCompiler.toJavaStatement(xexp, result, false)
+		compiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)
 	}
 	
@@ -900,7 +898,7 @@ try {
 		val rule = inputCode.firstRule
 		val xexp = rule.rulePremises.get(index)
 		val result = rule.createAppendable
-		xbaseCompiler.toJavaStatement(xexp, result, false)
+		compiler.toJavaStatement(xexp, result, false)
 		Assert::assertEquals(expected.toString, result.toString)
 	}
 	
@@ -908,7 +906,7 @@ try {
 		val rule = inputCode.firstRule
 		val xexp = rule.environmentSpecificationOfRuleInvocation
 		val result = rule.createAppendable
-		xbaseCompiler.generateEnvironmentSpecificationAsExpression(xexp, result)
+		compiler.generateEnvironmentSpecificationAsExpression(xexp, result)
 		assertEqualsStrings(expected, result)
 	}
 }
