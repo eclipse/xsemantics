@@ -448,7 +448,7 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
   public void testFinalThrowRuleErrorInformation() {
     CharSequence _testRuleWithErrorSpecifications = this.testFiles.testRuleWithErrorSpecifications();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("eClassEObjectThrowException(eClass, object)");
+    _builder.append("eClassEObjectThrowException(e_applyRuleEClassEObject, eClass, object)");
     this.assertFinalThrow(_testRuleWithErrorSpecifications, _builder);
   }
   

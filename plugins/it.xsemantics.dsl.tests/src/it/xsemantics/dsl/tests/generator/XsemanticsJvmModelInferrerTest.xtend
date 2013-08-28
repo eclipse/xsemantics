@@ -285,7 +285,7 @@ typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRe
 	def testFinalThrowRuleErrorInformation() {
 		testFiles.testRuleWithErrorSpecifications.assertFinalThrow
 (
-'''eClassEObjectThrowException(eClass, object)'''
+'''eClassEObjectThrowException(e_applyRuleEClassEObject, eClass, object)'''
 )
 	}
 	
