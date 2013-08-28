@@ -11,7 +11,7 @@ import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.example.expressions.expressions.MultiOrDiv
 import it.xsemantics.example.expressions.expressions.Plus
 import it.xsemantics.runtime.StringRepresentation
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -51,7 +51,7 @@ i = 1 * 10 + -2 / 3 < 1 && !true
 		)
 	}
 	
-	def expressionToString(Expression expression) {
+	def String expressionToString(Expression expression) {
 		switch (expression) {
 			AndOrExpression:
 			'''
