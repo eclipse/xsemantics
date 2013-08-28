@@ -8,6 +8,7 @@ import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -300,6 +301,20 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       this._validationTestHelper.assertError(_parse, _ruleParameter, 
         org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING, 
         "Duplicate local variable eClass");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVisibilityForVarDeclInRuleInvocation() {
+    try {
+      CharSequence _testVisibilityForVarDeclInRuleInvocation = this.testFiles.testVisibilityForVarDeclInRuleInvocation();
+      XsemanticsSystem _parse = this.parser.parse(_testVisibilityForVarDeclInRuleInvocation);
+      EClass _xFeatureCall = XbasePackage.eINSTANCE.getXFeatureCall();
+      this._validationTestHelper.assertError(_parse, _xFeatureCall, 
+        Diagnostic.LINKING_DIAGNOSTIC, 
+        "Couldn\'t resolve reference to JvmIdentifiableElement \'cc\'");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

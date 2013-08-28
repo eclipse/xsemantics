@@ -2121,4 +2121,21 @@ class XsemanticsTestFiles {
 	axiom TestRule
 		G ||- EClass c : c.getEIDAttribute : c.getEAllStructuralFeatures.get(0)
 	'''
+
+	def testVisibilityForVarDeclInRuleInvocation() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	judgments {
+		type |- EObject o : output EClass : Object o2
+	}
+	
+	rule TestRule
+		G |- EObject o : EClass c : Object oo
+	from {
+		G |- o : var EClass cc : cc // <- cc must not be resolvable
+		cc.name
+	}
+	'''
 }

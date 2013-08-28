@@ -4639,4 +4639,40 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testVisibilityForVarDeclInRuleInvocation() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject o : output EClass : Object o2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("rule TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : EClass c : Object oo");
+    _builder.newLine();
+    _builder.append("from {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- o : var EClass cc : cc // <- cc must not be resolvable");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("cc.name");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
 }

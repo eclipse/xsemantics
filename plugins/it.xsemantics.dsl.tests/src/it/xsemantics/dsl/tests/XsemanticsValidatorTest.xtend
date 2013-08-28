@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.validation.IssueCodes
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import org.eclipse.xtext.common.types.TypesPackage
+import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
@@ -286,5 +287,15 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testVisibilityForVarDeclInRuleInvocation() {
+		parser.parse(testFiles
+				.testVisibilityForVarDeclInRuleInvocation()).
+		assertError(
+			XbasePackage::eINSTANCE.XFeatureCall,
+			Diagnostic::LINKING_DIAGNOSTIC,
+			"Couldn't resolve reference to JvmIdentifiableElement 'cc'"
+		)
+	}
 
 }
