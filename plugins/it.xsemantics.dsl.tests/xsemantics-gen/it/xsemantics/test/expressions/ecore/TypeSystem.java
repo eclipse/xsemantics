@@ -1,5 +1,6 @@
 package it.xsemantics.test.expressions.ecore;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -10,7 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -145,74 +145,67 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
-    
-    {
-      boolean _or = false;
-      String _string = new String();
-      boolean _equals = ObjectExtensions.operator_equals(
-        "foo", _string);
-      if (_equals) {
-        _or = true;
-      } else {
-        String _string_1 = new String();
-        boolean _equals_1 = ObjectExtensions.operator_equals("bar", _string_1);
-        _or = (_equals || _equals_1);
-      }
-      /* 'foo' == new String() || 'bar' == new String() */
-      if (!_or) {
-        sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");
-      }
-      boolean _and = false;
-      String _string_2 = new String();
-      boolean _equals_2 = ObjectExtensions.operator_equals(
-        "foo", _string_2);
-      if (!_equals_2) {
-        _and = false;
-      } else {
-        String _string_3 = new String();
-        boolean _equals_3 = ObjectExtensions.operator_equals("bar", _string_3);
-        _and = (_equals_2 && _equals_3);
-      }
-      /* 'foo' == new String() && 'bar' == new String() */
-      if (!_and) {
-        sneakyThrowRuleFailedException("\'foo\' == new String() && \'bar\' == new String()");
-      }
-      String _string_4 = new String();
-      String _firstUpper = StringExtensions.toFirstUpper("bar");
-      String _plus = (_string_4 + _firstUpper);
-      boolean _equals_4 = ObjectExtensions.operator_equals(
-        "foo", _plus);
-      /* 'foo' == new String() + 'bar'.toFirstUpper */
-      if (!_equals_4) {
-        sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
-      }
-      String _string_5 = new String();
-      String _firstUpper_1 = StringExtensions.toFirstUpper("bar");
-      String _plus_1 = (_string_5 + _firstUpper_1);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(
-        "foo", _plus_1);
-      /* 'foo' != new String() + 'bar'.toFirstUpper */
-      if (!_notEquals) {
-        sneakyThrowRuleFailedException("\'foo\' != new String() + \'bar\'.toFirstUpper");
-      }
-      String _string_6 = new String();
-      String _firstUpper_2 = StringExtensions.toFirstUpper("bar");
-      final String temp = (_string_6 + _firstUpper_2);
-      boolean _contains = "foo".contains("f");
-      /* 'foo'.contains('f') */
-      if (!_contains) {
-        sneakyThrowRuleFailedException("\'foo\'.contains(\'f\')");
-      }
-      "foo".concat("f");
-      boolean _contains_1 = "foo".contains("f");
-      boolean _not = (!_contains_1);
-      /* !('foo'.contains('f')) */
-      if (!_not) {
-        sneakyThrowRuleFailedException("!(\'foo\'.contains(\'f\'))");
-      }
-      final EClass eC = EcoreFactory.eINSTANCE.createEClass();
-      Boolean b = Boolean.valueOf(false);
+    boolean _or = false;
+    String _string = new String();
+    boolean _equals = Objects.equal("foo", _string);
+    if (_equals) {
+      _or = true;
+    } else {
+      String _string_1 = new String();
+      boolean _equals_1 = Objects.equal("bar", _string_1);
+      _or = (_equals || _equals_1);
     }
+    /* 'foo' == new String() || 'bar' == new String() */
+    if (!_or) {
+      sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");
+    }
+    boolean _and = false;
+    String _string_2 = new String();
+    boolean _equals_2 = Objects.equal("foo", _string_2);
+    if (!_equals_2) {
+      _and = false;
+    } else {
+      String _string_3 = new String();
+      boolean _equals_3 = Objects.equal("bar", _string_3);
+      _and = (_equals_2 && _equals_3);
+    }
+    /* 'foo' == new String() && 'bar' == new String() */
+    if (!_and) {
+      sneakyThrowRuleFailedException("\'foo\' == new String() && \'bar\' == new String()");
+    }
+    String _string_4 = new String();
+    String _firstUpper = StringExtensions.toFirstUpper("bar");
+    String _plus = (_string_4 + _firstUpper);
+    boolean _equals_4 = Objects.equal("foo", _plus);
+    /* 'foo' == new String() + 'bar'.toFirstUpper */
+    if (!_equals_4) {
+      sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
+    }
+    String _string_5 = new String();
+    String _firstUpper_1 = StringExtensions.toFirstUpper("bar");
+    String _plus_1 = (_string_5 + _firstUpper_1);
+    boolean _notEquals = (!Objects.equal("foo", _plus_1));
+    /* 'foo' != new String() + 'bar'.toFirstUpper */
+    if (!_notEquals) {
+      sneakyThrowRuleFailedException("\'foo\' != new String() + \'bar\'.toFirstUpper");
+    }
+    String _string_6 = new String();
+    String _firstUpper_2 = StringExtensions.toFirstUpper("bar");
+    final String temp = (_string_6 + _firstUpper_2);
+    boolean _contains = "foo".contains("f");
+    /* 'foo'.contains('f') */
+    if (!_contains) {
+      sneakyThrowRuleFailedException("\'foo\'.contains(\'f\')");
+    }
+    "foo".concat("f");
+    boolean _contains_1 = "foo".contains("f");
+    boolean _not = (!_contains_1);
+    /* !('foo'.contains('f')) */
+    if (!_not) {
+      sneakyThrowRuleFailedException("!(\'foo\'.contains(\'f\'))");
+    }
+    final EClass eC = EcoreFactory.eINSTANCE.createEClass();
+    Boolean b = Boolean.valueOf(false);
     return new Result<EObject>(object);
   }
   
@@ -233,7 +226,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleTestForThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass cl = null; // output parameter
-    
     EClass _eClass = obj.eClass();
     EClass _clone = this.<EClass>clone(_eClass);
     cl = _clone;

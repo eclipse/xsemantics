@@ -1,5 +1,6 @@
 package it.xsemantics.test.ruleinvocation.ecore;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
@@ -12,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -222,18 +222,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    EClass eClassResult = null;
+    /* G ||- object : eClassResult */
+    Result<EClass> result = etypeInternal(G, _trace_, object);
+    checkAssignableTo(result.getFirst(), EClass.class);
+    eClassResult = (EClass) result.getFirst();
     
-    {
-      EClass eClassResult = null;
-      /* G ||- object : eClassResult */
-      Result<EClass> result = etypeInternal(G, _trace_, object);
-      checkAssignableTo(result.getFirst(), EClass.class);
-      eClassResult = (EClass) result.getFirst();
-      
-      /* G |- eClass : object.eClass */
-      EClass _eClass = object.eClass();
-      typeInternal(G, _trace_, eClass, _eClass);
-    }
+    /* G |- eClass : object.eClass */
+    EClass _eClass = object.eClass();
+    typeInternal(G, _trace_, eClass, _eClass);
     return new Result<Boolean>(true);
   }
   
@@ -253,25 +250,20 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass1, final EClass eClass2) throws RuleFailedException {
-    
-    {
-      String _string = new String();
-      String _firstUpper = StringExtensions.toFirstUpper("bar");
-      String _plus = (_string + _firstUpper);
-      boolean _equals = ObjectExtensions.operator_equals(
-        "foo", _plus);
-      /* 'foo' == new String() + 'bar'.toFirstUpper */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
-      }
-      final EClass eC = EcoreFactory.eINSTANCE.createEClass();
-      eC.setName("MyEClass");
-      boolean _equals_1 = ObjectExtensions.operator_equals(
-        eClass1, eC);
-      /* eClass1 == eC */
-      if (!Boolean.valueOf(_equals_1)) {
-        sneakyThrowRuleFailedException("eClass1 == eC");
-      }
+    String _string = new String();
+    String _firstUpper = StringExtensions.toFirstUpper("bar");
+    String _plus = (_string + _firstUpper);
+    boolean _equals = Objects.equal("foo", _plus);
+    /* 'foo' == new String() + 'bar'.toFirstUpper */
+    if (!_equals) {
+      sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
+    }
+    final EClass eC = EcoreFactory.eINSTANCE.createEClass();
+    eC.setName("MyEClass");
+    boolean _equals_1 = Objects.equal(eClass1, eC);
+    /* eClass1 == eC */
+    if (!_equals_1) {
+      sneakyThrowRuleFailedException("eClass1 == eC");
     }
     return new Result<Boolean>(true);
   }
@@ -293,8 +285,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     
+    return new Result<EClass>(_applyRuleEObjectEClass_1(G, eObject));
+  }
+  
+  private EClass _applyRuleEObjectEClass_1(final RuleEnvironment G, final EObject eObject) throws RuleFailedException {
     EClass _eClass = eObject.eClass();
-    return new Result<EClass>(_eClass);
+    return _eClass;
   }
   
   protected Result<EClass> etype2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
@@ -314,7 +310,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    
     /* G ||- eObject : eClass */
     Result<EClass> result = etypeInternal(G, _trace_, eObject);
     checkAssignableTo(result.getFirst(), EClass.class);
@@ -341,7 +336,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result2<EClass,EStructuralFeature> applyRuleEObjectEClassEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     EClass eClass = null; // output parameter
     EStructuralFeature feat = null; // output parameter
-    
     /* G |~ eObject : eClass : feat */
     Result2<EClass,EStructuralFeature> result = etype3Internal(G, _trace_, eObject);
     checkAssignableTo(result.getFirst(), EClass.class);
@@ -369,16 +363,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleWithVarDeclAsOutputArg(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass result = null; // output parameter
+    /* G ||- o : var EClass temp */
+    EClass temp = null;
+    Result<EClass> result_1 = etypeInternal(G, _trace_, o);
+    checkAssignableTo(result_1.getFirst(), EClass.class);
+    temp = (EClass) result_1.getFirst();
     
-    {
-      /* G ||- o : var EClass temp */
-      EClass temp = null;
-      Result<EClass> result_1 = etypeInternal(G, _trace_, o);
-      checkAssignableTo(result_1.getFirst(), EClass.class);
-      temp = (EClass) result_1.getFirst();
-      
-      result = temp;
-    }
+    result = temp;
     return new Result<EClass>(result);
   }
 }

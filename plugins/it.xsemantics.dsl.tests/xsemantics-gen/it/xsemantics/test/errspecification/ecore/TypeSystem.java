@@ -77,7 +77,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _plus = ("cannot find " + c);
     String _plus_1 = (_plus + "\'s EClass");
     String error = _plus_1;
@@ -96,7 +95,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass left, final EClass right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _name = left.getName();
     String _plus = (_name + " is not a subtype of ");
     String _name_1 = right.getName();
@@ -126,7 +124,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    
     EClass _eClass = obj.eClass();
     eClass = _eClass;
     return new Result<EClass>(eClass);
@@ -140,25 +137,27 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleEObjectEClassWithErrorSpecification) {
-      
-      String _stringRep = this.stringRep(obj);
-      String _plus = ("cannot find EClass for EClass " + _stringRep);
-      String error = _plus;
-      EObject source = obj;
-      EStructuralFeature _eContainingFeature = obj.eContainingFeature();
-      EStructuralFeature feature = _eContainingFeature;
-      throwRuleFailedException(error,
-      	EOBJECTECLASSWITHERRORSPECIFICATION, e_applyRuleEObjectEClassWithErrorSpecification, new ErrorInformation(source, feature));
+      eObjectEClassWithErrorSpecificationThrowException(e_applyRuleEObjectEClassWithErrorSpecification, obj);
       return null;
     }
   }
   
   protected Result<EClass> applyRuleEObjectEClassWithErrorSpecification(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    
     EClass _eClass = obj.eClass();
     eClass = _eClass;
     return new Result<EClass>(eClass);
+  }
+  
+  private void eObjectEClassWithErrorSpecificationThrowException(final Exception e_applyRuleEObjectEClassWithErrorSpecification, final EClass obj) throws RuleFailedException {
+    String _stringRep = this.stringRep(obj);
+    String _plus = ("cannot find EClass for EClass " + _stringRep);
+    String error = _plus;
+    EObject source = obj;
+    EStructuralFeature _eContainingFeature = obj.eContainingFeature();
+    EStructuralFeature feature = _eContainingFeature;
+    throwRuleFailedException(error,
+    	EOBJECTECLASSWITHERRORSPECIFICATION, e_applyRuleEObjectEClassWithErrorSpecification, new ErrorInformation(source, feature));
   }
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass candidate, final EClass superClass) throws RuleFailedException {
@@ -177,10 +176,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass candidate, final EClass superClass) throws RuleFailedException {
-    
     boolean _isSuperTypeOf = superClass.isSuperTypeOf(candidate);
     /* superClass.isSuperTypeOf(candidate) */
-    if (!Boolean.valueOf(_isSuperTypeOf)) {
+    if (!_isSuperTypeOf) {
       sneakyThrowRuleFailedException("superClass.isSuperTypeOf(candidate)");
     }
     return new Result<Boolean>(true);

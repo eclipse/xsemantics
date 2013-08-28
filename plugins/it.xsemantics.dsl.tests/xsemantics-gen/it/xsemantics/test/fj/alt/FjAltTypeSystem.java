@@ -1,5 +1,6 @@
 package it.xsemantics.test.fj.alt;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -141,11 +141,10 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
-    
     /* program.main == null or empty |- program.main */
     try {
       Expression _main = program.getMain();
-      boolean _equals = ObjectExtensions.operator_equals(_main, null);
+      boolean _equals = Objects.equal(_main, null);
       /* program.main == null */
       if (!_equals) {
         sneakyThrowRuleFailedException("program.main == null");
@@ -174,7 +173,6 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected Result<Boolean> checkClassOkInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
-    
     /* empty |- clazz */
     checkInternal(emptyEnvironment(), _trace_, clazz);
     return new Result<Boolean>(true);
@@ -193,7 +191,6 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected void classtypeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _stringRep = this.stringRep(expression);
     String _plus = (_stringRep + " has not a class type");
     String error = _plus;
@@ -215,7 +212,6 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _stringRep = this.stringRep(left);
     String _plus = (_stringRep + " is not a subtype of ");
     String _stringRep_1 = this.stringRep(right);
@@ -239,7 +235,6 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    
     String _name = candidate.getName();
     String _plus = (_name + " is not a subclass of ");
     String _name_1 = superclass.getName();
@@ -260,25 +255,27 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
       addAsSubtrace(_trace_, _subtrace_);
       return _result_;
     } catch (Exception e_applyRuleTypeEquals) {
-      
-      String _stringRep = this.stringRep(left);
-      String _plus = (_stringRep + " and ");
-      String _stringRep_1 = this.stringRep(right);
-      String _plus_1 = (_plus + _stringRep_1);
-      String _plus_2 = (_plus_1 + 
-        " are not comparable");
-      String error = _plus_2;
-      throwRuleFailedException(error,
-      	TYPEEQUALS, e_applyRuleTypeEquals, new ErrorInformation(null, null));
+      typeEqualsThrowException(e_applyRuleTypeEquals, left, right);
       return null;
     }
   }
   
   protected Result<Boolean> applyRuleTypeEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type left, final Type right) throws RuleFailedException {
-    
     /* fail */
     throwForExplicitFail();
     return new Result<Boolean>(true);
+  }
+  
+  private void typeEqualsThrowException(final Exception e_applyRuleTypeEquals, final Type left, final Type right) throws RuleFailedException {
+    String _stringRep = this.stringRep(left);
+    String _plus = (_stringRep + " and ");
+    String _stringRep_1 = this.stringRep(right);
+    String _plus_1 = (_plus + _stringRep_1);
+    String _plus_2 = (_plus_1 + 
+      " are not comparable");
+    String error = _plus_2;
+    throwRuleFailedException(error,
+    	TYPEEQUALS, e_applyRuleTypeEquals, new ErrorInformation(null, null));
   }
   
   @Override
@@ -299,23 +296,20 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected Result<Boolean> applyRuleCheckNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
-    
-    {
-      ClassType _type = newExp.getType();
-      it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-      List<Field> fields = this.fjAux.getFields(_classref);
-      /* G |- newExp : newExp.args << fields */
-      EList<Expression> _args = newExp.getArgs();
-      subtypesequenceInternal(G, _trace_, newExp, _args, fields);
-      EList<Expression> _args_1 = newExp.getArgs();
-      final Procedure1<Expression> _function = new Procedure1<Expression>() {
-          public void apply(final Expression it) {
-            /* G |- it */
-            checkInternal(G, _trace_, it);
-          }
-        };
-      IterableExtensions.<Expression>forEach(_args_1, _function);
-    }
+    ClassType _type = newExp.getType();
+    it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
+    List<Field> fields = this.fjAux.getFields(_classref);
+    /* G |- newExp : newExp.args << fields */
+    EList<Expression> _args = newExp.getArgs();
+    subtypesequenceInternal(G, _trace_, newExp, _args, fields);
+    EList<Expression> _args_1 = newExp.getArgs();
+    final Procedure1<Expression> _function = new Procedure1<Expression>() {
+        public void apply(final Expression it) {
+          /* G |- it */
+          checkInternal(G, _trace_, it);
+        }
+      };
+    IterableExtensions.<Expression>forEach(_args_1, _function);
     return new Result<Boolean>(true);
   }
   
@@ -337,95 +331,90 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    
     it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_superclass, null);
+    boolean _notEquals = (!Objects.equal(_superclass, null));
     if (_notEquals) {
-      {
-        List<it.xsemantics.example.fj.fj.Class> superClasses = this.fjAux.getSuperclasses(cl);
-        boolean _contains = superClasses.contains(cl);
-        boolean _not = (!_contains);
-        /* !superClasses.contains(cl) */
-        if (!_not) {
-          sneakyThrowRuleFailedException("!superClasses.contains(cl)");
-        }
-        it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
-        List<Field> inheritedFields = this.fjAux.getFields(_superclass_1);
-        final Procedure1<Field> _function = new Procedure1<Field>() {
-            public void apply(final Field inheritedField) {
-              List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
-              for (final Field field : _selectFields) {
-                /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-                try {
-                  String _name = field.getName();
-                  String _name_1 = inheritedField.getName();
-                  boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
-                  /* field.name != inheritedField.name */
-                  if (!_notEquals) {
-                    sneakyThrowRuleFailedException("field.name != inheritedField.name");
-                  }
-                } catch (Exception e) {
-                  /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-                  EObject _eContainer = inheritedField.eContainer();
-                  String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
-                  String _plus = ("field already defined in superclass " + _stringRep);
-                  String error = _plus;
-                  throwForExplicitFail(error, new ErrorInformation(null, null));
+      List<it.xsemantics.example.fj.fj.Class> superClasses = this.fjAux.getSuperclasses(cl);
+      boolean _contains = superClasses.contains(cl);
+      boolean _not = (!_contains);
+      /* !superClasses.contains(cl) */
+      if (!_not) {
+        sneakyThrowRuleFailedException("!superClasses.contains(cl)");
+      }
+      it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
+      List<Field> inheritedFields = this.fjAux.getFields(_superclass_1);
+      final Procedure1<Field> _function = new Procedure1<Field>() {
+          public void apply(final Field inheritedField) {
+            List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
+            for (final Field field : _selectFields) {
+              /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+              try {
+                String _name = field.getName();
+                String _name_1 = inheritedField.getName();
+                boolean _notEquals = (!Objects.equal(_name, _name_1));
+                /* field.name != inheritedField.name */
+                if (!_notEquals) {
+                  sneakyThrowRuleFailedException("field.name != inheritedField.name");
                 }
+              } catch (Exception e) {
+                /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+                EObject _eContainer = inheritedField.eContainer();
+                String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
+                String _plus = ("field already defined in superclass " + _stringRep);
+                String error = _plus;
+                throwForExplicitFail(error, new ErrorInformation(null, null));
               }
             }
-          };
-        IterableExtensions.<Field>forEach(inheritedFields, _function);
-        it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
-        List<Method> inheritedMethods = this.fjAux.getMethods(_superclass_2);
-        final Procedure1<Method> _function_1 = new Procedure1<Method>() {
-            public void apply(final Method inheritedMethod) {
-              List<Method> _selectMethods = FjAltTypeSystem.this.fjAux.selectMethods(cl);
-              final Procedure1<Method> _function = new Procedure1<Method>() {
-                  public void apply(final Method it) {
-                    /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
-                    try {
-                      String _name = it.getName();
-                      String _name_1 = inheritedMethod.getName();
-                      boolean _notEquals = ObjectExtensions.operator_notEquals(_name, _name_1);
-                      /* it.name != inheritedMethod.name */
-                      if (!_notEquals) {
-                        sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
-                      }
-                    } catch (Exception e) {
-                      {
-                        /* G |- it.type ~~ inheritedMethod.type */
-                        Type _type = it.getType();
-                        Type _type_1 = inheritedMethod.getType();
-                        equalstypeInternal(G, _trace_, _type, _type_1);
-                        EList<Parameter> _params = it.getParams();
-                        int _size = _params.size();
-                        EList<Parameter> _params_1 = inheritedMethod.getParams();
-                        int _size_1 = _params_1.size();
-                        boolean _equals = (_size == _size_1);
-                        /* it.params.size == inheritedMethod.params.size */
-                        if (!_equals) {
-                          sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
-                        }
-                        EList<Parameter> _params_2 = inheritedMethod.getParams();
-                        final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
-                        EList<Parameter> _params_3 = it.getParams();
-                        for (final Parameter param : _params_3) {
-                          /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
-                          Type _type_2 = param.getType();
-                          Parameter _next = inheritedMethodParamsIt.next();
-                          Type _type_3 = _next.getType();
-                          equalstypeInternal(G, _trace_, _type_2, _type_3);
-                        }
-                      }
+          }
+        };
+      IterableExtensions.<Field>forEach(inheritedFields, _function);
+      it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
+      List<Method> inheritedMethods = this.fjAux.getMethods(_superclass_2);
+      final Procedure1<Method> _function_1 = new Procedure1<Method>() {
+          public void apply(final Method inheritedMethod) {
+            List<Method> _selectMethods = FjAltTypeSystem.this.fjAux.selectMethods(cl);
+            final Procedure1<Method> _function = new Procedure1<Method>() {
+                public void apply(final Method it) {
+                  /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
+                  try {
+                    String _name = it.getName();
+                    String _name_1 = inheritedMethod.getName();
+                    boolean _notEquals = (!Objects.equal(_name, _name_1));
+                    /* it.name != inheritedMethod.name */
+                    if (!_notEquals) {
+                      sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
+                    }
+                  } catch (Exception e) {
+                    /* G |- it.type ~~ inheritedMethod.type */
+                    Type _type = it.getType();
+                    Type _type_1 = inheritedMethod.getType();
+                    equalstypeInternal(G, _trace_, _type, _type_1);
+                    EList<Parameter> _params = it.getParams();
+                    int _size = _params.size();
+                    EList<Parameter> _params_1 = inheritedMethod.getParams();
+                    int _size_1 = _params_1.size();
+                    boolean _equals = (_size == _size_1);
+                    /* it.params.size == inheritedMethod.params.size */
+                    if (!_equals) {
+                      sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
+                    }
+                    EList<Parameter> _params_2 = inheritedMethod.getParams();
+                    final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
+                    EList<Parameter> _params_3 = it.getParams();
+                    for (final Parameter param : _params_3) {
+                      /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
+                      Type _type_2 = param.getType();
+                      Parameter _next = inheritedMethodParamsIt.next();
+                      Type _type_3 = _next.getType();
+                      equalstypeInternal(G, _trace_, _type_2, _type_3);
                     }
                   }
-                };
-              IterableExtensions.<Method>forEach(_selectMethods, _function);
-            }
-          };
-        IterableExtensions.<Method>forEach(inheritedMethods, _function_1);
-      }
+                }
+              };
+            IterableExtensions.<Method>forEach(_selectMethods, _function);
+          }
+        };
+      IterableExtensions.<Method>forEach(inheritedMethods, _function_1);
     }
     return new Result<Boolean>(true);
   }
