@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -59,6 +60,16 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				rule.resultType(appendable)
 				appendable.append("(true);")
 				
+				return appendable
+			}
+			AuxiliaryFunction: {
+				if (rule.auxiliaryDescription.type != null)
+					return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
+				
+				// else we must put an explicit return true, since
+				// the Java method is expected to be boolean
+				internalToJavaStatement(obj, appendable, false)
+				appendable.newLine.append("return true;")
 				return appendable
 			}
 		}

@@ -3,9 +3,12 @@ package it.xsemantics.dsl.typing
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
+import it.xsemantics.dsl.xsemantics.EnvironmentComposition
+import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
@@ -21,8 +24,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import it.xsemantics.dsl.xsemantics.EnvironmentComposition
-import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -54,6 +55,17 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			// the premises block should not be checked against
 			// return type
 			state = state.withoutRootExpectation
+		}
+		
+		if (b.eContainer instanceof AuxiliaryFunction) {
+			val aux = b.eContainer as AuxiliaryFunction
+			val type = aux.auxiliaryDescription?.type
+			
+			// if the return type is null we assume boolean
+			// and we must not check it
+			if (type == null)
+				state = state.withExpectation(state.getPrimitiveVoid)
+			// we will adjust the boolean result in the compiler
 		}
 		
 		if (b.eContainer instanceof RuleWithPremises) {

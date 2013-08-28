@@ -8,6 +8,7 @@ import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
 import it.xsemantics.dsl.xsemantics.Environment;
@@ -95,6 +96,22 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
         appendable.append("return new ");
         this._xsemanticsGeneratorExtensions.resultType(_checkRule, appendable);
         appendable.append("(true);");
+        return appendable;
+      }
+    }
+    if (!_matched) {
+      if (rule instanceof AuxiliaryFunction) {
+        final AuxiliaryFunction _auxiliaryFunction = (AuxiliaryFunction)rule;
+        _matched=true;
+        AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(_auxiliaryFunction);
+        JvmTypeReference _type = _auxiliaryDescription.getType();
+        boolean _notEquals = (!Objects.equal(_type, null));
+        if (_notEquals) {
+          return super.compile(obj, appendable, expectedReturnType, declaredExceptions);
+        }
+        this.internalToJavaStatement(obj, appendable, false);
+        ITreeAppendable _newLine = appendable.newLine();
+        _newLine.append("return true;");
         return appendable;
       }
     }

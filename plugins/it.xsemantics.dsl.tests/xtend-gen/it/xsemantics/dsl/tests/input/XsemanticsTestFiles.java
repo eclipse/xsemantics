@@ -4391,6 +4391,8 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject");
     _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EStructuralFeature");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("auxiliary {");
     _builder.newLine();
@@ -4464,6 +4466,14 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("true");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("auxiliary voidFun(EStructuralFeature o) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(o)");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

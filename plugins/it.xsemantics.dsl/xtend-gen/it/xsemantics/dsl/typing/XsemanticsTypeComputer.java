@@ -4,6 +4,8 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import it.xsemantics.dsl.util.XsemanticsUtils;
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment;
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess;
@@ -115,9 +117,26 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
       state = _withoutRootExpectation;
     }
     EObject _eContainer_3 = b.eContainer();
-    if ((_eContainer_3 instanceof RuleWithPremises)) {
+    if ((_eContainer_3 instanceof AuxiliaryFunction)) {
       EObject _eContainer_4 = b.eContainer();
-      final RuleWithPremises rule = ((RuleWithPremises) _eContainer_4);
+      final AuxiliaryFunction aux = ((AuxiliaryFunction) _eContainer_4);
+      AuxiliaryDescription _auxiliaryDescription = this._xsemanticsUtils.auxiliaryDescription(aux);
+      JvmTypeReference _type = null;
+      if (_auxiliaryDescription!=null) {
+        _type=_auxiliaryDescription.getType();
+      }
+      final JvmTypeReference type = _type;
+      boolean _equals_1 = Objects.equal(type, null);
+      if (_equals_1) {
+        LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
+        ITypeComputationState _withExpectation = state.withExpectation(_primitiveVoid);
+        state = _withExpectation;
+      }
+    }
+    EObject _eContainer_5 = b.eContainer();
+    if ((_eContainer_5 instanceof RuleWithPremises)) {
+      EObject _eContainer_6 = b.eContainer();
+      final RuleWithPremises rule = ((RuleWithPremises) _eContainer_6);
       List<RuleParameter> _outputParams = this._xsemanticsUtils.outputParams(rule);
       for (final RuleParameter outputParam : _outputParams) {
         JvmFormalParameter _parameter = outputParam.getParameter();
@@ -149,8 +168,8 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
               }
             }
           }
-          LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
-          expectation.acceptActualType(_primitiveVoid, ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+          LightweightTypeReference _primitiveVoid_1 = this.getPrimitiveVoid(state);
+          expectation.acceptActualType(_primitiveVoid_1, ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
         } else {
           final EList<XExpression> expressions_1 = b.getExpressions();
           boolean _isEmpty_1 = expressions_1.isEmpty();

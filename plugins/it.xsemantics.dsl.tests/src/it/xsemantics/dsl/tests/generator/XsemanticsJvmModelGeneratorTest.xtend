@@ -2761,6 +2761,7 @@ import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
@@ -2932,16 +2933,32 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean applyAuxFunVoidFun(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
-    boolean _xblockexpression = false;
-    {
-      InputOutput.<EObject>println(o);
-      /* true */
-      if (!Boolean.valueOf(true)) {
-        sneakyThrowRuleFailedException("true");
-      }
-      _xblockexpression = (true);
+    InputOutput.<EObject>println(o);
+    /* true */
+    if (!true) {
+      sneakyThrowRuleFailedException("true");
     }
-    return Boolean.valueOf(_xblockexpression);
+    return true;
+  }
+  
+  protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EStructuralFeature o) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+      addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyAuxFunVoidFun) {
+      voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
+      	VOIDFUN,
+      	e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
+      return null;
+    }
+  }
+  
+  protected Boolean applyAuxFunVoidFun(final RuleApplicationTrace _trace_, final EStructuralFeature o) throws RuleFailedException {
+    InputOutput.<EStructuralFeature>println(o);
+    return true;
   }
 }
 '''

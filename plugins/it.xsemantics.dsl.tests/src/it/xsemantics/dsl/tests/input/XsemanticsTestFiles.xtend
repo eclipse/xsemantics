@@ -2002,6 +2002,7 @@ class XsemanticsTestFiles {
 	«typeSystemQualifiedName»
 	import org.eclipse.emf.ecore.EClass
 	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EStructuralFeature
 	
 	auxiliary {
 		isValue(EObject o, EClass c) : Boolean
@@ -2036,6 +2037,10 @@ class XsemanticsTestFiles {
 	auxiliary voidFun(EObject o) {
 		println(o)
 		true
+	}
+	
+	auxiliary voidFun(EStructuralFeature o) {
+		println(o)
 	}
 	'''
 
