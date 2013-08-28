@@ -16,7 +16,8 @@ Require-Bundle: it.xsemantics.dsl,
  org.eclipse.jdt.core;bundle-version="3.7.1",
  it.xsemantics.example.expressions.tests;bundle-version="1.0.0",
  it.xsemantics.example.lambda.tests;bundle-version="1.0.0",
- org.junit;bundle-version="4.8.2"
+ org.junit;bundle-version="4.8.2",
+ org.eclipse.xtext.common.types.ui
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.junit.runner;version="4.5.0",
