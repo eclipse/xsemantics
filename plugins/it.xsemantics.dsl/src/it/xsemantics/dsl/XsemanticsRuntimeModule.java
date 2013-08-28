@@ -7,7 +7,6 @@ import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.scoping.XsemanticsScopeProvider;
 import it.xsemantics.dsl.typing.XsemanticsTypeComputer;
-import it.xsemantics.dsl.typing.XsemanticsTypeProvider;
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -15,7 +14,6 @@ import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 /**
@@ -28,11 +26,6 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 		return XsemanticsScopeProvider.class;
 	}
 
-	@Override
-	public Class<? extends ITypeProvider> bindITypeProvider() {
-		return XsemanticsTypeProvider.class;
-	}
-	
 	@Override
 	public Class<? extends ITypeComputer> bindITypeComputer() {
 		return XsemanticsTypeComputer.class;

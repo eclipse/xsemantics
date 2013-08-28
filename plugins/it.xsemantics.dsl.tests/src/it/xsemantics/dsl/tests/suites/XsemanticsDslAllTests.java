@@ -5,7 +5,6 @@ import it.xsemantics.dsl.tests.XsemanticsNodeModelUtilsTest;
 import it.xsemantics.dsl.tests.XsemanticsParserTest;
 import it.xsemantics.dsl.tests.XsemanticsProposalsForDatatypeRulesTest;
 import it.xsemantics.dsl.tests.XsemanticsScopingTest;
-import it.xsemantics.dsl.tests.XsemanticsTypeProviderTest;
 import it.xsemantics.dsl.tests.XsemanticsTypeSystemTest;
 import it.xsemantics.dsl.tests.XsemanticsUtilsTest;
 import it.xsemantics.dsl.tests.XsemanticsValidatorTest;
@@ -24,7 +23,6 @@ import org.junit.runners.Suite;
 	QualifiedNameTest.class,
 	XsemanticsUtilsTest.class,
 	XsemanticsNodeModelUtilsTest.class,
-	XsemanticsTypeProviderTest.class,
 	XsemanticsTypeSystemTest.class
 })
 public class XsemanticsDslAllTests {
