@@ -28,5 +28,16 @@ public class XsemanticsProposalProviderTest extends
 						"<~!", "!~>", "error", "override");
 	}
 
+	@Test
+	def void testProposalsForInjectionsInConclusion() {
+		newBuilder.
+		append(testInputs.inputForInjections).
+		append(
+		'''
+		rule TestRule
+			G |- EObject o : my'''
+		).
+		assertProposal("mylist")
+	}
 
 }

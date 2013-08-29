@@ -2,6 +2,7 @@ package it.xsemantics.dsl.tests.ui.contentassist;
 
 import it.xsemantics.dsl.XsemanticsUiInjectorProvider;
 import it.xsemantics.dsl.tests.ui.contentassist.XsemanticsTestFilesForContentAssist;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
@@ -43,6 +44,24 @@ public class XsemanticsProposalProviderTest extends AbstractContentAssistTest {
       _append.assertText(":", "<:", ":>", "<<", ">>", "<|", "|>", "<-", 
         "-->", "<~", "~>", "~~", "<!", "!>", "<<!", "!>>", 
         "<~!", "!~>", "error", "override");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testProposalsForInjectionsInConclusion() {
+    try {
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      String _inputForInjections = this.testInputs.inputForInjections();
+      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_inputForInjections);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("rule TestRule");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("G |- EObject o : my");
+      ContentAssistProcessorTestBuilder _append_1 = _append.append(_builder.toString());
+      _append_1.assertProposal("mylist");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

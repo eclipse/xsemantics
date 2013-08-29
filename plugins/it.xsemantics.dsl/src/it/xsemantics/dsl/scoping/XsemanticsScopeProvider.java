@@ -79,19 +79,6 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	}
 	
-	@Override
-	protected JvmDeclaredType getContextType(EObject obj) {
-		// the context type of an ExpressionInConclusion is the same
-		// as the inferred class of the containing Rule
-		// this way, visibility works correctly and
-		// an ExpressionInConclusion can access private injected fields
-		if (obj instanceof ExpressionInConclusion) {
-			return super.getContextType(logicalContainerProvider
-					.getLogicalContainer(utils.containingRule(obj)));
-		}
-		return super.getContextType(obj);
-	}
-
 	private JvmOperation getJvmOperationAssociatedToSourceElement(
 			EObject context) {
 		EObject sourceElement = associations.getPrimarySourceElement(context);
