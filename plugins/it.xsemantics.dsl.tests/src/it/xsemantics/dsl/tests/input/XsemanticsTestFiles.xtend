@@ -1530,6 +1530,15 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testSystemWithDuplicateInjections() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	/* a utility field */
+	inject List<String> strings
+	inject String strings
+	'''
+
 	def testAccessToInjectedFields() '''
 	«testSystemWithInjections»
 	

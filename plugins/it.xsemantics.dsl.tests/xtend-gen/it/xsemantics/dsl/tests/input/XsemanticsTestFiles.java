@@ -3430,6 +3430,23 @@ public class XsemanticsTestFiles {
     return _builder;
   }
   
+  public CharSequence testSystemWithDuplicateInjections() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _testFileWithImports = this.testFileWithImports();
+    _builder.append(_testFileWithImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/* a utility field */");
+    _builder.newLine();
+    _builder.append("inject List<String> strings");
+    _builder.newLine();
+    _builder.append("inject String strings");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence testAccessToInjectedFields() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _testSystemWithInjections = this.testSystemWithInjections();

@@ -1,5 +1,6 @@
 package it.xsemantics.test.ecore;
 
+import com.google.common.base.Objects;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -10,7 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -74,25 +74,20 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
-    
-    {
-      String _string = new String();
-      String _firstUpper = StringExtensions.toFirstUpper("bar");
-      String _plus = (_string + _firstUpper);
-      boolean _equals = ObjectExtensions.operator_equals(
-        "foo", _plus);
-      /* 'foo' == new String() + 'bar'.toFirstUpper */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
-      }
-      final EClass eC = EcoreFactory.eINSTANCE.createEClass();
-      eC.setName("MyEClass");
-      boolean _equals_1 = ObjectExtensions.operator_equals(
-        eClass, eC);
-      /* eClass == eC */
-      if (!Boolean.valueOf(_equals_1)) {
-        sneakyThrowRuleFailedException("eClass == eC");
-      }
+    String _string = new String();
+    String _firstUpper = StringExtensions.toFirstUpper("bar");
+    String _plus = (_string + _firstUpper);
+    boolean _equals = Objects.equal("foo", _plus);
+    /* 'foo' == new String() + 'bar'.toFirstUpper */
+    if (!_equals) {
+      sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
+    }
+    final EClass eC = EcoreFactory.eINSTANCE.createEClass();
+    eC.setName("MyEClass");
+    boolean _equals_1 = Objects.equal(eClass, eC);
+    /* eClass == eC */
+    if (!_equals_1) {
+      sneakyThrowRuleFailedException("eClass == eC");
     }
     return new Result<Boolean>(true);
   }

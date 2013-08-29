@@ -44,11 +44,11 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		assertTrue(generator != null);
 	}
 
-	@Test
-	public void testCleanOutputFolder() {
-		setGeneratorOutputPath(RESULT_DIR + "ecore_test/");
-		cleanOutputFolderAndAssertEmpty();
-	}
+//	@Test
+//	public void testCleanOutputFolder() {
+//		setGeneratorOutputPath(RESULT_DIR + "ecore_test/");
+//		cleanOutputFolderAndAssertEmpty();
+//	}
 
 	@Test
 	public void testGeneratorOnSimpleRule() throws Exception {

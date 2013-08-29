@@ -9,6 +9,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
@@ -600,6 +601,15 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 				}
 			}
 			return;
+		}
+	}
+
+	@Check
+	public void checkInjected(Injected i) {
+		if (helper.hasDuplicateInjectedField(i)) {
+			error("Duplicate injection '" + i.getName() + "'",
+				XsemanticsPackage.eINSTANCE.getInjected_Name(),
+				IssueCodes.DUPLICATE_INJECTED_FIELD);
 		}
 	}
 

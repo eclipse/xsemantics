@@ -11,6 +11,7 @@ import it.xsemantics.dsl.xsemantics.JudgmentDescription
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.Injected
 
 class XsemanticsJavaValidatorHelper {
 	
@@ -75,6 +76,12 @@ class XsemanticsJavaValidatorHelper {
 	def findDuplicateJvmFormalParameter(Iterable<JvmFormalParameter> params, JvmFormalParameter param) {
 		params.exists [ 
 			it != param && it.name == param.name
+		]
+	}
+	
+	def hasDuplicateInjectedField(Injected i) {
+		i.containingSystem.injections.exists[
+			it != i && it.name == i.name
 		]
 	}
 

@@ -25,6 +25,9 @@ public interface IssueCodes {
 
 	String DUPLICATE_JUDGMENT_NAME = PREFIX
 			+ "DuplicateJudgmentName";
+
+	String DUPLICATE_INJECTED_FIELD = PREFIX
+			+ "DuplicateInjectedField";
 	
 	String NOT_EOBJECT = PREFIX + "NotEObject";
 

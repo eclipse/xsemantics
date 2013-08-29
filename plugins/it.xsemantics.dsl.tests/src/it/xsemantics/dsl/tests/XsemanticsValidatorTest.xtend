@@ -298,4 +298,14 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testDuplicateInjectedFields() {
+		parser.parse(testFiles.testSystemWithDuplicateInjections).
+		assertError(
+			XsemanticsPackage::eINSTANCE.injected,
+			IssueCodes::DUPLICATE_INJECTED_FIELD,
+			"Duplicate injection 'strings'"
+		)
+	}
+
 }

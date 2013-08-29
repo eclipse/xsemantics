@@ -319,4 +319,18 @@ public class XsemanticsValidatorTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testDuplicateInjectedFields() {
+    try {
+      CharSequence _testSystemWithDuplicateInjections = this.testFiles.testSystemWithDuplicateInjections();
+      XsemanticsSystem _parse = this.parser.parse(_testSystemWithDuplicateInjections);
+      EClass _injected = XsemanticsPackage.eINSTANCE.getInjected();
+      this._validationTestHelper.assertError(_parse, _injected, 
+        IssueCodes.DUPLICATE_INJECTED_FIELD, 
+        "Duplicate injection \'strings\'");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.CheckRule;
+import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.JudgmentParameter;
@@ -237,6 +238,28 @@ public class XsemanticsJavaValidatorHelper {
         }
       };
     boolean _exists = IterableExtensions.<JvmFormalParameter>exists(params, _function);
+    return _exists;
+  }
+  
+  public boolean hasDuplicateInjectedField(final Injected i) {
+    XsemanticsSystem _containingSystem = this._xsemanticsUtils.containingSystem(i);
+    EList<Injected> _injections = _containingSystem.getInjections();
+    final Function1<Injected,Boolean> _function = new Function1<Injected,Boolean>() {
+        public Boolean apply(final Injected it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, i));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _name = it.getName();
+            String _name_1 = i.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            _and = (_notEquals && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    boolean _exists = IterableExtensions.<Injected>exists(_injections, _function);
     return _exists;
   }
 }
