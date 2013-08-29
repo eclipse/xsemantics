@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	LambdaIntegrationTest.class
+	LambdaWorkbenchTest.class,
+	LambdaEditorTest.class
 })
 public class LambdaAllUiTests {
 
