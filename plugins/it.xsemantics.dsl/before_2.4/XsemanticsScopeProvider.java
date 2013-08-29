@@ -35,10 +35,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * This class contains custom scoping description. XbaseScopeProvider is
- * NOT used by the Xbase validator: it is used only by the content assist,
- * that's why it is still here, see
- * http://www.eclipse.org/forums/index.php/t/476486/
+ * This class contains custom scoping description.
  * 
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
  * how and when to use it
@@ -82,6 +79,19 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	}
 	
+	@Override
+	protected JvmDeclaredType getContextType(EObject obj) {
+		// the context type of an ExpressionInConclusion is the same
+		// as the inferred class of the containing Rule
+		// this way, visibility works correctly and
+		// an ExpressionInConclusion can access private injected fields
+		if (obj instanceof ExpressionInConclusion) {
+			return super.getContextType(logicalContainerProvider
+					.getLogicalContainer(utils.containingRule(obj)));
+		}
+		return super.getContextType(obj);
+	}
+
 	private JvmOperation getJvmOperationAssociatedToSourceElement(
 			EObject context) {
 		EObject sourceElement = associations.getPrimarySourceElement(context);

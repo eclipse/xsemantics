@@ -34,4 +34,19 @@ judgments {
 
 '''.toString
 	}
+
+	def inputForRuleInvocation() {
+'''
+system my.test.ts.TypeSystem
+
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EClass
+import java.util.List
+
+judgments {
+	type |- EObject o : output EClass : output EClass
+}
+
+'''.toString
+	}
 }
