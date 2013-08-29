@@ -248,8 +248,9 @@ Let&apos;s start with simple expressions
 </span><span class="keyword">axiom</span>&nbsp;TBoolConstant<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;|-&nbsp;BoolConstant&nbsp;b&nbsp;:&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span>.basic=<span class="string">&apos;boolean&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">it</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BasicType&nbsp;t&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.basic=<span class="string">&apos;boolean&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;].apply(FjFactory::eINSTANCE.createBasicType())<br/>
 </p>
 </div>

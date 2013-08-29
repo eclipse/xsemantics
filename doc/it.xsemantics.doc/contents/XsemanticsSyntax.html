@@ -11,10 +11,63 @@
 <a name="Syntax"></a>
 <h1>Xsemantics Syntax</h1>
 <p>
+Here we describe the syntax of Xsemantics. You may also
+want to refer to <a href="Examples.html#Examples" title="Go to &quot;Examples&quot;" >section Examples</a> for better understanding the syntax
+of judgments, rules, etc.
+</p>
+<a name="Imports"></a>
+<h2>Imports</h2>
+<p>
 After giving your system a name, as seen in the previous example, 
-you can specify <span class="inlinecode"><span class="keyword">import</span></span>s like in Java (without the terminating <span class="inlinecode">;</span>),
+you can specify <span class="inlinecode"><span class="keyword">import</span></span>s like in Java (you don&apos;t need the terminating <span class="inlinecode">;</span>),
 possibly with a terminating <span class="inlinecode">*</span> in order to import all the classes of that
-Java package.
+Java package (the use of wildcard imports is deprecated though).
+</p>
+<p>
+Since version 1.3.0 (i.e., after the move to Xbase 2.4) you can also specify
+<em>static imports</em> (wildcard can be used for static imports); for example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.EcoreUtil2.*<br/>
+<br/>
+...<br/>
+<br/>
+<span class="comment">//&nbsp;simply&nbsp;use,&nbsp;for&nbsp;example<br/>
+</span>getContainerOfType(o,&nbsp;<span class="keyword">typeof</span>(EClass))<br/>
+<span class="comment">//&nbsp;instead&nbsp;of<br/>
+</span>EcoreUtil2.getContainerOfType(o,&nbsp;<span class="keyword">typeof</span>(EClass))<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+You can also specify <em>static extension imports</em> (you may know such feature
+from Xtend, and it has exactly the same semantics), so that you can
+use all the imported methods as <em>extension methods</em>; for example
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.EcoreUtil2.*<br/>
+<br/>
+...<br/>
+<br/>
+<span class="comment">//&nbsp;use&nbsp;EcoreUtil2&nbsp;static&nbsp;methods&nbsp;as&nbsp;extension&nbsp;methods<br/>
+</span>o.getContainerOfType(<span class="keyword">typeof</span>(EClass))<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Content assist for Java types is provided, which automatically
+inserts the corresponding import statement.
+</p>
+<p>
+The menu "Organize Imports" is also available for Xsemantics files.
 </p>
 <a name="InjectedFields"></a>
 <h2>Injected Fields</h2>

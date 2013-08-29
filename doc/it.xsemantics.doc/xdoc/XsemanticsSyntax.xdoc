@@ -1,9 +1,47 @@
 chapter:Syntax[Xsemantics Syntax]
 
+Here we describe the syntax of Xsemantics. You may also
+want to refer to ref:Examples[] for better understanding the syntax
+of judgments, rules, etc.
+
+section:Imports[Imports]
+
 After giving your system a name, as seen in the previous example, 
-you can specify code[Xsemantics][import]s like in Java (without the terminating code[;]),
+you can specify code[Xsemantics][import]s like in Java (you don't need the terminating code[;]),
 possibly with a terminating code[*] in order to import all the classes of that
-Java package.
+Java package (the use of wildcard imports is deprecated though).
+
+Since version 1.3.0 (i.e., after the move to Xbase 2.4) you can also specify
+e[static imports] (wildcard can be used for static imports); for example:
+
+code[Xsemantics][
+import static org.eclipse.xtext.EcoreUtil2.*
+
+...
+
+// simply use, for example
+getContainerOfType(o, typeof(EClass))
+// instead of
+EcoreUtil2.getContainerOfType(o, typeof(EClass))
+]
+
+You can also specify e[static extension imports] (you may know such feature
+from Xtend, and it has exactly the same semantics), so that you can
+use all the imported methods as e[extension methods]; for example
+
+code[Xsemantics][
+import static extension org.eclipse.xtext.EcoreUtil2.*
+
+...
+
+// use EcoreUtil2 static methods as extension methods
+o.getContainerOfType(typeof(EClass))
+]
+
+Content assist for Java types is provided, which automatically
+inserts the corresponding import statement.
+
+The menu "Organize Imports" is also available for Xsemantics files.
 
 section:InjectedFields[Injected Fields]
 
