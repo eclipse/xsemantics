@@ -4734,4 +4734,62 @@ public class XsemanticsTestFiles {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence testStaticImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import static org.eclipse.xtext.EcoreUtil2.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject o : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("axiom TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : getContainerOfType(o, typeof(EClass))");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence testStaticExtensionImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _typeSystemQualifiedName = this.typeSystemQualifiedName();
+    _builder.append(_typeSystemQualifiedName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EClass");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import static extension org.eclipse.xtext.EcoreUtil2.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("judgments {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("type |- EObject o : output EClass");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("axiom TestRule");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("G |- EObject o : o.getContainerOfType(typeof(EClass))");
+    _builder.newLine();
+    return _builder;
+  }
 }

@@ -711,4 +711,26 @@ public class XsemanticsParserTest extends XsemanticsBaseTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testStaticImport() {
+    try {
+      CharSequence _testStaticImport = this.testFiles.testStaticImport();
+      XsemanticsSystem _parse = this.parser.parse(_testStaticImport);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticExtensionImport() {
+    try {
+      CharSequence _testStaticExtensionImport = this.testFiles.testStaticExtensionImport();
+      XsemanticsSystem _parse = this.parser.parse(_testStaticExtensionImport);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

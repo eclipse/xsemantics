@@ -2166,4 +2166,34 @@ class XsemanticsTestFiles {
 		cc.name
 	}
 	'''
+
+	def testStaticImport() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	import static org.eclipse.xtext.EcoreUtil2.*
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	axiom TestRule
+		G |- EObject o : getContainerOfType(o, typeof(EClass))
+	'''
+
+	def testStaticExtensionImport() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	import static extension org.eclipse.xtext.EcoreUtil2.*
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	axiom TestRule
+		G |- EObject o : o.getContainerOfType(typeof(EClass))
+	'''
 }

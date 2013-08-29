@@ -429,4 +429,14 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testAuxiliaryFunctionsInvocation() {
 		parser.parse(testFiles.testAuxiliaryFunctionsInvocation).assertNoErrors
 	}
+
+	@Test
+	def void testStaticImport() {
+		parser.parse(testFiles.testStaticImport).assertNoErrors
+	}
+
+	@Test
+	def void testStaticExtensionImport() {
+		parser.parse(testFiles.testStaticExtensionImport).assertNoErrors
+	}
 }
