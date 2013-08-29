@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
@@ -152,7 +151,6 @@ public class LambdaEditorTest extends AbstractEditorTest {
   private void inferTypeAndExpect(final String contents, final String expected) {
     try {
       final IFile file = this.createTestFile(contents);
-      IResourcesSetupUtil.waitForAutoBuild();
       final XtextEditor editor = this.openEditor(file);
       this.modifyTermWithInferredType(editor);
       IXtextDocument _document = editor.getDocument();
@@ -167,7 +165,6 @@ public class LambdaEditorTest extends AbstractEditorTest {
     Abstraction _xblockexpression = null;
     {
       final IFile file = this.createTestFile(contents);
-      IResourcesSetupUtil.waitForAutoBuild();
       final XtextEditor editor = this.openEditor(file);
       this.modifyAbstractionWithInferredType(editor);
       Abstraction _abstractionFromEditor = this.abstractionFromEditor(editor);
@@ -208,19 +205,10 @@ public class LambdaEditorTest extends AbstractEditorTest {
   
   private void modifyAbstractionWithInferredType(final IXtextDocument xtextDocument) {
     this.lambdaTermModifier.modifyAbstractionWithInferredType(xtextDocument);
-    this.saveAllEditors();
-    IResourcesSetupUtil.waitForAutoBuild();
   }
   
   private void modifyTermWithInferredType(final XtextEditor editor) {
     IXtextDocument _document = editor.getDocument();
     this.lambdaTermModifier.modifyTermWithInferredType(_document);
-    this.saveAllEditors();
-    IResourcesSetupUtil.waitForAutoBuild();
-  }
-  
-  private void saveAllEditors() {
-    IWorkbenchPage _activePage = this.getActivePage();
-    _activePage.saveAllEditors(false);
   }
 }

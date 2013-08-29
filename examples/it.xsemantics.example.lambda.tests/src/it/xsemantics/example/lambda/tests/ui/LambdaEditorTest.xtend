@@ -111,7 +111,6 @@ class LambdaEditorTest extends AbstractEditorTest {
 
 	def private inferTypeAndExpect(String contents, String expected) {
 		val file = createTestFile(contents)
-		waitForAutoBuild()
 		val editor = file.openEditor
 		editor.modifyTermWithInferredType
 		
@@ -120,7 +119,6 @@ class LambdaEditorTest extends AbstractEditorTest {
 
 	def private modifyAbstractionWithInferredType(String contents) throws Exception {
 		val file = createTestFile(contents)
-		waitForAutoBuild()
 		val editor = file.openEditor
 		editor.modifyAbstractionWithInferredType
 		//file.assertNoErrorMarkers
@@ -151,18 +149,14 @@ class LambdaEditorTest extends AbstractEditorTest {
 	def private void modifyAbstractionWithInferredType(
 			IXtextDocument xtextDocument) {
 		lambdaTermModifier.modifyAbstractionWithInferredType(xtextDocument);
-		saveAllEditors();
-		waitForAutoBuild();
 	}
 
 	def private void modifyTermWithInferredType(
 			XtextEditor editor) {
 		lambdaTermModifier.modifyTermWithInferredType(editor.document);
-		saveAllEditors();
-		waitForAutoBuild();
 	}
 
-	def private void saveAllEditors() {
-		getActivePage().saveAllEditors(false);
-	}
+//	def private void saveAllEditors() {
+//		getActivePage().saveAllEditors(false);
+//	}
 }
