@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		eclipse.download	The base URL for all the repositories in the RMAP
+							Default: http://download.eclipse.org
+-->
+<project name="common" >
+	<property name="eclipse.download" value="http://download.eclipse.org" />
+
+	<property name="eclipse.name" value="kepler" />
+	<property name="eclipse.version" value="4.3" />
+
+	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
+	<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
+
+	<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name},${eclipse.download}/updates/${eclipse.version}" />
+
+	<property name="director.install.dest" location="${user.home}" />
+	<property name="director.dir" location="${director.install.dest}/director" />
+	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
+
+	<property name="eclipse.p2.mirrors" value="true" />
+	<property name="java.net.preferIPv4Stack" value="true" />
+
+	<target name="install.eclipse">
+		<condition property="eclipse.installed">
+			<available file="${eclipse.dest}/.eclipseproduct" />
+		</condition>
+		<antcall target="install.eclipse.internal" />
+	</target>
+
+	<target name="install.eclipse.internal" unless="eclipse.installed" >
+		<antcall target="install.p2.director" />
+		<echo message="" />
+		<echo message="Installing eclipse ${eclipse.name} into ${eclipse.dest}..." />
+		<echo message="Repositories: ${eclipse.repos}" />
+		<java fork="true" dir="${director.dir}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+			<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+			<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+			<classpath>
+				<fileset dir="${director.dir}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+			<arg line="-r ${eclipse.repos}" />
+			<arg line='-d "${eclipse.dest}"' />
+			<arg line="-installIU org.eclipse.sdk.ide" />
+			<arg line="-tag InitialState" />
+			<arg line="-profile SDKProfile" />
+			<arg line="-profileProperties org.eclipse.update.install.features=true" />
+		</java>
+	</target>
+
+	<target name="install.p2.director">
+		<condition property="p2.director.installed">
+			<available file="${director.dir}" />
+		</condition>
+		<antcall target="install.p2.director.internal" />
+	</target>
+
+	<target name="install.p2.director.internal" unless="p2.director.installed">
+		<echo message="" />
+		<echo message="Installing director from ${director.url}..." />
+		<tempfile destdir="${java.io.tmpdir}"
+						          prefix="director-"
+						          suffix=".zip"
+						          property="director.zip"
+						          deleteonexit="true" />
+		<get src="${director.url}" dest="${director.zip}" />
+		<unzip src="${director.zip}" dest="${director.install.dest}" />
+		<delete file="${director.zip}" />
+	</target>
+
+</project>

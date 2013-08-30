@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Install Kepler SDK" default="install.eclipse.kepler">
+	<import file="common.ant" as="common" />
+	
+	<target name="install.eclipse.kepler" description="Install Eclipse SDK Kepler">
+		<antcall target="install.eclipse"></antcall>
+	</target>
+
+</project>
