@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Test Features Installation" default="test.install.in.kepler">
+	<import file="common.ant" as="common" />
+
+	<property name="WORKSPACE" location="${ant.file}/../../../../" />
+	<property name="build.root" location="${WORKSPACE}/buildroot" />
+	<property name="site.p2" location="${build.root}/buckminster.output/it.xsemantics.site_1.2.0-eclipse.feature/site.p2/" />
+	
+	<target name="test.install.in.kepler" description="Test installation in Kepler">
+		<install.eclipse.features 
+			features.repos="${site.p2}"/>
+	</target>
+
+</project>

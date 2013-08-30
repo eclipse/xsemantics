@@ -6,6 +6,8 @@
 <project name="common" >
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
+	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
+
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
@@ -13,13 +15,34 @@
 	<property name="eclipse.p2.mirrors" value="true" />
 	<property name="java.net.preferIPv4Stack" value="true" />
 
+	<macrodef name="install.eclipse.features">
+		<attribute name="eclipse.name" default="kepler" />
+		<attribute name="eclipse.version" default="4.3" />
+		<attribute name="features.repos" />
+		<sequential>
+			<install.eclipse eclipse.name="@{eclipse.name}" eclipse.version="@{eclipse.version}"/>
+			<property name="eclipse.test.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}-test" />
+			<makeurl file="@{features.repos}" property="features.repos.url"/>
+			<property name="all.eclipse.repos" value="${eclipse.repos},${features.repos.url}" />
+			
+			<echo message="Installing features into ${eclipse.test.dest}..." />
+			<echo message="Features Repos: ${features.repos.url}" />
+			<echo message="All used Repositories: ${all.eclipse.repos}" />
+			
+			<delete dir="${eclipse.test.dest}"></delete>
+			
+			<copy todir="${eclipse.test.dest}">
+				<fileset dir="${eclipse.dest}"/>
+			</copy>
+		</sequential>
+	</macrodef>		
+
 	<macrodef name="install.eclipse">
 		<attribute name="eclipse.name" default="kepler" />
 		<attribute name="eclipse.version" default="4.3" />
 		<sequential>
 			<property name="eclipse.name" value="@{eclipse.name}" />
 			<property name="eclipse.version" value="@{eclipse.version}" />
-			<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
 			<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
 			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name},${eclipse.download}/updates/${eclipse.version}" />
 			<antcall target="-install.eclipse"/>
