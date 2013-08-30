@@ -696,7 +696,12 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					.getJudgmentParameters();
 			Iterator<? extends EObject> elementsIt = elements.iterator();
 			for (JudgmentParameter judgmentParameter : judgmentParameters) {
-				checkConformance(judgmentParameter, elementsIt.next(),
+				// the rule might still be incomplete, thus we must check
+				// whether there is an element to check against.
+				// Recall that the judgment has been searched for using only
+				// the symbols, not the rele conclusion elements
+				if (elementsIt.hasNext())
+					checkConformance(judgmentParameter, elementsIt.next(),
 						elementDescription, conformanceFeature);
 			}
 		}
