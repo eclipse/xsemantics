@@ -250,7 +250,8 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     JvmTypeReference _typeForName = this.typeForName(EAttribute.class);
     tupleType.add(_typeForName);
     TupleType _tupleType_1 = new TupleType();
-    boolean _equals = this.typeSystem.equals(_tupleType_1, tupleType);
+    XsemanticsSystem _fakeContext = this.fakeContext();
+    boolean _equals = this.typeSystem.equals(_tupleType_1, tupleType, _fakeContext);
     Assert.assertFalse(_equals);
   }
   
@@ -264,7 +265,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     JvmTypeReference _typeForName_2 = this.typeReferences.getTypeForName(EObject.class, ts);
     JvmTypeReference _typeForName_3 = this.typeReferences.getTypeForName(EClass.class, ts);
     final TupleType tupleType2 = this.tupleType(_typeForName_2, _typeForName_3);
-    boolean _equals = this.typeSystem.equals(tupleType2, tupleType1);
+    boolean _equals = this.typeSystem.equals(tupleType2, tupleType1, ts);
     Assert.assertTrue(_equals);
   }
   
@@ -278,8 +279,15 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     JvmTypeReference _typeForName_2 = this.typeReferences.getTypeForName(EObject.class, ts);
     JvmTypeReference _typeForName_3 = this.typeReferences.getTypeForName(Notifier.class, ts);
     final TupleType tupleType2 = this.tupleType(_typeForName_2, _typeForName_3);
-    boolean _equals = this.typeSystem.equals(tupleType2, tupleType1);
+    XsemanticsSystem _fakeContext = this.fakeContext();
+    boolean _equals = this.typeSystem.equals(tupleType2, tupleType1, _fakeContext);
     Assert.assertFalse(_equals);
+  }
+  
+  private XsemanticsSystem fakeContext() {
+    CharSequence _testRuleWithExpressionInConclusion = this.testFiles.testRuleWithExpressionInConclusion();
+    XsemanticsSystem _parse = this.parse(_testRuleWithExpressionInConclusion);
+    return _parse;
   }
   
   @Test
@@ -388,7 +396,7 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     final XsemanticsSystem ts = this.parse(_testRuleWithExpressionInConclusion);
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(expected, ts);
     JvmTypeReference _typeForName_1 = this.typeReferences.getTypeForName(actual, ts);
-    boolean _isConformant = this.typeSystem.isConformant(_typeForName, _typeForName_1);
+    boolean _isConformant = this.typeSystem.isConformant(_typeForName, _typeForName_1, ts);
     Assert.assertTrue(_isConformant);
   }
   
@@ -397,11 +405,11 @@ public class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
     final XsemanticsSystem ts = this.parse(_testRuleWithExpressionInConclusion);
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(left, ts);
     JvmTypeReference _typeForName_1 = this.typeReferences.getTypeForName(right, ts);
-    this.assertEquals(_typeForName, _typeForName_1, expectedEquals);
+    this.assertEquals(_typeForName, _typeForName_1, expectedEquals, ts);
   }
   
-  public void assertEquals(final JvmTypeReference left, final JvmTypeReference right, final boolean expectedEquals) {
-    boolean _equals = this.typeSystem.equals(left, right);
+  public void assertEquals(final JvmTypeReference left, final JvmTypeReference right, final boolean expectedEquals, final EObject context) {
+    boolean _equals = this.typeSystem.equals(left, right, context);
     boolean _equals_1 = (_equals == expectedEquals);
     Assert.assertTrue(_equals_1);
   }

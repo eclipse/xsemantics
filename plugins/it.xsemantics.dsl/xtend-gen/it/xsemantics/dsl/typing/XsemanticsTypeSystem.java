@@ -29,12 +29,15 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
 public class XsemanticsTypeSystem {
   @Inject
-  private XbaseTypeConformanceComputer conformanceComputer;
+  private CommonTypeComputationServices services;
   
   @Inject
   private TypeReferences typeReferences;
@@ -66,7 +69,7 @@ public class XsemanticsTypeSystem {
     return tupleType;
   }
   
-  public boolean equals(final TupleType tupleType1, final TupleType tupleType2) {
+  public boolean equals(final TupleType tupleType1, final TupleType tupleType2, final EObject context) {
     int _size = tupleType1.size();
     int _size_1 = tupleType2.size();
     boolean _notEquals = (_size != _size_1);
@@ -76,7 +79,7 @@ public class XsemanticsTypeSystem {
     final Iterator<JvmTypeReference> judgmentParametersIt = tupleType1.iterator();
     for (final JvmTypeReference jvmTypeReference : tupleType2) {
       JvmTypeReference _next = judgmentParametersIt.next();
-      boolean _equals = this.equals(_next, jvmTypeReference);
+      boolean _equals = this.equals(_next, jvmTypeReference, context);
       boolean _not = (!_equals);
       if (_not) {
         return false;
@@ -109,7 +112,7 @@ public class XsemanticsTypeSystem {
         } else {
           JvmTypeReference _type = this.getType(jParam1);
           JvmTypeReference _type_1 = this.getType(jParam2);
-          boolean _equals = this.equals(_type, _type_1);
+          boolean _equals = this.equals(_type, _type_1, jParam1);
           boolean _not = (!_equals);
           _or = (_notEquals_1 || _not);
         }
@@ -121,46 +124,46 @@ public class XsemanticsTypeSystem {
     return true;
   }
   
-  public boolean equals(final JvmTypeReference t1, final JvmTypeReference t2) {
+  public boolean equals(final JvmTypeReference t1, final JvmTypeReference t2, final EObject context) {
     boolean _and = false;
-    boolean _isConformant = this.isConformant(t1, t2);
+    boolean _isConformant = this.isConformant(t1, t2, context);
     if (!_isConformant) {
       _and = false;
     } else {
-      boolean _isConformant_1 = this.isConformant(t2, t1);
+      boolean _isConformant_1 = this.isConformant(t2, t1, context);
       _and = (_isConformant && _isConformant_1);
     }
     return _and;
   }
   
-  public boolean isConformant(final JvmTypeReference expected, final JvmTypeReference actual) {
-    boolean _isConformant = this.conformanceComputer.isConformant(expected, actual);
-    return _isConformant;
+  public boolean isConformant(final JvmTypeReference expected, final JvmTypeReference actual, final EObject context) {
+    boolean _isSubtype = this.isSubtype(actual, expected, context);
+    return _isSubtype;
   }
   
   public boolean isEObject(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(EObject.class, context);
-    boolean _isConformant = this.isConformant(_typeForName, type);
+    boolean _isConformant = this.isConformant(_typeForName, type, context);
     return _isConformant;
   }
   
   public boolean isAbstractDeclarativeValidator(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(AbstractDeclarativeValidator.class, context);
-    boolean _isConformant = this.isConformant(_typeForName, type);
+    boolean _isConformant = this.isConformant(_typeForName, type, context);
     return _isConformant;
   }
   
   public boolean isEStructuralFeature(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(
       EStructuralFeature.class, context);
-    boolean _isConformant = this.isConformant(_typeForName, type);
+    boolean _isConformant = this.isConformant(_typeForName, type, context);
     return _isConformant;
   }
   
   public boolean isValidSuperSystem(final JvmTypeReference type, final EObject context) {
     JvmTypeReference _typeForName = this.typeReferences.getTypeForName(
       XsemanticsRuntimeSystem.class, context);
-    boolean _isConformant = this.isConformant(_typeForName, type);
+    boolean _isConformant = this.isConformant(_typeForName, type, context);
     return _isConformant;
   }
   
@@ -172,7 +175,7 @@ public class XsemanticsTypeSystem {
     } else {
       final JvmTypeReference booleanType = this.typeReferences.getTypeForName(Boolean.TYPE, expression);
       final JvmTypeReference operationType = this.getType(expression);
-      return this.conformanceComputer.isConformant(booleanType, operationType);
+      return this.isSubtype(operationType, booleanType, expression);
     }
   }
   
@@ -202,5 +205,39 @@ public class XsemanticsTypeSystem {
       _or = (_or_1 || (expression instanceof XBooleanLiteral));
     }
     return _or;
+  }
+  
+  public boolean isSubtype(final JvmTypeReference t1, final JvmTypeReference t2, final EObject context) {
+    boolean _xblockexpression = false;
+    {
+      boolean _or = false;
+      boolean _equals = Objects.equal(t1, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _equals_1 = Objects.equal(t2, null);
+        _or = (_equals || _equals_1);
+      }
+      if (_or) {
+        return false;
+      }
+      final LightweightTypeReference type1 = this.toLightweightTypeReference(t1, context);
+      final LightweightTypeReference type2 = this.toLightweightTypeReference(t2, context);
+      boolean _isAssignableFrom = type2.isAssignableFrom(type1);
+      _xblockexpression = (_isAssignableFrom);
+    }
+    return _xblockexpression;
+  }
+  
+  public LightweightTypeReference toLightweightTypeReference(final JvmTypeReference typeRef, final EObject context) {
+    LightweightTypeReference _xblockexpression = null;
+    {
+      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, context);
+      OwnedConverter _ownedConverter = new OwnedConverter(_standardTypeReferenceOwner);
+      final OwnedConverter converter = _ownedConverter;
+      LightweightTypeReference _lightweightReference = converter.toLightweightReference(typeRef);
+      _xblockexpression = (_lightweightReference);
+    }
+    return _xblockexpression;
   }
 }

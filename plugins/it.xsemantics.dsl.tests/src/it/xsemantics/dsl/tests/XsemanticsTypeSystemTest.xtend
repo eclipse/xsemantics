@@ -215,7 +215,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val tupleType = new TupleType()
 		tupleType.add(typeForName(typeof(EAttribute)))
 		Assert::assertFalse(
-			typeSystem.equals(new TupleType(), tupleType)
+			typeSystem.equals(new TupleType(), tupleType, fakeContext)
 		)
 	}
 	
@@ -230,7 +230,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(EClass), ts))
 		Assert::assertTrue(
-			typeSystem.equals(tupleType2, tupleType1)
+			typeSystem.equals(tupleType2, tupleType1, ts)
 		)
 	}
 	
@@ -245,8 +245,13 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(Notifier), ts))
 		Assert::assertFalse(
-			typeSystem.equals(tupleType2, tupleType1)
+			typeSystem.equals(tupleType2, tupleType1, fakeContext)
 		)
+	}
+
+	def private fakeContext() {
+		// we need a context for type conformance
+		testFiles.testRuleWithExpressionInConclusion.parse
 	}
 
 	@Test
@@ -314,18 +319,21 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
 		Assert::assertTrue(typeSystem.isConformant(
 				typeReferences.getTypeForName(expected, ts),
-				typeReferences.getTypeForName(actual, ts)
+				typeReferences.getTypeForName(actual, ts),
+				ts
 		))
 	}
 	
 	def assertEquals(Class<?> left, Class<?> right, boolean expectedEquals) {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
 		assertEquals(typeReferences.getTypeForName(left, ts),
-				typeReferences.getTypeForName(right, ts), expectedEquals)
+				typeReferences.getTypeForName(right, ts), 
+				expectedEquals, ts)
 	}
 	
-	def assertEquals(JvmTypeReference left, JvmTypeReference right, boolean expectedEquals) {
-		Assert::assertTrue(typeSystem.equals(left, right) == expectedEquals)
+	def assertEquals(JvmTypeReference left, JvmTypeReference right, 
+			boolean expectedEquals, EObject context) {
+		Assert::assertTrue(typeSystem.equals(left, right, context) == expectedEquals)
 	}
 	
 }

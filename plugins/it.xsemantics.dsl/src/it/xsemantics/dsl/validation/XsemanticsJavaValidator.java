@@ -301,7 +301,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					Rule ruleToOverride = null;
 					for (Rule rule2 : rulesOfTheSameKind) {
 						TupleType tupleType2 = typeSystem.getInputTypes(rule2);
-						if (typeSystem.equals(tupleType, tupleType2)) {
+						if (typeSystem.equals(tupleType, tupleType2, rule)) {
 							ruleToOverride = rule2;
 							break;
 						}
@@ -342,7 +342,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					for (CheckRule checkRule2 : inheritedCheckRules) {
 						if (typeSystem.equals(rule.getElement().getParameter()
 								.getParameterType(), checkRule2.getElement()
-								.getParameter().getParameterType())
+								.getParameter().getParameterType(), rule)
 								&& rule.getName().equals(checkRule2.getName())) {
 							inheritedRule = checkRule2;
 						}
@@ -530,7 +530,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			for (Rule rule2 : rulesOfTheSameKind) {
 				if (rule2 != rule && !rule.isOverride()) {
 					TupleType tupleType2 = typeSystem.getInputTypes(rule2);
-					if (typeSystem.equals(tupleType, tupleType2)) {
+					if (typeSystem.equals(tupleType, tupleType2, rule)) {
 						error("Duplicate rule of the same kind with parameters: "
 								+ tupleTypeRepresentation(tupleType)
 								+ reportContainingSystemName(rule2),
@@ -637,7 +637,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 						.getType(jvmFormalParameter);
 				JvmFormalParameter funParam = funParamsIt.next();
 				JvmTypeReference actual = typeSystem.getType(funParam);
-				if (!typeSystem.isConformant(expected, actual)) {
+				if (!typeSystem.isConformant(expected, actual, funParam)) {
 					error("parameter type "
 							+ getNameOfTypes(actual)
 							+ " is not subtype of AuxiliaryDescription declared type "
@@ -713,7 +713,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 			EStructuralFeature feature) {
 		JvmTypeReference expected = typeSystem.getType(judgmentParameter);
 		JvmTypeReference actual = typeSystem.getType(element);
-		if (!typeSystem.isConformant(expected, actual)) {
+		if (!typeSystem.isConformant(expected, actual, element)) {
 			error(elementDescription + " type " + getNameOfTypes(actual)
 					+ " is not subtype of JudgmentDescription declared type "
 					+ getNameOfTypes(expected), element, feature,
