@@ -6,14 +6,6 @@
 <project name="common" >
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
-	<property name="eclipse.name" value="kepler" />
-	<property name="eclipse.version" value="4.3" />
-
-	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
-	<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
-
-	<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name},${eclipse.download}/updates/${eclipse.version}" />
-
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
@@ -21,7 +13,20 @@
 	<property name="eclipse.p2.mirrors" value="true" />
 	<property name="java.net.preferIPv4Stack" value="true" />
 
-	<target name="install.eclipse">
+	<macrodef name="install.eclipse">
+		<attribute name="eclipse.name" default="kepler" />
+		<attribute name="eclipse.version" default="4.3" />
+		<sequential>
+			<property name="eclipse.name" value="@{eclipse.name}" />
+			<property name="eclipse.version" value="@{eclipse.version}" />
+			<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
+			<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
+			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name},${eclipse.download}/updates/${eclipse.version}" />
+			<antcall target="-install.eclipse"/>
+		</sequential>
+	</macrodef>		
+	
+	<target name="-install.eclipse">
 		<condition property="eclipse.installed">
 			<available file="${eclipse.dest}/.eclipseproduct" />
 		</condition>
