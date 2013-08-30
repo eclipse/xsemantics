@@ -8,7 +8,8 @@
 	
 	<target name="test.install.in.kepler" description="Test installation in Kepler">
 		<install.eclipse.features 
-			features.repos="${site.p2}"/>
+			features.repos="${site.p2}"
+			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
 	</target>
 
 </project>
