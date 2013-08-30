@@ -5,16 +5,16 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-Version: 1.2.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fj;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.2.1";visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
- org.apache.commons.logging;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe.core;resolution:=optional,
- com.ibm.icu;resolution:=optional,
+ com.ibm.icu;bundle-version="4.0.0";resolution:=optional,
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.common,
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.eclipse.emf.common;bundle-version="2.7.0",
  org.antlr.runtime,
  it.xsemantics.runtime;visibility:=reexport,
  org.eclipse.emf.mwe2.launch;resolution:=optional

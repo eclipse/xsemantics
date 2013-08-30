@@ -5,19 +5,19 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-Version: 1.2.0.qualifier
 Bundle-SymbolicName: it.xsemantics.dsl;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.3.0";visibility:=reexport,
- org.eclipse.xtext.xbase;bundle-version="2.3.0";visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.xtext.util;bundle-version="2.3.0",
- org.eclipse.emf.ecore,
- org.eclipse.emf.common,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.eclipse.emf.common;bundle-version="2.7.0",
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  it.xsemantics.runtime;visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.3.0";visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
