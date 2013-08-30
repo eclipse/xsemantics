@@ -30,7 +30,7 @@ judgments {
 axiom XExpressionType
 	G |- XExpression e : 
 	typeResolver.resolveTypes(e).
-		getActualType(e).toTypeReference
+		getActualType(e)?.toTypeReference
 
 /* xbase type provider does not seem to return the type for var decl */
 axiom XVariableDeclarationType

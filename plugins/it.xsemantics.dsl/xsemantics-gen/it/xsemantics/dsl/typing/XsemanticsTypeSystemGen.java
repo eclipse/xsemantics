@@ -128,7 +128,10 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   private JvmTypeReference _applyRuleXExpressionType_1(final RuleEnvironment G, final XExpression e) throws RuleFailedException {
     IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(e);
     LightweightTypeReference _actualType = _resolveTypes.getActualType(e);
-    JvmTypeReference _typeReference = _actualType.toTypeReference();
+    JvmTypeReference _typeReference = null;
+    if (_actualType!=null) {
+      _typeReference=_actualType.toTypeReference();
+    }
     return _typeReference;
   }
   
