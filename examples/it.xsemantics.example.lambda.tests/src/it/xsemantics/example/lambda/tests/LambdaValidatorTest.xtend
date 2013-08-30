@@ -2,7 +2,7 @@ package it.xsemantics.example.lambda.tests
 
 import it.xsemantics.example.lambda.LambdaInjectorProvider
 import it.xsemantics.example.lambda.validation.LambdaJavaValidator
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

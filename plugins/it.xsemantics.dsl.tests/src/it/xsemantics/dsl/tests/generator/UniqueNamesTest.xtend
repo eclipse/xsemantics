@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator
 
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.UniqueNames
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test

@@ -8,13 +8,13 @@ import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.ParamRef;
 import it.xsemantics.example.fj.fj.Program;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class FjTestsUtils {

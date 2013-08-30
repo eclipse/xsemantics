@@ -86,7 +86,7 @@ public class FormattingTest extends TestWithLoader {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see junit.framework.TestCase#setUp()
+	 * @see org.junit.TestCase#setUp()
 	 * @generated
 	 */
 	@Override
@@ -99,7 +99,7 @@ public class FormattingTest extends TestWithLoader {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see junit.framework.TestCase#tearDown()
+	 * @see org.junit.TestCase#tearDown()
 	 * @generated
 	 */
 	@Override

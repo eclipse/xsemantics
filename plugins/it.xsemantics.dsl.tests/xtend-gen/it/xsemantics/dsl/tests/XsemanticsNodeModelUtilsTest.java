@@ -9,12 +9,12 @@ import it.xsemantics.dsl.util.XsemanticsUtils;
 import it.xsemantics.dsl.xsemantics.RuleInvocation;
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

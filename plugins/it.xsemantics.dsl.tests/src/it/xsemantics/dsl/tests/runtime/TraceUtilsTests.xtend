@@ -9,7 +9,7 @@ import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.util.TraceUtils
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

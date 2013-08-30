@@ -9,7 +9,7 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static junit.framework.Assert.*
+import static org.junit.Assert.*
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))

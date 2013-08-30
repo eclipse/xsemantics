@@ -10,16 +10,14 @@ import it.xsemantics.example.lambda.lambda.Type;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.xsemantics.LambdaTypeBeautifier;
 
-import junit.framework.TestCase;
-
 import static it.xsemantics.example.lambda.tests.util.LambdaTestsUtil.*;
+import static org.junit.Assert.*;
 
-public class LambdaTypeBeautifierTests extends TestCase {
+public class LambdaTypeBeautifierTests {
 	LambdaTypeBeautifier lambdaTypeBeautifier;
 
 	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		lambdaTypeBeautifier = new LambdaTypeBeautifier();
 	}
 

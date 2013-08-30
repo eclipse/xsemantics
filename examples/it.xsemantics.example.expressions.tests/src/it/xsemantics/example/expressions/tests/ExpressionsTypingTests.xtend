@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.runtime.util.TraceUtils
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper

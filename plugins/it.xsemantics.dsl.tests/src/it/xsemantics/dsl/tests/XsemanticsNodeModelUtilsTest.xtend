@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test

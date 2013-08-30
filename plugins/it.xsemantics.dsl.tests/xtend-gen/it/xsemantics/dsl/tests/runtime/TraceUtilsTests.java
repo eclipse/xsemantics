@@ -13,7 +13,6 @@ import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.util.TraceUtils;
 import java.util.LinkedList;
 import java.util.List;
-import junit.framework.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -21,6 +20,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

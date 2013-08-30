@@ -5,9 +5,9 @@ import it.xsemantics.example.lambda.lambda.Term;
 import it.xsemantics.example.lambda.tests.LambdaBaseTest;
 import it.xsemantics.example.lambda.tests.LambdaInjectorWithNonBeautifiedTypesProvider;
 import it.xsemantics.example.lambda.xsemantics.LambdaTermUtils;
-import junit.framework.Assert;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

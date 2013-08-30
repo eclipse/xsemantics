@@ -12,7 +12,7 @@ import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static extension junit.framework.Assert.*
+import static extension org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))

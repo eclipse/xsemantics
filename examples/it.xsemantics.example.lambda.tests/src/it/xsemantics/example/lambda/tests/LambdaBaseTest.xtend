@@ -12,7 +12,7 @@ import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 import org.junit.Before
 import it.xsemantics.example.lambda.xsemantics.LambdaUtils
 import it.xsemantics.runtime.Result
-import junit.framework.Assert
+import org.junit.Assert
 import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.example.lambda.lambda.Type
 import it.xsemantics.example.lambda.lambda.TypeVariable

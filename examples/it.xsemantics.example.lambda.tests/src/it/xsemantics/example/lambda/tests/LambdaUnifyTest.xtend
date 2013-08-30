@@ -1,7 +1,7 @@
 package it.xsemantics.example.lambda.tests
 
 import it.xsemantics.example.lambda.lambda.Type
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test

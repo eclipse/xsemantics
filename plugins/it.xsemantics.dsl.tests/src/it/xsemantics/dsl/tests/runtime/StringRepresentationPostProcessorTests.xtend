@@ -5,7 +5,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.StringRepresentationPostProcessor
-import junit.framework.Assert
+import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test

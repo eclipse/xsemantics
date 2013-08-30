@@ -10,12 +10,12 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import junit.framework.Assert;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

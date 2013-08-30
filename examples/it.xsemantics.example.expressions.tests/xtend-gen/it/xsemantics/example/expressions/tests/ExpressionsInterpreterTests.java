@@ -10,7 +10,6 @@ import it.xsemantics.example.expressions.tests.ExtendedExpressionsInjectorProvid
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.util.TraceUtils;
-import junit.framework.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

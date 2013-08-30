@@ -8,9 +8,9 @@ import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.tests.LambdaBaseTest;
 import it.xsemantics.example.lambda.tests.LambdaInjectorWithNonBeautifiedTypesProvider;
 import it.xsemantics.runtime.Result2;
-import junit.framework.Assert;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

@@ -3,7 +3,7 @@ package it.xsemantics.dsl.tests.generator.fj.common
 import it.xsemantics.example.fj.fj.Program
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.example.fj.fj.Field
-import junit.framework.Assert
+import org.junit.Assert
 import it.xsemantics.example.fj.fj.ParamRef
 import it.xsemantics.example.fj.fj.Method
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics

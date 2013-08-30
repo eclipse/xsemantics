@@ -7,7 +7,7 @@ import it.xsemantics.example.lambda.lambda.ArrowType;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
 import it.xsemantics.runtime.StringRepresentation;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;

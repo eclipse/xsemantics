@@ -6,7 +6,7 @@ package it.xsemantics.example.lambda.tests;
 import it.xsemantics.example.lambda.lambda.Type;
 import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
