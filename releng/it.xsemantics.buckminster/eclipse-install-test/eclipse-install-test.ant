@@ -9,7 +9,17 @@
 	<target name="test.install.in.kepler" description="Test installation in Kepler">
 		<install.eclipse.features 
 			features.repos="${site.p2}"
-			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"
+			features.to.install="it.xsemantics.sdk.feature.group"/>
+	</target>
+
+	<target name="test.install.in.juno" description="Test installation in Juno">
+		<install.eclipse.features
+			eclipse.name="juno" 
+			eclipse.version="4.2"
+			features.repos="${site.p2}"
+			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"
+			features.to.install="it.xsemantics.sdk.feature.group"/>
 	</target>
 
 </project>

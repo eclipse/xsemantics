@@ -20,6 +20,7 @@
 		<attribute name="eclipse.version" default="4.3" />
 		<attribute name="features.repos" />
 		<attribute name="additional.repos"/>
+		<attribute name="features.to.install"/>
 		<sequential>
 			<install.eclipse eclipse.name="@{eclipse.name}" eclipse.version="@{eclipse.version}"/>
 			<property name="eclipse.test.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}-test" />
@@ -37,6 +38,22 @@
 			<copy todir="${eclipse.test.dest}">
 				<fileset dir="${eclipse.dest}"/>
 			</copy>
+			
+			<java fork="true" dir="${eclipse.test.dest}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+				<classpath>
+					<fileset dir="${eclipse.test.dest}/plugins">
+						<include name="org.eclipse.equinox.launcher_*.jar" />
+					</fileset>
+				</classpath>
+				<arg value="-application"/>
+				<arg value="org.eclipse.equinox.p2.director"/>
+				<arg line="-noSplash" />
+				<arg line="-r ${all.eclipse.repos}" />
+				<arg line="-installIUs @{features.to.install}" />
+				<arg line="-consoleLog" />
+			</java>
 		</sequential>
 	</macrodef>		
 
@@ -78,6 +95,7 @@
 			<arg line="-tag InitialState" />
 			<arg line="-profile SDKProfile" />
 			<arg line="-profileProperties org.eclipse.update.install.features=true" />
+			<arg line="-roaming" />
 		</java>
 	</target>
 
