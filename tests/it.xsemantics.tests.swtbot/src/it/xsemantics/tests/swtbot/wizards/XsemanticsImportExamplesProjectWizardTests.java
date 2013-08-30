@@ -64,7 +64,7 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 		bot.button("Finish").click();
 
 		// creation of a project might require some time
-		bot.waitUntil(shellCloses(shell), 80000);
+		bot.waitUntil(shellCloses(shell), SHELL_TIMEOUT);
 		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId));
 		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
 				+ ".tests"));

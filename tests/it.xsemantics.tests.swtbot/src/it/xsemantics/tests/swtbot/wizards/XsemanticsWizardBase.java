@@ -33,6 +33,7 @@ public class XsemanticsWizardBase {
 
 	protected static final String TEST_PROJECT = "MyTestProject";
 	protected static SWTWorkbenchBot bot;
+	protected static int SHELL_TIMEOUT = 150000;
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
