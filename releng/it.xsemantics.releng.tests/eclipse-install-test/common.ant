@@ -30,17 +30,18 @@
 				<path path="@{features.repos}" />
 			</makeurl>
 			<property name="all.eclipse.repos" value="${eclipse.repos},${features.repos.url},@{additional.repos}" />
-			
+
 			<echo message="Installing features into ${eclipse.test.dest}..." />
 			<echo message="Features Repos: ${features.repos.url}" />
 			<echo message="All used Repositories: ${all.eclipse.repos}" />
-			
-			<delete dir="${eclipse.test.dest}"></delete>
-			
+
+			<delete dir="${eclipse.test.dest}">
+			</delete>
+
 			<copy todir="${eclipse.test.dest}">
 				<fileset dir="${eclipse.dest}"/>
 			</copy>
-			
+
 			<java fork="true" dir="${eclipse.test.dest}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
 				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
@@ -57,7 +58,7 @@
 				<arg line="-consoleLog" />
 			</java>
 		</sequential>
-	</macrodef>		
+	</macrodef>
 
 	<macrodef name="install.eclipse">
 		<attribute name="eclipse.name" default="kepler" />
@@ -67,8 +68,8 @@
 			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name}" />
 			<antcall target="-install.eclipse"/>
 		</sequential>
-	</macrodef>		
-	
+	</macrodef>
+
 	<target name="-install.eclipse">
 		<condition property="eclipse.installed">
 			<available file="${eclipse.dest}/.eclipseproduct" />
@@ -118,5 +119,45 @@
 		<unzip src="${director.zip}" dest="${director.install.dest}" />
 		<delete file="${director.zip}" />
 	</target>
+
+	<macrodef name="bundles.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="bundle.pattern" />
+		<sequential>
+			<pathconvert property="found.jars">
+				<fileset dir="@{eclipse.test.dest}/plugins">
+					<include name="@{bundle.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found bundles ${found.jars}..." />
+			<fail message="Nothing found!">
+				<condition>
+					<equals arg1="${found.jars}" arg2="" />
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="bundles.dont.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="bundle.pattern" />
+		<sequential>
+			<pathconvert property="not.to.find.jars">
+				<fileset dir="@{eclipse.test.dest}/plugins">
+					<include name="@{bundle.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found bundles ${not.to.find.jars}..." />
+			<fail message="Bundles should not have been found!">
+				<condition>
+					<not>
+						<equals arg1="${not.to.find.jars}" arg2="" />
+					</not>
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
 
 </project>
