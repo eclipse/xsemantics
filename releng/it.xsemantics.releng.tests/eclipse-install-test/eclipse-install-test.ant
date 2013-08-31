@@ -4,7 +4,7 @@
 
 	<property name="WORKSPACE" location="${ant.file}/../../../../" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="site.p2" location="${build.root}/buckminster.output/it.xsemantics.site_1.2.0-eclipse.feature/site.p2" />
+	<property name="site.p2" location="${sp:repository}" />
 
 	<property name="additional.repos" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases" />
 	<property name="xsemantics.sdk.feature" value="it.xsemantics.sdk.feature.group" />
