@@ -6,7 +6,10 @@
 <project name="common" >
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
-	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" />
+	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" 
+		description="The base path of the main eclipse installations"/>
+	<property name="eclipse.test.base.dest" location="${eclipse.base.dest}" 
+		description="The base path of the temporary test eclipse installations"/>
 
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
@@ -17,13 +20,12 @@
 
 	<macrodef name="install.eclipse.features">
 		<attribute name="eclipse.name" default="kepler" />
-		<attribute name="eclipse.version" default="4.3" />
 		<attribute name="features.repos" />
 		<attribute name="additional.repos"/>
 		<attribute name="features.to.install"/>
 		<sequential>
-			<install.eclipse eclipse.name="@{eclipse.name}" eclipse.version="@{eclipse.version}"/>
-			<property name="eclipse.test.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}-test" />
+			<install.eclipse eclipse.name="@{eclipse.name}" />
+			<property name="eclipse.test.dest" location="${eclipse.test.base.dest}/eclipse-${eclipse.name}-test" />
 			<makeurl property="features.repos.url" separator=",">
 				<path path="@{features.repos}" />
 			</makeurl>
@@ -59,12 +61,10 @@
 
 	<macrodef name="install.eclipse">
 		<attribute name="eclipse.name" default="kepler" />
-		<attribute name="eclipse.version" default="4.3" />
 		<sequential>
 			<property name="eclipse.name" value="@{eclipse.name}" />
-			<property name="eclipse.version" value="@{eclipse.version}" />
 			<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
-			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name},${eclipse.download}/updates/${eclipse.version}" />
+			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name}" />
 			<antcall target="-install.eclipse"/>
 		</sequential>
 	</macrodef>		

@@ -7,11 +7,11 @@
 	</target>
 
 	<target name="install.eclipse.juno" description="Install Eclipse SDK Juno">
-		<install.eclipse eclipse.name="juno" eclipse.version="4.2"/>
+		<install.eclipse eclipse.name="juno" />
 	</target>
 
 	<target name="install.eclipse.indigo" description="Install Eclipse SDK Indigo">
-		<install.eclipse eclipse.name="indigo" eclipse.version="3.7"/>
+		<install.eclipse eclipse.name="indigo" />
 	</target>
 
 </project>

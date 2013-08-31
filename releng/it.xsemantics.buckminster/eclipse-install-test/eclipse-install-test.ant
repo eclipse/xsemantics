@@ -4,22 +4,32 @@
 
 	<property name="WORKSPACE" location="${ant.file}/../../../../" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="site.p2" location="${build.root}/buckminster.output/it.xsemantics.site_1.2.0-eclipse.feature/site.p2/" />
+	<property name="site.p2" location="${build.root}/buckminster.output/it.xsemantics.site_1.2.0-eclipse.feature/site.p2" />
+
+	<property name="additional.repos" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases" />
+	<property name="xsemantics.sdk.feature" value="it.xsemantics.sdk.feature.group" />
 	
 	<target name="test.install.in.kepler" description="Test installation in Kepler">
 		<install.eclipse.features 
 			features.repos="${site.p2}"
-			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"
-			features.to.install="it.xsemantics.sdk.feature.group"/>
+			additional.repos="${additional.repos}"
+			features.to.install="${xsemantics.sdk.feature}"/>
 	</target>
 
 	<target name="test.install.in.juno" description="Test installation in Juno">
 		<install.eclipse.features
-			eclipse.name="juno" 
-			eclipse.version="4.2"
+			eclipse.name="juno"
 			features.repos="${site.p2}"
-			additional.repos="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"
-			features.to.install="it.xsemantics.sdk.feature.group"/>
+			additional.repos="${additional.repos}"
+			features.to.install="${xsemantics.sdk.feature}"/>
+	</target>
+
+	<target name="test.install.in.indigo" description="Test installation in Indigo">
+		<install.eclipse.features
+			eclipse.name="indigo"
+			features.repos="${site.p2}"
+			additional.repos="${additional.repos}"
+			features.to.install="${xsemantics.sdk.feature}"/>
 	</target>
 
 </project>
