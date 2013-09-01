@@ -3,7 +3,7 @@
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases/"/>
   <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/juno"/>
-  <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/helios/dev-build/update-site"/>
+  <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/releases/latest"/>
   <rm:property key="xdoc.repository" value="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.3"/>
   
   <rm:redirect pattern="^it\.xsemantics(?:\..+)?$" href="project.rmap"/>
