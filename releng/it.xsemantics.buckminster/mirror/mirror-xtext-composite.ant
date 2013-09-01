@@ -1,0 +1,18 @@
+<project name="Create Mirror" default="create-mirror" basedir=".">
+
+	<target name="create-mirror">
+
+		<property name="target.dir" location="${user.home}/mirror" />
+
+		<echo message="" />
+		<echo message="Mirroring into ${target.dir}/xtext-composite/..." />
+
+	    <p2.mirror source="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
+	      <destination location="${target.dir}/xtext-composite/"  />
+	      <!-- <iu id="org.eclipse.xtext.sdk.feature.group" />
+	      <iu id="org.eclipse.xtend.sdk.feature.group" />
+	      <iu id="org.eclipse.xpand.sdk.feature.group" /> -->
+	    </p2.mirror>
+	</target>
+
+</project>
