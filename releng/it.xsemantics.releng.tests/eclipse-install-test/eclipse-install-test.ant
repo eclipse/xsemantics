@@ -61,6 +61,17 @@
 		</sequential>
 	</macrodef>
 
+	<macrodef name="test.xtext.installed.features.versions">
+		<sequential>
+			<features.exist
+				feature.pattern="*xtext*2.3*.jar"
+			/>
+			<features.dont.exist 
+				feature.pattern="*xtext*2.4*.jar" 
+			/>
+		</sequential>
+	</macrodef>
+
 	<target name="test.bundle.presence" description="Test bundle presence">
 		<bundles.exist
 			bundle.pattern="*xtext*2.3*.jar"

@@ -31,6 +31,7 @@
 			</makeurl>
 			<property name="all.eclipse.repos" value="${eclipse.repos},${features.repos.url},@{additional.repos}" />
 
+			<echo message="Installing features @{features.to.install}..." />
 			<echo message="Installing features into ${eclipse.test.dest}..." />
 			<echo message="Features Repos: ${features.repos.url}" />
 			<echo message="All used Repositories: ${all.eclipse.repos}" />
@@ -124,7 +125,8 @@
 		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
 		<attribute name="bundle.pattern" />
 		<sequential>
-			<pathconvert property="found.jars">
+			<local name="found.jars"/>
+			<pathconvert property="found.jars" pathsep="${line.separator}">
 				<fileset dir="@{eclipse.test.dest}/plugins">
 					<include name="@{bundle.pattern}" />
 				</fileset>
@@ -143,17 +145,60 @@
 		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
 		<attribute name="bundle.pattern" />
 		<sequential>
-			<pathconvert property="not.to.find.jars">
+			<local name="found.jars"/>
+			<pathconvert property="found.jars" pathsep="${line.separator}">
 				<fileset dir="@{eclipse.test.dest}/plugins">
 					<include name="@{bundle.pattern}" />
 				</fileset>
 			</pathconvert>
 			<echo message="" />
-			<echo message="Found bundles ${not.to.find.jars}..." />
+			<echo message="Found bundles (MUST BE EMPTY) ${found.jars}..." />
 			<fail message="Bundles should not have been found!">
 				<condition>
 					<not>
-						<equals arg1="${not.to.find.jars}" arg2="" />
+						<equals arg1="${found.jars}" arg2="" />
+					</not>
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="features.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="feature.pattern" />
+		<sequential>
+			<local name="found.features"/>
+			<pathconvert property="found.features" pathsep="${line.separator}">
+				<fileset dir="@{eclipse.test.dest}/feature">
+					<include name="@{feature.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found features ${found.features}..." />
+			<fail message="Nothing found!">
+				<condition>
+					<equals arg1="${found.features}" arg2="" />
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="features.dont.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="feature.pattern" />
+		<sequential>
+			<local name="found.features"/>
+			<pathconvert property="found.features" pathsep="${line.separator}">
+				<fileset dir="@{eclipse.test.dest}/features">
+					<include name="@{feature.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found features (MUST BE EMPTY) ${found.features}..." />
+			<fail message="Features should not have been found!">
+				<condition>
+					<not>
+						<equals arg1="${found.features}" arg2="" />
 					</not>
 				</condition>
 			</fail>
