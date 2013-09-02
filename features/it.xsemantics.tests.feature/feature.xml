@@ -108,7 +108,7 @@
          unpack="false"/>
 
    <plugin
-         id="it.xsemantics.xsemantics.ui.examples"
+         id="it.xsemantics.ui.examples"
          download-size="0"
          install-size="0"
          version="0.0.0"
