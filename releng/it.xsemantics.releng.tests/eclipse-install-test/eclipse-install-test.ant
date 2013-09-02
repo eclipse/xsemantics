@@ -10,6 +10,11 @@
 	<property name="xsemantics.sdk.feature" value="it.xsemantics.sdk.feature.group" />
 	<property name="xsemantics.runtime.feature" value="it.xsemantics.runtime.feature.feature.group" />
 
+	<property name="eclipse.kepler.repos" value="http://download.eclipse.org/releases/kepler" />
+	<property name="eclipse.juno.repos" value="http://download.eclipse.org/releases/juno" />
+	<property name="eclipse.indigo.repos" value="http://download.eclipse.org/releases/indigo" />
+
+	
 	<macrodef name="test.install">
 		<attribute name="eclipse.name" default="kepler"/>
 		<sequential>
@@ -29,15 +34,18 @@
 	</macrodef>
 	
 	<target name="test.install.in.kepler" description="Test installation in Kepler">
+		<property name="eclipse.repos" value="${eclipse.kepler.repos}" />
 		<test.install/>
 	</target>
 
 	<target name="test.install.in.juno" description="Test installation in Juno">
+		<property name="eclipse.repos" value="${eclipse.juno.repos}" />
 		<test.install
 			eclipse.name="juno"/>
 	</target>
 
 	<target name="test.install.in.indigo" description="Test installation in Indigo">
+		<property name="eclipse.repos" value="${eclipse.indigo.repos}" />
 		<test.install
 			eclipse.name="indigo"/>
 	</target>

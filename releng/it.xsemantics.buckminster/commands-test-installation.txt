@@ -1,0 +1,8 @@
+setpref targetPlatformPath="${target.platform}"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/build.cquery"
+
+build
+
+perform "it.xsemantics.releng.tests#eclipse-install-test-indigo"
+perform "it.xsemantics.releng.tests#eclipse-install-test-juno"
+#perform "it.xsemantics.releng.tests#eclipse-install-test-kepler"
