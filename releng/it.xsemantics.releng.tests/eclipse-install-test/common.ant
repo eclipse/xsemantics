@@ -169,9 +169,9 @@
 		<sequential>
 			<local name="found.features"/>
 			<pathconvert property="found.features" pathsep="${line.separator}">
-				<fileset dir="@{eclipse.test.dest}/feature">
+				<dirset dir="@{eclipse.test.dest}/features">
 					<include name="@{feature.pattern}" />
-				</fileset>
+				</dirset>
 			</pathconvert>
 			<echo message="" />
 			<echo message="Found features ${found.features}..." />
@@ -189,9 +189,9 @@
 		<sequential>
 			<local name="found.features"/>
 			<pathconvert property="found.features" pathsep="${line.separator}">
-				<fileset dir="@{eclipse.test.dest}/features">
+				<dirset dir="@{eclipse.test.dest}/features">
 					<include name="@{feature.pattern}" />
-				</fileset>
+				</dirset>
 			</pathconvert>
 			<echo message="" />
 			<echo message="Found features (MUST BE EMPTY) ${found.features}..." />

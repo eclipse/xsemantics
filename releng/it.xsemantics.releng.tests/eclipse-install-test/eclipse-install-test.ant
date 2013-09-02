@@ -30,6 +30,7 @@
 				additional.repos="${additional.repos}"
 				features.to.install="${xsemantics.sdk.feature}"/>
 			<test.xtext.installed.versions/>
+			<test.xtext.installed.features.versions/>
 		</sequential>
 	</macrodef>
 	
@@ -64,10 +65,10 @@
 	<macrodef name="test.xtext.installed.features.versions">
 		<sequential>
 			<features.exist
-				feature.pattern="*xtext*2.3*.jar"
+				feature.pattern="*xtext*2.3*"
 			/>
 			<features.dont.exist 
-				feature.pattern="*xtext*2.4*.jar" 
+				feature.pattern="*xtext*2.4*" 
 			/>
 		</sequential>
 	</macrodef>

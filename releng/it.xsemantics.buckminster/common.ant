@@ -74,7 +74,7 @@
 				<arg line='-configuration "${build.root}/configuration"' />
 				<arg line='--properties "@{propertiesfile}"' />
 				<arg line='--script "@{commandsfile}"' />
-				<arg line='-L ant=INFO' />
+				<!-- <arg line='-L ant=INFO' />  -->
 				<!-- <arg line='-L DEBUG' /> -->
 				<sysproperty key="projects.location" value="${projects.location}" />
 				<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
