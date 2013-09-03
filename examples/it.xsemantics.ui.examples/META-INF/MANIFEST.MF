@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Examples
-Bundle-SymbolicName: it.xsemantics.xsemantics.ui.examples;singleton:=true
+Bundle-SymbolicName: it.xsemantics.ui.examples;singleton:=true
 Bundle-Version: 1.2.0.qualifier
 Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

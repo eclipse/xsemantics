@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="it.xsemantics.releng.tests" componentType="buckminster" version="1.0.0">
+    <cs:dependencies>
+        <cs:dependency name="it.xsemantics.site" componentType="eclipse.feature"/>
+    </cs:dependencies>
+    <cs:actions>
+        <cs:public name="eclipse-install-test-indigo" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="eclipse-install-test/eclipse-install-test.ant"/>
+                <cs:property key="targets" value="test.install.in.indigo"/>
+            </cs:actorProperties>
+            <cs:prerequisites alias="repository">
+                <cs:attribute name="site.p2" component="it.xsemantics.site"/>
+            </cs:prerequisites>
+        </cs:public>
+        <cs:public name="eclipse-install-test-juno" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="eclipse-install-test/eclipse-install-test.ant"/>
+                <cs:property key="targets" value="test.install.in.juno"/>
+            </cs:actorProperties>
+            <cs:prerequisites alias="repository">
+                <cs:attribute name="site.p2" component="it.xsemantics.site"/>
+            </cs:prerequisites>
+        </cs:public>
+        <cs:public name="eclipse-install-test-kepler" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="eclipse-install-test/eclipse-install-test.ant"/>
+                <cs:property key="targets" value="test.install.in.kepler"/>
+            </cs:actorProperties>
+            <cs:prerequisites alias="repository">
+                <cs:attribute name="site.p2" component="it.xsemantics.site"/>
+            </cs:prerequisites>
+        </cs:public>
+    </cs:actions>
+</cs:cspec>

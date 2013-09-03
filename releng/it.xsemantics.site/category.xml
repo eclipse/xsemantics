@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="XSemantics" url="http://xsemantics.sourceforge.net">
-      XSemantics is a DSL (implemented in Xtext itself) for writing
+   <description name="Xsemantics" url="http://xsemantics.sourceforge.net">
+      Xsemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation
 rules) for languages implemented in Xtext. It then generates
 Java code that can be used in your language implemented in Xtext
@@ -23,9 +23,9 @@ in Java).
    <feature id="it.xsemantics.sdk.source">
       <category name="xsemantics"/>
    </feature>
-   <category-def name="xsemantics" label="XSemantics (1.2.x) for Xtext 2.3.1">
+   <category-def name="xsemantics" label="Xsemantics (1.2.x) for Xtext 2.3.1">
       <description>
-         XSemantics is a DSL (implemented in Xtext itself) for writing
+         Xsemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation
 rules) for languages implemented in Xtext. It then generates
 Java code that can be used in your language implemented in Xtext

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: XSemantics Runtime
+Bundle-Name: Xsemantics Runtime
 Bundle-SymbolicName: it.xsemantics.runtime
 Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: it.xsemantics.runtime.Activator

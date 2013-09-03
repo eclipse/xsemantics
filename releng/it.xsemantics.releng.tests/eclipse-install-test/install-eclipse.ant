@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Install Kepler SDK" default="install.eclipse.kepler">
+	<import file="common.ant" as="common" />
+	
+	<target name="install.eclipse.kepler" description="Install Eclipse SDK Kepler">
+		<install.eclipse/>
+	</target>
+
+	<target name="install.eclipse.juno" description="Install Eclipse SDK Juno">
+		<install.eclipse eclipse.name="juno" />
+	</target>
+
+	<target name="install.eclipse.indigo" description="Install Eclipse SDK Indigo">
+		<install.eclipse eclipse.name="indigo" />
+	</target>
+
+</project>

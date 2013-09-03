@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Test Features Installation" default="test.install.in.kepler">
+	<import file="common.ant" as="common" />
+
+	<property name="WORKSPACE" location="${ant.file}/../../../../" />
+	<property name="build.root" location="${WORKSPACE}/buildroot" />
+	<property name="site.p2" location="${sp:repository}" />
+
+	<property name="additional.repos" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases" />
+	<property name="xsemantics.sdk.feature" value="it.xsemantics.sdk.feature.group" />
+	<property name="xsemantics.runtime.feature" value="it.xsemantics.runtime.feature.feature.group" />
+
+	<property name="eclipse.kepler.repos" value="http://download.eclipse.org/releases/kepler" />
+	<property name="eclipse.juno.repos" value="http://download.eclipse.org/releases/juno" />
+	<property name="eclipse.indigo.repos" value="http://download.eclipse.org/releases/indigo" />
+	
+	<property name="xsemantics.remote.repo" value="http://sourceforge.net/projects/xsemantics/files/updates/releases" />
+
+	<property name="expected.xtext.bundles" value="*xtext*2.3*.jar"/>
+	<property name="unwanted.xtext.bundles" value="*xtext*2.4*.jar"/>
+
+	<property name="expected.xtext.features" value="*xtext*2.3*"/>
+	<property name="unwanted.xtext.features" value="*xtext*2.4*"/>
+	
+	<macrodef name="test.install">
+		<attribute name="eclipse.name" default="kepler"/>
+		<attribute name="features.repos" default="${site.p2}"/>
+		<sequential>
+			<install.eclipse.features
+				eclipse.name="@{eclipse.name}"
+				features.repos="@{features.repos}"
+				additional.repos="${additional.repos}"
+				features.to.install="${xsemantics.runtime.feature}"/>
+			<test.xtext.installed.versions/>
+			<install.eclipse.features
+				eclipse.name="@{eclipse.name}"
+				features.repos="@{features.repos}"
+				additional.repos="${additional.repos}"
+				features.to.install="${xsemantics.sdk.feature}"/>
+			<test.xtext.installed.versions/>
+			<test.xtext.installed.features.versions/>
+		</sequential>
+	</macrodef>
+	
+	<target name="test.install.in.kepler" description="Test installation in Kepler">
+		<property name="eclipse.repos" value="${eclipse.kepler.repos}" />
+		<test.install/>
+	</target>
+
+	<target name="test.install.in.juno" description="Test installation in Juno">
+		<property name="eclipse.repos" value="${eclipse.juno.repos}" />
+		<test.install
+			eclipse.name="juno"/>
+	</target>
+
+	<target name="test.install.in.indigo" description="Test installation in Indigo">
+		<property name="eclipse.repos" value="${eclipse.indigo.repos}" />
+		<test.install
+			eclipse.name="indigo"/>
+	</target>
+
+	<target name="test.install.from.remote.repo.in.kepler" description="Test installation from remote repository in Kepler">
+		<property name="eclipse.repos" value="${eclipse.kepler.repos}" />
+		<property name="features.repos.url" value="${xsemantics.remote.repo}"/>
+
+		<test.install/>
+	</target>
+
+	<target name="test.install.from.remote.repo.in.juno" description="Test installation from remote repository in Juno">
+		<property name="eclipse.repos" value="${eclipse.juno.repos}" />
+		<property name="features.repos.url" value="${xsemantics.remote.repo}"/>
+
+		<test.install
+			eclipse.name="juno"
+		/>
+	</target>
+
+	<macrodef name="test.xtext.installed.versions">
+		<sequential>
+			<bundles.exist
+				bundle.pattern="${expected.xtext.bundles}"
+			/>
+			<bundles.dont.exist 
+				bundle.pattern="${unwanted.xtext.bundles}" 
+			/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="test.xtext.installed.features.versions">
+		<sequential>
+			<features.exist
+				feature.pattern="${expected.xtext.features}"
+			/>
+			<features.dont.exist 
+				feature.pattern="${unwanted.xtext.features}" 
+			/>
+		</sequential>
+	</macrodef>
+
+	<target name="test.bundle.presence" description="Test bundle presence">
+		<bundles.exist
+			bundle.pattern="*xtext*2.3*.jar"
+			eclipse.test.dest="${user.home}/eclipse-install/eclipse-juno-test/"
+		/>
+	</target>
+
+	<target name="test.bundle.absence" description="Test bundle absence">
+		<bundles.dont.exist 
+			bundle.pattern="*xtext*2.4*.jar" 
+			eclipse.test.dest="${user.home}/eclipse-install/eclipse-juno-test/" />
+	</target>
+
+</project>

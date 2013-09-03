@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="it.xsemantics.feature"
-      label="XSemantics"
+      label="Xsemantics"
       version="1.2.0.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
-      XSemantics is a DSL (implemented in Xtext itself) for writing
+      Xsemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation
 rules) for languages implemented in Xtext. It then generates
 Java code that can be used in your language implemented in Xtext
@@ -111,6 +111,11 @@ This Agreement is governed by the laws of the State of New York and the intellec
    <includes
          id="it.xsemantics.runtime.feature"
          version="0.0.0"/>
+
+
+   <requires>
+      <import feature="org.eclipse.xtext.sdk" version="2.3.1.v201208210947" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="it.xsemantics.dsl"

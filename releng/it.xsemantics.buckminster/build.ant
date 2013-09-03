@@ -42,7 +42,7 @@
 
 	<target name="b3_aggregation" depends="install.b3.headless" description="description">
 
-		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/xtext-swtbot-tp-mirror.b3aggr" />
+		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/juno-xtext-2.3-swtbot-mirror.b3aggr" />
 		
 		<echo message="IMPORTANT: Mirror aggregation may took over 10 minutes." />
 		<echo message="build.model: ${build.model}" />

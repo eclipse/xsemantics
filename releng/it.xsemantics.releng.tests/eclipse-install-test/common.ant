@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		eclipse.download	The base URL for all the repositories in the RMAP
+							Default: http://download.eclipse.org
+-->
+<project name="common" >
+	<property name="eclipse.download" value="http://download.eclipse.org" />
+
+	<property name="eclipse.base.dest" location="${user.home}/eclipse-install" 
+		description="The base path of the main eclipse installations"/>
+	<property name="eclipse.test.base.dest" location="${eclipse.base.dest}" 
+		description="The base path of the temporary test eclipse installations"/>
+
+	<property name="director.install.dest" location="${user.home}" />
+	<property name="director.dir" location="${director.install.dest}/director" />
+	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
+
+	<property name="eclipse.p2.mirrors" value="true" />
+	<property name="java.net.preferIPv4Stack" value="true" />
+
+	<macrodef name="install.eclipse.features">
+		<attribute name="eclipse.name" default="kepler" />
+		<attribute name="features.repos" />
+		<attribute name="additional.repos"/>
+		<attribute name="features.to.install"/>
+		<sequential>
+			<install.eclipse eclipse.name="@{eclipse.name}" />
+			<property name="eclipse.test.dest" location="${eclipse.test.base.dest}/eclipse-${eclipse.name}-test" />
+			<makeurl property="features.repos.url" separator=",">
+				<path path="@{features.repos}" />
+			</makeurl>
+			<property name="all.eclipse.repos" value="${eclipse.repos},${features.repos.url},@{additional.repos}" />
+
+			<echo message="" />
+			<echo message="Installing features @{features.to.install}..." />
+			<echo message="Installing features into ${eclipse.test.dest}..." />
+			<echo message="Features Repos: ${features.repos.url}" />
+			<echo message="All used Repositories: ${all.eclipse.repos}" />
+
+			<delete dir="${eclipse.test.dest}">
+			</delete>
+
+			<copy todir="${eclipse.test.dest}">
+				<fileset dir="${eclipse.dest}"/>
+			</copy>
+
+			<java fork="true" dir="${eclipse.test.dest}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+				<classpath>
+					<fileset dir="${eclipse.test.dest}/plugins">
+						<include name="org.eclipse.equinox.launcher_*.jar" />
+					</fileset>
+				</classpath>
+				<arg value="-application"/>
+				<arg value="org.eclipse.equinox.p2.director"/>
+				<arg line="-noSplash" />
+				<arg line="-r ${all.eclipse.repos}" />
+				<arg line="-installIUs @{features.to.install}" />
+				<arg line="-consoleLog" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="install.eclipse">
+		<attribute name="eclipse.name" default="kepler" />
+		<sequential>
+			<property name="eclipse.name" value="@{eclipse.name}" />
+			<property name="eclipse.dest" location="${eclipse.base.dest}/eclipse-${eclipse.name}" />
+			<property name="eclipse.repos" value="${eclipse.download}/releases/${eclipse.name}" />
+			<antcall target="-install.eclipse"/>
+		</sequential>
+	</macrodef>
+
+	<target name="-install.eclipse">
+		<condition property="eclipse.installed">
+			<available file="${eclipse.dest}/.eclipseproduct" />
+		</condition>
+		<antcall target="install.eclipse.internal" />
+	</target>
+
+	<target name="install.eclipse.internal" unless="eclipse.installed" >
+		<antcall target="install.p2.director" />
+		<echo message="" />
+		<echo message="Installing eclipse ${eclipse.name} into ${eclipse.dest}..." />
+		<echo message="Repositories: ${eclipse.repos}" />
+		<java fork="true" dir="${director.dir}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+			<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+			<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+			<classpath>
+				<fileset dir="${director.dir}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+			<arg line="-r ${eclipse.repos}" />
+			<arg line='-d "${eclipse.dest}"' />
+			<arg line="-installIU org.eclipse.sdk.ide" />
+			<arg line="-tag InitialState" />
+			<arg line="-profile SDKProfile" />
+			<arg line="-profileProperties org.eclipse.update.install.features=true" />
+			<arg line="-roaming" />
+		</java>
+	</target>
+
+	<target name="install.p2.director">
+		<condition property="p2.director.installed">
+			<available file="${director.dir}" />
+		</condition>
+		<antcall target="install.p2.director.internal" />
+	</target>
+
+	<target name="install.p2.director.internal" unless="p2.director.installed">
+		<echo message="" />
+		<echo message="Installing director from ${director.url}..." />
+		<tempfile destdir="${java.io.tmpdir}"
+						          prefix="director-"
+						          suffix=".zip"
+						          property="director.zip"
+						          deleteonexit="true" />
+		<get src="${director.url}" dest="${director.zip}" />
+		<unzip src="${director.zip}" dest="${director.install.dest}" />
+		<delete file="${director.zip}" />
+	</target>
+
+	<macrodef name="bundles.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="bundle.pattern" />
+		<sequential>
+			<local name="found.jars"/>
+			<pathconvert property="found.jars" pathsep="${line.separator}">
+				<fileset dir="@{eclipse.test.dest}/plugins">
+					<include name="@{bundle.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found bundles ${found.jars}..." />
+			<fail message="Nothing found!">
+				<condition>
+					<equals arg1="${found.jars}" arg2="" />
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="bundles.dont.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="bundle.pattern" />
+		<sequential>
+			<local name="found.jars"/>
+			<pathconvert property="found.jars" pathsep="${line.separator}">
+				<fileset dir="@{eclipse.test.dest}/plugins">
+					<include name="@{bundle.pattern}" />
+				</fileset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found bundles (MUST BE EMPTY) ${found.jars}..." />
+			<fail message="Bundles should not have been found!">
+				<condition>
+					<not>
+						<equals arg1="${found.jars}" arg2="" />
+					</not>
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="features.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="feature.pattern" />
+		<sequential>
+			<local name="found.features"/>
+			<pathconvert property="found.features" pathsep="${line.separator}">
+				<dirset dir="@{eclipse.test.dest}/features">
+					<include name="@{feature.pattern}" />
+				</dirset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found features ${found.features}..." />
+			<fail message="Nothing found!">
+				<condition>
+					<equals arg1="${found.features}" arg2="" />
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="features.dont.exist">
+		<attribute name="eclipse.test.dest" default="${eclipse.test.dest}" />
+		<attribute name="feature.pattern" />
+		<sequential>
+			<local name="found.features"/>
+			<pathconvert property="found.features" pathsep="${line.separator}">
+				<dirset dir="@{eclipse.test.dest}/features">
+					<include name="@{feature.pattern}" />
+				</dirset>
+			</pathconvert>
+			<echo message="" />
+			<echo message="Found features (MUST BE EMPTY) ${found.features}..." />
+			<fail message="Features should not have been found!">
+				<condition>
+					<not>
+						<equals arg1="${found.features}" arg2="" />
+					</not>
+				</condition>
+			</fail>
+		</sequential>
+	</macrodef>
+
+</project>
