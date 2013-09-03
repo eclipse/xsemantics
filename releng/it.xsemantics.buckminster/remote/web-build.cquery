@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/xsemantics.rmap?format=raw">
+<?xml version="1.0" encoding="UTF-8"?>
+<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/xsemantics.rmap?format=raw">
     <cq:rootRequest name="it.xsemantics.buckminster" componentType="buckminster"/>
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
-    <cq:advisorNode namePattern="org\.eclipse\.xtext\.xbase*" versionOverride="[2.3.1,2.4.0)"/>
-    <cq:advisorNode namePattern="org\.eclipse\.emf\.mwe2\.*" versionOverride="[2.3.0,2.4.0)"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtext$" versionOverride="[2.3.1,2.4.0)"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.ui*" versionOverride="[2.3.1,2.4.0)"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.builder*" versionOverride="[2.3.1,2.4.0)"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.common*" versionOverride="[2.3.1,2.4.0)"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util*" versionOverride="[2.3.1,2.4.0)"/>
+    <cq:advisorNode namePattern="org\.eclipse\.xtext\.xbase*" versionOverride="[2.4.3,2.5.0)"/>
+    <cq:advisorNode namePattern="org\.eclipse\.emf\.mwe2\.*" versionOverride="[2.4.0,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext$" versionOverride="[2.4.3,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.ui*" versionOverride="[2.4.3,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.builder*" versionOverride="[2.4.3,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.common*" versionOverride="[2.4.3,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util*" versionOverride="[2.4.3,2.5.0)"/>
     <cq:advisorNode namePattern=".*" useTargetPlatform="false"/>
 </cq:componentQuery>
