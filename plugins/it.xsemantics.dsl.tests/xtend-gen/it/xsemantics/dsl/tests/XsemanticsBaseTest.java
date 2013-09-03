@@ -315,13 +315,13 @@ public class XsemanticsBaseTest {
     EList<RuleConclusionElement> _conclusionElements = _conclusion.getConclusionElements();
     List<RuleParameter> _typeSelect = EcoreUtil2.<RuleParameter>typeSelect(_conclusionElements, RuleParameter.class);
     final Function1<RuleParameter,Boolean> _function = new Function1<RuleParameter,Boolean>() {
-        public Boolean apply(final RuleParameter it) {
-          JvmFormalParameter _parameter = it.getParameter();
-          String _name = _parameter.getName();
-          boolean _equals = Objects.equal(_name, name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final RuleParameter it) {
+        JvmFormalParameter _parameter = it.getParameter();
+        String _name = _parameter.getName();
+        boolean _equals = Objects.equal(_name, name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     RuleParameter _findFirst = IterableExtensions.<RuleParameter>findFirst(_typeSelect, _function);
     return _findFirst;
   }

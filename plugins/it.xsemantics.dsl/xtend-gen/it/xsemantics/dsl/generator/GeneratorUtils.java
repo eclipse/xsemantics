@@ -13,12 +13,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class GeneratorUtils {
   public static ArrayList<Issue> onlyErrors(final List<Issue> issues) {
     final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final Issue it) {
+        Severity _severity = it.getSeverity();
+        boolean _equals = Objects.equal(_severity, Severity.ERROR);
+        return Boolean.valueOf(_equals);
+      }
+    };
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
     ArrayList<Issue> _newArrayList = Lists.<Issue>newArrayList(_filter);
     return _newArrayList;

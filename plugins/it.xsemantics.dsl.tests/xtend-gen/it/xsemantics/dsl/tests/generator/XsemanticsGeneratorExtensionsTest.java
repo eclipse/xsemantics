@@ -341,15 +341,15 @@ public class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTe
     Rule _head = IterableExtensions.<Rule>head(_rules);
     List<ExpressionInConclusion> _expressionsInConclusion = this._xsemanticsUtils.expressionsInConclusion(_head);
     final Procedure1<List<ExpressionInConclusion>> _function = new Procedure1<List<ExpressionInConclusion>>() {
-        public void apply(final List<ExpressionInConclusion> it) {
-          ExpressionInConclusion _get = it.get(0);
-          String _expressionInConclusionMethodName = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get);
-          Assert.assertEquals("_applyRuleTestRule_1", _expressionInConclusionMethodName);
-          ExpressionInConclusion _get_1 = it.get(1);
-          String _expressionInConclusionMethodName_1 = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get_1);
-          Assert.assertEquals("_applyRuleTestRule_2", _expressionInConclusionMethodName_1);
-        }
-      };
+      public void apply(final List<ExpressionInConclusion> it) {
+        ExpressionInConclusion _get = it.get(0);
+        String _expressionInConclusionMethodName = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get);
+        Assert.assertEquals("_applyRuleTestRule_1", _expressionInConclusionMethodName);
+        ExpressionInConclusion _get_1 = it.get(1);
+        String _expressionInConclusionMethodName_1 = XsemanticsGeneratorExtensionsTest.this._xsemanticsGeneratorExtensions.expressionInConclusionMethodName(_get_1);
+        Assert.assertEquals("_applyRuleTestRule_2", _expressionInConclusionMethodName_1);
+      }
+    };
     ObjectExtensions.<List<ExpressionInConclusion>>operator_doubleArrow(_expressionsInConclusion, _function);
   }
   

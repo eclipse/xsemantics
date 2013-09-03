@@ -367,22 +367,22 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
     final ArrayList<String> toUpper = CollectionLiterals.<String>newArrayList();
     final ArrayList<String> toLower = CollectionLiterals.<String>newArrayList();
     final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-        public Boolean apply(final String it) {
-          String _lowerCase = it.toLowerCase();
-          boolean _equals = _lowerCase.equals(it);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final String it) {
+        String _lowerCase = it.toLowerCase();
+        boolean _equals = _lowerCase.equals(it);
+        return Boolean.valueOf(_equals);
+      }
+    };
     final Procedure1<String> _function_1 = new Procedure1<String>() {
-        public void apply(final String it) {
-          toLower.add(it);
-        }
-      };
+      public void apply(final String it) {
+        toLower.add(it);
+      }
+    };
     final Procedure1<String> _function_2 = new Procedure1<String>() {
-        public void apply(final String it) {
-          toUpper.add(it);
-        }
-      };
+      public void apply(final String it) {
+        toUpper.add(it);
+      }
+    };
     this._xsemanticsUtils.<String>iterateIfThenElse(stringList, _function, _function_1, _function_2);
     String _string = toLower.toString();
     Assert.assertEquals("[a, c]", _string);
@@ -615,15 +615,15 @@ public class XsemanticsUtilsTest extends XsemanticsBaseTest {
   
   public void assertJudgments(final List<JudgmentDescription> judgments, final CharSequence expected) {
     final Function1<JudgmentDescription,String> _function = new Function1<JudgmentDescription,String>() {
-        public String apply(final JudgmentDescription it) {
-          XsemanticsSystem _containingSystem = XsemanticsUtilsTest.this._xsemanticsUtils.containingSystem(it);
-          String _name = _containingSystem.getName();
-          String _plus = (_name + " ");
-          String _programText = XsemanticsUtilsTest.this.nodeModelUtils.getProgramText(it);
-          String _plus_1 = (_plus + _programText);
-          return _plus_1;
-        }
-      };
+      public String apply(final JudgmentDescription it) {
+        XsemanticsSystem _containingSystem = XsemanticsUtilsTest.this._xsemanticsUtils.containingSystem(it);
+        String _name = _containingSystem.getName();
+        String _plus = (_name + " ");
+        String _programText = XsemanticsUtilsTest.this.nodeModelUtils.getProgramText(it);
+        String _plus_1 = (_plus + _programText);
+        return _plus_1;
+      }
+    };
     List<String> _map = ListExtensions.<JudgmentDescription, String>map(judgments, _function);
     String _join = IterableExtensions.join(_map, "\n");
     String _plus = (_join + "\n");

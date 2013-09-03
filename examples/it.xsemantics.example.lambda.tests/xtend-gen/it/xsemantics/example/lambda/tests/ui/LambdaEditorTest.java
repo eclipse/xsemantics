@@ -60,15 +60,15 @@ public class LambdaEditorTest extends AbstractEditorTest {
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject(this.TEST_PROJECT);
       final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
-          public void apply(final IJavaProject it) {
-            try {
-              IProject _project = it.getProject();
-              IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+        public void apply(final IJavaProject it) {
+          try {
+            IProject _project = it.getProject();
+            IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
-        };
+        }
+      };
       ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -186,12 +186,12 @@ public class LambdaEditorTest extends AbstractEditorTest {
   private Abstraction abstractionFromEditor(final XtextEditor editor) {
     IXtextDocument _document = editor.getDocument();
     final IUnitOfWork<Program,XtextResource> _function = new IUnitOfWork<Program,XtextResource>() {
-        public Program exec(final XtextResource it) throws Exception {
-          EList<EObject> _contents = it.getContents();
-          EObject _get = _contents.get(0);
-          return ((Program) _get);
-        }
-      };
+      public Program exec(final XtextResource it) throws Exception {
+        EList<EObject> _contents = it.getContents();
+        EObject _get = _contents.get(0);
+        return ((Program) _get);
+      }
+    };
     Program _readOnly = _document.<Program>readOnly(_function);
     Term _term = _readOnly.getTerm();
     Abstraction _abstraction = LambdaTestsUtil.getAbstraction(_term);

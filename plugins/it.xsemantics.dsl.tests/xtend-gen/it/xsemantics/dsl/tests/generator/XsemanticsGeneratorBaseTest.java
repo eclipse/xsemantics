@@ -67,13 +67,13 @@ public class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
   public void configureAppendable(final Rule rule, final ITreeAppendable appendable) {
     List<RuleParameter> _ruleParams = this._xsemanticsUtils.ruleParams(rule);
     final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
-        public void apply(final RuleParameter it) {
-          JvmFormalParameter _parameter = it.getParameter();
-          JvmFormalParameter _parameter_1 = it.getParameter();
-          String _simpleName = _parameter_1.getSimpleName();
-          appendable.declareVariable(_parameter, _simpleName);
-        }
-      };
+      public void apply(final RuleParameter it) {
+        JvmFormalParameter _parameter = it.getParameter();
+        JvmFormalParameter _parameter_1 = it.getParameter();
+        String _simpleName = _parameter_1.getSimpleName();
+        appendable.declareVariable(_parameter, _simpleName);
+      }
+    };
     IterableExtensions.<RuleParameter>forEach(_ruleParams, _function);
   }
   

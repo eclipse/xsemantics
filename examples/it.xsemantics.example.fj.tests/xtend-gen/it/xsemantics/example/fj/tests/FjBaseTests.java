@@ -59,10 +59,10 @@ public class FjBaseTests {
     try {
       Program _parse = this._parseHelper.parse(prog);
       final Procedure1<Program> _function = new Procedure1<Program>() {
-          public void apply(final Program it) {
-            FjBaseTests.this._validationTestHelper.assertNoErrors(it);
-          }
-        };
+        public void apply(final Program it) {
+          FjBaseTests.this._validationTestHelper.assertNoErrors(it);
+        }
+      };
       Program _doubleArrow = ObjectExtensions.<Program>operator_doubleArrow(_parse, _function);
       return _doubleArrow;
     } catch (Throwable _e) {
@@ -73,12 +73,12 @@ public class FjBaseTests {
   public Method methodByName(final Program p, final String methodName) {
     List<Method> _allContentsOfType = EcoreUtil2.<Method>getAllContentsOfType(p, Method.class);
     final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
-        public Boolean apply(final Method it) {
-          String _name = it.getName();
-          boolean _equals = Objects.equal(_name, methodName);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final Method it) {
+        String _name = it.getName();
+        boolean _equals = Objects.equal(_name, methodName);
+        return Boolean.valueOf(_equals);
+      }
+    };
     Method _findFirst = IterableExtensions.<Method>findFirst(_allContentsOfType, _function);
     return _findFirst;
   }

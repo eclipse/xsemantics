@@ -7992,57 +7992,57 @@ public class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
   
   private void assertCorrectJavaCodeGeneration(final XsemanticsSystem system, final String prefix, final CharSequence expected, final CharSequence expectedValidator) {
     final IAcceptor<Result> _function = new IAcceptor<Result>() {
-        public void accept(final Result it) {
-          Map<String,CharSequence> _allGeneratedResources = it.getAllGeneratedResources();
-          Set<Entry<String,CharSequence>> _entrySet = _allGeneratedResources.entrySet();
-          for (final Entry<String,CharSequence> e : _entrySet) {
-            boolean _or = false;
-            boolean _equals = Objects.equal(prefix, null);
-            if (_equals) {
-              _or = true;
+      public void accept(final Result it) {
+        Map<String,CharSequence> _allGeneratedResources = it.getAllGeneratedResources();
+        Set<Entry<String,CharSequence>> _entrySet = _allGeneratedResources.entrySet();
+        for (final Entry<String,CharSequence> e : _entrySet) {
+          boolean _or = false;
+          boolean _equals = Objects.equal(prefix, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            String _key = e.getKey();
+            boolean _contains = _key.contains(prefix);
+            _or = (_equals || _contains);
+          }
+          if (_or) {
+            boolean _and = false;
+            String _key_1 = e.getKey();
+            boolean _endsWith = _key_1.endsWith("Validator.java");
+            if (!_endsWith) {
+              _and = false;
             } else {
-              String _key = e.getKey();
-              boolean _contains = _key.contains(prefix);
-              _or = (_equals || _contains);
+              boolean _notEquals = (!Objects.equal(expectedValidator, null));
+              _and = (_endsWith && _notEquals);
             }
-            if (_or) {
-              boolean _and = false;
-              String _key_1 = e.getKey();
-              boolean _endsWith = _key_1.endsWith("Validator.java");
-              if (!_endsWith) {
-                _and = false;
+            if (_and) {
+              String _string = expectedValidator.toString();
+              CharSequence _value = e.getValue();
+              String _string_1 = _value.toString();
+              Assert.assertEquals(_string, _string_1);
+            } else {
+              boolean _and_1 = false;
+              String _key_2 = e.getKey();
+              boolean _endsWith_1 = _key_2.endsWith("Validator.java");
+              boolean _not = (!_endsWith_1);
+              if (!_not) {
+                _and_1 = false;
               } else {
-                boolean _notEquals = (!Objects.equal(expectedValidator, null));
-                _and = (_endsWith && _notEquals);
+                boolean _notEquals_1 = (!Objects.equal(expected, null));
+                _and_1 = (_not && _notEquals_1);
               }
-              if (_and) {
-                String _string = expectedValidator.toString();
-                CharSequence _value = e.getValue();
-                String _string_1 = _value.toString();
-                Assert.assertEquals(_string, _string_1);
-              } else {
-                boolean _and_1 = false;
-                String _key_2 = e.getKey();
-                boolean _endsWith_1 = _key_2.endsWith("Validator.java");
-                boolean _not = (!_endsWith_1);
-                if (!_not) {
-                  _and_1 = false;
-                } else {
-                  boolean _notEquals_1 = (!Objects.equal(expected, null));
-                  _and_1 = (_not && _notEquals_1);
-                }
-                if (_and_1) {
-                  String _string_2 = expected.toString();
-                  CharSequence _value_1 = e.getValue();
-                  String _string_3 = _value_1.toString();
-                  Assert.assertEquals(_string_2, _string_3);
-                }
+              if (_and_1) {
+                String _string_2 = expected.toString();
+                CharSequence _value_1 = e.getValue();
+                String _string_3 = _value_1.toString();
+                Assert.assertEquals(_string_2, _string_3);
               }
             }
           }
-          it.compileToJava();
         }
-      };
+        it.compileToJava();
+      }
+    };
     this._xsemanticsCompilationTestHelper.compileAll(system, _function);
   }
 }

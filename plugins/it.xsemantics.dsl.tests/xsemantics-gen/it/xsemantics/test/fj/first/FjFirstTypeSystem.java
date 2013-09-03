@@ -806,15 +806,15 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   private BasicType _applyRuleTBoolConstant_1(final RuleEnvironment G, final BoolConstant b) throws RuleFailedException {
     final Function1<BasicType,BasicType> _function = new Function1<BasicType,BasicType>() {
-        public BasicType apply(final BasicType t) {
-          BasicType _xblockexpression = null;
-          {
-            t.setBasic("boolean");
-            _xblockexpression = (t);
-          }
-          return _xblockexpression;
+      public BasicType apply(final BasicType t) {
+        BasicType _xblockexpression = null;
+        {
+          t.setBasic("boolean");
+          _xblockexpression = (t);
         }
-      };
+        return _xblockexpression;
+      }
+    };
     BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
     BasicType _apply = _function.apply(_createBasicType);
     return _apply;
@@ -1155,22 +1155,22 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     final List<Method> allMethods = this.<Method>getAll(cl, _class_Members, _class_Superclass, 
       Method.class);
     final Procedure1<Method> _function = new Procedure1<Method>() {
-        public void apply(final Method method) {
-          final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
-              public Boolean apply(final Method it) {
-                String _name = it.getName();
-                String _name_1 = method.getName();
-                boolean _equals = Objects.equal(_name, _name_1);
-                return Boolean.valueOf(_equals);
-              }
-            };
-          boolean _exists = IterableExtensions.<Method>exists(result, _function);
-          boolean _not = (!_exists);
-          if (_not) {
-            result.add(method);
+      public void apply(final Method method) {
+        final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
+          public Boolean apply(final Method it) {
+            String _name = it.getName();
+            String _name_1 = method.getName();
+            boolean _equals = Objects.equal(_name, _name_1);
+            return Boolean.valueOf(_equals);
           }
+        };
+        boolean _exists = IterableExtensions.<Method>exists(result, _function);
+        boolean _not = (!_exists);
+        if (_not) {
+          result.add(method);
         }
-      };
+      }
+    };
     IterableExtensions.<Method>forEach(allMethods, _function);
     methods = result;
     return new Result<List<Method>>(methods);
@@ -1331,11 +1331,11 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
     EList<Expression> _args_1 = newExp.getArgs();
     final Procedure1<Expression> _function = new Procedure1<Expression>() {
-        public void apply(final Expression it) {
-          /* G |- it */
-          checkInternal(G, _trace_, it);
-        }
-      };
+      public void apply(final Expression it) {
+        /* G |- it */
+        checkInternal(G, _trace_, it);
+      }
+    };
     IterableExtensions.<Expression>forEach(_args_1, _function);
     return new Result<Boolean>(true);
   }
@@ -1451,20 +1451,20 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       inheritedFields = (List<Field>) result.getFirst();
       
       final Procedure1<Field> _function = new Procedure1<Field>() {
-          public void apply(final Field inheritedField) {
-            EList<Member> _members = cl.getMembers();
-            List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
-            for (final Field field : _typeSelect) {
-              String _name = field.getName();
-              String _name_1 = inheritedField.getName();
-              boolean _notEquals = (!Objects.equal(_name, _name_1));
-              /* field.name != inheritedField.name */
-              if (!_notEquals) {
-                sneakyThrowRuleFailedException("field.name != inheritedField.name");
-              }
+        public void apply(final Field inheritedField) {
+          EList<Member> _members = cl.getMembers();
+          List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
+          for (final Field field : _typeSelect) {
+            String _name = field.getName();
+            String _name_1 = inheritedField.getName();
+            boolean _notEquals = (!Objects.equal(_name, _name_1));
+            /* field.name != inheritedField.name */
+            if (!_notEquals) {
+              sneakyThrowRuleFailedException("field.name != inheritedField.name");
             }
           }
-        };
+        }
+      };
       IterableExtensions.<Field>forEach(inheritedFields, _function);
       List<Method> inheritedMethods = null;
       /* G ||~ cl.superclass >> inheritedMethods */
@@ -1474,50 +1474,50 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       inheritedMethods = (List<Method>) result_1.getFirst();
       
       final Procedure1<Method> _function_1 = new Procedure1<Method>() {
-          public void apply(final Method inheritedMethod) {
-            EList<Member> _members = cl.getMembers();
-            List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-            final Procedure1<Method> _function = new Procedure1<Method>() {
-                public void apply(final Method it) {
-                  /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
-                  try {
-                    String _name = it.getName();
-                    String _name_1 = inheritedMethod.getName();
-                    boolean _notEquals = (!Objects.equal(_name, _name_1));
-                    /* it.name != inheritedMethod.name */
-                    if (!_notEquals) {
-                      sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
-                    }
-                  } catch (Exception e) {
-                    /* G |- it.type ~~ inheritedMethod.type */
-                    Type _type = it.getType();
-                    Type _type_1 = inheritedMethod.getType();
-                    equalstypeInternal(G, _trace_, _type, _type_1);
-                    EList<Parameter> _params = it.getParams();
-                    int _size = _params.size();
-                    EList<Parameter> _params_1 = inheritedMethod.getParams();
-                    int _size_1 = _params_1.size();
-                    boolean _equals = (_size == _size_1);
-                    /* it.params.size == inheritedMethod.params.size */
-                    if (!_equals) {
-                      sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
-                    }
-                    EList<Parameter> _params_2 = inheritedMethod.getParams();
-                    final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
-                    EList<Parameter> _params_3 = it.getParams();
-                    for (final Parameter param : _params_3) {
-                      /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
-                      Type _type_2 = param.getType();
-                      Parameter _next = inheritedMethodParamsIt.next();
-                      Type _type_3 = _next.getType();
-                      equalstypeInternal(G, _trace_, _type_2, _type_3);
-                    }
-                  }
+        public void apply(final Method inheritedMethod) {
+          EList<Member> _members = cl.getMembers();
+          List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
+          final Procedure1<Method> _function = new Procedure1<Method>() {
+            public void apply(final Method it) {
+              /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
+              try {
+                String _name = it.getName();
+                String _name_1 = inheritedMethod.getName();
+                boolean _notEquals = (!Objects.equal(_name, _name_1));
+                /* it.name != inheritedMethod.name */
+                if (!_notEquals) {
+                  sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
                 }
-              };
-            IterableExtensions.<Method>forEach(_typeSelect, _function);
-          }
-        };
+              } catch (Exception e) {
+                /* G |- it.type ~~ inheritedMethod.type */
+                Type _type = it.getType();
+                Type _type_1 = inheritedMethod.getType();
+                equalstypeInternal(G, _trace_, _type, _type_1);
+                EList<Parameter> _params = it.getParams();
+                int _size = _params.size();
+                EList<Parameter> _params_1 = inheritedMethod.getParams();
+                int _size_1 = _params_1.size();
+                boolean _equals = (_size == _size_1);
+                /* it.params.size == inheritedMethod.params.size */
+                if (!_equals) {
+                  sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
+                }
+                EList<Parameter> _params_2 = inheritedMethod.getParams();
+                final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
+                EList<Parameter> _params_3 = it.getParams();
+                for (final Parameter param : _params_3) {
+                  /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
+                  Type _type_2 = param.getType();
+                  Parameter _next = inheritedMethodParamsIt.next();
+                  Type _type_3 = _next.getType();
+                  equalstypeInternal(G, _trace_, _type_2, _type_3);
+                }
+              }
+            }
+          };
+          IterableExtensions.<Method>forEach(_typeSelect, _function);
+        }
+      };
       IterableExtensions.<Method>forEach(inheritedMethods, _function_1);
     }
     return new Result<Boolean>(true);

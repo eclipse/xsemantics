@@ -23,11 +23,11 @@ public class XsemanticsProposalsForDatatypeRules {
     AbstractElement _alternatives = _judgmentSymbolRule.getAlternatives();
     List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, Keyword.class);
     final Function1<Keyword,String> _function = new Function1<Keyword,String>() {
-        public String apply(final Keyword it) {
-          String _value = it.getValue();
-          return _value;
-        }
-      };
+      public String apply(final Keyword it) {
+        String _value = it.getValue();
+        return _value;
+      }
+    };
     List<String> _map = ListExtensions.<Keyword, String>map(_allContentsOfType, _function);
     return _map;
   }
@@ -37,11 +37,11 @@ public class XsemanticsProposalsForDatatypeRules {
     AbstractElement _alternatives = _relationSymbolRule.getAlternatives();
     List<Keyword> _allContentsOfType = EcoreUtil2.<Keyword>getAllContentsOfType(_alternatives, Keyword.class);
     final Function1<Keyword,String> _function = new Function1<Keyword,String>() {
-        public String apply(final Keyword it) {
-          String _value = it.getValue();
-          return _value;
-        }
-      };
+      public String apply(final Keyword it) {
+        String _value = it.getValue();
+        return _value;
+      }
+    };
     List<String> _map = ListExtensions.<Keyword, String>map(_allContentsOfType, _function);
     return _map;
   }

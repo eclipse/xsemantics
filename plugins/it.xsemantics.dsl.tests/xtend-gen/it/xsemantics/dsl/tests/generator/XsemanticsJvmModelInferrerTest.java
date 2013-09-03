@@ -585,11 +585,11 @@ public class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest 
   public void assertGeneratedMembers(final Iterable<? extends JvmMember> members, final CharSequence expected) {
     final FakeTreeAppendable a = this.createTestAppendable();
     final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
-        public void apply(final JvmMember it) {
-          GeneratorConfig _generatorConfig = XsemanticsJvmModelInferrerTest.this.generatorConfig();
-          XsemanticsJvmModelInferrerTest.this.generator.generateMember(it, a, _generatorConfig);
-        }
-      };
+      public void apply(final JvmMember it) {
+        GeneratorConfig _generatorConfig = XsemanticsJvmModelInferrerTest.this.generatorConfig();
+        XsemanticsJvmModelInferrerTest.this.generator.generateMember(it, a, _generatorConfig);
+      }
+    };
     IterableExtensions.forEach(members, _function);
     String _string = a.toString();
     String _trim = _string.trim();

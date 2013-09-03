@@ -238,11 +238,11 @@ public class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
   protected void _computeTypes(final OrExpression e, final ITypeComputationState state) {
     EList<XExpression> _branches = e.getBranches();
     final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
-        public void apply(final XExpression it) {
-          ITypeComputationState _withoutExpectation = state.withoutExpectation();
-          XsemanticsTypeComputer.this.computeTypes(it, _withoutExpectation);
-        }
-      };
+      public void apply(final XExpression it) {
+        ITypeComputationState _withoutExpectation = state.withoutExpectation();
+        XsemanticsTypeComputer.this.computeTypes(it, _withoutExpectation);
+      }
+    };
     IterableExtensions.<XExpression>forEach(_branches, _function);
     LightweightTypeReference _primitiveVoid = this.getPrimitiveVoid(state);
     state.acceptActualType(_primitiveVoid);

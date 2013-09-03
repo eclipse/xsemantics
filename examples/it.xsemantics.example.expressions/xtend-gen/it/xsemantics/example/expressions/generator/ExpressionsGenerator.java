@@ -56,11 +56,11 @@ public class ExpressionsGenerator implements IGenerator {
   public String compileModel(final Model expModel) {
     EList<Variable> _variables = expModel.getVariables();
     final Function1<Variable,CharSequence> _function = new Function1<Variable,CharSequence>() {
-        public CharSequence apply(final Variable it) {
-          CharSequence _compileVariable = ExpressionsGenerator.this.compileVariable(it);
-          return _compileVariable;
-        }
-      };
+      public CharSequence apply(final Variable it) {
+        CharSequence _compileVariable = ExpressionsGenerator.this.compileVariable(it);
+        return _compileVariable;
+      }
+    };
     List<CharSequence> _map = ListExtensions.<Variable, CharSequence>map(_variables, _function);
     String _join = IterableExtensions.join(_map, "\n\n");
     return _join;

@@ -39,24 +39,24 @@ public class FjExpectedTraces {
     String _string = expectedErrorInformation.toString();
     LinkedList<ErrorInformation> _filteredErrorInformation = this._traceUtils.filteredErrorInformation(e);
     final Function1<ErrorInformation,String> _function = new Function1<ErrorInformation,String>() {
-        public String apply(final ErrorInformation it) {
-          EObject _source = it.getSource();
-          String _string = FjExpectedTraces.this._stringRepresentation.string(_source);
-          String _xifexpression = null;
-          EStructuralFeature _feature = it.getFeature();
-          boolean _notEquals = (!Objects.equal(_feature, null));
-          if (_notEquals) {
-            EStructuralFeature _feature_1 = it.getFeature();
-            String _name = _feature_1.getName();
-            String _plus = (" feature: " + _name);
-            _xifexpression = _plus;
-          } else {
-            _xifexpression = "";
-          }
-          String _plus_1 = (_string + _xifexpression);
-          return _plus_1;
+      public String apply(final ErrorInformation it) {
+        EObject _source = it.getSource();
+        String _string = FjExpectedTraces.this._stringRepresentation.string(_source);
+        String _xifexpression = null;
+        EStructuralFeature _feature = it.getFeature();
+        boolean _notEquals = (!Objects.equal(_feature, null));
+        if (_notEquals) {
+          EStructuralFeature _feature_1 = it.getFeature();
+          String _name = _feature_1.getName();
+          String _plus = (" feature: " + _name);
+          _xifexpression = _plus;
+        } else {
+          _xifexpression = "";
         }
-      };
+        String _plus_1 = (_string + _xifexpression);
+        return _plus_1;
+      }
+    };
     List<String> _map = ListExtensions.<ErrorInformation, String>map(_filteredErrorInformation, _function);
     String _join = IterableExtensions.join(_map, " -- ");
     Assert.assertEquals(_string, _join);

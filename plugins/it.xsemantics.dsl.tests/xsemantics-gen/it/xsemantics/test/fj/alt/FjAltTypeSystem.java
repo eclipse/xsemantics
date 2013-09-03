@@ -304,11 +304,11 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
     EList<Expression> _args_1 = newExp.getArgs();
     final Procedure1<Expression> _function = new Procedure1<Expression>() {
-        public void apply(final Expression it) {
-          /* G |- it */
-          checkInternal(G, _trace_, it);
-        }
-      };
+      public void apply(final Expression it) {
+        /* G |- it */
+        checkInternal(G, _trace_, it);
+      }
+    };
     IterableExtensions.<Expression>forEach(_args_1, _function);
     return new Result<Boolean>(true);
   }
@@ -344,76 +344,76 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
       it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
       List<Field> inheritedFields = this.fjAux.getFields(_superclass_1);
       final Procedure1<Field> _function = new Procedure1<Field>() {
-          public void apply(final Field inheritedField) {
-            List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
-            for (final Field field : _selectFields) {
-              /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-              try {
-                String _name = field.getName();
-                String _name_1 = inheritedField.getName();
-                boolean _notEquals = (!Objects.equal(_name, _name_1));
-                /* field.name != inheritedField.name */
-                if (!_notEquals) {
-                  sneakyThrowRuleFailedException("field.name != inheritedField.name");
-                }
-              } catch (Exception e) {
-                /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-                EObject _eContainer = inheritedField.eContainer();
-                String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
-                String _plus = ("field already defined in superclass " + _stringRep);
-                String error = _plus;
-                throwForExplicitFail(error, new ErrorInformation(null, null));
+        public void apply(final Field inheritedField) {
+          List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
+          for (final Field field : _selectFields) {
+            /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+            try {
+              String _name = field.getName();
+              String _name_1 = inheritedField.getName();
+              boolean _notEquals = (!Objects.equal(_name, _name_1));
+              /* field.name != inheritedField.name */
+              if (!_notEquals) {
+                sneakyThrowRuleFailedException("field.name != inheritedField.name");
               }
+            } catch (Exception e) {
+              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+              EObject _eContainer = inheritedField.eContainer();
+              String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
+              String _plus = ("field already defined in superclass " + _stringRep);
+              String error = _plus;
+              throwForExplicitFail(error, new ErrorInformation(null, null));
             }
           }
-        };
+        }
+      };
       IterableExtensions.<Field>forEach(inheritedFields, _function);
       it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
       List<Method> inheritedMethods = this.fjAux.getMethods(_superclass_2);
       final Procedure1<Method> _function_1 = new Procedure1<Method>() {
-          public void apply(final Method inheritedMethod) {
-            List<Method> _selectMethods = FjAltTypeSystem.this.fjAux.selectMethods(cl);
-            final Procedure1<Method> _function = new Procedure1<Method>() {
-                public void apply(final Method it) {
-                  /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
-                  try {
-                    String _name = it.getName();
-                    String _name_1 = inheritedMethod.getName();
-                    boolean _notEquals = (!Objects.equal(_name, _name_1));
-                    /* it.name != inheritedMethod.name */
-                    if (!_notEquals) {
-                      sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
-                    }
-                  } catch (Exception e) {
-                    /* G |- it.type ~~ inheritedMethod.type */
-                    Type _type = it.getType();
-                    Type _type_1 = inheritedMethod.getType();
-                    equalstypeInternal(G, _trace_, _type, _type_1);
-                    EList<Parameter> _params = it.getParams();
-                    int _size = _params.size();
-                    EList<Parameter> _params_1 = inheritedMethod.getParams();
-                    int _size_1 = _params_1.size();
-                    boolean _equals = (_size == _size_1);
-                    /* it.params.size == inheritedMethod.params.size */
-                    if (!_equals) {
-                      sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
-                    }
-                    EList<Parameter> _params_2 = inheritedMethod.getParams();
-                    final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
-                    EList<Parameter> _params_3 = it.getParams();
-                    for (final Parameter param : _params_3) {
-                      /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
-                      Type _type_2 = param.getType();
-                      Parameter _next = inheritedMethodParamsIt.next();
-                      Type _type_3 = _next.getType();
-                      equalstypeInternal(G, _trace_, _type_2, _type_3);
-                    }
-                  }
+        public void apply(final Method inheritedMethod) {
+          List<Method> _selectMethods = FjAltTypeSystem.this.fjAux.selectMethods(cl);
+          final Procedure1<Method> _function = new Procedure1<Method>() {
+            public void apply(final Method it) {
+              /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
+              try {
+                String _name = it.getName();
+                String _name_1 = inheritedMethod.getName();
+                boolean _notEquals = (!Objects.equal(_name, _name_1));
+                /* it.name != inheritedMethod.name */
+                if (!_notEquals) {
+                  sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
                 }
-              };
-            IterableExtensions.<Method>forEach(_selectMethods, _function);
-          }
-        };
+              } catch (Exception e) {
+                /* G |- it.type ~~ inheritedMethod.type */
+                Type _type = it.getType();
+                Type _type_1 = inheritedMethod.getType();
+                equalstypeInternal(G, _trace_, _type, _type_1);
+                EList<Parameter> _params = it.getParams();
+                int _size = _params.size();
+                EList<Parameter> _params_1 = inheritedMethod.getParams();
+                int _size_1 = _params_1.size();
+                boolean _equals = (_size == _size_1);
+                /* it.params.size == inheritedMethod.params.size */
+                if (!_equals) {
+                  sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
+                }
+                EList<Parameter> _params_2 = inheritedMethod.getParams();
+                final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
+                EList<Parameter> _params_3 = it.getParams();
+                for (final Parameter param : _params_3) {
+                  /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
+                  Type _type_2 = param.getType();
+                  Parameter _next = inheritedMethodParamsIt.next();
+                  Type _type_3 = _next.getType();
+                  equalstypeInternal(G, _trace_, _type_2, _type_3);
+                }
+              }
+            }
+          };
+          IterableExtensions.<Method>forEach(_selectMethods, _function);
+        }
+      };
       IterableExtensions.<Method>forEach(inheritedMethods, _function_1);
     }
     return new Result<Boolean>(true);

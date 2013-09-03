@@ -163,11 +163,11 @@ public class XsemanticsProposalProviderTest extends AbstractContentAssistTest {
       ContentAssistProcessorTestBuilder _append_1 = _append.append(_builder.toString());
       ICompletionProposal[] _computeCompletionProposals = _append_1.computeCompletionProposals();
       final Procedure1<ICompletionProposal> _function = new Procedure1<ICompletionProposal>() {
-          public void apply(final ICompletionProposal proposal) {
-            String _displayString = proposal.getDisplayString();
-            Assert.assertNotEquals(_displayString, "myNewVar");
-          }
-        };
+        public void apply(final ICompletionProposal proposal) {
+          String _displayString = proposal.getDisplayString();
+          Assert.assertNotEquals(_displayString, "myNewVar");
+        }
+      };
       IterableExtensions.<ICompletionProposal>forEach(((Iterable<ICompletionProposal>)Conversions.doWrapArray(_computeCompletionProposals)), _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

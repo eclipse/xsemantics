@@ -52,19 +52,19 @@ public class TraceUtils {
       final StringBuffer indent = _stringBuffer;
       LinkedList<RuleFailedException> _failureAsList = this.failureAsList(e);
       final Function1<RuleFailedException,String> _function = new Function1<RuleFailedException,String>() {
-          public String apply(final RuleFailedException it) {
-            String _xblockexpression = null;
-            {
-              String _string = indent.toString();
-              String _message = it.getMessage();
-              String _removeLeadingWhitespace = Strings.removeLeadingWhitespace(_message);
-              final String listElem = (_string + _removeLeadingWhitespace);
-              indent.append(" ");
-              _xblockexpression = (listElem);
-            }
-            return _xblockexpression;
+        public String apply(final RuleFailedException it) {
+          String _xblockexpression = null;
+          {
+            String _string = indent.toString();
+            String _message = it.getMessage();
+            String _removeLeadingWhitespace = Strings.removeLeadingWhitespace(_message);
+            final String listElem = (_string + _removeLeadingWhitespace);
+            indent.append(" ");
+            _xblockexpression = (listElem);
           }
-        };
+          return _xblockexpression;
+        }
+      };
       List<String> _map = ListExtensions.<RuleFailedException, String>map(_failureAsList, _function);
       _xblockexpression = (_map);
     }
@@ -165,31 +165,31 @@ public class TraceUtils {
       LinkedList<ErrorInformation> _linkedList = new LinkedList<ErrorInformation>();
       final List<ErrorInformation> noDuplicates = _linkedList;
       final Procedure1<ErrorInformation> _function = new Procedure1<ErrorInformation>() {
-          public void apply(final ErrorInformation errorInformation) {
-            final Function1<ErrorInformation,Boolean> _function = new Function1<ErrorInformation,Boolean>() {
-                public Boolean apply(final ErrorInformation it) {
-                  boolean _and = false;
-                  EObject _source = it.getSource();
-                  EObject _source_1 = errorInformation.getSource();
-                  boolean _equals = Objects.equal(_source, _source_1);
-                  if (!_equals) {
-                    _and = false;
-                  } else {
-                    EStructuralFeature _feature = it.getFeature();
-                    EStructuralFeature _feature_1 = errorInformation.getFeature();
-                    boolean _equals_1 = Objects.equal(_feature, _feature_1);
-                    _and = (_equals && _equals_1);
-                  }
-                  return Boolean.valueOf(_and);
-                }
-              };
-            boolean _exists = IterableExtensions.<ErrorInformation>exists(noDuplicates, _function);
-            boolean _not = (!_exists);
-            if (_not) {
-              noDuplicates.add(errorInformation);
+        public void apply(final ErrorInformation errorInformation) {
+          final Function1<ErrorInformation,Boolean> _function = new Function1<ErrorInformation,Boolean>() {
+            public Boolean apply(final ErrorInformation it) {
+              boolean _and = false;
+              EObject _source = it.getSource();
+              EObject _source_1 = errorInformation.getSource();
+              boolean _equals = Objects.equal(_source, _source_1);
+              if (!_equals) {
+                _and = false;
+              } else {
+                EStructuralFeature _feature = it.getFeature();
+                EStructuralFeature _feature_1 = errorInformation.getFeature();
+                boolean _equals_1 = Objects.equal(_feature, _feature_1);
+                _and = (_equals && _equals_1);
+              }
+              return Boolean.valueOf(_and);
             }
+          };
+          boolean _exists = IterableExtensions.<ErrorInformation>exists(noDuplicates, _function);
+          boolean _not = (!_exists);
+          if (_not) {
+            noDuplicates.add(errorInformation);
           }
-        };
+        }
+      };
       IterableExtensions.<ErrorInformation>forEach(errorInformations, _function);
       _xblockexpression = (noDuplicates);
     }
@@ -198,13 +198,13 @@ public class TraceUtils {
   
   public LinkedList<ErrorInformation> removeNonNodeModelSources(final Iterable<ErrorInformation> errorInformations) {
     final Function1<ErrorInformation,Boolean> _function = new Function1<ErrorInformation,Boolean>() {
-        public Boolean apply(final ErrorInformation it) {
-          EObject _source = it.getSource();
-          ICompositeNode _node = NodeModelUtils.getNode(_source);
-          boolean _notEquals = (!Objects.equal(_node, null));
-          return Boolean.valueOf(_notEquals);
-        }
-      };
+      public Boolean apply(final ErrorInformation it) {
+        EObject _source = it.getSource();
+        ICompositeNode _node = NodeModelUtils.getNode(_source);
+        boolean _notEquals = (!Objects.equal(_node, null));
+        return Boolean.valueOf(_notEquals);
+      }
+    };
     Iterable<ErrorInformation> _filter = IterableExtensions.<ErrorInformation>filter(errorInformations, _function);
     LinkedList<ErrorInformation> _newLinkedList = Lists.<ErrorInformation>newLinkedList(_filter);
     return _newLinkedList;
@@ -220,13 +220,13 @@ public class TraceUtils {
   public RuleFailedException innermostRuleFailedExceptionWithNodeModelSources(final RuleFailedException e) {
     LinkedList<RuleFailedException> _failureAsList = this.failureAsList(e);
     final Function1<RuleFailedException,Boolean> _function = new Function1<RuleFailedException,Boolean>() {
-        public Boolean apply(final RuleFailedException it) {
-          LinkedList<ErrorInformation> _filteredErrorInformation = TraceUtils.this.filteredErrorInformation(it);
-          boolean _isEmpty = _filteredErrorInformation.isEmpty();
-          boolean _not = (!_isEmpty);
-          return Boolean.valueOf(_not);
-        }
-      };
+      public Boolean apply(final RuleFailedException it) {
+        LinkedList<ErrorInformation> _filteredErrorInformation = TraceUtils.this.filteredErrorInformation(it);
+        boolean _isEmpty = _filteredErrorInformation.isEmpty();
+        boolean _not = (!_isEmpty);
+        return Boolean.valueOf(_not);
+      }
+    };
     RuleFailedException _findLast = IterableExtensions.<RuleFailedException>findLast(_failureAsList, _function);
     return _findLast;
   }

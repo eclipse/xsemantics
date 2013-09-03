@@ -468,10 +468,10 @@ public class XsemanticsXbaseCompiler extends XbaseCompiler {
     this.toJavaStatement(_argument, b, true);
     if (isReferenced) {
       final Later _function = new Later() {
-          public void exec(final ITreeAppendable app) {
-            XsemanticsXbaseCompiler.this.compileEnvironmentAccess(environmentAccess, app);
-          }
-        };
+        public void exec(final ITreeAppendable app) {
+          XsemanticsXbaseCompiler.this.compileEnvironmentAccess(environmentAccess, app);
+        }
+      };
       this.declareFreshLocalVariable(environmentAccess, b, _function);
     } else {
       this.newLine(b);

@@ -17,11 +17,11 @@ public class LambdaTermUtils {
       final Term clone = EcoreUtil.<Term>copy(term);
       List<Abstraction> _eAllOfType = EcoreUtil2.<Abstraction>eAllOfType(clone, Abstraction.class);
       final Procedure1<Abstraction> _function = new Procedure1<Abstraction>() {
-          public void apply(final Abstraction it) {
-            Parameter _param = it.getParam();
-            _param.setType(null);
-          }
-        };
+        public void apply(final Abstraction it) {
+          Parameter _param = it.getParam();
+          _param.setType(null);
+        }
+      };
       IterableExtensions.<Abstraction>forEach(_eAllOfType, _function);
       _xblockexpression = (clone);
     }

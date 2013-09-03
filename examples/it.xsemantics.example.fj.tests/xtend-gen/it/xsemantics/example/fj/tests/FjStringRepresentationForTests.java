@@ -51,11 +51,11 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
     _builder.append("(");
     EList<Expression> _args = exp.getArgs();
     final Function1<Expression,String> _function = new Function1<Expression,String>() {
-        public String apply(final Expression it) {
-          String _string = FjStringRepresentationForTests.this.string(it);
-          return _string;
-        }
-      };
+      public String apply(final Expression it) {
+        String _string = FjStringRepresentationForTests.this.string(it);
+        return _string;
+      }
+    };
     List<String> _map = ListExtensions.<Expression, String>map(_args, _function);
     String _join = IterableExtensions.join(_map, ", ");
     String _plus = (_builder.toString() + _join);
@@ -93,11 +93,11 @@ public class FjStringRepresentationForTests extends FjStringRepresentation {
         String _plus = (_name + "(");
         EList<Expression> _args = exp.getArgs();
         final Function1<Expression,String> _function = new Function1<Expression,String>() {
-            public String apply(final Expression it) {
-              String _string = FjStringRepresentationForTests.this.string(it);
-              return _string;
-            }
-          };
+          public String apply(final Expression it) {
+            String _string = FjStringRepresentationForTests.this.string(it);
+            return _string;
+          }
+        };
         List<String> _map = ListExtensions.<Expression, String>map(_args, _function);
         String _join = IterableExtensions.join(_map, ", ");
         String _plus_1 = (_plus + _join);

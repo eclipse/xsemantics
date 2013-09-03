@@ -60,11 +60,11 @@ public class XsemanticsTypeSystem {
     final TupleType tupleType = _tupleType;
     List<RuleParameter> _inputParams = this._xsemanticsUtils.inputParams(rule);
     final Procedure1<RuleParameter> _function = new Procedure1<RuleParameter>() {
-        public void apply(final RuleParameter it) {
-          JvmTypeReference _type = XsemanticsTypeSystem.this.getType(it);
-          tupleType.add(_type);
-        }
-      };
+      public void apply(final RuleParameter it) {
+        JvmTypeReference _type = XsemanticsTypeSystem.this.getType(it);
+        tupleType.add(_type);
+      }
+    };
     IterableExtensions.<RuleParameter>forEach(_inputParams, _function);
     return tupleType;
   }

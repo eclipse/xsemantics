@@ -74,31 +74,31 @@ public class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGenerat
   
   public void checkErrorOfErrorSpecification(final CharSequence inputProgram, final CharSequence expected, final CharSequence expectedVar) {
     final Function2<ErrorSpecification,ITreeAppendable,String> _function = new Function2<ErrorSpecification,ITreeAppendable,String>() {
-        public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
-          String _compileErrorOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileErrorOfErrorSpecification(errSpec, b);
-          return _compileErrorOfErrorSpecification;
-        }
-      };
+      public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
+        String _compileErrorOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileErrorOfErrorSpecification(errSpec, b);
+        return _compileErrorOfErrorSpecification;
+      }
+    };
     this.checkCompilationOfErrorSpecification(inputProgram, _function, expected, expectedVar);
   }
   
   public void checkSourceOfErrorSpecification(final CharSequence inputProgram, final CharSequence expected, final CharSequence expectedVar) {
     final Function2<ErrorSpecification,ITreeAppendable,String> _function = new Function2<ErrorSpecification,ITreeAppendable,String>() {
-        public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
-          String _compileSourceOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileSourceOfErrorSpecification(errSpec, b);
-          return _compileSourceOfErrorSpecification;
-        }
-      };
+      public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
+        String _compileSourceOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileSourceOfErrorSpecification(errSpec, b);
+        return _compileSourceOfErrorSpecification;
+      }
+    };
     this.checkCompilationOfErrorSpecification(inputProgram, _function, expected, expectedVar);
   }
   
   public void checkFeatureOfErrorSpecification(final CharSequence inputProgram, final CharSequence expected, final CharSequence expectedVar) {
     final Function2<ErrorSpecification,ITreeAppendable,String> _function = new Function2<ErrorSpecification,ITreeAppendable,String>() {
-        public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
-          String _compileFeatureOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileFeatureOfErrorSpecification(errSpec, b);
-          return _compileFeatureOfErrorSpecification;
-        }
-      };
+      public String apply(final ErrorSpecification errSpec, final ITreeAppendable b) {
+        String _compileFeatureOfErrorSpecification = XsemanticsErrorSpecificationGeneratorTest.this.errSpecGenerator.compileFeatureOfErrorSpecification(errSpec, b);
+        return _compileFeatureOfErrorSpecification;
+      }
+    };
     this.checkCompilationOfErrorSpecification(inputProgram, _function, expected, expectedVar);
   }
   

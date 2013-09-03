@@ -676,12 +676,12 @@ throwForExplicitFail(error, new ErrorInformation(source, null));'''
 
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
 final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
-    public Boolean apply(final EStructuralFeature it) {
-      String _name = it.getName();
-      boolean _notEquals = (!Objects.equal(_name, "foo"));
-      return Boolean.valueOf(_notEquals);
-    }
-  };
+  public Boolean apply(final EStructuralFeature it) {
+    String _name = it.getName();
+    boolean _notEquals = (!Objects.equal(_name, "foo"));
+    return Boolean.valueOf(_notEquals);
+  }
+};
 boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
 /* eClass.EStructuralFeatures.forall [ it.name != 'foo' ] */
 if (!_forall) {
@@ -689,16 +689,16 @@ if (!_forall) {
 }
 EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
 final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
-    public Boolean apply(final EStructuralFeature it) {
-      String _name = it.getName();
-      boolean _notEquals = (!Objects.equal(_name, "foo"));
-      /* it.name != 'foo' */
-      if (!Boolean.valueOf(_notEquals)) {
-        sneakyThrowRuleFailedException("it.name != \'foo\'");
-      }
-      return Boolean.valueOf(_notEquals);
+  public Boolean apply(final EStructuralFeature it) {
+    String _name = it.getName();
+    boolean _notEquals = (!Objects.equal(_name, "foo"));
+    /* it.name != 'foo' */
+    if (!Boolean.valueOf(_notEquals)) {
+      sneakyThrowRuleFailedException("it.name != \'foo\'");
     }
-  };
+    return Boolean.valueOf(_notEquals);
+  }
+};
 boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures_1, _function_1);
 /* eClass.EStructuralFeatures.forall [ { it.name != 'foo' } ] */
 if (!_forall_1) {
@@ -706,11 +706,11 @@ if (!_forall_1) {
 }
 EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
 final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
-    public void apply(final EStructuralFeature it) {
-      /* G ||- it */
-      uselessInternal(G, _trace_, it);
-    }
-  };
+  public void apply(final EStructuralFeature it) {
+    /* G ||- it */
+    uselessInternal(G, _trace_, it);
+  }
+};
 IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);
 EList<EStructuralFeature> _eStructuralFeatures_3 = eClass.getEStructuralFeatures();
 EStructuralFeature _get = _eStructuralFeatures_3.get(0);
@@ -731,11 +731,11 @@ if (!_notEquals) {
 
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-    public void apply(final EStructuralFeature it) {
-      String _name = it.getName();
-      boolean _notEquals = (!Objects.equal(_name, "foo"));
-    }
-  };
+  public void apply(final EStructuralFeature it) {
+    String _name = it.getName();
+    boolean _notEquals = (!Objects.equal(_name, "foo"));
+  }
+};
 IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);'''
 			)
 	}
@@ -760,12 +760,12 @@ eClass = _clone;'''
 
 EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-    public void apply(final EStructuralFeature it) {
-      EClass _eClass = obj.eClass();
-      final EClass e = TypeSystem.this.<EClass>clone(_eClass);
-      InputOutput.<EClass>println(e);
-    }
-  };
+  public void apply(final EStructuralFeature it) {
+    EClass _eClass = obj.eClass();
+    final EClass e = TypeSystem.this.<EClass>clone(_eClass);
+    InputOutput.<EClass>println(e);
+  }
+};
 IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);'''
 			)
 	}

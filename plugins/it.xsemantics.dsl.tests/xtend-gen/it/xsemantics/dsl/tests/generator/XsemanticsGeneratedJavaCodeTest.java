@@ -94,10 +94,10 @@ public class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
     final EObject system = _contents.get(0);
     this._validationTestHelper.assertNoErrors(system);
     final IAcceptor<Result> _function = new IAcceptor<Result>() {
-        public void accept(final Result it) {
-          it.compileToJava();
-        }
-      };
+      public void accept(final Result it) {
+        it.compileToJava();
+      }
+    };
     this._xsemanticsCompilationTestHelper.compileAll(system, _function);
   }
 }
