@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Lambda Example UI
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.3.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.lambda.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.lambda;visibility:=reexport,
