@@ -16,10 +16,10 @@
 	
 	<property name="xsemantics.remote.repo" value="http://sourceforge.net/projects/xsemantics/files/updates/releases" />
 
-	<property name="expected.xtext.bundles" value="*xtext*2.4*.jar"/>
+	<property name="expected.xtext.bundles" value="*xtext*2.4.3*.jar"/>
 	<property name="unwanted.xtext.bundles" value="*xtext*2.5*.jar"/>
 
-	<property name="expected.xtext.features" value="*xtext*2.4*"/>
+	<property name="expected.xtext.features" value="*xtext*2.4.3*"/>
 	<property name="unwanted.xtext.features" value="*xtext*2.5*"/>
 	
 	<macrodef name="test.install">
