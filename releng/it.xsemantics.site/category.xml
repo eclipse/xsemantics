@@ -23,7 +23,7 @@ in Java).
    <feature id="it.xsemantics.sdk.source">
       <category name="xsemantics"/>
    </feature>
-   <category-def name="xsemantics" label="Xsemantics (1.2.x) for Xtext 2.3.1">
+   <category-def name="xsemantics" label="Xsemantics (1.3.x) for Xtext 2.4.3">
       <description>
          Xsemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation
