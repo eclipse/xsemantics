@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="IncrementVersionsTask" basedir="." default="set-version">
 
+	<property name="WORKSPACE" location="${ant.file}/../../../" />
+
+	<target name="show-workspace-path">
+		<echo message="WORKSPACE: ${WORKSPACE}" />
+	</target>
+	
 	<target name="set-version" description="Modifies artifacts to set a release version" >
 		<input message="Please enter the new release version (MAJOR.MINOR.MICRO):" addproperty="version.main" defaultvalue="${version_main}" />
 
@@ -11,8 +17,6 @@
 			<entry key="version_osgi" value="${version.osgi}" />
 		</propertyfile>
 		
-		<property name="WORKSPACE" location="${ant.file}/../../../" />
-
 		<antcall target="-modify-artifacts"/>
 	</target>
 
