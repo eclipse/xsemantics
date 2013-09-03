@@ -31,6 +31,7 @@
 			</makeurl>
 			<property name="all.eclipse.repos" value="${eclipse.repos},${features.repos.url},@{additional.repos}" />
 
+			<echo message="" />
 			<echo message="Installing features @{features.to.install}..." />
 			<echo message="Installing features into ${eclipse.test.dest}..." />
 			<echo message="Features Repos: ${features.repos.url}" />

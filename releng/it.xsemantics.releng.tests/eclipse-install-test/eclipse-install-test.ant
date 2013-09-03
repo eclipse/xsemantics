@@ -13,20 +13,28 @@
 	<property name="eclipse.kepler.repos" value="http://download.eclipse.org/releases/kepler" />
 	<property name="eclipse.juno.repos" value="http://download.eclipse.org/releases/juno" />
 	<property name="eclipse.indigo.repos" value="http://download.eclipse.org/releases/indigo" />
+	
+	<property name="xsemantics.remote.repo" value="http://sourceforge.net/projects/xsemantics/files/updates/releases" />
 
+	<property name="expected.xtext.bundles" value="*xtext*2.3*.jar"/>
+	<property name="unwanted.xtext.bundles" value="*xtext*2.4*.jar"/>
+
+	<property name="expected.xtext.features" value="*xtext*2.3*"/>
+	<property name="unwanted.xtext.features" value="*xtext*2.4*"/>
 	
 	<macrodef name="test.install">
 		<attribute name="eclipse.name" default="kepler"/>
+		<attribute name="features.repos" default="${site.p2}"/>
 		<sequential>
 			<install.eclipse.features
 				eclipse.name="@{eclipse.name}"
-				features.repos="${site.p2}"
+				features.repos="@{features.repos}"
 				additional.repos="${additional.repos}"
 				features.to.install="${xsemantics.runtime.feature}"/>
 			<test.xtext.installed.versions/>
 			<install.eclipse.features
 				eclipse.name="@{eclipse.name}"
-				features.repos="${site.p2}"
+				features.repos="@{features.repos}"
 				additional.repos="${additional.repos}"
 				features.to.install="${xsemantics.sdk.feature}"/>
 			<test.xtext.installed.versions/>
@@ -51,13 +59,29 @@
 			eclipse.name="indigo"/>
 	</target>
 
+	<target name="test.install.from.remote.repo.in.kepler" description="Test installation from remote repository in Kepler">
+		<property name="eclipse.repos" value="${eclipse.kepler.repos}" />
+		<property name="features.repos.url" value="${xsemantics.remote.repo}"/>
+
+		<test.install/>
+	</target>
+
+	<target name="test.install.from.remote.repo.in.juno" description="Test installation from remote repository in Juno">
+		<property name="eclipse.repos" value="${eclipse.juno.repos}" />
+		<property name="features.repos.url" value="${xsemantics.remote.repo}"/>
+
+		<test.install
+			eclipse.name="juno"
+		/>
+	</target>
+
 	<macrodef name="test.xtext.installed.versions">
 		<sequential>
 			<bundles.exist
-				bundle.pattern="*xtext*2.3*.jar"
+				bundle.pattern="${expected.xtext.bundles}"
 			/>
 			<bundles.dont.exist 
-				bundle.pattern="*xtext*2.4*.jar" 
+				bundle.pattern="${unwanted.xtext.bundles}" 
 			/>
 		</sequential>
 	</macrodef>
@@ -65,10 +89,10 @@
 	<macrodef name="test.xtext.installed.features.versions">
 		<sequential>
 			<features.exist
-				feature.pattern="*xtext*2.3*"
+				feature.pattern="${expected.xtext.features}"
 			/>
 			<features.dont.exist 
-				feature.pattern="*xtext*2.4*" 
+				feature.pattern="${unwanted.xtext.features}" 
 			/>
 		</sequential>
 	</macrodef>
