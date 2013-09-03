@@ -11,5 +11,5 @@ Inclusions (e.g.: **/*.class)
 
 
 Exclusions (e.g.: **/*Test*)
-**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/*.*,**/example/lambda/lambda/*.*,**/example/expressions/expressions/*.*
+**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
 
