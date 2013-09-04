@@ -34,6 +34,7 @@
     </cs:actions>
     <cs:groups>
         <cs:public name="eclipse-install-test">
+            <cs:attribute name="eclipse-install-test-indigo"/>
             <cs:attribute name="eclipse-install-test-juno"/>
             <cs:attribute name="eclipse-install-test-kepler"/>
         </cs:public>
