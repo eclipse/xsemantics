@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<toc topic="contents/00-Main.html" label="XSemantics Documentation" >
-	<topic href="contents/00-Main_12.html#XSemantics%20Documentation_12" label="Reference Documentation" >
+<toc topic="contents/00-Main.html" label="Xsemantics Documentation" >
+	<topic href="contents/00-Main_12.html#Xsemantics%20Documentation_12" label="Reference Documentation" >
 		<topic href="contents/01-Introduction.html#Introduction" label="Introduction" >
 		</topic>
 		<topic href="contents/02-GettingStarted.html#GettingStarted" label="Getting Started" >
@@ -52,7 +52,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/00-Main_13.html#XSemantics%20Documentation_13" label="Examples" >
+	<topic href="contents/00-Main_13.html#Xsemantics%20Documentation_13" label="Examples" >
 		<topic href="contents/Examples.html#Examples" label="Examples" >
 		</topic>
 		<topic href="contents/Expressions-example.html#Expressions" label="An Expression Language" >
@@ -106,7 +106,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/00-Main_14.html#XSemantics%20Documentation_14" label="Appendix" >
+	<topic href="contents/00-Main_14.html#Xsemantics%20Documentation_14" label="Appendix" >
 		<topic href="contents/GettingSources.html#GettingSources" label="Getting Sources" >
 			<topic href="contents/GettingSources.html#InstallBuckminster" label="Install Buckminster in the IDE" >
 			</topic>

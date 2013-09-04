@@ -10,7 +10,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
-		document = "XSemantics Documentation"
+		document = "Xsemantics Documentation"
 		pdfLatex = "/usr/bin/pdflatex"
 		cleanAfterRun = false
 	}
