@@ -1,7 +1,37 @@
 setpref targetPlatformPath="${target.platform}"
 resolve "${projects.location}/releng/it.xsemantics.buckminster/build.cquery"
 
-build
+clean
+
+# this first Java build will fail with compilation errors, since Xtend
+# classes have not been compiled yet.  However, it will compile some
+# Java classes so that we will be able to compile Xtend classes
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.runtime/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.dsl/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.dsl.tests/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.example.expressions/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.example.expressions.tests/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.example.fj.tests/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.example.lambda/XtendCompiler.launch"
+build --continueonerror
+
+launch --stderr --stdout -l "it.xsemantics.example.lambda.tests/XtendCompiler.launch"
+
+build --clean
 
 emma -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.XsemanticsAllTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.XsemanticsAllTests.launch.html"
 emma -l "it.xsemantics.example.fj.tests/FjAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/FjAllTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.FjAllTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.FjAllTests.launch.html"
