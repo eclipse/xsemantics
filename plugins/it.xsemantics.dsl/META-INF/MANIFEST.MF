@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  it.xsemantics.runtime;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.xtend.standalone;resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.dsl,

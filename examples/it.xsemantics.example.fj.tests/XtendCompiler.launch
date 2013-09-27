@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/it.xsemantics.example.fj.tests"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.xtend.core.compiler.batch.Main"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-classpath ${project_classpath:it.xsemantics.example.fj.tests} -d xtend-gen src"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="it.xsemantics.example.fj.tests"/>
+</launchConfiguration>

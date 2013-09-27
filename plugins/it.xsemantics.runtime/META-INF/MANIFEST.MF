@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
  com.google.inject,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext;visibility:=reexport
+ org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtend.standalone;resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: it.xsemantics.runtime,
