@@ -34,28 +34,6 @@
 	<property name="java.net.preferIPv4Stack" value="true" />
 	
 	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: replace_win_slashes          
-         = = = = = = = = = = = = = = = = = -->
-	<macrodef name="replace_win_slashes">
-		<attribute name="property.to.process" default="default" />
-		<attribute name="output.property" default="default" />
-		<sequential>
-			<echo message="@{property.to.process}" file="some.tmp.file" />
-			<loadfile property="@{output.property}" srcFile="some.tmp.file">
-				<filterchain>
-					<tokenfilter>
-						<replaceregex pattern="\\" replace="/" flags="g" />
-						<replaceregex pattern=" " replace="\\ " flags="g" />
-					</tokenfilter>
-				</filterchain>
-			</loadfile>
-			<delete file="some.tmp.file" />
-		</sequential>
-	</macrodef>
-
-	<replace_win_slashes property.to.process="${eclipse.download}" output.property="eclipse-download" />
-	
-	<!-- = = = = = = = = = = = = = = = = =
           macrodef: run_buckminster
           pass the commandsfile to execute      
          = = = = = = = = = = = = = = = = = -->
@@ -80,7 +58,7 @@
 				<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
 				<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
 				<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
-				<sysproperty key="eclipse.download" value="${eclipse-download}" />
+				<sysproperty key="eclipse.download" value="${eclipse.download}" />
 				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
 				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
 				<jvmarg line=" -Xms256m -Xmx512m" />
@@ -180,7 +158,7 @@
 				</fileset>
 			</classpath>
 			<arg line='-data "${director.dir}/workspace"' />
-			<arg line="-r ${eclipse-download}/modeling/emft/b3/headless-4.2" />
+			<arg line="-r ${eclipse.download}/modeling/emft/b3/headless-4.2" />
 			<arg line='-d "${b3.home}"' />
 			<arg line="-p b3" />
 			<arg line="-i org.eclipse.b3.cli.product" />
