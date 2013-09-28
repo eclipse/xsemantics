@@ -15,16 +15,16 @@ launch --stderr --stdout -l "it.xsemantics.dsl/XtendCompiler.launch"
 build --continueonerror
 
 launch --stderr --stdout -l "it.xsemantics.dsl.tests/XtendCompiler.launch"
-build --continueonerror
+# no need to build --continueonerror
 
 launch --stderr --stdout -l "it.xsemantics.example.expressions/XtendCompiler.launch"
 build --continueonerror
 
 launch --stderr --stdout -l "it.xsemantics.example.expressions.tests/XtendCompiler.launch"
-build --continueonerror
+# no need to build --continueonerror
 
 launch --stderr --stdout -l "it.xsemantics.example.fj.tests/XtendCompiler.launch"
-build --continueonerror
+# no need to build --continueonerror
 
 launch --stderr --stdout -l "it.xsemantics.example.lambda/XtendCompiler.launch"
 build --continueonerror
