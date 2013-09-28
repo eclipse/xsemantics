@@ -13,5 +13,4 @@
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.common*" versionOverride="[2.4.2,2.5.0)"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util*" versionOverride="[2.4.2,2.5.0)"/>
     <cq:advisorNode namePattern="\.ppc(?:\..+)?" skipComponent="true"/>
-    <cq:advisorNode namePattern=".*" useTargetPlatform="false"/>
 </cq:componentQuery>
