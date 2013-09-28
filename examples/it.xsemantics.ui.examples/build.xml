@@ -18,7 +18,7 @@
 		<attribute name="target" default="${target_xtext}" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
-			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,**/*._trace,**/*.smap,.antlr-generator*.jar,target,target/**,nodist,nodist/**,old,old/**" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,**/*._trace,**/*.smap,.antlr-generator*.jar,target,target/**,nodist,nodist/**,old,old/**,**/hs_*.log" />
 		</sequential>
 	</macrodef>
 
@@ -40,7 +40,7 @@
 			<delete file="@{target}/../../@{conference}.zip" />
 			<zip destfile="@{target}/../../@{conference}.zip">
 				<zipfileset dir="${source}/@{tutorial}/@{initial}" prefix="@{tutorial}" excludes="**/Tutorial.pdf" />
-				<zipfileset dir="${source}/@{tutorial}.tests/@{initial}" prefix="@{tutorial}.tests" excludes="**/*._trace" />
+				<zipfileset dir="${source}/@{tutorial}.tests/@{initial}" prefix="@{tutorial}.tests" excludes="**/*._trace,**/hs_*.log" />
 				<zipfileset dir="${source}/@{tutorial}.ui/@{initial}" prefix="@{tutorial}.ui" />
 			</zip>
 		</sequential>
