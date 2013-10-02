@@ -26,6 +26,11 @@
 	<property name="buckminster.home" location="${user.home}/buckminster" />
 	<property name="b3.home" location="${user.home}/b3" />
 
+	<property name="buckminster.output.root" value="${build.root}/buckminster.output" />
+	<property name="buckminster.temp.root" value="${build.root}/buckminster.temp" />
+	<property name="buckminster.workspace" value="${build.root}/buckminster.workspace"/>
+	<property name="buckminster.configuration" value="${build.root}/configuration"/>
+	<property name="buckminster.target.platform" value="${build.root}/${target.platform}"/>
 	<property name="buckminster.loglevel" value="INFO" />
 		
 	<property name="director.install.dest" location="${user.home}" />
@@ -43,6 +48,8 @@
 		<attribute name="commandsfile" default="default" />
 		<attribute name="propertiesfile" default="default" />
 		<sequential>
+			<echo message=" " />
+			<echo message="java -Dbuckminster.output.root=${buckminster.output.root} -Dbuckminster.temp.root=${buckminster.temp.root} -Xms256m -Xmx512m -jar ${buckminster.home}/plugins/org.eclipse.equinox.launcher_*.jar -application org.eclipse.buckminster.cmdline.headless -data ${buckminster.workspace} --loglevel ${buckminster.loglevel} --script @{commandsfile} --properties @{propertiesfile}" />
 			<java fork="true" dir="${buckminster.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<classpath>
 					<fileset dir="${buckminster.home}/plugins">
@@ -50,17 +57,17 @@
 					</fileset>
 				</classpath>
 				<arg line='-application org.eclipse.buckminster.cmdline.headless' />
-				<arg line='-data "${build.root}/buckminster.workspace"' />
-				<arg line='-configuration "${build.root}/configuration"' />
+				<arg line='-data "${buckminster.workspace}"' />
+				<arg line='-configuration "${buckminster.configuration}"' />
 				<arg line='--properties "@{propertiesfile}"' />
 				<arg line='--script "@{commandsfile}"' />
 				<arg line='-L ${buckminster.loglevel}' />
 				<!-- <arg line='-L ant=INFO' />  -->
 				<!-- <arg line='-L DEBUG' /> -->
 				<sysproperty key="projects.location" value="${projects.location}" />
-				<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
-				<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
-				<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
+				<sysproperty key="buckminster.output.root" value="${buckminster.output.root}" />
+				<sysproperty key="buckminster.temp.root" value="${buckminster.temp.root}" />
+				<sysproperty key="target.platform" value="${buckminster.target.platform}" />
 				<sysproperty key="eclipse.download" value="${eclipse.download}" />
 				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
 				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
