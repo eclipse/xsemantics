@@ -18,12 +18,8 @@
 <project name="Buckminster Headless" default="buckminster">
 	<import file="common.ant" as="common" />
 	
-	<property name="WORKSPACE" location="${ant.file}/../../../" />
-	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="projects.location" location="${WORKSPACE}" />
 	<property name="commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/commands.txt" />
 	<property name="commands-local.file" location="${projects.location}/releng/it.xsemantics.buckminster/commands-local.txt" />
-	<property name="target.platform" value="target.platform" />
 
 	<target name="buckminster" depends="cleanup,clean-xtend-gen,install.buckminster.headless" description="description">
 
