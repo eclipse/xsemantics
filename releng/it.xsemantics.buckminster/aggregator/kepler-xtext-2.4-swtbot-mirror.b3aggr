@@ -24,7 +24,7 @@
       </repositories>
     </contributions>
     <contributions description="Xdoc" label="Xdoc">
-      <repositories location="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.4">
+      <repositories location="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.4">
         <features name="org.eclipse.xtext.xdoc.feature.feature.group"/>
       </repositories>
     </contributions>

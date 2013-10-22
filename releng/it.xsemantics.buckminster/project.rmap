@@ -2,6 +2,11 @@
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
 	xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
 	<rm:property key="projects.location" value="${workspace.root}" />
+	
+	<rm:property key="git.clone.dest" 
+		value="${user.home}/git/xsemantics" />
+	<rm:property key="git.uri" 
+		value="https://github.com/LorenzoBettini/xsemantics.git" />
 
 	<rm:locator pattern="^it.xsemantics(?:\..+)?$"
 		searchPathRef="project" />
@@ -57,5 +62,67 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
+		
+		<!-- if not found locally, take it from git -->
+
+		<rm:provider componentTypes="eclipse.feature,buckminster"
+			readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},devtools/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="eclipse.feature,buckminster"
+			readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},releng/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},plugins/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="eclipse.feature" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},features/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},tests/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},dsl/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},examples/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git">
+			<rm:property key="git.remote.uri" value="${git.uri}"/>
+			<rm:uri format="{0},doc/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		
 	</rm:searchPath>
 </rm:rmap>

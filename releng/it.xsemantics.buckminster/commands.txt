@@ -1,5 +1,6 @@
 setpref targetPlatformPath="${target.platform}"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/build.cquery"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
 clean
 build --continueonerror
 launch --stderr --stdout -l "it.xsemantics.runtime/XtendCompiler.launch"
@@ -17,7 +18,7 @@ launch --stderr --stdout -l "it.xsemantics.example.lambda.tests/XtendCompiler.la
 build --clean
 emma -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.XsemanticsAllTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.XsemanticsAllTests.launch.html"
 emma -l "it.xsemantics.example.fj.tests/FjAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/FjAllTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.FjAllTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.FjAllTests.launch.html"
-emma -l "it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch" --flatXML --output "${buckminster.output.root}/test.results/LambdaAllUiTests.launch.xml" --stderr --stdout --exec "${buckminster.output.root}/test.results/coverage.LambdaAllUiTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.LambdaAllUiTests.launch.html"
+emma -l "it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch" --flatXML --output "${buckminster.output.root}/test.results/LambdaAllUiTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.LambdaAllUiTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.LambdaAllUiTests.launch.html"
 emma -l "it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsProposalProviderTest.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.XsemanticsProposalProviderTest.launch.exec" --html "${buckminster.output.root}/test.results/coverage.XsemanticsProposalProviderTest.launch.html"
 emma -l "it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsExamplesProjectWizardJunitPluginTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.XsemanticsExamplesProjectWizardJunitPluginTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.XsemanticsExamplesProjectWizardJunitPluginTests.launch.html"
 perform "it.xsemantics.site#site.p2"

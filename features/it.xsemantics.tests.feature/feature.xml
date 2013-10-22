@@ -22,19 +22,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.platform"
-         version="0.0.0"/>
-
-   <includes
          id="it.xsemantics.examples.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.ide"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.sdk"
          version="0.0.0"/>
 
    <plugin

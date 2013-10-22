@@ -1,5 +1,7 @@
 setpref targetPlatformPath="${target.platform}"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/build.cquery"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
+
 
 build
 
