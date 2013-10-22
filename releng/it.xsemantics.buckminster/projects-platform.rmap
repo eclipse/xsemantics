@@ -6,7 +6,8 @@
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/releases/latest"/>
   <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.4"/>
   
-  <rm:redirect pattern="^it\.xsemantics(?:\..+)?$" href="project.rmap"/>
+  <rm:redirect pattern="^it\.xsemantics\.buckminster(?:\..+)?$" href="project.rmap"/>
+  <rm:redirect pattern="^it\.xsemantics\.build(?:\..+)?$" href="project.rmap"/>
 
   <rm:locator pattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$" searchPathRef="xdoc"/>
   <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>

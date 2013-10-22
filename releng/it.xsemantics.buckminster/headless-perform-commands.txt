@@ -1,6 +1,3 @@
-setpref targetPlatformPath="${target.platform}"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
 clean
 build --continueonerror
 launch --stderr --stdout -l "it.xsemantics.runtime/XtendCompiler.launch"

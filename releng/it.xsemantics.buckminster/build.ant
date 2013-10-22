@@ -17,39 +17,48 @@
 -->
 <project name="Buckminster Headless" default="buckminster">
 	<import file="common.ant" as="common" />
+
+	<property name="resolve.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-resolve-commands.txt" />
+	<property name="perform.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-perform-commands.txt" />
+	<property name="perform.local.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-perform-local-commands.txt" />
+
+	<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
 	
-	<property name="commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/commands.txt" />
-	<property name="commands-local.file" location="${projects.location}/releng/it.xsemantics.buckminster/commands-local.txt" />
-
-	<target name="buckminster" depends="cleanup,clean-xtend-gen,install.buckminster.headless" description="description">
+	<target name="buckminster" depends="common.cleanup,clean-xtend-gen,install.buckminster.headless" description="description">
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
-		<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
-		
+		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-perform" />
+	</target>
+
+	<target name="buckminster-local" depends="common.cleanup,install.buckminster.headless" description="description">
+
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+
+		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-perform-local" />
+	</target>
+	
+	<target name="buckminster-resolve">
 		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
-		<echo message="properties file: ${build.properties}" />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${resolve.commands.file}" propertiesfile="${build.properties}" />
+	</target>
 
-		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}"/>
-
+	<target name="buckminster-perform">
+		<run_buckminster commandsfile="${perform.commands.file}" propertiesfile="${build.properties}" />
 		<echo message=" " />
 		<echo message="Updatesite output in: ${build.root}/buckminster.output/it.xsemantics.site_*-eclipse.feature/site.p2/" />
 	</target>
 
-	<target name="buckminster-local" depends="cleanup,install.buckminster.headless" description="description">
-
-		<fail unless="buckminster.home" message="buckminster.home must be specified." />
-
-		<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
-		
-		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
-		<echo message="properties file: ${build.properties}" />
-
-		<run_buckminster commandsfile="${commands-local.file}" propertiesfile="${build.properties}"/>
-
+	<target name="buckminster-perform-local">
+		<run_buckminster commandsfile="${perform.local.commands.file}" propertiesfile="${build.properties}" />
 		<echo message=" " />
 		<echo message="Updatesite output in: ${build.root}/buckminster.output/it.xsemantics.site_*-eclipse.feature/site.p2/" />
 	</target>
+
 
 	<target name="b3_aggregation" depends="install.b3.headless" description="description">
 

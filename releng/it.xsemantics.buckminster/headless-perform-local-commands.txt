@@ -1,7 +1,3 @@
-setpref targetPlatformPath="${target.platform}"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
-
 build --clean
 junit -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml" 
 junit -l "it.xsemantics.example.fj.tests/FjAllTests.launch" --flatXML --output "${buckminster.output.root}/test.results/FjAllTests.launch.xml" 
