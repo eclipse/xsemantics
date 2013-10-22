@@ -34,7 +34,7 @@
 
 	<property name="git.config.file" location="${git.clone.dest}/.git/config" />
 	
-	<property name="remote.cquery" value="https://github.com/LorenzoBettini/xsemantics/blob/master/devtools/it.xsemantics.contributor/xsemantics-contributor.cquery" />
+	<property name="remote.cquery" value="https://raw.github.com/LorenzoBettini/xsemantics/master/devtools/it.xsemantics.contributor/xsemantics-contributor.cquery" />
 
 	<target name="materialize.workspace" depends="install.buckminster.headless">
 		<property name="WORKSPACE" location="${user.home}/workspaces/xsemantics-sources" />
