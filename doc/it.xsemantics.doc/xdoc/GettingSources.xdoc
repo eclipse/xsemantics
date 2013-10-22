@@ -5,84 +5,57 @@ for instance, to contribute new features and patches, you can get them
 via Git.
 
 We use link[http://www.eclipse.org/buckminster/][Buckminster] as the
-building and materialization infrastructure; this will let you
-automatically materialize the sources in the workspace and setup
+building and materialization infrastructure.
+We provide an link[https://raw.github.com/LorenzoBettini/xsemantics/master/devtools/it.xsemantics.contributor/workspace.ant][ant script] which installs and runs Buckminster. 
+This will automatically materialize the sources in the workspace and setup
 the target platform, so that you will have everything that is necessary
 to have a working workspace with Xsemantics sources.
 
-section:InstallBuckminster[Install Buckminster in the IDE]
+What this ant script will do in detail:
 
-First of all, you need to install Buckminster in your Eclipse;
-you can do that using the update site
-
-e[http://download.eclipse.org/tools/buckminster/updates-4.2]
-
-You need to install the core, git and pde features.
-
-img[images/install-buckminster.png][Install Buckminster features][ ][width:90%]
-
-section:PrepareTP[Prepare an empty target platform]
-
-It is better to start with an empty target platform in your IDE
-(then Buckminster will materialize the required features and
-bundles starting from that empty target);
-you then need to create an empty target platform manually that contains 
-one single and empty directory and set this target platform active.
-A subsequent resolution/materialization will use that platform.
-Here are the detailed steps:
-
-ol[
-	item[Create a new general project named TP 
-	(or some name of your preference)]
-	item[Open "Window" => "Preferences" and expand "Plug-in Development"]
-	item[Select "Target Platform"]
-	item[Click "Add..."]
-	item[Click "Next>" (i.e. start with nothing)]
-	item[Enter TP in the Name: field]
-	item[Click "Add..."]
-	item[Select "Directory" and click "Next"]
-	item[Click on "Variables..."]
-	item[Scroll down and select "workspace_loc" and then type TP in the Argument: field.]
-	item[Click "OK" and then "Finish" and then "Finish" again.]
-	item[Set your new target definition active by checking it in the list of Target definitions: and click "OK"]
+ul[
+item[installs Buckminster headless if not found;
+	default path: e[${user.home}/buckminster].
+	It can be changed by passing a path for the variable
+	e[buckminster.home].]
+item[creates an eclipse workspace; 
+	default: e[${user.home}/workspaces/xsemantics-sources].
+	It can be changed by passing a path for the 
+	variable e[WORKSPACE]]
+item[clones the Xsemantics git repository;
+	default: e[${user.home}/git/xsemantics].
+	It can be changed by passing a full path for the
+	variable e[git.clone.dest].  Note that the repository will
+	be cloned only if it is not found in the given path.]
+item[creates and sets a target platform]
+item[imports necessary projects in created workspace]
+item[sets some important workspace settings]
 ]
 
-section:MaterializeWP[Materialize the Workspace]
+Especially the first time (for cloning and materializing the target platform)
+the script might take several minutes.  (Target platform materialization
+might also fail due to network problems; in that case, try and run the
+script again).
 
-From the File menu choose e[Open a Component Query...] and
-use this URL
+Run the ant script located link[https://raw.github.com/LorenzoBettini/xsemantics/master/devtools/it.xsemantics.contributor/workspace.ant][here]. 
+In unix you can use following command: 
 
-link[http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw][http://sourceforge.net/p/xsemantics/code/ci/master/tree/releng/it.xsemantics.buckminster/remote/web-build.cquery?format=raw]
+code[
+wget -N https://raw.github.com/LorenzoBettini/xsemantics/master/devtools/it.xsemantics.contributor/workspace.ant
+]
 
-img[images/open-cquery.png][The component query opened][ ][width:90%]
+and then run the script:
 
-section2:CustomizeProperties[(Optional) Customize some Properties]
+code[
+ant -f workspace.ant
+]
 
-Before starting the materialization, you might want to customize
-some properties; you can do that in the e[Properties] tab of
-the opened component query:
+You can pass custom path using the variables defined above; for instance
 
-img[images/open-cquery1.png][The properties tab][ ][width:90%]
+code[
+ant -Dgit.clone.dest=/myrepos/xsemantics -DWORKSPACE=/myworkspaces/xsemantics -f workspace.ant
+]
 
-You can add a property by pressing
-the e[New] button.
-
-You can customize the path in your system where
-the git repository will be cloned (property e[git.clone.dest]), 
-which defaults to e[${user.home}/git/xsemantics]): you can change it
-to something else, for instance, e[${user.home}/repositories/xsemantics] 
-
-section2:StartMaterialization[Start Materialization]
-
-You can now press the button in the opened query e[Resolve and Materialize].
-This will start the materialization process which will consist of
-cloning the git repository, materialize the target platform and importing
-all the projects into the workspace.
-
-Materializing the target platform may take sometime (depending on your
-network connection), so you might want to go and get a coffee 
-in the meantime ;)
-
-When the whole process terminates, you will have a working
-workspace with Xsemantics projects and the needed target platform
-(thus, you should have no error!).
+After the script terminates successfully, you can open the materialized
+workspace with Eclipse (an automatic build will also start for compiling
+Xtend files).  The workspace is already setup with the correct target platform.
