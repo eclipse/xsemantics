@@ -20,19 +20,6 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.buckminster.ant.AntBuilder</name>
-			<arguments>
-				<dictionary>
-					<key>given.name</key>
-					<value>Ant tasks compile</value>
-				</dictionary>
-				<dictionary>
-					<key>script.file</key>
-					<value>build.xml</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
