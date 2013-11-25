@@ -5,6 +5,8 @@
   <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/kepler"/>
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/releases/latest"/>
   <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.4"/>
+  <rm:property key="itemis.p2.repository"
+		value="http://download.itemis.de/updates" />
   
   <rm:redirect pattern="^it\.xsemantics\.buckminster(?:\..+)?$" href="project.rmap"/>
   <rm:redirect pattern="^it\.xsemantics\.build(?:\..+)?$" href="project.rmap"/>
@@ -14,6 +16,7 @@
   <rm:locator pattern="^com\.google.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.antlr.*" searchPathRef="xtext"/>
   <rm:locator pattern="javax.inject" searchPathRef="xtext"/>
+  <rm:locator pattern="^de\.itemis(?:\..+)?$" searchPathRef="xtext" />
   <rm:locator pattern="^org\.hamcrest*" searchPathRef="swtbot"/>
   <rm:locator pattern="^org\.eclipse\.(?:swtbot)(?:\..+)?$" searchPathRef="swtbot"/>
   <rm:locator searchPathRef="eclipse"/>
@@ -25,6 +28,13 @@
         <bc:propertyRef key="xtext.p2.repository"/>
       </rm:uri>
     </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature"
+		readerType="p2" source="false">
+		<rm:property key="buckminster.source" value="false" />
+		<rm:uri format="{0}">
+			<bc:propertyRef key="itemis.p2.repository" />
+		</rm:uri>
+	</rm:provider>
   </rm:searchPath>
   <rm:searchPath name="swtbot">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">

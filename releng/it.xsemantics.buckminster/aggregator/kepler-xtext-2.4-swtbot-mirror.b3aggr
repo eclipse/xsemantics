@@ -28,6 +28,11 @@
         <features name="org.eclipse.xtext.xdoc.feature.feature.group"/>
       </repositories>
     </contributions>
+    <contributions description="Itemis Xtext" label="Itemis Xtext">
+      <repositories location="http://download.itemis.de/updates">
+        <features name="de.itemis.xtext.antlr.feature.feature.group"/>
+      </repositories>
+    </contributions>
   </validationSets>
   <configurations/>
   <configurations architecture="x86_64"/>

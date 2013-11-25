@@ -1,0 +1,27 @@
+// alternative type system for FJ using external auxiliary functions
+
+system it.xsemantics.test.fj.lambdas.FjTestsForLambdas extends it.xsemantics.test.fj.first.FjFirstTypeSystem
+
+import it.xsemantics.example.fj.fj.Class
+import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.Expression
+import it.xsemantics.example.fj.fj.FjPackage
+import it.xsemantics.example.fj.fj.New
+import it.xsemantics.example.fj.fj.Program
+import it.xsemantics.example.fj.fj.Type
+import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
+import java.util.List
+
+inject FjAuxiliaryFunctions fjAux
+
+judgments {
+	existsSubtype ||- Type left <<! Type right
+}
+
+rule ExistsSubtypeWithLambda
+	G ||- ClassType left <<! ClassType right
+from {
+	left.classref.superclasses.exists[
+		G |- it <| right.classref
+	]
+}
