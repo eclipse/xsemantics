@@ -138,15 +138,17 @@
 				</fileset>
 			</classpath>
 			<arg line='-data "${director.dir}/workspace"' />
-			<arg line="-r ${eclipse.download}/tools/buckminster/headless-4.3,http://download.cloudsmith.com/buckminster/external-4.3,${eclipse.download}/releases/kepler" />
+			<arg line="-r ${eclipse.download}/tools/buckminster/headless-4.3,http://download.cloudsmith.com/buckminster/external-4.3,${eclipse.download}/modeling/tmf/xtext/updates/composite/releases" />
 			<arg line='-d "${buckminster.home}"' />
 			<arg line="-p Buckminster" />
+			<arg line="-roaming" />
 			<arg line="-i org.eclipse.buckminster.cmdline.product" />
 			<arg line="-i org.eclipse.buckminster.core.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.pde.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.git.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.maven.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.emma.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.emf.mwe2.launcher.feature.group" />
 		</java>
 	</target>
 
