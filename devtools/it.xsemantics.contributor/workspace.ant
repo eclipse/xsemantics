@@ -72,7 +72,7 @@
 		<run_buckminster command='addbaseline -A "api-baseline"' />
 	</target>
 
-	<target name="resolve.commands">
+	<target name="resolve.commands" depends="copy-xtext-grammar-to-bin">
 		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
 		<run_buckminster command='--script "${checkout.location}/releng/it.xsemantics.buckminster/headless-resolve-commands-contributor.txt"' />
 	</target>
@@ -108,6 +108,16 @@
 			</java>
 		</sequential>
 	</macrodef>
+
+	<target name="copy-xtext-grammar-to-bin">
+	  <copy todir="${checkout.location}" overwrite="true" verbose="true">
+	    <fileset dir="${checkout.location}" casesensitive="true">
+	      <include name="**/src/**/*.xtext" />
+	    </fileset>
+	    <mapper type="regexp" 
+		      from="(.*)/(src)/(.*/*\.xtext)" to="\1/bin/\3" />
+	  </copy>
+	</target>
 
 	<target name="install.buckminster.headless">
 		<condition property="buckminster.headless.installed">

@@ -32,7 +32,10 @@ What this ant script will do in detail:
 		installs Buckminster headless if not found;
 			default path: <em>${user.home}/buckminster</em>.
 			It can be changed by passing a path for the variable
-			<em>buckminster.home</em>.
+			<em>buckminster.home</em>. If you have already installed Buckminster
+			headless for other projects, please make sure to specify
+			a new directory, since we need some additional features to
+			build Xsemantics (e.g., emma and mwe2).
 	</li>
 	<li>
 		creates an eclipse workspace; 
@@ -52,6 +55,9 @@ What this ant script will do in detail:
 	</li>
 	<li>
 		imports necessary projects in created workspace
+	</li>
+	<li>
+		runs the MWE2 workflow for generating Xtext language infrastructure for the DSL
 	</li>
 	<li>
 		sets some important workspace settings

@@ -1,3 +1,9 @@
 setpref targetPlatformPath="${target.platform}"
 resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform-contributor.cquery"
 resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
+
+# runs the MWE2 workflows to create Xtext DSL artifacts
+launch --stderr --stdout -l "it.xsemantics.dsl/.launch/Generate Language Infrastructure (it.xsemantics.dsl).launch"
+launch --stderr --stdout -l "it.xsemantics.example.expressions/.launch/Generate Language Infrastructure (it.xsemantics.example.expressions).launch"
+launch --stderr --stdout -l "it.xsemantics.example.fj/.launch/GenerateFJ.mwe2.launch"
+launch --stderr --stdout -l "it.xsemantics.example.lambda/.launch/GenerateLambda.mwe2.launch"

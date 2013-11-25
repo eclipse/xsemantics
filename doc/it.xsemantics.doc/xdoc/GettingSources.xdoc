@@ -17,7 +17,10 @@ ul[
 item[installs Buckminster headless if not found;
 	default path: e[${user.home}/buckminster].
 	It can be changed by passing a path for the variable
-	e[buckminster.home].]
+	e[buckminster.home]. If you have already installed Buckminster
+	headless for other projects, please make sure to specify
+	a new directory, since we need some additional features to
+	build Xsemantics (e.g., emma and mwe2).]
 item[creates an eclipse workspace; 
 	default: e[${user.home}/workspaces/xsemantics-sources].
 	It can be changed by passing a path for the 
@@ -29,6 +32,7 @@ item[clones the Xsemantics git repository;
 	be cloned only if it is not found in the given path.]
 item[creates and sets a target platform]
 item[imports necessary projects in created workspace]
+item[runs the MWE2 workflow for generating Xtext language infrastructure for the DSL]
 item[sets some important workspace settings]
 ]
 
