@@ -9,5 +9,6 @@ logs.zip
 target/
 *.java._trace
 *.smap
+src-gen/
 
 buildroot
