@@ -816,6 +816,19 @@ try {
 			)
 	}
 
+	@Test
+	def void testInstanceOfAsPremise_Issue_1() {
+		checkCompilationOfPremises(
+			testFiles.testInstanceOfAsPremise_Issue_1,
+'''
+
+/* o instanceof EClass */
+if (!(o instanceof EClass)) {
+  sneakyThrowRuleFailedException("o instanceof EClass");
+}'''
+			)
+	}
+
 	def void checkCompilationOfRightExpression(CharSequence inputCode, 
 		String expectedExpName, CharSequence expected) {
 		checkCompilationOfRightExpression(inputCode, expectedExpName, expected,

@@ -2196,4 +2196,20 @@ class XsemanticsTestFiles {
 	axiom TestRule
 		G |- EObject o : o.getContainerOfType(typeof(EClass))
 	'''
+
+	def testInstanceOfAsPremise_Issue_1() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	rule TestRule
+		G |- EObject o : EClass c
+	from {
+		o instanceof EClass
+	}
+	'''
 }

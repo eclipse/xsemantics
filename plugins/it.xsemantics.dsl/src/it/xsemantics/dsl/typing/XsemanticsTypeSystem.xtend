@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.XInstanceOfExpression
 
 class XsemanticsTypeSystem {
 	
@@ -120,7 +121,8 @@ class XsemanticsTypeSystem {
 			(expression instanceof XBinaryOperation) ||
 			(expression instanceof XUnaryOperation) ||
 			(expression instanceof XMemberFeatureCall) ||
-			(expression instanceof XBooleanLiteral)
+			(expression instanceof XBooleanLiteral) ||
+			(expression instanceof XInstanceOfExpression)
 	}
 
 	def isSubtype(JvmTypeReference t1, JvmTypeReference t2, EObject context) {
