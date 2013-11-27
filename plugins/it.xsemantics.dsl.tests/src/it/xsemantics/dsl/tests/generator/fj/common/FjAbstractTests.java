@@ -3,6 +3,7 @@
  */
 package it.xsemantics.dsl.tests.generator.fj.common;
 
+import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.Program;
 
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -40,6 +41,10 @@ public abstract class FjAbstractTests extends AbstractXtextTests {
 
 	protected Program getProgram(String model) throws Exception {
 		return (Program) getModel(model);
+	}
+
+	public Class fjClassForName(Program program, String className) {
+		return fjTestsUtils.fjClassForName(program, className);
 	}
 
 }

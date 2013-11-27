@@ -165,7 +165,8 @@ from { /* premises */ }
 ]
 
 The premises of a rule which are specified in a code[from] block can be
-any Xbase expression, or a rule invocation.  If you think of a rule
+any Xbase expression, or a e[rule invocation] (see also ref:RuleInvocations[]).
+If you think of a rule
 declaration as a function declaration, then a rule invocation corresponds
 to function invocation, thus you must specify the environment to pass
 to the rule, and the arguments, both input and output arguments.
@@ -268,9 +269,10 @@ go to the second block, etc.
 
 section2:ExpressionsInPremises[Expressions in Premises]
 
-Xsemantics consider a Xbase expression as a boolean premise when it is
+Xsemantics considers an Xbase expression as a boolean premise when it is
 used as a statement, i.e., it is not the right expression in
-an assignment, it is not the condition of a loop.  Moreover, this holds
+an assignment, it is not the condition of a loop, it is not
+the expression of an if, etc..  This holds
 when the expression is used in a block, NOT in a closure block.
 It is crucial to understand when a boolean expression is considered
 as a premise since when a premise fails the whole rule fails.
@@ -289,6 +291,38 @@ from {
 	\] 
 }
 ]
+
+section2:RuleInvocations[Rule Invocations]
+
+Rule invocations have already been introduced.  When rule invocations
+concern predicate judgments, then they can be used also in contexts
+where a boolean expression is expected.
+
+Due to a (hopefully) temporary limitation of the Xsemantics parser, a rule
+invocation is not an expression, thus you need to included it in a block.
+
+For instance
+
+code[Xsemantics][
+if ( G |- t1 <: t2 ) {... // SYNTAX ERROR
+]
+
+will issue an error, while this form is accepted:
+
+code[Xsemantics][
+if ( {G |- t1 <: t2} ) {... // OK, provided it refers to a predicate judgment
+]
+
+This limitation does not hold for lambda expressions, thus you
+can simply write:
+
+code[Xsemantics][
+mytypes.forall\[ t | G |- t <: MyType \]
+mytypes.exists\[ t | G |- t <: MyType \]
+]
+
+with the expected semantics ("for all elements of code[mytypes] the predicate
+judgment must hold", similarly "does an element, satisfying the judgement, exist?").
 
 section2:Environment[Rule Environment]
 

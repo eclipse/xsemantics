@@ -255,6 +255,16 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def testInvalidRuleInvocationIsNotOfExpectedType() {
+		val s = parser.parse(testFiles.testInvalidRuleInvocationIsNotOfExpectedType)
+		s.assertError(
+			XbasePackage::eINSTANCE.XMemberFeatureCall,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from List<Boolean> to List<Integer>"
+		)
+	}
+
+	@Test
 	def void testAccessToVarInsideClosure() {
 		parser.parse(testFiles
 				.testAccessToVarInsideClosure()).

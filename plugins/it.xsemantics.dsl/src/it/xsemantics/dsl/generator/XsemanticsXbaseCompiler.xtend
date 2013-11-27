@@ -416,30 +416,48 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		ruleInvocationExpressionsToJavaStatements(b, ruleInvocationExpressions);
 		generateEnvironmentSpecificationAsStatements(
 				ruleInvocation.getEnvironment(), b);
+		
+		if (isReferenced) {
+			// if we're here, the RuleInvocation is used as a boolean expression
+			ruleInvocation.declareFreshLocalVariable(b) [
+				append(judgmentDescription.succeededMethodName().toString());
+				append("(");
+				generateEnvironmentSpecificationAsExpression(
+					ruleInvocation.getEnvironment(), it);
+				comma(it);
+				append(ruleInvocation.additionalArgsForRuleInvocation().toString());
+				comma(it);
+				ruleInvocationArgumentsToJavaExpressions(it, ruleInvocation);
+				append(");");				
+			]
+			
+		} else {
 
-		val hasOutputParams = ruleInvocation.hasOutputParams();
-		newLine(b);
-
-		var resultVariable = "";
-		if (hasOutputParams) {
-			judgmentDescription.resultType(b);
-			space(b);
-			resultVariable = generateResultVariable(ruleInvocation, b);
-			assign(b);
-		}
-
-		b.append(judgmentDescription.entryPointInternalMethodName().toString());
-		b.append("(");
-		generateEnvironmentSpecificationAsExpression(
-				ruleInvocation.getEnvironment(), b);
-		comma(b);
-		b.append(ruleInvocation.additionalArgsForRuleInvocation().toString());
-		comma(b);
-		ruleInvocationExpressionsToJavaExpressions(b, ruleInvocation);
-		b.append(");");
-
-		if (hasOutputParams) {
-			reassignResults(b, ruleInvocation, resultVariable, true);
+			val hasOutputParams = ruleInvocation.hasOutputParams();
+			newLine(b);
+	
+			var resultVariable = "";
+			if (hasOutputParams) {
+				judgmentDescription.resultType(b);
+				space(b);
+				resultVariable = generateResultVariable(ruleInvocation, b);
+				assign(b);
+			}
+	
+			b.append(judgmentDescription.entryPointInternalMethodName().toString());
+			b.append("(");
+			generateEnvironmentSpecificationAsExpression(
+					ruleInvocation.getEnvironment(), b);
+			comma(b);
+			b.append(ruleInvocation.additionalArgsForRuleInvocation().toString());
+			comma(b);
+			ruleInvocationArgumentsToJavaExpressions(b, ruleInvocation);
+			b.append(");");
+	
+			if (hasOutputParams) {
+				reassignResults(b, ruleInvocation, resultVariable, true);
+			}
+		
 		}
 	}
 
@@ -511,13 +529,13 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		return b.declareSyntheticVariable(ruleInvocation, "result");
 	}
 
-	def protected void ruleInvocationExpressionsToJavaExpressions(
+	def protected void ruleInvocationArgumentsToJavaExpressions(
 			ITreeAppendable b, RuleInvocation ruleInvocation) {
-		ruleInvocationExpressionsToJavaExpressions(b,
+		ruleInvocationArgumentsToJavaExpressions(b,
 				ruleInvocation.inputArgsExpressions());
 	}
 
-	def protected void ruleInvocationExpressionsToJavaExpressions(
+	def protected void ruleInvocationArgumentsToJavaExpressions(
 			ITreeAppendable b,
 			List<XExpression> inputArgsExpressions) {
 		val expIt = inputArgsExpressions
@@ -575,6 +593,11 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,
 			ITreeAppendable b) {
 		b.append(b.getName(environmentAccess));
+	}
+
+	def dispatch void internalToConvertedExpression(RuleInvocation ruleInvocation,
+			ITreeAppendable b) {
+		b.append(ruleInvocation.getVarName(b))
 	}
 
 	def void generateCommentWithOriginalCode(EObject modelElement,

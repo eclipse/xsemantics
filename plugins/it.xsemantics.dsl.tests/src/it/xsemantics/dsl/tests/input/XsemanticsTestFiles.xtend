@@ -1120,7 +1120,8 @@ class XsemanticsTestFiles {
 			{ it.name != 'foo' }
 		]
 		
-		// rule invocations inside closures will still
+		// rule invocations inside closures without expected
+		// return type will still
 		// throw exception if they fail
 		eClass.EStructuralFeatures.forEach [
 			G ||- it
@@ -1143,7 +1144,7 @@ class XsemanticsTestFiles {
 	
 	judgments {
 		type |- EClass c
-		useless ||- EStructuralFeature f
+		useless ||- EStructuralFeature f : output EClass
 	}
 	
 	rule TestForClosures
@@ -1154,8 +1155,60 @@ class XsemanticsTestFiles {
 		eClass.EStructuralFeatures.forall [
 			G ||- it
 		]
-		
-		eClass.EStructuralFeatures.get(0).name != 'foo'
+	}
+	
+	rule Useless
+		G ||- EStructuralFeature feat : EClass c
+	from {
+		fail
+	}
+	'''
+
+	def testInvalidRuleInvocationIsNotOfExpectedType()
+	'''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	import java.util.List
+	
+	judgments {
+		type |- EClass c
+		useless ||- EStructuralFeature f 
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// a List<Boolean> is returned instead
+		val List<Integer> result = eClass.EStructuralFeatures.map [
+			G ||- it
+		]
+	}
+	
+	rule Useless
+		G ||- EStructuralFeature feat 
+	from {
+		fail
+	}
+	'''
+
+	def testRuleInvocationIsBooleanInClosures()
+	'''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+		useless ||- EStructuralFeature f
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// rule invocations inside closures has boolean type
+		// in case the judgment is a predicate
+		eClass.EStructuralFeatures.forall [
+			G ||- it
+		]
 	}
 	
 	rule Useless
@@ -1164,7 +1217,69 @@ class XsemanticsTestFiles {
 		fail
 	}
 	'''
+
+	def testRuleInvocationIsBooleanInIfExpression()
+	'''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
 	
+	judgments {
+		type |- EClass c
+		useless ||- EStructuralFeature f
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// rule invocations inside if has boolean type
+		// in case the judgment is a predicate
+		if ({G ||- eClass.EStructuralFeatures.head}) {
+			println("OK")
+		}
+	}
+	
+	rule Useless
+		G ||- EStructuralFeature feat
+	from {
+		fail
+	}
+	'''
+
+	def testRuleInvocationsAsBooleanExpressions()
+	'''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		type |- EClass c
+		useless ||- EStructuralFeature f
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		val features = eClass.EStructuralFeatures
+
+		features.forall [
+			// note that {} are required since a rule invocation
+			// is NOT an expression
+			{G ||- it} || eClass != null
+		]
+		
+		features.forall [
+			println("testing")
+			G ||- it 
+		]
+		
+	}
+	
+	rule Useless
+		G ||- EStructuralFeature feat
+	from {
+		fail
+	}
+	'''
+
 	def testForScopeOfThisInRule() '''
 	«testJudgmentDescriptionsEObjectEClass»
 	

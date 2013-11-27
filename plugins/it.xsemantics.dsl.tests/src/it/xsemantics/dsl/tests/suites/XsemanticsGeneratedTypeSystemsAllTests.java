@@ -6,6 +6,7 @@ import it.xsemantics.dsl.tests.generator.fj.FjAltGeneratedTypeSystemTests;
 import it.xsemantics.dsl.tests.generator.fj.FjAltGeneratedValidatorTests;
 import it.xsemantics.dsl.tests.generator.fj.FjFirstGeneratedTypeSystemTests;
 import it.xsemantics.dsl.tests.generator.fj.FjFirstGeneratedValidatorTests;
+import it.xsemantics.dsl.tests.generator.fj.FjLambdaGeneratedTypeSystemTests;
 import it.xsemantics.dsl.tests.generator.fj.FjSepGeneratedTypeSystemTests;
 import it.xsemantics.dsl.tests.generator.fj.FjSepGeneratedValidatorTests;
 
@@ -21,7 +22,8 @@ import org.junit.runners.Suite;
 	FjActualGeneratedTypeSystemTests.class,
 	FjActualGeneratedValidatorTests.class,
 	FjSepGeneratedTypeSystemTests.class,
-	FjSepGeneratedValidatorTests.class
+	FjSepGeneratedValidatorTests.class,
+	FjLambdaGeneratedTypeSystemTests.class
 })
 public class XsemanticsGeneratedTypeSystemsAllTests {
 

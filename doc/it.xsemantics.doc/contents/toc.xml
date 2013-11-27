@@ -21,6 +21,8 @@
 			<topic href="contents/XsemanticsSyntax.html#Premises" label="Premises" >
 				<topic href="contents/XsemanticsSyntax.html#ExpressionsInPremises" label="Expressions in Premises" >
 				</topic>
+				<topic href="contents/XsemanticsSyntax.html#RuleInvocations" label="Rule Invocations" >
+				</topic>
 				<topic href="contents/XsemanticsSyntax.html#Environment" label="Rule Environment" >
 				</topic>
 				<topic href="contents/XsemanticsSyntax.html#ErrorSpecification" label="Error Specification" >

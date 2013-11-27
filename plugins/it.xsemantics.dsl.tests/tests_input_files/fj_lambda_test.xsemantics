@@ -1,16 +1,10 @@
-// alternative type system for FJ using external auxiliary functions
+// Uses rule invocations as boolean expressions
 
-system it.xsemantics.test.fj.lambdas.FjTestsForLambdas extends it.xsemantics.test.fj.first.FjFirstTypeSystem
+system it.xsemantics.test.fj.lambda.FjTestsForLambdas extends it.xsemantics.test.fj.first.FjFirstTypeSystem
 
-import it.xsemantics.example.fj.fj.Class
 import it.xsemantics.example.fj.fj.ClassType
-import it.xsemantics.example.fj.fj.Expression
-import it.xsemantics.example.fj.fj.FjPackage
-import it.xsemantics.example.fj.fj.New
-import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
-import java.util.List
 
 inject FjAuxiliaryFunctions fjAux
 
@@ -21,7 +15,11 @@ judgments {
 rule ExistsSubtypeWithLambda
 	G ||- ClassType left <<! ClassType right
 from {
-	left.classref.superclasses.exists[
+	// we reverse the superclasses so that the top
+	// classes come first; this is useful to perform
+	// sensible tests (otherwise the first element examined
+	// will soon succeed)
+	left.classref.superclasses.reverseView.exists[
 		G |- it <| right.classref
 	]
 }

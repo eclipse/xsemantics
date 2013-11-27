@@ -8,8 +8,13 @@ import it.xsemantics.example.fj.fj.ParamRef
 import it.xsemantics.example.fj.fj.Method
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics
 import it.xsemantics.example.fj.fj.Member
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.RuleFailedException
 
 class FjTestsUtils {
+	
+	val extension TraceUtils traceUtils = new TraceUtils
 	
 	def fjClassForName(Program program, String className) {
 		program.classes.findFirst( [ it.name.equals(className) ] )
@@ -51,5 +56,17 @@ class FjTestsUtils {
 	
 	def method(Member member) {
 		member as Method
+	}
+
+	def void assertTrace(RuleApplicationTrace trace, CharSequence expectedTrace) {
+		Assert::assertEquals(expectedTrace.toString.trim,
+			trace.traceAsString
+		)
+	}
+
+	def void assertFailureTrace(RuleFailedException e, CharSequence expectedTrace) {
+		Assert::assertEquals(expectedTrace.toString.trim,
+			e.failureTraceAsString
+		)
 	}
 }

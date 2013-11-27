@@ -34,6 +34,8 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	@Inject extension XsemanticsUtils
 	
+	@Inject extension XsemanticsTypeSystem
+	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		switch (expression) {
 			RuleInvocation: expression._computeTypes(state)
@@ -132,7 +134,14 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			expressionState.computeTypes(expression);
 		}
 		e.environment.handleEnvironmentSpecification(state)
-		state.acceptActualType(getPrimitiveVoid(state))
+		if (state.hasTypeExpectations && e.isPredicate)
+			state.acceptActualType(getTypeForName(Boolean.TYPE, state))
+		else
+			state.acceptActualType(getPrimitiveVoid(state))
+	}
+
+	protected def hasTypeExpectations(ITypeComputationState state) {
+		!state.expectations.empty
 	}
 
 	protected def _computeTypes(OrExpression e, ITypeComputationState state) {

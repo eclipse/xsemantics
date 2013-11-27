@@ -829,6 +829,90 @@ if (!(o instanceof EClass)) {
 			)
 	}
 
+	@Test
+	def void testRuleInvocationIsBooleanInClosures() {
+		checkCompilationOfPremises(
+			testFiles.testRuleInvocationIsBooleanInClosures,
+'''
+
+EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+  public Boolean apply(final EStructuralFeature it) {
+    /* G ||- it */
+    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+    return Boolean.valueOf(_ruleinvocation);
+  }
+};
+boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
+/* eClass.EStructuralFeatures.forall [ G ||- it ] */
+if (!_forall) {
+  sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ G ||- it ]");
+}'''
+			)
+	}
+
+	@Test
+	def void testRuleInvocationIsBooleanInIfExpression() {
+		checkCompilationOfPremises(
+			testFiles.testRuleInvocationIsBooleanInIfExpression,
+'''
+
+/* G ||- eClass.EStructuralFeatures.head */
+EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eStructuralFeatures);
+boolean _ruleinvocation = uselessSucceeded(G, _trace_, _head);;
+if (_ruleinvocation) {
+  InputOutput.<String>println("OK");
+}'''
+			)
+	}
+
+	@Test
+	def void testRuleInvocationsAsBooleanExpressions() {
+		checkCompilationOfPremises(
+			testFiles.testRuleInvocationsAsBooleanExpressions,
+'''
+
+final EList<EStructuralFeature> features = eClass.getEStructuralFeatures();
+final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+  public Boolean apply(final EStructuralFeature it) {
+    boolean _or = false;
+    /* G ||- it */
+    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+    if (_ruleinvocation) {
+      _or = true;
+    } else {
+      boolean _notEquals = (!Objects.equal(eClass, null));
+      _or = (_ruleinvocation || _notEquals);
+    }
+    return Boolean.valueOf(_or);
+  }
+};
+boolean _forall = IterableExtensions.<EStructuralFeature>forall(features, _function);
+/* features.forall [ {G ||- it} || eClass != null ] */
+if (!_forall) {
+  sneakyThrowRuleFailedException("features.forall [ {G ||- it} || eClass != null ]");
+}
+final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
+  public Boolean apply(final EStructuralFeature it) {
+    boolean _xblockexpression = false;
+    {
+      InputOutput.<String>println("testing");
+      /* G ||- it */
+      boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+      _xblockexpression = (_ruleinvocation);
+    }
+    return Boolean.valueOf(_xblockexpression);
+  }
+};
+boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(features, _function_1);
+/* features.forall [ println("testing") G ||- it ] */
+if (!_forall_1) {
+  sneakyThrowRuleFailedException("features.forall [ println(\"testing\") G ||- it ]");
+}'''
+			)
+	}
+
 	def void checkCompilationOfRightExpression(CharSequence inputCode, 
 		String expectedExpName, CharSequence expected) {
 		checkCompilationOfRightExpression(inputCode, expectedExpName, expected,

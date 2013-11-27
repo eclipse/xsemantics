@@ -11,6 +11,15 @@ class B extends A { }
 class C extends B { }
 '''
 
+	def testClassHierarchy2()
+'''
+«testClassHierarchy»
+
+class D extends C { }
+
+class E extends D { }
+'''
+
 	def testClassHierarchyWithObject()
 '''
 «testClassHierarchy»
