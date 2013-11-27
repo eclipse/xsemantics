@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -58,6 +59,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XbaseTypeConformanceComputer
 
 	@Inject XbaseCompiler xbaseCompiler
+	
+	@Inject XsemanticsTypeSystem typeSystem
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -153,6 +156,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			ts.judgmentDescriptions.forEach [
 				elem |
 				members += elem.genEntryPointMethods
+				members += elem.genSucceededMethods
 			]
 			
 			ts.checkrules.forEach [
@@ -396,6 +400,77 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		]
    		
    		entryPointMethods
+   	}
+
+   	def genSucceededMethods(JudgmentDescription judgmentDescription) {
+   		val inferredMethods = <JvmOperation>newArrayList()
+
+		if (!typeSystem.isPredicate(judgmentDescription))
+			return inferredMethods
+
+   		// main succeded method
+   		inferredMethods += judgmentDescription.toMethod(
+   			judgmentDescription.succeededMethodName.toString,
+   			judgmentDescription.booleanType
+   		) [
+   			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+   			
+   			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append(
+   				'''return «judgmentDescription.succeededMethodName»(new ''')
+   				it.append(judgmentDescription.environmentType.type)
+   				it.append('''(), null, «judgmentDescription.inputArgs»);''')
+   			]
+   		]
+   		
+   		// entry point method with environment parameter
+   		inferredMethods += judgmentDescription.toMethod(
+   			judgmentDescription.succeededMethodName.toString,
+   			judgmentDescription.booleanType
+   		) [
+   			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+
+   			parameters += judgmentDescription.environmentParam
+   			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append(
+   				'''return «judgmentDescription.succeededMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);''')
+   			]
+   		]
+   		
+   		// entry point method with environment parameter and rule application trace
+   		inferredMethods += judgmentDescription.toMethod(
+   			judgmentDescription.succeededMethodName.toString,
+   			judgmentDescription.booleanType
+   		) [
+			if (judgmentDescription.^override)
+				annotations += judgmentDescription.toAnnotation(typeof(Override))
+   			
+   			parameters += judgmentDescription.environmentParam
+   			parameters += judgmentDescription.ruleApplicationTraceParam
+   			parameters += judgmentDescription.inputParameters
+   			
+   			body = [
+   				it.append('''
+				try {
+					«judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
+					return true;
+				} catch (''')
+				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
+				it.append(" ")
+				it.append('''
+				«judgmentDescription.exceptionVarName») {
+					return false;
+				}''')
+   			]
+   		]
+   		
+   		inferredMethods
    	}
 
    	def genEntryPointMethods(AuxiliaryDescription aux) {

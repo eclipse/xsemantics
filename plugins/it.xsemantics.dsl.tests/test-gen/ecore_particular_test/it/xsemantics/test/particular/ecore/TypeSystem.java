@@ -131,6 +131,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean type1Succeeded(final EObject o) {
+    return type1Succeeded(new RuleEnvironment(), null, o);
+  }
+  
+  public Boolean type1Succeeded(final RuleEnvironment _environment_, final EObject o) {
+    return type1Succeeded(_environment_, null, o);
+  }
+  
+  public Boolean type1Succeeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	type1Internal(_environment_, _trace_, o);
+    	return true;
+    } catch (Exception _e_type1) {
+    	return false;
+    }
+  }
+  
   public Result<List<EStructuralFeature>> features(final EClass c1) {
     return features(new RuleEnvironment(), null, c1);
   }
@@ -160,6 +177,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return collectionsInternal(_environment_, _trace_, c2, l2);
     } catch (Exception _e_collections) {
     	return resultForFailure(_e_collections);
+    }
+  }
+  
+  public Boolean collectionsSucceeded(final EClass c2, final List<EStructuralFeature> l2) {
+    return collectionsSucceeded(new RuleEnvironment(), null, c2, l2);
+  }
+  
+  public Boolean collectionsSucceeded(final RuleEnvironment _environment_, final EClass c2, final List<EStructuralFeature> l2) {
+    return collectionsSucceeded(_environment_, null, c2, l2);
+  }
+  
+  public Boolean collectionsSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c2, final List<EStructuralFeature> l2) {
+    try {
+    	collectionsInternal(_environment_, _trace_, c2, l2);
+    	return true;
+    } catch (Exception _e_collections) {
+    	return false;
     }
   }
   
@@ -211,6 +245,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean closuresSucceeded(final EClass eClass) {
+    return closuresSucceeded(new RuleEnvironment(), null, eClass);
+  }
+  
+  public Boolean closuresSucceeded(final RuleEnvironment _environment_, final EClass eClass) {
+    return closuresSucceeded(_environment_, null, eClass);
+  }
+  
+  public Boolean closuresSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
+    try {
+    	closuresInternal(_environment_, _trace_, eClass);
+    	return true;
+    } catch (Exception _e_closures) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> environments(final EClass eClass) {
     return environments(new RuleEnvironment(), null, eClass);
   }
@@ -224,6 +275,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return environmentsInternal(_environment_, _trace_, eClass);
     } catch (Exception _e_environments) {
     	return resultForFailure(_e_environments);
+    }
+  }
+  
+  public Boolean environmentsSucceeded(final EClass eClass) {
+    return environmentsSucceeded(new RuleEnvironment(), null, eClass);
+  }
+  
+  public Boolean environmentsSucceeded(final RuleEnvironment _environment_, final EClass eClass) {
+    return environmentsSucceeded(_environment_, null, eClass);
+  }
+  
+  public Boolean environmentsSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
+    try {
+    	environmentsInternal(_environment_, _trace_, eClass);
+    	return true;
+    } catch (Exception _e_environments) {
+    	return false;
     }
   }
   

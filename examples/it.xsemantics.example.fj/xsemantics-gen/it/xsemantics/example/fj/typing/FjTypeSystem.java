@@ -304,6 +304,23 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean subtypeSucceeded(final Type left, final Type right) {
+    return subtypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
+    return subtypeSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    try {
+    	subtypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> assignable(final Expression expression, final Type right) {
     return assignable(new RuleEnvironment(), null, expression, right);
   }
@@ -317,6 +334,23 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	return assignableInternal(_environment_, _trace_, expression, right);
     } catch (Exception _e_assignable) {
     	return resultForFailure(_e_assignable);
+    }
+  }
+  
+  public Boolean assignableSucceeded(final Expression expression, final Type right) {
+    return assignableSucceeded(new RuleEnvironment(), null, expression, right);
+  }
+  
+  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final Expression expression, final Type right) {
+    return assignableSucceeded(_environment_, null, expression, right);
+  }
+  
+  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type right) {
+    try {
+    	assignableInternal(_environment_, _trace_, expression, right);
+    	return true;
+    } catch (Exception _e_assignable) {
+    	return false;
     }
   }
   
@@ -336,6 +370,23 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean equalstypeSucceeded(final Type left, final Type right) {
+    return equalstypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
+    return equalstypeSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    try {
+    	equalstypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_equalstype) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> subtypesequence(final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
     return subtypesequence(new RuleEnvironment(), null, owner, expressions, elements);
   }
@@ -349,6 +400,23 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	return subtypesequenceInternal(_environment_, _trace_, owner, expressions, elements);
     } catch (Exception _e_subtypesequence) {
     	return resultForFailure(_e_subtypesequence);
+    }
+  }
+  
+  public Boolean subtypesequenceSucceeded(final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    return subtypesequenceSucceeded(new RuleEnvironment(), null, owner, expressions, elements);
+  }
+  
+  public Boolean subtypesequenceSucceeded(final RuleEnvironment _environment_, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    return subtypesequenceSucceeded(_environment_, null, owner, expressions, elements);
+  }
+  
+  public Boolean subtypesequenceSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    try {
+    	subtypesequenceInternal(_environment_, _trace_, owner, expressions, elements);
+    	return true;
+    } catch (Exception _e_subtypesequence) {
+    	return false;
     }
   }
   

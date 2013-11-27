@@ -177,6 +177,23 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean notoccurSucceeded(final Type type, final Type other) {
+    return notoccurSucceeded(new RuleEnvironment(), null, type, other);
+  }
+  
+  public Boolean notoccurSucceeded(final RuleEnvironment _environment_, final Type type, final Type other) {
+    return notoccurSucceeded(_environment_, null, type, other);
+  }
+  
+  public Boolean notoccurSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type type, final Type other) {
+    try {
+    	notoccurInternal(_environment_, _trace_, type, other);
+    	return true;
+    } catch (Exception _e_notoccur) {
+    	return false;
+    }
+  }
+  
   public Result2<Type,Type> unify(final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
     return unify(new RuleEnvironment(), null, substitutions, originalLeft, originalRight);
   }

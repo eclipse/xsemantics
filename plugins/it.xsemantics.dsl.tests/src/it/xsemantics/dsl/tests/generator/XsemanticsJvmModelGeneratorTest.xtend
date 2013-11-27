@@ -63,6 +63,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean typeSucceeded(final List<String> list, final Set<Integer> set) {
+    return typeSucceeded(new RuleEnvironment(), null, list, set);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final List<String> list, final Set<Integer> set) {
+    return typeSucceeded(_environment_, null, list, set);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final List<String> list, final Set<Integer> set) {
+    try {
+    	typeInternal(_environment_, _trace_, list, set);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final List<String> list, final Set<Integer> set) {
     try {
     	checkParamsNotNull(list, set);
@@ -128,6 +145,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return typeInternal(_environment_, _trace_, c, o);
     } catch (Exception _e_type) {
     	return resultForFailure(_e_type);
+    }
+  }
+  
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
     }
   }
   
@@ -1539,6 +1573,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	checkParamsNotNull(c, o);
@@ -1699,6 +1750,23 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
     	return type2Internal(_environment_, _trace_, c1, c2);
     } catch (Exception _e_type2) {
     	return resultForFailure(_e_type2);
+    }
+  }
+  
+  public Boolean type2Succeeded(final EClass c1, final EClass c2) {
+    return type2Succeeded(new RuleEnvironment(), null, c1, c2);
+  }
+  
+  public Boolean type2Succeeded(final RuleEnvironment _environment_, final EClass c1, final EClass c2) {
+    return type2Succeeded(_environment_, null, c1, c2);
+  }
+  
+  public Boolean type2Succeeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	type2Internal(_environment_, _trace_, c1, c2);
+    	return true;
+    } catch (Exception _e_type2) {
+    	return false;
     }
   }
   
@@ -2101,6 +2169,26 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
   }
   
   @Override
+  public Boolean subtypeSucceeded(final EClass c1, final EClass c2) {
+    return subtypeSucceeded(new RuleEnvironment(), null, c1, c2);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final EClass c1, final EClass c2) {
+    return subtypeSucceeded(_environment_, null, c1, c2);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) {
+    try {
+    	subtypeInternal(_environment_, _trace_, c1, c2);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
+  @Override
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	checkParamsNotNull(obj);
@@ -2202,6 +2290,26 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
   }
   
   @Override
+  public Boolean subtypeSucceeded(final EClass left, final EClass right) {
+    return subtypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final EClass left, final EClass right) {
+    return subtypeSucceeded(_environment_, null, left, right);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
+    try {
+    	subtypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
+  @Override
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
     try {
     	checkParamsNotNull(left, right);
@@ -2295,6 +2403,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return subtypeInternal(_environment_, _trace_, left, right);
     } catch (Exception _e_subtype) {
     	return resultForFailure(_e_subtype);
+    }
+  }
+  
+  public Boolean subtypeSucceeded(final EObject left, final EObject right) {
+    return subtypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final EObject left, final EObject right) {
+    return subtypeSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject left, final EObject right) {
+    try {
+    	subtypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
     }
   }
   
@@ -2517,6 +2642,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	checkParamsNotNull(c, o);
@@ -2633,6 +2775,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return typeInternal(_environment_, _trace_, c, o);
     } catch (Exception _e_type) {
     	return resultForFailure(_e_type);
+    }
+  }
+  
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
     }
   }
   

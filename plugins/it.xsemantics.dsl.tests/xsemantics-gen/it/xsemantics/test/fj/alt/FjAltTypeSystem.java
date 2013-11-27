@@ -107,6 +107,26 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   }
   
   @Override
+  public Boolean subtypeSucceeded(final Type left, final Type right) {
+    return subtypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
+    return subtypeSucceeded(_environment_, null, left, right);
+  }
+  
+  @Override
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    try {
+    	subtypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
+  @Override
   public Result<Boolean> subclass(final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
     return subclass(new RuleEnvironment(), null, candidate, superclass);
   }
@@ -122,6 +142,26 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return subclassInternal(_environment_, _trace_, candidate, superclass);
     } catch (Exception _e_subclass) {
     	return resultForFailure(_e_subclass);
+    }
+  }
+  
+  @Override
+  public Boolean subclassSucceeded(final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    return subclassSucceeded(new RuleEnvironment(), null, candidate, superclass);
+  }
+  
+  @Override
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    return subclassSucceeded(_environment_, null, candidate, superclass);
+  }
+  
+  @Override
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    try {
+    	subclassInternal(_environment_, _trace_, candidate, superclass);
+    	return true;
+    } catch (Exception _e_subclass) {
+    	return false;
     }
   }
   

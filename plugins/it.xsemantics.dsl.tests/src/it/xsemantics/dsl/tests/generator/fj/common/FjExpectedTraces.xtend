@@ -13,6 +13,10 @@ class FjExpectedTraces {
 	
 	@Inject extension StringRepresentation
 	
+	def successTraceAsString(RuleApplicationTrace t) {
+		t.traceAsString
+	}
+	
 	def void assertFailureTrace(RuleFailedException e, CharSequence expectedTrace) {
 		Assert::assertEquals(expectedTrace.toString.trim,
 			e.failureTraceAsString

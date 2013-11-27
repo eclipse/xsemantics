@@ -155,6 +155,9 @@ it is rare to want more than three ouput parameters, but of course, it is
 easy to remove this limitation in case).
 </p>
 <p>
+A judgment without output parameters is also called <em>predicate judgment</em>.
+</p>
+<p>
 Once you declared the judgments of your system, you can start declaring the rules.
 </p>
 <p>
@@ -976,8 +979,45 @@ parameters, <abbr title="it.xsemantics.runtime.Result3" >Result3</abbr> (with th
 additional method <span class="inlinecode">getThird()</span>).
 </p>
 <p>
-If the judgment has no output parameter, the type of the result will
+If the judgment has no output parameter (<em>predicate judgment</em>), the type of the result will
 be <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html" title="View JavaDoc"><abbr title="java.lang.Boolean" >Boolean</abbr></a>, i.e., <span class="inlinecode">Result&lt;Boolean&gt;</span>.
+</p>
+<p>
+For such judgments some additional utility methods are generated, which
+allow you to just check whether the predicate succeded
+(in case of failures you have no additional information; but if you
+pass a trace you can still inspect how the judgment succeded).
+For instance, consider this predicate judgment
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">judgments</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;mypredjudgment&nbsp;|-&nbsp;MyClass1&nbsp;arg1&nbsp;:&nbsp;MyClass2&nbsp;arg2&nbsp;<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+the generated Java system will feature three additional public methods
+(note the suffix "Succeded"):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;same&nbsp;generated&nbsp;methods&nbsp;as&nbsp;before,&nbsp;plus:<br/>
+</span><span class="keyword">public</span>&nbsp;Boolean&nbsp;myjudgmentSucceeded(MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+<span class="keyword">public</span>&nbsp;Boolean&nbsp;myjudgmentSucceeded(RuleEnvironment&nbsp;env,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+<span class="keyword">public</span>&nbsp;Boolean&nbsp;myjudgmentSucceeded(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;RuleEnvironment&nbsp;env,&nbsp;RuleApplication&nbsp;trace,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyClass1&nbsp;arg1,&nbsp;MyClass2&nbsp;arg2)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The first generated method basically only takes the arguments specified in the

@@ -167,6 +167,10 @@ class XsemanticsGeneratorExtensions {
 		'''«judgmentDescription.name»'''
 	}
 
+	def succeededMethodName(JudgmentDescription judgmentDescription) {
+		'''«judgmentDescription.name»Succeeded'''
+	}
+
 	def entryPointMethodName(AuxiliaryDescription aux) {
 		'''«aux.name»'''
 	}
@@ -395,6 +399,10 @@ class XsemanticsGeneratorExtensions {
 
 	def resultType(AuxiliaryFunction e) {
 		typeSystem.getType(e.auxiliaryDescription)
+	}
+
+	def booleanType(EObject e) {
+		e.newTypeRef(typeof(Boolean))
 	}
 
 	def resultJvmTypeReferences(JudgmentDescription e) {

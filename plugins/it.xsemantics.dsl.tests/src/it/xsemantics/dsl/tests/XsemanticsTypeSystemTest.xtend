@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
-import org.junit.Assert
+import static extension org.junit.Assert.*
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
@@ -181,7 +181,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	@Test
 	def void testIsEObject() {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
-		Assert::assertTrue
+		assertTrue
 			(typeSystem.isEObject
 				(typeReferences.getTypeForName(typeof(XsemanticsSystem), ts), ts))
 	}
@@ -189,7 +189,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	@Test
 	def void testIsEObjectFails() {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
-		Assert::assertFalse
+		assertFalse
 			(typeSystem.isEObject
 				(typeReferences.getTypeForName(typeof(String), ts), ts))
 	}
@@ -197,7 +197,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	@Test
 	def void testIsEStructuralFeature() {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
-		Assert::assertTrue
+		assertTrue
 			(typeSystem.isEStructuralFeature
 				(typeReferences.getTypeForName(typeof(EAttribute), ts), ts))
 	}
@@ -205,7 +205,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	@Test
 	def void testIsEStructuralFeatureFails() {
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
-		Assert::assertFalse
+		assertFalse
 			(typeSystem.isEStructuralFeature
 				(typeReferences.getTypeForName(typeof(XsemanticsSystem), ts), ts))
 	}
@@ -214,7 +214,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	def void testTupleTypeNotEqualsDifferentSize() {
 		val tupleType = new TupleType()
 		tupleType.add(typeForName(typeof(EAttribute)))
-		Assert::assertFalse(
+		assertFalse(
 			typeSystem.equals(new TupleType(), tupleType, fakeContext)
 		)
 	}
@@ -229,7 +229,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val tupleType2 = tupleType(
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(EClass), ts))
-		Assert::assertTrue(
+		assertTrue(
 			typeSystem.equals(tupleType2, tupleType1, ts)
 		)
 	}
@@ -244,7 +244,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val tupleType2 = tupleType(
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(Notifier), ts))
-		Assert::assertFalse(
+		assertFalse(
 			typeSystem.equals(tupleType2, tupleType1, fakeContext)
 		)
 	}
@@ -258,37 +258,53 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	def testJudgmentDescriptionsEquals() {
 		val judgments =	testFiles.testForJudgmentParameters.
 				parseAndAssertNoError.judgmentDescriptions
-		Assert::assertTrue(typeSystem.equals(judgments.get(0), judgments.get(1)))
-		Assert::assertFalse(typeSystem.equals(judgments.get(0), judgments.get(2)))
-		Assert::assertFalse(typeSystem.equals(judgments.get(0), judgments.get(3)))
+		assertTrue(typeSystem.equals(judgments.get(0), judgments.get(1)))
+		assertFalse(typeSystem.equals(judgments.get(0), judgments.get(2)))
+		assertFalse(typeSystem.equals(judgments.get(0), judgments.get(3)))
+	}
+	
+	@Test
+	def void testPredicateJudgments() {
+		testFiles.testPredicateJudgments.parseAndAssertNoError => [
+			typeSystem.isPredicate(judgmentDescriptions.head).assertFalse
+			typeSystem.isPredicate(judgmentDescriptions.last).assertTrue
+			
+			typeSystem.isPredicate(
+				getRule(1).ruleInvocationFromPremises
+			).assertFalse
+			
+			typeSystem.isPredicate(
+				getRule(0).ruleInvocationFromPremises
+			).assertTrue
+		]
 	}
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
-		Assert::assertTrue(featureCall.toString,
+		assertTrue(featureCall.toString,
 			typeSystem.isBooleanPremise(featureCall)
 		)
 	}
 	
 	def checkNotBooleanPremise(XExpression expression) {
-		Assert::assertFalse(expression.toString,
+		assertFalse(expression.toString,
 			typeSystem.isBooleanPremise(expression)
 		)
 	}
 	
 	def void assertRuleConclusionTypes(CharSequence source, Class<?> leftClass, Class<?> rightClass) {
 		val conclusion = source.getFirstRule.conclusion
-		Assert::assertEquals(leftClass.name, 
+		assertEquals(leftClass.name, 
 			typeSystem.getType(conclusion.conclusionElements.get(0)).identifier
 		)
-		Assert::assertEquals(rightClass.name, 
+		assertEquals(rightClass.name, 
 			typeSystem.getType(conclusion.conclusionElements.get(1)).identifier
 		)
 	}
 	
 	def void assertRuleInvocationExpressionsTypes(CharSequence source, int index, Class<?> leftClass, Class<?> rightClass) {
 		val invocation = source.firstRule.ruleInvocations.get(index)
-		Assert::assertEquals(leftClass.name, typeSystem.getType(invocation.expressions.get(0)).identifier)
-		Assert::assertEquals(rightClass.name, typeSystem.getType(invocation.expressions.get(1)).identifier)
+		assertEquals(leftClass.name, typeSystem.getType(invocation.expressions.get(0)).identifier)
+		assertEquals(rightClass.name, typeSystem.getType(invocation.expressions.get(1)).identifier)
 	}
 
 	def assertPremiseType(CharSequence prog, int premiseIndex, CharSequence expected) {
@@ -317,7 +333,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	def assertSubtyping(Class<?> expected, Class<?> actual) {
 		// getTypeForName requires an EObject context
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
-		Assert::assertTrue(typeSystem.isConformant(
+		assertTrue(typeSystem.isConformant(
 				typeReferences.getTypeForName(expected, ts),
 				typeReferences.getTypeForName(actual, ts),
 				ts
@@ -333,7 +349,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	
 	def assertEquals(JvmTypeReference left, JvmTypeReference right, 
 			boolean expectedEquals, EObject context) {
-		Assert::assertTrue(typeSystem.equals(left, right, context) == expectedEquals)
+		assertTrue(typeSystem.equals(left, right, context) == expectedEquals)
 	}
 	
 }

@@ -100,6 +100,8 @@ parameters (the latter limitation does not seem to have an impact, since
 it is rare to want more than three ouput parameters, but of course, it is
 easy to remove this limitation in case).
 
+A judgment without output parameters is also called e[predicate judgment].
+
 Once you declared the judgments of your system, you can start declaring the rules.
 
 Each rule consists of
@@ -701,8 +703,33 @@ code[getSecond()], respectively); similarly for three output
 parameters, codeRef[it.xsemantics.runtime.Result3] (with the
 additional method code[getThird()]).
 
-If the judgment has no output parameter, the type of the result will
+If the judgment has no output parameter (e[predicate judgment]), the type of the result will
 be codeRef[java.lang.Boolean], i.e., code[Result<Boolean>].
+
+For such judgments some additional utility methods are generated, which
+allow you to just check whether the predicate succeded
+(in case of failures you have no additional information; but if you
+pass a trace you can still inspect how the judgment succeded).
+For instance, consider this predicate judgment
+
+code[Xsemantics][
+judgments {
+	mypredjudgment |- MyClass1 arg1 : MyClass2 arg2 
+}
+]
+
+the generated Java system will feature three additional public methods
+(note the suffix "Succeded"):
+
+code[Java][
+// same generated methods as before, plus:
+public Boolean myjudgmentSucceeded(MyClass1 arg1, MyClass2 arg2)
+public Boolean myjudgmentSucceeded(RuleEnvironment env,
+	MyClass1 arg1, MyClass2 arg2)
+public Boolean myjudgmentSucceeded(
+	RuleEnvironment env, RuleApplication trace,
+	MyClass1 arg1, MyClass2 arg2)
+]
 
 The first generated method basically only takes the arguments specified in the
 judgment.  With the second version, you can also pass an environment

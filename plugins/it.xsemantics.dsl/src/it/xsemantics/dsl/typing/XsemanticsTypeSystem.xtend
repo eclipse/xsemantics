@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.XInstanceOfExpression
+import it.xsemantics.dsl.xsemantics.RuleInvocation
 
 class XsemanticsTypeSystem {
 	
@@ -138,5 +139,15 @@ class XsemanticsTypeSystem {
 		val converter = new OwnedConverter
 			(new StandardTypeReferenceOwner(services, context))
 		converter.toLightweightReference(typeRef)
+	}
+
+	def isPredicate(JudgmentDescription j) {
+		if (j == null)
+			return false
+		j.outputJudgmentParameters.empty
+	}
+
+	def isPredicate(RuleInvocation ruleInvocation) {
+		ruleInvocation.judgmentDescription.predicate
 	}
 }

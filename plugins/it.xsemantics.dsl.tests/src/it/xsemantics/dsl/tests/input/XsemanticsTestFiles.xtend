@@ -2212,4 +2212,27 @@ class XsemanticsTestFiles {
 		o instanceof EClass
 	}
 	'''
+
+	def testPredicateJudgments() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	
+	judgments {
+		nonPredicateJudgment |- EObject o : output EClass
+		predicateJudgment ||- EObject o : EClass c
+	}
+	
+	rule TestRuleInvokesPredicateJudgment
+		G |- EObject o : EClass c
+	from {
+		G ||- o : c
+	}
+
+	rule TestRuleInvokesNonPredicateJudgment
+		G ||- EObject o : EClass c
+	from {
+		G |- o : var EClass result
+	}
+	'''
 }

@@ -44,6 +44,23 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	checkParamsNotNull(c, o);

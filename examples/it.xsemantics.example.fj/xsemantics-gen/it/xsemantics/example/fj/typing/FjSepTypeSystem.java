@@ -107,6 +107,23 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
   }
   
+  public Boolean checkSucceeded(final EObject obj) {
+    return checkSucceeded(new RuleEnvironment(), null, obj);
+  }
+  
+  public Boolean checkSucceeded(final RuleEnvironment _environment_, final EObject obj) {
+    return checkSucceeded(_environment_, null, obj);
+  }
+  
+  public Boolean checkSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
+    try {
+    	checkInternal(_environment_, _trace_, obj);
+    	return true;
+    } catch (Exception _e_check) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> checkClassOk(final it.xsemantics.example.fj.fj.Class clazz) {
     return checkClassOk(null, clazz);
   }

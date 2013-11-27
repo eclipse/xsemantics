@@ -48,6 +48,13 @@ public interface IFjTypeSystem {
 			final RuleApplicationTrace _trace_, final Type _Type,
 			final Type _Type_1);
 
+	public abstract Boolean subtypeSucceeded(final Type _Type, final Type _Type_1);
+
+	public abstract Boolean subtypeSucceeded(
+			final RuleEnvironment _environment_,
+			final RuleApplicationTrace _trace_, final Type _Type,
+			final Type _Type_1);
+
 	public abstract Result<Boolean> equalstype(final Type _Type, final Type _Type_1);
 	
 	public abstract Result<Boolean> equalstype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_,

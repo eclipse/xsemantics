@@ -154,6 +154,24 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 	}
 
 	@Test
+	public void testSubtypeSucceededBasic() throws Exception {
+		FjFieldsForTests fields = new FjFieldsForTests(
+				testFiles.testForSubtyping());
+		assertSubtypeSucceeded(fields.basicField1.getType(),
+				fields.basicField3.getType(), true, fields.trace,
+				"BasicSubtyping: [] |- String <: String");
+	}
+
+	@Test
+	public void testSubtypeSucceededBasicFailed() throws Exception {
+		FjFieldsForTests fields = new FjFieldsForTests(
+				testFiles.testForSubtyping());
+		assertSubtypeSucceeded(fields.basicField1.getType(),
+				fields.basicField2.getType(), false, fields.trace,
+				expectedTraces.failSubtypesBasic());
+	}
+
+	@Test
 	public void testSubtypesClasses() throws Exception {
 		FjFieldsForTests fields = new FjFieldsForTests(
 				testFiles.testForSubtyping());
@@ -566,6 +584,17 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 					expectedTrace, expectedErrorInformations);
 	}
 
+	protected void assertSubtypeSucceeded(Type subType, Type superType,
+			boolean expectSuccess, RuleApplicationTrace trace,
+			CharSequence expectedTrace) {
+		if (expectSuccess)
+			assertSucceededTrue(fjTypeSystem.subtypeSucceeded(null, trace,
+					subType, superType), trace, expectedTrace);
+		else
+			assertSucceededFalse(fjTypeSystem.subtypeSucceeded(null, trace,
+					subType, superType), trace);
+	}
+
 	protected void assertEqualsType(Type subType, Type superType,
 			boolean expectSuccess, RuleApplicationTrace trace,
 			CharSequence expectedTrace, CharSequence expectedErrorInformations) {
@@ -652,6 +681,22 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 			RuleApplicationTrace trace, CharSequence expectedTrace) {
 		assertResultTrue(result);
 		expectedTraces.assertTrace(trace, expectedTrace);
+	}
+
+	protected void assertSucceededTrue(boolean result,
+			RuleApplicationTrace trace, CharSequence expectedTrace) {
+		assertTrue(result);
+		expectedTraces.assertTrace(trace, expectedTrace);
+	}
+
+	protected void assertSucceededFalse(boolean result,
+			RuleApplicationTrace trace) {
+		if (result) {
+			assertFalse(
+					"unexpected success:\n"
+							+ expectedTraces.successTraceAsString(trace),
+					result);
+		}
 	}
 
 	protected void assertResultFalse(Result<?> result,

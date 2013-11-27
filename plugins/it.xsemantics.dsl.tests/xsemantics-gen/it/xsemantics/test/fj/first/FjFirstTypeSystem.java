@@ -243,6 +243,23 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean subtypeSucceeded(final Type left, final Type right) {
+    return subtypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
+    return subtypeSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    try {
+    	subtypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> equalstype(final Type left, final Type right) {
     return equalstype(new RuleEnvironment(), null, left, right);
   }
@@ -256,6 +273,23 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	return equalstypeInternal(_environment_, _trace_, left, right);
     } catch (Exception _e_equalstype) {
     	return resultForFailure(_e_equalstype);
+    }
+  }
+  
+  public Boolean equalstypeSucceeded(final Type left, final Type right) {
+    return equalstypeSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
+    return equalstypeSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    try {
+    	equalstypeInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_equalstype) {
+    	return false;
     }
   }
   
@@ -275,6 +309,23 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
+  public Boolean subtypesequenceSucceeded(final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    return subtypesequenceSucceeded(new RuleEnvironment(), null, owner, expressions, elements);
+  }
+  
+  public Boolean subtypesequenceSucceeded(final RuleEnvironment _environment_, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    return subtypesequenceSucceeded(_environment_, null, owner, expressions, elements);
+  }
+  
+  public Boolean subtypesequenceSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression owner, final List<Expression> expressions, final List<? extends TypedElement> elements) {
+    try {
+    	subtypesequenceInternal(_environment_, _trace_, owner, expressions, elements);
+    	return true;
+    } catch (Exception _e_subtypesequence) {
+    	return false;
+    }
+  }
+  
   public Result<Boolean> subclass(final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
     return subclass(new RuleEnvironment(), null, candidate, superclass);
   }
@@ -288,6 +339,23 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	return subclassInternal(_environment_, _trace_, candidate, superclass);
     } catch (Exception _e_subclass) {
     	return resultForFailure(_e_subclass);
+    }
+  }
+  
+  public Boolean subclassSucceeded(final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    return subclassSucceeded(new RuleEnvironment(), null, candidate, superclass);
+  }
+  
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    return subclassSucceeded(_environment_, null, candidate, superclass);
+  }
+  
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
+    try {
+    	subclassInternal(_environment_, _trace_, candidate, superclass);
+    	return true;
+    } catch (Exception _e_subclass) {
+    	return false;
     }
   }
   
@@ -336,6 +404,23 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     	return checkInternal(_environment_, _trace_, obj);
     } catch (Exception _e_check) {
     	return resultForFailure(_e_check);
+    }
+  }
+  
+  public Boolean checkSucceeded(final EObject obj) {
+    return checkSucceeded(new RuleEnvironment(), null, obj);
+  }
+  
+  public Boolean checkSucceeded(final RuleEnvironment _environment_, final EObject obj) {
+    return checkSucceeded(_environment_, null, obj);
+  }
+  
+  public Boolean checkSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
+    try {
+    	checkInternal(_environment_, _trace_, obj);
+    	return true;
+    } catch (Exception _e_check) {
+    	return false;
     }
   }
   

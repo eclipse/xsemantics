@@ -98,6 +98,15 @@ public class FjSepTypeSystemWrapper implements IFjTypeSystem {
 		return ts.subtype(_environment_, _trace_, _Type, _Type_1);
 	}
 
+	public Boolean subtypeSucceeded(Type _Type, Type _Type_1) {
+		return ts.subtypeSucceeded(_Type, _Type_1);
+	}
+
+	public Boolean subtypeSucceeded(RuleEnvironment _environment_,
+			RuleApplicationTrace _trace_, Type _Type, Type _Type_1) {
+		return ts.subtypeSucceeded(_environment_, _trace_, _Type, _Type_1);
+	}
+
 	public Result<Boolean> equalstype(Type _Type, Type _Type_1) {
 		return ts.equalstype(_Type, _Type_1);
 	}

@@ -95,6 +95,23 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
   }
   
+  public Boolean coerceSucceeded(final Expression expression, final Type expectedType) {
+    return coerceSucceeded(new RuleEnvironment(), null, expression, expectedType);
+  }
+  
+  public Boolean coerceSucceeded(final RuleEnvironment _environment_, final Expression expression, final Type expectedType) {
+    return coerceSucceeded(_environment_, null, expression, expectedType);
+  }
+  
+  public Boolean coerceSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
+    try {
+    	coerceInternal(_environment_, _trace_, expression, expectedType);
+    	return true;
+    } catch (Exception _e_coerce) {
+    	return false;
+    }
+  }
+  
   protected Result<Boolean> coerceInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
     try {
     	checkParamsNotNull(expression, expectedType);
