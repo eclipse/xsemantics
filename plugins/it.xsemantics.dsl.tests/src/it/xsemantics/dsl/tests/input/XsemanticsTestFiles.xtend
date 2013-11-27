@@ -630,6 +630,8 @@ class XsemanticsTestFiles {
 		type17 |- EClass c <~! EObject o
 		type18 |- EClass c !~> EObject o
 		type19 ||- EClass c >> EObject o
+		type20 ||- EClass c \/ EObject o
+		type21 ||- EClass c /\ EObject o
 	}
 	
 	rule EClassEObject derives
@@ -676,6 +678,8 @@ class XsemanticsTestFiles {
 		eC.name = 'MyEClass'
 		eClass == eC
 		G ||- object.eClass >> eClass
+		G ||- object.eClass /\ eClass
+		G ||- object.eClass \/ eClass
 	}
 	'''
 

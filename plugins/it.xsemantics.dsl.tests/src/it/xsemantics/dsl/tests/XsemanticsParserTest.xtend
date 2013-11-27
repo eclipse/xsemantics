@@ -162,7 +162,7 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	@Test
 	def void testRuleInvocationsWithOperatorsConflictingXbase() {
 		var ts = testFiles.testRuleInvocationsWithOperatorsConflictingXbase.parseAndAssertNoError
-		Assert::assertEquals(18, ts.ruleInvocations.size)
+		Assert::assertEquals(20, ts.ruleInvocations.size)
 	}
 	
 	@Test

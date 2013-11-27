@@ -23,7 +23,7 @@ class XsemanticsProposalsForDatatypeRulesTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testProposalsForRelationSymbol() {
-		assertEqualsStrings("[<!, !>, <<!, !>>, <~!, !~>, :, <:, :>, <<, >>, ~~, <|, |>, <-, -->, <~, ~>]",
+		assertEqualsStrings("[<!, !>, <<!, !>>, <~!, !~>, :, <:, :>, <<, >>, ~~, <|, |>, <-, -->, <~, ~>, \\/, /\\]",
 			proposalProvider.relationSymbols
 		)
 	}
