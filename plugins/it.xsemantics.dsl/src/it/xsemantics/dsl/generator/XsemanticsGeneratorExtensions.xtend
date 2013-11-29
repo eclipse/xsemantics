@@ -30,6 +30,8 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
+import static extension org.eclipse.xtext.util.Strings.*
+
 class XsemanticsGeneratorExtensions {
 	
 	@Inject extension IQualifiedNameProvider
@@ -130,7 +132,7 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def relationSymbolsArgs(JudgmentDescription judgmentDescription) {
-		judgmentDescription.relationSymbols.map(['''"«it»"''']).join(", ")
+		judgmentDescription.relationSymbols.map(['''"«it.escapeJavaStringChars»"''']).join(", ")
 	}
 
 	def polymorphicDispatcherImpl(JudgmentDescription judgmentDescription) {
@@ -295,7 +297,7 @@ class XsemanticsGeneratorExtensions {
 				buffer.append(forInput.apply(it))
 			}
 			if (relationSymbols.hasNext)
-				buffer.append(''' + " «relationSymbols.next» "''')
+				buffer.append(''' + " «relationSymbols.next.escapeJavaStringChars» "''')
 			
 		]
 		buffer.toString
@@ -517,5 +519,7 @@ class XsemanticsGeneratorExtensions {
 		result.append(");")
 	}
 
-
+	def escapeJavaStringChars(String s) {
+		s.convertToJavaString
+	}
 }

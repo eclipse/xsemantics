@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
+
 import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
@@ -325,7 +326,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		«judgmentDescription.polymorphicDispatcherField» = «judgmentDescription.polymorphicDispatcherBuildMethod»(
 			"«judgmentDescription.polymorphicDispatcherImpl»", «
 			»«judgmentDescription.polymorphicDispatcherNumOfArgs», «
-			»"«judgmentDescription.judgmentSymbol»"«
+			»"«judgmentDescription.judgmentSymbol.escapeJavaStringChars»"«
 			»«relationSymbolArgs»);'''
    	}
 

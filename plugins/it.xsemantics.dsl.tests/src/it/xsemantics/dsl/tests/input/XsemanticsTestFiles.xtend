@@ -2354,4 +2354,29 @@ class XsemanticsTestFiles {
 		G |- o : var EClass result
 	}
 	'''
+
+	def testOperatorsWithSlashes_Issue_6() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	judgments {
+		typeUnion        ||- EClass c \/ EObject o
+		typeIntersection ||- EClass c /\ EObject o
+	}
+	
+	rule UnionRule derives
+		G ||- EClass eClass \/ EObject object
+	from {
+		G ||- object.eClass /\ eClass
+		G ||- object.eClass \/ eClass
+	}
+	
+	rule IntersectionRule derives
+		G ||- EClass eClass /\ EObject object
+	from {
+		G ||- object.eClass /\ eClass
+		G ||- object.eClass \/ eClass
+	}
+	'''
+
 }

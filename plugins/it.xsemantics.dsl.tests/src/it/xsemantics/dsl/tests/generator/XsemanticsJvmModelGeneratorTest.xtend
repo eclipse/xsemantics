@@ -3381,6 +3381,192 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 
+	@Test
+	def testOperatorsWithSlashes_Issue_6() {
+		testFiles.testOperatorsWithSlashes_Issue_6.
+		assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String UNIONRULE = "it.xsemantics.test.rules.UnionRule";
+  
+  public final static String INTERSECTIONRULE = "it.xsemantics.test.rules.IntersectionRule";
+  
+  private PolymorphicDispatcher<Result<Boolean>> typeUnionDispatcher;
+  
+  private PolymorphicDispatcher<Result<Boolean>> typeIntersectionDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeUnionDispatcher = buildPolymorphicDispatcher1(
+    	"typeUnionImpl", 4, "||-", "\\/");
+    typeIntersectionDispatcher = buildPolymorphicDispatcher1(
+    	"typeIntersectionImpl", 4, "||-", "/\\");
+  }
+  
+  public Result<Boolean> typeUnion(final EClass c, final EObject o) {
+    return typeUnion(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Result<Boolean> typeUnion(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeUnion(_environment_, null, c, o);
+  }
+  
+  public Result<Boolean> typeUnion(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	return typeUnionInternal(_environment_, _trace_, c, o);
+    } catch (Exception _e_typeUnion) {
+    	return resultForFailure(_e_typeUnion);
+    }
+  }
+  
+  public Boolean typeUnionSucceeded(final EClass c, final EObject o) {
+    return typeUnionSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeUnionSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeUnionSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeUnionSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeUnionInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_typeUnion) {
+    	return false;
+    }
+  }
+  
+  public Result<Boolean> typeIntersection(final EClass c, final EObject o) {
+    return typeIntersection(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Result<Boolean> typeIntersection(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeIntersection(_environment_, null, c, o);
+  }
+  
+  public Result<Boolean> typeIntersection(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	return typeIntersectionInternal(_environment_, _trace_, c, o);
+    } catch (Exception _e_typeIntersection) {
+    	return resultForFailure(_e_typeIntersection);
+    }
+  }
+  
+  public Boolean typeIntersectionSucceeded(final EClass c, final EObject o) {
+    return typeIntersectionSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeIntersectionSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeIntersectionSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeIntersectionSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeIntersectionInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_typeIntersection) {
+    	return false;
+    }
+  }
+  
+  protected Result<Boolean> typeUnionInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	checkParamsNotNull(c, o);
+    	return typeUnionDispatcher.invoke(_environment_, _trace_, c, o);
+    } catch (Exception _e_typeUnion) {
+    	sneakyThrowRuleFailedException(_e_typeUnion);
+    	return null;
+    }
+  }
+  
+  protected void typeUnionThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<Boolean> typeIntersectionInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	checkParamsNotNull(c, o);
+    	return typeIntersectionDispatcher.invoke(_environment_, _trace_, c, o);
+    } catch (Exception _e_typeIntersection) {
+    	sneakyThrowRuleFailedException(_e_typeIntersection);
+    	return null;
+    }
+  }
+  
+  protected void typeIntersectionThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<Boolean> typeUnionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleUnionRule(G, _subtrace_, eClass, object);
+      addToTrace(_trace_, ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleUnionRule) {
+      typeUnionThrowException(ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object),
+      	UNIONRULE,
+      	e_applyRuleUnionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleUnionRule(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    /* G ||- object.eClass /\ eClass */
+    EClass _eClass = object.eClass();
+    typeIntersectionInternal(G, _trace_, _eClass, eClass);
+    /* G ||- object.eClass \/ eClass */
+    EClass _eClass_1 = object.eClass();
+    typeUnionInternal(G, _trace_, _eClass_1, eClass);
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> typeIntersectionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleIntersectionRule(G, _subtrace_, eClass, object);
+      addToTrace(_trace_, ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleIntersectionRule) {
+      typeIntersectionThrowException(ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object),
+      	INTERSECTIONRULE,
+      	e_applyRuleIntersectionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleIntersectionRule(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    /* G ||- object.eClass /\ eClass */
+    EClass _eClass = object.eClass();
+    typeIntersectionInternal(G, _trace_, _eClass, eClass);
+    /* G ||- object.eClass \/ eClass */
+    EClass _eClass_1 = object.eClass();
+    typeUnionInternal(G, _trace_, _eClass_1, eClass);
+    return new Result<Boolean>(true);
+  }
+}
+'''
+		)
+	}
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}
