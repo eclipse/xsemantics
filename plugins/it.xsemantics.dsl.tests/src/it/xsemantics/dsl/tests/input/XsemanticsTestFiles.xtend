@@ -1024,6 +1024,31 @@ class XsemanticsTestFiles {
 		|- object.eClass : eClass
 	}
 	'''
+
+	def testEnvironmentXExpression() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		new it.xsemantics.runtime.RuleEnvironment
+		|- eClass : object
+		
+		new it.xsemantics.runtime.RuleEnvironment(G)
+		|- eClass : object
+		
+		environmentComposition(
+	      emptyEnvironment(), environmentComposition(
+	        G, environmentComposition(
+	          emptyEnvironment(), G
+	        )
+	      )
+	    ) |- eClass : object
+	    
+	    emptyEnvironment, 'a' <- object, new it.xsemantics.runtime.RuleEnvironment
+	    |- eClass : object
+	}
+	'''
 	
 	def testRulesWithNonEObjectParams() '''
 	«testFileWithImports»

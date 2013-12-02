@@ -124,8 +124,8 @@ EnvironmentAccess returns xbase::XExpression:
 ;
 
 RuleInvocation:
-	=>environment=EnvironmentSpecification
-	judgmentSymbol=JudgmentSymbol
+	=>(environment=EnvironmentSpecification
+	judgmentSymbol=JudgmentSymbol)
 	expressions+=RuleInvocationExpression
 	(relationSymbols+=RelationSymbol
 	expressions+=RuleInvocationExpression)*
@@ -144,13 +144,18 @@ EnvironmentSpecification returns xbase::XExpression:
 ;
 
 TerminalEnvironmentSpecification returns xbase::XExpression:
-	{EmptyEnvironment} 'empty' |
-	{EnvironmentMapping} key=XExpression EnvironmentMapsTo value=XExpression |
-	EnvironmentReference
+	EnvironmentMapping
 ;
 
-EnvironmentReference:
-	{EnvironmentReference} environment=[Environment]
+EnvironmentMapping returns xbase::XExpression:
+	TerminalEnvironmentMapping
+	=>({EnvironmentMapping.key = current}
+		EnvironmentMapsTo value=XExpression)?
+;
+
+TerminalEnvironmentMapping returns xbase::XExpression:
+	{EmptyEnvironment} 'empty' |
+	XExpression
 ;
 
 Environment: name=ID;

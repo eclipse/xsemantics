@@ -2731,6 +2731,129 @@ null
 	}
 
 	@Test
+	def testEnvironmentXExpression() {
+		testFiles.testEnvironmentXExpression.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.rules.EClassEObject";
+  
+  private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":");
+  }
+  
+  public Result<Boolean> type(final EClass c, final EObject o) {
+    return type(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return type(_environment_, null, c, o);
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	return typeInternal(_environment_, _trace_, c, o);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  public Boolean typeSucceeded(final EClass c, final EObject o) {
+    return typeSucceeded(new RuleEnvironment(), null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
+    return typeSucceeded(_environment_, null, c, o);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	typeInternal(_environment_, _trace_, c, o);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
+  protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
+    try {
+    	checkParamsNotNull(c, o);
+    	return typeDispatcher.invoke(_environment_, _trace_, c, o);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    try {
+      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+      addAsSubtrace(_trace_, _subtrace_);
+      return _result_;
+    } catch (Exception e_applyRuleEClassEObject) {
+      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+      	ECLASSEOBJECT,
+      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+      return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
+    /* new it.xsemantics.runtime.RuleEnvironment |- eClass : object */
+    RuleEnvironment _ruleEnvironment = new RuleEnvironment();
+    typeInternal(_ruleEnvironment, _trace_, eClass, object);
+    /* new it.xsemantics.runtime.RuleEnvironment(G) |- eClass : object */
+    RuleEnvironment _ruleEnvironment_1 = new RuleEnvironment(G);
+    typeInternal(_ruleEnvironment_1, _trace_, eClass, object);
+    /* environmentComposition( emptyEnvironment(), environmentComposition( G, environmentComposition( emptyEnvironment(), G ) ) ) |- eClass : object */
+    RuleEnvironment _emptyEnvironment = this.emptyEnvironment();
+    RuleEnvironment _emptyEnvironment_1 = this.emptyEnvironment();
+    RuleEnvironment _environmentComposition = this.environmentComposition(_emptyEnvironment_1, G);
+    RuleEnvironment _environmentComposition_1 = this.environmentComposition(G, _environmentComposition);
+    RuleEnvironment _environmentComposition_2 = this.environmentComposition(_emptyEnvironment, _environmentComposition_1);
+    typeInternal(_environmentComposition_2, _trace_, eClass, object);
+    /* emptyEnvironment, 'a' <- object, new it.xsemantics.runtime.RuleEnvironment |- eClass : object */
+    RuleEnvironment _emptyEnvironment_2 = this.emptyEnvironment();
+    RuleEnvironment _ruleEnvironment_2 = new RuleEnvironment();
+    typeInternal(environmentComposition(
+      _emptyEnvironment_2, environmentComposition(
+        environmentEntry("a", object), _ruleEnvironment_2
+      )
+    ), _trace_, eClass, object);
+    return new Result<Boolean>(true);
+  }
+}
+''',
+null
+		)
+	}
+
+	@Test
 	def testEnvironmentAccess() {
 		testFiles.testWithEnvironmentAccess.assertCorrectJavaCodeGeneration(
 '''

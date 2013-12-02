@@ -11,7 +11,6 @@ import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
-import it.xsemantics.dsl.xsemantics.EnvironmentReference
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -470,9 +469,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def protected void generateEnvironmentSpecificationAsStatements(
 			XExpression environmentSpecification, ITreeAppendable b) {
 				
-		if (environmentSpecification instanceof EmptyEnvironment ||
-			environmentSpecification instanceof EnvironmentReference
-		) {
+		if (environmentSpecification instanceof EmptyEnvironment) {
 			// already handled as expression
 			return
 		}
@@ -607,10 +604,6 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	def dispatch void internalToConvertedExpression(EmptyEnvironment e, ITreeAppendable b) {
 		b.append(emptyEnvironmentInvocation());
-	}
-
-	def dispatch void internalToConvertedExpression(EnvironmentReference e, ITreeAppendable b) {
-		b.append(e.getEnvironment().getName());
 	}
 
 	def void generateCommentWithOriginalCode(EObject modelElement,

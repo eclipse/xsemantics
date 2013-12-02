@@ -253,6 +253,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 			subEnvironment.environmentComposition.
 				subEnvironment.environmentMapping
 	}
+
+	@Test
+	def void testEnvironmentXExpression() {
+		testFiles.testEnvironmentXExpression.parseAndAssertNoError
+	}
 	
 	@Test
 	def void testCheckRule() {

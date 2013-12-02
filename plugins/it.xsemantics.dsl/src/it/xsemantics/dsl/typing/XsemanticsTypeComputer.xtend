@@ -9,7 +9,6 @@ import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
-import it.xsemantics.dsl.xsemantics.EnvironmentReference
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.OrExpression
@@ -24,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
+import it.xsemantics.runtime.RuleEnvironment
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -152,11 +152,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected def dispatch void handleEnvironmentSpecification(EmptyEnvironment e, ITypeComputationState state) {
-		
-	}
-
-	protected def dispatch void handleEnvironmentSpecification(EnvironmentReference e, ITypeComputationState state) {
-		//state.acceptActualType(getTypeForName(RuleEnvironment, state))
+		state.acceptActualType(getTypeForName(RuleEnvironment, state))
 	}
 
 	protected def dispatch void handleEnvironmentSpecification(EnvironmentComposition e, ITypeComputationState state) {
@@ -167,6 +163,10 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	protected def dispatch void handleEnvironmentSpecification(EnvironmentMapping e, ITypeComputationState state) {
 		e.key.computeTypes(state.withoutExpectation)
 		e.value.computeTypes(state.withoutExpectation)
+	}
+
+	protected def dispatch void handleEnvironmentSpecification(XExpression e, ITypeComputationState state) {
+		e.computeTypes(state.withoutExpectation)
 	}
 
 	protected def _computeTypes(Fail e, ITypeComputationState state) {
