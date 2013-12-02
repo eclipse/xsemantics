@@ -8,7 +8,6 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
-import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -19,7 +18,6 @@ import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import org.junit.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -32,6 +30,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.junit.Assert
 import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
@@ -232,11 +231,11 @@ class XsemanticsBaseTest {
 		rule.rulePremises.get(0) as RuleInvocation
 	}
 	
-	def getEnvironmentComposition(EnvironmentSpecification envSpec) {
+	def getEnvironmentComposition(XExpression envSpec) {
 		envSpec as EnvironmentComposition
 	}
 	
-	def getEnvironmentMapping(EnvironmentSpecification envSpec) {
+	def getEnvironmentMapping(XExpression envSpec) {
 		envSpec as EnvironmentMapping
 	}
 	

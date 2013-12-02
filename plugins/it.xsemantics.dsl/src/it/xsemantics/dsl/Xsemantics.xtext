@@ -136,14 +136,14 @@ RuleInvocationExpression returns xbase::XExpression:
 	XVariableDeclaration | XExpression
 ;
 
-EnvironmentSpecification:
+EnvironmentSpecification returns xbase::XExpression:
 	TerminalEnvironmentSpecification
 	=>({EnvironmentComposition.currentEnvironment = current}
 		EnvironmentComposition
 		subEnvironment=EnvironmentSpecification)*
 ;
 
-TerminalEnvironmentSpecification returns EnvironmentSpecification:
+TerminalEnvironmentSpecification returns xbase::XExpression:
 	{EmptyEnvironment} 'empty' |
 	{EnvironmentMapping} key=XExpression EnvironmentMapsTo value=XExpression |
 	EnvironmentReference

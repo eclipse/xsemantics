@@ -5,13 +5,13 @@ import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.EnvironmentReference
-import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -469,7 +468,15 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	}
 
 	def protected void generateEnvironmentSpecificationAsStatements(
-			EnvironmentSpecification environmentSpecification, ITreeAppendable b) {
+			XExpression environmentSpecification, ITreeAppendable b) {
+				
+		if (environmentSpecification instanceof EmptyEnvironment ||
+			environmentSpecification instanceof EnvironmentReference
+		) {
+			// already handled as expression
+			return
+		}
+				
 		if (environmentSpecification instanceof EnvironmentMapping) {
 			val mapping = environmentSpecification as EnvironmentMapping;
 			toJavaStatement(mapping.getKey(), b, true);
@@ -480,17 +487,13 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 					composition.getCurrentEnvironment(), b);
 			generateEnvironmentSpecificationAsStatements(
 					composition.getSubEnvironment(), b);
+		} else {
+			toJavaStatement(environmentSpecification, b, true);
 		}
 	}
 
 	def void generateEnvironmentSpecificationAsExpression(
-			EnvironmentSpecification environmentSpecification, ITreeAppendable b) {
-		if (environmentSpecification instanceof EmptyEnvironment) {
-			b.append(emptyEnvironmentInvocation());
-		} else if (environmentSpecification instanceof EnvironmentReference) {
-			b.append((environmentSpecification as EnvironmentReference)
-					.getEnvironment().getName());
-		}
+			XExpression environmentSpecification, ITreeAppendable b) {
 		if (environmentSpecification instanceof EnvironmentMapping) {
 			val mapping = environmentSpecification as EnvironmentMapping;
 			b.append(environmentEntryInvocation());
@@ -513,6 +516,8 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			b.decreaseIndentation();
 			newLine(b);
 			b.append(")");
+		} else {
+			toJavaExpression(environmentSpecification, b);
 		}
 	}
 
@@ -598,6 +603,14 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void internalToConvertedExpression(RuleInvocation ruleInvocation,
 			ITreeAppendable b) {
 		b.append(ruleInvocation.getVarName(b))
+	}
+
+	def dispatch void internalToConvertedExpression(EmptyEnvironment e, ITreeAppendable b) {
+		b.append(emptyEnvironmentInvocation());
+	}
+
+	def dispatch void internalToConvertedExpression(EnvironmentReference e, ITreeAppendable b) {
+		b.append(e.getEnvironment().getName());
 	}
 
 	def void generateCommentWithOriginalCode(EObject modelElement,

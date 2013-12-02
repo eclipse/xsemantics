@@ -9,7 +9,7 @@ import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
-import it.xsemantics.dsl.xsemantics.EnvironmentSpecification
+import it.xsemantics.dsl.xsemantics.EnvironmentReference
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.OrExpression
@@ -151,12 +151,12 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	
-	protected def dispatch void handleEnvironmentSpecification(EnvironmentSpecification e, ITypeComputationState state) {
+	protected def dispatch void handleEnvironmentSpecification(EmptyEnvironment e, ITypeComputationState state) {
 		
 	}
 
-	protected def dispatch void handleEnvironmentSpecification(EmptyEnvironment e, ITypeComputationState state) {
-		
+	protected def dispatch void handleEnvironmentSpecification(EnvironmentReference e, ITypeComputationState state) {
+		//state.acceptActualType(getTypeForName(RuleEnvironment, state))
 	}
 
 	protected def dispatch void handleEnvironmentSpecification(EnvironmentComposition e, ITypeComputationState state) {
