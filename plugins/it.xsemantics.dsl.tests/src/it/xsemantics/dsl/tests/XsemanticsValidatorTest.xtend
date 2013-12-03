@@ -318,4 +318,24 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testWrongEnvironmentXExpression() {
+		parser.parse(testFiles.testWrongEnvironmentXExpression).
+		assertError(
+			XbasePackage::eINSTANCE.XStringLiteral,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from String to RuleEnvironment"
+		)
+	}
+
+	@Test
+	def void testWrongEnvironmentXExpression2() {
+		parser.parse(testFiles.testWrongEnvironmentXExpression2).
+		assertError(
+			XbasePackage::eINSTANCE.XStringLiteral,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from String to RuleEnvironment"
+		)
+	}
+
 }

@@ -133,7 +133,9 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			val expressionState = state.withoutExpectation();
 			expressionState.computeTypes(expression);
 		}
-		e.environment.handleEnvironmentSpecification(state)
+		e.environment.handleEnvironmentSpecification(
+			state.withExpectation(getTypeForName(RuleEnvironment, state))
+		)
 		if (state.hasTypeExpectations && e.isPredicate)
 			state.acceptActualType(getTypeForName(Boolean.TYPE, state))
 		else
@@ -166,7 +168,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def dispatch void handleEnvironmentSpecification(XExpression e, ITypeComputationState state) {
-		e.computeTypes(state.withoutExpectation)
+		state.computeTypes(e)
 	}
 
 	protected def _computeTypes(Fail e, ITypeComputationState state) {

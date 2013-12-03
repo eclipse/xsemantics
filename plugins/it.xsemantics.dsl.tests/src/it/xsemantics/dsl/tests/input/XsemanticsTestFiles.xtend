@@ -1049,6 +1049,30 @@ class XsemanticsTestFiles {
 	    |- eClass : object
 	}
 	'''
+
+	def testWrongEnvironmentXExpression() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		"wrong"
+		|- eClass : object
+		
+	}
+	'''
+
+	def testWrongEnvironmentXExpression2() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		G, "wrong"
+		|- eClass : object
+		
+	}
+	'''
 	
 	def testRulesWithNonEObjectParams() '''
 	«testFileWithImports»
