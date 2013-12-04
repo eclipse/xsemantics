@@ -415,7 +415,7 @@ public class XsemanticsRuntimeSystemTests extends
 		assertEquals(1, environment.get("first"));
 		assertEquals(2, environment.get("second"));
 		// but different from the original
-		assertTrue(original != environment);
+		assertNull(original.get("second"));
 	}
 
 	@Test
