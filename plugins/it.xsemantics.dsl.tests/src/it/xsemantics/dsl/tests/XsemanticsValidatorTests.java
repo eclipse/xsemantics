@@ -249,24 +249,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testErrorSpecificationSourceNotEObject() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testErrorSpecificationSourceNotEObject());
-		validate.assertAll(AssertableDiagnostics.error(IssueCodes.NOT_EOBJECT,
-				"Not an EObject: String"));
-	}
-
-	@Test
-	public void testErrorSpecificationFeatureNotEStructuralFeature()
-			throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testErrorSpecificationFeatureNotEStructuralFeature());
-		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NOT_ESTRUCTURALFEATURE,
-				"Not an EStructuralFeature: EClass"));
-	}
-
-	@Test
 	public void testRuleInvocationWithWrongOutputArg() throws Exception {
 		EObject model = getModel(testFiles
 				.testRuleInvocationWithWrongOutputArg().toString());

@@ -24,6 +24,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import it.xsemantics.runtime.RuleEnvironment
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -178,8 +180,10 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
 	protected def _computeTypes(ErrorSpecification e, ITypeComputationState state) {
 		e.error?.computeTypes(state.withoutExpectation)
-		e.source?.computeTypes(state.withoutExpectation)
-		e.feature?.computeTypes(state.withoutExpectation)
+		e.source?.computeTypes
+			(state.withExpectation(getTypeForName(EObject, state)))
+		e.feature?.computeTypes
+			(state.withExpectation(getTypeForName(EStructuralFeature, state)))
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	

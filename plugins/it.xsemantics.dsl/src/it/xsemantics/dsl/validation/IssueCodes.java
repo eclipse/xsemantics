@@ -29,10 +29,6 @@ public interface IssueCodes {
 	String DUPLICATE_INJECTED_FIELD = PREFIX
 			+ "DuplicateInjectedField";
 	
-	String NOT_EOBJECT = PREFIX + "NotEObject";
-
-	String NOT_ESTRUCTURALFEATURE = PREFIX + "NotEStructuralFeature";
-
 	String NOT_VALIDATOR = PREFIX + "NotAbstractDeclarativeValidator";
 	
 	String NOT_PARAMETER = PREFIX + "NotParameter";

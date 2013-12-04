@@ -8,7 +8,6 @@ import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction;
 import it.xsemantics.dsl.xsemantics.CheckRule;
-import it.xsemantics.dsl.xsemantics.ErrorSpecification;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.InputParameter;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
@@ -436,30 +435,6 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 					}
 				}
 
-			}
-		}
-	}
-
-	@Check
-	public void checkErrorSpecification(ErrorSpecification errorSpecification) {
-		XExpression source = errorSpecification.getSource();
-		if (source != null) {
-			JvmTypeReference sourceType = typeSystem.getType(source);
-			if (!typeSystem.isEObject(sourceType, errorSpecification)) {
-				error("Not an EObject: " + getNameOfTypes(sourceType),
-						XsemanticsPackage.Literals.ERROR_SPECIFICATION__SOURCE,
-						IssueCodes.NOT_EOBJECT);
-			}
-		}
-		XExpression feature = errorSpecification.getFeature();
-		if (feature != null) {
-			JvmTypeReference featureType = typeSystem.getType(feature);
-			if (!typeSystem.isEStructuralFeature(featureType,
-					errorSpecification)) {
-				error("Not an EStructuralFeature: "
-						+ getNameOfTypes(featureType),
-						XsemanticsPackage.Literals.ERROR_SPECIFICATION__FEATURE,
-						IssueCodes.NOT_ESTRUCTURALFEATURE);
 			}
 		}
 	}

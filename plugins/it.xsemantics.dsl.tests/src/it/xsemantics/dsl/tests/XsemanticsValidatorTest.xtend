@@ -338,4 +338,24 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testErrorSpecificationFeatureNotEStructuralFeature() {
+		parser.parse(testFiles.testErrorSpecificationFeatureNotEStructuralFeature).
+		assertError(
+			XbasePackage::eINSTANCE.XMemberFeatureCall,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from EClass to EStructuralFeature"
+		)
+	}
+
+	@Test
+	def void testErrorSpecificationSourceNotEObject() {
+		parser.parse(testFiles.testErrorSpecificationSourceNotEObject).
+		assertError(
+			XbasePackage::eINSTANCE.XMemberFeatureCall,
+			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			"Type mismatch: cannot convert from String to EObject"
+		)
+	}
+
 }
