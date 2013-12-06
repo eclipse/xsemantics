@@ -115,16 +115,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EObject> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EObject> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EObject> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + "EObject",
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + "EObject",
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
+    	return null;
     }
   }
   

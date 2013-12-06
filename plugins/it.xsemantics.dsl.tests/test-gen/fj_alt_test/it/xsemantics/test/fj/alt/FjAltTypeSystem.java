@@ -289,14 +289,14 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   protected Result<Boolean> equalstypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type left, final Type right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleTypeEquals(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleTypeEquals(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTypeEquals) {
-      typeEqualsThrowException(e_applyRuleTypeEquals, left, right);
-      return null;
+    	typeEqualsThrowException(e_applyRuleTypeEquals, left, right);
+    	return null;
     }
   }
   
@@ -321,16 +321,16 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
-      addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
-      checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
-      	CHECKNEW,
-      	e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
-      return null;
+    	checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
+    		CHECKNEW,
+    		e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
+    	return null;
     }
   }
   
@@ -356,16 +356,16 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckClass) {
-      checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
-      	CHECKCLASS,
-      	e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
+    		CHECKCLASS,
+    		e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   

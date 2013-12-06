@@ -235,60 +235,6 @@ protected Result2<EObject,EStructuralFeature> applyRuleEClassEObjectEStructuralF
 )
 	}
 	
-	@Test
-	def testErrorInformationArgsWithOneEObjectArg() {
-		testFiles.testRuleWithTwoOutputParams.assertErrorInformationArgs
-(
-'''new ErrorInformation(eClass)'''
-)
-	}
-	
-	@Test
-	def testErrorInformationArgsWithTwoEObjectArg() {
-		testFiles.testSimpleRule.assertErrorInformationArgs
-(
-'''new ErrorInformation(eClass), new ErrorInformation(object)'''
-)
-	}
-
-	@Test
-	def testErrorInformationWithNoEObjectArg() {
-		testFiles.testRulesOfTheSameKind.assertErrorInformationArgs
-(
-''''''
-)
-	}
-	
-	@Test
-	def testFinalThrowWithNoErrorInformation() {
-		testFiles.testSimpleRule.assertFinalThrow
-(
-'''
-typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-	ECLASSEOBJECT,
-	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)})'''
-)
-	}
-	
-	@Test
-	def testFinalThrowRuleJudgmentErrorInformation() {
-		testFiles.testRuleJudgmentDescriptionsWithErrorSpecification.assertFinalThrow
-(
-'''
-typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-	TESTRULE,
-	e_applyRuleTestRule, o, new ErrorInformation[] {new ErrorInformation(o)})'''
-)
-	}
-	
-	@Test
-	def testFinalThrowRuleErrorInformation() {
-		testFiles.testRuleWithErrorSpecifications.assertFinalThrow
-(
-'''eClassEObjectThrowException(e_applyRuleEClassEObject, eClass, object)'''
-)
-	}
-	
 	// @Test does not work with Xbase 2.4.0
 	def testCompileImplMethod() {
 		testFiles.testSimpleRule.
@@ -345,19 +291,6 @@ protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicatio
 	def assertInit(CharSequence prog, CharSequence expected) {
 		val m = inferrer.genInit(prog.parseAndAssertNoError)
 		m.assertGeneratedMember(expected)
-	}
-	
-	def assertErrorInformationArgs(CharSequence prog, CharSequence expected) {
-		val a = createTestAppendable
-		inferrer.errorInformationArgs(prog.parseAndAssertNoError.rules.get(0), a)
-		assertEqualsStrings(
-		''', new ErrorInformation[] {«expected»}''', a.toString.trim)
-	}
-	
-	def assertFinalThrow(CharSequence prog, CharSequence expected) {
-		val a = createTestAppendable
-		inferrer.compileFinalThrow(prog.parseAndAssertNoError.rules.get(0), a)
-		assertEqualsStrings(expected, a.toString.trim)
 	}
 	
 	def assertGeneratedMember(JvmMember member, CharSequence expected) {

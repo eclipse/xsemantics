@@ -93,16 +93,16 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
   
   protected Result<Boolean> existsSubtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleExistsSubtypeWithLambda(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleExistsSubtypeWithLambda(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleExistsSubtypeWithLambda) {
-      existsSubtypeThrowException(ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right),
-      	EXISTSSUBTYPEWITHLAMBDA,
-      	e_applyRuleExistsSubtypeWithLambda, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	existsSubtypeThrowException(ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right),
+    		EXISTSSUBTYPEWITHLAMBDA,
+    		e_applyRuleExistsSubtypeWithLambda, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   

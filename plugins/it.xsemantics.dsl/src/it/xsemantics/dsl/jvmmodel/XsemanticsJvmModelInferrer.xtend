@@ -1,9 +1,9 @@
 package it.xsemantics.dsl.jvmmodel
 
 import com.google.inject.Inject
-
 import it.xsemantics.dsl.generator.UniqueNames
 import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
@@ -20,6 +20,7 @@ import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
@@ -27,14 +28,12 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -52,8 +51,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension XsemanticsGeneratorExtensions
 	
 	@Inject extension XsemanticsUtils
-	
-	@Inject extension TypeReferenceSerializer
 	
 	@Inject extension TypeReferences
 	
@@ -349,12 +346,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append(
-   				'''return «judgmentDescription.entryPointMethodName»(new ''')
-   				it.append(judgmentDescription.environmentType.type)
-   				it.append('''(), null, «judgmentDescription.inputArgs»);''')
-   			]
+   			body = '''return «judgmentDescription.entryPointMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
    		]
    		
    		// entry point method with environment parameter
@@ -368,10 +360,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append(
-   				'''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);''')
-   			]
+   			body = '''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
    		]
    		
    		// entry point method with environment parameter and rule application trace
@@ -386,18 +375,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append('''
+   			body = '''
 				try {
 					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
-				} catch (''')
-				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
-				it.append(" ")
-				it.append('''
-				«judgmentDescription.exceptionVarName») {
+				} catch («Exception» «judgmentDescription.exceptionVarName») {
 					return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
-				}''')
-   			]
+				}'''
    		]
    		
    		entryPointMethods
@@ -419,12 +402,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append(
-   				'''return «judgmentDescription.succeededMethodName»(new ''')
-   				it.append(judgmentDescription.environmentType.type)
-   				it.append('''(), null, «judgmentDescription.inputArgs»);''')
-   			]
+   			body = '''return «judgmentDescription.succeededMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
    		]
    		
    		// entry point method with environment parameter
@@ -438,10 +416,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append(
-   				'''return «judgmentDescription.succeededMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);''')
-   			]
+   			body = '''return «judgmentDescription.succeededMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
    		]
    		
    		// entry point method with environment parameter and rule application trace
@@ -456,19 +431,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append('''
+   			body = '''
 				try {
 					«judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
 					return true;
-				} catch (''')
-				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
-				it.append(" ")
-				it.append('''
-				«judgmentDescription.exceptionVarName») {
+				} catch («Exception» «judgmentDescription.exceptionVarName») {
 					return false;
-				}''')
-   			]
+				}'''
    		]
    		
    		inferredMethods
@@ -485,10 +454,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			parameters += aux.inputParameters
    			
-   			body = [
-   				it.append(
-   				'''return «aux.entryPointMethodName»(null, «aux.inputArgs»);''')
-   			]
+   			body = '''return «aux.entryPointMethodName»(null, «aux.inputArgs»);'''
    		]
    		
    		// entry point method with rule application trace
@@ -501,18 +467,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += aux.ruleApplicationTraceParam
    			parameters += aux.inputParameters
    			
-   			body = [
-   				it.append('''
+   			body = '''
 				try {
 					return «aux.entryPointInternalMethodName»(«ruleApplicationTraceName», «aux.inputArgs»);
-				} catch (''')
-				aux.exceptionType.serialize(aux, it)
-				it.append(" ")
-				it.append('''
-				«aux.exceptionVarName») {
+				} catch («Exception» «aux.exceptionVarName») {
 					throw extractRuleFailedException(«aux.exceptionVarName»);
-				}''')
-   			]
+				}'''
    		]
    		
    		entryPointMethods
@@ -594,9 +554,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			if (errorSpecification != null) {
    				body = errorSpecification
    			} else {
-   				body = [
-   					append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-   				]
+   				body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
    			}
    			
 //   			body = [
@@ -649,9 +607,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			if (errorSpecification != null) {
    				body = errorSpecification
    			} else {
-   				body = [
-   					append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-   				]
+   				body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
    			}
    			
 //   			body = [
@@ -688,21 +644,14 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = [
-   				it.append('''
-					try {
-						checkParamsNotNull(«judgmentDescription.inputArgs»);
-						return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «judgmentDescription.inputArgs»);
-					} catch (''')
-				judgmentDescription.exceptionType.serialize(judgmentDescription, it)
-				it.append(" ")
-				it.append('''
-					«judgmentDescription.exceptionVarName») {
-						sneakyThrowRuleFailedException(«judgmentDescription.exceptionVarName»);
-						return null;
-					}'''
-				)
-   			]
+   			body = '''
+			try {
+				checkParamsNotNull(«judgmentDescription.inputArgs»);
+				return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «judgmentDescription.inputArgs»);
+			} catch («Exception» «judgmentDescription.exceptionVarName») {
+				sneakyThrowRuleFailedException(«judgmentDescription.exceptionVarName»);
+				return null;
+			}'''
 		]
 	}
 	
@@ -723,28 +672,19 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			val isBoolean = aux.newTypeRef(typeof(Boolean)).
 				isConformant(aux.type)
    			
-   			body = [
-   				it.append('''
-					try {
-						checkParamsNotNull(«aux.inputArgs»);
-						return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «aux.inputArgs»);
-					} catch (''')
-				aux.exceptionType.serialize(aux, it)
-				it.append(" ")
-				if (isBoolean)
-					it.append('''
-						«aux.exceptionVarName») {
-							return false;
-						}'''
-					)
-				else
-					it.append('''
-						«aux.exceptionVarName») {
-							sneakyThrowRuleFailedException(«aux.exceptionVarName»);
-							return null;
-						}'''
-					)
-   			]
+   			body = '''
+				try {
+					checkParamsNotNull(«aux.inputArgs»);
+					return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «aux.inputArgs»);
+				} catch («Exception» «aux.exceptionVarName») {
+					«IF isBoolean»
+						return false;
+					«ELSE»
+						sneakyThrowRuleFailedException(«aux.exceptionVarName»);
+						return null;
+					«ENDIF»
+				}
+				'''
 		]
 	}
 
@@ -773,27 +713,24 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += rule.judgmentDescription.ruleApplicationTraceParam
    			parameters += rule.inputParameters
    			
-   			body = [
-   				it.append('''try {''').increaseIndentation.newLine
-				it.append(rule.ruleApplicationTraceType.type)
-				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
-				rule.judgmentDescription.resultType(it)
-				it.append(" ")
-				it.append('''
-					_result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
+   			body = '''
+				try {
+					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
+					«rule.judgmentDescription.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return _result_;''').decreaseIndentation.newLine
-				it.append('''} catch (''')
-				rule.exceptionType.serialize(rule, it)
-				it.append(" ")
-				it.append('''''')
-				it.append('''«rule.exceptionVarName») {''').increaseIndentation.newLine
-   				rule.compileFinalThrow(it)
-   				it.append(''';''').newLine
-   				it.append('''return null;''').decreaseIndentation.newLine
-   				it.append('''}''')
-   			]
+					return _result_;
+				} catch («Exception» «rule.exceptionVarName») {
+					«IF rule.conclusion.error != null»
+					«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»);
+					«ELSE»
+					«rule.judgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
+						«rule.ruleIssueString»,
+						e_«rule.applyRuleName», «rule.inputParameterNames»«rule.errorInformationArgs»);
+					«ENDIF»
+					return null;
+				}
+   				'''
 		]
 	}
 
@@ -810,107 +747,33 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += aux.auxiliaryDescription.ruleApplicationTraceParam
    			parameters += aux.inputParameters
    			
-   			body = [
-   				it.append('''try {''').increaseIndentation.newLine
-				it.append(aux.ruleApplicationTraceType.type)
-				it.append(''' «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;''').newLine
-				it.append(aux.resultType.type)
-				it.append(" ")
-				it.append('''
-					_result_ = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
+   			body = '''
+				try {
+					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
+					«aux.resultType.type» _result_ = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), aux.traceStringForAuxiliaryFun)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return _result_;''').decreaseIndentation.newLine
-				it.append('''} catch (''')
-				aux.exceptionType.serialize(aux, it)
-				it.append(" ")
-				it.append('''''')
-				it.append('''e_«aux.applyAuxFunName») {''').increaseIndentation.newLine
-   				aux.compileFinalThrow(it)
-   				it.append(''';''').newLine
-   				it.append('''return null;''').decreaseIndentation.newLine
-   				it.append('''}''')
-   			]
+					return _result_;
+				} catch («Exception» e_«aux.applyAuxFunName») {
+					«aux.auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
+						«aux.auxiliaryDescription.ruleIssueString»,
+						e_«aux.applyAuxFunName», «aux.inputParameterNames»«aux.errorInformationArgs»);
+					return null;
+				}
+   				'''
 		]
 	}
 	
-	def ruleApplicationTraceType(EObject o) {
-		o.newTypeRef(typeof(RuleApplicationTrace))
-	}
-	
-	def compileFinalThrow(Rule rule, ITreeAppendable b) {
-		if (rule.conclusion.error != null) {
-			b.append(
-			'''«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»)'''
-			)
-//			val errorSpecification = rule.conclusion.error
-//			val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, b)
-//			val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, b)
-//			val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, b)
-//			b.newLine()
-//			
-//			b.append('''
-//   					«throwRuleFailedExceptionMethod»(«error»,
-//   						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
-//			rule.errorInformationType.serialize(rule, b)
-//			b.append('''(«source», «feature»))''')
-		} else {
-			b.append('''
-			«rule.judgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
-				«rule.ruleIssueString»,
-				e_«rule.applyRuleName», «rule.inputParameterNames»''')
-			rule.errorInformationArgs(b)
-			b.append(''')''')
-		}
+	def StringConcatenationClient errorInformationArgs(Rule rule) {
+		rule.inputEObjectParams.map[parameter.name].errorInformationArgs
 	}
 
-	def compileFinalThrow(AuxiliaryFunction aux, ITreeAppendable b) {
-		b.append('''
-		«aux.auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
-			«aux.auxiliaryDescription.ruleIssueString»,
-			e_«aux.applyAuxFunName», «aux.inputParameterNames»''')
-		aux.errorInformationArgs(b)
-		b.append(''')''')
+	def StringConcatenationClient errorInformationArgs(AuxiliaryFunction aux) {
+		aux.inputEObjectParams.map[name].errorInformationArgs
 	}
 
-	def errorInformationArgs(Rule rule, ITreeAppendable b) {
-		val inputEObjects = rule.inputEObjectParams
-		b.append(", ")
-		b.append('''new ''')
-		rule.newTypeRef(typeof(ErrorInformation)).serialize(rule, b)
-		b.append('''[] {''')
-
-		val iter = inputEObjects.iterator
-		val errInfoType = rule.errorInformationType.type
-		while (iter.hasNext) {
-			b.append("new ")
-			b.append(errInfoType)
-			b.append('''(«iter.next.parameter.name»)''')
-			if (iter.hasNext)
-				b.append(", ")
-		}
-
-		b.append('''}''')
-	}
-
-	def errorInformationArgs(AuxiliaryFunction aux, ITreeAppendable b) {
-		val inputEObjects = aux.inputEObjectParams
-		b.append(", ")
-		b.append('''new ''')
-		aux.newTypeRef(typeof(ErrorInformation)).serialize(aux, b)
-		b.append('''[] {''')
-
-		val iter = inputEObjects.iterator
-		val errInfoType = aux.errorInformationType.type
-		while (iter.hasNext) {
-			b.append("new ")
-			b.append(errInfoType)
-			b.append('''(«iter.next.name»)''')
-			if (iter.hasNext)
-				b.append(", ")
-		}
-
-		b.append('''}''')
+	def StringConcatenationClient errorInformationArgs(Iterable<String> names) {
+		''', new «ErrorInformation»[] {«FOR name : names SEPARATOR ', '»new «ErrorInformation»(«name»)«ENDFOR»}'''
 	}
 
 	def compileApplyMethod(Rule rule) {
@@ -1019,11 +882,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					rule.element.parameter.parameterType
    				)
    			
-   			body = [
-   				it.append(
-   				'''return «rule.methodName»(null, «rule.element.parameter.name»);'''
-   				)
-   			]
+   			body = '''return «rule.methodName»(null, «rule.element.parameter.name»);'''
 		]
 		
 		checkMethods += rule.toMethod(
@@ -1040,21 +899,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					rule.element.parameter.parameterType
    				)
    			
-   			body = [
-   				it.append(
-   				'''
+   			body = '''
 				try {
 					return «rule.methodName»Internal(«ruleApplicationTraceName.toString», «rule.element.parameter.name»);
-				} catch ('''
-   				)
-   				rule.exceptionType.serialize(rule, it)
-   				it.append(
-   				'''
-				 e) {
+				} catch («Exception» e) {
 					return resultForFailure(e);
 				}'''
-   				)
-   			]
 		]
 		
 		checkMethods
@@ -1076,14 +926,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					rule.element.parameter.parameterType
    				)
    			
-   			body = [
-   				it.append(
+   			body = 
    				'''
 				errorGenerator.generateErrors(this,
 					getXsemanticsSystem().«rule.methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
-   				)
-   			]
 		]
 	}
 
@@ -1107,14 +954,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    				)
 
    			body = rule.premises
-//   			body = [
-//   				rule.compilePremises(it)
-//   				if (!it.toString.empty)
-//					it.newLine
-//				it.append("return new ")
-//				rule.resultType(it)
-//				it.append("(true);")
-//   			]
 		]
 	}
 	
@@ -1142,8 +981,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def void compilePremises(CheckRule rule, ITreeAppendable result) {
 		xbaseCompiler.toJavaStatement(rule.premises, result, false)
 	}
-	
-
 
 }
 

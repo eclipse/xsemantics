@@ -181,16 +181,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -350,16 +350,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject,EStructuralFeature> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result2<EObject,EStructuralFeature> _result_ = applyRuleEClassEObjectEStructuralFeature(G, _subtrace_, eClass);
-      addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result2<EObject, EStructuralFeature> _result_ = applyRuleEClassEObjectEStructuralFeature(G, _subtrace_, eClass);
+    	addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObjectEStructuralFeature) {
-      type2ThrowException(ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature",
-      	ECLASSEOBJECTESTRUCTURALFEATURE,
-      	e_applyRuleEClassEObjectEStructuralFeature, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
-      return null;
+    	type2ThrowException(ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature",
+    		ECLASSEOBJECTESTRUCTURALFEATURE,
+    		e_applyRuleEClassEObjectEStructuralFeature, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
+    	return null;
     }
   }
   
@@ -444,16 +444,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result3<EObject,EStructuralFeature,String> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result3<EObject,EStructuralFeature,String> _result_ = applyRuleEClassEObjectEStructuralFeatureString(G, _subtrace_, eClass);
-      addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " : " + stringRep(_result_.getThird()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result3<EObject, EStructuralFeature, String> _result_ = applyRuleEClassEObjectEStructuralFeatureString(G, _subtrace_, eClass);
+    	addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " : " + stringRep(_result_.getThird()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObjectEStructuralFeatureString) {
-      typeThrowException(ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature" + " : " + "String",
-      	ECLASSEOBJECTESTRUCTURALFEATURESTRING,
-      	e_applyRuleEClassEObjectEStructuralFeatureString, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
-      return null;
+    	typeThrowException(ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + "EObject" + " : " + "EStructuralFeature" + " : " + "String",
+    		ECLASSEOBJECTESTRUCTURALFEATURESTRING,
+    		e_applyRuleEClassEObjectEStructuralFeatureString, eClass, new ErrorInformation[] {new ErrorInformation(eClass)});
+    	return null;
     }
   }
   
@@ -540,16 +540,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -728,16 +728,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, object, new ErrorInformation[] {new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, object, new ErrorInformation[] {new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -908,16 +908,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -1009,16 +1009,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject,EStructuralFeature> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result2<EObject,EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTwoExpressionsInConclusion) {
-      typeThrowException(ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + "EClass" + " : " + "EStructuralFeature",
-      	TWOEXPRESSIONSINCONCLUSION,
-      	e_applyRuleTwoExpressionsInConclusion, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	typeThrowException(ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + "EClass" + " : " + "EStructuralFeature",
+    		TWOEXPRESSIONSINCONCLUSION,
+    		e_applyRuleTwoExpressionsInConclusion, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
@@ -1108,16 +1108,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject,EStructuralFeature> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result2<EObject,EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTwoExpressionsInConclusion) {
-      typeThrowException(ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + "EClass" + " : " + "EStructuralFeature",
-      	TWOEXPRESSIONSINCONCLUSION,
-      	e_applyRuleTwoExpressionsInConclusion, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	typeThrowException(ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + "EClass" + " : " + "EStructuralFeature",
+    		TWOEXPRESSIONSINCONCLUSION,
+    		e_applyRuleTwoExpressionsInConclusion, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
@@ -1204,16 +1204,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, object, new ErrorInformation[] {new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, object, new ErrorInformation[] {new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -1348,16 +1348,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -1496,16 +1496,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -1604,16 +1604,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -1809,16 +1809,16 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
-      addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
+    	addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromTypeSystem) {
-      typeThrowException(ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + "EClass",
-      	FROMTYPESYSTEM,
-      	e_applyRuleFromTypeSystem, c, new ErrorInformation[] {new ErrorInformation(c)});
-      return null;
+    	typeThrowException(ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + "EClass",
+    		FROMTYPESYSTEM,
+    		e_applyRuleFromTypeSystem, c, new ErrorInformation[] {new ErrorInformation(c)});
+    	return null;
     }
   }
   
@@ -1837,16 +1837,16 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
-      addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromExtendedTypeSystem) {
-      subtypeThrowException(ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2),
-      	FROMEXTENDEDTYPESYSTEM,
-      	e_applyRuleFromExtendedTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
-      return null;
+    	subtypeThrowException(ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2),
+    		FROMEXTENDEDTYPESYSTEM,
+    		e_applyRuleFromExtendedTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
+    	return null;
     }
   }
   
@@ -1858,16 +1858,16 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<Boolean> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
-      addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromThisTypeSystem) {
-      type2ThrowException(ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2),
-      	FROMTHISTYPESYSTEM,
-      	e_applyRuleFromThisTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
-      return null;
+    	type2ThrowException(ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2),
+    		FROMTHISTYPESYSTEM,
+    		e_applyRuleFromThisTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
+    	return null;
     }
   }
   
@@ -1981,16 +1981,16 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
-      addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
+    	addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromTypeSystem) {
-      typeThrowException(ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + "EClass",
-      	FROMTYPESYSTEM,
-      	e_applyRuleFromTypeSystem, c, new ErrorInformation[] {new ErrorInformation(c)});
-      return null;
+    	typeThrowException(ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + "EClass",
+    		FROMTYPESYSTEM,
+    		e_applyRuleFromTypeSystem, c, new ErrorInformation[] {new ErrorInformation(c)});
+    	return null;
     }
   }
   
@@ -2008,16 +2008,16 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
-      addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromExtendedTypeSystem) {
-      subtypeThrowException(ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2),
-      	FROMEXTENDEDTYPESYSTEM,
-      	e_applyRuleFromExtendedTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
-      return null;
+    	subtypeThrowException(ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2),
+    		FROMEXTENDEDTYPESYSTEM,
+    		e_applyRuleFromExtendedTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
+    	return null;
     }
   }
   
@@ -2031,16 +2031,16 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<Boolean> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
-      addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFromThisTypeSystem) {
-      type2ThrowException(ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2),
-      	FROMTHISTYPESYSTEM,
-      	e_applyRuleFromThisTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
-      return null;
+    	type2ThrowException(ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2),
+    		FROMTHISTYPESYSTEM,
+    		e_applyRuleFromThisTypeSystem, c1, c2, new ErrorInformation[] {new ErrorInformation(c1), new ErrorInformation(c2)});
+    	return null;
     }
   }
   
@@ -2457,16 +2457,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleTypeEObject(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleTypeEObject(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTypeEObject) {
-      typeThrowException(ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	TYPEEOBJECT,
-      	e_applyRuleTypeEObject, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		TYPEEOBJECT,
+    		e_applyRuleTypeEObject, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -2482,14 +2482,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleTypeEClass(G, _subtrace_, c);
-      addToTrace(_trace_, ruleName("TypeEClass") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleTypeEClass(G, _subtrace_, c);
+    	addToTrace(_trace_, ruleName("TypeEClass") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTypeEClass) {
-      typeEClassThrowException(e_applyRuleTypeEClass, c);
-      return null;
+    	typeEClassThrowException(e_applyRuleTypeEClass, c);
+    	return null;
     }
   }
   
@@ -2514,14 +2514,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleSubtypeEObject(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("SubtypeEObject") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubtypeEObject(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("SubtypeEObject") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleSubtypeEObject) {
-      subtypeEObjectThrowException(e_applyRuleSubtypeEObject, left, right);
-      return null;
+    	subtypeEObjectThrowException(e_applyRuleSubtypeEObject, left, right);
+    	return null;
     }
   }
   
@@ -2540,16 +2540,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EStructuralFeature left, final EObject right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleSubtypeEStructuralFeature(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubtypeEStructuralFeature(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleSubtypeEStructuralFeature) {
-      subtypeThrowException(ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
-      	SUBTYPEESTRUCTURALFEATURE,
-      	e_applyRuleSubtypeEStructuralFeature, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	subtypeThrowException(ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+    		SUBTYPEESTRUCTURALFEATURE,
+    		e_applyRuleSubtypeEStructuralFeature, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -2563,16 +2563,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleSubtypeEClass(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubtypeEClass(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleSubtypeEClass) {
-      subtypeThrowException(ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
-      	SUBTYPEECLASS,
-      	e_applyRuleSubtypeEClass, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	subtypeThrowException(ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+    		SUBTYPEECLASS,
+    		e_applyRuleSubtypeEClass, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -2582,6 +2582,224 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     if (!_isSuperTypeOf) {
       sneakyThrowRuleFailedException("right.isSuperTypeOf(left)");
     }
+    return new Result<Boolean>(true);
+  }
+}
+''',
+null
+		)
+	}
+
+	@Test
+	def testErrorInformationWithNoEObjectArg() {
+		testFiles.testRulesOfTheSameKind.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String TYPE1 = "it.xsemantics.test.rules.Type1";
+  
+  public final static String TYPE2 = "it.xsemantics.test.rules.Type2";
+  
+  public final static String SUBTYPE1 = "it.xsemantics.test.rules.SubType1";
+  
+  public final static String SUBTYPE2 = "it.xsemantics.test.rules.SubType2";
+  
+  private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
+  
+  private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 4, "|-", ":");
+    subtypeDispatcher = buildPolymorphicDispatcher1(
+    	"subtypeImpl", 4, "|-", "<:");
+  }
+  
+  public Result<Boolean> type(final Object o1, final Object o2) {
+    return type(new RuleEnvironment(), null, o1, o2);
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final Object o1, final Object o2) {
+    return type(_environment_, null, o1, o2);
+  }
+  
+  public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	return typeInternal(_environment_, _trace_, o1, o2);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  public Boolean typeSucceeded(final Object o1, final Object o2) {
+    return typeSucceeded(new RuleEnvironment(), null, o1, o2);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final Object o1, final Object o2) {
+    return typeSucceeded(_environment_, null, o1, o2);
+  }
+  
+  public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	typeInternal(_environment_, _trace_, o1, o2);
+    	return true;
+    } catch (Exception _e_type) {
+    	return false;
+    }
+  }
+  
+  public Result<Boolean> subtype(final Object o1, final Object o2) {
+    return subtype(new RuleEnvironment(), null, o1, o2);
+  }
+  
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final Object o1, final Object o2) {
+    return subtype(_environment_, null, o1, o2);
+  }
+  
+  public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	return subtypeInternal(_environment_, _trace_, o1, o2);
+    } catch (Exception _e_subtype) {
+    	return resultForFailure(_e_subtype);
+    }
+  }
+  
+  public Boolean subtypeSucceeded(final Object o1, final Object o2) {
+    return subtypeSucceeded(new RuleEnvironment(), null, o1, o2);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Object o1, final Object o2) {
+    return subtypeSucceeded(_environment_, null, o1, o2);
+  }
+  
+  public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	subtypeInternal(_environment_, _trace_, o1, o2);
+    	return true;
+    } catch (Exception _e_subtype) {
+    	return false;
+    }
+  }
+  
+  protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	checkParamsNotNull(o1, o2);
+    	return typeDispatcher.invoke(_environment_, _trace_, o1, o2);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final Object o1, final Object o2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Object o1, final Object o2) {
+    try {
+    	checkParamsNotNull(o1, o2);
+    	return subtypeDispatcher.invoke(_environment_, _trace_, o1, o2);
+    } catch (Exception _e_subtype) {
+    	sneakyThrowRuleFailedException(_e_subtype);
+    	return null;
+    }
+  }
+  
+  protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Object o1, final Object o2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleType1(G, _subtrace_, s1, i2);
+    	addToTrace(_trace_, ruleName("Type1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " : " + stringRep(i2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleType1) {
+    	typeThrowException(ruleName("Type1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " : " + stringRep(i2),
+    		TYPE1,
+    		e_applyRuleType1, s1, i2, new ErrorInformation[] {});
+    	return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleType1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
+    
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleType2(G, _subtrace_, b1, i2);
+    	addToTrace(_trace_, ruleName("Type2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " : " + stringRep(i2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleType2) {
+    	typeThrowException(ruleName("Type2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " : " + stringRep(i2),
+    		TYPE2,
+    		e_applyRuleType2, b1, i2, new ErrorInformation[] {});
+    	return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleType2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
+    
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubType1(G, _subtrace_, s1, i2);
+    	addToTrace(_trace_, ruleName("SubType1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " <: " + stringRep(i2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleSubType1) {
+    	subtypeThrowException(ruleName("SubType1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " <: " + stringRep(i2),
+    		SUBTYPE1,
+    		e_applyRuleSubType1, s1, i2, new ErrorInformation[] {});
+    	return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubType1(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
+    
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubType2(G, _subtrace_, b1, i2);
+    	addToTrace(_trace_, ruleName("SubType2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " <: " + stringRep(i2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleSubType2) {
+    	subtypeThrowException(ruleName("SubType2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " <: " + stringRep(i2),
+    		SUBTYPE2,
+    		e_applyRuleSubType2, b1, i2, new ErrorInformation[] {});
+    	return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubType2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
+    
     return new Result<Boolean>(true);
   }
 }
@@ -2671,16 +2889,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -2806,16 +3024,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -2930,16 +3148,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
-      typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
-      	ECLASSEOBJECT,
-      	e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeThrowException(ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object),
+    		ECLASSEOBJECT,
+    		e_applyRuleEClassEObject, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -3152,16 +3370,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Boolean _result_ = applyAuxFunIsValue(_subtrace_, eO, eC);
-      addToTrace(_trace_, auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunIsValue(_subtrace_, eO, eC);
+    	addToTrace(_trace_, auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
-      isValueThrowException(auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
-      	ISVALUE,
-      	e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
-      return null;
+    	isValueThrowException(auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
+    		ISVALUE,
+    		e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
+    	return null;
     }
   }
   
@@ -3177,16 +3395,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
-      addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
+    	addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunObjectClass) {
-      objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
-      	OBJECTCLASS,
-      	e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
+    		OBJECTCLASS,
+    		e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3197,16 +3415,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
-      addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+    	addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunVoidFun) {
-      voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
-      	VOIDFUN,
-      	e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
+    		VOIDFUN,
+    		e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3221,16 +3439,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EStructuralFeature o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
-      addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+    	addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunVoidFun) {
-      voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
-      	VOIDFUN,
-      	e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
+    		VOIDFUN,
+    		e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3365,16 +3583,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
-      addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
+    	addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunObjectClass) {
-      objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
-      	OBJECTCLASS,
-      	e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	objectClassThrowException(auxFunName("objectClass") + "(" + stringRep(o)+ ")",
+    		OBJECTCLASS,
+    		e_applyAuxFunObjectClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3385,16 +3603,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
-      typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	EOBJECTECLASS,
-      	e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3474,16 +3692,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<EClass> _result_ = applyRuleTestRule(G, _subtrace_, o);
-      addToTrace(_trace_, ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleTestRule(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTestRule) {
-      typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
-      	TESTRULE,
-      	e_applyRuleTestRule, o, new ErrorInformation[] {new ErrorInformation(o)});
-      return null;
+    	typeThrowException(ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		TESTRULE,
+    		e_applyRuleTestRule, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
     }
   }
   
@@ -3634,16 +3852,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeUnionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleUnionRule(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleUnionRule(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleUnionRule) {
-      typeUnionThrowException(ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object),
-      	UNIONRULE,
-      	e_applyRuleUnionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeUnionThrowException(ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object),
+    		UNIONRULE,
+    		e_applyRuleUnionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   
@@ -3659,16 +3877,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeIntersectionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleIntersectionRule(G, _subtrace_, eClass, object);
-      addToTrace(_trace_, ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleIntersectionRule(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleIntersectionRule) {
-      typeIntersectionThrowException(ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object),
-      	INTERSECTIONRULE,
-      	e_applyRuleIntersectionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
-      return null;
+    	typeIntersectionThrowException(ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object),
+    		INTERSECTIONRULE,
+    		e_applyRuleIntersectionRule, eClass, object, new ErrorInformation[] {new ErrorInformation(eClass), new ErrorInformation(object)});
+    	return null;
     }
   }
   

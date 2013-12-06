@@ -691,16 +691,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected List<it.xsemantics.example.fj.fj.Class> superclassesImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      List _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
-      addToTrace(_trace_, auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	List _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
+    	addToTrace(_trace_, auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyAuxFunSuperclasses) {
-      superclassesThrowException(auxFunName("superclasses") + "(" + stringRep(cl)+ ")",
-      	SUPERCLASSES,
-      	e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	superclassesThrowException(auxFunName("superclasses") + "(" + stringRep(cl)+ ")",
+    		SUPERCLASSES,
+    		e_applyAuxFunSuperclasses, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
@@ -714,16 +714,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typedeclImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTTypedElement(G, _subtrace_, typedElement);
-      addToTrace(_trace_, ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTTypedElement(G, _subtrace_, typedElement);
+    	addToTrace(_trace_, ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTTypedElement) {
-      typedeclThrowException(ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + "Type",
-      	TTYPEDELEMENT,
-      	e_applyRuleTTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
-      return null;
+    	typedeclThrowException(ruleName("TTypedElement") + stringRepForEnv(G) + " ||- " + stringRep(typedElement) + " : " + "Type",
+    		TTYPEDELEMENT,
+    		e_applyRuleTTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
+    	return null;
     }
   }
   
@@ -739,16 +739,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTThis(G, _subtrace_, _this);
-      addToTrace(_trace_, ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTThis(G, _subtrace_, _this);
+    	addToTrace(_trace_, ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTThis) {
-      typeThrowException(ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + "ClassType",
-      	TTHIS,
-      	e_applyRuleTThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
-      return null;
+    	typeThrowException(ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + "ClassType",
+    		TTHIS,
+    		e_applyRuleTThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
+    	return null;
     }
   }
   
@@ -765,16 +765,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
-      addToTrace(_trace_, ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTNew) {
-      typeThrowException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
-      	TNEW,
-      	e_applyRuleTNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
-      return null;
+    	typeThrowException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
+    		TNEW,
+    		e_applyRuleTNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
+    	return null;
     }
   }
   
@@ -790,16 +790,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTParamRef(G, _subtrace_, paramref);
-      addToTrace(_trace_, ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTParamRef(G, _subtrace_, paramref);
+    	addToTrace(_trace_, ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTParamRef) {
-      typeThrowException(ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + "Type",
-      	TPARAMREF,
-      	e_applyRuleTParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
-      return null;
+    	typeThrowException(ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + "Type",
+    		TPARAMREF,
+    		e_applyRuleTParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
+    	return null;
     }
   }
   
@@ -816,16 +816,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringConstant s) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTStringConstant(G, _subtrace_, s);
-      addToTrace(_trace_, ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTStringConstant(G, _subtrace_, s);
+    	addToTrace(_trace_, ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTStringConstant) {
-      typeThrowException(ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + "BasicType",
-      	TSTRINGCONSTANT,
-      	e_applyRuleTStringConstant, s, new ErrorInformation[] {new ErrorInformation(s)});
-      return null;
+    	typeThrowException(ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + "BasicType",
+    		TSTRINGCONSTANT,
+    		e_applyRuleTStringConstant, s, new ErrorInformation[] {new ErrorInformation(s)});
+    	return null;
     }
   }
   
@@ -846,16 +846,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final IntConstant i) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTIntConstant(G, _subtrace_, i);
-      addToTrace(_trace_, ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTIntConstant(G, _subtrace_, i);
+    	addToTrace(_trace_, ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTIntConstant) {
-      typeThrowException(ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + "BasicType",
-      	TINTCONSTANT,
-      	e_applyRuleTIntConstant, i, new ErrorInformation[] {new ErrorInformation(i)});
-      return null;
+    	typeThrowException(ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + "BasicType",
+    		TINTCONSTANT,
+    		e_applyRuleTIntConstant, i, new ErrorInformation[] {new ErrorInformation(i)});
+    	return null;
     }
   }
   
@@ -871,16 +871,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BoolConstant b) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTBoolConstant(G, _subtrace_, b);
-      addToTrace(_trace_, ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTBoolConstant(G, _subtrace_, b);
+    	addToTrace(_trace_, ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTBoolConstant) {
-      typeThrowException(ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + "BasicType",
-      	TBOOLCONSTANT,
-      	e_applyRuleTBoolConstant, b, new ErrorInformation[] {new ErrorInformation(b)});
-      return null;
+    	typeThrowException(ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + "BasicType",
+    		TBOOLCONSTANT,
+    		e_applyRuleTBoolConstant, b, new ErrorInformation[] {new ErrorInformation(b)});
+    	return null;
     }
   }
   
@@ -907,16 +907,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
-      addToTrace(_trace_, ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
+    	addToTrace(_trace_, ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTSelection) {
-      typeThrowException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
-      	TSELECTION,
-      	e_applyRuleTSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
-      return null;
+    	typeThrowException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
+    		TSELECTION,
+    		e_applyRuleTSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
+    	return null;
     }
   }
   
@@ -933,16 +933,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
-      addToTrace(_trace_, ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
+    	addToTrace(_trace_, ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTCast) {
-      typeThrowException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
-      	TCAST,
-      	e_applyRuleTCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
-      return null;
+    	typeThrowException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
+    		TCAST,
+    		e_applyRuleTCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
+    	return null;
     }
   }
   
@@ -958,16 +958,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<ClassType> classtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<ClassType> _result_ = applyRuleTExpressionClassType(G, _subtrace_, expression);
-      addToTrace(_trace_, ruleName("TExpressionClassType") + stringRepForEnv(G) + " ||~ " + stringRep(expression) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<ClassType> _result_ = applyRuleTExpressionClassType(G, _subtrace_, expression);
+    	addToTrace(_trace_, ruleName("TExpressionClassType") + stringRepForEnv(G) + " ||~ " + stringRep(expression) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTExpressionClassType) {
-      classtypeThrowException(ruleName("TExpressionClassType") + stringRepForEnv(G) + " ||~ " + stringRep(expression) + " : " + "ClassType",
-      	TEXPRESSIONCLASSTYPE,
-      	e_applyRuleTExpressionClassType, expression, new ErrorInformation[] {new ErrorInformation(expression)});
-      return null;
+    	classtypeThrowException(ruleName("TExpressionClassType") + stringRepForEnv(G) + " ||~ " + stringRep(expression) + " : " + "ClassType",
+    		TEXPRESSIONCLASSTYPE,
+    		e_applyRuleTExpressionClassType, expression, new ErrorInformation[] {new ErrorInformation(expression)});
+    	return null;
     }
   }
   
@@ -983,16 +983,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleBasicSubtyping(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleBasicSubtyping(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleBasicSubtyping) {
-      subtypeThrowException(ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
-      	BASICSUBTYPING,
-      	e_applyRuleBasicSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	subtypeThrowException(ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+    		BASICSUBTYPING,
+    		e_applyRuleBasicSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -1009,16 +1009,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleClassSubtyping(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleClassSubtyping(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleClassSubtyping) {
-      subtypeThrowException(ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
-      	CLASSSUBTYPING,
-      	e_applyRuleClassSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	subtypeThrowException(ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+    		CLASSSUBTYPING,
+    		e_applyRuleClassSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -1032,16 +1032,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subclassImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class class1, final it.xsemantics.example.fj.fj.Class class2) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleSubclassing(G, _subtrace_, class1, class2);
-      addToTrace(_trace_, ruleName("Subclassing") + stringRepForEnv(G) + " |- " + stringRep(class1) + " <| " + stringRep(class2));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubclassing(G, _subtrace_, class1, class2);
+    	addToTrace(_trace_, ruleName("Subclassing") + stringRepForEnv(G) + " |- " + stringRep(class1) + " <| " + stringRep(class2));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleSubclassing) {
-      subclassThrowException(ruleName("Subclassing") + stringRepForEnv(G) + " |- " + stringRep(class1) + " <| " + stringRep(class2),
-      	SUBCLASSING,
-      	e_applyRuleSubclassing, class1, class2, new ErrorInformation[] {new ErrorInformation(class1), new ErrorInformation(class2)});
-      return null;
+    	subclassThrowException(ruleName("Subclassing") + stringRepForEnv(G) + " |- " + stringRep(class1) + " <| " + stringRep(class2),
+    		SUBCLASSING,
+    		e_applyRuleSubclassing, class1, class2, new ErrorInformation[] {new ErrorInformation(class1), new ErrorInformation(class2)});
+    	return null;
     }
   }
   
@@ -1079,16 +1079,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> equalstypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleBasicEquals(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleBasicEquals(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleBasicEquals) {
-      equalstypeThrowException(ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
-      	BASICEQUALS,
-      	e_applyRuleBasicEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	equalstypeThrowException(ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
+    		BASICEQUALS,
+    		e_applyRuleBasicEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -1105,16 +1105,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> equalstypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleClassEquals(G, _subtrace_, left, right);
-      addToTrace(_trace_, ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleClassEquals(G, _subtrace_, left, right);
+    	addToTrace(_trace_, ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleClassEquals) {
-      equalstypeThrowException(ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
-      	CLASSEQUALS,
-      	e_applyRuleClassEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
-      return null;
+    	equalstypeThrowException(ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right),
+    		CLASSEQUALS,
+    		e_applyRuleClassEquals, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
     }
   }
   
@@ -1131,16 +1131,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypesequenceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression owner, final List<Expression> expressions, final List<TypedElement> typedElements) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleSubtypeSequence(G, _subtrace_, owner, expressions, typedElements);
-      addToTrace(_trace_, ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " : " + stringRep(expressions) + " << " + stringRep(typedElements));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleSubtypeSequence(G, _subtrace_, owner, expressions, typedElements);
+    	addToTrace(_trace_, ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " : " + stringRep(expressions) + " << " + stringRep(typedElements));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleSubtypeSequence) {
-      subtypesequenceThrowException(ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " : " + stringRep(expressions) + " << " + stringRep(typedElements),
-      	SUBTYPESEQUENCE,
-      	e_applyRuleSubtypeSequence, owner, expressions, typedElements, new ErrorInformation[] {new ErrorInformation(owner)});
-      return null;
+    	subtypesequenceThrowException(ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " : " + stringRep(expressions) + " << " + stringRep(typedElements),
+    		SUBTYPESEQUENCE,
+    		e_applyRuleSubtypeSequence, owner, expressions, typedElements, new ErrorInformation[] {new ErrorInformation(owner)});
+    	return null;
     }
   }
   
@@ -1175,16 +1175,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<List<Field>> fieldsImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<List<Field>> _result_ = applyRuleFields(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("Fields") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " >> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<List<Field>> _result_ = applyRuleFields(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("Fields") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " >> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleFields) {
-      fieldsThrowException(ruleName("Fields") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " >> " + "List<Field>",
-      	FIELDS,
-      	e_applyRuleFields, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	fieldsThrowException(ruleName("Fields") + stringRepForEnv(G) + " ||- " + stringRep(cl) + " >> " + "List<Field>",
+    		FIELDS,
+    		e_applyRuleFields, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
@@ -1218,16 +1218,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<List<Method>> methodsImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<List<Method>> _result_ = applyRuleMethods(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("Methods") + stringRepForEnv(G) + " ||~ " + stringRep(cl) + " >> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<List<Method>> _result_ = applyRuleMethods(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("Methods") + stringRepForEnv(G) + " ||~ " + stringRep(cl) + " >> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleMethods) {
-      methodsThrowException(ruleName("Methods") + stringRepForEnv(G) + " ||~ " + stringRep(cl) + " >> " + "List<Method>",
-      	METHODS,
-      	e_applyRuleMethods, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	methodsThrowException(ruleName("Methods") + stringRepForEnv(G) + " ||~ " + stringRep(cl) + " >> " + "List<Method>",
+    		METHODS,
+    		e_applyRuleMethods, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
@@ -1263,16 +1263,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Constant _const) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckConstant(G, _subtrace_, _const);
-      addToTrace(_trace_, ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckConstant(G, _subtrace_, _const);
+    	addToTrace(_trace_, ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckConstant) {
-      checkThrowException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
-      	CHECKCONSTANT,
-      	e_applyRuleCheckConstant, _const, new ErrorInformation[] {new ErrorInformation(_const)});
-      return null;
+    	checkThrowException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
+    		CHECKCONSTANT,
+    		e_applyRuleCheckConstant, _const, new ErrorInformation[] {new ErrorInformation(_const)});
+    	return null;
     }
   }
   
@@ -1283,16 +1283,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckTypedElement(G, _subtrace_, typedElement);
-      addToTrace(_trace_, ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckTypedElement(G, _subtrace_, typedElement);
+    	addToTrace(_trace_, ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckTypedElement) {
-      checkThrowException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
-      	CHECKTYPEDELEMENT,
-      	e_applyRuleCheckTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
-      return null;
+    	checkThrowException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
+    		CHECKTYPEDELEMENT,
+    		e_applyRuleCheckTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
+    	return null;
     }
   }
   
@@ -1303,16 +1303,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckParamRef(G, _subtrace_, paramref);
-      addToTrace(_trace_, ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckParamRef(G, _subtrace_, paramref);
+    	addToTrace(_trace_, ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckParamRef) {
-      checkThrowException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
-      	CHECKPARAMREF,
-      	e_applyRuleCheckParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
-      return null;
+    	checkThrowException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
+    		CHECKPARAMREF,
+    		e_applyRuleCheckParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
+    	return null;
     }
   }
   
@@ -1323,16 +1323,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckThis(G, _subtrace_, _this);
-      addToTrace(_trace_, ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckThis(G, _subtrace_, _this);
+    	addToTrace(_trace_, ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckThis) {
-      checkThrowException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
-      	CHECKTHIS,
-      	e_applyRuleCheckThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
-      return null;
+    	checkThrowException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
+    		CHECKTHIS,
+    		e_applyRuleCheckThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
+    	return null;
     }
   }
   
@@ -1349,16 +1349,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckMethod(G, _subtrace_, method);
-      addToTrace(_trace_, ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckMethod(G, _subtrace_, method);
+    	addToTrace(_trace_, ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckMethod) {
-      checkThrowException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
-      	CHECKMETHOD,
-      	e_applyRuleCheckMethod, method, new ErrorInformation[] {new ErrorInformation(method)});
-      return null;
+    	checkThrowException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
+    		CHECKMETHOD,
+    		e_applyRuleCheckMethod, method, new ErrorInformation[] {new ErrorInformation(method)});
+    	return null;
     }
   }
   
@@ -1389,16 +1389,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
-      addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
-      checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
-      	CHECKNEW,
-      	e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
-      return null;
+    	checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
+    		CHECKNEW,
+    		e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
+    	return null;
     }
   }
   
@@ -1427,16 +1427,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckSelection(G, _subtrace_, selection);
-      addToTrace(_trace_, ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckSelection(G, _subtrace_, selection);
+    	addToTrace(_trace_, ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckSelection) {
-      checkThrowException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
-      	CHECKSELECTION,
-      	e_applyRuleCheckSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
-      return null;
+    	checkThrowException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
+    		CHECKSELECTION,
+    		e_applyRuleCheckSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
+    	return null;
     }
   }
   
@@ -1465,16 +1465,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckCast(G, _subtrace_, cast);
-      addToTrace(_trace_, ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckCast(G, _subtrace_, cast);
+    	addToTrace(_trace_, ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckCast) {
-      checkThrowException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
-      	CHECKCAST,
-      	e_applyRuleCheckCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
-      return null;
+    	checkThrowException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
+    		CHECKCAST,
+    		e_applyRuleCheckCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
+    	return null;
     }
   }
   
@@ -1501,16 +1501,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckClass) {
-      checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
-      	CHECKCLASS,
-      	e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
+    		CHECKCLASS,
+    		e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   
