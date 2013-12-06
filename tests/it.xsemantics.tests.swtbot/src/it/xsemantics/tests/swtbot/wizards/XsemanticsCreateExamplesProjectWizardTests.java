@@ -4,8 +4,8 @@
 package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.core.runtime.CoreException;

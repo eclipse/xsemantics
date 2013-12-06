@@ -3,7 +3,7 @@
  */
 package it.xsemantics.tests.swtbot.wizards;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.root;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
