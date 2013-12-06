@@ -630,9 +630,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    String _plus = ("this " + c);
-    String _plus_1 = (_plus + " made an error!");
-    String error = _plus_1;
+    String error = (("this " + c) + " made an error!");
     EObject source = c;
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
@@ -2434,9 +2432,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    String _plus = ("this " + c);
-    String _plus_1 = (_plus + " made an error!");
-    String error = _plus_1;
+    String error = (("this " + c) + " made an error!");
     EObject source = c;
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();

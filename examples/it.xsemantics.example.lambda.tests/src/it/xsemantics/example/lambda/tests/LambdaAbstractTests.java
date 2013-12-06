@@ -10,7 +10,7 @@ import it.xsemantics.example.lambda.tests.util.LambdaTestsUtil;
 import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation;
 import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Before;
 

@@ -38,7 +38,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsBaseTest {
+abstract class XsemanticsBaseTest {
 	
 	@Inject
 	protected XsemanticsTestFiles testFiles

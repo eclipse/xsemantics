@@ -8,5 +8,4 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.swtbot.go,
  org.eclipse.core.resources;bundle-version="3.7.100"
-Import-Package: org.eclipse.xtext.ui.junit.util
 Export-Package: it.xsemantics.tests.swtbot.wizards

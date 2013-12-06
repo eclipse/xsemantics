@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
+abstract class XsemanticsGeneratorBaseTest extends XsemanticsBaseTest {
 	
 	@Inject extension XsemanticsUtils
 	

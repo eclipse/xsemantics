@@ -258,9 +258,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	def testInvalidRuleInvocationIsNotOfExpectedType() {
 		val s = parser.parse(testFiles.testInvalidRuleInvocationIsNotOfExpectedType)
 		s.assertError(
-			XbasePackage::eINSTANCE.XMemberFeatureCall,
+			XsemanticsPackage::eINSTANCE.ruleInvocation,
 			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
-			"Type mismatch: cannot convert from List<Boolean> to List<Integer>"
+			"Type mismatch: cannot convert from boolean to Integer"
 		)
 	}
 

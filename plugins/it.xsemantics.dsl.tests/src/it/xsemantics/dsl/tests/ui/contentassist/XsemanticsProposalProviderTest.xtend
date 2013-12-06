@@ -1,12 +1,13 @@
 package it.xsemantics.dsl.tests.ui.contentassist
 
+import it.xsemantics.dsl.XsemanticsUiInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.XsemanticsUiInjectorProvider
-import static extension org.junit.Assert.*
+
+import static org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -97,7 +98,7 @@ public class XsemanticsProposalProviderTest extends
 		).
 		computeCompletionProposals.forEach[
 			proposal |
-			proposal.displayString.assertNotEquals("myNewVar")
+			assertFalse(proposal.displayString, proposal.displayString == 'myNewVar')
 		]
 		// myNewVar should not be proposed, since it is
 		// not visible in that context
