@@ -94,9 +94,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    String _plus = ("cannot find " + c);
-    String _plus_1 = (_plus + "\'s EClass");
-    String error = _plus_1;
+    String error = (("cannot find " + c) + "\'s EClass");
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }

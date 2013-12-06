@@ -22,9 +22,7 @@ class XsemanticsErrorSpecificationGeneratorTest extends XsemanticsGeneratorBaseT
 			testFiles.testJudgmentDescriptionsWithErrorSpecification,
 '''
 
-String _plus = ("this " + c);
-String _plus_1 = (_plus + " made an error!");
-String error = _plus_1;''', "error")
+String error = (("this " + c) + " made an error!");''', "error")
 	}
 	
 	@Test

@@ -190,7 +190,7 @@ public class XsemanticsOnTheFlyJavaCompiler extends OnTheFlyJavaCompiler {
 		}
 	}
 	
-	private void cleanUpTmpFolder(File tempDir) {
+	protected void cleanUpTmpFolder(File tempDir) {
 		try {
 			Files.cleanFolder(tempDir, new FileFilter() {
 				public boolean accept(File pathname) {
