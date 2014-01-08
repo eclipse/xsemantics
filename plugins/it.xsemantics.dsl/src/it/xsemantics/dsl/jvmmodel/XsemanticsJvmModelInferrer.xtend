@@ -28,8 +28,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -56,8 +54,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject extension XbaseTypeConformanceComputer
 
-	@Inject XbaseCompiler xbaseCompiler
-	
 	@Inject XsemanticsTypeSystem typeSystem
 
 	/**
@@ -969,18 +965,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			)
 		]
 	}
-
-	def inputArgs(Rule rule) {
-		rule.inputParams.map[
-			it.parameter.name
-		].join(", ")
-	}	
 	
-
-
-	def void compilePremises(CheckRule rule, ITreeAppendable result) {
-		xbaseCompiler.toJavaStatement(rule.premises, result, false)
-	}
-
 }
 
