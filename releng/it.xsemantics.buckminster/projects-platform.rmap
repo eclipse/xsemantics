@@ -4,7 +4,7 @@
   <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases/"/>
   <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/kepler"/>
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/releases/latest"/>
-  <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.4"/>
+  <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.5"/>
   <rm:property key="itemis.p2.repository"
 		value="http://download.itemis.de/updates" />
   

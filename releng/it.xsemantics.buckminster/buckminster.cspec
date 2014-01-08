@@ -6,5 +6,6 @@
         <cs:dependency name="org.eclipse.swtbot.eclipse" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.swtbot.ide" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xtext.sdk" componentType="eclipse.feature" versionDesignator="[2.5.0,2.6.0)"/>
+        <cs:dependency name="org.eclipse.xtext.xdoc.feature" componentType="eclipse.feature"/>
     </cs:dependencies>
 </cs:cspec>
