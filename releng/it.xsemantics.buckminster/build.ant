@@ -63,7 +63,7 @@
 
 	<target name="b3_aggregation" depends="install.b3.headless" description="description">
 
-		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/kepler-xtext-2.4-swtbot-mirror.b3aggr" />
+		<property name="build.model" location="${projects.location}/releng/it.xsemantics.buckminster/aggregator/kepler-xtext-2.5-swtbot-mirror.b3aggr" />
 		
 		<echo message="IMPORTANT: Mirror aggregation may took over 10 minutes." />
 		<echo message="build.model: ${build.model}" />
@@ -71,7 +71,7 @@
 		<run_b3_aggregator buildmodel="${build.model}" />
 
 		<echo message=" " />
-		<echo message="Aggregated mirror in: ${user.home}/mirror/xtext-swtbot-tp/final" />
+		<echo message="Aggregated mirror in: ${user.home}/mirror/kepler-xtext-2.5-swtbot/final" />
 	</target>
 
 </project>
