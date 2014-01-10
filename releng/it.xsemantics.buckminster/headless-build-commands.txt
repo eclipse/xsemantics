@@ -9,5 +9,4 @@ build --continueonerror
 
 junit --launch "it.xsemantics.build.tools/bootstrap-build.launch"  --flatXML --output "${buckminster.output.root}/builder-run.result.xml"
 
-# useless to rebuild
-# build --clean
+build --clean
