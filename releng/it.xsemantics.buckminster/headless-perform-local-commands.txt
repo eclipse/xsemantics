@@ -1,5 +1,3 @@
-build --clean
-
 perform "it.xsemantics.ui.examples#zip.examples"
 
 junit -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml" 

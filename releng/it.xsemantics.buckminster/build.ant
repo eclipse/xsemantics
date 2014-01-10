@@ -18,9 +18,12 @@
 <project name="Buckminster Headless" default="buckminster">
 	<import file="common.ant" as="common" />
 
-	<property name="resolve.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-resolve-commands.txt" />
-	<property name="perform.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-perform-commands.txt" />
-	<property name="perform.local.commands.file" location="${projects.location}/releng/it.xsemantics.buckminster/headless-perform-local-commands.txt" />
+	<property name="releng.project" location="${projects.location}/releng/it.xsemantics.buckminster"/>
+	<property name="resolve.commands.file" value="${releng.project}/headless-resolve-commands.txt" />
+	<property name="build.commands.file" value="${releng.project}/headless-build-commands.txt" />
+	<property name="build.local.commands.file" value="${releng.project}/headless-build-local-commands.txt" />
+	<property name="perform.commands.file" value="${releng.project}/headless-perform-commands.txt" />
+	<property name="perform.local.commands.file" value="${releng.project}/headless-perform-local-commands.txt" />
 
 	<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
 	
@@ -30,6 +33,7 @@
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
 		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-build" />
 		<antcall target="buckminster-perform" />
 	</target>
 
@@ -38,6 +42,7 @@
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
 		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-build-local" />
 		<antcall target="buckminster-perform-local" />
 	</target>
 	
@@ -46,6 +51,14 @@
 		<echo message="eclipse.download: ${eclipse.download}" />
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${resolve.commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-build">
+		<run_buckminster commandsfile="${build.commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-build-local">
+		<run_buckminster commandsfile="${build.local.commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
 	<target name="buckminster-perform">
