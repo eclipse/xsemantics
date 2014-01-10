@@ -635,7 +635,7 @@ the class <abbr title="it.xsemantics.runtime.StringRepresentation" >StringRepres
 a string corresponding to an object.  This will do its best to generate
 a good string representation; in particular, if the object to represent
 is an EObject which actually corresponds to a node in the model of the AST,
-it will rely on <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/nodemodel/util/NodeModelUtils.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.nodemodel.util.NodeModelUtils" >NodeModelUtils</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java" title="View Source Code" >(src)</a> Xtext
+it will rely on <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/nodemodel/util/NodeModelUtils.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.nodemodel.util.NodeModelUtils" >NodeModelUtils</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java" title="View Source Code" >(src)</a> Xtext
 class to use the string which corresponds to the object in the program.
 </p>
 <p>
@@ -938,14 +938,14 @@ Xsemantics will generate two Java classes for each xsemantics system:
 			all the implementations of the system&apos;s rules and auxiliary functions;
 	</li>
 	<li>
-		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
 			subclass,
 			with the same name of the system with suffix <span class="inlinecode">Validator</span> 
 			(in particular, if the
 			<span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause, <a href="XsemanticsSyntax.html#validatorExtends" title="Go to &quot;The validatorExtends clause&quot;" >section validatorExtends</a>,
 			is not used,
 			then the generated validator inherits from 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>,
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>,
 			otherwise it will inherit from the one specified with <span class="inlinecode"><span class="keyword">validatorExtends</span></span>) ; 
 	</li>
 </ul>
@@ -1118,7 +1118,7 @@ This can be useful to then implement quickfixes for specific failures.
 <h3>The Generated Java Validator</h3>
 <p>
 From a system definition Xsemantics also generates a Java
-class (which extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>).
+class (which extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>).
 If you plan to use this generated validator, because you defined
 some <em>checkrule</em>s (<a href="XsemanticsSyntax.html#CheckRules" title="Go to &quot;Rules for Validator: checkrule&quot;" >section CheckRules</a>), it is better to specify
 the <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause in order to have
@@ -1147,7 +1147,7 @@ the generated validator of the super system.
 </p>
 <p>
 The <span class="inlinecode"><span class="keyword">validatorExtends</span></span> clause requires a
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>
 subclass (the content assist will filter completions accordingly).
 The class which should be specified is the class which Xtext
 generated for you in the <span class="inlinecode">src-gen</span> folder
@@ -1248,7 +1248,7 @@ according to the error information found in the trace of a failure
 </p>
 <p>
 When generating error markers the validator will use only the error information
-that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> which corresponds to
+that related to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> which corresponds to
 an actual node in the AST.  Note that this error information can be customized in
 a Xsemantics system by explicit error specifications (see <a href="XsemanticsSyntax.html#ErrorSpecification" title="Go to &quot;Error Specification&quot;" >section ErrorSpecification</a>
 and <a href="XsemanticsSyntax.html#ExplicitFailure" title="Go to &quot;Explicit Failure&quot;" >section ExplicitFailure</a>), thus, you should keep in mind the above strategy when
