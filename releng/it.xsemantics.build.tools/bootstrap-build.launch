@@ -2,9 +2,9 @@
 <launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
 <setAttribute key="additional_plugins">
 <setEntry value="it.xsemantics.build.tools:1.4.0.qualifier:default:true"/>
-<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20130611-2154:default:true"/>
-<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20131215-1153:default:true"/>
-<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20131215-1202:default:true"/>
+<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20130611-2154:default:false"/>
+<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20131215-1153:default:false"/>
+<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20131215-1202:default:false"/>
 </setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="askclear" value="false"/>
@@ -80,6 +80,7 @@
 <setEntry value="org.eclipse.xtext.xbase.lib:default"/>
 <setEntry value="org.eclipse.xtext.xbase.source:default"/>
 <setEntry value="org.eclipse.xtext.xbase:default"/>
+<setEntry value="org.eclipse.xtext.xdoc.feature:default"/>
 <setEntry value="org.eclipse.xtext.xtext.ui.source:default"/>
 <setEntry value="org.eclipse.xtext.xtext.ui:default"/>
 </setAttribute>
