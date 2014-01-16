@@ -150,6 +150,19 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 			testFiles.testRuleWithOutputParams.firstRule.
 			outputParams.size())
 	}
+
+	@Test
+	def void testOutputParamsForRuleWithoutJudgmentDescriptionEmpty() {
+		Assert::assertEquals(0, 
+			'''
+			system test
+			judgments {
+				type |- Object o : Object o1
+			}
+			axiom Foo G |- String s
+			'''.getRuleWithoutValidation(0).
+			outputParams.size())
+	}
 	
 	@Test
 	def void testIsInputParam() {

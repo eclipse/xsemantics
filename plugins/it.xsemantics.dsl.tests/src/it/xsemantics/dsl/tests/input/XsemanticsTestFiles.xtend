@@ -741,6 +741,17 @@ class XsemanticsTestFiles {
 		G |- object : object.eClass
 	}
 	'''
+
+	def testRuleInvocationWithWrongOutputArg2() '''
+	«testJudgmentDescriptionsEObjectEClass»
+	
+	rule EClassEObject derives
+		G |- EObject object : EClass eClass 
+	from {
+		// this is NOT: not valid output argument
+		G |- object : val EClass c
+	}
+	'''
 	
 	def testRuleInvocationWithInputParamPassedAsOutput() '''
 	«testJudgmentDescriptionsReferringToEcoreWithOutput»

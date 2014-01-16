@@ -259,6 +259,16 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
+	public void testRuleInvocationWithWrongOutputArg2() throws Exception {
+		EObject model = getModel(testFiles
+				.testRuleInvocationWithWrongOutputArg2().toString());
+		validationTestHelper.assertError(model,
+				XbasePackage.eINSTANCE.getXVariableDeclaration(),
+				IssueCodes.NOT_VALID_OUTPUT_ARG,
+				"Not a valid argument for output parameter");
+	}
+
+	@Test
 	public void testWrongVariableDeclarationAsOutputArgument() throws Exception {
 		EObject model = getModel(testFiles
 				.testWrongVariableDeclarationAsOutputArgument().toString());
