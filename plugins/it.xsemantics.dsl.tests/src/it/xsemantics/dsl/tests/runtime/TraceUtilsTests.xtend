@@ -4,15 +4,14 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.EmfFactoryUtils
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.util.TraceUtils
-import org.junit.Assert
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -21,8 +20,6 @@ import org.junit.runner.RunWith
 class TraceUtilsTests extends XsemanticsBaseTest {
 	
 	@Inject extension TraceUtils
-	
-	@Inject extension XsemanticsUtils
 	
 	@Inject extension EmfFactoryUtils
 

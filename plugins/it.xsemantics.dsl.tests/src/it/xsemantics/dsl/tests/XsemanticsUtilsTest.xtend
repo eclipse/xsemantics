@@ -2,17 +2,18 @@ package it.xsemantics.dsl.tests
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
+import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import java.util.List
-import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -235,19 +236,19 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 		)
 	}
 	
-	@Test
-	def void testIterateIfThenElse() {
-		val stringList = 'a,B,c'.split(',').toList
-		val toUpper = newArrayList()
-		val toLower = newArrayList()
-		stringList.iterateIfThenElse(
-			[ it.toLowerCase.equals(it) ],
-			[ toLower += it ],
-			[ toUpper += it ]
-		)
-		Assert::assertEquals("[a, c]", toLower.toString)
-		Assert::assertEquals("[B]", toUpper.toString)
-	}
+//	@Test
+//	def void testIterateIfThenElse() {
+//		val stringList = 'a,B,c'.split(',').toList
+//		val toUpper = newArrayList()
+//		val toLower = newArrayList()
+//		stringList.iterateIfThenElse(
+//			[ it.toLowerCase.equals(it) ],
+//			[ toLower += it ],
+//			[ toUpper += it ]
+//		)
+//		Assert::assertEquals("[a, c]", toLower.toString)
+//		Assert::assertEquals("[B]", toUpper.toString)
+//	}
 	
 	@Test
 	def void testOutputConclusionElementsWithoutOutputParams() {
@@ -429,4 +430,18 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 				nodeModelUtils.getProgramText(it)
 			].join('\n') + '\n')
 	}
+
+	def private List<OutputParameter> outputJudgmentParameters(Rule rule) {
+		rule.judgmentDescription.outputJudgmentParameters
+	}
+
+	def private boolean hasOutputParams(Rule rule) {
+		!rule.outputParams.empty
+	}
+
+	def private superSystemJudgments(XsemanticsSystem system) {
+		system.superSystemDefinition?.judgmentDescriptions ?:
+			Lists::newArrayList
+	}
+	
 }

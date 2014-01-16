@@ -11,7 +11,6 @@ import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
-import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
@@ -38,34 +37,10 @@ class XsemanticsUtils {
 	@Inject
     IJvmModelAssociations associations;
 	
-	def getJvmTypes(XsemanticsSystem ts) {
-		ts.getAllContentsOfType(typeof(JvmTypeReference))
-	}
-	
-	def getRules(XsemanticsSystem ts) {
-		EcoreUtil2::getAllContentsOfType(ts, typeof(Rule))
-	}
-	
-	def getJvmParameters(Rule rule) {
-		EcoreUtil2::getAllContentsOfType(rule.conclusion, typeof(JvmFormalParameter))
-	}
-	
 	def getVariableDeclarations(RuleInvocation ruleInvocation) {
 		ruleInvocation.expressions.typeSelect(typeof(XVariableDeclaration))
 	}
 	
-	def getJvmParameters(JudgmentDescription jd) {
-		EcoreUtil2::getAllContentsOfType(jd, typeof(JvmFormalParameter))
-	}
-	
-	def getRuleInvocations(EObject element) {
-		EcoreUtil2::getAllContentsOfType(element, typeof(RuleInvocation))
-	}
-	
-	def getOrs(EObject element) {
-		element.getAllContentsOfType(typeof(OrExpression))
-	}
-
 	def containingSystem(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
 	}
@@ -74,10 +49,6 @@ class XsemanticsUtils {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
 
-	def containingCheckRule(EObject element) {
-		return EcoreUtil2::getContainerOfType(element, typeof(CheckRule))
-	}
-	
 	def containingJudgmentDescription(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(JudgmentDescription))
 	}
@@ -163,10 +134,6 @@ class XsemanticsUtils {
 		judgmentDescription.getJudgmentParameters.typeSelect(typeof(OutputParameter))
 	}
 	
-	def List<OutputParameter> outputJudgmentParameters(Rule rule) {
-		rule.judgmentDescription.outputJudgmentParameters
-	}
-	
 	def List<RuleConclusionElement> outputConclusionElements(Rule rule) {
 		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
@@ -243,28 +210,20 @@ class XsemanticsUtils {
 		).typeSelect(typeof(RuleParameter))
 	}
 	
-	def boolean hasOutputParams(Rule rule) {
-		!rule.outputParams.empty
-	}
-	
 	def boolean hasOutputParams(RuleInvocation ruleInvocation) {
 		!ruleInvocation.outputParams.empty
 	}
 	
-	def <T> void iterateIfThenElse(Iterable<T> iterable, (T)=>boolean predicate,
-		(T)=>void ifTrue, (T)=>void ifFalse) {
-		iterable.forEach() [
-			if (predicate.apply(it)) {
-				ifTrue.apply(it)
-			} else {
-				ifFalse.apply(it)
-			}
-		]		
-	}
-	
-	def List<RuleParameter> ruleParams(Rule rule) {
-		rule.conclusion.conclusionElements.typeSelect(typeof(RuleParameter))
-	}
+//	def <T> void iterateIfThenElse(Iterable<T> iterable, (T)=>boolean predicate,
+//		(T)=>void ifTrue, (T)=>void ifFalse) {
+//		iterable.forEach() [
+//			if (predicate.apply(it)) {
+//				ifTrue.apply(it)
+//			} else {
+//				ifFalse.apply(it)
+//			}
+//		]		
+//	}
 	
 	def List<ExpressionInConclusion> expressionsInConclusion(Rule rule) {
 		rule.conclusion.getAllContentsOfType(typeof(ExpressionInConclusion))
@@ -347,11 +306,6 @@ class XsemanticsUtils {
 		)
 	}
 
-	def superSystemJudgments(XsemanticsSystem system) {
-		system.superSystemDefinition?.judgmentDescriptions ?:
-			Lists::newArrayList
-	}
-
 	def allSuperSystemDefinitions(XsemanticsSystem system) {
 		system.
 			allSuperSystemDefinitionsInternal(Sets::newHashSet)
@@ -379,10 +333,6 @@ class XsemanticsUtils {
 		// it is the JvmType which is associated to an XsemanticsSystem
 		associations.getSourceElements(typeReference.type).
 			filter(typeof(XsemanticsSystem)).head
-	}
-
-	def ruleByName(Iterable<Rule> rules, String n) {
-		rules.findFirst [ name == n ]
 	}
 	
 }

@@ -2,20 +2,21 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
+import it.xsemantics.dsl.xsemantics.OrExpression
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsXbaseCompilerTest extends XsemanticsGeneratorBaseTest {
-
-	@Inject extension XsemanticsUtils
 
 	@Inject XsemanticsXbaseCompiler compiler
 
@@ -1005,4 +1006,9 @@ if (!_forall_1) {
 		compiler.generateEnvironmentSpecificationAsExpression(xexp, result)
 		assertEqualsStrings(expected, result)
 	}
+
+	def private getOrs(EObject element) {
+		element.getAllContentsOfType(typeof(OrExpression))
+	}
+
 }

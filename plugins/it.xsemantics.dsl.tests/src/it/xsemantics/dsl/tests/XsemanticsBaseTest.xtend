@@ -35,6 +35,7 @@ import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.EcoreUtil2
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -308,4 +309,9 @@ abstract class XsemanticsBaseTest {
 				testFiles.testSystemExtendsExtendedTypeSystem
 			)
 	}
+
+	def getRuleInvocations(EObject element) {
+		EcoreUtil2::getAllContentsOfType(element, typeof(RuleInvocation))
+	}
+
 }

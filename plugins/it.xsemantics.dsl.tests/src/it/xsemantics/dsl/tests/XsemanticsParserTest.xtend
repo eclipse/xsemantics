@@ -1,13 +1,13 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Type
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.junit4.InjectWith
@@ -21,13 +21,13 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
+import static extension org.eclipse.xtext.EcoreUtil2.*
+
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsParserTest extends XsemanticsBaseTest {
 	
 	@Inject extension ValidationTestHelper
-	
-	@Inject extension XsemanticsUtils
 	
 	@Test
 	def void testParsingOfName() {
@@ -444,4 +444,9 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testStaticExtensionImport() {
 		parser.parse(testFiles.testStaticExtensionImport).assertNoErrors
 	}
+
+	def getJvmTypes(XsemanticsSystem ts) {
+		ts.getAllContentsOfType(typeof(JvmTypeReference))
+	}
+	
 }

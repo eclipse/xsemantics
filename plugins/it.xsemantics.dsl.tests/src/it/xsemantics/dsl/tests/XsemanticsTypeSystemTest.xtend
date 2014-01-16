@@ -2,23 +2,23 @@ package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
-import it.xsemantics.dsl.util.XsemanticsUtils
-import static extension org.junit.Assert.*
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import org.eclipse.emf.common.notify.Notifier
+import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XExpression
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.common.types.JvmTypeReference
-import it.xsemantics.dsl.typing.TupleType
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import org.eclipse.emf.ecore.EAttribute
-import org.eclipse.emf.common.notify.Notifier
+
+import static extension org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -26,8 +26,6 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	
 	@Inject
 	protected XsemanticsTypeSystem typeSystem
-	
-	@Inject extension XsemanticsUtils
 	
 	@Inject
 	protected TypeReferences typeReferences

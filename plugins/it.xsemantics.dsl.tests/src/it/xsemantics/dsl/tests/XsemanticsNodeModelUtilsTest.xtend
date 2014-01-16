@@ -2,20 +2,17 @@ package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
-import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
-import org.junit.Assert
+import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.emf.ecore.EcoreFactory
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsNodeModelUtilsTest extends XsemanticsBaseTest {
-	
-	@Inject extension XsemanticsUtils
 	
 	@Inject XsemanticsNodeModelUtils nodeModelUtils
 	
