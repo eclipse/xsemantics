@@ -38,9 +38,6 @@ class XsemanticsUtils {
 	
 	@Inject
     IJvmModelAssociations associations;
-    
-    @Inject
-    XsemanticsDslCache cache
 	
 	def getVariableDeclarations(RuleInvocation ruleInvocation) {
 		ruleInvocation.expressions.typeSelect(typeof(XVariableDeclaration))
@@ -73,18 +70,14 @@ class XsemanticsUtils {
 	}
 	
 	def judgmentDescription(Rule rule) {
-		cache.get("judgmentDescription" -> rule) [|
-			rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
-				rule.conclusion.relationSymbols)
-		]
+		rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
+			rule.conclusion.relationSymbols)
 	}
 	
 	def judgmentDescription(RuleInvocation ruleInvocation) {
-		cache.get("judgmentDescription" -> ruleInvocation) [|
-			ruleInvocation.
-				judgmentDescription(ruleInvocation.judgmentSymbol, 
-					ruleInvocation.relationSymbols)
-		]
+		ruleInvocation.
+			judgmentDescription(ruleInvocation.judgmentSymbol, 
+				ruleInvocation.relationSymbols)
 	}
 	
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
@@ -98,12 +91,10 @@ class XsemanticsUtils {
 	}
 	
 	def auxiliaryDescription(AuxiliaryFunction fun) {
-		cache.get("auxiliaryDescription" -> fun) [|
-			fun.containingSystem.
-				auxiliaryDescriptions.findFirst [
-					name == fun.name
-				]
-		]
+		fun.containingSystem.
+			auxiliaryDescriptions.findFirst [
+				name == fun.name
+			]
 	}
 	
 	def List<Rule> rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
@@ -280,11 +271,9 @@ class XsemanticsUtils {
 	}
 
 	def allJudgments(XsemanticsSystem system) {
-		cache.get("allJudgments" -> system) [|
-			Lists::newArrayList(system.judgmentDescriptions) => [
-				it += system.allSuperSystemDefinitions.
-					map[judgmentDescriptions].flatten
-			]
+		Lists::newArrayList(system.judgmentDescriptions) => [
+			it += system.allSuperSystemDefinitions.
+				map[judgmentDescriptions].flatten
 		]
 	}
 	
@@ -295,47 +284,33 @@ class XsemanticsUtils {
 	}
 
 	def allRules(XsemanticsSystem system) {
-		cache.get("allRules" -> system) [|
-			Lists::newArrayList(system.rules) => [
-				it += system.allSuperSystemDefinitions.
-					map[rules].flatten
-			]
+		Lists::newArrayList(system.rules) => [
+			it += system.allSuperSystemDefinitions.
+				map[rules].flatten
 		]
 	}
 
 	def allRulesByJudgmentDescription(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
-		cache.get2("allRulesByJudgmentDescription" -> (ts -> (judgmentSymbol -> relationSymbols))) [|
-			ts.allRules.filterRulesByJudgmentDescription(judgmentSymbol,
-				relationSymbols)
-		]
+		ts.allRules.filterRulesByJudgmentDescription(judgmentSymbol,
+			relationSymbols)
 	}
 
 	def allCheckRules(XsemanticsSystem system) {
-		cache.get("allCheckRules" -> system) [|
-			Lists::newArrayList(system.checkrules) => [
-				it += system.allSuperSystemDefinitions.
-					map[checkrules].flatten
-			]
+		Lists::newArrayList(system.checkrules) => [
+			it += system.allSuperSystemDefinitions.
+				map[checkrules].flatten
 		]
 	}
 
 	def allCheckRulesByName(XsemanticsSystem system, CheckRule rule) {
 		Lists::newArrayList(
-			system.allCheckRulesByName(rule.name).filter [ it != rule ]
+			system.allCheckRules.filter [ it != rule && name == rule.name ]
 		)
 	}
 
-	def allCheckRulesByName(XsemanticsSystem system, String ruleName) {
-		cache.get2("allCheckRulesByName" -> (system -> ruleName)) [|
-			system.allCheckRules.filter [ name == ruleName ]
-		]
-	}
-
 	def allSuperSystemDefinitions(XsemanticsSystem system) {
-		cache.get("allSuperSystemDefinitions" -> system) [|
-			system.
-				allSuperSystemDefinitionsInternal(Sets::newHashSet)
-		]
+		system.
+			allSuperSystemDefinitionsInternal(Sets::newHashSet)
 	}
 
 	def protected List<XsemanticsSystem> allSuperSystemDefinitionsInternal(XsemanticsSystem system, Set<XsemanticsSystem> visited) {
