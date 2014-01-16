@@ -1,5 +1,7 @@
 package it.xsemantics.dsl.tests.suites;
 
+import it.xsemantics.dsl.tests.performance.XsemanticsPerformanceTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -9,7 +11,8 @@ import org.junit.runners.Suite;
 	XsemanticsRuntimeAllTests.class,
 	XsemanticsGeneratorAllTests.class,
 	XsemanticsGeneratedTypeSystemsAllTests.class,
-	XsemanticsExamplesAllTests.class
+	XsemanticsExamplesAllTests.class,
+	XsemanticsPerformanceTest.class
 })
 public class XsemanticsAllTests {
 
