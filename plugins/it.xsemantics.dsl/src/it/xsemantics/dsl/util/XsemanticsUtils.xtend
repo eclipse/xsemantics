@@ -29,7 +29,9 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import com.google.inject.Singleton
 
+@Singleton
 class XsemanticsUtils {
 	
 	@Inject extension XsemanticsTypeSystem
