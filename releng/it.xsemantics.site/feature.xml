@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.site"
       label="it.xsemantics.site Feature"
-      version="1.3.4.qualifier">
+      version="1.3.5.qualifier">
 
    <includes
          id="it.xsemantics.sdk"
