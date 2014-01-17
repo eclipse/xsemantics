@@ -5,4 +5,9 @@
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
     <cq:advisorNode namePattern="^.*\.source$" skipComponent="true"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$" versionOverride="0.1.0"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext\.logging(?:\..+)?$" versionOverride="1.2.15"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtext(?:\..+)?$" versionOverride="[2.4.0,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtend\.lib(?:\..+)?$" versionOverride="[2.4.0,2.5.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.mwe2(?:\..+)?$" versionOverride="[2.4.0,2.5.0)"/>
 </cq:componentQuery>
