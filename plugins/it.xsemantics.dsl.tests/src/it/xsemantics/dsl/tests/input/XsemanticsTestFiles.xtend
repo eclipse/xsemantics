@@ -2439,4 +2439,16 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testWithIncompleteEnvironmentAccess_Issue_10() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		G |- object.eClass : eClass
+		env() // this used to raise a NullPointerException
+		// and it also made the IDE freeze
+		// https://github.com/LorenzoBettini/xsemantics/issues/10
+	}
+	'''
 }

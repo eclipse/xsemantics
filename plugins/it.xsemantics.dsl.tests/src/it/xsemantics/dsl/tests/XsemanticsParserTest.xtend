@@ -449,4 +449,11 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		ts.getAllContentsOfType(typeof(JvmTypeReference))
 	}
 	
+	@Test
+	def void testIncompleteEnvironmentAccess_Issue_10() {
+		// https://github.com/LorenzoBettini/xsemantics/issues/10
+		// this only makes sure we don't get null pointer exceptions
+		parser.parse(testFiles.testWithIncompleteEnvironmentAccess_Issue_10).
+			validate
+	}
 }
