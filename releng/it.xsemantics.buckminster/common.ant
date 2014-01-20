@@ -254,6 +254,7 @@
 						          deleteonexit="true" />
 		<get src="${director.url}" dest="${director.zip}" />
 		<unzip src="${director.zip}" dest="${director.install.dest}" />
+		<chmod file="${director.install.dest}/director/director" perm="+x" />
 		<delete file="${director.zip}" />
 	</target>
 
