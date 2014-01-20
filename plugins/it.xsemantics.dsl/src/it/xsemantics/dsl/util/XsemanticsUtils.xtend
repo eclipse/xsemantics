@@ -47,7 +47,9 @@ class XsemanticsUtils {
 	}
 	
 	def containingSystem(EObject element) {
-		return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
+		//return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
+		// this might be more efficient
+		return element.eResource.contents.head as XsemanticsSystem
 	}
 	
 	def containingRule(EObject element) {
@@ -73,18 +75,14 @@ class XsemanticsUtils {
 	}
 	
 	def judgmentDescription(Rule rule) {
-		cache.get("judgmentDescription" -> rule) [|
-			rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
-				rule.conclusion.relationSymbols)
-		]
+		rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
+			rule.conclusion.relationSymbols)
 	}
 	
 	def judgmentDescription(RuleInvocation ruleInvocation) {
-		cache.get("judgmentDescription" -> ruleInvocation) [|
-			ruleInvocation.
-				judgmentDescription(ruleInvocation.judgmentSymbol, 
-					ruleInvocation.relationSymbols)
-		]
+		ruleInvocation.
+			judgmentDescription(ruleInvocation.judgmentSymbol, 
+				ruleInvocation.relationSymbols)
 	}
 	
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
@@ -289,9 +287,11 @@ class XsemanticsUtils {
 	}
 	
 	def allJudgments(XsemanticsSystem system, String judgmentSymbol, Iterable<String> relationSymbols) {
-		Lists::newArrayList(
-			system.allJudgments.
-				filterJudgmentDescriptions(judgmentSymbol, relationSymbols))
+		cache.get2("allJudgments" -> (system -> (judgmentSymbol -> relationSymbols))) [|
+			Lists::newArrayList(
+				system.allJudgments.
+					filterJudgmentDescriptions(judgmentSymbol, relationSymbols))
+		]
 	}
 
 	def allRules(XsemanticsSystem system) {
