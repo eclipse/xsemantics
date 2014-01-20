@@ -24,7 +24,6 @@ import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesPackage
@@ -39,6 +38,8 @@ import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
 
+import static extension org.eclipse.xtext.EcoreUtil2.*
+
 //import org.eclipse.xtext.validation.Check
 
 /**
@@ -52,10 +53,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	protected XsemanticsTypeSystem typeSystem;
 
 	@Inject
-	protected XsemanticsUtils xsemanticsUtils;
-
-	@Inject
-	protected XsemanticsJavaValidatorHelper helper;
+	protected extension XsemanticsUtils;
 
 	@Inject
 	protected XsemanticsXExpressionHelper xExpressionHelper;
@@ -72,8 +70,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		// we allow assignment to output parameters
 		val assignmentFeature = assignment.getFeature();
 		if (assignmentFeature instanceof JvmFormalParameter) {
-			if (xsemanticsUtils
-					.isInputParam(assignmentFeature)) {
+			if (assignmentFeature.isInputParam()) {
 				error("Assignment to input parameter",
 						XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
@@ -97,7 +94,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 //	}
 
 	def protected boolean isContainedInAuxiliaryFunction(XExpression expr) {
-		return EcoreUtil2.getContainerOfType(expr, AuxiliaryFunction) != null
+		return expr.getContainerOfType(AuxiliaryFunction) != null
 	}
 
 	override protected boolean isImplicitReturn(XExpression expr) {
@@ -148,8 +145,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (judgmentDescription.isOverride())
 			return;
 		if (enableWarnings
-				&& xsemanticsUtils.rulesForJudgmentDescription(
-						judgmentDescription).isEmpty()) {
+				&& judgmentDescription.rulesForJudgmentDescription(
+						).isEmpty()) {
 			warning("No rule defined for the judgment description",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION
 							.getEIDAttribute(),
@@ -159,7 +156,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def void checkInputParameter(InputParameter param) {
-		if (helper.findDuplicateParameter(param)) {
+		if (param.findDuplicateParameter()) {
 			error("Duplicate parameter '" + param.getParameter().getName()
 					+ "'",
 					XsemanticsPackage.Literals.INPUT_PARAMETER__PARAMETER,
@@ -170,8 +167,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	def void checkNoDuplicateJudgmentDescription(
 			JudgmentDescription judgmentDescription) {
-		val judgmentDescriptionWithTheSameName = helper
-				.judgmentDescriptionWithTheSameName(judgmentDescription);
+		val judgmentDescriptionWithTheSameName = judgmentDescription
+				.judgmentDescriptionWithTheSameName();
 		if (judgmentDescriptionWithTheSameName != null
 				&& !judgmentDescription.isOverride()) {
 			error("Duplicate judgment '"
@@ -187,8 +184,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			JudgmentDescription judgmentDescription) {
 		val judgmentSymbol = judgmentDescription.getJudgmentSymbol();
 		val relationSymbols = judgmentDescription.getRelationSymbols();
-		if (xsemanticsUtils.getJudgmentDescriptions(
-				xsemanticsUtils.containingSystem(judgmentDescription),
+		if (judgmentDescription.containingSystem().getJudgmentDescriptions(
 				judgmentSymbol, relationSymbols).size() > 1) {
 			error("Duplicate JudgmentDescription symbols: "
 					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
@@ -199,7 +195,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def protected void checkNumOfOutputParams(
 			JudgmentDescription judgmentDescription) {
-		if (xsemanticsUtils.outputJudgmentParameters(judgmentDescription)
+		if (judgmentDescription.outputJudgmentParameters()
 				.size() > maxOfOutputParams) {
 			error("No more than " + maxOfOutputParams
 					+ " output parameters are handled at the moment",
@@ -209,7 +205,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	def protected void checkNumOfInputParams(JudgmentDescription judgmentDescription) {
-		if (xsemanticsUtils.inputParams(judgmentDescription).isEmpty()) {
+		if (judgmentDescription.inputParams().isEmpty()) {
 			error("No input parameter; at least one is needed",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
 					IssueCodes.NO_INPUT_PARAM);
@@ -229,8 +225,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			val judgmentParametersIt = judgmentParameters
 					.iterator();
 			for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
-				if (!xsemanticsUtils.isOutputParameter(judgmentParametersIt
-						.next())
+				if (!judgmentParametersIt.next().isOutputParameter()
 						&& !(ruleConclusionElement instanceof RuleParameter)) {
 					error("Must be a parameter, not an expression",
 							ruleConclusionElement,
@@ -244,13 +239,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkNoCheckRulesWithTheSameName(Rule rule) {
-		if (!helper.noRulesWithTheSameName(rule)) {
+		if (!rule.noRulesWithTheSameName()) {
 			error("Duplicate rule '" + rule.getName() + "'", rule,
 					XsemanticsPackage.Literals.RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
 		}
 
-		if (!helper.noRulesWithTheSameNameOfCheckRule(rule)) {
+		if (!rule.noRulesWithTheSameNameOfCheckRule()) {
 			error("Duplicate checkrule with the same name", rule,
 					XsemanticsPackage.Literals.RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
@@ -259,13 +254,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkNoRulesWithTheSameName(CheckRule rule) {
-		if (!helper.noCheckRulesWithTheSameName(rule)) {
+		if (!rule.noCheckRulesWithTheSameName()) {
 			error("Duplicate checkrule '" + rule.getName() + "'", rule,
 					XsemanticsPackage.Literals.CHECK_RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
 		}
 
-		if (!helper.noCheckRulesWithTheSameNameOfRule(rule)) {
+		if (!rule.noCheckRulesWithTheSameNameOfRule()) {
 			error("Duplicate rule with the same name", rule,
 					XsemanticsPackage.Literals.CHECK_RULE__NAME,
 					IssueCodes.DUPLICATE_RULE_NAME);
@@ -274,18 +269,17 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkValidOverride(Rule rule) {
-		val system = xsemanticsUtils.containingSystem(rule);
+		val system = rule.containingSystem();
 		if (system != null) {
 			if (rule.isOverride()) {
-				val superSystem = xsemanticsUtils
-						.superSystemDefinition(system);
+				val superSystem = system.superSystemDefinition();
 				if (superSystem == null) {
 					error("Cannot override rule without system 'extends'",
 							rule, XsemanticsPackage.Literals.RULE__OVERRIDE,
 							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 				} else {
-					val rulesOfTheSameKind = xsemanticsUtils
-							.allRulesOfTheSameKind(superSystem, rule);
+					val rulesOfTheSameKind = superSystem
+							.allRulesOfTheSameKind(rule);
 					val tupleType = typeSystem.getInputTypes(rule);
 					var Rule ruleToOverride = rulesOfTheSameKind.findFirst[
 						val tupleType2 = typeSystem.getInputTypes(it);
@@ -310,19 +304,17 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def void checkValidOverride(CheckRule rule) {
-		val system = xsemanticsUtils.containingSystem(rule);
+		val system = rule.containingSystem();
 		if (system != null) {
 			if (rule.isOverride()) {
-				val superSystem = xsemanticsUtils
-						.superSystemDefinition(system);
+				val superSystem = system.superSystemDefinition();
 				if (superSystem == null) {
 					error("Cannot override checkrule without system 'extends'",
 							rule,
 							XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
 							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 				} else {
-					val inheritedCheckRules = xsemanticsUtils
-							.allCheckRules(superSystem);
+					val inheritedCheckRules = superSystem.allCheckRules();
 					var CheckRule inheritedRule = inheritedCheckRules.findFirst[
 						typeSystem.equals(rule.getElement().getParameter()
 								.getParameterType(), it.getElement()
@@ -342,19 +334,19 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkValidOverride(JudgmentDescription judgment) {
-		val system = xsemanticsUtils.containingSystem(judgment);
+		val system = judgment.containingSystem();
 		if (system != null) {
 			if (judgment.isOverride()) {
-				val superSystem = xsemanticsUtils
-						.superSystemDefinition(system);
+				val superSystem = system
+						.superSystemDefinition();
 				if (superSystem == null) {
 					error("Cannot override judgment without system 'extends'",
 							judgment,
 							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
 							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 				} else {
-					val inheritedJudgments = xsemanticsUtils
-							.allJudgments(superSystem,
+					val inheritedJudgments = superSystem
+							.allJudgments(
 									judgment.getJudgmentSymbol(),
 									judgment.getRelationSymbols());
 					val judgmentToOverride = inheritedJudgments.findFirst[
@@ -392,10 +384,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			val judgmentParametersIt = judgmentParameters
 					.iterator();
 			for (XExpression ruleInvocationExpression : invocationExpressions) {
-				if (xsemanticsUtils.isOutputParameter(judgmentParametersIt
-						.next())) {
-					if (!xsemanticsUtils
-							.validOutputArgExpression(ruleInvocationExpression)) {
+				if (judgmentParametersIt
+						.next().isOutputParameter()) {
+					if (!ruleInvocationExpression
+							.validOutputArgExpression()) {
 						error("Not a valid argument for output parameter: "
 								+ nodeModelUtils
 										.getProgramText(ruleInvocationExpression),
@@ -404,8 +396,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 								IssueCodes.NOT_VALID_OUTPUT_ARG);
 					}
 				} else {
-					if (!xsemanticsUtils
-							.validInputArgExpression(ruleInvocationExpression)) {
+					if (!ruleInvocationExpression
+							.validInputArgExpression()) {
 						error("Not a valid argument for input parameter: "
 								+ nodeModelUtils
 										.getProgramText(ruleInvocationExpression),
@@ -449,8 +441,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
 			}
 		}
-		val superSystems = xsemanticsUtils
-				.allSuperSystemDefinitions(system);
+		val superSystems = system
+				.allSuperSystemDefinitions();
 		if (superSystems.contains(system)) {
 			error("Cycle in extends relation",
 					XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
@@ -462,11 +454,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def protected void checkNoDuplicateCheckRulesWithSameArguments(CheckRule rule) {
 		if (rule.isOverride())
 			return;
-		val system = xsemanticsUtils
-				.superSystemDefinition(xsemanticsUtils.containingSystem(rule));
+		val system = rule.containingSystem().superSystemDefinition();
 		if (system != null) {
-			val rulesWithTheSameName = xsemanticsUtils
-					.allCheckRulesByName(system, rule);
+			val rulesWithTheSameName = system
+					.allCheckRulesByName(rule);
 			for (CheckRule checkRule : rulesWithTheSameName) {
 				error("Duplicate checkrule with the same name"
 						+ reportContainingSystemName(checkRule),
@@ -478,8 +469,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
-		val rulesOfTheSameKind = xsemanticsUtils
-				.allRulesOfTheSameKind(rule);
+		val rulesOfTheSameKind = rule
+				.allRulesOfTheSameKind();
 		if (rulesOfTheSameKind.size() > 1) {
 			val tupleType = typeSystem.getInputTypes(rule);
 			for (Rule rule2 : rulesOfTheSameKind) {
@@ -499,13 +490,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
-		if (helper.auxiliaryDescriptionWithTheSameName(aux) != null) {
+		if (aux.auxiliaryDescriptionWithTheSameName() != null) {
 			error("Duplicate auxiliary description '" + aux.getName() + "'",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
 					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
 
-		if (helper.auxiliaryDescriptionWithTheSameNameOfJudgment(aux) != null) {
+		if (aux.auxiliaryDescriptionWithTheSameNameOfJudgment() != null) {
 			error("Duplicate judgment with the same name '" + aux.getName()
 					+ "'",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
@@ -515,7 +506,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkAuxiliaryFunctions(AuxiliaryDescription aux) {
-		val functionsForAuxiliaryDescrition = xsemanticsUtils.functionsForAuxiliaryDescrition(aux);
+		val functionsForAuxiliaryDescrition = aux.functionsForAuxiliaryDescrition();
 		if (enableWarnings
 				&& functionsForAuxiliaryDescrition
 						.isEmpty()) {
@@ -547,8 +538,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	def public void checkAuxiliaryFunctionHasAuxiliaryDescription(
 			AuxiliaryFunction aux) {
-		val auxiliaryDescription = xsemanticsUtils
-				.auxiliaryDescription(aux);
+		val auxiliaryDescription = aux
+				.auxiliaryDescription();
 		if (auxiliaryDescription == null) {
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",
@@ -564,7 +555,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (feature instanceof JvmFormalParameter) {
 			val container = feature.eContainer();
 			if (container instanceof RuleParameter) {
-				if (xsemanticsUtils.isOutputParam(container as RuleParameter)
+				if ((container as RuleParameter).isOutputParam
 						&& insideClosure(featureCall)) {
 					error("Cannot refer to an output parameter "
 							+ feature.getIdentifier()
@@ -578,7 +569,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def public void checkInjected(Injected i) {
-		if (helper.hasDuplicateInjectedField(i)) {
+		if (i.hasDuplicateInjectedField()) {
 			error("Duplicate injection '" + i.getName() + "'",
 				XsemanticsPackage.eINSTANCE.getInjected_Name(),
 				IssueCodes.DUPLICATE_INJECTED_FIELD);
@@ -586,8 +577,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	def private boolean insideClosure(XFeatureCall featureCall) {
-		return EcoreUtil2.getContainerOfType(featureCall,
-				XClosure) != null;
+		return featureCall.getContainerOfType(XClosure) != null;
 	}
 
 	def protected void checkConformanceOfAuxiliaryFunction(AuxiliaryFunction aux,
@@ -624,7 +614,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def protected String reportContainingSystemName(EObject object) {
 		return ", in system: "
-				+ xsemanticsUtils.containingSystem(object).getName();
+				+ object.containingSystem().getName();
 	}
 
 	def protected JudgmentDescription checkRuleConformantToJudgmentDescription(
@@ -657,8 +647,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			Iterable<? extends EObject> elements,
 			String elementDescription, EStructuralFeature elementFeature,
 			EStructuralFeature conformanceFeature) {
-		val judgmentDescription = xsemanticsUtils
-				.judgmentDescription(element, judgmentSymbol, relationSymbols);
+		val judgmentDescription = element
+				.judgmentDescription(judgmentSymbol, relationSymbols);
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
@@ -722,4 +712,64 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		this.enableWarnings = enableWarnings;
 	}
 
+	def noRulesWithTheSameNameOfCheckRule(Rule rule) {
+		rule.containingSystem.checkrules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noRulesWithTheSameName(Rule rule) {
+		rule.containingSystem.rules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noCheckRulesWithTheSameNameOfRule(CheckRule rule) {
+		rule.containingSystem.rules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def noCheckRulesWithTheSameName(CheckRule rule) {
+		rule.containingSystem.checkrules.findFirst [
+			it != rule && it.name == rule.name
+		] == null
+	}
+	
+	def judgmentDescriptionWithTheSameName(JudgmentDescription j) {
+		j.containingSystem.allJudgments.findFirst [
+			it != j && it.name == j.name
+		]
+	}
+
+	def auxiliaryDescriptionWithTheSameName(AuxiliaryDescription aux) {
+		aux.containingSystem.auxiliaryDescriptions.findFirst [
+			it != aux && it.name == aux.name
+		]
+	}
+	
+	def auxiliaryDescriptionWithTheSameNameOfJudgment(AuxiliaryDescription aux) {
+		aux.containingSystem.judgmentDescriptions.findFirst [
+			it != aux && it.name == aux.name
+		]
+	}
+	
+	def findDuplicateParameter(InputParameter param) {
+		param.containingJudgmentDescription.judgmentParameters.
+			typeSelect(typeof(InputParameter)).
+				map([ it.parameter ]).
+					findDuplicateJvmFormalParameter(param.parameter)
+	}
+	
+	def findDuplicateJvmFormalParameter(Iterable<JvmFormalParameter> params, JvmFormalParameter param) {
+		params.exists [ 
+			it != param && it.name == param.name
+		]
+	}
+	
+	def hasDuplicateInjectedField(Injected i) {
+		i.containingSystem.injections.exists[
+			it != i && it.name == i.name
+		]
+	}
 }
