@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests;
 
 import it.xsemantics.dsl.validation.IssueCodes;
-import it.xsemantics.dsl.validation.XsemanticsJavaValidator;
+import it.xsemantics.dsl.validation.XsemanticsValidator;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 import java.util.List;
@@ -18,18 +18,18 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 
 	private static final String IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM = ", in system: it.xsemantics.test.TypeSystem";
 
-	private XsemanticsJavaValidator validator;
+	private XsemanticsValidator validator;
 
-	private ValidatorTester<XsemanticsJavaValidator> tester;
+	private ValidatorTester<XsemanticsValidator> tester;
 
 	private ValidationTestHelper validationTestHelper;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		validator = get(XsemanticsJavaValidator.class);
+		validator = get(XsemanticsValidator.class);
 		validator.setEnableWarnings(false);
-		tester = new ValidatorTester<XsemanticsJavaValidator>(validator,
+		tester = new ValidatorTester<XsemanticsValidator>(validator,
 				getInjector());
 		validationTestHelper = get(ValidationTestHelper.class);
 	}

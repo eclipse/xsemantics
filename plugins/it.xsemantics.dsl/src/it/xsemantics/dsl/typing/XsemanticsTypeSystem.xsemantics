@@ -1,6 +1,6 @@
 system it.xsemantics.dsl.typing.XsemanticsTypeSystemGen
 
-validatorExtends it.xsemantics.dsl.validation.AbstractXsemanticsJavaValidator
+validatorExtends it.xsemantics.dsl.validation.AbstractXsemanticsValidator
 
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.typing.ITypeProvider
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 
 inject JvmTypesBuilder typesBuilder

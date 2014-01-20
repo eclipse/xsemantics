@@ -2,11 +2,11 @@ package it.xsemantics.dsl.typing.validation;
 
 import com.google.inject.Inject;
 import it.xsemantics.dsl.typing.XsemanticsTypeSystemGen;
-import it.xsemantics.dsl.validation.AbstractXsemanticsJavaValidator;
+import it.xsemantics.dsl.validation.AbstractXsemanticsValidator;
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 
 @SuppressWarnings("all")
-public class XsemanticsTypeSystemGenValidator extends AbstractXsemanticsJavaValidator {
+public class XsemanticsTypeSystemGenValidator extends AbstractXsemanticsValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
   

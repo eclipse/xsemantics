@@ -226,28 +226,28 @@
     </extension>
 
 
-    <!-- marker definitions for it.xsemantics.dsl.Xsemantics -->
-    <extension
-            id="xsemantics.check.fast"
-            name="Xsemantics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="xsemantics.check.normal"
-            name="Xsemantics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="xsemantics.check.expensive"
-            name="Xsemantics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
+	<!-- marker definitions for it.xsemantics.dsl.Xsemantics -->
+	<extension
+	        id="xsemantics.check.fast"
+	        name="Xsemantics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="xsemantics.check.normal"
+	        name="Xsemantics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="xsemantics.check.expensive"
+	        name="Xsemantics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">

@@ -67,7 +67,7 @@ Workflow {
             }
 
             // java-based API for validation
-            fragment = validation.JavaValidatorFragment {
+            fragment = validation.ValidatorFragment {
             //    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
             // does not work with the model inferrer so we disable it
             // composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
