@@ -7,7 +7,7 @@
     <package 
        uri = "http://xsemantics.sf.net/Xsemantics" 
        class = "it.xsemantics.dsl.xsemantics.XsemanticsPackage"
-       genModel = "it/xsemantics/dsl/Xsemantics.genmodel" /> 
+       genModel = "model/generated/Xsemantics.genmodel" /> 
 	
   </extension>
 

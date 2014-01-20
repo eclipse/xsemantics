@@ -7,7 +7,7 @@
     <package 
        uri = "http://xsemantics.sf.net/example/fj/FJ" 
        class = "it.xsemantics.example.fj.fj.FjPackage"
-       genModel = "it/xsemantics/example/fj/FJ.genmodel" /> 
+       genModel = "model/generated/FJ.genmodel" /> 
 	
   </extension>
 

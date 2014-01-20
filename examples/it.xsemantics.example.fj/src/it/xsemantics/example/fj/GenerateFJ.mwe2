@@ -36,10 +36,8 @@ Workflow {
             // Java API to access grammar elements (required by several other fragments)
             fragment = grammarAccess.GrammarAccessFragment {}
 
-            // generates Java API for the generated EPackages 
-            fragment = ecore.EcoreGeneratorFragment {
-            // referencedGenModels = "uri to genmodel, uri to next genmodel"
-            }
+            // generates Java API for the generated EPackages
+    		fragment = ecore.EMFGeneratorFragment auto-inject {}
 
             // Serializer 2.0
             fragment = serializer.SerializerFragment {}

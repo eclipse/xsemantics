@@ -5,9 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.xsemantics.it/example/expressions/Expressions" 
+       uri = "http://xsemantics.sf.net/example/expressions/Expressions" 
        class = "it.xsemantics.example.expressions.expressions.ExpressionsPackage"
-       genModel = "it/xsemantics/example/expressions/Expressions.genmodel" /> 
+       genModel = "model/generated/Expressions.genmodel" /> 
 	
   </extension>
 
