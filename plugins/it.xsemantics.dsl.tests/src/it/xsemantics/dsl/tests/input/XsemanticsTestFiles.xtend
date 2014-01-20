@@ -2322,6 +2322,19 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testDuplicateAuxiliaryFunctionsWithSameParameterTypes_Issue_9() '''
+	«testAuxiliaryDescriptions»
+	
+	auxiliary isValue(EClass eO, EClass eC) {
+		eO == eC
+	}
+	
+	// they must differ for the parameters
+	auxiliary isValue(EClass e1, EClass e2) {
+		true
+	}
+	'''
+
 	def testExpressionsInConclusion() '''
 	«testJudgmentDescriptionsReferringToEcore3WithOutput»
 	

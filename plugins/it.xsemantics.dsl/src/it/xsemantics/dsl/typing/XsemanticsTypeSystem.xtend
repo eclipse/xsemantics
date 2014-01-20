@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.XInstanceOfExpression
 import it.xsemantics.dsl.xsemantics.RuleInvocation
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsTypeSystem {
 	
@@ -43,6 +44,14 @@ class XsemanticsTypeSystem {
 	def TupleType getInputTypes(Rule rule) {
 		val tupleType = new TupleType();
 		rule.inputParams.forEach [
+			tupleType.add(it.getType)
+		]
+		return tupleType;
+	}
+
+	def TupleType getInputTypes(AuxiliaryFunction aux) {
+		val tupleType = new TupleType();
+		aux.parameters.forEach [
 			tupleType.add(it.getType)
 		]
 		return tupleType;

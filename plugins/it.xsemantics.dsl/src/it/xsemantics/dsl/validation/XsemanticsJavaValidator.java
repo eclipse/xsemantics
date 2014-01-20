@@ -479,7 +479,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	}
 
 	@Check
-	protected void checkNoDuplicateRulesWithSameArguments(CheckRule rule) {
+	protected void checkNoDuplicateCheckRulesWithSameArguments(CheckRule rule) {
 		if (rule.isOverride())
 			return;
 		XsemanticsSystem system = xsemanticsUtils
@@ -497,7 +497,7 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	}
 
 	@Check
-	protected void checkNoDuplicateCheckRulesWithSameArguments(Rule rule) {
+	protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
 		List<Rule> rulesOfTheSameKind = xsemanticsUtils
 				.allRulesOfTheSameKind(rule);
 		if (rulesOfTheSameKind.size() > 1) {
@@ -535,15 +535,37 @@ public class XsemanticsJavaValidator extends AbstractXsemanticsJavaValidator {
 	}
 
 	@Check
-	public void checkAuxiliaryDescriptionHasAuxiliaryFunctions(
-			AuxiliaryDescription aux) {
+	public void checkAuxiliaryFunctions(AuxiliaryDescription aux) {
+		List<AuxiliaryFunction> functionsForAuxiliaryDescrition = xsemanticsUtils.functionsForAuxiliaryDescrition(aux);
 		if (enableWarnings
-				&& xsemanticsUtils.functionsForAuxiliaryDescrition(aux)
+				&& functionsForAuxiliaryDescrition
 						.isEmpty()) {
 			warning("No function defined for the auxiliary description",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION
 							.getEIDAttribute(),
 					IssueCodes.NO_AUXFUN_FOR_AUX_DESCRIPTION);
+		}
+		
+		if (functionsForAuxiliaryDescrition.size() > 1) {
+			for (AuxiliaryFunction auxiliaryFunction : functionsForAuxiliaryDescrition) {
+				TupleType tupleType = typeSystem.getInputTypes(auxiliaryFunction);
+				
+				for (AuxiliaryFunction auxiliaryFunction2 : functionsForAuxiliaryDescrition) {
+					if (auxiliaryFunction == auxiliaryFunction2)
+						continue;
+					
+					TupleType tupleType2 = typeSystem.getInputTypes(auxiliaryFunction2);
+					if (typeSystem.equals(tupleType, tupleType2, auxiliaryFunction)) {
+						error("Duplicate auxiliary function of the same kind with parameters: "
+								+ tupleTypeRepresentation(tupleType)
+								+ reportContainingSystemName(auxiliaryFunction2),
+								auxiliaryFunction2,
+								XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
+								IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS);
+						break;
+					}
+				}
+			}
 		}
 	}
 

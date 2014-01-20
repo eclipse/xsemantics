@@ -245,6 +245,16 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def testDuplicateAuxiliaryFunctionsWithSameParameterTypes_Issue_9() {
+		val s = parser.parse(testFiles.testDuplicateAuxiliaryFunctionsWithSameParameterTypes_Issue_9)
+		s.assertError(
+			XsemanticsPackage.eINSTANCE.auxiliaryFunction,
+			IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
+			"Duplicate auxiliary function of the same kind with parameters: EClass, EClass"
+		)
+	}
+
+	@Test
 	def testInvalidRuleInvocationIsVoidInClosures() {
 		val s = parser.parse(testFiles.testRuleInvocationIsVoidInClosures)
 		s.assertError(

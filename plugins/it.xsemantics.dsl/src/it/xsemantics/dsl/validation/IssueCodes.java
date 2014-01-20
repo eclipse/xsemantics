@@ -16,6 +16,9 @@ public interface IssueCodes {
 
 	String DUPLICATE_RULE_WITH_SAME_ARGUMENTS = PREFIX
 			+ "DuplicateRulesWithSameArguments";
+
+	String DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS = PREFIX
+			+ "DuplicateAuxFunWithSameArguments";
 	
 	String DUPLICATE_RULE_NAME = PREFIX
 			+ "DuplicateRuleName";
