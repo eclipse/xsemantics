@@ -3,7 +3,7 @@
  */
 package it.xsemantics.tests.swtbot.wizards;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
@@ -18,7 +18,6 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.eclipse.ui.PlatformUI;
@@ -43,17 +42,18 @@ public class XsemanticsWizardBase {
 		
 		closeWelcomePage();
 
-		// Change the perspective via the Open Perspective dialog
-		bot.menu("Window").menu("Open Perspective").menu("Other...").click();
-		SWTBotShell openPerspectiveShell = bot.shell("Open Perspective");
-		openPerspectiveShell.activate();
-
-		// select the dialog
-		bot.table().select("Plug-in Development");
-		bot.button("OK").click();
-
-		bot.viewByTitle("Error Log").close();
-		bot.viewByTitle("Problems").show();
+//		// Change the perspective via the Open Perspective dialog
+//		bot.menu("Window").menu("Open Perspective").menu("Other...").click();
+//		SWTBotShell openPerspectiveShell = bot.shell("Open Perspective");
+//		openPerspectiveShell.activate();
+//
+//		// select the dialog
+//		bot.table().select("Plug-in Development");
+//		bot.button("OK").click();
+//
+//		// the following two lines tend to fail with SwtBot 2.2.0
+//		bot.viewByTitle("Error Log").close();
+//		bot.viewByTitle("Problems").show();
 	}
 	
 	@AfterClass
@@ -103,13 +103,13 @@ public class XsemanticsWizardBase {
 	}
 
 	protected static SWTBotTree getProjectTree() {
-		SWTBotView packageExplorer = getPackageExplorer();
+		SWTBotView packageExplorer = getProjectExplorer();
 		SWTBotTree tree = packageExplorer.bot().tree();
 		return tree;
 	}
 
-	protected static SWTBotView getPackageExplorer() {
-		SWTBotView view = bot.viewByTitle("Package Explorer");
+	protected static SWTBotView getProjectExplorer() {
+		SWTBotView view = bot.viewByTitle("Project Explorer");
 		return view;
 	}
 
