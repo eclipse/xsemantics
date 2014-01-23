@@ -103,8 +103,8 @@ public class XsemanticsWizardBase {
 	}
 
 	protected static SWTBotTree getProjectTree() {
-		SWTBotView packageExplorer = getProjectExplorer();
-		SWTBotTree tree = packageExplorer.bot().tree();
+		SWTBotView projectExplorer = getProjectExplorer();
+		SWTBotTree tree = projectExplorer.bot().tree();
 		return tree;
 	}
 
