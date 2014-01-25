@@ -7,3 +7,5 @@ emma -l "it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch" --flatXM
 emma -l "it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsExamplesProjectWizardJunitPluginTests.launch.xml" --exec "${buckminster.output.root}/test.results/coverage.XsemanticsExamplesProjectWizardJunitPluginTests.launch.exec" --html "${buckminster.output.root}/test.results/coverage.XsemanticsExamplesProjectWizardJunitPluginTests.launch.html"
 
 perform "it.xsemantics.site#site.p2"
+
+perform "it.xsemantics.build#run.findbugs"

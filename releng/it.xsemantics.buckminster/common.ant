@@ -37,6 +37,11 @@
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
+	<property name="findbugs.version" value="2.0.3" />
+	<property name="findbugs.url" value="http://prdownloads.sourceforge.net/findbugs/findbugs-${findbugs.version}.zip?download"/>
+	<property name="findbugs.install.dest" value="${user.home}" />
+	<property name="findbugs.home" value="${findbugs.install.dest}/findbugs-${findbugs.version}" />
+	
 	<property name="eclipse.p2.mirrors" value="true" />
 	<property name="java.net.preferIPv4Stack" value="true" />
 	
@@ -69,6 +74,7 @@
 				<sysproperty key="buckminster.temp.root" value="${buckminster.temp.root}" />
 				<sysproperty key="target.platform" value="${buckminster.target.platform}" />
 				<sysproperty key="eclipse.download" value="${eclipse.download}" />
+				<sysproperty key="findbugs.home" value="${findbugs.home}" />
 				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
 				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
 				<jvmarg line=" -Xms256m -Xmx512m" />
@@ -258,4 +264,23 @@
 		<delete file="${director.zip}" />
 	</target>
 
+	<target name="install.findbugs">
+		<condition property="findbugs.installed">
+			<available file="${findbugs.home}" />
+		</condition>
+		<antcall target="install.findbugs.internal" />
+	</target>
+
+	<target name="install.findbugs.internal" unless="findbugs.installed">
+		<echo message="" />
+		<echo message="Installing findbugs from ${findbugs.url}..." />
+		<tempfile destdir="${java.io.tmpdir}"
+						          prefix="findbugs-"
+						          suffix=".zip"
+						          property="findbugs.zip"
+						          deleteonexit="true" />
+		<get src="${findbugs.url}" dest="${findbugs.zip}" />
+		<unzip src="${findbugs.zip}" dest="${findbugs.install.dest}" />
+		<delete file="${findbugs.zip}" />
+	</target>
 </project>

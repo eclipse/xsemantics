@@ -28,7 +28,7 @@
 	<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
 	
 	<target name="buckminster" 
-		depends="common.cleanup,clean-xtend-gen,copy-xtext-grammar-to-bin,install.buckminster.headless" description="description">
+		depends="common.cleanup,clean-xtend-gen,copy-xtext-grammar-to-bin,install.buckminster.headless,install.findbugs" description="description">
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
@@ -37,7 +37,7 @@
 		<antcall target="buckminster-perform" />
 	</target>
 
-	<target name="buckminster-local" depends="common.cleanup,install.buckminster.headless" description="description">
+	<target name="buckminster-local" depends="common.cleanup,install.buckminster.headless,install.findbugs" description="description">
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 

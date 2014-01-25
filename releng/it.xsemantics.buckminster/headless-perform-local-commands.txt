@@ -7,3 +7,5 @@ junit -l "it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch" --flatX
 junit -l "it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsExamplesProjectWizardJunitPluginTests.launch.xml" 
 
 perform "it.xsemantics.site#site.p2"
+
+perform "it.xsemantics.build#run.findbugs"

@@ -9,4 +9,18 @@
         <cs:dependency name="it.xsemantics.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="it.xsemantics.build.tools" componentType="osgi.bundle"/>
     </cs:dependencies>
+    <cs:actions>
+	   <cs:public name="run.findbugs" actor="ant">
+	       <cs:actorProperties>
+	           <cs:property key="buildFile" value="findbugs.ant"/>
+	           <cs:property key="targets" value="findbugs"/>
+	       </cs:actorProperties>
+	       <cs:prerequisites>
+	           <cs:attribute name="site.p2" 
+	           		alias="site.p2.repository" 
+	           		component="it.xsemantics.site"/>
+	       </cs:prerequisites>
+	       <cs:products alias="action.output" base="${buckminster.output.root}/findbugs/"/>
+	   </cs:public>
+    </cs:actions>
 </cs:cspec>
