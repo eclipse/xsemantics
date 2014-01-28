@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -76,8 +77,10 @@ public class XsemanticsProposalProvider extends
 	protected void showOnlySubtypesOf(EObject model,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor,
 			Class<?> superType, EReference reference) {
-		typeProposalProvider.createSubTypeProposals(
-				typesBuilder.newTypeRef(model, superType).getType(), this,
+		JvmTypeReference superTypeRef = typesBuilder.newTypeRef(model, superType);
+		if (superTypeRef != null)
+			typeProposalProvider.createSubTypeProposals(
+				superTypeRef.getType(), this,
 				context, reference, acceptor);
 	}
 }

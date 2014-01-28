@@ -25,6 +25,8 @@ public class ExpressionsScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_Variable(Variable variable, EReference ref) {
 		// only the variables declared before this one
 		Model model = EcoreUtil2.getContainerOfType(variable, Model.class);
+		if (model == null)
+			return IScope.NULLSCOPE;
 		EList<Variable> variables = model.getVariables();
 		return Scopes
 				.scopeFor(variables.subList(0, variables.indexOf(variable)));
