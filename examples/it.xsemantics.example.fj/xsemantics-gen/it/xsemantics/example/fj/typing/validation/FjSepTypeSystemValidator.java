@@ -6,7 +6,6 @@ import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.Program;
 import it.xsemantics.example.fj.typing.FjSepTypeSystem;
 import it.xsemantics.example.fj.typing.validation.FjTypeSystemValidator;
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xtext.validation.Check;
 
 /**
@@ -15,9 +14,6 @@ import org.eclipse.xtext.validation.Check;
  */
 @SuppressWarnings("all")
 public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
-  @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
   @Inject
   protected FjSepTypeSystem xsemanticsSystem;
   

@@ -1886,7 +1886,6 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.ExtendedTypeSystem2;
 import it.xsemantics.test.validation.ExtendedTypeSystemValidator;
 import org.eclipse.emf.ecore.EObject;
@@ -1894,9 +1893,6 @@ import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
-  @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
   @Inject
   protected ExtendedTypeSystem2 xsemanticsSystem;
   
@@ -2060,7 +2056,6 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.ExtendedTypeSystemWithRuleOverride;
 import it.xsemantics.test.validation.ExtendedTypeSystem2Validator;
 import org.eclipse.emf.ecore.EObject;
@@ -2068,9 +2063,6 @@ import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystemWithRuleOverrideValidator extends ExtendedTypeSystem2Validator {
-  @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
   @Inject
   protected ExtendedTypeSystemWithRuleOverride xsemanticsSystem;
   
@@ -3204,7 +3196,6 @@ null,
 package it.xsemantics.test.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import it.xsemantics.test.ExtendedTypeSystem;
 import it.xsemantics.test.validation.TypeSystemValidator;
 import org.eclipse.emf.ecore.EClass;
@@ -3213,9 +3204,6 @@ import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystemValidator extends TypeSystemValidator {
-  @Inject
-  protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
   @Inject
   protected ExtendedTypeSystem xsemanticsSystem;
   

@@ -207,10 +207,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			else
 				superTypes += ts.newTypeRef(typeof(AbstractDeclarativeValidator))
 
-			members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
-				annotations += ts.toAnnotation(typeof(Inject))
-				visibility = JvmVisibility::PROTECTED
-			]
+			if (ts.superSystem === null)
+				members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
+					annotations += ts.toAnnotation(typeof(Inject))
+					visibility = JvmVisibility::PROTECTED
+				]
+			// avoid generating a field that masks the one in the superclass
+			// FindBugs MF_CLASS_MASKS_FIELD
 						
 			members += ts.toField("xsemanticsSystem", inferredClass.createTypeRef) [
 				annotations += ts.toAnnotation(typeof(Inject))
