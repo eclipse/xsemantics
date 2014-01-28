@@ -17,13 +17,16 @@ in Java).
    <feature id="it.xsemantics.runtime.feature">
       <category name="xsemantics"/>
    </feature>
+   <feature id="it.xsemantics.doc.feature">
+      <category name="xsemantics"/>
+   </feature>
    <feature id="it.xsemantics.sdk">
       <category name="xsemantics"/>
    </feature>
    <feature id="it.xsemantics.sdk.source">
       <category name="xsemantics"/>
    </feature>
-   <feature id="it.xsemantics.runtime.source">
+   <feature id="it.xsemantics.runtime.source.feature">
       <category name="xsemantics"/>
    </feature>
    <feature id="it.xsemantics.source.feature">
