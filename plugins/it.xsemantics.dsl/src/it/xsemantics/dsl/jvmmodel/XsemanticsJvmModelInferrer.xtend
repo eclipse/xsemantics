@@ -677,10 +677,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 						return false;
 					«ELSE»
 						sneakyThrowRuleFailedException(«aux.exceptionVarName»);
-						return null;
+						return «IF aux.type === null»false«ELSE»null«ENDIF»;
 					«ENDIF»
 				}
 				'''
+				// don't return null if aux.type is null: the generated method will have
+				// type Boolean and returning null is considered bad practice
+				// see FindBugs NP_BOOLEAN_RETURN_NULL
 		]
 	}
 
@@ -731,9 +734,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	def compileImplMethod(AuxiliaryFunction aux) {
+		val resultType = aux.resultType
+		val isBoolean = aux.newTypeRef(typeof(Boolean)).
+				isConformant(resultType)
+		
 		aux.toMethod(
 			'''«aux.auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
-			aux.resultType
+			resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -754,9 +761,12 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					«aux.auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
 						«aux.auxiliaryDescription.ruleIssueString»,
 						e_«aux.applyAuxFunName», «aux.inputParameterNames»«aux.errorInformationArgs»);
-					return null;
+					return «IF isBoolean»false«ELSE»null«ENDIF»;
 				}
    				'''
+   				// don't return null if resultType is boolean: the generated method will have
+				// type Boolean and returning null is considered bad practice
+				// see FindBugs NP_BOOLEAN_RETURN_NULL
 		]
 	}
 	

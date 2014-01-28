@@ -248,16 +248,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
-      addToTrace(_trace_, ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTNew) {
-      typeThrowException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
-      	TNEW,
-      	e_applyRuleTNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
-      return null;
+    	typeThrowException(ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + "ClassType",
+    		TNEW,
+    		e_applyRuleTNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
+    	return null;
     }
   }
   
@@ -275,16 +275,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
-      addToTrace(_trace_, ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
+    	addToTrace(_trace_, ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTSelection) {
-      typeThrowException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
-      	TSELECTION,
-      	e_applyRuleTSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
-      return null;
+    	typeThrowException(ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + "Type",
+    		TSELECTION,
+    		e_applyRuleTSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
+    	return null;
     }
   }
   
@@ -303,16 +303,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
-      addToTrace(_trace_, ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
+    	addToTrace(_trace_, ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleTCast) {
-      typeThrowException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
-      	TCAST,
-      	e_applyRuleTCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
-      return null;
+    	typeThrowException(ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + "ClassType",
+    		TCAST,
+    		e_applyRuleTCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
+    	return null;
     }
   }
   
@@ -329,16 +329,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Constant _const) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckConstant(G, _subtrace_, _const);
-      addToTrace(_trace_, ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckConstant(G, _subtrace_, _const);
+    	addToTrace(_trace_, ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckConstant) {
-      checkThrowException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
-      	CHECKCONSTANT,
-      	e_applyRuleCheckConstant, _const, new ErrorInformation[] {new ErrorInformation(_const)});
-      return null;
+    	checkThrowException(ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const),
+    		CHECKCONSTANT,
+    		e_applyRuleCheckConstant, _const, new ErrorInformation[] {new ErrorInformation(_const)});
+    	return null;
     }
   }
   
@@ -349,16 +349,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckTypedElement(G, _subtrace_, typedElement);
-      addToTrace(_trace_, ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckTypedElement(G, _subtrace_, typedElement);
+    	addToTrace(_trace_, ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckTypedElement) {
-      checkThrowException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
-      	CHECKTYPEDELEMENT,
-      	e_applyRuleCheckTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
-      return null;
+    	checkThrowException(ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement),
+    		CHECKTYPEDELEMENT,
+    		e_applyRuleCheckTypedElement, typedElement, new ErrorInformation[] {new ErrorInformation(typedElement)});
+    	return null;
     }
   }
   
@@ -369,16 +369,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckParamRef(G, _subtrace_, paramref);
-      addToTrace(_trace_, ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckParamRef(G, _subtrace_, paramref);
+    	addToTrace(_trace_, ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckParamRef) {
-      checkThrowException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
-      	CHECKPARAMREF,
-      	e_applyRuleCheckParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
-      return null;
+    	checkThrowException(ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref),
+    		CHECKPARAMREF,
+    		e_applyRuleCheckParamRef, paramref, new ErrorInformation[] {new ErrorInformation(paramref)});
+    	return null;
     }
   }
   
@@ -389,16 +389,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckThis(G, _subtrace_, _this);
-      addToTrace(_trace_, ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckThis(G, _subtrace_, _this);
+    	addToTrace(_trace_, ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckThis) {
-      checkThrowException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
-      	CHECKTHIS,
-      	e_applyRuleCheckThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
-      return null;
+    	checkThrowException(ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this),
+    		CHECKTHIS,
+    		e_applyRuleCheckThis, _this, new ErrorInformation[] {new ErrorInformation(_this)});
+    	return null;
     }
   }
   
@@ -415,16 +415,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckMethod(G, _subtrace_, method);
-      addToTrace(_trace_, ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckMethod(G, _subtrace_, method);
+    	addToTrace(_trace_, ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckMethod) {
-      checkThrowException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
-      	CHECKMETHOD,
-      	e_applyRuleCheckMethod, method, new ErrorInformation[] {new ErrorInformation(method)});
-      return null;
+    	checkThrowException(ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method),
+    		CHECKMETHOD,
+    		e_applyRuleCheckMethod, method, new ErrorInformation[] {new ErrorInformation(method)});
+    	return null;
     }
   }
   
@@ -456,16 +456,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
-      addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
-      checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
-      	CHECKNEW,
-      	e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
-      return null;
+    	checkThrowException(ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp),
+    		CHECKNEW,
+    		e_applyRuleCheckNew, newExp, new ErrorInformation[] {new ErrorInformation(newExp)});
+    	return null;
     }
   }
   
@@ -489,16 +489,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckSelection(G, _subtrace_, selection);
-      addToTrace(_trace_, ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckSelection(G, _subtrace_, selection);
+    	addToTrace(_trace_, ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckSelection) {
-      checkThrowException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
-      	CHECKSELECTION,
-      	e_applyRuleCheckSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
-      return null;
+    	checkThrowException(ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection),
+    		CHECKSELECTION,
+    		e_applyRuleCheckSelection, selection, new ErrorInformation[] {new ErrorInformation(selection)});
+    	return null;
     }
   }
   
@@ -510,11 +510,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     boolean _matched = false;
     if (!_matched) {
       if (message instanceof Method) {
-        final Method _method = (Method)message;
         _matched=true;
         /* G |- selection ~> selection.args << message.params */
         EList<Expression> _args = selection.getArgs();
-        EList<Parameter> _params = _method.getParams();
+        EList<Parameter> _params = ((Method)message).getParams();
         subtypesequenceInternal(G, _trace_, selection, _args, _params);
         EList<Expression> _args_1 = selection.getArgs();
         for (final Expression arg : _args_1) {
@@ -528,16 +527,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckCast(G, _subtrace_, cast);
-      addToTrace(_trace_, ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckCast(G, _subtrace_, cast);
+    	addToTrace(_trace_, ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckCast) {
-      checkThrowException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
-      	CHECKCAST,
-      	e_applyRuleCheckCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
-      return null;
+    	checkThrowException(ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast),
+    		CHECKCAST,
+    		e_applyRuleCheckCast, cast, new ErrorInformation[] {new ErrorInformation(cast)});
+    	return null;
     }
   }
   
@@ -564,16 +563,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
-      addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
+    	addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleCheckClass) {
-      checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
-      	CHECKCLASS,
-      	e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
-      return null;
+    	checkThrowException(ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl),
+    		CHECKCLASS,
+    		e_applyRuleCheckClass, cl, new ErrorInformation[] {new ErrorInformation(cl)});
+    	return null;
     }
   }
   

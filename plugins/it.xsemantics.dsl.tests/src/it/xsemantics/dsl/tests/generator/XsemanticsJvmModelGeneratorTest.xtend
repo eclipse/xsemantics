@@ -3343,7 +3343,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return voidFunDispatcher.invoke(_trace_, o);
     } catch (Exception _e_voidFun) {
     	sneakyThrowRuleFailedException(_e_voidFun);
-    	return null;
+    	return false;
     }
   }
   
@@ -3379,7 +3379,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	isValueThrowException(auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")",
     		ISVALUE,
     		e_applyAuxFunIsValue, eO, eC, new ErrorInformation[] {new ErrorInformation(eO), new ErrorInformation(eC)});
-    	return null;
+    	return false;
     }
   }
   
@@ -3424,7 +3424,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
     		VOIDFUN,
     		e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
-    	return null;
+    	return false;
     }
   }
   
@@ -3448,7 +3448,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	voidFunThrowException(auxFunName("voidFun") + "(" + stringRep(o)+ ")",
     		VOIDFUN,
     		e_applyAuxFunVoidFun, o, new ErrorInformation[] {new ErrorInformation(o)});
-    	return null;
+    	return false;
     }
   }
   

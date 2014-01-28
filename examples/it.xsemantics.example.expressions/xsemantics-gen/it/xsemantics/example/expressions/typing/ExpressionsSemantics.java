@@ -235,16 +235,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral num) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleNumeralLiteral(G, _subtrace_, num);
-      addToTrace(_trace_, ruleName("NumeralLiteral") + stringRepForEnv(G) + " |- " + stringRep(num) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleNumeralLiteral(G, _subtrace_, num);
+    	addToTrace(_trace_, ruleName("NumeralLiteral") + stringRepForEnv(G) + " |- " + stringRep(num) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleNumeralLiteral) {
-      typeThrowException(ruleName("NumeralLiteral") + stringRepForEnv(G) + " |- " + stringRep(num) + " : " + "IntType",
-      	NUMERALLITERAL,
-      	e_applyRuleNumeralLiteral, num, new ErrorInformation[] {new ErrorInformation(num)});
-      return null;
+    	typeThrowException(ruleName("NumeralLiteral") + stringRepForEnv(G) + " |- " + stringRep(num) + " : " + "IntType",
+    		NUMERALLITERAL,
+    		e_applyRuleNumeralLiteral, num, new ErrorInformation[] {new ErrorInformation(num)});
+    	return null;
     }
   }
   
@@ -260,16 +260,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleBooleanLiteral(G, _subtrace_, bool);
-      addToTrace(_trace_, ruleName("BooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleBooleanLiteral(G, _subtrace_, bool);
+    	addToTrace(_trace_, ruleName("BooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleBooleanLiteral) {
-      typeThrowException(ruleName("BooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " : " + "BooleanType",
-      	BOOLEANLITERAL,
-      	e_applyRuleBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
-      return null;
+    	typeThrowException(ruleName("BooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " : " + "BooleanType",
+    		BOOLEANLITERAL,
+    		e_applyRuleBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
+    	return null;
     }
   }
   
@@ -285,16 +285,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleStringLiteral(G, _subtrace_, str);
-      addToTrace(_trace_, ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleStringLiteral(G, _subtrace_, str);
+    	addToTrace(_trace_, ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleStringLiteral) {
-      typeThrowException(ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + "StringType",
-      	STRINGLITERAL,
-      	e_applyRuleStringLiteral, str, new ErrorInformation[] {new ErrorInformation(str)});
-      return null;
+    	typeThrowException(ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + "StringType",
+    		STRINGLITERAL,
+    		e_applyRuleStringLiteral, str, new ErrorInformation[] {new ErrorInformation(str)});
+    	return null;
     }
   }
   
@@ -310,16 +310,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleMultiOrDiv(G, _subtrace_, multiOrDiv);
-      addToTrace(_trace_, ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleMultiOrDiv(G, _subtrace_, multiOrDiv);
+    	addToTrace(_trace_, ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleMultiOrDiv) {
-      typeThrowException(ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + "IntType",
-      	MULTIORDIV,
-      	e_applyRuleMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
-      return null;
+    	typeThrowException(ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + "IntType",
+    		MULTIORDIV,
+    		e_applyRuleMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
+    	return null;
     }
   }
   
@@ -342,16 +342,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleMinus(G, _subtrace_, minus);
-      addToTrace(_trace_, ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleMinus(G, _subtrace_, minus);
+    	addToTrace(_trace_, ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleMinus) {
-      typeThrowException(ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + "IntType",
-      	MINUS,
-      	e_applyRuleMinus, minus, new ErrorInformation[] {new ErrorInformation(minus)});
-      return null;
+    	typeThrowException(ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + "IntType",
+    		MINUS,
+    		e_applyRuleMinus, minus, new ErrorInformation[] {new ErrorInformation(minus)});
+    	return null;
     }
   }
   
@@ -379,16 +379,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRulePlus(G, _subtrace_, plus);
-      addToTrace(_trace_, ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRulePlus(G, _subtrace_, plus);
+    	addToTrace(_trace_, ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRulePlus) {
-      typeThrowException(ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + "Type",
-      	PLUS,
-      	e_applyRulePlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
-      return null;
+    	typeThrowException(ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + "Type",
+    		PLUS,
+    		e_applyRulePlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
+    	return null;
     }
   }
   
@@ -440,16 +440,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleComparison(G, _subtrace_, comparison);
-      addToTrace(_trace_, ruleName("Comparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleComparison(G, _subtrace_, comparison);
+    	addToTrace(_trace_, ruleName("Comparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleComparison) {
-      typeThrowException(ruleName("Comparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
-      	COMPARISON,
-      	e_applyRuleComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
-      return null;
+    	typeThrowException(ruleName("Comparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
+    		COMPARISON,
+    		e_applyRuleComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
+    	return null;
     }
   }
   
@@ -469,22 +469,10 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     rightType = (Type) result_1.getFirst();
     
     boolean _or = false;
-    boolean _and = false;
-    if (!(leftType instanceof IntType)) {
-      _and = false;
-    } else {
-      _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
-    }
-    if (_and) {
+    if (((leftType instanceof IntType) && (rightType instanceof IntType))) {
       _or = true;
     } else {
-      boolean _and_1 = false;
-      if (!(leftType instanceof StringType)) {
-        _and_1 = false;
-      } else {
-        _and_1 = ((leftType instanceof StringType) && (rightType instanceof StringType));
-      }
-      _or = (_and || _and_1);
+      _or = (((leftType instanceof IntType) && (rightType instanceof IntType)) || ((leftType instanceof StringType) && (rightType instanceof StringType)));
     }
     /* (leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType) */
     if (!_or) {
@@ -500,16 +488,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleEquals(G, _subtrace_, comparison);
-      addToTrace(_trace_, ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleEquals(G, _subtrace_, comparison);
+    	addToTrace(_trace_, ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleEquals) {
-      typeThrowException(ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
-      	EQUALS,
-      	e_applyRuleEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
-      return null;
+    	typeThrowException(ruleName("Equals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " : " + "BooleanType",
+    		EQUALS,
+    		e_applyRuleEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
+    	return null;
     }
   }
   
@@ -545,16 +533,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleBooleanNegation(G, _subtrace_, negation);
-      addToTrace(_trace_, ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleBooleanNegation(G, _subtrace_, negation);
+    	addToTrace(_trace_, ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleBooleanNegation) {
-      typeThrowException(ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + "BooleanType",
-      	BOOLEANNEGATION,
-      	e_applyRuleBooleanNegation, negation, new ErrorInformation[] {new ErrorInformation(negation)});
-      return null;
+    	typeThrowException(ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + "BooleanType",
+    		BOOLEANNEGATION,
+    		e_applyRuleBooleanNegation, negation, new ErrorInformation[] {new ErrorInformation(negation)});
+    	return null;
     }
   }
   
@@ -571,16 +559,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleAndOr(G, _subtrace_, andOr);
-      addToTrace(_trace_, ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleAndOr(G, _subtrace_, andOr);
+    	addToTrace(_trace_, ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleAndOr) {
-      typeThrowException(ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + "BooleanType",
-      	ANDOR,
-      	e_applyRuleAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
-      return null;
+    	typeThrowException(ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + "BooleanType",
+    		ANDOR,
+    		e_applyRuleAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
+    	return null;
     }
   }
   
@@ -603,16 +591,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleArithmeticSigned(G, _subtrace_, signed);
-      addToTrace(_trace_, ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleArithmeticSigned(G, _subtrace_, signed);
+    	addToTrace(_trace_, ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleArithmeticSigned) {
-      typeThrowException(ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + "IntType",
-      	ARITHMETICSIGNED,
-      	e_applyRuleArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
-      return null;
+    	typeThrowException(ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + "IntType",
+    		ARITHMETICSIGNED,
+    		e_applyRuleArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
+    	return null;
     }
   }
   
@@ -634,16 +622,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleVariableReference(G, _subtrace_, varRef);
-      addToTrace(_trace_, ruleName("VariableReference") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleVariableReference(G, _subtrace_, varRef);
+    	addToTrace(_trace_, ruleName("VariableReference") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleVariableReference) {
-      typeThrowException(ruleName("VariableReference") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " : " + "Type",
-      	VARIABLEREFERENCE,
-      	e_applyRuleVariableReference, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
-      return null;
+    	typeThrowException(ruleName("VariableReference") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " : " + "Type",
+    		VARIABLEREFERENCE,
+    		e_applyRuleVariableReference, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
+    	return null;
     }
   }
   
@@ -660,16 +648,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Type> vartypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Variable variable) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Type> _result_ = applyRuleVariable(G, _subtrace_, variable);
-      addToTrace(_trace_, ruleName("Variable") + stringRepForEnv(G) + " ||- " + stringRep(variable) + " : " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Type> _result_ = applyRuleVariable(G, _subtrace_, variable);
+    	addToTrace(_trace_, ruleName("Variable") + stringRepForEnv(G) + " ||- " + stringRep(variable) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleVariable) {
-      vartypeThrowException(ruleName("Variable") + stringRepForEnv(G) + " ||- " + stringRep(variable) + " : " + "Type",
-      	VARIABLE,
-      	e_applyRuleVariable, variable, new ErrorInformation[] {new ErrorInformation(variable)});
-      return null;
+    	vartypeThrowException(ruleName("Variable") + stringRepForEnv(G) + " ||- " + stringRep(variable) + " : " + "Type",
+    		VARIABLE,
+    		e_applyRuleVariable, variable, new ErrorInformation[] {new ErrorInformation(variable)});
+    	return null;
     }
   }
   
@@ -692,16 +680,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretNumberLiteral(G, _subtrace_, number);
-      addToTrace(_trace_, ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretNumberLiteral(G, _subtrace_, number);
+    	addToTrace(_trace_, ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretNumberLiteral) {
-      interpretThrowException(ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + "int",
-      	INTERPRETNUMBERLITERAL,
-      	e_applyRuleInterpretNumberLiteral, number, new ErrorInformation[] {new ErrorInformation(number)});
-      return null;
+    	interpretThrowException(ruleName("InterpretNumberLiteral") + stringRepForEnv(G) + " |- " + stringRep(number) + " ~> " + "int",
+    		INTERPRETNUMBERLITERAL,
+    		e_applyRuleInterpretNumberLiteral, number, new ErrorInformation[] {new ErrorInformation(number)});
+    	return null;
     }
   }
   
@@ -717,16 +705,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretStringLiteral(G, _subtrace_, string);
-      addToTrace(_trace_, ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretStringLiteral(G, _subtrace_, string);
+    	addToTrace(_trace_, ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretStringLiteral) {
-      interpretThrowException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "String",
-      	INTERPRETSTRINGLITERAL,
-      	e_applyRuleInterpretStringLiteral, string, new ErrorInformation[] {new ErrorInformation(string)});
-      return null;
+    	interpretThrowException(ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + "String",
+    		INTERPRETSTRINGLITERAL,
+    		e_applyRuleInterpretStringLiteral, string, new ErrorInformation[] {new ErrorInformation(string)});
+    	return null;
     }
   }
   
@@ -742,16 +730,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretBooleanLiteral(G, _subtrace_, bool);
-      addToTrace(_trace_, ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretBooleanLiteral(G, _subtrace_, bool);
+    	addToTrace(_trace_, ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretBooleanLiteral) {
-      interpretThrowException(ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + "Boolean",
-      	INTERPRETBOOLEANLITERAL,
-      	e_applyRuleInterpretBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
-      return null;
+    	interpretThrowException(ruleName("InterpretBooleanLiteral") + stringRepForEnv(G) + " |- " + stringRep(bool) + " ~> " + "Boolean",
+    		INTERPRETBOOLEANLITERAL,
+    		e_applyRuleInterpretBooleanLiteral, bool, new ErrorInformation[] {new ErrorInformation(bool)});
+    	return null;
     }
   }
   
@@ -768,16 +756,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretMinus(G, _subtrace_, plus);
-      addToTrace(_trace_, ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretMinus(G, _subtrace_, plus);
+    	addToTrace(_trace_, ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretMinus) {
-      interpretThrowException(ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Integer",
-      	INTERPRETMINUS,
-      	e_applyRuleInterpretMinus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
-      return null;
+    	interpretThrowException(ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Integer",
+    		INTERPRETMINUS,
+    		e_applyRuleInterpretMinus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
+    	return null;
     }
   }
   
@@ -806,16 +794,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretMultiOrDiv(G, _subtrace_, multiOrDiv);
-      addToTrace(_trace_, ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretMultiOrDiv(G, _subtrace_, multiOrDiv);
+    	addToTrace(_trace_, ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretMultiOrDiv) {
-      interpretThrowException(ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + "Integer",
-      	INTERPRETMULTIORDIV,
-      	e_applyRuleInterpretMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
-      return null;
+    	interpretThrowException(ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + "Integer",
+    		INTERPRETMULTIORDIV,
+    		e_applyRuleInterpretMultiOrDiv, multiOrDiv, new ErrorInformation[] {new ErrorInformation(multiOrDiv)});
+    	return null;
     }
   }
   
@@ -853,16 +841,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretArithmeticSigned(G, _subtrace_, signed);
-      addToTrace(_trace_, ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretArithmeticSigned(G, _subtrace_, signed);
+    	addToTrace(_trace_, ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretArithmeticSigned) {
-      interpretThrowException(ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + "Integer",
-      	INTERPRETARITHMETICSIGNED,
-      	e_applyRuleInterpretArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
-      return null;
+    	interpretThrowException(ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + "Integer",
+    		INTERPRETARITHMETICSIGNED,
+    		e_applyRuleInterpretArithmeticSigned, signed, new ErrorInformation[] {new ErrorInformation(signed)});
+    	return null;
     }
   }
   
@@ -875,23 +863,22 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_1.getFirst(), Integer.class);
     expResult = (Integer) result_1.getFirst();
     
-    int _minus = (-(expResult).intValue());
-    result = Integer.valueOf(_minus);
+    result = Integer.valueOf((-(expResult).intValue()));
     return new Result<Object>(result);
   }
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretAndOr(G, _subtrace_, andOr);
-      addToTrace(_trace_, ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretAndOr(G, _subtrace_, andOr);
+    	addToTrace(_trace_, ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretAndOr) {
-      interpretThrowException(ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + "Boolean",
-      	INTERPRETANDOR,
-      	e_applyRuleInterpretAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
-      return null;
+    	interpretThrowException(ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + "Boolean",
+    		INTERPRETANDOR,
+    		e_applyRuleInterpretAndOr, andOr, new ErrorInformation[] {new ErrorInformation(andOr)});
+    	return null;
     }
   }
   
@@ -939,16 +926,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretBooleanNegation(G, _subtrace_, neg);
-      addToTrace(_trace_, ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretBooleanNegation(G, _subtrace_, neg);
+    	addToTrace(_trace_, ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretBooleanNegation) {
-      interpretThrowException(ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + "Boolean",
-      	INTERPRETBOOLEANNEGATION,
-      	e_applyRuleInterpretBooleanNegation, neg, new ErrorInformation[] {new ErrorInformation(neg)});
-      return null;
+    	interpretThrowException(ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + "Boolean",
+    		INTERPRETBOOLEANNEGATION,
+    		e_applyRuleInterpretBooleanNegation, neg, new ErrorInformation[] {new ErrorInformation(neg)});
+    	return null;
     }
   }
   
@@ -961,23 +948,22 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_1.getFirst(), Boolean.class);
     expResult = (Boolean) result_1.getFirst();
     
-    boolean _not = (!(expResult).booleanValue());
-    result = Boolean.valueOf(_not);
+    result = Boolean.valueOf((!(expResult).booleanValue()));
     return new Result<Object>(result);
   }
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretComparison(G, _subtrace_, comparison);
-      addToTrace(_trace_, ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretComparison(G, _subtrace_, comparison);
+    	addToTrace(_trace_, ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretComparison) {
-      interpretThrowException(ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
-      	INTERPRETCOMPARISON,
-      	e_applyRuleInterpretComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
-      return null;
+    	interpretThrowException(ruleName("InterpretComparison") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
+    		INTERPRETCOMPARISON,
+    		e_applyRuleInterpretComparison, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
+    	return null;
     }
   }
   
@@ -1017,16 +1003,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretEquals(G, _subtrace_, comparison);
-      addToTrace(_trace_, ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretEquals(G, _subtrace_, comparison);
+    	addToTrace(_trace_, ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretEquals) {
-      interpretThrowException(ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
-      	INTERPRETEQUALS,
-      	e_applyRuleInterpretEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
-      return null;
+    	interpretThrowException(ruleName("InterpretEquals") + stringRepForEnv(G) + " |- " + stringRep(comparison) + " ~> " + "Boolean",
+    		INTERPRETEQUALS,
+    		e_applyRuleInterpretEquals, comparison, new ErrorInformation[] {new ErrorInformation(comparison)});
+    	return null;
     }
   }
   
@@ -1055,16 +1041,16 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretPlus(G, _subtrace_, plus);
-      addToTrace(_trace_, ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretPlus(G, _subtrace_, plus);
+    	addToTrace(_trace_, ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretPlus) {
-      interpretThrowException(ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Object",
-      	INTERPRETPLUS,
-      	e_applyRuleInterpretPlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
-      return null;
+    	interpretThrowException(ruleName("InterpretPlus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + "Object",
+    		INTERPRETPLUS,
+    		e_applyRuleInterpretPlus, plus, new ErrorInformation[] {new ErrorInformation(plus)});
+    	return null;
     }
   }
   
@@ -1093,29 +1079,27 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     if (_or) {
       String leftString = leftResult.toString();
       String rightString = rightResult.toString();
-      String _plus = (leftString + rightString);
-      result = _plus;
+      result = (leftString + rightString);
     } else {
       Integer leftInt = ((Integer) leftResult);
       Integer rightInt = ((Integer) rightResult);
-      int _plus_1 = ((leftInt).intValue() + (rightInt).intValue());
-      result = Integer.valueOf(_plus_1);
+      result = Integer.valueOf(((leftInt).intValue() + (rightInt).intValue()));
     }
     return new Result<Object>(result);
   }
   
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     try {
-      RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-      Result<Object> _result_ = applyRuleInterpretVariableRefenrence(G, _subtrace_, varRef);
-      addToTrace(_trace_, ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + stringRep(_result_.getFirst()));
-      addAsSubtrace(_trace_, _subtrace_);
-      return _result_;
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<Object> _result_ = applyRuleInterpretVariableRefenrence(G, _subtrace_, varRef);
+    	addToTrace(_trace_, ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
     } catch (Exception e_applyRuleInterpretVariableRefenrence) {
-      interpretThrowException(ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + "Object",
-      	INTERPRETVARIABLEREFENRENCE,
-      	e_applyRuleInterpretVariableRefenrence, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
-      return null;
+    	interpretThrowException(ruleName("InterpretVariableRefenrence") + stringRepForEnv(G) + " |- " + stringRep(varRef) + " ~> " + "Object",
+    		INTERPRETVARIABLEREFENRENCE,
+    		e_applyRuleInterpretVariableRefenrence, varRef, new ErrorInformation[] {new ErrorInformation(varRef)});
+    	return null;
     }
   }
   
