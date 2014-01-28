@@ -20,4 +20,8 @@
          id="it.xsemantics.runtime.feature"
          version="0.0.0"/>
 
+   <includes
+         id="it.xsemantics.doc.feature"
+         version="0.0.0"/>
+
 </feature>

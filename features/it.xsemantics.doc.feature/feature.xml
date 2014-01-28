@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="it.xsemantics.feature"
-      label="Xsemantics UI"
+      id="it.xsemantics.doc.feature"
+      label="Xsemantics Documentation Feature"
       version="1.4.1.qualifier"
       provider-name="Lorenzo Bettini">
 
@@ -108,23 +108,8 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
 
-   <includes
-         id="it.xsemantics.runtime.feature"
-         version="0.0.0"/>
-
-   <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.5.0" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
-         id="it.xsemantics.dsl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="it.xsemantics.dsl.ui"
+         id="it.xsemantics.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"

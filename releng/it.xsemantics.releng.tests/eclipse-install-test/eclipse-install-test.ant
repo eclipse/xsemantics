@@ -9,6 +9,7 @@
 	<property name="additional.repos" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases" />
 	<property name="xsemantics.sdk.feature" value="it.xsemantics.sdk.feature.group" />
 	<property name="xsemantics.runtime.feature" value="it.xsemantics.runtime.feature.feature.group" />
+	<property name="xsemantics.ui.feature" value="it.xsemantics.feature.feature.group" />
 
 	<property name="eclipse.kepler.repos" value="http://download.eclipse.org/releases/kepler" />
 	<property name="eclipse.juno.repos" value="http://download.eclipse.org/releases/juno" />
@@ -31,6 +32,13 @@
 				features.repos="@{features.repos}"
 				additional.repos="${additional.repos}"
 				features.to.install="${xsemantics.runtime.feature}"/>
+			<test.xtext.installed.versions/>
+			<test.no.xpand/>
+			<install.eclipse.features
+				eclipse.name="@{eclipse.name}"
+				features.repos="@{features.repos}"
+				additional.repos="${additional.repos}"
+				features.to.install="${xsemantics.ui.feature}"/>
 			<test.xtext.installed.versions/>
 			<install.eclipse.features
 				eclipse.name="@{eclipse.name}"
@@ -93,6 +101,14 @@
 			/>
 			<features.dont.exist 
 				feature.pattern="${unwanted.xtext.features}" 
+			/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="test.no.xpand">
+		<sequential>
+			<bundles.dont.exist 
+				bundle.pattern="org.eclipse.xpand_*.jar" 
 			/>
 		</sequential>
 	</macrodef>

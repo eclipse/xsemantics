@@ -1,0 +1,3 @@
+build
+
+perform "it.xsemantics.releng.tests#eclipse-install-test-kepler"
