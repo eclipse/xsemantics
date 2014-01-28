@@ -714,7 +714,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def noRulesWithTheSameNameOfCheckRule(Rule rule) {
 		rule.containingSystem.checkrules.findFirst [
-			it != rule && it.name == rule.name
+			it.name == rule.name
 		] == null
 	}
 	
@@ -726,7 +726,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	
 	def noCheckRulesWithTheSameNameOfRule(CheckRule rule) {
 		rule.containingSystem.rules.findFirst [
-			it != rule && it.name == rule.name
+			it.name == rule.name
 		] == null
 	}
 	
@@ -750,7 +750,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	
 	def auxiliaryDescriptionWithTheSameNameOfJudgment(AuxiliaryDescription aux) {
 		aux.containingSystem.judgmentDescriptions.findFirst [
-			it != aux && it.name == aux.name
+			it.name == aux.name
 		]
 	}
 	
