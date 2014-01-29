@@ -12,6 +12,8 @@ import static org.eclipse.xtext.xbase.lib.IterableExtensions.take;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.toList;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.junit.Test;
 
@@ -41,11 +44,15 @@ public class InternalBuilder {
 		long used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
 		System.out.println("Starting build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
 		
+		clearJdtIndex();
+		
 		//ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor());
 		setAutoBuild(true);
 		cleanBuild();
 		waitForAutoBuild();
 		setAutoBuild(false);
+		
+		clearJdtIndex();
 		
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
 				.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
@@ -129,5 +136,16 @@ public class InternalBuilder {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void clearJdtIndex() {
+		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
+		boolean success = false;
+		try {
+			success = org.eclipse.xtext.util.Files.sweepFolder(jdtMetadata);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
 	}
 }
