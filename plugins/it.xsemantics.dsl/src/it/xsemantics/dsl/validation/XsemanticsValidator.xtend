@@ -11,7 +11,6 @@ import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
-import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
 import it.xsemantics.dsl.xsemantics.Rule
@@ -37,6 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 
+import static extension it.xsemantics.dsl.util.XsemanticsModelExtensions.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
 //import org.eclipse.xtext.validation.Check
@@ -214,110 +214,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkValidOverride(Rule rule) {
-		val system = rule.containingSystem();
-		if (system != null) {
-			if (rule.isOverride()) {
-				val superSystem = system.superSystemDefinition();
-				if (superSystem == null) {
-					error("Cannot override rule without system 'extends'",
-							rule, XsemanticsPackage.Literals.RULE__OVERRIDE,
-							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
-				} else {
-					val rulesOfTheSameKind = superSystem
-							.allRulesOfTheSameKind(rule);
-					val tupleType = typeSystem.getInputTypes(rule);
-					var Rule ruleToOverride = rulesOfTheSameKind.findFirst[
-						val tupleType2 = typeSystem.getInputTypes(it);
-						typeSystem.equals(tupleType, tupleType2, rule)
-					]
-					if (ruleToOverride == null) {
-						error("No rule of the same kind to override: "
-								+ tupleTypeRepresentation(tupleType), rule,
-								XsemanticsPackage.Literals.RULE__OVERRIDE,
-								IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND);
-					} else if (!ruleToOverride.getName().equals(rule.getName())) {
-						error("Must have the same name of the rule to override: "
-								+ ruleToOverride.getName(),
-								rule,
-								XsemanticsPackage.Literals.RULE__OVERRIDE,
-								IssueCodes.OVERRIDE_RULE_MUST_HAVE_THE_SAME_NAME);
-					}
-				}
-			}
-		}
-	}
-
-	@Check
-	def void checkValidOverride(CheckRule rule) {
-		val system = rule.containingSystem();
-		if (system != null) {
-			if (rule.isOverride()) {
-				val superSystem = system.superSystemDefinition();
-				if (superSystem == null) {
-					error("Cannot override checkrule without system 'extends'",
-							rule,
-							XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
-							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
-				} else {
-					val inheritedCheckRules = superSystem.allCheckRules();
-					var CheckRule inheritedRule = inheritedCheckRules.findFirst[
-						typeSystem.equals(rule.getElement().getParameter()
-								.getParameterType(), it.getElement()
-								.getParameter().getParameterType(), rule)
-								&& rule.getName().equals(it.getName())
-						]
-					
-					if (inheritedRule == null)
-						error("No checkrule to override: " + rule.getName(),
-								rule,
-								XsemanticsPackage.Literals.CHECK_RULE__OVERRIDE,
-								IssueCodes.NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND);
-				}
-			}
-		}
-	}
-
-	@Check
-	def public void checkValidOverride(JudgmentDescription judgment) {
-		val system = judgment.containingSystem();
-		if (system != null) {
-			if (judgment.isOverride()) {
-				val superSystem = system
-						.superSystemDefinition();
-				if (superSystem == null) {
-					error("Cannot override judgment without system 'extends'",
-							judgment,
-							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
-							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
-				} else {
-					val inheritedJudgments = superSystem
-							.allJudgments(
-									judgment.getJudgmentSymbol(),
-									judgment.getRelationSymbols());
-					val judgmentToOverride = inheritedJudgments.findFirst[
-						typeSystem.equals(judgment, it)
-					]
-					if (judgmentToOverride == null) {
-						error("No judgment of the same kind to override: "
-								+ nodeModelUtils.getProgramText(judgment),
-								judgment,
-								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
-								IssueCodes.NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND);
-					} else if (!judgmentToOverride.getName().equals(
-							judgment.getName())) {
-						error("Must have the same name of the judgment to override: "
-								+ judgmentToOverride.getName(),
-								judgment,
-								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
-								IssueCodes.OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME);
-					}
-				}
-			}
-		}
-	}
-
-	@Check
 	def public void checkRuleInvocation(RuleInvocation ruleInvocation) {
 		val judgmentDescription = checkRuleInvocationConformantToJudgmentDescription(ruleInvocation);
 		if (judgmentDescription != null) {
@@ -396,22 +292,43 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					IssueCodes.CYCLIC_HIERARCHY);
 		}
 		
-		val allSuperJudgments = system.superSystemDefinition?.allJudgments
-		if (allSuperJudgments != null) {
-			val superJudgmentsMap = allSuperJudgments.toMap[name]
-			for (j : system.judgmentDescriptions) {
-				if (!j.override) {
-					val overridden = superJudgmentsMap.get(j.name)
-					if (overridden != null)
-						error(
-							"Judgment '" + j.name + "' must override judgment" +
-								reportContainingSystemName(overridden),
-							j,
-							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__NAME, 
-							IssueCodes.DUPLICATE_JUDGMENT_NAME);
-				}
-			}
-		}
+		val superSystemDefinition = system.superSystemDefinition
+		val allSuperJudgments = superSystemDefinition?.allJudgments
+		system.judgmentDescriptions.
+			checkOverrides(allSuperJudgments, [name], [override], 
+			[j1, j2 |
+				j1.judgmentSymbol == j2.judgmentSymbol &&
+				j1.relationSymbols.elementsEqual(j2.relationSymbols) &&
+				typeSystem.equals(j1, j2)
+			],
+			"judgment")
+
+		val allSuperCheckRules = superSystemDefinition?.allCheckRules
+		system.checkrules.
+			checkOverrides(allSuperCheckRules, [name], [override], 
+			[r1, r2 |
+				typeSystem.equals(
+							r1.element.parameter.parameterType, 
+							r2.element.parameter.parameterType, 
+							r1
+						)
+			],
+			"checkrule")
+		
+		val allSuperRules = superSystemDefinition?.allRules
+		system.rules.
+			checkOverrides(allSuperRules, [name], [override], 
+			[r1, r2 |
+				r1.conclusion.judgmentSymbol.equals(r2.conclusion.judgmentSymbol) &&
+				r1.conclusion.relationSymbols.elementsEqual(r2.conclusion.relationSymbols)
+				&&
+				typeSystem.equals(
+					typeSystem.getInputTypes(r1),
+					typeSystem.getInputTypes(r2), 
+					r1
+				)
+			],
+			"rule")
 		
 		val elements = system.injections + 
 			system.judgmentDescriptions +
@@ -427,7 +344,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (!collection.empty) {
 			val map = <String,EObject>Multimaps2::newLinkedHashListMultimap
 			for (e : collection) {
-				map.put(XsemanticsNameComputer.computeName(e), e)
+				map.put(e.computeName, e)
 			}
 
 			for (entry : map.asMap.entrySet) {
@@ -444,19 +361,42 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 	}
 
-	@Check
-	def protected void checkNoDuplicateCheckRulesFromSupersystem(CheckRule rule) {
-		if (rule.isOverride())
-			return;
-		val system = rule.containingSystem().superSystemDefinition();
-		if (system != null) {
-			val rulesWithTheSameName = system
-					.allCheckRulesByName(rule);
-			for (CheckRule checkRule : rulesWithTheSameName) {
-				error("Duplicate checkrule with the same name"
-						+ reportContainingSystemName(checkRule),
-						XsemanticsPackage.Literals.CHECK_RULE__NAME,
-						IssueCodes.DUPLICATE_RULE_NAME);
+	def private <T extends EObject> checkOverrides(Iterable<T> collection, 
+			Iterable<T> superCollection, 
+			(T) => String nameComputer, 
+			(T) => boolean overrideComputer,
+			(T, T) => boolean conformanceComputer,
+			String kind) {
+		
+		if (superCollection == null) {
+			for (j : collection.filter[overrideComputer.apply(it)]) {
+				error(
+					"Cannot override " + kind + " without system 'extends'",
+					j,
+					null, 
+					IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+			}
+		} else {
+			val superMap = superCollection.toMap[nameComputer.apply(it)]
+			for (j : collection) {
+				val name = nameComputer.apply(j)
+				val overridden = superMap.get(name)
+					
+				if (!overrideComputer.apply(j)) {
+					if (overridden != null)
+						error(
+							kind + " '" + name + "' must override " + kind +
+								reportContainingSystemName(overridden),
+							j,
+							null, 
+							IssueCodes.MUST_OVERRIDE);
+				} else {
+					if (overridden == null || !conformanceComputer.apply(j, overridden))
+						error("No " + kind + " to override: " + name,
+							j,
+							null,
+							IssueCodes.NOTHING_TO_OVERRIDE);
+				}
 			}
 		}
 	}

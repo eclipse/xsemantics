@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.validation.IssueCodes
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Diagnostic
@@ -13,6 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtext.diagnostics.Severity
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.dsl.validation.IssueCodes
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -95,8 +95,8 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			).
 		assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::DUPLICATE_RULE_NAME,
-			"Duplicate checkrule with the same name, in system: it.xsemantics.test.ExtendedTypeSystem2"
+			IssueCodes::MUST_OVERRIDE,
+			"checkrule 'CheckEObject' must override checkrule, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
 
@@ -108,8 +108,8 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND,
-			"No rule of the same kind to override: EClass"
+			IssueCodes::NOTHING_TO_OVERRIDE,
+			"No rule to override: FromTypeSystem"
 		)
 	}
 	
@@ -121,8 +121,8 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::OVERRIDE_RULE_MUST_HAVE_THE_SAME_NAME,
-			"Must have the same name of the rule to override: FromTypeSystem"
+			IssueCodes::NOTHING_TO_OVERRIDE,
+			"No rule to override: DifferentName"
 		)
 	}
 
@@ -134,12 +134,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND,
+			IssueCodes::NOTHING_TO_OVERRIDE,
 			"No checkrule to override: WrongCheckEObject"
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND,
+			IssueCodes::NOTHING_TO_OVERRIDE,
 			"No checkrule to override: CheckEObject"
 		)
 	}
@@ -152,7 +152,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			).
 		assertErrorMessages(
 '''
-Judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
+judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 '''	
 		)
 	}
@@ -175,13 +175,13 @@ Judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 			)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.judgmentDescription,
-			IssueCodes::NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND,
-			"No judgment of the same kind to override: override type |- EObject obj : EClass c"
+			IssueCodes::NOTHING_TO_OVERRIDE,
+			"No judgment to override: type"
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.judgmentDescription,
-			IssueCodes::OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME,
-			"Must have the same name of the judgment to override: subtype"
+			IssueCodes::NOTHING_TO_OVERRIDE,
+			"No judgment to override: subtype2"
 		)
 	}
 
@@ -450,4 +450,5 @@ Duplicate name 'eClass' (InputParameter)
 				map[message].join("\n")
 		)
 	}
+
 }

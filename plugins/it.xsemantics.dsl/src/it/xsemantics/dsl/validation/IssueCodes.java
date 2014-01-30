@@ -20,11 +20,8 @@ public interface IssueCodes {
 	String DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS = PREFIX
 			+ "DuplicateAuxFunWithSameArguments";
 	
-	String DUPLICATE_RULE_NAME = PREFIX
-			+ "DuplicateRuleName";
-	
-	String DUPLICATE_JUDGMENT_NAME = PREFIX
-			+ "DuplicateJudgmentName";
+	String MUST_OVERRIDE = PREFIX
+			+ "MustOverride";
 
 	String DUPLICATE_NAME = PREFIX
 			+ "DuplicateName";
@@ -59,13 +56,7 @@ public interface IssueCodes {
 
 	String OVERRIDE_WITHOUT_SYSTEM_EXTENDS = PREFIX + "OverrideWithoutSystemExtends";
 
-	String NO_RULE_TO_OVERRIDE_OF_THE_SAME_KIND = PREFIX + "NoRuleToOverrideOfTheSameKind";
-
-	String OVERRIDE_RULE_MUST_HAVE_THE_SAME_NAME = PREFIX + "OverrideRuleMustHaveTheSameName";
-
-	String NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND = PREFIX + "NoJudgmentToOverrideOfTheSameKind";
-
-	String OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME = PREFIX + "OverrideJudgmentMustHaveTheSameName";
+	String NOTHING_TO_OVERRIDE = PREFIX + "NothingToOverride";
 
 	String DUPLICATE_AUXILIARY_NAME = PREFIX + "DuplicateAuxiliaryDescription";
 

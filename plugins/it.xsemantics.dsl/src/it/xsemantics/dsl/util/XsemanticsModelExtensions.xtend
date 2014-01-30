@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.validation
+package it.xsemantics.dsl.util
 
 import org.eclipse.emf.ecore.EObject
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -8,8 +8,9 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.InputParameter
+import org.eclipse.xtext.common.types.JvmFormalParameter
 
-class XsemanticsNameComputer {
+class XsemanticsModelExtensions {
 	
 	def static computeName(EObject it) {
 		switch (it) {
@@ -20,6 +21,15 @@ class XsemanticsNameComputer {
 			Rule: name
 			CheckRule: name
 			InputParameter: parameter.name
+			JvmFormalParameter: name
+		}
+	}
+
+	def static isOverride(EObject it) {
+		switch (it) {
+			JudgmentDescription: override
+			Rule: override
+			CheckRule: override
 		}
 	}
 }
