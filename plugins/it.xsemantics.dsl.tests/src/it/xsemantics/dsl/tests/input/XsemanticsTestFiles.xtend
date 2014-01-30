@@ -42,6 +42,7 @@ class XsemanticsTestFiles {
 	judgments {
 		type |- List<String> list : java.util.Set<Integer> set
 		type ||- List<String> list2 : java.util.Set<Integer> set2
+		type |~ List<String> list : java.util.Set<Integer> set
 	}
 	'''
 	
@@ -359,6 +360,17 @@ class XsemanticsTestFiles {
 
 	axiom Foo
 		G1 |- EClass o : EClass o2
+	'''
+
+	def testDuplicateRuleNames2() '''
+	«testJudgmentDescriptionsReferringToEClassEObject»
+	
+	axiom Foo
+		G |- EClass eClass : EObject object
+
+	rule Foo
+		G1 |- EClass o : EClass o2
+	from {}
 	'''
 	
 	def testDuplicateCheckRuleNames() '''

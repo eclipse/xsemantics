@@ -11,6 +11,8 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XbasePackage
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.diagnostics.Severity
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -148,10 +150,10 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			parseWithBaseSystem(
 				testFiles.testInvalidJudgmentWithTheSameNameOfBaseSystem
 			).
-		assertError(
-			XsemanticsPackage::eINSTANCE.judgmentDescription,
-			IssueCodes::DUPLICATE_JUDGMENT_NAME,
-			"Duplicate judgment 'type', in system: it.xsemantics.test.TypeSystem"
+		assertErrorMessages(
+'''
+Judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
+'''	
 		)
 	}
 
@@ -191,11 +193,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def testDuplicateAuxiliaryDescriptions() {
-		parser.parse(testFiles.testDuplicateAuxiliaryDescriptions).
-		assertError(
-			XsemanticsPackage::eINSTANCE.auxiliaryDescription,
-			IssueCodes::DUPLICATE_AUXILIARY_NAME,
-			"Duplicate auxiliary description 'foo'"
+		testFiles.testDuplicateAuxiliaryDescriptions.
+		assertErrorMessages(
+'''
+Duplicate name 'foo' (AuxiliaryDescription)
+Duplicate name 'foo' (AuxiliaryDescription)
+'''
 		)
 	}
 
@@ -211,11 +214,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def testAuxiliaryDescriptionWithTheSameNameOfJudgment() {
-		parser.parse(testFiles.testAuxiliaryDescriptionWithTheSameNameOfJudgment).
-			assertError(
-			XsemanticsPackage::eINSTANCE.auxiliaryDescription,
-			IssueCodes::DUPLICATE_AUXILIARY_NAME,
-			"Duplicate judgment with the same name 'foo'"
+		testFiles.testAuxiliaryDescriptionWithTheSameNameOfJudgment.
+		assertErrorMessages(
+'''
+Duplicate name 'foo' (JudgmentDescription)
+Duplicate name 'foo' (AuxiliaryDescription)
+'''
 		)
 	}
 
@@ -320,11 +324,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testDuplicateInjectedFields() {
-		parser.parse(testFiles.testSystemWithDuplicateInjections).
-		assertError(
-			XsemanticsPackage::eINSTANCE.injected,
-			IssueCodes::DUPLICATE_INJECTED_FIELD,
-			"Duplicate injection 'strings'"
+		testFiles.testSystemWithDuplicateInjections.
+		assertErrorMessages(
+'''
+Duplicate name 'strings' (Injected)
+Duplicate name 'strings' (Injected)
+'''
 		)
 	}
 
@@ -368,4 +373,70 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 	}
 
+	@Test
+	def void testJudgmentDescriptionsWithDuplicates() {
+		testFiles.testJudgmentDescriptionsWithDuplicates.
+			assertErrorMessages(
+'''
+Duplicate name 'type' (JudgmentDescription)
+Duplicate name 'type' (JudgmentDescription)
+Duplicate name 'type' (JudgmentDescription)
+'''
+			)
+	}
+
+	@Test
+	def void testDuplicateRuleNames() {
+		testFiles.testDuplicateRuleNames.
+			assertErrorMessages(
+'''
+Duplicate name 'Foo' (Axiom)
+Duplicate name 'Foo' (Axiom)
+'''
+			)
+	}
+
+	@Test
+	def void testDuplicateRuleNames2() {
+		testFiles.testDuplicateRuleNames2.
+			assertErrorMessages(
+'''
+Duplicate name 'Foo' (Axiom)
+Duplicate name 'Foo' (RuleWithPremises)
+'''
+			)
+	}
+
+	@Test
+	def void testDuplicateCheckRuleNames() {
+		testFiles.testDuplicateCheckRuleNames().
+			assertErrorMessages(
+'''
+Duplicate name 'Foo' (CheckRule)
+Duplicate name 'Foo' (CheckRule)
+'''
+			)
+	}
+
+	@Test
+	def void testDuplicateRuleAndCheckRuleNames() {
+		testFiles.testDuplicateRuleAndCheckRuleNames().
+			assertErrorMessages(
+'''
+Duplicate name 'Foo' (Axiom)
+Duplicate name 'Foo' (CheckRule)
+'''
+			)
+	}
+
+	def private assertErrorMessages(CharSequence input, CharSequence expected) {
+		parser.parse(input).assertErrorMessages(expected)
+	}
+
+	def private assertErrorMessages(XsemanticsSystem system, CharSequence expected) {
+		expected.toString.trim.assertEqualsStrings(
+			system.validate.filter[severity == Severity.ERROR].
+				map[message].join("\n")
+		)
+	}
 }

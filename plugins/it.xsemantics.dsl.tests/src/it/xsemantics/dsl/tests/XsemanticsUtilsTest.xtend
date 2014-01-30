@@ -419,7 +419,7 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 	}
 
 	def void assertRules(List<Rule> rules, Rule expectedRule1, Rule expectedRule2) {
-		Assert::assertEquals(2, rules.size)
+		Assert::assertEquals("rules: " + rules.map[name], 2, rules.size)
 		Assert::assertEquals(expectedRule1, rules.get(0))
 		Assert::assertEquals(expectedRule2, rules.get(1))
 	}
@@ -456,5 +456,5 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 		system.superSystemDefinition?.judgmentDescriptions ?:
 			Lists::newArrayList
 	}
-	
+
 }

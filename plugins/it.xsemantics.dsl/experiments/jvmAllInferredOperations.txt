@@ -1,0 +1,50 @@
+	@Test
+	def void testJvmInferredClass() {
+		systemExtendsSystemWithJudgments.
+				assertInferredClass('ExtendedTypeSystem')
+	}
+
+	@Test
+	def void testAllJvmInferredFeaturesContainsInheritedOnes() {
+		systemExtendsSystemWithRuleOverride.
+				assertAllInferredOperationsContains('type', 'type2', 'subtype')
+	}
+
+	def private assertAllInferredOperationsContains(XsemanticsSystem system, CharSequence... expected) {
+		val ops = system.jvmAllInferredOperations.map[simpleName]
+		for (n : expected)
+			Assert.assertTrue(n + ' not found', ops.exists[it == n])
+	}
+
+	def private assertInferredClass(XsemanticsSystem system, CharSequence expected) {
+		expected.assertEqualsStrings(
+			system.jvmInferredClass.simpleName)
+	}
+
+
+	def allRules(XsemanticsSystem system) {
+		cache.get("allRules" -> system) [|
+//			Lists::newArrayList(system.rules) => [
+//				it += system.allSuperSystemDefinitions.
+//					map[rules].flatten
+//			]
+			system.jvmAllInferredOperations.map[
+				associations.getPrimarySourceElement(it)
+			].filter(Rule)
+		]
+	}
+
+	def jvmAllInferredOperations(XsemanticsSystem system) {
+		cache.get("jvmAllInferredOperations" -> system) [|
+			system.jvmInferredClass.allFeatures.filter(JvmOperation)
+		]
+	}
+
+	def jvmInferredClass(XsemanticsSystem system) {
+		cache.get("jvmInferredClass" -> system) [|
+			associations.getJvmElements(system).filter(JvmGenericType).
+				filter[
+					extendedClass.isSubtype(XsemanticsRuntimeSystem.getTypeForName(system), system)
+				].head
+		]
+	}

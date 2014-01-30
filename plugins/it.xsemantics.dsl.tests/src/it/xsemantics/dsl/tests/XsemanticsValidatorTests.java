@@ -35,14 +35,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testDuplicateJudgmentDescriptions() throws Exception {
-		assertDuplicateErrors(
-				loadModelAndValidate(testFiles
-						.testJudgmentDescriptionsWithDuplicates()),
-				"judgment", "type", IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM);
-	}
-
-	@Test
 	public void testDuplicateJudgmentDescriptionSymbols() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWithDuplicateSymbols());
@@ -52,30 +44,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				messageFragment), AssertableDiagnostics.error(
 				IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 				messageFragment));
-	}
-
-	@Test
-	public void testDuplicateRuleNames() throws Exception {
-		assertDuplicateErrors(
-				loadModelAndValidate(testFiles.testDuplicateRuleNames()),
-				"rule", "Foo");
-	}
-
-	@Test
-	public void testDuplicateCheckRuleNames() throws Exception {
-		assertDuplicateErrors(
-				loadModelAndValidate(testFiles.testDuplicateCheckRuleNames()),
-				"checkrule", "Foo");
-	}
-
-	@Test
-	public void testDuplicateRuleAndCheckRuleNames() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testDuplicateRuleAndCheckRuleNames());
-		validate.assertAll(AssertableDiagnostics
-				.errorMsg("Duplicate checkrule with the same name"),
-				AssertableDiagnostics
-						.errorMsg("Duplicate rule with the same name"));
 	}
 
 	@Test
@@ -448,7 +416,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	protected void assertDuplicateErrors(AssertableDiagnostics validate,
 			String elementClassName, String duplicateName,
 			String... msgFragments) {
-		// System.out.println(diagnosticsToString(validate));
+		//System.out.println(diagnosticsToString(validate));
 		String messageFragment = "Duplicate " + elementClassName + " '"
 				+ duplicateName + "'";
 		validate.assertAll(AssertableDiagnostics.errorMsg(messageFragment),

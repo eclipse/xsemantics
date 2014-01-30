@@ -31,6 +31,9 @@ public interface IssueCodes {
 
 	String DUPLICATE_INJECTED_FIELD = PREFIX
 			+ "DuplicateInjectedField";
+
+	String DUPLICATE_NAME = PREFIX
+			+ "DuplicateName";
 	
 	String NOT_VALIDATOR = PREFIX + "NotAbstractDeclarativeValidator";
 	

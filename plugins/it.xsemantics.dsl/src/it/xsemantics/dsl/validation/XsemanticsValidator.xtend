@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
+import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
@@ -137,10 +138,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		checkNoDuplicateJudgmentDescriptionSymbols(judgmentDescription);
 		checkNumOfOutputParams(judgmentDescription);
 		checkNumOfInputParams(judgmentDescription);
+		checkJudgmentDescriptionRules(judgmentDescription)
 	}
 
-	@Check
-	def void checkJudgmentDescriptionHasRules(
+	def void checkJudgmentDescriptionRules(
 			JudgmentDescription judgmentDescription) {
 		if (judgmentDescription.isOverride())
 			return;
@@ -161,22 +162,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					+ "'",
 					XsemanticsPackage.Literals.INPUT_PARAMETER__PARAMETER,
 					IssueCodes.DUPLICATE_PARAM_NAME);
-		}
-	}
-
-	@Check
-	def void checkNoDuplicateJudgmentDescription(
-			JudgmentDescription judgmentDescription) {
-		val judgmentDescriptionWithTheSameName = judgmentDescription
-				.judgmentDescriptionWithTheSameName();
-		if (judgmentDescriptionWithTheSameName != null
-				&& !judgmentDescription.isOverride()) {
-			error("Duplicate judgment '"
-					+ judgmentDescription.getName()
-					+ "'"
-					+ reportContainingSystemName(judgmentDescriptionWithTheSameName),
-					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__NAME,
-					IssueCodes.DUPLICATE_JUDGMENT_NAME);
 		}
 	}
 
@@ -234,36 +219,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 							IssueCodes.NOT_PARAMETER);
 				}
 			}
-		}
-	}
-
-	@Check
-	def public void checkNoCheckRulesWithTheSameName(Rule rule) {
-		if (!rule.noRulesWithTheSameName()) {
-			error("Duplicate rule '" + rule.getName() + "'", rule,
-					XsemanticsPackage.Literals.RULE__NAME,
-					IssueCodes.DUPLICATE_RULE_NAME);
-		}
-
-		if (!rule.noRulesWithTheSameNameOfCheckRule()) {
-			error("Duplicate checkrule with the same name", rule,
-					XsemanticsPackage.Literals.RULE__NAME,
-					IssueCodes.DUPLICATE_RULE_NAME);
-		}
-	}
-
-	@Check
-	def public void checkNoRulesWithTheSameName(CheckRule rule) {
-		if (!rule.noCheckRulesWithTheSameName()) {
-			error("Duplicate checkrule '" + rule.getName() + "'", rule,
-					XsemanticsPackage.Literals.CHECK_RULE__NAME,
-					IssueCodes.DUPLICATE_RULE_NAME);
-		}
-
-		if (!rule.noCheckRulesWithTheSameNameOfRule()) {
-			error("Duplicate rule with the same name", rule,
-					XsemanticsPackage.Literals.CHECK_RULE__NAME,
-					IssueCodes.DUPLICATE_RULE_NAME);
 		}
 	}
 
@@ -441,6 +396,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
 			}
 		}
+
 		val superSystems = system
 				.allSuperSystemDefinitions();
 		if (superSystems.contains(system)) {
@@ -448,10 +404,57 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
 					IssueCodes.CYCLIC_HIERARCHY);
 		}
+		
+		val allSuperJudgments = system.superSystemDefinition?.allJudgments
+		if (allSuperJudgments != null) {
+			val superJudgmentsMap = allSuperJudgments.toMap[name]
+			for (j : system.judgmentDescriptions) {
+				if (!j.override) {
+					val overridden = superJudgmentsMap.get(j.name)
+					if (overridden != null)
+						error(
+							"Judgment '" + j.name + "' must override judgment" +
+								reportContainingSystemName(overridden),
+							j,
+							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__NAME, 
+							IssueCodes.DUPLICATE_JUDGMENT_NAME);
+				}
+			}
+		}
+		
+		val elements = system.injections + 
+			system.judgmentDescriptions +
+			system.auxiliaryDescriptions +
+			// system.auxiliaryFunctions + 
+			// aux functions have the same name of aux descriptions
+			system.rules + 
+			system.checkrules
+		elements.checkDuplicateNames()
+	}
+
+	def private <T extends EObject> checkDuplicateNames(Iterable<T> collection) {
+		if (!collection.empty) {
+			val map = <String,EObject>Multimaps2::newLinkedHashListMultimap
+			for (e : collection) {
+				map.put(XsemanticsNameComputer.computeName(e), e)
+			}
+
+			for (entry : map.asMap.entrySet) {
+				val duplicates = entry.value
+				if (duplicates.size > 1) {
+					for (d : duplicates)
+						error(
+							"Duplicate name '" + entry.key + "' (" + d.eClass.name + ")",
+							d,
+							null, 
+							IssueCodes.DUPLICATE_NAME);
+				}
+			}
+		}
 	}
 
 	@Check
-	def protected void checkNoDuplicateCheckRulesWithSameArguments(CheckRule rule) {
+	def protected void checkNoDuplicateCheckRulesFromSupersystem(CheckRule rule) {
 		if (rule.isOverride())
 			return;
 		val system = rule.containingSystem().superSystemDefinition();
@@ -485,22 +488,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					}
 				}
 			}
-		}
-	}
-
-	@Check
-	def public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
-		if (aux.auxiliaryDescriptionWithTheSameName() != null) {
-			error("Duplicate auxiliary description '" + aux.getName() + "'",
-					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
-					IssueCodes.DUPLICATE_AUXILIARY_NAME);
-		}
-
-		if (aux.auxiliaryDescriptionWithTheSameNameOfJudgment() != null) {
-			error("Duplicate judgment with the same name '" + aux.getName()
-					+ "'",
-					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
-					IssueCodes.DUPLICATE_AUXILIARY_NAME);
 		}
 	}
 
@@ -564,15 +551,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				}
 			}
 			return;
-		}
-	}
-
-	@Check
-	def public void checkInjected(Injected i) {
-		if (i.hasDuplicateInjectedField()) {
-			error("Duplicate injection '" + i.getName() + "'",
-				XsemanticsPackage.eINSTANCE.getInjected_Name(),
-				IssueCodes.DUPLICATE_INJECTED_FIELD);
 		}
 	}
 
@@ -661,7 +639,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				// the rule might still be incomplete, thus we must check
 				// whether there is an element to check against.
 				// Recall that the judgment has been searched for using only
-				// the symbols, not the rele conclusion elements
+				// the symbols, not the rule conclusion elements
 				if (elementsIt.hasNext())
 					checkConformance(judgmentParameter, elementsIt.next(),
 						elementDescription, conformanceFeature);
@@ -715,12 +693,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def noRulesWithTheSameNameOfCheckRule(Rule rule) {
 		rule.containingSystem.checkrules.findFirst [
 			it.name == rule.name
-		] == null
-	}
-	
-	def noRulesWithTheSameName(Rule rule) {
-		rule.containingSystem.rules.findFirst [
-			it != rule && it.name == rule.name
 		] == null
 	}
 	
