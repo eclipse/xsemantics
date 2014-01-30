@@ -12,8 +12,6 @@ import it.xsemantics.dsl.util.XsemanticsXExpressionHelper
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.dsl.xsemantics.Injected
-import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
 import it.xsemantics.dsl.xsemantics.Rule
@@ -137,7 +135,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def void checkJudgmentDescription(JudgmentDescription judgmentDescription) {
 		checkNoDuplicateJudgmentDescriptionSymbols(judgmentDescription);
 		checkNumOfOutputParams(judgmentDescription);
-		checkNumOfInputParams(judgmentDescription);
+		checkInputParams(judgmentDescription);
 		checkJudgmentDescriptionRules(judgmentDescription)
 	}
 
@@ -152,16 +150,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION
 							.getEIDAttribute(),
 					IssueCodes.NO_RULE_FOR_JUDGMENT_DESCRIPTION);
-		}
-	}
-
-	@Check
-	def void checkInputParameter(InputParameter param) {
-		if (param.findDuplicateParameter()) {
-			error("Duplicate parameter '" + param.getParameter().getName()
-					+ "'",
-					XsemanticsPackage.Literals.INPUT_PARAMETER__PARAMETER,
-					IssueCodes.DUPLICATE_PARAM_NAME);
 		}
 	}
 
@@ -189,11 +177,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 	}
 
-	def protected void checkNumOfInputParams(JudgmentDescription judgmentDescription) {
-		if (judgmentDescription.inputParams().isEmpty()) {
+	def protected void checkInputParams(JudgmentDescription judgmentDescription) {
+		val inputParams = judgmentDescription.inputParams()
+		if (inputParams.empty) {
 			error("No input parameter; at least one is needed",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
 					IssueCodes.NO_INPUT_PARAM);
+		} else {
+			inputParams.checkDuplicateNames
 		}
 	}
 
@@ -689,59 +680,5 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def public void setEnableWarnings(boolean enableWarnings) {
 		this.enableWarnings = enableWarnings;
 	}
-
-	def noRulesWithTheSameNameOfCheckRule(Rule rule) {
-		rule.containingSystem.checkrules.findFirst [
-			it.name == rule.name
-		] == null
-	}
 	
-	def noCheckRulesWithTheSameNameOfRule(CheckRule rule) {
-		rule.containingSystem.rules.findFirst [
-			it.name == rule.name
-		] == null
-	}
-	
-	def noCheckRulesWithTheSameName(CheckRule rule) {
-		rule.containingSystem.checkrules.findFirst [
-			it != rule && it.name == rule.name
-		] == null
-	}
-	
-	def judgmentDescriptionWithTheSameName(JudgmentDescription j) {
-		j.containingSystem.allJudgments.findFirst [
-			it != j && it.name == j.name
-		]
-	}
-
-	def auxiliaryDescriptionWithTheSameName(AuxiliaryDescription aux) {
-		aux.containingSystem.auxiliaryDescriptions.findFirst [
-			it != aux && it.name == aux.name
-		]
-	}
-	
-	def auxiliaryDescriptionWithTheSameNameOfJudgment(AuxiliaryDescription aux) {
-		aux.containingSystem.judgmentDescriptions.findFirst [
-			it.name == aux.name
-		]
-	}
-	
-	def findDuplicateParameter(InputParameter param) {
-		param.containingJudgmentDescription.judgmentParameters.
-			typeSelect(typeof(InputParameter)).
-				map([ it.parameter ]).
-					findDuplicateJvmFormalParameter(param.parameter)
-	}
-	
-	def findDuplicateJvmFormalParameter(Iterable<JvmFormalParameter> params, JvmFormalParameter param) {
-		params.exists [ 
-			it != param && it.name == param.name
-		]
-	}
-	
-	def hasDuplicateInjectedField(Injected i) {
-		i.containingSystem.injections.exists[
-			it != i && it.name == i.name
-		]
-	}
 }

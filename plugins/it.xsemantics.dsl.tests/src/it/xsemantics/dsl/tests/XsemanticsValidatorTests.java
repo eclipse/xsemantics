@@ -46,13 +46,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				messageFragment));
 	}
 
-	@Test
-	public void testDuplicateParamNamesInJudgmentDescription() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testDuplicateParamsInJudgmentDescription());
-		assertContains(validate, "Duplicate parameter 'eClass'");
-	}
-
 	protected void assertContains(AssertableDiagnostics validate, String string) {
 		final String diagnosticsToString = diagnosticsToString(validate);
 		if (!diagnosticsToString.contains(string)) {

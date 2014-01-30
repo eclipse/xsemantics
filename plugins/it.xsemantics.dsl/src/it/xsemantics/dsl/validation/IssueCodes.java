@@ -23,14 +23,8 @@ public interface IssueCodes {
 	String DUPLICATE_RULE_NAME = PREFIX
 			+ "DuplicateRuleName";
 	
-	String DUPLICATE_PARAM_NAME = PREFIX
-			+ "DuplicateParamName";
-
 	String DUPLICATE_JUDGMENT_NAME = PREFIX
 			+ "DuplicateJudgmentName";
-
-	String DUPLICATE_INJECTED_FIELD = PREFIX
-			+ "DuplicateInjectedField";
 
 	String DUPLICATE_NAME = PREFIX
 			+ "DuplicateName";

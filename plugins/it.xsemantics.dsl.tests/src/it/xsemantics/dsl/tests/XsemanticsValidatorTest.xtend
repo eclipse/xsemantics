@@ -429,6 +429,17 @@ Duplicate name 'Foo' (CheckRule)
 			)
 	}
 
+	@Test
+	def void testDuplicateParamNamesInJudgmentDescription() {
+		testFiles.testDuplicateParamsInJudgmentDescription().
+			assertErrorMessages(
+'''
+Duplicate name 'eClass' (InputParameter)
+Duplicate name 'eClass' (InputParameter)
+'''
+			)
+	}
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parser.parse(input).assertErrorMessages(expected)
 	}
