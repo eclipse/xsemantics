@@ -1,0 +1,64 @@
+	@Check
+	def public void checkValidOverride(JudgmentDescription judgment) {
+		val system = judgment.containingSystem();
+		if (system != null) {
+			if (judgment.isOverride()) {
+				val superSystem = system
+						.superSystemDefinition();
+				if (superSystem == null) {
+					error("Cannot override judgment without system 'extends'",
+							judgment,
+							XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+							IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+				} else {
+					val inheritedJudgments = superSystem
+							.allJudgments(
+									judgment.getJudgmentSymbol(),
+									judgment.getRelationSymbols());
+					val judgmentToOverride = inheritedJudgments.findFirst[
+						typeSystem.equals(judgment, it)
+					]
+					if (judgmentToOverride == null) {
+						error("No judgment of the same kind to override: "
+								+ nodeModelUtils.getProgramText(judgment),
+								judgment,
+								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+								IssueCodes.NO_JUDGMENT_TO_OVERRIDE_OF_THE_SAME_KIND);
+					} else if (!judgmentToOverride.getName().equals(
+							judgment.getName())) {
+						error("Must have the same name of the judgment to override: "
+								+ judgmentToOverride.getName(),
+								judgment,
+								XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__OVERRIDE,
+								IssueCodes.OVERRIDE_JUDGMENT_MUST_HAVE_THE_SAME_NAME);
+					}
+				}
+			}
+		}
+	}
+
+
+	@Check
+	def void checkRule(Rule rule) {
+		val judgmentDescription = checkRuleConformantToJudgmentDescription(rule);
+		if (judgmentDescription != null) {
+			val judgmentParameters = judgmentDescription
+					.getJudgmentParameters();
+			val conclusionElements = rule
+					.getConclusion().getConclusionElements();
+			// judgmentParameters.size() == conclusionElements.size())
+			// otherwise we could not find a JudgmentDescription for the rule
+			val judgmentParametersIt = judgmentParameters
+					.iterator();
+			for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
+				if (!judgmentParametersIt.next().isOutputParameter()
+						&& !(ruleConclusionElement instanceof RuleParameter)) {
+					error("Must be a parameter, not an expression",
+							ruleConclusionElement,
+							XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT
+									.getEIDAttribute(),
+							IssueCodes.NOT_PARAMETER);
+				}
+			}
+		}
+	}

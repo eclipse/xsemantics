@@ -86,13 +86,16 @@ class XsemanticsUtils {
 	}
 	
 	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
-		val descriptions = Lists::newArrayList(
-			object.
-			containingSystem.
-				allJudgments
-					(judgmentSymbol, relationSymbols))
-		if (descriptions.size > 0)
-			descriptions.get(0)
+//		val descriptions = Lists::newArrayList(
+//			object.
+//			containingSystem.
+//				allJudgments
+//					(judgmentSymbol, relationSymbols))
+//		if (descriptions.size > 0)
+//			descriptions.get(0)
+		object.containingSystem.allJudgmentsRepresentations.get(
+			judgmentSymbol -> relationSymbols
+		)
 	}
 	
 	def auxiliaryDescription(AuxiliaryFunction fun) {
@@ -361,5 +364,10 @@ class XsemanticsUtils {
 		associations.getSourceElements(typeReference.type).
 			filter(typeof(XsemanticsSystem)).head
 	}
-	
+
+	def allJudgmentsRepresentations(XsemanticsSystem system) {
+		cache.get("allJudgmentsRepresentations" -> (system)) [|
+			system.allJudgments.toMap[judgmentSymbol -> relationSymbols]
+		]
+	}
 }

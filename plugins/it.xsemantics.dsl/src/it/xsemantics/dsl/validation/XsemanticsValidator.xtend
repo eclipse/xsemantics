@@ -141,15 +141,35 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def void checkJudgmentDescriptionRules(
 			JudgmentDescription judgmentDescription) {
-		if (judgmentDescription.isOverride())
-			return;
-		if (enableWarnings
-				&& judgmentDescription.rulesForJudgmentDescription(
-						).isEmpty()) {
-			warning("No rule defined for the judgment description",
+		val rulesForJudgmentDescription = judgmentDescription.rulesForJudgmentDescription
+		
+		if (rulesForJudgmentDescription.isEmpty()) {
+			if (enableWarnings && !judgmentDescription.override)
+				warning("No rule defined for the judgment description",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION
 							.getEIDAttribute(),
 					IssueCodes.NO_RULE_FOR_JUDGMENT_DESCRIPTION);
+		} else {
+			val judgmentParameters = judgmentDescription.judgmentParameters
+			for (rule : rulesForJudgmentDescription) {
+				val conclusionElements = rule.conclusion.conclusionElements
+				// judgmentParameters.size() == conclusionElements.size())
+				// otherwise we could not find a JudgmentDescription for the rule
+				val judgmentParametersIt = judgmentParameters
+						.iterator();
+				for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
+					if (!judgmentParametersIt.next().isOutputParameter()
+							&& !(ruleConclusionElement instanceof RuleParameter)) {
+						error("Must be a parameter, not an expression",
+								ruleConclusionElement,
+								XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT
+										.getEIDAttribute(),
+								IssueCodes.NOT_PARAMETER);
+					}
+				}
+				
+				rule.checkRuleConformantToJudgmentDescription(judgmentDescription)
+			}
 		}
 	}
 
@@ -190,27 +210,11 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def void checkRule(Rule rule) {
-		val judgmentDescription = checkRuleConformantToJudgmentDescription(rule);
-		if (judgmentDescription != null) {
-			val judgmentParameters = judgmentDescription
-					.getJudgmentParameters();
-			val conclusionElements = rule
-					.getConclusion().getConclusionElements();
-			// judgmentParameters.size() == conclusionElements.size())
-			// otherwise we could not find a JudgmentDescription for the rule
-			val judgmentParametersIt = judgmentParameters
-					.iterator();
-			for (RuleConclusionElement ruleConclusionElement : conclusionElements) {
-				if (!judgmentParametersIt.next().isOutputParameter()
-						&& !(ruleConclusionElement instanceof RuleParameter)) {
-					error("Must be a parameter, not an expression",
-							ruleConclusionElement,
-							XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT
-									.getEIDAttribute(),
-							IssueCodes.NOT_PARAMETER);
-				}
-			}
-		}
+		val conclusion = rule.conclusion
+		rule.findJudgmentDescriptionOrError(
+			conclusion.judgmentSymbol, 
+			conclusion.relationSymbols, 
+			XsemanticsPackage.Literals.RULE__CONCLUSION);
 	}
 
 	@Check
@@ -526,10 +530,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				+ object.containingSystem().getName();
 	}
 
-	def protected JudgmentDescription checkRuleConformantToJudgmentDescription(
-			Rule rule) {
+	def private void checkRuleConformantToJudgmentDescription(
+			Rule rule,
+			JudgmentDescription judgmentDescription) {
 		val conclusion = rule.getConclusion();
-		return checkConformanceAgainstJudgmentDescription(conclusion,
+		checkConformanceAgainstJudgmentDescription(
+				judgmentDescription,
+				conclusion,
 				conclusion.getJudgmentSymbol(),
 				conclusion.getRelationSymbols(),
 				conclusion.getConclusionElements(), "Rule conclusion",
@@ -538,7 +545,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 						.getEIDAttribute());
 	}
 
-	def protected JudgmentDescription checkRuleInvocationConformantToJudgmentDescription(
+	def private JudgmentDescription checkRuleInvocationConformantToJudgmentDescription(
 			RuleInvocation ruleInvocation) {
 		return checkConformanceAgainstJudgmentDescription(
 				ruleInvocation,
@@ -550,24 +557,52 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				null);
 	}
 
-	def protected JudgmentDescription checkConformanceAgainstJudgmentDescription(
+	def private JudgmentDescription checkConformanceAgainstJudgmentDescription(
 			EObject element, String judgmentSymbol,
 			Iterable<String> relationSymbols,
 			Iterable<? extends EObject> elements,
 			String elementDescription, EStructuralFeature elementFeature,
 			EStructuralFeature conformanceFeature) {
 		val judgmentDescription = element
+				.findJudgmentDescriptionOrError(judgmentSymbol, relationSymbols, elementFeature);
+		checkConformanceAgainstJudgmentDescription(
+			judgmentDescription,
+			element,
+			judgmentSymbol,
+			relationSymbols,
+			elements,
+			elementDescription,
+			elementFeature,
+			conformanceFeature
+		)
+		return judgmentDescription;
+	}
+
+	def private findJudgmentDescriptionOrError(EObject element, String judgmentSymbol,
+			Iterable<String> relationSymbols, EStructuralFeature elementFeature) {
+		val judgmentDescription = element
 				.judgmentDescription(judgmentSymbol, relationSymbols);
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
 					elementFeature, IssueCodes.NO_JUDGMENT_DESCRIPTION);
-		} else {
+		}
+		return judgmentDescription;
+	}
+
+	def private checkConformanceAgainstJudgmentDescription(
+			JudgmentDescription judgmentDescription,
+			EObject element, String judgmentSymbol,
+			Iterable<String> relationSymbols,
+			Iterable<? extends EObject> elements,
+			String elementDescription, EStructuralFeature elementFeature,
+			EStructuralFeature conformanceFeature) {
+		if (judgmentDescription != null) {
 			val judgmentParameters = judgmentDescription
 					.getJudgmentParameters();
 			val elementsIt = elements.iterator();
 			for (judgmentParameter : judgmentParameters) {
-				// the rule might still be incomplete, thus we must check
+				// the element might still be incomplete, thus we must check
 				// whether there is an element to check against.
 				// Recall that the judgment has been searched for using only
 				// the symbols, not the rule conclusion elements
@@ -576,7 +611,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 						elementDescription, conformanceFeature);
 			}
 		}
-		return judgmentDescription;
 	}
 
 	def protected void checkConformance(JudgmentParameter judgmentParameter,
