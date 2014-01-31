@@ -19,6 +19,15 @@ Workflow {
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     }
 
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/emf-gen"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		genModel = "platform:/resource/${projectName}/model/custom/Xsemantics.genmodel"
+		srcPath = "platform:/resource/${projectName}/src"
+	}
+
     component = DirectoryCleaner {
         directory = "${runtimeProject}/src-gen"
     }
@@ -38,6 +47,8 @@ Workflow {
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
         language = {
+        	loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
+        	
             uri = grammarURI
             fileExtensions = file.extensions
 
@@ -45,7 +56,7 @@ Workflow {
             fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages
-    		fragment = ecore.EMFGeneratorFragment auto-inject {}
+    		//fragment = ecore.EMFGeneratorFragment auto-inject {}
 
 			// the serialization component
 			fragment = serializer.SerializerFragment {}
