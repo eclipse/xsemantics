@@ -124,15 +124,6 @@ class XsemanticsUtils {
 				it.conclusion.relationSymbols.elementsEqual(relationSymbols)	]
 	}
 	
-	def allRulesOfTheSameKind(Rule rule) {
-		rule.containingSystem.allRulesOfTheSameKind(rule)
-	}
-
-	def List<Rule> allRulesOfTheSameKind(XsemanticsSystem system, Rule rule) {
-		Lists::newArrayList(system.allRulesByJudgmentDescription
-			(rule.conclusion.judgmentSymbol, rule.conclusion.relationSymbols))
-	}
-	
 	def isOutputParameter(JudgmentParameter j) {
 		j instanceof OutputParameter
 	}

@@ -72,8 +72,14 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	@Test
 	def void testAllRulesOfTheSameKind() {
 		val ts = testFiles.testRulesOfTheSameKind.parseAndAssertNoError
-		ts.getRules.get(0).allRulesOfTheSameKind.assertRules(ts.getRules.get(0), ts.getRules.get(1))
-		ts.getRules.get(2).allRulesOfTheSameKind.assertRules(ts.getRules.get(2), ts.getRules.get(3))
+		ts.getRules.get(0) => [
+			ts.allRulesByJudgmentDescription(conclusion.judgmentSymbol, conclusion.relationSymbols).
+				assertRules(ts.getRules.get(0), ts.getRules.get(1))
+		]
+		ts.getRules.get(2) => [
+			ts.allRulesByJudgmentDescription(conclusion.judgmentSymbol, conclusion.relationSymbols)
+				.assertRules(ts.getRules.get(2), ts.getRules.get(3))
+		]
 	}
 	
 	@Test
@@ -418,7 +424,7 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 				allCheckRules.size)
 	}
 
-	def void assertRules(List<Rule> rules, Rule expectedRule1, Rule expectedRule2) {
+	def void assertRules(Iterable<Rule> rules, Rule expectedRule1, Rule expectedRule2) {
 		Assert::assertEquals("rules: " + rules.map[name], 2, rules.size)
 		Assert::assertEquals(expectedRule1, rules.get(0))
 		Assert::assertEquals(expectedRule2, rules.get(1))

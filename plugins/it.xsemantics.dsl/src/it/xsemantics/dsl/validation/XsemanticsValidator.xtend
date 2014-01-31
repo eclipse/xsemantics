@@ -6,6 +6,7 @@ package it.xsemantics.dsl.validation
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
+import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper
@@ -34,7 +35,6 @@ import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
-import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 
 import static extension it.xsemantics.dsl.util.XsemanticsModelExtensions.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -334,6 +334,30 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			],
 			"rule")
 		
+		for (rule : system.rules) {
+			val conclusion = rule.conclusion
+			val rulesOfTheSameKind = 
+				system.allRulesByJudgmentDescription(
+					conclusion.judgmentSymbol, conclusion.relationSymbols
+				)
+			if (rulesOfTheSameKind.size() > 1) {
+				val tupleType = typeSystem.getInputTypes(rule);
+				for (Rule rule2 : rulesOfTheSameKind) {
+					if (rule2 != rule && !rule.isOverride()) {
+						val tupleType2 = typeSystem.getInputTypes(rule2);
+						if (typeSystem.equals(tupleType, tupleType2, rule)) {
+							error("Duplicate rule of the same kind with parameters: "
+									+ tupleTypeRepresentation(tupleType)
+									+ reportContainingSystemName(rule2),
+									rule,
+									XsemanticsPackage.Literals.RULE__CONCLUSION,
+									IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
+						}
+					}
+				}
+			}
+		}
+		
 		val elements = system.injections + 
 			system.judgmentDescriptions +
 			system.auxiliaryDescriptions +
@@ -346,7 +370,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def private <T extends EObject> checkDuplicateNames(Iterable<T> collection) {
 		if (!collection.empty) {
-			val map = <String,EObject>Multimaps2::newLinkedHashListMultimap
+			val map = XsemanticsMultimapsUtils.duplicatesMultimap
 			for (e : collection) {
 				map.put(e.computeName, e)
 			}
@@ -400,27 +424,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 							j,
 							null,
 							IssueCodes.NOTHING_TO_OVERRIDE);
-				}
-			}
-		}
-	}
-
-	@Check
-	def protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
-		val rulesOfTheSameKind = rule
-				.allRulesOfTheSameKind();
-		if (rulesOfTheSameKind.size() > 1) {
-			val tupleType = typeSystem.getInputTypes(rule);
-			for (Rule rule2 : rulesOfTheSameKind) {
-				if (rule2 != rule && !rule.isOverride()) {
-					val tupleType2 = typeSystem.getInputTypes(rule2);
-					if (typeSystem.equals(tupleType, tupleType2, rule)) {
-						error("Duplicate rule of the same kind with parameters: "
-								+ tupleTypeRepresentation(tupleType)
-								+ reportContainingSystemName(rule2),
-								XsemanticsPackage.Literals.RULE__CONCLUSION,
-								IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
-					}
 				}
 			}
 		}

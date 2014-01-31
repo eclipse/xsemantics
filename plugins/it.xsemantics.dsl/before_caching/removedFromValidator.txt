@@ -62,3 +62,25 @@
 			}
 		}
 	}
+
+	@Check
+	def protected void checkNoDuplicateRulesWithSameArguments(Rule rule) {
+		val rulesOfTheSameKind = rule
+				.allRulesOfTheSameKind();
+		if (rulesOfTheSameKind.size() > 1) {
+			val tupleType = typeSystem.getInputTypes(rule);
+			for (Rule rule2 : rulesOfTheSameKind) {
+				if (rule2 != rule && !rule.isOverride()) {
+					val tupleType2 = typeSystem.getInputTypes(rule2);
+					if (typeSystem.equals(tupleType, tupleType2, rule)) {
+						error("Duplicate rule of the same kind with parameters: "
+								+ tupleTypeRepresentation(tupleType)
+								+ reportContainingSystemName(rule2),
+								XsemanticsPackage.Literals.RULE__CONCLUSION,
+								IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
+					}
+				}
+			}
+		}
+	}
+	
