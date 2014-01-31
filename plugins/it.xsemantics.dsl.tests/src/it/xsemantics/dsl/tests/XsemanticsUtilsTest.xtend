@@ -442,7 +442,7 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 		))
 	}
 
-	def assertJudgments(List<JudgmentDescription> judgments, CharSequence expected) {
+	def assertJudgments(Iterable<JudgmentDescription> judgments, CharSequence expected) {
 		expected.assertEqualsStrings(
 			judgments.map[ 
 				it.containingSystem.name + " " +

@@ -539,7 +539,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	def protected void ruleInvocationArgumentsToJavaExpressions(
 			ITreeAppendable b,
-			List<XExpression> inputArgsExpressions) {
+			Iterable<XExpression> inputArgsExpressions) {
 		val expIt = inputArgsExpressions
 				.iterator();
 		while (expIt.hasNext()) {

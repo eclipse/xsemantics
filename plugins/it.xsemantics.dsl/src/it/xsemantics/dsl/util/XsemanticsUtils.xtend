@@ -102,10 +102,10 @@ class XsemanticsUtils {
 		]
 	}
 	
-	def List<Rule> rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
-		Lists::newArrayList(judgmentDescription.containingSystem.
+	def rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
+		judgmentDescription.containingSystem.
 			filterRulesByJudgmentDescription
-				(judgmentDescription.judgmentSymbol, judgmentDescription.relationSymbols))
+				(judgmentDescription.judgmentSymbol, judgmentDescription.relationSymbols)
 	}
 
 	def List<AuxiliaryFunction> functionsForAuxiliaryDescrition(AuxiliaryDescription aux) {
@@ -146,30 +146,28 @@ class XsemanticsUtils {
 		ruleInvocation.judgmentDescription.outputJudgmentParameters
 	}
 	
-	def List<InputParameter> inputParams(JudgmentDescription judgmentDescription) {
+	def inputParams(JudgmentDescription judgmentDescription) {
 		judgmentDescription.getJudgmentParameters.typeSelect(typeof(InputParameter))
 	}
 	
-	def List<RuleParameter> inputParams(Rule rule) {
+	def inputParams(Rule rule) {
 		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must not be output
 		Lists::newArrayList(
-			rule.conclusion.conclusionElements.filter(
-				[ !judgmentParameters.next.outputParameter ]
-			)
-		).typeSelect(typeof(RuleParameter))
+			rule.conclusion.conclusionElements.
+				filter[ !judgmentParameters.next.outputParameter ].
+				filter(RuleParameter)
+		)
 	}
 	
-	def List<RuleParameter> inputEObjectParams(Rule rule) {
-		Lists::newArrayList(rule.inputParams.filter [
+	def inputEObjectParams(Rule rule) {
+		rule.inputParams.filter [
 			it.parameter.parameterType.isEObject(rule)
-		])
+		]
 	}
 
-	def List<JvmFormalParameter> inputEObjectParams(AuxiliaryFunction aux) {
-		Lists::newArrayList(aux.parameters.filter [
-			parameterType.isEObject(aux)
-		])
+	def inputEObjectParams(AuxiliaryFunction aux) {
+		aux.parameters.filter[parameterType.isEObject(aux)]
 	}
 	
 	def isInputParam(RuleParameter ruleParameter) {
@@ -195,39 +193,28 @@ class XsemanticsUtils {
 		}
 	}
 	
-	def List<RuleParameter> outputParams(Rule rule) {
+	def outputParams(Rule rule) {
 		val judgmentDescription = rule.judgmentDescription
 		if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
 			return Lists::newArrayList
 		val judgmentParameters = judgmentDescription.judgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
-			rule.conclusion.conclusionElements.filter(
-				[ judgmentParameters.next.outputParameter ]
-			)
-		).typeSelect(typeof(RuleParameter))
+			rule.conclusion.conclusionElements.
+				filter[judgmentParameters.next.outputParameter].
+				filter(RuleParameter)
+		)
 	}
 	
 	def boolean hasOutputParams(RuleInvocation ruleInvocation) {
 		!ruleInvocation.outputParams.empty
 	}
 	
-//	def <T> void iterateIfThenElse(Iterable<T> iterable, (T)=>boolean predicate,
-//		(T)=>void ifTrue, (T)=>void ifFalse) {
-//		iterable.forEach() [
-//			if (predicate.apply(it)) {
-//				ifTrue.apply(it)
-//			} else {
-//				ifFalse.apply(it)
-//			}
-//		]		
-//	}
-	
-	def List<ExpressionInConclusion> expressionsInConclusion(Rule rule) {
+	def expressionsInConclusion(Rule rule) {
 		rule.conclusion.getAllContentsOfType(typeof(ExpressionInConclusion))
 	}
 	
-	def List<XExpression> outputArgsExpressions(RuleInvocation ruleInvocation) {
+	def outputArgsExpressions(RuleInvocation ruleInvocation) {
 		val judgmentParameters = ruleInvocation.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
@@ -256,7 +243,7 @@ class XsemanticsUtils {
 		return !(ruleInvocationExpression instanceof XVariableDeclaration);
 	}
 	
-	def List<XExpression> inputArgsExpressions(RuleInvocation ruleInvocation) {
+	def inputArgsExpressions(RuleInvocation ruleInvocation) {
 		val judgmentParameters = ruleInvocation.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must not be output
 		Lists::newArrayList(
@@ -268,35 +255,33 @@ class XsemanticsUtils {
 
 	def allJudgments(XsemanticsSystem system) {
 		cache.get("allJudgments" -> system) [|
-			Lists::newArrayList(system.judgmentDescriptions) => [
-				it += system.allSuperSystemDefinitions.
+			system.judgmentDescriptions
+				+ system.allSuperSystemDefinitions.
 					map[judgmentDescriptions].flatten
-			]
 		]
 	}
 	
 	def allRules(XsemanticsSystem system) {
 		cache.get("allRules" -> system) [|
-			Lists::newArrayList(system.rules) => [
-				it += system.allSuperSystemDefinitions.
+			system.rules
+				+ system.allSuperSystemDefinitions.
 					map[rules].flatten
-			]
 		]
 	}
 
+	// since it will be used for checking its size, better to return a List
 	def allRulesByJudgmentDescription(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
 		cache.get2("allRulesByJudgmentDescription" -> (ts -> (judgmentSymbol -> relationSymbols))) [|
 			ts.allRules.filterRulesByJudgmentDescription(judgmentSymbol,
-				relationSymbols)
+				relationSymbols).toList
 		]
 	}
 
 	def allCheckRules(XsemanticsSystem system) {
 		cache.get("allCheckRules" -> system) [|
-			Lists::newArrayList(system.checkrules) => [
-				it += system.allSuperSystemDefinitions.
+			system.checkrules 
+				+ system.allSuperSystemDefinitions.
 					map[checkrules].flatten
-			]
 		]
 	}
 

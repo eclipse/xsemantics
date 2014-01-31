@@ -109,7 +109,7 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		acceptor.accept("XBlockExpression", descriptions);
 	}
 
-	def private void addRuleParamsInDescriptions(List<RuleParameter> params,
+	def private void addRuleParamsInDescriptions(Iterable<RuleParameter> params,
 			List<IValidatedEObjectDescription> descriptions,
 			boolean referredFromClosure) {
 		for (RuleParameter p : params) {
