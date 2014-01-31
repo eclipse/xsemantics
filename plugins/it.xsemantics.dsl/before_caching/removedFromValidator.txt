@@ -83,4 +83,18 @@
 			}
 		}
 	}
+
+	def protected void checkNoDuplicateJudgmentDescriptionSymbols(
+			JudgmentDescription judgmentDescription) {
+		val judgmentSymbol = judgmentDescription.getJudgmentSymbol();
+		val relationSymbols = judgmentDescription.getRelationSymbols();
+		if (judgmentDescription.containingSystem().getJudgmentDescriptions(
+				judgmentSymbol, relationSymbols).size() > 1) {
+			error("Duplicate JudgmentDescription symbols: "
+					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
+					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
+					IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS);
+		}
+	}
+
 	

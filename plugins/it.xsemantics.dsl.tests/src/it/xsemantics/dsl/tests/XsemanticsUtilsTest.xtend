@@ -24,14 +24,6 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	@Inject XsemanticsNodeModelUtils nodeModelUtils
 	
 	@Test
-	def void testJudgmentDescriptions() {
-		val descriptions = 
-			parser.parse(testFiles.testJudgmentDescriptionsWithDuplicateSymbols).
-				getJudgmentDescriptions('|-', ':')
-		Assert::assertEquals(2, descriptions.size)
-	}
-
-	@Test
 	def void testRuleJudgmentDescription() {
 		assertDescription(testFiles.
 			testSimpleRule.
@@ -436,12 +428,6 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 		Assert::assertEquals(relationSymbol, description.relationSymbols.get(0))
 	}
 	
-	def List<JudgmentDescription> getJudgmentDescriptions(XsemanticsSystem ts, String judgmentSymbol, String relationSymbol) {
-		Lists::newArrayList(filterJudgmentDescriptions(ts, judgmentSymbol, 
-			Lists::newArrayList(relationSymbol)
-		))
-	}
-
 	def assertJudgments(Iterable<JudgmentDescription> judgments, CharSequence expected) {
 		expected.assertEqualsStrings(
 			judgments.map[ 

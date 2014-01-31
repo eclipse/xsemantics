@@ -55,20 +55,6 @@ class XsemanticsUtils {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
 
-	def List<JudgmentDescription> getJudgmentDescriptions(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
-		Lists::newArrayList(filterJudgmentDescriptions(ts, judgmentSymbol, relationSymbols))
-	}
-	
-	def filterJudgmentDescriptions(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
-		ts.getJudgmentDescriptions.filterJudgmentDescriptions(judgmentSymbol, relationSymbols)
-	}
-
-	def filterJudgmentDescriptions(Iterable<JudgmentDescription> desc, String judgmentSymbol, Iterable<String> relationSymbols) {
-		desc.filter
-			[ it.judgmentSymbol== judgmentSymbol && 
-				it.relationSymbols.elementsEqual(relationSymbols) ]
-	}
-	
 	def judgmentDescription(Rule rule) {
 		rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
 			rule.conclusion.relationSymbols)

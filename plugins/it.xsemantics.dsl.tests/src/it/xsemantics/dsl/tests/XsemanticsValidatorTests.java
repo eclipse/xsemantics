@@ -38,7 +38,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	public void testDuplicateJudgmentDescriptionSymbols() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWithDuplicateSymbols());
-		String messageFragment = "Duplicate JudgmentDescription symbols: |- :";
+		String messageFragment = "Duplicate judgment symbols '|- :'";
 		validate.assertAll(AssertableDiagnostics.error(
 				IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 				messageFragment), AssertableDiagnostics.error(

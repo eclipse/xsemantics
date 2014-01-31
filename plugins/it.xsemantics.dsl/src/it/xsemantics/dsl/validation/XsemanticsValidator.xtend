@@ -133,7 +133,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def void checkJudgmentDescription(JudgmentDescription judgmentDescription) {
-		checkNoDuplicateJudgmentDescriptionSymbols(judgmentDescription);
 		checkNumOfOutputParams(judgmentDescription);
 		checkInputParams(judgmentDescription);
 		checkJudgmentDescriptionRules(judgmentDescription)
@@ -173,19 +172,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 	}
 
-	def protected void checkNoDuplicateJudgmentDescriptionSymbols(
-			JudgmentDescription judgmentDescription) {
-		val judgmentSymbol = judgmentDescription.getJudgmentSymbol();
-		val relationSymbols = judgmentDescription.getRelationSymbols();
-		if (judgmentDescription.containingSystem().getJudgmentDescriptions(
-				judgmentSymbol, relationSymbols).size() > 1) {
-			error("Duplicate JudgmentDescription symbols: "
-					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
-					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
-					IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS);
-		}
-	}
-
 	def protected void checkNumOfOutputParams(
 			JudgmentDescription judgmentDescription) {
 		if (judgmentDescription.outputJudgmentParameters()
@@ -204,7 +190,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
 					IssueCodes.NO_INPUT_PARAM);
 		} else {
-			inputParams.checkDuplicateNames
+			inputParams.checkDuplicates("name", null, IssueCodes.DUPLICATE_NAME)[parameter.name]
 		}
 	}
 
@@ -365,14 +351,27 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			// aux functions have the same name of aux descriptions
 			system.rules + 
 			system.checkrules
-		elements.checkDuplicateNames()
+		elements.checkDuplicates("name", null, IssueCodes.DUPLICATE_NAME)[computeName]
+		
+		system.judgmentDescriptions.checkDuplicates(
+			"judgment symbols",
+			XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
+			IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
+			[judgmentRepresentation(judgmentSymbol, relationSymbols)]
+		)
 	}
 
-	def private <T extends EObject> checkDuplicateNames(Iterable<T> collection) {
+	def private <T extends EObject> checkDuplicates(
+		Iterable<T> collection,
+		String kind,
+		EStructuralFeature feature,
+		String issue,
+		(T) => String nameComputer
+	) {
 		if (!collection.empty) {
 			val map = XsemanticsMultimapsUtils.duplicatesMultimap
 			for (e : collection) {
-				map.put(e.computeName, e)
+				map.put(nameComputer.apply(e), e)
 			}
 
 			for (entry : map.asMap.entrySet) {
@@ -380,10 +379,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				if (duplicates.size > 1) {
 					for (d : duplicates)
 						error(
-							"Duplicate name '" + entry.key + "' (" + d.eClass.name + ")",
+							"Duplicate " + kind + " '" + entry.key + "' (" + d.eClass.name + ")",
 							d,
-							null, 
-							IssueCodes.DUPLICATE_NAME);
+							feature, 
+							issue);
 				}
 			}
 		}
@@ -587,7 +586,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				.judgmentDescription(judgmentSymbol, relationSymbols);
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
-					+ symbolsRepresentation(judgmentSymbol, relationSymbols),
+					+ judgmentRepresentation(judgmentSymbol, relationSymbols),
 					elementFeature, IssueCodes.NO_JUDGMENT_DESCRIPTION);
 		}
 		return judgmentDescription;
@@ -629,7 +628,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 	}
 
-	def protected String symbolsRepresentation(String judgmentSymbol,
+	def protected String judgmentRepresentation(String judgmentSymbol,
 			Iterable<String> relationSymbols) {
 		return judgmentSymbol + " "
 				+ IterableExtensions.join(relationSymbols, " ");
