@@ -25,11 +25,4 @@ class XsemanticsModelExtensions {
 		}
 	}
 
-	def static isOverride(EObject it) {
-		switch (it) {
-			JudgmentDescription: override
-			Rule: override
-			CheckRule: override
-		}
-	}
 }

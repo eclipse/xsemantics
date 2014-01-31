@@ -3,10 +3,10 @@ package it.xsemantics.dsl.util
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
-import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import com.google.inject.Singleton
 
 @Singleton
 class XsemanticsUtils {
@@ -56,10 +55,6 @@ class XsemanticsUtils {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
 
-	def containingJudgmentDescription(EObject element) {
-		return EcoreUtil2::getContainerOfType(element, typeof(JudgmentDescription))
-	}
-	
 	def List<JudgmentDescription> getJudgmentDescriptions(XsemanticsSystem ts, String judgmentSymbol, Iterable<String> relationSymbols) {
 		Lists::newArrayList(filterJudgmentDescriptions(ts, judgmentSymbol, relationSymbols))
 	}
@@ -289,14 +284,6 @@ class XsemanticsUtils {
 		]
 	}
 	
-	def allJudgments(XsemanticsSystem system, String judgmentSymbol, Iterable<String> relationSymbols) {
-		cache.get2("allJudgments" -> (system -> (judgmentSymbol -> relationSymbols))) [|
-			Lists::newArrayList(
-				system.allJudgments.
-					filterJudgmentDescriptions(judgmentSymbol, relationSymbols))
-		]
-	}
-
 	def allRules(XsemanticsSystem system) {
 		cache.get("allRules" -> system) [|
 			Lists::newArrayList(system.rules) => [
@@ -319,18 +306,6 @@ class XsemanticsUtils {
 				it += system.allSuperSystemDefinitions.
 					map[checkrules].flatten
 			]
-		]
-	}
-
-	def allCheckRulesByName(XsemanticsSystem system, CheckRule rule) {
-		Lists::newArrayList(
-			system.allCheckRulesByName(rule.name).filter [ it != rule ]
-		)
-	}
-
-	def allCheckRulesByName(XsemanticsSystem system, String ruleName) {
-		cache.get2("allCheckRulesByName" -> (system -> ruleName)) [|
-			system.allCheckRules.filter [ name == ruleName ]
 		]
 	}
 

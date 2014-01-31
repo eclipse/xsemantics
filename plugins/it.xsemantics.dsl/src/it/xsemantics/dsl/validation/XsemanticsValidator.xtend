@@ -144,7 +144,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		val rulesForJudgmentDescription = judgmentDescription.rulesForJudgmentDescription
 		
 		if (rulesForJudgmentDescription.isEmpty()) {
-			if (enableWarnings && !judgmentDescription.override)
+			if (isEnableWarnings && !judgmentDescription.override)
 				warning("No rule defined for the judgment description",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION
 							.getEIDAttribute(),
@@ -429,7 +429,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	def public void checkAuxiliaryFunctions(AuxiliaryDescription aux) {
 		val functionsForAuxiliaryDescrition = aux.functionsForAuxiliaryDescrition();
-		if (enableWarnings
+		if (isEnableWarnings
 				&& functionsForAuxiliaryDescrition
 						.isEmpty()) {
 			warning("No function defined for the auxiliary description",
