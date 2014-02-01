@@ -36,8 +36,8 @@ import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
 
-import static extension it.xsemantics.dsl.util.XsemanticsModelExtensions.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.UniqueByName
 
 //import org.eclipse.xtext.validation.Check
 
@@ -190,7 +190,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
 					IssueCodes.NO_INPUT_PARAM);
 		} else {
-			inputParams.checkDuplicates("name", null, IssueCodes.DUPLICATE_NAME)[parameter.name]
+			inputParams.checkDuplicatesByName(null, IssueCodes.DUPLICATE_NAME)
 		}
 	}
 
@@ -351,7 +351,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			// aux functions have the same name of aux descriptions
 			system.rules + 
 			system.checkrules
-		elements.checkDuplicates("name", null, IssueCodes.DUPLICATE_NAME)[computeName]
+		elements.checkDuplicatesByName(null, IssueCodes.DUPLICATE_NAME)
 		
 		system.judgmentDescriptions.checkDuplicates(
 			"judgment symbols",
@@ -359,6 +359,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 			[judgmentRepresentation(judgmentSymbol, relationSymbols)]
 		)
+	}
+
+	def private <T extends UniqueByName> checkDuplicatesByName(
+		Iterable<T> collection,
+		EStructuralFeature feature,
+		String issue
+	) {
+		collection.checkDuplicates("name", feature, issue)[name]
 	}
 
 	def private <T extends EObject> checkDuplicates(
