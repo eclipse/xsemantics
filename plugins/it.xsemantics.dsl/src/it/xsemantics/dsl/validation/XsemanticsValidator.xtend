@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.UniqueByName
+import it.xsemantics.dsl.xsemantics.Overrider
 
 //import org.eclipse.xtext.validation.Check
 
@@ -285,7 +286,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		val superSystemDefinition = system.superSystemDefinition
 		val allSuperJudgments = superSystemDefinition?.allJudgments
 		system.judgmentDescriptions.
-			checkOverrides(allSuperJudgments, [name], [override], 
+			checkOverrides(allSuperJudgments,
 			[j1, j2 |
 				j1.judgmentSymbol == j2.judgmentSymbol &&
 				j1.relationSymbols.elementsEqual(j2.relationSymbols) &&
@@ -295,7 +296,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 		val allSuperCheckRules = superSystemDefinition?.allCheckRules
 		system.checkrules.
-			checkOverrides(allSuperCheckRules, [name], [override], 
+			checkOverrides(allSuperCheckRules, 
 			[r1, r2 |
 				typeSystem.equals(
 							r1.element.parameter.parameterType, 
@@ -307,7 +308,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		
 		val allSuperRules = superSystemDefinition?.allRules
 		system.rules.
-			checkOverrides(allSuperRules, [name], [override], 
+			checkOverrides(allSuperRules, 
 			[r1, r2 |
 				r1.conclusion.judgmentSymbol.equals(r2.conclusion.judgmentSymbol) &&
 				r1.conclusion.relationSymbols.elementsEqual(r2.conclusion.relationSymbols)
@@ -396,15 +397,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 	}
 
-	def private <T extends EObject> checkOverrides(Iterable<T> collection, 
+	def private <T extends Overrider> checkOverrides(Iterable<T> collection, 
 			Iterable<T> superCollection, 
-			(T) => String nameComputer, 
-			(T) => boolean overrideComputer,
 			(T, T) => boolean conformanceComputer,
 			String kind) {
 		
 		if (superCollection == null) {
-			for (j : collection.filter[overrideComputer.apply(it)]) {
+			for (j : collection.filter[override]) {
 				error(
 					"Cannot override " + kind + " without system 'extends'",
 					j,
@@ -412,12 +411,12 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 			}
 		} else {
-			val superMap = superCollection.toMap[nameComputer.apply(it)]
+			val superMap = superCollection.toMap[name]
 			for (j : collection) {
-				val name = nameComputer.apply(j)
+				val name = j.name
 				val overridden = superMap.get(name)
 					
-				if (!overrideComputer.apply(j)) {
+				if (!j.override) {
 					if (overridden != null)
 						error(
 							kind + " '" + name + "' must override " + kind +
