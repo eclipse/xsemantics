@@ -289,17 +289,17 @@ class XsemanticsGeneratorExtensions {
 		)
 		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
 		val relationSymbols = rule.conclusion.relationSymbols.iterator
-		rule.conclusion.conclusionElements.forEach() [
+		for (e : rule.conclusion.conclusionElements) {
 			buffer.append(" + ")
 			if (judgmentParameters.next.outputParameter) {
-				buffer.append(forOutput.apply(it))
+				buffer.append(forOutput.apply(e))
 			} else {
-				buffer.append(forInput.apply(it))
+				buffer.append(forInput.apply(e))
 			}
 			if (relationSymbols.hasNext)
 				buffer.append(''' + " «relationSymbols.next.escapeJavaStringChars» "''')
 			
-		]
+		}
 		buffer.toString
 	}
 
@@ -461,10 +461,10 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def declareVariablesForOutputParams(Rule rule, ITreeAppendable appendable) {
-		rule.outputParams.forEach([
-			appendable.append("\n")
-			it.declareVariableForOutputParam(appendable)
-		])
+		for (p : rule.outputParams) {
+ 			appendable.append("\n")
+			p.declareVariableForOutputParam(appendable)
+		}
 	}
 	
 	def declareVariableForOutputParam(RuleParameter ruleParam, ITreeAppendable appendable) {

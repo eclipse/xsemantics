@@ -43,17 +43,17 @@ class XsemanticsTypeSystem {
 	
 	def TupleType getInputTypes(Rule rule) {
 		val tupleType = new TupleType();
-		rule.inputParams.forEach [
-			tupleType.add(it.getType)
-		]
+		for (p : rule.inputParams)
+			tupleType.add(p.getType)
+		
 		return tupleType;
 	}
 
 	def TupleType getInputTypes(AuxiliaryFunction aux) {
 		val tupleType = new TupleType();
-		aux.parameters.forEach [
-			tupleType.add(it.getType)
-		]
+		for (p : aux.parameters)
+			tupleType.add(p.getType)
+		
 		return tupleType;
 	}
 	

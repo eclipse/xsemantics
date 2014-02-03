@@ -78,8 +78,7 @@ class TraceUtils {
 	
 	def removeDuplicateErrorInformation(Iterable<ErrorInformation> errorInformations) {
 		val List<ErrorInformation> noDuplicates = new LinkedList()
-		errorInformations.forEach [
-			errorInformation |
+		for (errorInformation : errorInformations) {
 			if (!noDuplicates.exists [ 
 				it.source == errorInformation.source &&
 				it.feature == errorInformation.feature
@@ -87,7 +86,7 @@ class TraceUtils {
 			{
 				noDuplicates.add(errorInformation)
 			}
-		]
+		}
 		noDuplicates
 	}
 	

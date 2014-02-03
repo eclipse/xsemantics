@@ -97,18 +97,15 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			else
 				superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
 
-			ts.auxiliaryDescriptions.forEach [
-				elem |
+			for (elem: ts.auxiliaryDescriptions) {
 				members += elem.genIssueField
-			]
+			}
 			
-			ts.rules.forEach [
-				elem |
+			for (elem : ts.rules) {
 				members += elem.genIssueField
-			]
+			}
 			
-			ts.injections.forEach [
-				injectedField |
+			for (injectedField : ts.injections) {
 				members += injectedField.toField(
 					injectedField.name, 
 					injectedField.type
@@ -117,81 +114,70 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					annotations += ts.toAnnotation(typeof(Inject))
 					visibility = JvmVisibility::PRIVATE
 				]
-			]
+			}
 			
-			ts.auxiliaryDescriptions.forEach [
-				elem |
+			for (elem : ts.auxiliaryDescriptions) {
 				members += elem.genPolymorphicDispatcherField
-			]
+			}
 			
-			ts.judgmentDescriptions.forEach [
-				elem |
+			for (elem : ts.judgmentDescriptions) {
 				members += elem.genPolymorphicDispatcherField
-			]
+			}
 			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += ts.genConstructor
 			
 			members += ts.genInit
 			
-			ts.injections.forEach [
-				injectedField |
+			for (injectedField : ts.injections) {
 				members += injectedField.toGetter
 					(injectedField.name, injectedField.type)
 				members += injectedField.toSetter
 					(injectedField.name, injectedField.type)
-			]
+			}
 			
-			ts.auxiliaryDescriptions.forEach [
-				elem |
+			for (elem : ts.auxiliaryDescriptions) {
 				members += elem.genEntryPointMethods
-			]
+			}
 
-			ts.judgmentDescriptions.forEach [
-				elem |
+			for (elem : ts.judgmentDescriptions) {
 				members += elem.genEntryPointMethods
 				members += elem.genSucceededMethods
-			]
+			}
 			
-			ts.checkrules.forEach [
-				r |
+			for (r : ts.checkrules) {
 				members += r.compileCheckRuleMethods
 				members += r.compileInternalMethod
-			]
+			}
 
-			ts.auxiliaryDescriptions.forEach [
-				elem |
+			for (elem : ts.auxiliaryDescriptions) {
 				members += elem.compileInternalMethod
 				members += elem.compileThrowExceptionMethod
-			]
+			}
 			
-			ts.judgmentDescriptions.forEach [
-				elem |
+			for (elem : ts.judgmentDescriptions) {
 				members += elem.compileInternalMethod
 				members += elem.compileThrowExceptionMethod
-			]
+			}
 			
-			ts.auxiliaryFunctions.forEach [
-				aux |
+			for (aux : ts.auxiliaryFunctions) {
 				if (aux.auxiliaryDescription != null) {
 					members += aux.compileImplMethod
 					members += aux.compileApplyAuxiliaryFunction
 				}
-			]
+			}
 			
-			ts.rules.forEach [
-				rule |
+			for (rule : ts.rules) {
 				if (rule.judgmentDescription != null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
-					rule.expressionsInConclusion.forEach[
-						e |
+					for (e : rule.expressionsInConclusion) {
 						members += e.compileExpressionInConclusionMethod
-					]
+					}
 					if (rule.conclusion.error != null)
 						members += rule.compileErrorSpecificationMethod
 				}
-			]
+			}
 		]
 		
 		// generation of the Validator
@@ -226,10 +212,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    					annotations += ts.toAnnotation(typeof(Override))
 			]
 			
-			ts.checkrules.forEach [
-				rule |
+			for (rule : ts.checkrules) {
 				members += rule.compileValidatorCheckRuleMethod
-			]
+			}
 		]
    	}
 
