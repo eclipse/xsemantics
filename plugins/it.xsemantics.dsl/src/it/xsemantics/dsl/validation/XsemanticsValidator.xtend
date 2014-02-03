@@ -362,8 +362,9 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
 			IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 			[judgmentRepresentation(judgmentSymbol, relationSymbols)],
-			["Duplicate judgment symbols '" + 
-				judgmentRepresentation(judgmentSymbol, relationSymbols) + "' (" + eClass.name + ")"
+			[key, it | 
+				"Duplicate judgment symbols '" + 
+				key + "' (" + eClass.name + ")"
 			]
 		)
 	}
@@ -374,7 +375,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		String issue
 	) {
 		collection.checkDuplicates(feature, issue, [name],
-			["Duplicate name '" + name + "' (" + eClass.name + ")"]
+			[key, it | "Duplicate name '" + name + "' (" + eClass.name + ")"]
 		)
 	}
 
@@ -383,7 +384,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		EStructuralFeature feature,
 		String issue,
 		(T) => K keyComputer,
-		(T) => String errorMessageProvider
+		(K, T) => String errorMessageProvider
 	) {
 		if (!collection.empty) {
 			val map = XsemanticsMultimapsUtils.duplicatesMultimap
@@ -396,7 +397,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				if (duplicates.size > 1) {
 					for (d : duplicates)
 						error(
-							errorMessageProvider.apply(d),
+							errorMessageProvider.apply(entry.key, d),
 							d,
 							feature, 
 							issue);
@@ -460,9 +461,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
 			IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
 			[typeSystem.getInputTypes(it)],
-			["Duplicate auxiliary function of the same kind with parameters: "
-								+ tupleTypeRepresentation(typeSystem.getInputTypes(it))
-								+ reportContainingSystemName(it)
+			[key, it | 
+				"Duplicate auxiliary function of the same kind with parameters: "
+							+ tupleTypeRepresentation(key)
+							+ reportContainingSystemName(it)
 			])
 		}
 	}
