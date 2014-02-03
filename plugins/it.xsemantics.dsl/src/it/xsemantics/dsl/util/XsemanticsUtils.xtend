@@ -133,13 +133,13 @@ class XsemanticsUtils {
 	}
 	
 	def inputParams(Rule rule) {
-		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
-		// the corresponding judgmentParameter must not be output
-		Lists::newArrayList(
+		cache.get("inputParams" -> rule) [|
+			val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
+			// the corresponding judgmentParameter must not be output
 			rule.conclusion.conclusionElements.
 				filter[ !judgmentParameters.next.outputParameter ].
-				filter(RuleParameter)
-		)
+				filter(RuleParameter).toList
+		]
 	}
 	
 	def inputEObjectParams(Rule rule) {
@@ -176,16 +176,16 @@ class XsemanticsUtils {
 	}
 	
 	def outputParams(Rule rule) {
-		val judgmentDescription = rule.judgmentDescription
-		if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
-			return Lists::newArrayList
-		val judgmentParameters = judgmentDescription.judgmentParameters.iterator
-		// the corresponding judgmentParameter must be output
-		Lists::newArrayList(
+		cache.get("outputParams" -> rule) [|
+			val judgmentDescription = rule.judgmentDescription
+			if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
+				return Lists::newArrayList
+			val judgmentParameters = judgmentDescription.judgmentParameters.iterator
+			// the corresponding judgmentParameter must be output
 			rule.conclusion.conclusionElements.
 				filter[judgmentParameters.next.outputParameter].
-				filter(RuleParameter)
-		)
+				filter(RuleParameter).toList
+		]
 	}
 	
 	def boolean hasOutputParams(RuleInvocation ruleInvocation) {
