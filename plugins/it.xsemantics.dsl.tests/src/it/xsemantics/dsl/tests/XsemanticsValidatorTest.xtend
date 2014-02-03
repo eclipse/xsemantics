@@ -440,6 +440,17 @@ Duplicate name 'eClass' (InputParameter)
 			)
 	}
 
+	@Test
+	def void testRulesOfTheSameKindWithSameArgumentTypes() {
+		testFiles.testRulesOfTheSameKindWithSameArgumentTypes.
+		assertErrorMessages(
+'''
+Duplicate rule of the same kind with parameters: Object, Integer, in system: it.xsemantics.test.TypeSystem
+Duplicate rule of the same kind with parameters: Object, Integer, in system: it.xsemantics.test.TypeSystem
+'''			
+		)
+	}
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parser.parse(input).assertErrorMessages(expected)
 	}

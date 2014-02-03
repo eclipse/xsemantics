@@ -58,14 +58,14 @@ class XsemanticsTypeSystem {
 	}
 	
 	def equals(TupleType tupleType1, TupleType tupleType2, EObject context) {
-		if (tupleType1.size() != tupleType2.size())
-			return false;
-		val judgmentParametersIt = tupleType1.iterator();
-		for (JvmTypeReference jvmTypeReference : tupleType2) {
-			if (!equals(judgmentParametersIt.next(), jvmTypeReference, context))
-				return false;
-		}
-		return true;
+//		if (tupleType1.size() != tupleType2.size())
+//			return false;
+//		val judgmentParametersIt = tupleType1.iterator();
+//		for (JvmTypeReference jvmTypeReference : tupleType2) {
+//			if (!equals(judgmentParametersIt.next(), jvmTypeReference, context))
+//				return false;
+//		}
+		return tupleType1.equals(tupleType2);
 	}
 
 	def equals(JudgmentDescription j1, JudgmentDescription j2) {
@@ -82,7 +82,10 @@ class XsemanticsTypeSystem {
 	}
 	
 	def equals(JvmTypeReference t1, JvmTypeReference t2, EObject context) {
-		isConformant(t1, t2, context) && isConformant(t2, t1, context);
+		//isConformant(t1, t2, context) && isConformant(t2, t1, context);
+		if (t1 == null)
+			return t2 == null
+		return t1.type.equals(t2.type)
 	}
 	
 	def isConformant(JvmTypeReference expected,

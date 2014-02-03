@@ -166,29 +166,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testRulesOfTheSameKindWithSameArgumentTypes() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testRulesOfTheSameKindWithSameArgumentTypes());
-		validate.assertAll(
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: String, Integer"
-										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: String, int"
-										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: Object, Integer"
-										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
-				AssertableDiagnostics
-						.error(IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
-								"Duplicate rule of the same kind with parameters: Object, Integer"
-										+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
-	}
-
-	@Test
 	public void testRulesOfTheSameKindWithSameInputArgumentTypes()
 			throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles

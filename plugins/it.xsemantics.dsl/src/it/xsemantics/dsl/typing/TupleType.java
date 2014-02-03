@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
- * @author bettini
+ * @author Lorenzo Bettini
  * 
  */
 public class TupleType extends ArrayList<JvmTypeReference> {
