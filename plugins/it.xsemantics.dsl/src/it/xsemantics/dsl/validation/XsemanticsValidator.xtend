@@ -13,10 +13,12 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
+import it.xsemantics.dsl.xsemantics.Overrider
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
+import it.xsemantics.dsl.xsemantics.UniqueByName
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.emf.ecore.EObject
@@ -36,8 +38,6 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.lib.IterableExtensions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.xsemantics.UniqueByName
-import it.xsemantics.dsl.xsemantics.Overrider
 import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 
 //import org.eclipse.xtext.validation.Check
@@ -355,10 +355,12 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		elements.checkDuplicatesByName(null, IssueCodes.DUPLICATE_NAME)
 		
 		system.judgmentDescriptions.checkDuplicates(
-			"judgment symbols",
 			XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
 			IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
-			[judgmentRepresentation(judgmentSymbol, relationSymbols)]
+			[judgmentRepresentation(judgmentSymbol, relationSymbols)],
+			["Duplicate judgment symbols '" + 
+				judgmentRepresentation(judgmentSymbol, relationSymbols) + "' (" + eClass.name + ")"
+			]
 		)
 	}
 
@@ -367,20 +369,22 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		EStructuralFeature feature,
 		String issue
 	) {
-		collection.checkDuplicates("name", feature, issue)[name]
+		collection.checkDuplicates(feature, issue, [name],
+			["Duplicate name '" + name + "' (" + eClass.name + ")"]
+		)
 	}
 
-	def private <T extends EObject> checkDuplicates(
+	def private <T extends EObject, K> checkDuplicates(
 		Iterable<T> collection,
-		String kind,
 		EStructuralFeature feature,
 		String issue,
-		(T) => String nameComputer
+		(T) => K keyComputer,
+		(T) => String errorMessageProvider
 	) {
 		if (!collection.empty) {
-			val map = XsemanticsMultimapsUtils.duplicatesByNameMultimap
+			val map = XsemanticsMultimapsUtils.duplicatesMultimap
 			for (e : collection) {
-				map.put(nameComputer.apply(e), e)
+				map.put(keyComputer.apply(e), e)
 			}
 
 			for (entry : map.asMap.entrySet) {
@@ -388,7 +392,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				if (duplicates.size > 1) {
 					for (d : duplicates)
 						error(
-							"Duplicate " + kind + " '" + entry.key + "' (" + d.eClass.name + ")",
+							errorMessageProvider.apply(d),
 							d,
 							feature, 
 							issue);
@@ -448,23 +452,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 		
 		if (functionsForAuxiliaryDescrition.size() > 1) {
-			val map = XsemanticsMultimapsUtils.duplicatesByTypeMultimap
-			for (e : functionsForAuxiliaryDescrition) {
-				map.put(typeSystem.getInputTypes(e), e)
-			}
-
-			for (entry : map.asMap.entrySet) {
-				val duplicates = entry.value
-				if (duplicates.size > 1) {
-					for (d : duplicates)
-						error("Duplicate auxiliary function of the same kind with parameters: "
-								+ tupleTypeRepresentation(entry.key)
-								+ reportContainingSystemName(d),
-								d,
-								XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
-								IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS);
-				}
-			}
+			functionsForAuxiliaryDescrition.checkDuplicates(
+			XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
+			IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
+			[typeSystem.getInputTypes(it)],
+			["Duplicate auxiliary function of the same kind with parameters: "
+								+ tupleTypeRepresentation(typeSystem.getInputTypes(it))
+								+ reportContainingSystemName(it)
+			])
 		}
 	}
 
