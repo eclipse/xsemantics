@@ -1,6 +1,7 @@
 grammar it.xsemantics.dsl.Xsemantics with org.eclipse.xtext.xbase.Xbase
 
-generate xsemantics "http://xsemantics.sf.net/Xsemantics"
+//generate xsemantics "http://www.xsemantics.it/dsl/Xsemantics"
+import "http://www.xsemantics.it/dsl/Xsemantics"
 
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 

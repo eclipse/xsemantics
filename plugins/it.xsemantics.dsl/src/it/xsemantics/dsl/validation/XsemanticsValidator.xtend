@@ -321,6 +321,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			],
 			"rule")
 		
+		// the following check must be done like that:
+		// we need to check each rule in the system against rules possibly
+		// "inherited" from a supersystem, and the corresponding judgment
+		// could be defined in the supersystem and not in this system
 		for (rule : system.rules) {
 			val conclusion = rule.conclusion
 			val rulesOfTheSameKind = 
