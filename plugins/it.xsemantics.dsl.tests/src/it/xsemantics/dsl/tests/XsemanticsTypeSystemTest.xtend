@@ -276,6 +276,28 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			).assertTrue
 		]
 	}
+
+	@Test
+	def void testHashCodeOfTupleType() {
+		testFiles.testDuplicateAuxiliaryFunctionsWithSameParameterTypes_Issue_9.
+		parseAndValidate.auxiliaryFunctions => [
+			assertEquals(
+				typeSystem.getInputTypes(head).hashCode,
+				typeSystem.getInputTypes(last).hashCode
+			)
+		]
+	}
+
+	@Test
+	def void testHashCodeOfTupleTypeWithUnresolvedTypes() {
+		testFiles.testForUnresolvedTypeTypeReferences.
+		parseAndValidate.auxiliaryFunctions => [
+			assertEquals(
+				typeSystem.getInputTypes(head).hashCode,
+				typeSystem.getInputTypes(last).hashCode
+			)
+		]
+	}
 	
 	def checkBooleanPremise(XAbstractFeatureCall featureCall) {
 		assertTrue(featureCall.toString,

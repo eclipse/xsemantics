@@ -2347,6 +2347,19 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testForUnresolvedTypeTypeReferences() '''
+	«testAuxiliaryDescriptions»
+	
+	auxiliary isValue(FooBar eO, EClass eC) {
+		eO == eC
+	}
+	
+	// they must differ for the parameters
+	auxiliary isValue(FooBar e1, EClass e2) {
+		true
+	}
+	'''
+
 	def testExpressionsInConclusion() '''
 	«testJudgmentDescriptionsReferringToEcore3WithOutput»
 	

@@ -98,6 +98,10 @@ abstract class XsemanticsBaseTest {
 	def parse(CharSequence s) {
 		parser.parse(s)
 	}
+
+	def parseAndValidate(CharSequence s) {
+		parser.parse(s) => [validate]
+	}
 	
 	def getFirstRule(CharSequence s) {
 		getRule(s, 0)

@@ -6,7 +6,6 @@ package it.xsemantics.dsl.validation
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
-import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.util.XsemanticsXExpressionHelper
@@ -39,6 +38,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.UniqueByName
 import it.xsemantics.dsl.xsemantics.Overrider
+import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 
 //import org.eclipse.xtext.validation.Check
 
@@ -378,7 +378,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		(T) => String nameComputer
 	) {
 		if (!collection.empty) {
-			val map = XsemanticsMultimapsUtils.duplicatesMultimap
+			val map = XsemanticsMultimapsUtils.duplicatesByNameMultimap
 			for (e : collection) {
 				map.put(nameComputer.apply(e), e)
 			}
@@ -448,19 +448,21 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 		
 		if (functionsForAuxiliaryDescrition.size() > 1) {
-			for (AuxiliaryFunction auxiliaryFunction : functionsForAuxiliaryDescrition) {
-				val tupleType = typeSystem.getInputTypes(auxiliaryFunction);
-				
-				for (AuxiliaryFunction auxiliaryFunction2 : functionsForAuxiliaryDescrition) {
-					val tupleType2 = typeSystem.getInputTypes(auxiliaryFunction2);
-					if (auxiliaryFunction !== auxiliaryFunction2 && typeSystem.equals(tupleType, tupleType2, auxiliaryFunction)) {
+			val map = XsemanticsMultimapsUtils.duplicatesByTypeMultimap
+			for (e : functionsForAuxiliaryDescrition) {
+				map.put(typeSystem.getInputTypes(e), e)
+			}
+
+			for (entry : map.asMap.entrySet) {
+				val duplicates = entry.value
+				if (duplicates.size > 1) {
+					for (d : duplicates)
 						error("Duplicate auxiliary function of the same kind with parameters: "
-								+ tupleTypeRepresentation(tupleType)
-								+ reportContainingSystemName(auxiliaryFunction2),
-								auxiliaryFunction2,
+								+ tupleTypeRepresentation(entry.key)
+								+ reportContainingSystemName(d),
+								d,
 								XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
 								IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS);
-					}
 				}
 			}
 		}
