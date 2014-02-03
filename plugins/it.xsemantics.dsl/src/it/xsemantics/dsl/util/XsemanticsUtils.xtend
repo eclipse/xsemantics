@@ -80,12 +80,8 @@ class XsemanticsUtils {
 	}
 	
 	def auxiliaryDescription(AuxiliaryFunction fun) {
-		cache.get("auxiliaryDescription" -> fun) [|
-			fun.containingSystem.
-				auxiliaryDescriptions.findFirst [
-					name == fun.name
-				]
-		]
+		fun.containingSystem.
+			auxiliaryDescriptionsByName.get(fun.name)
 	}
 	
 	def rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
@@ -305,6 +301,12 @@ class XsemanticsUtils {
 	def allJudgmentsRepresentations(XsemanticsSystem system) {
 		cache.get("allJudgmentsRepresentations" -> (system)) [|
 			system.allJudgments.toMap[judgmentSymbol -> relationSymbols]
+		]
+	}
+
+	def auxiliaryDescriptionsByName(XsemanticsSystem system) {
+		cache.get("auxiliaryDescriptionsByName" -> (system)) [|
+			system.auxiliaryDescriptions.toMap[name]
 		]
 	}
 }
