@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.xsemantics.ReferToJudgment
 
 @Singleton
 class XsemanticsUtils {
@@ -55,18 +56,21 @@ class XsemanticsUtils {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
 
-	def judgmentDescription(Rule rule) {
-		rule.judgmentDescription(rule.conclusion.judgmentSymbol, 
-			rule.conclusion.relationSymbols)
+	def judgmentDescription(ReferToJudgment e) {
+		// compute corresponding judgment only on the first invokation
+		if (!e.setJudgment) {
+			e.judgment = switch (e) {
+				Rule: e.judgmentDescription(e.conclusion.judgmentSymbol, 
+					e.conclusion.relationSymbols)
+				RuleInvocation: e.
+					judgmentDescription(e.judgmentSymbol, 
+						e.relationSymbols)
+			}
+		}
+		return e.judgment
 	}
 	
-	def judgmentDescription(RuleInvocation ruleInvocation) {
-		ruleInvocation.
-			judgmentDescription(ruleInvocation.judgmentSymbol, 
-				ruleInvocation.relationSymbols)
-	}
-	
-	def judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
+	def private judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
 //		val descriptions = Lists::newArrayList(
 //			object.
 //			containingSystem.

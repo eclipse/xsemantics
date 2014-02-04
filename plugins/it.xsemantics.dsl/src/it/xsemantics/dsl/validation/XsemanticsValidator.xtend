@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
+import it.xsemantics.dsl.xsemantics.ReferToJudgment
 
 //import org.eclipse.xtext.validation.Check
 
@@ -570,7 +571,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	def private JudgmentDescription checkConformanceAgainstJudgmentDescription(
-			EObject element, String judgmentSymbol,
+			ReferToJudgment element, String judgmentSymbol,
 			Iterable<String> relationSymbols,
 			Iterable<? extends EObject> elements,
 			String elementDescription, EStructuralFeature elementFeature,
@@ -590,10 +591,9 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		return judgmentDescription;
 	}
 
-	def private findJudgmentDescriptionOrError(EObject element, String judgmentSymbol,
+	def private findJudgmentDescriptionOrError(ReferToJudgment element, String judgmentSymbol,
 			Iterable<String> relationSymbols, EStructuralFeature elementFeature) {
-		val judgmentDescription = element
-				.judgmentDescription(judgmentSymbol, relationSymbols);
+		val judgmentDescription = element.judgmentDescription
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ judgmentRepresentation(judgmentSymbol, relationSymbols),

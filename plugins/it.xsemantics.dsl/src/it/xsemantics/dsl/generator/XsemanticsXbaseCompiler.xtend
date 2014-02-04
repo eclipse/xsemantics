@@ -404,10 +404,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(RuleInvocation ruleInvocation,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(ruleInvocation, b);
-		val judgmentDescription = ruleInvocation
-				.judgmentDescription(
-						ruleInvocation.getJudgmentSymbol(),
-						ruleInvocation.getRelationSymbols());
+		val judgmentDescription = ruleInvocation.judgmentDescription;
 		val ruleInvocationExpressions = ruleInvocation
 				.getExpressions();
 
