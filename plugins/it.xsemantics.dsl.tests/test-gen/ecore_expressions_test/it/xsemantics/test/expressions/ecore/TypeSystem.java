@@ -153,7 +153,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } else {
       String _string_1 = new String();
       boolean _equals_1 = Objects.equal("bar", _string_1);
-      _or = (_equals || _equals_1);
+      _or = _equals_1;
     }
     /* 'foo' == new String() || 'bar' == new String() */
     if (!_or) {
@@ -167,7 +167,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } else {
       String _string_3 = new String();
       boolean _equals_3 = Objects.equal("bar", _string_3);
-      _and = (_equals_2 && _equals_3);
+      _and = _equals_3;
     }
     /* 'foo' == new String() && 'bar' == new String() */
     if (!_and) {

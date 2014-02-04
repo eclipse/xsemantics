@@ -446,9 +446,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleNotOccurVar(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
     String _typevarName = variable.getTypevarName();
     String _typevarName_1 = other.getTypevarName();
-    boolean _notEquals = (!Objects.equal(_typevarName, _typevarName_1));
     /* variable.typevarName != other.typevarName */
-    if (!_notEquals) {
+    if (!(!Objects.equal(_typevarName, _typevarName_1))) {
       sneakyThrowRuleFailedException("variable.typevarName != other.typevarName");
     }
     return new Result<Boolean>(true);

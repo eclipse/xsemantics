@@ -307,7 +307,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         if ((leftType instanceof StringType)) {
           _or = true;
         } else {
-          _or = ((leftType instanceof StringType) || (rightType instanceof StringType));
+          _or = (rightType instanceof StringType);
         }
         /* leftType instanceof StringType || rightType instanceof StringType */
         if (!_or) {
@@ -320,7 +320,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         if (!(leftType instanceof IntType)) {
           _and = false;
         } else {
-          _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
+          _and = (rightType instanceof IntType);
         }
         /* leftType instanceof IntType && rightType instanceof IntType */
         if (!_and) {
@@ -484,7 +484,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     } else {
       String _value_1 = string.getValue();
       boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
-      _or = (_equalsIgnoreCase || _equalsIgnoreCase_1);
+      _or = _equalsIgnoreCase_1;
     }
     /* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
     if (!_or) {
@@ -757,7 +757,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         _and = false;
       } else {
         boolean _booleanValue_1 = rightResult.booleanValue();
-        _and = (_booleanValue && _booleanValue_1);
+        _and = _booleanValue_1;
       }
       result = Boolean.valueOf(_and);
     } else {
@@ -767,7 +767,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         _or = true;
       } else {
         boolean _booleanValue_3 = rightResult.booleanValue();
-        _or = (_booleanValue_2 || _booleanValue_3);
+        _or = _booleanValue_3;
       }
       result = Boolean.valueOf(_or);
     }

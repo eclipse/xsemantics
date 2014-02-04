@@ -277,9 +277,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     final EClass eC = EcoreFactory.eINSTANCE.createEClass();
     eC.setName("MyEClass");
-    boolean _equals_1 = Objects.equal(eClass1, eC);
     /* eClass1 == eC */
-    if (!_equals_1) {
+    if (!Objects.equal(eClass1, eC)) {
       sneakyThrowRuleFailedException("eClass1 == eC");
     }
     return new Result<Boolean>(true);

@@ -542,7 +542,6 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               try {
-                Boolean _overrides = FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -876,9 +875,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
     EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
       it.xsemantics.example.fj.fj.Class.class);
-    return _all;
   }
   
   protected List<Field> fieldsImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
@@ -899,8 +897,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<Field> applyAuxFunFields(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     ArrayList<Field> _xblockexpression = null;
     {
-      ArrayList<Field> _arrayList = new ArrayList<Field>();
-      Iterable<Field> fields = _arrayList;
+      Iterable<Field> fields = new ArrayList<Field>();
       List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, clazz);
       for (final it.xsemantics.example.fj.fj.Class superclass : _superclasses) {
         EList<Member> _members = superclass.getMembers();
@@ -912,8 +909,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(_members_1, Field.class);
       Iterable<Field> _plus_1 = Iterables.<Field>concat(fields, _typeSelect_1);
       fields = _plus_1;
-      ArrayList<Field> _newArrayList = Lists.<Field>newArrayList(fields);
-      _xblockexpression = (_newArrayList);
+      _xblockexpression = (Lists.<Field>newArrayList(fields));
     }
     return _xblockexpression;
   }
@@ -943,7 +939,6 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         public void apply(final it.xsemantics.example.fj.fj.Class c) {
           EList<Member> _members = c.getMembers();
           List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-          boolean _addAll = methods.addAll(_typeSelect);
         }
       };
       IterableExtensions.<it.xsemantics.example.fj.fj.Class>forEach(_superclasses, _function);
@@ -1084,19 +1079,17 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
       public Boolean apply(final Expression it) {
         try {
-          Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-          return _isValue;
+          return FjTypeSystem.this.isValueInternal(_trace_, it);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       }
     };
-    boolean _forall = IterableExtensions.<Expression>forall(_args, _function);
     /* exp.args.forall[isValue(it)] */
-    if (!Boolean.valueOf(_forall)) {
+    if (!Boolean.valueOf(IterableExtensions.<Expression>forall(_args, _function))) {
       sneakyThrowRuleFailedException("exp.args.forall[isValue(it)]");
     }
-    return Boolean.valueOf(_forall);
+    return Boolean.valueOf(IterableExtensions.<Expression>forall(_args, _function));
   }
   
   protected MethodBody replaceThisAndParamsImpl(final RuleApplicationTrace _trace_, final MethodBody body, final Expression thisReplacement, final List<Parameter> params, final List<Expression> args) throws RuleFailedException {
@@ -1143,8 +1136,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         IterableExtensions.<ParamRef>forEach(_eAllOfType_1, _function_1);
       }
     };
-    MethodBody _doubleArrow = ObjectExtensions.<MethodBody>operator_doubleArrow(_clone, _function);
-    return _doubleArrow;
+    return ObjectExtensions.<MethodBody>operator_doubleArrow(_clone, _function);
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
@@ -1479,9 +1471,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleBasicSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     String _basic = left.getBasic();
     String _basic_1 = right.getBasic();
-    boolean _equals = _basic.equals(_basic_1);
     /* left.basic.equals(right.basic) */
-    if (!_equals) {
+    if (!_basic.equals(_basic_1)) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1526,9 +1517,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         it.xsemantics.example.fj.fj.Class _classref_3 = left.getClassref();
         List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref_3);
         it.xsemantics.example.fj.fj.Class _classref_4 = right.getClassref();
-        boolean _contains = _superclasses.contains(_classref_4);
         /* superclasses(left.classref).contains(right.classref) */
-        if (!_contains) {
+        if (!_superclasses.contains(_classref_4)) {
           sneakyThrowRuleFailedException("superclasses(left.classref).contains(right.classref)");
         }
       }
@@ -1613,9 +1603,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleBasicEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     String _basic = left.getBasic();
     String _basic_1 = right.getBasic();
-    boolean _equals = _basic.equals(_basic_1);
     /* left.basic.equals(right.basic) */
-    if (!_equals) {
+    if (!_basic.equals(_basic_1)) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1639,9 +1628,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleClassEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
     it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-    boolean _equals = Objects.equal(_classref, _classref_1);
     /* left.classref == right.classref */
-    if (!_equals) {
+    if (!Objects.equal(_classref, _classref_1)) {
       sneakyThrowRuleFailedException("left.classref == right.classref");
     }
     return new Result<Boolean>(true);
@@ -1717,8 +1705,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       public boolean apply(final Expression it) {
         try {
           Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-          boolean _not = (!(_isValue).booleanValue());
-          return _not;
+          return (!(_isValue).booleanValue());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -1797,8 +1784,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             public boolean apply(final Field it) {
               String _name = it.getName();
               String _name_1 = ((Field)message).getName();
-              boolean _equals = Objects.equal(_name, _name_1);
-              return _equals;
+              return Objects.equal(_name, _name_1);
             }
           };
           final int fieldIndex = Iterables.<Field>indexOf(_fields, _function);
@@ -1815,8 +1801,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             public boolean apply(final Expression it) {
               try {
                 Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-                boolean _not = (!(_isValue).booleanValue());
-                return _not;
+                return (!(_isValue).booleanValue());
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }

@@ -191,9 +191,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleEClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass candidate, final EClass superClass) throws RuleFailedException {
-    boolean _isSuperTypeOf = superClass.isSuperTypeOf(candidate);
     /* superClass.isSuperTypeOf(candidate) */
-    if (!_isSuperTypeOf) {
+    if (!superClass.isSuperTypeOf(candidate)) {
       sneakyThrowRuleFailedException("superClass.isSuperTypeOf(candidate)");
     }
     return new Result<Boolean>(true);

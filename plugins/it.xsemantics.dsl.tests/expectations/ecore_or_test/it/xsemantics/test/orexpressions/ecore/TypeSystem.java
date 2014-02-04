@@ -174,9 +174,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
           sneakyThrowRuleFailedException("object.eClass.name == \'bar2\'");
         }
         String _name_3 = eClass.getName();
-        boolean _equals_3 = Objects.equal(_name_3, foo);
         /* eClass.name == foo */
-        if (!_equals_3) {
+        if (!Objects.equal(_name_3, foo)) {
           sneakyThrowRuleFailedException("eClass.name == foo");
         }
       }

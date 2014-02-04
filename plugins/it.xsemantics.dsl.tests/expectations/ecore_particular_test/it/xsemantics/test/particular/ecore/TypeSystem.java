@@ -440,9 +440,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
     String _plus = (_string + _firstUpper);
-    boolean _equals = Objects.equal("foo", _plus);
     /* 'foo' == new String() + 'bar'.toFirstUpper */
-    if (!_equals) {
+    if (!Objects.equal("foo", _plus)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
     return new Result<EObject>(_applyRuleEClassEObject_1(G, _createEObject));
@@ -473,9 +472,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
     String _plus = (_string + _firstUpper);
-    boolean _equals = Objects.equal("foo", _plus);
     /* 'foo' == new String() + 'bar'.toFirstUpper */
-    if (!_equals) {
+    if (!Objects.equal("foo", _plus)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
     return new Result2<EClass,EObject>(_createEObject, _applyRuleEClassEObject2_2(G, s));
@@ -580,7 +578,6 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
       public void apply(final EStructuralFeature it) {
         String _name = it.getName();
-        boolean _notEquals = (!Objects.equal(_name, "foo"));
       }
     };
     IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
@@ -641,8 +638,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
       public Boolean apply(final EStructuralFeature it) {
         String _name = it.getName();
-        boolean _notEquals = (!Objects.equal(_name, "foo"));
-        return Boolean.valueOf(_notEquals);
+        return Boolean.valueOf((!Objects.equal(_name, "foo")));
       }
     };
     boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
@@ -653,9 +649,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
     EStructuralFeature _get = _eStructuralFeatures_1.get(0);
     String _name = _get.getName();
-    boolean _notEquals = (!Objects.equal(_name, "foo"));
     /* eClass.EStructuralFeatures.get(0).name != 'foo' */
-    if (!_notEquals) {
+    if (!(!Objects.equal(_name, "foo"))) {
       sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");
     }
     return new Result<Boolean>(true);

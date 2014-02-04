@@ -707,9 +707,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
     EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-    List<it.xsemantics.example.fj.fj.Class> _all = this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
       it.xsemantics.example.fj.fj.Class.class);
-    return _all;
   }
   
   protected Result<Type> typedeclImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
@@ -999,9 +998,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleBasicSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     String _basic = left.getBasic();
     String _basic_1 = right.getBasic();
-    boolean _equals = _basic.equals(_basic_1);
     /* left.basic.equals(right.basic) */
-    if (!_equals) {
+    if (!_basic.equals(_basic_1)) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1095,9 +1093,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleBasicEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
     String _basic = left.getBasic();
     String _basic_1 = right.getBasic();
-    boolean _equals = _basic.equals(_basic_1);
     /* left.basic.equals(right.basic) */
-    if (!_equals) {
+    if (!_basic.equals(_basic_1)) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1121,9 +1118,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleClassEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
     it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-    boolean _equals = Objects.equal(_classref, _classref_1);
     /* left.classref == right.classref */
-    if (!_equals) {
+    if (!Objects.equal(_classref, _classref_1)) {
       sneakyThrowRuleFailedException("left.classref == right.classref");
     }
     return new Result<Boolean>(true);
@@ -1233,8 +1229,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<List<Method>> applyRuleMethods(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     List<Method> methods = null; // output parameter
-    LinkedList<Method> _linkedList = new LinkedList<Method>();
-    final LinkedList<Method> result = _linkedList;
+    final LinkedList<Method> result = new LinkedList<Method>();
     EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
     EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
     final List<Method> allMethods = this.<Method>getAll(cl, _class_Members, _class_Superclass, 
@@ -1245,8 +1240,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
           public Boolean apply(final Method it) {
             String _name = it.getName();
             String _name_1 = method.getName();
-            boolean _equals = Objects.equal(_name, _name_1);
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_name, _name_1));
           }
         };
         boolean _exists = IterableExtensions.<Method>exists(result, _function);
@@ -1339,9 +1333,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     /* env(G, 'this', ClassType) */
     ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    boolean _notEquals = (!Objects.equal(_environmentaccess, null));
     /* env(G, 'this', ClassType) != null */
-    if (!_notEquals) {
+    if (!(!Objects.equal(_environmentaccess, null))) {
       sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
     }
     return new Result<Boolean>(true);
@@ -1541,9 +1534,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
           for (final Field field : _typeSelect) {
             String _name = field.getName();
             String _name_1 = inheritedField.getName();
-            boolean _notEquals = (!Objects.equal(_name, _name_1));
             /* field.name != inheritedField.name */
-            if (!_notEquals) {
+            if (!(!Objects.equal(_name, _name_1))) {
               sneakyThrowRuleFailedException("field.name != inheritedField.name");
             }
           }

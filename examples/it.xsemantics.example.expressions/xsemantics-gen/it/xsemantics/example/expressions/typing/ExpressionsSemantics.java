@@ -414,7 +414,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       if ((leftType instanceof StringType)) {
         _or = true;
       } else {
-        _or = ((leftType instanceof StringType) || (rightType instanceof StringType));
+        _or = (rightType instanceof StringType);
       }
       /* leftType instanceof StringType || rightType instanceof StringType */
       if (!_or) {
@@ -427,7 +427,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       if (!(leftType instanceof IntType)) {
         _and = false;
       } else {
-        _and = ((leftType instanceof IntType) && (rightType instanceof IntType));
+        _and = (rightType instanceof IntType);
       }
       /* leftType instanceof IntType && rightType instanceof IntType */
       if (!_and) {
@@ -468,14 +468,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_1.getFirst(), Type.class);
     rightType = (Type) result_1.getFirst();
     
-    boolean _or = false;
-    if (((leftType instanceof IntType) && (rightType instanceof IntType))) {
-      _or = true;
-    } else {
-      _or = (((leftType instanceof IntType) && (rightType instanceof IntType)) || ((leftType instanceof StringType) && (rightType instanceof StringType)));
-    }
     /* (leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType) */
-    if (!_or) {
+    if (!(((leftType instanceof IntType) && (rightType instanceof IntType)) || ((leftType instanceof StringType) && (rightType instanceof StringType)))) {
       sneakyThrowRuleFailedException("(leftType instanceof IntType && rightType instanceof IntType) || (leftType instanceof StringType && rightType instanceof StringType)");
     }
     return new Result<Type>(_applyRuleComparison_1(G, comparison));
@@ -518,9 +512,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     EClass _eClass = leftType.eClass();
     EClass _eClass_1 = rightType.eClass();
-    boolean _equals = Objects.equal(_eClass, _eClass_1);
     /* leftType.eClass == rightType.eClass */
-    if (!_equals) {
+    if (!Objects.equal(_eClass, _eClass_1)) {
       sneakyThrowRuleFailedException("leftType.eClass == rightType.eClass");
     }
     return new Result<Type>(_applyRuleEquals_1(G, comparison));
@@ -907,7 +900,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
         _and = false;
       } else {
         boolean _booleanValue_1 = rightResult.booleanValue();
-        _and = (_booleanValue && _booleanValue_1);
+        _and = _booleanValue_1;
       }
       result = Boolean.valueOf(_and);
     } else {
@@ -917,7 +910,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
         _or = true;
       } else {
         boolean _booleanValue_3 = rightResult.booleanValue();
-        _or = (_booleanValue_2 || _booleanValue_3);
+        _or = _booleanValue_3;
       }
       result = Boolean.valueOf(_or);
     }
@@ -987,7 +980,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     if (!(leftResult instanceof String)) {
       _and = false;
     } else {
-      _and = ((leftResult instanceof String) && (rightResult instanceof String));
+      _and = (rightResult instanceof String);
     }
     if (_and) {
       String _string = leftResult.toString();
@@ -1074,7 +1067,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     if ((leftResult instanceof String)) {
       _or = true;
     } else {
-      _or = ((leftResult instanceof String) || (rightResult instanceof String));
+      _or = (rightResult instanceof String);
     }
     if (_or) {
       String leftString = leftResult.toString();

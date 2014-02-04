@@ -405,9 +405,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     /* env(G, 'this', ClassType) */
     ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    boolean _notEquals = (!Objects.equal(_environmentaccess, null));
     /* env(G, 'this', ClassType) != null */
-    if (!_notEquals) {
+    if (!(!Objects.equal(_environmentaccess, null))) {
       sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
     }
     return new Result<Boolean>(true);
@@ -599,9 +598,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
           for (final Field field : _selectFields) {
             String _name = field.getName();
             String _name_1 = inheritedField.getName();
-            boolean _notEquals = (!Objects.equal(_name, _name_1));
             /* field.name != inheritedField.name */
-            if (!_notEquals) {
+            if (!(!Objects.equal(_name, _name_1))) {
               sneakyThrowRuleFailedException("field.name != inheritedField.name");
             }
           }
@@ -619,7 +617,6 @@ public class FjSepTypeSystem extends FjTypeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               try {
-                Boolean _overrides = FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }

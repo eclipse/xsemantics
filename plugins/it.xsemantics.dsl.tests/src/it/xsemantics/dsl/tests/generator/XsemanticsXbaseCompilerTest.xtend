@@ -111,9 +111,8 @@ boolean _lessThan = (_length < 10);
 if (!_lessThan) {
   sneakyThrowRuleFailedException("eC.name.length < 10");
 }
-boolean _equals_2 = Objects.equal(eClass, eC);
 /* eClass == eC */
-if (!_equals_2) {
+if (!Objects.equal(eClass, eC)) {
   sneakyThrowRuleFailedException("eClass == eC");
 }'''
 			)
@@ -343,9 +342,8 @@ try {
   typeInternal(G, _trace_, _eClass_1, eClass);
   EClass _eClass_2 = object.eClass();
   String _name_1 = _eClass_2.getName();
-  boolean _equals_1 = Objects.equal(_name_1, "bar");
   /* object.eClass.name == 'bar' */
-  if (!_equals_1) {
+  if (!Objects.equal(_name_1, "bar")) {
     sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
   }
 }'''
@@ -386,24 +384,22 @@ try {
     sneakyThrowRuleFailedException("eClass.name == \'foo\'");
   }
   String _name_1 = eClass.getName();
-  boolean _equals_1 = Objects.equal(_name_1, "foo");
   /* eClass.name == 'foo' */
-  if (!_equals_1) {
+  if (!Objects.equal(_name_1, "foo")) {
     sneakyThrowRuleFailedException("eClass.name == \'foo\'");
   }
 } catch (Exception e) {
   EClass _eClass = object.eClass();
   String _name_2 = _eClass.getName();
-  boolean _equals_2 = Objects.equal(_name_2, "bar");
+  boolean _equals_1 = Objects.equal(_name_2, "bar");
   /* object.eClass.name == 'bar' */
-  if (!_equals_2) {
+  if (!_equals_1) {
     sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
   }
   EClass _eClass_1 = object.eClass();
   String _name_3 = _eClass_1.getName();
-  boolean _equals_3 = Objects.equal(_name_3, "bar");
   /* object.eClass.name == 'bar' */
-  if (!_equals_3) {
+  if (!Objects.equal(_name_3, "bar")) {
     sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
   }
 }'''
@@ -435,17 +431,16 @@ try {
       typeInternal(G, _trace_, _eClass_2, eClass);
       EClass _eClass_3 = object.eClass();
       String _name = _eClass_3.getName();
-      boolean _equals = Objects.equal(_name, "bar");
       /* object.eClass.name == 'bar' */
-      if (!_equals) {
+      if (!Objects.equal(_name, "bar")) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
     } catch (Exception e_2) {
       EClass _eClass_4 = object.eClass();
       String _name_1 = _eClass_4.getName();
-      boolean _equals_1 = Objects.equal(_name_1, "bar");
+      boolean _equals = Objects.equal(_name_1, "bar");
       /* object.eClass.name == 'bar' */
-      if (!_equals_1) {
+      if (!_equals) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
     }
@@ -477,7 +472,7 @@ if (_equals) {
 } else {
   String _string_1 = new String();
   boolean _equals_1 = Objects.equal("bar", _string_1);
-  _or = (_equals || _equals_1);
+  _or = _equals_1;
 }
 /* 'foo' == new String() || 'bar' == new String() */
 if (!_or) {
@@ -491,7 +486,7 @@ if (!_equals_2) {
 } else {
   String _string_3 = new String();
   boolean _equals_3 = Objects.equal("bar", _string_3);
-  _and = (_equals_2 && _equals_3);
+  _and = _equals_3;
 }
 /* 'foo' == new String() && 'bar' == new String() */
 if (!_and) {
@@ -679,8 +674,7 @@ EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures()
 final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     String _name = it.getName();
-    boolean _notEquals = (!Objects.equal(_name, "foo"));
-    return Boolean.valueOf(_notEquals);
+    return Boolean.valueOf((!Objects.equal(_name, "foo")));
   }
 };
 boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
@@ -692,12 +686,11 @@ EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures
 final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     String _name = it.getName();
-    boolean _notEquals = (!Objects.equal(_name, "foo"));
     /* it.name != 'foo' */
-    if (!Boolean.valueOf(_notEquals)) {
+    if (!Boolean.valueOf((!Objects.equal(_name, "foo")))) {
       sneakyThrowRuleFailedException("it.name != \'foo\'");
     }
-    return Boolean.valueOf(_notEquals);
+    return Boolean.valueOf((!Objects.equal(_name, "foo")));
   }
 };
 boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures_1, _function_1);
@@ -716,9 +709,8 @@ IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function
 EList<EStructuralFeature> _eStructuralFeatures_3 = eClass.getEStructuralFeatures();
 EStructuralFeature _get = _eStructuralFeatures_3.get(0);
 String _name = _get.getName();
-boolean _notEquals = (!Objects.equal(_name, "foo"));
 /* eClass.EStructuralFeatures.get(0).name != 'foo' */
-if (!_notEquals) {
+if (!(!Objects.equal(_name, "foo"))) {
   sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");
 }'''
 			)
@@ -734,7 +726,6 @@ EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures()
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
   public void apply(final EStructuralFeature it) {
     String _name = it.getName();
-    boolean _notEquals = (!Objects.equal(_name, "foo"));
   }
 };
 IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);'''
@@ -844,9 +835,8 @@ final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructura
     return Boolean.valueOf(_ruleinvocation);
   }
 };
-boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
 /* eClass.EStructuralFeatures.forall [ G ||- it ] */
-if (!_forall) {
+if (!IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function)) {
   sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ G ||- it ]");
 }'''
 			)
@@ -884,7 +874,7 @@ final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructura
       _or = true;
     } else {
       boolean _notEquals = (!Objects.equal(eClass, null));
-      _or = (_ruleinvocation || _notEquals);
+      _or = _notEquals;
     }
     return Boolean.valueOf(_or);
   }
@@ -906,9 +896,8 @@ final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructu
     return Boolean.valueOf(_xblockexpression);
   }
 };
-boolean _forall_1 = IterableExtensions.<EStructuralFeature>forall(features, _function_1);
 /* features.forall [ println("testing") G ||- it ] */
-if (!_forall_1) {
+if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
   sneakyThrowRuleFailedException("features.forall [ println(\"testing\") G ||- it ]");
 }'''
 			)

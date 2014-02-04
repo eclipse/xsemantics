@@ -205,9 +205,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     final EClass eC = EcoreFactory.eINSTANCE.createEClass();
     eC.setName("MyEClass");
-    boolean _equals_1 = Objects.equal(eClass, eC);
     /* eClass == eC */
-    if (!_equals_1) {
+    if (!Objects.equal(eClass, eC)) {
       sneakyThrowRuleFailedException("eClass == eC");
     }
     return new Result<Boolean>(true);
@@ -931,9 +930,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       sneakyThrowRuleFailedException("strings.add(myString)");
     }
     EClass _eClass = o.eClass();
-    boolean _add_1 = this.eClasses.add(_eClass);
     /* eClasses.add(o.eClass) */
-    if (!_add_1) {
+    if (!this.eClasses.add(_eClass)) {
       sneakyThrowRuleFailedException("eClasses.add(o.eClass)");
     }
     return new Result<EClass>(c);
@@ -1371,8 +1369,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     {
       InputOutput.<TypeSystem>println(this);
       EObject _clone = this.<EObject>clone(o);
-      EClass _eClass = _clone.eClass();
-      _xblockexpression = (_eClass);
+      _xblockexpression = (_clone.eClass());
     }
     return _xblockexpression;
   }
@@ -1627,24 +1624,22 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
       }
       String _name_1 = eClass.getName();
-      boolean _equals_1 = Objects.equal(_name_1, "foo");
       /* eClass.name == 'foo' */
-      if (!_equals_1) {
+      if (!Objects.equal(_name_1, "foo")) {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
       }
     } catch (Exception e) {
       EClass _eClass = object.eClass();
       String _name_2 = _eClass.getName();
-      boolean _equals_2 = Objects.equal(_name_2, "bar");
+      boolean _equals_1 = Objects.equal(_name_2, "bar");
       /* object.eClass.name == 'bar' */
-      if (!_equals_2) {
+      if (!_equals_1) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
       EClass _eClass_1 = object.eClass();
       String _name_3 = _eClass_1.getName();
-      boolean _equals_3 = Objects.equal(_name_3, "bar");
       /* object.eClass.name == 'bar' */
-      if (!_equals_3) {
+      if (!Objects.equal(_name_3, "bar")) {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
     }
@@ -2569,9 +2564,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleSubtypeEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
-    boolean _isSuperTypeOf = right.isSuperTypeOf(left);
     /* right.isSuperTypeOf(left) */
-    if (!_isSuperTypeOf) {
+    if (!right.isSuperTypeOf(left)) {
       sneakyThrowRuleFailedException("right.isSuperTypeOf(left)");
     }
     return new Result<Boolean>(true);
@@ -3169,9 +3163,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     String _name_1 = eClass.getName();
     EClass _environmentaccess = environmentAccess(G, _name_1, EClass.class);
     String _instanceClassName = _environmentaccess.getInstanceClassName();
-    boolean _equals = Objects.equal("foo", _instanceClassName);
     /* 'foo' == env(G, eClass.name, EClass).getInstanceClassName() */
-    if (!_equals) {
+    if (!Objects.equal("foo", _instanceClassName)) {
       sneakyThrowRuleFailedException("\'foo\' == env(G, eClass.name, EClass).getInstanceClassName()");
     }
     return new Result<Boolean>(true);
@@ -3373,12 +3366,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     EClass _eClass = eO.eClass();
-    boolean _equals = Objects.equal(_eClass, eC);
     /* eO.eClass == eC */
-    if (!Boolean.valueOf(_equals)) {
+    if (!Boolean.valueOf(Objects.equal(_eClass, eC))) {
       sneakyThrowRuleFailedException("eO.eClass == eC");
     }
-    return Boolean.valueOf(_equals);
+    return Boolean.valueOf(Objects.equal(_eClass, eC));
   }
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
@@ -3397,8 +3389,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected EClass applyAuxFunObjectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
-    EClass _eClass = o.eClass();
-    return _eClass;
+    return o.eClass();
   }
   
   protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
@@ -3530,9 +3521,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkEObjectInternal(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass _objectClass = this.objectClassInternal(_trace_, o);
-    boolean _notEquals = (!Objects.equal(_objectClass, null));
     /* objectClass(o) != null */
-    if (!_notEquals) {
+    if (!(!Objects.equal(_objectClass, null))) {
       sneakyThrowRuleFailedException("objectClass(o) != null");
     }
     return new Result<Boolean>(true);
@@ -3585,8 +3575,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected EClass applyAuxFunObjectClass(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
-    EClass _eClass = o.eClass();
-    return _eClass;
+    return o.eClass();
   }
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {

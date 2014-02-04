@@ -118,9 +118,8 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
         return Boolean.valueOf(_ruleinvocation);
       }
     };
-    boolean _exists = IterableExtensions.<it.xsemantics.example.fj.fj.Class>exists(_reverseView, _function);
     /* left.classref.superclasses.reverseView.exists[ G |- it <| right.classref ] */
-    if (!_exists) {
+    if (!IterableExtensions.<it.xsemantics.example.fj.fj.Class>exists(_reverseView, _function)) {
       sneakyThrowRuleFailedException("left.classref.superclasses.reverseView.exists[ G |- it <| right.classref ]");
     }
     return new Result<Boolean>(true);
