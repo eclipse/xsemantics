@@ -13,8 +13,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	XsemanticsCreateExamplesProjectWizardTests.class,
-	XsemanticsImportExamplesProjectWizardTests.class
+	XsemanticsImportExamplesProjectWizardTests.class,
+	XsemanticsXImportTests.class
 })
-public class XsemanticsExamplesProjectWizardAllTests {
+public class XsemanticsSwtbotTests {
 
 }

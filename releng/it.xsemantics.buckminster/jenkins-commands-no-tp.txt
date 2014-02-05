@@ -11,4 +11,4 @@ junit -l 'it.xsemantics.example.lambda.tests/.launch/LambdaAllTests.launch' --st
 junit -l 'it.xsemantics.dsl.tests/XsemanticsAllTests.launch' --stderr -o 'tests_output/junit_Xsemantics.xml'
 junit -l 'it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch' --stderr -o 'tests_output/junit_LambdaUi.xml'
 junit -l 'it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch' --stderr -o 'tests_output/junit_XsemanticsUi.xml'
-junit -l 'it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch' --stderr -o 'tests_output/junit_XsemanticsExamplesWizardsUi.xml'
+junit -l 'it.xsemantics.tests.swtbot/XsemanticsSwtbotTests.launch' --stderr -o 'tests_output/junit_XsemanticsExamplesWizardsUi.xml'

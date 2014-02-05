@@ -8,7 +8,7 @@ junit -l "it.xsemantics.example.fj.tests/FjAllTests.launch"  --flatXML --output 
 junit -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/XsemanticsAllTests.launch.xml"
 junit -l "it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch" --flatXML --output "${buckminster.output.root}/test.results/junit_LambdaUi.xml"
 junit -l "it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch" --flatXML --output "${buckminster.output.root}/test.results/junit_XsemanticsUi.xml"
-junit -l "it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch" --flatXML --output "${buckminster.output.root}/test.results/junit_XsemanticsExamplesWizardsUi.xml"
+junit -l "it.xsemantics.tests.swtbot/XsemanticsSwtbotTests.launch" --flatXML --output "${buckminster.output.root}/test.results/junit_XsemanticsExamplesWizardsUi.xml"
 
 # these are already executed by XsemanticsAllTests
 #junit -l "it.xsemantics.example.expressions.tests/ExpressionsAllTests.launch"  --flatXML --output "${buckminster.output.root}/test.results/ExpressionsAllTests.launch.xml"

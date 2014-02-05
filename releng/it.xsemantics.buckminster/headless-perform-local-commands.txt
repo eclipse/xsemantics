@@ -4,7 +4,7 @@ junit -l "it.xsemantics.dsl.tests/XsemanticsAllTests.launch" --flatXML --output 
 junit -l "it.xsemantics.example.fj.tests/FjAllTests.launch" --flatXML --output "${buckminster.output.root}/test.results/FjAllTests.launch.xml" 
 junit -l "it.xsemantics.example.lambda.tests/.launch/LambdaAllUiTests.launch" --flatXML --output "${buckminster.output.root}/test.results/LambdaAllUiTests.launch.xml"
 junit -l "it.xsemantics.dsl.tests/XsemanticsProposalProviderTest.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsProposalProviderTest.launch.xml"
-junit -l "it.xsemantics.tests.swtbot/XsemanticsExamplesProjectWizardJunitPluginTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsExamplesProjectWizardJunitPluginTests.launch.xml" 
+junit -l "it.xsemantics.tests.swtbot/XsemanticsSwtbotTests.launch" --flatXML --output "${buckminster.output.root}/test.results/XsemanticsSwtbotTests.launch.xml" 
 
 perform "it.xsemantics.site#site.p2"
 
