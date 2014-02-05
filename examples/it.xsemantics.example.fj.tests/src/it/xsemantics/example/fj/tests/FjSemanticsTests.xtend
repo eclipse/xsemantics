@@ -249,7 +249,28 @@ BasicSubtyping: [] |- int <: int''')
 	}
 
 	@Test
-	def void testCongruenceReduceFieldSelection() {
+	def void testCongruenceReduceFieldSelection1() {
+		'''
+		class A {
+			int i;
+		}
+		
+		new A(new A(10).i).i
+		'''.assertReduceOneStep(
+"new A(10).i",
+'''
+RSelection: [] |- new A(new A(10).i).i ~> new A(10).i
+ RNew: [] |- new A(new A(10).i) ~> new A(10)
+  RSelection: [] |- new A(10).i ~> 10
+   isValue(new A(10)) = true
+    isValue(10) = true
+   fields(class A { int i; }) = [int i;]
+    superclasses(class A { int i; }) = []'''
+		)
+	}
+
+	@Test
+	def void testCongruenceReduceFieldSelection2() {
 		'''
 		class A {
 			int i;

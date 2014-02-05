@@ -3366,11 +3366,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     EClass _eClass = eO.eClass();
+    boolean _equals = Objects.equal(_eClass, eC);
     /* eO.eClass == eC */
-    if (!Boolean.valueOf(Objects.equal(_eClass, eC))) {
+    if (!Boolean.valueOf(_equals)) {
       sneakyThrowRuleFailedException("eO.eClass == eC");
     }
-    return Boolean.valueOf(Objects.equal(_eClass, eC));
+    return Boolean.valueOf(_equals);
   }
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {

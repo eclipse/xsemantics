@@ -717,6 +717,43 @@ if (!(!Objects.equal(_name, "foo"))) {
 	}
 	
 	@Test
+	def void testForClosureWithAuxiliaryFunctionWithNoSideEffect() {
+		checkCompilationOfAllPremises(
+			testFiles.testForClosureWithAuxiliaryFunctionWithNoSideEffect,
+'''
+
+EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
+  public void apply(final EStructuralFeature it) {
+    try {
+      TypeSystem.this.overridesInternal(_trace_, it);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+};
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
+  public void apply(final EStructuralFeature it) {
+    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
+      public void apply(final EStructuralFeature it) {
+        try {
+          TypeSystem.this.isValueInternal(_trace_, it);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+  }
+};
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);'''
+			)
+	}
+
+	@Test
 	def void testForClosureWithExpressionWithNoSideEffect() {
 		checkCompilationOfAllPremises(
 			testFiles.testForClosureWithExpressionWithNoSideEffect,
@@ -726,9 +763,24 @@ EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures()
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
   public void apply(final EStructuralFeature it) {
     String _name = it.getName();
+    /* (!Objects.equal(_name, "foo")); */
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);'''
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
+  public void apply(final EStructuralFeature it) {
+    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
+    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
+      public void apply(final EStructuralFeature it) {
+        String _name = it.getName();
+        /* (!Objects.equal(_name, "foo")); */
+      }
+    };
+    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+  }
+};
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);'''
 			)
 	}
 	

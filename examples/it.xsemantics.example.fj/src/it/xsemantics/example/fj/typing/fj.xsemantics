@@ -125,7 +125,9 @@ auxiliary overrides(Method current, Method previous) {
 
 auxiliary isValue(Expression e) { false }
 auxiliary isValue(Constant exp) { true }
-auxiliary isValue(New exp) { exp.args.forall[isValue(it)] }
+auxiliary isValue(New exp) { 
+	exp.args.forall[isValue(it)]
+}
 
 auxiliary replaceThisAndParams(MethodBody body, Expression thisReplacement, List<Parameter> params, List<Expression> args) {
 	clone(body) => [

@@ -1619,6 +1619,52 @@ class XsemanticsTestFiles {
 		eClass.EStructuralFeatures.forEach [
 			it.name != "foo"
 		]
+		
+		// boolean expressions inside closures without side effect
+		eClass.EStructuralFeatures.forEach [
+			eClass.EStructuralFeatures.forEach [
+				it.name != "foo"
+			]
+		]
+	}
+	'''
+
+	def testForClosureWithAuxiliaryFunctionWithNoSideEffect()
+	'''«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	
+	auxiliary {
+		overrides(EObject c)
+		isValue(EObject c) : Boolean
+	}
+	
+	judgments {
+		type |- EClass c
+	}
+	
+	auxiliary overrides(EClass c) {
+		true
+	}
+	
+	auxiliary isValue(EClass c) {
+		true
+	}
+	
+	rule TestForClosures
+		G |- EClass eClass
+	from {
+		// boolean expressions inside closures without side effect
+		eClass.EStructuralFeatures.forEach [
+			overrides()
+		]
+		
+		// boolean expressions inside closures without side effect
+		eClass.EStructuralFeatures.forEach [
+			eClass.EStructuralFeatures.forEach [
+				isValue
+			]
+		]
 	}
 	'''
 

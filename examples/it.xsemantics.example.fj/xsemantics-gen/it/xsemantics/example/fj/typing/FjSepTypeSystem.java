@@ -617,6 +617,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               try {
+                FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }

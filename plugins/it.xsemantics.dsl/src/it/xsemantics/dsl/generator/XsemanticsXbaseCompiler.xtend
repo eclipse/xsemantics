@@ -193,16 +193,10 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	override protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
 		if (insideClosure(expr)) {
-			// make sure it is referenced if there's only one expression in the
-			// block otherwise we might generate
-			// an invalid Java statement
 			super._toJavaStatement(
 					expr,
 					b,
-					isReferenced
-							|| (expr.getExpressions().size() == 1 && 
-									expr.getExpressions()
-											.get(0).isBooleanPremise));
+					isReferenced);
 		} else {
 			if (expr.getExpressions().isEmpty())
 				return;
@@ -277,6 +271,31 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			throwNewRuleFailedException(expression, b);
 			closeBracket(b);
 		}
+	}
+
+	override protected isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		// in Xtext 2.5.1 this method does not behave correctly in case
+		// we need a referenced compile expression (for boolean premises)
+		// NOT inside a closure.
+		if (!expr.insideClosure && expr.booleanPremise) {
+			val container = expr.eContainer
+			if (container instanceof XBlockExpression) {
+				val siblings = container.getExpressions();
+				// if it's the last expression of the block
+				if (siblings.get(siblings.size() - 1) == expr) {
+					// in Xtext 2.5.1 this would return false
+					// but for auxiliary functions we need the variable declaration
+					// which we'll use both for testing the evaluated value
+					// (and if false, throw an exception)
+					// and for returning the value itself
+					if (container.eContainer instanceof AuxiliaryFunction)
+						return true;
+					return false; // the behavior in 2.5.1
+				}
+			}
+		}
+		
+		return super.isVariableDeclarationRequired(expr, b)
 	}
 
 	/**
@@ -692,7 +711,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(".class");
 	}
 
-	def boolean insideClosure(XBlockExpression expr) {
+	def boolean insideClosure(XExpression expr) {
 		return expr.eContainer() instanceof XClosure;
 	}
 }

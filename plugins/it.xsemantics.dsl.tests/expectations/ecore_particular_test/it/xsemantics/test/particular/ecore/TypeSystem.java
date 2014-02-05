@@ -578,6 +578,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
       public void apply(final EStructuralFeature it) {
         String _name = it.getName();
+        /* (!Objects.equal(_name, "foo")); */
       }
     };
     IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);

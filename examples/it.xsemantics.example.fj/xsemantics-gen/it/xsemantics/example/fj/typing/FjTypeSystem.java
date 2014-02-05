@@ -542,6 +542,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               try {
+                FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -939,6 +940,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         public void apply(final it.xsemantics.example.fj.fj.Class c) {
           EList<Member> _members = c.getMembers();
           List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
+          methods.addAll(_typeSelect);
         }
       };
       IterableExtensions.<it.xsemantics.example.fj.fj.Class>forEach(_superclasses, _function);
@@ -1085,11 +1087,12 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         }
       }
     };
+    boolean _forall = IterableExtensions.<Expression>forall(_args, _function);
     /* exp.args.forall[isValue(it)] */
-    if (!Boolean.valueOf(IterableExtensions.<Expression>forall(_args, _function))) {
+    if (!Boolean.valueOf(_forall)) {
       sneakyThrowRuleFailedException("exp.args.forall[isValue(it)]");
     }
-    return Boolean.valueOf(IterableExtensions.<Expression>forall(_args, _function));
+    return Boolean.valueOf(_forall);
   }
   
   protected MethodBody replaceThisAndParamsImpl(final RuleApplicationTrace _trace_, final MethodBody body, final Expression thisReplacement, final List<Parameter> params, final List<Expression> args) throws RuleFailedException {
