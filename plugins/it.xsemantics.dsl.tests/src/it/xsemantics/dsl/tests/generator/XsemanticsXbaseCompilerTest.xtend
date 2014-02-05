@@ -147,40 +147,6 @@ features = (List<EStructuralFeature>) result.getFirst();
 	}
 	
 	@Test
-	def void testRuleInvokingAnotherRuleWithTwoOutputParams() {
-		checkCompilationOfPremises(
-			testFiles.testRuleWithTwoOutputParams,
-'''
-
-/* G ||- eClass : object : feat */
-Result2<EObject,EStructuralFeature> result = type2Internal(G, _trace_, eClass);
-checkAssignableTo(result.getFirst(), EObject.class);
-object = (EObject) result.getFirst();
-checkAssignableTo(result.getSecond(), EStructuralFeature.class);
-feat = (EStructuralFeature) result.getSecond();
-'''
-			)
-	}
-
-	@Test
-	def void testRuleInvokingAnotherRuleWithThreeOutputParams() {
-		checkCompilationOfPremises(
-			testFiles.testRuleWith3OutputParams,
-'''
-
-/* G |- eClass : object : feat : s */
-Result3<EObject,EStructuralFeature,String> result = typeInternal(G, _trace_, eClass);
-checkAssignableTo(result.getFirst(), EObject.class);
-object = (EObject) result.getFirst();
-checkAssignableTo(result.getSecond(), EStructuralFeature.class);
-feat = (EStructuralFeature) result.getSecond();
-checkAssignableTo(result.getThird(), String.class);
-s = (String) result.getThird();
-'''
-			)
-	}
-	
-	@Test
 	def void testRuleWithOutputParamAsLocalVariable() {
 		checkCompilationOfPremises(
 			testFiles.testRuleWithOutputArgAsLocalVariable,
@@ -228,21 +194,6 @@ typeInternal(G, _trace_, eClass, _eClass_1);'''
 			)
 	}
 
-	@Test
-	def void testCheckRule() {
-		checkCompilationOfPremisesOfCheckRule(
-			testFiles.testCheckRule,
-'''
-
-EClass result = null;
-/* empty |- obj : result */
-Result<EClass> result_1 = typeInternal(emptyEnvironment(), _trace_, obj);
-checkAssignableTo(result_1.getFirst(), EClass.class);
-result = (EClass) result_1.getFirst();
-'''
-			)
-	}
-	
 	@Test
 	def void testRuleInvocation() {
 		checkCompilationOfRuleInvocation(
@@ -365,43 +316,6 @@ try {
   /* G |- object.eClass : eClass */
   EClass _eClass_1 = object.eClass();
   typeInternal(G, _trace_, _eClass_1, eClass);
-}'''
-			)
-	}
-	
-	@Test
-	def void testOrExpressionWithBlocks() {
-		checkCompilationOfOr(
-			testFiles.testOrExpressionWithBlocks, 0,
-'''
-
-/* {eClass.name == 'foo' eClass.name == 'foo'} or {object.eClass.name == 'bar' object.eClass.name == 'bar'} */
-try {
-  String _name = eClass.getName();
-  boolean _equals = Objects.equal(_name, "foo");
-  /* eClass.name == 'foo' */
-  if (!_equals) {
-    sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-  }
-  String _name_1 = eClass.getName();
-  /* eClass.name == 'foo' */
-  if (!Objects.equal(_name_1, "foo")) {
-    sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-  }
-} catch (Exception e) {
-  EClass _eClass = object.eClass();
-  String _name_2 = _eClass.getName();
-  boolean _equals_1 = Objects.equal(_name_2, "bar");
-  /* object.eClass.name == 'bar' */
-  if (!_equals_1) {
-    sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
-  }
-  EClass _eClass_1 = object.eClass();
-  String _name_3 = _eClass_1.getName();
-  /* object.eClass.name == 'bar' */
-  if (!Objects.equal(_name_3, "bar")) {
-    sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
-  }
 }'''
 			)
 	}
@@ -533,30 +447,6 @@ final EClass eC = EcoreFactory.eINSTANCE.createEClass();'''
 		compiler.throwNewRuleFailedException(getXAbstractFeatureCall(0), a)
 		assertEqualsStrings('''sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");''', 
 			a.toString
-		)
-	}
-	
-	@Test
-	def void testCompilationOfEnvironmentAccess() {
-		checkCompilationOfXExpression(testFiles.testWithEnvironmentAccess, 3,
-'''
-
-/* env(G, eClass.name, EClass) */
-String _name = eClass.getName();
-environmentAccess(G, _name, EClass.class);'''
-		)
-	}
-	
-	@Test
-	def void testCompilationOfEnvironmentAccessAsExpression() {
-		checkCompilationOfXExpression(testFiles.testWithEnvironmentAccess, 4,
-'''
-
-/* env(G, eClass.name, EClass) */
-String _name = eClass.getName();
-EClass _environmentaccess = environmentAccess(G, _name, EClass.class);
-String _instanceClassName = _environmentaccess.getInstanceClassName();
-/* Objects.equal("foo", _instanceClassName); */'''
 		)
 	}
 	
@@ -837,39 +727,6 @@ Result<EClass> result = typeInternal(G, _trace_, o);
 checkAssignableTo(result.getFirst(), EClass.class);
 e = (EClass) result.getFirst();
 '''
-			)
-	}
-
-	@Test
-	def void testRuleInvocationWithDuplicateVarDeclarationAsOutputArg() {
-		checkCompilationOfPremises(
-			testFiles.testDuplicateVariableDeclarationAsOutputArgument,
-'''
-
-/* var temp = c or { G |- o : var EClass temp } */
-try {
-  EClass temp = c;
-} catch (Exception e) {
-  /* G |- o : var EClass temp */
-  EClass temp_1 = null;
-  Result<EClass> result = typeInternal(G, _trace_, o);
-  checkAssignableTo(result.getFirst(), EClass.class);
-  temp_1 = (EClass) result.getFirst();
-  
-}'''
-			)
-	}
-
-	@Test
-	def void testInstanceOfAsPremise_Issue_1() {
-		checkCompilationOfPremises(
-			testFiles.testInstanceOfAsPremise_Issue_1,
-'''
-
-/* o instanceof EClass */
-if (!(o instanceof EClass)) {
-  sneakyThrowRuleFailedException("o instanceof EClass");
-}'''
 			)
 	}
 

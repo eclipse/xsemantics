@@ -6,7 +6,6 @@ import it.xsemantics.dsl.tests.generator.XsemanticsGeneratedJavaCodeTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorExtensionsTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorRunnerTests;
 import it.xsemantics.dsl.tests.generator.XsemanticsJvmModelGeneratorTest;
-import it.xsemantics.dsl.tests.generator.XsemanticsJvmModelInferrerTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsXbaseCompilerTest;
 
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import org.junit.runners.Suite;
 	UniqueNamesTest.class,
 	XsemanticsGeneratorExtensionsTest.class,
 	XsemanticsXbaseCompilerTest.class,
-	XsemanticsJvmModelInferrerTest.class,
 	XsemanticsJvmModelGeneratorTest.class,
 	XsemanticsGeneratorRunnerTests.class,
 	XsemanticsErrorSpecificationGeneratorTest.class,

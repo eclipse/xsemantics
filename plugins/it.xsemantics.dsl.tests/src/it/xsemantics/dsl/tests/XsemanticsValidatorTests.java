@@ -55,12 +55,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testRulesWithExpressionInConclusion() throws Exception {
-		assertOk(loadModelAndValidate(testFiles
-				.testRuleWithExpressionInConclusion()));
-	}
-
-	@Test
 	public void testRulesWithExpressionInConclusionWrong() throws Exception {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithExpressionInConclusion2());
@@ -70,20 +64,9 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testRulesWithBlockExpressionInConclusion() throws Exception {
-		assertOk(loadModelAndValidate(testFiles
-				.testRuleWithBlockExpressionInConclusion()));
-	}
-
-	@Test
 	public void testRulesWithSameEnvironmentNames() throws Exception {
 		assertOk(loadModelAndValidate(testFiles
 				.testRulesWithSameEnvironmentNames()));
-	}
-
-	@Test
-	public void testRuleInvokingAnotherRule() throws Exception {
-		assertOk(loadModelAndValidate(testFiles.testRuleInvokingAnotherRule()));
 	}
 
 	@Test
@@ -259,13 +242,6 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				XbasePackage.eINSTANCE.getXFeatureCall(),
 				IssueCodes.NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
-	}
-
-	@Test
-	public void testVariableDeclarationAsOutputArgument() throws Exception {
-		AssertableDiagnostics validate = loadModelAndValidate(testFiles
-				.testVariableDeclarationAsOutputArgument());
-		assertOk(validate);
 	}
 
 	@Test
