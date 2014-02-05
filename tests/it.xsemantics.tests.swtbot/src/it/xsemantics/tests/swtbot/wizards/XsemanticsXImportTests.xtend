@@ -42,6 +42,26 @@ judgments {
 
 	}
 
+	@Test
+	def void testProposalForJavaList() {
+'''
+system my.test.System
+
+judgments {
+	type |- Lis'''.
+	assertProposal(
+		"List - java.util",
+'''
+import java.util.List
+
+system my.test.System
+
+judgments {
+	type |- List'''
+	)			
+
+	}
+
 	def private void assertProposal(CharSequence input, CharSequence proposal, CharSequence expectedAfterProposal) {
 		assertProposal(input, "", proposal, expectedAfterProposal)
 	}

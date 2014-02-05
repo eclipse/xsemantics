@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.ReferToJudgment
+import it.xsemantics.dsl.xsemantics.XsemanticsFile
 
 @Singleton
 class XsemanticsUtils {
@@ -49,7 +50,7 @@ class XsemanticsUtils {
 	def containingSystem(EObject element) {
 		//return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
 		// this might be more efficient
-		return element.eResource.contents.head as XsemanticsSystem
+		return (element.eResource.contents.head as XsemanticsFile).xsemanticsSystem
 	}
 	
 	def containingRule(EObject element) {

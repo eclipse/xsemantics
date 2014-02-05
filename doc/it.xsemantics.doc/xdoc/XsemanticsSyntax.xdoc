@@ -6,8 +6,7 @@ of judgments, rules, etc.
 
 section:Imports[Imports]
 
-After giving your system a name, as seen in the previous example, 
-you can specify code[Xsemantics][import]s like in Java (you don't need the terminating code[;]),
+You can specify code[Xsemantics][import]s like in Java (you don't need the terminating code[;]),
 possibly with a terminating code[*] in order to import all the classes of that
 Java package (the use of wildcard imports is deprecated though).
 
@@ -41,7 +40,7 @@ o.getContainerOfType(typeof(EClass))
 Content assist for Java types is provided, which automatically
 inserts the corresponding import statement.
 
-The menu "Organize Imports" is also available for Xsemantics files.
+The menu e["Organize Imports"] is also available for Xsemantics files.
 
 section:InjectedFields[Injected Fields]
 

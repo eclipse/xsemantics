@@ -36,6 +36,7 @@ import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtext.EcoreUtil2
+import it.xsemantics.dsl.xsemantics.XsemanticsFile
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -48,7 +49,7 @@ abstract class XsemanticsBaseTest {
 	protected FjTypeSystemFiles fjTestFiles
 	
 	@Inject
-	protected ParseHelper<XsemanticsSystem> parser
+	protected ParseHelper<XsemanticsFile> parser
 	
 	@Inject extension ValidationTestHelper
 	
@@ -58,7 +59,7 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def parseAndAssertNoError(CharSequence s) {
-		var ts = parser.parse(s)
+		var ts = parse(s)
 		ts.assertNoErrors
 		ts
 	}
@@ -73,7 +74,7 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
-		val base = parser.parse(baseSystem)
+		val base = parse(baseSystem)
 		base.assertNoErrors
 		val ts = base.parseWithBaseSystem(s)
 		ts.assertNoErrors
@@ -87,20 +88,20 @@ abstract class XsemanticsBaseTest {
 	}
 
 	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
-		val base = parser.parse(baseSystem)
+		val base = parse(baseSystem)
 		base.parseWithBaseSystem(s)
 	}
 
 	def parseWithBaseSystem(XsemanticsSystem baseSystem, CharSequence s) {
-		parser.parse(s, baseSystem.eResource.resourceSet)
+		parser.parse(s, baseSystem.eResource.resourceSet).xsemanticsSystem
 	}
 	
 	def parse(CharSequence s) {
-		parser.parse(s)
+		parser.parse(s).xsemanticsSystem
 	}
 
 	def parseAndValidate(CharSequence s) {
-		parser.parse(s) => [validate]
+		parse(s) => [validate]
 	}
 	
 	def getFirstRule(CharSequence s) {

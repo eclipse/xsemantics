@@ -452,7 +452,7 @@ Duplicate rule of the same kind with parameters: Object, Integer, in system: it.
 	}
 
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
-		parser.parse(input).assertErrorMessages(expected)
+		parse(input).assertErrorMessages(expected)
 	}
 
 	def private assertErrorMessages(XsemanticsSystem system, CharSequence expected) {

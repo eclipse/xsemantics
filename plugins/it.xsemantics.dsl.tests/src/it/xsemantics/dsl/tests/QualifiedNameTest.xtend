@@ -17,7 +17,7 @@ class QualifiedNameTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testParsingOfName() {
-		val rule = parser.parse(testFiles.testSimpleRule).getRules.get(0)
+		val rule = parse(testFiles.testSimpleRule).getRules.get(0)
 		Assert::assertEquals("it.xsemantics.test.TypeSystem.EClassEObject",
 			rule.fullyQualifiedName.toString
 		)

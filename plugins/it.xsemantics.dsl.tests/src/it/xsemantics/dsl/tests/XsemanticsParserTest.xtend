@@ -74,7 +74,7 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testFjDescriptions() {
-		val typesystem = parser.parse(fjTestFiles.fjJudgmentDescriptions)
+		val typesystem = parse(fjTestFiles.fjJudgmentDescriptions)
 		typesystem.assertNoErrors
 		var jvmReferences = typesystem.jvmTypes
 		Assert::assertEquals(typeof(Expression).name, jvmReferences.get(0).identifier)

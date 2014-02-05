@@ -5,6 +5,11 @@ import "http://www.xsemantics.it/dsl/Xsemantics"
 
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
+XsemanticsFile:
+	importSection=XImportSection?
+	xsemanticsSystem=XsemanticsSystem?
+;
+
 XsemanticsSystem:
 	'system' name=QualifiedName
 	('extends' superSystem=JvmParameterizedTypeReference)?
