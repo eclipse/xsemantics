@@ -71,7 +71,6 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
 				+ ".ui"));
 
-		waitForAutoBuild();
-		assertNoErrorsInProject();
+		waitForAutoBuildAndAssertNoErrors();
 	}
 }

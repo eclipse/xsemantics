@@ -4,6 +4,7 @@
 package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
@@ -119,7 +120,12 @@ public class XsemanticsWizardBase {
 		return getProjectTree().getTreeItem(myTestProject);
 	}
 
-	protected void assertNoErrorsInProject() throws CoreException {
+	protected void waitForAutoBuildAndAssertNoErrors() throws CoreException {
+		waitForAutoBuild();
+		assertNoErrorsInProject();
+	}
+
+	protected static void assertNoErrorsInProject() throws CoreException {
 		IMarker[] markers = root().findMarkers(IMarker.PROBLEM, true,
 				IResource.DEPTH_INFINITE);
 		List<IMarker> errorMarkers = new LinkedList<IMarker>();
@@ -135,7 +141,7 @@ public class XsemanticsWizardBase {
 				errorMarkers.size());
 	}
 
-	private String printMarkers(List<IMarker> errorMarkers) {
+	private static String printMarkers(List<IMarker> errorMarkers) {
 		StringBuffer buffer = new StringBuffer();
 		for (IMarker iMarker : errorMarkers) {
 			try {
