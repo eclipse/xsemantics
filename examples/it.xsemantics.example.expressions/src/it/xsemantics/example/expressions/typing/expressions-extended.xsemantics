@@ -1,11 +1,3 @@
-/*
- * This system is more involved:
- * we want to implicitly convert string literals to numbers 
- * and to booleans when this is possible
- */
-system it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics
-	extends it.xsemantics.example.expressions.typing.ExpressionsSemantics
-
 import it.xsemantics.example.expressions.expressions.AndOrExpression
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned
 import it.xsemantics.example.expressions.expressions.BooleanLiteral
@@ -21,6 +13,14 @@ import it.xsemantics.example.expressions.expressions.Plus
 import it.xsemantics.example.expressions.expressions.StringLiteral
 import it.xsemantics.example.expressions.expressions.StringType
 import it.xsemantics.example.expressions.expressions.Type
+
+/*
+ * This system is more involved:
+ * we want to implicitly convert string literals to numbers 
+ * and to booleans when this is possible
+ */
+system it.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics
+	extends ExpressionsSemantics
 
 judgments {
 	coerce |~ Expression expression |> Type expectedType

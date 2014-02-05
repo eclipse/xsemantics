@@ -28,6 +28,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * alternative type system for FJ using external auxiliary functions
+ */
 @SuppressWarnings("all")
 public class FjAltTypeSystem extends FjFirstTypeSystem {
   public final static String TYPEEQUALS = "it.xsemantics.test.fj.alt.rules.TypeEquals";

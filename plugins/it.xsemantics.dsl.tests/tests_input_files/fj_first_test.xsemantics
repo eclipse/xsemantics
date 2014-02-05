@@ -1,7 +1,3 @@
-system it.xsemantics.test.fj.first.FjFirstTypeSystem
-
-validatorExtends it.xsemantics.example.fj.validation.AbstractFJJavaValidator
-
 import it.xsemantics.example.fj.fj.*
 import it.xsemantics.example.fj.util.*
 
@@ -14,6 +10,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals
 import com.google.common.collect.Lists
 
 import java.util.*
+
+system it.xsemantics.test.fj.first.FjFirstTypeSystem
+
+validatorExtends it.xsemantics.example.fj.validation.AbstractFJJavaValidator
 
 inject FjTypeUtils fjTypeUtils
 

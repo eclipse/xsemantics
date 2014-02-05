@@ -1,9 +1,3 @@
-/*
- * A version of the FJ system where type computation involves also
- * type checking.
- */
-system it.xsemantics.example.fj.typing.FjTypeSystem
-
 import com.google.common.collect.Iterables
 import com.google.common.collect.Lists
 import it.xsemantics.example.fj.fj.BasicType
@@ -32,6 +26,12 @@ import it.xsemantics.example.fj.util.FjTypeUtils
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtext.EcoreUtil2
+
+/*
+ * A version of the FJ system where type computation involves also
+ * type checking.
+ */
+system it.xsemantics.example.fj.typing.FjTypeSystem
 
 inject FjTypeUtils fjTypeUtils
 

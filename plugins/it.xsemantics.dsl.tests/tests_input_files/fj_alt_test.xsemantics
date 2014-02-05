@@ -1,7 +1,3 @@
-// alternative type system for FJ using external auxiliary functions
-
-system it.xsemantics.test.fj.alt.FjAltTypeSystem extends it.xsemantics.test.fj.first.FjFirstTypeSystem
-
 import it.xsemantics.example.fj.fj.*
 import it.xsemantics.example.fj.util.*
 import it.xsemantics.example.fj.lookup.*
@@ -15,6 +11,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals
 import com.google.common.collect.Lists
 
 import java.util.*
+
+/*
+ * alternative type system for FJ using external auxiliary functions
+ */
+system it.xsemantics.test.fj.alt.FjAltTypeSystem extends it.xsemantics.test.fj.first.FjFirstTypeSystem
 
 inject FjAuxiliaryFunctions fjAux
 

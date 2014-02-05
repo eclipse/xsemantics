@@ -1,9 +1,3 @@
-/*
- * A version of the FJ system where type computation and
- * checking are separated.
- */
-system it.xsemantics.example.fj.typing.FjSepTypeSystem extends it.xsemantics.example.fj.typing.FjTypeSystem
-
 import it.xsemantics.example.fj.fj.Cast
 import it.xsemantics.example.fj.fj.Class
 import it.xsemantics.example.fj.fj.ClassType
@@ -21,6 +15,12 @@ import it.xsemantics.example.fj.fj.TypedElement
 import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
+
+/*
+ * A version of the FJ system where type computation and
+ * checking are separated.
+ */
+system it.xsemantics.example.fj.typing.FjSepTypeSystem extends FjTypeSystem
 
 inject FjAuxiliaryFunctions fjAux
 

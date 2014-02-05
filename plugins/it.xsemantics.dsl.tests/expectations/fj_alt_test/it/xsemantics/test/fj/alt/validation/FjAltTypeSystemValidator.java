@@ -6,6 +6,9 @@ import it.xsemantics.test.fj.alt.FjAltTypeSystem;
 import it.xsemantics.test.fj.first.validation.FjFirstTypeSystemValidator;
 import org.eclipse.xtext.validation.Check;
 
+/**
+ * alternative type system for FJ using external auxiliary functions
+ */
 @SuppressWarnings("all")
 public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject

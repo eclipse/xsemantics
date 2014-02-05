@@ -1,12 +1,3 @@
-/*
- * This system allows to convert implicitly
- * integers and booleans to strings, and '+' can
- * be used also for string concatenations
- */
-system it.xsemantics.example.expressions.typing.ExpressionsSemantics
-
-validatorExtends it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
-
 import it.xsemantics.example.expressions.expressions.AndOrExpression
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned
 import it.xsemantics.example.expressions.expressions.BooleanLiteral
@@ -27,6 +18,16 @@ import it.xsemantics.example.expressions.expressions.StringType
 import it.xsemantics.example.expressions.expressions.Type
 import it.xsemantics.example.expressions.expressions.Variable
 import it.xsemantics.example.expressions.expressions.VariableReference
+import it.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
+
+/*
+ * This system allows to convert implicitly
+ * integers and booleans to strings, and '+' can
+ * be used also for string concatenations
+ */
+system it.xsemantics.example.expressions.typing.ExpressionsSemantics
+
+validatorExtends AbstractExpressionsJavaValidator
 
 judgments {
 	type |- Expression expression : output Type
