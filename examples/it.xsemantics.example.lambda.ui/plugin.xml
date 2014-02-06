@@ -315,7 +315,7 @@
       <wizard
             category="it.xsemantics.dsl.wizards.category"
             class="it.xsemantics.example.lambda.ui.LambdaExecutableExtensionFactory:it.xsemantics.example.lambda.ui.wizard.LambdaNewProjectWizard"
-            icon="icons/lambda-icon.png"
+            icon="icons/lambda-small.png"
             id="it.xsemantics.example.lambda.ui.wizard.LambdaNewProjectWizard"
             name="Lambda Project"
             project="true">
@@ -389,7 +389,7 @@
                menubarPath="it.xsemantics.example.lambda.ui.menu1/group1">
          </action>
          <menu
-               icon="icons/lambda-icon.png"
+               icon="icons/lambda-small.png"
                id="it.xsemantics.example.lambda.ui.menu1"
                label="Lambda"
                path="additions">
