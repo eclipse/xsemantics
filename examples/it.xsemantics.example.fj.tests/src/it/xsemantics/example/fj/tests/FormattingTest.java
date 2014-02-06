@@ -121,7 +121,7 @@ public class FormattingTest extends TestWithLoader {
 
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		assertEquals("class A {\n}", outputStream.toString());
+		assertEquals("class A {\n}", outputStream.toString().replace("\r", ""));
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class FormattingTest extends TestWithLoader {
 		resource.save(outputStream, null);
 		assertEquals(
 				"class A {\n\tA f1;\n\tA f2;\n\tA myMeth(A p1, A p2) { return this.f2; }\n}\n\nclass B {\n}",
-				outputStream.toString());
+				outputStream.toString().replace("\r", ""));
 	}
 
 } // FormattingTest
