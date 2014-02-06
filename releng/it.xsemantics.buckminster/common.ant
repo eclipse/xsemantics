@@ -127,12 +127,13 @@
 	-->
 
 	<target name="copy-xtext-grammar-to-bin">
+	  <echo message="projects.location: ${projects.location}" />
+
 	  <copy todir="${projects.location}" overwrite="true" verbose="true">
 	    <fileset dir="${projects.location}" casesensitive="true">
 	      <include name="**/src/**/*.xtext" />
 	    </fileset>
-	    <mapper type="regexp" 
-		      from="(.*)/(src)/(.*/*\.xtext)" to="\1/bin/\3" />
+	    <regexpmapper from="(.*)/(src)/(.*/*\.xtext)" to="\1/bin/\3" casesensitive="yes" handledirsep="yes"/>
 	  </copy>
 	</target>
 
