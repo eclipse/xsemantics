@@ -1,7 +1,5 @@
 package it.xsemantics.dsl.tests.generator;
 
-import it.xsemantics.dsl.generator.GeneratorUtils;
-import it.xsemantics.dsl.generator.Main;
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.tests.XsemanticsAbstractTests;
 
@@ -19,7 +17,7 @@ import org.junit.Test;
 public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	protected static final String VALIDATION_SUBDIR = "validation/";
 
-	Main generator;
+	GeneratorForTests generator;
 	
 	XtextResourceSet resourceSet;
 
@@ -30,7 +28,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		generator = get(Main.class);
+		generator = get(GeneratorForTests.class);
 		generator.setOutputPath(null);
 		resourceSet = get(XtextResourceSet.class);
 	}
@@ -208,16 +206,6 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		else {
 			assertFalse("errors: " + issues, GeneratorUtils.hasErrors(issues));
 		}
-	}
-
-	protected void runGeneratorOnInputFiles(String outputFolder,
-			String... inputFiles) {
-		assertTrue("did you forget to specify the output folder?",
-				outputFolder != null && outputFolder.length() > 0);
-		setGeneratorOutputPath(outputFolder);
-		cleanOutputFolderAndAssertEmpty();
-		List<Issue> errors = generator.runGeneratorOnFiles(inputFiles);
-		assertTrue("errors: " + errors, errors.isEmpty());
 	}
 
 	protected void assertDirectoryContainsJavaClassFiles(String dir,

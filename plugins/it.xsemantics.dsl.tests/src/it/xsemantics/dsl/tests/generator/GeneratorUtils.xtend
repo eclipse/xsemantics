@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.generator
+package it.xsemantics.dsl.tests.generator
 
 import java.util.List
 import org.eclipse.xtext.validation.Issue
@@ -9,7 +9,7 @@ class GeneratorUtils {
 	
 	def static onlyErrors(List<Issue> issues) {
 		Lists::newArrayList(
-			issues.filter( [ severity == Severity::ERROR ] )
+			issues.filter[ severity == Severity::ERROR ]
 		)
 	}
 	
