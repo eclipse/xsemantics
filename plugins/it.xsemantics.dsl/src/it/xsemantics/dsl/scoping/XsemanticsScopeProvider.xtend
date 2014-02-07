@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProv
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription
-import org.eclipse.xtext.xbase.validation.IssueCodes
 
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.LocalVariableAcceptor
@@ -41,10 +40,6 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	protected IJvmModelAssociations associations
 
 	override protected void createLocalVarScope(LocalVariableAcceptor acceptor, LocalVariableScopeContext scopeContext) {
-		if (scopeContext == null || scopeContext.getContext() == null) {
-			super.createLocalVarScope(acceptor, scopeContext);
-			return;
-		}
 		val context = scopeContext.getContext();
 
 		// The inferrer associates to a Rule both field(s) and methods
@@ -55,13 +50,8 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		if (jvmOperation == null) {
 			super.createLocalVarScope(acceptor, scopeContext);
 		} else {
-			if (jvmOperation.getDeclaringType() != null) {
-				val declaredType = jvmOperation.getDeclaringType();
-				if (!jvmOperation.isStatic()) {
-					createLocalVarScopeForJvmDeclaredType(
-							declaredType, acceptor);
-				}
-			}
+			val declaredType = jvmOperation.getDeclaringType();
+			createLocalVarScopeForJvmDeclaredType(declaredType, acceptor);
 			createLocalVarScopeForJvmOperation(jvmOperation, acceptor);
 		}
 
@@ -113,12 +103,11 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			List<IValidatedEObjectDescription> descriptions,
 			boolean referredFromClosure) {
 		for (RuleParameter p : params) {
-			if (p.getParameter() != null && p.getParameter().getName() != null) {
+			if (p.getParameter().getName() != null) {
 				val desc = createLocalVarDescription(p
 						.getParameter());
-				if (referredFromClosure)
-					desc.setIssueCode(IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS);
-				descriptions.add(desc);
+				if (!referredFromClosure)
+					descriptions.add(desc);
 			}
 		}
 	}
@@ -128,9 +117,8 @@ public class XsemanticsScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			XVariableDeclaration varDecl, boolean referredFromClosure) {
 		if (varDecl.getName() != null) {
 			val desc = createLocalVarDescription(varDecl);
-			if (referredFromClosure && varDecl.isWriteable())
-				desc.setIssueCode(IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS);
-			descriptions.add(desc);
+			if (!(referredFromClosure && varDecl.isWriteable()))
+				descriptions.add(desc);
 		}
 	}
 }

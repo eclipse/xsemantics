@@ -103,4 +103,144 @@ public class XsemanticsProposalProviderTest extends
 		// myNewVar should not be proposed, since it is
 		// not visible in that context
 	}
+
+	@Test
+	def void testNoOutputParamsInClosure() {
+		newBuilder.
+		append(
+		'''
+		import java.util.ArrayList
+
+		system my.test.TypeSystem
+			
+		judgments {
+			type |- Object o : output Object
+		}
+		
+		rule Type G |- String inputP : Object myOutputP
+		from {
+			new ArrayList().findFirst [
+				println('''
+		).
+		computeCompletionProposals.forEach[
+			proposal |
+			assertFalse(proposal.displayString, proposal.displayString == 'myOutputP')
+		]
+	}
+
+	@Test
+	def void testNoWritableVarInClosure() {
+		newBuilder.
+		append(
+		'''
+		import java.util.ArrayList
+
+		system my.test.TypeSystem
+			
+		judgments {
+			type |- Object o : output Object
+		}
+		
+		rule Type G |- String inputP : Object myOutputP
+		from {
+			val nonWritable = 1
+			var writableVar = 0
+			new ArrayList().findFirst [
+				println('''
+		).
+		computeCompletionProposals.map[displayString] => [
+			assertTrue(contains("nonWritable"))
+			assertFalse(contains('writableVar'))
+		]
+	}
+
+	@Test
+	def void testWritableVarOutsideClosure() {
+		newBuilder.
+		append(
+		'''
+		import java.util.ArrayList
+
+		system my.test.TypeSystem
+			
+		judgments {
+			type |- Object o : output Object
+		}
+		
+		rule Type G |- String inputP : Object myOutputP
+		from {
+			val nonWritable = 1
+			var writableVar = 0
+			println('''
+		).
+		computeCompletionProposals.map[displayString] => [
+			assertTrue(contains("nonWritable"))
+			assertTrue(contains('writableVar'))
+		]
+	}
+
+	@Test
+	def void testProposalsForStandardBlocks() {
+		'''
+		import java.util.ArrayList
+		
+		system my.test.TypeSystem
+			
+		judgments {
+			type |- Object o
+		}
+		
+		rule Type G |- String s
+		from {
+			for (loopVar : new ArrayList()) {
+				var declaredVar = 0
+				println('''
+		.assertProposalsContain("loopVar", "declaredVar")
+	}
+
+	@Test
+	def void testProposalsForVarDeclInRuleInvocationFromClosure() {
+		newBuilder.
+		append(testInputs.inputForRuleInvocation).
+		append(
+		'''
+		rule TestRule
+			G |- EObject o : EClass o1 : EClass o2
+		from {
+			G |- o : var EClass myNewVar : var EClass myNewVar2
+			new java.util.ArrayList().forEach[
+				println('''
+		).
+		computeCompletionProposals.map[displayString] => [
+			assertFalse(contains("myNewVar"))
+			assertFalse(contains('myNewVar2'))
+		]
+	}
+
+	@Test
+	def void testProposalsForVarDeclInRuleInvocationOutsideClosure() {
+		newBuilder.
+		append(testInputs.inputForRuleInvocation).
+		append(
+		'''
+		rule TestRule
+			G |- EObject o : EClass o1 : EClass o2
+		from {
+			G |- o : var EClass myNewVar : var EClass myNewVar2
+			for (loopVar : new java.util.ArrayList()) {
+				println('''
+		).
+		computeCompletionProposals.map[displayString] => [
+			assertTrue(contains("myNewVar"))
+			assertTrue(contains('myNewVar2'))
+		]
+	}
+
+	def private assertProposalsContain(CharSequence input, String... expected) {
+		newBuilder.append(input.toString).
+		computeCompletionProposals.map[displayString] => [
+			for (e : expected)
+				assertTrue(e + " was not proposed in " + join(", "), contains(e))
+		]
+	}
 }
