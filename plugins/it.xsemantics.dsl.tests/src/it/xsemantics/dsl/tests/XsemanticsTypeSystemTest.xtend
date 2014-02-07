@@ -231,7 +231,33 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeSystem.equals(tupleType2, tupleType1, ts)
 		)
 	}
-	
+
+	@Test
+	def void testTupleTypeEqualsWithNull() {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		val tupleType1 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		assertFalse(
+			typeSystem.equals(tupleType1, null, ts)
+		)
+	}
+
+	@Test
+	def void testTupleTypeEqualsWithDifferentSize() {
+		// getTypeForName requires an EObject context
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		val tupleType1 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		val tupleType2 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts))
+		assertFalse(
+			typeSystem.equals(tupleType1, tupleType2, ts)
+		)
+	}
+
 	@Test
 	def void testTupleTypeNotEquals() {
 		// getTypeForName requires an EObject context
@@ -343,11 +369,8 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		typeReferences.getTypeForName(clazz, ts)
 	}
 	
-	def tupleType(JvmTypeReference c1, JvmTypeReference c2) {
-		val tupleType = new TupleType()
-		tupleType.add(c1)
-		tupleType.add(c2)
-		tupleType
+	def tupleType(JvmTypeReference... c) {
+		new TupleType() => [addAll(c)]
 	}
 	
 	def assertSubtyping(Class<?> expected, Class<?> actual) {

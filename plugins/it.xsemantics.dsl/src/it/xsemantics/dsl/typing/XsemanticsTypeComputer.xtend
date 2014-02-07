@@ -52,9 +52,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	override void _computeTypes(XBlockExpression b, ITypeComputationState typeState) {
 		var state = typeState
 		
-		// the container is null for axioms, since we created
-		// an empty block for them in the inferrer
-		if (b.eContainer == null || b.eContainer instanceof Rule ||
+		if (b.eContainer instanceof Rule ||
 				b.eContainer instanceof CheckRule) {
 			// the premises block should not be checked against
 			// return type
