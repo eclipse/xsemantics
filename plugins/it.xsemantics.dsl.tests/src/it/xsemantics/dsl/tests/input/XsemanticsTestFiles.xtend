@@ -1615,6 +1615,11 @@ class XsemanticsTestFiles {
 	rule TestForClosures
 		G |- EClass eClass
 	from {
+		// boolean expressions inside block inside closure without side effect
+		eClass.EStructuralFeatures.forEach [
+			{ it.name != "foo" } // <- this is considered a boolean premise
+		]
+		
 		// boolean expressions inside closures without side effect
 		eClass.EStructuralFeatures.forEach [
 			it.name != "foo"

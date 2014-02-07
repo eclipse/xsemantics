@@ -653,12 +653,23 @@ EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures()
 final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
   public void apply(final EStructuralFeature it) {
     String _name = it.getName();
-    /* (!Objects.equal(_name, "foo")); */
+    /* it.name != "foo" */
+    if (!(!Objects.equal(_name, "foo"))) {
+      sneakyThrowRuleFailedException("it.name != \"foo\"");
+    }
   }
 };
 IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
 EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
 final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
+  public void apply(final EStructuralFeature it) {
+    String _name = it.getName();
+    /* (!Objects.equal(_name, "foo")); */
+  }
+};
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);
+EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
+final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
   public void apply(final EStructuralFeature it) {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
     final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
@@ -670,7 +681,24 @@ final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFea
     IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);'''
+IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);'''
+			)
+	}
+
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInFor() {
+		checkCompilationOfAllPremises(
+			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInFor,
+'''
+
+EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
+for (final EStructuralFeature s : _eAllStructuralFeatures) {
+  String _name = s.getName();
+  /* s.name != 'foo' */
+  if (!(!Objects.equal(_name, "foo"))) {
+    sneakyThrowRuleFailedException("s.name != \'foo\'");
+  }
+}'''
 			)
 	}
 	

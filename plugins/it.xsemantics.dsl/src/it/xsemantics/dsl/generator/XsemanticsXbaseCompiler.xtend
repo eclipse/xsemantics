@@ -15,7 +15,6 @@ import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.OrExpression
-import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusion
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
@@ -72,47 +71,36 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			}
 		}
 		
-		switch (obj) {
-			ErrorSpecification: {
-				val error = compileErrorOfErrorSpecification(obj, appendable)
-				val source = compileSourceOfErrorSpecification(obj, appendable)
-				val feature = compileFeatureOfErrorSpecification(obj, appendable)
-   				
-   				appendable.newLine
+		if (obj instanceof ErrorSpecification) {
+			val error = compileErrorOfErrorSpecification(obj, appendable)
+			val source = compileSourceOfErrorSpecification(obj, appendable)
+			val feature = compileFeatureOfErrorSpecification(obj, appendable)
+			
+			appendable.newLine
 
-   				obj.eContainer.compileFinalPartOfThrowExceptionMethod
-   					(appendable, error, source, feature)
-   				
-   				return appendable
-			}	
+			obj.eContainer.compileFinalPartOfThrowExceptionMethod
+				(appendable, error, source, feature)
+			
+			return appendable
 		}
 		
 		return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
 	}
 	
-	def void compileRuleBody(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
+	def void compileRuleBody(RuleWithPremises rule, JvmTypeReference resultType, ITreeAppendable result) {
 		compilePremises(rule, result)
 
 		rule.compileReturnResult(resultType, result)
 	}
 	
-	def dispatch compilePremises(Rule rule, ITreeAppendable result) {
-		return
-	}
-
-	def dispatch compilePremises(RuleWithPremises rule, ITreeAppendable result) {
+	def compilePremises(RuleWithPremises rule, ITreeAppendable result) {
 		toJavaStatement(rule.premises, result, false)
 	}
 
-	def dispatch compilePremises(CheckRule rule, ITreeAppendable result) {
+	def compilePremises(CheckRule rule, ITreeAppendable result) {
 		toJavaStatement(rule.premises, result, false)
 	}
 	
-	def dispatch compileFinalPartOfThrowExceptionMethod(EObject o, 
-			ITreeAppendable a, String error, String source, String feature) {
-		a.append("/* NOT IMPLEMENTED */")
-	}
-
 	def dispatch compileFinalPartOfThrowExceptionMethod(JudgmentDescription judgmentDescription, 
 			ITreeAppendable a, String error, String source, String feature) {
 		a.append('''
@@ -276,8 +264,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	override protected isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		// in Xtext 2.5.1 this method does not behave correctly in case
 		// we need a referenced compile expression (for boolean premises)
-		// NOT inside a closure.
-		if (!expr.insideClosure && expr.booleanPremise) {
+		if (expr.booleanPremise) {
 			val container = expr.eContainer
 			if (container instanceof XBlockExpression) {
 				val siblings = container.getExpressions();
@@ -469,7 +456,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			b.append(");");
 	
 			if (hasOutputParams) {
-				reassignResults(b, ruleInvocation, resultVariable, true);
+				reassignResults(b, ruleInvocation, resultVariable);
 			}
 		
 		}
@@ -566,29 +553,25 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	}
 
 	def protected void reassignResults(ITreeAppendable b,
-			RuleInvocation ruleInvocation, String resultVariable,
-			boolean checkAssignable) {
-		val expIt = ruleInvocation
-				.outputArgsExpressions();
-		if (expIt.isEmpty())
-			return;
+			RuleInvocation ruleInvocation, String resultVariable) {
+		val expressions = ruleInvocation.outputArgsExpressions();
+		
 		newLine(b);
 		val getMethods = XsemanticsGeneratorConstants
 				.getResultGetMethods().iterator();
-		for (expression : expIt) {
+		for (expression : expressions) {
 			val expressionType = typeSystem.getType(
 					expression);
 			val getMethod = getMethods.next();
 
-			if (checkAssignable) {
-				b.append("checkAssignableTo");
-				b.append("(");
-				b.append(resultVariable + "." + getMethod);
-				comma(b);
-				generateJavaClassReference(expressionType, expression, b);
-				b.append(");");
-				newLine(b);
-			}
+			b.append("checkAssignableTo");
+			b.append("(");
+			b.append(resultVariable + "." + getMethod);
+			comma(b);
+			generateJavaClassReference(expressionType, expression, b);
+			b.append(");");
+			newLine(b);
+
 			// assignment with cast
 			if (expression instanceof XVariableDeclaration) {
 				// this is not contemplated by xbase compiler

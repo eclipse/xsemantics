@@ -335,10 +335,8 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def ruleConclusionInputParamForError(RuleConclusionElement element) {
-		switch element {
-			RuleParameter: element.parameter.name
-			ExpressionInConclusion: element.type.simpleName
-		}
+		// this is called only for input params
+		(element as RuleParameter).parameter.name
 	}
 
 	def inputParameterNames(Rule rule) {
@@ -485,8 +483,7 @@ class XsemanticsGeneratorExtensions {
 	def compileReturnResult(Rule rule, JvmTypeReference resultType, ITreeAppendable result) {
 		val expressions = rule.outputConclusionElements
 		
-		if (!result.toString.empty)
-			result.append("\n")
+		result.append("\n")
 		result.append("return new ")
 		resultType.serialize(rule, result)
 		result.append("(")
@@ -506,9 +503,8 @@ class XsemanticsGeneratorExtensions {
 						elem.expressionInConclusionMethodName +
 						"(" + 
 						rule.ruleEnvName +
-						if (!inputParams.empty)
-							", " + inputParams
-						+ ")"
+						// if (!inputParams.empty) // in a valid program there's at least one
+							", " + inputParams + ")"
 						)
 					}
 				}

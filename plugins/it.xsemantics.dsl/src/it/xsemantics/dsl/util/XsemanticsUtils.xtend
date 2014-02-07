@@ -205,9 +205,8 @@ class XsemanticsUtils {
 		val judgmentParameters = ruleInvocation.judgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
-			ruleInvocation.expressions.filter(
+			ruleInvocation.expressions.filter
 				[ judgmentParameters.next.outputParameter ]
-			)
 		)
 	}
 	
