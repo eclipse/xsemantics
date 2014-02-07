@@ -104,7 +104,7 @@ class XsemanticsGeneratorExtensions {
 		if (typeSystemPackage != null && typeSystemPackage.length > 0)
 			typeSystemPackage + "." + "validation"
 		else
-			"validation"
+			""
 	}
 
 	def toValidatorJavaClassName(XsemanticsSystem ts) {
@@ -112,7 +112,11 @@ class XsemanticsGeneratorExtensions {
 	}
 	
 	def toValidatorJavaFullyQualifiedName(XsemanticsSystem ts) {
-		ts.toValidatorPackage + "." + ts.toValidatorJavaClassName
+		val validatorPackage = ts.toValidatorPackage
+		if (validatorPackage.length > 0)
+			validatorPackage + "." + ts.toValidatorJavaClassName
+		else
+			ts.toValidatorJavaClassName
 	}
 	
 	def ruleIssueString(Rule rule) {

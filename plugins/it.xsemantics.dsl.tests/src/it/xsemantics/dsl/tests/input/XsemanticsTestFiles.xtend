@@ -2540,4 +2540,20 @@ class XsemanticsTestFiles {
 		// https://github.com/LorenzoBettini/xsemantics/issues/10
 	}
 	'''
+
+	def typeSystemWithNoPackage() '''
+	system TypeSystem
+	
+	auxiliary {
+		foo(Object o)
+	}
+	
+	judgments {
+		type |- Object o
+	}
+	
+	auxiliary foo(String s) { true }
+	
+	axiom Type G |- String s
+	'''
 }
