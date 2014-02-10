@@ -451,6 +451,17 @@ Duplicate rule of the same kind with parameters: Object, Integer, in system: it.
 		)
 	}
 
+	@Test
+	def void testAuxiliaryDescriptionsWithNoInputParam() {
+		testFiles.testAuxiliaryDescriptionsWithNoInputParam.
+			assertErrorMessages(
+'''
+No input parameter; at least one is needed
+'''
+			)
+	}
+
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
 	}

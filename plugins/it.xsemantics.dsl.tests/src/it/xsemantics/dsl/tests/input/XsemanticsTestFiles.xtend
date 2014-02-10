@@ -219,6 +219,16 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
+	def testAuxiliaryDescriptionsWithNoInputParam() '''
+	«typeSystemQualifiedName»
+	
+	auxiliary {
+		foo()
+	}
+	
+	auxiliary foo() {}
+	'''
+
 	def testJudgmentDescriptionsWithNoInputParam() '''
 	«typeSystemQualifiedName»
 	import org.eclipse.emf.ecore.EClass

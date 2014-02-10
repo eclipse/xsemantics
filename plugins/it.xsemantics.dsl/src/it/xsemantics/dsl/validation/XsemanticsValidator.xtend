@@ -446,7 +446,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkAuxiliaryFunctions(AuxiliaryDescription aux) {
+	def public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
+		if (aux.parameters.empty) {
+			error("No input parameter; at least one is needed",
+					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
+					IssueCodes.NO_INPUT_PARAM);
+		}
+		
 		val functionsForAuxiliaryDescrition = aux.functionsForAuxiliaryDescrition();
 		if (isEnableWarnings
 				&& functionsForAuxiliaryDescrition
