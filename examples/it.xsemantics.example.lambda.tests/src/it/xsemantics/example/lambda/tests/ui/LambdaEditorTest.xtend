@@ -49,7 +49,7 @@ class LambdaEditorTest extends AbstractEditorTest {
 	}
 	
 	@Test
-	def void testEntitiesEditor() {
+	def void testLambdaEditor() {
 		createTestFile("lambda x . x").openEditor
 	}
 
