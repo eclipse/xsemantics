@@ -36,7 +36,7 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(Rule rule) {
-		JudgmentDescription judgmentDescription = utils.judgmentDescription(rule);
+		JudgmentDescription judgmentDescription = utils.getOrSetJudgmentDescription(rule);
 		return rule.getName()
 				+ (judgmentDescription != null ? " (" + Strings.emptyIfNull(judgmentDescription.getName()) + ")" : "");
 	}

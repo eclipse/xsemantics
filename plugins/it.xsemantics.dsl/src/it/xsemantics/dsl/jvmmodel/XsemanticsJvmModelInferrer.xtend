@@ -168,7 +168,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			}
 			
 			for (rule : ts.rules) {
-				if (rule.judgmentDescription != null) {
+				if (rule.orSetJudgmentDescription != null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
 					for (e : rule.expressionsInConclusion) {
@@ -685,8 +685,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compileImplMethod(Rule rule) {
 		rule.toMethod(
-			'''«rule.judgmentDescription.polymorphicDispatcherImpl»'''.toString,
-			rule.judgmentDescription.resultType
+			'''«rule.orSetJudgmentDescription.polymorphicDispatcherImpl»'''.toString,
+			rule.orSetJudgmentDescription.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -697,13 +697,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			exceptions += rule.ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
-   			parameters += rule.judgmentDescription.ruleApplicationTraceParam
+   			parameters += rule.orSetJudgmentDescription.ruleApplicationTraceParam
    			parameters += rule.inputParameters
    			
    			body = '''
 				try {
 					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					«rule.judgmentDescription.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
+					«rule.orSetJudgmentDescription.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
 					return _result_;
@@ -711,7 +711,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					«IF rule.conclusion.error != null»
 					«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»);
 					«ELSE»
-					«rule.judgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
+					«rule.orSetJudgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
 						«rule.ruleIssueString»,
 						e_«rule.applyRuleName», «rule.inputParameterNames»«rule.errorInformationArgs»);
 					«ENDIF»
@@ -773,7 +773,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
 			rule.applyRuleName.toString,
-			rule.judgmentDescription.resultType
+			rule.orSetJudgmentDescription.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -794,7 +794,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
 		logicalContainer.body = [
 	   		rule.declareVariablesForOutputParams(it)
-	   		rule.compileReturnResult(rule.judgmentDescription.resultType, it)
+	   		rule.compileReturnResult(rule.orSetJudgmentDescription.resultType, it)
 	   	]
 	}
 

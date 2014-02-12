@@ -599,7 +599,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def private findJudgmentDescriptionOrError(ReferToJudgment element, String judgmentSymbol,
 			Iterable<String> relationSymbols, EStructuralFeature elementFeature) {
-		val judgmentDescription = element.judgmentDescription
+		val judgmentDescription = element.orSetJudgmentDescription
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ judgmentRepresentation(judgmentSymbol, relationSymbols),

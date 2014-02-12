@@ -45,7 +45,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		switch (rule) {
 			RuleWithPremises: {
 				rule.declareVariablesForOutputParams(appendable) 
-   				rule.compileRuleBody(rule.judgmentDescription.resultType, appendable)
+   				rule.compileRuleBody(rule.orSetJudgmentDescription.resultType, appendable)
 			
 				return appendable
 			}
@@ -410,7 +410,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(RuleInvocation ruleInvocation,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(ruleInvocation, b);
-		val judgmentDescription = ruleInvocation.judgmentDescription;
+		val judgmentDescription = ruleInvocation.orSetJudgmentDescription;
 		val ruleInvocationExpressions = ruleInvocation
 				.getExpressions();
 

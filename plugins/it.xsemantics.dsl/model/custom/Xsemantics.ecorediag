@@ -520,6 +520,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_W65_042wEeOsPM0eGGvUxw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_W65_1I2wEeOsPM0eGGvUxw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_7HjPgJQDEeOC57T3wlqhIw" type="2002">
+        <element xmi:type="ecore:EOperation" href="Xsemantics.ecore#//ReferToJudgment/getJudgmentSymbol"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7HjPgZQDEeOC57T3wlqhIw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__8u1wJQDEeOC57T3wlqhIw" type="2002">
+        <element xmi:type="ecore:EOperation" href="Xsemantics.ecore#//ReferToJudgment/getRelationSymbols"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__8u1wZQDEeOC57T3wlqhIw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_W65_1Y2wEeOsPM0eGGvUxw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_W65_1o2wEeOsPM0eGGvUxw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_W65_142wEeOsPM0eGGvUxw"/>

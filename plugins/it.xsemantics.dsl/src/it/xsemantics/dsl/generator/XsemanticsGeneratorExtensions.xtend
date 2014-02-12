@@ -291,7 +291,7 @@ class XsemanticsGeneratorExtensions {
 		val buffer = new StringBuffer(
 		'''«rule.name.ruleNameInvocation» + «wrapInStringReprForEnv(rule.ruleEnvName)» + " «rule.conclusion.judgmentSymbol» "'''
 		)
-		val judgmentParameters = rule.judgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = rule.orSetJudgmentDescription.getJudgmentParameters.iterator
 		val relationSymbols = rule.conclusion.relationSymbols.iterator
 		for (e : rule.conclusion.conclusionElements) {
 			buffer.append(" + ")

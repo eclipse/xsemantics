@@ -27,21 +27,21 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	def void testRuleJudgmentDescription() {
 		assertDescription(testFiles.
 			testSimpleRule.
-				firstRule.judgmentDescription, "|-", ":"
+				firstRule.orSetJudgmentDescription, "|-", ":"
 		)
 	}
 	
 	@Test
 	def void testRuleInvocationJudgmentDescription() {
 		assertDescription(testFiles.testRuleInvokingAnotherRule.
-			parseAndAssertNoError.ruleInvocations.get(0).judgmentDescription, "|-", ":")
+			parseAndAssertNoError.ruleInvocations.get(0).orSetJudgmentDescription, "|-", ":")
 	}
 	
 	@Test
 	def void testRuleWithoutDescription() {
 		val description = testFiles.
 			testRuleWithoutJudgmentDescription.
-				getRuleWithoutValidation(1).judgmentDescription
+				getRuleWithoutValidation(1).orSetJudgmentDescription
 		Assert::assertNull(description)
 	}
 	
@@ -378,22 +378,22 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 	@Test
 	def void testRuleJudgmentDescriptionInherited() {
 		val ts = systemExtendsExtendedTypeSystem
-		assertDescription(ts.getRule(0).judgmentDescription, "|-", ":")
-		assertDescription(ts.getRule(1).judgmentDescription, "|-", "<:")
-		assertDescription(ts.getRule(2).judgmentDescription, "||-", ":")
+		assertDescription(ts.getRule(0).orSetJudgmentDescription, "|-", ":")
+		assertDescription(ts.getRule(1).orSetJudgmentDescription, "|-", "<:")
+		assertDescription(ts.getRule(2).orSetJudgmentDescription, "||-", ":")
 	}
 
 	@Test
 	def void testRuleInvocationJudgmentDescriptionInherited() {
 		val ts = systemExtendsExtendedTypeSystem
 		assertDescription
-			(ts.getRule(0).ruleInvocationFromPremises.judgmentDescription,
+			(ts.getRule(0).ruleInvocationFromPremises.orSetJudgmentDescription,
 				"|-", "<:")
 		assertDescription
-			(ts.getRule(1).ruleInvocationFromPremises.judgmentDescription,
+			(ts.getRule(1).ruleInvocationFromPremises.orSetJudgmentDescription,
 				"||-", ":")
 		assertDescription
-			(ts.getRule(2).ruleInvocationFromPremises.judgmentDescription,
+			(ts.getRule(2).ruleInvocationFromPremises.orSetJudgmentDescription,
 				"|-", ":")
 	}
 
@@ -437,7 +437,7 @@ it.xsemantics.test.TypeSystem type |- EObject c : output EClass error "this " + 
 	}
 
 	def private List<OutputParameter> outputJudgmentParameters(Rule rule) {
-		rule.judgmentDescription.outputJudgmentParameters
+		rule.orSetJudgmentDescription.outputJudgmentParameters
 	}
 
 	def private boolean hasOutputParams(Rule rule) {

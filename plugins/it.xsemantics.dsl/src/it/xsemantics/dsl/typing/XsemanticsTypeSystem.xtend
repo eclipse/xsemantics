@@ -160,6 +160,6 @@ class XsemanticsTypeSystem {
 	}
 
 	def isPredicate(RuleInvocation ruleInvocation) {
-		ruleInvocation.judgmentDescription.predicate
+		ruleInvocation.orSetJudgmentDescription.predicate
 	}
 }
