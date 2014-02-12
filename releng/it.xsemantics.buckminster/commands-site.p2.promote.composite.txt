@@ -1,0 +1,5 @@
+# we assume that projects have already been resolved
+# and so has the target platform
+# and that everything has already been built
+
+perform "it.xsemantics.build#promote.site.composite"

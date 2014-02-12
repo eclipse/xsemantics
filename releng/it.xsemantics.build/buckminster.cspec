@@ -22,5 +22,15 @@
 	       </cs:prerequisites>
 	       <cs:products alias="action.output" base="${buckminster.output.root}/findbugs/"/>
 	   </cs:public>
+	   <cs:public name="promote.site.composite" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="packaging.ant"/>
+                <cs:property key="targets" value="composite.add"/>
+            </cs:actorProperties>
+            <cs:prerequisites alias="action.requirements">
+            	<cs:attribute name="manifest" alias="manifest" component="it.xsemantics.site" />
+                <cs:attribute name="site.p2" component="it.xsemantics.site" />
+            </cs:prerequisites>
+        </cs:public>
     </cs:actions>
 </cs:cspec>
