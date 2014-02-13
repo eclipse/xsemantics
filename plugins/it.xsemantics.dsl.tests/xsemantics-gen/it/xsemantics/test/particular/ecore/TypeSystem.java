@@ -22,23 +22,23 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "it.xsemantics.test.particular.ecore.rules.EClassEObject";
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.particular.ecore.EClassEObject";
   
-  public final static String ECLASSEOBJECT2 = "it.xsemantics.test.particular.ecore.rules.EClassEObject2";
+  public final static String ECLASSEOBJECT2 = "it.xsemantics.test.particular.ecore.EClassEObject2";
   
-  public final static String FEATURES = "it.xsemantics.test.particular.ecore.rules.Features";
+  public final static String FEATURES = "it.xsemantics.test.particular.ecore.Features";
   
-  public final static String COLELCTIONS = "it.xsemantics.test.particular.ecore.rules.Colelctions";
+  public final static String COLELCTIONS = "it.xsemantics.test.particular.ecore.Colelctions";
   
-  public final static String FOREACH = "it.xsemantics.test.particular.ecore.rules.ForEach";
+  public final static String FOREACH = "it.xsemantics.test.particular.ecore.ForEach";
   
-  public final static String FOREACHWITHBOOLEANEXPRESSIONINSIDE = "it.xsemantics.test.particular.ecore.rules.ForEachWithBooleanExpressionInside";
+  public final static String FOREACHWITHBOOLEANEXPRESSIONINSIDE = "it.xsemantics.test.particular.ecore.ForEachWithBooleanExpressionInside";
   
-  public final static String WITHFAIL = "it.xsemantics.test.particular.ecore.rules.WithFail";
+  public final static String WITHFAIL = "it.xsemantics.test.particular.ecore.WithFail";
   
-  public final static String TESTFORCLOSURES = "it.xsemantics.test.particular.ecore.rules.TestForClosures";
+  public final static String TESTFORCLOSURES = "it.xsemantics.test.particular.ecore.TestForClosures";
   
-  public final static String TESTFORENVIRONMENTS = "it.xsemantics.test.particular.ecore.rules.TestForEnvironments";
+  public final static String TESTFORENVIRONMENTS = "it.xsemantics.test.particular.ecore.TestForEnvironments";
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   

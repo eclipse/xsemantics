@@ -13,11 +13,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "it.xsemantics.test.errspecification.ecore.rules.EObjectEClass";
+  public final static String EOBJECTECLASS = "it.xsemantics.test.errspecification.ecore.EObjectEClass";
   
-  public final static String EOBJECTECLASSWITHERRORSPECIFICATION = "it.xsemantics.test.errspecification.ecore.rules.EObjectEClassWithErrorSpecification";
+  public final static String EOBJECTECLASSWITHERRORSPECIFICATION = "it.xsemantics.test.errspecification.ecore.EObjectEClassWithErrorSpecification";
   
-  public final static String ECLASSSUBTYPING = "it.xsemantics.test.errspecification.ecore.rules.EClassSubtyping";
+  public final static String ECLASSSUBTYPING = "it.xsemantics.test.errspecification.ecore.EClassSubtyping";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   

@@ -21,30 +21,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	@Inject extension XsemanticsUtils
 
 	@Test
-	def void testTypeSystemToPackageWithNullName() {
-		assertEquals(null,
-			'system '.parse.toPackage)
-	}
-	
-	@Test
-	def void testTypeSystemToPackage() {
-		assertEquals("it.xsemantics.test",
-			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toPackage)
-	}
-	
-	@Test
-	def void testTypeSystemToJavaFullyQualifiedName() {
-		assertEquals("it.xsemantics.test.TypeSystem",
-			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaFullyQualifiedName)
-	}
-	
-	@Test
-	def void testTypeSystemToJavaClassName() {
-		assertEquals("TypeSystem",
-			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toJavaClassName)
-	}
-	
-	@Test
 	def void testTypeSystemToValidatorPackage() {
 		assertEquals("it.xsemantics.test.validation",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorPackage)
@@ -54,18 +30,6 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	def void testTypeSystemToValidatorJavaFullyQualifiedName() {
 		assertEquals("it.xsemantics.test.validation.TypeSystemValidator",
 			testFiles.typeSystemQualifiedName.parseAndAssertNoError.toValidatorJavaFullyQualifiedName)
-	}
-	
-	@Test
-	def void testRuleToPackage() {
-		assertEquals("it.xsemantics.test.rules",
-			testFiles.testSimpleRule.firstRule.toPackage)
-	}
-	
-	@Test
-	def void testRuleToFullyQualifiedName() {
-		assertEquals("it.xsemantics.test.rules.EClassEObject",
-			testFiles.testSimpleRule.firstRule.toJavaFullyQualifiedName)
 	}
 	
 	@Test

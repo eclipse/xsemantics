@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import it.xsemantics.dsl.xsemantics.Named
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -168,7 +169,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			}
 			
 			for (rule : ts.rules) {
-				if (rule.orSetJudgmentDescription != null) {
+				if (rule.getOrSetJudgmentDescription != null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
 					for (e : rule.expressionsInConclusion) {
@@ -218,32 +219,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
    	}
 
-   	def genIssueField(Rule rule) {
-   		val issueField = rule.toField(
-				rule.ruleIssueString,
-				rule.newTypeRef(typeof(String))
+   	def genIssueField(Named e) {
+   		val issueField = e.toField(
+				e.ruleIssueString,
+				e.newTypeRef(typeof(String))
 			) [
 				visibility = JvmVisibility::PUBLIC
 				^static = true
 				final = true
 			]
 		issueField.setInitializer [
-			it.append('''"«rule.toJavaFullyQualifiedName»"''')
-		]
-		issueField
-   	}
-
-   	def genIssueField(AuxiliaryDescription aux) {
-   		val issueField = aux.toField(
-				aux.ruleIssueString,
-				aux.newTypeRef(typeof(String))
-			) [
-				visibility = JvmVisibility::PUBLIC
-				^static = true
-				final = true
-			]
-		issueField.setInitializer [
-			it.append('''"«aux.toJavaFullyQualifiedName»"''')
+			it.append('''"«e.toJavaFullyQualifiedName»"''')
 		]
 		issueField
    	}
@@ -684,9 +670,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def compileImplMethod(Rule rule) {
+		val judgment = rule.getOrSetJudgmentDescription
 		rule.toMethod(
-			'''«rule.orSetJudgmentDescription.polymorphicDispatcherImpl»'''.toString,
-			rule.orSetJudgmentDescription.resultType
+			'''«judgment.polymorphicDispatcherImpl»'''.toString,
+			judgment.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -697,13 +684,13 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			exceptions += rule.ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
-   			parameters += rule.orSetJudgmentDescription.ruleApplicationTraceParam
+   			parameters += judgment.ruleApplicationTraceParam
    			parameters += rule.inputParameters
    			
    			body = '''
 				try {
 					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					«rule.orSetJudgmentDescription.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
+					«judgment.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
 					return _result_;
@@ -711,7 +698,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					«IF rule.conclusion.error != null»
 					«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»);
 					«ELSE»
-					«rule.orSetJudgmentDescription.throwExceptionMethod»(«rule.errorForRule»,
+					«judgment.throwExceptionMethod»(«rule.errorForRule»,
 						«rule.ruleIssueString»,
 						e_«rule.applyRuleName», «rule.inputParameterNames»«rule.errorInformationArgs»);
 					«ENDIF»
@@ -774,7 +761,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
 			rule.applyRuleName.toString,
-			rule.orSetJudgmentDescription.resultType
+			rule.getOrSetJudgmentDescription.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -795,7 +782,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
 		logicalContainer.body = [
 	   		rule.declareVariablesForOutputParams(it)
-	   		rule.compileReturnResult(rule.orSetJudgmentDescription.resultType, it)
+	   		rule.compileReturnResult(rule.getOrSetJudgmentDescription.resultType, it)
 	   	]
 	}
 

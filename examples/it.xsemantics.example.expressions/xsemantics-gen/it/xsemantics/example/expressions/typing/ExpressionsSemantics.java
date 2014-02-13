@@ -40,55 +40,55 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 @SuppressWarnings("all")
 public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
-  public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.rules.NumeralLiteral";
+  public final static String NUMERALLITERAL = "it.xsemantics.example.expressions.typing.NumeralLiteral";
   
-  public final static String BOOLEANLITERAL = "it.xsemantics.example.expressions.typing.rules.BooleanLiteral";
+  public final static String BOOLEANLITERAL = "it.xsemantics.example.expressions.typing.BooleanLiteral";
   
-  public final static String STRINGLITERAL = "it.xsemantics.example.expressions.typing.rules.StringLiteral";
+  public final static String STRINGLITERAL = "it.xsemantics.example.expressions.typing.StringLiteral";
   
-  public final static String MULTIORDIV = "it.xsemantics.example.expressions.typing.rules.MultiOrDiv";
+  public final static String MULTIORDIV = "it.xsemantics.example.expressions.typing.MultiOrDiv";
   
-  public final static String MINUS = "it.xsemantics.example.expressions.typing.rules.Minus";
+  public final static String MINUS = "it.xsemantics.example.expressions.typing.Minus";
   
-  public final static String PLUS = "it.xsemantics.example.expressions.typing.rules.Plus";
+  public final static String PLUS = "it.xsemantics.example.expressions.typing.Plus";
   
-  public final static String COMPARISON = "it.xsemantics.example.expressions.typing.rules.Comparison";
+  public final static String COMPARISON = "it.xsemantics.example.expressions.typing.Comparison";
   
-  public final static String EQUALS = "it.xsemantics.example.expressions.typing.rules.Equals";
+  public final static String EQUALS = "it.xsemantics.example.expressions.typing.Equals";
   
-  public final static String BOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.BooleanNegation";
+  public final static String BOOLEANNEGATION = "it.xsemantics.example.expressions.typing.BooleanNegation";
   
-  public final static String ANDOR = "it.xsemantics.example.expressions.typing.rules.AndOr";
+  public final static String ANDOR = "it.xsemantics.example.expressions.typing.AndOr";
   
-  public final static String ARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.rules.ArithmeticSigned";
+  public final static String ARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.ArithmeticSigned";
   
-  public final static String VARIABLEREFERENCE = "it.xsemantics.example.expressions.typing.rules.VariableReference";
+  public final static String VARIABLEREFERENCE = "it.xsemantics.example.expressions.typing.VariableReference";
   
-  public final static String VARIABLE = "it.xsemantics.example.expressions.typing.rules.Variable";
+  public final static String VARIABLE = "it.xsemantics.example.expressions.typing.Variable";
   
-  public final static String INTERPRETNUMBERLITERAL = "it.xsemantics.example.expressions.typing.rules.InterpretNumberLiteral";
+  public final static String INTERPRETNUMBERLITERAL = "it.xsemantics.example.expressions.typing.InterpretNumberLiteral";
   
-  public final static String INTERPRETSTRINGLITERAL = "it.xsemantics.example.expressions.typing.rules.InterpretStringLiteral";
+  public final static String INTERPRETSTRINGLITERAL = "it.xsemantics.example.expressions.typing.InterpretStringLiteral";
   
-  public final static String INTERPRETBOOLEANLITERAL = "it.xsemantics.example.expressions.typing.rules.InterpretBooleanLiteral";
+  public final static String INTERPRETBOOLEANLITERAL = "it.xsemantics.example.expressions.typing.InterpretBooleanLiteral";
   
-  public final static String INTERPRETMINUS = "it.xsemantics.example.expressions.typing.rules.InterpretMinus";
+  public final static String INTERPRETMINUS = "it.xsemantics.example.expressions.typing.InterpretMinus";
   
-  public final static String INTERPRETMULTIORDIV = "it.xsemantics.example.expressions.typing.rules.InterpretMultiOrDiv";
+  public final static String INTERPRETMULTIORDIV = "it.xsemantics.example.expressions.typing.InterpretMultiOrDiv";
   
-  public final static String INTERPRETARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.rules.InterpretArithmeticSigned";
+  public final static String INTERPRETARITHMETICSIGNED = "it.xsemantics.example.expressions.typing.InterpretArithmeticSigned";
   
-  public final static String INTERPRETANDOR = "it.xsemantics.example.expressions.typing.rules.InterpretAndOr";
+  public final static String INTERPRETANDOR = "it.xsemantics.example.expressions.typing.InterpretAndOr";
   
-  public final static String INTERPRETBOOLEANNEGATION = "it.xsemantics.example.expressions.typing.rules.InterpretBooleanNegation";
+  public final static String INTERPRETBOOLEANNEGATION = "it.xsemantics.example.expressions.typing.InterpretBooleanNegation";
   
-  public final static String INTERPRETCOMPARISON = "it.xsemantics.example.expressions.typing.rules.InterpretComparison";
+  public final static String INTERPRETCOMPARISON = "it.xsemantics.example.expressions.typing.InterpretComparison";
   
-  public final static String INTERPRETEQUALS = "it.xsemantics.example.expressions.typing.rules.InterpretEquals";
+  public final static String INTERPRETEQUALS = "it.xsemantics.example.expressions.typing.InterpretEquals";
   
-  public final static String INTERPRETPLUS = "it.xsemantics.example.expressions.typing.rules.InterpretPlus";
+  public final static String INTERPRETPLUS = "it.xsemantics.example.expressions.typing.InterpretPlus";
   
-  public final static String INTERPRETVARIABLEREFENRENCE = "it.xsemantics.example.expressions.typing.rules.InterpretVariableRefenrence";
+  public final static String INTERPRETVARIABLEREFENRENCE = "it.xsemantics.example.expressions.typing.InterpretVariableRefenrence";
   
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   

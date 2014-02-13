@@ -49,61 +49,61 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
-  public final static String SUPERCLASSES = "it.xsemantics.test.fj.first.auxiliary.Superclasses";
+  public final static String SUPERCLASSES = "it.xsemantics.test.fj.first.Superclasses";
   
-  public final static String TTYPEDELEMENT = "it.xsemantics.test.fj.first.rules.TTypedElement";
+  public final static String TTYPEDELEMENT = "it.xsemantics.test.fj.first.TTypedElement";
   
-  public final static String TTHIS = "it.xsemantics.test.fj.first.rules.TThis";
+  public final static String TTHIS = "it.xsemantics.test.fj.first.TThis";
   
-  public final static String TNEW = "it.xsemantics.test.fj.first.rules.TNew";
+  public final static String TNEW = "it.xsemantics.test.fj.first.TNew";
   
-  public final static String TPARAMREF = "it.xsemantics.test.fj.first.rules.TParamRef";
+  public final static String TPARAMREF = "it.xsemantics.test.fj.first.TParamRef";
   
-  public final static String TSTRINGCONSTANT = "it.xsemantics.test.fj.first.rules.TStringConstant";
+  public final static String TSTRINGCONSTANT = "it.xsemantics.test.fj.first.TStringConstant";
   
-  public final static String TINTCONSTANT = "it.xsemantics.test.fj.first.rules.TIntConstant";
+  public final static String TINTCONSTANT = "it.xsemantics.test.fj.first.TIntConstant";
   
-  public final static String TBOOLCONSTANT = "it.xsemantics.test.fj.first.rules.TBoolConstant";
+  public final static String TBOOLCONSTANT = "it.xsemantics.test.fj.first.TBoolConstant";
   
-  public final static String TSELECTION = "it.xsemantics.test.fj.first.rules.TSelection";
+  public final static String TSELECTION = "it.xsemantics.test.fj.first.TSelection";
   
-  public final static String TCAST = "it.xsemantics.test.fj.first.rules.TCast";
+  public final static String TCAST = "it.xsemantics.test.fj.first.TCast";
   
-  public final static String TEXPRESSIONCLASSTYPE = "it.xsemantics.test.fj.first.rules.TExpressionClassType";
+  public final static String TEXPRESSIONCLASSTYPE = "it.xsemantics.test.fj.first.TExpressionClassType";
   
-  public final static String BASICSUBTYPING = "it.xsemantics.test.fj.first.rules.BasicSubtyping";
+  public final static String BASICSUBTYPING = "it.xsemantics.test.fj.first.BasicSubtyping";
   
-  public final static String CLASSSUBTYPING = "it.xsemantics.test.fj.first.rules.ClassSubtyping";
+  public final static String CLASSSUBTYPING = "it.xsemantics.test.fj.first.ClassSubtyping";
   
-  public final static String SUBCLASSING = "it.xsemantics.test.fj.first.rules.Subclassing";
+  public final static String SUBCLASSING = "it.xsemantics.test.fj.first.Subclassing";
   
-  public final static String BASICEQUALS = "it.xsemantics.test.fj.first.rules.BasicEquals";
+  public final static String BASICEQUALS = "it.xsemantics.test.fj.first.BasicEquals";
   
-  public final static String CLASSEQUALS = "it.xsemantics.test.fj.first.rules.ClassEquals";
+  public final static String CLASSEQUALS = "it.xsemantics.test.fj.first.ClassEquals";
   
-  public final static String SUBTYPESEQUENCE = "it.xsemantics.test.fj.first.rules.SubtypeSequence";
+  public final static String SUBTYPESEQUENCE = "it.xsemantics.test.fj.first.SubtypeSequence";
   
-  public final static String FIELDS = "it.xsemantics.test.fj.first.rules.Fields";
+  public final static String FIELDS = "it.xsemantics.test.fj.first.Fields";
   
-  public final static String METHODS = "it.xsemantics.test.fj.first.rules.Methods";
+  public final static String METHODS = "it.xsemantics.test.fj.first.Methods";
   
-  public final static String CHECKCONSTANT = "it.xsemantics.test.fj.first.rules.CheckConstant";
+  public final static String CHECKCONSTANT = "it.xsemantics.test.fj.first.CheckConstant";
   
-  public final static String CHECKTYPEDELEMENT = "it.xsemantics.test.fj.first.rules.CheckTypedElement";
+  public final static String CHECKTYPEDELEMENT = "it.xsemantics.test.fj.first.CheckTypedElement";
   
-  public final static String CHECKPARAMREF = "it.xsemantics.test.fj.first.rules.CheckParamRef";
+  public final static String CHECKPARAMREF = "it.xsemantics.test.fj.first.CheckParamRef";
   
-  public final static String CHECKTHIS = "it.xsemantics.test.fj.first.rules.CheckThis";
+  public final static String CHECKTHIS = "it.xsemantics.test.fj.first.CheckThis";
   
-  public final static String CHECKMETHOD = "it.xsemantics.test.fj.first.rules.CheckMethod";
+  public final static String CHECKMETHOD = "it.xsemantics.test.fj.first.CheckMethod";
   
-  public final static String CHECKNEW = "it.xsemantics.test.fj.first.rules.CheckNew";
+  public final static String CHECKNEW = "it.xsemantics.test.fj.first.CheckNew";
   
-  public final static String CHECKSELECTION = "it.xsemantics.test.fj.first.rules.CheckSelection";
+  public final static String CHECKSELECTION = "it.xsemantics.test.fj.first.CheckSelection";
   
-  public final static String CHECKCAST = "it.xsemantics.test.fj.first.rules.CheckCast";
+  public final static String CHECKCAST = "it.xsemantics.test.fj.first.CheckCast";
   
-  public final static String CHECKCLASS = "it.xsemantics.test.fj.first.rules.CheckClass";
+  public final static String CHECKCLASS = "it.xsemantics.test.fj.first.CheckClass";
   
   @Inject
   private FjTypeUtils fjTypeUtils;

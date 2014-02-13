@@ -31,49 +31,49 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
-  public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.rules.SubstituteType";
+  public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteType";
   
-  public final static String SUBSTITUTETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.rules.SubstituteTypeVariable";
+  public final static String SUBSTITUTETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.SubstituteTypeVariable";
   
-  public final static String SUBSTITUTEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.rules.SubstituteArrowType";
+  public final static String SUBSTITUTEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteArrowType";
   
-  public final static String NOTOCCURBASE = "it.xsemantics.example.lambda.xsemantics.rules.NotOccurBase";
+  public final static String NOTOCCURBASE = "it.xsemantics.example.lambda.xsemantics.NotOccurBase";
   
-  public final static String NOTOCCURVAR = "it.xsemantics.example.lambda.xsemantics.rules.NotOccurVar";
+  public final static String NOTOCCURVAR = "it.xsemantics.example.lambda.xsemantics.NotOccurVar";
   
-  public final static String NOTOCCURVARINARROW = "it.xsemantics.example.lambda.xsemantics.rules.NotOccurVarInArrow";
+  public final static String NOTOCCURVARINARROW = "it.xsemantics.example.lambda.xsemantics.NotOccurVarInArrow";
   
-  public final static String UNIFYTYPE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyType";
+  public final static String UNIFYTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyType";
   
-  public final static String UNIFYSTRINGTYPE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyStringType";
+  public final static String UNIFYSTRINGTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyStringType";
   
-  public final static String UNIFYINTTYPE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyIntType";
+  public final static String UNIFYINTTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyIntType";
   
-  public final static String UNIFYTYPEVARIABLEBASICTYPE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyTypeVariableBasicType";
+  public final static String UNIFYTYPEVARIABLEBASICTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyTypeVariableBasicType";
   
-  public final static String UNIFYBASICTYPETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyBasicTypeTypeVariable";
+  public final static String UNIFYBASICTYPETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.UnifyBasicTypeTypeVariable";
   
-  public final static String UNIFYTYPEVARIABLES = "it.xsemantics.example.lambda.xsemantics.rules.UnifyTypeVariables";
+  public final static String UNIFYTYPEVARIABLES = "it.xsemantics.example.lambda.xsemantics.UnifyTypeVariables";
   
-  public final static String UNIFYTYPEVARIABLEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyTypeVariableArrowType";
+  public final static String UNIFYTYPEVARIABLEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyTypeVariableArrowType";
   
-  public final static String UNIFYARROWTYPETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.rules.UnifyArrowTypeTypeVariable";
+  public final static String UNIFYARROWTYPETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.UnifyArrowTypeTypeVariable";
   
-  public final static String UNIFYARROWTYPES = "it.xsemantics.example.lambda.xsemantics.rules.UnifyArrowTypes";
+  public final static String UNIFYARROWTYPES = "it.xsemantics.example.lambda.xsemantics.UnifyArrowTypes";
   
-  public final static String PARAMETERTYPE = "it.xsemantics.example.lambda.xsemantics.rules.ParameterType";
+  public final static String PARAMETERTYPE = "it.xsemantics.example.lambda.xsemantics.ParameterType";
   
-  public final static String STRINGCONSTANTTYPE = "it.xsemantics.example.lambda.xsemantics.rules.StringConstantType";
+  public final static String STRINGCONSTANTTYPE = "it.xsemantics.example.lambda.xsemantics.StringConstantType";
   
-  public final static String INTCONSTANTTYPE = "it.xsemantics.example.lambda.xsemantics.rules.IntConstantType";
+  public final static String INTCONSTANTTYPE = "it.xsemantics.example.lambda.xsemantics.IntConstantType";
   
-  public final static String VARIABLETYPE = "it.xsemantics.example.lambda.xsemantics.rules.VariableType";
+  public final static String VARIABLETYPE = "it.xsemantics.example.lambda.xsemantics.VariableType";
   
-  public final static String ARITHMETICSTYPE = "it.xsemantics.example.lambda.xsemantics.rules.ArithmeticsType";
+  public final static String ARITHMETICSTYPE = "it.xsemantics.example.lambda.xsemantics.ArithmeticsType";
   
-  public final static String ABSTRACTIONTYPE = "it.xsemantics.example.lambda.xsemantics.rules.AbstractionType";
+  public final static String ABSTRACTIONTYPE = "it.xsemantics.example.lambda.xsemantics.AbstractionType";
   
-  public final static String APPLICATIONTYPE = "it.xsemantics.example.lambda.xsemantics.rules.ApplicationType";
+  public final static String APPLICATIONTYPE = "it.xsemantics.example.lambda.xsemantics.ApplicationType";
   
   @Inject
   private LambdaUtils lambdaUtils;

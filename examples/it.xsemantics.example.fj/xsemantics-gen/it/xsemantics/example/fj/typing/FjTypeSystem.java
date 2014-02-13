@@ -56,59 +56,59 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class FjTypeSystem extends XsemanticsRuntimeSystem {
-  public final static String SUPERCLASSES = "it.xsemantics.example.fj.typing.auxiliary.Superclasses";
+  public final static String SUPERCLASSES = "it.xsemantics.example.fj.typing.Superclasses";
   
-  public final static String FIELDS = "it.xsemantics.example.fj.typing.auxiliary.Fields";
+  public final static String FIELDS = "it.xsemantics.example.fj.typing.Fields";
   
-  public final static String METHODS = "it.xsemantics.example.fj.typing.auxiliary.Methods";
+  public final static String METHODS = "it.xsemantics.example.fj.typing.Methods";
   
-  public final static String OVERRIDES = "it.xsemantics.example.fj.typing.auxiliary.Overrides";
+  public final static String OVERRIDES = "it.xsemantics.example.fj.typing.Overrides";
   
-  public final static String ISVALUE = "it.xsemantics.example.fj.typing.auxiliary.IsValue";
+  public final static String ISVALUE = "it.xsemantics.example.fj.typing.IsValue";
   
-  public final static String REPLACETHISANDPARAMS = "it.xsemantics.example.fj.typing.auxiliary.ReplaceThisAndParams";
+  public final static String REPLACETHISANDPARAMS = "it.xsemantics.example.fj.typing.ReplaceThisAndParams";
   
-  public final static String TTHIS = "it.xsemantics.example.fj.typing.rules.TThis";
+  public final static String TTHIS = "it.xsemantics.example.fj.typing.TThis";
   
-  public final static String TNEW = "it.xsemantics.example.fj.typing.rules.TNew";
+  public final static String TNEW = "it.xsemantics.example.fj.typing.TNew";
   
-  public final static String TPARAMREF = "it.xsemantics.example.fj.typing.rules.TParamRef";
+  public final static String TPARAMREF = "it.xsemantics.example.fj.typing.TParamRef";
   
-  public final static String TSTRINGCONSTANT = "it.xsemantics.example.fj.typing.rules.TStringConstant";
+  public final static String TSTRINGCONSTANT = "it.xsemantics.example.fj.typing.TStringConstant";
   
-  public final static String TINTCONSTANT = "it.xsemantics.example.fj.typing.rules.TIntConstant";
+  public final static String TINTCONSTANT = "it.xsemantics.example.fj.typing.TIntConstant";
   
-  public final static String TBOOLCONSTANT = "it.xsemantics.example.fj.typing.rules.TBoolConstant";
+  public final static String TBOOLCONSTANT = "it.xsemantics.example.fj.typing.TBoolConstant";
   
-  public final static String TSELECTION = "it.xsemantics.example.fj.typing.rules.TSelection";
+  public final static String TSELECTION = "it.xsemantics.example.fj.typing.TSelection";
   
-  public final static String TCAST = "it.xsemantics.example.fj.typing.rules.TCast";
+  public final static String TCAST = "it.xsemantics.example.fj.typing.TCast";
   
-  public final static String TEXPRESSIONCLASSTYPE = "it.xsemantics.example.fj.typing.rules.TExpressionClassType";
+  public final static String TEXPRESSIONCLASSTYPE = "it.xsemantics.example.fj.typing.TExpressionClassType";
   
-  public final static String GENERALSUBTYPING = "it.xsemantics.example.fj.typing.rules.GeneralSubtyping";
+  public final static String GENERALSUBTYPING = "it.xsemantics.example.fj.typing.GeneralSubtyping";
   
-  public final static String BASICSUBTYPING = "it.xsemantics.example.fj.typing.rules.BasicSubtyping";
+  public final static String BASICSUBTYPING = "it.xsemantics.example.fj.typing.BasicSubtyping";
   
-  public final static String CLASSSUBTYPING = "it.xsemantics.example.fj.typing.rules.ClassSubtyping";
+  public final static String CLASSSUBTYPING = "it.xsemantics.example.fj.typing.ClassSubtyping";
   
-  public final static String EXPRESSIONASSIGNABLETOTYPE = "it.xsemantics.example.fj.typing.rules.ExpressionAssignableToType";
+  public final static String EXPRESSIONASSIGNABLETOTYPE = "it.xsemantics.example.fj.typing.ExpressionAssignableToType";
   
-  public final static String GENERALEQUALS = "it.xsemantics.example.fj.typing.rules.GeneralEquals";
+  public final static String GENERALEQUALS = "it.xsemantics.example.fj.typing.GeneralEquals";
   
-  public final static String BASICEQUALS = "it.xsemantics.example.fj.typing.rules.BasicEquals";
+  public final static String BASICEQUALS = "it.xsemantics.example.fj.typing.BasicEquals";
   
-  public final static String CLASSEQUALS = "it.xsemantics.example.fj.typing.rules.ClassEquals";
+  public final static String CLASSEQUALS = "it.xsemantics.example.fj.typing.ClassEquals";
   
-  public final static String SUBTYPESEQUENCE = "it.xsemantics.example.fj.typing.rules.SubtypeSequence";
+  public final static String SUBTYPESEQUENCE = "it.xsemantics.example.fj.typing.SubtypeSequence";
   
-  public final static String RNEW = "it.xsemantics.example.fj.typing.rules.RNew";
+  public final static String RNEW = "it.xsemantics.example.fj.typing.RNew";
   
-  public final static String RSELECTION = "it.xsemantics.example.fj.typing.rules.RSelection";
+  public final static String RSELECTION = "it.xsemantics.example.fj.typing.RSelection";
   
-  public final static String RCAST = "it.xsemantics.example.fj.typing.rules.RCast";
+  public final static String RCAST = "it.xsemantics.example.fj.typing.RCast";
   
-  public final static String SUBJRED = "it.xsemantics.example.fj.typing.rules.SubjRed";
+  public final static String SUBJRED = "it.xsemantics.example.fj.typing.SubjRed";
   
   @Inject
   private FjTypeUtils fjTypeUtils;

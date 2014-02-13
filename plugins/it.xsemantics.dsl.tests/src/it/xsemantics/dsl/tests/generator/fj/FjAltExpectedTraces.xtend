@@ -154,13 +154,13 @@ failed: A is not a subtype of B
  BasicEquals: [] |- String ~~ String'''
 
 	override validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new A('foo') : ['foo'] << [int i;]" at Program.main->New'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.SubtypeSequence "failed: SubtypeSequence: [] |- new A('foo') : ['foo'] << [int i;]" at Program.main->New'''
 
 	override validateCyclicClassHierarchy()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'
-Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.CheckClass "failed: CheckClass: [] |- class B extends A { }" at Program.classes[1]->Class'B'
-Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.CheckClass "failed: CheckClass: [] |- class C extends B { }" at Program.classes[2]->Class'C' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'
+Diagnostic ERROR code=it.xsemantics.test.fj.alt.CheckClass "failed: CheckClass: [] |- class B extends A { }" at Program.classes[1]->Class'B'
+Diagnostic ERROR code=it.xsemantics.test.fj.alt.CheckClass "failed: CheckClass: [] |- class C extends B { }" at Program.classes[2]->Class'C' '''
 
 	override validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.rules.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.alt.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
 }

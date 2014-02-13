@@ -43,29 +43,29 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class FjSepTypeSystem extends FjTypeSystem {
-  public final static String TNEW = "it.xsemantics.example.fj.typing.rules.TNew";
+  public final static String TNEW = "it.xsemantics.example.fj.typing.TNew";
   
-  public final static String TSELECTION = "it.xsemantics.example.fj.typing.rules.TSelection";
+  public final static String TSELECTION = "it.xsemantics.example.fj.typing.TSelection";
   
-  public final static String TCAST = "it.xsemantics.example.fj.typing.rules.TCast";
+  public final static String TCAST = "it.xsemantics.example.fj.typing.TCast";
   
-  public final static String CHECKCONSTANT = "it.xsemantics.example.fj.typing.rules.CheckConstant";
+  public final static String CHECKCONSTANT = "it.xsemantics.example.fj.typing.CheckConstant";
   
-  public final static String CHECKTYPEDELEMENT = "it.xsemantics.example.fj.typing.rules.CheckTypedElement";
+  public final static String CHECKTYPEDELEMENT = "it.xsemantics.example.fj.typing.CheckTypedElement";
   
-  public final static String CHECKPARAMREF = "it.xsemantics.example.fj.typing.rules.CheckParamRef";
+  public final static String CHECKPARAMREF = "it.xsemantics.example.fj.typing.CheckParamRef";
   
-  public final static String CHECKTHIS = "it.xsemantics.example.fj.typing.rules.CheckThis";
+  public final static String CHECKTHIS = "it.xsemantics.example.fj.typing.CheckThis";
   
-  public final static String CHECKMETHOD = "it.xsemantics.example.fj.typing.rules.CheckMethod";
+  public final static String CHECKMETHOD = "it.xsemantics.example.fj.typing.CheckMethod";
   
-  public final static String CHECKNEW = "it.xsemantics.example.fj.typing.rules.CheckNew";
+  public final static String CHECKNEW = "it.xsemantics.example.fj.typing.CheckNew";
   
-  public final static String CHECKSELECTION = "it.xsemantics.example.fj.typing.rules.CheckSelection";
+  public final static String CHECKSELECTION = "it.xsemantics.example.fj.typing.CheckSelection";
   
-  public final static String CHECKCAST = "it.xsemantics.example.fj.typing.rules.CheckCast";
+  public final static String CHECKCAST = "it.xsemantics.example.fj.typing.CheckCast";
   
-  public final static String CHECKCLASS = "it.xsemantics.example.fj.typing.rules.CheckClass";
+  public final static String CHECKCLASS = "it.xsemantics.example.fj.typing.CheckClass";
   
   @Inject
   private FjAuxiliaryFunctions fjAux;

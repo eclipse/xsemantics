@@ -31,6 +31,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 import static extension org.eclipse.xtext.util.Strings.*
+import it.xsemantics.dsl.xsemantics.Named
+import it.xsemantics.dsl.xsemantics.UniqueByName
 
 class XsemanticsGeneratorExtensions {
 	
@@ -48,61 +50,25 @@ class XsemanticsGeneratorExtensions {
 	protected IJvmModelAssociations associations
 	
 	def toJavaFullyQualifiedName(XsemanticsSystem ts) {
-		val packageString = ts.toPackage?.toString
-		if (packageString != null && packageString.length > 0)
-			packageString + "." + ts.toJavaClassName
+		ts.fullyQualifiedName
+	}
+	
+	def toJavaFullyQualifiedName(Named e) {
+		val fQN = e.containingSystem.toJavaFullyQualifiedName
+		if (fQN != null && fQN.segmentCount > 1)
+			fQN.skipLast(1) + "." + e.toJavaClassName
 		else
-			ts.toJavaClassName
-	}
-	
-	def toPackage(XsemanticsSystem ts) {
-		ts.fullyQualifiedName?.skipLast(1)?.toString
-	}
-	
-	def toJavaClassName(XsemanticsSystem ts) {
-		ts.fullyQualifiedName?.lastSegment
-	}
-	
-	def toJavaFullyQualifiedName(Rule rule) {
-		rule.toPackage + "." + rule.toJavaClassName
-	}
-	
-	def toPackage(Rule rule) {
-		val typeSystemPackage = rule.containingSystem.toPackage
-		if (typeSystemPackage.length > 0)
-			typeSystemPackage + "." + "rules"
-		else
-			"rules"
-	}
-	
-	def toJavaClassName(Rule rule) {
-		rule.name.toFirstUpper
+			e.toJavaClassName
 	}
 
-	def toJavaClassName(AuxiliaryFunction aux) {
-		aux.name.toFirstUpper
-	}
-
-	def toJavaFullyQualifiedName(AuxiliaryDescription desc) {
-		desc.toPackage + "." + desc.toJavaClassName
-	}
-	
-	def toPackage(AuxiliaryDescription desc) {
-		val typeSystemPackage = desc.containingSystem.toPackage
-		if (typeSystemPackage.length > 0)
-			typeSystemPackage + "." + "auxiliary"
-		else
-			"auxiliary"
-	}
-	
-	def toJavaClassName(AuxiliaryDescription desc) {
-		desc.name.toFirstUpper
+	def toJavaClassName(Named e) {
+		e.name.toFirstUpper
 	}
 	
 	def toValidatorPackage(XsemanticsSystem ts) {
-		val typeSystemPackage = ts.toPackage
-		if (typeSystemPackage != null && typeSystemPackage.length > 0)
-			typeSystemPackage + "." + "validation"
+		val typeSystemPackage = ts.fullyQualifiedName
+		if (typeSystemPackage != null && typeSystemPackage.segmentCount > 1)
+			typeSystemPackage.skipLast(1) + "." + "validation"
 		else
 			""
 	}
@@ -119,20 +85,12 @@ class XsemanticsGeneratorExtensions {
 			ts.toValidatorJavaClassName
 	}
 	
-	def ruleIssueString(Rule rule) {
-		rule.name.toUpperCase
+	def ruleIssueString(Named e) {
+		e.name.toUpperCase
 	}
 
-	def ruleIssueString(AuxiliaryDescription aux) {
-		aux.name.toUpperCase
-	}
-	
-	def polymorphicDispatcherField(JudgmentDescription judgmentDescription) {
-		'''«judgmentDescription.name»Dispatcher'''
-	}
-
-	def polymorphicDispatcherField(AuxiliaryDescription aux) {
-		'''«aux.name»Dispatcher'''
+	def polymorphicDispatcherField(UniqueByName e) {
+		'''«e.name»Dispatcher'''
 	}
 	
 	def relationSymbolsArgs(JudgmentDescription judgmentDescription) {

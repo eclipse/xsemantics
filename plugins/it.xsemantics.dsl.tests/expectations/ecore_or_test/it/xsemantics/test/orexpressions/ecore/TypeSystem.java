@@ -13,9 +13,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "it.xsemantics.test.orexpressions.ecore.rules.EClassEObject";
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.orexpressions.ecore.EClassEObject";
   
-  public final static String ECLASSEOBJECT2 = "it.xsemantics.test.orexpressions.ecore.rules.EClassEObject2";
+  public final static String ECLASSEOBJECT2 = "it.xsemantics.test.orexpressions.ecore.EClassEObject2";
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   

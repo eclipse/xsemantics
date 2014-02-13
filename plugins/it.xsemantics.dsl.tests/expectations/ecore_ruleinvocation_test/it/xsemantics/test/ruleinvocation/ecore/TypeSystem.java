@@ -17,17 +17,17 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "it.xsemantics.test.ruleinvocation.ecore.rules.EClassEObject";
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.ruleinvocation.ecore.EClassEObject";
   
-  public final static String ECLASSECLASS = "it.xsemantics.test.ruleinvocation.ecore.rules.EClassEClass";
+  public final static String ECLASSECLASS = "it.xsemantics.test.ruleinvocation.ecore.EClassEClass";
   
-  public final static String EOBJECTECLASS = "it.xsemantics.test.ruleinvocation.ecore.rules.EObjectEClass";
+  public final static String EOBJECTECLASS = "it.xsemantics.test.ruleinvocation.ecore.EObjectEClass";
   
-  public final static String EOBJECTECLASS2 = "it.xsemantics.test.ruleinvocation.ecore.rules.EObjectEClass2";
+  public final static String EOBJECTECLASS2 = "it.xsemantics.test.ruleinvocation.ecore.EObjectEClass2";
   
-  public final static String EOBJECTECLASSESTRUCTURALFEATURE = "it.xsemantics.test.ruleinvocation.ecore.rules.EObjectEClassEStructuralFeature";
+  public final static String EOBJECTECLASSESTRUCTURALFEATURE = "it.xsemantics.test.ruleinvocation.ecore.EObjectEClassEStructuralFeature";
   
-  public final static String WITHVARDECLASOUTPUTARG = "it.xsemantics.test.ruleinvocation.ecore.rules.WithVarDeclAsOutputArg";
+  public final static String WITHVARDECLASOUTPUTARG = "it.xsemantics.test.ruleinvocation.ecore.WithVarDeclAsOutputArg";
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   

@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "it.xsemantics.test.validation.ecore.rules.EClassEObject";
+  public final static String ECLASSEOBJECT = "it.xsemantics.test.validation.ecore.EClassEObject";
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   

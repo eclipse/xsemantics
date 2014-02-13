@@ -214,7 +214,7 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 '''Diagnostic ERROR "expected 2 arguments, but got 3" at Program.main->New.args[2]->New'''
 
 	override validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.rules.ExpressionAssignableToType "failed: 'foo' is not assignable for int" at Program.main->New.args[0]->StringConstant'''
+'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.ExpressionAssignableToType "failed: 'foo' is not assignable for int" at Program.main->New.args[0]->StringConstant'''
 
 	override castWrong()
 '''failed: CheckCast: [] |- (D) new C()
@@ -230,5 +230,5 @@ Diagnostic ERROR "Cyclic hierarchy for B" at Program.classes[1]->Class'B'
 Diagnostic ERROR "Cyclic hierarchy for C" at Program.classes[2]->Class'C' '''
 
 	override validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.rules.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
+'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
 }

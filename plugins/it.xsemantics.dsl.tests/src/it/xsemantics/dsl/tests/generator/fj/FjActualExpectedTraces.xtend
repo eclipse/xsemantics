@@ -213,7 +213,7 @@ class FjActualExpectedTraces extends FjExpectedTraces {
 '''Diagnostic ERROR "expected 2 arguments, but got 3" at Program.main->New.args[2]->New'''
 
 	override validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.rules.ExpressionAssignableToType "failed: 'foo' is not assignable for int" at Program.main->New.args[0]->StringConstant'''
+'''Diagnostic ERROR code=it.xsemantics.example.fj.typing.ExpressionAssignableToType "failed: 'foo' is not assignable for int" at Program.main->New.args[0]->StringConstant'''
 
 	override castWrong()
 '''failed: cannot type (D) new C()

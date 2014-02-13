@@ -33,11 +33,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class FjAltTypeSystem extends FjFirstTypeSystem {
-  public final static String TYPEEQUALS = "it.xsemantics.test.fj.alt.rules.TypeEquals";
+  public final static String TYPEEQUALS = "it.xsemantics.test.fj.alt.TypeEquals";
   
-  public final static String CHECKNEW = "it.xsemantics.test.fj.alt.rules.CheckNew";
+  public final static String CHECKNEW = "it.xsemantics.test.fj.alt.CheckNew";
   
-  public final static String CHECKCLASS = "it.xsemantics.test.fj.alt.rules.CheckClass";
+  public final static String CHECKCLASS = "it.xsemantics.test.fj.alt.CheckClass";
   
   @Inject
   private FjAuxiliaryFunctions fjAux;

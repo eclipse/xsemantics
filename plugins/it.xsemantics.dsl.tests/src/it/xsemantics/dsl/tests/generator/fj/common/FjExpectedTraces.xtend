@@ -318,19 +318,19 @@ TSelection: [] |- new A(10).f : int
  BasicEquals: [] |- String ~~ String'''
 
 	def validateCheckNewWrongSubtypeSimpler()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.BasicSubtyping "failed: BasicSubtyping: [] |- String <: int" at Program.classes[0]->Class'A'.members[0]->Field'i'.type->BasicType'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.BasicSubtyping "failed: BasicSubtyping: [] |- String <: int" at Program.classes[0]->Class'A'.members[0]->Field'i'.type->BasicType'''
 
 	def validateCheckNewWrongArgNum()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.SubtypeSequence "failed: SubtypeSequence: [] |- new B(20, 'bar', 1) : [20, 'bar', 1] << [int i;, String s;]" at Program.main->New.args[2]->New'''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.SubtypeSequence "failed: SubtypeSequence: [] |- new B(20, 'bar', 1) : [20, 'bar', 1] << [int i;, String s;]" at Program.main->New.args[2]->New'''
 	
 	def validateSubclassNotOverrideMethodChangingReturnType()
 '''NOT IMPLEMENTED'''
 
 	def validateCyclicClassHierarchy()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'
-Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class B extends A { }" at Program.classes[1]->Class'B'
-Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class C extends B { }" at Program.classes[2]->Class'C' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.CheckClass "failed: CheckClass: [] |- class A extends C { }" at Program.classes[0]->Class'A'
+Diagnostic ERROR code=it.xsemantics.test.fj.first.CheckClass "failed: CheckClass: [] |- class B extends A { }" at Program.classes[1]->Class'B'
+Diagnostic ERROR code=it.xsemantics.test.fj.first.CheckClass "failed: CheckClass: [] |- class C extends B { }" at Program.classes[2]->Class'C' '''
 
 	def validateSubclassDeclaresSameFieldOfSuperClass()
-'''Diagnostic ERROR code=it.xsemantics.test.fj.first.rules.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
+'''Diagnostic ERROR code=it.xsemantics.test.fj.first.CheckClass "failed: CheckClass: [] |- class B extends A { String s; int i; }" at Program.classes[1]->Class'B' '''
 }
