@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import org.eclipse.xtext.common.types.JvmField
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -96,88 +97,88 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				superTypes += ts.superSystem.cloneWithProxies
 			else
 				superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+			
+			val injectedFields = <JvmField>newArrayList()
+			val polyDispFields = <JvmField>newArrayList()
+			val issueFields = <JvmField>newArrayList()
+
+			val getterSetters = <JvmOperation>newArrayList()
+			val entryPoints = <JvmOperation>newArrayList()
+			val checkMethods = <JvmOperation>newArrayList()
+			val internalMethods = <JvmOperation>newArrayList()
+			val implMethods = <JvmOperation>newArrayList()
 
 			for (elem: ts.auxiliaryDescriptions) {
-				members += elem.genIssueField
+				issueFields += elem.genIssueField
+				entryPoints += elem.genEntryPointMethods
+				polyDispFields += elem.genPolymorphicDispatcherField
+				internalMethods += elem.compileInternalMethod
+				internalMethods += elem.compileThrowExceptionMethod
 			}
 			
-			for (elem : ts.rules) {
-				members += elem.genIssueField
-			}
-			
-			for (injectedField : ts.injections) {
-				members += injectedField.toField(
-					injectedField.name, 
-					injectedField.type
+			for (injected : ts.injections) {
+				injectedFields += injected.toField(
+					injected.name, 
+					injected.type
 				) [
-					documentation = injectedField.documentation
+					documentation = injected.documentation
 					annotations += ts.toAnnotation(typeof(Inject))
 					visibility = JvmVisibility::PRIVATE
 				]
-			}
-			
-			for (elem : ts.auxiliaryDescriptions) {
-				members += elem.genPolymorphicDispatcherField
+				
+				getterSetters += injected.toGetter
+					(injected.name, injected.type)
+				getterSetters += injected.toSetter
+					(injected.name, injected.type)
 			}
 			
 			for (elem : ts.judgmentDescriptions) {
-				members += elem.genPolymorphicDispatcherField
+				polyDispFields += elem.genPolymorphicDispatcherField
+				entryPoints += elem.genEntryPointMethods
+				entryPoints += elem.genSucceededMethods
+				internalMethods += elem.compileInternalMethod
+				internalMethods += elem.compileThrowExceptionMethod
 			}
+
+			for (r : ts.checkrules) {
+				checkMethods += r.compileCheckRuleMethods
+				checkMethods += r.compileInternalMethod
+			}
+
+			for (aux : ts.auxiliaryFunctions) {
+				if (aux.getOrSetAuxiliaryDescription != null) {
+					implMethods += aux.compileImplMethod
+					implMethods += aux.compileApplyAuxiliaryFunction
+				}
+			}
+			
+			for (rule : ts.rules) {
+				issueFields += rule.genIssueField
+				if (rule.orSetJudgmentDescription != null) {
+					implMethods += rule.compileImplMethod
+					implMethods += rule.compileApplyMethod
+					for (e : rule.expressionsInConclusion) {
+						implMethods += e.compileExpressionInConclusionMethod
+					}
+					if (rule.conclusion.error != null)
+						implMethods += rule.compileErrorSpecificationMethod
+				}
+			}			
+			// add fields to the inferred class
+			members.addAll(issueFields)
+			members.addAll(injectedFields)
+			members.addAll(polyDispFields)
 			
 			//val procedure = element.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += ts.genConstructor
 			
 			members += ts.genInit
 			
-			for (injectedField : ts.injections) {
-				members += injectedField.toGetter
-					(injectedField.name, injectedField.type)
-				members += injectedField.toSetter
-					(injectedField.name, injectedField.type)
-			}
-			
-			for (elem : ts.auxiliaryDescriptions) {
-				members += elem.genEntryPointMethods
-			}
-
-			for (elem : ts.judgmentDescriptions) {
-				members += elem.genEntryPointMethods
-				members += elem.genSucceededMethods
-			}
-			
-			for (r : ts.checkrules) {
-				members += r.compileCheckRuleMethods
-				members += r.compileInternalMethod
-			}
-
-			for (elem : ts.auxiliaryDescriptions) {
-				members += elem.compileInternalMethod
-				members += elem.compileThrowExceptionMethod
-			}
-			
-			for (elem : ts.judgmentDescriptions) {
-				members += elem.compileInternalMethod
-				members += elem.compileThrowExceptionMethod
-			}
-			
-			for (aux : ts.auxiliaryFunctions) {
-				if (aux.getOrSetAuxiliaryDescription != null) {
-					members += aux.compileImplMethod
-					members += aux.compileApplyAuxiliaryFunction
-				}
-			}
-			
-			for (rule : ts.rules) {
-				if (rule.orSetJudgmentDescription != null) {
-					members += rule.compileImplMethod
-					members += rule.compileApplyMethod
-					for (e : rule.expressionsInConclusion) {
-						members += e.compileExpressionInConclusionMethod
-					}
-					if (rule.conclusion.error != null)
-						members += rule.compileErrorSpecificationMethod
-				}
-			}
+			members.addAll(getterSetters)
+			members.addAll(entryPoints)
+			members.addAll(checkMethods)
+			members.addAll(internalMethods)
+			members.addAll(implMethods)
 		]
 		
 		// generation of the Validator
