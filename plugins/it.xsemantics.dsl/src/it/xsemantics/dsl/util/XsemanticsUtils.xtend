@@ -79,9 +79,13 @@ class XsemanticsUtils {
 		)
 	}
 	
-	def auxiliaryDescription(AuxiliaryFunction fun) {
-		fun.containingSystem.
-			auxiliaryDescriptionsByName.get(fun.name)
+	def getOrSetAuxiliaryDescription(AuxiliaryFunction fun) {
+		// compute corresponding auxiliary description only on the first invokation
+		if (!fun.isSetAuxiliaryDescription) {
+			fun.auxiliaryDescription = fun.containingSystem.
+				auxiliaryDescriptionsByName.get(fun.name)	
+		}
+		fun.auxiliaryDescription
 	}
 	
 	def rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {

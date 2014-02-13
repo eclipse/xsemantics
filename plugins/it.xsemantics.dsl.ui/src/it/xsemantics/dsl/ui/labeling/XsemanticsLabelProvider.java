@@ -46,7 +46,7 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(AuxiliaryFunction aux) {
-		AuxiliaryDescription desc = utils.auxiliaryDescription(aux);
+		AuxiliaryDescription desc = utils.getOrSetAuxiliaryDescription(aux);
 		return aux.getName() + (desc != null ? " (" + Strings.emptyIfNull(desc.getName()) + ")" : "");
 	}
 

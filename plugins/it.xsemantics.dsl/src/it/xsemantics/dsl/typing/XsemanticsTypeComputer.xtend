@@ -61,7 +61,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		
 		if (b.eContainer instanceof AuxiliaryFunction) {
 			val aux = b.eContainer as AuxiliaryFunction
-			val type = aux.auxiliaryDescription?.type
+			val type = aux.getOrSetAuxiliaryDescription?.type
 			
 			// if the return type is null we assume boolean
 			// and we must not check it

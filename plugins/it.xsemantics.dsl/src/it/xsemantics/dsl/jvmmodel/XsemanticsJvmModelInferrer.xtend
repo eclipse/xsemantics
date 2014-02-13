@@ -161,7 +161,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			}
 			
 			for (aux : ts.auxiliaryFunctions) {
-				if (aux.auxiliaryDescription != null) {
+				if (aux.getOrSetAuxiliaryDescription != null) {
 					members += aux.compileImplMethod
 					members += aux.compileApplyAuxiliaryFunction
 				}
@@ -725,9 +725,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		val resultType = aux.resultType
 		val isBoolean = aux.newTypeRef(typeof(Boolean)).
 				isConformant(resultType)
+		val auxiliaryDescription = aux.getOrSetAuxiliaryDescription
 		
 		aux.toMethod(
-			'''«aux.auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
+			'''«auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
 			resultType
 		) 
 		[
@@ -735,7 +736,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			exceptions += aux.ruleFailedExceptionType
 			
-   			parameters += aux.auxiliaryDescription.ruleApplicationTraceParam
+   			parameters += auxiliaryDescription.ruleApplicationTraceParam
    			parameters += aux.inputParameters
    			
    			body = '''
@@ -746,8 +747,8 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
 					return _result_;
 				} catch («Exception» e_«aux.applyAuxFunName») {
-					«aux.auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
-						«aux.auxiliaryDescription.ruleIssueString»,
+					«auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
+						«auxiliaryDescription.ruleIssueString»,
 						e_«aux.applyAuxFunName», «aux.inputParameterNames»«aux.errorInformationArgs»);
 					return «IF isBoolean»false«ELSE»null«ENDIF»;
 				}

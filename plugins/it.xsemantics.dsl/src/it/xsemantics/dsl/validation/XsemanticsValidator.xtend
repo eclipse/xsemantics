@@ -480,7 +480,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def public void checkAuxiliaryFunctionHasAuxiliaryDescription(
 			AuxiliaryFunction aux) {
 		val auxiliaryDescription = aux
-				.auxiliaryDescription();
+				.getOrSetAuxiliaryDescription();
 		if (auxiliaryDescription == null) {
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",

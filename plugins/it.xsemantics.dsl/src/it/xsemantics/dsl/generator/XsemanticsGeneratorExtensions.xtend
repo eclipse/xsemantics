@@ -359,7 +359,7 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def errorForAuxiliaryFun(AuxiliaryFunction aux) {
-		aux.auxiliaryDescription.name.auxFunNameInvocation + 
+		aux.getOrSetAuxiliaryDescription.name.auxFunNameInvocation + 
 		''' + "(" + «aux.parameters.map[name.wrapInStringRepr].join(''' + ", " + ''')»+ ")"'''
 	}
 
@@ -402,7 +402,7 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def resultType(AuxiliaryFunction e) {
-		typeSystem.getType(e.auxiliaryDescription)
+		typeSystem.getType(e.getOrSetAuxiliaryDescription)
 	}
 
 	def booleanType(EObject e) {

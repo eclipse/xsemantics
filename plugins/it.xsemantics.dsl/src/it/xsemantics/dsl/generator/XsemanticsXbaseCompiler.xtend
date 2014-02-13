@@ -60,7 +60,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				return appendable
 			}
 			AuxiliaryFunction: {
-				if (rule.auxiliaryDescription.type != null)
+				if (rule.getOrSetAuxiliaryDescription.type != null)
 					return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
 				
 				// else we must put an explicit return true, since
