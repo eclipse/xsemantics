@@ -828,7 +828,7 @@ final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructu
       InputOutput.<String>println("testing");
       /* G ||- it */
       boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
-      _xblockexpression = (_ruleinvocation);
+      _xblockexpression = _ruleinvocation;
     }
     return Boolean.valueOf(_xblockexpression);
   }

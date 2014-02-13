@@ -1305,7 +1305,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         BasicType _xblockexpression = null;
         {
           t.setBasic("boolean");
-          _xblockexpression = (t);
+          _xblockexpression = t;
         }
         return _xblockexpression;
       }
