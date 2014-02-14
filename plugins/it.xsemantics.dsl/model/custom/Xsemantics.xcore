@@ -1,0 +1,172 @@
+@Ecore(nsURI="http://www.xsemantics.it/dsl/Xsemantics")
+@GenModel(modelDirectory="/it.xsemantics.dsl/emf-gen", editDirectory="/it.xsemantics.dsl.edit/src", editorDirectory="/it.xsemantics.dsl.editor/src", forceOverwrite="true", updateClasspath="false", editorPluginID="it.xsemantics.dsl.editor")
+package it.xsemantics.dsl.xsemantics
+
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xtype.XImportSection
+
+class XsemanticsFile {
+	contains XImportSection importSection
+	contains XsemanticsSystem xsemanticsSystem
+}
+
+class XsemanticsSystem {
+	String name
+	contains JvmParameterizedTypeReference superSystem
+	contains JvmParameterizedTypeReference validatorExtends
+	contains XImportSection importSection
+	contains Injected[] injections
+	contains AuxiliaryDescription[] auxiliaryDescriptions
+	contains JudgmentDescription[] judgmentDescriptions
+	contains AuxiliaryFunction[] auxiliaryFunctions
+	contains Rule[] rules
+	contains CheckRule[] checkrules
+}
+
+class Injected extends UniqueByName {
+	contains JvmTypeReference ^type
+	String name
+}
+
+class AuxiliaryDescription extends UniqueByName {
+	String name
+	contains JvmFormalParameter[] parameters
+	contains JvmTypeReference ^type
+	contains XExpression error
+}
+
+class JudgmentDescription extends Overrider {
+	boolean override
+	String name
+	String judgmentSymbol
+	contains JudgmentParameter[] judgmentParameters
+	String[] relationSymbols
+	contains XExpression error
+}
+
+class JudgmentParameter {
+}
+
+class AuxiliaryFunction extends Named {
+	String name
+	contains JvmFormalParameter[] parameters
+	contains XExpression body
+	refers transient unsettable AuxiliaryDescription auxiliaryDescription
+}
+
+class Rule extends Overrider , ReferToJudgment {
+	boolean override
+	String name
+	contains RuleConclusion conclusion
+	@GenModel(body="return getConclusion().getJudgmentSymbol();")
+	op String getJudgmentSymbol()
+	@GenModel(body="return getConclusion().getRelationSymbols();")
+	op unique String[] getRelationSymbols()
+}
+
+class Axiom extends Rule {
+}
+
+class RuleWithPremises extends Rule {
+	contains XExpression premises
+}
+
+class CheckRule extends Overrider {
+	boolean override
+	String name
+	contains RuleParameter element
+	contains XExpression premises
+}
+
+class RuleConclusion {
+	contains Environment environment
+	String judgmentSymbol
+	contains RuleConclusionElement[] conclusionElements
+	String[] relationSymbols
+	contains XExpression error
+}
+
+class RuleInvocation extends XExpression , ReferToJudgment {
+	contains XExpression environment
+	String judgmentSymbol
+	contains XExpression[] expressions
+	String[] relationSymbols
+}
+
+class Environment {
+	String name
+}
+
+class RuleConclusionElement {
+}
+
+class RuleParameter extends RuleConclusionElement {
+	contains JvmFormalParameter parameter
+}
+
+class ExpressionInConclusion extends RuleConclusionElement {
+	contains XExpression expression
+}
+
+class OutputParameter extends JudgmentParameter {
+	contains JvmTypeReference jvmTypeReference
+}
+
+class InputParameter extends JudgmentParameter , UniqueByName {
+	contains JvmFormalParameter parameter
+	@GenModel(body="return getParameter().getName();")
+	op String getName()
+}
+
+class OrExpression extends XExpression {
+	contains XExpression[] branches
+}
+
+class Fail extends XExpression {
+	contains XExpression error
+}
+
+class EnvironmentAccess extends XExpression {
+	refers Environment environment
+	contains XExpression argument
+	contains JvmTypeReference ^type
+}
+
+class EnvironmentComposition extends XExpression {
+	contains XExpression currentEnvironment
+	contains XExpression subEnvironment
+}
+
+class EnvironmentMapping extends XExpression {
+	contains XExpression key
+	contains XExpression value
+}
+
+class EmptyEnvironment extends XExpression {
+}
+
+class ErrorSpecification extends XExpression {
+	contains XExpression error
+	contains XExpression source
+	contains XExpression feature
+}
+
+interface UniqueByName extends Named {
+}
+
+interface Overrider extends UniqueByName {
+	op boolean isOverride()
+}
+
+class ReferToJudgment {
+	refers transient unsettable JudgmentDescription judgment
+	op String getJudgmentSymbol()
+	op unique String[] getRelationSymbols()
+}
+
+interface Named {
+	op String getName()
+}
