@@ -1,7 +1,8 @@
 @Ecore(nsURI="http://www.xsemantics.it/dsl/Xsemantics")
 @GenModel(modelDirectory="/it.xsemantics.dsl/emf-gen", 
 	forceOverwrite="true", 
-	updateClasspath="false"
+	updateClasspath="false",
+	operationReflection="false" // http://www.eclipse.org/forums/index.php/mv/msg/649098/1246741/#msg_1246741
 )
 package it.xsemantics.dsl.xsemantics
 
