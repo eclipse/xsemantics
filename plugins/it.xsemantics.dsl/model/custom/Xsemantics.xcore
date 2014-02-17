@@ -1,5 +1,8 @@
 @Ecore(nsURI="http://www.xsemantics.it/dsl/Xsemantics")
-@GenModel(modelDirectory="/it.xsemantics.dsl/emf-gen", editDirectory="/it.xsemantics.dsl.edit/src", editorDirectory="/it.xsemantics.dsl.editor/src", forceOverwrite="true", updateClasspath="false", editorPluginID="it.xsemantics.dsl.editor")
+@GenModel(modelDirectory="/it.xsemantics.dsl/emf-gen", 
+	forceOverwrite="true", 
+	updateClasspath="false"
+)
 package it.xsemantics.dsl.xsemantics
 
 import org.eclipse.xtext.common.types.JvmFormalParameter
