@@ -65,10 +65,12 @@ class Rule extends Overrider , ReferToJudgment {
 	boolean override
 	String name
 	contains RuleConclusion conclusion
-	@GenModel(body="return getConclusion().getJudgmentSymbol();")
-	op String getJudgmentSymbol()
-	@GenModel(body="return getConclusion().getRelationSymbols();")
-	op unique String[] getRelationSymbols()
+	op String getJudgmentSymbol() {
+		return conclusion.judgmentSymbol
+	}
+	op unique String[] getRelationSymbols() {
+		return conclusion.relationSymbols
+	}
 }
 
 class Axiom extends Rule {
@@ -121,8 +123,9 @@ class OutputParameter extends JudgmentParameter {
 
 class InputParameter extends JudgmentParameter , UniqueByName {
 	contains JvmFormalParameter parameter
-	@GenModel(body="return getParameter().getName();")
-	op String getName()
+	op String getName() {
+		return parameter.name
+	}
 }
 
 class OrExpression extends XExpression {
