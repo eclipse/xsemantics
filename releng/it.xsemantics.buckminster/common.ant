@@ -173,6 +173,14 @@
 		</delete>
 	</target>
 
+	<target name="clean-emf-gen" unless="dont-clean-emf-gen">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${projects.location}" defaultexcludes="false">
+				<include name="**/emf-gen/**/*.java*" />
+			</fileset>
+		</delete>
+	</target>
+
 	<target name="reset.target-platform">
 		<delete includeemptydirs="true">
 			<fileset dir="${build.root}" defaultexcludes="false">

@@ -29,7 +29,7 @@
 	<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
 	
 	<target name="buckminster" 
-		depends="common.cleanup,clean-xtend-gen,copy-xtext-grammar-to-bin,install.buckminster.headless,install.findbugs" description="description">
+		depends="common.cleanup,clean-xtend-gen,clean-emf-gen,copy-xtext-grammar-to-bin,install.buckminster.headless,install.findbugs" description="description">
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 

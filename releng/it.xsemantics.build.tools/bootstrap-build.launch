@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
 <setAttribute key="additional_plugins">
-<setEntry value="it.xsemantics.build.tools:1.4.0.qualifier:default:true"/>
-<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20130611-2154:default:false"/>
-<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20131215-1153:default:false"/>
-<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20131215-1202:default:false"/>
+<setEntry value="it.xsemantics.build.tools:1.4.2.qualifier:default:true"/>
+<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20140122-1821:default:false"/>
+<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20140122-1821:default:false"/>
+<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20140122-1821:default:false"/>
 </setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="askclear" value="false"/>
@@ -47,6 +47,13 @@
 <setEntry value="org.eclipse.e4.rcp.source:default"/>
 <setEntry value="org.eclipse.e4.rcp:default"/>
 <setEntry value="org.eclipse.emf.common:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.lib.source:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.lib:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.sdk:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.source:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.ui.source:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore.ui:default"/>
+<setEntry value="org.eclipse.emf.ecore.xcore:default"/>
 <setEntry value="org.eclipse.emf.ecore:default"/>
 <setEntry value="org.eclipse.equinox.p2.core.feature.source:default"/>
 <setEntry value="org.eclipse.equinox.p2.core.feature:default"/>
