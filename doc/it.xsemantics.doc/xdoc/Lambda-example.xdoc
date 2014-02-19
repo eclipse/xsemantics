@@ -197,29 +197,32 @@ TypeVariable: typevarName=ID;
 section:LambdaTypeSystem[Lambda Type Inference]
 
 Thus, we want to write the type system definition in Xsemantics for Lambda, 
-also inferring types (performing unification for inferring the most general type). 
-We start with the judgments:
+also inferring types (performing unification for inferring the most general type).
+
+In the following we will skip import statements.
+
+We start with the auxiliary functions and judgments:
 
 code[Xsemantics][
 system it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 
 validatorExtends it.xsemantics.example.lambda.validation.AbstractLambdaJavaValidator
 
-import it.xsemantics.example.lambda.lambda.*
-import it.xsemantics.example.lambda.xsemantics.*
-
-import org.eclipse.emf.ecore.util.*
-
 inject LambdaUtils lambdaUtils
+
+auxiliary {
+	notoccur(Type type, Type other)
+		error stringRep(type) + " occurs in " + stringRep(other)
+	typesubstitution(TypeSubstitutions substitutions, Type original) : Type
+	unify(TypeSubstitutions substitutions, 
+			Type left, Type right) : UnifyResult
+		error "cannot unify " + stringRep(left) + 
+			" with " + stringRep(right)
+}
 
 judgments {
 	type |- TypeSubstitutions substitutions |> Term term : output Type
 	paramtype |~ Parameter param : output Type
-	typesubstitution |- TypeSubstitutions substitutions |> Type original ~> output Type
-	notoccur |- Type type :> Type other
-		error stringRep(type) + " occurs in " + stringRep(other)
-	unify |- TypeSubstitutions substitutions |> 
-		Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
 }
 ]
 
@@ -252,81 +255,81 @@ public class TypeSubstitutions {
 }
 ]
 
-Let's start with the rules which check that a type variable does NOT occur 
+It uses code[UnionResult] that is basically an implementation of a pair
+of code[Type]s.
+
+Let's start with the auxiliary function implementations
+that check that a type variable does NOT occur 
 in another type term (judgment e[notoccur], which takes two input parameters):
 
 code[Xsemantics][
-axiom NotOccurBase
-	G |- Type type :> Type other
+auxiliary notoccur(Type type, Type other) { true }
 
-rule NotOccurVar
-	G |- TypeVariable variable :> TypeVariable other
-from {
+auxiliary notoccur(TypeVariable variable, TypeVariable other)
+{
 	variable.typevarName != other.typevarName
 }
 
-rule NotOccurVarInArrow
-	G |- TypeVariable variable :> ArrowType arrowType
-from {
-	G |- variable :> arrowType.left
-	G |- variable :> arrowType.right
+auxiliary notoccur(TypeVariable variable, ArrowType arrowType)
+{
+	notoccur(variable, arrowType.left)
+	notoccur(variable, arrowType.right)
 }
 ]
 
-The base case (which simply holds) catches all the other situations not handled by
-the specific rules; a type variable occurs in another one, if they both have 
-the same name, and a type variable occurs in an arrow type if it occurs either 
-on the left or on the right.
+The base case (which simply always holds) catches all the other situations not handled by
+the specific cases; the second case states that
+a type variable does not occur in another one, if it has a different
+name, and the third one that a type variable does not
+in an arrow type if it occurs neither 
+in the left nor in the right part of the arrow.
 
-Now we show the rules for the judgment e[typesubstitution], which
+Now we show the implementation of the auxiliary function e[typesubstitution], which
 takes as input parameters a map for type substitution and the original type
-and has an output parameter containing the new type after performing
-substitutions.
+and returns the new type after performing substitutions.
 
 code[Xsemantics][
-rule SubstituteType
-	G |- TypeSubstitutions substitutions |> Type type ~> Type result
-from {
-	result = type
+auxiliary typesubstitution(TypeSubstitutions substitutions, Type type)
+{
+	type
 }
 
-rule SubstituteTypeVariable
-	G |- TypeSubstitutions substitutions |> TypeVariable variable ~> Type result
-from {
-	{
-		var mapped = substitutions.mapped(variable.typevarName)
-		mapped != null
-		result = EcoreUtil::copy(mapped)
-		G |- substitutions |> result ~> result // recursive
-	}
-	or
-		result = variable
+auxiliary typesubstitution(TypeSubstitutions substitutions, TypeVariable variable)
+{
+	var mapped = substitutions.mapped(variable.typevarName)
+	if (mapped != null) {
+		val result = EcoreUtil::copy(mapped)
+		typesubstitution(substitutions, result) // recursive
+	} else
+		variable
 }
 
-rule SubstituteArrowType
-	G |- TypeSubstitutions substitutions |> ArrowType arrowType ~> ArrowType result
-from {
+auxiliary typesubstitution(TypeSubstitutions substitutions, ArrowType arrowType)
+{
 	var Type subResult
-	result = EcoreUtil::copy(arrowType)
-	G |- substitutions |> arrowType.left ~> subResult
+	val result = EcoreUtil::copy(arrowType)
+	subResult = typesubstitution(substitutions, arrowType.left)
 	result.left = subResult
-	G |- substitutions |> arrowType.right ~> subResult
+	subResult = typesubstitution(substitutions, arrowType.right)
 	result.right = subResult
+	result
 }
 ]
 
 The general case simply returns the input parameter as the result
 (no substitution needed).
 When we substitute a type variable we create a new code[Type] by 
-cloning the value the type variable maps to (if this block
-fails, due to no existing mapping, it means that there's no need of 
+cloning the value the type variable maps to (if there's
+no existing mapping, it means that there's no need of 
 substitution, and the result is simply the input argument). 
 However, we cannot stop here: 
 a type variable can map to another type variable (see the 
 cases below for unification) which in turn can be mapped to something
 else and so on, thus, we must make sure we apply all the substitutions 
-that concern a type variable: we apply the substitution judgment recursively 
-on the result. For instance, if we have the mappings 
+that concern a type variable: we apply the substitution recursively 
+on the result. 
+
+For instance, if we have the mappings 
 code[X1] to code[Lambda][(int->X2)] and code[X2] to code[Lambda][string] 
 and we have apply the substitutions to the the type code[X1->X2], 
 the result must be
@@ -342,53 +345,54 @@ the substitution judgment can also be invoked by passing the same
 argument both for the input and as the output parameter (as we will see
 in the following).
 
-The judgment for unification
+The auxiliary function for unification
 
 code[Xsemantics][
-unify |- TypeSubstitutions substitutions |> 
-	Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
+unify(TypeSubstitutions substitutions, 
+		Type left, Type right) : UnifyResult
+	error "cannot unify " + stringRep(left) + 
+		" with " + stringRep(right)
 ]
 
-takes the substitutions map, two types and outputs two types:
+takes the substitutions map, two types and outputs two types
+(contained in codeRef[it.xsemantics.example.lambda.xsemantics.UnifyResult]):
 it tries to unify the two input types, and if the unification
 succeeds it outputs two new types which are the unified version of the
 two input types after performing the substitutions (which are
 also recorded in the e[substitutions] parameter).
 
-The rules for this judgment consider all possible cases which make sense
+The implementation of this auxiliary function 
+considers all possible cases that make sense
 (the default case simply fails); let's start considering the
 simpler ones:
 
 code[Xsemantics][
-rule UnifyType
-	G |- TypeSubstitutions substitutions |>  Type t1 ~~ Type t2 ~> t1 ~~ t2
-from {
-	// in general it fails
+auxiliary unify(TypeSubstitutions substitutions, Type t1, Type t2) {
+	// if we get here we cannot unify the two types
 	fail
+	null
+} 
+
+auxiliary unify(TypeSubstitutions substitutions, StringType t1, StringType t2) 
+{
+	new UnifyResult(EcoreUtil::copy(t1), EcoreUtil::copy(t2))
 }
 
+auxiliary unify(TypeSubstitutions substitutions, IntType t1, IntType t2)
+{
+	new UnifyResult(EcoreUtil::copy(t1), EcoreUtil::copy(t2))
+}
 
-axiom UnifyStringType
-	G |- TypeSubstitutions substitutions |> StringType t1 ~~ StringType t2 
-		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
-
-axiom UnifyIntType
-	G |- TypeSubstitutions substitutions |> IntType t1 ~~ IntType t2 
-		~> EcoreUtil::copy(t1) ~~ EcoreUtil::copy(t2)
-
-rule UnifyTypeVariableBasicType
-	G |- TypeSubstitutions substitutions |> TypeVariable typeVar ~~ BasicType basicType 
-		~> EcoreUtil::copy(basicType) ~~ BasicType result
-from {
-	result = EcoreUtil::copy(basicType)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable typeVar, BasicType basicType)
+{
+	val result = EcoreUtil::copy(basicType)
 	substitutions.add(typeVar.typevarName, result)
+	new UnifyResult(EcoreUtil::copy(basicType), result)
 }
 
-rule UnifyBasicTypeTypeVariable
-	G |- TypeSubstitutions substitutions |> BasicType basicType ~~ TypeVariable typeVar
-		~> BasicType resultForVar ~~ BasicType resultForBasic
-from {
-	G |- substitutions |> typeVar ~~ basicType ~> resultForVar ~~ resultForBasic
+auxiliary unify(TypeSubstitutions substitutions, BasicType basicType, TypeVariable typeVar)
+{
+	unify(substitutions, typeVar, basicType)
 }
 ]
 
@@ -398,15 +402,14 @@ the substitution is recorded).  Note that we must also consider the
 symmetric case.
 
 code[Xsemantics][
-rule UnifyTypeVariables
-	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ TypeVariable originalRight 
-		~> TypeVariable newLeft ~~ TypeVariable newRight
-from {
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, TypeVariable originalRight)
+{
 	// unify both variables with a fresh new variable
-	newLeft = lambdaUtils.createFreshTypeVariable
-	newRight = EcoreUtil::copy(newLeft)
+	val newLeft = lambdaUtils.createFreshTypeVariable
+	val newRight = EcoreUtil::copy(newLeft)
 	substitutions.add(originalLeft.typevarName, newLeft)
 	substitutions.add(originalRight.typevarName, newRight)
+	new UnifyResult(newLeft, newRight)
 }
 ]
 
@@ -415,36 +418,31 @@ type variable (using the utility class codeRef[it.xsemantics.example.lambda.xsem
 and we map both variables to that new fresh variable.
 
 code[Xsemantics][
-rule UnifyTypeVariableArrowType
-	G |- TypeSubstitutions substitutions |> TypeVariable originalLeft ~~ ArrowType originalRight 
-		~> ArrowType newLeft ~~ EcoreUtil::copy(originalRight)
-from {
-	G |- originalLeft :> originalRight // occur check
-	newLeft = EcoreUtil::copy(originalRight)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, ArrowType originalRight)
+{
+	// occur check
+	notoccur(originalLeft, originalRight)
+	val newLeft = EcoreUtil::copy(originalRight)
 	substitutions.add(originalLeft.typevarName, newLeft)
+	new UnifyResult(newLeft, EcoreUtil::copy(originalRight))
 }
 
-rule UnifyArrowTypeTypeVariable
-	G |- TypeSubstitutions substitutions |> ArrowType originalLeft ~~ TypeVariable originalRight 
-		~> ArrowType newLeft ~~ ArrowType newRight
-from {
-	G |- substitutions |> originalRight ~~ originalLeft ~> newRight ~~ newLeft
+auxiliary unify(TypeSubstitutions substitutions, ArrowType originalLeft, TypeVariable originalRight)
+{
+	unify(substitutions, originalRight, originalLeft)
 }
 
-rule UnifyArrowTypes
-	G |- TypeSubstitutions substitutions |> ArrowType arrow1 ~~ ArrowType arrow2 
-		~> ArrowType newArrow1 ~~ ArrowType newArrow2
-from {
-	newArrow1 = EcoreUtil::copy(arrow1)
-	newArrow2 = EcoreUtil::copy(arrow2)
-	var Type temp1
-	var Type temp2
-	G |- substitutions |> arrow1.left ~~ arrow2.left ~> temp1 ~~ temp2
-	newArrow1.left = temp1
-	newArrow2.left = temp2
-	G |- substitutions |> arrow1.right ~~ arrow2.right ~> temp1 ~~ temp2
-	newArrow1.right = temp1
-	newArrow2.right = temp2
+auxiliary unify(TypeSubstitutions substitutions, ArrowType arrow1, ArrowType arrow2)
+{
+	val newArrow1 = EcoreUtil::copy(arrow1)
+	val newArrow2 = EcoreUtil::copy(arrow2)
+	var result = unify(substitutions, arrow1.left, arrow2.left)
+	newArrow1.left = result.first
+	newArrow2.left = result.second
+	result = unify(substitutions, arrow1.right, arrow2.right)
+	newArrow1.right = result.first
+	newArrow2.right = result.second
+	new UnifyResult(newArrow1, newArrow2)
 }
 ]
 
@@ -516,7 +514,8 @@ rule VariableType
 	G |- TypeSubstitutions substitutions |> 
 		Variable variable : Type type
 from {
-	G |- substitutions |> EcoreUtil::copy(env(G, variable.ref, Type)) ~> type
+	type = typesubstitution(substitutions, 
+		EcoreUtil::copy(env(G, variable.ref, Type)))
 }
 ]
 
@@ -532,7 +531,7 @@ from {
 	intType = lambdaUtils.createIntType
 	G |- substitutions |> arithmetics.term : var Type termType
 	// the term type must be unifiable with int type
-	G |- substitutions |> termType ~~ intType ~> intType ~~ intType
+	unify(substitutions, termType, intType)
 }
 ]
 
@@ -547,8 +546,8 @@ from {
 	G |~ abstraction.param : var Type paramType
 	G, abstraction.param <- paramType |- 
 		substitutions |> abstraction.term : var Type termType
-	G |- substitutions |> paramType ~> paramType
-	G |- substitutions |> termType ~> termType
+	paramType = typesubstitution(substitutions, paramType)
+	termType = typesubstitution(substitutions, termType)
 	type = lambdaUtils.createArrowType(paramType, termType)
 }
 ]
@@ -567,15 +566,15 @@ from {
 	
 	// make sure funType can be unified ArrowType
 	var arrowType = lambdaUtils.createFreshArrowType
-	G |- substitutions |> funType ~~ arrowType ~> funType ~~ arrowType
+	arrowType = unify(substitutions, funType, arrowType).second as ArrowType
 	
 	G |- substitutions |> application.arg : var Type argType
 	
 	// unify arrow left with the type of the argument
-	G |- substitutions |> arrowType.left ~~ argType ~> funType ~~ argType
+	unify(substitutions, arrowType.left, argType)
 	
 	// the result is the arrow right after substitutions
-	G |- substitutions |> arrowType.right ~> type
+	type = typesubstitution(substitutions, arrowType.right)
 }
 ]
 
