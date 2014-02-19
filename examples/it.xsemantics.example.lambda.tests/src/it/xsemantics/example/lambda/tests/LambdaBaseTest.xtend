@@ -89,12 +89,17 @@ class LambdaBaseTest {
 				result.failed
 			);
 	}
+
+	def void assertFailure(Boolean result) {
+		if (result)
+			Assert::assertTrue("should have failed", result);
+	}
 	
 	def <T> void assertFailureTrace(Result<T> result, CharSequence expectedTrace) {
 		assertFailure(result)
 		assertStrings(expectedTrace, result.ruleFailedException.failureTraceAsString)
 	}
-	
+
 	def void assertStrings(Object expected, Object actual) {
 		Assert::assertEquals(expected.toString, actual.toString)
 	}
@@ -122,8 +127,8 @@ class LambdaBaseTest {
 		Assert::assertEquals(expected, result.first.string + " -- " + result.second.string)
 	}
 	
-	def void assertResultTrue(Result<Boolean> result) {
-		assertResultAsString(result, "true")
+	def void assertResultTrue(Boolean result) {
+		Assert.assertTrue(result)
 	}
 	
 	def getTypeVariable(Type type) {

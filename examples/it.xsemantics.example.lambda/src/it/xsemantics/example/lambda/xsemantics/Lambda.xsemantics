@@ -22,14 +22,30 @@ validatorExtends AbstractLambdaJavaValidator
 
 inject LambdaUtils lambdaUtils
 
+auxiliary {
+	notoccur(Type type, Type other)
+		error stringRep(type) + " occurs in " + stringRep(other)
+}
+
 judgments {
 	type |- TypeSubstitutions substitutions |> Term term : output Type
 	paramtype |~ Parameter param : output Type
 	typesubstitution |- TypeSubstitutions substitutions |> Type original ~> output Type
-	notoccur |- Type type :> Type other
-		error stringRep(type) + " occurs in " + stringRep(other)
 	unify |- TypeSubstitutions substitutions |> 
 		Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
+}
+
+auxiliary notoccur(Type type, Type other) { true }
+
+auxiliary notoccur(TypeVariable variable, TypeVariable other)
+{
+	variable.typevarName != other.typevarName
+}
+
+auxiliary notoccur(TypeVariable variable, ArrowType arrowType)
+{
+	notoccur(variable, arrowType.left)
+	notoccur(variable, arrowType.right)
 }
 
 rule SubstituteType
@@ -62,21 +78,6 @@ from {
 	result.right = subResult
 }
 
-axiom NotOccurBase
-	G |- Type type :> Type other
-
-rule NotOccurVar
-	G |- TypeVariable variable :> TypeVariable other
-from {
-	variable.typevarName != other.typevarName
-}
-
-rule NotOccurVarInArrow
-	G |- TypeVariable variable :> ArrowType arrowType
-from {
-	G |- variable :> arrowType.left
-	G |- variable :> arrowType.right
-}
 
 rule UnifyType
 	G |- TypeSubstitutions substitutions |>  Type t1 ~~ Type t2 ~> t1 ~~ t2
@@ -84,7 +85,6 @@ from {
 	// in general it fails
 	fail
 }
-
 
 axiom UnifyStringType
 	G |- TypeSubstitutions substitutions |> StringType t1 ~~ StringType t2 
@@ -125,7 +125,7 @@ rule UnifyTypeVariableArrowType
 		~> ArrowType newLeft ~~ EcoreUtil::copy(originalRight)
 from {
 	// occur check
-	G |- originalLeft :> originalRight
+	notoccur(originalLeft, originalRight)
 	newLeft = EcoreUtil::copy(originalRight)
 	substitutions.add(originalLeft.typevarName, newLeft)
 }

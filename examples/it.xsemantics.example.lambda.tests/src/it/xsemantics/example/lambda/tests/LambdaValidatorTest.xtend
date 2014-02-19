@@ -44,8 +44,8 @@ class LambdaValidatorTest extends LambdaBaseTest {
 		assertAll('''lambda x . x x''',
 '''Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.ApplicationType "failed: ApplicationType: [x <- X1] |- subst{X1=a -> b} |> (x x) : Type" at Program.term->Abstraction.term->Application
 Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.UnifyTypeVariableArrowType "failed: UnifyTypeVariableArrowType: [x <- X1] |- subst{X1=a -> b} |> X2 ~~ a -> b ~> ArrowType ~~ ArrowType" at Program.term->Abstraction.term->Application
-Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.NotOccurVarInArrow "failed: X2 occurs in a -> b" at Program.term->Abstraction.term->Application
-Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.NotOccurVar "failed: X2 occurs in X2" at Program.term->Abstraction.term->Application
+Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.Notoccur "failed: X2 occurs in a -> b" at Program.term->Abstraction.term->Application
+Diagnostic ERROR code=it.xsemantics.example.lambda.xsemantics.Notoccur "failed: X2 occurs in X2" at Program.term->Abstraction.term->Application
 Diagnostic ERROR "failed: variable.typevarName != other.typevarName" at Program.term->Abstraction.term->Application'''
 		)
 	}

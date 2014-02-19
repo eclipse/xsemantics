@@ -31,17 +31,13 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
+  public final static String NOTOCCUR = "it.xsemantics.example.lambda.xsemantics.Notoccur";
+  
   public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteType";
   
   public final static String SUBSTITUTETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.SubstituteTypeVariable";
   
   public final static String SUBSTITUTEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteArrowType";
-  
-  public final static String NOTOCCURBASE = "it.xsemantics.example.lambda.xsemantics.NotOccurBase";
-  
-  public final static String NOTOCCURVAR = "it.xsemantics.example.lambda.xsemantics.NotOccurVar";
-  
-  public final static String NOTOCCURVARINARROW = "it.xsemantics.example.lambda.xsemantics.NotOccurVarInArrow";
   
   public final static String UNIFYTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyType";
   
@@ -78,13 +74,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   @Inject
   private LambdaUtils lambdaUtils;
   
+  private PolymorphicDispatcher<Boolean> notoccurDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<Type>> paramtypeDispatcher;
   
   private PolymorphicDispatcher<Result<Type>> typesubstitutionDispatcher;
-  
-  private PolymorphicDispatcher<Result<Boolean>> notoccurDispatcher;
   
   private PolymorphicDispatcher<Result2<Type,Type>> unifyDispatcher;
   
@@ -99,10 +95,10 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	"paramtypeImpl", 3, "|~", ":");
     typesubstitutionDispatcher = buildPolymorphicDispatcher1(
     	"typesubstitutionImpl", 4, "|-", "|>", "~>");
-    notoccurDispatcher = buildPolymorphicDispatcher1(
-    	"notoccurImpl", 4, "|-", ":>");
     unifyDispatcher = buildPolymorphicDispatcher2(
     	"unifyImpl", 5, "|-", "|>", "~~", "~>", "~~");
+    notoccurDispatcher = buildPolymorphicDispatcher(
+    	"notoccurImpl", 3);
   }
   
   public LambdaUtils getLambdaUtils() {
@@ -111,6 +107,18 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   public void setLambdaUtils(final LambdaUtils lambdaUtils) {
     this.lambdaUtils = lambdaUtils;
+  }
+  
+  public Boolean notoccur(final Type type, final Type other) throws RuleFailedException {
+    return notoccur(null, type, other);
+  }
+  
+  public Boolean notoccur(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
+    try {
+    	return notoccurInternal(_trace_, type, other);
+    } catch (Exception _e_notoccur) {
+    	throw extractRuleFailedException(_e_notoccur);
+    }
   }
   
   public Result<Type> type(final TypeSubstitutions substitutions, final Term term) {
@@ -161,39 +169,6 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public Result<Boolean> notoccur(final Type type, final Type other) {
-    return notoccur(new RuleEnvironment(), null, type, other);
-  }
-  
-  public Result<Boolean> notoccur(final RuleEnvironment _environment_, final Type type, final Type other) {
-    return notoccur(_environment_, null, type, other);
-  }
-  
-  public Result<Boolean> notoccur(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type type, final Type other) {
-    try {
-    	return notoccurInternal(_environment_, _trace_, type, other);
-    } catch (Exception _e_notoccur) {
-    	return resultForFailure(_e_notoccur);
-    }
-  }
-  
-  public Boolean notoccurSucceeded(final Type type, final Type other) {
-    return notoccurSucceeded(new RuleEnvironment(), null, type, other);
-  }
-  
-  public Boolean notoccurSucceeded(final RuleEnvironment _environment_, final Type type, final Type other) {
-    return notoccurSucceeded(_environment_, null, type, other);
-  }
-  
-  public Boolean notoccurSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type type, final Type other) {
-    try {
-    	notoccurInternal(_environment_, _trace_, type, other);
-    	return true;
-    } catch (Exception _e_notoccur) {
-    	return false;
-    }
-  }
-  
   public Result2<Type,Type> unify(final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
     return unify(new RuleEnvironment(), null, substitutions, originalLeft, originalRight);
   }
@@ -233,6 +208,26 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     type = (Type) result.getFirst();
     
     return new Result<Boolean>(true);
+  }
+  
+  protected Boolean notoccurInternal(final RuleApplicationTrace _trace_, final Type type, final Type other) {
+    try {
+    	checkParamsNotNull(type, other);
+    	return notoccurDispatcher.invoke(_trace_, type, other);
+    } catch (Exception _e_notoccur) {
+    	sneakyThrowRuleFailedException(_e_notoccur);
+    	return false;
+    }
+  }
+  
+  protected void notoccurThrowException(final String _error, final String _issue, final Exception _ex, final Type type, final Type other, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    String _stringRep = this.stringRep(type);
+    String _plus = (_stringRep + " occurs in ");
+    String _stringRep_1 = this.stringRep(other);
+    String _plus_1 = (_plus + _stringRep_1);
+    String error = _plus_1;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(null, null));
   }
   
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Term term) {
@@ -277,26 +272,6 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected Result<Boolean> notoccurInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type type, final Type other) {
-    try {
-    	checkParamsNotNull(type, other);
-    	return notoccurDispatcher.invoke(_environment_, _trace_, type, other);
-    } catch (Exception _e_notoccur) {
-    	sneakyThrowRuleFailedException(_e_notoccur);
-    	return null;
-    }
-  }
-  
-  protected void notoccurThrowException(final String _error, final String _issue, final Exception _ex, final Type type, final Type other, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    String _stringRep = this.stringRep(type);
-    String _plus = (_stringRep + " occurs in ");
-    String _stringRep_1 = this.stringRep(other);
-    String _plus_1 = (_plus + _stringRep_1);
-    String error = _plus_1;
-    throwRuleFailedException(error,
-    	_issue, _ex, new ErrorInformation(null, null));
-  }
-  
   protected Result2<Type,Type> unifyInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight) {
     try {
     	checkParamsNotNull(substitutions, originalLeft, originalRight);
@@ -309,6 +284,86 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected void unifyThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Type originalLeft, final Type originalRight, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, type, other);
+    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(type) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyAuxFunNotoccur) {
+    	notoccurThrowException(auxFunName("notoccur") + "(" + stringRep(type) + ", " + stringRep(other)+ ")",
+    		NOTOCCUR,
+    		e_applyAuxFunNotoccur, type, other, new ErrorInformation[] {new ErrorInformation(type), new ErrorInformation(other)});
+    	return false;
+    }
+  }
+  
+  protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
+    /* true */
+    if (!true) {
+      sneakyThrowRuleFailedException("true");
+    }
+    return true;
+  }
+  
+  protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, other);
+    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyAuxFunNotoccur) {
+    	notoccurThrowException(auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(other)+ ")",
+    		NOTOCCUR,
+    		e_applyAuxFunNotoccur, variable, other, new ErrorInformation[] {new ErrorInformation(variable), new ErrorInformation(other)});
+    	return false;
+    }
+  }
+  
+  protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
+    String _typevarName = variable.getTypevarName();
+    String _typevarName_1 = other.getTypevarName();
+    boolean _notEquals = (!Objects.equal(_typevarName, _typevarName_1));
+    /* variable.typevarName != other.typevarName */
+    if (!_notEquals) {
+      sneakyThrowRuleFailedException("variable.typevarName != other.typevarName");
+    }
+    return true;
+  }
+  
+  protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, arrowType);
+    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyAuxFunNotoccur) {
+    	notoccurThrowException(auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(arrowType)+ ")",
+    		NOTOCCUR,
+    		e_applyAuxFunNotoccur, variable, arrowType, new ErrorInformation[] {new ErrorInformation(variable), new ErrorInformation(arrowType)});
+    	return false;
+    }
+  }
+  
+  protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
+    Type _left = arrowType.getLeft();
+    Boolean _notoccur = this.notoccurInternal(_trace_, variable, _left);
+    /* notoccur(variable, arrowType.left) */
+    if (!_notoccur) {
+      sneakyThrowRuleFailedException("notoccur(variable, arrowType.left)");
+    }
+    Type _right = arrowType.getRight();
+    Boolean _notoccur_1 = this.notoccurInternal(_trace_, variable, _right);
+    /* notoccur(variable, arrowType.right) */
+    if (!_notoccur_1) {
+      sneakyThrowRuleFailedException("notoccur(variable, arrowType.right)");
+    }
+    return true;
   }
   
   protected Result<Type> typesubstitutionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
@@ -406,76 +461,6 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     
     result.setRight(subResult);
     return new Result<Type>(result);
-  }
-  
-  protected Result<Boolean> notoccurImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
-    try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleNotOccurBase(G, _subtrace_, type, other);
-    	addToTrace(_trace_, ruleName("NotOccurBase") + stringRepForEnv(G) + " |- " + stringRep(type) + " :> " + stringRep(other));
-    	addAsSubtrace(_trace_, _subtrace_);
-    	return _result_;
-    } catch (Exception e_applyRuleNotOccurBase) {
-    	notoccurThrowException(ruleName("NotOccurBase") + stringRepForEnv(G) + " |- " + stringRep(type) + " :> " + stringRep(other),
-    		NOTOCCURBASE,
-    		e_applyRuleNotOccurBase, type, other, new ErrorInformation[] {new ErrorInformation(type), new ErrorInformation(other)});
-    	return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleNotOccurBase(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
-    
-    return new Result<Boolean>(true);
-  }
-  
-  protected Result<Boolean> notoccurImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
-    try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleNotOccurVar(G, _subtrace_, variable, other);
-    	addToTrace(_trace_, ruleName("NotOccurVar") + stringRepForEnv(G) + " |- " + stringRep(variable) + " :> " + stringRep(other));
-    	addAsSubtrace(_trace_, _subtrace_);
-    	return _result_;
-    } catch (Exception e_applyRuleNotOccurVar) {
-    	notoccurThrowException(ruleName("NotOccurVar") + stringRepForEnv(G) + " |- " + stringRep(variable) + " :> " + stringRep(other),
-    		NOTOCCURVAR,
-    		e_applyRuleNotOccurVar, variable, other, new ErrorInformation[] {new ErrorInformation(variable), new ErrorInformation(other)});
-    	return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleNotOccurVar(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
-    String _typevarName = variable.getTypevarName();
-    String _typevarName_1 = other.getTypevarName();
-    /* variable.typevarName != other.typevarName */
-    if (!(!Objects.equal(_typevarName, _typevarName_1))) {
-      sneakyThrowRuleFailedException("variable.typevarName != other.typevarName");
-    }
-    return new Result<Boolean>(true);
-  }
-  
-  protected Result<Boolean> notoccurImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
-    try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleNotOccurVarInArrow(G, _subtrace_, variable, arrowType);
-    	addToTrace(_trace_, ruleName("NotOccurVarInArrow") + stringRepForEnv(G) + " |- " + stringRep(variable) + " :> " + stringRep(arrowType));
-    	addAsSubtrace(_trace_, _subtrace_);
-    	return _result_;
-    } catch (Exception e_applyRuleNotOccurVarInArrow) {
-    	notoccurThrowException(ruleName("NotOccurVarInArrow") + stringRepForEnv(G) + " |- " + stringRep(variable) + " :> " + stringRep(arrowType),
-    		NOTOCCURVARINARROW,
-    		e_applyRuleNotOccurVarInArrow, variable, arrowType, new ErrorInformation[] {new ErrorInformation(variable), new ErrorInformation(arrowType)});
-    	return null;
-    }
-  }
-  
-  protected Result<Boolean> applyRuleNotOccurVarInArrow(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
-    /* G |- variable :> arrowType.left */
-    Type _left = arrowType.getLeft();
-    notoccurInternal(G, _trace_, variable, _left);
-    /* G |- variable :> arrowType.right */
-    Type _right = arrowType.getRight();
-    notoccurInternal(G, _trace_, variable, _right);
-    return new Result<Boolean>(true);
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
@@ -670,8 +655,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<Type,Type> applyRuleUnifyTypeVariableArrowType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
     ArrowType newLeft = null; // output parameter
-    /* G |- originalLeft :> originalRight */
-    notoccurInternal(G, _trace_, originalLeft, originalRight);
+    Boolean _notoccur = this.notoccurInternal(_trace_, originalLeft, originalRight);
+    /* notoccur(originalLeft, originalRight) */
+    if (!_notoccur) {
+      sneakyThrowRuleFailedException("notoccur(originalLeft, originalRight)");
+    }
     ArrowType _copy = EcoreUtil.<ArrowType>copy(originalRight);
     newLeft = _copy;
     String _typevarName = originalLeft.getTypevarName();

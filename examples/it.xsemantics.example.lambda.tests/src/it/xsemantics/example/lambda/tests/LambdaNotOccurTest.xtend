@@ -1,13 +1,18 @@
 package it.xsemantics.example.lambda.tests
 
+import it.xsemantics.runtime.RuleFailedException
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))
 class LambdaNotOccurTest extends LambdaBaseTest {
+	
+	@Rule public ExpectedException thrown= ExpectedException.none();
 	
 	@Test
 	def void NotOccurConstantTypes() {
@@ -25,10 +30,11 @@ class LambdaNotOccurTest extends LambdaBaseTest {
 	
 	@Test
 	def void NotOccurTypeVariablesFails() {
+		thrown.expect( RuleFailedException );
+    	thrown.expectMessage("failed: X1 occurs in X1");
+		
 		val variable = lambdaUtils.createFreshTypeVariable
-		assertFailure(
-			system.notoccur(variable, lambdaUtils.createTypeVariable("X1"))
-		)
+		system.notoccur(variable, lambdaUtils.createTypeVariable("X1"))
 	}
 	
 	@Test
@@ -42,14 +48,31 @@ class LambdaNotOccurTest extends LambdaBaseTest {
 	
 	@Test
 	def void notOccurTypeVariablesInArrowTypeFails() {
+		thrown.expect( RuleFailedException );
+    	thrown.expectMessage("failed: a occurs in ((X1 -> X2) -> (X3 -> a))");
+		
 		val variable = lambdaUtils.createTypeVariable("a")
-		assertFailureTrace(
-			system.notoccur(variable, 
-				lambdaUtils.createArrowType(lambdaUtils.createFreshArrowType, 
-					lambdaUtils.createArrowType
-						(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
-				)
-			), traces.notOccurTypeVariablesInArrowTypeFails()
-		)
+		system.notoccur(trace, variable, 
+						lambdaUtils.createArrowType(lambdaUtils.createFreshArrowType, 
+							lambdaUtils.createArrowType
+								(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
+						)
+					)
+//		val trace = new RuleApplicationTrace
+//		var notoccur = false
+//		try {
+//			notoccur = system.notoccur(trace, variable, 
+//						lambdaUtils.createArrowType(lambdaUtils.createFreshArrowType, 
+//							lambdaUtils.createArrowType
+//								(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
+//						)
+//					)
+//		} finally {
+//			assertFailureTrace(
+//				notoccur, 
+//				trace,
+//				traces.notOccurTypeVariablesInArrowTypeFails()
+//			)
+//		}
 	}
 }
