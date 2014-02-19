@@ -36,7 +36,7 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(Rule rule) {
-		JudgmentDescription judgmentDescription = utils.getOrSetJudgmentDescription(rule);
+		JudgmentDescription judgmentDescription = utils.getJudgmentDescription(rule);
 		return rule.getName()
 				+ (judgmentDescription != null ? " (" + Strings.emptyIfNull(judgmentDescription.getName()) + ")" : "");
 	}
@@ -46,7 +46,7 @@ public class XsemanticsLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(AuxiliaryFunction aux) {
-		AuxiliaryDescription desc = utils.getOrSetAuxiliaryDescription(aux);
+		AuxiliaryDescription desc = utils.getAuxiliaryDescription(aux);
 		return aux.getName() + (desc != null ? " (" + Strings.emptyIfNull(desc.getName()) + ")" : "");
 	}
 

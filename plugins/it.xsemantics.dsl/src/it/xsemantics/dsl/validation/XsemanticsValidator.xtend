@@ -480,7 +480,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def public void checkAuxiliaryFunctionHasAuxiliaryDescription(
 			AuxiliaryFunction aux) {
 		val auxiliaryDescription = aux
-				.getOrSetAuxiliaryDescription();
+				.getAuxiliaryDescription();
 		if (auxiliaryDescription == null) {
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",
@@ -599,7 +599,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	def private findJudgmentDescriptionOrError(ReferToJudgment element, String judgmentSymbol,
 			Iterable<String> relationSymbols, EStructuralFeature elementFeature) {
-		val judgmentDescription = element.orSetJudgmentDescription
+		val judgmentDescription = element.getJudgmentDescription
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ judgmentRepresentation(judgmentSymbol, relationSymbols),

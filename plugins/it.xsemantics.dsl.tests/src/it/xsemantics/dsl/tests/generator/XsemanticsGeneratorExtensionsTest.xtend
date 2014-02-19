@@ -47,7 +47,7 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	@Test
 	def void testJudgmentDescriptionInputArgs() {
 		assertEquals("c, o",
-				testFiles.testSimpleRule.firstRule.orSetJudgmentDescription.
+				testFiles.testSimpleRule.firstRule.getJudgmentDescription.
 				inputArgs().toString)
 	}
 	
@@ -61,14 +61,14 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	@Test
 	def void testPolymorphicDispatcherNumOfArgs() {
 		assertEquals("4",
-				testFiles.testSimpleRule.firstRule.orSetJudgmentDescription.
+				testFiles.testSimpleRule.firstRule.getJudgmentDescription.
 				polymorphicDispatcherNumOfArgs().toString)
 	}
 	
 	@Test
 	def void testPolymorphicDispatcherNumOfArgs2() {
 		assertEquals("4",
-				testFiles.testRuleWithOutputParams.firstRule.orSetJudgmentDescription.
+				testFiles.testRuleWithOutputParams.firstRule.getJudgmentDescription.
 				polymorphicDispatcherNumOfArgs().toString)
 	}
 	

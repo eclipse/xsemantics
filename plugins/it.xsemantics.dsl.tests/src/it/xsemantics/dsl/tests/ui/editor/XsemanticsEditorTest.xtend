@@ -68,7 +68,7 @@ axiom TestRule G |- Object o
 		val firstJudgment = system.judgmentDescriptions.head
 		
 		// the rule refers to the first judgment
-		assertSame(firstJudgment, rule.orSetJudgmentDescription)
+		assertSame(firstJudgment, rule.getJudgmentDescription)
 		
 		// we remove the first judgment and this should invalidate the model
 		editor.document.modify [
@@ -79,7 +79,7 @@ axiom TestRule G |- Object o
 		// now the computed feature rule.judgment must be recomputed
 		rule = editor.xsemanticsSystem.rules.head
 		// and refers to no judgment
-		assertNull(rule.orSetJudgmentDescription)
+		assertNull(rule.getJudgmentDescription)
 	}
 
 	def private getXsemanticsSystem(XtextEditor editor) {

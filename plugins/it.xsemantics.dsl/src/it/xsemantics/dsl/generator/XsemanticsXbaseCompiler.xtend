@@ -45,7 +45,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		switch (rule) {
 			RuleWithPremises: {
 				rule.declareVariablesForOutputParams(appendable) 
-   				rule.compileRuleBody(rule.orSetJudgmentDescription.resultType, appendable)
+   				rule.compileRuleBody(rule.getJudgmentDescription.resultType, appendable)
 			
 				return appendable
 			}
@@ -60,7 +60,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				return appendable
 			}
 			AuxiliaryFunction: {
-				if (rule.getOrSetAuxiliaryDescription.type != null)
+				if (rule.getAuxiliaryDescription.type != null)
 					return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
 				
 				// else we must put an explicit return true, since
@@ -410,7 +410,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(RuleInvocation ruleInvocation,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(ruleInvocation, b);
-		val judgmentDescription = ruleInvocation.orSetJudgmentDescription;
+		val judgmentDescription = ruleInvocation.getJudgmentDescription;
 		val ruleInvocationExpressions = ruleInvocation
 				.getExpressions();
 

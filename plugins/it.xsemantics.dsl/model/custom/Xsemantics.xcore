@@ -58,7 +58,7 @@ class AuxiliaryFunction extends Named {
 	String name
 	contains JvmFormalParameter[] parameters
 	contains XExpression body
-	refers transient unsettable AuxiliaryDescription auxiliaryDescription
+	refers transient unsettable AuxiliaryDescription _auxiliaryDescription
 }
 
 class Rule extends Overrider , ReferToJudgment {
@@ -169,7 +169,7 @@ interface Overrider extends UniqueByName {
 }
 
 class ReferToJudgment {
-	refers transient unsettable JudgmentDescription judgment
+	refers transient unsettable JudgmentDescription _judgment
 	op String getJudgmentSymbol()
 	op unique String[] getRelationSymbols()
 }

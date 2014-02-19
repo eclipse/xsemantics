@@ -57,13 +57,13 @@ class XsemanticsUtils {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
 	}
 
-	def getOrSetJudgmentDescription(ReferToJudgment e) {
+	def getJudgmentDescription(ReferToJudgment e) {
 		// compute corresponding judgment only on the first invokation
-		if (!e.setJudgment) {
-			e.judgment = e.judgmentDescription(e.judgmentSymbol, 
+		if (!e.isSet_judgment) {
+			e._judgment = e.judgmentDescription(e.judgmentSymbol, 
 					e.relationSymbols)
 		}
-		return e.judgment
+		return e._judgment
 	}
 	
 	def private judgmentDescription(EObject object, String judgmentSymbol, Iterable<String> relationSymbols) {
@@ -79,13 +79,13 @@ class XsemanticsUtils {
 		)
 	}
 	
-	def getOrSetAuxiliaryDescription(AuxiliaryFunction fun) {
+	def getAuxiliaryDescription(AuxiliaryFunction fun) {
 		// compute corresponding auxiliary description only on the first invokation
-		if (!fun.isSetAuxiliaryDescription) {
-			fun.auxiliaryDescription = fun.containingSystem.
+		if (!fun.isSet_auxiliaryDescription) {
+			fun._auxiliaryDescription = fun.containingSystem.
 				auxiliaryDescriptionsByName.get(fun.name)	
 		}
-		fun.auxiliaryDescription
+		fun._auxiliaryDescription
 	}
 	
 	def rulesForJudgmentDescription(JudgmentDescription judgmentDescription) {
@@ -119,7 +119,7 @@ class XsemanticsUtils {
 	}
 	
 	def List<RuleConclusionElement> outputConclusionElements(Rule rule) {
-		val judgmentParameters = rule.orSetJudgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = rule.getJudgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
 			rule.conclusion.conclusionElements.filter(
@@ -129,7 +129,7 @@ class XsemanticsUtils {
 	}
 	
 	def List<OutputParameter> outputParams(RuleInvocation ruleInvocation) {
-		ruleInvocation.orSetJudgmentDescription.outputJudgmentParameters
+		ruleInvocation.getJudgmentDescription.outputJudgmentParameters
 	}
 	
 	def inputParams(JudgmentDescription judgmentDescription) {
@@ -138,7 +138,7 @@ class XsemanticsUtils {
 	
 	def inputParams(Rule rule) {
 		cache.get("inputParams" -> rule) [|
-			val judgmentParameters = rule.orSetJudgmentDescription.getJudgmentParameters.iterator
+			val judgmentParameters = rule.getJudgmentDescription.getJudgmentParameters.iterator
 			// the corresponding judgmentParameter must not be output
 			rule.conclusion.conclusionElements.
 				filter[ !judgmentParameters.next.outputParameter ].
@@ -181,7 +181,7 @@ class XsemanticsUtils {
 	
 	def outputParams(Rule rule) {
 		cache.get("outputParams" -> rule) [|
-			val judgmentDescription = rule.orSetJudgmentDescription
+			val judgmentDescription = rule.getJudgmentDescription
 			if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
 				return Lists::newArrayList
 			val judgmentParameters = judgmentDescription.judgmentParameters.iterator
@@ -201,7 +201,7 @@ class XsemanticsUtils {
 	}
 	
 	def outputArgsExpressions(RuleInvocation ruleInvocation) {
-		val judgmentParameters = ruleInvocation.orSetJudgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = ruleInvocation.getJudgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must be output
 		Lists::newArrayList(
 			ruleInvocation.expressions.filter
@@ -229,7 +229,7 @@ class XsemanticsUtils {
 	}
 	
 	def inputArgsExpressions(RuleInvocation ruleInvocation) {
-		val judgmentParameters = ruleInvocation.orSetJudgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = ruleInvocation.getJudgmentDescription.getJudgmentParameters.iterator
 		// the corresponding judgmentParameter must not be output
 		Lists::newArrayList(
 			ruleInvocation.expressions.filter(

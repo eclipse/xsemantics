@@ -162,14 +162,14 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			}
 			
 			for (aux : ts.auxiliaryFunctions) {
-				if (aux.getOrSetAuxiliaryDescription != null) {
+				if (aux.getAuxiliaryDescription != null) {
 					members += aux.compileImplMethod
 					members += aux.compileApplyAuxiliaryFunction
 				}
 			}
 			
 			for (rule : ts.rules) {
-				if (rule.getOrSetJudgmentDescription != null) {
+				if (rule.getJudgmentDescription != null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
 					for (e : rule.expressionsInConclusion) {
@@ -670,7 +670,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def compileImplMethod(Rule rule) {
-		val judgment = rule.getOrSetJudgmentDescription
+		val judgment = rule.getJudgmentDescription
 		rule.toMethod(
 			'''«judgment.polymorphicDispatcherImpl»'''.toString,
 			judgment.resultType
@@ -712,7 +712,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		val resultType = aux.resultType
 		val isBoolean = aux.newTypeRef(typeof(Boolean)).
 				isConformant(resultType)
-		val auxiliaryDescription = aux.getOrSetAuxiliaryDescription
+		val auxiliaryDescription = aux.getAuxiliaryDescription
 		
 		aux.toMethod(
 			'''«auxiliaryDescription.polymorphicDispatcherImpl»'''.toString,
@@ -761,7 +761,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def compileApplyMethod(Rule rule) {
 		rule.toMethod(
 			rule.applyRuleName.toString,
-			rule.getOrSetJudgmentDescription.resultType
+			rule.getJudgmentDescription.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
@@ -782,7 +782,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch assignBody(JvmExecutable logicalContainer, Rule rule) {
 		logicalContainer.body = [
 	   		rule.declareVariablesForOutputParams(it)
-	   		rule.compileReturnResult(rule.getOrSetJudgmentDescription.resultType, it)
+	   		rule.compileReturnResult(rule.getJudgmentDescription.resultType, it)
 	   	]
 	}
 

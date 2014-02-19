@@ -249,7 +249,7 @@ class XsemanticsGeneratorExtensions {
 		val buffer = new StringBuffer(
 		'''«rule.name.ruleNameInvocation» + «wrapInStringReprForEnv(rule.ruleEnvName)» + " «rule.conclusion.judgmentSymbol» "'''
 		)
-		val judgmentParameters = rule.orSetJudgmentDescription.getJudgmentParameters.iterator
+		val judgmentParameters = rule.getJudgmentDescription.getJudgmentParameters.iterator
 		val relationSymbols = rule.conclusion.relationSymbols.iterator
 		for (e : rule.conclusion.conclusionElements) {
 			buffer.append(" + ")
@@ -317,7 +317,7 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def errorForAuxiliaryFun(AuxiliaryFunction aux) {
-		aux.getOrSetAuxiliaryDescription.name.auxFunNameInvocation + 
+		aux.getAuxiliaryDescription.name.auxFunNameInvocation + 
 		''' + "(" + «aux.parameters.map[name.wrapInStringRepr].join(''' + ", " + ''')»+ ")"'''
 	}
 
@@ -360,7 +360,7 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def resultType(AuxiliaryFunction e) {
-		typeSystem.getType(e.getOrSetAuxiliaryDescription)
+		typeSystem.getType(e.getAuxiliaryDescription)
 	}
 
 	def booleanType(EObject e) {
