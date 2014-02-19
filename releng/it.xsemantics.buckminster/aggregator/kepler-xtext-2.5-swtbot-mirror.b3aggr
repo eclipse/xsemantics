@@ -11,6 +11,7 @@
     <contributions description="Xtext Releases" label="Xtext Releases">
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
         <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.5.0,2.6.0)"/>
+        <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
       </repositories>
     </contributions>
     <contributions description="SwtBot" label="SwtBot">

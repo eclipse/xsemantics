@@ -13,6 +13,7 @@
 
   <rm:locator pattern="^org\.eclipse\.xtext\.xdoc(?:\..+)?$" searchPathRef="xdoc"/>
   <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.ecore\.xcore(?:\..+)?$" searchPathRef="xtext"/>
   <rm:locator pattern="^com\.google.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.antlr.*" searchPathRef="xtext"/>
   <rm:locator pattern="javax.inject" searchPathRef="xtext"/>
