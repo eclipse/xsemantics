@@ -76,6 +76,12 @@ public class LambdaStringRepresentation extends StringRepresentation {
 				+ "}";
 	}
 
+	protected String stringRep(UnifyResult result) {
+		return "result{" + string(result.getFirst()) + ", "
+				+ string(result.getSecond())
+				+ "}";
+	}
+
 	protected String stringRep(StringType type) {
 		return "String";
 	}

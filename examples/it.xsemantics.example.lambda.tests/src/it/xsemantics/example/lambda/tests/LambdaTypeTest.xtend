@@ -119,6 +119,23 @@ class LambdaTypeTest extends LambdaBaseTest {
 	def void testOmega() {
 		assertAbstractionTypeFailureTrace("lambda x . x x", traces.omegaFails())
 	}
+
+	@Test
+	def void testOmega2() {
+		assertAbstractionTypeFailureTrace
+		("lambda f . lambda g. lambda x. (f (f f))", 
+'''
+failed: AbstractionType: [] |- subst{X1=(X4 -> X5), X4=X8, X5=X9, X6=X8, X7=X9} |> lambda f . (lambda g . (lambda x . ((f (f f))))) : ArrowType
+ failed: AbstractionType: [f <- X1] |- subst{X1=(X4 -> X5), X4=X8, X5=X9, X6=X8, X7=X9} |> lambda g . (lambda x . ((f (f f)))) : ArrowType
+  failed: AbstractionType: [f <- X1, g <- X2] |- subst{X1=(X4 -> X5), X4=X8, X5=X9, X6=X8, X7=X9} |> lambda x . ((f (f f))) : ArrowType
+   failed: ApplicationType: [f <- X1, g <- X2, x <- X3] |- subst{X1=(X4 -> X5), X4=X8, X5=X9, X6=X8, X7=X9} |> (f (f f)) : Type
+    failed: ApplicationType: [f <- X1, g <- X2, x <- X3] |- subst{X1=(X4 -> X5), X4=X8, X5=X9, X6=X8, X7=X9} |> (f f) : Type
+     failed: cannot unify X8 with (X8 -> X9)
+      failed: X8 occurs in (X8 -> X9)
+       failed: X8 occurs in X8
+        failed: variable.typevarName != other.typevarName'''
+		)
+	}
 	
 	def environmentForParam(Abstraction abstraction) {
 		val env = new RuleEnvironment()
@@ -133,7 +150,7 @@ class LambdaTypeTest extends LambdaBaseTest {
 	}
 	
 	def void assertAbstractionTypeFailureTrace(CharSequence prog, CharSequence expectedTrace) {
-		assertFailureTrace(system.type(substitutions, prog.abstraction), expectedTrace)
+		assertFailureTrace(system.type(null, trace, substitutions, prog.abstraction), expectedTrace)
 	}
 	
 	def void assertAbstractionType(CharSequence prog, String expectedType, String expectedSubsts) {

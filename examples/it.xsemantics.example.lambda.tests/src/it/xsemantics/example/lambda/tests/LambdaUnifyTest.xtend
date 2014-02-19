@@ -1,15 +1,20 @@
 package it.xsemantics.example.lambda.tests
 
 import it.xsemantics.example.lambda.lambda.Type
-import org.junit.Assert
+import it.xsemantics.runtime.RuleFailedException
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Assert
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))
 class LambdaUnifyTest extends LambdaBaseTest {
+	
+	@Rule public ExpectedException thrown= ExpectedException.none();
 
 	@Test
 	def void testUnifyTypeVar() {
@@ -40,10 +45,10 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	
 	@Test
 	def void testBasicTypeFails() {
-		assertFailureTrace(
-			system.unify(substitutions, lambdaUtils.createStringType, lambdaUtils.createIntType),
-			"failed: UnifyType: [] |- subst{} |> String ~~ int ~> Type ~~ Type"
-		)
+		thrown.expect( RuleFailedException );
+    	thrown.expectMessage("failed: cannot unify String with int");
+		
+		system.unify(substitutions, lambdaUtils.createStringType, lambdaUtils.createIntType)
 	}
 	
 	@Test
@@ -136,15 +141,16 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	
 	@Test
 	def void unifyTypeVariableOccursInArrowTypeFails() {
+		thrown.expect( RuleFailedException );
+    	thrown.expectMessage("failed: cannot unify a with ((X1 -> X2) -> (X3 -> a))");
+    	
 		val variable = lambdaUtils.createTypeVariable("a")
-		assertFailureTrace(
-			system.unify(substitutions, variable, 
+		system.unify(substitutions, variable, 
 				lambdaUtils.createArrowType(lambdaUtils.createFreshArrowType, 
 					lambdaUtils.createArrowType
 						(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
 				)
-			), traces.unifyTypeVariableOccursInArrowTypeFails()
-		)
+			)
 	}
 	
 	def assertUnify(Type left, Type right, String expectedResult, String expectedSubsts) {

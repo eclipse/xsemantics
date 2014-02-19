@@ -1,35 +1,35 @@
 package it.xsemantics.example.lambda.tests
 
 import com.google.inject.Inject
+import com.google.inject.Injector
 import it.xsemantics.example.lambda.LambdaInjectorProvider
+import it.xsemantics.example.lambda.lambda.Abstraction
+import it.xsemantics.example.lambda.lambda.ArrowType
+import it.xsemantics.example.lambda.lambda.Constant
 import it.xsemantics.example.lambda.lambda.Program
+import it.xsemantics.example.lambda.lambda.Term
+import it.xsemantics.example.lambda.lambda.Type
+import it.xsemantics.example.lambda.lambda.TypeVariable
+import it.xsemantics.example.lambda.lambda.Variable
+import it.xsemantics.example.lambda.validation.LambdaJavaValidator
+import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation
+import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTypeBeautifier
+import it.xsemantics.example.lambda.xsemantics.LambdaUtils
+import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
+import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions
+import it.xsemantics.example.lambda.xsemantics.UnifyResult
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.StringRepresentation
+import it.xsemantics.runtime.util.TraceUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.runner.RunWith
-import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
-import org.junit.Before
-import it.xsemantics.example.lambda.xsemantics.LambdaUtils
-import it.xsemantics.runtime.Result
 import org.junit.Assert
-import it.xsemantics.runtime.StringRepresentation
-import it.xsemantics.example.lambda.lambda.Type
-import it.xsemantics.example.lambda.lambda.TypeVariable
-import it.xsemantics.example.lambda.lambda.ArrowType
-import it.xsemantics.runtime.Result2
-import it.xsemantics.runtime.util.TraceUtils
-import it.xsemantics.example.lambda.lambda.Term
-import it.xsemantics.example.lambda.lambda.Abstraction
-import it.xsemantics.example.lambda.lambda.Variable
-import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions
-import it.xsemantics.example.lambda.lambda.Constant
-import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation
-import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTypeBeautifier
-import it.xsemantics.example.lambda.validation.LambdaJavaValidator
-import com.google.inject.Injector
+import org.junit.Before
 import org.junit.BeforeClass
+import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorProvider))
@@ -85,7 +85,8 @@ class LambdaBaseTest {
 	def <T> void assertFailure(Result<T> result) {
 		if (!result.failed)
 			Assert::assertTrue("should have failed, instead got: " +
-				result.value.string, 
+				result.value.string + "\n" + 
+				trace.traceAsString, 
 				result.failed
 			);
 	}
@@ -127,8 +128,9 @@ class LambdaBaseTest {
 		Assert::assertEquals(expected, reprBeautifier.string(result.value))
 	}
 	
-	def <T,V> void assertResult2AsString(Result2<T,V> result, String expected) {
-		Assert::assertFalse("should not have failed", result.failed);
+	def void assertResult2AsString(UnifyResult result, String expected) {
+		Assert::assertNotNull(result.first);
+		Assert::assertNotNull(result.second);
 		Assert::assertEquals(expected, result.first.string + " -- " + result.second.string)
 	}
 	
