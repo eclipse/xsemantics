@@ -33,11 +33,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   public final static String NOTOCCUR = "it.xsemantics.example.lambda.xsemantics.Notoccur";
   
-  public final static String SUBSTITUTETYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteType";
-  
-  public final static String SUBSTITUTETYPEVARIABLE = "it.xsemantics.example.lambda.xsemantics.SubstituteTypeVariable";
-  
-  public final static String SUBSTITUTEARROWTYPE = "it.xsemantics.example.lambda.xsemantics.SubstituteArrowType";
+  public final static String TYPESUBSTITUTION = "it.xsemantics.example.lambda.xsemantics.Typesubstitution";
   
   public final static String UNIFYTYPE = "it.xsemantics.example.lambda.xsemantics.UnifyType";
   
@@ -76,11 +72,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Boolean> notoccurDispatcher;
   
+  private PolymorphicDispatcher<Type> typesubstitutionDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<Type>> paramtypeDispatcher;
-  
-  private PolymorphicDispatcher<Result<Type>> typesubstitutionDispatcher;
   
   private PolymorphicDispatcher<Result2<Type,Type>> unifyDispatcher;
   
@@ -93,12 +89,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	"typeImpl", 4, "|-", "|>", ":");
     paramtypeDispatcher = buildPolymorphicDispatcher1(
     	"paramtypeImpl", 3, "|~", ":");
-    typesubstitutionDispatcher = buildPolymorphicDispatcher1(
-    	"typesubstitutionImpl", 4, "|-", "|>", "~>");
     unifyDispatcher = buildPolymorphicDispatcher2(
     	"unifyImpl", 5, "|-", "|>", "~~", "~>", "~~");
     notoccurDispatcher = buildPolymorphicDispatcher(
     	"notoccurImpl", 3);
+    typesubstitutionDispatcher = buildPolymorphicDispatcher(
+    	"typesubstitutionImpl", 3);
   }
   
   public LambdaUtils getLambdaUtils() {
@@ -118,6 +114,18 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return notoccurInternal(_trace_, type, other);
     } catch (Exception _e_notoccur) {
     	throw extractRuleFailedException(_e_notoccur);
+    }
+  }
+  
+  public Type typesubstitution(final TypeSubstitutions substitutions, final Type original) throws RuleFailedException {
+    return typesubstitution(null, substitutions, original);
+  }
+  
+  public Type typesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) throws RuleFailedException {
+    try {
+    	return typesubstitutionInternal(_trace_, substitutions, original);
+    } catch (Exception _e_typesubstitution) {
+    	throw extractRuleFailedException(_e_typesubstitution);
     }
   }
   
@@ -150,22 +158,6 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return paramtypeInternal(_environment_, _trace_, param);
     } catch (Exception _e_paramtype) {
     	return resultForFailure(_e_paramtype);
-    }
-  }
-  
-  public Result<Type> typesubstitution(final TypeSubstitutions substitutions, final Type original) {
-    return typesubstitution(new RuleEnvironment(), null, substitutions, original);
-  }
-  
-  public Result<Type> typesubstitution(final RuleEnvironment _environment_, final TypeSubstitutions substitutions, final Type original) {
-    return typesubstitution(_environment_, null, substitutions, original);
-  }
-  
-  public Result<Type> typesubstitution(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) {
-    try {
-    	return typesubstitutionInternal(_environment_, _trace_, substitutions, original);
-    } catch (Exception _e_typesubstitution) {
-    	return resultForFailure(_e_typesubstitution);
     }
   }
   
@@ -230,6 +222,20 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	_issue, _ex, new ErrorInformation(null, null));
   }
   
+  protected Type typesubstitutionInternal(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) {
+    try {
+    	checkParamsNotNull(substitutions, original);
+    	return typesubstitutionDispatcher.invoke(_trace_, substitutions, original);
+    } catch (Exception _e_typesubstitution) {
+    	sneakyThrowRuleFailedException(_e_typesubstitution);
+    	return null;
+    }
+  }
+  
+  protected void typesubstitutionThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Type original, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Term term) {
     try {
     	checkParamsNotNull(substitutions, term);
@@ -255,20 +261,6 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void paramtypeThrowException(final String _error, final String _issue, final Exception _ex, final Parameter param, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
-  }
-  
-  protected Result<Type> typesubstitutionInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) {
-    try {
-    	checkParamsNotNull(substitutions, original);
-    	return typesubstitutionDispatcher.invoke(_environment_, _trace_, substitutions, original);
-    } catch (Exception _e_typesubstitution) {
-    	sneakyThrowRuleFailedException(_e_typesubstitution);
-    	return null;
-    }
-  }
-  
-  protected void typesubstitutionThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Type original, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
@@ -366,101 +358,93 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     return true;
   }
   
-  protected Result<Type> typesubstitutionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
+  protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleSubstituteType(G, _subtrace_, substitutions, type);
-    	addToTrace(_trace_, ruleName("SubstituteType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(type) + " ~> " + stringRep(_result_.getFirst()));
+    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, type);
+    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(type)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
-    } catch (Exception e_applyRuleSubstituteType) {
-    	typesubstitutionThrowException(ruleName("SubstituteType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(type) + " ~> " + "Type",
-    		SUBSTITUTETYPE,
-    		e_applyRuleSubstituteType, substitutions, type, new ErrorInformation[] {new ErrorInformation(type)});
+    } catch (Exception e_applyAuxFunTypesubstitution) {
+    	typesubstitutionThrowException(auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(type)+ ")",
+    		TYPESUBSTITUTION,
+    		e_applyAuxFunTypesubstitution, substitutions, type, new ErrorInformation[] {new ErrorInformation(type)});
     	return null;
     }
   }
   
-  protected Result<Type> applyRuleSubstituteType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
-    Type result = null; // output parameter
-    result = type;
-    return new Result<Type>(result);
+  protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
+    return type;
   }
   
-  protected Result<Type> typesubstitutionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
+  protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleSubstituteTypeVariable(G, _subtrace_, substitutions, variable);
-    	addToTrace(_trace_, ruleName("SubstituteTypeVariable") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(variable) + " ~> " + stringRep(_result_.getFirst()));
+    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, variable);
+    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(variable)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
-    } catch (Exception e_applyRuleSubstituteTypeVariable) {
-    	typesubstitutionThrowException(ruleName("SubstituteTypeVariable") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(variable) + " ~> " + "Type",
-    		SUBSTITUTETYPEVARIABLE,
-    		e_applyRuleSubstituteTypeVariable, substitutions, variable, new ErrorInformation[] {new ErrorInformation(variable)});
+    } catch (Exception e_applyAuxFunTypesubstitution) {
+    	typesubstitutionThrowException(auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(variable)+ ")",
+    		TYPESUBSTITUTION,
+    		e_applyAuxFunTypesubstitution, substitutions, variable, new ErrorInformation[] {new ErrorInformation(variable)});
     	return null;
     }
   }
   
-  protected Result<Type> applyRuleSubstituteTypeVariable(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
-    Type result = null; // output parameter
-    /* { var mapped = substitutions.mapped(variable.typevarName) mapped != null result = EcoreUtil::copy(mapped) G |- substitutions |> result ~> result } or result = variable */
-    try {
+  protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
+    Type _xblockexpression = null;
+    {
       String _typevarName = variable.getTypevarName();
       Type mapped = substitutions.mapped(_typevarName);
+      Type _xifexpression = null;
       boolean _notEquals = (!Objects.equal(mapped, null));
-      /* mapped != null */
-      if (!_notEquals) {
-        sneakyThrowRuleFailedException("mapped != null");
+      if (_notEquals) {
+        Type _xblockexpression_1 = null;
+        {
+          final Type result = EcoreUtil.<Type>copy(mapped);
+          _xblockexpression_1 = (this.typesubstitutionInternal(_trace_, substitutions, result));
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        _xifexpression = variable;
       }
-      Type _copy = EcoreUtil.<Type>copy(mapped);
-      result = _copy;
-      /* G |- substitutions |> result ~> result */
-      Result<Type> result_1 = typesubstitutionInternal(G, _trace_, substitutions, result);
-      checkAssignableTo(result_1.getFirst(), Type.class);
-      result = (Type) result_1.getFirst();
-      
-    } catch (Exception e) {
-      result = variable;
+      _xblockexpression = (_xifexpression);
     }
-    return new Result<Type>(result);
+    return _xblockexpression;
   }
   
-  protected Result<Type> typesubstitutionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
+  protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleSubstituteArrowType(G, _subtrace_, substitutions, arrowType);
-    	addToTrace(_trace_, ruleName("SubstituteArrowType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(arrowType) + " ~> " + stringRep(_result_.getFirst()));
+    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, arrowType);
+    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
-    } catch (Exception e_applyRuleSubstituteArrowType) {
-    	typesubstitutionThrowException(ruleName("SubstituteArrowType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(arrowType) + " ~> " + "ArrowType",
-    		SUBSTITUTEARROWTYPE,
-    		e_applyRuleSubstituteArrowType, substitutions, arrowType, new ErrorInformation[] {new ErrorInformation(arrowType)});
+    } catch (Exception e_applyAuxFunTypesubstitution) {
+    	typesubstitutionThrowException(auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(arrowType)+ ")",
+    		TYPESUBSTITUTION,
+    		e_applyAuxFunTypesubstitution, substitutions, arrowType, new ErrorInformation[] {new ErrorInformation(arrowType)});
     	return null;
     }
   }
   
-  protected Result<Type> applyRuleSubstituteArrowType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
-    ArrowType result = null; // output parameter
-    Type subResult = null;
-    ArrowType _copy = EcoreUtil.<ArrowType>copy(arrowType);
-    result = _copy;
-    /* G |- substitutions |> arrowType.left ~> subResult */
-    Type _left = arrowType.getLeft();
-    Result<Type> result_1 = typesubstitutionInternal(G, _trace_, substitutions, _left);
-    checkAssignableTo(result_1.getFirst(), Type.class);
-    subResult = (Type) result_1.getFirst();
-    
-    result.setLeft(subResult);
-    /* G |- substitutions |> arrowType.right ~> subResult */
-    Type _right = arrowType.getRight();
-    Result<Type> result_2 = typesubstitutionInternal(G, _trace_, substitutions, _right);
-    checkAssignableTo(result_2.getFirst(), Type.class);
-    subResult = (Type) result_2.getFirst();
-    
-    result.setRight(subResult);
-    return new Result<Type>(result);
+  protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
+    ArrowType _xblockexpression = null;
+    {
+      Type subResult = null;
+      final ArrowType result = EcoreUtil.<ArrowType>copy(arrowType);
+      Type _left = arrowType.getLeft();
+      Type _typesubstitution = this.typesubstitutionInternal(_trace_, substitutions, _left);
+      subResult = _typesubstitution;
+      result.setLeft(subResult);
+      Type _right = arrowType.getRight();
+      Type _typesubstitution_1 = this.typesubstitutionInternal(_trace_, substitutions, _right);
+      subResult = _typesubstitution_1;
+      result.setRight(subResult);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   protected Result2<Type,Type> unifyImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
@@ -851,15 +835,12 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleVariableType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
     Type type = null; // output parameter
-    /* G |- substitutions |> EcoreUtil::copy(env(G, variable.ref, Type)) ~> type */
     /* env(G, variable.ref, Type) */
     Parameter _ref = variable.getRef();
     Type _environmentaccess = environmentAccess(G, _ref, Type.class);
     Type _copy = EcoreUtil.<Type>copy(_environmentaccess);
-    Result<Type> result = typesubstitutionInternal(G, _trace_, substitutions, _copy);
-    checkAssignableTo(result.getFirst(), Type.class);
-    type = (Type) result.getFirst();
-    
+    Type _typesubstitution = this.typesubstitutionInternal(_trace_, substitutions, _copy);
+    type = _typesubstitution;
     return new Result<Type>(type);
   }
   
@@ -933,16 +914,10 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_1.getFirst(), Type.class);
     termType = (Type) result_1.getFirst();
     
-    /* G |- substitutions |> paramType ~> paramType */
-    Result<Type> result_2 = typesubstitutionInternal(G, _trace_, substitutions, paramType);
-    checkAssignableTo(result_2.getFirst(), Type.class);
-    paramType = (Type) result_2.getFirst();
-    
-    /* G |- substitutions |> termType ~> termType */
-    Result<Type> result_3 = typesubstitutionInternal(G, _trace_, substitutions, termType);
-    checkAssignableTo(result_3.getFirst(), Type.class);
-    termType = (Type) result_3.getFirst();
-    
+    Type _typesubstitution = this.typesubstitutionInternal(_trace_, substitutions, paramType);
+    paramType = _typesubstitution;
+    Type _typesubstitution_1 = this.typesubstitutionInternal(_trace_, substitutions, termType);
+    termType = _typesubstitution_1;
     ArrowType _createArrowType = this.lambdaUtils.createArrowType(paramType, termType);
     type = _createArrowType;
     return new Result<Type>(type);
@@ -995,12 +970,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_3.getSecond(), Type.class);
     argType = (Type) result_3.getSecond();
     
-    /* G |- substitutions |> arrowType.right ~> type */
     Type _right = arrowType.getRight();
-    Result<Type> result_4 = typesubstitutionInternal(G, _trace_, substitutions, _right);
-    checkAssignableTo(result_4.getFirst(), Type.class);
-    type = (Type) result_4.getFirst();
-    
+    Type _typesubstitution = this.typesubstitutionInternal(_trace_, substitutions, _right);
+    type = _typesubstitution;
     return new Result<Type>(type);
   }
 }

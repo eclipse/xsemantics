@@ -25,12 +25,12 @@ inject LambdaUtils lambdaUtils
 auxiliary {
 	notoccur(Type type, Type other)
 		error stringRep(type) + " occurs in " + stringRep(other)
+	typesubstitution(TypeSubstitutions substitutions, Type original) : Type
 }
 
 judgments {
 	type |- TypeSubstitutions substitutions |> Term term : output Type
 	paramtype |~ Parameter param : output Type
-	typesubstitution |- TypeSubstitutions substitutions |> Type original ~> output Type
 	unify |- TypeSubstitutions substitutions |> 
 		Type originalLeft ~~ Type originalRight ~> output Type ~~ output Type
 }
@@ -48,34 +48,30 @@ auxiliary notoccur(TypeVariable variable, ArrowType arrowType)
 	notoccur(variable, arrowType.right)
 }
 
-rule SubstituteType
-	G |- TypeSubstitutions substitutions |> Type type ~> Type result
-from {
-	result = type
+auxiliary typesubstitution(TypeSubstitutions substitutions, Type type)
+{
+	type
 }
 
-rule SubstituteTypeVariable
-	G |- TypeSubstitutions substitutions |> TypeVariable variable ~> Type result
-from {
-	{
-		var mapped = substitutions.mapped(variable.typevarName)
-		mapped != null
-		result = EcoreUtil::copy(mapped)
-		G |- substitutions |> result ~> result // recursive
-	}
-	or
-		result = variable
+auxiliary typesubstitution(TypeSubstitutions substitutions, TypeVariable variable)
+{
+	var mapped = substitutions.mapped(variable.typevarName)
+	if (mapped != null) {
+		val result = EcoreUtil::copy(mapped)
+		typesubstitution(substitutions, result) // recursive
+	} else
+		variable
 }
 
-rule SubstituteArrowType
-	G |- TypeSubstitutions substitutions |> ArrowType arrowType ~> ArrowType result
-from {
+auxiliary typesubstitution(TypeSubstitutions substitutions, ArrowType arrowType)
+{
 	var Type subResult
-	result = EcoreUtil::copy(arrowType)
-	G |- substitutions |> arrowType.left ~> subResult
+	val result = EcoreUtil::copy(arrowType)
+	subResult = typesubstitution(substitutions, arrowType.left)
 	result.left = subResult
-	G |- substitutions |> arrowType.right ~> subResult
+	subResult = typesubstitution(substitutions, arrowType.right)
 	result.right = subResult
+	result
 }
 
 
@@ -176,7 +172,8 @@ rule VariableType
 	G |- TypeSubstitutions substitutions |> 
 		Variable variable : Type type
 from {
-	G |- substitutions |> EcoreUtil::copy(env(G, variable.ref, Type)) ~> type
+	type = typesubstitution(substitutions, 
+		EcoreUtil::copy(env(G, variable.ref, Type)))
 }
 
 rule ArithmeticsType
@@ -195,8 +192,8 @@ from {
 	G |~ abstraction.param : var Type paramType
 	G, abstraction.param <- paramType |- 
 		substitutions |> abstraction.term : var Type termType
-	G |- substitutions |> paramType ~> paramType
-	G |- substitutions |> termType ~> termType
+	paramType = typesubstitution(substitutions, paramType)
+	termType = typesubstitution(substitutions, termType)
 	type = lambdaUtils.createArrowType(paramType, termType)
 }
 
@@ -215,7 +212,7 @@ from {
 	G |- substitutions |> arrowType.left ~~ argType ~> funType ~~ argType
 	
 	// the result is the arrow right after substitutions
-	G |- substitutions |> arrowType.right ~> type
+	type = typesubstitution(substitutions, arrowType.right)
 }
 
 checkrule CheckProgram for

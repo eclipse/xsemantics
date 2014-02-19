@@ -112,6 +112,11 @@ class LambdaBaseTest {
 		}
 		Assert::assertEquals(expected, result.value.string)
 	}
+
+	def <T> void assertResultAsString(T result, String expected) {
+		Assert::assertNotNull(result)
+		Assert::assertEquals(expected, result.string)
+	}
 	
 	def <T> void assertResultAsStringBeautifier(Result<T> result, String expected) {
 		if (result.failed) {
