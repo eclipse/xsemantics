@@ -71,6 +71,8 @@ class Rule extends Overrider , ReferToJudgment {
 	op unique String[] getRelationSymbols() {
 		return conclusion.relationSymbols
 	}
+	refers transient unsettable RuleParameter[] _inputParams
+	refers transient unsettable RuleParameter[] _outputParams
 }
 
 class Axiom extends Rule {
