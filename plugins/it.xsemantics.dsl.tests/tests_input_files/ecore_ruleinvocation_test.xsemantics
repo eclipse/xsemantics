@@ -1,7 +1,10 @@
 system it.xsemantics.test.ruleinvocation.ecore.TypeSystem
 
-import org.eclipse.emf.ecore.*
-	
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EcoreFactory
+
 judgments {
 	type |- EClass c1 : EObject o1
 	etype ||- EObject o2 : output EClass

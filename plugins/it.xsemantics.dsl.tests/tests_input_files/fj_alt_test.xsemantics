@@ -1,21 +1,18 @@
-import it.xsemantics.example.fj.fj.*
-import it.xsemantics.example.fj.util.*
-import it.xsemantics.example.fj.lookup.*
-
-import org.eclipse.emf.ecore.EObject
-
-import org.eclipse.xtext.EcoreUtil2
-
-import org.eclipse.xtext.xbase.lib.CollectionLiterals
-
-import com.google.common.collect.Lists
-
-import java.util.*
+import it.xsemantics.example.fj.fj.Class
+import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.Expression
+import it.xsemantics.example.fj.fj.FjPackage
+import it.xsemantics.example.fj.fj.New
+import it.xsemantics.example.fj.fj.Program
+import it.xsemantics.example.fj.fj.Type
+import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
+import it.xsemantics.test.fj.first.FjFirstTypeSystem
+import java.util.List
 
 /*
  * alternative type system for FJ using external auxiliary functions
  */
-system it.xsemantics.test.fj.alt.FjAltTypeSystem extends it.xsemantics.test.fj.first.FjFirstTypeSystem
+system it.xsemantics.test.fj.alt.FjAltTypeSystem extends FjFirstTypeSystem
 
 inject FjAuxiliaryFunctions fjAux
 

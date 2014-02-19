@@ -2,8 +2,9 @@
 
 system it.xsemantics.test.orexpressions.ecore.TypeSystem
 
-import org.eclipse.emf.ecore.*
-	
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+
 judgments {
 	type |- EClass c : output EObject
 	type2 ||- EClass c : output EObject

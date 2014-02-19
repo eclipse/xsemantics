@@ -2,9 +2,12 @@
 
 system it.xsemantics.test.particular.ecore.TypeSystem
 
-import org.eclipse.emf.ecore.*
-import java.util.*
-	
+import java.util.List
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EcoreFactory
+
 judgments {
 	type |- EClass c : output EObject
 	type2 ||- String s : output EClass : output EObject

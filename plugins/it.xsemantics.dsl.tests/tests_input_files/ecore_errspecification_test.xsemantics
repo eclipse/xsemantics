@@ -1,9 +1,9 @@
 // some particular cases
 
-system it.xsemantics.test.errspecification.ecore.TypeSystem
-
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+
+system it.xsemantics.test.errspecification.ecore.TypeSystem
 
 judgments {
 	type |- EObject c : output EClass
