@@ -13,9 +13,6 @@ Workflow {
     bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
-        // The following two lines can be removed, if Xbase is not used.
-        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-        registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
     }
 
     component = DirectoryCleaner {
@@ -113,12 +110,6 @@ Workflow {
 
             // rename refactoring
             fragment = refactoring.RefactorElementNameFragment {}
-
-            // provides the necessary bindings for java types integration
-            fragment = types.TypesGeneratorFragment {}
-
-            // generates the required bindings only if the grammar inherits from Xbase
-            fragment = xbase.XbaseGeneratorFragment {}
 
             // provides a preference page for template proposals
             fragment = templates.CodetemplatesGeneratorFragment {}
