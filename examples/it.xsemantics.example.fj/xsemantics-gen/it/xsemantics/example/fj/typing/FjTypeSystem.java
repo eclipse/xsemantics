@@ -861,7 +861,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<it.xsemantics.example.fj.fj.Class> superclassesImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	List _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
+    	List<it.xsemantics.example.fj.fj.Class> _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
     	addToTrace(_trace_, auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
@@ -883,7 +883,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<Field> fieldsImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	List _result_ = applyAuxFunFields(_subtrace_, clazz);
+    	List<Field> _result_ = applyAuxFunFields(_subtrace_, clazz);
     	addToTrace(_trace_, auxFunName("fields") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
@@ -918,7 +918,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<Method> methodsImpl(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	List _result_ = applyAuxFunMethods(_subtrace_, clazz);
+    	List<Method> _result_ = applyAuxFunMethods(_subtrace_, clazz);
     	addToTrace(_trace_, auxFunName("methods") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
