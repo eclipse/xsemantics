@@ -5,15 +5,12 @@ package it.xsemantics.example.fj.tests.loader;
 
 import it.xsemantics.example.fj.FJStandaloneSetup;
 import it.xsemantics.example.fj.fj.Program;
-import it.xsemantics.example.fj.util.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -86,21 +83,6 @@ public class FJTestLoader {
 
 	public Program loadProgramFromString(String program) throws IOException {
 		return (Program)loadFromString(program).getContents().get(0);
-	}
-
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-	public static void main(String[] args) throws IOException {
-		FJTestLoader loader = new FJTestLoader();
-		Resource resource = loader.loadResource("one_class.fj");
-		EObject program = resource.getContents().get(0);
-		System.out.println(new ModelPrinter().doSwitch(program));
-		
-		resource = loader.loadFromString("class A { A a; } class B extends A { B b; }");
-		program = resource.getContents().get(0);
-		System.out.println(new ModelPrinter().doSwitch(program));
 	}
 
 }
