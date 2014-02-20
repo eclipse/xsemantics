@@ -7,6 +7,6 @@ launch --stderr --stdout -l "it.xsemantics.example.lambda/.launch/GenerateLambda
 # first build to compile at least the build project
 build --continueonerror
 
-junit --launch "it.xsemantics.build.tools/bootstrap-build.launch"  --flatXML --output "${buckminster.output.root}/builder-run.result.xml"
+junit --launch "it.xsemantics.build.tools/bootstrap-build.launch" --stderr --flatXML --output "${buckminster.output.root}/builder-run.result.xml"
 
 build --clean

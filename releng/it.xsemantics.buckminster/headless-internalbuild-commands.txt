@@ -1,0 +1,5 @@
+setpref targetPlatformPath="${target.platform}"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
+resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"
+
+junit --launch "it.xsemantics.build.tools/bootstrap-build.launch" --stderr --flatXML --output "${buckminster.output.root}/builder-run.result.xml"

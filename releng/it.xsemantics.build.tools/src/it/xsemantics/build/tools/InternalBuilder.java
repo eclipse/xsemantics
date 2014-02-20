@@ -7,15 +7,11 @@
  *******************************************************************************/
 package it.xsemantics.build.tools;
 
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.join;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.take;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.toList;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -28,7 +24,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.junit.Test;
 
 /**
@@ -38,7 +33,7 @@ import org.junit.Test;
 public class InternalBuilder {
 
 	@Test
-	public void test() throws CoreException {
+	public void buildInEclipse() throws CoreException {
 		long maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
 		long free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
 		long used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
@@ -48,7 +43,9 @@ public class InternalBuilder {
 		
 		//ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor());
 		setAutoBuild(true);
+		printMessage("Cleaning...");
 		cleanBuild();
+		printMessage("Waiting for autobuild...");
 		waitForAutoBuild();
 		setAutoBuild(false);
 		
@@ -56,26 +53,46 @@ public class InternalBuilder {
 		
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
 				.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-		List<String> errors = new ArrayList<String>();
-		for (IMarker marker : markers) {
-			String msg = MarkerUtilities.getMessage(marker);
-			if (MarkerUtilities.getSeverity(marker) == IMarker.SEVERITY_ERROR) {
-				errors.add(msg);
+		
+		Arrays.sort(markers, new Comparator<IMarker>() {
+			public int compare(IMarker a, IMarker b) {
+				try {
+					long diff = a.getCreationTime() - b.getCreationTime();
+					return diff > 0 ? 1 : (diff < 0 ? -1 : 0);
+				} catch (CoreException e) {
+					return 0;
+				}
+			}
+		});
+		
+		for (IMarker problem : markers) {
+			String message = null;
+			switch (problem.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO)) {
+				case IMarker.SEVERITY_ERROR:
+					message = formatMarkerMessage("Error", problem); //$NON-NLS-1$
+					break;
+				case IMarker.SEVERITY_WARNING:
+					message = formatMarkerMessage("Warning", problem); //$NON-NLS-1$
+					break;
+				case IMarker.SEVERITY_INFO:
+					message = formatMarkerMessage("Info", problem); //$NON-NLS-1$
+			}
+
+			if (message != null) {
+				System.err.println(message);
 			}
 		}
-
-		List<String> top10;
-		if (errors.size() > 10) {
-			top10 = toList(take(errors, 10));
-		} else {
-			top10 = errors;
-		}
+		
 		maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
 		free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
 		used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
-		System.out.println("Finished build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
-		assertTrue("Problems found (" + top10.size() + " from " + errors.size() + "): " + join(errors, ", "),
-				errors.isEmpty());
+		printMessage("Finished build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
+		printMessage("Garbage collecting...");
+		Runtime.getRuntime().gc();
+		maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
+		free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
+		used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
+		printMessage("Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
 	}
 
 	public static void cleanBuild() throws CoreException {
@@ -142,10 +159,53 @@ public class InternalBuilder {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
 		boolean success = false;
 		try {
-			success = org.eclipse.xtext.util.Files.sweepFolder(jdtMetadata);
+			cleanFolder(jdtMetadata);
+			success = true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
+		printMessage("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
+	}
+
+	private void cleanFolder(File parentFolder) throws FileNotFoundException {
+		cleanFolder(parentFolder, new FileFilter() {
+			public boolean accept(File pathname) {
+				return true;
+			}
+		});
+	}
+	
+	private void cleanFolder(File parentFolder, FileFilter myFilter) throws FileNotFoundException {
+		if (!parentFolder.exists()) {
+			throw new FileNotFoundException(parentFolder.getAbsolutePath());
+		}
+		final File[] contents = parentFolder.listFiles(myFilter);
+		for (int j = 0; j < contents.length; j++) {
+			final File file = contents[j];
+			if (file.isDirectory()) {
+				cleanFolder(file, myFilter);
+			} else {
+				file.delete();
+			}
+		}
+	}
+
+	private String formatMarkerMessage(String type, IMarker problem) {
+		StringBuilder bld = new StringBuilder();
+		bld.append(type);
+		bld.append(": file "); //$NON-NLS-1$
+		bld.append(problem.getResource().getLocation().toOSString());
+		int line = problem.getAttribute(IMarker.LINE_NUMBER, -1);
+		if (line > 0) {
+			bld.append(", line "); //$NON-NLS-1$
+			bld.append(line);
+		}
+		bld.append(": "); //$NON-NLS-1$
+		bld.append(problem.getAttribute(IMarker.MESSAGE, "")); //$NON-NLS-1$
+		return bld.toString();
+	}
+
+	private void printMessage(String m) {
+		System.err.println(m);
 	}
 }
