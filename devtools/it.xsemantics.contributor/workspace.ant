@@ -22,6 +22,8 @@
 	<property name="git.root" value="${user.home}/git" />
 	<property name="git.clone.dest" location="${git.root}/xsemantics" />
 	<property name="checkout.location" location="${git.clone.dest}" />
+	<property name="releng.project" location="${checkout.location}/releng/it.xsemantics.buckminster"/>
+	<property name="contributor.project" location="${checkout.location}/devtools/it.xsemantics.contributor"/>
 
 	<property name="target.platform.dir" value="target.platform" />
 	<property name="eclipse.download" value="http://download.eclipse.org" />
@@ -46,6 +48,8 @@
 		<antcall target="cleanup" />
 		<antcall target="set.target.platform.path" />
 		<antcall target="clone.projects" />
+		<antcall target="import.api.baseline" />
+		<antcall target="set.api.baseline" />
 		<antcall target="resolve.commands" />
 		<antcall target="import.workspace.settings" />
 
@@ -65,7 +69,7 @@
 	</target>
 
 	<target name="import.api.baseline">
-		<run_buckminster command='importtargetdefinition "${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target"' />
+		<run_buckminster command='importtargetdefinition "${releng.project}/api-baseline/api-baseline.target"' />
 	</target>
 
 	<target name="set.api.baseline">
@@ -74,11 +78,11 @@
 
 	<target name="resolve.commands" depends="copy-xtext-grammar-to-bin">
 		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
-		<run_buckminster command='--script "${checkout.location}/releng/it.xsemantics.buckminster/headless-resolve-commands-contributor.txt"' />
+		<run_buckminster command='--script "${releng.project}/headless-resolve-commands-contributor.txt"' />
 	</target>
 
 	<target name="import.workspace.settings">
-		<run_buckminster command='importprefs -F "${checkout.location}/devtools/it.xsemantics.contributor/workspace.epf"' />
+		<run_buckminster command='importprefs -F "${contributor.project}/workspace.epf"' />
 	</target>
 
 	<!-- = = = = = = = = = = = = = = = = =
@@ -173,6 +177,7 @@
 				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
 				<exclude name="**/.metadata/.plugins/*mylyn*/" />
 				<exclude name="**/.metadata/.mylyn/" />
+				<exclude name="**/.metadata/.plugins/org.eclipse.core.runtime/" />
 				<exclude name="**/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" />
 				<exclude name="**/.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml" />
 				<exclude name="**/${target.platform.dir}/" />
