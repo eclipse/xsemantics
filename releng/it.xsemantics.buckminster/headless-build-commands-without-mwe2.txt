@@ -6,4 +6,4 @@ build --continueonerror
 
 junit --launch "it.xsemantics.build.tools/bootstrap-build.launch" --stderr --flatXML --output "${buckminster.output.root}/builder-run.result.xml"
 
-build --clean
+build --thorough
