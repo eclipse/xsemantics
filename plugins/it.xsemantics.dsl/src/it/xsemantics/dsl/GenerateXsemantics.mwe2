@@ -8,6 +8,7 @@ var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
 var file.extensions = "xsemantics"
 var projectName = "it.xsemantics.dsl"
 var runtimeProject = "../${projectName}"
+var testProject = "${runtimeProject}/../../tests/${projectName}.tests"
 
 Workflow {
     bean = StandaloneSetup {
@@ -38,13 +39,13 @@ Workflow {
     }
 
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}.tests/src-gen"
+		directory = "${testProject}/src-gen"
 	}
 
     component = Generator {
         pathRtProject = runtimeProject
         pathUiProject = "${runtimeProject}.ui"
-        pathTestProject = "${runtimeProject}.tests"
+        pathTestProject = "${testProject}"
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
         language = {
@@ -134,7 +135,7 @@ Workflow {
             }
 
             // generates junit test support classes into Generator#pathTestProject
-            fragment = junit.Junit4Fragment {}
+            fragment = junit.Junit4Fragment auto-inject {}
 
             // project wizard (optional)
             // fragment = projectWizard.SimpleProjectWizardFragment {
