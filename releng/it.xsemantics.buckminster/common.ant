@@ -54,7 +54,19 @@
 		<attribute name="propertiesfile" default="default" />
 		<sequential>
 			<echo message=" " />
-			<echo message="java -Dbuckminster.output.root=${buckminster.output.root} -Dbuckminster.temp.root=${buckminster.temp.root} -Xms256m -Xmx512m -jar ${buckminster.home}/plugins/org.eclipse.equinox.launcher_*.jar -application org.eclipse.buckminster.cmdline.headless -data ${buckminster.workspace} --loglevel ${buckminster.loglevel} --script @{commandsfile} --properties @{propertiesfile}" />
+			<echo message="Running Buckminster headless:" />
+			<echo message="java -Xms256m -Xmx512m" />
+			<echo message="  -jar ${buckminster.home}/plugins/org.eclipse.equinox.launcher_*.jar" />
+			<echo message="  -application org.eclipse.buckminster.cmdline.headless" />
+			<echo message="  -data ${buckminster.workspace}" />
+			<echo message="  -configuration ${buckminster.configuration}" />
+			<echo message="  --loglevel ${buckminster.loglevel}" />
+			<echo message="  --script @{commandsfile} --properties @{propertiesfile}" />
+			<echo message="  --properties @{propertiesfile}" />
+			<echo message="  -Dbuckminster.output.root=${buckminster.output.root}" />
+			<echo message="  -Dbuckminster.temp.root=${buckminster.temp.root}" />
+			<echo message="  -Dprojects.location=${projects.location}" />
+			<echo message="  -Dtarget.platform=${buckminster.target.platform}" />
 			<java fork="true" dir="${buckminster.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<classpath>
 					<fileset dir="${buckminster.home}/plugins">
