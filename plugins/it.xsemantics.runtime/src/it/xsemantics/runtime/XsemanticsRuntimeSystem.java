@@ -290,6 +290,25 @@ public class XsemanticsRuntimeSystem {
 			ruleApplicationTrace.addAsSubtrace(subTrace);
 	}
 
+	/**
+	 * This method replaces the previous keyword 'env' in Xsemantics grammar
+	 * (before version 1.5.0).
+	 * 
+	 * It is useless to have such element in the grammar, since it has
+	 * exactly the same syntax of this Java method invocation.
+	 * 
+	 * @param environment
+	 * @param key
+	 * @param clazz
+	 * @return
+	 * @throws RuleFailedException
+	 * @since 1.5
+	 */
+	public <T> T env(RuleEnvironment environment, Object key,
+			Class<? extends T> clazz) throws RuleFailedException {
+		return environmentAccess(environment, key, clazz);
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> T environmentAccess(RuleEnvironment environment, Object key,
 			Class<? extends T> clazz) throws RuleFailedException {
