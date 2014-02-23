@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.feature"
       label="Xsemantics UI"
-      version="1.4.2.qualifier"
+      version="1.4.3.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
