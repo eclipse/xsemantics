@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
@@ -124,15 +123,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		var expressions = ts.getRulePremises(0)
 		assertIsInstance(typeof(RuleInvocation), expressions.get(0))
 		assertIsInstance(typeof(RuleInvocation), expressions.get(1))
-	}
-	
-	@Test
-	def void testWithEnvironmentAccess() {
-		val premises = testFiles.testWithEnvironmentAccess.
-			parseAndAssertNoError.getRulePremises(0)
-		assertIsInstance(typeof(RuleInvocation), premises.get(0))
-		assertIsInstance(typeof(EnvironmentAccess), premises.get(1))
-		assertIsInstance(typeof(RuleInvocation), premises.get(2))
 	}
 	
 	@Test
@@ -449,11 +439,4 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		ts.getAllContentsOfType(typeof(JvmTypeReference))
 	}
 	
-	@Test
-	def void testIncompleteEnvironmentAccess_Issue_10() {
-		// https://github.com/LorenzoBettini/xsemantics/issues/10
-		// this only makes sure we don't get null pointer exceptions
-		parser.parse(testFiles.testWithIncompleteEnvironmentAccess_Issue_10).
-			validate
-	}
 }

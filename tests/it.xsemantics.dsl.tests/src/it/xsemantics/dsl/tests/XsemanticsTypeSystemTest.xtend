@@ -115,13 +115,6 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testEnvironmentAccess() {
-		assertPremiseType(
-			testFiles.testWithEnvironmentAccess, 1,
-			"org.eclipse.emf.ecore.EClass")
-	}
-
-	@Test
 	def void testStandardXVariableDeclaration() {
 		assertPremiseType(
 			testFiles.testRuleWithFeatureCallsForBinaryOps, 8,

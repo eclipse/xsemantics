@@ -1163,9 +1163,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private ClassType _applyRuleTThis_1(final RuleEnvironment G, final This _this) throws RuleFailedException {
-    /* env(G, 'this', ClassType) */
-    ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    return _environmentaccess;
+    ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
+    return _env;
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {

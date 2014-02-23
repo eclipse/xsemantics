@@ -138,12 +138,6 @@ class Fail extends XExpression {
 	contains XExpression error
 }
 
-class EnvironmentAccess extends XExpression {
-	refers Environment environment
-	contains XExpression argument
-	contains JvmTypeReference ^type
-}
-
 class EnvironmentComposition extends XExpression {
 	contains XExpression currentEnvironment
 	contains XExpression subEnvironment

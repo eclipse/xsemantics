@@ -5,7 +5,6 @@ import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles
 import it.xsemantics.dsl.xsemantics.CheckRule
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
@@ -17,8 +16,10 @@ import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
+import it.xsemantics.dsl.xsemantics.XsemanticsFile
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -35,8 +36,6 @@ import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.EcoreUtil2
-import it.xsemantics.dsl.xsemantics.XsemanticsFile
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -256,10 +255,6 @@ abstract class XsemanticsBaseTest {
 
 	def getXAbstractFeatureCalls(XsemanticsSystem ts) {
 		ts.getRules.get(0).rulePremises.typeSelect(typeof(XAbstractFeatureCall))
-	}
-	
-	def getEnvironmentAccess(XsemanticsSystem ts) {
-		ts.getRules.get(0).rulePremises.typeSelect(typeof(EnvironmentAccess)).get(0)
 	}
 	
 	def assertEqualsStrings(Object expected, Object actual) {

@@ -6,7 +6,6 @@ import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
@@ -15,17 +14,16 @@ import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
+import it.xsemantics.runtime.RuleEnvironment
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer
-import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import it.xsemantics.runtime.RuleEnvironment
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EStructuralFeature
 
 /**
  * Custom version of type computer for Custom XExpressions
@@ -44,7 +42,6 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			OrExpression: expression._computeTypes(state)
 			Fail: expression._computeTypes(state)
 			ErrorSpecification: expression._computeTypes(state)
-			EnvironmentAccess: expression._computeTypes(state)
 			default: super.computeTypes(expression, state)
 		}
 	}
@@ -185,9 +182,4 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	
-	protected def _computeTypes(EnvironmentAccess exp, ITypeComputationState state) {
-		exp.argument?.computeTypes(state.withoutExpectation)
-		state.acceptActualType(state.converter.
-			toLightweightReference(exp.type))
-	}
 }

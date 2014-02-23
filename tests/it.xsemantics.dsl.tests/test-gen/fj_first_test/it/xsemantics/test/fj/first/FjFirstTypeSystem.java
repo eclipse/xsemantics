@@ -757,9 +757,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private ClassType _applyRuleTThis_1(final RuleEnvironment G, final This _this) throws RuleFailedException {
-    /* env(G, 'this', ClassType) */
-    ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
-    return _environmentaccess;
+    ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
+    return _env;
   }
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
@@ -1331,10 +1330,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
-    /* env(G, 'this', ClassType) */
-    ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
+    ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
     /* env(G, 'this', ClassType) != null */
-    if (!(!Objects.equal(_environmentaccess, null))) {
+    if (!(!Objects.equal(_env, null))) {
       sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
     }
     return new Result<Boolean>(true);

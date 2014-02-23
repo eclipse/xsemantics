@@ -8,7 +8,6 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
-import it.xsemantics.dsl.xsemantics.EnvironmentAccess
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
@@ -337,22 +336,6 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		super.internalToConvertedExpression(obj, appendable);
 	}
 
-	def dispatch void doInternalToJavaStatement(EnvironmentAccess environmentAccess,
-			ITreeAppendable b, boolean isReferenced) {
-		generateCommentWithOriginalCode(environmentAccess, b);
-
-		toJavaStatement(environmentAccess.getArgument(), b, true);
-
-		if (isReferenced) {
-			declareFreshLocalVariable(environmentAccess, b)
-				[ app | compileEnvironmentAccess(environmentAccess, app) ]
-		} else {
-			newLine(b);
-			compileEnvironmentAccess(environmentAccess, b);
-			b.append(";");
-		}
-	}
-
 	def dispatch void doInternalToJavaStatement(OrExpression orExpression,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
@@ -591,11 +574,6 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		}
 	}
 
-	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,
-			ITreeAppendable b) {
-		b.append(b.getName(environmentAccess));
-	}
-
 	def dispatch void internalToConvertedExpression(RuleInvocation ruleInvocation,
 			ITreeAppendable b) {
 		b.append(ruleInvocation.getVarName(b))
@@ -616,19 +594,6 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			ITreeAppendable b) {
 		b.append("\"")
 				.append(modelElement.getProgramText.javaString).append("\"");
-	}
-
-	def void compileEnvironmentAccess(
-			EnvironmentAccess environmentAccess, ITreeAppendable b) {
-		b.append(environmentAccessMethod());
-		b.append("(");
-		b.append(environmentAccess.getEnvironment().getName());
-		comma(b);
-		toJavaExpression(environmentAccess.getArgument(), b);
-		comma(b);
-		generateJavaClassReference(environmentAccess.getType(),
-				environmentAccess, b);
-		b.append(")");
 	}
 
 	def void comma(ITreeAppendable b) {

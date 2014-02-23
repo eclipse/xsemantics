@@ -403,10 +403,9 @@ public class FjSepTypeSystem extends FjTypeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
-    /* env(G, 'this', ClassType) */
-    ClassType _environmentaccess = environmentAccess(G, "this", ClassType.class);
+    ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
     /* env(G, 'this', ClassType) != null */
-    if (!(!Objects.equal(_environmentaccess, null))) {
+    if (!(!Objects.equal(_env, null))) {
       sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
     }
     return new Result<Boolean>(true);

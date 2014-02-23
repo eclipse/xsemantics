@@ -557,21 +557,6 @@ class XsemanticsTestFiles {
 	}
 	'''
 	
-	def testWithEnvironmentAccess() '''
-	«testJudgmentDescriptionsReferringToEcore»
-	
-	rule EClassEObject derives
-		G |- EClass eClass : EObject object
-	from {
-		G |- object.eClass : eClass
-		env(G, 'this', EClass)
-		G |- object.eClass : eClass
-		env(G, eClass.name, EClass)
-		// env as an expression
-		'foo' == env(G, eClass.name, EClass).getInstanceClassName()
-	}
-	'''
-	
 	def testRuleInvokingAnotherRule3() '''
 	«testJudgmentDescriptionsReferringToEcore3»
 	
@@ -2535,19 +2520,6 @@ class XsemanticsTestFiles {
 	from {
 		G ||- object.eClass /\ eClass
 		G ||- object.eClass \/ eClass
-	}
-	'''
-
-	def testWithIncompleteEnvironmentAccess_Issue_10() '''
-	«testJudgmentDescriptionsReferringToEcore»
-	
-	rule EClassEObject derives
-		G |- EClass eClass : EObject object
-	from {
-		G |- object.eClass : eClass
-		env() // this used to raise a NullPointerException
-		// and it also made the IDE freeze
-		// https://github.com/LorenzoBettini/xsemantics/issues/10
 	}
 	'''
 

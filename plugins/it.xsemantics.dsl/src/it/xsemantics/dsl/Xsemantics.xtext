@@ -113,20 +113,12 @@ TerminalPremiseExpression returns xbase::XExpression:
 ;
 
 XLiteral returns xbase::XExpression:
-	EnvironmentAccess |
 	XClosure |
 	XBooleanLiteral |
 	XNumberLiteral |
 	XNullLiteral |
 	XStringLiteral |
 	XTypeLiteral
-;
-
-EnvironmentAccess returns xbase::XExpression:
-	{EnvironmentAccess} 'env' '(' 
-		environment=[Environment] ','
-		argument=XExpression ','
-		type=JvmTypeReference ')'
 ;
 
 RuleInvocation:

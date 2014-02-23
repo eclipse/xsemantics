@@ -1,0 +1,39 @@
+	def dispatch void doInternalToJavaStatement(EnvironmentAccess environmentAccess,
+			ITreeAppendable b, boolean isReferenced) {
+		generateCommentWithOriginalCode(environmentAccess, b);
+
+		toJavaStatement(environmentAccess.getArgument(), b, true);
+
+		if (isReferenced) {
+			declareFreshLocalVariable(environmentAccess, b)
+				[ app | compileEnvironmentAccess(environmentAccess, app) ]
+		} else {
+			newLine(b);
+			compileEnvironmentAccess(environmentAccess, b);
+			b.append(";");
+		}
+	}
+
+	def dispatch void internalToConvertedExpression(EnvironmentAccess environmentAccess,
+			ITreeAppendable b) {
+		b.append(b.getName(environmentAccess));
+	}
+
+	def void compileEnvironmentAccess(
+			EnvironmentAccess environmentAccess, ITreeAppendable b) {
+		b.append(environmentAccessMethod());
+		b.append("(");
+		b.append(environmentAccess.getEnvironment().getName());
+		comma(b);
+		toJavaExpression(environmentAccess.getArgument(), b);
+		comma(b);
+		generateJavaClassReference(environmentAccess.getType(),
+				environmentAccess, b);
+		b.append(")");
+	}
+
+	protected def _computeTypes(EnvironmentAccess exp, ITypeComputationState state) {
+		exp.argument?.computeTypes(state.withoutExpectation)
+		state.acceptActualType(state.converter.
+			toLightweightReference(exp.type))
+	}
