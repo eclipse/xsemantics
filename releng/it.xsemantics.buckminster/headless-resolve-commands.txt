@@ -1,8 +1,7 @@
-# with the imported preferences we avoid the error:
-# "An API baseline has not been set for the current workspace"
-importprefs -F "${projects.location}/releng/it.xsemantics.buckminster/workspace.epf"
-
 setpref targetPlatformPath="${target.platform}"
+
+importtargetdefinition "${projects.location}/releng/it.xsemantics.buckminster/api-baseline/api-baseline.target"
+addbaseline -A "api-baseline"
 
 resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
 resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"

@@ -20,6 +20,7 @@
 
 	<property name="releng.project" location="${projects.location}/releng/it.xsemantics.buckminster"/>
 	<property name="resolve.commands.file" value="${releng.project}/headless-resolve-commands.txt" />
+	<property name="resolve.local.commands.file" value="${releng.project}/headless-resolve-local-commands.txt" />
 	<property name="build.commands.file" value="${releng.project}/headless-build-commands.txt" />
 	<property name="build.local.commands.file" value="${releng.project}/headless-build-local-commands.txt" />
 	<property name="perform.commands.file" value="${releng.project}/headless-perform-commands.txt" />
@@ -42,7 +43,7 @@
 
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 
-		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-resolve-local" />
 		<antcall target="buckminster-build-local" />
 		<antcall target="buckminster-perform-local" />
 	</target>
@@ -52,6 +53,13 @@
 		<echo message="eclipse.download: ${eclipse.download}" />
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${resolve.commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-resolve-local">
+		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${resolve.local.commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
 	<target name="buckminster-build">
