@@ -37,3 +37,14 @@
 		state.acceptActualType(state.converter.
 			toLightweightReference(exp.type))
 	}
+
+XLiteral returns xbase::XExpression:
+	EnvironmentAccess |
+	XClosure |
+	XBooleanLiteral |
+	XNumberLiteral |
+	XNullLiteral |
+	XStringLiteral |
+	XTypeLiteral
+;
+

@@ -112,15 +112,6 @@ TerminalPremiseExpression returns xbase::XExpression:
 	XExpression
 ;
 
-XLiteral returns xbase::XExpression:
-	XClosure |
-	XBooleanLiteral |
-	XNumberLiteral |
-	XNullLiteral |
-	XStringLiteral |
-	XTypeLiteral
-;
-
 RuleInvocation:
 	=>(environment=EnvironmentSpecification
 	judgmentSymbol=JudgmentSymbol)
