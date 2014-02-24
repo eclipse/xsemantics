@@ -130,25 +130,27 @@ public class XsemanticsOnTheFlyJavaCompiler extends OnTheFlyJavaCompiler {
 				errorStream)), false /* systemExit */, null /* options */, null);
 	}
 
-	/**
-	 * Copied from {@link OnTheFlyJavaCompiler}
-	 * 
-	 * @return
-	 */
-	private File createTempDir() {
-		File rootTempDir = null;
-		String defTmpPath = System.getProperty("java.io.tmpdir");
-		if (defTmpPath != null) {
-			rootTempDir = new File(defTmpPath);
-		} else {
-			// use current directory, should be writable
-			rootTempDir = new File("./");
-		}
-		// VM unique temp dir
-		File tempDir = new File(rootTempDir, "otfjc"
-				+ OnTheFlyJavaCompiler.class.hashCode());
-		return tempDir;
-	}
+//	/**
+//	 * Copied from {@link OnTheFlyJavaCompiler}
+//	 * we don't need this anymore since it's accessible now
+//	 * 
+//	 * @return
+//	 */
+//	@Override
+//	protected File createTempDir() {
+//		File rootTempDir = null;
+//		String defTmpPath = System.getProperty("java.io.tmpdir");
+//		if (defTmpPath != null) {
+//			rootTempDir = new File(defTmpPath);
+//		} else {
+//			// use current directory, should be writable
+//			rootTempDir = new File("./");
+//		}
+//		// VM unique temp dir
+//		File tempDir = new File(rootTempDir, "otfjc"
+//				+ OnTheFlyJavaCompiler.class.hashCode());
+//		return tempDir;
+//	}
 	
 	@Override
 	public Class<?> compileToClass(String classname, String code) {
