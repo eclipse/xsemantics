@@ -14,6 +14,6 @@
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_ANT_TARGETS" value="buckminster-local,"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/it.xsemantics.buckminster/build.ant}"/>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-Dbuckminster.home=${system_property:user.home}/buckminster -Dbuild.properties=${project_loc:it.xsemantics.buckminster}/buckminster-local.properties -Dperform.local.commands.file=${project_loc:it.xsemantics.buckminster}/commands-site.p2.txt"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-Dbuckminster.home=${system_property:user.home}/buckminster -Dbuild.properties=${project_loc:it.xsemantics.buckminster}/buckminster-local.properties -Dperform.local.commands.file=${project_loc:it.xsemantics.buckminster}/commands/commands-site.p2.txt"/>
 <stringAttribute key="process_factory_id" value="org.eclipse.ant.ui.remoteAntProcessFactory"/>
 </launchConfiguration>

@@ -23,6 +23,7 @@
 	<property name="git.clone.dest" location="${git.root}/xsemantics" />
 	<property name="checkout.location" location="${git.clone.dest}" />
 	<property name="releng.project" location="${checkout.location}/releng/it.xsemantics.buckminster"/>
+	<property name="commands.path" value="${releng.project}/commands"/>
 	<property name="contributor.project" location="${checkout.location}/devtools/it.xsemantics.contributor"/>
 
 	<property name="target.platform.dir" value="target.platform" />
@@ -78,7 +79,7 @@
 
 	<target name="resolve.commands" depends="copy-xtext-grammar-to-bin">
 		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
-		<run_buckminster command='--script "${releng.project}/headless-resolve-commands-contributor.txt"' />
+		<run_buckminster command='--script "${commands.path}/headless-resolve-commands-contributor.txt"' />
 	</target>
 
 	<target name="import.workspace.settings">

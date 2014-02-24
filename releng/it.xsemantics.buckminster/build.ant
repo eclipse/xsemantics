@@ -19,13 +19,15 @@
 	<import file="common.ant" as="common" />
 
 	<property name="releng.project" location="${projects.location}/releng/it.xsemantics.buckminster"/>
-	<property name="resolve.commands.file" value="${releng.project}/headless-resolve-commands.txt" />
-	<property name="resolve.local.commands.file" value="${releng.project}/headless-resolve-local-commands.txt" />
-	<property name="build.commands.file" value="${releng.project}/headless-build-commands.txt" />
-	<property name="build.local.commands.file" value="${releng.project}/headless-build-local-commands.txt" />
-	<property name="perform.commands.file" value="${releng.project}/headless-perform-commands.txt" />
-	<property name="perform.local.commands.file" value="${releng.project}/headless-perform-local-commands.txt" />
-	<property name="perform.site.p2.promote.composite.commands.file" value="${releng.project}/commands-site.p2.promote.composite.txt" />
+	<property name="commands.path" value="${releng.project}/commands"/>
+
+	<property name="resolve.commands.file" value="${commands.path}/headless-resolve-commands.txt" />
+	<property name="resolve.local.commands.file" value="${commands.path}/headless-resolve-local-commands.txt" />
+	<property name="build.commands.file" value="${commands.path}/headless-build-commands.txt" />
+	<property name="build.local.commands.file" value="${commands.path}/headless-build-local-commands.txt" />
+	<property name="perform.commands.file" value="${commands.path}/headless-perform-commands.txt" />
+	<property name="perform.local.commands.file" value="${commands.path}/headless-perform-local-commands.txt" />
+	<property name="perform.site.p2.promote.composite.commands.file" value="${commands.path}/commands-site.p2.promote.composite.txt" />
 
 	<property name="build.properties" location="${projects.location}/releng/it.xsemantics.buckminster/buckminster.properties" />
 	
