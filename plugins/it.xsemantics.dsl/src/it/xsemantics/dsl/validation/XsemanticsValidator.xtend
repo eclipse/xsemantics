@@ -40,6 +40,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 import it.xsemantics.dsl.xsemantics.ReferToJudgment
+import it.xsemantics.dsl.xsemantics.OutputParameter
+import it.xsemantics.dsl.xsemantics.Injected
 
 //import org.eclipse.xtext.validation.Check
 
@@ -505,6 +507,19 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				}
 			}
 			return;
+		}
+	}
+
+	@Check
+	def protected void ensureNotPrimitive(JvmTypeReference typeRef) {
+		val reference = toLightweightTypeReference(typeRef);
+		if (reference.isPrimitive()) {
+			val container = typeRef.eContainer
+			if (container instanceof OutputParameter || container instanceof JvmFormalParameter ||
+					container instanceof Injected || container instanceof AuxiliaryDescription)
+				error("Primitives cannot be used in this context.", typeRef, null, 
+					org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_USE_OF_TYPE
+				);
 		}
 	}
 

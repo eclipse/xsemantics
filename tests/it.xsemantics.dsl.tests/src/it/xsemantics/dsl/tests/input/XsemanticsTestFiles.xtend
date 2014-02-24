@@ -805,7 +805,7 @@ class XsemanticsTestFiles {
 		G |- String s1 : Integer i2
 	
 	axiom Type2
-		G |- String b1 : int i2
+		G |- String b1 : Boolean i2
 	
 	axiom SubType1
 		G |- Object s1 <: Integer i2
@@ -2537,5 +2537,46 @@ class XsemanticsTestFiles {
 	auxiliary foo(String s) { true }
 	
 	axiom Type G |- String s
+	'''
+
+	def typeInvalidUseOfPrimitiveTypes_Issue_17() '''
+	system TypeSystem
+	
+	inject int i
+	
+	auxiliary {
+		foo(Object o) : int
+	}
+	
+	judgments {
+		type |- Object o : output boolean 
+	}
+	
+	auxiliary foo(String s) { 0 }
+	
+	axiom Type G |- String s : true
+	'''
+
+	def typeCorrectUseOfPrimitiveTypes_Issue_17() '''
+	system TypeSystem
+	
+	auxiliary {
+		foo(Object o) : Integer
+	}
+	
+	judgments {
+		type |- Object o : output Boolean
+	}
+	
+	auxiliary foo(String s) { 
+		val int i = 0
+		i
+	}
+	
+	rule Type G |- String s : Boolean b
+	from {
+		val boolean b1 = true
+		b = b1
+	}
 	'''
 }

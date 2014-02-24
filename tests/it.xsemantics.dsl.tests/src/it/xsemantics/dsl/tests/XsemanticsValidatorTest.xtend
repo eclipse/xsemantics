@@ -461,6 +461,23 @@ No input parameter; at least one is needed
 			)
 	}
 
+	@Test
+	def void testInvalidUseOfPrimitiveTypes_Issue_17() {
+		testFiles.typeInvalidUseOfPrimitiveTypes_Issue_17.
+			assertErrorMessages(
+'''
+Primitives cannot be used in this context.
+Primitives cannot be used in this context.
+Primitives cannot be used in this context.
+'''
+			)
+	}
+
+	@Test
+	def void testCorrectUseOfPrimitiveTypes_Issue_17() {
+		testFiles.typeCorrectUseOfPrimitiveTypes_Issue_17.
+			parseAndAssertNoError
+	}
 
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
