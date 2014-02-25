@@ -126,7 +126,7 @@ public class XsemanticsRuntimeSystem {
 	public void checkAssignableTo(Object result, Class<?> destinationClass)
 			throws RuleFailedException {
 		if (!isResultAssignableTo(result, destinationClass))
-			throw new RuleFailedException(stringRep(result)
+			throw newRuleFailedException(stringRep(result)
 					+ " cannot be assigned to " + stringRep(destinationClass));
 	}
 
@@ -140,7 +140,7 @@ public class XsemanticsRuntimeSystem {
 
 	public void checkNotNull(Object object) throws RuleFailedException {
 		if (object == null)
-			throw new RuleFailedException("passed null object to system");
+			throw newRuleFailedException("passed null object to system");
 	}
 
 	public String stringRep(Object object) {
@@ -178,14 +178,14 @@ public class XsemanticsRuntimeSystem {
 	protected RuleFailedException noSuchMethodException(
 			final String judgmentSymbol,
 			final Iterable<String> relationSymbols, Object... params) {
-		return new RuleFailedException("cannot find a rule for "
+		return newRuleFailedException("cannot find a rule for "
 				+ judgmentSymbol + " "
 				+ stringRepForParams(params, relationSymbols));
 	}
 
 	protected RuleFailedException noSuchMethodException(final String name,
 			Object... params) {
-		return new RuleFailedException("cannot find an implementation for "
+		return newRuleFailedException("cannot find an implementation for "
 				+ name + "(" + stringRepForParams(params) + ")");
 	}
 
@@ -198,12 +198,12 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public void throwForExplicitFail() {
-		Exceptions.sneakyThrow(new RuleFailedException());
+		Exceptions.sneakyThrow(newRuleFailedException());
 	}
 
 	public void throwForExplicitFail(String message,
 			ErrorInformation errorInformation) {
-		final RuleFailedException ex = new RuleFailedException(message);
+		final RuleFailedException ex = newRuleFailedException(message);
 		ex.addErrorInformation(errorInformation);
 		Exceptions.sneakyThrow(ex);
 	}
@@ -214,6 +214,27 @@ public class XsemanticsRuntimeSystem {
 		throw newRuleFailedException(message, issue, t, errorInformations);
 	}
 
+	/**
+	 * @since 1.5
+	 */
+	public RuleFailedException newRuleFailedException() {
+		return createRuleFailedException(null, null, null);
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public RuleFailedException newRuleFailedException(Throwable t) {
+		return createRuleFailedException(t.toString(), null, t);
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public RuleFailedException newRuleFailedException(String message) {
+		return createRuleFailedException(message, null, null);
+	}
+
 	public RuleFailedException newRuleFailedException(String message,
 			String issue, ErrorInformation... errorInformations) {
 		return newRuleFailedException(message, issue, null, errorInformations);
@@ -221,10 +242,26 @@ public class XsemanticsRuntimeSystem {
 
 	public RuleFailedException newRuleFailedException(String message,
 			String issue, Throwable t, ErrorInformation... errorInformations) {
-		final RuleFailedException ruleFailedException = new RuleFailedException(
+		final RuleFailedException ruleFailedException = createRuleFailedException(
 				failed(message), issue, t);
 		ruleFailedException.addErrorInformations(errorInformations);
 		return ruleFailedException;
+	}
+
+	/**
+	 * This factory method can be overridden if one needs to provide a custom implementation
+	 * of {@link RuleFailedException}.
+	 * 
+	 * @param message
+	 * @param issue
+	 * @param t
+	 * @return
+	 * 
+	 * @since 1.5
+	 */
+	protected RuleFailedException createRuleFailedException(String message,
+			String issue, Throwable t) {
+		return new RuleFailedException(message, issue, t);
 	}
 
 	public RuleFailedException extractRuleFailedException(Exception e) {
@@ -238,7 +275,7 @@ public class XsemanticsRuntimeSystem {
 		} else if (e instanceof RuleFailedException) {
 			return (RuleFailedException) e;
 		}
-		return new RuleFailedException(e);
+		return newRuleFailedException(e);
 	}
 
 	protected <T> Result<T> resultForFailure(Exception e) {
@@ -313,15 +350,15 @@ public class XsemanticsRuntimeSystem {
 	public <T> T environmentAccess(RuleEnvironment environment, Object key,
 			Class<? extends T> clazz) throws RuleFailedException {
 		if (environment == null)
-			throw new RuleFailedException("access to null environment");
+			throw newRuleFailedException("access to null environment");
 		Object value = environment.get(key);
 		if (value == null)
-			throw new RuleFailedException("no mapping in the environment for: "
+			throw newRuleFailedException("no mapping in the environment for: "
 					+ stringRep(key));
 		if (clazz.isAssignableFrom(value.getClass()))
 			return (T) value;
 		else
-			throw new RuleFailedException("mapped value " + stringRep(value)
+			throw newRuleFailedException("mapped value " + stringRep(value)
 					+ " cannot be assigned to " + stringRep(clazz));
 	}
 
