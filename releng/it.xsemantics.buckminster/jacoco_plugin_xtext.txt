@@ -2,7 +2,7 @@ Path to exec files (e.g.: **/target/**.exec, **/jacoco.exec)
 **/**.exec
 
 Path to class directories (e.g.: **/target/classDir, **/classes)	
-plugins/it.xsemantics.dsl/**/bin,plugins/it.xsemantics.dsl.ui/**/bin,examples/it.xsemantics.example.expressions/**/bin,examples/it.xsemantics.example.expressions.ui/**/bin,examples/it.xsemantics.example.fj/**/bin,examples/it.xsemantics.example.fj.ui/**/bin,examples/it.xsemantics.example.lambda/**/bin,examples/it.xsemantics.example.lambda.ui/**/bin
+plugins/it.xsemantics.runtime/**/bin,plugins/it.xsemantics.dsl/**/bin,plugins/it.xsemantics.dsl.ui/**/bin,examples/it.xsemantics.example.expressions/**/bin,examples/it.xsemantics.example.expressions.ui/**/bin,examples/it.xsemantics.example.fj/**/bin,examples/it.xsemantics.example.fj.ui/**/bin,examples/it.xsemantics.example.lambda/**/bin,examples/it.xsemantics.example.lambda.ui/**/bin
 
 Path to source directories (e.g.: **/mySourceFiles)
 plugins/it.xsemantics.*/src,plugins/it.xsemantics.*/xtend-gen,plugins/it.xsemantics.*/src-gen,examples/it.xsemantics.*/src,examples/it.xsemantics.*/xtend-gen,examples/it.xsemantics.*/src-gen,*/it.xsemantics.*/xsemantics-gen
