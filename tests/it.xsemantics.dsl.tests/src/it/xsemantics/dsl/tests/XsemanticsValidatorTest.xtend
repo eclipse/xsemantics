@@ -479,6 +479,12 @@ Primitives cannot be used in this context.
 			parseAndAssertNoError
 	}
 
+	@Test
+	def void testCorrectReturnInAuxiliaryFunctions_Issue_18() {
+		testFiles.testCorrectReturnInAuxFunction_Issue_18.
+			parseAndAssertNoError
+	}
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
 	}

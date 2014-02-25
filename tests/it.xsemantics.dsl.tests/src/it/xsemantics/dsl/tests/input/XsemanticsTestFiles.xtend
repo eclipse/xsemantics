@@ -1562,6 +1562,25 @@ class XsemanticsTestFiles {
 		return obj
 	}
 	'''
+
+	def testCorrectReturnInAuxFunction_Issue_18() '''
+	«typeSystemQualifiedName»
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	auxiliary {
+		overrides(EObject c)
+		isValue(EObject c) : Boolean
+	}
+	
+	auxiliary overrides(EClass c) {
+		return true
+	}
+	
+	auxiliary isValue(EClass c) {
+		return true
+	}
+	'''
 	
 	def testWrongThrowInPremises() '''
 	«testJudgmentDescriptionsEObjectEClass»

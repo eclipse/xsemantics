@@ -86,8 +86,12 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	override void checkReturn(XReturnExpression expr) {
-		error("Return statements are not allowed here", expr, null,
+		// better to allow return statements in auxiliary functions
+		// see https://github.com/LorenzoBettini/xsemantics/issues/18
+		if (!expr.isContainedInAuxiliaryFunction()) {
+			error("Return statements are not allowed here", expr, null,
 				IssueCodes.RETURN_NOT_ALLOWED);
+		}
 	}
 
 //	@Override
