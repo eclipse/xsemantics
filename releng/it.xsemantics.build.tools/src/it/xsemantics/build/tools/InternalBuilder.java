@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -65,11 +66,13 @@ public class InternalBuilder {
 			}
 		});
 		
+		int errors = 0;
 		for (IMarker problem : markers) {
 			String message = null;
 			switch (problem.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO)) {
 				case IMarker.SEVERITY_ERROR:
 					message = formatMarkerMessage("Error", problem); //$NON-NLS-1$
+					errors++;
 					break;
 				case IMarker.SEVERITY_WARNING:
 					message = formatMarkerMessage("Warning", problem); //$NON-NLS-1$
@@ -93,6 +96,8 @@ public class InternalBuilder {
 		free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
 		used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
 		printMessage("Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
+		
+		Assert.assertTrue("Errors during the build: " + errors, errors == 0);
 	}
 
 	public static void cleanBuild() throws CoreException {
