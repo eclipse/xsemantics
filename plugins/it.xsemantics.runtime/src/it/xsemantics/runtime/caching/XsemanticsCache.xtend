@@ -5,6 +5,8 @@ import com.google.inject.Provider
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.util.IResourceScopeCache
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.RuleApplicationTrace
 
 /**
  * @since 1.5
@@ -13,6 +15,18 @@ import org.eclipse.xtext.util.IResourceScopeCache
 class XsemanticsCache {
 	
 	@Inject private IResourceScopeCache cache
+
+	def <T> T get(String methodName, RuleEnvironment environment, RuleApplicationTrace trace, 
+			Provider<XsemanticsCachedData<T>> provider, Object...elements) {
+		val cached = get(methodName, provider, elements)
+		if (environment !== null && environment !== cached.environment) {
+			environment.increment(cached.environment)
+		}
+		if (trace !== null && cached.trace !== null) {
+			trace.addAsSubtrace(cached.trace)
+		}
+		cached.result
+	}
 	
 	def <T> T get(String methodName, Provider<T> provider, Object...elements) {
 		cache.get(methodName -> elements.getKeys(), elements.getResource(), provider)
