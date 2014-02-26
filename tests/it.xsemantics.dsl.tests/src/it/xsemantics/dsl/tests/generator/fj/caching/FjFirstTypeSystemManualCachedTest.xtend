@@ -95,6 +95,89 @@ class FjFirstTypeSystemManualCachedTest {
 		]
 	}
 
+	@Test
+	def void testCachedSubtyping() {
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertSubtypingCached("B", "A", 
+'''
+Subclassing: [] |- class B extends A {} <| class A {}
+ Subclassing: [] |- class A {} <| class A {}
+'''
+			)
+			
+			// note that it reuses the cached subclasses(B, A)
+			assertSubtypingCached("C", "A", 
+'''
+Subclassing: [] |- class C extends B {} <| class A {}
+ cached:
+  Subclassing: [] |- class B extends A {} <| class A {}
+   Subclassing: [] |- class A {} <| class A {}
+'''
+			)
+
+			// note that it reuses the cached subclasses(A, A)
+			assertSubtypingCached("D", "A", 
+'''
+Subclassing: [] |- class D extends A {} <| class A {}
+ cached:
+  Subclassing: [] |- class A {} <| class A {}
+'''
+			)
+		]
+	}
+
+	@Test
+	def void testFailureNotCached() {
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertSubtypingCachedFailed("D", "C", 
+'''
+failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
+ failed: Subclassing: [] |- class A {} <| class C extends B {}
+  failed: class1.superclass != null
+'''
+			)
+
+			assertSubtypingCachedFailed("D", "C", 
+'''
+failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
+ failed: Subclassing: [] |- class A {} <| class C extends B {}
+  failed: class1.superclass != null
+'''
+			)
+		]
+	}
+
+	def private assertSubtypingCached(Program p, String className1, String className2, CharSequence expectedTrace) {
+		val C1 = p.classes.findFirst[name == className1]
+		val C2 = p.classes.findFirst[name == className2]
+		
+		val trace1 = new RuleApplicationTrace
+		cachedTypeSystem.subclass(null, trace1, C1, C2)
+		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
+	}
+
+	def private assertSubtypingCachedFailed(Program p, String className1, String className2, CharSequence expectedTrace) {
+		val C1 = p.classes.findFirst[name == className1]
+		val C2 = p.classes.findFirst[name == className2]
+		
+		val result = cachedTypeSystem.subclass(C1, C2)
+		expectedTrace.toString.trim.assertEquals(
+			result.ruleFailedException.failureTraceAsString.trim
+		)
+	}
+
 	def private firstMethodOfFirstClass(Program p) {
 		(p.classes.head.members.head as Method)
 	}
