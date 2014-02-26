@@ -16,6 +16,7 @@ import org.junit.runner.RunWith
 import static extension org.junit.Assert.*
 import it.xsemantics.example.fj.fj.ClassType
 import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.caching.XsemanticsCache
 
 @InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -55,13 +56,12 @@ class FjFirstTypeSystemManualCachedTest {
 		new A()
 		'''.
 		parse.main => [
-			var trace = new RuleApplicationTrace
+			val trace = new RuleApplicationTrace
 			cachedTypeSystem.type(null, trace, it)
-			val s = trace.traceAsString
 			
-			trace = new RuleApplicationTrace
-			cachedTypeSystem.type(null, trace, it)
-			s.assertEquals(trace.traceAsString)
+			val trace2 = new RuleApplicationTrace
+			cachedTypeSystem.type(null, trace2, it)
+			trace.assertCachedTrace(trace2)
 		]
 	}
 
@@ -73,30 +73,36 @@ class FjFirstTypeSystemManualCachedTest {
 		}
 		'''.
 		parse.firstMethodOfFirstClass.body.expression => [
-			var trace = new RuleApplicationTrace
+			val trace = new RuleApplicationTrace
 			val envForThis = it.environmentWithMappedThisAsContainingClass
 			cachedTypeSystem.type(envForThis, trace, it)
-			val s = trace.traceAsString
 			
 			// even though we pass a null environment the cached
 			// result is returned
-			trace = new RuleApplicationTrace
-			val result = cachedTypeSystem.type(null, trace, it)
+			val trace2 = new RuleApplicationTrace
+			val result = cachedTypeSystem.type(null, trace2, it)
 			(result.value as ClassType).classref.name.assertEquals("A")
-			s.assertEquals(trace.traceAsString)
+			trace.assertCachedTrace(trace2)
 			
 			// even though we pass an empty environment the cached
 			// result is returned and the passed environment is updated
 			// with the cached one
-			trace = new RuleApplicationTrace
+			val trace3 = new RuleApplicationTrace
 			val emptyEnv = new RuleEnvironment
-			cachedTypeSystem.type(emptyEnv, trace, it)
-			s.assertEquals(trace.traceAsString)
+			cachedTypeSystem.type(emptyEnv, trace3, it)
+			trace.assertCachedTrace(trace3)
 			"A".assertEquals((emptyEnv.get("this") as ClassType).classref.name)
 		]
 	}
 
 	def private firstMethodOfFirstClass(Program p) {
 		(p.classes.head.members.head as Method)
+	}
+
+	def private void assertCachedTrace(RuleApplicationTrace original, RuleApplicationTrace cached) {
+		val prepared = new RuleApplicationTrace()
+		prepared.addToTrace(XsemanticsCache.CACHED_STRING)
+		prepared.addAsSubtrace(original)
+		prepared.traceAsString.assertEquals(cached.traceAsString)
 	}
 }

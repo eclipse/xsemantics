@@ -15,14 +15,19 @@ import it.xsemantics.runtime.RuleApplicationTrace
 class XsemanticsCache {
 	
 	@Inject private IResourceScopeCache cache
+	
+	public static var CACHED_STRING = "cached:"
 
 	def <T> T get(String methodName, RuleEnvironment environment, RuleApplicationTrace trace, 
-			Provider<XsemanticsCachedData<T>> provider, Object...elements) {
+			XsemanticsProvider<T> provider, Object...elements) {
 		val cached = get(methodName, provider, elements)
 		if (environment !== null && environment !== cached.environment) {
 			environment.increment(cached.environment)
 		}
 		if (trace !== null && trace !== cached.trace) {
+			if (!provider.called)
+				trace.addToTrace(CACHED_STRING)
+			
 			if (trace.empty)
 				trace.replaceWith(cached.trace)
 			else
