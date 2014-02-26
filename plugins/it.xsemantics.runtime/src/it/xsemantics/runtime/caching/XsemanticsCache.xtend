@@ -22,8 +22,11 @@ class XsemanticsCache {
 		if (environment !== null && environment !== cached.environment) {
 			environment.increment(cached.environment)
 		}
-		if (trace !== null && cached.trace !== null) {
-			trace.addAsSubtrace(cached.trace)
+		if (trace !== null && trace !== cached.trace) {
+			if (trace.empty)
+				trace.replaceWith(cached.trace)
+			else
+				trace.addAsSubtrace(cached.trace)
 		}
 		cached.result
 	}

@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
@@ -65,15 +64,9 @@ public class FJScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	private RuleEnvironment environmentForExpression(Expression expression) {
-		Class containingClass = EcoreUtil2.getContainerOfType(expression,
-				Class.class);
-		if (containingClass != null) {
-			ClassType thisType = fjTypeUtils.createClassType(containingClass);
-			return new RuleEnvironment(typeSystem.environmentEntry("this",
-					thisType));
-		}
-		return null;
+		return fjTypeUtils.environmentWithMappedThisAsContainingClass(expression);
 	}
+
 
 	public List<Member> getMembers(Class cl) {
 		List<Member> allMembers = new LinkedList<Member>();

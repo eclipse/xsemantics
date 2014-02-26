@@ -21,14 +21,31 @@ public class RuleApplicationTrace {
 	}
 
 	public void addToTrace(Object traceElement) {
-		trace.add(traceElement);
+		if (traceElement != null)
+			trace.add(traceElement);
 	}
 
 	public void addAsSubtrace(RuleApplicationTrace subTrace) {
-		trace.add(subTrace);
+		if (subTrace != null)
+			trace.add(subTrace);
 	}
 
 	public List<Object> getTrace() {
 		return trace;
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public boolean isEmpty() {
+		return trace.isEmpty();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public void replaceWith(RuleApplicationTrace t) {
+		trace.clear();
+		trace.addAll(t.getTrace());
 	}
 }

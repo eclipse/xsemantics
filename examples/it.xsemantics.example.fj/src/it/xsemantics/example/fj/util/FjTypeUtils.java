@@ -3,10 +3,15 @@
  */
 package it.xsemantics.example.fj.util;
 
+import org.eclipse.xtext.EcoreUtil2;
+
 import it.xsemantics.example.fj.fj.BasicType;
 import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.ClassType;
+import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.FjFactory;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleEnvironmentEntry;
 
 /**
  * Utility functions for types
@@ -36,4 +41,20 @@ public class FjTypeUtils {
 		return createBasicType("int");
 	}
 
+	public RuleEnvironment environmentWithMappedThisAsContainingClass(
+			Expression expression) {
+		Class containingClass = EcoreUtil2.getContainerOfType(expression,
+				Class.class);
+		if (containingClass != null) {
+			return environmentWithMappedThis(containingClass);
+		}
+		return null;
+	}
+
+
+	public RuleEnvironment environmentWithMappedThis(Class containingClass) {
+		ClassType thisType = createClassType(containingClass);
+		return new RuleEnvironment(new RuleEnvironmentEntry("this",
+				thisType));
+	}
 }
