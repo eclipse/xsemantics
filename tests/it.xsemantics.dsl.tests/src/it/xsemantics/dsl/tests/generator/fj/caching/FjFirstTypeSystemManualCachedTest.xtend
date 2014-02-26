@@ -159,6 +159,76 @@ failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
 		]
 	}
 
+	@Test
+	def void testCachedSuperclasses() {
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertSuperclassesCached("B", 
+'''
+superclasses(class B extends A {}) = [class A {}]
+'''
+			)
+			
+			assertSuperclassesCached("B", 
+'''
+cached:
+ superclasses(class B extends A {}) = [class A {}]
+'''
+			)
+		
+			// superclasses is not recursive so we don't reuse
+			// computation of previous superclasses
+			assertSuperclassesCached("C", 
+'''
+superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+'''
+			)
+		]
+	}
+
+	@Test
+	def void testCachedSuperclassesUsedInTypecheck() {
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertSuperclassesCachedInTypecheck("C",
+'''
+CheckClass: [] |- class C extends B {}
+ superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+ Fields: [] ||- class B extends A {} >> []
+  superclasses(class B extends A {}) = [class A {}]
+ Methods: [] ||~ class B extends A {} >> []
+'''
+			)
+		
+			// we reuse the superclasses computation
+			// implicitly also when computing fields
+			assertSuperclassesCachedInTypecheck("C",
+'''
+CheckClass: [] |- class C extends B {}
+ cached:
+  superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+  Fields: [] ||- class B extends A {} >> []
+   superclasses(class B extends A {}) = [class A {}]
+  Methods: [] ||~ class B extends A {} >> []
+ Fields: [] ||- class B extends A {} >> []
+  cached:
+   superclasses(class B extends A {}) = [class A {}]
+ Methods: [] ||~ class B extends A {} >> []
+'''
+			)
+		]
+	}
+
 	def private assertSubtypingCached(Program p, String className1, String className2, CharSequence expectedTrace) {
 		val C1 = p.classes.findFirst[name == className1]
 		val C2 = p.classes.findFirst[name == className2]
@@ -176,6 +246,22 @@ failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
 		expectedTrace.toString.trim.assertEquals(
 			result.ruleFailedException.failureTraceAsString.trim
 		)
+	}
+
+	def private assertSuperclassesCached(Program p, String className1, CharSequence expectedTrace) {
+		val C1 = p.classes.findFirst[name == className1]
+		
+		val trace1 = new RuleApplicationTrace
+		cachedTypeSystem.superclasses(trace1, C1)
+		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
+	}
+
+	def private assertSuperclassesCachedInTypecheck(Program p, String className1, CharSequence expectedTrace) {
+		val C1 = p.classes.findFirst[name == className1]
+		
+		val trace1 = new RuleApplicationTrace
+		cachedTypeSystem.check(null, trace1, C1)
+		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
 	}
 
 	def private firstMethodOfFirstClass(Program p) {

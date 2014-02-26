@@ -1,5 +1,7 @@
 package it.xsemantics.dsl.tests.generator.fj.caching;
 
+import java.util.List;
+
 import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Type;
@@ -17,6 +19,18 @@ public class FjFirstTypeSystemManualCached extends FjFirstTypeSystem {
 	@Inject
 	XsemanticsCache cache;
 
+	@Override
+	protected List<Class> superclassesInternal(final RuleApplicationTrace _trace_,
+			final Class cl) {
+		return cache.get("superclassesInternal", (RuleEnvironment)null, _trace_,
+				new XsemanticsProvider<List<Class>>(null, _trace_) {
+					public List<Class> doGet() {
+						return FjFirstTypeSystemManualCached.
+								super.superclassesInternal(_trace_, cl);
+					}
+				}, cl);
+	}
+	
 	@Override
 	protected Result<Type> typeInternal(final RuleEnvironment _environment_,
 			final RuleApplicationTrace _trace_, final Expression expression) {
