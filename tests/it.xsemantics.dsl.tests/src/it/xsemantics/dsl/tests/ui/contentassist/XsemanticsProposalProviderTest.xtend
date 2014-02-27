@@ -27,7 +27,7 @@ public class XsemanticsProposalProviderTest extends
 		newBuilder().append(testInputs.inputForRelationSymbols())
 				.assertText(":", "<:", ":>", "<<", ">>", "<|", "|>", "<-",
 						"-->", "<~", "~>", "~~", "<!", "!>", "<<!", "!>>",
-						"<~!", "!~>", "error", "override", "\\/", "/\\");
+						"<~!", "!~>", "cached", "error", "override", "\\/", "/\\");
 	}
 
 	@Test
