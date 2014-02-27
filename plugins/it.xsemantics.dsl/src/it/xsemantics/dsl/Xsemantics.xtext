@@ -49,6 +49,7 @@ JudgmentDescription:
 	judgmentParameters+=JudgmentParameter
 	(relationSymbols+=RelationSymbol
 	judgmentParameters+=JudgmentParameter)*
+	(cached?='cached')?
 	(error=ErrorSpecification)?
 ;
 

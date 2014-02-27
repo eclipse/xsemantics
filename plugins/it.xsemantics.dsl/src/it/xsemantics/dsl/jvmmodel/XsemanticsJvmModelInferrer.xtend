@@ -10,6 +10,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
+import it.xsemantics.dsl.xsemantics.Named
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
@@ -32,7 +33,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import it.xsemantics.dsl.xsemantics.Named
+import it.xsemantics.runtime.caching.XsemanticsProvider
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -600,8 +601,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	def compileInternalMethod(JudgmentDescription judgmentDescription) {
+		val methodName = judgmentDescription.entryPointInternalMethodName.toString
 		judgmentDescription.toMethod(
-			judgmentDescription.entryPointInternalMethodName.toString,
+			methodName,
 			judgmentDescription.resultType
 		) 
 		[
@@ -614,14 +616,33 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = '''
-			try {
-				checkParamsNotNull(«judgmentDescription.inputArgs»);
-				return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «judgmentDescription.inputArgs»);
-			} catch («Exception» «judgmentDescription.exceptionVarName») {
-				sneakyThrowRuleFailedException(«judgmentDescription.exceptionVarName»);
-				return null;
-			}'''
+   			val inputArgs = judgmentDescription.inputArgs
+   			val exceptionName = judgmentDescription.exceptionVarName
+   			
+   			if (judgmentDescription.cached) {
+   				body = '''
+				return getCache().get("«methodName»", «environmentName», «ruleApplicationTraceName»,
+					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
+						public «judgmentDescription.resultType» doGet() {
+							try {
+								checkParamsNotNull(«inputArgs»);
+								return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
+							} catch («Exception» «exceptionName») {
+								sneakyThrowRuleFailedException(«exceptionName»);
+								return null;
+							}
+						}
+					}, «inputArgs»);'''
+   			} else {
+	   			body = '''
+				try {
+					checkParamsNotNull(«inputArgs»);
+					return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
+				} catch («Exception» «exceptionName») {
+					sneakyThrowRuleFailedException(«exceptionName»);
+					return null;
+				}'''
+			}
 		]
 	}
 	

@@ -3,6 +3,8 @@
  */
 package it.xsemantics.runtime;
 
+import it.xsemantics.runtime.caching.XsemanticsCache;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Lorenzo Bettini
@@ -38,6 +41,12 @@ public class XsemanticsRuntimeSystem {
 	@Inject
 	protected StringRepresentation stringRepresentation;
 
+	@Inject
+	private Provider<XsemanticsCache> cacheProvider;
+
+	@Inject
+	private XsemanticsCache cache;
+
 	public StringRepresentation getStringRepresentation() {
 		return stringRepresentation;
 	}
@@ -45,6 +54,15 @@ public class XsemanticsRuntimeSystem {
 	public void setStringRepresentation(
 			StringRepresentation stringRepresentation) {
 		this.stringRepresentation = stringRepresentation;
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public XsemanticsCache getCache() {
+		if (cache == null)
+			cache = cacheProvider.get();
+		return cache;
 	}
 
 	protected Predicate<Method> getPredicate(String methodName, int numOfArgs) {

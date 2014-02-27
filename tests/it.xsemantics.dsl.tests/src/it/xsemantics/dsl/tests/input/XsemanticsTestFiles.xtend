@@ -2598,4 +2598,15 @@ class XsemanticsTestFiles {
 		b = b1
 	}
 	'''
+
+	def cachedDescriptions() '''
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	«typeSystemQualifiedName»
+	
+	judgments {
+		type |- EObject o : output EClass cached
+	}
+	'''
 }

@@ -3674,6 +3674,76 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 
+	@Test
+	def testCaching() {
+		testFiles.cachedDescriptions.
+		assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import it.xsemantics.runtime.caching.XsemanticsProvider;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+  }
+  
+  public Result<EClass> type(final EObject o) {
+    return type(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject o) {
+    return type(_environment_, null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	return typeInternal(_environment_, _trace_, o);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    return getCache().get("typeInternal", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return typeDispatcher.invoke(_environment_, _trace_, o);
+    			} catch (Exception _e_type) {
+    				sneakyThrowRuleFailedException(_e_type);
+    				return null;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+}
+'''
+		)
+	}
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}

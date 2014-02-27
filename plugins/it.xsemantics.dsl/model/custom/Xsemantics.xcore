@@ -42,12 +42,13 @@ class AuxiliaryDescription extends UniqueByName {
 	contains XExpression error
 }
 
-class JudgmentDescription extends Overrider {
+class JudgmentDescription extends Overrider, Cachable {
 	boolean override
 	String name
 	String judgmentSymbol
 	contains JudgmentParameter[] judgmentParameters
 	String[] relationSymbols
+	boolean cached
 	contains XExpression error
 }
 
@@ -162,6 +163,10 @@ interface UniqueByName extends Named {
 
 interface Overrider extends UniqueByName {
 	op boolean isOverride()
+}
+
+interface Cachable extends UniqueByName {
+	op boolean isCached()
 }
 
 class ReferToJudgment {
