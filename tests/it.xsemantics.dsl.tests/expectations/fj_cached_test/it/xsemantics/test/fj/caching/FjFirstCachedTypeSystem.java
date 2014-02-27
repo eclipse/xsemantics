@@ -12,10 +12,10 @@ import it.xsemantics.test.fj.first.FjFirstTypeSystem;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
-public class FjCachedTypeSystem extends FjFirstTypeSystem {
+public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
-  public FjCachedTypeSystem() {
+  public FjFirstCachedTypeSystem() {
     init();
   }
   

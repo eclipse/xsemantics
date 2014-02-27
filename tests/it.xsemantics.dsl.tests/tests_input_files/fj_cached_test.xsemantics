@@ -4,7 +4,7 @@ import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
 
-system it.xsemantics.test.fj.caching.FjCachedTypeSystem extends FjFirstTypeSystem
+system it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem extends FjFirstTypeSystem
 
 judgments {
 	override type |- Expression expression : output Type cached 

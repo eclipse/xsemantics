@@ -123,7 +123,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
-	public void testGeneratorOnFjCachedTest() throws Exception {
+	public void testGeneratorOnFjFirstCachedTest() throws Exception {
 		// make sure to load fj_first_test.xsemantics ...
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "fj_first_test.xsemantics", "fj_first_test/",
@@ -131,7 +131,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		// since fj_cached_test.xsemantics extends fj_first_test.xsemantics
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "fj_cached_test.xsemantics", "fj_cached_test/",
-				"it/xsemantics/test/fj/caching/", "FjCachedTypeSystem");
+				"it/xsemantics/test/fj/caching/", "FjFirstCachedTypeSystem");
 	}
 
 	@Test

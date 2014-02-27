@@ -3,22 +3,22 @@ package it.xsemantics.dsl.tests.generator.fj;
 import it.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedTypeSystemTests;
 import it.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import it.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
-import it.xsemantics.test.fj.caching.FjCachedTypeSystem;
+import it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem;
 
-public class FjCachedGeneratedTypeSystemTests extends
+public class FjFirstCachedGeneratedTypeSystemTests extends
 		FjAbstractGeneratedTypeSystemTests {
 
 	public static class FjStandaloneSetupCached extends
 			FjCustomStandaloneSetupForTesting {
 		
-		public static class FjCachedTypeSystemWrapper extends FjCachedTypeSystem
+		public static class FjFirstCachedTypeSystemWrapper extends FjFirstCachedTypeSystem
 				implements IFjTypeSystem {
 
 		}
 
 		@Override
-		protected Class<FjCachedTypeSystemWrapper> fjTypeSystemClass() {
-			return FjCachedTypeSystemWrapper.class;
+		protected Class<FjFirstCachedTypeSystemWrapper> fjTypeSystemClass() {
+			return FjFirstCachedTypeSystemWrapper.class;
 		}
 	}
 
