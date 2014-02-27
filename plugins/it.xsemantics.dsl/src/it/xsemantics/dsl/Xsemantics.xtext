@@ -39,6 +39,7 @@ AuxiliaryDescription:
 	)?
 	')'
 	(':' type=JvmTypeReference)?
+	(cached?='cached')?
 	(error=ErrorSpecification)?
 ;
 

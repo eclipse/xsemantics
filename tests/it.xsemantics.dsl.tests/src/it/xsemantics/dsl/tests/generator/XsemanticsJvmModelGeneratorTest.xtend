@@ -3688,12 +3688,17 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import it.xsemantics.runtime.caching.XsemanticsProvider;
+import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String ECLASSES = "it.xsemantics.test.Eclasses";
+  
+  private PolymorphicDispatcher<List<EClass>> eclassesDispatcher;
+  
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
   public TypeSystem() {
@@ -3703,6 +3708,20 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
+    eclassesDispatcher = buildPolymorphicDispatcher(
+    	"eclassesImpl", 2);
+  }
+  
+  public List<EClass> eclasses(final EObject o) throws RuleFailedException {
+    return eclasses(null, o);
+  }
+  
+  public List<EClass> eclasses(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	return eclassesInternal(_trace_, o);
+    } catch (Exception _e_eclasses) {
+    	throw extractRuleFailedException(_e_eclasses);
+    }
   }
   
   public Result<EClass> type(final EObject o) {
@@ -3719,6 +3738,25 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } catch (Exception _e_type) {
     	return resultForFailure(_e_type);
     }
+  }
+  
+  protected List<EClass> eclassesInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    return getFromCache("eclassesInternal", (RuleEnvironment)null, _trace_,
+    	new XsemanticsProvider<List<EClass>>(null, _trace_) {
+    		public List<EClass> doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return eclassesDispatcher.invoke(_trace_, o);
+    			} catch (Exception _e_eclasses) {
+    				sneakyThrowRuleFailedException(_e_eclasses);
+    				return null;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void eclassesThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {

@@ -35,10 +35,11 @@ class Injected extends UniqueByName {
 	String name
 }
 
-class AuxiliaryDescription extends UniqueByName {
+class AuxiliaryDescription extends Cachable {
 	String name
 	contains JvmFormalParameter[] parameters
 	contains JvmTypeReference ^type
+	boolean cached
 	contains XExpression error
 }
 

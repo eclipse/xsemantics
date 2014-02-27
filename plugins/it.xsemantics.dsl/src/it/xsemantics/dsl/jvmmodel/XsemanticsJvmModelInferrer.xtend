@@ -19,6 +19,7 @@ import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.runtime.caching.XsemanticsProvider
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend2.lib.StringConcatenationClient
@@ -33,7 +34,6 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import it.xsemantics.runtime.caching.XsemanticsProvider
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -647,8 +647,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 	
 	def compileInternalMethod(AuxiliaryDescription aux) {
+		val methodName = aux.entryPointInternalMethodName.toString
 		aux.toMethod(
-			aux.entryPointInternalMethodName.toString,
+			methodName,
 			aux.resultType
 		) 
 		[
@@ -662,23 +663,46 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			// check the original declared type (which can be null)
 			val isBoolean = aux.newTypeRef(typeof(Boolean)).
 				isConformant(aux.type)
+			
+			val exceptionName = aux.exceptionVarName
+			val inputArgs = aux.inputArgs
    			
-   			body = '''
-				try {
-					checkParamsNotNull(«aux.inputArgs»);
-					return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «aux.inputArgs»);
-				} catch («Exception» «aux.exceptionVarName») {
-					«IF isBoolean»
-						return false;
-					«ELSE»
-						sneakyThrowRuleFailedException(«aux.exceptionVarName»);
-						return «IF aux.type === null»false«ELSE»null«ENDIF»;
-					«ENDIF»
-				}
-				'''
-				// don't return null if aux.type is null: the generated method will have
-				// type Boolean and returning null is considered bad practice
-				// see FindBugs NP_BOOLEAN_RETURN_NULL
+   			if (aux.cached) {
+   				body = '''
+				return getFromCache("«methodName»", («RuleEnvironment»)null, «ruleApplicationTraceName»,
+					new «XsemanticsProvider»<«aux.resultType»>(null, «ruleApplicationTraceName») {
+						public «aux.resultType» doGet() {
+							try {
+								checkParamsNotNull(«inputArgs»);
+								return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
+							} catch («Exception» «exceptionName») {
+								«IF isBoolean»
+									return false;
+								«ELSE»
+									sneakyThrowRuleFailedException(«exceptionName»);
+									return «IF aux.type === null»false«ELSE»null«ENDIF»;
+								«ENDIF»
+							}
+						}
+					}, «inputArgs»);'''
+   			} else {
+	   			body = '''
+					try {
+						checkParamsNotNull(«inputArgs»);
+						return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
+					} catch («Exception» «exceptionName») {
+						«IF isBoolean»
+							return false;
+						«ELSE»
+							sneakyThrowRuleFailedException(«exceptionName»);
+							return «IF aux.type === null»false«ELSE»null«ENDIF»;
+						«ENDIF»
+					}
+					'''
+			}
+			// don't return null if aux.type is null: the generated method will have
+			// type Boolean and returning null is considered bad practice
+			// see FindBugs NP_BOOLEAN_RETURN_NULL
 		]
 	}
 

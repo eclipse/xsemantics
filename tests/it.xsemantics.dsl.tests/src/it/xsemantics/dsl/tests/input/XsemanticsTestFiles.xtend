@@ -2602,8 +2602,13 @@ class XsemanticsTestFiles {
 	def cachedDescriptions() '''
 	import org.eclipse.emf.ecore.EObject
 	import org.eclipse.emf.ecore.EClass
+	import java.util.List
 	
 	«typeSystemQualifiedName»
+	
+	auxiliary {
+		eclasses(EObject o) : List<EClass> cached
+	}
 	
 	judgments {
 		type |- EObject o : output EClass cached
