@@ -123,6 +123,18 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	}
 
 	@Test
+	public void testGeneratorOnFjCachedTest() throws Exception {
+		// make sure to load fj_first_test.xsemantics ...
+		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
+				+ "fj_first_test.xsemantics", "fj_first_test/",
+				"it/xsemantics/test/fj/first/", "FjFirstTypeSystem");
+		// since fj_cached_test.xsemantics extends fj_first_test.xsemantics
+		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
+				+ "fj_cached_test.xsemantics", "fj_cached_test/",
+				"it/xsemantics/test/fj/caching/", "FjCachedTypeSystem");
+	}
+
+	@Test
 	public void testErrorSpecifications() throws Exception {
 		runGenerationAndAssertJavaFiles(TESTS_INPUT_FILES
 				+ "ecore_errspecification_test.xsemantics",
@@ -149,6 +161,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 		runGenerator(TESTS_INPUT_FILES + "fj_first_test.xsemantics");
 		runGenerator(TESTS_INPUT_FILES + "fj_alt_test.xsemantics");
 		runGenerator(TESTS_INPUT_FILES + "fj_lambda_test.xsemantics");
+		runGenerator(TESTS_INPUT_FILES + "fj_cached_test.xsemantics");
 		runGenerator(TESTS_INPUT_FILES + "ecore_test.xsemantics");
 		runGenerator(TESTS_INPUT_FILES + "ecore_expressions_test.xsemantics");
 		runGenerator(TESTS_INPUT_FILES + "ecore_particular_test.xsemantics");
