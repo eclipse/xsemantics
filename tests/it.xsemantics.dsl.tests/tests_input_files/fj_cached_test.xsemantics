@@ -1,11 +1,19 @@
 // Uses 'cached'
 
+import it.xsemantics.example.fj.fj.Class
 import it.xsemantics.example.fj.fj.Expression
+import it.xsemantics.example.fj.fj.Field
+import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
+
+import java.util.List
 
 system it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem extends FjFirstTypeSystem
 
 judgments {
 	override type |- Expression expression : output Type cached 
+	override subclass |- Class candidate <| Class superclass cached
+	override fields ||- Class cl >> output List<Field> cached
+	override methods ||~ Class cl >> output List<Method> cached
 }
