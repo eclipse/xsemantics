@@ -47,7 +47,7 @@ public class FjCachedTypeSystem extends FjFirstTypeSystem {
   
   @Override
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
-    return getCache().get("typeInternal", _environment_, _trace_,
+    return getFromCache("typeInternal", _environment_, _trace_,
     	new XsemanticsProvider<Result<Type>>(_environment_, _trace_) {
     		public Result<Type> doGet() {
     			try {

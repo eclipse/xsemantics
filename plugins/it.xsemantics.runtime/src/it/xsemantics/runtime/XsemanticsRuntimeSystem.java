@@ -4,6 +4,7 @@
 package it.xsemantics.runtime;
 
 import it.xsemantics.runtime.caching.XsemanticsCache;
+import it.xsemantics.runtime.caching.XsemanticsProvider;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -63,6 +64,15 @@ public class XsemanticsRuntimeSystem {
 		if (cache == null)
 			cache = cacheProvider.get();
 		return cache;
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	protected <T> T getFromCache(String methodName, RuleEnvironment environment,
+			RuleApplicationTrace trace, XsemanticsProvider<T> provider,
+			Object... elements) {
+		return getCache().get(methodName, environment, trace, provider, elements);
 	}
 
 	protected Predicate<Method> getPredicate(String methodName, int numOfArgs) {

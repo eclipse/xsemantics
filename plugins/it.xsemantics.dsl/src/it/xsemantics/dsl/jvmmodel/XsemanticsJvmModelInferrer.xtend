@@ -621,7 +621,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			if (judgmentDescription.cached) {
    				body = '''
-				return getCache().get("«methodName»", «environmentName», «ruleApplicationTraceName»,
+				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
 						public «judgmentDescription.resultType» doGet() {
 							try {

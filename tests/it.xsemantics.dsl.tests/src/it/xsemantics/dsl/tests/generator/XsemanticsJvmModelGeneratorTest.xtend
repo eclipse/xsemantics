@@ -3722,7 +3722,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
-    return getCache().get("typeInternal", _environment_, _trace_,
+    return getFromCache("typeInternal", _environment_, _trace_,
     	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
     		public Result<EClass> doGet() {
     			try {
