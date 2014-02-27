@@ -17,6 +17,7 @@ import static extension org.junit.Assert.*
 import it.xsemantics.example.fj.fj.ClassType
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.caching.XsemanticsCache
+import it.xsemantics.dsl.tests.runtime.XsemanticsCacheTraceLoggerListener
 
 @InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -229,6 +230,41 @@ CheckClass: [] |- class C extends B {}
 		]
 	}
 
+	@Test
+	def void testXsemanticsCacheListener() {
+		val logger = new XsemanticsCacheTraceLoggerListener
+		cachedTypeSystem.cache.addListener(logger)
+		
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertCacheStatisticsInTypecheck(logger,"C",
+'''
+''',
+'''
+superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+superclasses(class B extends A {}) = [class A {}]
+'''
+			)
+			
+			assertCacheStatisticsInTypecheck(logger,"C",
+'''
+superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+superclasses(class B extends A {}) = [class A {}]
+''',
+'''
+superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+superclasses(class B extends A {}) = [class A {}]
+'''
+			)
+		]
+		cachedTypeSystem.cache.removeListener(logger)
+	}
+
 	def private assertSubtypingCached(Program p, String className1, String className2, CharSequence expectedTrace) {
 		val C1 = p.classes.findFirst[name == className1]
 		val C2 = p.classes.findFirst[name == className2]
@@ -264,6 +300,16 @@ CheckClass: [] |- class C extends B {}
 		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
 	}
 
+	def private assertCacheStatisticsInTypecheck(Program p, XsemanticsCacheTraceLoggerListener listener, 
+		String className1, CharSequence expectedHits, CharSequence expectedMissed
+	) {
+		val C1 = p.classes.findFirst[name == className1]
+		
+		cachedTypeSystem.check(null, new RuleApplicationTrace, C1)
+		expectedHits.toString.trim.assertEquals(listener.hits.join("\n"))
+		expectedMissed.toString.trim.assertEquals(listener.missed.join("\n"))
+	}
+
 	def private firstMethodOfFirstClass(Program p) {
 		(p.classes.head.members.head as Method)
 	}
@@ -274,4 +320,5 @@ CheckClass: [] |- class C extends B {}
 		prepared.addAsSubtrace(original)
 		prepared.traceAsString.assertEquals(cached.traceAsString)
 	}
+
 }
