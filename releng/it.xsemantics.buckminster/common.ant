@@ -61,7 +61,7 @@
 			<echo message="  -data ${buckminster.workspace}" />
 			<echo message="  -configuration ${buckminster.configuration}" />
 			<echo message="  --loglevel ${buckminster.loglevel}" />
-			<echo message="  --script @{commandsfile} --properties @{propertiesfile}" />
+			<echo message="  --script @{commandsfile}" />
 			<echo message="  --properties @{propertiesfile}" />
 			<echo message="  -Dbuckminster.output.root=${buckminster.output.root}" />
 			<echo message="  -Dbuckminster.temp.root=${buckminster.temp.root}" />
