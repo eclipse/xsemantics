@@ -1,0 +1,29 @@
+import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.Expression
+import it.xsemantics.example.fj.fj.Field
+import it.xsemantics.example.fj.fj.Method
+import it.xsemantics.example.fj.fj.Type
+import it.xsemantics.example.fj.fj.TypedElement
+import java.util.List
+
+/*
+ * A version of the FJ system where type computation and
+ * checking are separated.
+ */
+system it.xsemantics.example.fj.typing.FjCachedTypeSystem extends FjSepTypeSystem
+
+auxiliary {
+	superclasses(Class cl) : List<Class> cached
+	fields(Class cl) : List<Field> cached
+	methods(Class cl) : List<Method> cached
+}
+
+judgments {
+	override type |- Expression expression : output Type cached
+		error "cannot type " + stringRep(expression)
+		source expression
+	override subtype |- Type left <: Type right cached
+		error stringRep(left) + " is not a subtype of " + stringRep(right)
+	override equalstype |- Type left ~~ Type right cached
+		error stringRep(left) + " is not the same type as " + stringRep(right)
+}
