@@ -26,4 +26,4 @@ Export-Package: it.xsemantics.example.fj.ui,
  it.xsemantics.example.fj.ui.contentassist.antlr,
  it.xsemantics.example.fj.ui.internal,
  it.xsemantics.example.fj.ui.quickfix
-Bundle-Activator: it.xsemantics.example.fj.ui.internal.FJActivator
+Bundle-Activator: it.xsemantics.example.fj.ui.FJActivatorCustom
