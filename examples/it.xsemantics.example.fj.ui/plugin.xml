@@ -19,7 +19,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="false"
               extensions="fj"
-              icon="icons/fj_obj.gif"
+              icon="icons/fj_sep.gif"
               id="it.xsemantics.example.fj.FJ.Sep"
               name="FJ Separated Type System Editor">
         </editor>
@@ -28,7 +28,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="false"
               extensions="fj"
-              icon="icons/fj_obj.gif"
+              icon="icons/fj_cached.gif"
               id="it.xsemantics.example.fj.FJ.Cached"
               name="FJ Cached Type System Editor">
         </editor>
