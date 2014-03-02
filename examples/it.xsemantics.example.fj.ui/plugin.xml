@@ -23,6 +23,15 @@
               id="it.xsemantics.example.fj.FJ.Sep"
               name="FJ Separated Type System Editor">
         </editor>
+        <editor
+              class="it.xsemantics.example.fj.ui.FJCachedExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="false"
+              extensions="fj"
+              icon="icons/fj_obj.gif"
+              id="it.xsemantics.example.fj.FJ.Cached"
+              name="FJ Cached Type System Editor">
+        </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
