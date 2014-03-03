@@ -156,4 +156,31 @@ public class StringRepresentation {
 
 		return buffer.toString();
 	}
+
+	/**
+	 * @since 1.5
+	 */
+	protected String stringRep(Result<?> result) {
+		return "Result " + (result.failed() ? "failed" :
+				string(result.getValue()));
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	protected String stringRep(Result2<?,?> result) {
+		return "Result2 " + (result.failed() ? "failed" :
+				string(result.getFirst()) + ", " + 
+				string(result.getSecond()));
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	protected String stringRep(Result3<?,?,?> result) {
+		return "Result3 " + (result.failed() ? "failed" :
+				string(result.getFirst()) + ", " + 
+				string(result.getSecond()) + ", " + 
+				string(result.getThird()));
+	}
 }

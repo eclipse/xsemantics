@@ -10,6 +10,10 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
+import it.xsemantics.runtime.Result
+import it.xsemantics.runtime.RuleFailedException
+import it.xsemantics.runtime.Result2
+import it.xsemantics.runtime.Result3
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -72,5 +76,32 @@ class StringRepresentationTests extends XsemanticsBaseTest {
 		val e = EcoreFactory::eINSTANCE.createEDataType
 		e.name = "myEDataType with very very very very very long desc"
 		assertEqualsStrings(e.name, e.string)
+	}
+
+	@Test
+	def testFailedResult() {
+		assertEqualsStrings("Result failed", new Result(new RuleFailedException).string)
+		assertEqualsStrings("Result2 failed", new Result2(new RuleFailedException).string)
+		assertEqualsStrings("Result3 failed", new Result3(new RuleFailedException).string)
+	}
+
+	@Test
+	def testSuccessResult() {
+		val eClass1 = EcoreFactory::eINSTANCE.createEClass
+		eClass1.name = "myEClass1"
+		val eClass2 = EcoreFactory::eINSTANCE.createEClass
+		eClass2.name = "myEClass2"
+		val eClass3 = EcoreFactory::eINSTANCE.createEClass
+		eClass3.name = "myEClass3"
+		
+		assertEqualsStrings("Result EClass(name=myEClass1)", 
+			new Result(eClass1).string
+		)
+		assertEqualsStrings("Result2 EClass(name=myEClass1), EClass(name=myEClass2)", 
+			new Result2(eClass1, eClass2).string
+		)
+		assertEqualsStrings("Result3 EClass(name=myEClass1), EClass(name=myEClass2), EClass(name=myEClass3)", 
+			new Result3(eClass1, eClass2, eClass3).string
+		)
 	}
 }
