@@ -1,10 +1,14 @@
 package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
+import it.xsemantics.example.fj.fj.ClassType
 import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.util.FjTypeUtils
 import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.caching.XsemanticsCache
+import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
 import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
 import org.eclipse.xtext.junit4.InjectWith
@@ -14,10 +18,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.junit.Assert.*
-import it.xsemantics.example.fj.fj.ClassType
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.caching.XsemanticsCache
-import it.xsemantics.dsl.tests.runtime.XsemanticsCacheTraceLoggerListener
 
 @InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
