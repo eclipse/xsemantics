@@ -1,9 +1,8 @@
-import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.Class
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Field
 import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Type
-import it.xsemantics.example.fj.fj.TypedElement
 import java.util.List
 
 /*
