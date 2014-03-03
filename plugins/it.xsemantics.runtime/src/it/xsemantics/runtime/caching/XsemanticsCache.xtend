@@ -28,25 +28,29 @@ class XsemanticsCache {
 		if (!provider.called) {
 			for (l : listeners)
 				l.cacheHit(cached)
+
+			// update the additional arguments with cached data
+			if (environment !== null && environment !== cached.environment) {
+				environment.increment(cached.environment)
+			}
+			
+			if (trace !== null && trace !== cached.trace) {
+				if (!provider.called) {
+					trace.addToTrace(CACHED_STRING)
+				}
+				
+				if (trace.empty)
+					trace.replaceWith(cached.trace)
+				else
+					trace.addAsSubtrace(cached.trace)
+			}
 		} else {
+			cached.name = methodName
+
 			for (l : listeners)
 				l.cacheMissed(cached)
 		}
-		
-		if (environment !== null && environment !== cached.environment) {
-			environment.increment(cached.environment)
-		}
-		
-		if (trace !== null && trace !== cached.trace) {
-			if (!provider.called) {
-				trace.addToTrace(CACHED_STRING)
-			}
-			
-			if (trace.empty)
-				trace.replaceWith(cached.trace)
-			else
-				trace.addAsSubtrace(cached.trace)
-		}
+
 		cached.result
 	}
 	
