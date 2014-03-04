@@ -18,6 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.junit.Assert.*
+import it.xsemantics.runtime.StringRepresentation
 
 @InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -32,6 +33,8 @@ class FjFirstTypeSystemManualCachedTest {
 	@Inject extension TraceUtils
 
 	@Inject extension FjTypeUtils
+	
+	@Inject extension StringRepresentation
 	
 	@Test
 	def void testCachedTyping() {
@@ -93,6 +96,24 @@ class FjFirstTypeSystemManualCachedTest {
 			cachedTypeSystem.type(emptyEnv, trace3, it)
 			trace.assertCachedTrace(trace3)
 			"A".assertEquals((emptyEnv.get("this") as ClassType).classref.name)
+		]
+	}
+
+	@Test
+	def void testCachedDataDoesNotChangeEnvironmentsAndTraceIfTheyAreTheSame() {
+		'''
+		class A {}
+		new A()
+		'''.
+		parse.main => [
+			val trace = new RuleApplicationTrace
+			val env = new RuleEnvironment
+			cachedTypeSystem.type(env, trace, it)
+			val traceRepr = trace.traceAsString
+			val envRepr = env.string
+			cachedTypeSystem.type(env, trace, it)
+			traceRepr.assertEquals(trace.traceAsString)
+			envRepr.assertEquals(env.string)
 		]
 	}
 
