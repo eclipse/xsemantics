@@ -13,12 +13,15 @@ class XsemanticsCacheTraceLoggerListener extends XsemanticsCacheLoggerListener {
 
 	override cacheHit(XsemanticsCachedData<?> data) {
 		if (data.trace !== null)
-			hits += data.trace.trace.head.toString.removeLeadingWhitespace
+			hits += dataTraceRepresentation(data)
 	}
 
 	override cacheMissed(XsemanticsCachedData<?> data) {
 		if (data.trace !== null)
-			missed += data.trace.trace.head.toString.removeLeadingWhitespace
+			missed += dataTraceRepresentation(data)
 	}
 
+	def dataTraceRepresentation(XsemanticsCachedData<?> data) {
+		data.trace.trace.head.toString.removeLeadingWhitespace
+	}
 }

@@ -16,12 +16,16 @@ class XsemanticsCacheResultLoggerListener extends XsemanticsCacheLoggerListener 
 
 	override cacheHit(XsemanticsCachedData<?> data) {
 		if (data.result !== null)
-			hits += data.result.string
+			hits += resultRepresentation(data)
 	}
 
 	override cacheMissed(XsemanticsCachedData<?> data) {
 		if (data.result !== null)
-			missed += data.result.string
+			missed += resultRepresentation(data)
+	}
+	
+	def resultRepresentation(XsemanticsCachedData<?> data) {
+		data.name + ": " + data.result.string
 	}
 
 }
