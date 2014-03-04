@@ -19,13 +19,13 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	public void testAddAsSubtraceNull() {
 		RuleApplicationTrace t1 = new RuleApplicationTrace();
 		t1.addAsSubtrace(null);
-		Assert.assertTrue(t1.getTrace().isEmpty());
+		Assert.assertTrue(t1.isEmpty());
 	}
 
 	@Test
 	public void testAddNull() {
 		RuleApplicationTrace t1 = new RuleApplicationTrace();
 		t1.addToTrace(null);
-		Assert.assertTrue(t1.getTrace().isEmpty());
+		Assert.assertTrue(t1.isEmpty());
 	}
 }
