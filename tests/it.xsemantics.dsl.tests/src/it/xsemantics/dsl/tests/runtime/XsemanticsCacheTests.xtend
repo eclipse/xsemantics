@@ -71,11 +71,11 @@ class XsemanticsCacheTest extends XsemanticsBaseTest {
 		resource.contents += key2
 		
 		val provider = [| new Object ]
-		val o1 = cache.get("test", provider, key1)
-		val o2 = cache.get("test", provider, key1)
+		val o1 = cache.internalGet("test", provider, key1)
+		val o2 = cache.internalGet("test", provider, key1)
 		o1.assertSame(o2)
 		
-		val o3 = cache.get("test", provider, key2)
+		val o3 = cache.internalGet("test", provider, key2)
 		o1.assertNotSame(o3)
 	}
 }

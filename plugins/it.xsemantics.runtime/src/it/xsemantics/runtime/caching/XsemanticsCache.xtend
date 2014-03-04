@@ -23,7 +23,7 @@ class XsemanticsCache {
 
 	def <T> T get(String methodName, RuleEnvironment environment, RuleApplicationTrace trace, 
 			XsemanticsProvider<T> provider, Object...elements) {
-		val cached = get(methodName, provider, elements)
+		val cached = internalGet(methodName, provider, elements)
 		
 		if (!provider.called) {
 			for (l : listeners)
@@ -48,7 +48,7 @@ class XsemanticsCache {
 		cached.result
 	}
 	
-	def <T> T get(String methodName, Provider<T> provider, Object...elements) {
+	def <T> T internalGet(String methodName, Provider<T> provider, Object...elements) {
 		cache.get(methodName -> elements.getKeys(), elements.getResource(), provider)
 	}
 
