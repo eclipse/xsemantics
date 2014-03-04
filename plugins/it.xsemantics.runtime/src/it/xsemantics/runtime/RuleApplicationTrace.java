@@ -40,12 +40,4 @@ public class RuleApplicationTrace {
 	public boolean isEmpty() {
 		return trace.isEmpty();
 	}
-
-	/**
-	 * @since 1.5
-	 */
-	public void replaceWith(RuleApplicationTrace t) {
-		trace.clear();
-		trace.addAll(t.getTrace());
-	}
 }

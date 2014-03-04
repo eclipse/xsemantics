@@ -35,14 +35,8 @@ class XsemanticsCache {
 			}
 			
 			if (trace !== null && trace !== cached.trace) {
-				if (!provider.called) {
-					trace.addToTrace(CACHED_STRING)
-				}
-				
-				if (trace.empty)
-					trace.replaceWith(cached.trace)
-				else
-					trace.addAsSubtrace(cached.trace)
+				trace.addToTrace(CACHED_STRING)
+				trace.addAsSubtrace(cached.trace)
 			}
 		} else {
 			cached.name = methodName
