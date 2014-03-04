@@ -9,9 +9,11 @@ package it.xsemantics.runtime.caching;
  * @author Lorenzo Bettini
  * @since 1.5
  */
-public class XsemanticsCacheListener {
+public interface XsemanticsCacheListener {
 	
-	public void cacheMissed(XsemanticsCachedData<?> data) {}
+	public void cacheMissed(XsemanticsCachedData<?> data);
 	
-	public void cacheHit(XsemanticsCachedData<?> data) {}
+	public void cacheHit(XsemanticsCachedData<?> data);
+	
+	public void reset();
 }
