@@ -3,9 +3,6 @@
  */
 package it.xsemantics.example.fj.ui.contentassist;
 
-import it.xsemantics.example.fj.ui.contentassist.AbstractFJProposalProvider;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * A specialization to use the label provider to show the proposals in the
@@ -17,20 +14,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class FJProposalProvider extends AbstractFJProposalProvider {
 
-	/**
-	 * Redefined so that it uses the label provider to show the text (display
-	 * string) of the content assist.
-	@Override
-	protected ICompletionProposal createCompletionProposal(EObject element,
-			String proposal, String displayString,
-			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, labelProvider
-				.getText(element), getImage(element), contentAssistContext);
-	}
-	 */
-
-	@Override
-	public String getDisplayString(EObject element, String qualifiedName, String shortName) {
-		return getLabelProvider().getText(element);
-	}
 }
