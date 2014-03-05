@@ -10,6 +10,8 @@ import it.xsemantics.runtime.RuleApplicationTrace
 import java.util.ArrayList
 
 /**
+ * Caches judgment and auxiliary functions computations.
+ * 
  * @since 1.5
  */
 @Singleton

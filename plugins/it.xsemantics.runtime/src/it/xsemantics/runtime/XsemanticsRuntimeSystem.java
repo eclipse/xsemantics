@@ -28,6 +28,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * All generated systems will inherit from this class.
+ * 
  * @author Lorenzo Bettini
  * 
  */
@@ -45,8 +47,7 @@ public class XsemanticsRuntimeSystem {
 	@Inject
 	private Provider<XsemanticsCache> cacheProvider;
 
-	@Inject
-	private XsemanticsCache cache;
+	private XsemanticsCache cache = null;
 
 	public StringRepresentation getStringRepresentation() {
 		return stringRepresentation;
