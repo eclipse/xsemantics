@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="it.xsemantics.build" componentType="buckminster" version="1.0.0">
     <cs:dependencies>
+        <cs:dependency name="it.xsemantics.build.tools" componentType="osgi.bundle"/>
         <cs:dependency name="it.xsemantics.example.expressions.tests" componentType="osgi.bundle"/>
         <cs:dependency name="it.xsemantics.example.fj.tests" componentType="osgi.bundle"/>
         <cs:dependency name="it.xsemantics.example.lambda.tests" componentType="osgi.bundle"/>
         <cs:dependency name="it.xsemantics.releng.tests" componentType="buckminster"/>
         <cs:dependency name="it.xsemantics.site" componentType="eclipse.feature"/>
         <cs:dependency name="it.xsemantics.tests.feature" componentType="eclipse.feature"/>
-        <cs:dependency name="it.xsemantics.build.tools" componentType="osgi.bundle"/>
+        <cs:dependency name="it.xsemantics.example.fjcached.tests" componentType="osgi.bundle"/>
     </cs:dependencies>
     <cs:actions>
-	   <cs:public name="run.findbugs" actor="ant">
-	       <cs:actorProperties>
-	           <cs:property key="buildFile" value="findbugs.ant"/>
-	           <cs:property key="targets" value="findbugs"/>
-	       </cs:actorProperties>
-	       <cs:prerequisites>
-	           <cs:attribute name="site.p2" 
-	           		alias="site.p2.repository" 
-	           		component="it.xsemantics.site"/>
-	       </cs:prerequisites>
-	       <cs:products alias="action.output" base="${buckminster.output.root}/findbugs/"/>
-	   </cs:public>
-	   <cs:public name="promote.site.composite" actor="ant">
+        <cs:public name="promote.site.composite" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="packaging.ant"/>
                 <cs:property key="targets" value="composite.add"/>
             </cs:actorProperties>
             <cs:prerequisites alias="action.requirements">
-            	<cs:attribute name="manifest" alias="manifest" component="it.xsemantics.site" />
-                <cs:attribute name="site.p2" component="it.xsemantics.site" />
+                <cs:attribute name="manifest" alias="manifest" component="it.xsemantics.site"/>
+                <cs:attribute name="site.p2" component="it.xsemantics.site"/>
             </cs:prerequisites>
+        </cs:public>
+        <cs:public name="run.findbugs" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="findbugs.ant"/>
+                <cs:property key="targets" value="findbugs"/>
+            </cs:actorProperties>
+            <cs:prerequisites>
+                <cs:attribute name="site.p2" alias="site.p2.repository" component="it.xsemantics.site"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="${buckminster.output.root}/findbugs/"/>
         </cs:public>
     </cs:actions>
 </cs:cspec>

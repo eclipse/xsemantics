@@ -1,0 +1,8 @@
+grammar it.xsemantics.example.fjcached.Fjcached with it.xsemantics.example.fj.FJ
+
+generate fjcached "http://www.xsemantics.it/example/fjcached/Fjcached"
+
+Program :
+	(classes += Class)*
+	(main = Expression)? 
+;
