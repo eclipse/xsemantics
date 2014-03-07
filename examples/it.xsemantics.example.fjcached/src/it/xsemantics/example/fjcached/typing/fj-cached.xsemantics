@@ -4,13 +4,13 @@ import it.xsemantics.example.fj.fj.Field
 import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Type
 import java.util.List
-import it.xsemantics.example.fj.typing.FjSepTypeSystem
+import it.xsemantics.example.fj.typing.FjTypeSystem
 
 /*
  * A version of the FJ system where type computation and
  * checking are separated.
  */
-system it.xsemantics.example.fjcached.typing.FjCachedTypeSystem extends FjSepTypeSystem
+system it.xsemantics.example.fjcached.typing.FjCachedTypeSystem extends FjTypeSystem
 
 auxiliary {
 	superclasses(Class cl) : List<Class> cached

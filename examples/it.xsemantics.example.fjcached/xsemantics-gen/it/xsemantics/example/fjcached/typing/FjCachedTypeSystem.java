@@ -4,7 +4,7 @@ import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.example.fj.fj.Type;
-import it.xsemantics.example.fj.typing.FjSepTypeSystem;
+import it.xsemantics.example.fj.typing.FjTypeSystem;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  * checking are separated.
  */
 @SuppressWarnings("all")
-public class FjCachedTypeSystem extends FjSepTypeSystem {
+public class FjCachedTypeSystem extends FjTypeSystem {
   public final static String SUPERCLASSES = "it.xsemantics.example.fjcached.typing.Superclasses";
   
   public final static String FIELDS = "it.xsemantics.example.fjcached.typing.Fields";

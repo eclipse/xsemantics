@@ -1,7 +1,7 @@
 package it.xsemantics.example.fjcached.typing.validation;
 
 import com.google.inject.Inject;
-import it.xsemantics.example.fj.typing.validation.FjSepTypeSystemValidator;
+import it.xsemantics.example.fj.typing.validation.FjTypeSystemValidator;
 import it.xsemantics.example.fjcached.typing.FjCachedTypeSystem;
 
 /**
@@ -9,7 +9,7 @@ import it.xsemantics.example.fjcached.typing.FjCachedTypeSystem;
  * checking are separated.
  */
 @SuppressWarnings("all")
-public class FjCachedTypeSystemValidator extends FjSepTypeSystemValidator {
+public class FjCachedTypeSystemValidator extends FjTypeSystemValidator {
   @Inject
   protected FjCachedTypeSystem xsemanticsSystem;
   
