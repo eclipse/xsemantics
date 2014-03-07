@@ -95,11 +95,13 @@ public class RuleEnvironment {
 	}
 
 	public void increment(RuleEnvironment ruleEnvironment) {
-		environment.putAll(ruleEnvironment.getEnvironment());
+		if (ruleEnvironment != null)
+			environment.putAll(ruleEnvironment.getEnvironment());
 	}
 
 	public void decrement(RuleEnvironment ruleEnvironment) {
-		environment.keySet().removeAll(
+		if (ruleEnvironment != null)
+			environment.keySet().removeAll(
 				ruleEnvironment.getEnvironment().keySet());
 	}
 
