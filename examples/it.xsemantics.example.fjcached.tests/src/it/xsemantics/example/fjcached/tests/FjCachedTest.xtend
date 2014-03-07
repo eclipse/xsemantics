@@ -1,27 +1,28 @@
 package it.xsemantics.example.fjcached.tests
 
 import com.google.inject.Inject
+import it.xsemantics.example.fj.fj.FjPackage
+import it.xsemantics.example.fj.typing.FjTypeSystem
 import it.xsemantics.example.fjcached.FjcachedInjectorProvider
-import it.xsemantics.example.fjcached.fjcached.Program
+import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
+import it.xsemantics.runtime.caching.XsemanticsCache
+import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
-import it.xsemantics.runtime.caching.XsemanticsCache
-import org.junit.Before
-import org.junit.After
+
 import static org.junit.Assert.*
-import it.xsemantics.example.fj.fj.FjPackage
-import it.xsemantics.example.fj.typing.FjTypeSystem
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjcachedInjectorProvider))
 class FjCachedTest {
 	
-	@Inject extension ParseHelper<Program>
+	@Inject extension ParseHelper<FjCachedProgram>
 	
 	@Inject extension ValidationTestHelper
 	
