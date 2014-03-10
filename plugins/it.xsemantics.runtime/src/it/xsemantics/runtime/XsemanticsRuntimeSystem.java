@@ -149,6 +149,8 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public boolean isResultAssignableTo(Object result, Class<?> destinationClass) {
+		if (result == null) // null is always assignable
+			return true;
 		return destinationClass.isAssignableFrom(result.getClass());
 	}
 

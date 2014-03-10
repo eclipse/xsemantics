@@ -194,6 +194,11 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
+	public void testForAssignableWithNullArgument() throws RuleFailedException {
+		assertTrue(ts.isResultAssignableTo(null, BaseClass2.class));
+	}
+
+	@Test
 	public void testRuleFailedException() {
 		RuleFailedException original = new RuleFailedException();
 		assertEquals(original,
