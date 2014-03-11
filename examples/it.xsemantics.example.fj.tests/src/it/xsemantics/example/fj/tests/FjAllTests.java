@@ -17,7 +17,8 @@ import org.junit.runners.Suite;
 	AuxiliaryFunctionTest.class,
 	FormattingTest.class,
 	FjParserTests.class,
-	FjSemanticsTests.class
+	FjSemanticsTests.class,
+	FjValidatorTests.class
 })
 public class FjAllTests {
 
