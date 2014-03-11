@@ -1,11 +1,11 @@
-package it.xsemantics.example.fj.tests.ui.editor
+package it.xsemantics.example.fjcached.ui.tests
 
 import com.google.inject.Inject
-import it.xsemantics.example.fj.FJUiInjectorProvider
 import it.xsemantics.example.fj.fj.FjFactory
-import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.typing.FjTypeSystem
-import it.xsemantics.example.fj.ui.FJActivatorCustom
+import it.xsemantics.example.fjcached.FjcachedUiInjectorProvider
+import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
+import it.xsemantics.example.fjcached.ui.internal.FjcachedActivator
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -21,7 +21,7 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(FJUiInjectorProvider))
+@InjectWith(typeof(FjcachedUiInjectorProvider))
 class FjCachedTypeSystemEditorTest extends AbstractEditorTest {
 	
 	val TEST_PROJECT = "mytestproject"
@@ -30,7 +30,7 @@ class FjCachedTypeSystemEditorTest extends AbstractEditorTest {
 	XsemanticsCacheResultLoggerListener cacheResultLogger
 	
 	override protected getEditorId() {
-		FJActivatorCustom.IT_XSEMANTICS_EXAMPLE_FJ_CACHED_TYPESYSTEM
+		FjcachedActivator.IT_XSEMANTICS_EXAMPLE_FJCACHED_FJCACHED
 	}
 
 	@Before
@@ -46,12 +46,12 @@ class FjCachedTypeSystemEditorTest extends AbstractEditorTest {
 	
 	def void createJavaProjectWithXtextNature() {
 		createJavaProject(TEST_PROJECT) => [
-			getProject().addNature(XtextProjectHelper::NATURE_ID)
+			getProject().addNature(XtextProjectHelper.NATURE_ID)
 		]
 	}
 
 	def createTestFile(CharSequence contents, String name) {
-		createFile(TEST_PROJECT + "/src/" + name + ".fj", contents.toString)
+		createFile(TEST_PROJECT + "/src/" + name + ".fjcached", contents.toString)
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ new C().m()
 		waitForAutoBuild;
 		// this will trigger validation in the editor
 		editor.document.modify[
-			(contents.head as Program).classes +=
+			(contents.head as FjCachedProgram).cachedprogram.classes +=
 				FjFactory.eINSTANCE.createClass => [name = "TestClass"]
 		]
 		cache.removeListener(cacheResultLogger)

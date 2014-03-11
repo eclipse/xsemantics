@@ -17,25 +17,18 @@ public class FJActivatorCustom extends FJActivator {
 
 	public static final String IT_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM = "it.xsemantics.example.fj.FJ.Sep";
 	
-	public static final String IT_XSEMANTICS_EXAMPLE_FJ_CACHED_TYPESYSTEM = "it.xsemantics.example.fj.FJ.Cached";
-
 	@Override
 	protected Module getRuntimeModule(String grammar) {
 		if (IT_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM.equals(grammar)) {
 			return new it.xsemantics.example.fj.FJSepTypeSystemRuntimeModule();
 		}
 		
-		if (IT_XSEMANTICS_EXAMPLE_FJ_CACHED_TYPESYSTEM.equals(grammar)) {
-			return new it.xsemantics.example.fj.FJCachedTypeSystemRuntimeModule();
-		}
-
 		return super.getRuntimeModule(grammar);
 	}
 
 	@Override
 	protected Module getUiModule(String grammar) {
-		if (IT_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM.equals(grammar) || 
-				IT_XSEMANTICS_EXAMPLE_FJ_CACHED_TYPESYSTEM.equals(grammar)) {
+		if (IT_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM.equals(grammar)) {
 			return new it.xsemantics.example.fj.ui.FJUiModule(this);
 		}
 		

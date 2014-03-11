@@ -1,8 +1,8 @@
 package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
-import it.xsemantics.example.fj.FjCachedTypeSystemInjectorProvider
 import it.xsemantics.example.fj.fj.Program
+import it.xsemantics.example.fjcached.FjcachedInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
@@ -10,7 +10,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(FjCachedTypeSystemInjectorProvider))
+@InjectWith(typeof(FjcachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class FjCachedTypeSystemResourceSetTest {
 	@Inject extension ParseHelper<Program>
