@@ -11,6 +11,7 @@
 				  name="Examples" 
 				  parentCategory="it.xsemantics.dsl.wizards.category" />
 	</extension>
+
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="it.xsemantics.examples.NewXsemanticsFjExampleWizard" 
 			name="Xsemantics FJ Example" 
@@ -21,6 +22,7 @@
 			<description>Featherweight Java implemented with Xsemantics</description>
 		</wizard>
 	</extension>
+
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="it.xsemantics.examples.NewXsemanticsFjExampleWizard" 
 			name="Xsemantics FJ Example" 
@@ -31,6 +33,29 @@
 			<description>Featherweight Java implemented with Xsemantics</description>
 		</wizard>
 	</extension>
+
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsFjCachedExampleWizard" 
+			name="Xsemantics FJ (with cached type system) Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/it.xsemantics.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Featherweight Java (with cached type system) implemented with Xsemantics. You must import the Xsemantics FJ Example first.</description>
+		</wizard>
+	</extension>
+
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="it.xsemantics.examples.NewXsemanticsFjCachedExampleWizard" 
+			name="Xsemantics FJ (with cached type system) Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="it.xsemantics.dsl.wizards.category/it.xsemantics.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>Featherweight Java (with cached type system) implemented with Xsemantics. You must import the Xsemantics FJ Example first.</description>
+		</wizard>
+	</extension>
+
    <extension
          point="org.eclipse.emf.common.ui.examples">
       <example
@@ -50,6 +75,29 @@
                contentURI="contents/it.xsemantics.example.fj.tests.zip"
                description="A test suite for the language."
                name="it.xsemantics.example.fj.tests">
+         </projectDescriptor>
+      </example>
+   </extension>
+
+   <extension
+         point="org.eclipse.emf.common.ui.examples">
+      <example
+            pageImage="icons/genproject.gif"
+            wizardID="it.xsemantics.examples.NewXsemanticsFjCachedExampleWizard">
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fjcached.zip"
+               description="Parser, Serializer, Linker, etc."
+               name="it.xsemantics.example.fjcached">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fjcached.ui.zip"
+               description="A smart editor for the language."
+               name="it.xsemantics.example.fjcached.ui">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/it.xsemantics.example.fjcached.tests.zip"
+               description="A test suite for the language."
+               name="it.xsemantics.example.fjcached.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -74,6 +122,7 @@
 			<description>An Expressions DSL implemented with Xsemantics</description>
 		</wizard>
 	</extension>
+
    <extension
          point="org.eclipse.emf.common.ui.examples">
       <example

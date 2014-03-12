@@ -50,6 +50,9 @@
 		<zip_example name="it.xsemantics.example.fj" />
 		<zip_example name="it.xsemantics.example.fj.tests" />
 		<zip_example name="it.xsemantics.example.fj.ui" />
+		<zip_example name="it.xsemantics.example.fjcached" />
+		<zip_example name="it.xsemantics.example.fjcached.tests" />
+		<zip_example name="it.xsemantics.example.fjcached.ui" />
 		<zip_example name="it.xsemantics.example.expressions" />
 		<zip_example name="it.xsemantics.example.expressions.tests" />
 		<zip_example name="it.xsemantics.example.expressions.ui" />

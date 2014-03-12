@@ -4,8 +4,7 @@
 package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.junit.Assert.assertTrue;
 import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
@@ -37,6 +36,15 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 	public void canCreateExampleFJProjects() throws Exception {
 		createExampleProjectsAndAssertNoErrorMarker("Xsemantics FJ Example",
 				"it.xsemantics.example.fj");
+		createExampleProjects("Xsemantics FJ (with cached type system) Example",
+				"it.xsemantics.example.fjcached");
+		waitForAutoBuild();
+		
+		// if we don't clean this project the fjcached project
+		// presents an error in the xsemantics file...
+		cleanProject("it.xsemantics.example.fj");
+		
+		waitForAutoBuildAndAssertNoErrors();
 	}
 
 	@Test
@@ -54,6 +62,13 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 
 	protected void createExampleProjectsAndAssertNoErrorMarker(
 			String projectType, String mainProjectId) throws CoreException {
+		createExampleProjects(projectType, mainProjectId);
+
+		waitForAutoBuildAndAssertNoErrors();
+	}
+
+	protected void createExampleProjects(String projectType,
+			String mainProjectId) {
 		bot.menu("File").menu("New").menu("Other...").click();
 
 		SWTBotShell shell = bot.shell("New");
@@ -71,7 +86,5 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 				+ ".tests"));
 		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
 				+ ".ui"));
-
-		waitForAutoBuildAndAssertNoErrors();
 	}
 }

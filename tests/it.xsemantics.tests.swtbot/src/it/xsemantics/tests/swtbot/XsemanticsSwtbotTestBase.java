@@ -3,6 +3,7 @@
  */
 package it.xsemantics.tests.swtbot;
 
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,11 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
@@ -123,6 +128,23 @@ public class XsemanticsSwtbotTestBase {
 	protected void waitForAutoBuildAndAssertNoErrors() throws CoreException {
 		waitForAutoBuild();
 		assertNoErrorsInProject();
+	}
+
+	protected void cleanProject(String projectName) throws CoreException {
+		root().getProject(projectName).build(
+				IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
+						null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
 	}
 
 	protected static void assertNoErrorsInProject() throws CoreException {
