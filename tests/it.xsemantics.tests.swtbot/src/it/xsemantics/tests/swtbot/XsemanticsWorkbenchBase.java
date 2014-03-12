@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.xsemantics.tests.swtbot.wizards;
+package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(SWTBotJunit4ClassRunner.class)
-public class XsemanticsWorkbenchBase extends XsemanticsWizardBase {
+public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	protected static final String TEST_FILE = "mytest.xsemantics";
 

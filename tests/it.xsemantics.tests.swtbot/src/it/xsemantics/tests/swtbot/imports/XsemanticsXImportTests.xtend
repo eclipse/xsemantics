@@ -1,5 +1,6 @@
-package it.xsemantics.tests.swtbot.wizards
+package it.xsemantics.tests.swtbot.imports
 
+import it.xsemantics.tests.swtbot.XsemanticsWorkbenchBase
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner
 import org.junit.Test
 import org.junit.runner.RunWith

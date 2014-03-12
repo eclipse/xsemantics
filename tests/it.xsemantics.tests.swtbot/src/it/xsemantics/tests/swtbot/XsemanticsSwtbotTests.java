@@ -1,7 +1,11 @@
 /**
  * 
  */
-package it.xsemantics.tests.swtbot.wizards;
+package it.xsemantics.tests.swtbot;
+
+import it.xsemantics.tests.swtbot.imports.XsemanticsXImportTests;
+import it.xsemantics.tests.swtbot.wizards.XsemanticsCreateExamplesProjectWizardTests;
+import it.xsemantics.tests.swtbot.wizards.XsemanticsImportExamplesProjectWizardTests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
