@@ -41,6 +41,11 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 	}
 
 	@Test
+	public void canCreateANewFJCachedProject() throws Exception {
+		createProjectAndAssertNoErrorMarker("FJ (cached type system) Project");
+	}
+
+	@Test
 	public void canCreateANewExpressionsProject() throws Exception {
 		createProjectAndAssertNoErrorMarker("Expressions Project");
 

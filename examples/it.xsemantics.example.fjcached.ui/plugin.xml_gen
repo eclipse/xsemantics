@@ -339,6 +339,17 @@
             </attribute>
         </markerResolutionGenerator>
     </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="it.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:it.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"
+            id="it.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"
+            name="Fjcached Project"
+            project="true">
+      </wizard>
+   </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 

@@ -102,7 +102,7 @@ Workflow {
             // project wizard (optional)
             fragment = projectWizard.SimpleProjectWizardFragment {
                   generatorProjectName = "${projectName}"
-                  modelFileExtension = file.extensions
+                  fileExtension = file.extensions
             }
             
             // rename refactoring
