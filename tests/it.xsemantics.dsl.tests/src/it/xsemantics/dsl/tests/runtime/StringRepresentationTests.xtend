@@ -14,6 +14,7 @@ import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.Result2
 import it.xsemantics.runtime.Result3
+import it.xsemantics.dsl.xsemantics.XsemanticsFactory
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -53,12 +54,35 @@ class StringRepresentationTests extends XsemanticsBaseTest {
 		env.add(e, true)
 		assertEqualsStrings("[foo <- 1, myEDataType <- true]", env.string)
 	}
+
+	@Test
+	def testEnvironmentWithNext() {
+		val env = new RuleEnvironment()
+		env.add("foo", 1)
+		val env1 = new RuleEnvironment()
+		env1.add("bar", 2)
+		env.setNext(env1)
+		assertEqualsStrings("[foo <- 1]::[bar <- 2]", env.string)
+	}
 	
 	@Test
 	def testForCustom() {
 		val eClass = EcoreFactory::eINSTANCE.createEClass
 		eClass.name = "myEClass"
 		assertEqualsStrings("EClass(name=myEClass)", eClass.string)
+	}
+
+	@Test
+	def testForNullName() {
+		val eClass = EcoreFactory::eINSTANCE.createEClass
+		eClass.name = null
+		assertEqualsStrings("EClass(name=null)", eClass.string)
+	}
+
+	@Test
+	def testForObjectWithoutNameFeature() {
+		val j = XsemanticsFactory.eINSTANCE.createJudgmentParameter
+		assertEqualsStrings("JudgmentParameter", j.string)
 	}
 	
 	@Test

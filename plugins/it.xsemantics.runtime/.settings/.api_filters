@@ -80,4 +80,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/StringRepresentation.java" type="it.xsemantics.runtime.StringRepresentation">
+        <filter comment="this method made no sense" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.StringRepresentation"/>
+                <message_argument value="notNullToString(Object)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

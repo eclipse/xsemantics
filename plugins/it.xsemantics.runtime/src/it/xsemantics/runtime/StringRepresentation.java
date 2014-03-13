@@ -69,12 +69,6 @@ public class StringRepresentation {
 	}
 
 	protected String stringRep(Object value) {
-		return notNullToString(value);
-	}
-
-	protected String notNullToString(Object value) {
-		if (value == null)
-			return NULL_REPRESENTATION;
 		return value.toString();
 	}
 
@@ -95,21 +89,18 @@ public class StringRepresentation {
 
 	protected String stringRepForEObject(EObject eObject) {
 		EClass eClass = eObject.eClass();
-		EStructuralFeature eStructuralFeature = eClass
-				.getEStructuralFeature("name");
+		EStructuralFeature nameFeature = eClass.getEStructuralFeature("name");
 		String stringRepEClass = stringRep(eClass);
-		if (eStructuralFeature != null) {
-			Object eGet = eObject.eGet(eStructuralFeature);
-			if (eGet != null)
-				return withType(stringRepEClass, string(eGet));
-			else
-				return stringRepEClass;
-		} else {
+		if (nameFeature != null) {
+			Object eGet = eObject.eGet(nameFeature);
+			return withType(stringRepEClass, string(eGet));
+		} 
+		else {
 			EList<EStructuralFeature> eStructuralFeatures = eClass
 					.getEStructuralFeatures();
-			for (EStructuralFeature eStructuralFeature2 : eStructuralFeatures) {
-				if (eStructuralFeature2 instanceof EAttribute) {
-					EAttribute attribute = (EAttribute) eStructuralFeature2;
+			for (EStructuralFeature feature : eStructuralFeatures) {
+				if (feature instanceof EAttribute) {
+					EAttribute attribute = (EAttribute) feature;
 					if (attribute.getEType().getName().equals("EString")) {
 						Object eGet = eObject.eGet(attribute);
 						if (eGet != null)
@@ -117,8 +108,8 @@ public class StringRepresentation {
 					}
 				}
 
-				if (eStructuralFeature2 instanceof EReference) {
-					Object ref = eObject.eGet(eStructuralFeature2, true);
+				if (feature instanceof EReference) {
+					Object ref = eObject.eGet(feature, true);
 					if (ref != null) {
 						return withType(stringRepEClass, string(ref));
 					}
