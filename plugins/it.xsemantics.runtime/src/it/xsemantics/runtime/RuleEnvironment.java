@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+
 /**
  * Implements the environment for a typing judgment
  * 
@@ -58,6 +61,15 @@ public class RuleEnvironment {
 		next2.add(runtimeEnvironmentEntry);
 	}
 
+	public void add(RuleEnvironmentEntry runtimeEnvironmentEntry) {
+		add(runtimeEnvironmentEntry.getLeft(),
+				runtimeEnvironmentEntry.getRight());
+	}
+
+	public boolean add(Object o1, Object o2) {
+		return add(o1, o2, false);
+	}
+
 	/**
 	 * If checkExist is true, before inserting, also checks that there is no
 	 * other statement in the environment with left equal to the passed
@@ -76,10 +88,6 @@ public class RuleEnvironment {
 		return true;
 	}
 
-	public boolean add(Object o1, Object o2) {
-		return add(o1, o2, false);
-	}
-
 	/**
 	 * If the key is not found in this environment tries recursively with the
 	 * next one
@@ -94,26 +102,66 @@ public class RuleEnvironment {
 		return object;
 	}
 
+	/**
+	 * Adds all the entries of the passed environment to this one (existing
+	 * mappings for the same key will be overwritten).
+	 * @param ruleEnvironment
+	 */
 	public void increment(RuleEnvironment ruleEnvironment) {
 		if (ruleEnvironment != null)
 			environment.putAll(ruleEnvironment.getEnvironment());
 	}
 
+	/**
+	 * Same as add
+	 * @param runtimeEnvironmentEntry
+	 */
+	public void increment(RuleEnvironmentEntry runtimeEnvironmentEntry) {
+		increment(runtimeEnvironmentEntry.getLeft(),
+				runtimeEnvironmentEntry.getRight());
+	}
+	
+	/**
+	 * Same as add
+	 * @param o1
+	 * @param o2
+	 */
+	public void increment(Object o1, Object o2) {
+		add(o1, o2);
+	}
+
+	/**
+	 * Removes all the mapping that have as keys the keys of the
+	 * passed environment.
+	 * @param ruleEnvironment
+	 */
 	public void decrement(RuleEnvironment ruleEnvironment) {
 		if (ruleEnvironment != null)
 			environment.keySet().removeAll(
 				ruleEnvironment.getEnvironment().keySet());
 	}
 
-	public void increment(Object o1, Object o2) {
-		add(o1, o2);
-	}
 
+	/**
+	 * Remove the mapping with the passed object as key
+	 * @param o1
+	 */
 	public void decrement(Object o1) {
 		environment.remove(o1);
 	}
 
+	/**
+	 * Adds all the entries of the passed environment, but it returns false
+	 * if there are mappings in the passed environment with the same key
+	 * of the current environment; the current environment is NOT restored
+	 * to its original state in case of failure.
+	 * @param ruleEnvironment if null it's succeeds
+	 * @return
+	 */
 	public boolean union(RuleEnvironment ruleEnvironment) {
+		if (ruleEnvironment == null)
+			return true;
+		
 		Set<Entry<Object, Object>> entrySet = ruleEnvironment
 				.getEnvironment().entrySet();
 		for (Entry<Object, Object> entry : entrySet) {
@@ -123,24 +171,15 @@ public class RuleEnvironment {
 		return true;
 	}
 
-	public boolean union(Object o1, Object o2) {
-		return add(o1, o2, true);
-	}
-
-	public void add(RuleEnvironmentEntry runtimeEnvironmentEntry) {
-		add(runtimeEnvironmentEntry.getLeft(),
-				runtimeEnvironmentEntry.getRight());
-	}
-
 	public boolean union(RuleEnvironmentEntry runtimeEnvironmentEntry) {
 		return union(runtimeEnvironmentEntry.getLeft(),
 				runtimeEnvironmentEntry.getRight());
 	}
 
-	public void increment(RuleEnvironmentEntry runtimeEnvironmentEntry) {
-		increment(runtimeEnvironmentEntry.getLeft(),
-				runtimeEnvironmentEntry.getRight());
+	public boolean union(Object o1, Object o2) {
+		return add(o1, o2, true);
 	}
+
 
 	public boolean empty() {
 		return environment.size() == 0;
@@ -149,14 +188,24 @@ public class RuleEnvironment {
 	public String toString() {
 		if (empty())
 			return "";
-		StringBuffer buffer = new StringBuffer();
-		Set<Entry<Object, Object>> entrySet = getEnvironment().entrySet();
-		for (Entry<Object, Object> entry : entrySet) {
-			buffer.append(entry.getKey() + " -> " + entry.getValue());
-		}
+		
+		StringBuffer buffer = new StringBuffer(
+			IterableExtensions.join(
+				IterableExtensions.map(getEnvironment().entrySet(), 
+						new Functions.Function1<Entry<Object, Object>, String>() {
+							public String apply(Map.Entry<Object,Object> p) {
+								return p.getKey() + " -> " + p.getValue();
+							}
+						}
+				),
+				", "
+			)
+		);
+		
 		if (next != null) {
-			buffer.append("::");
+			buffer.append(" :: [");
 			buffer.append(next.toString());
+			buffer.append("]");
 		}
 		return buffer.toString();
 	}

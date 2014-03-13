@@ -2,6 +2,7 @@ package it.xsemantics.dsl.tests.suites;
 
 import it.xsemantics.dsl.tests.runtime.ResultTests;
 import it.xsemantics.dsl.tests.runtime.RuleApplicationTraceTests;
+import it.xsemantics.dsl.tests.runtime.RuleEnvironmentTests;
 import it.xsemantics.dsl.tests.runtime.RuleFailedExceptionTests;
 import it.xsemantics.dsl.tests.runtime.StringRepresentationPostProcessorTests;
 import it.xsemantics.dsl.tests.runtime.StringRepresentationTests;
@@ -21,6 +22,7 @@ import org.junit.runners.Suite;
 	TraceUtilsTests.class,
 	StringRepresentationPostProcessorTests.class,
 	StringRepresentationTests.class,
+	RuleEnvironmentTests.class,
 	XsemanticsRuntimeSystemTests.class,
 	XsemanticsCacheTest.class,
 	XsemanticsCacheListenerTest.class
