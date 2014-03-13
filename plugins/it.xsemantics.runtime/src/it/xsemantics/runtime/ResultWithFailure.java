@@ -25,10 +25,6 @@ public class ResultWithFailure {
 		return ruleFailedException;
 	}
 
-	public void setRuleFailedException(RuleFailedException ruleFailedException) {
-		this.ruleFailedException = ruleFailedException;
-	}
-
 	public boolean failed() {
 		return ruleFailedException != null;
 	}

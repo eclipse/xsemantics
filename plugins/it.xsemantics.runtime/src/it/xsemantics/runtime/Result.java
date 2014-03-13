@@ -26,16 +26,8 @@ public class Result<T> extends ResultWithFailure {
 		return value;
 	}
 
-	public void setValue(T value) {
-		this.value = value;
-	}
-
 	public T getFirst() {
 		return value;
-	}
-
-	public void setFirst(T value) {
-		this.value = value;
 	}
 
 }

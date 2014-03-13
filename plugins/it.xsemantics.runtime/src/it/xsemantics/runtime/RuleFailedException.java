@@ -53,10 +53,6 @@ public class RuleFailedException extends Exception {
 		this.previous = previous;
 	}
 
-	public RuleFailedException(Throwable arg0) {
-		super(arg0);
-	}
-
 	public List<ErrorInformation> getErrorInformations() {
 		return errorInformations;
 	}
@@ -70,10 +66,6 @@ public class RuleFailedException extends Exception {
 			addErrorInformation(errorInformations[i]);
 	}
 
-	public void setPrevious(RuleFailedException previous) {
-		this.previous = previous;
-	}
-
 	public RuleFailedException getPrevious() {
 		return previous;
 	}
@@ -82,7 +74,4 @@ public class RuleFailedException extends Exception {
 		return issue;
 	}
 
-	public void setIssue(String issue) {
-		this.issue = issue;
-	}
 }

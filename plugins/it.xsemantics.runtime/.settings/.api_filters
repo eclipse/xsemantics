@@ -8,4 +8,76 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/ErrorInformation.java" type="it.xsemantics.runtime.ErrorInformation">
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.ErrorInformation"/>
+                <message_argument value="setFeature(EStructuralFeature)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.ErrorInformation"/>
+                <message_argument value="setSource(EObject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/Result.java" type="it.xsemantics.runtime.Result">
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.Result"/>
+                <message_argument value="setFirst(T)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.Result"/>
+                <message_argument value="setValue(T)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/Result2.java" type="it.xsemantics.runtime.Result2">
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.Result2"/>
+                <message_argument value="setSecond(SecondT)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/Result3.java" type="it.xsemantics.runtime.Result3">
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.Result3"/>
+                <message_argument value="setThird(ThirdT)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/ResultWithFailure.java" type="it.xsemantics.runtime.ResultWithFailure">
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.ResultWithFailure"/>
+                <message_argument value="setRuleFailedException(RuleFailedException)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/RuleFailedException.java" type="it.xsemantics.runtime.RuleFailedException">
+        <filter comment="removed unused constructor" id="338722907">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="RuleFailedException(Throwable)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="setIssue(String)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="set methods were not used anyway" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="setPrevious(RuleFailedException)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

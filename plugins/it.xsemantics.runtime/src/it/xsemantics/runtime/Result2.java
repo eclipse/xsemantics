@@ -28,9 +28,4 @@ public class Result2<FirstT, SecondT> extends Result<FirstT> {
 		return second;
 	}
 
-	public void setSecond(SecondT second) {
-		this.second = second;
-	}
-	
-	
 }

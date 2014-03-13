@@ -31,20 +31,8 @@ public class ErrorInformation {
 		return source;
 	}
 
-	public void setSource(EObject source) {
-		this.source = source;
-	}
-
 	public EStructuralFeature getFeature() {
 		return feature;
 	}
 
-	public void setFeature(EStructuralFeature feature) {
-		this.feature = feature;
-	}
-
-	public String toString() {
-		return (source != null ? source : "")
-				+ ((feature != null ? "(" + feature + ")" : ""));
-	}
 }
