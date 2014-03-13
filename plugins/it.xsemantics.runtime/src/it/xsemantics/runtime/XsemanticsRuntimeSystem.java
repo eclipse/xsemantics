@@ -49,15 +49,6 @@ public class XsemanticsRuntimeSystem {
 
 	private XsemanticsCache cache = null;
 
-	public StringRepresentation getStringRepresentation() {
-		return stringRepresentation;
-	}
-
-	public void setStringRepresentation(
-			StringRepresentation stringRepresentation) {
-		this.stringRepresentation = stringRepresentation;
-	}
-
 	/**
 	 * @since 1.5
 	 */

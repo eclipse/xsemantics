@@ -88,4 +88,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/XsemanticsRuntimeSystem.java" type="it.xsemantics.runtime.XsemanticsRuntimeSystem">
+        <filter comment="never used" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.XsemanticsRuntimeSystem"/>
+                <message_argument value="getStringRepresentation()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="never used" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.XsemanticsRuntimeSystem"/>
+                <message_argument value="setStringRepresentation(StringRepresentation)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
