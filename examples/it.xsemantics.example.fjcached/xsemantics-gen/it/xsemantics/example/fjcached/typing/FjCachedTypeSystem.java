@@ -108,11 +108,16 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   @Override
   public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
-    try {
-    	return typeInternal(_environment_, _trace_, expression);
-    } catch (Exception _e_type) {
-    	return resultForFailure(_e_type);
-    }
+    return getFromCache("type", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Type>>(_environment_, _trace_) {
+    		public Result<Type> doGet() {
+    			try {
+    				return typeInternal(_environment_, _trace_, expression);
+    			} catch (Exception _e_type) {
+    				return resultForFailure(_e_type);
+    			}
+    		}
+    	}, expression);
   }
   
   @Override
@@ -127,11 +132,16 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
-    try {
-    	return subtypeInternal(_environment_, _trace_, left, right);
-    } catch (Exception _e_subtype) {
-    	return resultForFailure(_e_subtype);
-    }
+    return getFromCache("subtype", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
+    		public Result<Boolean> doGet() {
+    			try {
+    				return subtypeInternal(_environment_, _trace_, left, right);
+    			} catch (Exception _e_subtype) {
+    				return resultForFailure(_e_subtype);
+    			}
+    		}
+    	}, left, right);
   }
   
   @Override
@@ -166,11 +176,16 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   @Override
   public Result<Boolean> equalstype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
-    try {
-    	return equalstypeInternal(_environment_, _trace_, left, right);
-    } catch (Exception _e_equalstype) {
-    	return resultForFailure(_e_equalstype);
-    }
+    return getFromCache("equalstype", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
+    		public Result<Boolean> doGet() {
+    			try {
+    				return equalstypeInternal(_environment_, _trace_, left, right);
+    			} catch (Exception _e_equalstype) {
+    				return resultForFailure(_e_equalstype);
+    			}
+    		}
+    	}, left, right);
   }
   
   @Override

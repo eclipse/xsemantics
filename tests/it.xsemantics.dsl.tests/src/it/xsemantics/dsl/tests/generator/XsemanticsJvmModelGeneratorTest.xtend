@@ -3733,11 +3733,16 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
-    try {
-    	return typeInternal(_environment_, _trace_, o);
-    } catch (Exception _e_type) {
-    	return resultForFailure(_e_type);
-    }
+    return getFromCache("type", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				return typeInternal(_environment_, _trace_, o);
+    			} catch (Exception _e_type) {
+    				return resultForFailure(_e_type);
+    			}
+    		}
+    	}, o);
   }
   
   protected List<EClass> eclassesInternal(final RuleApplicationTrace _trace_, final EObject o) {

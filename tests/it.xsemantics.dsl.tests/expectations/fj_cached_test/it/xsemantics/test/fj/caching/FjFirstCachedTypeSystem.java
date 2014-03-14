@@ -53,11 +53,16 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
-    try {
-    	return typeInternal(_environment_, _trace_, expression);
-    } catch (Exception _e_type) {
-    	return resultForFailure(_e_type);
-    }
+    return getFromCache("type", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Type>>(_environment_, _trace_) {
+    		public Result<Type> doGet() {
+    			try {
+    				return typeInternal(_environment_, _trace_, expression);
+    			} catch (Exception _e_type) {
+    				return resultForFailure(_e_type);
+    			}
+    		}
+    	}, expression);
   }
   
   @Override
@@ -72,11 +77,16 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class candidate, final it.xsemantics.example.fj.fj.Class superclass) {
-    try {
-    	return subclassInternal(_environment_, _trace_, candidate, superclass);
-    } catch (Exception _e_subclass) {
-    	return resultForFailure(_e_subclass);
-    }
+    return getFromCache("subclass", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
+    		public Result<Boolean> doGet() {
+    			try {
+    				return subclassInternal(_environment_, _trace_, candidate, superclass);
+    			} catch (Exception _e_subclass) {
+    				return resultForFailure(_e_subclass);
+    			}
+    		}
+    	}, candidate, superclass);
   }
   
   @Override
@@ -111,11 +121,16 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<List<Field>> fields(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	return fieldsInternal(_environment_, _trace_, cl);
-    } catch (Exception _e_fields) {
-    	return resultForFailure(_e_fields);
-    }
+    return getFromCache("fields", _environment_, _trace_,
+    	new XsemanticsProvider<Result<List<Field>>>(_environment_, _trace_) {
+    		public Result<List<Field>> doGet() {
+    			try {
+    				return fieldsInternal(_environment_, _trace_, cl);
+    			} catch (Exception _e_fields) {
+    				return resultForFailure(_e_fields);
+    			}
+    		}
+    	}, cl);
   }
   
   @Override
@@ -130,11 +145,16 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
   
   @Override
   public Result<List<Method>> methods(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
-    try {
-    	return methodsInternal(_environment_, _trace_, cl);
-    } catch (Exception _e_methods) {
-    	return resultForFailure(_e_methods);
-    }
+    return getFromCache("methods", _environment_, _trace_,
+    	new XsemanticsProvider<Result<List<Method>>>(_environment_, _trace_) {
+    		public Result<List<Method>> doGet() {
+    			try {
+    				return methodsInternal(_environment_, _trace_, cl);
+    			} catch (Exception _e_methods) {
+    				return resultForFailure(_e_methods);
+    			}
+    		}
+    	}, cl);
   }
   
   @Override

@@ -335,8 +335,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		]
    		
    		// entry point method with environment parameter and rule application trace
-   		entryPointMethods += judgmentDescription.toMethod(
-   			judgmentDescription.entryPointMethodName.toString,
+   		val methodName = judgmentDescription.entryPointMethodName.toString
+		entryPointMethods += judgmentDescription.toMethod(
+   			methodName,
    			judgmentDescription.resultType
    		) [
 			if (judgmentDescription.^override)
@@ -346,12 +347,28 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			parameters += judgmentDescription.ruleApplicationTraceParam
    			parameters += judgmentDescription.inputParameters
    			
-   			body = '''
+   			val inputArgs = judgmentDescription.inputArgs
+   			
+   			if (judgmentDescription.cached) {
+	   			body = '''
+				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
+					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
+						public «judgmentDescription.resultType» doGet() {
+							try {
+								return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
+							} catch («Exception» «judgmentDescription.exceptionVarName») {
+								return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
+							}
+						}
+					}, «inputArgs»);'''
+			} else {
+				body = '''
 				try {
-					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
+					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
 				} catch («Exception» «judgmentDescription.exceptionVarName») {
 					return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
 				}'''
+			}
    		]
    		
    		entryPointMethods
