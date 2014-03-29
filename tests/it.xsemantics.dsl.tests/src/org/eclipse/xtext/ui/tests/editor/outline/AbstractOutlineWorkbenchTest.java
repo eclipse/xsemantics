@@ -129,8 +129,8 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected void assertAllLabels(TreeViewer treeViewer, CharSequence expected) {
 		treeViewer.expandAll();
 		IOutlineNode rootNode = getOutlineRootNode(treeViewer);
-		assertEquals(expected.toString().trim(),
-				outlineStringRepresentation(rootNode).trim());
+		assertEquals(expected.toString().trim().replaceAll("\r", ""),
+				outlineStringRepresentation(rootNode).trim().replaceAll("\r", ""));
 	}
 
 	protected String outlineStringRepresentation(IOutlineNode node) {
