@@ -60,6 +60,31 @@ class RuleEnvironmentTests extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testMethodsDelegatedToMap() {
+		val ruleEnvironment = new RuleEnvironment() => [
+			add("foo", 1)
+		]
+		assertEquals(1, ruleEnvironment.size)
+		
+		assertTrue(ruleEnvironment.keySet.contains("foo"))
+		assertTrue(ruleEnvironment.values.contains(1))
+		
+		val entrySet = ruleEnvironment.entrySet
+		assertEquals(1, entrySet.size)
+		assertEquals("foo", entrySet.head.key)
+		assertEquals(1, entrySet.head.value)
+		
+		val ruleEnvironment2 = new RuleEnvironment(ruleEnvironment)
+		assertEquals(ruleEnvironment, ruleEnvironment2)
+		assertFalse(ruleEnvironment.equals("foo"))
+		
+		assertEquals(ruleEnvironment.hashCode, ruleEnvironment2.hashCode)
+		
+		ruleEnvironment.clear
+		assertTrue(ruleEnvironment.empty)
+	}
+
+	@Test
 	def void testGetWithNext() {
 		val ruleEnvironment = new RuleEnvironment() => [
 			add("foo", 1)

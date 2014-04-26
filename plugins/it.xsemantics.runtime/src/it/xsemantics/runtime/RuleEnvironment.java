@@ -3,6 +3,7 @@
  */
 package it.xsemantics.runtime;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -180,14 +181,6 @@ public class RuleEnvironment {
 		return add(o1, o2, true);
 	}
 
-
-	/**
-	 * @since 1.5
-	 */
-	public boolean isEmpty() {
-		return environment.isEmpty();
-	}
-
 	public String toString() {
 		if (isEmpty())
 			return "";
@@ -212,4 +205,67 @@ public class RuleEnvironment {
 		}
 		return buffer.toString();
 	}
+
+	/**
+	 * @since 1.5
+	 */
+	public boolean isEmpty() {
+		return environment.isEmpty();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public int size() {
+		return environment.size();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public void clear() {
+		environment.clear();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public Set<Object> keySet() {
+		return environment.keySet();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public Collection<Object> values() {
+		return environment.values();
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public Set<Entry<Object, Object>> entrySet() {
+		return environment.entrySet();
+	}
+
+	/**
+	 * If the passed object is a RuleEnvironment then returns equals on the
+	 * two {@link Map} contained objects.
+	 * 
+	 * @since 1.5
+	 */
+	public boolean equals(Object o) {
+		if (o instanceof RuleEnvironment) {
+			return environment.equals(((RuleEnvironment) o).getEnvironment());
+		}
+		return super.equals(o);
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	public int hashCode() {
+		return environment.hashCode();
+	}
+
 }
