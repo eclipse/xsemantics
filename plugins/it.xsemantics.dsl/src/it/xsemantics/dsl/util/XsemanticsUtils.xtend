@@ -322,4 +322,9 @@ class XsemanticsUtils {
 	def cacheEntryPointMethods(Cachable c) {
 		c.cachedClause?.entryPointsOption == EntryPointsOption.DEFAULT
 	}
+
+	def cacheCondition(Cachable c) {
+		c.cachedClause?.condition
+	}
+
 }

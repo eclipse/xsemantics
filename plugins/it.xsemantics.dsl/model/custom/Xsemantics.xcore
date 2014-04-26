@@ -178,6 +178,7 @@ interface Named {
 
 class CachedClause {
 	EntryPointsOption entryPointsOption
+	contains XExpression condition
 }
 
 interface Cachable extends UniqueByName {

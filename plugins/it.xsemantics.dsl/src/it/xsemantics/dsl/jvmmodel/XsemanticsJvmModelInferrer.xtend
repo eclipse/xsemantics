@@ -160,6 +160,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			for (elem : ts.judgmentDescriptions) {
 				members += elem.compileInternalMethod
 				members += elem.compileThrowExceptionMethod
+				val cacheConditionMethod = elem.compileCacheConditionMethod
+				if (cacheConditionMethod !== null)
+					members += cacheConditionMethod
 			}
 			
 			for (aux : ts.auxiliaryFunctions) {
@@ -350,7 +353,16 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			val inputArgs = judgmentDescription.inputArgs
    			
    			if (judgmentDescription.cacheEntryPointMethods) {
-	   			body = '''
+   				val hasCacheCondition = judgmentDescription.cacheCondition !== null
+   				body = '''
+   				«IF hasCacheCondition»
+if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputArgs»))
+	try {
+		return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
+	} catch («Exception» «judgmentDescription.exceptionVarName») {
+		return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
+	}
+   				«ENDIF»
 				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
 						public «judgmentDescription.resultType» doGet() {
@@ -563,6 +575,29 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 //   			]
 		]
 	}
+
+	def compileCacheConditionMethod(JudgmentDescription cachable) {
+		val condition = cachable.cacheCondition
+		
+		if (condition === null)
+			return null
+		
+		cachable.toMethod(
+			cachable.cacheConditionMethod.toString,
+			Boolean.getTypeForName(cachable)
+		)
+		[
+			visibility = JvmVisibility::PROTECTED
+			
+			parameters += cachable.toParameter("environment", 
+				cachable.newTypeRef(RuleEnvironment)
+			)
+			
+			parameters += cachable.inputParameters
+			
+			body = condition
+		]
+	}
 	
 	def compileThrowExceptionMethod(AuxiliaryDescription aux) {
 		val errorSpecification = aux.error
@@ -637,7 +672,18 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			val exceptionName = judgmentDescription.exceptionVarName
    			
    			if (judgmentDescription.cachedClause !== null) {
+   				val hasCacheCondition = judgmentDescription.cacheCondition !== null
    				body = '''
+   				«IF hasCacheCondition»
+if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputArgs»))
+	try {
+		checkParamsNotNull(«inputArgs»);
+		return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
+	} catch («Exception» «exceptionName») {
+		sneakyThrowRuleFailedException(«exceptionName»);
+		return null;
+	}
+   				«ENDIF»
 				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
 						public «judgmentDescription.resultType» doGet() {

@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import static extension org.eclipse.xtext.util.Strings.*
 import it.xsemantics.dsl.xsemantics.Named
 import it.xsemantics.dsl.xsemantics.UniqueByName
+import it.xsemantics.dsl.xsemantics.Cachable
 
 class XsemanticsGeneratorExtensions {
 	
@@ -202,6 +203,10 @@ class XsemanticsGeneratorExtensions {
 
 	def throwExceptionMethod(Rule rule) {
 		'''«rule.name.toFirstLower»ThrowException'''
+	}
+
+	def cacheConditionMethod(Cachable c) {
+		'''«c.name.toFirstLower»CacheCondition'''
 	}
 
 	def throwRuleFailedExceptionMethod() {

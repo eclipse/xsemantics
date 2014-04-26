@@ -3707,6 +3707,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<EClass>> nocacheentryPointsDispatcher;
   
+  private PolymorphicDispatcher<Result<EClass>> withCacheConditionDispatcher;
+  
   public TypeSystem() {
     init();
   }
@@ -3716,6 +3718,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	"typeImpl", 3, "|-", ":");
     nocacheentryPointsDispatcher = buildPolymorphicDispatcher1(
     	"nocacheentryPointsImpl", 3, "||-", ":");
+    withCacheConditionDispatcher = buildPolymorphicDispatcher1(
+    	"withCacheConditionImpl", 3, "|=", ":");
     eclassesDispatcher = buildPolymorphicDispatcher(
     	"eclassesImpl", 2);
     auxnocacheentryPointsDispatcher = buildPolymorphicDispatcher(
@@ -3781,6 +3785,33 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     } catch (Exception _e_nocacheentryPoints) {
     	return resultForFailure(_e_nocacheentryPoints);
     }
+  }
+  
+  public Result<EClass> withCacheCondition(final EObject o) {
+    return withCacheCondition(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> withCacheCondition(final RuleEnvironment _environment_, final EObject o) {
+    return withCacheCondition(_environment_, null, o);
+  }
+  
+  public Result<EClass> withCacheCondition(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    if (!withCacheConditionCacheCondition(_environment_, o))
+    	try {
+    		return withCacheConditionInternal(_environment_, _trace_, o);
+    	} catch (Exception _e_withCacheCondition) {
+    		return resultForFailure(_e_withCacheCondition);
+    	}
+    return getFromCache("withCacheCondition", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				return withCacheConditionInternal(_environment_, _trace_, o);
+    			} catch (Exception _e_withCacheCondition) {
+    				return resultForFailure(_e_withCacheCondition);
+    			}
+    		}
+    	}, o);
   }
   
   protected List<EClass> eclassesInternal(final RuleApplicationTrace _trace_, final EObject o) {
@@ -3856,6 +3887,45 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected void nocacheentryPointsThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<EClass> withCacheConditionInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    if (!withCacheConditionCacheCondition(_environment_, o))
+    	try {
+    		checkParamsNotNull(o);
+    		return withCacheConditionDispatcher.invoke(_environment_, _trace_, o);
+    	} catch (Exception _e_withCacheCondition) {
+    		sneakyThrowRuleFailedException(_e_withCacheCondition);
+    		return null;
+    	}
+    return getFromCache("withCacheConditionInternal", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return withCacheConditionDispatcher.invoke(_environment_, _trace_, o);
+    			} catch (Exception _e_withCacheCondition) {
+    				sneakyThrowRuleFailedException(_e_withCacheCondition);
+    				return null;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void withCacheConditionThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Boolean withCacheConditionCacheCondition(final RuleEnvironment environment, final EObject o) {
+    boolean _and = false;
+    boolean _isEmpty = environment.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (!_not) {
+      _and = false;
+    } else {
+      _and = (!(o instanceof EClass));
+    }
+    return Boolean.valueOf(_and);
   }
 }
 '''

@@ -2614,6 +2614,10 @@ class XsemanticsTestFiles {
 	judgments {
 		type |- EObject o : output EClass cached
 		nocacheentryPoints ||- EObject o : output EClass cached { entryPoints=NONE }
+		withCacheCondition |= EObject o : output EClass 
+			cached { 
+				condition = (!environment.isEmpty() && !(o instanceof EClass))
+			}
 	}
 	'''
 }

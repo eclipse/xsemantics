@@ -57,6 +57,7 @@ JudgmentDescription:
 CachedClause:
 	{CachedClause} 'cached' ('{'
 		('entryPoints' '=' entryPointsOption=EntryPointsOption)?
+		('condition' '=' condition=XExpression)?
 	'}')?
 ;
 
