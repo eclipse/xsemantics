@@ -181,12 +181,15 @@ public class RuleEnvironment {
 	}
 
 
-	public boolean empty() {
-		return environment.size() == 0;
+	/**
+	 * @since 1.5
+	 */
+	public boolean isEmpty() {
+		return environment.isEmpty();
 	}
 
 	public String toString() {
-		if (empty())
+		if (isEmpty())
 			return "";
 		
 		StringBuffer buffer = new StringBuffer(

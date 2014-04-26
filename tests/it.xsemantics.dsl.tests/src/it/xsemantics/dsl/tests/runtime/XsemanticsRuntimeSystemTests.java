@@ -393,7 +393,7 @@ public class XsemanticsRuntimeSystemTests extends
 	@Test
 	public void testEmptyEnvironment() {
 		RuleEnvironment env = runtimeTypeSystem.emptyEnvironment();
-		assertTrue(env.empty());
+		assertTrue(env.isEmpty());
 	}
 
 	@Test

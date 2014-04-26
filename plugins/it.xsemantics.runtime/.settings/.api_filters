@@ -60,6 +60,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/RuleEnvironment.java" type="it.xsemantics.runtime.RuleEnvironment">
+        <filter comment="it should not break code to rename empty with isEmpty" id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleEnvironment"/>
+                <message_argument value="empty()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/it/xsemantics/runtime/RuleFailedException.java" type="it.xsemantics.runtime.RuleFailedException">
         <filter comment="removed unused constructor" id="338722907">
             <message_arguments>
