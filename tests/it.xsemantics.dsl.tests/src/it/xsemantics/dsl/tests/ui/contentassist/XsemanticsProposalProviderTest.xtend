@@ -236,6 +236,19 @@ public class XsemanticsProposalProviderTest extends
 		]
 	}
 
+	@Test
+	def void testProposalsForCachedClause() {
+		'''
+		import java.util.ArrayList
+		
+		system my.test.TypeSystem
+			
+		judgments {
+			type |- Object o '''
+		.assertProposalsContain("cached")
+	}
+
+
 	def private assertProposalsContain(CharSequence input, String... expected) {
 		newBuilder.append(input.toString).
 		computeCompletionProposals.map[displayString] => [
