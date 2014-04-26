@@ -82,7 +82,7 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 
 	protected void assertAll(CharSequence expectedErrors,
 			AssertableDiagnostics validate) {
-		assertEquals(utils.removeObjectIdentifiers(expectedErrors.toString())
+		assertEqualsStrings(utils.removeObjectIdentifiers(expectedErrors.toString())
 				.trim(), utils.removeObjectIdentifiers(utils
 				.diagnosticsToString(validate)));
 	}

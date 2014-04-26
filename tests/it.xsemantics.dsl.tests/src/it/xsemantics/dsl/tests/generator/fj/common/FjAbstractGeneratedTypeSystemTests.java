@@ -32,9 +32,9 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 
 	protected TraceUtils traceUtils;
 
-	static {
-		System.setProperty("line.separator", "\n");
-	}
+//	static {
+//		System.setProperty("line.separator", "\n");
+//	}
 
 	public class FjClassForTests {
 		public Class A;
@@ -544,19 +544,19 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 
 	protected void assertSuperclasses(FjClassForTests classes, Class class1,
 			String expectedListRepresentation) throws RuleFailedException {
-		assertEquals(expectedListRepresentation,
+		assertEqualsStrings(expectedListRepresentation,
 				stringRep.string(fjTypeSystem.superclasses(class1)));
 	}
 
 	protected void assertFields(FjClassForTests classes, Class class1,
 			String expectedListRepresentation) {
-		assertEquals(expectedListRepresentation,
+		assertEqualsStrings(expectedListRepresentation,
 				stringRep.string(fjTypeSystem.fields(class1).getValue()));
 	}
 
 	protected void assertMethods(FjClassForTests classes, Class class1,
 			String expectedListRepresentation) {
-		assertEquals(expectedListRepresentation,
+		assertEqualsStrings(expectedListRepresentation,
 				stringRep.string(fjTypeSystem.methods(class1).getValue()));
 	}
 
@@ -642,7 +642,7 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 			CharSequence expectedErrorInformations) {
 		if (expectedType != null) {
 			assertFalse(result.failed());
-			assertEquals(expectedType, stringRep.string(result.getValue()));
+			assertEqualsStrings(expectedType, stringRep.string(result.getValue()));
 			expectedTraces.assertTrace(trace, expectedTrace);
 		} else {
 			assertResultFalse(result, expectedTrace, expectedErrorInformations);

@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.Assert
-import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -52,10 +51,10 @@ abstract class XsemanticsBaseTest {
 	
 	@Inject extension ValidationTestHelper
 	
-	@BeforeClass
-	def static void setNewLine() {
-		System::setProperty("line.separator", "\n")
-	}
+//	@BeforeClass
+//	def static void setNewLine() {
+//		System::setProperty("line.separator", "\n")
+//	}
 	
 	def parseAndAssertNoError(CharSequence s) {
 		var ts = parse(s)
@@ -258,7 +257,10 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def assertEqualsStrings(Object expected, Object actual) {
-		Assert::assertEquals("" + expected, "" + actual)
+		Assert::assertEquals(
+			("" + expected).replaceAll("\r", ""), 
+			("" + actual).replaceAll("\r", "")
+		)
 	}
 
 	def systemExtendsSystemWithJudgments() {

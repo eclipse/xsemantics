@@ -292,7 +292,7 @@ superclasses(class B extends A {}) = [class A {}]
 		
 		val trace1 = new RuleApplicationTrace
 		cachedTypeSystem.subclass(null, trace1, C1, C2)
-		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
+		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
 	}
 
 	def private assertSubtypingCachedFailed(Program p, String className1, String className2, CharSequence expectedTrace) {
@@ -300,7 +300,7 @@ superclasses(class B extends A {}) = [class A {}]
 		val C2 = p.classes.findFirst[name == className2]
 		
 		val result = cachedTypeSystem.subclass(C1, C2)
-		expectedTrace.toString.trim.assertEquals(
+		assertEqualsStrings(expectedTrace.toString.trim,
 			result.ruleFailedException.failureTraceAsString.trim
 		)
 	}
@@ -310,7 +310,7 @@ superclasses(class B extends A {}) = [class A {}]
 		
 		val trace1 = new RuleApplicationTrace
 		cachedTypeSystem.superclasses(trace1, C1)
-		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
+		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
 	}
 
 	def private assertSuperclassesCachedInTypecheck(Program p, String className1, CharSequence expectedTrace) {
@@ -318,7 +318,7 @@ superclasses(class B extends A {}) = [class A {}]
 		
 		val trace1 = new RuleApplicationTrace
 		cachedTypeSystem.check(null, trace1, C1)
-		expectedTrace.toString.trim.assertEquals(trace1.traceAsString.trim)
+		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
 	}
 
 	def private assertCacheStatisticsInTypecheck(Program p, XsemanticsCacheTraceLoggerListener listener, 
@@ -327,8 +327,8 @@ superclasses(class B extends A {}) = [class A {}]
 		val C1 = p.classes.findFirst[name == className1]
 		
 		cachedTypeSystem.check(null, new RuleApplicationTrace, C1)
-		expectedHits.toString.trim.assertEquals(listener.hits.join("\n"))
-		expectedMissed.toString.trim.assertEquals(listener.missed.join("\n"))
+		assertEqualsStrings(expectedHits.toString.trim, listener.hits.join("\n"))
+		assertEqualsStrings(expectedMissed.toString.trim, listener.missed.join("\n"))
 	}
 
 	def private firstMethodOfFirstClass(Program p) {
@@ -339,7 +339,14 @@ superclasses(class B extends A {}) = [class A {}]
 		val prepared = new RuleApplicationTrace()
 		prepared.addToTrace(XsemanticsCache.CACHED_STRING)
 		prepared.addAsSubtrace(original)
-		prepared.traceAsString.assertEquals(cached.traceAsString)
+		assertEqualsStrings(prepared.traceAsString, cached.traceAsString)
+	}
+
+	def assertEqualsStrings(Object expected, Object actual) {
+		assertEquals(
+			("" + expected).replaceAll("\r", ""), 
+			("" + actual).replaceAll("\r", "")
+		)
 	}
 
 }

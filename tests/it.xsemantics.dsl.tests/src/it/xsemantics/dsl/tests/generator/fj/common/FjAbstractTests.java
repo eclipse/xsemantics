@@ -9,6 +9,7 @@ import it.xsemantics.example.fj.fj.Program;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
+import org.junit.Assert;
 
 /**
  * @author bettini
@@ -45,6 +46,13 @@ public abstract class FjAbstractTests extends AbstractXtextTests {
 
 	public Class fjClassForName(Program program, String className) {
 		return fjTestsUtils.fjClassForName(program, className);
+	}
+	
+	protected void assertEqualsStrings(Object expected, Object actual) {
+		Assert.assertEquals(
+				("" + expected).replaceAll("\r", ""), 
+				("" + actual).replaceAll("\r", "")
+			);
 	}
 
 }

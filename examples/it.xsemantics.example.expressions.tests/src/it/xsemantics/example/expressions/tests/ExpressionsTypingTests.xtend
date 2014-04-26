@@ -145,9 +145,9 @@ failed: cannot type !('abc')
 					result.ruleFailedException.failureTraceAsString
 				)
 			}
-			Assert::assertEquals(expectedResult, result.value.string)
+			assertEqualsStrings(expectedResult, result.value.string)
 			if (expectedTrace != null)
-				Assert::assertEquals(expectedTrace.toString, trace.traceAsString)
+				assertEqualsStrings(expectedTrace.toString, trace.traceAsString)
 		} else {
 			if (!result.failed) {
 				Assert::fail("unexpected success: " + 
@@ -155,7 +155,7 @@ failed: cannot type !('abc')
 				)
 			}
 			if (expectedTrace != null)
-				Assert::assertEquals(expectedTrace.toString,
+				assertEqualsStrings(expectedTrace.toString,
 					result.ruleFailedException.failureTraceAsString
 				)
 		}

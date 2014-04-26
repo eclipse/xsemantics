@@ -21,9 +21,9 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	
 	XtextResourceSet resourceSet;
 
-	static {
-		System.setProperty("line.separator", "\n");
-	}
+//	static {
+//		System.setProperty("line.separator", "\n");
+//	}
 
 	@Override
 	public void setUp() throws Exception {

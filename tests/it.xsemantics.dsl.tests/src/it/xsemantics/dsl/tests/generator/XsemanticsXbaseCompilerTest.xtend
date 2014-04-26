@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -851,9 +850,9 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = inputCode.
 			firstRule.conclusion.conclusionElements.get(1).ruleExpression.expression
 		compiler.toJavaStatement(xexp, appendable, true)
-		Assert::assertEquals(expected.toString, appendable.toString)
+		assertEqualsStrings(expected, appendable)
 		val expName = appendable.getName(xexp)
-		Assert::assertEquals(expectedExpName, expName)
+		assertEqualsStrings(expectedExpName, expName)
 	}
 	
 	def void checkCompilationOfPremises(CharSequence inputCode, 
@@ -862,7 +861,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = rule.rulePremisesAsBlock
 		val appendable = rule.createAppendable
 		compiler.toJavaStatement(xexp, appendable, false)
-		Assert::assertEquals(expected.toString, appendable.toString)
+		assertEqualsStrings(expected, appendable)
 	}
 	
 	def void checkCompilationOfPremisesOfCheckRule(CharSequence inputCode, 
@@ -871,7 +870,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 			firstCheckRule.rulePremisesAsBlock
 		val appendable = createAppendable
 		compiler.toJavaStatement(xexp, appendable, false)
-		Assert::assertEquals(expected.toString, appendable.toString)
+		assertEqualsStrings(expected, appendable)
 	}
 
 	def void checkCompilationOfRuleInvocation(CharSequence inputCode, int index,
@@ -880,7 +879,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = rule.ruleInvocations.get(index)
 		val result = rule.createAppendable
 		compiler.toJavaStatement(xexp, result, false)
-		Assert::assertEquals(expected.toString, result.toString)
+		assertEqualsStrings(expected, result)
 	}
 	
 	def void checkCompilationOfOr(CharSequence inputCode, int index,
@@ -889,7 +888,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = rule.ors.get(index)
 		val result = rule.createAppendable
 		compiler.toJavaStatement(xexp, result, false)
-		Assert::assertEquals(expected.toString, result.toString)
+		assertEqualsStrings(expected, result)
 	}
 	
 	def void checkRuleInvocationVariable(CharSequence inputCode, int index,
@@ -897,7 +896,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = inputCode.
 			parseAndAssertNoError.ruleInvocations.get(index)
 		val variable = compiler.declareResultVariable(xexp, appendable)
-		Assert::assertEquals(expectedVariableName, variable)
+		assertEqualsStrings(expectedVariableName, variable)
 	}
 	
 	def void checkCompilationOfAllPremises(CharSequence inputCode, CharSequence expected) {
@@ -905,7 +904,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val result = rule.createJvmModelGeneratorConfiguredAppendable
 		val xexp = rule.rulePremisesAsBlock
 		compiler.toJavaStatement(xexp, result, false)
-		Assert::assertEquals(expected.toString, result.toString)
+		assertEqualsStrings(expected, result)
 	}
 	
 	def void checkCompilationOfAllPremisesOfCheckRule(CharSequence inputCode, CharSequence expected) {
@@ -913,7 +912,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val result = rule.createAppendable
 		val xexp = rule.rulePremisesAsBlock
 		compiler.toJavaStatement(xexp, result, false)
-		Assert::assertEquals(expected.toString, result.toString)
+		assertEqualsStrings(expected, result)
 	}
 	
 	def void checkCompilationOfXExpression(CharSequence inputCode, int index,
@@ -922,7 +921,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(features, _function_1)) {
 		val xexp = rule.rulePremises.get(index)
 		val result = rule.createAppendable
 		compiler.toJavaStatement(xexp, result, false)
-		Assert::assertEquals(expected.toString, result.toString)
+		assertEqualsStrings(expected, result)
 	}
 	
 	def void checkCompilationOfEnvironmentSpecfication(CharSequence inputCode, CharSequence expected) {

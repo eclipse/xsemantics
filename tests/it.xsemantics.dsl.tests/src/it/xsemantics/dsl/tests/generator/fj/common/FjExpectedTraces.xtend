@@ -16,15 +16,22 @@ class FjExpectedTraces {
 	def successTraceAsString(RuleApplicationTrace t) {
 		t.traceAsString
 	}
+
+	def assertEqualsStrings(Object expected, Object actual) {
+		Assert::assertEquals(
+			("" + expected).replaceAll("\r", ""), 
+			("" + actual).replaceAll("\r", "")
+		)
+	}
 	
 	def void assertFailureTrace(RuleFailedException e, CharSequence expectedTrace) {
-		Assert::assertEquals(expectedTrace.toString.trim,
+		assertEqualsStrings(expectedTrace.toString.trim,
 			e.failureTraceAsString
 		)
 	}
 	
 	def void assertErrorInformation(RuleFailedException e, CharSequence expectedErrorInformation) {
-		Assert::assertEquals(expectedErrorInformation.toString,
+		assertEqualsStrings(expectedErrorInformation.toString,
 			e.filteredErrorInformation.map [
 				it.source.string + 
 				if (it.feature != null) {
@@ -37,7 +44,7 @@ class FjExpectedTraces {
 	}
 
 	def void assertTrace(RuleApplicationTrace trace, CharSequence expectedTrace) {
-		Assert::assertEquals(expectedTrace.toString.trim,
+		assertEqualsStrings(expectedTrace.toString.trim,
 			trace.traceAsString
 		)
 	}

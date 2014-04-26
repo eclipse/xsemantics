@@ -4,13 +4,11 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import static org.junit.Assert.*
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -3948,10 +3946,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 				if (prefix == null || e.key.contains(prefix)) {
 					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
 						// check the expected Java code for the validator
-						assertEquals(expectedValidator.toString, e.value.toString)
+						assertEqualsStrings(expectedValidator, e.value)
 					} else if (!e.key.endsWith("Validator.java") && expected != null) {
 						// check the expected Java code for the system
-						assertEquals(expected.toString, e.value.toString)
+						assertEqualsStrings(expected, e.value)
 					}
 				}
 			}

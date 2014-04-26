@@ -185,8 +185,8 @@ InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
 				result.ruleFailedException.failureTraceAsString
 			)
 		}
-		Assert::assertEquals(expectedResult.toString, result.value.toString)		
+		assertEqualsStrings(expectedResult.toString, result.value.toString)		
 		if (expectedTrace != null)
-			Assert::assertEquals(expectedTrace.toString, trace.traceAsString)
+			assertEqualsStrings(expectedTrace.toString, trace.traceAsString)
 	}
 }

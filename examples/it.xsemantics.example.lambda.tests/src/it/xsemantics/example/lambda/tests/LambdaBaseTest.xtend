@@ -98,11 +98,14 @@ class LambdaBaseTest {
 	
 	def <T> void assertFailureTrace(Result<T> result, CharSequence expectedTrace) {
 		assertFailure(result)
-		assertStrings(expectedTrace, result.ruleFailedException.failureTraceAsString)
+		assertEqualsStrings(expectedTrace, result.ruleFailedException.failureTraceAsString)
 	}
 
-	def void assertStrings(Object expected, Object actual) {
-		Assert::assertEquals(expected.toString, actual.toString)
+	def assertEqualsStrings(Object expected, Object actual) {
+		Assert.assertEquals(
+			("" + expected).replaceAll("\r", ""), 
+			("" + actual).replaceAll("\r", "")
+		)
 	}
 	
 	def <T> void assertResultAsString(Result<T> result, String expected) {
@@ -111,12 +114,12 @@ class LambdaBaseTest {
 				result.ruleFailedException.failureTraceAsString, result.failed
 			)
 		}
-		Assert::assertEquals(expected, result.value.string)
+		assertEqualsStrings(expected, result.value.string)
 	}
 
 	def <T> void assertResultAsString(T result, String expected) {
 		Assert::assertNotNull(result)
-		Assert::assertEquals(expected, result.string)
+		assertEqualsStrings(expected, result.string)
 	}
 	
 	def <T> void assertResultAsStringBeautifier(Result<T> result, String expected) {
@@ -125,13 +128,13 @@ class LambdaBaseTest {
 				result.ruleFailedException.failureTraceAsString, result.failed
 			)
 		}
-		Assert::assertEquals(expected, reprBeautifier.string(result.value))
+		assertEqualsStrings(expected, reprBeautifier.string(result.value))
 	}
 	
 	def void assertResult2AsString(UnifyResult result, String expected) {
 		Assert::assertNotNull(result.first);
 		Assert::assertNotNull(result.second);
-		Assert::assertEquals(expected, result.first.string + " -- " + result.second.string)
+		assertEqualsStrings(expected, result.first.string + " -- " + result.second.string)
 	}
 	
 	def void assertResultTrue(Boolean result) {
@@ -175,7 +178,7 @@ class LambdaBaseTest {
 	}
 	
 	def assertTypeSubstitutions(TypeSubstitutions substitutions, String expected) {
-		assertStrings(
+		assertEqualsStrings(
 			"subst{" + expected + "}", 
 			reprForSubstitutions.string(substitutions)
 		)

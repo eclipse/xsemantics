@@ -73,7 +73,7 @@ Diagnostic ERROR "failed: variable.typevarName != other.typevarName" at Program.
 	
 	def void assertAll(AssertableDiagnostics validate,
 			CharSequence expectedErrors) {
-		Assert::assertEquals(
+		assertEqualsStrings(
 			removeObjectIdentifiers(expectedErrors.toString()).trim(),
 			removeObjectIdentifiers(diagnosticsToString(validate))
 		);

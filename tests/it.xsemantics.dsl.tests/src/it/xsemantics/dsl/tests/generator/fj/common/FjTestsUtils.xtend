@@ -59,14 +59,21 @@ class FjTestsUtils {
 	}
 
 	def void assertTrace(RuleApplicationTrace trace, CharSequence expectedTrace) {
-		Assert::assertEquals(expectedTrace.toString.trim,
+		assertEqualsStrings(expectedTrace.toString.trim,
 			trace.traceAsString
 		)
 	}
 
 	def void assertFailureTrace(RuleFailedException e, CharSequence expectedTrace) {
-		Assert::assertEquals(expectedTrace.toString.trim,
+		assertEqualsStrings(expectedTrace.toString.trim,
 			e.failureTraceAsString
+		)
+	}
+
+	def assertEqualsStrings(Object expected, Object actual) {
+		Assert.assertEquals(
+			("" + expected).replaceAll("\r", ""), 
+			("" + actual).replaceAll("\r", "")
 		)
 	}
 }
