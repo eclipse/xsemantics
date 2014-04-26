@@ -2608,10 +2608,12 @@ class XsemanticsTestFiles {
 	
 	auxiliary {
 		eclasses(EObject o) : List<EClass> cached
+		auxnocacheentryPoints(EObject o) : Boolean cached { entryPoints=NONE }
 	}
 	
 	judgments {
 		type |- EObject o : output EClass cached
+		nocacheentryPoints ||- EObject o : output EClass cached { entryPoints=NONE }
 	}
 	'''
 }

@@ -31,6 +31,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.dsl.xsemantics.ReferToJudgment
 import it.xsemantics.dsl.xsemantics.XsemanticsFile
+import it.xsemantics.dsl.xsemantics.Cachable
+import it.xsemantics.dsl.xsemantics.EntryPointsOption
 
 @Singleton
 class XsemanticsUtils {
@@ -315,5 +317,9 @@ class XsemanticsUtils {
 		cache.get("auxiliaryDescriptionsByName" -> (system)) [|
 			system.auxiliaryDescriptions.toMap[name]
 		]
+	}
+
+	def cacheEntryPointMethods(Cachable c) {
+		c.cachedClause?.entryPointsOption == EntryPointsOption.DEFAULT
 	}
 }

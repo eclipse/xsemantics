@@ -177,9 +177,14 @@ interface Named {
 }
 
 class CachedClause {
-	
+	EntryPointsOption entryPointsOption
 }
 
 interface Cachable extends UniqueByName {
 	op CachedClause getCachedClause()
+}
+
+enum EntryPointsOption {
+	Default
+	None
 }

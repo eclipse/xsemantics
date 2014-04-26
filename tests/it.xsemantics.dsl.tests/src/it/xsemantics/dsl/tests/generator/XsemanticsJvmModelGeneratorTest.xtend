@@ -3697,9 +3697,15 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSES = "it.xsemantics.test.Eclasses";
   
+  public final static String AUXNOCACHEENTRYPOINTS = "it.xsemantics.test.AuxnocacheentryPoints";
+  
   private PolymorphicDispatcher<List<EClass>> eclassesDispatcher;
   
+  private PolymorphicDispatcher<Boolean> auxnocacheentryPointsDispatcher;
+  
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  private PolymorphicDispatcher<Result<EClass>> nocacheentryPointsDispatcher;
   
   public TypeSystem() {
     init();
@@ -3708,8 +3714,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
+    nocacheentryPointsDispatcher = buildPolymorphicDispatcher1(
+    	"nocacheentryPointsImpl", 3, "||-", ":");
     eclassesDispatcher = buildPolymorphicDispatcher(
     	"eclassesImpl", 2);
+    auxnocacheentryPointsDispatcher = buildPolymorphicDispatcher(
+    	"auxnocacheentryPointsImpl", 2);
   }
   
   public List<EClass> eclasses(final EObject o) throws RuleFailedException {
@@ -3721,6 +3731,18 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return eclassesInternal(_trace_, o);
     } catch (Exception _e_eclasses) {
     	throw extractRuleFailedException(_e_eclasses);
+    }
+  }
+  
+  public Boolean auxnocacheentryPoints(final EObject o) throws RuleFailedException {
+    return auxnocacheentryPoints(null, o);
+  }
+  
+  public Boolean auxnocacheentryPoints(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	return auxnocacheentryPointsInternal(_trace_, o);
+    } catch (Exception _e_auxnocacheentryPoints) {
+    	throw extractRuleFailedException(_e_auxnocacheentryPoints);
     }
   }
   
@@ -3745,6 +3767,22 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	}, o);
   }
   
+  public Result<EClass> nocacheentryPoints(final EObject o) {
+    return nocacheentryPoints(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> nocacheentryPoints(final RuleEnvironment _environment_, final EObject o) {
+    return nocacheentryPoints(_environment_, null, o);
+  }
+  
+  public Result<EClass> nocacheentryPoints(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	return nocacheentryPointsInternal(_environment_, _trace_, o);
+    } catch (Exception _e_nocacheentryPoints) {
+    	return resultForFailure(_e_nocacheentryPoints);
+    }
+  }
+  
   protected List<EClass> eclassesInternal(final RuleApplicationTrace _trace_, final EObject o) {
     return getFromCache("eclassesInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<List<EClass>>(null, _trace_) {
@@ -3764,6 +3802,24 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
+  protected Boolean auxnocacheentryPointsInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    return getFromCache("auxnocacheentryPointsInternal", (RuleEnvironment)null, _trace_,
+    	new XsemanticsProvider<Boolean>(null, _trace_) {
+    		public Boolean doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return auxnocacheentryPointsDispatcher.invoke(_trace_, o);
+    			} catch (Exception _e_auxnocacheentryPoints) {
+    				return false;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void auxnocacheentryPointsThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     return getFromCache("typeInternal", _environment_, _trace_,
     	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
@@ -3780,6 +3836,25 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<EClass> nocacheentryPointsInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    return getFromCache("nocacheentryPointsInternal", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return nocacheentryPointsDispatcher.invoke(_environment_, _trace_, o);
+    			} catch (Exception _e_nocacheentryPoints) {
+    				sneakyThrowRuleFailedException(_e_nocacheentryPoints);
+    				return null;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void nocacheentryPointsThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
 }

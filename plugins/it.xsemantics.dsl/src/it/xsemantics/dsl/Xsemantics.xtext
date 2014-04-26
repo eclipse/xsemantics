@@ -55,7 +55,13 @@ JudgmentDescription:
 ;
 
 CachedClause:
-	{CachedClause} 'cached'
+	{CachedClause} 'cached' ('{'
+		('entryPoints' '=' entryPointsOption=EntryPointsOption)?
+	'}')?
+;
+
+enum EntryPointsOption:
+	None='NONE'
 ;
 
 JudgmentParameter:
