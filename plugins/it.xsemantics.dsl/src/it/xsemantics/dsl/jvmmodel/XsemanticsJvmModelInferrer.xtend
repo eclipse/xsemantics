@@ -349,7 +349,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			
    			val inputArgs = judgmentDescription.inputArgs
    			
-   			if (judgmentDescription.cached) {
+   			if (judgmentDescription.cachedClause !== null) {
 	   			body = '''
 				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
@@ -636,7 +636,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			val inputArgs = judgmentDescription.inputArgs
    			val exceptionName = judgmentDescription.exceptionVarName
    			
-   			if (judgmentDescription.cached) {
+   			if (judgmentDescription.cachedClause !== null) {
    				body = '''
 				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
@@ -684,7 +684,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			val exceptionName = aux.exceptionVarName
 			val inputArgs = aux.inputArgs
    			
-   			if (aux.cached) {
+   			if (aux.cachedClause !== null) {
    				body = '''
 				return getFromCache("«methodName»", («RuleEnvironment»)null, «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«aux.resultType»>(null, «ruleApplicationTraceName») {

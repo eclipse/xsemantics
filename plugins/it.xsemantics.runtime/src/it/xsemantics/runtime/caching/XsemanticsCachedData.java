@@ -4,6 +4,8 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 
 /**
+ * The actual object put into the {@link XsemanticsCache}
+ * @author Lorenzo Bettini
  * @since 1.5
  */
 public class XsemanticsCachedData<T extends Object> {
