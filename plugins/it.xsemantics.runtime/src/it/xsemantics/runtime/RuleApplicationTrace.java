@@ -40,4 +40,29 @@ public class RuleApplicationTrace {
 	public boolean isEmpty() {
 		return trace.isEmpty();
 	}
+
+	/**
+	 * Returns a "snapshot" of the current trace (i.e., it clones possible
+	 * subtraces); this is useful for storing snapshots in cached computations.
+	 * @since 1.5
+	 */
+	public RuleApplicationTrace snapshot() {
+		return clone();
+	}
+	
+	/**
+	 * @since 1.5
+	 */
+	@Override
+	protected RuleApplicationTrace clone() {
+		RuleApplicationTrace cloned = new RuleApplicationTrace();
+		cloned.trace = new LinkedList<Object>();
+		for (Object orig : trace) {
+			if (orig instanceof RuleApplicationTrace)
+				cloned.trace.add(((RuleApplicationTrace)orig).clone());
+			else
+				cloned.trace.add(orig);
+		}
+		return cloned;
+	}
 }
