@@ -26,21 +26,21 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
-  public final static String XEXPRESSIONTYPE = "it.xsemantics.dsl.typing.rules.XExpressionType";
+  public final static String XEXPRESSIONTYPE = "it.xsemantics.dsl.typing.XExpressionType";
   
-  public final static String XVARIABLEDECLARATIONTYPE = "it.xsemantics.dsl.typing.rules.XVariableDeclarationType";
+  public final static String XVARIABLEDECLARATIONTYPE = "it.xsemantics.dsl.typing.XVariableDeclarationType";
   
-  public final static String EXPRESSIONINCONCLUSIONTYPE = "it.xsemantics.dsl.typing.rules.ExpressionInConclusionType";
+  public final static String EXPRESSIONINCONCLUSIONTYPE = "it.xsemantics.dsl.typing.ExpressionInConclusionType";
   
-  public final static String RULEPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.RuleParameterType";
+  public final static String RULEPARAMETERTYPE = "it.xsemantics.dsl.typing.RuleParameterType";
   
-  public final static String INPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.InputParameterType";
+  public final static String INPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.InputParameterType";
   
-  public final static String OUTPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.OutputParameterType";
+  public final static String OUTPUTPARAMETERTYPE = "it.xsemantics.dsl.typing.OutputParameterType";
   
-  public final static String JVMFORMALPARAMETERTYPE = "it.xsemantics.dsl.typing.rules.JvmFormalParameterType";
+  public final static String JVMFORMALPARAMETERTYPE = "it.xsemantics.dsl.typing.JvmFormalParameterType";
   
-  public final static String AUXILIARYDESCRIPTIONTYPE = "it.xsemantics.dsl.typing.rules.AuxiliaryDescriptionType";
+  public final static String AUXILIARYDESCRIPTIONTYPE = "it.xsemantics.dsl.typing.AuxiliaryDescriptionType";
   
   @Inject
   private JvmTypesBuilder typesBuilder;
