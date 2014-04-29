@@ -11,8 +11,12 @@ import java.util.List
 
 system it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem extends FjFirstTypeSystem
 
+auxiliary {
+	superclasses(Class cl) : List<Class> cached
+}
+
 judgments {
-	override type |- Expression expression : output Type cached 
+	override type |- Expression expression : output Type cached
 	override subclass |- Class candidate <| Class superclass cached
 	override fields ||- Class cl >> output List<Field> cached
 	override methods ||~ Class cl >> output List<Method> cached

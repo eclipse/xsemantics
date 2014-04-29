@@ -1,0 +1,4 @@
+// Uses 'cached'
+
+system it.xsemantics.test.fj.caching.FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem
+

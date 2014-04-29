@@ -33,7 +33,9 @@ public abstract class XsemanticsProvider<T> implements com.google.inject.Provide
 
 	public XsemanticsCachedData<T> get() {
 		called = true;
-		return new XsemanticsCachedData<T>(environment, trace, doGet());
+		T doGet = doGet();
+		RuleApplicationTrace snapshot = trace != null ? trace.snapshot() : null;
+		return new XsemanticsCachedData<T>(environment, snapshot, doGet);
 	}
 
 	public abstract T doGet();

@@ -26,14 +26,10 @@ class FjFirstCachedExpectedTraces extends FjExpectedTraces {
  CheckNew: [] |- new B()
   cached:
    Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []
-    superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]
-   SubtypeSequence: [] |- new B() : [] << []
   SubtypeSequence: [] |- new B() : [] << []
  CheckNew: [] |- new B()
   cached:
    Fields: [] ||- class B extends A { int m(B b, A a, int ... >> []
-    superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]
-   SubtypeSequence: [] |- new B() : [] << []
   SubtypeSequence: [] |- new B() : [] << []
  CheckConstant: [] |- 10'''
 }

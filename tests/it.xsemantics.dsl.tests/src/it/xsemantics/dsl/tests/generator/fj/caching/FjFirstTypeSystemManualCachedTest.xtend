@@ -1,14 +1,13 @@
 package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import it.xsemantics.example.fj.fj.ClassType
-import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.util.FjTypeUtils
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.caching.XsemanticsCache
-import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
+import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
 import org.eclipse.xtext.junit4.InjectWith
@@ -18,14 +17,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.junit.Assert.*
-import it.xsemantics.runtime.StringRepresentation
 
 @InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class FjFirstTypeSystemManualCachedTest {
+class FjFirstTypeSystemManualCachedTest extends AbstractFjFirstTypeSystemCachedTest {
 	
-	@Inject FjFirstTypeSystemManualCached cachedTypeSystem
-	
+	@Inject Provider<FjFirstTypeSystemManualCached> cachedTypeSystemProvider
+
 	@Inject FjFirstTypeSystem origTypeSystem
 	
 	@Inject extension ParseHelper<Program>
@@ -35,6 +33,10 @@ class FjFirstTypeSystemManualCachedTest {
 	@Inject extension FjTypeUtils
 	
 	@Inject extension StringRepresentation
+	
+	override createCachedTypeSystem() {
+		cachedTypeSystemProvider.get()
+	}
 	
 	@Test
 	def void testCachedTyping() {
@@ -106,13 +108,15 @@ class FjFirstTypeSystemManualCachedTest {
 		new A()
 		'''.
 		parse.main => [
-			val trace = new RuleApplicationTrace
+			var trace = new RuleApplicationTrace
 			val env = new RuleEnvironment
 			cachedTypeSystem.type(env, trace, it)
-			val traceRepr = trace.traceAsString
 			val envRepr = env.string
+			trace = new RuleApplicationTrace
 			cachedTypeSystem.type(env, trace, it)
-			traceRepr.assertEquals(trace.traceAsString)
+			'''
+			cached:
+			 TNew: [] |- new A() : A'''.assertEqualsStrings(trace.traceAsString)
 			envRepr.assertEquals(env.string)
 		]
 	}
@@ -139,7 +143,6 @@ Subclassing: [] |- class B extends A {} <| class A {}
 Subclassing: [] |- class C extends B {} <| class A {}
  cached:
   Subclassing: [] |- class B extends A {} <| class A {}
-   Subclassing: [] |- class A {} <| class A {}
 '''
 			)
 
@@ -239,9 +242,6 @@ CheckClass: [] |- class C extends B {}
 CheckClass: [] |- class C extends B {}
  cached:
   superclasses(class C extends B {}) = [class B extends A {}, class A {}]
-  Fields: [] ||- class B extends A {} >> []
-   superclasses(class B extends A {}) = [class A {}]
-  Methods: [] ||~ class B extends A {} >> []
  Fields: [] ||- class B extends A {} >> []
   cached:
    superclasses(class B extends A {}) = [class A {}]
@@ -253,9 +253,6 @@ CheckClass: [] |- class C extends B {}
 
 	@Test
 	def void testXsemanticsCacheListener() {
-		val logger = new XsemanticsCacheTraceLoggerListener
-		cachedTypeSystem.cache.addListener(logger)
-		
 		'''
 		class A {}
 		class B extends A {}
@@ -284,69 +281,6 @@ superclasses(class B extends A {}) = [class A {}]
 			)
 		]
 		cachedTypeSystem.cache.removeListener(logger)
-	}
-
-	def private assertSubtypingCached(Program p, String className1, String className2, CharSequence expectedTrace) {
-		val C1 = p.classes.findFirst[name == className1]
-		val C2 = p.classes.findFirst[name == className2]
-		
-		val trace1 = new RuleApplicationTrace
-		cachedTypeSystem.subclass(null, trace1, C1, C2)
-		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
-	}
-
-	def private assertSubtypingCachedFailed(Program p, String className1, String className2, CharSequence expectedTrace) {
-		val C1 = p.classes.findFirst[name == className1]
-		val C2 = p.classes.findFirst[name == className2]
-		
-		val result = cachedTypeSystem.subclass(C1, C2)
-		assertEqualsStrings(expectedTrace.toString.trim,
-			result.ruleFailedException.failureTraceAsString.trim
-		)
-	}
-
-	def private assertSuperclassesCached(Program p, String className1, CharSequence expectedTrace) {
-		val C1 = p.classes.findFirst[name == className1]
-		
-		val trace1 = new RuleApplicationTrace
-		cachedTypeSystem.superclasses(trace1, C1)
-		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
-	}
-
-	def private assertSuperclassesCachedInTypecheck(Program p, String className1, CharSequence expectedTrace) {
-		val C1 = p.classes.findFirst[name == className1]
-		
-		val trace1 = new RuleApplicationTrace
-		cachedTypeSystem.check(null, trace1, C1)
-		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
-	}
-
-	def private assertCacheStatisticsInTypecheck(Program p, XsemanticsCacheTraceLoggerListener listener, 
-		String className1, CharSequence expectedHits, CharSequence expectedMissed
-	) {
-		val C1 = p.classes.findFirst[name == className1]
-		
-		cachedTypeSystem.check(null, new RuleApplicationTrace, C1)
-		assertEqualsStrings(expectedHits.toString.trim, listener.hits.join("\n"))
-		assertEqualsStrings(expectedMissed.toString.trim, listener.missed.join("\n"))
-	}
-
-	def private firstMethodOfFirstClass(Program p) {
-		(p.classes.head.members.head as Method)
-	}
-
-	def private void assertCachedTrace(RuleApplicationTrace original, RuleApplicationTrace cached) {
-		val prepared = new RuleApplicationTrace()
-		prepared.addToTrace(XsemanticsCache.CACHED_STRING)
-		prepared.addAsSubtrace(original)
-		assertEqualsStrings(prepared.traceAsString, cached.traceAsString)
-	}
-
-	def assertEqualsStrings(Object expected, Object actual) {
-		assertEquals(
-			("" + expected).replaceAll("\r", ""), 
-			("" + actual).replaceAll("\r", "")
-		)
 	}
 
 }

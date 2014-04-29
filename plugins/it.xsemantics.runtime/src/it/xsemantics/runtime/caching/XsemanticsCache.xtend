@@ -38,7 +38,9 @@ class XsemanticsCache {
 			
 			if (trace !== null && trace !== cached.trace) {
 				trace.addToTrace(CACHED_STRING)
-				trace.addAsSubtrace(cached.trace)
+				if (cached.trace !== null) {
+					trace.addObjectAsSubtrace(cached.trace.trace.findLast[!(it instanceof RuleApplicationTrace)])
+				}
 			}
 		} else {
 			cached.name = methodName

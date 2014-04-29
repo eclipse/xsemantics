@@ -16,6 +16,10 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
+  public final static String SUPERCLASSES = "it.xsemantics.test.fj.caching.Superclasses";
+  
+  private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
@@ -39,6 +43,20 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
     	"fieldsImpl", 3, "||-", ">>");
     methodsDispatcher = buildPolymorphicDispatcher1(
     	"methodsImpl", 3, "||~", ">>");
+    superclassesDispatcher = buildPolymorphicDispatcher(
+    	"superclassesImpl", 2);
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    return superclasses(null, cl);
+  }
+  
+  public List<it.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
+    try {
+    	return superclassesInternal(_trace_, cl);
+    } catch (Exception _e_superclasses) {
+    	throw extractRuleFailedException(_e_superclasses);
+    }
   }
   
   @Override
@@ -155,6 +173,25 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
     			}
     		}
     	}, cl);
+  }
+  
+  protected List<it.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
+    return getFromCache("superclassesInternal", (RuleEnvironment)null, _trace_,
+    	new XsemanticsProvider<List<it.xsemantics.example.fj.fj.Class>>(null, _trace_) {
+    		public List<it.xsemantics.example.fj.fj.Class> doGet() {
+    			try {
+    				checkParamsNotNull(cl);
+    				return superclassesDispatcher.invoke(_trace_, cl);
+    			} catch (Exception _e_superclasses) {
+    				sneakyThrowRuleFailedException(_e_superclasses);
+    				return null;
+    			}
+    		}
+    	}, cl);
+  }
+  
+  protected void superclassesThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
   @Override

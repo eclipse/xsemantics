@@ -20,7 +20,9 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	@Test
 	def void testAddAsSubtraceNull() {
 		val t1 = new RuleApplicationTrace();
-		t1.addAsSubtrace(null);
+		t1.addAsSubtrace(null as RuleApplicationTrace);
+		Assert.assertTrue(t1.isEmpty());
+		t1.addObjectAsSubtrace(null as Object);
 		Assert.assertTrue(t1.isEmpty());
 	}
 
@@ -29,6 +31,16 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 		val t1 = new RuleApplicationTrace();
 		t1.addToTrace(null);
 		Assert.assertTrue(t1.isEmpty());
+	}
+
+	@Test
+	def void testAddObjectAsSubtraceNull() {
+		val t1 = new RuleApplicationTrace();
+		t1.addToTrace("first");
+		t1.addObjectAsSubtrace("nested");
+		'''
+		first
+		 nested'''.assertEqualsStrings(t1.traceAsString);
 	}
 
 	@Test

@@ -9,6 +9,7 @@ import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Assert;
 import org.junit.Before;
 
 /**
@@ -42,4 +43,10 @@ public class XsemanticsAbstractTests extends AbstractXtextTests {
 		return false;
 	}
 
+	protected void assertEqualsStrings(Object expected, Object actual) {
+		Assert.assertEquals(
+				("" + expected).replaceAll("\r", ""), 
+				("" + actual).replaceAll("\r", "")
+			);
+	}
 }

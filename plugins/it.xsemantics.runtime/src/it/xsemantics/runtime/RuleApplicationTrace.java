@@ -30,6 +30,17 @@ public class RuleApplicationTrace {
 			trace.add(subTrace);
 	}
 
+	/**
+	 * @since 1.5
+	 */
+	public void addObjectAsSubtrace(Object traceElement) {
+		if (traceElement != null) {
+			RuleApplicationTrace subTrace = new RuleApplicationTrace();
+			subTrace.addToTrace(traceElement);
+			trace.add(subTrace);
+		}	
+	}
+
 	public List<Object> getTrace() {
 		return trace;
 	}
