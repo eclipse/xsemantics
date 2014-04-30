@@ -106,10 +106,40 @@ Methods: [] ||~ class B extends A {} >> []
 		class D extends A {}
 		'''
 		.parse => [
-			assertSubtypingCachedFailedResult("D", "C", "")
+			assertSubclassCachedResult("D", "C", "")
 
 			// also failures are cached because entry point methods are cached
-			assertSubtypingCachedFailedResult("D", "C", "subclass: Result failed")
+			assertSubclassCachedResult("D", "C", "subclass: Result failed")
+		]
+	}
+
+	@Test
+	def void testSubtypingCached() {
+		'''
+		class A {
+			String s1;
+			int i1;
+			A a1;
+			B b1;
+		}
+		class B extends A {}
+		'''
+		.parse => [
+			val A = classes.head
+			val StringType = A.members.get(0).type
+			val IntType = A.members.get(1).type
+			val AType = A.members.get(2).type
+			val BType = A.members.get(3).type
+			// subtyping is not cached
+			assertSubtypingCachedResult(StringType, IntType, "")
+			assertSubtypingCachedResult(StringType, IntType, "")
+			assertSubtypingCachedResult(StringType, StringType, "")
+			assertSubtypingCachedResult(StringType, StringType, "")
+			// subtyping is not cached, but subclass is
+			assertSubtypingCachedResult(AType, AType, "")
+			assertSubtypingCachedResult(BType, AType, "subclassInternal: Result true")
+			assertSubtypingCachedResult(AType, AType, "subclassInternal: Result true; subclassInternal: Result true")
+			assertSubtypingCachedResult(BType, AType, "subclassInternal: Result true; subclassInternal: Result true; subclassInternal: Result true")
 		]
 	}
 }

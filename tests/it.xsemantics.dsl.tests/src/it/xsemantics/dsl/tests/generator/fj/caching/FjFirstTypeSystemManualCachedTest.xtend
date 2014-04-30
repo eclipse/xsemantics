@@ -123,7 +123,7 @@ class FjFirstTypeSystemManualCachedTest extends AbstractFjFirstTypeSystemCachedT
 	}
 
 	@Test
-	def void testCachedSubtyping() {
+	def void testCachedSubclass() {
 		'''
 		class A {}
 		class B extends A {}
@@ -131,7 +131,7 @@ class FjFirstTypeSystemManualCachedTest extends AbstractFjFirstTypeSystemCachedT
 		class D extends A {}
 		'''
 		.parse => [
-			assertSubtypingCached("B", "A", 
+			assertSubclassCached("B", "A", 
 '''
 Subclassing: [] |- class B extends A {} <| class A {}
  Subclassing: [] |- class A {} <| class A {}
@@ -139,7 +139,7 @@ Subclassing: [] |- class B extends A {} <| class A {}
 			)
 			
 			// note that it reuses the cached subclasses(B, A)
-			assertSubtypingCached("C", "A", 
+			assertSubclassCached("C", "A", 
 '''
 Subclassing: [] |- class C extends B {} <| class A {}
  cached:
@@ -148,7 +148,7 @@ Subclassing: [] |- class C extends B {} <| class A {}
 			)
 
 			// note that it reuses the cached subclasses(A, A)
-			assertSubtypingCached("D", "A", 
+			assertSubclassCached("D", "A", 
 '''
 Subclassing: [] |- class D extends A {} <| class A {}
  cached:
@@ -167,7 +167,7 @@ Subclassing: [] |- class D extends A {} <| class A {}
 		class D extends A {}
 		'''
 		.parse => [
-			assertSubtypingCachedFailed("D", "C", 
+			assertSubclassCachedFailed("D", "C", 
 '''
 failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
  failed: Subclassing: [] |- class A {} <| class C extends B {}
@@ -175,7 +175,7 @@ failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
 '''
 			)
 
-			assertSubtypingCachedFailed("D", "C", 
+			assertSubclassCachedFailed("D", "C", 
 '''
 failed: Subclassing: [] |- class D extends A {} <| class C extends B {}
  failed: Subclassing: [] |- class A {} <| class C extends B {}

@@ -1,9 +1,16 @@
 // Uses 'cached'
 
 import it.xsemantics.example.fj.fj.Class
+import it.xsemantics.example.fj.fj.Type
+import it.xsemantics.example.fj.fj.BasicType
 
 system it.xsemantics.test.fj.caching.FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem
 
 judgments {
 	override subclass |- Class candidate <| Class superclass cached { entryPoints=NONE }
+	override subtype |- Type left <: Type right cached {
+		condition = {
+			left instanceof BasicType && right instanceof BasicType
+		}
+	}
 }

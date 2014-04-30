@@ -14,6 +14,7 @@ import static org.junit.Assert.*
 import org.junit.After
 import com.google.inject.Provider
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
+import it.xsemantics.example.fj.fj.Type
 
 abstract class AbstractFjFirstTypeSystemCachedTest {
 	
@@ -46,7 +47,7 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 
 	def abstract FjFirstTypeSystem createCachedTypeSystem();
 	
-	def protected assertSubtypingCached(Program p, String className1, String className2, CharSequence expectedTrace) {
+	def protected assertSubclassCached(Program p, String className1, String className2, CharSequence expectedTrace) {
 		val C1 = p.classes.findFirst[name == className1]
 		val C2 = p.classes.findFirst[name == className2]
 		
@@ -55,7 +56,7 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 		assertEqualsStrings(expectedTrace.toString.trim, trace1.traceAsString.trim)
 	}
 
-	def protected assertSubtypingCachedFailed(Program p, String className1, String className2, CharSequence expectedTrace) {
+	def protected assertSubclassCachedFailed(Program p, String className1, String className2, CharSequence expectedTrace) {
 		val C1 = p.classes.findFirst[name == className1]
 		val C2 = p.classes.findFirst[name == className2]
 		
@@ -65,12 +66,17 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 		)
 	}
 
-	def protected assertSubtypingCachedFailedResult(Program p, String className1, String className2, CharSequence expectedHits) {
+	def protected assertSubclassCachedResult(Program p, String className1, String className2, CharSequence expectedHits) {
 		val C1 = p.classes.findFirst[name == className1]
 		val C2 = p.classes.findFirst[name == className2]
 		
 		cachedTypeSystem.subclass(C1, C2)
 		assertEqualsStrings(expectedHits.toString.trim, resultLogger.hits.join("\n"))
+	}
+
+	def protected assertSubtypingCachedResult(Type left, Type right, CharSequence expectedHits) {
+		cachedTypeSystem.subtype(left, right)
+		assertEqualsStrings(expectedHits.toString.trim, resultLogger.hits.join("; "))
 	}
 
 	def protected assertSuperclassesCached(Program p, String className1, CharSequence expectedTrace) {
