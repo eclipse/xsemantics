@@ -51,6 +51,14 @@ class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def testFjCached() {
+		// cached tests depend on fj_first_test so we must load it first
+		assertCorrectJavaCodeGeneration("fj_first_test.xsemantics");
+		assertCorrectJavaCodeGeneration("fj_cached_test.xsemantics");
+		assertCorrectJavaCodeGeneration("fj_cached_options_test.xsemantics");
+	}
+
+	@Test
 	def testEcore() {
 		assertCorrectJavaCodeGeneration("ecore_test.xsemantics");
 	}
