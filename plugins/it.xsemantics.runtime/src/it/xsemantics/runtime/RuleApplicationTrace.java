@@ -3,7 +3,7 @@
  */
 package it.xsemantics.runtime;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class RuleApplicationTrace {
 
-	protected List<Object> trace = new LinkedList<Object>();
+	protected List<Object> trace = new ArrayList<Object>();
 
 	public RuleApplicationTrace() {
 
@@ -67,7 +67,7 @@ public class RuleApplicationTrace {
 	@Override
 	protected RuleApplicationTrace clone() {
 		RuleApplicationTrace cloned = new RuleApplicationTrace();
-		cloned.trace = new LinkedList<Object>();
+		cloned.trace = new ArrayList<Object>();
 		for (Object orig : trace) {
 			if (orig instanceof RuleApplicationTrace)
 				cloned.trace.add(((RuleApplicationTrace)orig).clone());
