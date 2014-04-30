@@ -2618,6 +2618,10 @@ class XsemanticsTestFiles {
 			cached { 
 				condition = (!environment.isEmpty() && !(o instanceof EClass))
 			}
+		withCacheConditionBlock |= EObject o :> output EClass 
+			cached { 
+				condition = { (!environment.isEmpty() && !(o instanceof EClass)) }
+			}
 	}
 	'''
 }

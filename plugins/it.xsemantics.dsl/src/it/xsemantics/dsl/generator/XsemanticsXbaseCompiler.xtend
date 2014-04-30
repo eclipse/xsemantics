@@ -7,6 +7,7 @@ import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.CachedClause
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
@@ -32,6 +33,8 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -179,7 +182,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	 */
 	override protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b,
 			boolean isReferenced) {
-		if (insideClosure(expr)) {
+		if (insideClosure(expr) || insideCachedCondition(expr)) {
 			super._toJavaStatement(
 					expr,
 					b,
@@ -661,5 +664,9 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	def boolean insideClosure(XExpression expr) {
 		return expr.eContainer() instanceof XClosure;
+	}
+
+	def boolean insideCachedCondition(XExpression expr) {
+		return expr.getContainerOfType(CachedClause) !== null
 	}
 }

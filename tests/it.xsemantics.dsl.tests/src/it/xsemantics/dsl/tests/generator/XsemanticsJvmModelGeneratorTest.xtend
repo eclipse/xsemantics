@@ -3707,6 +3707,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<EClass>> withCacheConditionDispatcher;
   
+  private PolymorphicDispatcher<Result<EClass>> withCacheConditionBlockDispatcher;
+  
   public TypeSystem() {
     init();
   }
@@ -3718,6 +3720,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	"nocacheentryPointsImpl", 3, "||-", ":");
     withCacheConditionDispatcher = buildPolymorphicDispatcher1(
     	"withCacheConditionImpl", 3, "|=", ":");
+    withCacheConditionBlockDispatcher = buildPolymorphicDispatcher1(
+    	"withCacheConditionBlockImpl", 3, "|=", ":>");
     eclassesDispatcher = buildPolymorphicDispatcher(
     	"eclassesImpl", 2);
     auxnocacheentryPointsDispatcher = buildPolymorphicDispatcher(
@@ -3807,6 +3811,33 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     				return withCacheConditionInternal(_environment_, _trace_, o);
     			} catch (Exception _e_withCacheCondition) {
     				return resultForFailure(_e_withCacheCondition);
+    			}
+    		}
+    	}, o);
+  }
+  
+  public Result<EClass> withCacheConditionBlock(final EObject o) {
+    return withCacheConditionBlock(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> withCacheConditionBlock(final RuleEnvironment _environment_, final EObject o) {
+    return withCacheConditionBlock(_environment_, null, o);
+  }
+  
+  public Result<EClass> withCacheConditionBlock(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    if (!withCacheConditionBlockCacheCondition(_environment_, o))
+    	try {
+    		return withCacheConditionBlockInternal(_environment_, _trace_, o);
+    	} catch (Exception _e_withCacheConditionBlock) {
+    		return resultForFailure(_e_withCacheConditionBlock);
+    	}
+    return getFromCache("withCacheConditionBlock", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				return withCacheConditionBlockInternal(_environment_, _trace_, o);
+    			} catch (Exception _e_withCacheConditionBlock) {
+    				return resultForFailure(_e_withCacheConditionBlock);
     			}
     		}
     	}, o);
@@ -3915,6 +3946,45 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean withCacheConditionCacheCondition(final RuleEnvironment environment, final EObject o) {
+    boolean _and = false;
+    boolean _isEmpty = environment.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (!_not) {
+      _and = false;
+    } else {
+      _and = (!(o instanceof EClass));
+    }
+    return Boolean.valueOf(_and);
+  }
+  
+  protected Result<EClass> withCacheConditionBlockInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    if (!withCacheConditionBlockCacheCondition(_environment_, o))
+    	try {
+    		checkParamsNotNull(o);
+    		return withCacheConditionBlockDispatcher.invoke(_environment_, _trace_, o);
+    	} catch (Exception _e_withCacheConditionBlock) {
+    		sneakyThrowRuleFailedException(_e_withCacheConditionBlock);
+    		return null;
+    	}
+    return getFromCache("withCacheConditionBlockInternal", _environment_, _trace_,
+    	new XsemanticsProvider<Result<EClass>>(_environment_, _trace_) {
+    		public Result<EClass> doGet() {
+    			try {
+    				checkParamsNotNull(o);
+    				return withCacheConditionBlockDispatcher.invoke(_environment_, _trace_, o);
+    			} catch (Exception _e_withCacheConditionBlock) {
+    				sneakyThrowRuleFailedException(_e_withCacheConditionBlock);
+    				return null;
+    			}
+    		}
+    	}, o);
+  }
+  
+  protected void withCacheConditionBlockThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Boolean withCacheConditionBlockCacheCondition(final RuleEnvironment environment, final EObject o) {
     boolean _and = false;
     boolean _isEmpty = environment.isEmpty();
     boolean _not = (!_isEmpty);
