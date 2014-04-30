@@ -13,27 +13,35 @@ import org.junit.Before
 import static org.junit.Assert.*
 import org.junit.After
 import com.google.inject.Provider
+import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 
 abstract class AbstractFjFirstTypeSystemCachedTest {
 	
 	protected FjFirstTypeSystem cachedTypeSystem
 	
-	protected XsemanticsCacheTraceLoggerListener logger
+	protected XsemanticsCacheTraceLoggerListener traceLogger
+
+	protected XsemanticsCacheResultLoggerListener resultLogger
 
 	@Inject extension TraceUtils
 	
-	@Inject Provider<XsemanticsCacheTraceLoggerListener> loggerProvider
+	@Inject Provider<XsemanticsCacheTraceLoggerListener> traceLoggerProvider
+
+	@Inject Provider<XsemanticsCacheResultLoggerListener> resultLoggerProvider
 
 	@Before
 	def void setup() {
 		cachedTypeSystem = createCachedTypeSystem
-		logger = loggerProvider.get()
-		cachedTypeSystem.cache.addListener(logger)
+		traceLogger = traceLoggerProvider.get()
+		resultLogger = resultLoggerProvider.get()
+		cachedTypeSystem.cache.addListener(traceLogger)
+		cachedTypeSystem.cache.addListener(resultLogger)
 	}
 
 	@After
 	def void teardown() {
-		cachedTypeSystem.cache.removeListener(logger)
+		cachedTypeSystem.cache.removeListener(traceLogger)
+		cachedTypeSystem.cache.removeListener(resultLogger)
 	}
 
 	def abstract FjFirstTypeSystem createCachedTypeSystem();
@@ -55,6 +63,14 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 		assertEqualsStrings(expectedTrace.toString.trim,
 			result.ruleFailedException.failureTraceAsString.trim
 		)
+	}
+
+	def protected assertSubtypingCachedFailedResult(Program p, String className1, String className2, CharSequence expectedHits) {
+		val C1 = p.classes.findFirst[name == className1]
+		val C2 = p.classes.findFirst[name == className2]
+		
+		cachedTypeSystem.subclass(C1, C2)
+		assertEqualsStrings(expectedHits.toString.trim, resultLogger.hits.join("\n"))
 	}
 
 	def protected assertSuperclassesCached(Program p, String className1, CharSequence expectedTrace) {

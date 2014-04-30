@@ -2,6 +2,7 @@ package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import it.xsemantics.example.fj.FJInjectorProvider
 import it.xsemantics.example.fj.fj.ClassType
 import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.util.FjTypeUtils
@@ -18,7 +19,7 @@ import org.junit.runner.RunWith
 
 import static extension org.junit.Assert.*
 
-@InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
+@InjectWith(typeof(FJInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class FjFirstTypeSystemManualCachedTest extends AbstractFjFirstTypeSystemCachedTest {
 	
@@ -260,7 +261,7 @@ CheckClass: [] |- class C extends B {}
 		class D extends A {}
 		'''
 		.parse => [
-			assertCacheStatisticsInTypecheck(logger,"C",
+			assertCacheStatisticsInTypecheck(traceLogger,"C",
 '''
 ''',
 '''
@@ -269,7 +270,7 @@ superclasses(class B extends A {}) = [class A {}]
 '''
 			)
 			
-			assertCacheStatisticsInTypecheck(logger,"C",
+			assertCacheStatisticsInTypecheck(traceLogger,"C",
 '''
 superclasses(class C extends B {}) = [class B extends A {}, class A {}]
 superclasses(class B extends A {}) = [class A {}]
@@ -280,7 +281,7 @@ superclasses(class B extends A {}) = [class A {}]
 '''
 			)
 		]
-		cachedTypeSystem.cache.removeListener(logger)
+		cachedTypeSystem.cache.removeListener(traceLogger)
 	}
 
 }

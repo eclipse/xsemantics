@@ -2,6 +2,7 @@ package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import it.xsemantics.example.fj.FJInjectorProvider
 import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem
 import org.eclipse.xtext.junit4.InjectWith
@@ -10,7 +11,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(FjFirstTypeSystemManualCachedInjectorProvider))
+@InjectWith(typeof(FJInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class FjFirstTypeSystemCachedTest extends FjFirstTypeSystemManualCachedTest {
 	
@@ -66,7 +67,7 @@ CheckClass: [] |- class C extends B {}
 		class D extends A {}
 		'''
 		.parse => [
-			assertCacheStatisticsInTypecheck(logger,"C",
+			assertCacheStatisticsInTypecheck(traceLogger,"C",
 '''
 ''',
 '''
@@ -79,7 +80,7 @@ Methods: [] ||~ class B extends A {} >> []
 			
 			// the second time, superclasses(class B extends A {}) = [class A {}]
 			// is not used at all
-			assertCacheStatisticsInTypecheck(logger,"C",
+			assertCacheStatisticsInTypecheck(traceLogger,"C",
 '''
 superclasses(class C extends B {}) = [class B extends A {}, class A {}]
 Fields: [] ||- class B extends A {} >> []
@@ -93,6 +94,22 @@ Methods: [] ||~ class B extends A {} >> []
 '''
 			)
 		]
-		cachedTypeSystem.cache.removeListener(logger)
+		cachedTypeSystem.cache.removeListener(traceLogger)
+	}
+
+	@Test
+	def void testFailureCached() {
+		'''
+		class A {}
+		class B extends A {}
+		class C extends B {}
+		class D extends A {}
+		'''
+		.parse => [
+			assertSubtypingCachedFailedResult("D", "C", "")
+
+			// also failures are cached because entry point methods are cached
+			assertSubtypingCachedFailedResult("D", "C", "subclass: Result failed")
+		]
 	}
 }
