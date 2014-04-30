@@ -11,6 +11,8 @@ import it.xsemantics.test.fj.first.FjFirstTypeSystem
 import org.junit.Before
 
 import static org.junit.Assert.*
+import org.junit.After
+import com.google.inject.Provider
 
 abstract class AbstractFjFirstTypeSystemCachedTest {
 	
@@ -19,12 +21,19 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 	protected XsemanticsCacheTraceLoggerListener logger
 
 	@Inject extension TraceUtils
+	
+	@Inject Provider<XsemanticsCacheTraceLoggerListener> loggerProvider
 
 	@Before
 	def void setup() {
 		cachedTypeSystem = createCachedTypeSystem
-		logger = new XsemanticsCacheTraceLoggerListener
+		logger = loggerProvider.get()
 		cachedTypeSystem.cache.addListener(logger)
+	}
+
+	@After
+	def void teardown() {
+		cachedTypeSystem.cache.removeListener(logger)
 	}
 
 	def abstract FjFirstTypeSystem createCachedTypeSystem();

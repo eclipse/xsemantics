@@ -187,6 +187,16 @@ class TraceUtilsTests extends XsemanticsBaseTest {
 		val list = ex1.allErrorInformation.removeNonNodeModelSources
 		Assert::assertEquals(0, list.size)
 	}
+
+	@Test
+	def void testLastElementNotTrace() {
+		val t = new RuleApplicationTrace
+		t.addToTrace("first")
+		t.addAsSubtrace(new RuleApplicationTrace)
+		t.addToTrace("last")
+		t.addAsSubtrace(new RuleApplicationTrace)
+		Assert.assertEquals("last", t.lastElementNotTrace)
+	}
 	
 	def void assertMessage(RuleFailedException ex, String message) {
 		Assert::assertEquals(message, ex.getMessage());

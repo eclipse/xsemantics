@@ -72,22 +72,24 @@ CheckClass: [] |- class C extends B {}
 '''
 superclasses(class C extends B {}) = [class B extends A {}, class A {}]
 superclasses(class B extends A {}) = [class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+Fields: [] ||- class B extends A {} >> []
+Methods: [] ||~ class B extends A {} >> []
 '''
 			)
 			
+			// the second time, superclasses(class B extends A {}) = [class A {}]
+			// is not used at all
 			assertCacheStatisticsInTypecheck(logger,"C",
 '''
 superclasses(class C extends B {}) = [class B extends A {}, class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+Fields: [] ||- class B extends A {} >> []
+Methods: [] ||~ class B extends A {} >> []
 ''',
 '''
 superclasses(class C extends B {}) = [class B extends A {}, class A {}]
 superclasses(class B extends A {}) = [class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
-superclasses(class C extends B {}) = [class B extends A {}, class A {}]
+Fields: [] ||- class B extends A {} >> []
+Methods: [] ||~ class B extends A {} >> []
 '''
 			)
 		]

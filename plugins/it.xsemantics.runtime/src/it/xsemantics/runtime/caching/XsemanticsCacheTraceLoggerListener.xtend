@@ -1,6 +1,7 @@
 package it.xsemantics.runtime.caching
 
-import static extension org.eclipse.xtext.util.Strings.*
+import com.google.inject.Inject
+import it.xsemantics.runtime.util.TraceUtils
 
 /**
  * A utility class for recording RuleApplicationTrace strings 
@@ -10,6 +11,8 @@ import static extension org.eclipse.xtext.util.Strings.*
  * @since 1.5
  */
 class XsemanticsCacheTraceLoggerListener extends XsemanticsCacheLoggerListener {
+	
+	@Inject extension TraceUtils
 
 	override cacheHit(XsemanticsCachedData<?> data) {
 		if (data.trace !== null)
@@ -22,6 +25,6 @@ class XsemanticsCacheTraceLoggerListener extends XsemanticsCacheLoggerListener {
 	}
 
 	def dataTraceRepresentation(XsemanticsCachedData<?> data) {
-		data.trace.trace.head.toString.removeLeadingWhitespace
+		data.trace.lastElementNotTrace.toString.removeIndentation
 	}
 }

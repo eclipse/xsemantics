@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
 	XsemanticsRuntimeAllTests.class,
 	XsemanticsGeneratorAllTests.class,
 	XsemanticsGeneratedTypeSystemsAllTests.class,
+	XsemanticsCachedTypeSystemsAllTests.class,
 	XsemanticsExamplesAllTests.class,
 	XsemanticsPerformanceTest.class
 })

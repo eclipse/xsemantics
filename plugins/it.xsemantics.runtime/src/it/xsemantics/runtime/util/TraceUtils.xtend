@@ -25,7 +25,7 @@ class TraceUtils {
 	def failureTraceAsStrings(RuleFailedException e) {
 		val indent = new StringBuffer("")
 		e.failureAsList.map [
-			val listElem = indent.toString + it.message.removeLeadingWhitespace
+			val listElem = indent.toString + it.message.removeIndentation
 			indent.append(" ")
 			listElem
 		]
@@ -48,7 +48,7 @@ class TraceUtils {
 				buildTrace(trace, e, inc + 1)
 			}
 		} else {
-			trace.add(increment(inc) + element.toString.removeLeadingWhitespace)
+			trace.add(increment(inc) + element.toString.removeIndentation)
 		}
 	}
 	
@@ -106,5 +106,20 @@ class TraceUtils {
 		e.failureAsList.findLast [
 			!it.filteredErrorInformation.empty
 		]
+	}
+
+	/**
+	 * @since 1.5
+	 */
+	def removeIndentation(String s) {
+		s.removeLeadingWhitespace
+	}
+
+	/**
+	 * Returns the last element in the trace that is not a RuleApplicationTrace
+	 * @since 1.5
+	 */
+	def lastElementNotTrace(RuleApplicationTrace trace) {
+		trace.trace.findLast[!(it instanceof RuleApplicationTrace)]
 	}
 }

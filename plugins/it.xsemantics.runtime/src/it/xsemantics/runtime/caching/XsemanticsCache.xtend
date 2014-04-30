@@ -8,6 +8,7 @@ import org.eclipse.xtext.util.IResourceScopeCache
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.RuleApplicationTrace
 import java.util.ArrayList
+import it.xsemantics.runtime.util.TraceUtils
 
 /**
  * Caches judgment and auxiliary functions computations.
@@ -18,6 +19,8 @@ import java.util.ArrayList
 class XsemanticsCache {
 	
 	@Inject private IResourceScopeCache cache
+	
+	@Inject extension TraceUtils
 	
 	public static var CACHED_STRING = "cached:"
 	
@@ -39,7 +42,7 @@ class XsemanticsCache {
 			if (trace !== null && trace !== cached.trace) {
 				trace.addToTrace(CACHED_STRING)
 				if (cached.trace !== null) {
-					trace.addObjectAsSubtrace(cached.trace.trace.findLast[!(it instanceof RuleApplicationTrace)])
+					trace.addObjectAsSubtrace(cached.trace.lastElementNotTrace)
 				}
 			}
 		} else {

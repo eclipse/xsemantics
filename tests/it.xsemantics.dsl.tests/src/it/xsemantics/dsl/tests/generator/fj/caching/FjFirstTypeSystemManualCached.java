@@ -14,6 +14,13 @@ import it.xsemantics.test.fj.first.FjFirstTypeSystem;
 
 import com.google.inject.Inject;
 
+/**
+ * This is a manual implementation of caching, used as a reference implementation
+ * for code generation, and also for possible future experiments.  This DOES NOT implement
+ * caching for entry point methods, thus failures are not cached.
+ * 
+ * @author Lorenzo Bettini
+ */
 public class FjFirstTypeSystemManualCached extends FjFirstTypeSystem {
 
 	@Inject
