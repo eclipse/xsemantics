@@ -16,7 +16,7 @@ import static extension org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
-class XsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest {
+class OldXsemanticsJvmModelInferrerTest extends XsemanticsGeneratorBaseTest {
 	
 	@Inject
 	protected JvmModelGenerator generator

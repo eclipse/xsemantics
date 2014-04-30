@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
+import it.xsemantics.dsl.xsemantics.Cachable
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -155,6 +156,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			for (elem : ts.auxiliaryDescriptions) {
 				members += elem.compileInternalMethod
 				members += elem.compileThrowExceptionMethod
+				val cacheConditionMethod = elem.compileCacheConditionMethod
+				if (cacheConditionMethod !== null)
+					members += cacheConditionMethod
 			}
 			
 			for (elem : ts.judgmentDescriptions) {
@@ -576,7 +580,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		]
 	}
 
-	def compileCacheConditionMethod(JudgmentDescription cachable) {
+	def compileCacheConditionMethod(Cachable cachable) {
 		val condition = cachable.cacheCondition
 		
 		if (condition === null)
@@ -589,11 +593,15 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			parameters += cachable.toParameter("environment", 
-				cachable.newTypeRef(RuleEnvironment)
-			)
-			
-			parameters += cachable.inputParameters
+			if (cachable instanceof JudgmentDescription) {
+				parameters += cachable.toParameter("environment", 
+					cachable.newTypeRef(RuleEnvironment)
+				)
+				
+				parameters += cachable.inputParameters
+			} else if (cachable instanceof AuxiliaryDescription) {
+				parameters += cachable.inputParameters
+			}
 			
 			body = condition
 		]
@@ -731,7 +739,22 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			val inputArgs = aux.inputArgs
    			
    			if (aux.cachedClause !== null) {
+   				val hasCacheCondition = aux.cacheCondition !== null
    				body = '''
+   				«IF hasCacheCondition»
+if (!«aux.cacheConditionMethod»(«inputArgs»))
+	try {
+		checkParamsNotNull(«inputArgs»);
+		return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
+	} catch («Exception» «exceptionName») {
+		«IF isBoolean»
+			return false;
+		«ELSE»
+			sneakyThrowRuleFailedException(«exceptionName»);
+			return «IF aux.type === null»false«ELSE»null«ENDIF»;
+		«ENDIF»
+	}
+   				«ENDIF»
 				return getFromCache("«methodName»", («RuleEnvironment»)null, «ruleApplicationTraceName»,
 					new «XsemanticsProvider»<«aux.resultType»>(null, «ruleApplicationTraceName») {
 						public «aux.resultType» doGet() {

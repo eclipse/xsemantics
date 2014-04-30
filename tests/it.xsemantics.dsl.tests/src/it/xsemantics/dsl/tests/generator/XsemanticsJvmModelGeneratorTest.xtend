@@ -3863,6 +3863,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean auxnocacheentryPointsInternal(final RuleApplicationTrace _trace_, final EObject o) {
+    if (!auxnocacheentryPointsCacheCondition(o))
+    	try {
+    		checkParamsNotNull(o);
+    		return auxnocacheentryPointsDispatcher.invoke(_trace_, o);
+    	} catch (Exception _e_auxnocacheentryPoints) {
+    		return false;
+    	}
     return getFromCache("auxnocacheentryPointsInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<Boolean>(null, _trace_) {
     		public Boolean doGet() {
@@ -3878,6 +3885,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected void auxnocacheentryPointsThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Boolean auxnocacheentryPointsCacheCondition(final EObject o) {
+    return Boolean.valueOf((!(o instanceof EClass)));
   }
   
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
