@@ -39,7 +39,7 @@ AuxiliaryDescription:
 	)?
 	')'
 	(':' type=JvmTypeReference)?
-	(cachedClause=CachedClause)?
+	(cachedClause=CachedClauseForAuxiliary)?
 	(error=ErrorSpecification)?
 ;
 
@@ -50,13 +50,19 @@ JudgmentDescription:
 	judgmentParameters+=JudgmentParameter
 	(relationSymbols+=RelationSymbol
 	judgmentParameters+=JudgmentParameter)*
-	(cachedClause=CachedClause)?
+	(cachedClause=CachedClauseForJudgment)?
 	(error=ErrorSpecification)?
 ;
 
-CachedClause:
+CachedClauseForJudgment returns CachedClause:
 	{CachedClause} 'cached' ('{'
 		('entryPoints' '=' entryPointsOption=EntryPointsOption)?
+		('condition' '=' condition=XExpression)?
+	'}')?
+;
+
+CachedClauseForAuxiliary returns CachedClause:
+	{CachedClause} 'cached' ('{'
 		('condition' '=' condition=XExpression)?
 	'}')?
 ;

@@ -2608,7 +2608,7 @@ class XsemanticsTestFiles {
 	
 	auxiliary {
 		eclasses(EObject o) : List<EClass> cached
-		auxnocacheentryPoints(EObject o) : Boolean cached { entryPoints=NONE }
+		auxnocacheentryPoints(EObject o) : Boolean cached { condition=(!(o instanceof EClass)) }
 	}
 	
 	judgments {
