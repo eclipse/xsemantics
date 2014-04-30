@@ -193,16 +193,8 @@ class XsemanticsGeneratorExtensions {
 			""
 	}
 
-	def throwExceptionMethod(JudgmentDescription judgmentDescription) {
-		'''«judgmentDescription.name.toFirstLower»ThrowException'''
-	}
-
-	def throwExceptionMethod(AuxiliaryDescription aux) {
-		'''«aux.name.toFirstLower»ThrowException'''
-	}
-
-	def throwExceptionMethod(Rule rule) {
-		'''«rule.name.toFirstLower»ThrowException'''
+	def throwExceptionMethod(UniqueByName e) {
+		'''«e.name.toFirstLower»ThrowException'''
 	}
 
 	def cacheConditionMethod(Cachable c) {
