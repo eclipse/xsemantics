@@ -35,7 +35,8 @@ class Injected extends UniqueByName {
 	String name
 }
 
-class AuxiliaryDescription extends Cachable {
+class AuxiliaryDescription extends Description {
+	boolean override
 	String name
 	contains JvmFormalParameter[] parameters
 	contains JvmTypeReference ^type
@@ -43,7 +44,7 @@ class AuxiliaryDescription extends Cachable {
 	contains XExpression error
 }
 
-class JudgmentDescription extends Overrider, Cachable {
+class JudgmentDescription extends Description {
 	boolean override
 	String name
 	String judgmentSymbol
@@ -183,6 +184,10 @@ class CachedClause {
 
 interface Cachable extends UniqueByName {
 	op CachedClause getCachedClause()
+}
+
+interface Description extends Overrider, Cachable {
+	
 }
 
 enum EntryPointsOption {

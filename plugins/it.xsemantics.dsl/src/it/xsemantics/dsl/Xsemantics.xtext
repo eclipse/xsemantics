@@ -32,6 +32,7 @@ Injected:
 ;
 
 AuxiliaryDescription:
+	(override?='override')?
 	name=ID 
 	'('
 	(parameters+=FullJvmFormalParameter
