@@ -12,7 +12,7 @@ import java.util.List
 system it.xsemantics.test.fj.caching.FjFirstCachedTypeSystem extends FjFirstTypeSystem
 
 auxiliary {
-	superclasses(Class cl) : List<Class> cached
+	override superclasses(Class cl) : List<Class> cached
 }
 
 judgments {

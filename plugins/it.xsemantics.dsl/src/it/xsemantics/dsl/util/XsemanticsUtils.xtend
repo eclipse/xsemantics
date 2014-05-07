@@ -276,6 +276,14 @@ class XsemanticsUtils {
 		]
 	}
 
+	def allAuxiliaryDescriptions(XsemanticsSystem system) {
+		cache.get("allAuxiliaryDescriptions" -> system) [|
+			system.auxiliaryDescriptions
+				+ system.allSuperSystemDefinitions.
+					map[auxiliaryDescriptions].flatten
+		]
+	}
+
 	def allSuperSystemDefinitions(XsemanticsSystem system) {
 		cache.get("allSuperSystemDefinitions" -> system) [|
 			system.

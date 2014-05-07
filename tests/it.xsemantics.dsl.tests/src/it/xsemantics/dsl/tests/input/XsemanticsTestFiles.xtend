@@ -2156,11 +2156,27 @@ class XsemanticsTestFiles {
 		type3 |~ EClass c 
 	}
 	'''
+	
+	def testForAuxiliaryDescriptionEquals() '''
+	«testFileWithImports»
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		aux0(EClass c) : EObject
+		aux1(EClass c) : EObject
+		aux2(EClass c, EObject o)
+		aux3(EClass c)
+	}
+	'''
 
-	def testInvalidJudgmentOverrideWithoutSystemExtends() '''
+	def testInvalidOverrideWithoutSystemExtends() '''
 	system it.xsemantics.test.TypeSystem
 	
 	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		override isValue(EObject c)
+	}
 	
 	judgments {
 		override type |- EObject c : output EClass

@@ -291,6 +291,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		}
 		
 		val superSystemDefinition = system.superSystemDefinition
+
 		val allSuperJudgments = superSystemDefinition?.allJudgments
 		system.judgmentDescriptions.
 			checkOverrides(allSuperJudgments,
@@ -300,6 +301,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				typeSystem.equals(j1, j2)
 			],
 			"judgment")
+		
+		val allSuperAuxiliaryDescriptions = superSystemDefinition?.allAuxiliaryDescriptions
+		system.auxiliaryDescriptions.
+			checkOverrides(allSuperAuxiliaryDescriptions,
+			[a1, a2 |
+				typeSystem.equals(a1, a2)
+			],
+			"auxiliary description")
 
 		val allSuperCheckRules = superSystemDefinition?.allCheckRules
 		system.checkrules.
@@ -461,8 +470,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		
 		val functionsForAuxiliaryDescrition = aux.functionsForAuxiliaryDescrition();
 		if (isEnableWarnings
-				&& functionsForAuxiliaryDescrition
-						.isEmpty()) {
+				&& functionsForAuxiliaryDescrition.empty && !aux.override) {
 			warning("No function defined for the auxiliary description",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION
 							.getEIDAttribute(),

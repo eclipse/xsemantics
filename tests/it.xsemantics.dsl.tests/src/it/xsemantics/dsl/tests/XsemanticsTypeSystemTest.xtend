@@ -279,6 +279,15 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		assertFalse(typeSystem.equals(judgments.get(0), judgments.get(2)))
 		assertFalse(typeSystem.equals(judgments.get(0), judgments.get(3)))
 	}
+
+	@Test
+	def testAuxiliaryDescriptionsEquals() {
+		val aux =	testFiles.testForAuxiliaryDescriptionEquals.
+				parseAndAssertNoError.auxiliaryDescriptions
+		assertTrue(typeSystem.equals(aux.get(0), aux.get(1)))
+		assertFalse(typeSystem.equals(aux.get(0), aux.get(2)))
+		assertFalse(typeSystem.equals(aux.get(0), aux.get(3)))
+	}
 	
 	@Test
 	def void testPredicateJudgments() {

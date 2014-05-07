@@ -159,11 +159,16 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 
 	@Test
 	def void testInvalidJudgmentOverrideWithoutSystemExtends() {
-		val ts = testFiles.testInvalidJudgmentOverrideWithoutSystemExtends.parse
+		val ts = testFiles.testInvalidOverrideWithoutSystemExtends.parse
 		ts.assertError(
-			XsemanticsPackage::eINSTANCE.judgmentDescription,
+			XsemanticsPackage.eINSTANCE.judgmentDescription,
 			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
 			"Cannot override judgment without system 'extends'"
+		)
+		ts.assertError(
+			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
+			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			"Cannot override auxiliary description without system 'extends'"
 		)
 	}
 

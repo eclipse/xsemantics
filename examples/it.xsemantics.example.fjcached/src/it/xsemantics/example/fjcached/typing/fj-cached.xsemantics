@@ -13,9 +13,9 @@ import it.xsemantics.example.fj.typing.FjTypeSystem
 system it.xsemantics.example.fjcached.typing.FjCachedTypeSystem extends FjTypeSystem
 
 auxiliary {
-	superclasses(Class cl) : List<Class> cached
-	fields(Class cl) : List<Field> cached
-	methods(Class cl) : List<Method> cached
+	override superclasses(Class cl) : List<Class> cached
+	override fields(Class cl) : List<Field> cached
+	override methods(Class cl) : List<Method> cached
 }
 
 judgments {

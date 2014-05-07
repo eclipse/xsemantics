@@ -2,9 +2,11 @@ package it.xsemantics.dsl.typing
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
+import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
-import it.xsemantics.dsl.xsemantics.JudgmentParameter
 import it.xsemantics.dsl.xsemantics.Rule
+import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -15,14 +17,12 @@ import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XInstanceOfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.XInstanceOfExpression
-import it.xsemantics.dsl.xsemantics.RuleInvocation
-import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 
 class XsemanticsTypeSystem {
 	
@@ -72,7 +72,7 @@ class XsemanticsTypeSystem {
 		if (j1.judgmentParameters.size != j2.judgmentParameters.size)
 			return false
 		val judgmentParametersIt = j1.judgmentParameters.iterator();
-		for (JudgmentParameter jParam2 : j2.judgmentParameters) {
+		for (jParam2 : j2.judgmentParameters) {
 			val jParam1 = judgmentParametersIt.next()
 			if (jParam1.eClass != jParam2.eClass ||
 					!equals(getType(jParam1), getType(jParam2), jParam1))
@@ -80,11 +80,28 @@ class XsemanticsTypeSystem {
 		}
 		return true;
 	}
+
+	def equals(AuxiliaryDescription aux1, AuxiliaryDescription aux2) {
+		if (aux1.parameters.size != aux2.parameters.size)
+			return false
+		if (!equals(aux1.type, aux2.type, aux1))
+			return false
+		val paramIt = aux1.parameters.iterator();
+		for (param2 : aux2.parameters) {
+			val param1 = paramIt.next()
+			if (param1.eClass != param2.eClass ||
+					!equals(getType(param1), getType(param2), param1))
+				return false;
+		}
+		return true;
+	}
 	
 	def equals(JvmTypeReference t1, JvmTypeReference t2, EObject context) {
 		//isConformant(t1, t2, context) && isConformant(t2, t1, context);
-		if (t1 == null)
-			return t2 == null
+		if (t1 === null)
+			return t2 === null
+		if (t2 === null)
+			return t1 === null
 		return t1.type.equals(t2.type)
 	}
 	
