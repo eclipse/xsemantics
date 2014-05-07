@@ -102,14 +102,14 @@ class FjSepExpectedTraces extends FjExpectedTraces {
  CheckNew: [] |- new B()
   SubtypeSequence: [] |- new B() ~> [] << []
  SubtypeSequence: [] |- new B().m(new B(), new B(), 10) ~> [new B(), new B(), 10] << [B b, A a, int i]
-  ExpressionAssignableToType: [] |- new B() <| B
+  ExpressionAssignableToType: [] |- new B() |> B
    TNew: [] |- new B() : B
    ClassSubtyping: [] |- B <: B
-  ExpressionAssignableToType: [] |- new B() <| A
+  ExpressionAssignableToType: [] |- new B() |> A
    TNew: [] |- new B() : B
    ClassSubtyping: [] |- B <: A
     superclasses(class B extends A { int m(B b, A a, int ...) = [class A { }]
-  ExpressionAssignableToType: [] |- 10 <| int
+  ExpressionAssignableToType: [] |- 10 |> int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
  CheckNew: [] |- new B()
@@ -121,13 +121,13 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 	override newCheckOk()
 '''CheckNew: [] |- new C(10, 'foo', new B(20, 'bar'))
  SubtypeSequence: [] |- new C(10, 'foo', new B(20, 'bar')) ~> [10, 'foo', new B(20, 'bar')] << [int i;, String s;, A c;]
-  ExpressionAssignableToType: [] |- 10 <| int
+  ExpressionAssignableToType: [] |- 10 |> int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
-  ExpressionAssignableToType: [] |- 'foo' <| String
+  ExpressionAssignableToType: [] |- 'foo' |> String
    TStringConstant: [] |- 'foo' : String
    BasicSubtyping: [] |- String <: String
-  ExpressionAssignableToType: [] |- new B(20, 'bar') <| A
+  ExpressionAssignableToType: [] |- new B(20, 'bar') |> A
    TNew: [] |- new B(20, 'bar') : B
    ClassSubtyping: [] |- B <: A
     superclasses(class B extends A { String s; }) = [class A { int i; }]
@@ -135,10 +135,10 @@ class FjSepExpectedTraces extends FjExpectedTraces {
  CheckConstant: [] |- 'foo'
  CheckNew: [] |- new B(20, 'bar')
   SubtypeSequence: [] |- new B(20, 'bar') ~> [20, 'bar'] << [int i;, String s;]
-   ExpressionAssignableToType: [] |- 20 <| int
+   ExpressionAssignableToType: [] |- 20 |> int
     TIntConstant: [] |- 20 : int
     BasicSubtyping: [] |- int <: int
-   ExpressionAssignableToType: [] |- 'bar' <| String
+   ExpressionAssignableToType: [] |- 'bar' |> String
     TStringConstant: [] |- 'bar' : String
     BasicSubtyping: [] |- String <: String
   CheckConstant: [] |- 20
@@ -147,16 +147,16 @@ class FjSepExpectedTraces extends FjExpectedTraces {
 	override newCheckOk2()
 '''CheckNew: [] |- new C(10, true, 'foo', new B(20, false, ...
  SubtypeSequence: [] |- new C(10, true, 'foo', new B(20, false, ... ~> [10, true, 'foo', new B(20, false, 'bar')] << [int i;, boolean b;, String s;, A c;]
-  ExpressionAssignableToType: [] |- 10 <| int
+  ExpressionAssignableToType: [] |- 10 |> int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
-  ExpressionAssignableToType: [] |- true <| boolean
+  ExpressionAssignableToType: [] |- true |> boolean
    TBoolConstant: [] |- true : boolean
    BasicSubtyping: [] |- boolean <: boolean
-  ExpressionAssignableToType: [] |- 'foo' <| String
+  ExpressionAssignableToType: [] |- 'foo' |> String
    TStringConstant: [] |- 'foo' : String
    BasicSubtyping: [] |- String <: String
-  ExpressionAssignableToType: [] |- new B(20, false, 'bar') <| A
+  ExpressionAssignableToType: [] |- new B(20, false, 'bar') |> A
    TNew: [] |- new B(20, false, 'bar') : B
    ClassSubtyping: [] |- B <: A
     superclasses(class B extends A { String s; }) = [class A { int i; boolean b; }]
@@ -165,13 +165,13 @@ class FjSepExpectedTraces extends FjExpectedTraces {
  CheckConstant: [] |- 'foo'
  CheckNew: [] |- new B(20, false, 'bar')
   SubtypeSequence: [] |- new B(20, false, 'bar') ~> [20, false, 'bar'] << [int i;, boolean b;, String s;]
-   ExpressionAssignableToType: [] |- 20 <| int
+   ExpressionAssignableToType: [] |- 20 |> int
     TIntConstant: [] |- 20 : int
     BasicSubtyping: [] |- int <: int
-   ExpressionAssignableToType: [] |- false <| boolean
+   ExpressionAssignableToType: [] |- false |> boolean
     TBoolConstant: [] |- false : boolean
     BasicSubtyping: [] |- boolean <: boolean
-   ExpressionAssignableToType: [] |- 'bar' <| String
+   ExpressionAssignableToType: [] |- 'bar' |> String
     TStringConstant: [] |- 'bar' : String
     BasicSubtyping: [] |- String <: String
   CheckConstant: [] |- 20

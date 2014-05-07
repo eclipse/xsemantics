@@ -170,7 +170,7 @@ TSelection: [] |- new C(10).i : int
   fields(class C extends B { }) = [int i;]
    superclasses(class C extends B { }) = [class B extends A { int m() { return thi..., class A { int i; }]
   SubtypeSequence: [] |- new C(10) ~> [10] << [int i;]
-   ExpressionAssignableToType: [] |- 10 <| int
+   ExpressionAssignableToType: [] |- 10 |> int
     TIntConstant: [] |- 10 : int
     BasicSubtyping: [] |- int <: int
 SUBTYPE AFTER SUBSTITUTION
@@ -443,12 +443,12 @@ RCast: [] |- (A) new A(10).createB() ~> (A) new B(100)
 RCast: [] |- (A) new B(100) ~> new B(100)
  isValue(new B(100)) = true
   isValue(100) = true
- ExpressionAssignableToType: [] |- new B(100) <| A
+ ExpressionAssignableToType: [] |- new B(100) |> A
   TNew: [] |- new B(100) : B
    fields(class B extends A { }) = [int i;]
     superclasses(class B extends A { }) = [class A { int i; B createB() { return ne...]
    SubtypeSequence: [] |- new B(100) ~> [100] << [int i;]
-    ExpressionAssignableToType: [] |- 100 <| int
+    ExpressionAssignableToType: [] |- 100 |> int
      TIntConstant: [] |- 100 : int
      BasicSubtyping: [] |- int <: int
   ClassSubtyping: [] |- B <: A
@@ -473,7 +473,7 @@ TCast: [] |- (A) new B(10) : A
   fields(class B extends A { }) = [int i;]
    superclasses(class B extends A { }) = [class A { int i; }]
   SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
-   ExpressionAssignableToType: [] |- 10 <| int
+   ExpressionAssignableToType: [] |- 10 |> int
     TIntConstant: [] |- 10 : int
     BasicSubtyping: [] |- int <: int
  ClassSubtyping: [] |- B <: A
@@ -482,12 +482,12 @@ REDUCTION
 RCast: [] |- (A) new B(10) ~> new B(10)
  isValue(new B(10)) = true
   isValue(10) = true
- ExpressionAssignableToType: [] |- new B(10) <| A
+ ExpressionAssignableToType: [] |- new B(10) |> A
   TNew: [] |- new B(10) : B
    fields(class B extends A { }) = [int i;]
     superclasses(class B extends A { }) = [class A { int i; }]
    SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
-    ExpressionAssignableToType: [] |- 10 <| int
+    ExpressionAssignableToType: [] |- 10 |> int
      TIntConstant: [] |- 10 : int
      BasicSubtyping: [] |- int <: int
   ClassSubtyping: [] |- B <: A
@@ -497,7 +497,7 @@ TNew: [] |- new B(10) : B
  fields(class B extends A { }) = [int i;]
   superclasses(class B extends A { }) = [class A { int i; }]
  SubtypeSequence: [] |- new B(10) ~> [10] << [int i;]
-  ExpressionAssignableToType: [] |- 10 <| int
+  ExpressionAssignableToType: [] |- 10 |> int
    TIntConstant: [] |- 10 : int
    BasicSubtyping: [] |- int <: int
 SUBTYPE AFTER REDUCTION
@@ -600,7 +600,7 @@ ClassSubtyping: [] |- B <: A
     superclasses(class A { Object m() { return this.n(new...) = []
    SubtypeSequence: [] |- new A() ~> [] << []
   SubtypeSequence: [] |- new A().n(new B()) ~> [new B()] << [A o]
-   ExpressionAssignableToType: [] |- new B() <| A
+   ExpressionAssignableToType: [] |- new B() |> A
     TNew: [] |- new B() : B
      fields(class B extends A {}) = []
       superclasses(class B extends A {}) = [class A { Object m() { return this.n(new...]

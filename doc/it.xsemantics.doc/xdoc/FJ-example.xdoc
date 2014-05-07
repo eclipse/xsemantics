@@ -164,7 +164,7 @@ judgments {
 		source expression
 	subtype |- Type left <: Type right
 		error stringRep(left) + " is not a subtype of " + stringRep(right)
-	assignable |- Expression expression <| Type right
+	assignable |- Expression expression |> Type right
 		error stringRep(expression) + " is not assignable for " + stringRep(right)
 		source expression
 	equalstype |- Type left ~~ Type right
@@ -465,7 +465,7 @@ of the expression and then checking the subtyping:
 
 code[Xsemantics][
 rule ExpressionAssignableToType
-	G |- Expression expression <| Type right
+	G |- Expression expression |> Type right
 from {
 	var Type expressionType
 	G |- expression : expressionType
@@ -505,7 +505,7 @@ from {
 	
 	val typedElementsIterator = typedElements.iterator
 	for (exp : expressions) {
-		G |- exp <| typedElementsIterator.next.type
+		G |- exp |> typedElementsIterator.next.type
 	}
 }
 ]
@@ -562,7 +562,7 @@ from {
 	val typeForThis = FjTypeUtils::createClassType(
 		EcoreUtil2::getContainerOfType(method, typeof(Class))
 	)
-	'this' <- typeForThis |- method.body.expression <| method.type
+	'this' <- typeForThis |- method.body.expression |> method.type
 }
 ]
 

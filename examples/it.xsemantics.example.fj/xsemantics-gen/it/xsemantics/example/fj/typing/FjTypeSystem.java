@@ -153,7 +153,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "|-", "<:");
     assignableDispatcher = buildPolymorphicDispatcher1(
-    	"assignableImpl", 4, "|-", "<|");
+    	"assignableImpl", 4, "|-", "|>");
     equalstypeDispatcher = buildPolymorphicDispatcher1(
     	"equalstypeImpl", 4, "|-", "~~");
     subtypesequenceDispatcher = buildPolymorphicDispatcher1(
@@ -467,7 +467,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> checkMethodBodyInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
     final ClassType typeForThis = this.fjTypeUtils.createClassType(_containerOfType);
-    /* 'this' <- typeForThis |- method.body.expression <| method.type */
+    /* 'this' <- typeForThis |- method.body.expression |> method.type */
     MethodBody _body = method.getBody();
     Expression _expression = _body.getExpression();
     Type _type = method.getType();
@@ -1532,11 +1532,11 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	Result<Boolean> _result_ = applyRuleExpressionAssignableToType(G, _subtrace_, expression, right);
-    	addToTrace(_trace_, ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " <| " + stringRep(right));
+    	addToTrace(_trace_, ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right));
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleExpressionAssignableToType) {
-    	assignableThrowException(ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " <| " + stringRep(right),
+    	assignableThrowException(ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right),
     		EXPRESSIONASSIGNABLETOTYPE,
     		e_applyRuleExpressionAssignableToType, expression, right, new ErrorInformation[] {new ErrorInformation(expression), new ErrorInformation(right)});
     	return null;
@@ -1675,7 +1675,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
     final Iterator<TypedElement> typedElementsIterator = typedElements.iterator();
     for (final Expression exp : expressions) {
-      /* G |- exp <| typedElementsIterator.next.type */
+      /* G |- exp |> typedElementsIterator.next.type */
       TypedElement _next = typedElementsIterator.next();
       Type _type = _next.getType();
       assignableInternal(G, _trace_, exp, _type);
@@ -1865,7 +1865,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     Expression _expression = cast.getExpression();
     Boolean _isValue = this.isValueInternal(_trace_, _expression);
     if ((_isValue).booleanValue()) {
-      /* G |- cast.expression <| cast.type */
+      /* G |- cast.expression |> cast.type */
       Expression _expression_1 = cast.getExpression();
       ClassType _type = cast.getType();
       assignableInternal(G, _trace_, _expression_1, _type);
