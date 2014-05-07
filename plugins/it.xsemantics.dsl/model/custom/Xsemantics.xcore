@@ -36,22 +36,16 @@ class Injected extends UniqueByName {
 }
 
 class AuxiliaryDescription extends Description {
-	boolean override
 	String name
 	contains JvmFormalParameter[] parameters
 	contains JvmTypeReference ^type
-	contains CachedClause cachedClause
-	contains XExpression error
 }
 
 class JudgmentDescription extends Description {
-	boolean override
 	String name
 	String judgmentSymbol
 	contains JudgmentParameter[] judgmentParameters
 	String[] relationSymbols
-	contains CachedClause cachedClause
-	contains XExpression error
 }
 
 class JudgmentParameter {
@@ -65,7 +59,6 @@ class AuxiliaryFunction extends Named {
 }
 
 class Rule extends Overrider , ReferToJudgment {
-	boolean override
 	String name
 	contains RuleConclusion conclusion
 	op String getJudgmentSymbol() {
@@ -86,7 +79,6 @@ class RuleWithPremises extends Rule {
 }
 
 class CheckRule extends Overrider {
-	boolean override
 	String name
 	contains RuleParameter element
 	contains XExpression premises
@@ -163,8 +155,8 @@ class ErrorSpecification extends XExpression {
 interface UniqueByName extends Named {
 }
 
-interface Overrider extends UniqueByName {
-	op boolean isOverride()
+class Overrider extends UniqueByName {
+	boolean override
 }
 
 class ReferToJudgment {
@@ -182,12 +174,12 @@ class CachedClause {
 	contains XExpression condition
 }
 
-interface Cachable extends UniqueByName {
-	op CachedClause getCachedClause()
+class Cachable extends UniqueByName {
+	contains CachedClause cachedClause
 }
 
-interface Description extends Overrider, Cachable {
-	
+class Description extends Overrider, Cachable {
+	contains XExpression error
 }
 
 enum EntryPointsOption {
