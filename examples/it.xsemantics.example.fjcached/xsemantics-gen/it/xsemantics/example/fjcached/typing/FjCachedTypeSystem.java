@@ -60,10 +60,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	"methodsImpl", 2);
   }
   
+  @Override
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return superclasses(null, cl);
   }
   
+  @Override
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	return superclassesInternal(_trace_, cl);
@@ -72,10 +74,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   public List<Field> fields(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return fields(null, cl);
   }
   
+  @Override
   public List<Field> fields(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	return fieldsInternal(_trace_, cl);
@@ -84,10 +88,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   public List<Method> methods(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return methods(null, cl);
   }
   
+  @Override
   public List<Method> methods(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	return methodsInternal(_trace_, cl);
@@ -208,6 +214,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     }
   }
   
+  @Override
   protected List<it.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("superclassesInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<List<it.xsemantics.example.fj.fj.Class>>(null, _trace_) {
@@ -227,6 +234,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
+  @Override
   protected List<Field> fieldsInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("fieldsInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<List<Field>>(null, _trace_) {
@@ -246,6 +254,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
+  @Override
   protected List<Method> methodsInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("methodsInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<List<Method>>(null, _trace_) {
