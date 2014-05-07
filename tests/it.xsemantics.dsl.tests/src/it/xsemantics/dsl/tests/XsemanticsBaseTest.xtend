@@ -70,7 +70,7 @@ abstract class XsemanticsBaseTest {
 		ts.assertNoErrors
 		ts.parseWithBaseSystem(s)
 	}
-	
+
 	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
 		val base = parse(baseSystem)
 		base.assertNoErrors

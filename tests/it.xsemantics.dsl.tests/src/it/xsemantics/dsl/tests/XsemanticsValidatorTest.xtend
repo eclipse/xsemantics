@@ -191,6 +191,29 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 	}
 
 	@Test
+	def void testWrongAuxiliaryDescriptionOverride() {
+		val ts = testFiles.testAuxiliaryDescriptions.
+			parseWithBaseSystem(
+				testFiles.testWrongAuxiliaryDescriptionOverride
+			)
+		ts.assertError(
+			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
+			IssueCodes.MUST_OVERRIDE,
+			"auxiliary description 'isValue' must override auxiliary description, in system: it.xsemantics.test.TypeSystem"
+		)
+		ts.assertError(
+			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
+			IssueCodes.NOTHING_TO_OVERRIDE,
+			"No auxiliary description to override: voidFun"
+		)
+		ts.assertError(
+			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
+			IssueCodes.NOTHING_TO_OVERRIDE,
+			"No auxiliary description to override: objectClass"
+		)
+	}
+
+	@Test
 	def testNoRuleForJudgmentDescriptionOverridden() {
 		systemExtendsSystemWithJudgmentOverride.
 			assertNoIssues

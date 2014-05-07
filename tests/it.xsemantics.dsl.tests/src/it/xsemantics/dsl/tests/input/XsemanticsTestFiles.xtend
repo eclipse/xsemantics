@@ -2101,6 +2101,19 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testWrongAuxiliaryDescriptionOverride() '''
+	system it.xsemantics.test.ExtendedTypeSystem
+		extends it.xsemantics.test.TypeSystem
+	
+	import org.eclipse.emf.ecore.*
+	
+	auxiliary {
+		isValue(EObject o, EClass c) : Boolean // must override
+		override voidFun(EClass o) // must override with the same parameter type
+		override objectClass(EObject o) : EObject // must override with the same return type
+	}
+	'''
+
 	def testInvalidJudgmentWithTheSameNameOfBaseSystem() '''
 	system it.xsemantics.test.ExtendedTypeSystem2 
 		extends it.xsemantics.test.ExtendedTypeSystem
