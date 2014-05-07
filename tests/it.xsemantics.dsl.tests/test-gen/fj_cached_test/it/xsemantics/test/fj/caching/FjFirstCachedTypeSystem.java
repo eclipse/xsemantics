@@ -47,10 +47,12 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
     	"superclassesImpl", 2);
   }
   
+  @Override
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return superclasses(null, cl);
   }
   
+  @Override
   public List<it.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	return superclassesInternal(_trace_, cl);
@@ -175,6 +177,7 @@ public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
     	}, cl);
   }
   
+  @Override
   protected List<it.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("superclassesInternal", (RuleEnvironment)null, _trace_,
     	new XsemanticsProvider<List<it.xsemantics.example.fj.fj.Class>>(null, _trace_) {

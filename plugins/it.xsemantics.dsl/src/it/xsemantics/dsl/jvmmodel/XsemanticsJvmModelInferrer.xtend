@@ -319,7 +319,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
-   			if (judgmentDescription.^override)
+   			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
    			
    			parameters += judgmentDescription.inputParameters
@@ -332,7 +332,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.entryPointMethodName.toString,
    			judgmentDescription.resultType
    		) [
-   			if (judgmentDescription.^override)
+   			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
 
    			parameters += judgmentDescription.environmentParam
@@ -347,7 +347,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			methodName,
    			judgmentDescription.resultType
    		) [
-			if (judgmentDescription.^override)
+			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
    			
    			parameters += judgmentDescription.environmentParam
@@ -401,7 +401,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.succeededMethodName.toString,
    			judgmentDescription.booleanType
    		) [
-   			if (judgmentDescription.^override)
+   			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
    			
    			parameters += judgmentDescription.inputParameters
@@ -414,7 +414,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.succeededMethodName.toString,
    			judgmentDescription.booleanType
    		) [
-   			if (judgmentDescription.^override)
+   			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
 
    			parameters += judgmentDescription.environmentParam
@@ -428,7 +428,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.succeededMethodName.toString,
    			judgmentDescription.booleanType
    		) [
-			if (judgmentDescription.^override)
+			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
    			
    			parameters += judgmentDescription.environmentParam
@@ -456,6 +456,9 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		) [
    			exceptions += aux.ruleFailedExceptionType
    			
+   			if (aux.override)
+   				annotations += aux.toAnnotation(typeof(Override))
+   			
    			parameters += aux.inputParameters
    			
    			body = '''return «aux.entryPointMethodName»(null, «aux.inputArgs»);'''
@@ -468,6 +471,9 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		) [
    			exceptions += aux.ruleFailedExceptionType
    			
+   			if (aux.override)
+   				annotations += aux.toAnnotation(typeof(Override))
+
    			parameters += aux.ruleApplicationTraceParam
    			parameters += aux.inputParameters
    			
@@ -534,7 +540,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			if (judgmentDescription.^override)
+			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
 
 			exceptions += judgmentDescription.ruleFailedExceptionType
@@ -669,7 +675,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			if (judgmentDescription.^override)
+			if (judgmentDescription.override)
 				annotations += judgmentDescription.toAnnotation(typeof(Override))
 			
 			parameters += judgmentDescription.environmentParam
@@ -725,6 +731,9 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
+			
+			if (aux.override)
+   				annotations += aux.toAnnotation(typeof(Override))
 			
    			parameters += aux.ruleApplicationTraceParam
    			for (p : aux.parameters) {
@@ -809,7 +818,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 			
 			exceptions += rule.ruleFailedExceptionType
@@ -897,7 +906,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 			
 			exceptions += rule.ruleFailedExceptionType
@@ -987,7 +996,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			rule.resultType
 		) 
 		[
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 			
    			parameters += rule.element.parameter.
@@ -1003,7 +1012,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			rule.resultType
 		) 
 		[
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 			
 			parameters += rule.ruleApplicationTraceParam
@@ -1029,7 +1038,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			Void::TYPE.getTypeForName(rule)
 		) 
 		[
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 
 			annotations += rule.toAnnotation(typeof(Check))
@@ -1055,7 +1064,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			if (rule.^override)
+			if (rule.override)
 				annotations += rule.toAnnotation(typeof(Override))
 			
 			exceptions += rule.ruleFailedExceptionType
