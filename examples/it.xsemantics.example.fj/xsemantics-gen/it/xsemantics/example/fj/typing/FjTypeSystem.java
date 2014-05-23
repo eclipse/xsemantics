@@ -139,7 +139,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<Expression>> reduceDispatcher;
   
-  private PolymorphicDispatcher<Result3<Expression,Type,Type>> subjredDispatcher;
+  private PolymorphicDispatcher<Result3<Expression, Type, Type>> subjredDispatcher;
   
   public FjTypeSystem() {
     init();
@@ -436,15 +436,15 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public Result3<Expression,Type,Type> subjred(final Expression exp) {
+  public Result3<Expression, Type, Type> subjred(final Expression exp) {
     return subjred(new RuleEnvironment(), null, exp);
   }
   
-  public Result3<Expression,Type,Type> subjred(final RuleEnvironment _environment_, final Expression exp) {
+  public Result3<Expression, Type, Type> subjred(final RuleEnvironment _environment_, final Expression exp) {
     return subjred(_environment_, null, exp);
   }
   
-  public Result3<Expression,Type,Type> subjred(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
+  public Result3<Expression, Type, Type> subjred(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
     try {
     	return subjredInternal(_environment_, _trace_, exp);
     } catch (Exception _e_subjred) {
@@ -844,7 +844,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected Result3<Expression,Type,Type> subjredInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
+  protected Result3<Expression, Type, Type> subjredInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression exp) {
     try {
     	checkParamsNotNull(exp);
     	return subjredDispatcher.invoke(_environment_, _trace_, exp);
@@ -1078,7 +1078,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final New exp) throws RuleFailedException {
     EList<Expression> _args = exp.getArgs();
-    final Function1<Expression,Boolean> _function = new Function1<Expression,Boolean>() {
+    final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
       public Boolean apply(final Expression it) {
         try {
           return FjTypeSystem.this.isValueInternal(_trace_, it);
@@ -1299,7 +1299,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private BasicType _applyRuleTBoolConstant_1(final RuleEnvironment G, final BoolConstant b) throws RuleFailedException {
-    final Function1<BasicType,BasicType> _function = new Function1<BasicType,BasicType>() {
+    final Function1<BasicType, BasicType> _function = new Function1<BasicType, BasicType>() {
       public BasicType apply(final BasicType t) {
         BasicType _xblockexpression = null;
         {
@@ -1885,7 +1885,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     return new Result<Expression>(exp1);
   }
   
-  protected Result3<Expression,Type,Type> subjredImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
+  protected Result3<Expression, Type, Type> subjredImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	Result3<Expression, Type, Type> _result_ = applyRuleSubjRed(G, _subtrace_, e);
@@ -1900,7 +1900,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected Result3<Expression,Type,Type> applyRuleSubjRed(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
+  protected Result3<Expression, Type, Type> applyRuleSubjRed(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression e) throws RuleFailedException {
     Expression e1 = null; // output parameter
     Type T1 = null; // output parameter
     Type T = null; // output parameter
@@ -1921,6 +1921,6 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     
     /* G |- T1 <: T */
     subtypeInternal(G, _trace_, T1, T);
-    return new Result3<Expression,Type,Type>(e1, T1, T);
+    return new Result3<Expression, Type, Type>(e1, T1, T);
   }
 }

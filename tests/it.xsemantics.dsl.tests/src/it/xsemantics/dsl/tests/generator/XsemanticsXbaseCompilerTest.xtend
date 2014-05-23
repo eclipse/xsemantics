@@ -764,7 +764,7 @@ e = (EClass) result.getFirst();
 '''
 
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     /* G ||- it */
     boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;

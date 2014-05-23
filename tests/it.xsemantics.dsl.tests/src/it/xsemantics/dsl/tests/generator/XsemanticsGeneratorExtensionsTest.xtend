@@ -179,13 +179,13 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 	@Test
 	def void testResultTypeWith2OutputParameters() {
 		testFiles.testJudgmentDescriptionsWith2OutputParams.
-			assertResultType("Result2<EObject,EStructuralFeature>")
+			assertResultType("Result2<EObject, EStructuralFeature>")
 	}
 
 	@Test
 	def void testResultTypeWith3OutputParameters() {
 		testFiles.testJudgmentDescriptionsWith3OutputParams.
-			assertResultType("Result3<EObject,EStructuralFeature,String>")
+			assertResultType("Result3<EObject, EStructuralFeature, String>")
 	}
 
 	@Test

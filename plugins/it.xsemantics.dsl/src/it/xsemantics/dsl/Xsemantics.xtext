@@ -116,13 +116,13 @@ RuleConclusion:
 	(error=ErrorSpecification)?
 ;
 
-XExpressionInsideBlock returns xbase::XExpression:
+XExpressionOrVarDeclaration returns xbase::XExpression:
 	PremiseExpression
 ;
 
 PremiseExpression returns xbase::XExpression:
 	TerminalPremiseExpression
-	=>({OrExpression.branches+=current} 'or' branches+=XExpressionInsideBlock)*
+	=>({OrExpression.branches+=current} 'or' branches+=XExpressionOrVarDeclaration)*
 ;
 
 TerminalPremiseExpression returns xbase::XExpression:

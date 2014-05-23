@@ -35,7 +35,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<EClass>> etype2Dispatcher;
   
-  private PolymorphicDispatcher<Result2<EClass,EStructuralFeature>> etype3Dispatcher;
+  private PolymorphicDispatcher<Result2<EClass, EStructuralFeature>> etype3Dispatcher;
   
   private PolymorphicDispatcher<Result<EClass>> etypeWithVarDeclAsOutputArgDispatcher;
   
@@ -121,15 +121,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public Result2<EClass,EStructuralFeature> etype3(final EObject o4) {
+  public Result2<EClass, EStructuralFeature> etype3(final EObject o4) {
     return etype3(new RuleEnvironment(), null, o4);
   }
   
-  public Result2<EClass,EStructuralFeature> etype3(final RuleEnvironment _environment_, final EObject o4) {
+  public Result2<EClass, EStructuralFeature> etype3(final RuleEnvironment _environment_, final EObject o4) {
     return etype3(_environment_, null, o4);
   }
   
-  public Result2<EClass,EStructuralFeature> etype3(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o4) {
+  public Result2<EClass, EStructuralFeature> etype3(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o4) {
     try {
     	return etype3Internal(_environment_, _trace_, o4);
     } catch (Exception _e_etype3) {
@@ -195,7 +195,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected Result2<EClass,EStructuralFeature> etype3Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o4) {
+  protected Result2<EClass, EStructuralFeature> etype3Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o4) {
     try {
     	checkParamsNotNull(o4);
     	return etype3Dispatcher.invoke(_environment_, _trace_, o4);
@@ -334,7 +334,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     return new Result<EClass>(eClass);
   }
   
-  protected Result2<EClass,EStructuralFeature> etype3Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
+  protected Result2<EClass, EStructuralFeature> etype3Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	Result2<EClass, EStructuralFeature> _result_ = applyRuleEObjectEClassEStructuralFeature(G, _subtrace_, eObject);
@@ -349,17 +349,17 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected Result2<EClass,EStructuralFeature> applyRuleEObjectEClassEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
+  protected Result2<EClass, EStructuralFeature> applyRuleEObjectEClassEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject eObject) throws RuleFailedException {
     EClass eClass = null; // output parameter
     EStructuralFeature feat = null; // output parameter
     /* G |~ eObject : eClass : feat */
-    Result2<EClass,EStructuralFeature> result = etype3Internal(G, _trace_, eObject);
+    Result2<EClass, EStructuralFeature> result = etype3Internal(G, _trace_, eObject);
     checkAssignableTo(result.getFirst(), EClass.class);
     eClass = (EClass) result.getFirst();
     checkAssignableTo(result.getSecond(), EStructuralFeature.class);
     feat = (EStructuralFeature) result.getSecond();
     
-    return new Result2<EClass,EStructuralFeature>(eClass, feat);
+    return new Result2<EClass, EStructuralFeature>(eClass, feat);
   }
   
   protected Result<EClass> etypeWithVarDeclAsOutputArgImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {

@@ -35,12 +35,14 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.common.types.util.TypeReferences
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
 	@Inject extension XsemanticsGeneratorExtensions
 	@Inject extension XsemanticsNodeModelUtils
 	@Inject extension XsemanticsTypeSystem typeSystem
+	@Inject private TypeReferences typeReferences
 	
 	override compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
 		val rule = obj.eContainer
@@ -136,7 +138,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getError(),
 				b,
-				getTypeReferences().getTypeForName(typeof(String),
+				typeReferences.getTypeForName(typeof(String),
 						errorSpecification), "error");
 	}
 
@@ -145,7 +147,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getSource(),
 				b,
-				getTypeReferences().getTypeForName(typeof(EObject),
+				typeReferences.getTypeForName(typeof(EObject),
 						errorSpecification), "source");
 	}
 
@@ -154,7 +156,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		return compileAndAssignToLocalVariable(
 				errorSpecification.getFeature(),
 				b,
-				getTypeReferences().getTypeForName(typeof(EStructuralFeature),
+				typeReferences.getTypeForName(typeof(EStructuralFeature),
 						errorSpecification), "feature");
 	}
 

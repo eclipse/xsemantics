@@ -160,8 +160,12 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def dispatch void handleEnvironmentSpecification(EnvironmentMapping e, ITypeComputationState state) {
-		e.key.computeTypes(state.withoutExpectation)
-		e.value.computeTypes(state.withoutExpectation)
+		// in Xbase 2.6 we must call computeTypes on the state, not use the computeTypes(XExpression, ITypeComputationState)
+		// otherwise XStringLiteral compilation will then raise a NPE
+//		e.key.computeTypes(state.withNonVoidExpectation)
+//		e.value.computeTypes(state.withNonVoidExpectation)
+		state.withNonVoidExpectation.computeTypes(e.key)
+		state.withNonVoidExpectation.computeTypes(e.value)
 	}
 
 	protected def dispatch void handleEnvironmentSpecification(XExpression e, ITypeComputationState state) {
@@ -174,11 +178,19 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def _computeTypes(ErrorSpecification e, ITypeComputationState state) {
-		e.error?.computeTypes(state.withoutExpectation)
-		e.source?.computeTypes
-			(state.withExpectation(getTypeForName(EObject, state)))
-		e.feature?.computeTypes
-			(state.withExpectation(getTypeForName(EStructuralFeature, state)))
+		if (e.error !== null)
+			state.withExpectation(getTypeForName(String, state)).computeTypes(e.error)
+		if (e.source !== null)
+			state.withExpectation(getTypeForName(EObject, state)).computeTypes(e.source)
+		if (e.feature !== null)
+			state.withExpectation(getTypeForName(EStructuralFeature, state)).computeTypes(e.feature)
+		// in Xbase 2.6 we must call computeTypes on the state, not use the computeTypes(XExpression, ITypeComputationState)
+		// otherwise XStringLiteral compilation will then raise a NPE
+//		e.error?.computeTypes(state.withExpectation(getTypeForName(String, state)))
+//		e.source?.computeTypes
+//			(state.withExpectation(getTypeForName(EObject, state)))
+//		e.feature?.computeTypes
+//			(state.withExpectation(getTypeForName(EStructuralFeature, state)))
 		state.acceptActualType(getPrimitiveVoid(state))
 	}
 	

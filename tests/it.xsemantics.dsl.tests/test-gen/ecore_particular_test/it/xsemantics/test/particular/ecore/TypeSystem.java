@@ -42,7 +42,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   
-  private PolymorphicDispatcher<Result2<EClass,EObject>> type2Dispatcher;
+  private PolymorphicDispatcher<Result2<EClass, EObject>> type2Dispatcher;
   
   private PolymorphicDispatcher<Result<Boolean>> type1Dispatcher;
   
@@ -99,15 +99,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public Result2<EClass,EObject> type2(final String s) {
+  public Result2<EClass, EObject> type2(final String s) {
     return type2(new RuleEnvironment(), null, s);
   }
   
-  public Result2<EClass,EObject> type2(final RuleEnvironment _environment_, final String s) {
+  public Result2<EClass, EObject> type2(final RuleEnvironment _environment_, final String s) {
     return type2(_environment_, null, s);
   }
   
-  public Result2<EClass,EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
+  public Result2<EClass, EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
     try {
     	return type2Internal(_environment_, _trace_, s);
     } catch (Exception _e_type2) {
@@ -309,7 +309,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected Result2<EClass,EObject> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
+  protected Result2<EClass, EObject> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
     try {
     	checkParamsNotNull(s);
     	return type2Dispatcher.invoke(_environment_, _trace_, s);
@@ -452,7 +452,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     return _createEObject_1;
   }
   
-  protected Result2<EClass,EObject> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
+  protected Result2<EClass, EObject> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
     try {
     	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	Result2<EClass, EObject> _result_ = applyRuleEClassEObject2(G, _subtrace_, s);
@@ -467,7 +467,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected Result2<EClass,EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
+  protected Result2<EClass, EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
     EClass _createEObject = null; // output parameter
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
@@ -476,7 +476,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     if (!Objects.equal("foo", _plus)) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
-    return new Result2<EClass,EObject>(_createEObject, _applyRuleEClassEObject2_2(G, s));
+    return new Result2<EClass, EObject>(_createEObject, _applyRuleEClassEObject2_2(G, s));
   }
   
   private EObject _applyRuleEClassEObject2_2(final RuleEnvironment G, final String s) throws RuleFailedException {
@@ -636,7 +636,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-    final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+    final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature it) {
         String _name = it.getName();
         return Boolean.valueOf((!Objects.equal(_name, "foo")));

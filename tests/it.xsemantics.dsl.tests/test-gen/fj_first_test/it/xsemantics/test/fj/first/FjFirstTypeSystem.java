@@ -888,7 +888,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private BasicType _applyRuleTBoolConstant_1(final RuleEnvironment G, final BoolConstant b) throws RuleFailedException {
-    final Function1<BasicType,BasicType> _function = new Function1<BasicType,BasicType>() {
+    final Function1<BasicType, BasicType> _function = new Function1<BasicType, BasicType>() {
       public BasicType apply(final BasicType t) {
         BasicType _xblockexpression = null;
         {
@@ -1235,7 +1235,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       Method.class);
     final Procedure1<Method> _function = new Procedure1<Method>() {
       public void apply(final Method method) {
-        final Function1<Method,Boolean> _function = new Function1<Method,Boolean>() {
+        final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
           public Boolean apply(final Method it) {
             String _name = it.getName();
             String _name_1 = method.getName();

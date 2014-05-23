@@ -110,7 +110,7 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
     List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref);
     List<it.xsemantics.example.fj.fj.Class> _reverseView = ListExtensions.<it.xsemantics.example.fj.fj.Class>reverseView(_superclasses);
-    final Function1<it.xsemantics.example.fj.fj.Class,Boolean> _function = new Function1<it.xsemantics.example.fj.fj.Class,Boolean>() {
+    final Function1<it.xsemantics.example.fj.fj.Class, Boolean> _function = new Function1<it.xsemantics.example.fj.fj.Class, Boolean>() {
       public Boolean apply(final it.xsemantics.example.fj.fj.Class it) {
         /* G |- it <| right.classref */
         it.xsemantics.example.fj.fj.Class _classref = right.getClassref();

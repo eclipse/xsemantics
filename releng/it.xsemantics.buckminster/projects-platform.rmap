@@ -4,7 +4,8 @@
   <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases/"/>
   <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/kepler"/>
   <rm:property key="swtbot.repository" value="${eclipse.download}/technology/swtbot/releases/latest"/>
-  <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.5"/>
+  <rm:property key="emf.repository" value="${eclipse.download}/modeling/emf/emf/updates/milestones"/>
+  <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.6"/>
   <rm:property key="itemis.p2.repository"
 		value="http://download.itemis.de/updates" />
   
@@ -55,6 +56,20 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="eclipse">
+  	<!-- First always try the Xtext repository, since it can contain more recent
+  		versions of required bundles -->
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="xtext.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="emf.repository"/>
+      </rm:uri>
+    </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
