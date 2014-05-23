@@ -48,6 +48,10 @@ public class InternalBuilder {
 		cleanBuild();
 		printMessage("Waiting for autobuild...");
 		waitForAutoBuild();
+//		printMessage("Full build...");
+//		fullBuild();
+//		printMessage("Waiting for autobuild...");
+//		waitForAutoBuild();
 		setAutoBuild(false);
 		
 		clearJdtIndex();

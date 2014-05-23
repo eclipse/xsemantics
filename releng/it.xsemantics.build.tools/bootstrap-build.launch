@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
 <setAttribute key="additional_plugins">
-<setEntry value="it.xsemantics.build.tools:1.4.2.qualifier:default:true"/>
-<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20140122-1821:default:false"/>
-<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20140122-1821:default:false"/>
-<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20140122-1821:default:false"/>
+<setEntry value="it.xsemantics.build.tools:1.5.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.jdt.debug.ui:3.6.200.v20130514-0841:default:true"/>
+<setEntry value="org.eclipse.jdt.debug:3.8.0.v20130514-0841:default:true"/>
+<setEntry value="org.eclipse.xtext.xdoc.generator:0.1.0.v20140522-1803:default:true"/>
+<setEntry value="org.eclipse.xtext.xdoc.ui:0.1.0.v20140522-1803:default:true"/>
+<setEntry value="org.eclipse.xtext.xdoc:0.1.0.v20140522-1803:default:true"/>
 </setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="askclear" value="false"/>

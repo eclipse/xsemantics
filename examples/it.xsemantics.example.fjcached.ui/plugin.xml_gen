@@ -250,7 +250,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="it.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="it.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="fjcached"
+            >
       </participant>
    </extension>
    <extension

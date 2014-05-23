@@ -14,18 +14,18 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.xtext.util,
  org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport;bundle-version="2.7.0",
+ org.eclipse.emf.ecore;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.emf.common;bundle-version="2.7.0",
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  it.xsemantics.runtime;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
- org.apache.commons.logging;resolution:=optional;bundle-version="1.0.4",
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.xtend.standalone;resolution:=optional,
  org.eclipse.xtext.ecore,
  org.eclipse.emf.ecore.xcore.lib;visibility:=reexport,
  org.eclipse.emf.ecore.xcore;visibility:=reexport,
- org.objectweb.asm;visibility:=reexport;bundle-version="3.3.1"
+ org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.dsl,
