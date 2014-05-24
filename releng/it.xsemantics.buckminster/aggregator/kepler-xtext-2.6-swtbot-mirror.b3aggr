@@ -11,7 +11,6 @@
     <contributions description="Xtext Releases" label="Xtext Releases">
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
         <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.6.0,2.7.0)"/>
-        <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
         <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
       </repositories>
     </contributions>
@@ -24,6 +23,16 @@
     <contributions description="Itemis Xtext" label="Itemis Xtext">
       <repositories location="http://download.itemis.de/updates">
         <features name="de.itemis.xtext.antlr.feature.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="Xdoc" label="Xdoc">
+      <repositories location="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.6">
+        <features name="org.eclipse.xtext.xdoc.feature.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="EMF" label="EMF">
+      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/milestones">
+        <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
       </repositories>
     </contributions>
   </validationSets>
