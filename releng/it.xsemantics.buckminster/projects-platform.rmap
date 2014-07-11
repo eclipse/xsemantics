@@ -8,6 +8,8 @@
   <rm:property key="xdoc.repository" value="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.6"/>
   <rm:property key="itemis.p2.repository"
 		value="http://download.itemis.de/updates" />
+  <rm:property key="xpand.p2.repository"
+		value="http://download.eclipse.org/modeling/m2t/xpand/updates/releases" />
   
   <rm:redirect pattern="^it\.xsemantics\.buckminster(?:\..+)?$" href="project.rmap"/>
   <rm:redirect pattern="^it\.xsemantics\.build(?:\..+)?$" href="project.rmap"/>
@@ -37,6 +39,12 @@
 			<bc:propertyRef key="itemis.p2.repository" />
 		</rm:uri>
 	</rm:provider>
+	<rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="xpand.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="swtbot">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false">
