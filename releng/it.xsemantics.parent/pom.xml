@@ -12,6 +12,10 @@
 		<module>../../releng/it.xsemantics.releng.tools</module>
 		<module>../../plugins/it.xsemantics.dsl</module>
 		<module>../../plugins/it.xsemantics.dsl.ui</module>
+
+		<!-- we need the following examples for testing -->
+		<module>../../examples/it.xsemantics.example.fj</module>
+		<module>../../examples/it.xsemantics.example.fj.ui</module>
 	</modules>
 
 	<properties>
