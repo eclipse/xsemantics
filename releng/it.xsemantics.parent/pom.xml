@@ -16,6 +16,8 @@
 		<!-- we need the following examples for testing -->
 		<module>../../examples/it.xsemantics.example.fj</module>
 		<module>../../examples/it.xsemantics.example.fj.ui</module>
+		<module>../../examples/it.xsemantics.example.fjcached</module>
+		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
 	</modules>
 
 	<properties>

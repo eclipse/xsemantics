@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
+		<groupId>it.xsemantics</groupId>
+		<artifactId>it.xsemantics.parent</artifactId>
+		<version>1.5.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>it.xsemantics.example.fjcached</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<build>
+		<!-- The following is required so that the mwe2 workflow finds the .xtext 
+			grammar file -->
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.xtext</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<skip>${mwe2.skip}</skip>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/src-gen</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/xtend-gen</directory>
+						</fileset>
+						<!-- clean ui plugin as well -->
+						<fileset>
+							<directory>${basedir}/../${project.artifactId}.ui/src-gen</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../${project.artifactId}.ui/xtend-gen</directory>
+						</fileset>
+						<!-- clean test fragment as well -->
+						<fileset>
+							<directory>${basedir}/../${project.artifactId}.tests/src-gen</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../${project.artifactId}.tests/xtend-gen</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.fornax.toolsupport</groupId>
+				<artifactId>fornax-oaw-m2-plugin</artifactId>
+				<version>${fornax-oaw-m2-plugin-version}</version>
+				<configuration>
+					<skip>${mwe2.skip}</skip>
+					<workflowEngine>mwe2</workflowEngine>
+					<workflowDescriptor>src/it/xsemantics/example/fjcached/GenerateFjcached.mwe2</workflowDescriptor>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run-workflow</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
