@@ -16,6 +16,7 @@
 		<!-- we need the following examples for testing -->
 		<module>../../examples/it.xsemantics.example.fj</module>
 		<module>../../examples/it.xsemantics.example.fj.ui</module>
+		<module>../../examples/it.xsemantics.example.fj.tests</module>
 		<module>../../examples/it.xsemantics.example.fjcached</module>
 		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
 	</modules>
@@ -29,11 +30,16 @@
 		<jacoco-version>0.5.8.201207111220</jacoco-version>
 		<findbugs-version>2.5.4-SNAPSHOT</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
 		<xtext.version>2.6.2</xtext.version>
 		<xcore.version>1.2.0</xcore.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
+		
+		<!-- tests and runtime args -->
+		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
+		<uiTestsArgs>${memoryArgs} -Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
+		<pdeTestsArgs>-DbuildingWithTycho=true</pdeTestsArgs>
+		<swtbotTestsArgs>${uiTestsArgs} -Dorg.eclipse.swtbot.search.timeout=150000 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</swtbotTestsArgs>
 		
 		<!-- <jacoco.reportPath>../target/jacoco.exec</jacoco.reportPath> -->
 		<!-- <findbugs.reportPath>../target/findbugs</findbugs.reportPath>  -->
