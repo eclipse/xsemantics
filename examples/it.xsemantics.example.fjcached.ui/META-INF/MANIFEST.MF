@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: it.xsemantics.example.fjcached.ui
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Lorenzo Bettini
+Bundle-Version: 1.5.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fjcached.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.fjcached;visibility:=reexport,
