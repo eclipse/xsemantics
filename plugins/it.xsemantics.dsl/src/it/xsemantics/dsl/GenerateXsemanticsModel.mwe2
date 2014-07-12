@@ -1,0 +1,41 @@
+module it.xsemantics.dsl.GenerateXsemantics
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var projectName = "it.xsemantics.dsl"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	
+
+    bean = StandaloneSetup {
+        scanClassPath = true
+        platformUri = "${runtimeProject}/.."
+
+		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+//        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+//		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+//		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    }
+
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = "emf-gen"
+	}
+
+	component = de.itemis.xcore2java.XcoreReader {
+		register = org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup {}
+		path = "model"
+		slot = "model"
+	}
+
+	component = org.eclipse.xtext.generator.GeneratorComponent {
+		register = org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup {}
+		slot = 'model'
+		outlet = {
+			path = "emf-gen"
+		}
+	}
+
+}

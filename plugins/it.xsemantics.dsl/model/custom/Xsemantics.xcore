@@ -2,6 +2,7 @@
 @GenModel(modelDirectory="/it.xsemantics.dsl/emf-gen", 
 	forceOverwrite="true", 
 	updateClasspath="false",
+	complianceLevel="5.0", // when generating from mwe2 this is crucial
 	operationReflection="false" // http://www.eclipse.org/forums/index.php/mv/msg/649098/1246741/#msg_1246741
 )
 package it.xsemantics.dsl.xsemantics

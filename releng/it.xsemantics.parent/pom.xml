@@ -9,6 +9,8 @@
 		<module>../../devtools/it.xsemantics.targetplatform</module>
 		
 		<module>../../plugins/it.xsemantics.runtime</module>
+		<module>../../releng/it.xsemantics.releng.tools</module>
+		<module>../../plugins/it.xsemantics.dsl</module>
 	</modules>
 
 	<properties>
@@ -22,6 +24,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
 		<xtext.version>2.6.2</xtext.version>
+		<xcore.version>1.2.0</xcore.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
 		
