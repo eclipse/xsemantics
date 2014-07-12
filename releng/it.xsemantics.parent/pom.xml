@@ -11,6 +11,7 @@
 		<module>../../plugins/it.xsemantics.runtime</module>
 		<module>../../releng/it.xsemantics.releng.tools</module>
 		<module>../../plugins/it.xsemantics.dsl</module>
+		<module>../../plugins/it.xsemantics.dsl.ui</module>
 	</modules>
 
 	<properties>
