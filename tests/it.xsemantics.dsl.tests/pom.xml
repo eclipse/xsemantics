@@ -33,8 +33,6 @@
 			<version>${maven-surefire-plugin.version}</version>
 	       	<executions>
 				<execution>
-					<!-- The execution id default-test must be left to tycho-surefire-plugin
-						since it will execute it anyway -->
 					<id>RuntimeTests</id>
 					<phase>test</phase>
 					<configuration>
@@ -53,8 +51,6 @@
 					</goals>
 				</execution>
 				<execution>
-					<!-- The execution id default-test must be left to tycho-surefire-plugin
-						since it will execute it anyway -->
 					<id>DSLTests</id>
 					<phase>test</phase>
 					<configuration>
@@ -75,8 +71,29 @@
 					</goals>
 				</execution>
 				<execution>
-					<!-- The execution id default-test must be left to tycho-surefire-plugin
-						since it will execute it anyway -->
+					<id>GeneratorTests</id>
+					<phase>test</phase>
+					<configuration>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+						<includes>
+							<include>**/dsl/tests/generator/*Test*.java</include>
+						</includes>
+						<excludes>
+							<exclude>**/dsl/tests/generator/*Abstract*.java</exclude>
+							<exclude>**/dsl/tests/generator/*Helper*.java</exclude>
+							<exclude>**/dsl/tests/generator/*Base*.java</exclude>
+							<exclude>**/dsl/tests/generator/*GeneratorForTest*.java</exclude>
+							<exclude>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</exclude>
+							<exclude>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</exclude>
+						</excludes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+				<execution>
 					<id>FJGeneratedTypeSystemTests</id>
 					<phase>test</phase>
 					<configuration>
@@ -92,8 +109,6 @@
 					</goals>
 				</execution>
 				<execution>
-					<!-- The execution id default-test must be left to tycho-surefire-plugin
-						since it will execute it anyway -->
 					<id>FJCachingTypeSystemTests</id>
 					<phase>test</phase>
 					<configuration>
@@ -106,6 +121,21 @@
 						<excludes>
 							<exclude>**/dsl/tests/generator/fj/caching/*Abstract*.java</exclude>
 						</excludes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>PerformanceTests</id>
+					<phase>test</phase>
+					<configuration>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+						<includes>
+							<include>**/dsl/tests/performance/*Test*.java</include>
+						</includes>
 					</configuration>
 					<goals>
 						<goal>test</goal>
