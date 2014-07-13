@@ -5,7 +5,7 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-Version: 1.5.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fjcached.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: it.xsemantics.example.fjcached,
+Require-Bundle: it.xsemantics.example.fjcached;visibility:=reexport,
  it.xsemantics.example.fjcached.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4,
