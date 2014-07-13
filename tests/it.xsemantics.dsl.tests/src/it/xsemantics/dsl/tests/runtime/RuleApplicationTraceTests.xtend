@@ -59,22 +59,18 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 		val subTrace = new RuleApplicationTrace
 		subTrace.addToTrace("second")
 		t1.addAsSubtrace(subTrace)
-		assertEquals(
 '''modified
- second'''.toString, t1.traceAsString);
+ second'''.assertEqualsStrings(t1.traceAsString);
  		assertEquals("first", t2.traceAsString);
  		
  		val t3 = t1.snapshot
- 		assertEquals(
 '''modified
- second'''.toString, t3.traceAsString);
+ second'''.assertEqualsStrings(t3.traceAsString);
  
  		subTrace.getTrace().set(0, "modified2");
- 		assertEquals(
 '''modified
- modified2'''.toString, t1.traceAsString);
- 		assertEquals(
+ modified2'''.assertEqualsStrings(t1.traceAsString);
 '''modified
- second'''.toString, t3.traceAsString);
+ second'''.assertEqualsStrings(t3.traceAsString);
 	}
 }
