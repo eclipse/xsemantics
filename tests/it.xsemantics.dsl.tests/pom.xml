@@ -179,16 +179,17 @@
 					</goals>
 				</execution>
 				<execution>
-					<id>TychoSurefirePluginUiTest</id>
+					<id>UiTests</id>
 					<phase>test</phase>
 					<configuration>
-						<skip>true</skip>
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${memoryArgs} -DbuildingWithTycho=true</argLine>
+						<argLine>${tycho.testArgLine} ${uiTestsArgs}</argLine>
 						<includes>
-							<include>**/xtraitj/ui/tests/*Test.java</include>
+							<include>**/dsl/tests/ui/contentassist/*Test*.java</include>
+							<include>**/dsl/tests/ui/editor/*Test*.java</include>
+							<include>**/dsl/tests/ui/outline/*Test*.java</include>
 						</includes>
 					</configuration>
 					<goals>
