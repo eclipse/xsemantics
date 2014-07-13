@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
 	XsemanticsGeneratorAllTests.class,
 	XsemanticsGeneratedTypeSystemsAllTests.class,
 	XsemanticsCachedTypeSystemsAllTests.class,
-	XsemanticsExamplesAllTests.class,
+//	XsemanticsExamplesAllTests.class,
 	XsemanticsPerformanceTest.class
 })
 public class XsemanticsAllTests {
