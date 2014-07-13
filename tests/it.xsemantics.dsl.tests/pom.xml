@@ -120,17 +120,28 @@
 	        <version>${tycho-version}</version>
 	        <executions>
 	        	<execution>
-	        		<!--  compiler tests need an OSGI environment, but no UI  -->
+	        		<!--  We give each test run our own name, so we disable "default-test"  -->
 					<id>default-test</id>
 					<phase>test</phase>
 					<configuration>
 						<skip>true</skip>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+	        	<execution>
+	        		<!--  compiler tests need an OSGI environment, but no UI  -->
+					<id>JavaCompilerBasedTests</id>
+					<phase>test</phase>
+					<configuration>
 						<useUIHarness>false</useUIHarness>
 						<useUIThread>false</useUIThread>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<includes>
-							<include>**/xtraitj/tests/*CompilerTest.java</include>
+							<include>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</include>
+							<include>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</include>
 						</includes>
 					</configuration>
 					<goals>
