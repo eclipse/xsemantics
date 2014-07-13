@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+	<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
+	<groupId>it.xsemantics</groupId>
+	<artifactId>it.xsemantics.parent</artifactId>
+	<version>1.5.0-SNAPSHOT</version>
+  </parent>
+
+	<artifactId>it.xsemantics.dsl.tests</artifactId>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit-version}</version>
+		</dependency>
+	</dependencies>
+	  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>xtend-maven-plugin</artifactId>
+		</plugin>
+		
+		<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>${maven-surefire-plugin.version}</version>
+	       	<executions>
+				<execution>
+					<!-- The execution id default-test must be left to tycho-surefire-plugin
+						since it will execute it anyway -->
+					<id>RuntimeTests</id>
+					<phase>test</phase>
+					<configuration>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+						<includes>
+							<include>**/tests/runtime/*Test*.java</include>
+						</includes>
+						<excludes>
+							<exclude>**/tests/runtime/*Abstract*.java</exclude>
+						</excludes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+				<execution>
+					<!-- The execution id default-test must be left to tycho-surefire-plugin
+						since it will execute it anyway -->
+					<id>DSLTests</id>
+					<phase>test</phase>
+					<configuration>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+						<includes>
+							<include>**/dsl/tests/*Test*.java</include>
+						</includes>
+						<excludes>
+							<exclude>**/dsl/tests/*Abstract*.java</exclude>
+							<exclude>**/dsl/tests/*Helper*.java</exclude>
+							<exclude>**/dsl/tests/*Base*.java</exclude>
+						</excludes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+			</executions>
+	    </plugin>
+		
+		<plugin>
+	        <groupId>org.eclipse.tycho</groupId>
+	        <artifactId>tycho-surefire-plugin</artifactId>
+	        <version>${tycho-version}</version>
+	        <executions>
+	        	<execution>
+	        		<!--  compiler tests need an OSGI environment, but no UI  -->
+					<id>default-test</id>
+					<phase>test</phase>
+					<configuration>
+						<skip>true</skip>
+						<useUIHarness>false</useUIHarness>
+						<useUIThread>false</useUIThread>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+						<includes>
+							<include>**/xtraitj/tests/*CompilerTest.java</include>
+						</includes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>TychoSurefirePluginUiTest</id>
+					<phase>test</phase>
+					<configuration>
+						<skip>true</skip>
+						<useUIHarness>true</useUIHarness>
+						<useUIThread>true</useUIThread>
+						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
+						<argLine>${tycho.testArgLine} ${memoryArgs} -DbuildingWithTycho=true</argLine>
+						<includes>
+							<include>**/xtraitj/ui/tests/*Test.java</include>
+						</includes>
+					</configuration>
+					<goals>
+						<goal>test</goal>
+					</goals>
+				</execution>
+			</executions>
+	    </plugin>
+  	</plugins>
+  </build>
+</project>
