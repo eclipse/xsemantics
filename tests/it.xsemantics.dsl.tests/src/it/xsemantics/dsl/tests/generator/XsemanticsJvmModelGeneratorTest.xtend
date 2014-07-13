@@ -2,19 +2,19 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsCompilationTestHelper
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustomForPluginTest
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProviderCustomForPluginTest))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
-	@Inject extension XsemanticsCompilationTestHelper
+	@Inject extension CompilationTestHelper
 	
 	@Test
 	def testJudgmentDescriptions() {
@@ -98,7 +98,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 
 	@Test
 	def typeSystemWithNoPackage() {
-		testFiles.typeSystemWithNoPackage.compileAll[compileToJava]
+		testFiles.typeSystemWithNoPackage.compile[compiledClass]
 	}
 	
 	@Test
@@ -4022,7 +4022,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	def private assertCorrectJavaCodeGeneration(XsemanticsSystem system, 
 		String prefix, CharSequence expected, CharSequence expectedValidator
 	) {
-		system.compileAll [
+		system.eResource.resourceSet.compile [
 			for (e : allGeneratedResources.entrySet) {
 				if (prefix == null || e.key.contains(prefix)) {
 					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
@@ -4037,7 +4037,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			
 			
 			// this will issue Java generation
-			compileToJava
+			compiledClass
 		]
 	}
 	
