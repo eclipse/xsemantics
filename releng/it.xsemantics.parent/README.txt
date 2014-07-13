@@ -1,0 +1,1 @@
+MAVEN_OPTS="-Xms40m -Xmx384m -XX:MaxPermSize=256m"

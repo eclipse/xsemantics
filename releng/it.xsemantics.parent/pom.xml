@@ -19,6 +19,7 @@
 		<module>../../examples/it.xsemantics.example.fj.tests</module>
 		<module>../../examples/it.xsemantics.example.fjcached</module>
 		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
+		<module>../../examples/it.xsemantics.example.fjcached.tests</module>
 	</modules>
 
 	<properties>
