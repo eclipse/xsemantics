@@ -94,25 +94,23 @@ public class StringRepresentation {
 		if (nameFeature != null) {
 			Object eGet = eObject.eGet(nameFeature);
 			return withType(stringRepEClass, string(eGet));
-		} 
-		else {
-			EList<EStructuralFeature> eStructuralFeatures = eClass
-					.getEStructuralFeatures();
-			for (EStructuralFeature feature : eStructuralFeatures) {
-				if (feature instanceof EAttribute) {
-					EAttribute attribute = (EAttribute) feature;
-					if (attribute.getEType().getName().equals("EString")) {
-						Object eGet = eObject.eGet(attribute);
-						if (eGet != null)
-							return withType(stringRepEClass, string(eGet));
-					}
+		}
+		EList<EStructuralFeature> eStructuralFeatures = eClass
+				.getEStructuralFeatures();
+		for (EStructuralFeature feature : eStructuralFeatures) {
+			if (feature instanceof EAttribute) {
+				EAttribute attribute = (EAttribute) feature;
+				if (attribute.getEType().getName().equals("EString")) {
+					Object eGet = eObject.eGet(attribute);
+					if (eGet != null)
+						return withType(stringRepEClass, string(eGet));
 				}
+			}
 
-				if (feature instanceof EReference) {
-					Object ref = eObject.eGet(feature, true);
-					if (ref != null) {
-						return withType(stringRepEClass, string(ref));
-					}
+			if (feature instanceof EReference) {
+				Object ref = eObject.eGet(feature, true);
+				if (ref != null) {
+					return withType(stringRepEClass, string(ref));
 				}
 			}
 		}

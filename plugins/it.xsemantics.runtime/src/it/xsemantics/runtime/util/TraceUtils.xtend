@@ -44,7 +44,7 @@ class TraceUtils {
 	
 	def void buildTrace(List<String> trace, Object element, int inc) {
 		if (element instanceof RuleApplicationTrace) {
-			for (e : (element as RuleApplicationTrace).trace) {
+			for (e : element.trace) {
 				buildTrace(trace, e, inc + 1)
 			}
 		} else {

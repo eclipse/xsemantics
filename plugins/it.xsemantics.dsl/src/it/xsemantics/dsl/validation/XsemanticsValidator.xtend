@@ -510,7 +510,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (feature instanceof JvmFormalParameter) {
 			val container = feature.eContainer();
 			if (container instanceof RuleParameter) {
-				if ((container as RuleParameter).isOutputParam
+				if (container.isOutputParam
 						&& insideClosure(featureCall)) {
 					error("Cannot refer to an output parameter "
 							+ feature.getIdentifier()

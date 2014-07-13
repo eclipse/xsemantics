@@ -118,7 +118,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			RuleInvocation : {
 				for (exp : e.expressions) {
 					if (exp instanceof XVariableDeclaration) {
-						addLocalToCurrentScope(exp as XVariableDeclaration, state);
+						addLocalToCurrentScope(exp, state);
 					}
 				}
 			}

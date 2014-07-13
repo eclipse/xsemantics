@@ -412,7 +412,7 @@ class XsemanticsGeneratorExtensions {
 	def associatedAuxiliaryDescription(JvmIdentifiableElement e) {
 		val associated = associations.getPrimarySourceElement(e)
 		if (associated instanceof AuxiliaryDescription)
-			associated as AuxiliaryDescription
+			associated
 		else
 			null
 	}

@@ -177,7 +177,7 @@ class XsemanticsUtils {
         	// created by our model inferrer
         	val sourceElement = associations.getPrimarySourceElement(jvmFormalParameter);
         	if (sourceElement instanceof RuleParameter) {
-        		(sourceElement as RuleParameter).inputParam
+        		sourceElement.inputParam
         	} else
 				false
 		}
@@ -220,7 +220,7 @@ class XsemanticsUtils {
 			XFeatureCall : {
 				val feature = xexp.feature
 				if (feature instanceof JvmFormalParameter)
-					return !(feature as JvmFormalParameter).inputParam
+					return !feature.inputParam
 				return true;
 			}
 			XVariableDeclaration : {
