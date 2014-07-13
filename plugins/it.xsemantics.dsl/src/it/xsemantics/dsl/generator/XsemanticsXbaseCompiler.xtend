@@ -314,7 +314,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				b.append(", ");
 				val receiver = 
 					if (call instanceof XMemberFeatureCall)
-						(call as XMemberFeatureCall).getMemberCallTarget()
+						call.getMemberCallTarget()
 					else
 						null;
 				val shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
@@ -466,15 +466,13 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		}
 				
 		if (environmentSpecification instanceof EnvironmentMapping) {
-			val mapping = environmentSpecification as EnvironmentMapping;
-			toJavaStatement(mapping.getKey(), b, true);
-			toJavaStatement(mapping.getValue(), b, true);
+			toJavaStatement(environmentSpecification.getKey(), b, true);
+			toJavaStatement(environmentSpecification.getValue(), b, true);
 		} else if (environmentSpecification instanceof EnvironmentComposition) {
-			val composition = environmentSpecification as EnvironmentComposition;
 			generateEnvironmentSpecificationAsStatements(
-					composition.getCurrentEnvironment(), b);
+					environmentSpecification.getCurrentEnvironment(), b);
 			generateEnvironmentSpecificationAsStatements(
-					composition.getSubEnvironment(), b);
+					environmentSpecification.getSubEnvironment(), b);
 		} else {
 			toJavaStatement(environmentSpecification, b, true);
 		}
@@ -483,24 +481,22 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def void generateEnvironmentSpecificationAsExpression(
 			XExpression environmentSpecification, ITreeAppendable b) {
 		if (environmentSpecification instanceof EnvironmentMapping) {
-			val mapping = environmentSpecification as EnvironmentMapping;
 			b.append(environmentEntryInvocation());
 			b.append("(");
-			toJavaExpression(mapping.getKey(), b);
+			toJavaExpression(environmentSpecification.getKey(), b);
 			comma(b);
-			toJavaExpression(mapping.getValue(), b);
+			toJavaExpression(environmentSpecification.getValue(), b);
 			b.append(")");
 		} else if (environmentSpecification instanceof EnvironmentComposition) {
-			val composition = environmentSpecification as EnvironmentComposition;
 			b.append(environmentCompositionInvocation());
 			b.append("(");
 			b.increaseIndentation();
 			newLine(b);
 			generateEnvironmentSpecificationAsExpression(
-					composition.getCurrentEnvironment(), b);
+					environmentSpecification.getCurrentEnvironment(), b);
 			comma(b);
 			generateEnvironmentSpecificationAsExpression(
-					composition.getSubEnvironment(), b);
+					environmentSpecification.getSubEnvironment(), b);
 			b.decreaseIndentation();
 			newLine(b);
 			b.append(")");
@@ -563,8 +559,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			// assignment with cast
 			if (expression instanceof XVariableDeclaration) {
 				// this is not contemplated by xbase compiler
-				val varDecl = expression as XVariableDeclaration;
-				b.append(b.getName(varDecl));
+				b.append(b.getName(expression));
 			} else {
 				toJavaExpression(expression, b);
 			}

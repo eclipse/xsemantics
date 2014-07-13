@@ -379,9 +379,8 @@ public class XsemanticsRuntimeSystem {
 					+ stringRep(key));
 		if (clazz.isAssignableFrom(value.getClass()))
 			return (T) value;
-		else
-			throw newRuleFailedException("mapped value " + stringRep(value)
-					+ " cannot be assigned to " + stringRep(clazz));
+		throw newRuleFailedException("mapped value " + stringRep(value)
+				+ " cannot be assigned to " + stringRep(clazz));
 	}
 
 	public <T extends EObject> T clone(T eObject) {
@@ -466,9 +465,8 @@ public class XsemanticsRuntimeSystem {
 
 		if (object instanceof List) {
 			return (List<Object>) object;
-		} else {
-			return Lists.newArrayList(object);
 		}
+		return Lists.newArrayList(object);
 	}
 
 	public EObject getEObject(Object object) {
