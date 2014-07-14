@@ -21,6 +21,8 @@
 		<module>../../examples/it.xsemantics.example.fjcached</module>
 		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
 		<module>../../examples/it.xsemantics.example.fjcached.tests</module>
+
+		<module>../../examples/it.xsemantics.ui.examples</module>
 	</modules>
 
 	<properties>
@@ -56,6 +58,8 @@
 		<sonar.exclusions>file:**/src-gen/**</sonar.exclusions>
 		
 		<findbugs.skip>false</findbugs.skip>
+		<mwe2.skip>false</mwe2.skip>
+		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
 	</properties>
 

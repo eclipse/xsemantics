@@ -36,6 +36,7 @@
 					<id>RuntimeTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -54,6 +55,7 @@
 					<id>DSLTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -74,6 +76,7 @@
 					<id>GeneratorTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -97,6 +100,7 @@
 					<id>FJGeneratedTypeSystemTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -112,6 +116,7 @@
 					<id>FJCachingTypeSystemTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -130,6 +135,7 @@
 					<id>PerformanceTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
 						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
@@ -165,6 +171,7 @@
 					<id>JavaCompilerBasedTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<useUIHarness>false</useUIHarness>
 						<useUIThread>false</useUIThread>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
@@ -182,6 +189,7 @@
 					<id>UiTests</id>
 					<phase>test</phase>
 					<configuration>
+						<skip>${dsl.tests.skip}</skip>
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
