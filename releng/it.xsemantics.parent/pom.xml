@@ -23,6 +23,8 @@
 		<module>../../examples/it.xsemantics.example.fjcached.tests</module>
 
 		<module>../../examples/it.xsemantics.ui.examples</module>
+
+		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
 	</modules>
 
 	<properties>
