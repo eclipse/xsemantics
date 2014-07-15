@@ -24,8 +24,10 @@
 
 		<module>../../examples/it.xsemantics.example.expressions</module>
 		<module>../../examples/it.xsemantics.example.expressions.ui</module>
+		<module>../../examples/it.xsemantics.example.expressions.tests</module>
 		<module>../../examples/it.xsemantics.example.lambda</module>
 		<module>../../examples/it.xsemantics.example.lambda.ui</module>
+		<module>../../examples/it.xsemantics.example.lambda.tests</module>
 		<module>../../features/it.xsemantics.examples.feature</module>
 
 		<module>../../doc/it.xsemantics.doc</module>
