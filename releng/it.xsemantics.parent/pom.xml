@@ -22,9 +22,24 @@
 		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
 		<module>../../examples/it.xsemantics.example.fjcached.tests</module>
 
+		<module>../../examples/it.xsemantics.example.expressions</module>
+		<module>../../examples/it.xsemantics.example.expressions.ui</module>
+		<module>../../examples/it.xsemantics.example.lambda</module>
+		<module>../../examples/it.xsemantics.example.lambda.ui</module>
+		<module>../../features/it.xsemantics.examples.feature</module>
+
+		<module>../../doc/it.xsemantics.doc</module>
+		<module>../../features/it.xsemantics.doc.feature</module>
+
 		<module>../../examples/it.xsemantics.ui.examples</module>
 
+		<module>../../features/it.xsemantics.runtime.feature</module>
+		<module>../../features/it.xsemantics.feature</module>
+		<module>../../releng/it.xsemantics.sdk</module>
+
 		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
+<!-- 		<module>../../features/it.xsemantics.tests.feature</module> -->
+<!-- 		<module>../../tests/it.xsemantics.tests.swtbot</module> -->
 	</modules>
 
 	<properties>
@@ -158,6 +173,22 @@
 						<goals>
 							<goal>source-feature</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<!-- These are bundles and feature that do not have a corresponding
+									source version; NOT the ones that we do not want source versions -->
+								<plugin id="it.xsemantics.ui.examples"/>
+								
+								<feature id="it.xsemantics.tests.feature"/>
+
+								<feature id="org.eclipse.swtbot.ide"/>
+								<feature id="org.eclipse.xtext.sdk"/>
+								<feature id="org.eclipse.xtend.sdk"/>
+								<feature id="org.eclipse.pde"/>
+								<feature id="org.eclipse.emf.mwe2.language.sdk"/>
+								<feature id="org.eclipse.emf.mwe2.runtime.sdk"/>
+							</excludes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

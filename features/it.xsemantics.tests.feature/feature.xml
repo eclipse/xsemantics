@@ -25,6 +25,14 @@
          id="it.xsemantics.examples.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.xtext.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.sdk"
+         version="0.0.0"/>
+
    <plugin
          id="it.xsemantics.dsl.tests"
          download-size="0"
