@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
+		<groupId>it.xsemantics</groupId>
+		<artifactId>it.xsemantics.parent</artifactId>
+		<version>1.5.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>it.xsemantics.repository</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<profiles>
+		<profile>
+			<id>release-composite</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-eclipserun-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile packaging-p2composite.ant p2.composite.add -Dupdates.dir=xsemantics -Dsite.label="Xsemantics Site" -Dproject.build.directory=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier}</appArgLine>
+							<repositories>
+								<repository>
+									<id>kepler</id>
+									<layout>p2</layout>
+									<url>http://download.eclipse.org/releases/kepler</url>
+								</repository>
+							</repositories>
+							<dependencies>
+								<dependency>
+									<artifactId>org.eclipse.ant.core</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.apache.ant</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+									<type>eclipse-feature</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+									<type>eclipse-feature</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.ds</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+							</dependencies>
+						</configuration>
+						<executions>
+							<execution>
+								<id>add-p2-composite-repository</id>
+								<phase>package</phase>
+								<goals>
+									<goal>eclipse-run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+		</profile>
+	</profiles>
+</project>

@@ -42,6 +42,8 @@
 		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
 		<module>../../features/it.xsemantics.tests.feature</module>
 		<module>../../tests/it.xsemantics.tests.swtbot</module>
+
+		<module>../../releng/it.xsemantics.repository</module>
 	</modules>
 
 	<properties>
