@@ -37,7 +37,7 @@
 
 		<module>../../features/it.xsemantics.runtime.feature</module>
 		<module>../../features/it.xsemantics.feature</module>
-		<module>../../releng/it.xsemantics.sdk</module>
+		<module>../../features/it.xsemantics.sdk</module>
 
 		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
 		<module>../../features/it.xsemantics.tests.feature</module>
