@@ -1,0 +1,31 @@
+module GenerateHelpArtifacts
+
+import org.eclipse.emf.mwe.utils.*
+
+var modelPath = 'xdoc'
+var targetDir = 'contents'
+
+Workflow {
+
+    component = org.eclipse.xtext.mwe.Reader {
+        // lookup all resources on the classpath
+        useJavaClassPath = true
+
+        // or define search scope explicitly
+        path = modelPath
+
+        register = org.eclipse.xtext.xdoc.XdocStandaloneSetup {}
+        loadResource = {
+            slot = 'model'
+            uri = ".*\\.xdoc$"
+        }
+    }
+
+    component = org.eclipse.xtext.generator.GeneratorComponent {
+        register = org.eclipse.xtext.xdoc.XdocStandaloneSetup {}
+        slot = 'model'
+        outlet = {
+            path = targetDir
+        }
+    }
+}
