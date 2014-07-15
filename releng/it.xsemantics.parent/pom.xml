@@ -38,8 +38,8 @@
 		<module>../../releng/it.xsemantics.sdk</module>
 
 		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
-<!-- 		<module>../../features/it.xsemantics.tests.feature</module> -->
-<!-- 		<module>../../tests/it.xsemantics.tests.swtbot</module> -->
+		<module>../../features/it.xsemantics.tests.feature</module>
+		<module>../../tests/it.xsemantics.tests.swtbot</module>
 	</modules>
 
 	<properties>
