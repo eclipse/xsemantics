@@ -75,8 +75,13 @@
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.junit.reportsPath>../${project.artifactId}.tests/target/surefire-reports/</sonar.junit.reportsPath>
-		<sonar.skippedModules>it.xsemantics.tests,it.xsemantics.tests.swtbot</sonar.skippedModules>
-		<sonar.exclusions>file:**/src-gen/**</sonar.exclusions>
+		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**</sonar.exclusions>
+		<!--  sonar.skippedModules is deprecated: https://jira.codehaus.org/browse/SONAR-5109 -->
+		<!-- <sonar.skippedModules>it.xsemantics.dsl.tests,it.xsemantics.example.fj.tests,it.xsemantics.example.expressions.tests,it.xsemantics.example.lambda.tests,it.xsemantics.tests.swtbot</sonar.skippedModules> -->
+		<!-- instead we must use advanced reactor options: https://jira.codehaus.org/browse/MSONAR-61  -->
+		<!-- Example:
+			mvn sonar:sonar -pl :it.xsemantics.parent,:it.xsemantics.runtime,:it.xsemantics.dsl,:it.xsemantics.dsl.ui
+		 -->
 		
 		<findbugs.skip>false</findbugs.skip>
 		<mwe2.skip>false</mwe2.skip>
