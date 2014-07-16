@@ -22,16 +22,17 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.pde.internal.ui.IPDEUIConstants;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.WorkbenchException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -56,16 +57,19 @@ public class XsemanticsSwtbotTestBase {
 		closeWelcomePage();
 
 		// Change the perspective via the Open Perspective dialog
-		SWTBotMenu windowMenu = bot.menu("Window");
-		SWTBotMenu openPerspectiveMenu = windowMenu.menu("Open Perspective");
-		SWTBotMenu otherMenu = openPerspectiveMenu.menu("Other...");
-		otherMenu.click();
-		SWTBotShell openPerspectiveShell = bot.shell("Open Perspective");
-		openPerspectiveShell.activate();
-
-		// select the dialog
-		bot.table().select("Plug-in Development");
-		bot.button("OK").click();
+		// Using the menus does not seem to be reliable, so we change
+		// the perspective programmatically
+//		SWTBotMenu windowMenu = bot.menu("Window");
+//		SWTBotMenu openPerspectiveMenu = windowMenu.menu("Open Perspective");
+//		SWTBotMenu otherMenu = openPerspectiveMenu.menu("Other...");
+//		otherMenu.click();
+//		SWTBotShell openPerspectiveShell = bot.shell("Open Perspective");
+//		openPerspectiveShell.activate();
+//
+//		// select the dialog
+//		bot.table().select("Plug-in Development");
+//		bot.button("OK").click();
+		openPluginPerspective();
 
 		// in SwtBot 2.2.0 we must use part name since the title
 		// of the problems view also contains the items count
@@ -94,6 +98,19 @@ public class XsemanticsSwtbotTestBase {
 				if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
 					PlatformUI.getWorkbench().getIntroManager()
 							.closeIntro(PlatformUI.getWorkbench().getIntroManager().getIntro());
+				}
+			}
+		});
+	}
+
+	protected static void openPluginPerspective() throws InterruptedException {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				try {
+					PlatformUI.getWorkbench().showPerspective(IPDEUIConstants.PERSPECTIVE_ID,       
+					         PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+				} catch (WorkbenchException e) {
+					e.printStackTrace();
 				}
 			}
 		});
