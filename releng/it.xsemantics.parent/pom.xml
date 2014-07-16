@@ -88,60 +88,23 @@
 		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
 	</properties>
-
+	
 	<profiles>
 		<profile>
 			<id>kepler</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<target>
-								<artifact>
-									<groupId>it.xsemantics.targetplatform</groupId>
-									<artifactId>kepler</artifactId>
-									<version>${project.version}</version>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<properties>
+				<target-file-name>kepler</target-file-name>
+			</properties>
 		</profile>
-
 		<profile>
 			<id>local</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<target>
-								<artifact>
-									<groupId>it.xsemantics.targetplatform</groupId>
-									<artifactId>local</artifactId>
-									<version>${project.version}</version>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<properties>
+				<target-file-name>local</target-file-name>
+			</properties>
 		</profile>
-
 	</profiles>
 
 	<build>
@@ -210,6 +173,22 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>it.xsemantics</groupId>
+							<artifactId>it.xsemantics.targetplatform</artifactId>
+							<version>${project.version}</version>
+							<classifier>${target-file-name}</classifier> 
+						</artifact>
+					</target>
+				</configuration>
 			</plugin>
 			
 			<plugin>
