@@ -191,6 +191,7 @@
 								<feature id="it.xsemantics.tests.feature"/>
 
 								<feature id="org.eclipse.swtbot.ide"/>
+								<feature id="org.eclipse.swtbot.eclipse"/>
 								<feature id="org.eclipse.xtext.sdk"/>
 								<feature id="org.eclipse.xtend.sdk"/>
 								<feature id="org.eclipse.pde"/>
