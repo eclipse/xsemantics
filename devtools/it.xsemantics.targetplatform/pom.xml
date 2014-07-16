@@ -14,5 +14,6 @@
 
 	<modules>
 		<module>kepler</module>
+		<module>local</module>
 	</modules>
 </project>

@@ -89,6 +89,61 @@
 		<swtbot.tests.only>false</swtbot.tests.only>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>kepler</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<target>
+								<artifact>
+									<groupId>it.xsemantics.targetplatform</groupId>
+									<artifactId>kepler</artifactId>
+									<version>${project.version}</version>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<target>
+								<artifact>
+									<groupId>it.xsemantics.targetplatform</groupId>
+									<artifactId>local</artifactId>
+									<version>${project.version}</version>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -216,21 +271,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<target>
-						<artifact>
-							<groupId>it.xsemantics.targetplatform</groupId>
-							<artifactId>kepler</artifactId>
-							<version>${project.version}</version>
-						</artifact>
-					</target>
-				</configuration>
 			</plugin>
 			
 			<plugin>
