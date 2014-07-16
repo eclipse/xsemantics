@@ -34,8 +34,9 @@ public class XsemanticsValidatorErrorGenerator {
 	protected void generateErrors(
 			ValidationMessageAcceptor validationMessageAcceptor,
 			RuleFailedException ruleFailedException, EObject originalSource) {
-		if (ruleFailedException == null)
+		if (ruleFailedException == null) {
 			return;
+		}
 		Iterable<RuleFailedException> allFailures = filter
 				.filterRuleFailedExceptions(ruleFailedException);
 		// the last information about a model element with error
@@ -66,13 +67,14 @@ public class XsemanticsValidatorErrorGenerator {
 				lastErrorInformationWithSource = errorInformation;
 			}
 		} else {
-			if (lastErrorInformationWithSource != null)
+			if (lastErrorInformationWithSource != null) {
 				error(validationMessageAcceptor, errorMessage,
 						lastErrorInformationWithSource.getSource(),
 						lastErrorInformationWithSource.getFeature(), issue);
-			else
+			} else {
 				error(validationMessageAcceptor, errorMessage, originalSource,
 						null, issue);
+			}
 		}
 		return lastErrorInformationWithSource;
 	}

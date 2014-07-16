@@ -25,8 +25,9 @@ public class XsemanticsValidatorFilter {
 			RuleFailedException e) {
 		final RuleFailedException inner = traceUtils
 						.innermostRuleFailedExceptionWithNodeModelSources(e);
-		if (inner != null)
+		if (inner != null) {
 			return Lists.newArrayList(inner);
+		}
 		// we must return at least a failure, so we default to the passed one
 		return Lists.newArrayList(e);
 	}

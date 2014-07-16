@@ -27,8 +27,9 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 		Iterator<JvmTypeReference> i = iterator();
 		while (i.hasNext()) {
 			JvmType type = i.next().getType();
-			if (type != null && !type.eIsProxy())
+			if (type != null && !type.eIsProxy()) {
 				hashCode = 31 * hashCode + (type == null ? 0 : type.hashCode());
+			}
 		}
 		return hashCode;
 	}
@@ -38,8 +39,9 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o == null)
+		if (o == null) {
 			return false;
+		}
 
 		// the following checks are useless, since they
 		// are never true due to the way we create and use TupleType
@@ -51,8 +53,9 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 		while (e1.hasNext() && e2.hasNext()) {
 			JvmTypeReference o1 = e1.next();
 			JvmTypeReference o2 = e2.next();
-			if (!(o1 == null ? o2 == null : o1.getType().equals(o2.getType())))
+			if (!(o1 == null ? o2 == null : o1.getType().equals(o2.getType()))) {
 				return false;
+			}
 		}
 		return !(e1.hasNext() || e2.hasNext());
 	}

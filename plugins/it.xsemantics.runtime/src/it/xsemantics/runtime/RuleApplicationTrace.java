@@ -21,13 +21,15 @@ public class RuleApplicationTrace {
 	}
 
 	public void addToTrace(Object traceElement) {
-		if (traceElement != null)
+		if (traceElement != null) {
 			trace.add(traceElement);
+		}
 	}
 
 	public void addAsSubtrace(RuleApplicationTrace subTrace) {
-		if (subTrace != null)
+		if (subTrace != null) {
 			trace.add(subTrace);
+		}
 	}
 
 	/**
@@ -69,10 +71,11 @@ public class RuleApplicationTrace {
 		RuleApplicationTrace cloned = new RuleApplicationTrace();
 		cloned.trace = new ArrayList<Object>();
 		for (Object orig : trace) {
-			if (orig instanceof RuleApplicationTrace)
+			if (orig instanceof RuleApplicationTrace) {
 				cloned.trace.add(((RuleApplicationTrace)orig).clone());
-			else
+			} else {
 				cloned.trace.add(orig);
+			}
 		}
 		return cloned;
 	}

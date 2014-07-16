@@ -25,10 +25,11 @@ public class RuleEnvironment {
 	protected RuleEnvironment next = null;
 
 	public RuleEnvironment(RuleEnvironment e) {
-		if (e == null)
+		if (e == null) {
 			environment = new HashMap<Object, Object>();
-		else
+		} else {
 			environment = new HashMap<Object, Object>(e.getEnvironment());
+		}
 	}
 
 	public RuleEnvironment() {
@@ -81,8 +82,9 @@ public class RuleEnvironment {
 	 * @return
 	 */
 	public boolean add(Object o1, Object o2, boolean checkExist) {
-		if (checkExist && environment.containsKey(o1))
+		if (checkExist && environment.containsKey(o1)) {
 			return false;
+		}
 
 		environment.put(o1, o2);
 
@@ -98,8 +100,9 @@ public class RuleEnvironment {
 	 */
 	public Object get(Object key) {
 		Object object = environment.get(key);
-		if (object == null && next != null)
+		if (object == null && next != null) {
 			return next.get(key);
+		}
 		return object;
 	}
 
@@ -109,8 +112,9 @@ public class RuleEnvironment {
 	 * @param ruleEnvironment
 	 */
 	public void increment(RuleEnvironment ruleEnvironment) {
-		if (ruleEnvironment != null)
+		if (ruleEnvironment != null) {
 			environment.putAll(ruleEnvironment.getEnvironment());
+		}
 	}
 
 	/**
@@ -137,9 +141,10 @@ public class RuleEnvironment {
 	 * @param ruleEnvironment
 	 */
 	public void decrement(RuleEnvironment ruleEnvironment) {
-		if (ruleEnvironment != null)
+		if (ruleEnvironment != null) {
 			environment.keySet().removeAll(
 				ruleEnvironment.getEnvironment().keySet());
+		}
 	}
 
 
@@ -160,14 +165,16 @@ public class RuleEnvironment {
 	 * @return
 	 */
 	public boolean union(RuleEnvironment ruleEnvironment) {
-		if (ruleEnvironment == null)
+		if (ruleEnvironment == null) {
 			return true;
+		}
 		
 		Set<Entry<Object, Object>> entrySet = ruleEnvironment
 				.getEnvironment().entrySet();
 		for (Entry<Object, Object> entry : entrySet) {
-			if (!union(entry.getKey(), entry.getValue()))
+			if (!union(entry.getKey(), entry.getValue())) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -182,8 +189,9 @@ public class RuleEnvironment {
 	}
 
 	public String toString() {
-		if (isEmpty())
+		if (isEmpty()) {
 			return "";
+		}
 		
 		StringBuffer buffer = new StringBuffer(
 			IterableExtensions.join(

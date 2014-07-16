@@ -62,8 +62,9 @@ public class RuleFailedException extends Exception {
 	}
 	
 	public void addErrorInformations(ErrorInformation... errorInformations) {
-		for (int i = 0; i < errorInformations.length; ++i)
+		for (int i = 0; i < errorInformations.length; ++i) {
 			addErrorInformation(errorInformations[i]);
+		}
 	}
 
 	public RuleFailedException getPrevious() {

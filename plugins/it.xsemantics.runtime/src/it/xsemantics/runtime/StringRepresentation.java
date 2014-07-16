@@ -38,8 +38,9 @@ public class StringRepresentation {
 	public String string(Object object) {
 		// don't pass null argument to polymorphic dispatch
 		// otherwise we get ambiguos methods error
-		if (object == null)
+		if (object == null) {
 			return NULL_REPRESENTATION;
+		}
 		return dispatcher.invoke(object);
 	}
 
@@ -48,8 +49,9 @@ public class StringRepresentation {
 		StringBuffer buffer = new StringBuffer();
 
 		for (Object object : iterable) {
-			if (buffer.length() > 0)
+			if (buffer.length() > 0) {
 				buffer.append(", ");
+			}
 			buffer.append(string(object));
 		}
 
@@ -82,8 +84,9 @@ public class StringRepresentation {
 
 	protected String stringRepForEObjectNotProcessed(EObject eObject) {
 		final ICompositeNode node = NodeModelUtils.getNode(eObject);
-		if (node != null)
+		if (node != null) {
 			return NodeModelUtils.getTokenText(node);
+		}
 		return stringRepForEObject(eObject);
 	}
 
@@ -102,8 +105,9 @@ public class StringRepresentation {
 				EAttribute attribute = (EAttribute) feature;
 				if (attribute.getEType().getName().equals("EString")) {
 					Object eGet = eObject.eGet(attribute);
-					if (eGet != null)
+					if (eGet != null) {
 						return withType(stringRepEClass, string(eGet));
+					}
 				}
 			}
 
@@ -124,8 +128,9 @@ public class StringRepresentation {
 	}
 
 	protected String stringRep(RuleEnvironment environment) {
-		if (environment.isEmpty())
+		if (environment.isEmpty()) {
 			return "[]";
+		}
 		StringBuilder buffer = new StringBuilder();
 		Set<Entry<Object, Object>> entrySet = environment.getEnvironment()
 				.entrySet();
@@ -139,8 +144,9 @@ public class StringRepresentation {
 
 		if (environment.getNext() != null) {
 			String nextRep = stringRep(environment.getNext());
-			if (nextRep.length() > 0)
+			if (nextRep.length() > 0) {
 				buffer.append("::" + nextRep);
+			}
 		}
 
 		return buffer.toString();

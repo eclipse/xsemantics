@@ -53,8 +53,9 @@ public class XsemanticsRuntimeSystem {
 	 * @since 1.5
 	 */
 	public XsemanticsCache getCache() {
-		if (cache == null)
+		if (cache == null) {
 			cache = cacheProvider.get();
+		}
 		return cache;
 	}
 
@@ -140,16 +141,19 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public boolean isResultAssignableTo(Object result, Class<?> destinationClass) {
-		if (result == null) // null is always assignable
+		// null is always assignable
+		if (result == null) {
 			return true;
+		}
 		return destinationClass.isAssignableFrom(result.getClass());
 	}
 
 	public void checkAssignableTo(Object result, Class<?> destinationClass)
 			throws RuleFailedException {
-		if (!isResultAssignableTo(result, destinationClass))
+		if (!isResultAssignableTo(result, destinationClass)) {
 			throw newRuleFailedException(stringRep(result)
 					+ " cannot be assigned to " + stringRep(destinationClass));
+		}
 	}
 
 	public void checkParamsNotNull(Object... objects)
@@ -161,8 +165,9 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public void checkNotNull(Object object) throws RuleFailedException {
-		if (object == null)
+		if (object == null) {
 			throw newRuleFailedException("passed null object to system");
+		}
 	}
 
 	public String stringRep(Object object) {
@@ -170,8 +175,9 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	protected String stringRepForEnv(RuleEnvironment ruleEnvironment) {
-		if (ruleEnvironment == null)
+		if (ruleEnvironment == null) {
 			return "[]";
+		}
 		return stringRepresentation.string(ruleEnvironment);
 	}
 
@@ -181,8 +187,9 @@ public class XsemanticsRuntimeSystem {
 		Iterator<String> it = relationSymbols.iterator();
 		for (int i = INDEX_OF_RULE_PARAMETERS; i < params.length; i++) {
 			builder.append(stringRep(params[i]));
-			if (it.hasNext())
+			if (it.hasNext()) {
 				builder.append(" " + it.next() + " ");
+			}
 		}
 		return builder.toString();
 	}
@@ -190,8 +197,9 @@ public class XsemanticsRuntimeSystem {
 	protected String stringRepForParams(Object[] params) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = INDEX_OF_AUX_PARAMETERS; i < params.length; i++) {
-			if (builder.length() > 0)
+			if (builder.length() > 0) {
 				builder.append(", ");
+			}
 			builder.append(stringRep(params[i]));
 		}
 		return builder.toString();
@@ -332,21 +340,24 @@ public class XsemanticsRuntimeSystem {
 
 	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
 			Object traceElement) {
-		if (ruleApplicationTrace != null)
+		if (ruleApplicationTrace != null) {
 			ruleApplicationTrace.addToTrace(traceElement);
+		}
 	}
 
 	public RuleApplicationTrace newTrace(
 			RuleApplicationTrace ruleApplicationTrace) {
-		if (ruleApplicationTrace != null)
+		if (ruleApplicationTrace != null) {
 			return new RuleApplicationTrace();
+		}
 		return null;
 	}
 
 	public void addAsSubtrace(RuleApplicationTrace ruleApplicationTrace,
 			RuleApplicationTrace subTrace) {
-		if (ruleApplicationTrace != null)
+		if (ruleApplicationTrace != null) {
 			ruleApplicationTrace.addAsSubtrace(subTrace);
+		}
 	}
 
 	/**
@@ -371,14 +382,17 @@ public class XsemanticsRuntimeSystem {
 	@SuppressWarnings("unchecked")
 	public <T> T environmentAccess(RuleEnvironment environment, Object key,
 			Class<? extends T> clazz) throws RuleFailedException {
-		if (environment == null)
+		if (environment == null) {
 			throw newRuleFailedException("access to null environment");
+		}
 		Object value = environment.get(key);
-		if (value == null)
+		if (value == null) {
 			throw newRuleFailedException("no mapping in the environment for: "
 					+ stringRep(key));
-		if (clazz.isAssignableFrom(value.getClass()))
+		}
+		if (clazz.isAssignableFrom(value.getClass())) {
 			return (T) value;
+		}
 		throw newRuleFailedException("mapped value " + stringRep(value)
 				+ " cannot be assigned to " + stringRep(clazz));
 	}
@@ -397,8 +411,9 @@ public class XsemanticsRuntimeSystem {
 
 	public RuleEnvironment environmentComposition(RuleEnvironment environment,
 			RuleEnvironment environment2) {
-		if (environment == null)
+		if (environment == null) {
 			return new RuleEnvironment(environment2);
+		}
 		return new RuleEnvironment(environment, environment2);
 	}
 
@@ -460,12 +475,14 @@ public class XsemanticsRuntimeSystem {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Object> getList(Object object) {
-		if (object == null)
+		if (object == null) {
 			return Lists.newArrayList();
+		}
 
 		if (object instanceof List) {
 			return (List<Object>) object;
 		}
+
 		return Lists.newArrayList(object);
 	}
 
@@ -487,16 +504,18 @@ public class XsemanticsRuntimeSystem {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> void addToList(List<T> list, Object o, Class<? extends T> clazz) {
-		if (o == null)
+		if (o == null) {
 			return;
+		}
 		if (o instanceof List) {
 			List objectList = (List) o;
 			for (Object object : objectList) {
 				addToList(list, object, clazz);
 			}
 		} else {
-			if (clazz.isAssignableFrom(o.getClass()))
+			if (clazz.isAssignableFrom(o.getClass())) {
 				list.add((T) o);
+			}
 		}
 	}
 }

@@ -78,9 +78,10 @@ public class XsemanticsProposalProvider extends
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor,
 			Class<?> superType, EReference reference) {
 		JvmTypeReference superTypeRef = typesBuilder.newTypeRef(model, superType);
-		if (superTypeRef != null)
+		if (superTypeRef != null) {
 			typeProposalProvider.createSubTypeProposals(
 				superTypeRef.getType(), this,
 				context, reference, acceptor);
+		}
 	}
 }

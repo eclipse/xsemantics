@@ -15,8 +15,9 @@ public class XsemanticsNodeModelUtils {
 
 	public String getProgramText(EObject object) {
 		final ICompositeNode node = NodeModelUtils.getNode(object);
-		if (node == null)
+		if (node == null) {
 			return null;
+		}
 		return NodeModelUtils.getTokenText(node);
 	}
 }
