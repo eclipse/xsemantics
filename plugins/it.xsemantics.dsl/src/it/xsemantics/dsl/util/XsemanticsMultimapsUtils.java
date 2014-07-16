@@ -12,6 +12,11 @@ import com.google.common.collect.Multimap;
  * 
  */
 public class XsemanticsMultimapsUtils {
+	
+	private XsemanticsMultimapsUtils() {
+		
+	}
+	
 	public static <T, K> Multimap<K, T> duplicatesMultimap() {
 		return Multimaps2.<K, T> newLinkedHashListMultimap();
 	}

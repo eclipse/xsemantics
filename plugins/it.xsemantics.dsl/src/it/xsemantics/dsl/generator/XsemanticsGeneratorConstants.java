@@ -4,14 +4,19 @@
 package it.xsemantics.dsl.generator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author bettini
+ * @author Lorenzo Bettini
  * 
  */
 public class XsemanticsGeneratorConstants {
 
-	protected static ArrayList<String> resultGetMethods;
+	protected static List<String> resultGetMethods;
+	
+	private XsemanticsGeneratorConstants() {
+		
+	}
 
 	static {
 		resultGetMethods = new ArrayList<String>();

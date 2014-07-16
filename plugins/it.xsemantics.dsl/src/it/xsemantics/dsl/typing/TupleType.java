@@ -43,11 +43,6 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 			return false;
 		}
 
-		// the following checks are useless, since they
-		// are never true due to the way we create and use TupleType
-		// if (!(o instanceof TupleType))
-		// return false;
-
 		ListIterator<JvmTypeReference> e1 = listIterator();
 		ListIterator<JvmTypeReference> e2 = ((TupleType) o).listIterator();
 		while (e1.hasNext() && e2.hasNext()) {

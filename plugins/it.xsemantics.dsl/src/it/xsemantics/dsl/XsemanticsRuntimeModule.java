@@ -39,8 +39,4 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XsemanticsXbaseCompiler.class;
 	}
-
-//	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
-//		return XsemanticsXbaseCompiler.class;
-//	}
 }
