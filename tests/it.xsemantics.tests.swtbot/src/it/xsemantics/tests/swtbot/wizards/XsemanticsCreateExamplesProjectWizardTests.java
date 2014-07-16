@@ -60,7 +60,7 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 
 		SWTBotShell shell = bot.shell("New Project");
 		shell.activate();
-		bot.tree().expandNode("Xsemantics").select(projectType);
+		bot.tree().expandNode("Xsemantics", projectType).select();
 		bot.button("Next >").click();
 
 		bot.textWithLabel("Project name:").setText(TEST_PROJECT);
