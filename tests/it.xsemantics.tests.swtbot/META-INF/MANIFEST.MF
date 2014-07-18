@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.swtbot.go;bundle-version="2.2.0",
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  it.xsemantics.tests.pde.utils,
- org.eclipse.pde.ui
+ org.eclipse.pde.ui,
+ it.xsemantics.ui.examples
 Export-Package: it.xsemantics.tests.swtbot.wizards
 
