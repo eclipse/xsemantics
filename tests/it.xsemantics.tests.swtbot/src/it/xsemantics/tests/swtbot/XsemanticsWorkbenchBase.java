@@ -24,7 +24,7 @@ public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 	protected static final String TEST_FILE = "mytest.xsemantics";
 
 	@BeforeClass
-	public static void setupProjectForTestin() throws Exception {
+	public static void setupProjectForTesting() throws Exception {
 		bot.menu("File").menu("New").menu("Plug-in Project").click();
 		bot.text().setText(TEST_PROJECT);
 		bot.button("Next >").click();
