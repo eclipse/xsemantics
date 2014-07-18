@@ -29,3 +29,17 @@ Inclusions (e.g.: **/*.class)
 
 Exclusions (e.g.: **/*Test*)
 **/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+
+WITHOUT EXAMPLES
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/it.xsemantics.runtime/**/classes,plugins/it.xsemantics.dsl/**/classes,plugins/it.xsemantics.dsl.ui/**/classes
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/it.xsemantics.*/src,plugins/it.xsemantics.*/xtend-gen,plugins/it.xsemantics.*/src-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/**/*.*
