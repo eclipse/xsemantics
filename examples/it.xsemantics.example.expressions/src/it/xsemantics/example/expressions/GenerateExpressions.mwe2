@@ -8,6 +8,7 @@ var grammarURI = "classpath:/it/xsemantics/example/expressions/Expressions.xtext
 var file.extensions = "expressions"
 var projectName = "it.xsemantics.example.expressions"
 var runtimeProject = "../${projectName}"
+var encoding = "UTF-8"
 
 Workflow {
     bean = StandaloneSetup {
@@ -29,6 +30,7 @@ Workflow {
         pathTestProject = "${runtimeProject}.tests"
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
+        encoding = encoding
         language = {
             uri = grammarURI
             fileExtensions = file.extensions
