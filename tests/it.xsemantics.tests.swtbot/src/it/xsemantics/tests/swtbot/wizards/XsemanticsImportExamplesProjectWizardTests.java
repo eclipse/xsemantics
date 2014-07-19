@@ -10,6 +10,7 @@ import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.junit.After;
 import org.junit.Test;
@@ -69,7 +70,10 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 
 	protected void createExampleProjects(String projectType,
 			String mainProjectId) {
-		bot.menu("File").menu("New").menu("Other...").click();
+		SWTBotMenu fileMenu = bot.menu("File");
+		SWTBotMenu newMenu = fileMenu.menu("New");
+		SWTBotMenu otherMenu = newMenu.menu("Other...");
+		otherMenu.click();
 
 		SWTBotShell shell = bot.shell("New");
 		shell.activate();

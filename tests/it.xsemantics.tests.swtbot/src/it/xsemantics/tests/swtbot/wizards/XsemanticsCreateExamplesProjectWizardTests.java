@@ -11,6 +11,7 @@ import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.junit.After;
 import org.junit.Test;
@@ -56,7 +57,10 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 
 	protected void createProjectAndAssertNoErrorMarker(String projectType)
 			throws CoreException {
-		bot.menu("File").menu("New").menu("Project...").click();
+		SWTBotMenu fileMenu = bot.menu("File");
+		SWTBotMenu newMenu = fileMenu.menu("New");
+		SWTBotMenu projectMenu = newMenu.menu("Project...");
+		projectMenu.click();
 
 		SWTBotShell shell = bot.shell("New Project");
 		shell.activate();

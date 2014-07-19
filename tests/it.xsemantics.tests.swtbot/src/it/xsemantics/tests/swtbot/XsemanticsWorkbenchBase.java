@@ -9,6 +9,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBu
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,7 +26,10 @@ public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	@BeforeClass
 	public static void setupProjectForTesting() throws Exception {
-		bot.menu("File").menu("New").menu("Plug-in Project").click();
+		SWTBotMenu fileMenu = bot.menu("File");
+		SWTBotMenu newMenu = fileMenu.menu("New");
+		SWTBotMenu pluginProjectMenu = newMenu.menu("Plug-in Project");
+		pluginProjectMenu.click();
 		bot.text().setText(TEST_PROJECT);
 		bot.button("Next >").click();
 		bot.button("Finish").click();
