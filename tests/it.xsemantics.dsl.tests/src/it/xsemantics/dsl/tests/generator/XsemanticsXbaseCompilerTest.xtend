@@ -12,7 +12,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.junit.Ignore
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -554,14 +553,14 @@ throwForExplicitFail(error, new ErrorInformation(source, null));'''
 			)
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testForClosures() {
 		checkCompilationOfAllPremises(
 			testFiles.testForClosures,
 '''
 
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     String _name = it.getName();
     return Boolean.valueOf((!Objects.equal(_name, "foo")));
@@ -573,7 +572,7 @@ if (!_forall) {
   sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ it.name != \'foo\' ]");
 }
 EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
+final Function1<EStructuralFeature, Boolean> _function_1 = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     String _name = it.getName();
     /* it.name != 'foo' */
@@ -606,43 +605,6 @@ if (!(!Objects.equal(_name, "foo"))) {
 			)
 	}
 	
-	@Ignore("Xtext 2.6.0") @Test
-	def void testForClosureWithAuxiliaryFunctionWithNoSideEffect() {
-		checkCompilationOfAllPremises(
-			testFiles.testForClosureWithAuxiliaryFunctionWithNoSideEffect,
-'''
-
-EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
-    try {
-      TypeSystem.this.overridesInternal(_trace_, it);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-};
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
-EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
-    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
-        try {
-          TypeSystem.this.isValueInternal(_trace_, it);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
-      }
-    };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
-  }
-};
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);'''
-			)
-	}
-
 	@Test
 	def void testForClosureWithExpressionWithNoSideEffect() {
 		checkCompilationOfAllPremises(
@@ -702,47 +664,6 @@ for (final EStructuralFeature s : _eAllStructuralFeatures) {
 			)
 	}
 	
-	@Ignore("Xtext 2.6.0") @Test
-	def void testForScopeOfThisInRule() {
-		checkCompilationOfAllPremises(
-			testFiles.testForScopeOfThisInRule,
-'''
-
-EClass _eClass = obj.eClass();
-EClass _clone = this.<EClass>clone(_eClass);
-eClass = _clone;'''
-			)
-	}
-	
-	@Ignore("Xtext 2.6.0") @Test
-	def void testForScopeOfThisInClosure() {
-		checkCompilationOfAllPremises(
-			testFiles.testForScopeOfThisInClosure,
-'''
-
-EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
-final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
-    EClass _eClass = obj.eClass();
-    final EClass e = TypeSystem.this.<EClass>clone(_eClass);
-    InputOutput.<EClass>println(e);
-  }
-};
-IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);'''
-			)
-	}
-	
-	@Ignore("Xtext 2.6.0") @Test
-	def void testForScopeOfThisInCheckRule() {
-		checkCompilationOfAllPremisesOfCheckRule(
-			testFiles.testForScopeOfThisInCheckRule,
-'''
-
-EClass _eClass = obj.eClass();
-final EClass eClass = this.<EClass>clone(_eClass);'''
-			)
-	}
-	
 	@Test
 	def void testRuleInvocationWithVarDeclarationAsOutputArg() {
 		checkCompilationOfRuleInvocation(
@@ -795,14 +716,14 @@ if (_ruleinvocation) {
 			)
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testRuleInvocationsAsBooleanExpressions() {
 		checkCompilationOfPremises(
 			testFiles.testRuleInvocationsAsBooleanExpressions,
 '''
 
 final EList<EStructuralFeature> features = eClass.getEStructuralFeatures();
-final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     boolean _or = false;
     /* G ||- it */
@@ -821,7 +742,7 @@ boolean _forall = IterableExtensions.<EStructuralFeature>forall(features, _funct
 if (!_forall) {
   sneakyThrowRuleFailedException("features.forall [ {G ||- it} || eClass != null ]");
 }
-final Function1<EStructuralFeature,Boolean> _function_1 = new Function1<EStructuralFeature,Boolean>() {
+final Function1<EStructuralFeature, Boolean> _function_1 = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     boolean _xblockexpression = false;
     {

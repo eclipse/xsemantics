@@ -1351,48 +1351,10 @@ class XsemanticsTestFiles {
 	}
 	'''
 
-	def testForScopeOfThisInRule() '''
-	«testJudgmentDescriptionsEObjectEClass»
-	
-	rule EObjectEClass
-		G |- EObject obj : EClass eClass
-	from {
-		// clone is in the base runtime system
-		// it should be visible through this
-		eClass = clone(obj.eClass)
-	}
-	'''
-	
-	def testForScopeOfThisInClosure() '''
-	«testJudgmentDescriptionsEObjectEClass»
-	
-	rule EObjectEClass
-		G |- EObject obj : EClass eClass
-	from {
-		// clone is in the base runtime system
-		// it should be visible through this
-		eClass.EAllStructuralFeatures.forEach [
-			val e = clone(obj.eClass)
-			println(e)
-		]
-	}
-	'''
-	
-	def testForScopeOfThisInCheckRule() '''
-	«testJudgmentDescriptionsEObjectEClass»
-	
-	checkrule EObjectEClass
-		for EObject obj
-	from {
-		// clone is in the base runtime system
-		// it should be visible through this
-		val eClass = clone(obj.eClass)
-	}
-	'''
-	
-	def testForScopeOfThisInJudgmentDescription() '''
+	def testForScopeOfThis() '''
 	«testFileWithImports»
-	import org.eclipse.emf.ecore.*
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
 	
 	judgments {
 		type |- EObject c : output EClass
@@ -1400,8 +1362,31 @@ class XsemanticsTestFiles {
 			source clone(c)
 			feature clone(c.eClass).eContainingFeature
 	}
-	'''
 	
+	rule EObjectEClass
+		G |- EObject obj : EClass eClass
+	from {
+		// clone is in the base runtime system
+		// it should be visible through this
+		eClass = clone(obj.eClass)
+		
+		// clone is in the base runtime system
+		// it should be visible through this
+		eClass.EAllStructuralFeatures.forEach [
+			val e = clone(obj.eClass)
+			println(e)
+		]
+	}
+	
+	checkrule EObjectEClassCheck
+		for EObject obj
+	from {
+		// clone is in the base runtime system
+		// it should be visible through this
+		val eClass = clone(obj.eClass)
+	}
+	'''
+
 	def testOutputParamFromInputParam() '''
 	«testJudgmentDescriptionsEObjectEClass»
 	
