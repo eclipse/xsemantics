@@ -417,7 +417,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				append(ruleInvocation.additionalArgsForRuleInvocation().toString());
 				comma(it);
 				ruleInvocationArgumentsToJavaExpressions(it, ruleInvocation);
-				append(");");				
+				append(")");				
 			]
 			
 		} else {

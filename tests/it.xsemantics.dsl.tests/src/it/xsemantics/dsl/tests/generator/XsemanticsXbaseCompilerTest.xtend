@@ -689,7 +689,7 @@ EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures()
 final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
   public Boolean apply(final EStructuralFeature it) {
     /* G ||- it */
-    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);
     return Boolean.valueOf(_ruleinvocation);
   }
 };
@@ -709,7 +709,7 @@ if (!IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _functi
 /* G ||- eClass.EStructuralFeatures.head */
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
 EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eStructuralFeatures);
-boolean _ruleinvocation = uselessSucceeded(G, _trace_, _head);;
+boolean _ruleinvocation = uselessSucceeded(G, _trace_, _head);
 if (_ruleinvocation) {
   InputOutput.<String>println("OK");
 }'''
@@ -727,7 +727,7 @@ final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructur
   public Boolean apply(final EStructuralFeature it) {
     boolean _or = false;
     /* G ||- it */
-    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+    boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);
     if (_ruleinvocation) {
       _or = true;
     } else {
@@ -748,7 +748,7 @@ final Function1<EStructuralFeature, Boolean> _function_1 = new Function1<EStruct
     {
       InputOutput.<String>println("testing");
       /* G ||- it */
-      boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);;
+      boolean _ruleinvocation = uselessSucceeded(G, _trace_, it);
       _xblockexpression = _ruleinvocation;
     }
     return Boolean.valueOf(_xblockexpression);

@@ -114,7 +114,7 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
       public Boolean apply(final it.xsemantics.example.fj.fj.Class it) {
         /* G |- it <| right.classref */
         it.xsemantics.example.fj.fj.Class _classref = right.getClassref();
-        boolean _ruleinvocation = subclassSucceeded(G, _trace_, it, _classref);;
+        boolean _ruleinvocation = subclassSucceeded(G, _trace_, it, _classref);
         return Boolean.valueOf(_ruleinvocation);
       }
     };
