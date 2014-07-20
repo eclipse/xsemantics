@@ -30,6 +30,7 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.eclipse.ui.PlatformUI;
@@ -89,6 +90,23 @@ public class XsemanticsSwtbotTestBase {
 			bot.viewByPartName("Error Log").close();
 		}
 		bot.viewByPartName("Problems").show();
+		
+		SWTBotShell activeShell = null;
+		int retry = 0;
+		System.out.println("Checking active shell...");
+		while (activeShell == null) {
+			try {
+				activeShell = bot.activeShell();
+			} catch (WidgetNotFoundException e) {
+				System.out.println(e.getMessage());
+				System.out.println("Retrying in 10 seconds...");
+				bot.sleep(10000);
+				if (++retry > 5) {
+					System.out.println("Shell is null after " + retry + " tries");
+					break;
+				}
+			}
+		}
 	}
 	
 	@AfterClass
