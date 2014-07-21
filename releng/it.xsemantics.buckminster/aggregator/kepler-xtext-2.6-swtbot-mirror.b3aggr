@@ -6,6 +6,7 @@
         <products name="org.eclipse.sdk.ide"/>
         <features name="org.eclipse.emf.sdk.feature.group"/>
         <features name="org.eclipse.sdk.feature.group"/>
+        <features name="org.eclipse.equinox.executable.feature.group"/>
       </repositories>
     </contributions>
     <contributions description="Xtext Releases" label="Xtext Releases">
