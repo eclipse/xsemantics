@@ -33,13 +33,22 @@
 						<include>**/imports/*Test*.java</include>
 						<include>**/wizards/*Test*.java</include>
 					</includes>
-					<dependencies>
-						<dependency>
-							<type>p2-installable-unit</type>
-							<artifactId>it.xsemantics.tests.feature.feature.group</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-					</dependencies>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<dependency-resolution>
+						<extraRequirements>
+							<requirement>
+								<type>eclipse-feature</type>
+								<id>it.xsemantics.tests.feature</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
 				</configuration>
 			</plugin>
 		</plugins>

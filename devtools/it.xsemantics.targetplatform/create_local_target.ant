@@ -2,8 +2,8 @@
 <project name="CreateLocalTargetDefinitionFile" basedir="." >
 
 	<property name="local.target" value="local.target"/>
-	<property name="orig.target" location="./kepler.target"/>
-	<property name="local.mirror.path" location="${user.home}/mirror/kepler-xtext-2.6-swtbot/final/"/>
+	<property name="orig.target" location="./luna.target"/>
+	<property name="local.mirror.path" location="${user.home}/mirror/luna-xtext-2.6-swtbot/final/"/>
 	<property name="local.mirror.url" value="file:${local.mirror.path}"/>
 
 	

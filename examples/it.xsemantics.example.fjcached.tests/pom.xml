@@ -22,7 +22,7 @@
 					<execution>
 						<!-- compiler tests need an OSGI environment, but no UI -->
 						<id>default-test</id>
-						<phase>test</phase>
+						<phase>integration-test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
 							<useUIHarness>false</useUIHarness>
@@ -40,7 +40,7 @@
 					</execution>
 					<execution>
 						<id>TychoSurefirePluginUiTest</id>
-						<phase>test</phase>
+						<phase>integration-test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
 							<useUIHarness>true</useUIHarness>
@@ -62,6 +62,25 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<dependency-resolution>
+						<extraRequirements>
+							<!-- to get the org.eclipse.osgi.compatibility.state plugin iff 
+							the targeted Eclipse version (e.g., Luna) has it
+							(backwards compatible with kepler and previous versions) -->
+							<requirement>
+								<type>eclipse-feature</type>
+								<id>org.eclipse.rcp</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

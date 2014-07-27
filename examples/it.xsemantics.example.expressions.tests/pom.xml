@@ -22,7 +22,7 @@
 					<execution>
 						<!-- compiler tests need an OSGI environment, but no UI -->
 						<id>default-test</id>
-						<phase>test</phase>
+						<phase>integration-test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
 							<useUIHarness>false</useUIHarness>

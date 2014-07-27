@@ -39,7 +39,7 @@
 		<module>../../features/it.xsemantics.feature</module>
 		<module>../../features/it.xsemantics.sdk</module>
 
-		<module>../../tests/it.xsemantics.tests.pde.utils.kepler</module>
+		<module>../../tests/it.xsemantics.tests.pde.utils.luna</module>
 		<module>../../features/it.xsemantics.tests.feature</module>
 		<module>../../tests/it.xsemantics.tests.swtbot</module>
 
@@ -91,9 +91,18 @@
 	
 	<profiles>
 		<profile>
-			<id>kepler</id>
+			<id>luna</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<target-file-name>luna</target-file-name>
+			</properties>
+		</profile>
+		<profile>
+			<id>kepler</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<target-file-name>kepler</target-file-name>

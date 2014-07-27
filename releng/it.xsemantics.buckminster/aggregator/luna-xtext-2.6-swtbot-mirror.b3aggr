@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" description="Mirror for Luna SDK, Xtext 2.6 and SWTBot Target Platform" label="Mirror for Luna SDK, Xtext 2.6 and SWTBot Target Platform" buildRoot="${user.home}/mirror/luna-xtext-2.6-swtbot">
+  <validationSets label="main">
+    <contributions label="Luna RCP">
+      <repositories location="http://download.eclipse.org/releases/luna">
+        <products name="org.eclipse.sdk.ide"/>
+        <features name="org.eclipse.sdk.feature.group"/>
+        <features name="org.eclipse.equinox.executable.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="EMF Releases" label="EMF Releases">
+      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/releases">
+        <features name="org.eclipse.emf.sdk.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="Xtext Releases" label="Xtext Releases">
+      <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
+        <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.6.0,2.7.0)"/>
+        <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
+        <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="SwtBot" label="SwtBot">
+      <repositories location="http://download.eclipse.org/technology/swtbot/releases/latest">
+        <features name="org.eclipse.swtbot.eclipse.feature.group"/>
+        <features name="org.eclipse.swtbot.ide.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="Itemis Xtext" label="Itemis Xtext">
+      <repositories location="http://download.itemis.de/updates">
+        <features name="de.itemis.xtext.antlr.feature.feature.group"/>
+      </repositories>
+    </contributions>
+    <contributions description="Xdoc" label="Xdoc">
+      <repositories location="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.6">
+        <features name="org.eclipse.xtext.xdoc.feature.feature.group"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations/>
+  <configurations architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <customCategories identifier="custom.rcp.components" label="Custom RCP Components"/>
+</aggregator:Aggregation>
