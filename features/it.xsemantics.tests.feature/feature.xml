@@ -22,7 +22,7 @@
          version="0.0.0"/>
 
    <includes
-         id="it.xsemantics.examples.feature"
+         id="it.xsemantics.implemented.examples.feature"
          version="0.0.0"/>
 
    <includes

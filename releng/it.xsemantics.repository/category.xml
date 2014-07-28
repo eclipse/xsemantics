@@ -11,6 +11,9 @@ in Java).
    <feature id="it.xsemantics.examples.feature">
       <category name="xsemantics"/>
    </feature>
+   <feature id="it.xsemantics.implemented.examples.feature">
+      <category name="xsemantics"/>
+   </feature>
    <feature id="it.xsemantics.feature">
       <category name="xsemantics"/>
    </feature>

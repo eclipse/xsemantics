@@ -29,6 +29,7 @@
 		<module>../../examples/it.xsemantics.example.lambda.ui</module>
 		<module>../../examples/it.xsemantics.example.lambda.tests</module>
 		<module>../../features/it.xsemantics.examples.feature</module>
+		<module>../../features/it.xsemantics.implemented.examples.feature</module>
 
 		<module>../../doc/it.xsemantics.doc</module>
 		<module>../../features/it.xsemantics.doc.feature</module>
