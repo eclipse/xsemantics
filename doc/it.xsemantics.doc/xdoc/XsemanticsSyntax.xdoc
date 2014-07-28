@@ -61,6 +61,38 @@ Remember that these will correspond to fields in the generated Java class
 (ref:CodeGeneration[]),
 that will be instantiated through Guice injection.
 
+Since version 1.5.1 such fields can also be declared as code[Xsemantics][extension]
+(you may know such feature
+from Xtend, and it has exactly the same semantics), so that you can
+use all the methods of the corresponding type as e[extension methods]; for example,
+assuming this class
+
+code[Java][
+import java.util.List;
+
+public class MyExtensions {
+	public void printList(List<Object> l) {
+		// ...
+	}
+}
+]
+
+We can write
+
+code[Xsemantics][
+/* a utility field */
+inject extension MyExtensions myextensions
+
+...
+
+rule EObjectEClass
+	G |- EObject o : EClass c
+from {
+	val list = newArrayList()
+	list.printList // printList comes from MyExtensions
+}
+]
+
 section:Judgments[Judgments]
 
 Then, you have to declare the e[judgments] of your system;
@@ -936,3 +968,61 @@ An example of customization is shown in ref:LambdaCustomization[].
 If one needs the full control on how error markers are generated,
 a custom codeRef[it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator]
 can be injected.
+
+section:Caching[Automatic Caching]
+
+The automatic caching mechanism has been introduced in version 1.5.0
+(it can be seen as an experimental feature).
+
+Xsemantics provides automatic caching mechanisms that can
+be enabled in a system specification. These mechanisms internally
+use at run-time the class codeRef[org.eclipse.xtext.util.OnChangeEvictingCache] that is part
+of the Xtext utility library. This class implements a cache that
+stores its values in the scope of a resource. The values will be
+automatically discarded as soon as the contents of the resource
+changes semantically.
+
+When caching is enabled in Xsemantics system specification,
+then Xsemantics will generated Java code that automatically
+uses the cache.
+caching is enabled on a per-judgment and per-auxiliary description basis, 
+using the keyword code[Xsemantics][cached]. 
+Note that
+caching is based on the Java hashing features, thus it makes sense
+only when used with actual object instances, not with references.
+It is responsibility
+of the programmer to be aware of which judgments and auxiliary
+functions to cache, depending on the nature of the involved input
+parameters.
+
+You can specify also a boolean code[Xsemantics][condition] to enable
+caching only when such condition holds.  For judgments, it is also possible
+to specify whether generated methods (ref:GeneratedSystem[]) for judgments
+should be cached as well (otherwise caching is enabled only for the methods of
+the single rules).
+
+This is an example using all these features.
+
+code[Xsemantics][
+auxiliary {
+	eclasses(EObject o) : List<EClass> cached
+	auxnocacheentryPoints(EObject o) : Boolean cached { condition=(!(o instanceof EClass)) }
+}
+
+judgments {
+	type |- EObject o : output EClass cached
+	nocacheentryPoints ||- EObject o : output EClass cached { entryPoints=NONE }
+	withCacheCondition |= EObject o : output EClass 
+		cached { 
+			condition = (!environment.isEmpty() && !(o instanceof EClass))
+		}
+	withCacheConditionBlock |= EObject o :> output EClass 
+		cached { 
+			condition = { (!environment.isEmpty() && !(o instanceof EClass)) }
+		}
+}
+]
+
+Xsemantics also ships with a version of FJ (see ref:FJ[]) where caching is enabled.
+This is actually implemented as a separate example (e[fjcached]), which is an
+extension of the original FJ example (This is also another example of system extension, ref:SystemExtension[]).

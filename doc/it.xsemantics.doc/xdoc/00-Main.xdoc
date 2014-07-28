@@ -115,7 +115,8 @@ codelanguage-def[Xsemantics][
 	or, fail, error, source, feature, env, empty, inject, validatorExtends,
 	extends, override, auxiliary,
 	static, extension,
-	true, false
+	true, false,
+	cached, condition, entryPoints
 	]
 
 codelanguage-def[Lambda][lambda,int,string]
