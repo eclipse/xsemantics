@@ -29,9 +29,9 @@
 							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile packaging-p2composite.ant p2.composite.add -Dupdates.dir=xsemantics -Dsite.label="Xsemantics Site" -Dproject.build.directory=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier}</appArgLine>
 							<repositories>
 								<repository>
-									<id>kepler</id>
+									<id>luna</id>
 									<layout>p2</layout>
-									<url>http://download.eclipse.org/releases/kepler</url>
+									<url>http://download.eclipse.org/releases/luna</url>
 								</repository>
 							</repositories>
 							<dependencies>
