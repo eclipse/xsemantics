@@ -32,6 +32,7 @@ class XsemanticsSystem {
 }
 
 class Injected extends UniqueByName {
+	boolean ^extension
 	contains JvmTypeReference ^type
 	String name
 }

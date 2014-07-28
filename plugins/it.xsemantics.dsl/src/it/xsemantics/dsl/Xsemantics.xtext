@@ -28,7 +28,7 @@ XsemanticsSystem:
 ;
 
 Injected:
-	'inject' type=JvmTypeReference name=ValidID
+	'inject' extension?='extension'? type=JvmTypeReference name=ValidID
 ;
 
 AuxiliaryDescription:

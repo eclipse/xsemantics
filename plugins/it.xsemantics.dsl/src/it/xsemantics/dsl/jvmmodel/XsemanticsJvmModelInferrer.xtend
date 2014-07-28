@@ -114,7 +114,10 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					injectedField.type
 				) [
 					documentation = injectedField.documentation
-					annotations += ts.toAnnotation(typeof(Inject))
+					annotations += injectedField.toAnnotation(typeof(Inject))
+					if (injectedField.extension) {
+						annotations += injectedField.toAnnotation(typeof(Extension))
+					}
 					visibility = JvmVisibility::PRIVATE
 				]
 			}

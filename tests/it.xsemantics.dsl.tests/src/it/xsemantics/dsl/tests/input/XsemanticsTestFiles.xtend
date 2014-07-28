@@ -1793,6 +1793,28 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testInjectedExtensionFields() '''
+	system it.xsemantics.test.TypeSystem
+	
+	import it.xsemantics.dsl.tests.input.MyTestExtensions
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	
+	/* a utility field */
+	inject extension MyTestExtensions myextensions
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		val list = newArrayList()
+		list.printList // printList comes from MyTestExtensions
+	}
+	'''
+
 	def testAccessToInjectedFieldsInExpressionInConclusion() '''
 	«testSystemWithInjections»
 	

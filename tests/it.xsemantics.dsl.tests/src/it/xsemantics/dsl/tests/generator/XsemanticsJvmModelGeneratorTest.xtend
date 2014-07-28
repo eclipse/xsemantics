@@ -4388,6 +4388,114 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		)
 	}
 
+	@Test
+	def testInjectedExtensions() {
+		testFiles.testInjectedExtensionFields.
+		assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import com.google.inject.Inject;
+import it.xsemantics.dsl.tests.input.MyTestExtensions;
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.ArrayList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String EOBJECTECLASS = "it.xsemantics.test.EObjectEClass";
+  
+  /**
+   * a utility field
+   */
+  @Inject
+  @Extension
+  private MyTestExtensions myextensions;
+  
+  private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+  }
+  
+  public MyTestExtensions getMyextensions() {
+    return this.myextensions;
+  }
+  
+  public void setMyextensions(final MyTestExtensions myextensions) {
+    this.myextensions = myextensions;
+  }
+  
+  public Result<EClass> type(final EObject o) {
+    return type(new RuleEnvironment(), null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final EObject o) {
+    return type(_environment_, null, o);
+  }
+  
+  public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	return typeInternal(_environment_, _trace_, o);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
+    try {
+    	checkParamsNotNull(o);
+    	return typeDispatcher.invoke(_environment_, _trace_, o);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    try {
+    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleEObjectEClass) {
+    	typeThrowException(ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + "EClass",
+    		EOBJECTECLASS,
+    		e_applyRuleEObjectEClass, o, new ErrorInformation[] {new ErrorInformation(o)});
+    	return null;
+    }
+  }
+  
+  protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
+    EClass c = null; // output parameter
+    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
+    this.myextensions.printList(list);
+    return new Result<EClass>(c);
+  }
+}
+'''
+		)
+	}
+
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected) {
 		assertCorrectJavaCodeGeneration(input, expected, null)		
 	}
