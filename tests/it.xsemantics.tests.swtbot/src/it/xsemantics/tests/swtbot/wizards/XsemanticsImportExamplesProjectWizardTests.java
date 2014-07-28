@@ -4,14 +4,22 @@
 package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertTrue;
 import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,7 +85,11 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 
 		SWTBotShell shell = bot.shell("New");
 		shell.activate();
-		bot.tree().expandNode("Xsemantics", "Examples", projectType).select();
+		SWTBotTreeItem xsemanticsNode = bot.tree().expandNode("Xsemantics");
+		waitForNodes(xsemanticsNode);
+		SWTBotTreeItem examplesNode = xsemanticsNode.expandNode("Examples");
+		waitForNodes(examplesNode);
+		examplesNode.expandNode(projectType).select();
 		bot.button("Next >").click();
 
 		bot.button("Finish").click();
@@ -89,5 +101,39 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 				+ ".tests"));
 		assertTrue("Project doesn't exist", isProjectCreated(mainProjectId
 				+ ".ui"));
+	}
+	
+	public void waitForNodes(final SWTBotTreeItem treeItem) {
+		int retries = 3;
+		int msecs = 2000;
+		int count = 0;
+		while (count < retries) {
+			System.out.println("Checking that tree item " + treeItem.getText() + " has children...");
+			List<SWTBotTreeItem> foundItems = UIThreadRunnable.syncExec(new ListResult<SWTBotTreeItem>() {
+				public List<SWTBotTreeItem> run() {
+					TreeItem[] items = treeItem.widget.getItems();
+					List<SWTBotTreeItem> results = new ArrayList<SWTBotTreeItem>();
+					for (TreeItem treeItem : items) {
+						results.add(new SWTBotTreeItem(treeItem));
+					}
+					return results;
+				}
+			});
+			if (foundItems.isEmpty()) {
+				treeItem.collapse();
+				System.out.println("No chilren... retrying in " + msecs + " milliseconds..."); //$NON-NLS-1$
+				try {
+					Thread.sleep(msecs);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				treeItem.expand();
+			} else {
+				System.out.println("Found " + foundItems.size() + " items. OK!");
+				return;
+			}
+			
+			count++;
+		}
 	}
 }
