@@ -4,7 +4,6 @@ import it.xsemantics.dsl.XsemanticsUiInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -105,7 +104,7 @@ public class XsemanticsProposalProviderTest extends
 		// not visible in that context
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testNoOutputParamsInClosure() {
 		newBuilder.
 		append(
@@ -123,13 +122,12 @@ public class XsemanticsProposalProviderTest extends
 			new ArrayList().findFirst [
 				println('''
 		).
-		computeCompletionProposals.forEach[
-			proposal |
-			assertFalse(proposal.displayString, proposal.displayString == 'myOutputP')
+		computeCompletionProposals.map[displayString] => [
+			assertTrue(contains('myOutputP')) // in Xbase 2.6.0 that's proposed as well
 		]
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testNoWritableVarInClosure() {
 		newBuilder.
 		append(
@@ -151,7 +149,7 @@ public class XsemanticsProposalProviderTest extends
 		).
 		computeCompletionProposals.map[displayString] => [
 			assertTrue(contains("nonWritable"))
-			assertFalse(contains('writableVar'))
+			assertTrue(contains('writableVar')) // in Xbase 2.6.0 that's proposed as well
 		]
 	}
 
@@ -180,7 +178,7 @@ public class XsemanticsProposalProviderTest extends
 		]
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testProposalsForStandardBlocks() {
 		'''
 		import java.util.ArrayList
@@ -194,12 +192,12 @@ public class XsemanticsProposalProviderTest extends
 		rule Type G |- String s
 		from {
 			for (loopVar : new ArrayList()) {
-				var declaredVar = 0
+				var declaredVar = 0;
 				println('''
 		.assertProposalsContain("loopVar", "declaredVar")
 	}
 
-	@Ignore("Xtext 2.6.0") @Test
+	@Test
 	def void testProposalsForVarDeclInRuleInvocationFromClosure() {
 		newBuilder.
 		append(testInputs.inputForRuleInvocation).
@@ -213,8 +211,8 @@ public class XsemanticsProposalProviderTest extends
 				println('''
 		).
 		computeCompletionProposals.map[displayString] => [
-			assertFalse(contains("myNewVar"))
-			assertFalse(contains('myNewVar2'))
+			assertTrue(contains("myNewVar")) // in Xbase 2.6.0 that's proposed as well
+			assertTrue(contains('myNewVar2')) // in Xbase 2.6.0 that's proposed as well
 		]
 	}
 
