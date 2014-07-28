@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 import it.xsemantics.ui.examples.XsemanticsUiExamples;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,10 +26,13 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.pde.internal.ui.IPDEUIConstants;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
@@ -219,6 +223,49 @@ public class XsemanticsSwtbotTestBase {
 				wasInterrupted = true;
 			}
 		} while (wasInterrupted);
+	}
+
+	public void waitForTreeItems(final SWTBotTreeItem treeItem) {
+		int retries = 3;
+		int msecs = 2000;
+		int count = 0;
+		while (count < retries) {
+			System.out.println("Checking that tree item " + treeItem.getText() + " has children...");
+			List<SWTBotTreeItem> foundItems = UIThreadRunnable.syncExec(new ListResult<SWTBotTreeItem>() {
+				public List<SWTBotTreeItem> run() {
+					TreeItem[] items = treeItem.widget.getItems();
+					List<SWTBotTreeItem> results = new ArrayList<SWTBotTreeItem>();
+					for (TreeItem treeItem : items) {
+						results.add(new SWTBotTreeItem(treeItem));
+					}
+					return results;
+				}
+			});
+			if (foundItems.isEmpty()) {
+				treeItem.collapse();
+				System.out.println("No chilren... retrying in " + msecs + " milliseconds..."); //$NON-NLS-1$
+				try {
+					Thread.sleep(msecs);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				treeItem.expand();
+			} else if (foundItems.size() == 1 && foundItems.get(0).getText().trim().isEmpty()) {
+				treeItem.collapse();
+				System.out.println("Only one child with empty text... retrying in " + msecs + " milliseconds..."); //$NON-NLS-1$
+				try {
+					Thread.sleep(msecs);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				treeItem.expand();
+			} else {
+				System.out.println("Found " + foundItems.size() + " items. OK!");
+				return;
+			}
+			
+			count++;
+		}
 	}
 
 	protected static void assertNoErrorsInProject() throws CoreException {

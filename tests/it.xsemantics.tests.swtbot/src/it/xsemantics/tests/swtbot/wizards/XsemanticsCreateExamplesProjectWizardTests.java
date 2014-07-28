@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +65,9 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 
 		SWTBotShell shell = bot.shell("New Project");
 		shell.activate();
-		bot.tree().expandNode("Xsemantics", projectType).select();
+		SWTBotTreeItem xsemanticsNode = bot.tree().expandNode("Xsemantics");
+		waitForTreeItems(xsemanticsNode);
+		xsemanticsNode.expandNode(projectType).select();
 		bot.button("Next >").click();
 
 		bot.textWithLabel("Project name:").setText(TEST_PROJECT);
