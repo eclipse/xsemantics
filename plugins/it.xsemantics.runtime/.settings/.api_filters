@@ -3,14 +3,16 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="927989779">
             <message_arguments>
-                <message_argument value="1.5.0"/>
+                <message_argument value="1.5.1"/>
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
-        <filter id="927989779">
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="it.xsemantics.runtime.Activator">
+        <filter id="305324134">
             <message_arguments>
-                <message_argument value="1.5.1"/>
-                <message_argument value="org.eclipse.xtext"/>
+                <message_argument value="it.xsemantics.runtime.Activator"/>
+                <message_argument value="it.xsemantics.runtime_1.5.1"/>
             </message_arguments>
         </filter>
     </resource>
