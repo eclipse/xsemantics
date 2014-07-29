@@ -27,10 +27,15 @@ import com.google.inject.Inject;
  */
 public class StringRepresentation {
 
-	@Inject
-	protected StringRepresentationPostProcessor postProcessor;
+	/**
+	 * @since 1.5
+	 */
+	public static final String FAILED_REPRESENTATION = "failed";
 
 	public static final String NULL_REPRESENTATION = "null";
+
+	@Inject
+	protected StringRepresentationPostProcessor postProcessor;
 
 	private PolymorphicDispatcher<String> dispatcher = PolymorphicDispatcher
 			.createForSingleTarget("stringRep", this);
@@ -46,7 +51,7 @@ public class StringRepresentation {
 
 	@SuppressWarnings("rawtypes")
 	public String stringIterable(Iterable iterable) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		for (Object object : iterable) {
 			if (buffer.length() > 0) {
@@ -101,25 +106,35 @@ public class StringRepresentation {
 		EList<EStructuralFeature> eStructuralFeatures = eClass
 				.getEStructuralFeatures();
 		for (EStructuralFeature feature : eStructuralFeatures) {
-			if (feature instanceof EAttribute) {
-				EAttribute attribute = (EAttribute) feature;
-				if (attribute.getEType().getName().equals("EString")) {
-					Object eGet = eObject.eGet(attribute);
-					if (eGet != null) {
-						return withType(stringRepEClass, string(eGet));
-					}
-				}
-			}
-
-			if (feature instanceof EReference) {
-				Object ref = eObject.eGet(feature, true);
-				if (ref != null) {
-					return withType(stringRepEClass, string(ref));
-				}
+			String rep = stringRepForEStructuralFeature(eObject, stringRepEClass, feature);
+			if (rep != null) {
+				return rep;
 			}
 		}
 
 		return stringRepEClass;
+	}
+
+	private String stringRepForEStructuralFeature(EObject eObject,
+			String stringRepEClass, EStructuralFeature feature) {
+		if (feature instanceof EAttribute) {
+			EAttribute attribute = (EAttribute) feature;
+			if ("EString".equals(attribute.getEType().getName())) {
+				Object eGet = eObject.eGet(attribute);
+				if (eGet != null) {
+					return withType(stringRepEClass, string(eGet));
+				}
+			}
+		}
+
+		if (feature instanceof EReference) {
+			Object ref = eObject.eGet(feature, true);
+			if (ref != null) {
+				return withType(stringRepEClass, string(ref));
+			}
+		}
+		
+		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -156,7 +171,7 @@ public class StringRepresentation {
 	 * @since 1.5
 	 */
 	protected String stringRep(Result<?> result) {
-		return "Result " + (result.failed() ? "failed" :
+		return "Result " + (result.failed() ? FAILED_REPRESENTATION :
 				string(result.getValue()));
 	}
 
@@ -164,7 +179,7 @@ public class StringRepresentation {
 	 * @since 1.5
 	 */
 	protected String stringRep(Result2<?,?> result) {
-		return "Result2 " + (result.failed() ? "failed" :
+		return "Result2 " + (result.failed() ? FAILED_REPRESENTATION :
 				string(result.getFirst()) + ", " + 
 				string(result.getSecond()));
 	}
@@ -173,7 +188,7 @@ public class StringRepresentation {
 	 * @since 1.5
 	 */
 	protected String stringRep(Result3<?,?,?> result) {
-		return "Result3 " + (result.failed() ? "failed" :
+		return "Result3 " + (result.failed() ? FAILED_REPRESENTATION :
 				string(result.getFirst()) + ", " + 
 				string(result.getSecond()) + ", " + 
 				string(result.getThird()));
