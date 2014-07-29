@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class RuleFailedException extends Exception {
 	
-	protected String issue;
+	protected final String issue;
 
-	protected List<ErrorInformation> errorInformations = new LinkedList<ErrorInformation>();
+	protected final List<ErrorInformation> errorInformations = new LinkedList<ErrorInformation>();
 
 	/**
 	 * the previous exception in the trace of failures
 	 */
-	protected RuleFailedException previous;
+	protected final RuleFailedException previous;
 
 	/**
 	 * 
@@ -30,26 +30,39 @@ public class RuleFailedException extends Exception {
 
 	public RuleFailedException() {
 		super();
+		this.issue = null;
+		this.previous = null;
 	}
 
 	public RuleFailedException(String arg0, Throwable arg1) {
 		super(arg0, arg1);
 		if (arg1 instanceof RuleFailedException) {
 			this.previous = (RuleFailedException) arg1;
+		} else {
+			this.previous = null;
 		}
+		this.issue = null;
 	}
 
 	public RuleFailedException(String arg0) {
 		super(arg0);
+		this.issue = null;
+		this.previous = null;
 	}
 
 	public RuleFailedException(String failed, String issue2, Throwable t) {
-		this(failed, t);
+		super(failed, t);
+		if (t instanceof RuleFailedException) {
+			this.previous = (RuleFailedException) t;
+		} else {
+			this.previous = null;
+		}
 		this.issue = issue2;
 	}
 
 	public RuleFailedException(String arg0, RuleFailedException previous) {
-		this(arg0);
+		super(arg0);
+		this.issue = null;
 		this.previous = previous;
 	}
 

@@ -93,6 +93,24 @@
                 <message_argument value="setPrevious(RuleFailedException)"/>
             </message_arguments>
         </filter>
+        <filter id="388100214">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="errorInformations"/>
+            </message_arguments>
+        </filter>
+        <filter id="388100214">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="issue"/>
+            </message_arguments>
+        </filter>
+        <filter id="388100214">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="previous"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/it/xsemantics/runtime/StringRepresentation.java" type="it.xsemantics.runtime.StringRepresentation">
         <filter comment="this method made no sense" id="338792546">
