@@ -4,22 +4,22 @@
 package it.xsemantics.runtime;
 
 /**
- * @author bettini
+ * @author Lorenzo Bettini
  * 
  */
-public class Result3<FirstT, SecondT, ThirdT> extends Result2<FirstT, SecondT> {
+public class Result3<F, S, T> extends Result2<F, S> {
 
-	private ThirdT third;
+	private T third;
 
-	public Result3(FirstT first) {
+	public Result3(F first) {
 		super(first);
 	}
 
-	public Result3(FirstT first, SecondT second) {
+	public Result3(F first, S second) {
 		super(first, second);
 	}
 
-	public Result3(FirstT first, SecondT second, ThirdT third) {
+	public Result3(F first, S second, T third) {
 		this(first, second);
 		this.third = third;
 	}
@@ -28,7 +28,7 @@ public class Result3<FirstT, SecondT, ThirdT> extends Result2<FirstT, SecondT> {
 		super(ruleFailedException);
 	}
 
-	public ThirdT getThird() {
+	public T getThird() {
 		return third;
 	}
 

@@ -11,30 +11,30 @@ import it.xsemantics.runtime.RuleEnvironment;
 public class XsemanticsCachedData<T extends Object> {
 	private String name = "";
 	
-	private final RuleEnvironment _environment;
+	private final RuleEnvironment environment;
 
-	private final RuleApplicationTrace _trace;
+	private final RuleApplicationTrace trace;
 
-	private final T _result;
+	private final T result;
 
 	public XsemanticsCachedData(final RuleEnvironment environment,
 			final RuleApplicationTrace trace, final T result) {
 		super();
-		this._environment = environment;
-		this._trace = trace;
-		this._result = result;
+		this.environment = environment;
+		this.trace = trace;
+		this.result = result;
 	}
 
 	public RuleEnvironment getEnvironment() {
-		return this._environment;
+		return this.environment;
 	}
 
 	public RuleApplicationTrace getTrace() {
-		return this._trace;
+		return this.trace;
 	}
 
 	public T getResult() {
-		return this._result;
+		return this.result;
 	}
 
 	public String getName() {

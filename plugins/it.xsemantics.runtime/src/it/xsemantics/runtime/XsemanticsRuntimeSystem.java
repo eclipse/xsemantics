@@ -104,14 +104,14 @@ public class XsemanticsRuntimeSystem {
 		return dispatcher;
 	}
 
-	protected <FirstT, SecondT> PolymorphicDispatcher<Result2<FirstT, SecondT>> buildPolymorphicDispatcher2(
+	protected <F, S> PolymorphicDispatcher<Result2<F, S>> buildPolymorphicDispatcher2(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		PolymorphicDispatcher<Result2<FirstT, SecondT>> dispatcher = new PolymorphicDispatcher<Result2<FirstT, SecondT>>(
+		PolymorphicDispatcher<Result2<F, S>> dispatcher = new PolymorphicDispatcher<Result2<F, S>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
-			protected Result2<FirstT, SecondT> handleNoSuchMethod(
+			protected Result2<F, S> handleNoSuchMethod(
 					Object... params) {
 				return org.eclipse.xtext.util.Exceptions
 						.throwUncheckedException(noSuchMethodException(
@@ -122,14 +122,14 @@ public class XsemanticsRuntimeSystem {
 		return dispatcher;
 	}
 
-	protected <FirstT, SecondT, ThirdT> PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>> buildPolymorphicDispatcher3(
+	protected <F, S, T> PolymorphicDispatcher<Result3<F, S, T>> buildPolymorphicDispatcher3(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>> dispatcher = new PolymorphicDispatcher<Result3<FirstT, SecondT, ThirdT>>(
+		PolymorphicDispatcher<Result3<F, S, T>> dispatcher = new PolymorphicDispatcher<Result3<F, S, T>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
-			protected Result3<FirstT, SecondT, ThirdT> handleNoSuchMethod(
+			protected Result3<F, S, T> handleNoSuchMethod(
 					Object... params) {
 				return org.eclipse.xtext.util.Exceptions
 						.throwUncheckedException(noSuchMethodException(
@@ -312,14 +312,14 @@ public class XsemanticsRuntimeSystem {
 		return new Result<T>(extractRuleFailedException(e));
 	}
 
-	protected <FirstT, SecondT> Result2<FirstT, SecondT> resultForFailure2(
+	protected <F, S> Result2<F, S> resultForFailure2(
 			Exception e) {
-		return new Result2<FirstT, SecondT>(extractRuleFailedException(e));
+		return new Result2<F, S>(extractRuleFailedException(e));
 	}
 
-	protected <FirstT, SecondT, ThirdT> Result3<FirstT, SecondT, ThirdT> resultForFailure3(
+	protected <F, S, T> Result3<F, S, T> resultForFailure3(
 			Exception e) {
-		return new Result3<FirstT, SecondT, ThirdT>(extractRuleFailedException(e));
+		return new Result3<F, S, T>(extractRuleFailedException(e));
 	}
 
 	protected String failed(String message) {
