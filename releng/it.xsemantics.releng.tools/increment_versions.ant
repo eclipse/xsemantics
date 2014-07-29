@@ -11,10 +11,12 @@
 		<input message="Please enter the new release version (MAJOR.MINOR.MICRO):" addproperty="version.main" defaultvalue="${version_main}" />
 
 		<property name="version.osgi" value="${version.main}.qualifier"/>
+		<property name="version.mvn" value="${version.main}-SNAPSHOT"/>
 		
 		<propertyfile file="release.properties" comment="Build version">
 			<entry key="version_main" value="${version.main}" />
 			<entry key="version_osgi" value="${version.osgi}" />
+			<entry key="version_mvn" value="${version.mvn}" />
 		</propertyfile>
 		
 		<antcall target="-modify-artifacts"/>
@@ -23,8 +25,19 @@
 	<target name="-modify-artifacts" if="version.main" >
 		<echo message="VERSION MAIN: ${version.main}" />
 		<echo message="VERSION OSGI: ${version.osgi}" />
+		<echo message="VERSION MVN : ${version.mvn}" />
 		<echo message="WORKSPACE   : ${WORKSPACE}" />
 		<echo message="" />
+		
+		<!-- pom.xml -->
+		<replaceregexp>
+			<regexp pattern="&lt;version&gt;(.*)&lt;/version&gt;" />
+			<substitution expression="&lt;version&gt;${version.mvn}&lt;/version&gt;" />
+			<fileset id="path.pom" dir="${WORKSPACE}">
+				<include name="**/pom.xml" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
 
 		<!-- MANIFEST.MF -->
 		<replaceregexp>
