@@ -47,4 +47,27 @@
 		</replaceregexp>
 
 	</target>
+	
+	<target name="set-version-xtext" description="Sets the Xtext version constraints in MANIFEST.MF">
+		<!-- Read the last entered values for defaults -->
+		<property file="version.properties" />
+		<input message="Please enter the new Xtext version:" addproperty="version.xtext" defaultvalue="${version_xtext}" />
+		<!-- MANIFEST.MF -->
+		<replaceregexp>
+			<regexp pattern='org\.eclipse\.xtext;bundle-version=".*\"(.*)' />
+			<substitution expression='org.eclipse.xtext;bundle-version="${version.xtext}"\1' />
+			<fileset id="path.manifest" dir="${WORKSPACE}">
+				<include name="**/META-INF/MANIFEST.MF" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
+		<replaceregexp>
+			<regexp pattern='org\.eclipse\.xtext\.(?!example)(.*);bundle-version=".*\"(.*)' />
+			<substitution expression='org.eclipse.xtext.\1;bundle-version="${version.xtext}"\2' />
+			<fileset id="path.manifest" dir="${WORKSPACE}">
+				<include name="**/META-INF/MANIFEST.MF" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
+	</target>
 </project>

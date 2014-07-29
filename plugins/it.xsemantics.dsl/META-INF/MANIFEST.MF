@@ -6,7 +6,7 @@ Bundle-Version: 1.5.0.qualifier
 Bundle-ClassPath: .
 Bundle-SymbolicName: it.xsemantics.dsl;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;bundle-version="[2.6.2,2.7.0)";visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
