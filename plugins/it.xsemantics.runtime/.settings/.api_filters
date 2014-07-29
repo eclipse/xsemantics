@@ -7,6 +7,12 @@
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
+        <filter id="927989779">
+            <message_arguments>
+                <message_argument value="1.5.1"/>
+                <message_argument value="org.eclipse.xtext"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/it/xsemantics/runtime/ErrorInformation.java" type="it.xsemantics.runtime.ErrorInformation">
         <filter comment="set methods were not used anyway" id="338792546">
