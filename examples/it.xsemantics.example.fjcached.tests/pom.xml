@@ -6,7 +6,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>it.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.5.0-SNAPSHOT</version>
+		<version>1.5.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.example.fjcached.tests</artifactId>
