@@ -3,9 +3,26 @@
 
 	<property name="local.target" value="local.target"/>
 	<property name="orig.target" location="./luna.target"/>
-	<property name="local.mirror.path" location="${user.home}/mirror/luna-xtext-2.6-swtbot/final/"/>
-	<property name="local.mirror.url" value="file:${local.mirror.path}"/>
+	<property name="local.mirror.path.input" location="${user.home}/mirror/luna-xtext-2.6-swtbot/final/"/>
+	<property name="local.mirror.url.input" value="file:${local.mirror.path}"/>
+	
+	<macrodef name="replace_win_slashes">
+	    <attribute name="property.to.process" />
+	    <attribute name="output.property" />
+	    <sequential>
+	    	<loadresource property="@{output.property}">
+    	        <string value="@{property.to.process}"/>
+    	        <filterchain>
+    	        	<replaceregex pattern="\\" replace="/" flags="gi"/>
+    	        </filterchain>
+	    	</loadresource>
+	        <echo message="property.to.process: @{property.to.process}" />
+	    	<echo message="output.property    : ${@{output.property}}" />
+	    </sequential>
+	</macrodef>
 
+	<replace_win_slashes property.to.process="${local.mirror.path.input}" output.property="local.mirror.path" />
+	<replace_win_slashes property.to.process="${local.mirror.url.input}" output.property="local.mirror.url" />
 	
     <target name="copy-target-file" description="Copy the .target definition file into the local.target">
 		<echo message="local.target: ${local.target}" />
@@ -35,4 +52,5 @@
 			</fileset>
 		</replaceregexp>
 	</target>
+
 </project>
