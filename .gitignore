@@ -12,3 +12,4 @@ xtend-gen/
 emf-gen/
 
 buildroot
+org.sonar.ide.eclipse.core.prefs
