@@ -74,7 +74,7 @@ public class XsemanticsRuntimeSystem {
 
 	protected <T> PolymorphicDispatcher<T> buildPolymorphicDispatcher(
 			final String methodName, int numOfArgs) {
-		PolymorphicDispatcher<T> dispatcher = new PolymorphicDispatcher<T>(
+		return new PolymorphicDispatcher<T>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -84,13 +84,12 @@ public class XsemanticsRuntimeSystem {
 								methodName, params));
 			}
 		};
-		return dispatcher;
 	}
 
 	protected <T> PolymorphicDispatcher<Result<T>> buildPolymorphicDispatcher1(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		PolymorphicDispatcher<Result<T>> dispatcher = new PolymorphicDispatcher<Result<T>>(
+		return new PolymorphicDispatcher<Result<T>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -101,13 +100,12 @@ public class XsemanticsRuntimeSystem {
 								params));
 			}
 		};
-		return dispatcher;
 	}
 
 	protected <F, S> PolymorphicDispatcher<Result2<F, S>> buildPolymorphicDispatcher2(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		PolymorphicDispatcher<Result2<F, S>> dispatcher = new PolymorphicDispatcher<Result2<F, S>>(
+		return new PolymorphicDispatcher<Result2<F, S>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -119,13 +117,12 @@ public class XsemanticsRuntimeSystem {
 								params));
 			}
 		};
-		return dispatcher;
 	}
 
 	protected <F, S, T> PolymorphicDispatcher<Result3<F, S, T>> buildPolymorphicDispatcher3(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		PolymorphicDispatcher<Result3<F, S, T>> dispatcher = new PolymorphicDispatcher<Result3<F, S, T>>(
+		return new PolymorphicDispatcher<Result3<F, S, T>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -137,7 +134,6 @@ public class XsemanticsRuntimeSystem {
 								params));
 			}
 		};
-		return dispatcher;
 	}
 
 	public boolean isResultAssignableTo(Object result, Class<?> destinationClass) {
@@ -299,8 +295,7 @@ public class XsemanticsRuntimeSystem {
 			WrappedException wrappedException = (WrappedException) e;
 			Exception exception = wrappedException.exception();
 			if (exception instanceof RuleFailedException) {
-				RuleFailedException ruleFailedException = (RuleFailedException) exception;
-				return ruleFailedException;
+				return (RuleFailedException) exception;
 			}
 		} else if (e instanceof RuleFailedException) {
 			return (RuleFailedException) e;
