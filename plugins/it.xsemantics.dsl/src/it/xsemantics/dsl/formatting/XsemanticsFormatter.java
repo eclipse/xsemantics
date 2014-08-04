@@ -18,5 +18,6 @@ public class XsemanticsFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
+		// There's no implementation for custom formatting at the moment
 	}
 }
