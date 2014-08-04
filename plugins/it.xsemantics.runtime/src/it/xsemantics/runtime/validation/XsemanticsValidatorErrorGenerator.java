@@ -59,12 +59,14 @@ public class XsemanticsValidatorErrorGenerator {
 			Iterable<ErrorInformation> filteredErrorInformation,
 			ErrorInformation lastErrorInformationWithSource,
 			EObject originalSource) {
+		
+		ErrorInformation errorInformationToReturn = lastErrorInformationWithSource;
 		if (filteredErrorInformation.iterator().hasNext()) {
 			for (ErrorInformation errorInformation : filteredErrorInformation) {
 				error(validationMessageAcceptor, errorMessage,
 						errorInformation.getSource(),
 						errorInformation.getFeature(), issue);
-				lastErrorInformationWithSource = errorInformation;
+				errorInformationToReturn = errorInformation;
 			}
 		} else {
 			if (lastErrorInformationWithSource != null) {
@@ -76,7 +78,7 @@ public class XsemanticsValidatorErrorGenerator {
 						null, issue);
 			}
 		}
-		return lastErrorInformationWithSource;
+		return errorInformationToReturn;
 	}
 
 	protected void error(ValidationMessageAcceptor validationMessageAcceptor,

@@ -193,7 +193,7 @@ public class RuleEnvironment {
 			return "";
 		}
 		
-		StringBuffer buffer = new StringBuffer(
+		StringBuilder buffer = new StringBuilder(
 			IterableExtensions.join(
 				IterableExtensions.map(getEnvironment().entrySet(), 
 						new Functions.Function1<Entry<Object, Object>, String>() {
