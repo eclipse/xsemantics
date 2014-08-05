@@ -12,20 +12,20 @@ import java.util.List;
  */
 public class XsemanticsGeneratorConstants {
 
-	protected static List<String> resultGetMethods;
+	protected static final List<String> RESULT_GET_METHODS;
 	
 	private XsemanticsGeneratorConstants() {
 		
 	}
 
 	static {
-		resultGetMethods = new ArrayList<String>();
-		resultGetMethods.add("getFirst()");
-		resultGetMethods.add("getSecond()");
-		resultGetMethods.add("getThird()");
+		RESULT_GET_METHODS = new ArrayList<String>();
+		RESULT_GET_METHODS.add("getFirst()");
+		RESULT_GET_METHODS.add("getSecond()");
+		RESULT_GET_METHODS.add("getThird()");
 	}
 
 	public static Iterable<String> getResultGetMethods() {
-		return resultGetMethods;
+		return RESULT_GET_METHODS;
 	}
 }
