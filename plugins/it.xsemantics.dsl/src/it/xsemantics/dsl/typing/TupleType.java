@@ -39,11 +39,7 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) {
-			return false;
-		}
-		
-		if (!(o instanceof TupleType)) {
+		if (o == null || !(o instanceof TupleType)) {
 			return false;
 		}
 
