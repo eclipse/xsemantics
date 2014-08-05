@@ -5,6 +5,10 @@ package it.xsemantics.dsl.validation;
  */
 public class IssueCodes {
 
+	private IssueCodes() {
+		
+	}
+	
 	public static final String PREFIX = "it.xsemantics.dsl.validation.";
 
 	public static final String DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS = PREFIX
