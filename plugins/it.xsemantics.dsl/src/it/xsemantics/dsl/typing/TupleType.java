@@ -28,7 +28,7 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 		while (i.hasNext()) {
 			JvmType type = i.next().getType();
 			if (type != null && !type.eIsProxy()) {
-				hashCode = 31 * hashCode + (type == null ? 0 : type.hashCode());
+				hashCode = 31 * hashCode + type.hashCode();
 			}
 		}
 		return hashCode;
@@ -40,6 +40,10 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) {
+			return false;
+		}
+		
+		if (!(o instanceof TupleType)) {
 			return false;
 		}
 

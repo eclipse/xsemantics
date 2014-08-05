@@ -238,6 +238,17 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testTupleTypeEqualsWithANonTupleType() {
+		val ts = testFiles.testRuleWithExpressionInConclusion.parse
+		val tupleType1 = tupleType(
+			typeReferences.getTypeForName(typeof(EObject), ts),
+			typeReferences.getTypeForName(typeof(EClass), ts))
+		assertFalse(
+			tupleType1.equals("foo")
+		)
+	}
+
+	@Test
 	def void testTupleTypeEqualsWithDifferentSize() {
 		// getTypeForName requires an EObject context
 		val ts = testFiles.testRuleWithExpressionInConclusion.parse
