@@ -2,6 +2,7 @@ package it.xsemantics.dsl.typing;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription;
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion;
 import it.xsemantics.dsl.xsemantics.InputParameter;
@@ -107,9 +108,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XExpression e) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleXExpressionType(G, _subtrace_, e);
-    	addToTrace(_trace_, ruleName("XExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleXExpressionType(G, _subtrace_, e);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("XExpressionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleXExpressionType) {
@@ -137,9 +142,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final XVariableDeclaration e) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleXVariableDeclarationType(G, _subtrace_, e);
-    	addToTrace(_trace_, ruleName("XVariableDeclarationType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleXVariableDeclarationType(G, _subtrace_, e);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("XVariableDeclarationType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleXVariableDeclarationType) {
@@ -162,9 +171,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ExpressionInConclusion e) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleExpressionInConclusionType(G, _subtrace_, e);
-    	addToTrace(_trace_, ruleName("ExpressionInConclusionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleExpressionInConclusionType(G, _subtrace_, e);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("ExpressionInConclusionType") + stringRepForEnv(G) + " |- " + stringRep(e) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleExpressionInConclusionType) {
@@ -188,9 +201,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final RuleParameter p) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleRuleParameterType(G, _subtrace_, p);
-    	addToTrace(_trace_, ruleName("RuleParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleRuleParameterType(G, _subtrace_, p);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("RuleParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleRuleParameterType) {
@@ -214,9 +231,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final InputParameter p) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleInputParameterType(G, _subtrace_, p);
-    	addToTrace(_trace_, ruleName("InputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleInputParameterType(G, _subtrace_, p);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInputParameterType) {
@@ -240,9 +261,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final OutputParameter p) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleOutputParameterType(G, _subtrace_, p);
-    	addToTrace(_trace_, ruleName("OutputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleOutputParameterType(G, _subtrace_, p);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("OutputParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleOutputParameterType) {
@@ -265,9 +290,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final JvmFormalParameter p) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleJvmFormalParameterType(G, _subtrace_, p);
-    	addToTrace(_trace_, ruleName("JvmFormalParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleJvmFormalParameterType(G, _subtrace_, p);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("JvmFormalParameterType") + stringRepForEnv(G) + " |- " + stringRep(p) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleJvmFormalParameterType) {
@@ -290,9 +319,13 @@ public class XsemanticsTypeSystemGen extends XsemanticsRuntimeSystem {
   
   protected Result<JvmTypeReference> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AuxiliaryDescription aux) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<JvmTypeReference> _result_ = applyRuleAuxiliaryDescriptionType(G, _subtrace_, aux);
-    	addToTrace(_trace_, ruleName("AuxiliaryDescriptionType") + stringRepForEnv(G) + " |- " + stringRep(aux) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<JvmTypeReference> _result_ = applyRuleAuxiliaryDescriptionType(G, _subtrace_, aux);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("AuxiliaryDescriptionType") + stringRepForEnv(G) + " |- " + stringRep(aux) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleAuxiliaryDescriptionType) {
