@@ -108,6 +108,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -184,9 +185,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
@@ -225,6 +230,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
@@ -352,9 +358,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject, EStructuralFeature> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result2<EObject, EStructuralFeature> _result_ = applyRuleEClassEObjectEStructuralFeature(G, _subtrace_, eClass);
-    	addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result2<EObject, EStructuralFeature> _result_ = applyRuleEClassEObjectEStructuralFeature(G, _subtrace_, eClass);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObjectEStructuralFeature") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObjectEStructuralFeature) {
@@ -388,6 +398,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result3;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -446,9 +457,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result3<EObject, EStructuralFeature, String> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result3<EObject, EStructuralFeature, String> _result_ = applyRuleEClassEObjectEStructuralFeatureString(G, _subtrace_, eClass);
-    	addToTrace(_trace_, ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " : " + stringRep(_result_.getThird()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result3<EObject, EStructuralFeature, String> _result_ = applyRuleEClassEObjectEStructuralFeatureString(G, _subtrace_, eClass);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObjectEStructuralFeatureString") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " : " + stringRep(_result_.getThird());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObjectEStructuralFeatureString) {
@@ -485,6 +500,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -542,9 +558,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -651,6 +671,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -730,9 +751,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(object) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -801,6 +826,7 @@ public class TypeSystemValidator extends AbstractDeclarativeValidator {
 package it.xsemantics.test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -910,9 +936,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -950,6 +980,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1010,9 +1041,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject, EStructuralFeature> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
-    	addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTwoExpressionsInConclusion) {
@@ -1048,6 +1083,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result2;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1109,9 +1145,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result2<EObject, EStructuralFeature> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
-    	addToTrace(_trace_, ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result2<EObject, EStructuralFeature> _result_ = applyRuleTwoExpressionsInConclusion(G, _subtrace_, cl);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TwoExpressionsInConclusion") + stringRepForEnv(G) + " |- " + stringRep(cl) + " : " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTwoExpressionsInConclusion) {
@@ -1149,6 +1189,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1258,9 +1299,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -1297,6 +1342,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1405,9 +1451,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -1439,6 +1489,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1513,9 +1564,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
@@ -1611,6 +1666,7 @@ public class TypeSystemValidator extends AbstractDeclarativeValidator {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1716,9 +1772,13 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
-    	addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromTypeSystem) {
@@ -1744,9 +1804,13 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
-    	addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromExtendedTypeSystem) {
@@ -1765,9 +1829,13 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   
   protected Result<Boolean> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
-    	addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromThisTypeSystem) {
@@ -1826,6 +1894,7 @@ public class ExtendedTypeSystem2Validator extends ExtendedTypeSystemValidator {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -1884,9 +1953,13 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject c) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
-    	addToTrace(_trace_, ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleFromTypeSystem(G, _subtrace_, c);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromTypeSystem) {
@@ -1911,9 +1984,13 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
-    	addToTrace(_trace_, ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleFromExtendedTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromExtendedTypeSystem") + stringRepForEnv(G) + " |- " + stringRep(c1) + " <: " + stringRep(c2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromExtendedTypeSystem) {
@@ -1934,9 +2011,13 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   @Override
   protected Result<Boolean> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c1, final EClass c2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
-    	addToTrace(_trace_, ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleFromThisTypeSystem(G, _subtrace_, c1, c2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("FromThisTypeSystem") + stringRepForEnv(G) + " ||- " + stringRep(c1) + " : " + stringRep(c2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleFromThisTypeSystem) {
@@ -2233,6 +2314,7 @@ null
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2356,9 +2438,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleTypeEObject(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleTypeEObject(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TypeEObject") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTypeEObject) {
@@ -2381,9 +2467,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleTypeEClass(G, _subtrace_, c);
-    	addToTrace(_trace_, ruleName("TypeEClass") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleTypeEClass(G, _subtrace_, c);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TypeEClass") + stringRepForEnv(G) + " |- " + stringRep(c) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTypeEClass) {
@@ -2413,9 +2503,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleSubtypeEObject(G, _subtrace_, left, right);
-    	addToTrace(_trace_, ruleName("SubtypeEObject") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubtypeEObject(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("SubtypeEObject") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubtypeEObject) {
@@ -2439,9 +2533,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EStructuralFeature left, final EObject right) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleSubtypeEStructuralFeature(G, _subtrace_, left, right);
-    	addToTrace(_trace_, ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubtypeEStructuralFeature(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("SubtypeEStructuralFeature") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubtypeEStructuralFeature) {
@@ -2462,9 +2560,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass left, final EClass right) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleSubtypeEClass(G, _subtrace_, left, right);
-    	addToTrace(_trace_, ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubtypeEClass(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("SubtypeEClass") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubtypeEClass) {
@@ -2494,6 +2596,7 @@ null
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2623,9 +2726,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleType1(G, _subtrace_, s1, i2);
-    	addToTrace(_trace_, ruleName("Type1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " : " + stringRep(i2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleType1(G, _subtrace_, s1, i2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("Type1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " : " + stringRep(i2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleType1) {
@@ -2643,9 +2750,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleType2(G, _subtrace_, b1, i2);
-    	addToTrace(_trace_, ruleName("Type2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " : " + stringRep(i2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleType2(G, _subtrace_, b1, i2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("Type2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " : " + stringRep(i2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleType2) {
@@ -2663,9 +2774,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s1, final Integer i2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleSubType1(G, _subtrace_, s1, i2);
-    	addToTrace(_trace_, ruleName("SubType1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " <: " + stringRep(i2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubType1(G, _subtrace_, s1, i2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("SubType1") + stringRepForEnv(G) + " |- " + stringRep(s1) + " <: " + stringRep(i2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubType1) {
@@ -2683,9 +2798,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Boolean b1, final Integer i2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleSubType2(G, _subtrace_, b1, i2);
-    	addToTrace(_trace_, ruleName("SubType2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " <: " + stringRep(i2));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubType2(G, _subtrace_, b1, i2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("SubType2") + stringRepForEnv(G) + " |- " + stringRep(b1) + " <: " + stringRep(i2);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubType2) {
@@ -2712,6 +2831,7 @@ null
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2787,9 +2907,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
@@ -2848,6 +2972,7 @@ null
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -2922,9 +3047,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
@@ -3022,6 +3151,7 @@ public class ExtendedTypeSystemValidator extends TypeSystemValidator {
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleFailedException;
@@ -3141,9 +3271,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EObject eO, final EClass eC) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunIsValue(_subtrace_, eO, eC);
-    	addToTrace(_trace_, auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunIsValue(_subtrace_, eO, eC);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("isValue") + "(" + stringRep(eO) + ", " + stringRep(eC)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
@@ -3166,9 +3300,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
-    	addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunObjectClass) {
@@ -3185,9 +3323,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
-    	addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunVoidFun) {
@@ -3209,9 +3351,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean voidFunImpl(final RuleApplicationTrace _trace_, final EStructuralFeature o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
-    	addToTrace(_trace_, auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunVoidFun(_subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("voidFun") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunVoidFun) {
@@ -3239,6 +3385,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -3352,9 +3499,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected EClass objectClassImpl(final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
-    	addToTrace(_trace_, auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final EClass _result_ = applyAuxFunObjectClass(_subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("objectClass") + "(" + stringRep(o)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunObjectClass) {
@@ -3371,9 +3522,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -3403,6 +3558,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -3460,9 +3616,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleTestRule(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleTestRule(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TestRule") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTestRule) {
@@ -3493,6 +3653,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -3620,9 +3781,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeUnionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleUnionRule(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleUnionRule(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("UnionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " \\/ " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleUnionRule) {
@@ -3645,9 +3810,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeIntersectionImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleIntersectionRule(G, _subtrace_, eClass, object);
-    	addToTrace(_trace_, ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleIntersectionRule(G, _subtrace_, eClass, object);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("IntersectionRule") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " /\\ " + stringRep(object);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleIntersectionRule) {
@@ -3679,6 +3848,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -3821,9 +3991,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean overridesImpl(final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunOverrides(_subtrace_, c);
-    	addToTrace(_trace_, auxFunName("overrides") + "(" + stringRep(c)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunOverrides(_subtrace_, c);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("overrides") + "(" + stringRep(c)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunOverrides) {
@@ -3844,9 +4018,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean isValueImpl(final RuleApplicationTrace _trace_, final EClass c) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunIsValue(_subtrace_, c);
-    	addToTrace(_trace_, auxFunName("isValue") + "(" + stringRep(c)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunIsValue(_subtrace_, c);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("isValue") + "(" + stringRep(c)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
@@ -3867,9 +4045,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleTestForClosures(G, _subtrace_, eClass);
-    	addToTrace(_trace_, ruleName("TestForClosures") + stringRepForEnv(G) + " |- " + stringRep(eClass));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleTestForClosures(G, _subtrace_, eClass);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TestForClosures") + stringRepForEnv(G) + " |- " + stringRep(eClass);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTestForClosures) {
@@ -3923,6 +4105,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 '''
 package it.xsemantics.test;
 
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -4015,9 +4198,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, obj);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, obj);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -4396,6 +4583,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 package it.xsemantics.test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.dsl.tests.input.MyTestExtensions;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
@@ -4472,9 +4660,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
-    	addToTrace(_trace_, ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, o);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(o) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {

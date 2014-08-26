@@ -1,6 +1,7 @@
 package it.xsemantics.test.validation.ecore;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -115,9 +116,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EObject> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<EObject> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass);
-    	addToTrace(_trace_, ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<EObject> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
