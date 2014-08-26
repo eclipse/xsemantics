@@ -2,6 +2,7 @@ package it.xsemantics.example.lambda.xsemantics;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.example.lambda.lambda.Abstraction;
 import it.xsemantics.example.lambda.lambda.Application;
 import it.xsemantics.example.lambda.lambda.Arithmetics;
@@ -268,9 +269,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, type, other);
-    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(type) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunNotoccur(_subtrace_, type, other);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("notoccur") + "(" + stringRep(type) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunNotoccur) {
@@ -291,9 +296,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, other);
-    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, other);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(other)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunNotoccur) {
@@ -317,9 +326,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, arrowType);
-    	addToTrace(_trace_, auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Boolean _result_ = applyAuxFunNotoccur(_subtrace_, variable, arrowType);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("notoccur") + "(" + stringRep(variable) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunNotoccur) {
@@ -348,9 +361,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, type);
-    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(type)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, type);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(type)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunTypesubstitution) {
@@ -367,9 +384,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, variable);
-    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(variable)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, variable);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(variable)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunTypesubstitution) {
@@ -404,9 +425,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, arrowType);
-    	addToTrace(_trace_, auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Type _result_ = applyAuxFunTypesubstitution(_subtrace_, substitutions, arrowType);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("typesubstitution") + "(" + stringRep(substitutions) + ", " + stringRep(arrowType)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunTypesubstitution) {
@@ -437,9 +462,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -462,9 +491,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -483,9 +516,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -504,9 +541,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, typeVar, basicType);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(typeVar) + ", " + stringRep(basicType)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, typeVar, basicType);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(typeVar) + ", " + stringRep(basicType)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -531,9 +572,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, basicType, typeVar);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(basicType) + ", " + stringRep(typeVar)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, basicType, typeVar);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(basicType) + ", " + stringRep(typeVar)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -550,9 +595,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -579,9 +628,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -611,9 +664,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -630,9 +687,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, arrow1, arrow2);
-    	addToTrace(_trace_, auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(arrow1) + ", " + stringRep(arrow2)+ ")" + " = " + stringRep(_result_));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, arrow1, arrow2);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(arrow1) + ", " + stringRep(arrow2)+ ")" + " = " + stringRep(_result_);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
@@ -670,9 +731,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> paramtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleParameterType(G, _subtrace_, param);
-    	addToTrace(_trace_, ruleName("ParameterType") + stringRepForEnv(G) + " |~ " + stringRep(param) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleParameterType(G, _subtrace_, param);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("ParameterType") + stringRepForEnv(G) + " |~ " + stringRep(param) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleParameterType) {
@@ -705,9 +770,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleStringConstantType(G, _subtrace_, substitutions, stringConstant);
-    	addToTrace(_trace_, ruleName("StringConstantType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(stringConstant) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleStringConstantType(G, _subtrace_, substitutions, stringConstant);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("StringConstantType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(stringConstant) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleStringConstantType) {
@@ -730,9 +799,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleIntConstantType(G, _subtrace_, substitutions, intConstant);
-    	addToTrace(_trace_, ruleName("IntConstantType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(intConstant) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleIntConstantType(G, _subtrace_, substitutions, intConstant);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("IntConstantType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(intConstant) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleIntConstantType) {
@@ -755,9 +828,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleVariableType(G, _subtrace_, substitutions, variable);
-    	addToTrace(_trace_, ruleName("VariableType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(variable) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleVariableType(G, _subtrace_, substitutions, variable);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("VariableType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(variable) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleVariableType) {
@@ -770,10 +847,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleVariableType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
     Type type = null; // output parameter
-    /* env(G, variable.ref, Type) */
     Parameter _ref = variable.getRef();
-    Type _environmentaccess = environmentAccess(G, _ref, Type.class);
-    Type _copy = EcoreUtil.<Type>copy(_environmentaccess);
+    Type _env = this.<Type>env(G, _ref, Type.class);
+    Type _copy = EcoreUtil.<Type>copy(_env);
     Type _typesubstitution = this.typesubstitutionInternal(_trace_, substitutions, _copy);
     type = _typesubstitution;
     return new Result<Type>(type);
@@ -781,9 +857,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Arithmetics arithmetics) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleArithmeticsType(G, _subtrace_, substitutions, arithmetics);
-    	addToTrace(_trace_, ruleName("ArithmeticsType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(arithmetics) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleArithmeticsType(G, _subtrace_, substitutions, arithmetics);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("ArithmeticsType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(arithmetics) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleArithmeticsType) {
@@ -811,9 +891,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Abstraction abstraction) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleAbstractionType(G, _subtrace_, substitutions, abstraction);
-    	addToTrace(_trace_, ruleName("AbstractionType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(abstraction) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleAbstractionType(G, _subtrace_, substitutions, abstraction);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("AbstractionType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(abstraction) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleAbstractionType) {
@@ -854,9 +938,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Application application) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleApplicationType(G, _subtrace_, substitutions, application);
-    	addToTrace(_trace_, ruleName("ApplicationType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(application) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleApplicationType(G, _subtrace_, substitutions, application);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("ApplicationType") + stringRepForEnv(G) + " |- " + stringRep(substitutions) + " |> " + stringRep(application) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleApplicationType) {

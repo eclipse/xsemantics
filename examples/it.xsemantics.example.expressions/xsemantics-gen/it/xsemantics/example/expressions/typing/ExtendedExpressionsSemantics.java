@@ -1,6 +1,7 @@
 package it.xsemantics.example.expressions.typing;
 
 import com.google.common.base.Objects;
+import com.google.inject.Provider;
 import it.xsemantics.example.expressions.expressions.AndOrExpression;
 import it.xsemantics.example.expressions.expressions.ArithmeticSigned;
 import it.xsemantics.example.expressions.expressions.BooleanLiteral;
@@ -138,9 +139,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleStringLiteral(G, _subtrace_, str);
-    	addToTrace(_trace_, ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleStringLiteral(G, _subtrace_, str);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("StringLiteral") + stringRepForEnv(G) + " |- " + stringRep(str) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleStringLiteral) {
@@ -156,9 +161,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     Type resultType = null; // output parameter
     /* { val expected = env(G, 'expected', Type) G |~ str |> expected resultType = expected } or resultType = ExpressionsFactory::eINSTANCE.createStringType */
     try {
-      /* env(G, 'expected', Type) */
-      Type _environmentaccess = environmentAccess(G, "expected", Type.class);
-      final Type expected = _environmentaccess;
+      final Type expected = this.<Type>env(G, "expected", Type.class);
       /* G |~ str |> expected */
       coerceInternal(G, _trace_, str, expected);
       resultType = expected;
@@ -172,9 +175,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleMultiOrDiv(G, _subtrace_, multiOrDiv);
-    	addToTrace(_trace_, ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleMultiOrDiv(G, _subtrace_, multiOrDiv);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("MultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleMultiOrDiv) {
@@ -215,9 +222,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleMinus(G, _subtrace_, minus);
-    	addToTrace(_trace_, ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleMinus(G, _subtrace_, minus);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("Minus") + stringRepForEnv(G) + " |- " + stringRep(minus) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleMinus) {
@@ -258,9 +269,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRulePlus(G, _subtrace_, plus);
-    	addToTrace(_trace_, ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRulePlus(G, _subtrace_, plus);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("Plus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRulePlus) {
@@ -290,9 +305,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     /* { val expected = env(G, 'expected', Type) G |~ plus.left |> expected G |~ plus.right |> expected type = expected } or { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
     try {
-      /* env(G, 'expected', Type) */
-      Type _environmentaccess = environmentAccess(G, "expected", Type.class);
-      final Type expected = _environmentaccess;
+      final Type expected = this.<Type>env(G, "expected", Type.class);
       /* G |~ plus.left |> expected */
       Expression _left_1 = plus.getLeft();
       coerceInternal(G, _trace_, _left_1, expected);
@@ -335,9 +348,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleBooleanNegation(G, _subtrace_, negation);
-    	addToTrace(_trace_, ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleBooleanNegation(G, _subtrace_, negation);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("BooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(negation) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleBooleanNegation) {
@@ -367,9 +384,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleAndOr(G, _subtrace_, andOr);
-    	addToTrace(_trace_, ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleAndOr(G, _subtrace_, andOr);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("AndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleAndOr) {
@@ -407,9 +428,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Type> _result_ = applyRuleArithmeticSigned(G, _subtrace_, signed);
-    	addToTrace(_trace_, ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Type> _result_ = applyRuleArithmeticSigned(G, _subtrace_, signed);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("ArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " : " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleArithmeticSigned) {
@@ -441,9 +466,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleStringToInt(G, _subtrace_, string, type);
-    	addToTrace(_trace_, ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleStringToInt(G, _subtrace_, string, type);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("StringToInt") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleStringToInt) {
@@ -462,9 +491,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleStringToBool(G, _subtrace_, string, type);
-    	addToTrace(_trace_, ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleStringToBool(G, _subtrace_, string, type);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("StringToBool") + stringRepForEnv(G) + " |~ " + stringRep(string) + " |> " + stringRep(type);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleStringToBool) {
@@ -495,9 +528,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number, final IntType type) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleIntToInt(G, _subtrace_, number, type);
-    	addToTrace(_trace_, ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleIntToInt(G, _subtrace_, number, type);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("IntToInt") + stringRepForEnv(G) + " |~ " + stringRep(number) + " |> " + stringRep(type);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleIntToInt) {
@@ -515,9 +552,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool, final BooleanType type) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleBoolToBool(G, _subtrace_, bool, type);
-    	addToTrace(_trace_, ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleBoolToBool(G, _subtrace_, bool, type);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("BoolToBool") + stringRepForEnv(G) + " |~ " + stringRep(bool) + " |> " + stringRep(type);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleBoolToBool) {
@@ -536,9 +577,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretStringLiteral(G, _subtrace_, string);
-    	addToTrace(_trace_, ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretStringLiteral(G, _subtrace_, string);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretStringLiteral") + stringRepForEnv(G) + " |- " + stringRep(string) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretStringLiteral) {
@@ -555,18 +600,16 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     Type expected = null;
     /* { expected = env(G, 'expected', IntType) result = Integer::parseInt(string.value) } or { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
     try {
-      /* env(G, 'expected', IntType) */
-      IntType _environmentaccess = environmentAccess(G, "expected", IntType.class);
-      expected = _environmentaccess;
+      IntType _env = this.<IntType>env(G, "expected", IntType.class);
+      expected = _env;
       String _value = string.getValue();
       int _parseInt = Integer.parseInt(_value);
       result = Integer.valueOf(_parseInt);
     } catch (Exception e) {
       /* { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
       try {
-        /* env(G, 'expected', BooleanType) */
-        BooleanType _environmentaccess_1 = environmentAccess(G, "expected", BooleanType.class);
-        expected = _environmentaccess_1;
+        BooleanType _env_1 = this.<BooleanType>env(G, "expected", BooleanType.class);
+        expected = _env_1;
         String _value_1 = string.getValue();
         boolean _parseBoolean = Boolean.parseBoolean(_value_1);
         result = Boolean.valueOf(_parseBoolean);
@@ -581,9 +624,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretMinus(G, _subtrace_, plus);
-    	addToTrace(_trace_, ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretMinus(G, _subtrace_, plus);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretMinus") + stringRepForEnv(G) + " |- " + stringRep(plus) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretMinus) {
@@ -626,9 +673,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretMultiOrDiv(G, _subtrace_, multiOrDiv);
-    	addToTrace(_trace_, ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretMultiOrDiv(G, _subtrace_, multiOrDiv);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretMultiOrDiv") + stringRepForEnv(G) + " |- " + stringRep(multiOrDiv) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretMultiOrDiv) {
@@ -680,9 +731,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretArithmeticSigned(G, _subtrace_, signed);
-    	addToTrace(_trace_, ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretArithmeticSigned(G, _subtrace_, signed);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretArithmeticSigned") + stringRepForEnv(G) + " |- " + stringRep(signed) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretArithmeticSigned) {
@@ -713,9 +768,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretAndOr(G, _subtrace_, andOr);
-    	addToTrace(_trace_, ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretAndOr(G, _subtrace_, andOr);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretAndOr") + stringRepForEnv(G) + " |- " + stringRep(andOr) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretAndOr) {
@@ -777,9 +836,13 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Object> _result_ = applyRuleInterpretBooleanNegation(G, _subtrace_, neg);
-    	addToTrace(_trace_, ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + stringRep(_result_.getFirst()));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Object> _result_ = applyRuleInterpretBooleanNegation(G, _subtrace_, neg);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("InterpretBooleanNegation") + stringRepForEnv(G) + " |- " + stringRep(neg) + " ~> " + stringRep(_result_.getFirst());
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleInterpretBooleanNegation) {
