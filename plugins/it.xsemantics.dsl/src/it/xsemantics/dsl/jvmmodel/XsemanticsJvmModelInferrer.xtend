@@ -832,11 +832,11 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
    			
    			body = '''
 				try {
-					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					«judgment.resultType» _result_ = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
+					final «RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
+					final «judgment.resultType» «resultVariableForTrace» = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return _result_;
+					return «resultVariableForTrace»;
 				} catch («Exception» «rule.exceptionVarName») {
 					«IF rule.conclusion.error != null»
 					«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»);
@@ -871,11 +871,11 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
    			
    			body = '''
 				try {
-					«RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					«aux.resultType» _result_ = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
+					final «RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
+					final «aux.resultType» «resultVariableForTrace» = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
 					«addToTraceMethod(ruleApplicationTraceName(), aux.traceStringForAuxiliaryFun)»;
 					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return _result_;
+					return «resultVariableForTrace»;
 				} catch («Exception» e_«aux.applyAuxFunName») {
 					«auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
 						«auxiliaryDescription.ruleIssueString»,
