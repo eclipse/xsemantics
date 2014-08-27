@@ -333,10 +333,23 @@ public class XsemanticsRuntimeSystem {
 		return trimIfNotNull(ruleName);
 	}
 
+	/**
+	 * @deprecated use {@link #addToTrace(RuleApplicationTrace, Provider)} instead to compute the trace element lazily.
+	 * @param ruleApplicationTrace the trace, may be null.
+	 * @param traceElement the element to trace.
+	 */
+	@Deprecated
 	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
 			Object traceElement) {
 		if (ruleApplicationTrace != null) {
 			ruleApplicationTrace.addToTrace(traceElement);
+		}
+	}
+	
+	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
+			Provider<? extends Object> traceElementProvider) {
+		if (ruleApplicationTrace != null) {
+			ruleApplicationTrace.addToTrace(traceElementProvider.get());
 		}
 	}
 
