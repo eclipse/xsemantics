@@ -34,6 +34,8 @@ import static extension org.eclipse.xtext.util.Strings.*
 import it.xsemantics.dsl.xsemantics.Named
 import it.xsemantics.dsl.xsemantics.UniqueByName
 import it.xsemantics.dsl.xsemantics.Cachable
+import com.google.inject.Provider
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class XsemanticsGeneratorExtensions {
 	
@@ -227,8 +229,12 @@ class XsemanticsGeneratorExtensions {
 		rule.conclusion.environment.name
 	}
 
-	def addToTraceMethod(CharSequence trace, CharSequence toAdd) '''
-		addToTrace(«trace», «toAdd»)'''
+	def StringConcatenationClient addToTraceMethod(CharSequence trace, CharSequence toAdd) '''
+		addToTrace(«trace», new «Provider»<Object>() {
+			public Object get() {
+				return «toAdd»;
+			}
+		})'''
 	
 	def addAsSubtraceMethod(CharSequence trace, CharSequence subtrace) '''
 		addAsSubtrace(«trace», «subtrace»)'''
@@ -264,7 +270,7 @@ class XsemanticsGeneratorExtensions {
 
 	def traceStringForAuxiliaryFun(AuxiliaryFunction aux) {
 		aux.errorForAuxiliaryFun + ''' + " = " + ''' +
-			"_result_".wrapInStringRepr
+			resultVariableForTrace.wrapInStringRepr
 	}
 
 	def ruleNameInvocation(String ruleName) '''ruleName("«ruleName»")'''

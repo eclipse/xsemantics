@@ -2,6 +2,7 @@ package it.xsemantics.test.fj.alt;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
@@ -292,9 +293,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   
   protected Result<Boolean> equalstypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type left, final Type right) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleTypeEquals(G, _subtrace_, left, right);
-    	addToTrace(_trace_, ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleTypeEquals(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTypeEquals) {
@@ -324,9 +329,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
-    	addToTrace(_trace_, ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
@@ -359,9 +368,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
-    	RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
-    	addToTrace(_trace_, ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl));
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
+    	addToTrace(_trace_, new Provider<Object>() {
+    	public Object get() {
+    		return ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl);
+    	}
+    });
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckClass) {
