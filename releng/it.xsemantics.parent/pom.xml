@@ -56,8 +56,7 @@
 		<jacoco-version>0.5.8.201207111220</jacoco-version>
 		<findbugs-version>2.5.4-SNAPSHOT</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.6.2</xtext.version>
-		<xcore.version>1.2.0</xcore.version>
+		<xtext.version>2.7.0-SNAPSHOT</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
 		
@@ -98,6 +97,15 @@
 			</activation>
 			<properties>
 				<target-file-name>luna</target-file-name>
+			</properties>
+		</profile>
+		<profile>
+			<id>xtext-nightly</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<target-file-name>xtext-nightly</target-file-name>
 			</properties>
 		</profile>
 		<profile>
@@ -319,6 +327,17 @@
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>sonatype_snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
 	

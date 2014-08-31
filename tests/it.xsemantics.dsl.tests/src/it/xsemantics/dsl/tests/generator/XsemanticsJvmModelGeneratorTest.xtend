@@ -4693,7 +4693,21 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	}
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected, CharSequence expectedValidator) {
-		parse(input).assertCorrectJavaCodeGeneration(null, expected, expectedValidator)
+		input.compile [
+			for (e : allGeneratedResources.entrySet) {
+				if (e.key.endsWith("Validator.java") && expectedValidator != null) {
+					// check the expected Java code for the validator
+					assertEqualsStrings(expectedValidator, e.value)
+				} else if (!e.key.endsWith("Validator.java") && expected != null) {
+					// check the expected Java code for the system
+					assertEqualsStrings(expected, e.value)
+				}
+			}
+			
+			
+			// this will issue Java generation
+			compiledClass
+		]
 	}
 
 	def private assertCorrectJavaCodeGeneration(XsemanticsSystem system, 

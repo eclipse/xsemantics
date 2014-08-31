@@ -14,6 +14,7 @@ import org.junit.runner.RunWith
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.util.Wrapper
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjInjectorProviderCustom))
@@ -630,10 +631,10 @@ ClassSubtyping: [] |- B <: A
 	}
 	def private assertReduceAll(CharSequence prog, CharSequence expectedTrace) {
 		var exp = prog.parseAndAssertNoError.main.copy
-		var result = exp.assertReduce
-		while (!fjSystem.isValue(result.value)) {
-			exp = result.value
-			result = exp.assertReduce
+		val result = Wrapper.wrap(exp.assertReduce)
+		while (!fjSystem.isValue(result.get.value)) {
+			exp = result.get.value
+			result.set(exp.assertReduce)
 		}
 		Assert::assertEquals(
 			expectedTrace.toString.trim,

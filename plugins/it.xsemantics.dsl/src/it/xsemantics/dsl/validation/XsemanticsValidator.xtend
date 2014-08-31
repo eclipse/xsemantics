@@ -104,14 +104,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		return expr.getContainerOfType(AuxiliaryFunction) != null
 	}
 
-	override protected boolean isImplicitReturn(XExpression expr) {
-		if (expr.isContainedInAuxiliaryFunction()) {
-			return super.isImplicitReturn(expr);
-		}
-
-		// we will deal with this during generation
-		return false;
-	}
+//	override protected boolean isImplicitReturn(XExpression expr) {
+//		if (expr.isContainedInAuxiliaryFunction()) {
+//			return super.isImplicitReturn(expr);
+//		}
+//
+//		// we will deal with this during generation
+//		return false;
+//	}
 
 	@Check
 	def void checkThrow(XThrowExpression expr) {

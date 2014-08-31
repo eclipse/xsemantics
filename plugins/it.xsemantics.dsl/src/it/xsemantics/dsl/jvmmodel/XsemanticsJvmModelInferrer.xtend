@@ -7,6 +7,7 @@ import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.Cachable
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -23,8 +24,10 @@ import it.xsemantics.runtime.caching.XsemanticsProvider
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
@@ -32,9 +35,8 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer
-import it.xsemantics.dsl.xsemantics.Cachable
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -55,8 +57,6 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject extension TypeReferences
 	
-	@Inject extension XbaseTypeConformanceComputer
-
 	@Inject XsemanticsTypeSystem typeSystem
 
 	/**
@@ -65,18 +65,18 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 * 
 	 * @param element
 	 *            the model to create one or more
-	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType declared
+	 *            {@link JvmDeclaredType declared
 	 *            types} from.
 	 * @param acceptor
 	 *            each created
-	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType type}
+	 *            {@link JvmDeclaredType type}
 	 *            without a container should be passed to the acceptor in order
 	 *            get attached to the current resource. The acceptor's
 	 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
 	 *            accept(..)} method takes the constructed empty type for the
 	 *            pre-indexing phase. This one is further initialized in the
 	 *            indexing phase using the closure you pass to the returned
-	 *            {@link org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
+	 *            {@link IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
 	 *            initializeLater(..)}.
 	 * @param isPreIndexingPhase
 	 *            whether the method is called in a pre-indexing phase, i.e.
@@ -744,8 +744,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			}
 			
 			// check the original declared type (which can be null)
-			val isBoolean = aux.newTypeRef(typeof(Boolean)).
-				isConformant(aux.type)
+			val isBoolean = aux.type.isBoolean
 			
 			val exceptionName = aux.exceptionVarName
 			val inputArgs = aux.inputArgs
@@ -853,8 +852,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 
 	def compileImplMethod(AuxiliaryFunction aux) {
 		val resultType = aux.resultType
-		val isBoolean = aux.newTypeRef(typeof(Boolean)).
-				isConformant(resultType)
+		val isBoolean = resultType.isBoolean
 		val auxiliaryDescription = aux.getAuxiliaryDescription
 		
 		aux.toMethod(
@@ -1094,6 +1092,17 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			)
 		]
 	}
-	
+
+	def isBoolean(JvmTypeReference typeRef) {
+		typeRef != null
+		&&
+		{
+		val identifier = typeRef.getType().getIdentifier()
+		
+		"boolean".equals(identifier)
+		||
+		"java.lang.Boolean".equals(identifier)
+		}
+	}
 }
 
