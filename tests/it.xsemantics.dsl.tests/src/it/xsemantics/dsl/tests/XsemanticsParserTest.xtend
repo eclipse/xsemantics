@@ -364,7 +364,7 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	def void testSystemExtendsTestBaseSystem2() {
 		'''
 		system it.xsemantics.dsl.tests.input.TestBaseSystem
-		'''.parseWithBaseSystemAndAssertNoError(
+		'''.parseWithBaseSystem2AndAssertNoError(
 			testFiles.testSystemExtendsTestBaseSystem,
 			testFiles.testSystemExtendsSystem2
 		)
@@ -373,16 +373,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	@Test
 	def void testSystemExtendsExtendedTypeSystem() {
 		systemExtendsExtendedTypeSystem.assertNoErrors
-	}
-
-	@Test
-	def void testRuleOverride() {
-		systemExtendsSystemWithRuleOverride.assertNoErrors
-	}
-
-	@Test
-	def void testOverrideJudgment() {
-		systemExtendsSystemWithJudgmentOverride.assertNoErrors
 	}
 
 	@Test

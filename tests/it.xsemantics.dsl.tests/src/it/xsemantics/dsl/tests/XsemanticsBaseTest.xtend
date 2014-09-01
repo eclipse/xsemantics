@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles
@@ -24,6 +25,7 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBlockExpression
@@ -49,6 +51,9 @@ abstract class XsemanticsBaseTest {
 	@Inject
 	protected ParseHelper<XsemanticsFile> parser
 	
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider
+	
 	@Inject extension ValidationTestHelper
 	
 //	@BeforeClass
@@ -63,7 +68,7 @@ abstract class XsemanticsBaseTest {
 	}
 
 	/* s extends baseSystem2 which extends baseSystem */
-	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, 
+	def parseWithBaseSystem2AndAssertNoError(CharSequence baseSystem, 
 		CharSequence baseSystem2, CharSequence s
 	) {
 		val ts = baseSystem.parseWithBaseSystem(baseSystem2)
@@ -277,7 +282,7 @@ abstract class XsemanticsBaseTest {
 
 	def systemExtendsExtendedTypeSystem() {
 		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
+			parseWithBaseSystem2AndAssertNoError
 			(
 				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
 				testFiles.testSystemExtendsExtendedTypeSystem
@@ -285,31 +290,54 @@ abstract class XsemanticsBaseTest {
 	}
 
 	def systemExtendsSystemWithRuleOverride() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-				testFiles.testSystemExtendsExtendedTypeSystem
-			).
-			parseWithBaseSystemAndAssertNoError(
-				testFiles.testRuleOverride
-			)
+		#[
+			testFiles.testJudgmentDescriptionsWithErrorSpecification,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+			testFiles.testSystemExtendsExtendedTypeSystem,
+			testFiles.testRuleOverride
+		]
 	}
 
 	def systemExtendsSystemWithJudgmentOverride() {
-		loadBaseSystems.
-			parseWithBaseSystemAndAssertNoError(
-				testFiles.testOverrideJudgment
-			)
+		withBaseSystems(testFiles.testOverrideJudgment)
 	}
 
-	def loadBaseSystems() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-				testFiles.testSystemExtendsExtendedTypeSystem
-			)
+	def withBaseSystems(CharSequence input) {
+		#[
+			testFiles.testJudgmentDescriptionsWithErrorSpecification,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+			testFiles.testSystemExtendsExtendedTypeSystem,
+			input
+		]
+	}
+
+	def parseWithBaseSystems(CharSequence input) {
+		withBaseSystems(input).parseSystems
+	}
+
+	/**
+	 * It returns the system corresponding to the last input in the list.
+	 */
+	def parseSystems(CharSequence... inputs) {
+		val rs = resourceSetProvider.get
+		var XsemanticsSystem current = null
+		for (input : inputs) {
+			current = parser.parse(input, rs).xsemanticsSystem
+		}
+		return current
+	}
+
+	/**
+	 * It returns the system corresponding to the last input in the list.
+	 */
+	def parseSystemsAndAssertNoErrors(CharSequence... inputs) {
+		val rs = resourceSetProvider.get
+		var XsemanticsSystem current = null
+		for (input : inputs) {
+			current = parser.parse(input, rs).xsemanticsSystem
+			current.assertNoErrors
+		}
+		return current
 	}
 
 	def getRuleInvocations(EObject element) {

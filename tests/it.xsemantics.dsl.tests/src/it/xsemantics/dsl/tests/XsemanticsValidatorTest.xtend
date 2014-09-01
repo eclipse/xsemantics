@@ -63,10 +63,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testDuplicateRuleOfTheSameKindFromBaseSystem() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testDuplicateRuleOfTheSameKindFromSuperSystem
-			).
+		parseWithBaseSystems(
+			testFiles.testDuplicateRuleOfTheSameKindFromSuperSystem
+		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
@@ -76,10 +75,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName
-			).
+		parseWithBaseSystems(
+			testFiles.testDuplicateRuleOfTheSameKindFromSuperSystemButWithDifferentName
+		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
@@ -89,10 +87,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testDuplicateCheckRuleOfTheSameKindFromBaseSystem() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testDuplicateCheckRuleOfTheSameKindFromSuperSystem
-			).
+		parseWithBaseSystems(
+			testFiles.testDuplicateCheckRuleOfTheSameKindFromSuperSystem
+		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
 			IssueCodes::MUST_OVERRIDE,
@@ -102,10 +99,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testNoRuleOfTheSameKindToOverride() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testNoRuleOfTheSameKindToOverride
-			).
+		parseWithBaseSystems(
+			testFiles.testNoRuleOfTheSameKindToOverride
+		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::NOTHING_TO_OVERRIDE,
@@ -115,10 +111,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testOverrideRuleWithDifferentName() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testOverrideRuleWithDifferentName
-			).
+		parseWithBaseSystems(
+			testFiles.testOverrideRuleWithDifferentName
+		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
 			IssueCodes::NOTHING_TO_OVERRIDE,
@@ -128,10 +123,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testNoCheckRuleToOverride() {
-		val ts = loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testNoCheckRuleToOverride
-			)
+		val ts = parseWithBaseSystems(
+			testFiles.testNoCheckRuleToOverride
+		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
 			IssueCodes::NOTHING_TO_OVERRIDE,
@@ -146,10 +140,9 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testInvalidJudgmentWithTheSameNameOfBaseSystem() {
-		loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testInvalidJudgmentWithTheSameNameOfBaseSystem
-			).
+		parseWithBaseSystems(
+			testFiles.testInvalidJudgmentWithTheSameNameOfBaseSystem
+		).
 		assertErrorMessages(
 '''
 judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
@@ -174,10 +167,9 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 
 	@Test
 	def void testInvalidOverrideJudgment() {
-		val ts = loadBaseSystems.
-			parseWithBaseSystem(
-				testFiles.testInvalidOverrideJudgment
-			)
+		val ts = parseWithBaseSystems(
+			testFiles.testInvalidOverrideJudgment
+		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.judgmentDescription,
 			IssueCodes::NOTHING_TO_OVERRIDE,
@@ -215,7 +207,7 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 
 	@Test
 	def testNoRuleForJudgmentDescriptionOverridden() {
-		systemExtendsSystemWithJudgmentOverride.
+		systemExtendsSystemWithJudgmentOverride.parseSystemsAndAssertNoErrors.
 			assertNoIssues
 	}
 

@@ -3,9 +3,10 @@ package it.xsemantics.dsl.tests.generator
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustomForPluginTest
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import java.util.List
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,6 +16,8 @@ import org.junit.runner.RunWith
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
 	@Inject extension CompilationTestHelper
+	
+	@Inject private FileExtensionProvider extensionProvider
 	
 	@Test
 	def testJudgmentDescriptions() {
@@ -1656,12 +1659,10 @@ public class TypeSystemValidator extends AbstractDeclarativeValidator {
 
 	@Test
 	def testSystemWithExtends() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+		#[testFiles.testJudgmentDescriptionsWithErrorSpecification,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
 				testFiles.testSystemExtendsExtendedTypeSystem
-			).assertCorrectJavaCodeGeneration(
+			].assertCorrectJavaCodeGeneration(
 "ExtendedTypeSystem2",
 '''
 package it.xsemantics.test;
@@ -2215,10 +2216,7 @@ null
 
 	@Test
 	def testOverrideJudgmentWithDifferentParamNames() {
-		loadBaseSystems.
-			parseWithBaseSystemAndAssertNoError(
-				testFiles.testOverrideJudgmentWithDifferentParamNames
-			).
+		withBaseSystems(testFiles.testOverrideJudgmentWithDifferentParamNames).
 		assertCorrectJavaCodeGeneration(
 "ExtendedTypeSystemWithJudgmentOverride",
 '''
@@ -3096,11 +3094,9 @@ null
 
 	@Test
 	def testSystemExtendsSystemWithValidatorExtends() {
-		testFiles.testBaseSystemWithValidatorExtends.
-			parseWithBaseSystemAndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithValidatorExtends
-			).
+		#[testFiles.testBaseSystemWithValidatorExtends,
+			testFiles.testSystemExtendsSystemWithValidatorExtends
+			].
 		assertCorrectJavaCodeGeneration(
 "ExtendedTypeSystem",
 null,
@@ -4704,16 +4700,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 				}
 			}
 			
-			
 			// this will issue Java generation
 			compiledClass
 		]
 	}
 
-	def private assertCorrectJavaCodeGeneration(XsemanticsSystem system, 
+	def private assertCorrectJavaCodeGeneration(List<CharSequence> inputs, 
 		String prefix, CharSequence expected, CharSequence expectedValidator
 	) {
-		system.eResource.resourceSet.compile [
+		inputs.createResourceSet.compile [
 			for (e : allGeneratedResources.entrySet) {
 				if (prefix == null || e.key.contains(prefix)) {
 					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
@@ -4726,10 +4721,19 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 				}
 			}
 			
-			
 			// this will issue Java generation
 			compiledClass
 		]
 	}
-	
+
+	def private createResourceSet(List<CharSequence> inputs) {
+		val pairs = newArrayList() => [
+			list |
+			inputs.forEach[e, i|
+				list += "MyFile" + i + "." + 
+					extensionProvider.getPrimaryFileExtension() -> e
+			]
+		] 
+		resourceSet(pairs)
+	}
 }

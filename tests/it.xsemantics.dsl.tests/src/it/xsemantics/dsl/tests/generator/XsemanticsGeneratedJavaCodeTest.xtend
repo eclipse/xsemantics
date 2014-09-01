@@ -43,16 +43,15 @@ class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
 	@Test
 	def testFjAlt() {
 		// fj_alt_test depends on fj_first_test so we must load it first
-		assertCorrectJavaCodeGeneration("fj_first_test.xsemantics");
-		assertCorrectJavaCodeGeneration("fj_alt_test.xsemantics");
+		assertCorrectJavaCodeGeneration("fj_first_test.xsemantics",
+			"fj_alt_test.xsemantics");
 	}
 
 	@Test
 	def testFjCached() {
 		// cached tests depend on fj_first_test so we must load it first
-		assertCorrectJavaCodeGeneration("fj_first_test.xsemantics");
-		assertCorrectJavaCodeGeneration("fj_cached_test.xsemantics");
-		assertCorrectJavaCodeGeneration("fj_cached_options_test.xsemantics");
+		assertCorrectJavaCodeGeneration("fj_first_test.xsemantics",
+			"fj_cached_test.xsemantics", "fj_cached_options_test.xsemantics");
 	}
 
 	@Test
@@ -80,14 +79,14 @@ class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
 		assertCorrectJavaCodeGeneration("ecore_validation_test.xsemantics");
 	}
 
-	def private assertCorrectJavaCodeGeneration(CharSequence file) {
-		val fullPathInputFile = TESTS_INPUT_FILES + file
-		resourceSet.getResource(URI::createURI(fullPathInputFile), true);
-		
+	def private assertCorrectJavaCodeGeneration(CharSequence... files) {
+		for (file : files) {
+			resourceSet.getResource(URI::createURI(TESTS_INPUT_FILES + file), true);
+		}
 		resourceSet.compile [
 			// this will issue Java compilation on generated Java code
 			compiledClass
 		]
 	}
-	
+
 }
