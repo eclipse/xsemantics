@@ -300,13 +300,17 @@ abstract class XsemanticsBaseTest {
 	 * It returns the system corresponding to the last input in the list.
 	 */
 	def parseSystemsAndAssertNoErrors(CharSequence... inputs) {
-		val rs = resourceSetProvider.get
+		val rs = createResourceSet
 		var XsemanticsSystem current = null
 		for (input : inputs) {
 			current = parser.parse(input, rs).xsemanticsSystem
 			current.assertNoErrors
 		}
 		return current
+	}
+
+	def createResourceSet() {
+		resourceSetProvider.get
 	}
 
 	def getRuleInvocations(EObject element) {

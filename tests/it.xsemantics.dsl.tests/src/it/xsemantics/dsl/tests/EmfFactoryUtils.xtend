@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
 
 class EmfFactoryUtils {
 	
@@ -16,11 +17,14 @@ class EmfFactoryUtils {
 	
 	@Inject
 	private IResourceFactory resourceFactory;
+	
+	var counter = 0
 
-	def createResource((Resource) => void init) {
+	def createResource(ResourceSet resourceSet, (Resource) => void init) {
 		val name = "__synthetic";
-		val syntheticUri = URI.createURI(name + "." + "testresource");
+		val syntheticUri = URI.createURI(name + (counter++) + "." + "testresource");
 		resourceFactory.createResource(syntheticUri) => [
+			resourceSet.resources += it
 			init.apply(it)
 		]
 	}

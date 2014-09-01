@@ -32,7 +32,7 @@ class XsemanticsCacheTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testEObject() {
-		val resource = createResource[
+		val resource = createResourceSet.createResource[
 			it.createEObject
 			it.createEObject
 		]
@@ -41,8 +41,9 @@ class XsemanticsCacheTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testResourceOfTheFirstEObject() {
-		val resource1 = createResource[]
-		val resource2 = createResource[]
+		val rs = createResourceSet
+		val resource1 = rs.createResource[]
+		val resource2 = rs.createResource[]
 		val o1 = createEObject
 		val o2 = createEObject
 		resource1.contents += o1
@@ -64,7 +65,7 @@ class XsemanticsCacheTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testEffectiveCaching() {
-		val resource = createResource[]
+		val resource = createResourceSet.createResource[]
 		val key1 = createEObject
 		val key2 = createEObject
 		resource.contents += key1
