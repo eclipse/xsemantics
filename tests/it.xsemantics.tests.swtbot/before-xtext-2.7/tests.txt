@@ -1,0 +1,21 @@
+This fails because of missing dependencies
+
+but it is useless: it does not test imports
+
+@RunWith(SWTBotJunit4ClassRunner)
+class XsemanticsXImportTests extends XsemanticsWorkbenchBase {
+
+	@Test
+	def void testProjectWithNoErrors() {
+		assertTrue("Project doesn't exist", isProjectCreated(TEST_PROJECT));
+		setEditorContents(
+'''
+system my.test.System
+
+judgments {
+	type |- String s
+}
+'''			
+		)
+		waitForAutoBuildAndAssertNoErrors
+	}

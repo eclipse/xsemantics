@@ -5,25 +5,8 @@ import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.junit.Assert.*
-
 @RunWith(SWTBotJunit4ClassRunner)
 class XsemanticsXImportTests extends XsemanticsWorkbenchBase {
-	
-	@Test
-	def void testProjectWithNoErrors() {
-		assertTrue("Project doesn't exist", isProjectCreated(TEST_PROJECT));
-		setEditorContents(
-'''
-system my.test.System
-
-judgments {
-	type |- String s
-}
-'''			
-		)
-		waitForAutoBuildAndAssertNoErrors
-	}
 
 	@Test
 	def void testProposalForBasicType() {
