@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.junit.Assert
+import static org.junit.Assert.*
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -67,38 +67,6 @@ abstract class XsemanticsBaseTest {
 		ts
 	}
 
-	/* s extends baseSystem2 which extends baseSystem */
-	def parseWithBaseSystem2AndAssertNoError(CharSequence baseSystem, 
-		CharSequence baseSystem2, CharSequence s
-	) {
-		val ts = baseSystem.parseWithBaseSystem(baseSystem2)
-		ts.assertNoErrors
-		ts.parseWithBaseSystem(s)
-	}
-
-	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
-		val base = parse(baseSystem)
-		base.assertNoErrors
-		val ts = base.parseWithBaseSystem(s)
-		ts.assertNoErrors
-		ts
-	}
-
-	def parseWithBaseSystemAndAssertNoError(XsemanticsSystem baseSystem, CharSequence s) {
-		val ts = baseSystem.parseWithBaseSystem(s)
-		ts.assertNoErrors
-		ts
-	}
-
-	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
-		val base = parse(baseSystem)
-		base.parseWithBaseSystem(s)
-	}
-
-	def parseWithBaseSystem(XsemanticsSystem baseSystem, CharSequence s) {
-		parser.parse(s, baseSystem.eResource.resourceSet).xsemanticsSystem
-	}
-	
 	def parse(CharSequence s) {
 		parser.parse(s).xsemanticsSystem
 	}
@@ -121,7 +89,7 @@ abstract class XsemanticsBaseTest {
 	
 	def getRule(XsemanticsSystem ts, int index) {
 		val rules = ts.getRules
-		Assert::assertTrue("no rule for index " + index + ", only " + rules.size,
+		assertTrue("no rule for index " + index + ", only " + rules.size,
 			rules.size > index
 		)
 		rules.get(index)
@@ -137,7 +105,7 @@ abstract class XsemanticsBaseTest {
 	
 	def getCheckRule(XsemanticsSystem ts, int index) {
 		val rules = ts.getCheckrules
-		Assert::assertTrue("no rule for index " + index + ", only " + rules.size,
+		assertTrue("no rule for index " + index + ", only " + rules.size,
 			rules.size > index
 		)
 		rules.get(index)
@@ -224,12 +192,12 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def assertIsInstance(Class<?> superClass, Object o) {
-		Assert::assertTrue(o.getClass.name + " is not an instance of " + superClass.name,
+		assertTrue(o.getClass.name + " is not an instance of " + superClass.name,
 			superClass.isAssignableFrom(o.getClass))
 	}
 	
 	def assertOrExpression(XExpression exp, int branches) {
-		Assert::assertEquals(branches, exp.orExpression.branches.size)
+		assertEquals(branches, exp.orExpression.branches.size)
 	}
 	
 	def getOrExpression(XExpression exp) {
@@ -262,31 +230,32 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def assertEqualsStrings(Object expected, Object actual) {
-		Assert::assertEquals(
+		assertEquals(
 			("" + expected).replaceAll("\r", ""), 
 			("" + actual).replaceAll("\r", "")
 		)
 	}
 
 	def systemExtendsSystemWithJudgments() {
-		testFiles.testJudgmentDescriptions.
-			parseWithBaseSystemAndAssertNoError
-			(testFiles.testSystemExtendsSystemWithJudgments)
+		parseSystemsAndAssertNoErrors(
+			testFiles.testJudgmentDescriptions,
+			testFiles.testSystemExtendsSystemWithJudgments
+		)
 	}
 
 	def systemExtendsSystemWithAdditionalJudgment() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystemAndAssertNoError
-			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore)
+		parseSystemsAndAssertNoErrors(
+			testFiles.testJudgmentDescriptionsWithErrorSpecification,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore
+		)
 	}
 
 	def systemExtendsExtendedTypeSystem() {
-		testFiles.testJudgmentDescriptionsWithErrorSpecification.
-			parseWithBaseSystem2AndAssertNoError
-			(
-				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-				testFiles.testSystemExtendsExtendedTypeSystem
-			)
+		parseSystemsAndAssertNoErrors(
+			testFiles.testJudgmentDescriptionsWithErrorSpecification,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+			testFiles.testSystemExtendsExtendedTypeSystem
+		)
 	}
 
 	def systemExtendsSystemWithRuleOverride() {

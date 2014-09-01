@@ -22,11 +22,10 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	
 	@Test
 	def void testCyclicHierarchy() {
-		testFiles.testSystemBaseWithCycle.
-			parseWithBaseSystem
-			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore).
-				parseWithBaseSystem
-					(testFiles.testSystemBaseWithCycle2).
+		parseSystems(
+			testFiles.testSystemBaseWithCycle,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+			testFiles.testSystemBaseWithCycle2).
 		assertError(
 			XsemanticsPackage::eINSTANCE.xsemanticsSystem,
 			IssueCodes::CYCLIC_HIERARCHY,
@@ -36,7 +35,8 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testSystemExtendsWithValidatorExtends() {
-		testFiles.testJudgmentDescriptions.parseWithBaseSystem(
+		parseSystems(
+			testFiles.testJudgmentDescriptions,
 			testFiles.testSystemExtendsWithValidatorExtends
 		).
 		assertError(
@@ -184,10 +184,10 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 
 	@Test
 	def void testWrongAuxiliaryDescriptionOverride() {
-		val ts = testFiles.testAuxiliaryDescriptions.
-			parseWithBaseSystem(
-				testFiles.testWrongAuxiliaryDescriptionOverride
-			)
+		val ts = parseSystems(
+			testFiles.testAuxiliaryDescriptions,
+			testFiles.testWrongAuxiliaryDescriptionOverride
+		)
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
 			IssueCodes.MUST_OVERRIDE,

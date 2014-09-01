@@ -310,11 +310,11 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 
 	@Test
 	def void testAllSuperSystemDefinitionsWithCycle() {
-		val superSystems = testFiles.testSystemBaseWithCycle.
-			parseWithBaseSystem
-			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore).
-				parseWithBaseSystem(testFiles.testSystemExtendsExtendedTypeSystem).
-					allSuperSystemDefinitions
+		val superSystems = parseSystems(
+			testFiles.testSystemBaseWithCycle,
+			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+			testFiles.testSystemExtendsExtendedTypeSystem
+		).allSuperSystemDefinitions
 		// due to the cycle the initial type system appears twice
 		assertEquals(3, superSystems.size)
 	}
