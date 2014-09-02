@@ -334,18 +334,22 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	/**
-	 * @deprecated use {@link #addToTrace(RuleApplicationTrace, Provider)} instead to compute the trace element lazily.
-	 * @param ruleApplicationTrace the trace, may be null.
-	 * @param traceElement the element to trace.
+	 * If the passed ruleApplicationTrace is not null, then uses the
+	 * traceElementProvider to create an element to add to the trace.
+	 * 
+	 * Using a provider instead of the actual element avoids the creation of
+	 * such element in case the ruleApplicationTrace is null, heavily reducing
+	 * overhead and increasing performance.
+	 * 
+	 * See also <a
+	 * href="https://github.com/LorenzoBettini/xsemantics/pull/27">https
+	 * ://github.com/LorenzoBettini/xsemantics/pull/27</a>
+	 * 
+	 * @param ruleApplicationTrace
+	 * @param traceElementProvider
+	 * 
+	 * @since 1.6
 	 */
-	@Deprecated
-	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
-			Object traceElement) {
-		if (ruleApplicationTrace != null) {
-			ruleApplicationTrace.addToTrace(traceElement);
-		}
-	}
-	
 	public void addToTrace(RuleApplicationTrace ruleApplicationTrace,
 			Provider<? extends Object> traceElementProvider) {
 		if (ruleApplicationTrace != null) {

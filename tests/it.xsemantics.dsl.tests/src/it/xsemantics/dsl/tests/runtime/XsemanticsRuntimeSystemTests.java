@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Provider;
 
 /**
  * @author bettini
@@ -42,6 +43,8 @@ public class XsemanticsRuntimeSystemTests extends
 	protected TestTypeSystemWithPolymorphicDispatcher ts;
 
 	protected XsemanticsRuntimeSystem runtimeTypeSystem;
+	
+	private Object traceElement = new Object();
 
 	public class EClassesForTesting {
 		EClass C = emfUtils.createEClass("C");
@@ -75,6 +78,14 @@ public class XsemanticsRuntimeSystemTests extends
 
 			C.setSuperclass(D);
 		}
+	}
+
+	private class TraceElementProvider implements Provider<Object> {
+
+		public Object get() {
+			return traceElement;
+		}
+		
 	}
 
 	@Override
@@ -305,14 +316,13 @@ public class XsemanticsRuntimeSystemTests extends
 
 	@Test
 	public void testAddToTraceNull() {
-		runtimeTypeSystem.addToTrace(null, new Object());
+		runtimeTypeSystem.addToTrace(null, new TraceElementProvider());
 	}
 
 	@Test
 	public void testAddToTraceNotNull() {
 		final RuleApplicationTrace ruleApplicationTrace = new RuleApplicationTrace();
-		final Object traceElement = new Object();
-		runtimeTypeSystem.addToTrace(ruleApplicationTrace, traceElement);
+		runtimeTypeSystem.addToTrace(ruleApplicationTrace, new TraceElementProvider());
 		assertEquals(traceElement, ruleApplicationTrace.getTrace().get(0));
 	}
 
