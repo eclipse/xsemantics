@@ -36,6 +36,7 @@ import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.common.types.JvmAnnotationTarget
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -92,7 +93,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			if (ts.superSystem != null)
 				superTypes += ts.superSystem.cloneWithProxies
 			else
-				superTypes += ts.newTypeRef(typeof(XsemanticsRuntimeSystem))
+				superTypes += XsemanticsRuntimeSystem.typeRef
 
 			for (elem: ts.auxiliaryDescriptions) {
 				members += elem.genIssueField
@@ -108,9 +109,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 					injectedField.type
 				) [
 					documentation = injectedField.documentation
-					annotations += injectedField.toAnnotation(typeof(Inject))
+					addInjectAnnotation
 					if (injectedField.extension) {
-						annotations += injectedField.toAnnotation(typeof(Extension))
+						addExtensionAnnotation
 					}
 					visibility = JvmVisibility::PRIVATE
 				]
@@ -191,29 +192,29 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			documentation = ts.documentation
 			
 			if (ts.superSystemDefinition != null)
-				superTypes += ts.newTypeRef(ts.superSystemDefinition.toValidatorJavaFullyQualifiedName)
+				superTypes += ts.superSystemDefinition.toValidatorJavaFullyQualifiedName.typeRef
 			else if (ts.validatorExtends != null)
 				superTypes += ts.validatorExtends.cloneWithProxies
 			else
-				superTypes += ts.newTypeRef(typeof(AbstractDeclarativeValidator))
+				superTypes += AbstractDeclarativeValidator.typeRef
 
 			if (ts.superSystem === null)
-				members += ts.toField("errorGenerator", ts.newTypeRef(typeof(XsemanticsValidatorErrorGenerator))) [
-					annotations += ts.toAnnotation(typeof(Inject))
+				members += ts.toField("errorGenerator", XsemanticsValidatorErrorGenerator.typeRef) [
+					addInjectAnnotation
 					visibility = JvmVisibility::PROTECTED
 				]
 			// avoid generating a field that masks the one in the superclass
 			// FindBugs MF_CLASS_MASKS_FIELD
 						
 			members += ts.toField("xsemanticsSystem", inferredClass.createTypeRef) [
-				annotations += ts.toAnnotation(typeof(Inject))
+				addInjectAnnotation
 				visibility = JvmVisibility::PROTECTED
 			]
 			
 			members += ts.toGetter("xsemanticsSystem", inferredClass.createTypeRef) => [
 				visibility = JvmVisibility::PROTECTED
 				if (ts.superSystem != null)
-   					annotations += ts.toAnnotation(typeof(Override))
+   					addOverrideAnnotation
 			]
 			
 			for (rule : ts.checkrules) {
@@ -225,7 +226,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	def genIssueField(Named e) {
    		val issueField = e.toField(
 				e.ruleIssueString,
-				e.newTypeRef(typeof(String))
+				String.typeRef
 			) [
 				visibility = JvmVisibility::PUBLIC
 				^static = true
@@ -239,7 +240,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	
    	def genConstructor(XsemanticsSystem ts) {
    		ts.toConstructor() [
-			body = [it.append("init();")]
+			body = [append("init();")]
 		]
    	}
    	
@@ -258,17 +259,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	def polymorphicDispatcherType(JudgmentDescription e) {
-		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
+		PolymorphicDispatcher.typeRef(e.resultType)
 	}
 
 	def polymorphicDispatcherType(AuxiliaryDescription e) {
-		e.newTypeRef(typeof(PolymorphicDispatcher), e.resultType)
+		PolymorphicDispatcher.typeRef(e.resultType)
 	}
 	
 	def genInit(XsemanticsSystem ts) {
    		ts.toMethod("init", Void::TYPE.getTypeForName(ts)) [
    			if (ts.superSystem != null)
-   				annotations += ts.toAnnotation(typeof(Override))
+   				addOverrideAnnotation
    			
    			body = [
    				if (ts.superSystem != null)
@@ -315,7 +316,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.resultType
    		) [
    			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
    			
    			parameters += judgmentDescription.inputParameters
    			
@@ -328,7 +329,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.resultType
    		) [
    			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
@@ -343,7 +344,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    			judgmentDescription.resultType
    		) [
 			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
    			
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
@@ -397,7 +398,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.booleanType
    		) [
    			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
    			
    			parameters += judgmentDescription.inputParameters
    			
@@ -410,7 +411,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.booleanType
    		) [
    			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.inputParameters
@@ -424,7 +425,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			judgmentDescription.booleanType
    		) [
 			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
    			
    			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
@@ -449,10 +450,10 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			aux.entryPointMethodName.toString,
    			aux.resultType
    		) [
-   			exceptions += aux.ruleFailedExceptionType
+   			exceptions += ruleFailedExceptionType
    			
    			if (aux.override)
-   				annotations += aux.toAnnotation(typeof(Override))
+   				addOverrideAnnotation
    			
    			parameters += aux.inputParameters
    			
@@ -464,10 +465,10 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			aux.entryPointMethodName.toString,
    			aux.resultType
    		) [
-   			exceptions += aux.ruleFailedExceptionType
+   			exceptions += ruleFailedExceptionType
    			
    			if (aux.override)
-   				annotations += aux.toAnnotation(typeof(Override))
+   				addOverrideAnnotation
 
    			parameters += aux.ruleApplicationTraceParam
    			parameters += aux.inputParameters
@@ -514,14 +515,14 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 	def environmentParam(JudgmentDescription e) {
 		e.toParameter(
 			environmentName.toString,
-			e.environmentType
+			environmentType
 		)
 	}
 	
 	def ruleApplicationTraceParam(EObject e) {
 		e.toParameter(
 			ruleApplicationTraceName.toString,
-			e.newTypeRef(typeof(RuleApplicationTrace))
+			RuleApplicationTrace.typeRef
 		)
 	}
 	
@@ -536,15 +537,15 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			visibility = JvmVisibility::PROTECTED
 			
 			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 
-			exceptions += judgmentDescription.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
 			parameters += judgmentDescription.toParameter("_error", 
-				judgmentDescription.newTypeRef(typeof(String))
+				String.typeRef
 			)
 			parameters += judgmentDescription.toParameter("_issue", 
-				judgmentDescription.newTypeRef(typeof(String))
+				String.typeRef
 			)
    			parameters += judgmentDescription.toParameter("_ex",
    				judgmentDescription.exceptionType
@@ -552,8 +553,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			parameters += judgmentDescription.inputParameters
    			
    			parameters += judgmentDescription.toParameter("_errorInformations",
-   				judgmentDescription.newTypeRef(typeof(ErrorInformation)).
-   					addArrayTypeDimension
+   				ErrorInformation.typeRef.addArrayTypeDimension
    			)
    			
    			if (errorSpecification != null) {
@@ -596,7 +596,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			
 			if (cachable instanceof JudgmentDescription) {
 				parameters += cachable.toParameter("environment", 
-					cachable.newTypeRef(RuleEnvironment)
+					RuleEnvironment.typeRef
 				)
 				
 				parameters += cachable.inputParameters
@@ -618,22 +618,15 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			exceptions += aux.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
-			parameters += aux.toParameter("_error", 
-				aux.newTypeRef(typeof(String))
-			)
-			parameters += aux.toParameter("_issue", 
-				aux.newTypeRef(typeof(String))
-			)
-   			parameters += aux.toParameter("_ex",
-   				aux.exceptionType
-   			)
+			parameters += aux.toParameter("_error", String.typeRef)
+			parameters += aux.toParameter("_issue", String.typeRef)
+   			parameters += aux.toParameter("_ex", aux.exceptionType)
    			parameters += aux.inputParameters
    			
    			parameters += aux.toParameter("_errorInformations",
-   				aux.newTypeRef(typeof(ErrorInformation)).
-   					addArrayTypeDimension
+   				ErrorInformation.typeRef.addArrayTypeDimension
    			)
    			
    			if (errorSpecification != null) {
@@ -641,23 +634,6 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			} else {
    				body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
    			}
-   			
-//   			body = [
-//   				if (errorSpecification != null) {
-//	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
-//					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
-//					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
-//	   				
-//	   				it.newLine
-//	   				it.append('''
-//	   					«throwRuleFailedExceptionMethod»(«error»,
-//	   						_issue, _ex, new ''')
-//					aux.errorInformationType.serialize(aux, it)
-//					it.append('''(«source», «feature»));''')
-//				} else {
-//					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-//				}
-//   			]
 		]
 	}
 
@@ -671,7 +647,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			visibility = JvmVisibility::PROTECTED
 			
 			if (judgmentDescription.override)
-				annotations += judgmentDescription.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
 			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
@@ -728,7 +704,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			visibility = JvmVisibility::PROTECTED
 			
 			if (aux.override)
-   				annotations += aux.toAnnotation(typeof(Override))
+   				addOverrideAnnotation
 			
    			parameters += aux.ruleApplicationTraceParam
    			for (p : aux.parameters) {
@@ -795,12 +771,12 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		]
 	}
 
-	def ruleFailedExceptionType(EObject o) {
-		o.newTypeRef(typeof(RuleFailedException))
+	def ruleFailedExceptionType() {
+		RuleFailedException.typeRef
 	}
 	
-	def environmentType(EObject o) {
-		o.newTypeRef(typeof(RuleEnvironment))
+	def environmentType() {
+		RuleEnvironment.typeRef
 	}
 	
 	def compileImplMethod(Rule rule) {
@@ -813,9 +789,9 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			visibility = JvmVisibility::PROTECTED
 			
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
-			exceptions += rule.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
    			parameters += judgment.ruleApplicationTraceParam
@@ -854,7 +830,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PROTECTED
 			
-			exceptions += aux.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
    			parameters += auxiliaryDescription.ruleApplicationTraceParam
    			parameters += aux.inputParameters
@@ -900,9 +876,9 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			visibility = JvmVisibility::PROTECTED
 			
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
-			exceptions += rule.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
 			parameters += rule.paramForEnvironment
    			parameters += rule.ruleApplicationTraceParam
@@ -933,7 +909,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			
 			val rule = e.containingRule
 
-			exceptions += rule.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 
 			parameters += rule.paramForEnvironment
    			parameters += rule.inputParameters
@@ -952,7 +928,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PRIVATE
 			
-			exceptions += rule.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
 			parameters += rule.toParameter(rule.exceptionVarName,
    				rule.exceptionType
@@ -972,7 +948,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		[
 			visibility = JvmVisibility::PROTECTED
 
-			exceptions += auxfun.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
    			parameters += auxfun.ruleApplicationTraceParam
    			parameters += auxfun.inputParameters
@@ -990,7 +966,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		) 
 		[
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
    			parameters += rule.element.parameter.
    				toParameter(rule.element.parameter.name,
@@ -1006,7 +982,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		) 
 		[
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
 			parameters += rule.ruleApplicationTraceParam
    			parameters += rule.element.parameter.
@@ -1032,9 +1008,9 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		) 
 		[
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 
-			annotations += rule.toAnnotation(typeof(Check))
+			annotations += Check.annotationRef
 			
    			parameters += rule.element.parameter.
    				toParameter(rule.element.parameter.name,
@@ -1058,9 +1034,9 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			visibility = JvmVisibility::PROTECTED
 			
 			if (rule.override)
-				annotations += rule.toAnnotation(typeof(Override))
+				addOverrideAnnotation
 			
-			exceptions += rule.ruleFailedExceptionType
+			exceptions += ruleFailedExceptionType
 			
 			parameters += rule.ruleApplicationTraceParam
    			parameters += rule.element.parameter.
@@ -1073,7 +1049,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 	}
 	
 	def paramForEnvironment(Rule rule) {
-		rule.toParameter(rule.ruleEnvName, rule.newTypeRef(typeof(RuleEnvironment)))
+		rule.toParameter(rule.ruleEnvName, RuleEnvironment.typeRef)
 	}
 	
 	def inputParameters(Rule rule) {
@@ -1095,6 +1071,18 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		||
 		"java.lang.Boolean".equals(identifier)
 		}
+	}
+
+	def private addOverrideAnnotation(JvmAnnotationTarget it) {
+		annotations += Override.annotationRef
+	}
+
+	def private addInjectAnnotation(JvmAnnotationTarget it) {
+		annotations += Inject.annotationRef
+	}
+
+	def private addExtensionAnnotation(JvmAnnotationTarget it) {
+		annotations += Extension.annotationRef
 	}
 }
 
