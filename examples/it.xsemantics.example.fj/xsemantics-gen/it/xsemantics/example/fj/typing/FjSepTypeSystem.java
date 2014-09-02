@@ -252,10 +252,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTNew) {
@@ -283,10 +283,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTSelection) {
@@ -315,10 +315,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTCast) {
@@ -345,10 +345,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckConstant(G, _subtrace_, _const);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckConstant") + stringRepForEnv(G) + " |- " + stringRep(_const);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckConstant) {
@@ -369,10 +369,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckTypedElement(G, _subtrace_, typedElement);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckTypedElement") + stringRepForEnv(G) + " |- " + stringRep(typedElement);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckTypedElement) {
@@ -393,10 +393,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckParamRef(G, _subtrace_, paramref);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckParamRef) {
@@ -417,10 +417,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckThis(G, _subtrace_, _this);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckThis") + stringRepForEnv(G) + " |- " + stringRep(_this);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckThis) {
@@ -445,10 +445,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckMethod(G, _subtrace_, method);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckMethod") + stringRepForEnv(G) + " |- " + stringRep(method);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckMethod) {
@@ -490,10 +490,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
@@ -527,10 +527,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckSelection(G, _subtrace_, selection);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckSelection") + stringRepForEnv(G) + " |- " + stringRep(selection);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckSelection) {
@@ -569,10 +569,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckCast(G, _subtrace_, cast);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckCast") + stringRepForEnv(G) + " |- " + stringRep(cast);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckCast) {
@@ -609,10 +609,10 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckClass) {

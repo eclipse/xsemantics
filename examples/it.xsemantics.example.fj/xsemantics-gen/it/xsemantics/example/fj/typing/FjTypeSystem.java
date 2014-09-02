@@ -864,10 +864,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final List<it.xsemantics.example.fj.fj.Class> _result_ = applyAuxFunSuperclasses(_subtrace_, cl);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("superclasses") + "(" + stringRep(cl)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunSuperclasses) {
@@ -890,10 +890,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final List<Field> _result_ = applyAuxFunFields(_subtrace_, clazz);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("fields") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("fields") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunFields) {
@@ -929,10 +929,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final List<Method> _result_ = applyAuxFunMethods(_subtrace_, clazz);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("methods") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("methods") + "(" + stringRep(clazz)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunMethods) {
@@ -967,10 +967,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Boolean _result_ = applyAuxFunOverrides(_subtrace_, current, previous);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("overrides") + "(" + stringRep(current) + ", " + stringRep(previous)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("overrides") + "(" + stringRep(current) + ", " + stringRep(previous)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunOverrides) {
@@ -1037,10 +1037,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Boolean _result_ = applyAuxFunIsValue(_subtrace_, e);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("isValue") + "(" + stringRep(e)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("isValue") + "(" + stringRep(e)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
@@ -1064,10 +1064,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Boolean _result_ = applyAuxFunIsValue(_subtrace_, exp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("isValue") + "(" + stringRep(exp)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("isValue") + "(" + stringRep(exp)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
@@ -1091,10 +1091,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Boolean _result_ = applyAuxFunIsValue(_subtrace_, exp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("isValue") + "(" + stringRep(exp)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("isValue") + "(" + stringRep(exp)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunIsValue) {
@@ -1129,10 +1129,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final MethodBody _result_ = applyAuxFunReplaceThisAndParams(_subtrace_, body, thisReplacement, params, args);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return auxFunName("replaceThisAndParams") + "(" + stringRep(body) + ", " + stringRep(thisReplacement) + ", " + stringRep(params) + ", " + stringRep(args)+ ")" + " = " + stringRep(_result_);
-    	}
-    });
+    		public Object get() {
+    			return auxFunName("replaceThisAndParams") + "(" + stringRep(body) + ", " + stringRep(thisReplacement) + ", " + stringRep(params) + ", " + stringRep(args)+ ")" + " = " + stringRep(_result_);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunReplaceThisAndParams) {
@@ -1180,10 +1180,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTThis(G, _subtrace_, _this);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TThis") + stringRepForEnv(G) + " |- " + stringRep(_this) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTThis) {
@@ -1209,10 +1209,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTNew(G, _subtrace_, newExp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TNew") + stringRepForEnv(G) + " |- " + stringRep(newExp) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTNew) {
@@ -1243,10 +1243,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTParamRef(G, _subtrace_, paramref);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TParamRef") + stringRepForEnv(G) + " |- " + stringRep(paramref) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTParamRef) {
@@ -1273,10 +1273,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTStringConstant(G, _subtrace_, s);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TStringConstant") + stringRepForEnv(G) + " |- " + stringRep(s) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTStringConstant) {
@@ -1307,10 +1307,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTIntConstant(G, _subtrace_, i);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TIntConstant") + stringRepForEnv(G) + " |- " + stringRep(i) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTIntConstant) {
@@ -1336,10 +1336,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTBoolConstant(G, _subtrace_, b);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TBoolConstant") + stringRepForEnv(G) + " |- " + stringRep(b) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTBoolConstant) {
@@ -1376,10 +1376,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTSelection(G, _subtrace_, selection);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TSelection") + stringRepForEnv(G) + " |- " + stringRep(selection) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTSelection) {
@@ -1423,10 +1423,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Type> _result_ = applyRuleTCast(G, _subtrace_, cast);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TCast") + stringRepForEnv(G) + " |- " + stringRep(cast) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTCast) {
@@ -1468,10 +1468,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<ClassType> _result_ = applyRuleTExpressionClassType(G, _subtrace_, expression);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TExpressionClassType") + stringRepForEnv(G) + " |~ " + stringRep(expression) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TExpressionClassType") + stringRepForEnv(G) + " |~ " + stringRep(expression) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTExpressionClassType) {
@@ -1497,10 +1497,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleGeneralSubtyping(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("GeneralSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("GeneralSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleGeneralSubtyping) {
@@ -1533,10 +1533,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleBasicSubtyping(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("BasicSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleBasicSubtyping) {
@@ -1562,10 +1562,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleClassSubtyping(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleClassSubtyping) {
@@ -1614,10 +1614,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleExpressionAssignableToType(G, _subtrace_, expression, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleExpressionAssignableToType) {
@@ -1645,10 +1645,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleGeneralEquals(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("GeneralEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("GeneralEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleGeneralEquals) {
@@ -1681,10 +1681,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleBasicEquals(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("BasicEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleBasicEquals) {
@@ -1710,10 +1710,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleClassEquals(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("ClassEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleClassEquals) {
@@ -1739,10 +1739,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleSubtypeSequence(G, _subtrace_, owner, expressions, typedElements);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " ~> " + stringRep(expressions) + " << " + stringRep(typedElements);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("SubtypeSequence") + stringRepForEnv(G) + " |- " + stringRep(owner) + " ~> " + stringRep(expressions) + " << " + stringRep(typedElements);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubtypeSequence) {
@@ -1789,10 +1789,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Expression> _result_ = applyRuleRNew(G, _subtrace_, exp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("RNew") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("RNew") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleRNew) {
@@ -1845,10 +1845,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Expression> _result_ = applyRuleRSelection(G, _subtrace_, exp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("RSelection") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("RSelection") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleRSelection) {
@@ -1958,10 +1958,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Expression> _result_ = applyRuleRCast(G, _subtrace_, exp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("RCast") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("RCast") + stringRepForEnv(G) + " |- " + stringRep(exp) + " ~> " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleRCast) {
@@ -2003,10 +2003,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result3<Expression, Type, Type> _result_ = applyRuleSubjRed(G, _subtrace_, e);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("SubjRed") + stringRepForEnv(G) + " |= " + stringRep(e) + " ~> " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " <: " + stringRep(_result_.getThird());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("SubjRed") + stringRepForEnv(G) + " |= " + stringRep(e) + " ~> " + stringRep(_result_.getFirst()) + " : " + stringRep(_result_.getSecond()) + " <: " + stringRep(_result_.getThird());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleSubjRed) {
