@@ -1,0 +1,36 @@
+module GenerateXsemanticsArtifacts
+
+import org.eclipse.emf.mwe.utils.*
+
+var modelPath = 'src'
+var targetDir = 'xsemantics-gen'
+
+Workflow {
+	
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = targetDir
+	}
+
+    component = org.eclipse.xtext.mwe.Reader {
+        // lookup all resources on the classpath
+        useJavaClassPath = true
+
+        // or define search scope explicitly
+        path = modelPath
+
+        register = it.xsemantics.dsl.XsemanticsStandaloneSetup {}
+        loadResource = {
+            slot = 'model'
+            // avoid to process .xsemantics files in the bin directory
+            uri = ".*(src).*\\.xsemantics"
+        }
+    }
+
+    component = org.eclipse.xtext.generator.GeneratorComponent {
+        register = it.xsemantics.dsl.XsemanticsStandaloneSetup {}
+        slot = 'model'
+        outlet = {
+            path = targetDir
+        }
+    }
+}

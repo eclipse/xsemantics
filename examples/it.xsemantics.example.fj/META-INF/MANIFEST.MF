@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.antlr.runtime,
  it.xsemantics.runtime;visibility:=reexport,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.xtend.standalone;resolution:=optional
+ org.eclipse.xtend.standalone;resolution:=optional,
+ it.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.example.fj,
