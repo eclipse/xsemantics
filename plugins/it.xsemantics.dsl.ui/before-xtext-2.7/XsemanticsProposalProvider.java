@@ -3,23 +3,22 @@
  */
 package it.xsemantics.dsl.ui.contentassist;
 
+import it.xsemantics.dsl.services.XsemanticsProposalsForDatatypeRules;
+import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 import com.google.inject.Inject;
-
-import it.xsemantics.dsl.services.XsemanticsProposalsForDatatypeRules;
-import it.xsemantics.dsl.ui.contentassist.AbstractXsemanticsProposalProvider;
-import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
-import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
 /**
  * see
@@ -36,7 +35,7 @@ public class XsemanticsProposalProvider extends
 	private ITypesProposalProvider typeProposalProvider;
 
 	@Inject
-	private JvmTypesBuilder typesBuilder;
+	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	@Override
 	public void complete_JudgmentSymbol(EObject model, RuleCall ruleCall,

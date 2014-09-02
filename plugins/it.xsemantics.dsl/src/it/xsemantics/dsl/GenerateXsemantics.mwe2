@@ -124,7 +124,7 @@ Workflow {
             fragment = quickfix.QuickfixProviderFragment {}
 
             // content assist API
-            fragment = contentAssist.JavaBasedContentAssistFragment {}
+            fragment = contentAssist.ContentAssistFragment {}
 
             // generates a more lightweight Antlr parser and lexer tailored for content assist
             fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
