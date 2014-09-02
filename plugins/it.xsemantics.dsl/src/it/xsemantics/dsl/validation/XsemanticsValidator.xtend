@@ -331,8 +331,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				&&
 				typeSystem.equals(
 					typeSystem.getInputTypes(r1),
-					typeSystem.getInputTypes(r2), 
-					r1
+					typeSystem.getInputTypes(r2)
 				)
 			],
 			"rule")
@@ -352,7 +351,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				for (Rule rule2 : rulesOfTheSameKind) {
 					if (rule2 != rule && !rule.isOverride()) {
 						val tupleType2 = typeSystem.getInputTypes(rule2);
-						if (typeSystem.equals(tupleType, tupleType2, rule)) {
+						if (typeSystem.equals(tupleType, tupleType2)) {
 							error("Duplicate rule of the same kind with parameters: "
 									+ tupleTypeRepresentation(tupleType)
 									+ reportContainingSystemName(rule2),

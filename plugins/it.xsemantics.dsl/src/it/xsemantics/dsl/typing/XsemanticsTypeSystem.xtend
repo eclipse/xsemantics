@@ -57,14 +57,7 @@ class XsemanticsTypeSystem {
 		return tupleType;
 	}
 	
-	def equals(TupleType tupleType1, TupleType tupleType2, EObject context) {
-//		if (tupleType1.size() != tupleType2.size())
-//			return false;
-//		val judgmentParametersIt = tupleType1.iterator();
-//		for (JvmTypeReference jvmTypeReference : tupleType2) {
-//			if (!equals(judgmentParametersIt.next(), jvmTypeReference, context))
-//				return false;
-//		}
+	def equals(TupleType tupleType1, TupleType tupleType2) {
 		return tupleType1.equals(tupleType2);
 	}
 

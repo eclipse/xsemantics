@@ -206,7 +206,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val tupleType = new TupleType()
 		tupleType.add(typeForName(typeof(EAttribute)))
 		assertFalse(
-			typeSystem.equals(new TupleType(), tupleType, fakeContext)
+			typeSystem.equals(new TupleType(), tupleType)
 		)
 	}
 	
@@ -221,7 +221,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(EClass), ts))
 		assertTrue(
-			typeSystem.equals(tupleType2, tupleType1, ts)
+			typeSystem.equals(tupleType2, tupleType1)
 		)
 	}
 
@@ -233,7 +233,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(EClass), ts))
 		assertFalse(
-			typeSystem.equals(tupleType1, null, ts)
+			typeSystem.equals(tupleType1, null)
 		)
 	}
 
@@ -258,7 +258,7 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 		val tupleType2 = tupleType(
 			typeReferences.getTypeForName(typeof(EObject), ts))
 		assertFalse(
-			typeSystem.equals(tupleType1, tupleType2, ts)
+			typeSystem.equals(tupleType1, tupleType2)
 		)
 	}
 
@@ -273,13 +273,8 @@ class XsemanticsTypeSystemTest extends XsemanticsBaseTest {
 			typeReferences.getTypeForName(typeof(EObject), ts),
 			typeReferences.getTypeForName(typeof(Notifier), ts))
 		assertFalse(
-			typeSystem.equals(tupleType2, tupleType1, fakeContext)
+			typeSystem.equals(tupleType2, tupleType1)
 		)
-	}
-
-	def private fakeContext() {
-		// we need a context for type conformance
-		testFiles.testRuleWithExpressionInConclusion.parse
 	}
 
 	@Test
