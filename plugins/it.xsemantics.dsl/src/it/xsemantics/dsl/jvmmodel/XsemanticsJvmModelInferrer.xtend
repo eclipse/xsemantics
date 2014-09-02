@@ -35,7 +35,6 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 /**
@@ -72,12 +71,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            {@link JvmDeclaredType type}
 	 *            without a container should be passed to the acceptor in order
 	 *            get attached to the current resource. The acceptor's
-	 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
-	 *            accept(..)} method takes the constructed empty type for the
+	 *            accept(..) method takes the constructed empty type for the
 	 *            pre-indexing phase. This one is further initialized in the
-	 *            indexing phase using the closure you pass to the returned
-	 *            {@link IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
-	 *            initializeLater(..)}.
+	 *            indexing phase using the lambda you pass to accept as the last argument.
 	 * @param isPreIndexingPhase
 	 *            whether the method is called in a pre-indexing phase, i.e.
 	 *            when the global index is not yet fully updated. You must not
@@ -90,9 +86,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		
    		val inferredClass = ts.toClass( ts.toJavaFullyQualifiedName )
    		
-   		acceptor.accept(
-			inferredClass
-		).initializeLater [
+   		acceptor.accept(inferredClass) [
 			documentation = ts.documentation
 			
 			if (ts.superSystem != null)
@@ -193,9 +187,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		]
 		
 		// generation of the Validator
-		acceptor.accept(
-			ts.toClass( ts.toValidatorJavaFullyQualifiedName )
-		).initializeLater [
+		acceptor.accept(ts.toClass(ts.toValidatorJavaFullyQualifiedName)) [
 			documentation = ts.documentation
 			
 			if (ts.superSystemDefinition != null)
