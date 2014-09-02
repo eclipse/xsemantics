@@ -1,41 +1,41 @@
 package it.xsemantics.dsl.generator
 
-import com.google.common.collect.Lists
 import com.google.inject.Inject
+import com.google.inject.Provider
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.Cachable
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
+import it.xsemantics.dsl.xsemantics.Named
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
+import it.xsemantics.dsl.xsemantics.UniqueByName
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.Result2
 import it.xsemantics.runtime.Result3
+import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 import static extension org.eclipse.xtext.util.Strings.*
-import it.xsemantics.dsl.xsemantics.Named
-import it.xsemantics.dsl.xsemantics.UniqueByName
-import it.xsemantics.dsl.xsemantics.Cachable
-import com.google.inject.Provider
-import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class XsemanticsGeneratorExtensions {
 	
@@ -47,7 +47,7 @@ class XsemanticsGeneratorExtensions {
 	
 	@Inject extension TypeReferenceSerializer
 	
-	@Inject extension JvmTypesBuilder
+	@Inject extension TypeReferences
 	
 	@Inject
 	protected IJvmModelAssociations associations
@@ -343,19 +343,22 @@ class XsemanticsGeneratorExtensions {
 		val resultTypeArguments = e.resultJvmTypeReferences()
 		var JvmTypeReference resultT
 		if (resultTypeArguments.size == 1)
-			resultT = e.newTypeRef(typeof(Result), resultTypeArguments.get(0)) 
+			resultT = getTypeForName(Result, e, 
+				resultTypeArguments.get(0)
+			)
 		else if (resultTypeArguments.size == 2)
-			resultT = e.newTypeRef(typeof(Result2),
-				resultTypeArguments.get(0), resultTypeArguments.get(1)
+			resultT = getTypeForName(Result2, e,
+				resultTypeArguments.get(0),
+				resultTypeArguments.get(1)
 			)
 		else if (resultTypeArguments.size == 3)
-			resultT = e.newTypeRef(typeof(Result3),
+			resultT = getTypeForName(Result3, e,
 				resultTypeArguments.get(0),
 				resultTypeArguments.get(1),
 				resultTypeArguments.get(2)
 			)
 		else // safe default
-			resultT = e.newTypeRef(typeof(Result)) 
+			resultT = getTypeForName(typeof(Result), e)
 	}
 
 	def resultType(AuxiliaryDescription e) {
@@ -366,18 +369,14 @@ class XsemanticsGeneratorExtensions {
 		typeSystem.getType(e.getAuxiliaryDescription)
 	}
 
-	def booleanType(EObject e) {
-		e.newTypeRef(typeof(Boolean))
-	}
-
-	def resultJvmTypeReferences(JudgmentDescription e) {
+	def ArrayList<JvmTypeReference> resultJvmTypeReferences(JudgmentDescription e) {
 		val outputParams = e.outputJudgmentParameters
 		if (outputParams.size == 0) {
-			<JvmTypeReference>newArrayList(e.newTypeRef(typeof(Boolean)))
+			newArrayList(getTypeForName(Boolean, e))
 		} else {
-			Lists::newArrayList(outputParams.
+			newArrayList(outputParams.
 				filter[it.jvmTypeReference != null && it.jvmTypeReference.type != null].
-				map [ it.jvmTypeReference ])
+				map[it.jvmTypeReference])
 		}
 	}
 	
@@ -386,17 +385,16 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def resultType(CheckRule checkRule) {
-		checkRule.newTypeRef(typeof(Result),
-			checkRule.newTypeRef(typeof(Boolean)))
+		getTypeForName(Result, checkRule,
+			getTypeForName(Boolean, checkRule))
 	}
-	
 
 	def errorInformationType(EObject o) {
-		o.newTypeRef(typeof(ErrorInformation))
+		getTypeForName(ErrorInformation, o)
 	}
 
 	def exceptionType(EObject o) {
-		o.newTypeRef(typeof(Exception))
+		getTypeForName(Exception, o)
 	}
 
 	def emptyEnvironmentInvocation() {

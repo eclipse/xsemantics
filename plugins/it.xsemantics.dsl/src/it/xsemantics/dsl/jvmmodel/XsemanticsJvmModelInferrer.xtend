@@ -395,7 +395,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		// main succeded method
    		inferredMethods += judgmentDescription.toMethod(
    			judgmentDescription.succeededMethodName.toString,
-   			judgmentDescription.booleanType
+   			Boolean.typeRef
    		) [
    			if (judgmentDescription.override)
 				addOverrideAnnotation
@@ -408,7 +408,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		// entry point method with environment parameter
    		inferredMethods += judgmentDescription.toMethod(
    			judgmentDescription.succeededMethodName.toString,
-   			judgmentDescription.booleanType
+   			Boolean.typeRef
    		) [
    			if (judgmentDescription.override)
 				addOverrideAnnotation
@@ -422,7 +422,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		// entry point method with environment parameter and rule application trace
    		inferredMethods += judgmentDescription.toMethod(
    			judgmentDescription.succeededMethodName.toString,
-   			judgmentDescription.booleanType
+   			Boolean.typeRef
    		) [
 			if (judgmentDescription.override)
 				addOverrideAnnotation
