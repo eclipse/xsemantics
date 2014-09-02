@@ -81,10 +81,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass, object);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(object);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {

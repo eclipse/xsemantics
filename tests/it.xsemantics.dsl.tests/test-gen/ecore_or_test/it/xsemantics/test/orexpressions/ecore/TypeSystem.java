@@ -98,10 +98,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<EObject> _result_ = applyRuleEClassEObject(G, _subtrace_, eClass);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EClassEObject") + stringRepForEnv(G) + " |- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject) {
@@ -139,10 +139,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<EObject> _result_ = applyRuleEClassEObject2(G, _subtrace_, eClass);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EClassEObject2") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EClassEObject2") + stringRepForEnv(G) + " ||- " + stringRep(eClass) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassEObject2) {

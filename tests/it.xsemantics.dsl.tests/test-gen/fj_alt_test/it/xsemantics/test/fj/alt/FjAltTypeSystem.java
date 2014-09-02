@@ -296,10 +296,10 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleTypeEquals(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("TypeEquals") + stringRepForEnv(G) + " |- " + stringRep(left) + " ~~ " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleTypeEquals) {
@@ -332,10 +332,10 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckNew(G, _subtrace_, newExp);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckNew") + stringRepForEnv(G) + " |- " + stringRep(newExp);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckNew) {
@@ -371,10 +371,10 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleCheckClass(G, _subtrace_, cl);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("CheckClass") + stringRepForEnv(G) + " |- " + stringRep(cl);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleCheckClass) {

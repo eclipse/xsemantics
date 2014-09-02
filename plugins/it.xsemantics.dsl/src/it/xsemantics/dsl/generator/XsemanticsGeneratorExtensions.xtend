@@ -231,10 +231,10 @@ class XsemanticsGeneratorExtensions {
 
 	def StringConcatenationClient addToTraceMethod(CharSequence trace, CharSequence toAdd) '''
 		addToTrace(«trace», new «Provider»<Object>() {
-			public Object get() {
-				return «toAdd»;
-			}
-		})'''
+				public Object get() {
+					return «toAdd»;
+				}
+			})'''
 	
 	def addAsSubtraceMethod(CharSequence trace, CharSequence subtrace) '''
 		addAsSubtrace(«trace», «subtrace»)'''

@@ -128,10 +128,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<EClass> _result_ = applyRuleEObjectEClass(G, _subtrace_, obj);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EObjectEClass") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClass) {
@@ -154,10 +154,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<EClass> _result_ = applyRuleEObjectEClassWithErrorSpecification(G, _subtrace_, obj);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EObjectEClassWithErrorSpecification") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst());
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EObjectEClassWithErrorSpecification") + stringRepForEnv(G) + " |- " + stringRep(obj) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEObjectEClassWithErrorSpecification) {
@@ -189,10 +189,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleEClassSubtyping(G, _subtrace_, candidate, superClass);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("EClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(candidate) + " <: " + stringRep(superClass);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("EClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(candidate) + " <: " + stringRep(superClass);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleEClassSubtyping) {

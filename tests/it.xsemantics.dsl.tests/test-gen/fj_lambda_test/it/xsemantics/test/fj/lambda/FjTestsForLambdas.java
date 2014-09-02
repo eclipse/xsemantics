@@ -97,10 +97,10 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
     	final Result<Boolean> _result_ = applyRuleExistsSubtypeWithLambda(G, _subtrace_, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
-    	public Object get() {
-    		return ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right);
-    	}
-    });
+    		public Object get() {
+    			return ruleName("ExistsSubtypeWithLambda") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <<! " + stringRep(right);
+    		}
+    	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleExistsSubtypeWithLambda) {
