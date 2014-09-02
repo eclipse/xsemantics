@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: it.xsemantics.example.fjcached
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.5.2.qualifier
+Bundle-Version: 1.6.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fjcached; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
