@@ -56,7 +56,7 @@
 		<jacoco-version>0.5.8.201207111220</jacoco-version>
 		<findbugs-version>2.5.4-SNAPSHOT</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.7.0-SNAPSHOT</xtext.version>
+		<xtext.version>2.7.0</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
 		
@@ -93,7 +93,7 @@
 		<profile>
 			<id>luna</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
 				<target-file-name>luna</target-file-name>
@@ -102,7 +102,7 @@
 		<profile>
 			<id>xtext-nightly</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<target-file-name>xtext-nightly</target-file-name>
