@@ -3,17 +3,17 @@
  */
 package it.xsemantics.example.expressions.generator
 
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import it.xsemantics.example.expressions.typing.ExpressionsSemantics
+import it.xsemantics.example.expressions.expressions.Expression
 import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.example.expressions.expressions.Variable
-import it.xsemantics.example.expressions.expressions.Expression
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.example.expressions.typing.ExpressionsSemantics
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.StringRepresentation
+import it.xsemantics.runtime.TraceUtils
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
 
 class ExpressionsGenerator implements IGenerator {
 	

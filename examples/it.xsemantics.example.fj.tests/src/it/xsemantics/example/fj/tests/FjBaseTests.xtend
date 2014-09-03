@@ -1,20 +1,21 @@
 package it.xsemantics.example.fj.tests
 
+import com.google.inject.Inject
 import it.xsemantics.example.fj.FJInjectorProvider
+import it.xsemantics.example.fj.fj.Method
+import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.StringRepresentation
+import it.xsemantics.runtime.TraceUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.runner.RunWith
-import com.google.inject.Inject
-import org.eclipse.xtext.junit4.util.ParseHelper
-import it.xsemantics.example.fj.fj.Program
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import it.xsemantics.runtime.util.TraceUtils
-import it.xsemantics.runtime.StringRepresentation
+
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.example.fj.fj.Method
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FJInjectorProvider))

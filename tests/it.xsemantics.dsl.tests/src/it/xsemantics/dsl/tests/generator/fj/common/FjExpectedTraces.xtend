@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.StringRepresentation
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.TraceUtils
 import org.junit.Assert
 
 class FjExpectedTraces {

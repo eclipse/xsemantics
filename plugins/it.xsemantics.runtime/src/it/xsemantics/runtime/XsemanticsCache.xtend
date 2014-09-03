@@ -3,11 +3,6 @@ package it.xsemantics.runtime
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
-import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.XsemanticsCacheListener
-import it.xsemantics.runtime.XsemanticsProvider
-import it.xsemantics.runtime.util.TraceUtils
 import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.util.IResourceScopeCache

@@ -9,7 +9,7 @@ import it.xsemantics.example.fj.util.FjTypeUtils
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.StringRepresentation
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

@@ -7,7 +7,7 @@ import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.ErrorInformation
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.RuleFailedException
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.TraceUtils
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

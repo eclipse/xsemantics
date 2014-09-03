@@ -3,11 +3,10 @@
  */
 package it.xsemantics.dsl.tests.runtime;
 
-import it.xsemantics.runtime.RuleApplicationTrace;
-
-import org.junit.Assert;
-import org.junit.Test;
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.TraceUtils
+import org.junit.Assert
+import org.junit.Test
 
 /**
  * @author Lorenzo Bettini

@@ -21,7 +21,7 @@ import it.xsemantics.example.lambda.xsemantics.UnifyResult
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.StringRepresentation
-import it.xsemantics.runtime.util.TraceUtils
+import it.xsemantics.runtime.TraceUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper

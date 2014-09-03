@@ -763,7 +763,7 @@ codeRef[it.xsemantics.runtime.RuleFailedException] is declared to be thrown).
 The value in the result will be code[null] if the judgment rule failed;
 in that case you might want to inspect the codeRef[it.xsemantics.runtime.RuleFailedException].
 In particular, you might want to use the utility methods of
-codeRef[it.xsemantics.runtime.util.TraceUtils] to get the stack of all
+codeRef[it.xsemantics.runtime.TraceUtils] to get the stack of all
 the rule failures (also already formatted as an indented string).
 
 In case the judgment has two output parameters, the class
@@ -810,7 +810,7 @@ method terminates with success you can then inspect the trace of all the rules
 invoked together with the values used in the rules.  If the judgment fails,
 you will see also the rules that failed in the rule application trace.
 By using the method code[traceAsString(RuleApplicationTrace)] of
-codeRef[it.xsemantics.runtime.util.TraceUtils] you will have a string representation
+codeRef[it.xsemantics.runtime.TraceUtils] you will have a string representation
 indented, with the following idea
 
 code[
@@ -961,7 +961,7 @@ validator will use also the specified feature for generating the error marker.
 The generated validator relies on an injected codeRef[it.xsemantics.runtime.validation.XsemanticsValidatorFilter]
 to filter the error information according to the strategy defined above;
 you can customize the filtering by injecting your implementation.
-The filter relies on codeRef[it.xsemantics.runtime.util.TraceUtils] which
+The filter relies on codeRef[it.xsemantics.runtime.TraceUtils] which
 provides many utility methods to access the error trace.
 An example of customization is shown in ref:LambdaCustomization[].
 

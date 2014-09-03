@@ -1,15 +1,16 @@
 package it.xsemantics.dsl.tests.generator.fj
 
 import it.xsemantics.dsl.tests.generator.fj.common.FjAbstractTests
-import org.junit.Before
-import it.xsemantics.example.fj.FJStandaloneSetup
-import it.xsemantics.test.fj.lambda.FjTestsForLambdas
-import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.dsl.tests.generator.fj.common.FjInputFilesForTyping
-import org.junit.Test
-import it.xsemantics.example.fj.fj.FjFactory
 import it.xsemantics.dsl.tests.generator.fj.common.FjTestsUtils
+import it.xsemantics.example.fj.FJStandaloneSetup
+import it.xsemantics.example.fj.fj.Class
+import it.xsemantics.example.fj.fj.FjFactory
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.TraceUtils
+import it.xsemantics.test.fj.lambda.FjTestsForLambdas
+import org.junit.Before
+import org.junit.Test
 
 class FjLambdaGeneratedTypeSystemTests extends FjAbstractTests {
 	
@@ -61,8 +62,8 @@ failed: ExistsSubtypeWithLambda: [] ||- ClassType 'class A { }' <<! ClassType 'c
 		]
 	}
 
-	def private assertExistsSubtype(it.xsemantics.example.fj.fj.Class c1,
-		it.xsemantics.example.fj.fj.Class c2,
+	def private assertExistsSubtype(Class c1,
+		Class c2,
 		boolean expectedSuccess,
 		CharSequence expectedTrace,
 		CharSequence expectedFailureTrace)
@@ -85,7 +86,7 @@ failed: ExistsSubtypeWithLambda: [] ||- ClassType 'class A { }' <<! ClassType 'c
 		}
 	}
 
-	def private toClassType(it.xsemantics.example.fj.fj.Class c) {
+	def private toClassType(Class c) {
 		FjFactory.eINSTANCE.createClassType => [
 			classref = c
 		]

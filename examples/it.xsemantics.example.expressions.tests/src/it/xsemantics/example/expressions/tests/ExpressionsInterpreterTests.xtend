@@ -2,11 +2,11 @@ package it.xsemantics.example.expressions.tests
 
 import com.google.inject.Inject
 import it.xsemantics.example.expressions.expressions.Model
-import it.xsemantics.runtime.util.TraceUtils
-import org.junit.Assert
+import it.xsemantics.runtime.TraceUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 

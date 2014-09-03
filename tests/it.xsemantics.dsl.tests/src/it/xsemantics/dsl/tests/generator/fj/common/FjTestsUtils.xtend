@@ -1,16 +1,17 @@
 package it.xsemantics.dsl.tests.generator.fj.common
 
-import it.xsemantics.example.fj.fj.Program
-import static extension org.eclipse.xtext.EcoreUtil2.*
 import it.xsemantics.example.fj.fj.Field
-import org.junit.Assert
-import it.xsemantics.example.fj.fj.ParamRef
-import it.xsemantics.example.fj.fj.Method
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics
 import it.xsemantics.example.fj.fj.Member
+import it.xsemantics.example.fj.fj.Method
+import it.xsemantics.example.fj.fj.ParamRef
+import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.runtime.RuleFailedException
+import it.xsemantics.runtime.TraceUtils
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics
+import org.junit.Assert
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class FjTestsUtils {
 	

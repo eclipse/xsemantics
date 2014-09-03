@@ -1,4 +1,4 @@
-package it.xsemantics.runtime.util
+package it.xsemantics.runtime
 
 import it.xsemantics.runtime.RuleFailedException
 import static extension org.eclipse.xtext.util.Strings.*
@@ -9,6 +9,12 @@ import com.google.common.collect.Lists
 import it.xsemantics.runtime.ErrorInformation
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
+/**
+ * Several utility methods that act on rule traces, rule failures, etc. 
+ * 
+ * @author Lorenzo Bettini - Initial contribution and API
+ * @since 1.6
+ */
 class TraceUtils {
 	
 	def failureAsList(RuleFailedException e) {
@@ -108,16 +114,12 @@ class TraceUtils {
 		]
 	}
 
-	/**
-	 * @since 1.5
-	 */
 	def removeIndentation(String s) {
 		s.removeLeadingWhitespace
 	}
 
 	/**
 	 * Returns the last element in the trace that is not a RuleApplicationTrace
-	 * @since 1.5
 	 */
 	def lastElementNotTrace(RuleApplicationTrace trace) {
 		trace.trace.findLast[!(it instanceof RuleApplicationTrace)]

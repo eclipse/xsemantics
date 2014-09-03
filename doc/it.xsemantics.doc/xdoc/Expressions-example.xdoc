@@ -771,7 +771,7 @@ public class ExpressionsRuntimeModule extends
 
 Note that code[string] and code[traceAsString] come from
 codeRef[it.xsemantics.runtime.StringRepresentation] and
-codeRef[it.xsemantics.runtime.util.TraceUtils] respectively, and they
+codeRef[it.xsemantics.runtime.TraceUtils] respectively, and they
 are used as extension methods.
 
 Thus, starting from this expression:

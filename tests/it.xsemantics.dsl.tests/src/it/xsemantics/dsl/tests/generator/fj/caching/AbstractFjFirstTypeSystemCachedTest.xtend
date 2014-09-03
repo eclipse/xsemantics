@@ -6,10 +6,10 @@ import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.TraceUtils
 import it.xsemantics.runtime.XsemanticsCache
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
-import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
 import org.junit.After
 import org.junit.Before

@@ -5,7 +5,7 @@ package it.xsemantics.runtime.validation;
 
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleFailedException;
-import it.xsemantics.runtime.util.TraceUtils;
+import it.xsemantics.runtime.TraceUtils;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;

@@ -1,8 +1,8 @@
 package it.xsemantics.runtime.caching
 
 import com.google.inject.Inject
+import it.xsemantics.runtime.TraceUtils
 import it.xsemantics.runtime.XsemanticsCachedData
-import it.xsemantics.runtime.util.TraceUtils
 
 /**
  * A utility class for recording RuleApplicationTrace strings 
