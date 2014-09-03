@@ -1,12 +1,10 @@
-package it.xsemantics.runtime.caching;
+package it.xsemantics.runtime;
 
-import it.xsemantics.runtime.RuleApplicationTrace;
-import it.xsemantics.runtime.RuleEnvironment;
 
 /**
  * The actual object put into the {@link XsemanticsCache}
  * @author Lorenzo Bettini
- * @since 1.5
+ * @since 1.6
  */
 public class XsemanticsCachedData<T extends Object> {
 	private String name = "";

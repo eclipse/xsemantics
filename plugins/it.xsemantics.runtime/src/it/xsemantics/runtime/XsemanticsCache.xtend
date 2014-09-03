@@ -1,19 +1,21 @@
-package it.xsemantics.runtime.caching
+package it.xsemantics.runtime
 
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
+import it.xsemantics.runtime.RuleApplicationTrace
+import it.xsemantics.runtime.RuleEnvironment
+import it.xsemantics.runtime.XsemanticsCacheListener
+import it.xsemantics.runtime.XsemanticsProvider
+import it.xsemantics.runtime.util.TraceUtils
+import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.util.IResourceScopeCache
-import it.xsemantics.runtime.RuleEnvironment
-import it.xsemantics.runtime.RuleApplicationTrace
-import java.util.ArrayList
-import it.xsemantics.runtime.util.TraceUtils
 
 /**
  * Caches judgment and auxiliary functions computations.
  * 
- * @since 1.5
+ * @since 1.6
  */
 @Singleton
 class XsemanticsCache {

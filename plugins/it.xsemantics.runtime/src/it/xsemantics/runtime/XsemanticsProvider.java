@@ -1,10 +1,8 @@
 /**
  * 
  */
-package it.xsemantics.runtime.caching;
+package it.xsemantics.runtime;
 
-import it.xsemantics.runtime.RuleApplicationTrace;
-import it.xsemantics.runtime.RuleEnvironment;
 
 
 /**
@@ -14,7 +12,7 @@ import it.xsemantics.runtime.RuleEnvironment;
  * {@link RuleApplicationTrace}.
  * 
  * @author Lorenzo Bettini
- * @since 1.5
+ * @since 1.6
  */
 public abstract class XsemanticsProvider<T> implements com.google.inject.Provider<XsemanticsCachedData<T>> {
 

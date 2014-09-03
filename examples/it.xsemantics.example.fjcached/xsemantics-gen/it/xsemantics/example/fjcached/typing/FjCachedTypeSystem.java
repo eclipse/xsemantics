@@ -10,7 +10,7 @@ import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
-import it.xsemantics.runtime.caching.XsemanticsProvider;
+import it.xsemantics.runtime.XsemanticsProvider;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;

@@ -1,5 +1,6 @@
 package it.xsemantics.runtime.caching
 
+import it.xsemantics.runtime.XsemanticsCacheListener
 import java.util.ArrayList
 
 /**

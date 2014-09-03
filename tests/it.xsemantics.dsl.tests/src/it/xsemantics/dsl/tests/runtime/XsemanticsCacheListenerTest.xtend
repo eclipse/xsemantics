@@ -3,9 +3,9 @@ package it.xsemantics.dsl.tests.runtime
 import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.runtime.XsemanticsCachedData
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
-import it.xsemantics.runtime.caching.XsemanticsCachedData
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.After

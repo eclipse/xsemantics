@@ -5,7 +5,7 @@ import it.xsemantics.example.fj.fj.FjPackage
 import it.xsemantics.example.fj.typing.FjTypeSystem
 import it.xsemantics.example.fjcached.FjcachedInjectorProvider
 import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
-import it.xsemantics.runtime.caching.XsemanticsCache
+import it.xsemantics.runtime.XsemanticsCache
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

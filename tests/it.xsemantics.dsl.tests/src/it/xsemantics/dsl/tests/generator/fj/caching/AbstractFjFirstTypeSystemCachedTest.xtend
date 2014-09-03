@@ -1,20 +1,20 @@
 package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Program
+import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.runtime.RuleApplicationTrace
-import it.xsemantics.runtime.caching.XsemanticsCache
+import it.xsemantics.runtime.XsemanticsCache
+import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
 import it.xsemantics.runtime.util.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
+import org.junit.After
 import org.junit.Before
 
 import static org.junit.Assert.*
-import org.junit.After
-import com.google.inject.Provider
-import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
-import it.xsemantics.example.fj.fj.Type
 
 abstract class AbstractFjFirstTypeSystemCachedTest {
 	

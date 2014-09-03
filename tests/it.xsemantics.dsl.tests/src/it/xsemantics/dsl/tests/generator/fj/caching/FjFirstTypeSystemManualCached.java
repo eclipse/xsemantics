@@ -1,16 +1,16 @@
 package it.xsemantics.dsl.tests.generator.fj.caching;
 
-import java.util.List;
-
 import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Type;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
-import it.xsemantics.runtime.caching.XsemanticsCache;
-import it.xsemantics.runtime.caching.XsemanticsProvider;
+import it.xsemantics.runtime.XsemanticsCache;
+import it.xsemantics.runtime.XsemanticsProvider;
 import it.xsemantics.test.fj.first.FjFirstTypeSystem;
+
+import java.util.List;
 
 import com.google.inject.Inject;
 

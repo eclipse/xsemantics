@@ -3,9 +3,6 @@
  */
 package it.xsemantics.runtime;
 
-import it.xsemantics.runtime.caching.XsemanticsCache;
-import it.xsemantics.runtime.caching.XsemanticsProvider;
-
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,7 +47,7 @@ public class XsemanticsRuntimeSystem {
 	private XsemanticsCache cache = null;
 
 	/**
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	public XsemanticsCache getCache() {
 		if (cache == null) {
@@ -60,7 +57,7 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	/**
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	protected <T> T getFromCache(String methodName, RuleEnvironment environment,
 			RuleApplicationTrace trace, XsemanticsProvider<T> provider,

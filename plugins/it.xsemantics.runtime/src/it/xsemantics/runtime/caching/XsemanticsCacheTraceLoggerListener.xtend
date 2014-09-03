@@ -1,6 +1,7 @@
 package it.xsemantics.runtime.caching
 
 import com.google.inject.Inject
+import it.xsemantics.runtime.XsemanticsCachedData
 import it.xsemantics.runtime.util.TraceUtils
 
 /**
@@ -14,16 +15,25 @@ class XsemanticsCacheTraceLoggerListener extends XsemanticsCacheLoggerListener {
 	
 	@Inject extension TraceUtils
 
+	/**
+	 * @since 1.6
+	 */
 	override cacheHit(XsemanticsCachedData<?> data) {
 		if (data.trace !== null)
 			hits += dataTraceRepresentation(data)
 	}
 
+	/**
+	 * @since 1.6
+	 */
 	override cacheMissed(XsemanticsCachedData<?> data) {
 		if (data.trace !== null)
 			missed += dataTraceRepresentation(data)
 	}
 
+	/**
+	 * @since 1.6
+	 */
 	def dataTraceRepresentation(XsemanticsCachedData<?> data) {
 		data.trace.lastElementNotTrace.toString.removeIndentation
 	}
