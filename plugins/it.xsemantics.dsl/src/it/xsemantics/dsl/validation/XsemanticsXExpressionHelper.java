@@ -1,4 +1,4 @@
-package it.xsemantics.dsl.util;
+package it.xsemantics.dsl.validation;
 
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem;
 import it.xsemantics.dsl.xsemantics.ErrorSpecification;

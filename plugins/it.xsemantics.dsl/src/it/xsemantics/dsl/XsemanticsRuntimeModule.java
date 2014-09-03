@@ -6,7 +6,7 @@ package it.xsemantics.dsl;
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
 import it.xsemantics.dsl.typing.XsemanticsTypeComputer;
-import it.xsemantics.dsl.util.XsemanticsXExpressionHelper;
+import it.xsemantics.dsl.validation.XsemanticsXExpressionHelper;
 
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;

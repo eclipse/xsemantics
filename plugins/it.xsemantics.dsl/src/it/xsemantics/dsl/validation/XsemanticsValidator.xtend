@@ -6,14 +6,17 @@ package it.xsemantics.dsl.validation
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
+import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
-import it.xsemantics.dsl.util.XsemanticsXExpressionHelper
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.Injected
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
+import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.Overrider
+import it.xsemantics.dsl.xsemantics.ReferToJudgment
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
@@ -35,13 +38,8 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.xbase.lib.IterableExtensions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
-import it.xsemantics.dsl.xsemantics.ReferToJudgment
-import it.xsemantics.dsl.xsemantics.OutputParameter
-import it.xsemantics.dsl.xsemantics.Injected
 
 //import org.eclipse.xtext.validation.Check
 
