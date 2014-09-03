@@ -103,20 +103,6 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	}
 	
 	@Test
-	def void testInputEObjectParams() {
-		assertEquals(2, 
-			testFiles.testRuleWithOutputParams.firstRule.
-			inputEObjectParams.size())
-	}
-	
-	@Test
-	def void testInputEObjectParamsWithNonEObjects() {
-		assertEquals(1, 
-			testFiles.testRulesWithNonEObjectParams.firstRule.
-			inputEObjectParams.size())
-	}
-	
-	@Test
 	def void testOutputParamsNotEmpty() {
 		assertEquals(1, 
 			testFiles.testJudgmentDescriptionsReferringToEcore3WithOutput.parseAndAssertNoError.
@@ -246,20 +232,6 @@ class XsemanticsUtilsTest extends XsemanticsBaseTest {
 			outputConclusionElements.get(0)
 		)
 	}
-	
-//	@Test
-//	def void testIterateIfThenElse() {
-//		val stringList = 'a,B,c'.split(',').toList
-//		val toUpper = newArrayList()
-//		val toLower = newArrayList()
-//		stringList.iterateIfThenElse(
-//			[ it.toLowerCase.equals(it) ],
-//			[ toLower += it ],
-//			[ toUpper += it ]
-//		)
-//		assertEquals("[a, c]", toLower.toString)
-//		assertEquals("[B]", toUpper.toString)
-//	}
 	
 	@Test
 	def void testOutputConclusionElementsWithoutOutputParams() {

@@ -217,6 +217,20 @@ class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 				assertEquals(get(1).expressionInConclusionMethodName)
 			]
 	}
+
+	@Test
+	def void testInputEObjectParams() {
+		assertEquals(2, 
+			testFiles.testRuleWithOutputParams.firstRule.
+			inputEObjectParams.size())
+	}
+	
+	@Test
+	def void testInputEObjectParamsWithNonEObjects() {
+		assertEquals(1, 
+			testFiles.testRulesWithNonEObjectParams.firstRule.
+			inputEObjectParams.size())
+	}
 	
 	def assertResultType(CharSequence prog, CharSequence expected) {
 		val a = createAppendable

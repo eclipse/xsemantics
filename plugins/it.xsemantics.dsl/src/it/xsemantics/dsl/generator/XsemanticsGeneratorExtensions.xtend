@@ -481,4 +481,14 @@ class XsemanticsGeneratorExtensions {
 	def escapeJavaStringChars(String s) {
 		s.convertToJavaString
 	}
+
+	def inputEObjectParams(Rule rule) {
+		rule.inputParams.filter [
+			it.parameter.parameterType.isEObject(rule)
+		]
+	}
+
+	def inputEObjectParams(AuxiliaryFunction aux) {
+		aux.parameters.filter[parameterType.isEObject(aux)]
+	}
 }

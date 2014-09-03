@@ -4,18 +4,21 @@ import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
+import it.xsemantics.dsl.xsemantics.Cachable
+import it.xsemantics.dsl.xsemantics.EntryPointsOption
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
 import it.xsemantics.dsl.xsemantics.OutputParameter
+import it.xsemantics.dsl.xsemantics.ReferToJudgment
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleConclusionElement
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.RuleParameter
+import it.xsemantics.dsl.xsemantics.XsemanticsFile
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import java.util.List
 import java.util.Set
@@ -29,15 +32,9 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.xsemantics.ReferToJudgment
-import it.xsemantics.dsl.xsemantics.XsemanticsFile
-import it.xsemantics.dsl.xsemantics.Cachable
-import it.xsemantics.dsl.xsemantics.EntryPointsOption
 
 @Singleton
 class XsemanticsUtils {
-	
-	@Inject extension XsemanticsTypeSystem
 	
 	@Inject
     IJvmModelAssociations associations;
@@ -148,16 +145,6 @@ class XsemanticsUtils {
 				filter(RuleParameter).toList
 		}
 		rule._inputParams
-	}
-	
-	def inputEObjectParams(Rule rule) {
-		rule.inputParams.filter [
-			it.parameter.parameterType.isEObject(rule)
-		]
-	}
-
-	def inputEObjectParams(AuxiliaryFunction aux) {
-		aux.parameters.filter[parameterType.isEObject(aux)]
 	}
 	
 	def isInputParam(RuleParameter ruleParameter) {

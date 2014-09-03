@@ -57,7 +57,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject extension TypeReferences
 	
-	@Inject XsemanticsTypeSystem typeSystem
+	@Inject extension XsemanticsTypeSystem typeSystem
 
 	/**
 	 * The dispatch method {@code infer} is called for each instance of the
@@ -1084,5 +1084,6 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 	def private addExtensionAnnotation(JvmAnnotationTarget it) {
 		annotations += Extension.annotationRef
 	}
+
 }
 
