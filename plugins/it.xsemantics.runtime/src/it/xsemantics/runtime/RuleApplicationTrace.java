@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Keeps a trace of rule applied (and also failures)
+ * Keeps a trace of applied rules (and also failures)
  * 
  * @author Lorenzo Bettini
  * 
@@ -55,24 +55,42 @@ public class RuleApplicationTrace {
 	}
 
 	/**
-	 * Returns a "snapshot" of the current trace (i.e., it clones possible
-	 * subtraces); this is useful for storing snapshots in cached computations.
+	 * Returns a "snapshot" of the current trace (i.e., it partially deeply clones
+	 * possible subtraces); this is useful for storing snapshots in cached
+	 * computations.
+	 * 
+	 * If there are instantiation exceptions during the deep cloning of a
+	 * RuleApplicationTrace, e.g., {@link InstantiationException} or
+	 * {@link IllegalAccessException}, the clone gracefully falls back to the
+	 * very same instance.
+	 * 
+	 * Note that only possibly nested RuleApplicationTrace instances are cloned,
+	 * not the other objects of the trace, i.e., strings are not cloned.
+	 * 
 	 * @since 1.5
 	 */
 	public RuleApplicationTrace snapshot() {
-		return clone();
+		return performSafeDeepCloning();
 	}
 	
 	/**
-	 * @since 1.5
+	 * @since 1.6
 	 */
-	@Override
-	protected RuleApplicationTrace clone() {
-		RuleApplicationTrace cloned = new RuleApplicationTrace();
+	protected RuleApplicationTrace performSafeDeepCloning() {
+		RuleApplicationTrace cloned = null;
+		
+		try {
+			cloned = getClass().newInstance();
+		} catch (InstantiationException e) {
+			return this;
+		} catch (IllegalAccessException e) {
+			return this;
+		}
+
 		cloned.trace = new ArrayList<Object>();
 		for (Object orig : trace) {
 			if (orig instanceof RuleApplicationTrace) {
-				cloned.trace.add(((RuleApplicationTrace)orig).clone());
+				cloned.trace.add(((RuleApplicationTrace)orig).performSafeDeepCloning());
 			} else {
 				cloned.trace.add(orig);
 			}

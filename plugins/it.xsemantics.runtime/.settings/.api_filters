@@ -40,6 +40,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/RuleApplicationTrace.java" type="it.xsemantics.runtime.RuleApplicationTrace">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleApplicationTrace"/>
+                <message_argument value="clone()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/it/xsemantics/runtime/XsemanticsRuntimeSystem.java" type="it.xsemantics.runtime.XsemanticsRuntimeSystem">
         <filter id="338792546">
             <message_arguments>

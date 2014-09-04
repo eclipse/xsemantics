@@ -15,6 +15,42 @@ import org.junit.Test
 public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	
 	extension TraceUtils = new TraceUtils
+	
+	static class TestRuleApplicationTraceSubclass extends RuleApplicationTrace {
+		
+	}
+
+	/**
+	 * throws an InstantionException after the first instance is created: this
+	 * is used to test snapshot: in the presence of exceptions snapshot simply returns
+	 * the same trace
+	 */
+	static class TestRuleApplicationTraceWithInstantiationException extends RuleApplicationTrace {
+		static var first = false
+		new () {
+			if (first) {
+				throw new InstantiationException
+			} else {
+				first = true
+			}
+		}
+	}
+
+	/**
+	 * throws an IllegalAccessException after the first instance is created: this
+	 * is used to test snapshot: in the presence of exceptions snapshot simply returns
+	 * the same trace
+	 */
+	static class TestRuleApplicationTraceWithIllegalAccessException extends RuleApplicationTrace {
+		static var first = false
+		new () {
+			if (first) {
+				throw new IllegalAccessException
+			} else {
+				first = true
+			}
+		}
+	}
 
 	@Test
 	def void testAddAsSubtraceNull() {
@@ -43,7 +79,7 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	}
 
 	@Test
-	def void testSnapshot() throws CloneNotSupportedException {
+	def void testSnapshot() {
 		val t1 = new RuleApplicationTrace();
 		Assert.assertTrue(t1.snapshot().isEmpty());
 		
@@ -71,5 +107,23 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
  modified2'''.assertEqualsStrings(t1.traceAsString);
 '''modified
  second'''.assertEqualsStrings(t3.traceAsString);
+	}
+
+	@Test
+	def void testSnapshotWithSubclass() {
+		val t1 = new TestRuleApplicationTraceSubclass
+		assertEquals(TestRuleApplicationTraceSubclass, t1.snapshot.class)
+	}
+
+	@Test
+	def void testSnapshotWithInstantionExceptionReturnsThis() {
+		val t1 = new TestRuleApplicationTraceWithInstantiationException
+		assertSame(t1, t1.snapshot)
+	}
+
+	@Test
+	def void testSnapshotWithIllegalAccessExceptionReturnsThis() {
+		val t1 = new TestRuleApplicationTraceWithIllegalAccessException
+		assertSame(t1, t1.snapshot)
 	}
 }
