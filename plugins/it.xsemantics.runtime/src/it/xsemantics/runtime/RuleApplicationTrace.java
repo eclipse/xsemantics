@@ -6,6 +6,8 @@ package it.xsemantics.runtime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 /**
  * Keeps a trace of applied rules (and also failures)
  * 
@@ -13,6 +15,10 @@ import java.util.List;
  * 
  */
 public class RuleApplicationTrace {
+	
+	private static final String DEEP_CLONING = "deep cloning of trace disabled";
+
+	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTrace.class);
 
 	protected List<Object> trace = new ArrayList<Object>();
 
@@ -82,8 +88,10 @@ public class RuleApplicationTrace {
 		try {
 			cloned = getClass().newInstance();
 		} catch (InstantiationException e) {
+			LOGGER.info(DEEP_CLONING, e);
 			return this;
 		} catch (IllegalAccessException e) {
+			LOGGER.info(DEEP_CLONING, e);
 			return this;
 		}
 

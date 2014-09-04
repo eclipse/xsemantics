@@ -7,12 +7,15 @@ import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils
 import org.junit.Assert
 import org.junit.Test
+import org.apache.log4j.Logger
 
 /**
  * @author Lorenzo Bettini
  * 
  */
 public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
+	
+	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTraceTests);
 	
 	extension TraceUtils = new TraceUtils
 	
@@ -118,12 +121,14 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	@Test
 	def void testSnapshotWithInstantionExceptionReturnsThis() {
 		val t1 = new TestRuleApplicationTraceWithInstantiationException
+		LOGGER.info("*** EXCEPTION IN THE LOG IS EXPECTED IN THIS TEST ***")
 		assertSame(t1, t1.snapshot)
 	}
 
 	@Test
 	def void testSnapshotWithIllegalAccessExceptionReturnsThis() {
 		val t1 = new TestRuleApplicationTraceWithIllegalAccessException
+		LOGGER.info("*** EXCEPTION IN THE LOG IS EXPECTED IN THIS TEST ***")
 		assertSame(t1, t1.snapshot)
 	}
 }
