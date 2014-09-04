@@ -4,16 +4,15 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
-import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
-import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.CachedClause
+import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.Description
 import it.xsemantics.dsl.xsemantics.EmptyEnvironment
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.Fail
-import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.RuleConclusion
 import it.xsemantics.dsl.xsemantics.RuleInvocation
@@ -24,6 +23,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.common.types.util.TypeReferences
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -105,15 +104,15 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		toJavaStatement(rule.premises, result, false)
 	}
 	
-	def dispatch compileFinalPartOfThrowExceptionMethod(JudgmentDescription judgmentDescription, 
+	def dispatch compileFinalPartOfThrowExceptionMethod(Description desc, 
 			ITreeAppendable a, String error, String source, String feature) {
 		a.append('''
 			«throwRuleFailedExceptionMethod»(«error»,
 				_issue, _ex, new ''')
-		judgmentDescription.errorInformationType.serialize(judgmentDescription, a)
+		desc.errorInformationType.serialize(desc, a)
 		a.append('''(«source», «feature»));''')
 	}
-
+	
 	def dispatch compileFinalPartOfThrowExceptionMethod(RuleConclusion ruleConclusion,
 			ITreeAppendable a, String error, String source, String feature) {
 		val rule = ruleConclusion.containingRule
@@ -124,15 +123,6 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		a.append('''(«source», «feature»));''')
 	}
 
-	def dispatch compileFinalPartOfThrowExceptionMethod(AuxiliaryDescription aux,
-			ITreeAppendable a, String error, String source, String feature) {
-		a.append('''
-			«throwRuleFailedExceptionMethod»(«error»,
-				_issue, _ex, new ''')
-		aux.errorInformationType.serialize(aux, a)
-		a.append('''(«source», «feature»));''')
-	}
-	
 	def String compileErrorOfErrorSpecification(
 			ErrorSpecification errorSpecification, ITreeAppendable b) {
 		return compileAndAssignToLocalVariable(
