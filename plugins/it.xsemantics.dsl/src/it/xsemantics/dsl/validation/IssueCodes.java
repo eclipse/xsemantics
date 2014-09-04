@@ -5,10 +5,6 @@ package it.xsemantics.dsl.validation;
  */
 public class IssueCodes {
 
-	private IssueCodes() {
-		
-	}
-	
 	public static final String PREFIX = "it.xsemantics.dsl.validation.";
 
 	public static final String DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS = PREFIX
@@ -69,4 +65,8 @@ public class IssueCodes {
 	public static final String PARAMS_SIZE_DONT_MATCH = PREFIX + "ParamsSizeDontMatch";
 	
 	public static final String ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE = PREFIX + "AccessToOutputParamWithinClosure";
+
+	private IssueCodes() {
+		
+	}
 }
