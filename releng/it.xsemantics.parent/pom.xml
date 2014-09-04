@@ -76,12 +76,22 @@
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.junit.reportsPath>../${project.artifactId}.tests/target/surefire-reports/</sonar.junit.reportsPath>
 		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**,**/*RuntimeModule.java,**/*UiModule.java</sonar.exclusions>
+
 		<!-- see http://sonarqube.15.x6.nabble.com/sonar-issue-ignore-multicriteria-td5021722.html and
 		 http://stackoverflow.com/questions/21825469/configure-sonar-sonar-issue-ignore-multicriteria-through-maven
 		 for the multicriteria property -->
-		<sonar.issue.ignore.multicriteria>e1</sonar.issue.ignore.multicriteria>
+		<sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
+
+		<!-- standard convention for method names: in the outline tree provider we
+		 must use methods that start with _ and they'd violate the rule squid:S00100 -->
         <sonar.issue.ignore.multicriteria.e1.ruleKey>squid:S00100</sonar.issue.ignore.multicriteria.e1.ruleKey>
         <sonar.issue.ignore.multicriteria.e1.resourceKey>**/*OutlineTreeProvider.java</sonar.issue.ignore.multicriteria.e1.resourceKey>
+
+		<!-- "Tabulation characters should not be used"
+		 sorry... I don't agree :) -->
+        <sonar.issue.ignore.multicriteria.e2.ruleKey>squid:S00105</sonar.issue.ignore.multicriteria.e2.ruleKey>
+        <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e2.resourceKey>
+
 		<!--  sonar.skippedModules is deprecated: https://jira.codehaus.org/browse/SONAR-5109 -->
 		<!-- <sonar.skippedModules>it.xsemantics.dsl.tests,it.xsemantics.example.fj.tests,it.xsemantics.example.expressions.tests,it.xsemantics.example.lambda.tests,it.xsemantics.tests.swtbot</sonar.skippedModules> -->
 		<!-- instead we must use advanced reactor options: https://jira.codehaus.org/browse/MSONAR-61  -->
