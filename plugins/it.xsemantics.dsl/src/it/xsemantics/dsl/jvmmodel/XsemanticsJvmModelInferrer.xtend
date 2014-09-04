@@ -311,31 +311,22 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	def genEntryPointMethods(JudgmentDescription judgmentDescription) {
    		val entryPointMethods = <JvmOperation>newArrayList()
    		// main entry point method
-   		entryPointMethods += judgmentDescription.toMethod(
-   			judgmentDescription.entryPointMethodName.toString,
-   			judgmentDescription.resultType
-   		) [
-   			if (judgmentDescription.override)
-				addOverrideAnnotation
-   			
-   			parameters += judgmentDescription.inputParameters
-   			
-   			body = '''return «judgmentDescription.entryPointMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
-   		]
+   		entryPointMethods += judgmentDescription.entryPointCommon(
+   			[], // no parameters before input params
+   			[
+   				body = '''return «judgmentDescription.entryPointMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
+   			]	
+   		)
    		
    		// entry point method with environment parameter
-   		entryPointMethods += judgmentDescription.toMethod(
-   			judgmentDescription.entryPointMethodName.toString,
-   			judgmentDescription.resultType
-   		) [
-   			if (judgmentDescription.override)
-				addOverrideAnnotation
-
-   			parameters += judgmentDescription.environmentParam
-   			parameters += judgmentDescription.inputParameters
-   			
-   			body = '''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
-   		]
+   		entryPointMethods += judgmentDescription.entryPointCommon(
+   			[
+   				parameters += judgmentDescription.environmentParam
+   			],
+   			[
+   				body = '''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
+   			]
+   		)
    		
    		// entry point method with environment parameter and rule application trace
    		val methodName = judgmentDescription.entryPointMethodName.toString
@@ -385,6 +376,30 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		
    		entryPointMethods
    	}
+
+	/**
+	 * @param judgmentDescription
+	 * @param beforeInputParams can add parameters before the input parameters
+	 * @param bodyCreator handles the creation of the body of the method
+	 */
+	def entryPointCommon(JudgmentDescription judgmentDescription,
+		(JvmOperation) => void beforeInputParams,
+		(JvmOperation) => void bodyCreator
+	) {
+		
+		judgmentDescription.toMethod(
+   			judgmentDescription.entryPointMethodName.toString,
+   			judgmentDescription.resultType
+   		) [
+   			if (judgmentDescription.override)
+				addOverrideAnnotation
+   		
+   			beforeInputParams.apply(it)	
+   			parameters += judgmentDescription.inputParameters
+   			
+   			bodyCreator.apply(it)
+   		]
+	}
 
    	def genSucceededMethods(JudgmentDescription judgmentDescription) {
    		val inferredMethods = <JvmOperation>newArrayList()
