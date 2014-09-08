@@ -6,16 +6,21 @@ import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustomForPluginTest
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustomForPluginTest))
 @RunWith(typeof(XtextRunner))
 class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
+
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder 
 	
 	@Inject extension CompilationTestHelper
 	

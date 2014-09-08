@@ -102,8 +102,8 @@ public class XsemanticsRuntimeSystemTests extends
 			ts.callNonExistentMethod("foo", 10);
 			fail("should get an exception due to missing method");
 		} catch (Exception e) {
-			assertWrappedRuleFailedException(e,
-					"cannot find a rule for |- foo : 10");
+			assertRuleFailedException(e,
+					"cannot find a rule for |- foo : 10", null);
 		}
 	}
 
@@ -113,8 +113,8 @@ public class XsemanticsRuntimeSystemTests extends
 			ts.callNonExistentAuxiliary("foo", 10);
 			fail("should get an exception due to missing method");
 		} catch (Exception e) {
-			assertWrappedRuleFailedException(e,
-					"cannot find an implementation for testAuxiliaryImpl(foo, 10)");
+			assertRuleFailedException(e,
+					"cannot find an implementation for testAuxiliaryImpl(foo, 10)", null);
 		}
 	}
 

@@ -3843,8 +3843,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	}
 
 	@Test
-	def testForClosureWithAuxiliaryFunctionWithNoSideEffect() {
-		testFiles.testForClosureWithAuxiliaryFunctionWithNoSideEffect.
+	def testForLambdaWithAuxiliaryFunctionWithNoSideEffect() {
+		testFiles.testForLambdaWithAuxiliaryFunctionWithNoSideEffect.
 		assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
@@ -3861,7 +3861,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -4067,11 +4066,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
     final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
       public void apply(final EStructuralFeature it) {
-        try {
-          TypeSystem.this.overridesInternal(_trace_, it);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+        TypeSystem.this.overridesInternal(_trace_, it);
       }
     };
     IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
@@ -4081,11 +4076,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
         final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
           public void apply(final EStructuralFeature it) {
-            try {
-              TypeSystem.this.isValueInternal(_trace_, it);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+            TypeSystem.this.isValueInternal(_trace_, it);
           }
         };
         IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
