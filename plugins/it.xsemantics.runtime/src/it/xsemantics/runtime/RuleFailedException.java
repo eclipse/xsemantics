@@ -12,7 +12,7 @@ import java.util.List;
  * @author Lorenzo Bettini
  * 
  */
-public class RuleFailedException extends Exception {
+public class RuleFailedException extends RuntimeException {
 	
 	protected final String issue;
 
