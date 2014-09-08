@@ -57,6 +57,7 @@
 							<exclude>**/dsl/tests/generator/*GeneratorForTest*.java</exclude>
 							<exclude>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</exclude>
 							<exclude>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</exclude>
+							<exclude>**/dsl/tests/generator/*CompilerTest*.java</exclude>
 						</excludes>
 					</configuration>
 					<goals>
@@ -115,6 +116,7 @@
 						<includes>
 							<include>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</include>
 							<include>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</include>
+							<include>**/dsl/tests/generator/*CompilerTest*.java</include>
 						</includes>
 					</configuration>
 					<goals>

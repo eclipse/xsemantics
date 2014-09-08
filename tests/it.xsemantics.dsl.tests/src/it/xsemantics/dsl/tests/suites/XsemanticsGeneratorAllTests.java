@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.tests.suites;
 
 import it.xsemantics.dsl.tests.generator.UniqueNamesTest;
+import it.xsemantics.dsl.tests.generator.XsemanticsCompilerTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsErrorSpecificationGeneratorTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratedJavaCodeTest;
 import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorExtensionsTest;
@@ -17,6 +18,7 @@ import org.junit.runners.Suite;
 	XsemanticsGeneratorExtensionsTest.class,
 	XsemanticsXbaseCompilerTest.class,
 	XsemanticsJvmModelGeneratorTest.class,
+	XsemanticsCompilerTest.class,
 	XsemanticsGeneratorRunnerTests.class,
 	XsemanticsErrorSpecificationGeneratorTest.class,
 	XsemanticsGeneratedJavaCodeTest.class

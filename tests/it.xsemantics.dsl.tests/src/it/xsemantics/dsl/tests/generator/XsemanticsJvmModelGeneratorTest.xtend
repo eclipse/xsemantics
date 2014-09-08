@@ -5,9 +5,11 @@ import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustomForPluginTest
 import java.util.List
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -18,6 +20,9 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	@Inject extension CompilationTestHelper
 	
 	@Inject private FileExtensionProvider extensionProvider
+	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder 
 	
 	@Test
 	def testJudgmentDescriptions() {
