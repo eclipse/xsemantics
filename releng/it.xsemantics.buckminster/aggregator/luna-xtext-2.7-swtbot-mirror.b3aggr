@@ -8,8 +8,8 @@
         <features name="org.eclipse.equinox.executable.feature.group"/>
       </repositories>
     </contributions>
-    <contributions description="EMF Nightly" label="EMF Nightly">
-      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly">
+    <contributions description="EMF 2.10" label="EMF 2.10">
+      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x">
         <features name="org.eclipse.emf.sdk.feature.group"/>
         <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
       </repositories>
