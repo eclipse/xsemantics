@@ -45,7 +45,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -542,11 +541,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         public void apply(final Method inheritedMethod) {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
-              try {
-                FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
+              FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }
           };
           IterableExtensions.<Method>forEach(methods, _function);
@@ -1109,11 +1104,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EList<Expression> _args = exp.getArgs();
     final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
       public Boolean apply(final Expression it) {
-        try {
-          return FjTypeSystem.this.isValueInternal(_trace_, it);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+        return FjTypeSystem.this.isValueInternal(_trace_, it);
       }
     };
     boolean _forall = IterableExtensions.<Expression>forall(_args, _function);
@@ -1810,12 +1801,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EList<Expression> _args = exp1.getArgs();
     final Predicate<Expression> _function = new Predicate<Expression>() {
       public boolean apply(final Expression it) {
-        try {
-          Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-          return (!(_isValue).booleanValue());
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+        Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
+        return (!(_isValue).booleanValue());
       }
     };
     final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
@@ -1910,12 +1897,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
           EList<Expression> _args = exp.getArgs();
           final Predicate<Expression> _function = new Predicate<Expression>() {
             public boolean apply(final Expression it) {
-              try {
-                Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-                return (!(_isValue).booleanValue());
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
+              Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
+              return (!(_isValue).booleanValue());
             }
           };
           final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
