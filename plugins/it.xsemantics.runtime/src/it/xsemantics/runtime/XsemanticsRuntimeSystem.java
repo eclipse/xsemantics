@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -225,22 +224,22 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public void sneakyThrowRuleFailedException(Exception e) {
-		Exceptions.sneakyThrow(extractRuleFailedException(e));
+		throw extractRuleFailedException(e);
 	}
 
 	public void sneakyThrowRuleFailedException(String message) {
-		Exceptions.sneakyThrow(newRuleFailedException(message, null));
+		throw newRuleFailedException(message, null);
 	}
 
 	public void throwForExplicitFail() {
-		Exceptions.sneakyThrow(newRuleFailedException());
+		throw newRuleFailedException();
 	}
 
 	public void throwForExplicitFail(String message,
 			ErrorInformation errorInformation) {
 		final RuleFailedException ex = newRuleFailedException(message);
 		ex.addErrorInformation(errorInformation);
-		Exceptions.sneakyThrow(ex);
+		throw ex;
 	}
 
 	public void throwRuleFailedException(String message, String issue,
