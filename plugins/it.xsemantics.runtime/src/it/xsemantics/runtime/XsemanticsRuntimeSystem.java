@@ -141,8 +141,14 @@ public class XsemanticsRuntimeSystem {
 		return destinationClass.isAssignableFrom(result.getClass());
 	}
 
-	public void checkAssignableTo(Object result, Class<?> destinationClass)
-			throws RuleFailedException {
+	/**
+	 * Checks whether the result is assignable to the specified
+	 * destinationClass; if not it throws a {@link RuleFailedException}.
+	 * 
+	 * @param result
+	 * @param destinationClass
+	 */
+	public void checkAssignableTo(Object result, Class<?> destinationClass) {
 		if (!isResultAssignableTo(result, destinationClass)) {
 			throw newRuleFailedException(stringRep(result)
 					+ " cannot be assigned to " + stringRep(destinationClass));
@@ -157,7 +163,13 @@ public class XsemanticsRuntimeSystem {
 		}
 	}
 
-	public void checkNotNull(Object object) throws RuleFailedException {
+	/**
+	 * Checks that the passed object is not null; if it is null it throws a
+	 * {@link RuleFailedException}.
+	 * 
+	 * @param object
+	 */
+	public void checkNotNull(Object object) {
 		if (object == null) {
 			throw newRuleFailedException("passed null object to system");
 		}
