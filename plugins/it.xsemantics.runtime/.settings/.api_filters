@@ -48,6 +48,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/RuleFailedException.java" type="it.xsemantics.runtime.RuleFailedException">
+        <filter comment="Removed unused constructor" id="338722907">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.RuleFailedException"/>
+                <message_argument value="RuleFailedException(String, Throwable)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/it/xsemantics/runtime/XsemanticsRuntimeSystem.java" type="it.xsemantics.runtime.XsemanticsRuntimeSystem">
         <filter id="338792546">
             <message_arguments>

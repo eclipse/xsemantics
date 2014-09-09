@@ -34,16 +34,6 @@ public class RuleFailedException extends RuntimeException {
 		this.previous = null;
 	}
 
-	public RuleFailedException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
-		if (arg1 instanceof RuleFailedException) {
-			this.previous = (RuleFailedException) arg1;
-		} else {
-			this.previous = null;
-		}
-		this.issue = null;
-	}
-
 	public RuleFailedException(String arg0) {
 		super(arg0);
 		this.issue = null;
