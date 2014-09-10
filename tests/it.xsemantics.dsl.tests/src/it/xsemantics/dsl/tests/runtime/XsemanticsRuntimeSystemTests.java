@@ -492,6 +492,13 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
+	public void testAddToListNull() {
+		List<String> strings = new LinkedList<String>();
+		ts.addToList(strings, null, String.class);
+		assertEquals(0, strings.size());
+	}
+
+	@Test
 	public void testAddToListList() {
 		List<String> strings = Lists.newArrayList("foo", "bar");
 		List<Object> strings2 = Lists.<Object> newArrayList(1, "foo2", false,
@@ -548,6 +555,27 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
+	public void testGetAllNodesInRelationWithNull() {
+		List<EObject> list = ts.getAllNodesInRelation(null,
+				EcorePackage.Literals.ECLASS__ESUPER_TYPES);
+		assertAsStringRep("[]", list);
+	}
+
+	@Test
+	public void testGetAllNodesInRelationWithNull2() {
+		EClassesForTesting classes = new EClassesForTesting();
+		classes.C.getESuperTypes().add(classes.A);
+		List<EObject> list = new XsemanticsRuntimeSystem() {
+			public java.util.List<Object> getList(Object object) {
+				// a list with a NON EObject
+				return Lists.newArrayList(new Object());
+			};
+		}.getAllNodesInRelation(classes.A,
+				EcorePackage.Literals.ECLASS__ESUPER_TYPES);
+		assertAsStringRep("[]", list);
+	}
+
+	@Test
 	public void testGetAll() {
 		List<EClass> list = ts.getAll(new EClassesForTesting().A,
 				EcorePackage.Literals.ECLASS__ESUPER_TYPES,
@@ -579,6 +607,14 @@ public class XsemanticsRuntimeSystemTests extends
 				FjPackage.Literals.CLASS__SUPERCLASS, Method.class);
 		assertEquals(3, methods.size());
 		assertAsStringRep("[Method 'm1', Method 'm2', Method 'dm1']", methods);
+	}
+
+	@Test
+	public void testGetAllWithNull() {
+		List<Method> methods = ts.getAll(null,
+				FjPackage.Literals.CLASS__MEMBERS,
+				FjPackage.Literals.CLASS__SUPERCLASS, Method.class);
+		assertAsStringRep("[]", methods);
 	}
 
 	@Test

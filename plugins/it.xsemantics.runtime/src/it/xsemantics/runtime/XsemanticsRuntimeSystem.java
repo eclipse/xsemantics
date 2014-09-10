@@ -444,9 +444,7 @@ public class XsemanticsRuntimeSystem {
 			List<EObject> nodesInRelation = getAllNodesInRelation(eObject,
 					extendFeature);
 			for (EObject object : nodesInRelation) {
-				if (object != null) {
-					addToList(list, object.eGet(mainFeature), clazz);
-				}
+				addToList(list, object.eGet(mainFeature), clazz);
 			}
 		}
 
