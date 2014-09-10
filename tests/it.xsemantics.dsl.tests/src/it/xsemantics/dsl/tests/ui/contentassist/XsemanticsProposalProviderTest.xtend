@@ -1,13 +1,22 @@
 package it.xsemantics.dsl.tests.ui.contentassist
 
 import it.xsemantics.dsl.XsemanticsUiInjectorProvider
+import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
+import it.xsemantics.dsl.ui.internal.XsemanticsActivator
+import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -15,6 +24,31 @@ public class XsemanticsProposalProviderTest extends
 		AbstractContentAssistTest {
 
 	XsemanticsTestFilesForContentAssist testInputs = new XsemanticsTestFilesForContentAssist();
+	
+	static IJavaProject pluginJavaProject
+	
+	val static PROJECT_NAME = "customPluginProject"
+	
+	@BeforeClass
+	def static void setUp() {
+		PDETargetPlatformUtils.setTargetPlatform();
+		
+		val injector = XsemanticsActivator.getInstance().getInjector(XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
+		
+		val projectHelper = injector.getInstance(PluginProjectHelper)
+		
+		pluginJavaProject = projectHelper.createJavaPluginProject
+			(PROJECT_NAME, newArrayList("it.xsemantics.runtime"))
+	}
+	
+	@AfterClass
+	def static void tearDown() {
+		pluginJavaProject.project.delete(true, new NullProgressMonitor)
+	}
+	
+	override getJavaProject(ResourceSet resourceSet) {
+		pluginJavaProject
+	}
 
 	@Test
 	def void testProposalsForJudgmentSymbol() {
@@ -245,6 +279,18 @@ public class XsemanticsProposalProviderTest extends
 		judgments {
 			type |- Object o '''
 		.assertProposalsContain("cached")
+	}
+
+	@Test
+	def void testProposalsForSystemExtends() {
+		newBuilder.
+		append(
+		'''
+		system my.test.TypeSystem extends '''
+		).
+		assertText(XsemanticsRuntimeSystem.name);
+		// that's the only possible completion in this test:
+		// a system can extend only a type that is-a XsemanticsRuntimeSystem
 	}
 
 

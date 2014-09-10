@@ -131,7 +131,7 @@
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
 						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${uiTestsArgs}</argLine>
+						<argLine>${tycho.testArgLine} ${uiTestsArgs} ${pdeTestsArgs}</argLine>
 						<includes>
 							<include>**/dsl/tests/ui/contentassist/*Test*.java</include>
 							<include>**/dsl/tests/ui/editor/*Test*.java</include>
