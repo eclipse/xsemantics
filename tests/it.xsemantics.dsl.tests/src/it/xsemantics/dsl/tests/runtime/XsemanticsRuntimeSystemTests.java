@@ -235,10 +235,14 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
-	public void testRuleFailedException() {
+	public void testExtractRuleFailedException() {
 		RuleFailedException original = new RuleFailedException();
 		assertEquals(original,
 				ts.extractRuleFailedException(new WrappedException(original)));
+		NullPointerException npe = new NullPointerException();
+		assertEquals(npe,
+				((WrappedException) ts.extractRuleFailedException
+					(new WrappedException(npe)).getCause()).getCause());
 	}
 
 	@Test
