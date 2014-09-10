@@ -75,9 +75,7 @@ public class XsemanticsRuntimeSystem {
 						numOfArgs)) {
 			@Override
 			protected T handleNoSuchMethod(Object... params) {
-				return org.eclipse.xtext.util.Exceptions
-						.throwUncheckedException(noSuchMethodException(
-								methodName, params));
+				throw noSuchMethodException(methodName, params);
 			}
 		};
 	}
@@ -90,10 +88,9 @@ public class XsemanticsRuntimeSystem {
 						numOfArgs)) {
 			@Override
 			protected Result<T> handleNoSuchMethod(Object... params) {
-				return org.eclipse.xtext.util.Exceptions
-						.throwUncheckedException(noSuchMethodException(
-								judgmentSymbol, Arrays.asList(relationSymbols),
-								params));
+				throw noSuchMethodException(
+						judgmentSymbol, Arrays.asList(relationSymbols),
+						params);
 			}
 		};
 	}
@@ -107,10 +104,9 @@ public class XsemanticsRuntimeSystem {
 			@Override
 			protected Result2<F, S> handleNoSuchMethod(
 					Object... params) {
-				return org.eclipse.xtext.util.Exceptions
-						.throwUncheckedException(noSuchMethodException(
-								judgmentSymbol, Arrays.asList(relationSymbols),
-								params));
+				throw noSuchMethodException(
+						judgmentSymbol, Arrays.asList(relationSymbols),
+						params);
 			}
 		};
 	}
@@ -124,10 +120,9 @@ public class XsemanticsRuntimeSystem {
 			@Override
 			protected Result3<F, S, T> handleNoSuchMethod(
 					Object... params) {
-				return org.eclipse.xtext.util.Exceptions
-						.throwUncheckedException(noSuchMethodException(
-								judgmentSymbol, Arrays.asList(relationSymbols),
-								params));
+				throw noSuchMethodException(
+						judgmentSymbol, Arrays.asList(relationSymbols),
+						params);
 			}
 		};
 	}
