@@ -1,6 +1,20 @@
 package it.xsemantics.dsl.tests;
 
-import it.xsemantics.dsl.validation.IssueCodes;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.ASSIGNMENT_TO_INPUT_PARAM;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.DUPLICATE_RULE_WITH_SAME_ARGUMENTS;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_PARAMETER;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_SUBTYPE;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_VALIDATOR;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_VALID_INPUT_ARG;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_VALID_OUTPUT_ARG;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NOT_VALID_SUPER_SYSTEM;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NO_INPUT_PARAM;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.NO_JUDGMENT_DESCRIPTION;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.RETURN_NOT_ALLOWED;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.THROW_NOT_ALLOWED;
+import static it.xsemantics.dsl.validation.XsemanticsValidator.TOO_MANY_OUTPUT_PARAMS;
 import it.xsemantics.dsl.validation.XsemanticsValidator;
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
@@ -40,9 +54,9 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testJudgmentDescriptionsWithDuplicateSymbols());
 		String messageFragment = "Duplicate judgment symbols '|- :'";
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
+				DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 				messageFragment), AssertableDiagnostics.error(
-				IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
+				DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 				messageFragment));
 	}
 
@@ -59,7 +73,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithExpressionInConclusion2());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NOT_PARAMETER,
+				NOT_PARAMETER,
 				"Must be a parameter, not an expression"));
 	}
 
@@ -95,7 +109,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(programString);
 		String messageFragment = "No Judgment description for: ||- :";
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NO_JUDGMENT_DESCRIPTION, messageFragment));
+				NO_JUDGMENT_DESCRIPTION, messageFragment));
 	}
 
 	@Test
@@ -106,7 +120,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.assertError(
 						model,
 						XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT,
-						IssueCodes.NOT_SUBTYPE,
+						NOT_SUBTYPE,
 						"Rule conclusion type EObject "
 								+ "is not subtype of JudgmentDescription declared type "
 								+ "EClass");
@@ -120,7 +134,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.assertError(
 						model,
 						XbasePackage.eINSTANCE.getXBinaryOperation(),
-						IssueCodes.NOT_SUBTYPE,
+						NOT_SUBTYPE,
 						"Rule invocation type boolean "
 								+ "is not subtype of JudgmentDescription declared type "
 								+ "EObject");
@@ -132,12 +146,12 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testRuleWithConclusionNotSubtypeBoth());
 		validate.assertAll(
 				AssertableDiagnostics
-						.error(IssueCodes.NOT_SUBTYPE,
+						.error(NOT_SUBTYPE,
 								"Rule conclusion type EObject "
 										+ "is not subtype of JudgmentDescription declared type "
 										+ "EClass"),
 				AssertableDiagnostics
-						.error(IssueCodes.NOT_SUBTYPE,
+						.error(NOT_SUBTYPE,
 								"Rule conclusion type String "
 										+ "is not subtype of JudgmentDescription declared type "
 										+ "EObject"));
@@ -154,11 +168,11 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRulesOfTheSameKindWithSameInputArgumentTypes());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+				DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
 				"Duplicate rule of the same kind with parameters: String"
 						+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM),
 				AssertableDiagnostics.error(
-						IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+						DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
 						"Duplicate rule of the same kind with parameters: String"
 								+ IN_SYSTEM_IT_XSEMANTICS_TEST_TYPE_SYSTEM));
 	}
@@ -175,7 +189,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testRuleInvocationWithWrongOutputArg().toString());
 		validationTestHelper.assertError(model,
 				XbasePackage.eINSTANCE.getXMemberFeatureCall(),
-				IssueCodes.NOT_VALID_OUTPUT_ARG,
+				NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
 
@@ -185,7 +199,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testRuleInvocationWithWrongOutputArg2().toString());
 		validationTestHelper.assertError(model,
 				XbasePackage.eINSTANCE.getXVariableDeclaration(),
-				IssueCodes.NOT_VALID_OUTPUT_ARG,
+				NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
 
@@ -195,7 +209,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testWrongVariableDeclarationAsOutputArgument().toString());
 		validationTestHelper.assertError(model,
 				XbasePackage.eINSTANCE.getXVariableDeclaration(),
-				IssueCodes.NOT_VALID_OUTPUT_ARG,
+				NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
 
@@ -204,7 +218,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWith4OutputParams());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.TOO_MANY_OUTPUT_PARAMS,
+				TOO_MANY_OUTPUT_PARAMS,
 				"No more than 3 output parameters are handled at the moment"));
 	}
 
@@ -213,7 +227,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testJudgmentDescriptionsWithNoInputParam());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NO_INPUT_PARAM,
+				NO_INPUT_PARAM,
 				"No input parameter; at least one is needed"));
 	}
 
@@ -229,7 +243,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleWithAssignmentToInputParam());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.ASSIGNMENT_TO_INPUT_PARAM,
+				ASSIGNMENT_TO_INPUT_PARAM,
 				"Assignment to input parameter"));
 	}
 
@@ -240,7 +254,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testRuleInvocationWithInputParamPassedAsOutput().toString());
 		validationTestHelper.assertError(model,
 				XbasePackage.eINSTANCE.getXFeatureCall(),
-				IssueCodes.NOT_VALID_OUTPUT_ARG,
+				NOT_VALID_OUTPUT_ARG,
 				"Not a valid argument for output parameter");
 	}
 
@@ -249,7 +263,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongVariableDeclarationAsInputArgument());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.NOT_VALID_INPUT_ARG,
+				NOT_VALID_INPUT_ARG,
 				"Not a valid argument for input parameter"));
 	}
 
@@ -258,7 +272,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testRuleInvocationWithOutputArgInsideClosure());
 		validate.assertAll(AssertableDiagnostics
-				.error(IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
+				.error(ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
 						"Cannot refer to an output parameter eC from within a closure"));
 	}
 
@@ -267,7 +281,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testAccessToOutputParamInsideClosure());
 		validate.assertAll(AssertableDiagnostics
-				.error(IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
+				.error(ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE,
 						"Cannot refer to an output parameter eC from within a closure"));
 	}
 
@@ -276,11 +290,11 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongReturnInPremises());
 		validate.assertAll(
-				AssertableDiagnostics.error(IssueCodes.RETURN_NOT_ALLOWED,
+				AssertableDiagnostics.error(RETURN_NOT_ALLOWED,
 						"Return statements are not allowed here"));
 		// in 2.4 the next error is not issued
 //				AssertableDiagnostics
-//						.error(org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+//						.error(org.eclipse.xtext.xbase.validation.INCOMPATIBLE_TYPES,
 //								"Incompatible types"));
 	}
 
@@ -289,10 +303,10 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testWrongThrowInPremises());
 		validate.assertAll(AssertableDiagnostics.error(
-				IssueCodes.THROW_NOT_ALLOWED,
+				THROW_NOT_ALLOWED,
 				"Throw statements are not allowed here"));
 		// AssertableDiagnostics
-		// .error(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION,
+		// .error(org.eclipse.xtext.xbase.validation.UNHANDLED_EXCEPTION,
 		// "Unhandled exception"));
 	}
 
@@ -317,7 +331,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 				.testErrorNoSideEffect());
 		assertOk(validate);
 //		validate.assertAll(AssertableDiagnostics
-//				.error(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INNER_EXPRESSION,
+//				.error(org.eclipse.xtext.xbase.validation.INVALID_INNER_EXPRESSION,
 //						"This expression is not allowed in this context"));
 	}
 
@@ -327,7 +341,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testSystemWithValidatorExtendsNotAbstractDeclarativeValidator());
 		validate.assertAll(AssertableDiagnostics
-				.error(IssueCodes.NOT_VALIDATOR,
+				.error(NOT_VALIDATOR,
 						"Not an AbstractDeclarativeValidator: EClass"));
 	}
 
@@ -336,7 +350,7 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 		AssertableDiagnostics validate = loadModelAndValidate(testFiles
 				.testSystemExtendsInvalidBaseSystem());
 		validate.assertAll(AssertableDiagnostics
-				.error(IssueCodes.NOT_VALID_SUPER_SYSTEM,
+				.error(NOT_VALID_SUPER_SYSTEM,
 						"Not an Xsemantics system: TestInvalidBaseSystem"));
 	}
 

@@ -12,7 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtext.diagnostics.Severity
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
-import it.xsemantics.dsl.validation.IssueCodes
+import static it.xsemantics.dsl.validation.XsemanticsValidator.*
 
 @InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
@@ -28,7 +28,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 			testFiles.testSystemBaseWithCycle2).
 		assertError(
 			XsemanticsPackage::eINSTANCE.xsemanticsSystem,
-			IssueCodes::CYCLIC_HIERARCHY,
+			CYCLIC_HIERARCHY,
 			"Cycle in extends relation"
 		)
 	}
@@ -41,7 +41,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.xsemanticsSystem,
-			IssueCodes::EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS,
+			EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS,
 			"system 'extends' cannot coexist with 'validatorExtends'"
 		)
 	}
@@ -51,12 +51,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		val ts = testFiles.testInvalidRuleOverrideWithoutSystemExtends.parse
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
 			"Cannot override rule without system 'extends'"
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
 			"Cannot override checkrule without system 'extends'"
 		)
 	}
@@ -68,7 +68,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+			DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
 			"Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
@@ -80,7 +80,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
+			DUPLICATE_RULE_WITH_SAME_ARGUMENTS,
 			"Duplicate rule of the same kind with parameters: EObject, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
@@ -92,7 +92,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::MUST_OVERRIDE,
+			MUST_OVERRIDE,
 			"checkrule 'CheckEObject' must override checkrule, in system: it.xsemantics.test.ExtendedTypeSystem2"
 		)
 	}
@@ -104,7 +104,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No rule to override: FromTypeSystem"
 		)
 	}
@@ -116,7 +116,7 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		).
 		assertError(
 			XsemanticsPackage::eINSTANCE.rule,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No rule to override: DifferentName"
 		)
 	}
@@ -128,12 +128,12 @@ class XsemanticsValidatorTest extends XsemanticsBaseTest {
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No checkrule to override: WrongCheckEObject"
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.checkRule,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No checkrule to override: CheckEObject"
 		)
 	}
@@ -155,12 +155,12 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 		val ts = testFiles.testInvalidOverrideWithoutSystemExtends.parse
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.judgmentDescription,
-			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
 			"Cannot override judgment without system 'extends'"
 		)
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
-			IssueCodes::OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
+			OVERRIDE_WITHOUT_SYSTEM_EXTENDS,
 			"Cannot override auxiliary description without system 'extends'"
 		)
 	}
@@ -172,12 +172,12 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.judgmentDescription,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No judgment to override: type"
 		)
 		ts.assertError(
 			XsemanticsPackage::eINSTANCE.judgmentDescription,
-			IssueCodes::NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No judgment to override: subtype2"
 		)
 	}
@@ -190,17 +190,17 @@ judgment 'type' must override judgment, in system: it.xsemantics.test.TypeSystem
 		)
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
-			IssueCodes.MUST_OVERRIDE,
+			MUST_OVERRIDE,
 			"auxiliary description 'isValue' must override auxiliary description, in system: it.xsemantics.test.TypeSystem"
 		)
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
-			IssueCodes.NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No auxiliary description to override: voidFun"
 		)
 		ts.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryDescription,
-			IssueCodes.NOTHING_TO_OVERRIDE,
+			NOTHING_TO_OVERRIDE,
 			"No auxiliary description to override: objectClass"
 		)
 	}
@@ -227,7 +227,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		parser.parse(testFiles.testAuxiliaryFunctionWithWrongReturnExpression).
 			assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from EClass to Boolean"
 		)
 	}
@@ -248,7 +248,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		parser.parse(testFiles.testAuxiliaryFunctionWithoutAuxiliaryDescription).
 			assertError(
 			XsemanticsPackage::eINSTANCE.auxiliaryFunction,
-			IssueCodes::NO_AUXDESC_FOR_AUX_FUNCTION,
+			NO_AUXDESC_FOR_AUX_FUNCTION,
 			"No auxiliary description for auxiliary function 'foobar'"
 		)
 	}
@@ -258,12 +258,12 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testNonConformantAuxiliaryFunction)
 		s.assertError(
 			XsemanticsPackage::eINSTANCE.auxiliaryFunction,
-			IssueCodes::PARAMS_SIZE_DONT_MATCH,
+			PARAMS_SIZE_DONT_MATCH,
 			"expected 1 parameter(s), but was 2"
 		)
 		s.assertError(
 			TypesPackage::eINSTANCE.jvmFormalParameter,
-			IssueCodes::NOT_SUBTYPE,
+			NOT_SUBTYPE,
 			"parameter type EObject is not subtype of AuxiliaryDescription declared type EClass"
 		)
 	}
@@ -273,7 +273,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testDuplicateAuxiliaryFunctionsWithSameParameterTypes_Issue_9)
 		s.assertError(
 			XsemanticsPackage.eINSTANCE.auxiliaryFunction,
-			IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
+			DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
 			"Duplicate auxiliary function of the same kind with parameters: EClass, EClass"
 		)
 	}
@@ -283,7 +283,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testRuleInvocationIsVoidInClosures)
 		s.assertError(
 			XsemanticsPackage::eINSTANCE.ruleInvocation,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from void to Boolean"
 		)
 	}
@@ -293,7 +293,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testInvalidRuleInvocationIsNotOfExpectedType)
 		s.assertError(
 			XsemanticsPackage::eINSTANCE.ruleInvocation,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from boolean to Integer"
 		)
 	}
@@ -358,7 +358,7 @@ Duplicate name 'strings' (Injected)
 		parser.parse(testFiles.testWrongEnvironmentXExpression).
 		assertError(
 			XbasePackage::eINSTANCE.XStringLiteral,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to RuleEnvironment"
 		)
 	}
@@ -368,7 +368,7 @@ Duplicate name 'strings' (Injected)
 		parser.parse(testFiles.testWrongEnvironmentXExpression2).
 		assertError(
 			XbasePackage::eINSTANCE.XStringLiteral,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to RuleEnvironment"
 		)
 	}
@@ -378,7 +378,7 @@ Duplicate name 'strings' (Injected)
 		parser.parse(testFiles.testErrorSpecificationFeatureNotEStructuralFeature).
 		assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from EClass to EStructuralFeature"
 		)
 	}
@@ -388,7 +388,7 @@ Duplicate name 'strings' (Injected)
 		parser.parse(testFiles.testErrorSpecificationSourceNotEObject).
 		assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes::INCOMPATIBLE_TYPES,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to EObject"
 		)
 	}

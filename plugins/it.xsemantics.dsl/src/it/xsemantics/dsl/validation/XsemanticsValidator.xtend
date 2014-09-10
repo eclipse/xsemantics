@@ -65,6 +65,67 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	public final static int maxOfOutputParams = 3;
 
 	protected boolean enableWarnings = true;
+	
+		public static final String PREFIX = "it.xsemantics.dsl.validation.";
+
+	public static final String DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS = PREFIX
+			+ "DuplicateJudgmentDescriptionSymbols";
+
+	public static final String NO_JUDGMENT_DESCRIPTION = PREFIX + "NoJudgmentDescription";
+
+	public static final String NOT_SUBTYPE = PREFIX + "NotSubtype";
+
+	public static final String DUPLICATE_RULE_WITH_SAME_ARGUMENTS = PREFIX
+			+ "DuplicateRulesWithSameArguments";
+
+	public static final String DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS = PREFIX
+			+ "DuplicateAuxFunWithSameArguments";
+	
+	public static final String MUST_OVERRIDE = PREFIX
+			+ "MustOverride";
+
+	public static final String DUPLICATE_NAME = PREFIX
+			+ "DuplicateName";
+	
+	public static final String NOT_VALIDATOR = PREFIX + "NotAbstractDeclarativeValidator";
+	
+	public static final String NOT_PARAMETER = PREFIX + "NotParameter";
+	
+	public static final String NOT_VALID_OUTPUT_ARG = PREFIX + "NotValidOutputArg";
+	
+	public static final String NOT_VALID_INPUT_ARG = PREFIX + "NotValidInputArg";
+	
+	public static final String TOO_MANY_OUTPUT_PARAMS = PREFIX + "TooManyOutputParams";
+	
+	public static final String NO_INPUT_PARAM = PREFIX + "NoInputParam";
+
+	public static final String ASSIGNMENT_TO_INPUT_PARAM = PREFIX + "AssignmentToInputParam";
+
+	public static final String NO_RULE_FOR_JUDGMENT_DESCRIPTION = PREFIX + "NoRuleForJudgmentDescription";
+
+	public static final String NO_AUXFUN_FOR_AUX_DESCRIPTION = PREFIX + "NoAuxFunForAuxiliaryDescription";
+
+	public static final String RETURN_NOT_ALLOWED = PREFIX + "ReturnNotAllowed";
+
+	public static final String THROW_NOT_ALLOWED = PREFIX + "ThrowNotAllowed";
+
+	public static final String NOT_VALID_SUPER_SYSTEM = PREFIX + "NotValidSuperSystem";
+
+	public static final String CYCLIC_HIERARCHY = PREFIX + "CyclicHierarchy";
+
+	public static final String EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS = PREFIX + "ExtendsCannotCoexistWithValidatorExtends";
+
+	public static final String OVERRIDE_WITHOUT_SYSTEM_EXTENDS = PREFIX + "OverrideWithoutSystemExtends";
+
+	public static final String NOTHING_TO_OVERRIDE = PREFIX + "NothingToOverride";
+
+	public static final String DUPLICATE_AUXILIARY_NAME = PREFIX + "DuplicateAuxiliaryDescription";
+
+	public static final String NO_AUXDESC_FOR_AUX_FUNCTION = PREFIX + "NoAuxDescForAuxiliaryFunction";
+
+	public static final String PARAMS_SIZE_DONT_MATCH = PREFIX + "ParamsSizeDontMatch";
+	
+	public static final String ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE = PREFIX + "AccessToOutputParamWithinClosure";
 
 	@Check
 	override void checkAssignment(XAssignment assignment) {
@@ -75,7 +136,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				error("Assignment to input parameter",
 						XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-						IssueCodes.ASSIGNMENT_TO_INPUT_PARAM);
+						ASSIGNMENT_TO_INPUT_PARAM);
 			}
 			return;
 		}
@@ -88,7 +149,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		// see https://github.com/LorenzoBettini/xsemantics/issues/18
 		if (!expr.isContainedInAuxiliaryFunction()) {
 			error("Return statements are not allowed here", expr, null,
-				IssueCodes.RETURN_NOT_ALLOWED);
+				RETURN_NOT_ALLOWED);
 		}
 	}
 
@@ -114,7 +175,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	def void checkThrow(XThrowExpression expr) {
 		error("Throw statements are not allowed here", expr, null,
-				IssueCodes.THROW_NOT_ALLOWED);
+				THROW_NOT_ALLOWED);
 	}
 
 	override protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
@@ -153,7 +214,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				warning("No rule defined for the judgment description",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION
 							.getEIDAttribute(),
-					IssueCodes.NO_RULE_FOR_JUDGMENT_DESCRIPTION);
+					NO_RULE_FOR_JUDGMENT_DESCRIPTION);
 		} else {
 			val judgmentParameters = judgmentDescription.judgmentParameters
 			for (rule : rulesForJudgmentDescription) {
@@ -169,7 +230,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 								ruleConclusionElement,
 								XsemanticsPackage.Literals.RULE_CONCLUSION_ELEMENT
 										.getEIDAttribute(),
-								IssueCodes.NOT_PARAMETER);
+								NOT_PARAMETER);
 					}
 				}
 				
@@ -185,7 +246,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			error("No more than " + maxOfOutputParams
 					+ " output parameters are handled at the moment",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
-					IssueCodes.TOO_MANY_OUTPUT_PARAMS);
+					TOO_MANY_OUTPUT_PARAMS);
 		}
 	}
 
@@ -194,9 +255,9 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (inputParams.empty) {
 			error("No input parameter; at least one is needed",
 					XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_PARAMETERS,
-					IssueCodes.NO_INPUT_PARAM);
+					NO_INPUT_PARAM);
 		} else {
-			inputParams.checkDuplicatesByName(null, IssueCodes.DUPLICATE_NAME)
+			inputParams.checkDuplicatesByName(null, DUPLICATE_NAME)
 		}
 	}
 
@@ -231,7 +292,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
 								null,
-								IssueCodes.NOT_VALID_OUTPUT_ARG);
+								NOT_VALID_OUTPUT_ARG);
 					}
 				} else {
 					if (!ruleInvocationExpression
@@ -241,7 +302,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 										.getProgramText(ruleInvocationExpression),
 								ruleInvocationExpression,
 								null,
-								IssueCodes.NOT_VALID_INPUT_ARG);
+								NOT_VALID_INPUT_ARG);
 					}
 				}
 
@@ -259,7 +320,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				error("Not an AbstractDeclarativeValidator: "
 						+ getNameOfTypes(validatorExtends),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
-						IssueCodes.NOT_VALIDATOR);
+						NOT_VALIDATOR);
 			}
 		}
 		val superSystem = system.getSuperSystem();
@@ -268,15 +329,15 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				error("Not an Xsemantics system: "
 						+ getNameOfTypes(superSystem),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
-						IssueCodes.NOT_VALID_SUPER_SYSTEM);
+						NOT_VALID_SUPER_SYSTEM);
 			}
 			if (validatorExtends != null) {
 				error("system 'extends' cannot coexist with 'validatorExtends'",
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
-						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
+						EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
 				error("system 'extends' cannot coexist with 'validatorExtends'",
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__VALIDATOR_EXTENDS,
-						IssueCodes.EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
+						EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
 			}
 		}
 
@@ -285,7 +346,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (superSystems.contains(system)) {
 			error("Cycle in extends relation",
 					XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
-					IssueCodes.CYCLIC_HIERARCHY);
+					CYCLIC_HIERARCHY);
 		}
 		
 		val superSystemDefinition = system.superSystemDefinition
@@ -355,7 +416,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 									+ reportContainingSystemName(rule2),
 									rule,
 									XsemanticsPackage.Literals.RULE__CONCLUSION,
-									IssueCodes.DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
+									DUPLICATE_RULE_WITH_SAME_ARGUMENTS);
 						}
 					}
 				}
@@ -369,11 +430,11 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			// aux functions have the same name of aux descriptions
 			system.rules + 
 			system.checkrules
-		elements.checkDuplicatesByName(null, IssueCodes.DUPLICATE_NAME)
+		elements.checkDuplicatesByName(null, DUPLICATE_NAME)
 		
 		system.judgmentDescriptions.checkDuplicates(
 			XsemanticsPackage.Literals.JUDGMENT_DESCRIPTION__JUDGMENT_SYMBOL,
-			IssueCodes.DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
+			DUPLICATE_JUDGMENT_DESCRIPTION_SYMBOLS,
 			[judgmentRepresentation(judgmentSymbol, relationSymbols)],
 			[key, it | 
 				"Duplicate judgment symbols '" + 
@@ -430,7 +491,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					"Cannot override " + kind + " without system 'extends'",
 					j,
 					null, 
-					IssueCodes.OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
+					OVERRIDE_WITHOUT_SYSTEM_EXTENDS);
 			}
 		} else {
 			val superMap = superCollection.toMap[name]
@@ -445,13 +506,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 								reportContainingSystemName(overridden),
 							j,
 							null, 
-							IssueCodes.MUST_OVERRIDE);
+							MUST_OVERRIDE);
 				} else {
 					if (overridden == null || !conformanceComputer.apply(j, overridden))
 						error("No " + kind + " to override: " + name,
 							j,
 							null,
-							IssueCodes.NOTHING_TO_OVERRIDE);
+							NOTHING_TO_OVERRIDE);
 				}
 			}
 		}
@@ -462,7 +523,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (aux.parameters.empty) {
 			error("No input parameter; at least one is needed",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
-					IssueCodes.NO_INPUT_PARAM);
+					NO_INPUT_PARAM);
 		}
 		
 		val functionsForAuxiliaryDescrition = aux.functionsForAuxiliaryDescrition();
@@ -471,13 +532,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			warning("No function defined for the auxiliary description",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION
 							.getEIDAttribute(),
-					IssueCodes.NO_AUXFUN_FOR_AUX_DESCRIPTION);
+					NO_AUXFUN_FOR_AUX_DESCRIPTION);
 		}
 		
 		if (functionsForAuxiliaryDescrition.size() > 1) {
 			functionsForAuxiliaryDescrition.checkDuplicates(
 			XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
-			IssueCodes.DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
+			DUPLICATE_AUXFUN_WITH_SAME_ARGUMENTS,
 			[typeSystem.getInputTypes(it)],
 			[key, it | 
 				"Duplicate auxiliary function of the same kind with parameters: "
@@ -496,7 +557,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",
 					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__NAME,
-					IssueCodes.NO_AUXDESC_FOR_AUX_FUNCTION);
+					NO_AUXDESC_FOR_AUX_FUNCTION);
 		} else
 			checkConformanceOfAuxiliaryFunction(aux, auxiliaryDescription);
 	}
@@ -512,7 +573,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					error("Cannot refer to an output parameter "
 							+ feature.getIdentifier()
 							+ " from within a closure", featureCall, null,
-							IssueCodes.ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE);
+							ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE);
 				}
 			}
 			return;
@@ -547,7 +608,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 					+ funParams.size(),
 					aux,
 					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__PARAMETERS,
-					IssueCodes.PARAMS_SIZE_DONT_MATCH);
+					PARAMS_SIZE_DONT_MATCH);
 		} else {
 			val funParamsIt = funParams.iterator();
 			for (JvmFormalParameter jvmFormalParameter : descParams) {
@@ -562,7 +623,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 							+ getNameOfTypes(expected),
 							funParam,
 							TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
-							IssueCodes.NOT_SUBTYPE);
+							NOT_SUBTYPE);
 				}
 			}
 		}
@@ -627,7 +688,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (judgmentDescription == null) {
 			error("No Judgment description for: "
 					+ judgmentRepresentation(judgmentSymbol, relationSymbols),
-					elementFeature, IssueCodes.NO_JUDGMENT_DESCRIPTION);
+					elementFeature, NO_JUDGMENT_DESCRIPTION);
 		}
 		return judgmentDescription;
 	}
@@ -664,7 +725,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			error(elementDescription + " type " + getNameOfTypes(actual)
 					+ " is not subtype of JudgmentDescription declared type "
 					+ getNameOfTypes(expected), element, feature,
-					IssueCodes.NOT_SUBTYPE);
+					NOT_SUBTYPE);
 		}
 	}
 
