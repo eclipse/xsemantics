@@ -42,10 +42,6 @@ class XsemanticsUtils {
     @Inject
     XsemanticsDslCache cache
 	
-	def getVariableDeclarations(RuleInvocation ruleInvocation) {
-		ruleInvocation.expressions.typeSelect(typeof(XVariableDeclaration))
-	}
-	
 	def containingSystem(EObject element) {
 		//return EcoreUtil2::getContainerOfType(element, typeof(XsemanticsSystem))
 		// this might be more efficient
