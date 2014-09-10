@@ -111,6 +111,28 @@ public class XsemanticsRuntimeSystemTests extends
 	}
 
 	@Test
+	public void testNoSuchMethod2() throws RuleFailedException {
+		try {
+			ts.callNonExistentMethod2("foo", 10);
+			fail("should get an exception due to missing method");
+		} catch (Exception e) {
+			assertRuleFailedException(e,
+					"cannot find a rule for |- foo : 10", null);
+		}
+	}
+
+	@Test
+	public void testNoSuchMethod3() throws RuleFailedException {
+		try {
+			ts.callNonExistentMethod3("foo", 10);
+			fail("should get an exception due to missing method");
+		} catch (Exception e) {
+			assertRuleFailedException(e,
+					"cannot find a rule for |- foo : 10", null);
+		}
+	}
+
+	@Test
 	public void testNoSuchMethodForAuxiliary() throws RuleFailedException {
 		try {
 			ts.callNonExistentAuxiliary("foo", 10);

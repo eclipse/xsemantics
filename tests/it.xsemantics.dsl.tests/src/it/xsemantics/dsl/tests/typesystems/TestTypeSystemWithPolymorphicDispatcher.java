@@ -26,6 +26,10 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 
 	protected PolymorphicDispatcher<Result<Object>> nonExistentMethodDispatcher;
 
+	protected PolymorphicDispatcher<Result2<Object, Object>> nonExistentMethodDispatcher2;
+
+	protected PolymorphicDispatcher<Result3<Object, Object, Object>> nonExistentMethodDispatcher3;
+
 	protected PolymorphicDispatcher<Result2<String, Integer>> stringIntegerMethodDispatcher;
 
 	// we will have overloaded methods with BaseClass1, BaseClass2,
@@ -42,6 +46,10 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 
 	public void init() {
 		nonExistentMethodDispatcher = buildPolymorphicDispatcher1(
+				"nonExistentMethod", 2 + INDEX_OF_RULE_PARAMETERS, "|-", ":");
+		nonExistentMethodDispatcher2 = buildPolymorphicDispatcher2(
+				"nonExistentMethod", 2 + INDEX_OF_RULE_PARAMETERS, "|-", ":");
+		nonExistentMethodDispatcher3 = buildPolymorphicDispatcher3(
 				"nonExistentMethod", 2 + INDEX_OF_RULE_PARAMETERS, "|-", ":");
 		stringIntegerMethodDispatcher = buildPolymorphicDispatcher2(
 				"stringIntegerMethodImpl", 2 + INDEX_OF_RULE_PARAMETERS, "|-",
@@ -62,6 +70,14 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 
 	public void callNonExistentMethod(String foo, Integer bar) {
 		nonExistentMethodDispatcher.invoke(dummy, dummy, foo, bar);
+	}
+
+	public void callNonExistentMethod2(String foo, Integer bar) {
+		nonExistentMethodDispatcher2.invoke(dummy, dummy, foo, bar);
+	}
+
+	public void callNonExistentMethod3(String foo, Integer bar) {
+		nonExistentMethodDispatcher3.invoke(dummy, dummy, foo, bar);
 	}
 
 	public void callNonExistentAuxiliary(String foo, Integer bar) {
