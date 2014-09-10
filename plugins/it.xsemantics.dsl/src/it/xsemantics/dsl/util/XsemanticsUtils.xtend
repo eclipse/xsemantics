@@ -194,17 +194,14 @@ class XsemanticsUtils {
 	}
 	
 	def validOutputArgExpression(XExpression xexp) {
-		switch (xexp) {
-			XFeatureCall : {
-				val feature = xexp.feature
-				if (feature instanceof JvmFormalParameter)
-					return !feature.inputParam
-				return true;
-			}
-			XVariableDeclaration : {
-				return xexp.writeable && xexp.right == null
-			}
-		}		
+		if (xexp instanceof XFeatureCall) {
+			val feature = xexp.feature
+			if (feature instanceof JvmFormalParameter)
+				return !feature.inputParam
+			return true;
+		} else if (xexp instanceof XVariableDeclaration) {
+			return xexp.writeable && xexp.right == null
+		}
 		return false;
 	}
 	
