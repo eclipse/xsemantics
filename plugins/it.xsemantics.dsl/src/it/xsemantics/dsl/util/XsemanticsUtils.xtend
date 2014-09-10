@@ -153,16 +153,11 @@ class XsemanticsUtils {
 	
 	def isInputParam(JvmFormalParameter jvmFormalParameter) {
 		val ruleParameter = jvmFormalParameter.getContainerOfType(typeof(RuleParameter))
-		if (ruleParameter != null)
+		if (ruleParameter != null) {
 			ruleParameter.inputParam
-		else {
-			// retrieve the AST element associated to the method
-        	// created by our model inferrer
-        	val sourceElement = associations.getPrimarySourceElement(jvmFormalParameter);
-        	if (sourceElement instanceof RuleParameter) {
-        		sourceElement.inputParam
-        	} else
-				false
+		} else {
+			// it is surely an input parameter
+			true
 		}
 	}
 	
