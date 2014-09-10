@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -125,9 +124,8 @@ public class StringRepresentation {
 					return withType(stringRepEClass, string(eGet));
 				}
 			}
-		}
-
-		if (feature instanceof EReference) {
+		} else {
+			// it can only be an EReference
 			Object ref = eObject.eGet(feature, true);
 			if (ref != null) {
 				return withType(stringRepEClass, string(ref));
@@ -158,10 +156,7 @@ public class StringRepresentation {
 		buffer.append(strings.toString());
 
 		if (environment.getNext() != null) {
-			String nextRep = stringRep(environment.getNext());
-			if (nextRep.length() > 0) {
-				buffer.append("::" + nextRep);
-			}
+			buffer.append("::" + stringRep(environment.getNext()));
 		}
 
 		return buffer.toString();
