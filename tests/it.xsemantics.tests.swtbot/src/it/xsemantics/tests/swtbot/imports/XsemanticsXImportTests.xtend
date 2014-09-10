@@ -1,6 +1,7 @@
 package it.xsemantics.tests.swtbot.imports
 
 import it.xsemantics.tests.swtbot.XsemanticsWorkbenchBase
+import it.xsemantics.tests.swtbot.util.SWTBotEclipseEditorCustom
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -57,7 +58,7 @@ judgments {
 		
 		editor.toTextEditor.navigateTo(lines-1, 50)
 		
-		editor.toTextEditor.autoCompleteProposal(textToInsert, 
+		new SWTBotEclipseEditorCustom(editor.reference, bot).autoCompleteProposal(textToInsert, 
 			proposal.toString
 		)
 		
