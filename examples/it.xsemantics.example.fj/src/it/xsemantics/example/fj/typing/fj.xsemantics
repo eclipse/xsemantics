@@ -61,8 +61,8 @@ judgments {
 		source expression
 	subtype |- Type left <: Type right
 		error stringRep(left) + " is not a subtype of " + stringRep(right)
-	assignable |- Expression expression |> Type right
-		error stringRep(expression) + " is not assignable for " + stringRep(right)
+	assignable |- Expression expression |> Type target
+		error stringRep(expression) + " is not assignable for " + stringRep(target)
 		source expression
 	equalstype |- Type left ~~ Type right
 		error stringRep(left) + " is not the same type as " + stringRep(right)
@@ -241,11 +241,11 @@ from {
 }
 
 rule ExpressionAssignableToType
-	G |- Expression expression |> Type right
+	G |- Expression expression |> Type target
 from {
 	var Type expressionType
 	G |- expression : expressionType
-	G |- expressionType <: right
+	G |- expressionType <: target
 }
 
 rule GeneralEquals

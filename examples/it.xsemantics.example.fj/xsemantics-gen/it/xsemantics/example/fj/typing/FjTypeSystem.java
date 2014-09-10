@@ -321,33 +321,33 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public Result<Boolean> assignable(final Expression expression, final Type right) {
-    return assignable(new RuleEnvironment(), null, expression, right);
+  public Result<Boolean> assignable(final Expression expression, final Type target) {
+    return assignable(new RuleEnvironment(), null, expression, target);
   }
   
-  public Result<Boolean> assignable(final RuleEnvironment _environment_, final Expression expression, final Type right) {
-    return assignable(_environment_, null, expression, right);
+  public Result<Boolean> assignable(final RuleEnvironment _environment_, final Expression expression, final Type target) {
+    return assignable(_environment_, null, expression, target);
   }
   
-  public Result<Boolean> assignable(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type right) {
+  public Result<Boolean> assignable(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type target) {
     try {
-    	return assignableInternal(_environment_, _trace_, expression, right);
+    	return assignableInternal(_environment_, _trace_, expression, target);
     } catch (Exception _e_assignable) {
     	return resultForFailure(_e_assignable);
     }
   }
   
-  public Boolean assignableSucceeded(final Expression expression, final Type right) {
-    return assignableSucceeded(new RuleEnvironment(), null, expression, right);
+  public Boolean assignableSucceeded(final Expression expression, final Type target) {
+    return assignableSucceeded(new RuleEnvironment(), null, expression, target);
   }
   
-  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final Expression expression, final Type right) {
-    return assignableSucceeded(_environment_, null, expression, right);
+  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final Expression expression, final Type target) {
+    return assignableSucceeded(_environment_, null, expression, target);
   }
   
-  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type right) {
+  public Boolean assignableSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type target) {
     try {
-    	assignableInternal(_environment_, _trace_, expression, right);
+    	assignableInternal(_environment_, _trace_, expression, target);
     	return true;
     } catch (Exception _e_assignable) {
     	return false;
@@ -768,20 +768,20 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     	_issue, _ex, new ErrorInformation(null, null));
   }
   
-  protected Result<Boolean> assignableInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type right) {
+  protected Result<Boolean> assignableInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type target) {
     try {
-    	checkParamsNotNull(expression, right);
-    	return assignableDispatcher.invoke(_environment_, _trace_, expression, right);
+    	checkParamsNotNull(expression, target);
+    	return assignableDispatcher.invoke(_environment_, _trace_, expression, target);
     } catch (Exception _e_assignable) {
     	sneakyThrowRuleFailedException(_e_assignable);
     	return null;
     }
   }
   
-  protected void assignableThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+  protected void assignableThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final Type target, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(expression);
     String _plus = (_stringRep + " is not assignable for ");
-    String _stringRep_1 = this.stringRep(right);
+    String _stringRep_1 = this.stringRep(target);
     String _plus_1 = (_plus + _stringRep_1);
     String error = _plus_1;
     EObject source = expression;
@@ -1600,34 +1600,34 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     return new Result<Boolean>(true);
   }
   
-  protected Result<Boolean> assignableImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression, final Type right) throws RuleFailedException {
+  protected Result<Boolean> assignableImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression, final Type target) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final Result<Boolean> _result_ = applyRuleExpressionAssignableToType(G, _subtrace_, expression, right);
+    	final Result<Boolean> _result_ = applyRuleExpressionAssignableToType(G, _subtrace_, expression, target);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
-    			return ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right);
+    			return ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(target);
     		}
     	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyRuleExpressionAssignableToType) {
-    	assignableThrowException(ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(right),
+    	assignableThrowException(ruleName("ExpressionAssignableToType") + stringRepForEnv(G) + " |- " + stringRep(expression) + " |> " + stringRep(target),
     		EXPRESSIONASSIGNABLETOTYPE,
-    		e_applyRuleExpressionAssignableToType, expression, right, new ErrorInformation[] {new ErrorInformation(expression), new ErrorInformation(right)});
+    		e_applyRuleExpressionAssignableToType, expression, target, new ErrorInformation[] {new ErrorInformation(expression), new ErrorInformation(target)});
     	return null;
     }
   }
   
-  protected Result<Boolean> applyRuleExpressionAssignableToType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression, final Type right) throws RuleFailedException {
+  protected Result<Boolean> applyRuleExpressionAssignableToType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression expression, final Type target) throws RuleFailedException {
     Type expressionType = null;
     /* G |- expression : expressionType */
     Result<Type> result = typeInternal(G, _trace_, expression);
     checkAssignableTo(result.getFirst(), Type.class);
     expressionType = (Type) result.getFirst();
     
-    /* G |- expressionType <: right */
-    subtypeInternal(G, _trace_, expressionType, right);
+    /* G |- expressionType <: target */
+    subtypeInternal(G, _trace_, expressionType, target);
     return new Result<Boolean>(true);
   }
   
