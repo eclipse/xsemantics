@@ -15,6 +15,9 @@ import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.FjPackage;
 import it.xsemantics.example.fj.fj.Method;
 import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.Result3;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
@@ -550,6 +553,32 @@ public class XsemanticsRuntimeSystemTests extends
 				FjPackage.Literals.CLASS__SUPERCLASS, Method.class);
 		assertEquals(3, methods.size());
 		assertAsStringRep("[Method 'm1', Method 'm2', Method 'dm1']", methods);
+	}
+
+	@Test
+	public void testTrimIfNotNull() {
+		assertNull(ts.trimIfNotNull(null));
+		assertEquals("test", ts.trimIfNotNull(" test "));
+	}
+
+	@Test
+	public void testResultForFailure() {
+		final String message = "test";
+		
+		Result<Object> result1 = ts.resultForFailure(new RuleFailedException(message));
+		assertNull(result1.getValue());
+		assertRuleFailedException(result1.getRuleFailedException(), message, null);
+		
+		Result2<Object, Object> result2 = ts.resultForFailure2(new RuleFailedException(message));
+		assertNull(result2.getFirst());
+		assertNull(result2.getSecond());
+		assertRuleFailedException(result2.getRuleFailedException(), message, null);
+		
+		Result3<Object, Object, Object> result3 = ts.resultForFailure3(new RuleFailedException(message));
+		assertNull(result3.getFirst());
+		assertNull(result3.getSecond());
+		assertNull(result3.getThird());
+		assertRuleFailedException(result3.getRuleFailedException(), message, null);
 	}
 
 	protected void assertAssignable(Object result, Object destination,

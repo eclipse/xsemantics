@@ -11,6 +11,7 @@ import it.xsemantics.dsl.tests.classes.DerivedClass2;
 import it.xsemantics.dsl.tests.classes.DerivedDerivedClass1;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.Result2;
+import it.xsemantics.runtime.Result3;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 
@@ -118,4 +119,27 @@ public class TestTypeSystemWithPolymorphicDispatcher extends
 				new DerivedAlternativeClass1(), right);
 	}
 
+	@Override
+	public String trimIfNotNull(String message) {
+		// to make it available for testing
+		return super.trimIfNotNull(message);
+	}
+
+	@Override
+	public <T> Result<T> resultForFailure(Exception e) {
+		// to make it available for testing
+		return super.resultForFailure(e);
+	}
+
+	@Override
+	public <F, S> Result2<F, S> resultForFailure2(Exception e) {
+		// to make it available for testing
+		return super.resultForFailure2(e);
+	}
+
+	@Override
+	public <F, S, T> Result3<F, S, T> resultForFailure3(Exception e) {
+		// to make it available for testing
+		return super.resultForFailure3(e);
+	}
 }
