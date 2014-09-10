@@ -6,7 +6,6 @@ package it.xsemantics.dsl.validation
 import com.google.inject.Inject
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
-import it.xsemantics.dsl.util.XsemanticsMultimapsUtils
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
@@ -38,6 +37,7 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
@@ -400,7 +400,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		(K, T) => String errorMessageProvider
 	) {
 		if (!collection.empty) {
-			val map = XsemanticsMultimapsUtils.duplicatesMultimap
+			val map = duplicatesMultimap
 			for (e : collection) {
 				map.put(keyComputer.apply(e), e)
 			}
@@ -696,5 +696,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def public void setEnableWarnings(boolean enableWarnings) {
 		this.enableWarnings = enableWarnings;
 	}
-	
+
+	def private <K, T> duplicatesMultimap() {
+		return Multimaps2.<K, T> newLinkedHashListMultimap();
+	}
 }
