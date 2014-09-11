@@ -15,6 +15,9 @@ Require-Bundle: org.eclipse.swtbot.go;bundle-version="2.2.0",
  it.xsemantics.tests.pde.utils,
  org.eclipse.pde.ui,
  it.xsemantics.ui.examples,
- org.eclipse.ui.editors
+ org.eclipse.ui.editors,
+ com.google.inject;bundle-version="3.0.0",
+ it.xsemantics.dsl.ui,
+ it.xsemantics.dsl.tests
 Export-Package: it.xsemantics.tests.swtbot.wizards
 

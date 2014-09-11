@@ -5,15 +5,20 @@ package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper;
+import it.xsemantics.dsl.ui.internal.XsemanticsActivator;
+
+import java.util.Arrays;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Injector;
 
 /**
  * @author Lorenzo Bettini
@@ -26,20 +31,25 @@ public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	@BeforeClass
 	public static void setupProjectForTesting() throws Exception {
-		SWTBotMenu fileMenu = bot.menu("File");
-		SWTBotMenu newMenu = fileMenu.menu("New");
-		SWTBotMenu pluginProjectMenu = newMenu.menu("Plug-in Project");
-		pluginProjectMenu.click();
-		bot.text().setText(TEST_PROJECT);
-		bot.button("Next >").click();
-		bot.button("Finish").click();
+		Injector injector = XsemanticsActivator.getInstance().getInjector(XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
+		
+		PluginProjectHelper projectHelper = injector.getInstance(PluginProjectHelper.class);
+		
+		projectHelper.createJavaPluginProject
+			(TEST_PROJECT, Arrays.asList("it.xsemantics.runtime"));
+		
+//		SWTBotMenu fileMenu = bot.menu("File");
+//		SWTBotMenu newMenu = fileMenu.menu("New");
+//		SWTBotMenu pluginProjectMenu = newMenu.menu("Plug-in Project");
+//		pluginProjectMenu.click();
+//		bot.text().setText(TEST_PROJECT);
+//		bot.button("Next >").click();
+//		bot.button("Finish").click();
+//
+//		bot.tree().getTreeItem(TEST_PROJECT).contextMenu("Configure")
+//				.menu("Add Xtext Nature").click();
 
-		bot.tree().getTreeItem(TEST_PROJECT).contextMenu("Configure")
-				.menu("Add Xtext Nature").click();
-
-		bot.tree().getTreeItem(TEST_PROJECT).expand().getNode("src").expand()
-				.getNode("mytestproject").contextMenu("New").menu("File")
-				.click();
+		bot.tree().getTreeItem(TEST_PROJECT).expand().getNode("src").contextMenu("New").menu("File").click();
 		bot.textWithLabel("File name:").setText(TEST_FILE);
 		bot.button("Finish").click();
 		// bot.tree().getTreeItem("MyTestProject").getNode("src").getNode("mytestproject").getNode("MyTest.xsemantics").select();
