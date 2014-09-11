@@ -18,6 +18,11 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			
+			<properties>
+				<Dupdates.dir>xsemantics</Dupdates.dir>
+				<Dsite.label>Xsemantics Site</Dsite.label>
+			</properties>
 
 			<build>
 				<plugins>
@@ -26,7 +31,7 @@
 						<artifactId>tycho-eclipserun-plugin</artifactId>
 						<version>${tycho-version}</version>
 						<configuration>
-							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile packaging-p2composite.ant p2.composite.add -Dupdates.dir=xsemantics -Dsite.label="Xsemantics Site" -Dproject.build.directory=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier}</appArgLine>
+							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile packaging-p2composite.ant p2.composite.add -Dupdates.dir=${updates.dir} -Dsite.label="${site.label}" -Dproject.build.directory=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier}</appArgLine>
 							<repositories>
 								<repository>
 									<id>luna</id>
