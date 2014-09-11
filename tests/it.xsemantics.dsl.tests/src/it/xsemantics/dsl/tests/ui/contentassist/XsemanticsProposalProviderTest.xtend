@@ -293,6 +293,24 @@ public class XsemanticsProposalProviderTest extends
 		// a system can extend only a type that is-a XsemanticsRuntimeSystem
 	}
 
+	@Test
+	def void testProposalsForValidatorExtends() {
+		newBuilder.
+		append(
+		'''
+		system my.test.TypeSystem 
+		
+		validatorExtends '''
+		).
+		assertText(
+			org.eclipse.xtext.validation.AbstractDeclarativeValidator.name,
+			org.eclipse.xtext.validation.ImportUriValidator.name,
+			org.eclipse.xtext.validation.NamesAreUniqueValidator.name,
+			org.eclipse.xtext.xtext.XtextValidator.name
+		);
+		// that's the only possible completion in this test:
+		// a validator can extend only a type that is-a AbstractDeclarativeValidator
+	}
 
 	def private assertProposalsContain(CharSequence input, String... expected) {
 		newBuilder.append(input.toString).
