@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.util.Strings.*
+import it.xsemantics.dsl.xsemantics.Description
 
 class XsemanticsGeneratorExtensions {
 	
@@ -130,16 +131,12 @@ class XsemanticsGeneratorExtensions {
 		'''«aux.parameters.size + 1»'''
 	}
 
-	def entryPointMethodName(JudgmentDescription judgmentDescription) {
-		'''«judgmentDescription.name»'''
+	def entryPointMethodName(Description desc) {
+		'''«desc.name»'''
 	}
 
 	def succeededMethodName(JudgmentDescription judgmentDescription) {
 		'''«judgmentDescription.name»Succeeded'''
-	}
-
-	def entryPointMethodName(AuxiliaryDescription aux) {
-		'''«aux.name»'''
 	}
 
 	def inputArgs(JudgmentDescription judgmentDescription) {
@@ -175,16 +172,16 @@ class XsemanticsGeneratorExtensions {
 
 	def ruleApplicationSubtraceName() '''_subtrace_'''
 
-	def exceptionVarName(JudgmentDescription j) {
-		'''_e_«j.name»'''
-	}
-
-	def exceptionVarName(AuxiliaryDescription aux) {
-		'''_e_«aux.name»'''
+	def exceptionVarName(Description desc) {
+		'''_e_«desc.name»'''
 	}
 
 	def String exceptionVarName(Rule rule) {
 		'''e_«rule.applyRuleName»'''
+	}
+
+	def String exceptionVarName(AuxiliaryFunction aux) {
+		'''e_«aux.applyAuxFunName»'''
 	}
 
 	def suffixStartingFrom2(JudgmentDescription judgmentDescription) {

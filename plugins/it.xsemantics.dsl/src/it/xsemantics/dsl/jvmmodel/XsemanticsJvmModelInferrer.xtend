@@ -37,6 +37,8 @@ import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.XExpression
+import it.xsemantics.dsl.xsemantics.Overrider
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -309,90 +311,91 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    	}
    	
    	def genEntryPointMethods(JudgmentDescription judgmentDescription) {
+   		val methodName = judgmentDescription.entryPointMethodName
+   		val resultType = judgmentDescription.resultType
+   		
+   		judgmentDescription.toEntryMethodsTriple(methodName.toString, resultType)
+		[
+			val inputArgs = judgmentDescription.inputArgs
+			
+			val entryPointInternalInvocation =
+			'''
+				try {
+					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
+				} catch («Exception.simpleName» «judgmentDescription.exceptionVarName») {
+					return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
+				}'''
+		
+   			if (judgmentDescription.cacheEntryPointMethods) {
+   				body = '''
+				«bodyForCache(judgmentDescription, '''«environmentName», «inputArgs»''', entryPointInternalInvocation)»
+				«wrapInGetFromCache(methodName, resultType, inputArgs, entryPointInternalInvocation)»'''
+			} else {
+				body = [ append(entryPointInternalInvocation) ]
+			}
+		]
+   	}
+
+	/**
+	 * @param judgmentDescription
+	 * @param name method name
+	 * @param resultType method return type
+	 * @param beforeInputParams can add parameters before the input parameters
+	 * @param mainBodyCreator handles the creation of the body of the third method,
+	 * 	which implements the real logic; the first two methods are only delegates with
+	 * 	default arguments.
+	 */
+   	def toEntryMethodsTriple(JudgmentDescription judgmentDescription, String name, 
+   			JvmTypeReference resultType, (JvmOperation) => void mainBodyCreator
+   	) {
    		val entryPointMethods = <JvmOperation>newArrayList()
+   		val inputArgs = judgmentDescription.inputArgs
    		// main entry point method
-   		entryPointMethods += judgmentDescription.entryPointCommon(
+   		entryPointMethods += judgmentDescription.toEntryMethodCommon(name, resultType,
    			[], // no parameters before input params
    			[
-   				body = '''return «judgmentDescription.entryPointMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
+   				body = '''return «name»(new «RuleEnvironment»(), null, «inputArgs»);'''
    			]	
    		)
    		
    		// entry point method with environment parameter
-   		entryPointMethods += judgmentDescription.entryPointCommon(
+   		entryPointMethods += judgmentDescription.toEntryMethodCommon(name, resultType,
    			[
    				parameters += judgmentDescription.environmentParam
    			],
    			[
-   				body = '''return «judgmentDescription.entryPointMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
+   				body = '''return «name»(«environmentName», null, «inputArgs»);'''
    			]
    		)
    		
    		// entry point method with environment parameter and rule application trace
-   		val methodName = judgmentDescription.entryPointMethodName.toString
-		entryPointMethods += judgmentDescription.toMethod(
-   			methodName,
-   			judgmentDescription.resultType
-   		) [
-			if (judgmentDescription.override)
-				addOverrideAnnotation
-   			
-   			parameters += judgmentDescription.environmentParam
-   			parameters += judgmentDescription.ruleApplicationTraceParam
-   			parameters += judgmentDescription.inputParameters
-   			
-   			val inputArgs = judgmentDescription.inputArgs
-   			
-   			if (judgmentDescription.cacheEntryPointMethods) {
-   				val hasCacheCondition = judgmentDescription.cacheCondition !== null
-   				body = '''
-   				«IF hasCacheCondition»
-if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputArgs»))
-	try {
-		return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
-	} catch («Exception» «judgmentDescription.exceptionVarName») {
-		return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
-	}
-   				«ENDIF»
-				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
-					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
-						public «judgmentDescription.resultType» doGet() {
-							try {
-								return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
-							} catch («Exception» «judgmentDescription.exceptionVarName») {
-								return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
-							}
-						}
-					}, «inputArgs»);'''
-			} else {
-				body = '''
-				try {
-					return «judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «inputArgs»);
-				} catch («Exception» «judgmentDescription.exceptionVarName») {
-					return resultForFailure«judgmentDescription.suffixStartingFrom2»(«judgmentDescription.exceptionVarName»);
-				}'''
-			}
-   		]
-   		
+		entryPointMethods += judgmentDescription.toEntryMethodCommon(name, resultType,
+   			[
+   				parameters += judgmentDescription.environmentParam
+   				parameters += judgmentDescription.ruleApplicationTraceParam
+   			],
+   			mainBodyCreator
+   		)
+  		
    		entryPointMethods
    	}
 
 	/**
 	 * @param judgmentDescription
+	 * @param name method name
+	 * @param resultType method return type
 	 * @param beforeInputParams can add parameters before the input parameters
 	 * @param bodyCreator handles the creation of the body of the method
 	 */
-	def entryPointCommon(JudgmentDescription judgmentDescription,
+	def protected toEntryMethodCommon(JudgmentDescription judgmentDescription,
+		String name,
+		JvmTypeReference resultType,
 		(JvmOperation) => void beforeInputParams,
 		(JvmOperation) => void bodyCreator
 	) {
 		
-		judgmentDescription.toMethod(
-   			judgmentDescription.entryPointMethodName.toString,
-   			judgmentDescription.resultType
-   		) [
-   			if (judgmentDescription.override)
-				addOverrideAnnotation
+		judgmentDescription.toMethod(name, resultType) [
+   			addOverrideAnnotation(judgmentDescription)
    		
    			beforeInputParams.apply(it)	
    			parameters += judgmentDescription.inputParameters
@@ -401,52 +404,47 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		]
 	}
 
+	def private bodyForCache(Cachable c, CharSequence args, CharSequence entryPointInternalInvocation) {
+		val hasCacheCondition = c.cacheCondition !== null
+		'''
+		«IF hasCacheCondition»
+if (!«c.cacheConditionMethod»(«args»))
+	«entryPointInternalInvocation»
+		«ENDIF»
+		'''
+	} 
+
+	def private StringConcatenationClient wrapInGetFromCache(CharSequence methodName, JvmTypeReference resultType, 
+			String inputArgs, CharSequence providerBody) {
+		val envArg = environmentName
+		wrapInGetFromCacheCommon(methodName, resultType, envArg, envArg, inputArgs, providerBody)
+	}
+
+	def private StringConcatenationClient wrapInGetFromCache2(CharSequence methodName, JvmTypeReference resultType, 
+			String inputArgs, CharSequence providerBody) {
+		wrapInGetFromCacheCommon(methodName, resultType, 
+			'''(«RuleEnvironment.simpleName»)null''', "null", inputArgs, providerBody
+		)
+	}
+
+	def private StringConcatenationClient wrapInGetFromCacheCommon(CharSequence methodName, JvmTypeReference resultType, 
+		CharSequence getFromCacheEnvArg, CharSequence providerEnvArg, String inputArgs, CharSequence providerBody) {
+		'''
+		return getFromCache("«methodName»", «getFromCacheEnvArg», «ruleApplicationTraceName»,
+			new «XsemanticsProvider»<«resultType»>(«providerEnvArg», «ruleApplicationTraceName») {
+				public «resultType» doGet() {
+					«providerBody»
+				}
+			}, «inputArgs»);'''
+	}
+
    	def genSucceededMethods(JudgmentDescription judgmentDescription) {
-   		val inferredMethods = <JvmOperation>newArrayList()
-
 		if (!typeSystem.isPredicate(judgmentDescription))
-			return inferredMethods
+			return <JvmOperation>newArrayList()
 
-   		// main succeded method
-   		inferredMethods += judgmentDescription.toMethod(
-   			judgmentDescription.succeededMethodName.toString,
-   			Boolean.typeRef
-   		) [
-   			if (judgmentDescription.override)
-				addOverrideAnnotation
-   			
-   			parameters += judgmentDescription.inputParameters
-   			
-   			body = '''return «judgmentDescription.succeededMethodName»(new «RuleEnvironment»(), null, «judgmentDescription.inputArgs»);'''
-   		]
-   		
-   		// entry point method with environment parameter
-   		inferredMethods += judgmentDescription.toMethod(
-   			judgmentDescription.succeededMethodName.toString,
-   			Boolean.typeRef
-   		) [
-   			if (judgmentDescription.override)
-				addOverrideAnnotation
-
-   			parameters += judgmentDescription.environmentParam
-   			parameters += judgmentDescription.inputParameters
-   			
-   			body = '''return «judgmentDescription.succeededMethodName»(«environmentName», null, «judgmentDescription.inputArgs»);'''
-   		]
-   		
-   		// entry point method with environment parameter and rule application trace
-   		inferredMethods += judgmentDescription.toMethod(
-   			judgmentDescription.succeededMethodName.toString,
-   			Boolean.typeRef
-   		) [
-			if (judgmentDescription.override)
-				addOverrideAnnotation
-   			
-   			parameters += judgmentDescription.environmentParam
-   			parameters += judgmentDescription.ruleApplicationTraceParam
-   			parameters += judgmentDescription.inputParameters
-   			
-   			body = '''
+   		judgmentDescription.toEntryMethodsTriple(judgmentDescription.succeededMethodName.toString, Boolean.typeRef)
+		[
+			body = '''
 				try {
 					«judgmentDescription.entryPointInternalMethodName»(«additionalArgs», «judgmentDescription.inputArgs»);
 					return true;
@@ -454,8 +452,6 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 					return false;
 				}'''
    		]
-   		
-   		inferredMethods
    	}
 
    	def genEntryPointMethods(AuxiliaryDescription aux) {
@@ -467,8 +463,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		) [
    			exceptions += ruleFailedExceptionType
    			
-   			if (aux.override)
-   				addOverrideAnnotation
+   			addOverrideAnnotation(aux)
    			
    			parameters += aux.inputParameters
    			
@@ -482,8 +477,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    		) [
    			exceptions += ruleFailedExceptionType
    			
-   			if (aux.override)
-   				addOverrideAnnotation
+   			addOverrideAnnotation(aux)
 
    			parameters += aux.ruleApplicationTraceParam
    			parameters += aux.inputParameters
@@ -549,10 +543,7 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			Void::TYPE.getTypeForName(judgmentDescription)
 		) 
 		[
-			visibility = JvmVisibility::PROTECTED
-			
-			if (judgmentDescription.override)
-				addOverrideAnnotation
+			addProtectedAndOverride(judgmentDescription)
 
 			exceptions += ruleFailedExceptionType
 			
@@ -571,29 +562,16 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    				ErrorInformation.typeRef.addArrayTypeDimension
    			)
    			
-   			if (errorSpecification != null) {
-   				body = errorSpecification
-   			} else {
-   				body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
-   			}
-   			
-//   			body = [
-//   				if (errorSpecification != null) {
-//	   				val error = errSpecGenerator.compileErrorOfErrorSpecification(errorSpecification, it)
-//					val source = errSpecGenerator.compileSourceOfErrorSpecification(errorSpecification, it)
-//					val feature = errSpecGenerator.compileFeatureOfErrorSpecification(errorSpecification, it)
-//	   				
-//	   				it.newLine
-//	   				it.append('''
-//	   					«throwRuleFailedExceptionMethod»(«error»,
-//	   						_issue, _ex, new ''')
-//					judgmentDescription.errorInformationType.serialize(judgmentDescription, it)
-//					it.append('''(«source», «feature»));''')
-//				} else {
-//					it.append('''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);''')
-//				}
-//   			]
+   			compileErrorSpecification(errorSpecification)
 		]
+	}
+
+	def compileErrorSpecification(JvmOperation it, XExpression errorSpecification) {
+		if (errorSpecification != null) {
+			body = errorSpecification
+		} else {
+			body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
+		}
 	}
 
 	def compileCacheConditionMethod(Cachable cachable) {
@@ -644,25 +622,19 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    				ErrorInformation.typeRef.addArrayTypeDimension
    			)
    			
-   			if (errorSpecification != null) {
-   				body = errorSpecification
-   			} else {
-   				body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
-   			}
+   			compileErrorSpecification(errorSpecification)
 		]
 	}
 
 	def compileInternalMethod(JudgmentDescription judgmentDescription) {
 		val methodName = judgmentDescription.entryPointInternalMethodName.toString
+		val resultType = judgmentDescription.resultType
 		judgmentDescription.toMethod(
 			methodName,
-			judgmentDescription.resultType
+			resultType
 		) 
 		[
-			visibility = JvmVisibility::PROTECTED
-			
-			if (judgmentDescription.override)
-				addOverrideAnnotation
+			addProtectedAndOverride(judgmentDescription)
 			
 			parameters += judgmentDescription.environmentParam
    			parameters += judgmentDescription.ruleApplicationTraceParam
@@ -671,55 +643,33 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
    			val inputArgs = judgmentDescription.inputArgs
    			val exceptionName = judgmentDescription.exceptionVarName
    			
+   			val usePolymorphicDispatch = polymorphicInvokeTryCacth(
+   				judgmentDescription.polymorphicDispatcherField,
+   				additionalArgs, inputArgs, exceptionName,
+   				'''
+				sneakyThrowRuleFailedException(«exceptionName»);
+				return null;'''
+   			)
+   			
    			if (judgmentDescription.cachedClause !== null) {
-   				val hasCacheCondition = judgmentDescription.cacheCondition !== null
    				body = '''
-   				«IF hasCacheCondition»
-if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputArgs»))
-	try {
-		checkParamsNotNull(«inputArgs»);
-		return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
-	} catch («Exception» «exceptionName») {
-		sneakyThrowRuleFailedException(«exceptionName»);
-		return null;
-	}
-   				«ENDIF»
-				return getFromCache("«methodName»", «environmentName», «ruleApplicationTraceName»,
-					new «XsemanticsProvider»<«judgmentDescription.resultType»>(«environmentName», «ruleApplicationTraceName») {
-						public «judgmentDescription.resultType» doGet() {
-							try {
-								checkParamsNotNull(«inputArgs»);
-								return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
-							} catch («Exception» «exceptionName») {
-								sneakyThrowRuleFailedException(«exceptionName»);
-								return null;
-							}
-						}
-					}, «inputArgs»);'''
+				«bodyForCache(judgmentDescription, '''«environmentName», «inputArgs»''', usePolymorphicDispatch)»
+				«wrapInGetFromCache(methodName, resultType, inputArgs, usePolymorphicDispatch)»'''
    			} else {
-	   			body = '''
-				try {
-					checkParamsNotNull(«inputArgs»);
-					return «judgmentDescription.polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
-				} catch («Exception» «exceptionName») {
-					sneakyThrowRuleFailedException(«exceptionName»);
-					return null;
-				}'''
+	   			body = [append(usePolymorphicDispatch)]
 			}
 		]
 	}
 	
 	def compileInternalMethod(AuxiliaryDescription aux) {
 		val methodName = aux.entryPointInternalMethodName.toString
+		val resultType = aux.resultType
 		aux.toMethod(
 			methodName,
-			aux.resultType
+			resultType
 		) 
 		[
-			visibility = JvmVisibility::PROTECTED
-			
-			if (aux.override)
-   				addOverrideAnnotation
+			addProtectedAndOverride(aux)
 			
    			parameters += aux.ruleApplicationTraceParam
    			for (p : aux.parameters) {
@@ -731,59 +681,44 @@ if (!«judgmentDescription.cacheConditionMethod»(«environmentName», «inputAr
 			
 			val exceptionName = aux.exceptionVarName
 			val inputArgs = aux.inputArgs
+			
+			val invokePolymorphicDispatcher = polymorphicInvokeTryCacth(
+				aux.polymorphicDispatcherField,
+				ruleApplicationTraceName, inputArgs,
+				exceptionName,
+				'''
+				«IF isBoolean»
+					return false;
+				«ELSE»
+					sneakyThrowRuleFailedException(«exceptionName»);
+					return «IF aux.type === null»false«ELSE»null«ENDIF»;
+				«ENDIF»
+				'''
+			)
    			
    			if (aux.cachedClause !== null) {
-   				val hasCacheCondition = aux.cacheCondition !== null
    				body = '''
-   				«IF hasCacheCondition»
-if (!«aux.cacheConditionMethod»(«inputArgs»))
-	try {
-		checkParamsNotNull(«inputArgs»);
-		return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
-	} catch («Exception» «exceptionName») {
-		«IF isBoolean»
-			return false;
-		«ELSE»
-			sneakyThrowRuleFailedException(«exceptionName»);
-			return «IF aux.type === null»false«ELSE»null«ENDIF»;
-		«ENDIF»
-	}
-   				«ENDIF»
-				return getFromCache("«methodName»", («RuleEnvironment»)null, «ruleApplicationTraceName»,
-					new «XsemanticsProvider»<«aux.resultType»>(null, «ruleApplicationTraceName») {
-						public «aux.resultType» doGet() {
-							try {
-								checkParamsNotNull(«inputArgs»);
-								return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
-							} catch («Exception» «exceptionName») {
-								«IF isBoolean»
-									return false;
-								«ELSE»
-									sneakyThrowRuleFailedException(«exceptionName»);
-									return «IF aux.type === null»false«ELSE»null«ENDIF»;
-								«ENDIF»
-							}
-						}
-					}, «inputArgs»);'''
+   				«bodyForCache(aux, inputArgs, invokePolymorphicDispatcher)»
+   				«wrapInGetFromCache2(methodName, resultType, inputArgs, invokePolymorphicDispatcher)»'''
    			} else {
-	   			body = '''
-					try {
-						checkParamsNotNull(«inputArgs»);
-						return «aux.polymorphicDispatcherField».invoke(«ruleApplicationTraceName», «inputArgs»);
-					} catch («Exception» «exceptionName») {
-						«IF isBoolean»
-							return false;
-						«ELSE»
-							sneakyThrowRuleFailedException(«exceptionName»);
-							return «IF aux.type === null»false«ELSE»null«ENDIF»;
-						«ENDIF»
-					}
-					'''
+	   			body = [append(invokePolymorphicDispatcher)]
 			}
 			// don't return null if aux.type is null: the generated method will have
 			// type Boolean and returning null is considered bad practice
 			// see FindBugs NP_BOOLEAN_RETURN_NULL
 		]
+	}
+
+	def private polymorphicInvokeTryCacth(CharSequence polymorphicDispatcherField, 
+			CharSequence additionalArgs, CharSequence inputArgs, CharSequence exceptionName, CharSequence catchBlock
+	) {
+		'''
+		try {
+			checkParamsNotNull(«inputArgs»);
+			return «polymorphicDispatcherField».invoke(«additionalArgs», «inputArgs»);
+		} catch («Exception.simpleName» «exceptionName») {
+			«catchBlock»
+		}'''
 	}
 
 	def ruleFailedExceptionType() {
@@ -796,41 +731,42 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 	
 	def compileImplMethod(Rule rule) {
 		val judgment = rule.getJudgmentDescription
+		val resultType = judgment.resultType
 		rule.toMethod(
 			'''«judgment.polymorphicDispatcherImpl»'''.toString,
 			judgment.resultType
 		) 
 		[
-			visibility = JvmVisibility::PROTECTED
+			setupMethodForRule(rule)
 			
-			if (rule.override)
-				addOverrideAnnotation
-			
-			exceptions += ruleFailedExceptionType
-			
-			parameters += rule.paramForEnvironment
-   			parameters += judgment.ruleApplicationTraceParam
-   			parameters += rule.inputParameters
+			val exceptionVarName = rule.exceptionVarName
+			val inputArgs = rule.inputParameterNames
+			val applyRuleName = rule.applyRuleName
    			
-   			body = '''
-				try {
-					final «RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					final «judgment.resultType» «resultVariableForTrace» = «rule.applyRuleName»(«rule.additionalArgsForRule», «rule.inputParameterNames»);
-					«addToTraceMethod(ruleApplicationTraceName(), rule.traceStringForRule)»;
-					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return «resultVariableForTrace»;
-				} catch («Exception» «rule.exceptionVarName») {
-					«IF rule.conclusion.error != null»
-					«rule.throwExceptionMethod»(«rule.exceptionVarName», «rule.inputParameterNames»);
-					«ELSE»
-					«judgment.throwExceptionMethod»(«rule.errorForRule»,
+   			body = bodyForImplMethod(resultType, applyRuleName,
+				rule.additionalArgsForRule, inputArgs, rule.traceStringForRule, exceptionVarName,
+				'''
+				«IF rule.conclusion.error != null»
+					«rule.throwExceptionMethod»(«exceptionVarName», «inputArgs»);
+				«ELSE»
+				«judgment.throwExceptionMethod»(«rule.errorForRule»,
 						«rule.ruleIssueString»,
-						e_«rule.applyRuleName», «rule.inputParameterNames»«rule.errorInformationArgs»);
-					«ENDIF»
+						e_«applyRuleName», «inputArgs»«rule.errorInformationArgs»);
+				«ENDIF»
 					return null;
-				}
    				'''
+   			)
 		]
+	}
+
+	def private void setupMethodForRule(JvmOperation it, Rule rule) {
+		addProtectedAndOverride(rule)
+			
+		exceptions += ruleFailedExceptionType
+		
+		parameters += rule.paramForEnvironment
+		parameters += rule.ruleApplicationTraceParam
+		parameters += rule.inputParameters
 	}
 
 	def compileImplMethod(AuxiliaryFunction aux) {
@@ -850,24 +786,40 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
    			parameters += auxiliaryDescription.ruleApplicationTraceParam
    			parameters += aux.inputParameters
    			
-   			body = '''
-				try {
-					final «RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
-					final «aux.resultType» «resultVariableForTrace» = «aux.applyAuxFunName»(«ruleApplicationSubtraceName», «aux.inputParameterNames»);
-					«addToTraceMethod(ruleApplicationTraceName(), aux.traceStringForAuxiliaryFun)»;
-					«addAsSubtraceMethod(ruleApplicationTraceName(), ruleApplicationSubtraceName)»;
-					return «resultVariableForTrace»;
-				} catch («Exception» e_«aux.applyAuxFunName») {
-					«auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
-						«auxiliaryDescription.ruleIssueString»,
-						e_«aux.applyAuxFunName», «aux.inputParameterNames»«aux.errorInformationArgs»);
-					return «IF isBoolean»false«ELSE»null«ENDIF»;
-				}
+   			val inputArgs = aux.inputParameterNames
+   			val applyName = aux.applyAuxFunName
+   			val exceptionVarName = aux.exceptionVarName
+   			
+   			body = bodyForImplMethod(resultType, applyName,
+				ruleApplicationSubtraceName, inputArgs, aux.traceStringForAuxiliaryFun, exceptionVarName,
    				'''
+					«auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
+							«auxiliaryDescription.ruleIssueString»,
+							«exceptionVarName», «inputArgs»«aux.errorInformationArgs»);
+						return «IF isBoolean»false«ELSE»null«ENDIF»;
+   				'''
+   			)
    				// don't return null if resultType is boolean: the generated method will have
 				// type Boolean and returning null is considered bad practice
 				// see FindBugs NP_BOOLEAN_RETURN_NULL
 		]
+	}
+
+	def private StringConcatenationClient bodyForImplMethod(JvmTypeReference resultType, CharSequence applyRuleName,
+			CharSequence additionalArgs, CharSequence inputArgs, CharSequence traceString, CharSequence exceptionVarName,
+			StringConcatenationClient catchBlock
+	) {
+		'''
+		try {
+			final «RuleApplicationTrace» «ruleApplicationSubtraceName» = «newTraceMethod(ruleApplicationTraceName())»;
+			final «resultType» «resultVariableForTrace» = «applyRuleName»(«additionalArgs», «inputArgs»);
+			«addToTraceMethod(ruleApplicationTraceName, traceString)»;
+			«addAsSubtraceMethod(ruleApplicationTraceName, ruleApplicationSubtraceName)»;
+			return «resultVariableForTrace»;
+		} catch («Exception» «exceptionVarName») {
+			«catchBlock»
+		}
+		'''
 	}
 	
 	def StringConcatenationClient errorInformationArgs(Rule rule) {
@@ -888,16 +840,7 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 			rule.getJudgmentDescription.resultType
 		) 
 		[
-			visibility = JvmVisibility::PROTECTED
-			
-			if (rule.override)
-				addOverrideAnnotation
-			
-			exceptions += ruleFailedExceptionType
-			
-			parameters += rule.paramForEnvironment
-   			parameters += rule.ruleApplicationTraceParam
-   			parameters += rule.inputParameters
+			setupMethodForRule(rule)
 
 			assignBody(rule)    			
 		]
@@ -974,40 +917,30 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 
 	def compileCheckRuleMethods(CheckRule rule) {
 		val checkMethods = <JvmOperation>newArrayList()
+		val methodName = rule.methodName
+		val resultType = rule.resultType
 		
 		checkMethods += rule.toMethod(
-			'''«rule.methodName»''',
-			rule.resultType
+			'''«methodName»''',
+			resultType
 		) 
 		[
-			if (rule.override)
-				addOverrideAnnotation
-			
-   			parameters += rule.element.parameter.
-   				toParameter(rule.element.parameter.name,
-   					rule.element.parameter.parameterType
-   				)
+			setupMethodForCheckRule(rule)
    			
-   			body = '''return «rule.methodName»(null, «rule.element.parameter.name»);'''
+   			body = '''return «methodName»(null, «rule.element.parameter.name»);'''
 		]
 		
 		checkMethods += rule.toMethod(
-			'''«rule.methodName»''',
-			rule.resultType
+			'''«methodName»''',
+			resultType
 		) 
 		[
-			if (rule.override)
-				addOverrideAnnotation
-			
 			parameters += rule.ruleApplicationTraceParam
-   			parameters += rule.element.parameter.
-   				toParameter(rule.element.parameter.name,
-   					rule.element.parameter.parameterType
-   				)
+			setupMethodForCheckRule(rule)
    			
    			body = '''
 				try {
-					return «rule.methodName»Internal(«ruleApplicationTraceName.toString», «rule.element.parameter.name»);
+					return «methodName»Internal(«ruleApplicationTraceName.toString», «rule.element.parameter.name»);
 				} catch («Exception» e) {
 					return resultForFailure(e);
 				}'''
@@ -1017,50 +950,50 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 	}
 
 	def compileValidatorCheckRuleMethod(CheckRule rule) {
+		val methodName = rule.methodName
+		
 		rule.toMethod(
-			'''«rule.methodName»''',
+			'''«methodName»''',
 			Void::TYPE.getTypeForName(rule)
 		) 
 		[
-			if (rule.override)
-				addOverrideAnnotation
+			setupMethodForCheckRule(rule)			
 
 			annotations += Check.annotationRef
-			
-   			parameters += rule.element.parameter.
-   				toParameter(rule.element.parameter.name,
-   					rule.element.parameter.parameterType
-   				)
    			
    			body = 
    				'''
 				errorGenerator.generateErrors(this,
-					getXsemanticsSystem().«rule.methodName»(«rule.element.parameter.name»),
+					getXsemanticsSystem().«methodName»(«rule.element.parameter.name»),
 						«rule.element.parameter.name»);'''
 		]
 	}
 
 	def compileInternalMethod(CheckRule rule) {
+		val methodName = rule.methodName
+		
 		rule.toMethod(
-			'''«rule.methodName»Internal''',
+			'''«methodName»Internal''',
 			rule.resultType
 		) 
 		[
 			visibility = JvmVisibility::PROTECTED
-			
-			if (rule.override)
-				addOverrideAnnotation
-			
 			exceptions += ruleFailedExceptionType
 			
 			parameters += rule.ruleApplicationTraceParam
-   			parameters += rule.element.parameter.
-   				toParameter(rule.element.parameter.name,
-   					rule.element.parameter.parameterType
-   				)
+			setupMethodForCheckRule(rule)
 
    			body = rule.premises
 		]
+	}
+
+	def private setupMethodForCheckRule(JvmOperation it, CheckRule rule) {
+		addOverrideAnnotation(rule)
+		
+		parameters += rule.element.parameter.
+			toParameter(rule.element.parameter.name,
+				rule.element.parameter.parameterType
+			)
 	}
 	
 	def paramForEnvironment(Rule rule) {
@@ -1086,6 +1019,16 @@ if (!«aux.cacheConditionMethod»(«inputArgs»))
 		||
 		"java.lang.Boolean".equals(identifier)
 		}
+	}
+
+	def private addProtectedAndOverride(JvmOperation it, Overrider overrider) {
+		visibility = JvmVisibility::PROTECTED
+		addOverrideAnnotation(overrider)
+	}
+
+	def private addOverrideAnnotation(JvmAnnotationTarget it, Overrider overrider) {
+		if (overrider.override)
+			addOverrideAnnotation
 	}
 
 	def private addOverrideAnnotation(JvmAnnotationTarget it) {
