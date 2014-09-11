@@ -1,4 +1,9 @@
 <FindBugsFilter>
+	<!-- sources of tests -->
+	<Match>
+	    <Source name="~.*Test.*" />
+	</Match>
+
 	<!-- antlr generated -->
 	<Match>
 		<Class name="~.*\.antlr\.internal.*" />
