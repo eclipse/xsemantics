@@ -42,4 +42,4 @@ Inclusions (e.g.: **/*.class)
 
 
 Exclusions (e.g.: **/*Test*)
-**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/**/*.*
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/it/xsemantics/dsl/xsemantics/EntryPointsOption.*,**/example/**/*.*,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java

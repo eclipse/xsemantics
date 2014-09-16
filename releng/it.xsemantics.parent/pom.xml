@@ -75,7 +75,7 @@
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
 		<!--  <sonar.junit.reportsPath>../${project.artifactId}.tests/target/surefire-reports/</sonar.junit.reportsPath> -->
-		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**,file:**/example/**,file:**/tests/**,**/*RuntimeModule.java,**/*UiModule.java,**/*XcoreReader.java,**/*UiExamples.java</sonar.exclusions>
+		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**,file:**/example/**,file:**/tests/**,**/*RuntimeModule.java,**/*UiModule.java,**/*XcoreReader.java,**/*UiExamples.java,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java</sonar.exclusions>
 
 		<!-- see http://sonarqube.15.x6.nabble.com/sonar-issue-ignore-multicriteria-td5021722.html and
 		 http://stackoverflow.com/questions/21825469/configure-sonar-sonar-issue-ignore-multicriteria-through-maven
@@ -338,6 +338,8 @@
 								<exclude>**/Abstract*UiModule.java</exclude>
 								<exclude>**/Abstract*ProposalProvider.java</exclude>
 								<exclude>**/*Test.java</exclude>
+								<exclude>**/*TypeSystemGen*.java</exclude>
+								<exclude>**/*StandaloneSetup*.java</exclude>
 							</excludes>
 							<append>true</append>
 						</configuration>
