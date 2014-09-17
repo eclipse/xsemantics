@@ -15,9 +15,11 @@ public class UniqueNames {
 
 	private Set<String> names = newHashSet();
 
+	protected int max = Integer.MAX_VALUE;
+
 	public String createName(String proposedName) {
 		if (names.contains(proposedName)) {
-			for (int i = 1; i < Integer.MAX_VALUE; i++) {
+			for (int i = 1; i < max; i++) {
 				String newProposal = proposedName + "_" + i;
 				if (!names.contains(newProposal)) {
 					names.add(newProposal);
