@@ -53,6 +53,14 @@ class XsemanticsGeneratorExtensions {
 	@Inject
 	protected IJvmModelAssociations associations
 	
+	protected static val RESULT_GET_METHODS = newArrayList(
+		"getFirst()", "getSecond()", "getThird()"
+	)
+	
+	def static getResultGetMethods() {
+		return RESULT_GET_METHODS;
+	}
+	
 	def toJavaFullyQualifiedName(XsemanticsSystem ts) {
 		ts.fullyQualifiedName
 	}
@@ -237,7 +245,7 @@ class XsemanticsGeneratorExtensions {
 		addAsSubtrace(«trace», «subtrace»)'''
 
 	def traceStringForRule(Rule rule) {
-		val getMethods = XsemanticsGeneratorConstants::getResultGetMethods.iterator
+		val getMethods = getResultGetMethods.iterator
 		rule.stringForRule(
 			[wrapInStringRepr('''«resultVariableForTrace».«getMethods.next»''')],
 			[wrapInStringRepr(it.ruleConclusionInputParamForError)])

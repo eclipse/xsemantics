@@ -531,8 +531,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		val expressions = ruleInvocation.outputArgsExpressions();
 		
 		newLine(b);
-		val getMethods = XsemanticsGeneratorConstants
-				.getResultGetMethods().iterator();
+		val getMethods = XsemanticsGeneratorExtensions.getResultGetMethods().iterator();
 		for (expression : expressions) {
 			val expressionType = typeSystem.getType(
 					expression);
