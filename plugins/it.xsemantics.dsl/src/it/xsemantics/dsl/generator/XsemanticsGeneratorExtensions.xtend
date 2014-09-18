@@ -305,8 +305,15 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def ruleConclusionInputParamForError(RuleConclusionElement element) {
-		// this is called only for input params
-		(element as RuleParameter).parameter.name
+		// in a valid this should be called only for input params, but for invalid
+		// programs, during the inferrer, we should handle also the case of
+		// expressions (which are not valid input params)
+		if (element instanceof RuleParameter) {
+			return element.parameter.name
+		} else {
+			// failback case for invalid programs
+			return ""
+		}
 	}
 
 	def inputParameterNames(Rule rule) {
