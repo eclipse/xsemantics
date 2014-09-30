@@ -20,8 +20,8 @@
 			</activation>
 			
 			<properties>
-				<Dupdates.dir>xsemantics</Dupdates.dir>
-				<Dsite.label>Xsemantics Site</Dsite.label>
+				<updates.dir>xsemantics</updates.dir>
+				<site.label>Xsemantics Site</site.label>
 			</properties>
 
 			<build>
