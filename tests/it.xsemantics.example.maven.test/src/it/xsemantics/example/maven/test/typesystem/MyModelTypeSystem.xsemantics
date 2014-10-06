@@ -1,0 +1,11 @@
+import it.xsemantics.example.maven.test.model.MyModel
+
+system it.xsemantics.example.maven.test.typesystem.MyModelTypeSystem
+
+judgments {
+	type |- Object expression : output Object
+		error "cannot type " + stringRep(expression)
+}
+
+axiom MyModelType
+	G |- MyModel model : model.type

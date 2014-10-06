@@ -1,0 +1,14 @@
+import it.xsemantics.example.maven.test.model.MyModel
+
+system it.xsemantics.example.maven.test.typesystem.MyExtendedTypeSystem extends MyModelTypeSystem
+
+judgments {
+	subtype |- MyModel m1 <: MyModel m2
+		error stringRep(m1) + " is not a subtype of " + stringRep(m2)
+}
+
+rule MyModelSubtype
+	G |- MyModel m1 <: MyModel m2
+from {
+	m1.type == m2.type
+}
