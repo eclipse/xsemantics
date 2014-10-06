@@ -11,6 +11,16 @@
 
 	<artifactId>it.xsemantics.dsl</artifactId>
 	<packaging>eclipse-plugin</packaging>
+	
+	<dependencies>
+		<!-- This is required only for allowing the it.xsemantics.dsl to
+			be used as a Maven jar with the xtext-maven-plugin  -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>it.xsemantics.runtime</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<!-- The following is required so that the mwe2 workflow finds the .xtext 
