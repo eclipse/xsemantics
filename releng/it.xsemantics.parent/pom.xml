@@ -5,48 +5,18 @@
 	<artifactId>it.xsemantics.parent</artifactId>
 	<version>1.6.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<modules>
-		<module>../../devtools/it.xsemantics.targetplatform</module>
-		
-		<module>../../plugins/it.xsemantics.runtime</module>
-		<module>../../releng/it.xsemantics.releng.tools</module>
-		<module>../../plugins/it.xsemantics.dsl</module>
-		<module>../../plugins/it.xsemantics.dsl.ui</module>
-		<module>../../tests/it.xsemantics.dsl.tests</module>
 
-		<!-- we need the following examples for testing -->
-		<module>../../examples/it.xsemantics.example.fj</module>
-		<module>../../examples/it.xsemantics.example.fj.ui</module>
-		<module>../../examples/it.xsemantics.example.fj.tests</module>
-		<module>../../examples/it.xsemantics.example.fjcached</module>
-		<module>../../examples/it.xsemantics.example.fjcached.ui</module>
-		<module>../../examples/it.xsemantics.example.fjcached.tests</module>
-
-		<module>../../examples/it.xsemantics.example.expressions</module>
-		<module>../../examples/it.xsemantics.example.expressions.ui</module>
-		<module>../../examples/it.xsemantics.example.expressions.tests</module>
-		<module>../../examples/it.xsemantics.example.lambda</module>
-		<module>../../examples/it.xsemantics.example.lambda.ui</module>
-		<module>../../examples/it.xsemantics.example.lambda.tests</module>
-		<module>../../features/it.xsemantics.examples.feature</module>
-		<module>../../features/it.xsemantics.implemented.examples.feature</module>
-
-		<module>../../doc/it.xsemantics.doc</module>
-		<module>../../features/it.xsemantics.doc.feature</module>
-
-		<module>../../examples/it.xsemantics.ui.examples</module>
-
-		<module>../../features/it.xsemantics.runtime.feature</module>
-		<module>../../features/it.xsemantics.feature</module>
-		<module>../../features/it.xsemantics.sdk</module>
-
-		<module>../../tests/it.xsemantics.tests.pde.utils.luna</module>
-		<module>../../features/it.xsemantics.tests.feature</module>
-		<module>../../tests/it.xsemantics.tests.swtbot</module>
-
-		<module>../../releng/it.xsemantics.repository</module>
-	</modules>
-
+	<developers>
+		<developer>
+			<name>Lorenzo Bettini</name>
+			<email>lorenzo.bettini@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	
 	<properties>
 		<tycho-version>0.21.0</tycho-version>
 		<tycho-extras-version>0.21.0</tycho-extras-version>
@@ -103,45 +73,85 @@
 		<mwe2.skip>false</mwe2.skip>
 		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
+		
+		<target-file-name>luna</target-file-name>
 	</properties>
 	
 	<profiles>
 		<profile>
-			<id>luna</id>
+			<id>build</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<target-file-name>luna</target-file-name>
-			</properties>
+			
+			<modules>
+				<module>../../devtools/it.xsemantics.targetplatform</module>
+				
+				<module>../../plugins/it.xsemantics.runtime</module>
+				<module>../../releng/it.xsemantics.releng.tools</module>
+				<module>../../plugins/it.xsemantics.dsl</module>
+				<module>../../plugins/it.xsemantics.dsl.ui</module>
+				<module>../../tests/it.xsemantics.dsl.tests</module>
+		
+				<!-- we need the following examples for testing -->
+				<module>../../examples/it.xsemantics.example.fj</module>
+				<module>../../examples/it.xsemantics.example.fj.ui</module>
+				<module>../../examples/it.xsemantics.example.fj.tests</module>
+				<module>../../examples/it.xsemantics.example.fjcached</module>
+				<module>../../examples/it.xsemantics.example.fjcached.ui</module>
+				<module>../../examples/it.xsemantics.example.fjcached.tests</module>
+		
+				<module>../../examples/it.xsemantics.example.expressions</module>
+				<module>../../examples/it.xsemantics.example.expressions.ui</module>
+				<module>../../examples/it.xsemantics.example.expressions.tests</module>
+				<module>../../examples/it.xsemantics.example.lambda</module>
+				<module>../../examples/it.xsemantics.example.lambda.ui</module>
+				<module>../../examples/it.xsemantics.example.lambda.tests</module>
+				<module>../../features/it.xsemantics.examples.feature</module>
+				<module>../../features/it.xsemantics.implemented.examples.feature</module>
+		
+				<module>../../doc/it.xsemantics.doc</module>
+				<module>../../features/it.xsemantics.doc.feature</module>
+		
+				<module>../../examples/it.xsemantics.ui.examples</module>
+		
+				<module>../../features/it.xsemantics.runtime.feature</module>
+				<module>../../features/it.xsemantics.feature</module>
+				<module>../../features/it.xsemantics.sdk</module>
+		
+				<module>../../tests/it.xsemantics.tests.pde.utils.luna</module>
+				<module>../../features/it.xsemantics.tests.feature</module>
+				<module>../../tests/it.xsemantics.tests.swtbot</module>
+		
+				<module>../../releng/it.xsemantics.repository</module>
+			</modules>
 		</profile>
+
 		<profile>
-			<id>xtext-nightly</id>
+			<id>maven-deploy</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<properties>
-				<target-file-name>xtext-nightly</target-file-name>
-			</properties>
-		</profile>
-		<profile>
-			<id>kepler</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<target-file-name>kepler</target-file-name>
-			</properties>
-		</profile>
-		<profile>
-			<id>local</id>
-			<properties>
-				<target-file-name>local</target-file-name>
-			</properties>
+
+			<modules>
+				<module>../../devtools/it.xsemantics.targetplatform</module>
+				<module>../../plugins/it.xsemantics.runtime</module>
+				<module>../../releng/it.xsemantics.releng.tools</module>
+				<module>../../plugins/it.xsemantics.dsl</module>
+			</modules>
+
 		</profile>
 	</profiles>
 
 	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.7</version>
+			</extension>
+		</extensions>
+	
 		<pluginManagement>
 			<plugins>
 				<!-- xtend-maven-plugin is in pluginManagement instead of in plugins
@@ -403,5 +413,19 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+	<distributionManagement>
+		<!-- before deploying maven artifacts to sourceforge we need to create a shell -->
+		<repository>
+			<id>xsemantics.sf.net</id>
+			<name>Xsemantics Releases</name>
+			<url>scp://shell.sourceforge.net/home/frs/project/xsemantics/maven/repo/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>xsemantics.sf.net</id>
+			<name>Xsemantics Snapshots</name>
+			<url>scp://shell.sourceforge.net/home/frs/project/xsemantics/maven/repo/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
