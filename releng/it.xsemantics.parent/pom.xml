@@ -16,6 +16,12 @@
 			</roles>
 		</developer>
 	</developers>
+
+	<scm>
+		<url>https://github.com/LorenzoBettini/xsemantics</url>
+		<developerConnection>scm:git:https://github.com/LorenzoBettini/xsemantics.git</developerConnection>
+		<connection>scm:git:git@github.com/LorenzoBettini/xsemantics.git</connection>
+	</scm>
 	
 	<properties>
 		<tycho-version>0.21.0</tycho-version>
@@ -355,6 +361,15 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
