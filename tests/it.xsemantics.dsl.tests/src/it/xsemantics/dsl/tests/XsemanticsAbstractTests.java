@@ -19,6 +19,8 @@ import org.junit.Before;
 public class XsemanticsAbstractTests extends AbstractXtextTests {
 
 	protected static final String TESTS_INPUT_FILES = "./tests_input_files/";
+	
+	protected static final String TESTS_INPUT_FILES_WITH_ERRORS = "./tests_input_files_with_errors/";
 
 	protected static final String EXPECTATION_DIR = "expectations/";
 

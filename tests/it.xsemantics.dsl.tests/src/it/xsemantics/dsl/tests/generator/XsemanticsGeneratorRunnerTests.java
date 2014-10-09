@@ -147,7 +147,7 @@ public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 
 	@Test
 	public void testOnANonValidInputFile() throws Exception {
-		runGeneratorOnInputFileAndExpectErrors(TESTS_INPUT_FILES
+		runGeneratorOnInputFileAndExpectErrors(TESTS_INPUT_FILES_WITH_ERRORS
 				+ "ecore_test_errors.xsemantics", RESULT_DIR + "foo/", true);
 	}
 
