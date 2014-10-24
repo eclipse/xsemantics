@@ -135,24 +135,30 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 	protected String outlineStringRepresentation(IOutlineNode node) {
 		StringBuffer buffer = new StringBuffer();
-		outlineStringRepresentation(node, buffer, 0);
+		// skip the root node
+		outlineRepresentChildren(node, buffer, 0);
 		return buffer.toString();
 	}
 
 	protected void outlineStringRepresentation(IOutlineNode node,
 			StringBuffer buffer, int tabs) {
+		outlineRepresentNode(node, buffer, tabs);
+		outlineRepresentChildren(node, buffer, tabs + TAB_INDENT);
+	}
+
+	private void outlineRepresentChildren(IOutlineNode node,
+			StringBuffer buffer, int tabs) {
 		for (IOutlineNode child : node.getChildren()) {
-			for (int i = 0; i < tabs; ++i) {
-				buffer.append(" ");
-			}
-			buffer.append(child.getText().toString() + "\n");
-			if (child.hasChildren()) {
-				for (IOutlineNode child2 : child.getChildren()) {
-					outlineStringRepresentation(child2, buffer, tabs
-							+ TAB_INDENT);
-				}
-			}
+			outlineStringRepresentation(child, buffer, tabs);
 		}
+	}
+
+	private void outlineRepresentNode(IOutlineNode node, StringBuffer buffer,
+			int tabs) {
+		for (int i = 0; i < tabs; ++i) {
+			buffer.append(" ");
+		}
+		buffer.append(node.getText().toString() + "\n");
 	}
 
 	protected void assertExpanded(TreeViewer treeViewer,

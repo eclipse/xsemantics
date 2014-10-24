@@ -47,14 +47,14 @@ from {}
 		)
 		outline.assertAllLabels(
 '''
-test
+my.test.System
   injectedField
   aux
+    aux (aux)
   type
+    TestAxiom (type)
   type2
-  aux (aux)
-  TestAxiom (type)
-  TestRule (type2)
+    TestRule (type2)
   TestCheckRule
 '''			
 		)
