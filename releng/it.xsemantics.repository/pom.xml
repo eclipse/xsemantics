@@ -20,8 +20,8 @@
 			</activation>
 			
 			<properties>
-				<updates.dir>xsemantics</updates.dir>
-				<site.label>Xsemantics Site</site.label>
+				<updates.dir>xsemantics-backports</updates.dir>
+				<site.label>Xsemantics Backports Site</site.label>
 			</properties>
 
 			<build>
