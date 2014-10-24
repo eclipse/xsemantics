@@ -352,28 +352,6 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	}
 
 	@Test
-	def void testSystemExtendsTestBaseSystem() {
-		parseSystemsAndAssertNoErrors(
-			'''
-			system it.xsemantics.dsl.tests.input.TestBaseSystem
-			''',
-			testFiles.testSystemExtendsTestBaseSystem
-		)
-	}
-
-	@Test
-	def void testSystemExtendsTestBaseSystem2() {
-		parseSystemsAndAssertNoErrors(
-			'''
-			system it.xsemantics.dsl.tests.input.TestBaseSystem
-			''',
-			testFiles.testSystemExtendsTestBaseSystem,
-			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-			testFiles.testSystemExtendsSystem2
-		)
-	}
-
-	@Test
 	def void testSystemExtendsExtendedTypeSystem() {
 		systemExtendsExtendedTypeSystem.assertNoErrors
 	}

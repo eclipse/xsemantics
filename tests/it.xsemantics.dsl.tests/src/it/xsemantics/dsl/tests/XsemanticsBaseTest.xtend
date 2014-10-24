@@ -35,10 +35,9 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.junit.Assert
 import org.junit.runner.RunWith
 import org.junit.runners.model.TestClass
-
-import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
@@ -71,6 +70,38 @@ abstract class XsemanticsBaseTest {
 		ts
 	}
 
+	/* s extends baseSystem2 which extends baseSystem */
+	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, 
+		CharSequence baseSystem2, CharSequence s
+	) {
+		val ts = baseSystem.parseWithBaseSystem(baseSystem2)
+		ts.assertNoErrors
+		ts.parseWithBaseSystem(s)
+	}
+
+	def parseWithBaseSystemAndAssertNoError(CharSequence baseSystem, CharSequence s) {
+		val base = parse(baseSystem)
+		base.assertNoErrors
+		val ts = base.parseWithBaseSystem(s)
+		ts.assertNoErrors
+		ts
+	}
+
+	def parseWithBaseSystemAndAssertNoError(XsemanticsSystem baseSystem, CharSequence s) {
+		val ts = baseSystem.parseWithBaseSystem(s)
+		ts.assertNoErrors
+		ts
+	}
+
+	def parseWithBaseSystem(CharSequence baseSystem, CharSequence s) {
+		val base = parse(baseSystem)
+		base.parseWithBaseSystem(s)
+	}
+
+	def parseWithBaseSystem(XsemanticsSystem baseSystem, CharSequence s) {
+		parser.parse(s, baseSystem.eResource.resourceSet).xsemanticsSystem
+	}
+	
 	def parse(CharSequence s) {
 		parser.parse(s).xsemanticsSystem
 	}
@@ -93,7 +124,7 @@ abstract class XsemanticsBaseTest {
 	
 	def getRule(XsemanticsSystem ts, int index) {
 		val rules = ts.getRules
-		assertTrue("no rule for index " + index + ", only " + rules.size,
+		Assert::assertTrue("no rule for index " + index + ", only " + rules.size,
 			rules.size > index
 		)
 		rules.get(index)
@@ -109,7 +140,7 @@ abstract class XsemanticsBaseTest {
 	
 	def getCheckRule(XsemanticsSystem ts, int index) {
 		val rules = ts.getCheckrules
-		assertTrue("no rule for index " + index + ", only " + rules.size,
+		Assert::assertTrue("no rule for index " + index + ", only " + rules.size,
 			rules.size > index
 		)
 		rules.get(index)
@@ -196,12 +227,12 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def assertIsInstance(Class<?> superClass, Object o) {
-		assertTrue(o.getClass.name + " is not an instance of " + superClass.name,
+		Assert::assertTrue(o.getClass.name + " is not an instance of " + superClass.name,
 			superClass.isAssignableFrom(o.getClass))
 	}
 	
 	def assertOrExpression(XExpression exp, int branches) {
-		assertEquals(branches, exp.orExpression.branches.size)
+		Assert::assertEquals(branches, exp.orExpression.branches.size)
 	}
 	
 	def getOrExpression(XExpression exp) {
@@ -234,70 +265,59 @@ abstract class XsemanticsBaseTest {
 	}
 	
 	def assertEqualsStrings(Object expected, Object actual) {
-		assertEquals(
+		Assert::assertEquals(
 			("" + expected).replaceAll("\r", ""), 
 			("" + actual).replaceAll("\r", "")
 		)
 	}
 
 	def systemExtendsSystemWithJudgments() {
-		parseSystemsAndAssertNoErrors(
-			testFiles.testJudgmentDescriptions,
-			testFiles.testSystemExtendsSystemWithJudgments
-		)
+		testFiles.testJudgmentDescriptions.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgments)
 	}
 
 	def systemExtendsSystemWithAdditionalJudgment() {
-		parseSystemsAndAssertNoErrors(
-			testFiles.testJudgmentDescriptionsWithErrorSpecification,
-			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore
-		)
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore)
 	}
 
 	def systemExtendsExtendedTypeSystem() {
-		parseSystemsAndAssertNoErrors(
-			testFiles.testJudgmentDescriptionsWithErrorSpecification,
-			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-			testFiles.testSystemExtendsExtendedTypeSystem
-		)
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			)
 	}
 
 	def systemExtendsSystemWithRuleOverride() {
-		#[
-			testFiles.testJudgmentDescriptionsWithErrorSpecification,
-			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-			testFiles.testSystemExtendsExtendedTypeSystem,
-			testFiles.testRuleOverride
-		]
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			).
+			parseWithBaseSystemAndAssertNoError(
+				testFiles.testRuleOverride
+			)
 	}
 
 	def systemExtendsSystemWithJudgmentOverride() {
-		withBaseSystems(testFiles.testOverrideJudgment)
+		loadBaseSystems.
+			parseWithBaseSystemAndAssertNoError(
+				testFiles.testOverrideJudgment
+			)
 	}
 
-	def withBaseSystems(CharSequence input) {
-		#[
-			testFiles.testJudgmentDescriptionsWithErrorSpecification,
-			testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
-			testFiles.testSystemExtendsExtendedTypeSystem,
-			input
-		]
-	}
-
-	def parseWithBaseSystems(CharSequence input) {
-		withBaseSystems(input).parseSystems
-	}
-
-	/**
-	 * It returns the system corresponding to the last input in the list.
-	 */
-	def parseSystems(CharSequence... inputs) {
-		val rs = resourceSetProvider.get
-		var XsemanticsSystem current = null
-		for (input : inputs) {
-			current = parser.parse(input, rs).xsemanticsSystem
-		}
-		return current
+	def loadBaseSystems() {
+		testFiles.testJudgmentDescriptionsWithErrorSpecification.
+			parseWithBaseSystemAndAssertNoError
+			(
+				testFiles.testSystemExtendsSystemWithJudgmentsReferringToEcore,
+				testFiles.testSystemExtendsExtendedTypeSystem
+			)
 	}
 
 	/**
