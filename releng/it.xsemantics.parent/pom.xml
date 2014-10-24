@@ -32,7 +32,8 @@
 		<jacoco-version>0.5.8.201207111220</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.7.2</xtext.version>
+		<xtext.version>2.6.2</xtext.version>
+		<xcore.version>1.2.0</xcore.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
 		
@@ -145,7 +146,6 @@
 				<module>../../releng/it.xsemantics.releng.tools</module>
 				<module>../../plugins/it.xsemantics.dsl</module>
 			</modules>
-
 		</profile>
 	</profiles>
 
@@ -415,17 +415,6 @@
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-
-		<pluginRepository>
-			<id>sonatype_snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
 	
