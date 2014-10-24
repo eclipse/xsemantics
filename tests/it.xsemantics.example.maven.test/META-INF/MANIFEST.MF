@@ -6,7 +6,6 @@ Bundle-Version: 1.6.0.qualifier
 Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  it.xsemantics.runtime
