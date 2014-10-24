@@ -20,7 +20,8 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XInstanceOfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XUnaryOperation
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 class XsemanticsTypeSystem {
@@ -157,11 +158,9 @@ class XsemanticsTypeSystem {
 	}
 	
 	def toLightweightTypeReference(JvmTypeReference typeRef, EObject context) {
-		return newTypeReferenceOwner(context).toLightweightTypeReference(typeRef)
-	}
-
-	def protected newTypeReferenceOwner(EObject context) {
-		return new StandardTypeReferenceOwner(services, context);
+		val converter = new OwnedConverter
+			(new StandardTypeReferenceOwner(services, context))
+		converter.toLightweightReference(typeRef)
 	}
 
 	def isPredicate(JudgmentDescription j) {
