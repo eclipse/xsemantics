@@ -9,15 +9,104 @@ import it.xsemantics.dsl.xsemantics.CheckRule;
 import it.xsemantics.dsl.xsemantics.Injected;
 import it.xsemantics.dsl.xsemantics.JudgmentDescription;
 import it.xsemantics.dsl.xsemantics.Rule;
+import it.xsemantics.dsl.xsemantics.XsemanticsFile;
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.util.ITextRegion;
 /**
  * customization of the default outline structure
  * 
  */
 public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
+	
+	protected void _createChildren(DocumentRootNode parentNode, XsemanticsFile it) {
+		// skip useless toplevel node and imports - start tree with node for "system" 
+		createChildren(parentNode, it.getXsemanticsSystem());
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, XsemanticsSystem it) {
+		// skip imports
+		// injections
+		createNodesFor(parentNode, it.getInjections());
+		// auxiliary descriptions
+		createNodesFor(parentNode, it.getAuxiliaryDescriptions());
+		// judgment descriptions
+		createNodesFor(parentNode, it.getJudgmentDescriptions());
+		// skip auxiliary functions
+		// skip rules
+		// checkrules
+		createNodesFor(parentNode, it.getCheckrules());
+	}
+	
+	private <T extends EObject> void createNodesFor(IOutlineNode parentNode, Iterable<T> items){
+		for(T item: items){
+			createNode(parentNode, item);
+		}
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, AuxiliaryDescription it) {
+		XsemanticsSystem xsemanticsSystem = EcoreUtil2.getContainerOfType(it, XsemanticsSystem.class);
+		for(AuxiliaryFunction auxiliaryFunction: xsemanticsSystem.getAuxiliaryFunctions()){
+			if( auxiliaryFunction.get_auxiliaryDescription() == it ){
+				createNode(parentNode, auxiliaryFunction);
+			}
+		}
+	}
 
+	protected void _createChildren(IOutlineNode parentNode, JudgmentDescription it) {
+		XsemanticsSystem xsemanticsSystem = EcoreUtil2.getContainerOfType(it, XsemanticsSystem.class);
+		for(Rule rule: xsemanticsSystem.getRules()){
+			if( rule.get_judgment() == it ){
+				createNode(parentNode, rule);
+			}
+		}
+	}
+	
+	protected void _createNode(IOutlineNode parentNode, JudgmentDescription it){
+		EObjectNode node = createEObjectNode(parentNode, it);
+		
+		// Merge all text regions from the judgement and all relevant rules to support editor to outline jumps.
+		ITextRegion region = node.getFullTextRegion();
+		XsemanticsSystem xsemanticsSystem = EcoreUtil2.getContainerOfType(it, XsemanticsSystem.class);
+		for(Rule rule: xsemanticsSystem.getRules()){
+			if( rule.get_judgment() == it ){
+				ICompositeNode parserNode = NodeModelUtils.getNode(rule);
+				if (parserNode != null){
+					region = region.merge(parserNode.getTextRegion());
+				}
+			}
+		}
+		
+		node.setTextRegion(region);
+	}
+	
+	protected void _createNode(IOutlineNode parentNode, AuxiliaryDescription it){
+		EObjectNode node = createEObjectNode(parentNode, it);
+		
+		// Merge all text regions from the auxiliary descriptions and all relevant functions to support editor to outline jumps.
+		ITextRegion region = node.getFullTextRegion();
+		XsemanticsSystem xsemanticsSystem = EcoreUtil2.getContainerOfType(it, XsemanticsSystem.class);
+		for(AuxiliaryFunction auxiliaryFunction: xsemanticsSystem.getAuxiliaryFunctions()){
+			if( auxiliaryFunction.get_auxiliaryDescription() == it ){
+				ICompositeNode parserNode = NodeModelUtils.getNode(auxiliaryFunction);
+				if (parserNode != null){
+					region = region.merge(parserNode.getTextRegion());
+				}
+			}
+		}
+		
+		node.setTextRegion(region);
+	}
+	
+	
 	protected boolean _isLeaf(Rule rule) {
 		return true;
 	}
@@ -27,11 +116,11 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected boolean _isLeaf(JudgmentDescription desc) {
-		return true;
+		return false;
 	}
 
 	protected boolean _isLeaf(AuxiliaryDescription desc) {
-		return true;
+		return false;
 	}
 
 	protected boolean _isLeaf(AuxiliaryFunction aux) {
