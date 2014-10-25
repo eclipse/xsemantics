@@ -95,7 +95,7 @@ axiom NoJudgmentDesc G ||- Object o
 		)
 		outline.assertAllLabels(
 '''
-test
+my.test.System
   injectedField
   aux
   type

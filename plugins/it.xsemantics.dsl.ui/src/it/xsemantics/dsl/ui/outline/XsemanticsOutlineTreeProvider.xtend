@@ -33,15 +33,18 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	def protected void _createChildren(IOutlineNode parentNode, XsemanticsSystem it) {
 		// skip imports
 		// injections
-		createNodesFor(parentNode, it.getInjections())
+		createNodesFor(parentNode, injections)
 		// auxiliary descriptions
 		createGroupedNodesForAuxliary(parentNode, it)
 		// judgment descriptions
 		createGroupedNodesForJudgements(parentNode, it)
-		// skip auxiliary functions
-		// skip rules
+		// skip auxiliary functions and rules belonging to a description
 		// checkrules
-		createNodesFor(parentNode, it.getCheckrules())
+		createNodesFor(parentNode, checkrules)
+		// nodes for auxiliary functions and rules that do not have a description
+		// (of course this will represent errors in the input program)
+		createNodesFor(parentNode, auxiliaryFunctions.filter[get_auxiliaryDescription == null])
+		createNodesFor(parentNode, rules.filter[get_judgment == null])
 	}
 	
 	def private <T extends EObject> void createNodesFor(IOutlineNode parentNode, Iterable<T> items){
@@ -53,14 +56,14 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	def private void createGroupedNodesForAuxliary(IOutlineNode parentNode, XsemanticsSystem it){
 		val rootNodes = newLinkedHashSet
 		rootNodes.addAll(auxiliaryDescriptions)		// all "local" descriptions
-		rootNodes.addAll(auxiliaryFunctions.map[get_auxiliaryDescription])	// all descriptions of superSystems which have functions in this file
+		rootNodes.addAll(auxiliaryFunctions.map[get_auxiliaryDescription].filterNull)	// all descriptions of superSystems which have functions in this file
 		createNodesFor(parentNode, rootNodes)
 	}
 	
 	def private void createGroupedNodesForJudgements(IOutlineNode parentNode, XsemanticsSystem it){
 		val rootNodes = newLinkedHashSet
 		rootNodes.addAll(judgmentDescriptions)		// all "local" descriptions
-		rootNodes.addAll(rules.map[get_judgment])	// all descriptions of superSystems which have rules in this file
+		rootNodes.addAll(rules.map[get_judgment].filterNull)	// all descriptions of superSystems which have rules in this file
 		createNodesFor(parentNode, rootNodes)
 	}
 	
