@@ -8,11 +8,17 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fullBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaProject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -21,6 +27,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
@@ -66,6 +73,14 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		comparer = new IOutlineNodeComparer.Default();
+		createTestJavaProject();
+	}
+
+	/**
+	 * This creates the Java project that will be used for the tests.
+	 * @throws CoreException
+	 */
+	protected void createTestJavaProject() throws CoreException {
 		IJavaProject javaProject = createJavaProject(TEST_PROJECT);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
 	}
@@ -86,9 +101,12 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	}
 
 	protected TreeViewer getOutlineTreeViewer(CharSequence modelAsText) throws Exception {
-		file = IResourcesSetupUtil.createFile(TEST_PROJECT + "/test."
-				+ fileExtension, modelAsText.toString());
+		file = createFileInTestProject("test", modelAsText);
 		editor = openEditor(file);
+		return getOutlineTreeViewer();
+	}
+
+	protected TreeViewer getOutlineTreeViewer() throws PartInitException {
 		document = editor.getDocument();
 		outlineView = editor.getEditorSite().getPage()
 				.showView("org.eclipse.ui.views.ContentOutline");
@@ -102,6 +120,55 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 		assertTrue(treeViewer.getInput() instanceof IOutlineNode);
 		return treeViewer;
+	}
+
+	protected TreeViewer getOutlineTreeViewerAfterEditorContentsReplacement(CharSequence modelAsText) throws Exception {
+		file = createFileInTestProject("test2", "");
+		editor = openEditor(file);
+		
+		document = editor.getDocument();
+		outlineView = editor.getEditorSite().getPage()
+				.showView("org.eclipse.ui.views.ContentOutline");
+		executeAsyncDisplayJobs();
+		Object adapter = editor.getAdapter(IContentOutlinePage.class);
+		assertTrue(adapter instanceof OutlinePage);
+		outlinePage = (OutlinePage) adapter;
+		TreeViewer treeViewer = outlinePage.getTreeViewer();
+
+		awaitForTreeViewer(treeViewer);
+		
+		editor.getDocument().set(modelAsText.toString());
+		editor.doSave(monitor());
+		fullBuild();
+		waitForAutoBuild();
+		executeAsyncDisplayJobs();
+		
+		document = editor.getDocument();
+		outlineView = editor.getEditorSite().getPage()
+				.showView("org.eclipse.ui.views.ContentOutline");
+		executeAsyncDisplayJobs();
+		adapter = editor.getAdapter(IContentOutlinePage.class);
+		assertTrue(adapter instanceof OutlinePage);
+		outlinePage = (OutlinePage) adapter;
+		treeViewer = outlinePage.getTreeViewer();
+
+		awaitForTreeViewer(treeViewer);
+
+		return treeViewer;
+	}
+
+	protected IFile createFileInTestProject(String fileNameWithoutExtension, CharSequence modelAsText)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+		return IResourcesSetupUtil.createFile(TEST_PROJECT + "/src/" + fileNameWithoutExtension + "."
+				+ fileExtension, modelAsText.toString());
+	}
+
+	protected IFile getFileInTestProject(String fileNameWithoutExtension)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+		return IResourcesSetupUtil.root().getFile(new Path(TEST_PROJECT + "/src/" + fileNameWithoutExtension + "."
+				+ fileExtension));
 	}
 
 	protected IOutlineNode getOutlineRootNode(TreeViewer treeViewer) {
