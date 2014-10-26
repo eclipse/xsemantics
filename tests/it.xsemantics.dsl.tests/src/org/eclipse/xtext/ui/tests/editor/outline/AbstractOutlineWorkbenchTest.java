@@ -8,11 +8,17 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fullBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaProject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -21,16 +27,19 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -66,6 +75,14 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		comparer = new IOutlineNodeComparer.Default();
+		createTestJavaProject();
+	}
+
+	/**
+	 * This creates the Java project that will be used for the tests.
+	 * @throws CoreException
+	 */
+	protected void createTestJavaProject() throws CoreException {
 		IJavaProject javaProject = createJavaProject(TEST_PROJECT);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
 	}
@@ -86,9 +103,12 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	}
 
 	protected TreeViewer getOutlineTreeViewer(CharSequence modelAsText) throws Exception {
-		file = IResourcesSetupUtil.createFile(TEST_PROJECT + "/test."
-				+ fileExtension, modelAsText.toString());
+		file = createFileInTestProject("test", modelAsText);
 		editor = openEditor(file);
+		return getOutlineTreeViewer();
+	}
+
+	protected TreeViewer getOutlineTreeViewer() throws PartInitException {
 		document = editor.getDocument();
 		outlineView = editor.getEditorSite().getPage()
 				.showView("org.eclipse.ui.views.ContentOutline");
@@ -102,6 +122,61 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 		assertTrue(treeViewer.getInput() instanceof IOutlineNode);
 		return treeViewer;
+	}
+
+	protected TreeViewer getOutlineTreeViewerAfterEditorContentsReplacement(final CharSequence modelAsText) throws Exception {
+		file = createFileInTestProject("test2", "");
+		editor = openEditor(file);
+		
+		document = editor.getDocument();
+		outlineView = editor.getEditorSite().getPage()
+				.showView("org.eclipse.ui.views.ContentOutline");
+		executeAsyncDisplayJobs();
+		Object adapter = editor.getAdapter(IContentOutlinePage.class);
+		assertTrue(adapter instanceof OutlinePage);
+		outlinePage = (OutlinePage) adapter;
+		TreeViewer treeViewer = outlinePage.getTreeViewer();
+
+		awaitForTreeViewer(treeViewer);
+		
+		editor.getDocument().modify(new IUnitOfWork<Object, XtextResource>() {
+			public Object exec(XtextResource state) throws Exception {
+				editor.getDocument().set(modelAsText.toString());
+				return null;
+			}
+		});
+		//editor.getDocument().set(modelAsText.toString());
+		editor.doSave(monitor());
+		fullBuild();
+		waitForAutoBuild();
+		executeAsyncDisplayJobs();
+		
+		document = editor.getDocument();
+		outlineView = editor.getEditorSite().getPage()
+				.showView("org.eclipse.ui.views.ContentOutline");
+		executeAsyncDisplayJobs();
+		adapter = editor.getAdapter(IContentOutlinePage.class);
+		assertTrue(adapter instanceof OutlinePage);
+		outlinePage = (OutlinePage) adapter;
+		treeViewer = outlinePage.getTreeViewer();
+
+		awaitForTreeViewer(treeViewer);
+
+		return treeViewer;
+	}
+
+	protected IFile createFileInTestProject(String fileNameWithoutExtension, CharSequence modelAsText)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+		return IResourcesSetupUtil.createFile(TEST_PROJECT + "/src/" + fileNameWithoutExtension + "."
+				+ fileExtension, modelAsText.toString());
+	}
+
+	protected IFile getFileInTestProject(String fileNameWithoutExtension)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+		return IResourcesSetupUtil.root().getFile(new Path(TEST_PROJECT + "/src/" + fileNameWithoutExtension + "."
+				+ fileExtension));
 	}
 
 	protected IOutlineNode getOutlineRootNode(TreeViewer treeViewer) {
@@ -135,24 +210,30 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 	protected String outlineStringRepresentation(IOutlineNode node) {
 		StringBuffer buffer = new StringBuffer();
-		outlineStringRepresentation(node, buffer, 0);
+		// skip the root node
+		outlineRepresentChildren(node, buffer, 0);
 		return buffer.toString();
 	}
 
 	protected void outlineStringRepresentation(IOutlineNode node,
 			StringBuffer buffer, int tabs) {
+		outlineRepresentNode(node, buffer, tabs);
+		outlineRepresentChildren(node, buffer, tabs + TAB_INDENT);
+	}
+
+	private void outlineRepresentChildren(IOutlineNode node,
+			StringBuffer buffer, int tabs) {
 		for (IOutlineNode child : node.getChildren()) {
-			for (int i = 0; i < tabs; ++i) {
-				buffer.append(" ");
-			}
-			buffer.append(child.getText().toString() + "\n");
-			if (child.hasChildren()) {
-				for (IOutlineNode child2 : child.getChildren()) {
-					outlineStringRepresentation(child2, buffer, tabs
-							+ TAB_INDENT);
-				}
-			}
+			outlineStringRepresentation(child, buffer, tabs);
 		}
+	}
+
+	private void outlineRepresentNode(IOutlineNode node, StringBuffer buffer,
+			int tabs) {
+		for (int i = 0; i < tabs; ++i) {
+			buffer.append(" ");
+		}
+		buffer.append(node.getText().toString() + "\n");
 	}
 
 	protected void assertExpanded(TreeViewer treeViewer,
