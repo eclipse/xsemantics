@@ -170,8 +170,10 @@ my.test.System
 		// SEE THE FOLLOWING TEST, that simulates editing of the contents of the editor.
 	}
 
-	@Test
+	@Ignore("Unreliable Test") @Test
 	def void testOutlineWithDescriptionInAnotherResourceOnEditorModification() {
+		// Unfortunately this test has problems with synchronizations...
+		// it does not work reliably
 		createFileInTestProject("a",
 '''
 system my.test.System1
