@@ -4,7 +4,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.caching.XsemanticsCache"/>
-                <message_argument value="it.xsemantics.runtime_1.6.0"/>
+                <message_argument value="it.xsemantics.runtime_1.6.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -12,7 +12,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.caching.XsemanticsCacheListener"/>
-                <message_argument value="it.xsemantics.runtime_1.6.0"/>
+                <message_argument value="it.xsemantics.runtime_1.6.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -20,7 +20,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.caching.XsemanticsCachedData"/>
-                <message_argument value="it.xsemantics.runtime_1.6.0"/>
+                <message_argument value="it.xsemantics.runtime_1.6.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -28,7 +28,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.caching.XsemanticsProvider"/>
-                <message_argument value="it.xsemantics.runtime_1.6.0"/>
+                <message_argument value="it.xsemantics.runtime_1.6.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -36,7 +36,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.util.TraceUtils"/>
-                <message_argument value="it.xsemantics.runtime_1.6.0"/>
+                <message_argument value="it.xsemantics.runtime_1.6.1"/>
             </message_arguments>
         </filter>
     </resource>
