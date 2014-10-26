@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
-import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode
 import org.eclipse.xtext.util.ITextRegion
 
 /**
@@ -145,19 +144,7 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 	}
 	
-	def private dispatch XsemanticsSystem getXsemanticsSystem(IOutlineNode it){
-		null
-	}
-	
-	def private dispatch XsemanticsSystem getXsemanticsSystem(DocumentRootNode it){
-		throw new RuntimeException("due to a bug in Xtext readOnly on DocumentRootNode will always return null.")
-//		readOnly[ eo | 
-//			val xsFile = eo as XsemanticsFile
-//			xsFile.xsemanticsSystem
-//		]
-	}
-	
-	def private dispatch XsemanticsSystem getXsemanticsSystem(EObjectNode it){
+	def private XsemanticsSystem getXsemanticsSystem(IOutlineNode it){
 		readOnly[ eo | 
 			EcoreUtil2.getContainerOfType(eo, XsemanticsSystem)
 		]
