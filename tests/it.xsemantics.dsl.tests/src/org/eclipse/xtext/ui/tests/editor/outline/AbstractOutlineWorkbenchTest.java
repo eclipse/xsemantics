@@ -8,8 +8,8 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fullBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaProject;
 
@@ -32,12 +32,14 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -122,7 +124,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		return treeViewer;
 	}
 
-	protected TreeViewer getOutlineTreeViewerAfterEditorContentsReplacement(CharSequence modelAsText) throws Exception {
+	protected TreeViewer getOutlineTreeViewerAfterEditorContentsReplacement(final CharSequence modelAsText) throws Exception {
 		file = createFileInTestProject("test2", "");
 		editor = openEditor(file);
 		
@@ -137,7 +139,13 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 		awaitForTreeViewer(treeViewer);
 		
-		editor.getDocument().set(modelAsText.toString());
+		editor.getDocument().modify(new IUnitOfWork<Object, XtextResource>() {
+			public Object exec(XtextResource state) throws Exception {
+				editor.getDocument().set(modelAsText.toString());
+				return null;
+			}
+		});
+		//editor.getDocument().set(modelAsText.toString());
 		editor.doSave(monitor());
 		fullBuild();
 		waitForAutoBuild();
