@@ -9,6 +9,8 @@ var file.extensions = "xsemantics"
 var projectName = "it.xsemantics.dsl"
 var runtimeProject = "../${projectName}"
 var testProject = "${runtimeProject}/../../tests/${projectName}.tests"
+var generateXtendStub = true
+var encoding = "UTF-8"
 
 Workflow {
     bean = StandaloneSetup {
@@ -48,6 +50,7 @@ Workflow {
         pathTestProject = "${testProject}"
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
+        encoding = encoding
         language = {
         	//loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
         	// switch to xcore
@@ -117,8 +120,8 @@ Workflow {
             fragment = labeling.LabelProviderFragment {}
 
             // outline API
-            fragment = outline.OutlineTreeProviderFragment {}
-            fragment = outline.QuickOutlineFragment {}
+            fragment = outline.OutlineTreeProviderFragment auto-inject {}
+            fragment = outline.QuickOutlineFragment auto-inject {}
 
             // quickfix API
             fragment = quickfix.QuickfixProviderFragment {}

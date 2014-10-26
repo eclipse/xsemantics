@@ -15,7 +15,7 @@ class PluginProjectHelper {
 
 	def IJavaProject createJavaPluginProject(String projectName, List<String> requiredBundles) {
 		projectFactory.setProjectName(projectName);
-		projectFactory.addFolders(newArrayList("src"));
+		projectFactory.addFolders(newArrayList("src", "xsemantics-gen"));
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 
 			"org.eclipse.pde.ManifestBuilder",
