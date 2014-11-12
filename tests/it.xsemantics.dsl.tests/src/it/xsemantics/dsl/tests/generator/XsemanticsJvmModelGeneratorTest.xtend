@@ -728,8 +728,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	return checkEObjectInternal(_trace_, obj);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckEObject) {
+    	return resultForFailure(_e_CheckEObject);
     }
   }
   
@@ -1744,8 +1744,8 @@ public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
   public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	return checkEObjectInternal(_trace_, o);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckEObject) {
+    	return resultForFailure(_e_CheckEObject);
     }
   }
   
@@ -1937,8 +1937,8 @@ public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
   public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	return checkEObjectInternal(_trace_, o);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckEObject) {
+    	return resultForFailure(_e_CheckEObject);
     }
   }
   
@@ -3453,8 +3453,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkEObject(final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	return checkEObjectInternal(_trace_, o);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckEObject) {
+    	return resultForFailure(_e_CheckEObject);
     }
   }
   
@@ -4151,8 +4151,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> eObjectEClassCheck(final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	return eObjectEClassCheckInternal(_trace_, obj);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_EObjectEClassCheck) {
+    	return resultForFailure(_e_EObjectEClassCheck);
     }
   }
   

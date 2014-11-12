@@ -180,8 +180,8 @@ class XsemanticsGeneratorExtensions {
 
 	def ruleApplicationSubtraceName() '''_subtrace_'''
 
-	def exceptionVarName(Description desc) {
-		'''_e_«desc.name»'''
+	def exceptionVarName(UniqueByName e) {
+		'''_e_«e.name»'''
 	}
 
 	def String exceptionVarName(Rule rule) {

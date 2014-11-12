@@ -178,8 +178,8 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkMainInternal(_trace_, program);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMain) {
+    	return resultForFailure(_e_CheckMain);
     }
   }
   
@@ -210,8 +210,8 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) {
     try {
     	return checkClassOkInternal(_trace_, clazz);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckClassOk) {
+    	return resultForFailure(_e_CheckClassOk);
     }
   }
   

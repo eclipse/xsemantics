@@ -71,8 +71,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkEClass(final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	return checkEClassInternal(_trace_, eClass);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckEClass) {
+    	return resultForFailure(_e_CheckEClass);
     }
   }
   
