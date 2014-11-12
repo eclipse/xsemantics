@@ -459,8 +459,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkMethodBody(final RuleApplicationTrace _trace_, final Method method) {
     try {
     	return checkMethodBodyInternal(_trace_, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMethodBody) {
+    	return resultForFailure(_e_CheckMethodBody);
     }
   }
   
@@ -482,8 +482,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkField(final RuleApplicationTrace _trace_, final Field field) {
     try {
     	return checkFieldInternal(_trace_, field);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckField) {
+    	return resultForFailure(_e_CheckField);
     }
   }
   
@@ -522,8 +522,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkMethodOverride(final RuleApplicationTrace _trace_, final Method method) {
     try {
     	return checkMethodOverrideInternal(_trace_, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMethodOverride) {
+    	return resultForFailure(_e_CheckMethodOverride);
     }
   }
   
@@ -559,8 +559,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkClassHierachyNotCyclic(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) {
     try {
     	return checkClassHierachyNotCyclicInternal(_trace_, cl);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckClassHierachyNotCyclic) {
+    	return resultForFailure(_e_CheckClassHierachyNotCyclic);
     }
   }
   
@@ -596,8 +596,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkMainInternal(_trace_, program);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMain) {
+    	return resultForFailure(_e_CheckMain);
     }
   }
   
