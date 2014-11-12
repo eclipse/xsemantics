@@ -334,6 +334,15 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(OrExpression orExpression,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
+		
+		if (bracesAreAddedByOuterStructure(orExpression) || !b.hasObject(previousFailureVarName)) {
+			// we must declare it only once per Java scope
+			b.newLine;
+			b.declareVariable(
+					orExpression, previousFailureVarName);
+			b.append(orExpression.ruleFailedExceptionType().getType())
+			b.append(" " + previousFailureVarName + " = null;");
+		}
 
 		val left = orExpression.getBranches().get(0);
 		val right = orExpression.getBranches().get(1);
@@ -633,6 +642,10 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(declareExceptionVariable);
 		b.append(") {");
 		b.increaseIndentation();
+		b.newLine();
+		b.append(previousFailureVarName + " = extractRuleFailedException("
+			+ declareExceptionVariable + ");"
+		);
 		return declareExceptionVariable;
 	}
 

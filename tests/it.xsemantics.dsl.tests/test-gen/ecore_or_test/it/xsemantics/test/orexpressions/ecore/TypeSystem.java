@@ -115,6 +115,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' */
+    RuleFailedException previousFailure = null;
     try {
       String _name = eClass.getName();
       boolean _equals = Objects.equal(_name, "foo");
@@ -123,6 +124,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
       }
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       EClass _eClass = object.eClass();
       String _name_1 = _eClass.getName();
       boolean _equals_1 = Objects.equal(_name_1, "bar");
@@ -156,6 +158,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
+    RuleFailedException previousFailure = null;
     try {
       String _name = eClass.getName();
       boolean _equals = Objects.equal(_name, "foo");
@@ -164,6 +167,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         sneakyThrowRuleFailedException("eClass.name == \'foo\'");
       }
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
       try {
         EClass _eClass = object.eClass();
@@ -174,6 +178,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
           sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
         }
       } catch (Exception e_1) {
+        previousFailure = extractRuleFailedException(e_1);
         final String foo = "foo";
         EClass _eClass_1 = object.eClass();
         String _name_2 = _eClass_1.getName();

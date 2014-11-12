@@ -917,6 +917,33 @@ class XsemanticsTestFiles {
 		object.eClass.name == 'bar'}
 	}
 	'''
+
+	def testSeveralOrExpressions() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		val className = eClass.name
+		if (className.isEmpty()) {
+			{className == 'foo'}
+			or
+			{className == 'bar'}
+			or
+			{className == 'foobar'}
+			
+			{className == 'foo1'}
+			or
+			{className == 'bar1'}
+			or
+			{className == 'foobar1'}
+		} else {
+			{className == 'foo1'}
+			or
+			{className == 'bar1'}
+		}
+	}
+	'''
 	
 	def testOrExpressionWithRuleInvocations() '''
 	«testJudgmentDescriptionsReferringToEcore»
