@@ -17,6 +17,11 @@ import org.eclipse.xtext.util.Wrapper
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.Result
 
+/**
+ * These tests also run the generated (and on the fly compiled) Java code
+ * 
+ * @author Lorenzo Bettini
+ */
 @InjectWith(typeof(XsemanticsInjectorProviderCustomForPluginTest))
 @RunWith(typeof(XtextRunner))
 class XsemanticsCompilerTest extends XsemanticsBaseTest {
@@ -46,7 +51,8 @@ from {
 	res = list.head
 }
 '''.invokeTypeAndExpect(
-'''Type: [] |- [first, second] : first'''
+'''Type: [] |- [first, second] : first''',
+newArrayList("first", "second")
 )
 	}
 
@@ -82,7 +88,8 @@ axiom TypeString G |- String s : s
 TypeList: [] |- [first, second] : [first, second]
  TypeString: [] |- first : first
  TypeString: [] |- second : second
-'''
+''',
+newArrayList("first", "second")
 )
 	}
 
@@ -118,21 +125,52 @@ axiom TypeString G |- String s
 '''
 failed: TypeList: [] |- [first, 0]
  cannot find a rule for |- 0
-'''
+''',
+newArrayList("first", 0)
 )
 	}
 
-	def private invokeTypeAndExpect(CharSequence input, CharSequence expectedTrace) {
+	@Test
+	def testUseOfPreviousFailure() {
+'''
+import java.util.List
+
+system my.test.ruleinvokations.System
+			
+judgments {
+	type |- Object o : output Object
+}
+
+rule Type G |- List<String> list : Object res
+from {
+	{
+		list.size > 3
+	}
+	or
+	{
+		fail
+			error "there was a failure caused by: " +
+				previousFailure.message
+	}
+}
+'''.invokeTypeAndExpectFailure(
+'''failed: Type: [] |- [first, second] : Object
+ there was a failure caused by: failed: list.size > 3''',
+newArrayList("first", "second")
+)
+	}
+
+	def private invokeTypeAndExpect(CharSequence input, CharSequence expectedTrace, Object args) {
 		val system = input.instantiateSystem
 		val trace = new RuleApplicationTrace
-		system.invoke("type", null, trace, newArrayList("first", "second"))
+		system.invoke("type", null, trace, args)
 		expectedTrace.toString.trim.assertEqualsStrings(trace.traceAsString)
 	}
 
-	def private invokeTypeAndExpectFailure(CharSequence input, CharSequence expectedTrace) {
+	def private invokeTypeAndExpectFailure(CharSequence input, CharSequence expectedTrace, Object args) {
 		val system = input.instantiateSystem
 		val trace = new RuleApplicationTrace
-		val result = system.invoke("type", null, trace, newArrayList("first", 0)) as Result<Object>
+		val result = system.invoke("type", null, trace, args) as Result<Object>
 		expectedTrace.toString.trim.assertEqualsStrings(result.ruleFailedException.failureTraceAsString)
 	}
 
