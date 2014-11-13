@@ -160,12 +160,14 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   protected Result<Type> applyRuleStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     Type resultType = null; // output parameter
     /* { val expected = env(G, 'expected', Type) G |~ str |> expected resultType = expected } or resultType = ExpressionsFactory::eINSTANCE.createStringType */
+    RuleFailedException previousFailure = null;
     try {
       final Type expected = this.<Type>env(G, "expected", Type.class);
       /* G |~ str |> expected */
       coerceInternal(G, _trace_, str, expected);
       resultType = expected;
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
       resultType = _createStringType;
     }
@@ -304,6 +306,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     rightType = (Type) result_1.getFirst();
     
     /* { val expected = env(G, 'expected', Type) G |~ plus.left |> expected G |~ plus.right |> expected type = expected } or { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
+    RuleFailedException previousFailure = null;
     try {
       final Type expected = this.<Type>env(G, "expected", Type.class);
       /* G |~ plus.left |> expected */
@@ -314,6 +317,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
       coerceInternal(G, _trace_, _right_1, expected);
       type = expected;
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
       try {
         boolean _or = false;
@@ -329,6 +333,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
         type = _createStringType;
       } catch (Exception e_1) {
+        previousFailure = extractRuleFailedException(e_1);
         boolean _and = false;
         if (!(leftType instanceof IntType)) {
           _and = false;
@@ -599,6 +604,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     Object result = null; // output parameter
     Type expected = null;
     /* { expected = env(G, 'expected', IntType) result = Integer::parseInt(string.value) } or { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
+    RuleFailedException previousFailure = null;
     try {
       IntType _env = this.<IntType>env(G, "expected", IntType.class);
       expected = _env;
@@ -606,6 +612,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
       int _parseInt = Integer.parseInt(_value);
       result = Integer.valueOf(_parseInt);
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
       try {
         BooleanType _env_1 = this.<BooleanType>env(G, "expected", BooleanType.class);
@@ -614,6 +621,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         boolean _parseBoolean = Boolean.parseBoolean(_value_1);
         result = Boolean.valueOf(_parseBoolean);
       } catch (Exception e_1) {
+        previousFailure = extractRuleFailedException(e_1);
         String _value_2 = string.getValue();
         result = _value_2;
       }

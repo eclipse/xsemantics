@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.site"
       label="Xsemantics Update Site"
-      version="1.6.1.qualifier">
+      version="1.6.2.qualifier">
 
    <includes
          id="it.xsemantics.sdk"
