@@ -918,14 +918,26 @@ class XsemanticsTestFiles {
 	}
 	'''
 
-	def testSeveralOrExpressions() '''
-	«testJudgmentDescriptionsReferringToEcore»
+	def testOrExpressionsAccessingPreviousFailure() '''
+	«typeSystemQualifiedName»
+	
+	import org.eclipse.emf.ecore.EClass
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EcoreFactory
+	import it.xsemantics.runtime.TraceUtils
+	
+	inject extension TraceUtils traceUtils
+	
+	judgments {
+		type |- EClass c : EObject o
+	}
 	
 	rule EClassEObject derives
 		G |- EClass eClass : EObject object
 	from {
 		val className = eClass.name
 		
+		/*
 		{className == 'bar1'}
 		or
 		{
@@ -936,32 +948,50 @@ class XsemanticsTestFiles {
 					source object
 		}
 		
-		/*
+		*/
 		
 		if (className.isEmpty()) {
 			{className == 'foo'}
 			or
 			{className == 'bar'}
 			or
-			{className == 'foobar'}
+			{
+				{
+					// this is the first branch of the or
+					// but previousFailure is still available
+					// from the outer or branches
+					println(previousFailure)
+				}
+				or
+				{className == 'foobar'}
+			}
 			
 			{className == 'foo1'}
 			or
 			{className == 'bar1'}
 			or
-			{println(previousFailure)}
+			{
+				println(previousFailure)
+			}
 			or
 			{
 				fail
 					error "this is the previous error: " +
 						previousFailure.message
-					source object}
+					source object
+				}
 		} else {
 			{className == 'foo1'}
 			or
-			{className == 'bar1'}
+			{
+				fail
+					error "this is the previous error trace: " +
+						previousFailure.failureTraceAsString
+					source object
+					// note the TraceUtils.failureTraceAsString
+					// used as an extension method
+			}
 		}
-		*/
 		
 	}
 	'''

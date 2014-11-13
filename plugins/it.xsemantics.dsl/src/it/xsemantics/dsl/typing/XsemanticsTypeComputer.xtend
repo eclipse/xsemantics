@@ -150,8 +150,11 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	protected def _computeTypes(OrExpression e, ITypeComputationState state) {
 		var firstBranch = true
 		for (b : e.branches) {
-			val s = state.withoutExpectation
-			var st = s
+			var s = state.withoutExpectation
+			
+			// make sure to avoid adding the same variable if it's already in scope
+			// and avoid adding it for the first or branch (not already contained in
+			// an or branch)
 			if (!firstBranch && e.eContainer.containingOrExpression == null) {
 				val implicitVar = XbaseFactory.eINSTANCE.createXVariableDeclaration => [
 					writeable = false
@@ -161,14 +164,14 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 				]
 				// the element must be in a resource
 				e.eResource.contents += implicitVar
-				// and assign a type (this will also add it to the scope)
-				st = s.assignType(
+				// and assign a type to it (this will also add it to the scope)
+				s = s.assignType(
 					implicitVar,
 					ruleFailedExceptionType(e).toLightweightTypeReference(e)
 				)
 			}
 			firstBranch = false
-			b.computeTypes(st)
+			b.computeTypes(s)
 		}
 		
 		state.acceptActualType(getPrimitiveVoid(state))

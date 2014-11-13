@@ -494,11 +494,6 @@ Primitives cannot be used in this context.
 	}
 
 	@Test
-	def void testAccessToPrevioudFailureInOrExpression() {
-		testFiles.testSeveralOrExpressions.parseAndAssertNoError
-	}
-
-	@Test
 	def void testCorrectUseOfPrimitiveTypes_Issue_17() {
 		testFiles.typeCorrectUseOfPrimitiveTypes_Issue_17.
 			parseAndAssertNoError
@@ -510,6 +505,67 @@ Primitives cannot be used in this context.
 			parseAndAssertNoError
 	}
 
+	@Test
+	def void testAccessToPreviousFailureInOrExpression() {
+		testFiles.testOrExpressionsAccessingPreviousFailure.parseAndAssertNoError
+	}
+
+	@Test
+	def void testWrongAccessToPreviousFailureInFirstOrBranch() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			{
+				// previousFailure is not available in the first branch
+				println(previousFailure)
+			}
+			or
+			{
+				eClass.name == 'bar1'
+			}
+		}
+		'''.assertErrorMessages(
+			"Couldn't resolve reference to JvmIdentifiableElement 'previousFailure'."
+		)
+	}
+
+	@Test
+	def void testWrongWriteAccessToPreviousFailure() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			{
+				eClass.name == 'bar1'
+			}
+			or
+			{
+				previousFailure = null
+			}
+		}
+		'''.assertErrorMessages(
+			"Assignment to final variable"
+		)
+	}
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
 	}

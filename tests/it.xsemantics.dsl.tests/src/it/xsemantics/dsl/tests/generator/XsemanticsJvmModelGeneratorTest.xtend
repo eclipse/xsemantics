@@ -1494,26 +1494,33 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 
 	@Test
 	def testOrExpressions() {
-		testFiles.testSeveralOrExpressions.assertCorrectJavaCodeGeneration(
+		testFiles.testOrExpressionsAccessingPreviousFailure.assertCorrectJavaCodeGeneration(
 '''
 package it.xsemantics.test;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.TraceUtils;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public final static String ECLASSEOBJECT = "it.xsemantics.test.EClassEObject";
+  
+  @Inject
+  @Extension
+  private TraceUtils traceUtils;
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -1524,6 +1531,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 4, "|-", ":");
+  }
+  
+  public TraceUtils getTraceUtils() {
+    return this.traceUtils;
+  }
+  
+  public void setTraceUtils(final TraceUtils traceUtils) {
+    this.traceUtils = traceUtils;
   }
   
   public Result<Boolean> type(final EClass c, final EObject o) {
@@ -1594,24 +1609,88 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     final String className = eClass.getName();
-    /* {className == 'bar1'} or { println(previousFailure) fail error "this is the previous error: " + previousFailure.message source object } */
-    RuleFailedException previousFailure = null;
-    try {
-      /* className == 'bar1' */
-      if (!Objects.equal(className, "bar1")) {
-        sneakyThrowRuleFailedException("className == \'bar1\'");
+    boolean _isEmpty = className.isEmpty();
+    if (_isEmpty) {
+      /* {className == 'foo'} or {className == 'bar'} or { { println(previousFailure) } or {className == 'foobar'} } */
+      RuleFailedException previousFailure = null;
+      try {
+        /* className == 'foo' */
+        if (!Objects.equal(className, "foo")) {
+          sneakyThrowRuleFailedException("className == \'foo\'");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* {className == 'bar'} or { { println(previousFailure) } or {className == 'foobar'} } */
+        try {
+          /* className == 'bar' */
+          if (!Objects.equal(className, "bar")) {
+            sneakyThrowRuleFailedException("className == \'bar\'");
+          }
+        } catch (Exception e_1) {
+          previousFailure = extractRuleFailedException(e_1);
+          /* { println(previousFailure) } or {className == 'foobar'} */
+          try {
+            RuleFailedException _previousFailure = previousFailure;
+            InputOutput.<RuleFailedException>println(_previousFailure);
+          } catch (Exception e_2) {
+            previousFailure = extractRuleFailedException(e_2);
+            /* className == 'foobar' */
+            if (!Objects.equal(className, "foobar")) {
+              sneakyThrowRuleFailedException("className == \'foobar\'");
+            }
+          }
+        }
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      RuleFailedException _previousFailure = previousFailure;
-      InputOutput.<RuleFailedException>println(_previousFailure);
-      /* fail error "this is the previous error: " + previousFailure.message source object */
-      RuleFailedException _previousFailure_1 = previousFailure;
-      String _message = _previousFailure_1.getMessage();
-      String _plus = ("this is the previous error: " + _message);
-      String error = _plus;
-      EObject source = object;
-      throwForExplicitFail(error, new ErrorInformation(source, null));
+      /* {className == 'foo1'} or {className == 'bar1'} or { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+      try {
+        /* className == 'foo1' */
+        if (!Objects.equal(className, "foo1")) {
+          sneakyThrowRuleFailedException("className == \'foo1\'");
+        }
+      } catch (Exception e_3) {
+        previousFailure = extractRuleFailedException(e_3);
+        /* {className == 'bar1'} or { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+        try {
+          /* className == 'bar1' */
+          if (!Objects.equal(className, "bar1")) {
+            sneakyThrowRuleFailedException("className == \'bar1\'");
+          }
+        } catch (Exception e_4) {
+          previousFailure = extractRuleFailedException(e_4);
+          /* { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+          try {
+            RuleFailedException _previousFailure_1 = previousFailure;
+            InputOutput.<RuleFailedException>println(_previousFailure_1);
+          } catch (Exception e_5) {
+            previousFailure = extractRuleFailedException(e_5);
+            /* fail error "this is the previous error: " + previousFailure.message source object */
+            RuleFailedException _previousFailure_2 = previousFailure;
+            String _message = _previousFailure_2.getMessage();
+            String _plus = ("this is the previous error: " + _message);
+            String error = _plus;
+            EObject source = object;
+            throwForExplicitFail(error, new ErrorInformation(source, null));
+          }
+        }
+      }
+    } else {
+      /* {className == 'foo1'} or { fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object } */
+      RuleFailedException previousFailure = null;
+      try {
+        /* className == 'foo1' */
+        if (!Objects.equal(className, "foo1")) {
+          sneakyThrowRuleFailedException("className == \'foo1\'");
+        }
+      } catch (Exception e_6) {
+        previousFailure = extractRuleFailedException(e_6);
+        /* fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object */
+        RuleFailedException _previousFailure_3 = previousFailure;
+        String _failureTraceAsString = this.traceUtils.failureTraceAsString(_previousFailure_3);
+        String _plus_1 = ("this is the previous error trace: " + _failureTraceAsString);
+        String error_1 = _plus_1;
+        EObject source_1 = object;
+        throwForExplicitFail(error_1, new ErrorInformation(source_1, null));
+      }
     }
     return new Result<Boolean>(true);
   }
