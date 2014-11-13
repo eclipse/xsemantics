@@ -40,6 +40,8 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.xbase.XVariableDeclaration
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 
 //import org.eclipse.xtext.validation.Check
 
@@ -61,6 +63,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Inject
 	protected XsemanticsNodeModelUtils nodeModelUtils;
+
+	@Inject extension XsemanticsGeneratorExtensions
 
 	public final static int maxOfOutputParams = 3;
 
@@ -127,6 +131,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	
 	public static final String ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE = PREFIX + "AccessToOutputParamWithinClosure";
 
+	public static final String RESERVED_VARIABLE_NAME = PREFIX + "ReservedVariableName";
+
 	@Check
 	override void checkAssignment(XAssignment assignment) {
 		// we allow assignment to output parameters
@@ -150,6 +156,16 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		if (!expr.isContainedInAuxiliaryFunction()) {
 			error("Return statements are not allowed here", expr, null,
 				RETURN_NOT_ALLOWED);
+		}
+	}
+
+	@Check
+	override checkVariableDeclaration(XVariableDeclaration declaration) {
+		super.checkVariableDeclaration(declaration)
+		if (previousFailureVarName.equals(declaration.name)) {
+			error(previousFailureVarName +
+				" is a reserved name", declaration, null,
+					RESERVED_VARIABLE_NAME);
 		}
 	}
 

@@ -566,6 +566,38 @@ Primitives cannot be used in this context.
 			"Assignment to final variable"
 		)
 	}
+
+	@Test
+	def void testWrongPreviousFailureVariableDeclaration() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			val previousFailure = 'test'
+			{
+				eClass.name == 'bar1'
+			}
+			or
+			{
+				println(previousFailure)
+			}
+		}
+		'''.assertErrorMessages(
+		'''
+		Duplicate local variable previousFailure
+		previousFailure is a reserved name'''
+		)
+	}
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
 	}
