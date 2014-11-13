@@ -41,6 +41,7 @@ import org.junit.runners.model.TestClass
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import it.xsemantics.dsl.XsemanticsConstants
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -59,6 +60,14 @@ abstract class XsemanticsBaseTest {
 	private Provider<XtextResourceSet> resourceSetProvider
 	
 	@Inject extension ValidationTestHelper
+	
+	new() {
+		// the following are useless... but it's just to have coverage
+		// for the protected constructors ("required" by sonar)...
+		new XsemanticsConstants() {
+			
+		}
+	}
 	
 //	@BeforeClass
 //	def static void setNewLine() {

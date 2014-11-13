@@ -2,7 +2,7 @@ package it.xsemantics.dsl.typing
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
@@ -37,8 +37,6 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	@Inject extension XsemanticsUtils
 	
 	@Inject extension XsemanticsTypeSystem
-	
-	@Inject extension XsemanticsGeneratorExtensions
 	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		switch (expression) {
@@ -158,7 +156,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			if (!firstBranch && e.eContainer.containingOrExpression == null) {
 				val implicitVar = XbaseFactory.eINSTANCE.createXVariableDeclaration => [
 					writeable = false
-					name = previousFailureVarName
+					name = XsemanticsConstants.PREVIOUS_FAILURE
 					// setting the declared type won't work
 					// type = ruleFailedExceptionType(e)
 				]

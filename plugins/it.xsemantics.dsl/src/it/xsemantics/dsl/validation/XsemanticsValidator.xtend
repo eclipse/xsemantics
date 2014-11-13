@@ -4,6 +4,7 @@
 package it.xsemantics.dsl.validation
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
@@ -36,12 +37,12 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XThrowExpression
+import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.xbase.XVariableDeclaration
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 
 //import org.eclipse.xtext.validation.Check
 
@@ -63,8 +64,6 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Inject
 	protected XsemanticsNodeModelUtils nodeModelUtils;
-
-	@Inject extension XsemanticsGeneratorExtensions
 
 	public final static int maxOfOutputParams = 3;
 
@@ -162,8 +161,8 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	override checkVariableDeclaration(XVariableDeclaration declaration) {
 		super.checkVariableDeclaration(declaration)
-		if (previousFailureVarName.equals(declaration.name)) {
-			error(previousFailureVarName +
+		if (XsemanticsConstants.PREVIOUS_FAILURE.equals(declaration.name)) {
+			error(XsemanticsConstants.PREVIOUS_FAILURE +
 				" is a reserved name", declaration, null,
 					RESERVED_VARIABLE_NAME);
 		}
@@ -604,7 +603,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			if (container instanceof OutputParameter || container instanceof JvmFormalParameter ||
 					container instanceof Injected || container instanceof AuxiliaryDescription)
 				error("Primitives cannot be used in this context.", typeRef, null, 
-					org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_USE_OF_TYPE
+					IssueCodes.INVALID_USE_OF_TYPE
 				);
 		}
 	}

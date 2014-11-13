@@ -8,6 +8,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.Cachable
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.Description
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -36,8 +37,6 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.util.Strings.*
-import it.xsemantics.dsl.xsemantics.Description
-import it.xsemantics.runtime.RuleFailedException
 
 class XsemanticsGeneratorExtensions {
 	
@@ -191,10 +190,6 @@ class XsemanticsGeneratorExtensions {
 
 	def String exceptionVarName(AuxiliaryFunction aux) {
 		'''e_«aux.applyAuxFunName»'''
-	}
-
-	def String previousFailureVarName() {
-		"previousFailure"
 	}
 
 	def suffixStartingFrom2(JudgmentDescription judgmentDescription) {
@@ -412,10 +407,6 @@ class XsemanticsGeneratorExtensions {
 
 	def exceptionType(EObject o) {
 		getTypeForName(Exception, o)
-	}
-
-	def ruleFailedExceptionType(EObject o) {
-		getTypeForName(RuleFailedException, o)
 	}
 
 	def emptyEnvironmentInvocation() {

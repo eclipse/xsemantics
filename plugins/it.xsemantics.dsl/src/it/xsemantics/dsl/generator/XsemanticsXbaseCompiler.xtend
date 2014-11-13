@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.generator
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
@@ -335,13 +336,13 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
 		
-		if (bracesAreAddedByOuterStructure(orExpression) || !b.hasObject(previousFailureVarName)) {
+		if (bracesAreAddedByOuterStructure(orExpression) || !b.hasObject(XsemanticsConstants.PREVIOUS_FAILURE)) {
 			// we must declare it only once per Java scope
 			b.newLine;
 			b.declareVariable(
-					orExpression, previousFailureVarName);
+					orExpression, XsemanticsConstants.PREVIOUS_FAILURE);
 			b.append(orExpression.ruleFailedExceptionType().getType())
-			b.append(" " + previousFailureVarName + " = null;");
+			b.append(" " + XsemanticsConstants.PREVIOUS_FAILURE + " = null;");
 		}
 
 		val left = orExpression.getBranches().get(0);
@@ -643,7 +644,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(") {");
 		b.increaseIndentation();
 		b.newLine();
-		b.append(previousFailureVarName + " = extractRuleFailedException("
+		b.append(XsemanticsConstants.PREVIOUS_FAILURE + " = extractRuleFailedException("
 			+ declareExceptionVariable + ");"
 		);
 		return declareExceptionVariable;
