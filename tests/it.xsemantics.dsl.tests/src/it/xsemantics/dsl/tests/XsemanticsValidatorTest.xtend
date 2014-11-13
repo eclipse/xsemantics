@@ -494,6 +494,11 @@ Primitives cannot be used in this context.
 	}
 
 	@Test
+	def void testAccessToPrevioudFailureInOrExpression() {
+		testFiles.testSeveralOrExpressions.parseAndAssertNoError
+	}
+
+	@Test
 	def void testCorrectUseOfPrimitiveTypes_Issue_17() {
 		testFiles.typeCorrectUseOfPrimitiveTypes_Issue_17.
 			parseAndAssertNoError

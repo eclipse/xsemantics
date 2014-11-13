@@ -5,11 +5,13 @@ package it.xsemantics.dsl;
 
 import it.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import it.xsemantics.dsl.generator.XsemanticsXbaseCompiler;
+import it.xsemantics.dsl.resource.XsemanticsResourceDescriptionStrategy;
 import it.xsemantics.dsl.typing.XsemanticsTypeComputer;
 import it.xsemantics.dsl.validation.XsemanticsXExpressionHelper;
 
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -38,5 +40,10 @@ public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemantic
 
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XsemanticsXbaseCompiler.class;
+	}
+	
+	@Override
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return XsemanticsResourceDescriptionStrategy.class;
 	}
 }

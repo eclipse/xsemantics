@@ -925,6 +925,19 @@ class XsemanticsTestFiles {
 		G |- EClass eClass : EObject object
 	from {
 		val className = eClass.name
+		
+		{className == 'bar1'}
+		or
+		{
+			println(previousFailure)
+			fail
+					error "this is the previous error: " +
+						previousFailure.message
+					source object
+		}
+		
+		/*
+		
 		if (className.isEmpty()) {
 			{className == 'foo'}
 			or
@@ -936,12 +949,20 @@ class XsemanticsTestFiles {
 			or
 			{className == 'bar1'}
 			or
-			{className == 'foobar1'}
+			{println(previousFailure)}
+			or
+			{
+				fail
+					error "this is the previous error: " +
+						previousFailure.message
+					source object}
 		} else {
 			{className == 'foo1'}
 			or
 			{className == 'bar1'}
 		}
+		*/
+		
 	}
 	'''
 	

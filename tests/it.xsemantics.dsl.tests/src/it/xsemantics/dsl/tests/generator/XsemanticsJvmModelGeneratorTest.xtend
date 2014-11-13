@@ -1509,6 +1509,7 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -1593,68 +1594,24 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     final String className = eClass.getName();
-    boolean _isEmpty = className.isEmpty();
-    if (_isEmpty) {
-      /* {className == 'foo'} or {className == 'bar'} or {className == 'foobar'} */
-      RuleFailedException previousFailure = null;
-      try {
-        /* className == 'foo' */
-        if (!Objects.equal(className, "foo")) {
-          sneakyThrowRuleFailedException("className == \'foo\'");
-        }
-      } catch (Exception e) {
-        previousFailure = extractRuleFailedException(e);
-        /* {className == 'bar'} or {className == 'foobar'} */
-        try {
-          /* className == 'bar' */
-          if (!Objects.equal(className, "bar")) {
-            sneakyThrowRuleFailedException("className == \'bar\'");
-          }
-        } catch (Exception e_1) {
-          previousFailure = extractRuleFailedException(e_1);
-          /* className == 'foobar' */
-          if (!Objects.equal(className, "foobar")) {
-            sneakyThrowRuleFailedException("className == \'foobar\'");
-          }
-        }
+    /* {className == 'bar1'} or { println(previousFailure) fail error "this is the previous error: " + previousFailure.message source object } */
+    RuleFailedException previousFailure = null;
+    try {
+      /* className == 'bar1' */
+      if (!Objects.equal(className, "bar1")) {
+        sneakyThrowRuleFailedException("className == \'bar1\'");
       }
-      /* {className == 'foo1'} or {className == 'bar1'} or {className == 'foobar1'} */
-      try {
-        /* className == 'foo1' */
-        if (!Objects.equal(className, "foo1")) {
-          sneakyThrowRuleFailedException("className == \'foo1\'");
-        }
-      } catch (Exception e_2) {
-        previousFailure = extractRuleFailedException(e_2);
-        /* {className == 'bar1'} or {className == 'foobar1'} */
-        try {
-          /* className == 'bar1' */
-          if (!Objects.equal(className, "bar1")) {
-            sneakyThrowRuleFailedException("className == \'bar1\'");
-          }
-        } catch (Exception e_3) {
-          previousFailure = extractRuleFailedException(e_3);
-          /* className == 'foobar1' */
-          if (!Objects.equal(className, "foobar1")) {
-            sneakyThrowRuleFailedException("className == \'foobar1\'");
-          }
-        }
-      }
-    } else {
-      /* {className == 'foo1'} or {className == 'bar1'} */
-      RuleFailedException previousFailure = null;
-      try {
-        /* className == 'foo1' */
-        if (!Objects.equal(className, "foo1")) {
-          sneakyThrowRuleFailedException("className == \'foo1\'");
-        }
-      } catch (Exception e_4) {
-        previousFailure = extractRuleFailedException(e_4);
-        /* className == 'bar1' */
-        if (!Objects.equal(className, "bar1")) {
-          sneakyThrowRuleFailedException("className == \'bar1\'");
-        }
-      }
+    } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
+      RuleFailedException _previousFailure = previousFailure;
+      InputOutput.<RuleFailedException>println(_previousFailure);
+      /* fail error "this is the previous error: " + previousFailure.message source object */
+      RuleFailedException _previousFailure_1 = previousFailure;
+      String _message = _previousFailure_1.getMessage();
+      String _plus = ("this is the previous error: " + _message);
+      String error = _plus;
+      EObject source = object;
+      throwForExplicitFail(error, new ErrorInformation(source, null));
     }
     return new Result<Boolean>(true);
   }
