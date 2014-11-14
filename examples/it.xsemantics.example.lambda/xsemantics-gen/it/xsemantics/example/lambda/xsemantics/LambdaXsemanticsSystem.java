@@ -165,8 +165,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkProgram(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkProgramInternal(_trace_, program);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckProgram) {
+    	return resultForFailure(_e_CheckProgram);
     }
   }
   
@@ -751,6 +751,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   protected Result<Type> applyRuleParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     Type type = null; // output parameter
     /* { param.type != null type = EcoreUtil::copy(param.type) } or type = lambdaUtils.createFreshTypeVariable */
+    RuleFailedException previousFailure = null;
     try {
       Type _type = param.getType();
       boolean _notEquals = (!Objects.equal(_type, null));
@@ -762,6 +763,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       Type _copy = EcoreUtil.<Type>copy(_type_1);
       type = _copy;
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       TypeVariable _createFreshTypeVariable = this.lambdaUtils.createFreshTypeVariable();
       type = _createFreshTypeVariable;
     }

@@ -224,6 +224,7 @@ typeInternal(G, _trace_, eClass, _eClass);'''
 '''
 
 /* eClass.name == 'foo' or object.eClass.name == 'bar' */
+RuleFailedException previousFailure = null;
 try {
   String _name = eClass.getName();
   boolean _equals = Objects.equal(_name, "foo");
@@ -232,6 +233,7 @@ try {
     sneakyThrowRuleFailedException("eClass.name == \'foo\'");
   }
 } catch (Exception e) {
+  previousFailure = extractRuleFailedException(e);
   EClass _eClass = object.eClass();
   String _name_1 = _eClass.getName();
   boolean _equals_1 = Objects.equal(_name_1, "bar");
@@ -250,6 +252,7 @@ try {
 '''
 
 /* eClass.name == 'foo' or object.eClass.name == 'bar' */
+RuleFailedException previousFailure = null;
 try {
   String _name = eClass.getName();
   boolean _equals = Objects.equal(_name, "foo");
@@ -258,6 +261,7 @@ try {
     sneakyThrowRuleFailedException("eClass.name == \'foo\'");
   }
 } catch (Exception e) {
+  previousFailure = extractRuleFailedException(e);
   EClass _eClass = object.eClass();
   String _name_1 = _eClass.getName();
   boolean _equals_1 = Objects.equal(_name_1, "bar");
@@ -276,6 +280,7 @@ try {
 '''
 
 /* {eClass.name == 'foo' G |- object.eClass : eClass} or {G |- object.eClass : eClass object.eClass.name == 'bar'} */
+RuleFailedException previousFailure = null;
 try {
   String _name = eClass.getName();
   boolean _equals = Objects.equal(_name, "foo");
@@ -287,6 +292,7 @@ try {
   EClass _eClass = object.eClass();
   typeInternal(G, _trace_, _eClass, eClass);
 } catch (Exception e) {
+  previousFailure = extractRuleFailedException(e);
   /* G |- object.eClass : eClass */
   EClass _eClass_1 = object.eClass();
   typeInternal(G, _trace_, _eClass_1, eClass);
@@ -307,11 +313,13 @@ try {
 '''
 
 /* G |- object.eClass : eClass or G |- object.eClass : eClass */
+RuleFailedException previousFailure = null;
 try {
   /* G |- object.eClass : eClass */
   EClass _eClass = object.eClass();
   typeInternal(G, _trace_, _eClass, eClass);
 } catch (Exception e) {
+  previousFailure = extractRuleFailedException(e);
   /* G |- object.eClass : eClass */
   EClass _eClass_1 = object.eClass();
   typeInternal(G, _trace_, _eClass_1, eClass);
@@ -326,17 +334,20 @@ try {
 '''
 
 /* G |- object.eClass : eClass or G |- object.eClass : eClass or {G |- object.eClass : eClass object.eClass.name == 'bar'} or object.eClass.name == 'bar' */
+RuleFailedException previousFailure = null;
 try {
   /* G |- object.eClass : eClass */
   EClass _eClass = object.eClass();
   typeInternal(G, _trace_, _eClass, eClass);
 } catch (Exception e) {
+  previousFailure = extractRuleFailedException(e);
   /* G |- object.eClass : eClass or {G |- object.eClass : eClass object.eClass.name == 'bar'} or object.eClass.name == 'bar' */
   try {
     /* G |- object.eClass : eClass */
     EClass _eClass_1 = object.eClass();
     typeInternal(G, _trace_, _eClass_1, eClass);
   } catch (Exception e_1) {
+    previousFailure = extractRuleFailedException(e_1);
     /* {G |- object.eClass : eClass object.eClass.name == 'bar'} or object.eClass.name == 'bar' */
     try {
       /* G |- object.eClass : eClass */
@@ -349,6 +360,7 @@ try {
         sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
       }
     } catch (Exception e_2) {
+      previousFailure = extractRuleFailedException(e_2);
       EClass _eClass_4 = object.eClass();
       String _name_1 = _eClass_4.getName();
       boolean _equals = Objects.equal(_name_1, "bar");

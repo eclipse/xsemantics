@@ -131,8 +131,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
   public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) {
     try {
     	return checkClassOkInternal(_trace_, clazz);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckClassOk) {
+    	return resultForFailure(_e_CheckClassOk);
     }
   }
   
@@ -151,14 +151,15 @@ public class FjSepTypeSystem extends FjTypeSystem {
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkMainInternal(_trace_, program);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMain) {
+    	return resultForFailure(_e_CheckMain);
     }
   }
   
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main */
+    RuleFailedException previousFailure = null;
     try {
       Expression _main = program.getMain();
       boolean _equals = Objects.equal(_main, null);
@@ -167,6 +168,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
         sneakyThrowRuleFailedException("program.main == null");
       }
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* empty |- program.main */
       Expression _main_1 = program.getMain();
       checkInternal(emptyEnvironment(), _trace_, _main_1);
@@ -183,8 +185,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
   public Result<Boolean> checkMethodBody(final RuleApplicationTrace _trace_, final Method method) {
     try {
     	return checkMethodBodyInternal(_trace_, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMethodBody) {
+    	return resultForFailure(_e_CheckMethodBody);
     }
   }
   
@@ -202,8 +204,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
   public Result<Boolean> checkField(final RuleApplicationTrace _trace_, final Field field) {
     try {
     	return checkFieldInternal(_trace_, field);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckField) {
+    	return resultForFailure(_e_CheckField);
     }
   }
   
@@ -221,8 +223,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
   public Result<Boolean> checkMethodOverride(final RuleApplicationTrace _trace_, final Method method) {
     try {
     	return checkMethodOverrideInternal(_trace_, method);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMethodOverride) {
+    	return resultForFailure(_e_CheckMethodOverride);
     }
   }
   
@@ -591,11 +593,13 @@ public class FjSepTypeSystem extends FjTypeSystem {
     expType = (Type) result.getFirst();
     
     /* G |- cast.type <: expType or G |- expType <: cast.type */
+    RuleFailedException previousFailure = null;
     try {
       /* G |- cast.type <: expType */
       ClassType _type = cast.getType();
       subtypeInternal(G, _trace_, _type, expType);
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* G |- expType <: cast.type */
       ClassType _type_1 = cast.getType();
       subtypeInternal(G, _trace_, expType, _type_1);

@@ -2,6 +2,7 @@ package it.xsemantics.dsl.typing
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
@@ -144,8 +146,31 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 
 	protected def _computeTypes(OrExpression e, ITypeComputationState state) {
-		for (b : e.branches)
-			b.computeTypes(state.withoutExpectation)
+		var firstBranch = true
+		for (b : e.branches) {
+			var s = state.withoutExpectation
+			
+			// make sure to avoid adding the same variable if it's already in scope
+			// and avoid adding it for the first or branch (not already contained in
+			// an or branch)
+			if (!firstBranch && e.eContainer.containingOrExpression == null) {
+				val implicitVar = XbaseFactory.eINSTANCE.createXVariableDeclaration => [
+					writeable = false
+					name = XsemanticsConstants.PREVIOUS_FAILURE
+					// setting the declared type won't work
+					// type = ruleFailedExceptionType(e)
+				]
+				// the element must be in a resource
+				e.eResource.contents += implicitVar
+				// and assign a type to it (this will also add it to the scope)
+				s = s.assignType(
+					implicitVar,
+					ruleFailedExceptionType(e).toLightweightTypeReference(e)
+				)
+			}
+			firstBranch = false
+			b.computeTypes(s)
+		}
 		
 		state.acceptActualType(getPrimitiveVoid(state))
 	}

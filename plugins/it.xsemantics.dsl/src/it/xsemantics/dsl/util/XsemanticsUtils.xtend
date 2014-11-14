@@ -12,6 +12,7 @@ import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.JudgmentParameter
+import it.xsemantics.dsl.xsemantics.OrExpression
 import it.xsemantics.dsl.xsemantics.OutputParameter
 import it.xsemantics.dsl.xsemantics.ReferToJudgment
 import it.xsemantics.dsl.xsemantics.Rule
@@ -50,6 +51,10 @@ class XsemanticsUtils {
 	
 	def containingRule(EObject element) {
 		return EcoreUtil2::getContainerOfType(element, typeof(Rule))
+	}
+
+	def containingOrExpression(EObject element) {
+		return EcoreUtil2::getContainerOfType(element, typeof(OrExpression))
 	}
 
 	def getJudgmentDescription(ReferToJudgment e) {

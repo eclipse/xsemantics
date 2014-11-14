@@ -165,8 +165,8 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   public Result<Boolean> checkVariable(final RuleApplicationTrace _trace_, final Variable variable) {
     try {
     	return checkVariableInternal(_trace_, variable);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckVariable) {
+    	return resultForFailure(_e_CheckVariable);
     }
   }
   
@@ -434,6 +434,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     rightType = (Type) result_1.getFirst();
     
     /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
+    RuleFailedException previousFailure = null;
     try {
       boolean _or = false;
       if ((leftType instanceof StringType)) {
@@ -448,6 +449,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
       StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
       type = _createStringType;
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       boolean _and = false;
       if (!(leftType instanceof IntType)) {
         _and = false;

@@ -937,12 +937,13 @@ if (!«c.cacheConditionMethod»(«args»))
 		[
 			parameters += rule.ruleApplicationTraceParam
 			setupMethodForCheckRule(rule)
+			val exceptionName = rule.exceptionVarName
    			
    			body = '''
 				try {
 					return «methodName»Internal(«ruleApplicationTraceName.toString», «rule.element.parameter.name»);
-				} catch («Exception» e) {
-					return resultForFailure(e);
+				} catch («Exception» «exceptionName») {
+					return resultForFailure(«exceptionName»);
 				}'''
 		]
 		

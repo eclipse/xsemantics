@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.generator
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
@@ -334,6 +335,15 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(OrExpression orExpression,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
+		
+		if (bracesAreAddedByOuterStructure(orExpression) || !b.hasObject(XsemanticsConstants.PREVIOUS_FAILURE)) {
+			// we must declare it only once per Java scope
+			b.newLine;
+			b.declareVariable(
+					orExpression, XsemanticsConstants.PREVIOUS_FAILURE);
+			b.append(orExpression.ruleFailedExceptionType().getType())
+			b.append(" " + XsemanticsConstants.PREVIOUS_FAILURE + " = null;");
+		}
 
 		val left = orExpression.getBranches().get(0);
 		val right = orExpression.getBranches().get(1);
@@ -633,6 +643,10 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(declareExceptionVariable);
 		b.append(") {");
 		b.increaseIndentation();
+		b.newLine();
+		b.append(XsemanticsConstants.PREVIOUS_FAILURE + " = extractRuleFailedException("
+			+ declareExceptionVariable + ");"
+		);
 		return declareExceptionVariable;
 	}
 

@@ -8,6 +8,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.Cachable
 import it.xsemantics.dsl.xsemantics.CheckRule
+import it.xsemantics.dsl.xsemantics.Description
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.InputParameter
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -36,7 +37,6 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static extension org.eclipse.xtext.util.Strings.*
-import it.xsemantics.dsl.xsemantics.Description
 
 class XsemanticsGeneratorExtensions {
 	
@@ -180,8 +180,8 @@ class XsemanticsGeneratorExtensions {
 
 	def ruleApplicationSubtraceName() '''_subtrace_'''
 
-	def exceptionVarName(Description desc) {
-		'''_e_«desc.name»'''
+	def exceptionVarName(UniqueByName e) {
+		'''_e_«e.name»'''
 	}
 
 	def String exceptionVarName(Rule rule) {
@@ -295,10 +295,6 @@ class XsemanticsGeneratorExtensions {
 	}
 
 	def resultVariableForTrace() '''_result_'''
-
-	def environmentAccessMethod() {
-		"environmentAccess"
-	}
 
 	def sneakyThrowRuleFailedException() {
 		"sneakyThrowRuleFailedException"

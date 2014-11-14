@@ -178,14 +178,15 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkMainInternal(_trace_, program);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckMain) {
+    	return resultForFailure(_e_CheckMain);
     }
   }
   
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main */
+    RuleFailedException previousFailure = null;
     try {
       Expression _main = program.getMain();
       boolean _equals = Objects.equal(_main, null);
@@ -194,6 +195,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
         sneakyThrowRuleFailedException("program.main == null");
       }
     } catch (Exception e) {
+      previousFailure = extractRuleFailedException(e);
       /* empty |- program.main */
       Expression _main_1 = program.getMain();
       checkInternal(emptyEnvironment(), _trace_, _main_1);
@@ -210,8 +212,8 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) {
     try {
     	return checkClassOkInternal(_trace_, clazz);
-    } catch (Exception e) {
-    	return resultForFailure(e);
+    } catch (Exception _e_CheckClassOk) {
+    	return resultForFailure(_e_CheckClassOk);
     }
   }
   
@@ -404,6 +406,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
           List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
           for (final Field field : _selectFields) {
             /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+            RuleFailedException previousFailure = null;
             try {
               String _name = field.getName();
               String _name_1 = inheritedField.getName();
@@ -413,6 +416,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
                 sneakyThrowRuleFailedException("field.name != inheritedField.name");
               }
             } catch (Exception e) {
+              previousFailure = extractRuleFailedException(e);
               /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
               EObject _eContainer = inheritedField.eContainer();
               String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
@@ -432,6 +436,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
+              RuleFailedException previousFailure = null;
               try {
                 String _name = it.getName();
                 String _name_1 = inheritedMethod.getName();
@@ -441,6 +446,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
                   sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
                 }
               } catch (Exception e) {
+                previousFailure = extractRuleFailedException(e);
                 /* G |- it.type ~~ inheritedMethod.type */
                 Type _type = it.getType();
                 Type _type_1 = inheritedMethod.getType();

@@ -513,6 +513,99 @@ Primitives cannot be used in this context.
 			parseAndAssertNoError
 	}
 
+	@Test
+	def void testAccessToPreviousFailureInOrExpression() {
+		testFiles.testOrExpressionsAccessingPreviousFailure.parseAndAssertNoError
+	}
+
+	@Test
+	def void testWrongAccessToPreviousFailureInFirstOrBranch() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			{
+				// previousFailure is not available in the first branch
+				println(previousFailure)
+			}
+			or
+			{
+				eClass.name == 'bar1'
+			}
+		}
+		'''.assertErrorMessages(
+			"Couldn't resolve reference to JvmIdentifiableElement 'previousFailure'."
+		)
+	}
+
+	@Test
+	def void testWrongWriteAccessToPreviousFailure() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			{
+				eClass.name == 'bar1'
+			}
+			or
+			{
+				previousFailure = null
+			}
+		}
+		'''.assertErrorMessages(
+			"Assignment to final variable"
+		)
+	}
+
+	@Test
+	def void testWrongPreviousFailureVariableDeclaration() {
+		'''
+		«testFiles.typeSystemQualifiedName»
+		
+		import org.eclipse.emf.ecore.EClass
+		import org.eclipse.emf.ecore.EObject
+		
+		judgments {
+			type |- EClass c : EObject o
+		}
+		
+		rule EClassEObject derives
+			G |- EClass eClass : EObject object
+		from {
+			val previousFailure = 'test'
+			{
+				eClass.name == 'bar1'
+			}
+			or
+			{
+				println(previousFailure)
+			}
+		}
+		'''.assertErrorMessages(
+		'''
+		Duplicate local variable previousFailure
+		previousFailure is a reserved name'''
+		)
+	}
+
 	def private assertErrorMessages(CharSequence input, CharSequence expected) {
 		parse(input).assertErrorMessages(expected)
 	}

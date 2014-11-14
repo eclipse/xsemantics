@@ -7,6 +7,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleInvocation
+import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -172,4 +173,9 @@ class XsemanticsTypeSystem {
 	def isPredicate(RuleInvocation ruleInvocation) {
 		ruleInvocation.getJudgmentDescription.predicate
 	}
+
+	def ruleFailedExceptionType(EObject o) {
+		typeReferences.getTypeForName(RuleFailedException, o)
+	}
+
 }
