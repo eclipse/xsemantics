@@ -435,7 +435,8 @@
 		<pluginRepository>
 			<id>fornax.plugin.repository</id>
 			<name>Fornax Plugin Repository</name>
-			<url>http://www.fornax-platform.org/m2/repository</url>
+			<url>https://projects.itemis.de/nexus/content/groups/public/</url>
+			<!-- <url>http://www.fornax-platform.org/m2/repository</url> -->
 			<!--  <url>http://www.fornax-platform.org/nexus/content/groups/public</url> -->
 			<releases>
 				<enabled>true</enabled>
