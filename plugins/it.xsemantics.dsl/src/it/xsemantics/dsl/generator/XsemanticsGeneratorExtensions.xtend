@@ -296,10 +296,6 @@ class XsemanticsGeneratorExtensions {
 
 	def resultVariableForTrace() '''_result_'''
 
-	def environmentAccessMethod() {
-		"environmentAccess"
-	}
-
 	def sneakyThrowRuleFailedException() {
 		"sneakyThrowRuleFailedException"
 	}
