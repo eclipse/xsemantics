@@ -175,6 +175,33 @@ class TraceUtilsTests extends XsemanticsBaseTest {
 		Assert::assertSame(source2, list.get(1).source)
 		Assert::assertSame(source2, list.get(2).source)
 	}
+
+	@Test
+	def void testRemoveDuplicateErrorInformationWithData() {
+		val ex2 = new RuleFailedException("prev")
+		val source2 = createEObject
+		val additionalData = #[1, 2]
+		ex2.addErrorInformation(new ErrorInformation(source2, null, additionalData))
+		ex2.addErrorInformation(new ErrorInformation(source2, null, additionalData)) // considered duplicate
+		ex2.addErrorInformation(new ErrorInformation(source2, 
+			EcorePackage::eINSTANCE.EAttribute_EAttributeType
+		)) // not duplicate
+		ex2.addErrorInformation(new ErrorInformation(source2, 
+			EcorePackage::eINSTANCE.EAttribute_EAttributeType,
+			additionalData
+		)) // not duplicate
+
+		val ex1 = new RuleFailedException("first", ex2)
+		val source1 = createEObject
+		ex1.addErrorInformation(new ErrorInformation(source1))
+		val list = ex1.allErrorInformation.removeDuplicateErrorInformation
+		Assert::assertEquals(4, list.size)
+		Assert::assertSame(source1, list.get(0).source)
+		Assert::assertSame(source2, list.get(1).source)
+		Assert::assertSame(source2, list.get(2).source)
+		Assert::assertSame(source2, list.get(3).source)
+		Assert::assertSame(EcorePackage::eINSTANCE.EAttribute_EAttributeType, list.get(3).feature)
+	}
 	
 	@Test
 	def void testRemoveNonNodeModelSources() {
