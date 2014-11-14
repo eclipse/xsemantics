@@ -161,6 +161,41 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 	}
 
 	@Test
+	def void testErrorSpecificationsDifferentOrder() {
+		'''
+		system TypeSystem
+		
+		import org.eclipse.emf.ecore.EObject
+		import org.eclipse.emf.ecore.EClass
+		
+		judgments {
+			type |- EObject c : output EClass
+				error "this " + c + " made an error!"
+					feature c.eClass.eContainingFeature
+					source c
+		}
+		'''.parseAndAssertNoError
+	}
+
+	@Test
+	def void testErrorSpecificationsDifferentOrder2() {
+		'''
+		system TypeSystem
+		
+		import org.eclipse.emf.ecore.EObject
+		import org.eclipse.emf.ecore.EClass
+		
+		judgments {
+			type |- EObject c : output EClass
+				error "this " + c + " made an error!"
+					feature c.eClass.eContainingFeature
+					data c
+					source c
+		}
+		'''.parseAndAssertNoError
+	}
+
+	@Test
 	def void testRuleWithSimpleErrorSpecifications() {
 		testFiles.testRuleWithSimpleErrorSpecifications.parseAndAssertNoError
 	}
