@@ -209,6 +209,8 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			state.withExpectation(getTypeForName(EObject, state)).computeTypes(e.source)
 		if (e.feature !== null)
 			state.withExpectation(getTypeForName(EStructuralFeature, state)).computeTypes(e.feature)
+		if (e.data !== null)
+			state.withNonVoidExpectation.computeTypes(e.data)
 		// in Xbase 2.6 we must call computeTypes on the state, not use the computeTypes(XExpression, ITypeComputationState)
 		// otherwise XStringLiteral compilation will then raise a NPE
 //		e.error?.computeTypes(state.withExpectation(getTypeForName(String, state)))

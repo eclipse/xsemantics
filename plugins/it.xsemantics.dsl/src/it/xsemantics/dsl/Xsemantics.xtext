@@ -186,6 +186,7 @@ ErrorSpecification returns xbase::XExpression:
 	'error' error=XExpression
 	('source' source=XExpression)?
 	('feature' feature=XExpression)?
+	('data' data=XExpression)?
 ;
 
 JudgmentSymbol:

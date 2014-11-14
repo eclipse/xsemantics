@@ -394,6 +394,16 @@ Duplicate name 'strings' (Injected)
 	}
 
 	@Test
+	def void testErrorSpecificationDataVoid() {
+		testFiles.testErrorSpecificationDataVoid.
+			assertErrorMessages(
+'''
+Type mismatch: type void is not applicable at this location
+'''
+			)
+	}
+
+	@Test
 	def void testJudgmentDescriptionsWithDuplicates() {
 		testFiles.testJudgmentDescriptionsWithDuplicates.
 			assertErrorMessages(
