@@ -112,10 +112,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			«throwRuleFailedExceptionMethod»(«error»,
 				_issue, _ex, new ''')
 		desc.errorInformationType.serialize(desc, a)
-		if (data.empty)
-			a.append('''(«source», «feature»));''')
-		else
-			a.append('''(«source», «feature», «data»));''')
+		compileArgsForErrorInformationConstructor(a, source, feature, data)
 	}
 	
 	def dispatch compileFinalPartOfThrowExceptionMethod(RuleConclusion ruleConclusion,
@@ -125,6 +122,10 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
    					«throwRuleFailedExceptionMethod»(«error»,
    						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
 		rule.errorInformationType.serialize(rule, a)
+		compileArgsForErrorInformationConstructor(a, source, feature, data)
+	}
+	
+	private def compileArgsForErrorInformationConstructor(ITreeAppendable a, String source, String feature, String data) {
 		if (data.empty)
 			a.append('''(«source», «feature»));''')
 		else
