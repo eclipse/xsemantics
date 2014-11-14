@@ -32,7 +32,7 @@ public class ErrorInformation {
 	private Object data;
 
 	/**
-	 * @since 1.6
+	 * @since 1.7
 	 */
 	public ErrorInformation(EObject source, EStructuralFeature feature,
 			Object data) {
@@ -58,7 +58,7 @@ public class ErrorInformation {
 	}
 
 	/**
-	 * @since 1.6
+	 * @since 1.7
 	 */
 	public Object getData() {
 		return data;
