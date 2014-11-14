@@ -20,4 +20,4 @@ before_script:
  
 script:
  - export
- - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Dfindbugs.skip=true
+ - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dfindbugs.skip=true
