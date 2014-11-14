@@ -1,6 +1,6 @@
 language: java
 
-jdk: oraclejdk7
+jdk: oraclejdk8
 
 env: DISPLAY=:99.0
 
@@ -20,4 +20,4 @@ before_script:
  
 script:
  - export
- - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Djsse.enableSNIExtension=false -Dfindbugs.skip=true
+ - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Dfindbugs.skip=true
