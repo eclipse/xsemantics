@@ -160,6 +160,127 @@ newArrayList("first", "second")
 )
 	}
 
+	@Test
+	def testUseOfErrorInformationDataFromJudgment() {
+'''
+import java.util.List
+
+system my.test.ruleinvokations.System
+			
+judgments {
+	type |- Object o : output Object
+		error "type has failed"
+		data #["data: ", o]
+}
+
+rule TypeString G |- String s : Object res
+from {
+	s.isEmpty()
+}
+
+rule Type G |- List<String> list : Object res
+from {
+	{
+		G |- list.head : res
+	}
+	or
+	{
+		fail
+			error "data from failure: " +
+				previousFailure.getErrorInformations.head.getData
+	}
+}
+'''.invokeTypeAndExpectFailure(
+'''failed: type has failed
+ data from failure: [data: , first]''',
+newArrayList("first", "second")
+)
+	}
+
+	@Test
+	def testUseOfErrorInformationDataFromFail() {
+'''
+import java.util.List
+import it.xsemantics.runtime.TraceUtils
+
+system my.test.ruleinvokations.System
+
+inject extension TraceUtils traceUtils
+
+judgments {
+	type |- Object o : output Object
+}
+
+rule TypeString G |- String s : Object res
+from {
+	fail
+		error "type has failed"
+		data #["data: ", s]
+}
+
+rule Type G |- List<String> list : Object res
+from {
+	{
+		G |- list.head : res
+	}
+	or
+	{
+		// the failure we're interested in is the last one
+		// we retrieve that using TraceUtils injected as extension
+		fail
+			error "data from failure: " +
+				previousFailure.failureAsList.last.errorInformations.head.^data
+	}
+}
+'''.invokeTypeAndExpectFailure(
+'''failed: Type: [] |- [first, second] : Object
+ data from failure: [data: , first]''',
+newArrayList("first", "second")
+)
+	}
+
+	@Test
+	def testUseOfErrorInformationDataFromRule() {
+'''
+import java.util.List
+import it.xsemantics.runtime.TraceUtils
+
+system my.test.ruleinvokations.System
+
+inject extension TraceUtils traceUtils
+
+judgments {
+	type |- Object o : output Object
+}
+
+rule TypeString G |- String s : Object res
+	error "type has failed"
+		data #["data: ", s]
+from {
+	fail
+}
+
+rule Type G |- List<String> list : Object res
+from {
+	{
+		G |- list.head : res
+	}
+	or
+	{
+		// the failure we're interested in is the last one
+		// we retrieve that using TraceUtils injected as extension
+		fail
+			error "data from failure: " +
+				previousFailure.failureAsList.last.errorInformations.head.^data
+	}
+}
+'''.invokeTypeAndExpectFailure(
+'''failed: Type: [] |- [first, second] : Object
+ data from failure: [data: , first]''',
+newArrayList("first", "second")
+)
+	}
+
 	def private invokeTypeAndExpect(CharSequence input, CharSequence expectedTrace, Object args) {
 		val system = input.instantiateSystem
 		val trace = new RuleApplicationTrace
