@@ -1,6 +1,6 @@
 language: java
 
-jdk: oraclejdk8
+jdk: openjdk7
 
 env: DISPLAY=:99.0
 
