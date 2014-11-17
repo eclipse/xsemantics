@@ -312,6 +312,48 @@ public class XsemanticsProposalProviderTest extends
 		// a validator can extend only a type that is-a AbstractDeclarativeValidator
 	}
 
+	@Test
+	def void testProposalForBasicType() {
+		newBuilder.
+		append(
+'''
+system my.test.System
+
+judgments {
+	type |- Strin''').
+		applyProposal("String").
+		expectContent(
+'''
+system my.test.System
+
+judgments {
+	type |- String'''
+		)	
+
+	}
+
+	@Test
+	def void testProposalAndImportForListType() {
+		newBuilder.
+		append(
+'''
+system my.test.System
+
+judgments {
+	type |- LinkedL''').
+		applyProposal("LinkedList").
+		expectContent(
+'''
+import java.util.LinkedList
+
+system my.test.System
+
+judgments {
+	type |- LinkedList'''
+		)	
+
+	}
+
 	def private assertProposalsContain(CharSequence input, String... expected) {
 		newBuilder.append(input.toString).
 		computeCompletionProposals.map[displayString] => [
