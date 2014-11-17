@@ -45,4 +45,5 @@ for scoping and validation (it can also generate a validator
 in Java).
       </description>
    </category-def>
+   <repository-reference location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" enabled="true" />
 </site>
