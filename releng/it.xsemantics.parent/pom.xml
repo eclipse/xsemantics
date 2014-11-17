@@ -24,8 +24,8 @@
 	</scm>
 	
 	<properties>
-		<tycho-version>0.21.0</tycho-version>
-		<tycho-extras-version>0.21.0</tycho-extras-version>
+		<tycho-version>0.22.0-SNAPSHOT</tycho-version>
+		<tycho-extras-version>0.22.0-SNAPSHOT</tycho-extras-version>
 		<maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<junit-version>4.11</junit-version>
@@ -407,6 +407,11 @@
 	</build>
 
 	<pluginRepositories>
+		<pluginRepository>
+			<id>tycho-snapshots</id>
+			<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
+		</pluginRepository>
+
 		<pluginRepository>
 			<id>sonatype_releases</id>
 			<url>https://oss.sonatype.org/content/repositories/releases/</url>
