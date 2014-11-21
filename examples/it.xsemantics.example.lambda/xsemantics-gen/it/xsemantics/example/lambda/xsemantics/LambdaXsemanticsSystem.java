@@ -480,13 +480,13 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   }
   
   protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
-    Object _xblockexpression = null;
+    UnifyResult _xblockexpression = null;
     {
       /* fail */
       throwForExplicitFail();
       _xblockexpression = (null);
     }
-    return ((UnifyResult)_xblockexpression);
+    return _xblockexpression;
   }
   
   protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
