@@ -123,7 +123,7 @@ my.test.System
 		)
 	}
 
-	@Test
+	@Ignore("Xtext 2.6") @Test
 	def void testOutlineWithDescriptionInAnotherResourceOnEditorOpen() {
 		createFileInTestProject("a",
 '''
@@ -156,6 +156,8 @@ my.test.System
   TestAxiom
 '''			
 		)
+		
+		// Xtext 2.6: it seems to work but we can't rely on the old version of Xtext
 	
 		// Opening an editor on an existing file does not show the correct outline:
 		// the TestAxiom is not contained in the node of the corresponding JudgmentDescription
