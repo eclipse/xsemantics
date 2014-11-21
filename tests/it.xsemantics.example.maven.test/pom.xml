@@ -10,8 +10,8 @@
 
 	<properties>
 		<tycho-version>0.21.0</tycho-version>
-		<xtext.version>2.7.2</xtext.version>
-		<xsemantics.version>1.6.0-SNAPSHOT</xsemantics.version>
+		<xtext.version>2.7.3</xtext.version>
+		<xsemantics.version>1.7.0</xsemantics.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -26,6 +26,13 @@
 	</dependencies>
 
 	<repositories>
+		<repository>
+			<!-- we also need this one because this is an eclipse project, so it needs to
+				resolve xsemantics runtime dependencies from the p2 repository -->
+			<id>Xsemantics</id>
+			<layout>p2</layout>
+			<url>http://sourceforge.net/projects/xsemantics/files/updates/releases</url>
+		</repository>
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
