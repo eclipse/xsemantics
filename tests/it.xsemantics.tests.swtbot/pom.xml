@@ -6,7 +6,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>it.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.6.2-SNAPSHOT</version>
+		<version>1.7.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.tests.swtbot</artifactId>
@@ -15,16 +15,11 @@
 	<properties>
 		<!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
 		<sonar.sources></sonar.sources>
-		<sonar.tests>src,xtend-gen</sonar.tests>
+		<sonar.tests>src</sonar.tests>
 	</properties>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>

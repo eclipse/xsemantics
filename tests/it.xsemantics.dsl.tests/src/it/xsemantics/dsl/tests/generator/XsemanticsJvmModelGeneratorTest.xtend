@@ -2395,10 +2395,12 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.Collections;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -2492,8 +2494,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
+    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
-    	_issue, _ex, new ErrorInformation(source, feature));
+    	_issue, _ex, new ErrorInformation(source, feature, data));
   }
   
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject left, final EObject right) {
@@ -2571,8 +2574,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
+    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
-    	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature));
+    	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature, data));
   }
   
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject left, final EObject right) throws RuleFailedException {
@@ -2625,10 +2629,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleSubtypeEStructuralFeature(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EStructuralFeature left, final EObject right) throws RuleFailedException {
-    /* fail error "Unhandled case" source left */
+    /* fail error "Unhandled case" source left data #["some", "additional", "data", left, right] */
     String error = "Unhandled case";
     EObject source = left;
-    throwForExplicitFail(error, new ErrorInformation(source, null));
+    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", left, right));
+    throwForExplicitFail(error, new ErrorInformation(source, null, data));
     return new Result<Boolean>(true);
   }
   

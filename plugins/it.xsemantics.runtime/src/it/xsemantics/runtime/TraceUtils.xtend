@@ -87,7 +87,8 @@ class TraceUtils {
 		for (errorInformation : errorInformations) {
 			if (!noDuplicates.exists [ 
 				it.source == errorInformation.source &&
-				it.feature == errorInformation.feature
+				it.feature == errorInformation.feature &&
+				it.data == errorInformation.data
 			]) 
 			{
 				noDuplicates.add(errorInformation)

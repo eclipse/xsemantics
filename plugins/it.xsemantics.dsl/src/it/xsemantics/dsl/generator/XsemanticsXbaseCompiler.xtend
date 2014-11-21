@@ -79,11 +79,12 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			val error = compileErrorOfErrorSpecification(obj, appendable)
 			val source = compileSourceOfErrorSpecification(obj, appendable)
 			val feature = compileFeatureOfErrorSpecification(obj, appendable)
+			val data = compileDataOfErrorSpecification(obj, appendable)
 			
 			appendable.newLine
 
 			obj.eContainer.compileFinalPartOfThrowExceptionMethod
-				(appendable, error, source, feature)
+				(appendable, error, source, feature, data)
 			
 			return appendable
 		}
@@ -106,22 +107,29 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	}
 	
 	def dispatch compileFinalPartOfThrowExceptionMethod(Description desc, 
-			ITreeAppendable a, String error, String source, String feature) {
+			ITreeAppendable a, String error, String source, String feature, String data) {
 		a.append('''
 			«throwRuleFailedExceptionMethod»(«error»,
 				_issue, _ex, new ''')
 		desc.errorInformationType.serialize(desc, a)
-		a.append('''(«source», «feature»));''')
+		compileArgsForErrorInformationConstructor(a, source, feature, data)
 	}
 	
 	def dispatch compileFinalPartOfThrowExceptionMethod(RuleConclusion ruleConclusion,
-			ITreeAppendable a, String error, String source, String feature) {
+			ITreeAppendable a, String error, String source, String feature, String data) {
 		val rule = ruleConclusion.containingRule
 		a.append('''
    					«throwRuleFailedExceptionMethod»(«error»,
    						«rule.ruleIssueString», e_«rule.applyRuleName», new ''')
 		rule.errorInformationType.serialize(rule, a)
-		a.append('''(«source», «feature»));''')
+		compileArgsForErrorInformationConstructor(a, source, feature, data)
+	}
+	
+	private def compileArgsForErrorInformationConstructor(ITreeAppendable a, String source, String feature, String data) {
+		if (data.empty)
+			a.append('''(«source», «feature»));''')
+		else
+			a.append('''(«source», «feature», «data»));''')
 	}
 
 	def String compileErrorOfErrorSpecification(
@@ -149,6 +157,22 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				b,
 				typeReferences.getTypeForName(typeof(EStructuralFeature),
 						errorSpecification), "feature");
+	}
+
+	def String compileDataOfErrorSpecification(
+			ErrorSpecification errorSpecification, ITreeAppendable b) {
+		// data has been introduced recently, and I'd like to avoid
+		// to update all the generated test code, so we avoid passing
+		// the data to ErrorInformation if we don't need to
+		if (errorSpecification.getData() == null) {
+			return "";
+		}
+		
+		return compileAndAssignToLocalVariable(
+				errorSpecification.getData(),
+				b,
+				typeReferences.getTypeForName(Object,
+						errorSpecification), "data");
 	}
 
 	def protected String compileAndAssignToLocalVariable(
@@ -381,6 +405,8 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				errorSpecification, b);
 		val featureVar = compileFeatureOfErrorSpecification(
 				errorSpecification, b);
+		val dataVar = compileDataOfErrorSpecification(
+				errorSpecification, b);
 		newLine(b);
 		b.append("throwForExplicitFail(");
 		b.append(errorMessageVar);
@@ -391,6 +417,10 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(sourceVar);
 		comma(b);
 		b.append(featureVar);
+		if (!dataVar.empty) {
+			comma(b);
+			b.append(dataVar);
+		}
 		b.append(")");
 		b.append(");");
 	}

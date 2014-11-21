@@ -152,6 +152,7 @@ class ErrorSpecification extends XExpression {
 	contains XExpression error
 	contains XExpression source
 	contains XExpression feature
+	contains XExpression data
 }
 
 interface UniqueByName extends Named {

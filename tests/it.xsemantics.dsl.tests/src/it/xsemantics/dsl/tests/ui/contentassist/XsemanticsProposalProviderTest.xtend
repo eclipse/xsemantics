@@ -318,6 +318,48 @@ public class XsemanticsProposalProviderTest extends
 		// Xtext 2.6: Object is still there, it looks like a bug
 	}
 
+	@Test
+	def void testProposalForBasicType() {
+		newBuilder.
+		append(
+'''
+system my.test.System
+
+judgments {
+	type |- Strin''').
+		applyProposal("String").
+		expectContent(
+'''
+system my.test.System
+
+judgments {
+	type |- String'''
+		)	
+
+	}
+
+	@Test
+	def void testProposalAndImportForListType() {
+		newBuilder.
+		append(
+'''
+system my.test.System
+
+judgments {
+	type |- LinkedL''').
+		applyProposal("LinkedList").
+		expectContent(
+'''
+import java.util.LinkedList
+
+system my.test.System
+
+judgments {
+	type |- LinkedList'''
+		)	
+
+	}
+
 	def private assertProposalsContain(CharSequence input, String... expected) {
 		newBuilder.append(input.toString).
 		computeCompletionProposals.map[displayString] => [

@@ -877,6 +877,17 @@ class XsemanticsTestFiles {
 	from {
 	}
 	'''
+
+	def testErrorSpecificationDataVoid() '''
+	«testJudgmentDescriptionsReferringToEClassEObject»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+			error "Conclusion error"
+			data { println() }
+	from {
+	}
+	'''
 	
 	def testOrExpression() '''
 	«testJudgmentDescriptionsReferringToEcore»
@@ -2305,6 +2316,7 @@ class XsemanticsTestFiles {
 			error "this " + c + " made an error!"
 			source c
 			feature c.eClass.eContainingFeature
+			data #["some", "additional", "data", c]
 		
 		subtype |- EObject left <: EObject right
 	}
@@ -2318,6 +2330,7 @@ class XsemanticsTestFiles {
 			error "unexpected error!"
 			source c
 			feature c.eClass.eContainingFeature
+			data #["some", "additional", "data", c]
 	
 	// this rule has its own error specification
 	rule SubtypeEObject
@@ -2333,6 +2346,7 @@ class XsemanticsTestFiles {
 		fail
 			error "Unhandled case"
 			source left
+			data #["some", "additional", "data", left, right]
 	}
 	
 	rule SubtypeEClass

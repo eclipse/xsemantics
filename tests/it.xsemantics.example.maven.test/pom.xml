@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.xsemantics.example.maven.test</groupId>
 	<artifactId>it.xsemantics.example.maven.test</artifactId>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
 	<description>Just a test project that uses the xtext-maven-plugin for generating code with Xsemantics</description>
 
 	<packaging>eclipse-plugin</packaging>

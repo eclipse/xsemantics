@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<developers>
@@ -146,6 +146,7 @@
 				<module>../../releng/it.xsemantics.releng.tools</module>
 				<module>../../plugins/it.xsemantics.dsl</module>
 			</modules>
+
 		</profile>
 	</profiles>
 
@@ -424,7 +425,8 @@
 		<pluginRepository>
 			<id>fornax.plugin.repository</id>
 			<name>Fornax Plugin Repository</name>
-			<url>http://www.fornax-platform.org/m2/repository</url>
+			<url>https://projects.itemis.de/nexus/content/groups/public/</url>
+			<!-- <url>http://www.fornax-platform.org/m2/repository</url> -->
 			<!--  <url>http://www.fornax-platform.org/nexus/content/groups/public</url> -->
 			<releases>
 				<enabled>true</enabled>
