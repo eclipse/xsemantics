@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" description="Mirror for Luna SDK, Xtext 2.7 and SWTBot Target Platform" label="Mirror for Luna SDK, Xtext 2.7 and SWTBot Target Platform" buildRoot="${user.home}/mirror/luna-xtext-2.7-swtbot" packedStrategy="UNPACK">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" description="Mirror for Luna SDK, Xtext 2.7 and SWTBot Target Platform" label="Mirror for Luna SDK, Xtext 2.7 and SWTBot Target Platform" buildRoot="${user.home}/mirror/luna-xtext-2.7-swtbot" packedStrategy="SKIP">
   <validationSets label="main">
     <contributions label="Luna RCP">
       <repositories location="http://download.eclipse.org/releases/luna">
@@ -31,7 +31,7 @@
       </repositories>
     </contributions>
     <contributions description="Xdoc" label="Xdoc">
-      <repositories location="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.7">
+      <repositories location="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.7">
         <features name="org.eclipse.xtext.xdoc.feature.feature.group"/>
       </repositories>
     </contributions>
