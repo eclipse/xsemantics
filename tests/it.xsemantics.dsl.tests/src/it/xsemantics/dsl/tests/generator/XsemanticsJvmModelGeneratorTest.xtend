@@ -2388,6 +2388,7 @@ null
 '''
 package it.xsemantics.test;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Provider;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
@@ -2400,7 +2401,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -2494,7 +2494,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
-    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
+    Object data = Collections.<Object>unmodifiableList(Lists.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature, data));
   }
@@ -2574,7 +2574,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _eClass = c.eClass();
     EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
-    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
+    Object data = Collections.<Object>unmodifiableList(Lists.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
     	TYPEECLASS, e_applyRuleTypeEClass, new ErrorInformation(source, feature, data));
   }
@@ -2632,7 +2632,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     /* fail error "Unhandled case" source left data #["some", "additional", "data", left, right] */
     String error = "Unhandled case";
     EObject source = left;
-    Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", left, right));
+    Object data = Collections.<Object>unmodifiableList(Lists.<Object>newArrayList("some", "additional", "data", left, right));
     throwForExplicitFail(error, new ErrorInformation(source, null, data));
     return new Result<Boolean>(true);
   }
