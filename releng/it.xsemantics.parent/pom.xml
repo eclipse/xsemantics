@@ -153,9 +153,15 @@
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-file</artifactId>
+				<version>2.8</version>
+			</extension>
+			
+			<!-- <extension>
+				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
 				<version>2.7</version>
-			</extension>
+			</extension>  -->
 		</extensions>
 	
 		<pluginManagement>
@@ -453,7 +459,18 @@
 	</pluginRepositories>
 
 	<distributionManagement>
-		<!-- before deploying maven artifacts to sourceforge we need to create a shell -->
+		<repository>
+			<id>xsemantics.sf.net</id>
+			<name>Xsemantics Releases</name>
+			<url>file:${user.home}/maven.repos/xsemantics/maven/repo/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>xsemantics.sf.net</id>
+			<name>Xsemantics Snapshots</name>
+			<url>file:${user.home}/maven.repos/xsemantics/maven/repo/snapshots</url>
+		</snapshotRepository>
+	
+		<!--
 		<repository>
 			<id>xsemantics.sf.net</id>
 			<name>Xsemantics Releases</name>
@@ -464,6 +481,7 @@
 			<name>Xsemantics Snapshots</name>
 			<url>scp://shell.sourceforge.net/home/frs/project/xsemantics/maven/repo/snapshots</url>
 		</snapshotRepository>
+		-->
 	</distributionManagement>
 
 </project>
