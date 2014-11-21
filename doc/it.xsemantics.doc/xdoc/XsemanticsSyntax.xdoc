@@ -298,7 +298,9 @@ The premises of an Xsemantics rule are considered in logical
 and relation and are verified in the same order they are specified
 in the block.
 
-If we want to have premises (block of premises) in logical or relation,
+section2:OrBlocks[Or Blocks]
+
+If we want to have premises (or blocks of premises) in logical e[or] relation,
 we can use the operator code[or], which separates blocks of
 premises; if (and only if) one of the premises of the first block fails, we
 go to the second block, etc.
@@ -423,10 +425,12 @@ which consists of
 
 ul[
 item[code[error] and a string for the error]
-item[code[source] and an EObject specifying the object the error refers to
+item[code[source] and an codeRef[org.eclipse.emf.ecore.EObject] specifying the object the error refers to
 (optional)]
-item[code[feature] and an EStructuralFeature specifying the feature of the object 
+item[code[feature] and an codeRef[org.eclipse.emf.ecore.EStructuralFeature] specifying the feature of the object 
 containing the error (optional)]
+item[code[data] and any Java codeRef[java.lang.Object] containing any additional information you want to
+store in the error (optional), e[since version 1.7.0]]
 ]
 
 Error specifications can appear
@@ -453,6 +457,7 @@ rule EClassCase
 		error "cannot type EClass " + eClass.name
 			source eClass
 			feature EcorePackage::eINSTANCE.ENamedElement_Name
+			data "Some additional data for the error"
 from {...}
 ]
 
@@ -470,6 +475,75 @@ or
 fail 
 	error "my custom error"
 	source o
+]
+
+section2:PreviousFailure[Accessing Previous Failure of an Or Block]
+
+Since version 1.7.0, in an e[or] expression or block (see ref:OrBlocks[]) it is possible to access error information generated 
+in the previous or block.  This can be achieved by using the implicit variable code[previousFailure]
+which is of type codeRef[it.xsemantics.runtime.RuleFailedException] and can be assumed NOT code[null].
+Of course, such variable is available only in or blocks after the first one, unless the first or block
+is itself contained in an outer or block.
+
+This can be used together with all the other error features shown above; here's a simple
+example
+
+code[Xsemantics][
+{
+  ...
+} or {
+  ...
+  fail
+    error "this error, caused by " + previousFailure.message
+]
+
+If you inject in your system definition, as extension, a codeRef[it.xsemantics.runtime.TraceUtils] field
+(see ref:InjectedFields[]) you can also use it to process the previousFailure; for instance
+
+code[Xsemantics][
+inject extension TraceUtils traceUtils
+
+    ...
+            {...}
+            or
+            {
+                fail
+                    error "this is the previous error trace: " +
+                        previousFailure.failureTraceAsString
+                    source object
+                    // note the TraceUtils.failureTraceAsString
+                    // used as an extension method
+            }
+]
+
+Other examples follow (also using the code[data] element of an error specification, ref:ErrorSpecification[]:
+
+code[Xsemantics][
+    {
+        ...
+    }
+    or
+    {
+        fail
+            error "data from failure: " +
+                previousFailure.getErrorInformations.head.getData
+    }
+]
+
+code[Xsemantics][
+inject extension TraceUtils traceUtils
+
+    {
+        ...
+    }
+    or
+    {
+        // the failure we're interested in is the last one
+        // we retrieve that using TraceUtils injected as extension
+        fail
+            error "data from failure: " +
+                previousFailure.failureAsList.last.errorInformations.head.^data
+    }
 ]
 
 section2:StringRepresentation[String Representation]
