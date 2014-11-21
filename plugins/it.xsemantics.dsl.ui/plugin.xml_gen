@@ -478,7 +478,7 @@
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="it.xsemantics.dsl.Xsemantics" 
-                          id="it.xsemantics.dsl.Xsemantics.ide.rulerActions">
+                          id="it.xsemantics.dsl.Xsemantics.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -489,26 +489,26 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="it.xsemantics.dsl.Xsemantics.ide.rulerContextMenu"
-         id="it.xsemantics.dsl.Xsemantics.ide.RulerPopupActions">
+         targetID="it.xsemantics.dsl.Xsemantics.RulerContext"
+         id="it.xsemantics.dsl.Xsemantics.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="debug"
-            id="it.xsemantics.dsl.Xsemantics.ide.rulerContextMenu.toggleBreakpointAction">
+            id="it.xsemantics.dsl.Xsemantics.rulerContextMenu.toggleBreakpointAction">
          </action>
          <action
             label="Not used"
             class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
             menubarPath="debug"
-            id="it.xsemantics.dsl.Xsemantics.ide.rulerContextMenu.enableDisableBreakpointAction">
+            id="it.xsemantics.dsl.Xsemantics.rulerContextMenu.enableDisableBreakpointAction">
          </action>
          <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="it.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
            menubarPath="group.properties"
-           id="it.xsemantics.dsl.Xsemantics.ide.rulerContextMenu.openBreapointPropertiesAction">
+           id="it.xsemantics.dsl.Xsemantics.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
