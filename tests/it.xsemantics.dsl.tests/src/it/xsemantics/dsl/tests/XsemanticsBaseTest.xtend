@@ -1,7 +1,9 @@
 package it.xsemantics.dsl.tests
 
+import com.google.common.base.Joiner
 import com.google.inject.Inject
 import com.google.inject.Provider
+import it.xsemantics.dsl.XsemanticsConstants
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles
@@ -21,6 +23,7 @@ import it.xsemantics.dsl.xsemantics.XsemanticsFile
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.IInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -35,13 +38,13 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result
 import org.junit.runner.RunWith
 import org.junit.runners.model.TestClass
 
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import it.xsemantics.dsl.XsemanticsConstants
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -332,5 +335,14 @@ abstract class XsemanticsBaseTest {
 
 	def protected IInjectorProvider getOrCreateInjectorProvider() {
 		return InjectorProviders.getOrCreateInjectorProvider(new TestClass(getClass()));
+	}
+
+	protected def assertNoValidationErrors(Result it) {
+		val allErrors = getErrorsAndWarnings.filter[severity == Severity.ERROR]
+		if (!allErrors.empty) {
+			throw new IllegalStateException("One or more resources contained errors : "+
+				Joiner.on(',').join(allErrors)
+			);
+		}
 	}
 }

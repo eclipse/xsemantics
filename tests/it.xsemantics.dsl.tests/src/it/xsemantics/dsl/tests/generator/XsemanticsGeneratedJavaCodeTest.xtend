@@ -89,6 +89,7 @@ class XsemanticsGeneratedJavaCodeTest extends XsemanticsBaseTest {
 			resourceSet.getResource(URI::createURI(TESTS_INPUT_FILES + file), true);
 		}
 		resourceSet.compile [
+			assertNoValidationErrors
 			// this will issue Java compilation on generated Java code
 			compiledClass
 		]

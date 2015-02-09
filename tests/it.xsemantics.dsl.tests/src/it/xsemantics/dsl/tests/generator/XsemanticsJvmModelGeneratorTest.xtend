@@ -4765,6 +4765,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 
 	def private assertCorrectJavaCodeGeneration(CharSequence input, CharSequence expected, CharSequence expectedValidator) {
 		input.compile [
+			assertNoValidationErrors
+
 			for (e : allGeneratedResources.entrySet) {
 				if (e.key.endsWith("Validator.java") && expectedValidator != null) {
 					// check the expected Java code for the validator
@@ -4784,6 +4786,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		String prefix, CharSequence expected, CharSequence expectedValidator
 	) {
 		inputs.createResourceSet.compile [
+			assertNoValidationErrors
+
 			for (e : allGeneratedResources.entrySet) {
 				if (prefix == null || e.key.contains(prefix)) {
 					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
@@ -4811,4 +4815,5 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 		] 
 		resourceSet(pairs)
 	}
+
 }

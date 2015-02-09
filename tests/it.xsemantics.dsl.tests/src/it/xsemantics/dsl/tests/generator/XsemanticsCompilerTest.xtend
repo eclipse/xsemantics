@@ -298,6 +298,7 @@ newArrayList("first", "second")
 	def private instantiateSystem(CharSequence input) {
 		val instantiated = Wrapper.forType(XsemanticsRuntimeSystem)
 		input.compile[
+			assertNoValidationErrors
 			val systemClass = compiledClass
 			val obj = systemClass.newInstance
 			getOrCreateInjectorProvider.injector.injectMembers(obj)
