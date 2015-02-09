@@ -34,7 +34,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xtext.version>2.7.3</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
-		<fornax-oaw-m2-plugin-version>3.4.0</fornax-oaw-m2-plugin-version>
+		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 		
 		<!-- tests and runtime args -->
 		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
@@ -411,47 +411,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sonatype_releases</id>
-			<url>https://oss.sonatype.org/content/repositories/releases/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-
-		<pluginRepository>
-			<id>sonatype_snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	
-		<!-- Repository to resolve fornax-oaw-m2-plugin -->
-		<!-- in case of SSL certificates errors, use
-			-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -->
-		<pluginRepository>
-			<id>fornax.plugin.repository</id>
-			<name>Fornax Plugin Repository</name>
-			<url>https://projects.itemis.de/nexus/content/groups/public/</url>
-			<!-- <url>http://www.fornax-platform.org/m2/repository</url> -->
-			<!--  <url>http://www.fornax-platform.org/nexus/content/groups/public</url> -->
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<distributionManagement>
 		<repository>
