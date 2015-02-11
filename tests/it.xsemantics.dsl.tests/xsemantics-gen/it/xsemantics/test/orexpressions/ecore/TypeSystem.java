@@ -115,22 +115,24 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' */
-    RuleFailedException previousFailure = null;
-    try {
-      String _name = eClass.getName();
-      boolean _equals = Objects.equal(_name, "foo");
-      /* eClass.name == 'foo' */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-      }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      EClass _eClass = object.eClass();
-      String _name_1 = _eClass.getName();
-      boolean _equals_1 = Objects.equal(_name_1, "bar");
-      /* object.eClass.name == 'bar' */
-      if (!_equals_1) {
-        sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        String _name = eClass.getName();
+        boolean _equals = Objects.equal(_name, "foo");
+        /* eClass.name == 'foo' */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("eClass.name == \'foo\'");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        EClass _eClass = object.eClass();
+        String _name_1 = _eClass.getName();
+        boolean _equals_1 = Objects.equal(_name_1, "bar");
+        /* object.eClass.name == 'bar' */
+        if (!_equals_1) {
+          sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+        }
       }
     }
     return new Result<EObject>(object);
@@ -158,39 +160,43 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
-    RuleFailedException previousFailure = null;
-    try {
-      String _name = eClass.getName();
-      boolean _equals = Objects.equal(_name, "foo");
-      /* eClass.name == 'foo' */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("eClass.name == \'foo\'");
-      }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
+    {
+      RuleFailedException previousFailure = null;
       try {
-        EClass _eClass = object.eClass();
-        String _name_1 = _eClass.getName();
-        boolean _equals_1 = Objects.equal(_name_1, "bar");
-        /* object.eClass.name == 'bar' */
-        if (!_equals_1) {
-          sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+        String _name = eClass.getName();
+        boolean _equals = Objects.equal(_name, "foo");
+        /* eClass.name == 'foo' */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("eClass.name == \'foo\'");
         }
-      } catch (Exception e_1) {
-        previousFailure = extractRuleFailedException(e_1);
-        final String foo = "foo";
-        EClass _eClass_1 = object.eClass();
-        String _name_2 = _eClass_1.getName();
-        boolean _equals_2 = Objects.equal(_name_2, "bar2");
-        /* object.eClass.name == 'bar2' */
-        if (!_equals_2) {
-          sneakyThrowRuleFailedException("object.eClass.name == \'bar2\'");
-        }
-        String _name_3 = eClass.getName();
-        /* eClass.name == foo */
-        if (!Objects.equal(_name_3, foo)) {
-          sneakyThrowRuleFailedException("eClass.name == foo");
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
+        {
+          try {
+            EClass _eClass = object.eClass();
+            String _name_1 = _eClass.getName();
+            boolean _equals_1 = Objects.equal(_name_1, "bar");
+            /* object.eClass.name == 'bar' */
+            if (!_equals_1) {
+              sneakyThrowRuleFailedException("object.eClass.name == \'bar\'");
+            }
+          } catch (Exception e_1) {
+            previousFailure = extractRuleFailedException(e_1);
+            final String foo = "foo";
+            EClass _eClass_1 = object.eClass();
+            String _name_2 = _eClass_1.getName();
+            boolean _equals_2 = Objects.equal(_name_2, "bar2");
+            /* object.eClass.name == 'bar2' */
+            if (!_equals_2) {
+              sneakyThrowRuleFailedException("object.eClass.name == \'bar2\'");
+            }
+            String _name_3 = eClass.getName();
+            /* eClass.name == foo */
+            if (!Objects.equal(_name_3, foo)) {
+              sneakyThrowRuleFailedException("eClass.name == foo");
+            }
+          }
         }
       }
     }

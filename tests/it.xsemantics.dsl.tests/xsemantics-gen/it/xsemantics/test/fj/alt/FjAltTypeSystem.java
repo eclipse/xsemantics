@@ -186,19 +186,21 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main */
-    RuleFailedException previousFailure = null;
-    try {
-      Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
-      /* program.main == null */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("program.main == null");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        Expression _main = program.getMain();
+        boolean _equals = Objects.equal(_main, null);
+        /* program.main == null */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("program.main == null");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* empty |- program.main */
+        Expression _main_1 = program.getMain();
+        checkInternal(emptyEnvironment(), _trace_, _main_1);
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* empty |- program.main */
-      Expression _main_1 = program.getMain();
-      checkInternal(emptyEnvironment(), _trace_, _main_1);
     }
     return new Result<Boolean>(true);
   }
@@ -406,23 +408,25 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
           List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
           for (final Field field : _selectFields) {
             /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-            RuleFailedException previousFailure = null;
-            try {
-              String _name = field.getName();
-              String _name_1 = inheritedField.getName();
-              boolean _notEquals = (!Objects.equal(_name, _name_1));
-              /* field.name != inheritedField.name */
-              if (!_notEquals) {
-                sneakyThrowRuleFailedException("field.name != inheritedField.name");
+            {
+              RuleFailedException previousFailure = null;
+              try {
+                String _name = field.getName();
+                String _name_1 = inheritedField.getName();
+                boolean _notEquals = (!Objects.equal(_name, _name_1));
+                /* field.name != inheritedField.name */
+                if (!_notEquals) {
+                  sneakyThrowRuleFailedException("field.name != inheritedField.name");
+                }
+              } catch (Exception e) {
+                previousFailure = extractRuleFailedException(e);
+                /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+                EObject _eContainer = inheritedField.eContainer();
+                String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
+                String _plus = ("field already defined in superclass " + _stringRep);
+                String error = _plus;
+                throwForExplicitFail(error, new ErrorInformation(null, null));
               }
-            } catch (Exception e) {
-              previousFailure = extractRuleFailedException(e);
-              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-              EObject _eContainer = inheritedField.eContainer();
-              String _stringRep = FjAltTypeSystem.this.stringRep(_eContainer);
-              String _plus = ("field already defined in superclass " + _stringRep);
-              String error = _plus;
-              throwForExplicitFail(error, new ErrorInformation(null, null));
             }
           }
         }
@@ -436,39 +440,41 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
           final Procedure1<Method> _function = new Procedure1<Method>() {
             public void apply(final Method it) {
               /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
-              RuleFailedException previousFailure = null;
-              try {
-                String _name = it.getName();
-                String _name_1 = inheritedMethod.getName();
-                boolean _notEquals = (!Objects.equal(_name, _name_1));
-                /* it.name != inheritedMethod.name */
-                if (!_notEquals) {
-                  sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
-                }
-              } catch (Exception e) {
-                previousFailure = extractRuleFailedException(e);
-                /* G |- it.type ~~ inheritedMethod.type */
-                Type _type = it.getType();
-                Type _type_1 = inheritedMethod.getType();
-                equalstypeInternal(G, _trace_, _type, _type_1);
-                EList<Parameter> _params = it.getParams();
-                int _size = _params.size();
-                EList<Parameter> _params_1 = inheritedMethod.getParams();
-                int _size_1 = _params_1.size();
-                boolean _equals = (_size == _size_1);
-                /* it.params.size == inheritedMethod.params.size */
-                if (!_equals) {
-                  sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
-                }
-                EList<Parameter> _params_2 = inheritedMethod.getParams();
-                final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
-                EList<Parameter> _params_3 = it.getParams();
-                for (final Parameter param : _params_3) {
-                  /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
-                  Type _type_2 = param.getType();
-                  Parameter _next = inheritedMethodParamsIt.next();
-                  Type _type_3 = _next.getType();
-                  equalstypeInternal(G, _trace_, _type_2, _type_3);
+              {
+                RuleFailedException previousFailure = null;
+                try {
+                  String _name = it.getName();
+                  String _name_1 = inheritedMethod.getName();
+                  boolean _notEquals = (!Objects.equal(_name, _name_1));
+                  /* it.name != inheritedMethod.name */
+                  if (!_notEquals) {
+                    sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
+                  }
+                } catch (Exception e) {
+                  previousFailure = extractRuleFailedException(e);
+                  /* G |- it.type ~~ inheritedMethod.type */
+                  Type _type = it.getType();
+                  Type _type_1 = inheritedMethod.getType();
+                  equalstypeInternal(G, _trace_, _type, _type_1);
+                  EList<Parameter> _params = it.getParams();
+                  int _size = _params.size();
+                  EList<Parameter> _params_1 = inheritedMethod.getParams();
+                  int _size_1 = _params_1.size();
+                  boolean _equals = (_size == _size_1);
+                  /* it.params.size == inheritedMethod.params.size */
+                  if (!_equals) {
+                    sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
+                  }
+                  EList<Parameter> _params_2 = inheritedMethod.getParams();
+                  final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
+                  EList<Parameter> _params_3 = it.getParams();
+                  for (final Parameter param : _params_3) {
+                    /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
+                    Type _type_2 = param.getType();
+                    Parameter _next = inheritedMethodParamsIt.next();
+                    Type _type_3 = _next.getType();
+                    equalstypeInternal(G, _trace_, _type_2, _type_3);
+                  }
                 }
               }
             }

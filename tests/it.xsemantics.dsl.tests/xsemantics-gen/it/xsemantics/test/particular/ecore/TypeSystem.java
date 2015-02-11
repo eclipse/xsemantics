@@ -632,20 +632,22 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EClass> applyRuleWithFail(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o2) throws RuleFailedException {
     EClass eClass = null; // output parameter
     /* fail or fail error "this is an error" source o2.eClass feature o2.eClass.eContainingFeature */
-    RuleFailedException previousFailure = null;
-    try {
-      /* fail */
-      throwForExplicitFail();
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* fail error "this is an error" source o2.eClass feature o2.eClass.eContainingFeature */
-      String error = "this is an error";
-      EClass _eClass = o2.eClass();
-      EObject source = _eClass;
-      EClass _eClass_1 = o2.eClass();
-      EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
-      EStructuralFeature feature = _eContainingFeature;
-      throwForExplicitFail(error, new ErrorInformation(source, feature));
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        /* fail */
+        throwForExplicitFail();
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* fail error "this is an error" source o2.eClass feature o2.eClass.eContainingFeature */
+        String error = "this is an error";
+        EClass _eClass = o2.eClass();
+        EObject source = _eClass;
+        EClass _eClass_1 = o2.eClass();
+        EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
+        EStructuralFeature feature = _eContainingFeature;
+        throwForExplicitFail(error, new ErrorInformation(source, feature));
+      }
     }
     return new Result<EClass>(eClass);
   }

@@ -586,17 +586,19 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass c = null; // output parameter
     /* var temp = c or { G |- o : var EClass temp } */
-    RuleFailedException previousFailure = null;
-    try {
-      EClass temp = c;
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* G |- o : var EClass temp */
-      EClass temp_1 = null;
-      Result<EClass> result = typeInternal(G, _trace_, o);
-      checkAssignableTo(result.getFirst(), EClass.class);
-      temp_1 = (EClass) result.getFirst();
-      
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        EClass temp = c;
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* G |- o : var EClass temp */
+        EClass temp_1 = null;
+        Result<EClass> result = typeInternal(G, _trace_, o);
+        checkAssignableTo(result.getFirst(), EClass.class);
+        temp_1 = (EClass) result.getFirst();
+        
+      }
     }
     return new Result<EClass>(c);
   }
@@ -1612,84 +1614,99 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     boolean _isEmpty = className.isEmpty();
     if (_isEmpty) {
       /* {className == 'foo'} or {className == 'bar'} or { { println(previousFailure) } or {className == 'foobar'} } */
-      RuleFailedException previousFailure = null;
-      try {
-        /* className == 'foo' */
-        if (!Objects.equal(className, "foo")) {
-          sneakyThrowRuleFailedException("className == \'foo\'");
-        }
-      } catch (Exception e) {
-        previousFailure = extractRuleFailedException(e);
-        /* {className == 'bar'} or { { println(previousFailure) } or {className == 'foobar'} } */
+      {
+        RuleFailedException previousFailure = null;
         try {
-          /* className == 'bar' */
-          if (!Objects.equal(className, "bar")) {
-            sneakyThrowRuleFailedException("className == \'bar\'");
+          /* className == 'foo' */
+          if (!Objects.equal(className, "foo")) {
+            sneakyThrowRuleFailedException("className == \'foo\'");
           }
-        } catch (Exception e_1) {
-          previousFailure = extractRuleFailedException(e_1);
-          /* { println(previousFailure) } or {className == 'foobar'} */
-          try {
-            RuleFailedException _previousFailure = previousFailure;
-            InputOutput.<RuleFailedException>println(_previousFailure);
-          } catch (Exception e_2) {
-            previousFailure = extractRuleFailedException(e_2);
-            /* className == 'foobar' */
-            if (!Objects.equal(className, "foobar")) {
-              sneakyThrowRuleFailedException("className == \'foobar\'");
+        } catch (Exception e) {
+          previousFailure = extractRuleFailedException(e);
+          /* {className == 'bar'} or { { println(previousFailure) } or {className == 'foobar'} } */
+          {
+            try {
+              /* className == 'bar' */
+              if (!Objects.equal(className, "bar")) {
+                sneakyThrowRuleFailedException("className == \'bar\'");
+              }
+            } catch (Exception e_1) {
+              previousFailure = extractRuleFailedException(e_1);
+              /* { println(previousFailure) } or {className == 'foobar'} */
+              {
+                try {
+                  RuleFailedException _previousFailure = previousFailure;
+                  InputOutput.<RuleFailedException>println(_previousFailure);
+                } catch (Exception e_2) {
+                  previousFailure = extractRuleFailedException(e_2);
+                  /* className == 'foobar' */
+                  if (!Objects.equal(className, "foobar")) {
+                    sneakyThrowRuleFailedException("className == \'foobar\'");
+                  }
+                }
+              }
             }
           }
         }
       }
       /* {className == 'foo1'} or {className == 'bar1'} or { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
-      try {
-        /* className == 'foo1' */
-        if (!Objects.equal(className, "foo1")) {
-          sneakyThrowRuleFailedException("className == \'foo1\'");
-        }
-      } catch (Exception e_3) {
-        previousFailure = extractRuleFailedException(e_3);
-        /* {className == 'bar1'} or { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+      {
+        RuleFailedException previousFailure = null;
         try {
-          /* className == 'bar1' */
-          if (!Objects.equal(className, "bar1")) {
-            sneakyThrowRuleFailedException("className == \'bar1\'");
+          /* className == 'foo1' */
+          if (!Objects.equal(className, "foo1")) {
+            sneakyThrowRuleFailedException("className == \'foo1\'");
           }
-        } catch (Exception e_4) {
-          previousFailure = extractRuleFailedException(e_4);
-          /* { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
-          try {
-            RuleFailedException _previousFailure_1 = previousFailure;
-            InputOutput.<RuleFailedException>println(_previousFailure_1);
-          } catch (Exception e_5) {
-            previousFailure = extractRuleFailedException(e_5);
-            /* fail error "this is the previous error: " + previousFailure.message source object */
-            RuleFailedException _previousFailure_2 = previousFailure;
-            String _message = _previousFailure_2.getMessage();
-            String _plus = ("this is the previous error: " + _message);
-            String error = _plus;
-            EObject source = object;
-            throwForExplicitFail(error, new ErrorInformation(source, null));
+        } catch (Exception e_3) {
+          previousFailure = extractRuleFailedException(e_3);
+          /* {className == 'bar1'} or { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+          {
+            try {
+              /* className == 'bar1' */
+              if (!Objects.equal(className, "bar1")) {
+                sneakyThrowRuleFailedException("className == \'bar1\'");
+              }
+            } catch (Exception e_4) {
+              previousFailure = extractRuleFailedException(e_4);
+              /* { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
+              {
+                try {
+                  RuleFailedException _previousFailure_1 = previousFailure;
+                  InputOutput.<RuleFailedException>println(_previousFailure_1);
+                } catch (Exception e_5) {
+                  previousFailure = extractRuleFailedException(e_5);
+                  /* fail error "this is the previous error: " + previousFailure.message source object */
+                  RuleFailedException _previousFailure_2 = previousFailure;
+                  String _message = _previousFailure_2.getMessage();
+                  String _plus = ("this is the previous error: " + _message);
+                  String error = _plus;
+                  EObject source = object;
+                  throwForExplicitFail(error, new ErrorInformation(source, null));
+                }
+              }
+            }
           }
         }
       }
     } else {
       /* {className == 'foo1'} or { fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object } */
-      RuleFailedException previousFailure = null;
-      try {
-        /* className == 'foo1' */
-        if (!Objects.equal(className, "foo1")) {
-          sneakyThrowRuleFailedException("className == \'foo1\'");
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* className == 'foo1' */
+          if (!Objects.equal(className, "foo1")) {
+            sneakyThrowRuleFailedException("className == \'foo1\'");
+          }
+        } catch (Exception e_6) {
+          previousFailure = extractRuleFailedException(e_6);
+          /* fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object */
+          RuleFailedException _previousFailure_3 = previousFailure;
+          String _failureTraceAsString = this.traceUtils.failureTraceAsString(_previousFailure_3);
+          String _plus_1 = ("this is the previous error trace: " + _failureTraceAsString);
+          String error_1 = _plus_1;
+          EObject source_1 = object;
+          throwForExplicitFail(error_1, new ErrorInformation(source_1, null));
         }
-      } catch (Exception e_6) {
-        previousFailure = extractRuleFailedException(e_6);
-        /* fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object */
-        RuleFailedException _previousFailure_3 = previousFailure;
-        String _failureTraceAsString = this.traceUtils.failureTraceAsString(_previousFailure_3);
-        String _plus_1 = ("this is the previous error trace: " + _failureTraceAsString);
-        String error_1 = _plus_1;
-        EObject source_1 = object;
-        throwForExplicitFail(error_1, new ErrorInformation(source_1, null));
       }
     }
     return new Result<Boolean>(true);
@@ -1809,33 +1826,207 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     boolean _equals = Objects.equal(_eClass, null);
     if (_equals) {
       /* empty |- it : var String result or true */
-      RuleFailedException previousFailure = null;
-      try {
-        /* empty |- it : var String result */
-        String result = null;
-        Result<String> result_1 = typeInternal(emptyEnvironment(), _trace_, it);
-        checkAssignableTo(result_1.getFirst(), String.class);
-        result = (String) result_1.getFirst();
-        
-      } catch (Exception e) {
-        previousFailure = extractRuleFailedException(e);
-        /* true */
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* empty |- it : var String result */
+          String result = null;
+          Result<String> result_1 = typeInternal(emptyEnvironment(), _trace_, it);
+          checkAssignableTo(result_1.getFirst(), String.class);
+          result = (String) result_1.getFirst();
+          
+        } catch (Exception e) {
+          previousFailure = extractRuleFailedException(e);
+          /* true */
+        }
       }
     } else {
       InputOutput.println();
       /* empty |- eClass : var String result or true */
-      RuleFailedException previousFailure = null;
-      try {
-        /* empty |- eClass : var String result */
-        EClass _eClass_1 = it.eClass();
-        String result_2 = null;
-        Result<String> result_3 = typeInternal(emptyEnvironment(), _trace_, _eClass_1);
-        checkAssignableTo(result_3.getFirst(), String.class);
-        result_2 = (String) result_3.getFirst();
-        
-      } catch (Exception e_1) {
-        previousFailure = extractRuleFailedException(e_1);
-        /* true */
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* empty |- eClass : var String result */
+          EClass _eClass_1 = it.eClass();
+          String result_2 = null;
+          Result<String> result_3 = typeInternal(emptyEnvironment(), _trace_, _eClass_1);
+          checkAssignableTo(result_3.getFirst(), String.class);
+          result_2 = (String) result_3.getFirst();
+          
+        } catch (Exception e_1) {
+          previousFailure = extractRuleFailedException(e_1);
+          /* true */
+        }
+      }
+    }
+    return new Result<String>(_applyRuleTypeFoo_1(G, it));
+  }
+  
+  private String _applyRuleTypeFoo_1(final RuleEnvironment G, final EObject it) throws RuleFailedException {
+    return "Foo";
+  }
+}
+'''
+		)
+	}
+
+	@Test
+	def testOrExpressionInIfThenElse_Issue_46_2() {
+		// https://github.com/LorenzoBettini/xsemantics/issues/46
+		'''
+import org.eclipse.emf.ecore.EObject
+
+system it.xsemantics.test.TypeSystem
+
+judgments {
+    type |- EObject it : output String
+}
+
+rule typeFoo
+    G |- EObject it : "Foo"
+from {
+	if( eClass == null ){
+        empty |- it : var String result
+        or true
+    } else {
+        empty |- eClass : var String result
+        or true
+
+        empty |- eClass : var String result
+        or true
+    }
+}
+		'''.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import com.google.common.base.Objects;
+import com.google.inject.Provider;
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String TYPEFOO = "it.xsemantics.test.TypeFoo";
+  
+  private PolymorphicDispatcher<Result<String>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+  }
+  
+  public Result<String> type(final EObject it) {
+    return type(new RuleEnvironment(), null, it);
+  }
+  
+  public Result<String> type(final RuleEnvironment _environment_, final EObject it) {
+    return type(_environment_, null, it);
+  }
+  
+  public Result<String> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject it) {
+    try {
+    	return typeInternal(_environment_, _trace_, it);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  protected Result<String> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject it) {
+    try {
+    	checkParamsNotNull(it);
+    	return typeDispatcher.invoke(_environment_, _trace_, it);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject it, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<String> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject it) throws RuleFailedException {
+    try {
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<String> _result_ = applyRuleTypeFoo(G, _subtrace_, it);
+    	addToTrace(_trace_, new Provider<Object>() {
+    		public Object get() {
+    			return ruleName("typeFoo") + stringRepForEnv(G) + " |- " + stringRep(it) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleTypeFoo) {
+    	typeThrowException(ruleName("typeFoo") + stringRepForEnv(G) + " |- " + stringRep(it) + " : " + "String",
+    		TYPEFOO,
+    		e_applyRuleTypeFoo, it, new ErrorInformation[] {new ErrorInformation(it)});
+    	return null;
+    }
+  }
+  
+  protected Result<String> applyRuleTypeFoo(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject it) throws RuleFailedException {
+    EClass _eClass = it.eClass();
+    boolean _equals = Objects.equal(_eClass, null);
+    if (_equals) {
+      /* empty |- it : var String result or true */
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* empty |- it : var String result */
+          String result = null;
+          Result<String> result_1 = typeInternal(emptyEnvironment(), _trace_, it);
+          checkAssignableTo(result_1.getFirst(), String.class);
+          result = (String) result_1.getFirst();
+          
+        } catch (Exception e) {
+          previousFailure = extractRuleFailedException(e);
+          /* true */
+        }
+      }
+    } else {
+      /* empty |- eClass : var String result or true */
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* empty |- eClass : var String result */
+          EClass _eClass_1 = it.eClass();
+          String result_2 = null;
+          Result<String> result_3 = typeInternal(emptyEnvironment(), _trace_, _eClass_1);
+          checkAssignableTo(result_3.getFirst(), String.class);
+          result_2 = (String) result_3.getFirst();
+          
+        } catch (Exception e_1) {
+          previousFailure = extractRuleFailedException(e_1);
+          /* true */
+        }
+      }
+      /* empty |- eClass : var String result or true */
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          /* empty |- eClass : var String result */
+          EClass _eClass_2 = it.eClass();
+          String result_4 = null;
+          Result<String> result_5 = typeInternal(emptyEnvironment(), _trace_, _eClass_2);
+          checkAssignableTo(result_5.getFirst(), String.class);
+          result_4 = (String) result_5.getFirst();
+          
+        } catch (Exception e_2) {
+          previousFailure = extractRuleFailedException(e_2);
+          /* true */
+        }
       }
     }
     return new Result<String>(_applyRuleTypeFoo_1(G, it));
