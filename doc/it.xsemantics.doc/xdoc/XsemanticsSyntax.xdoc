@@ -795,6 +795,26 @@ on the plugin code[it.xsemantics.runtime].  Thus, in case you want to deploy
 your Xtext language implemented making use of Xsemantics, your language will
 not need to depend on the whole Xsemantics SDK.
 
+section2:GeneratedPackage[The Generated Java Packages]
+
+Xsemantics will generate the Java classes into Java packages according to
+the fully qualified name specified for your system.
+
+For example, given this system fully qualified name
+
+code[Xsemantics][
+system it.xsemantics.example.fj.typing.FjTypeSystem
+]
+
+The generated Java class for the rule system (ref:GeneratedSystem) will
+be generated in the Java package code[it.xsemantics.example.fj.typing] and
+the generated Java validator (ref:GeneratedValidator) will be generated in the
+package code[it.xsemantics.example.fj.typing.validation].
+
+If you plan to reuse these Java classes in other Eclipse projects
+(e.g., in the UI project or in the test project), please make sure to
+export such Java packages in the MANIFEST.MF.
+
 section2:GeneratedSystem[The Generated Java Rule System]
 
 The generated Java class containing the rules of your system will have
