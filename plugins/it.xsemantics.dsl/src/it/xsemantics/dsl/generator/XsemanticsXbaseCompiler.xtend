@@ -359,14 +359,29 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def dispatch void doInternalToJavaStatement(OrExpression orExpression,
 			ITreeAppendable b, boolean isReferenced) {
 		generateCommentWithOriginalCode(orExpression, b);
-		
-		if (bracesAreAddedByOuterStructure(orExpression) || !b.hasObject(XsemanticsConstants.PREVIOUS_FAILURE)) {
-			// we must declare it only once per Java scope
-			b.newLine;
-			b.declareVariable(
-					orExpression, XsemanticsConstants.PREVIOUS_FAILURE);
-			b.append(orExpression.ruleFailedExceptionType().getType())
-			b.append(" " + XsemanticsConstants.PREVIOUS_FAILURE + " = null;");
+
+		val previousFailureDeclared = b.hasObject(XsemanticsConstants.PREVIOUS_FAILURE)
+		// we must declare it only once per Java scope
+		if (bracesAreAddedByOuterStructure(orExpression) || !previousFailureDeclared) {
+			declarePreviousFailureVariable(orExpression, b);
+		} else if (previousFailureDeclared) {
+			// https://github.com/LorenzoBettini/xsemantics/issues/46
+			// the or expression which declares previousFailure
+			val elementDeclaringPreviousFailure = 
+				b.getObject(XsemanticsConstants.PREVIOUS_FAILURE) as OrExpression
+			
+			val declaringContainer = elementDeclaringPreviousFailure.eContainer
+			var EObject container = orExpression.eContainer
+			
+			while (container != null && container != declaringContainer) {
+				container = container.eContainer
+			}
+			
+			// if they there's no common container then we must declare
+			// previousFailure in this scope
+			if (container == null) {
+				declarePreviousFailureVariable(orExpression, b);
+			}
 		}
 
 		val left = orExpression.getBranches().get(0);
@@ -383,6 +398,14 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		compileBooleanXExpression(right, b, false);
 
 		closeBracket(b);
+	}
+	
+	def declarePreviousFailureVariable(OrExpression orExpression, ITreeAppendable b) {
+		b.newLine;
+		b.declareVariable(
+				orExpression, XsemanticsConstants.PREVIOUS_FAILURE);
+		b.append(orExpression.ruleFailedExceptionType().getType())
+		b.append(" " + XsemanticsConstants.PREVIOUS_FAILURE + " = null;")
 	}
 
 	def dispatch void doInternalToJavaStatement(Fail fail, ITreeAppendable b,
