@@ -569,23 +569,25 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     boolean _notEquals = (!Objects.equal(_superclass, null));
     if (_notEquals) {
       /* !superclasses(cl).contains(cl) or fail error "Cyclic hierarchy for " + cl.name source cl */
-      RuleFailedException previousFailure = null;
-      try {
-        List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, cl);
-        boolean _contains = _superclasses.contains(cl);
-        boolean _not = (!_contains);
-        /* !superclasses(cl).contains(cl) */
-        if (!_not) {
-          sneakyThrowRuleFailedException("!superclasses(cl).contains(cl)");
+      {
+        RuleFailedException previousFailure = null;
+        try {
+          List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, cl);
+          boolean _contains = _superclasses.contains(cl);
+          boolean _not = (!_contains);
+          /* !superclasses(cl).contains(cl) */
+          if (!_not) {
+            sneakyThrowRuleFailedException("!superclasses(cl).contains(cl)");
+          }
+        } catch (Exception e) {
+          previousFailure = extractRuleFailedException(e);
+          /* fail error "Cyclic hierarchy for " + cl.name source cl */
+          String _name = cl.getName();
+          String _plus = ("Cyclic hierarchy for " + _name);
+          String error = _plus;
+          EObject source = cl;
+          throwForExplicitFail(error, new ErrorInformation(source, null));
         }
-      } catch (Exception e) {
-        previousFailure = extractRuleFailedException(e);
-        /* fail error "Cyclic hierarchy for " + cl.name source cl */
-        String _name = cl.getName();
-        String _plus = ("Cyclic hierarchy for " + _name);
-        String error = _plus;
-        EObject source = cl;
-        throwForExplicitFail(error, new ErrorInformation(source, null));
       }
     }
     return new Result<Boolean>(true);
@@ -605,23 +607,25 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main : var Type mainType */
-    RuleFailedException previousFailure = null;
-    try {
-      Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
-      /* program.main == null */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("program.main == null");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        Expression _main = program.getMain();
+        boolean _equals = Objects.equal(_main, null);
+        /* program.main == null */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("program.main == null");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* empty |- program.main : var Type mainType */
+        Expression _main_1 = program.getMain();
+        Type mainType = null;
+        Result<Type> result = typeInternal(emptyEnvironment(), _trace_, _main_1);
+        checkAssignableTo(result.getFirst(), Type.class);
+        mainType = (Type) result.getFirst();
+        
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* empty |- program.main : var Type mainType */
-      Expression _main_1 = program.getMain();
-      Type mainType = null;
-      Result<Type> result = typeInternal(emptyEnvironment(), _trace_, _main_1);
-      checkAssignableTo(result.getFirst(), Type.class);
-      mainType = (Type) result.getFirst();
-      
     }
     return new Result<Boolean>(true);
   }
@@ -982,53 +986,57 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Boolean applyAuxFunOverrides(final RuleApplicationTrace _trace_, final Method current, final Method previous) throws RuleFailedException {
     /* current.name != previous.name or { empty |- current.type ~~ previous.type or fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type current.params.size == previous.params.size val previousParamsIt = previous.params.iterator for (param : current.params) { empty |- param.type ~~ previousParamsIt.next.type } } */
-    RuleFailedException previousFailure = null;
-    try {
-      String _name = current.getName();
-      String _name_1 = previous.getName();
-      boolean _notEquals = (!Objects.equal(_name, _name_1));
-      /* current.name != previous.name */
-      if (!_notEquals) {
-        sneakyThrowRuleFailedException("current.name != previous.name");
-      }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* empty |- current.type ~~ previous.type or fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
+    {
+      RuleFailedException previousFailure = null;
       try {
-        /* empty |- current.type ~~ previous.type */
-        Type _type = current.getType();
-        Type _type_1 = previous.getType();
-        equalstypeInternal(emptyEnvironment(), _trace_, _type, _type_1);
-      } catch (Exception e_1) {
-        previousFailure = extractRuleFailedException(e_1);
-        /* fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
-        Type _type_2 = previous.getType();
-        String _stringRep = this.stringRep(_type_2);
-        String _plus = ("cannot change return type of inherited method: " + _stringRep);
-        String error = _plus;
-        EObject source = current;
-        EReference _typedElement_Type = FjPackage.eINSTANCE.getTypedElement_Type();
-        EStructuralFeature feature = _typedElement_Type;
-        throwForExplicitFail(error, new ErrorInformation(source, feature));
-      }
-      EList<Parameter> _params = current.getParams();
-      int _size = _params.size();
-      EList<Parameter> _params_1 = previous.getParams();
-      int _size_1 = _params_1.size();
-      boolean _equals = (_size == _size_1);
-      /* current.params.size == previous.params.size */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("current.params.size == previous.params.size");
-      }
-      EList<Parameter> _params_2 = previous.getParams();
-      final Iterator<Parameter> previousParamsIt = _params_2.iterator();
-      EList<Parameter> _params_3 = current.getParams();
-      for (final Parameter param : _params_3) {
-        /* empty |- param.type ~~ previousParamsIt.next.type */
-        Type _type_3 = param.getType();
-        Parameter _next = previousParamsIt.next();
-        Type _type_4 = _next.getType();
-        equalstypeInternal(emptyEnvironment(), _trace_, _type_3, _type_4);
+        String _name = current.getName();
+        String _name_1 = previous.getName();
+        boolean _notEquals = (!Objects.equal(_name, _name_1));
+        /* current.name != previous.name */
+        if (!_notEquals) {
+          sneakyThrowRuleFailedException("current.name != previous.name");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* empty |- current.type ~~ previous.type or fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
+        {
+          try {
+            /* empty |- current.type ~~ previous.type */
+            Type _type = current.getType();
+            Type _type_1 = previous.getType();
+            equalstypeInternal(emptyEnvironment(), _trace_, _type, _type_1);
+          } catch (Exception e_1) {
+            previousFailure = extractRuleFailedException(e_1);
+            /* fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
+            Type _type_2 = previous.getType();
+            String _stringRep = this.stringRep(_type_2);
+            String _plus = ("cannot change return type of inherited method: " + _stringRep);
+            String error = _plus;
+            EObject source = current;
+            EReference _typedElement_Type = FjPackage.eINSTANCE.getTypedElement_Type();
+            EStructuralFeature feature = _typedElement_Type;
+            throwForExplicitFail(error, new ErrorInformation(source, feature));
+          }
+        }
+        EList<Parameter> _params = current.getParams();
+        int _size = _params.size();
+        EList<Parameter> _params_1 = previous.getParams();
+        int _size_1 = _params_1.size();
+        boolean _equals = (_size == _size_1);
+        /* current.params.size == previous.params.size */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("current.params.size == previous.params.size");
+        }
+        EList<Parameter> _params_2 = previous.getParams();
+        final Iterator<Parameter> previousParamsIt = _params_2.iterator();
+        EList<Parameter> _params_3 = current.getParams();
+        for (final Parameter param : _params_3) {
+          /* empty |- param.type ~~ previousParamsIt.next.type */
+          Type _type_3 = param.getType();
+          Parameter _next = previousParamsIt.next();
+          Type _type_4 = _next.getType();
+          equalstypeInternal(emptyEnvironment(), _trace_, _type_3, _type_4);
+        }
       }
     }
     return true;
@@ -1444,16 +1452,18 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     expType = (Type) result.getFirst();
     
     /* G |- cast.type <: expType or G |- expType <: cast.type */
-    RuleFailedException previousFailure = null;
-    try {
-      /* G |- cast.type <: expType */
-      ClassType _type = cast.getType();
-      subtypeInternal(G, _trace_, _type, expType);
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* G |- expType <: cast.type */
-      ClassType _type_1 = cast.getType();
-      subtypeInternal(G, _trace_, expType, _type_1);
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        /* G |- cast.type <: expType */
+        ClassType _type = cast.getType();
+        subtypeInternal(G, _trace_, _type, expType);
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* G |- expType <: cast.type */
+        ClassType _type_1 = cast.getType();
+        subtypeInternal(G, _trace_, expType, _type_1);
+      }
     }
     return new Result<Type>(_applyRuleTCast_1(G, cast));
   }
@@ -1578,34 +1588,38 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     /* left.classref == right.classref or right.classref.name == "Object" or { superclasses(left.classref).contains(right.classref) } */
-    RuleFailedException previousFailure = null;
-    try {
-      it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
-      it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
-      boolean _equals = Objects.equal(_classref, _classref_1);
-      /* left.classref == right.classref */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("left.classref == right.classref");
-      }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* right.classref.name == "Object" or { superclasses(left.classref).contains(right.classref) } */
+    {
+      RuleFailedException previousFailure = null;
       try {
-        it.xsemantics.example.fj.fj.Class _classref_2 = right.getClassref();
-        String _name = _classref_2.getName();
-        boolean _equals_1 = Objects.equal(_name, "Object");
-        /* right.classref.name == "Object" */
-        if (!_equals_1) {
-          sneakyThrowRuleFailedException("right.classref.name == \"Object\"");
+        it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
+        it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
+        boolean _equals = Objects.equal(_classref, _classref_1);
+        /* left.classref == right.classref */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("left.classref == right.classref");
         }
-      } catch (Exception e_1) {
-        previousFailure = extractRuleFailedException(e_1);
-        it.xsemantics.example.fj.fj.Class _classref_3 = left.getClassref();
-        List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref_3);
-        it.xsemantics.example.fj.fj.Class _classref_4 = right.getClassref();
-        /* superclasses(left.classref).contains(right.classref) */
-        if (!_superclasses.contains(_classref_4)) {
-          sneakyThrowRuleFailedException("superclasses(left.classref).contains(right.classref)");
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* right.classref.name == "Object" or { superclasses(left.classref).contains(right.classref) } */
+        {
+          try {
+            it.xsemantics.example.fj.fj.Class _classref_2 = right.getClassref();
+            String _name = _classref_2.getName();
+            boolean _equals_1 = Objects.equal(_name, "Object");
+            /* right.classref.name == "Object" */
+            if (!_equals_1) {
+              sneakyThrowRuleFailedException("right.classref.name == \"Object\"");
+            }
+          } catch (Exception e_1) {
+            previousFailure = extractRuleFailedException(e_1);
+            it.xsemantics.example.fj.fj.Class _classref_3 = left.getClassref();
+            List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref_3);
+            it.xsemantics.example.fj.fj.Class _classref_4 = right.getClassref();
+            /* superclasses(left.classref).contains(right.classref) */
+            if (!_superclasses.contains(_classref_4)) {
+              sneakyThrowRuleFailedException("superclasses(left.classref).contains(right.classref)");
+            }
+          }
         }
       }
     }
@@ -1758,26 +1772,28 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleSubtypeSequence(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Expression owner, final List<Expression> expressions, final List<TypedElement> typedElements) throws RuleFailedException {
     /* expressions.size == typedElements.size or fail error "expected " + typedElements.size + " arguments, but got " + expressions.size source owner */
-    RuleFailedException previousFailure = null;
-    try {
-      int _size = expressions.size();
-      int _size_1 = typedElements.size();
-      boolean _equals = (_size == _size_1);
-      /* expressions.size == typedElements.size */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("expressions.size == typedElements.size");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        int _size = expressions.size();
+        int _size_1 = typedElements.size();
+        boolean _equals = (_size == _size_1);
+        /* expressions.size == typedElements.size */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("expressions.size == typedElements.size");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* fail error "expected " + typedElements.size + " arguments, but got " + expressions.size source owner */
+        int _size_2 = typedElements.size();
+        String _plus = ("expected " + Integer.valueOf(_size_2));
+        String _plus_1 = (_plus + " arguments, but got ");
+        int _size_3 = expressions.size();
+        String _plus_2 = (_plus_1 + Integer.valueOf(_size_3));
+        String error = _plus_2;
+        EObject source = owner;
+        throwForExplicitFail(error, new ErrorInformation(source, null));
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* fail error "expected " + typedElements.size + " arguments, but got " + expressions.size source owner */
-      int _size_2 = typedElements.size();
-      String _plus = ("expected " + Integer.valueOf(_size_2));
-      String _plus_1 = (_plus + " arguments, but got ");
-      int _size_3 = expressions.size();
-      String _plus_2 = (_plus_1 + Integer.valueOf(_size_3));
-      String error = _plus_2;
-      EObject source = owner;
-      throwForExplicitFail(error, new ErrorInformation(source, null));
     }
     final Iterator<TypedElement> typedElementsIterator = typedElements.iterator();
     for (final Expression exp : expressions) {
@@ -1821,24 +1837,26 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     };
     final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
     /* { indexOfNextToReduce < 0 } or { val nextToReduce = exp1.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression expi exp1.args.set(indexOfNextToReduce, expi) } */
-    RuleFailedException previousFailure = null;
-    try {
-      /* indexOfNextToReduce < 0 */
-      if (!(indexOfNextToReduce < 0)) {
-        sneakyThrowRuleFailedException("indexOfNextToReduce < 0");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        /* indexOfNextToReduce < 0 */
+        if (!(indexOfNextToReduce < 0)) {
+          sneakyThrowRuleFailedException("indexOfNextToReduce < 0");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        EList<Expression> _args_1 = exp1.getArgs();
+        final Expression nextToReduce = _args_1.get(indexOfNextToReduce);
+        /* G |- nextToReduce ~> var Expression expi */
+        Expression expi = null;
+        Result<Expression> result = reduceInternal(G, _trace_, nextToReduce);
+        checkAssignableTo(result.getFirst(), Expression.class);
+        expi = (Expression) result.getFirst();
+        
+        EList<Expression> _args_2 = exp1.getArgs();
+        _args_2.set(indexOfNextToReduce, expi);
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      EList<Expression> _args_1 = exp1.getArgs();
-      final Expression nextToReduce = _args_1.get(indexOfNextToReduce);
-      /* G |- nextToReduce ~> var Expression expi */
-      Expression expi = null;
-      Result<Expression> result = reduceInternal(G, _trace_, nextToReduce);
-      checkAssignableTo(result.getFirst(), Expression.class);
-      expi = (Expression) result.getFirst();
-      
-      EList<Expression> _args_2 = exp1.getArgs();
-      _args_2.set(indexOfNextToReduce, expi);
     }
     return new Result<Expression>(exp1);
   }
@@ -1865,89 +1883,93 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Expression> applyRuleRSelection(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection exp) throws RuleFailedException {
     Expression exp1 = null; // output parameter
     /* { val sel = clone(exp) !isValue(exp.receiver) G |- exp.receiver ~> var Expression expi sel.receiver = expi exp1 = sel } or { val receiver = exp.receiver as New val message = exp.message switch (message) { Field: { val fieldIndex = Iterables::indexOf(fields(receiver.type.classref)) [ name == message.name ] exp1 = receiver.args.get(fieldIndex) } Method: { val indexOfNextToReduce = Iterables::indexOf(exp.args) [ !isValue(it) ] { indexOfNextToReduce < 0 val method = exp.message as Method exp1 = replaceThisAndParams( method.body, receiver, method.params, exp.args).expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } } } } */
-    RuleFailedException previousFailure = null;
-    try {
-      final Selection sel = this.<Selection>clone(exp);
-      Expression _receiver = exp.getReceiver();
-      Boolean _isValue = this.isValueInternal(_trace_, _receiver);
-      boolean _not = (!(_isValue).booleanValue());
-      /* !isValue(exp.receiver) */
-      if (!_not) {
-        sneakyThrowRuleFailedException("!isValue(exp.receiver)");
-      }
-      /* G |- exp.receiver ~> var Expression expi */
-      Expression _receiver_1 = exp.getReceiver();
-      Expression expi = null;
-      Result<Expression> result = reduceInternal(G, _trace_, _receiver_1);
-      checkAssignableTo(result.getFirst(), Expression.class);
-      expi = (Expression) result.getFirst();
-      
-      sel.setReceiver(expi);
-      exp1 = sel;
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      Expression _receiver_2 = exp.getReceiver();
-      final New receiver = ((New) _receiver_2);
-      final Member message = exp.getMessage();
-      boolean _matched = false;
-      if (!_matched) {
-        if (message instanceof Field) {
-          _matched=true;
-          ClassType _type = receiver.getType();
-          it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-          List<Field> _fields = this.fieldsInternal(_trace_, _classref);
-          final Predicate<Field> _function = new Predicate<Field>() {
-            public boolean apply(final Field it) {
-              String _name = it.getName();
-              String _name_1 = ((Field)message).getName();
-              return Objects.equal(_name, _name_1);
-            }
-          };
-          final int fieldIndex = Iterables.<Field>indexOf(_fields, _function);
-          EList<Expression> _args = receiver.getArgs();
-          Expression _get = _args.get(fieldIndex);
-          exp1 = _get;
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        final Selection sel = this.<Selection>clone(exp);
+        Expression _receiver = exp.getReceiver();
+        Boolean _isValue = this.isValueInternal(_trace_, _receiver);
+        boolean _not = (!(_isValue).booleanValue());
+        /* !isValue(exp.receiver) */
+        if (!_not) {
+          sneakyThrowRuleFailedException("!isValue(exp.receiver)");
         }
-      }
-      if (!_matched) {
-        if (message instanceof Method) {
-          _matched=true;
-          EList<Expression> _args = exp.getArgs();
-          final Predicate<Expression> _function = new Predicate<Expression>() {
-            public boolean apply(final Expression it) {
-              Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
-              return (!(_isValue).booleanValue());
+        /* G |- exp.receiver ~> var Expression expi */
+        Expression _receiver_1 = exp.getReceiver();
+        Expression expi = null;
+        Result<Expression> result = reduceInternal(G, _trace_, _receiver_1);
+        checkAssignableTo(result.getFirst(), Expression.class);
+        expi = (Expression) result.getFirst();
+        
+        sel.setReceiver(expi);
+        exp1 = sel;
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        Expression _receiver_2 = exp.getReceiver();
+        final New receiver = ((New) _receiver_2);
+        final Member message = exp.getMessage();
+        boolean _matched = false;
+        if (!_matched) {
+          if (message instanceof Field) {
+            _matched=true;
+            ClassType _type = receiver.getType();
+            it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
+            List<Field> _fields = this.fieldsInternal(_trace_, _classref);
+            final Predicate<Field> _function = new Predicate<Field>() {
+              public boolean apply(final Field it) {
+                String _name = it.getName();
+                String _name_1 = ((Field)message).getName();
+                return Objects.equal(_name, _name_1);
+              }
+            };
+            final int fieldIndex = Iterables.<Field>indexOf(_fields, _function);
+            EList<Expression> _args = receiver.getArgs();
+            Expression _get = _args.get(fieldIndex);
+            exp1 = _get;
+          }
+        }
+        if (!_matched) {
+          if (message instanceof Method) {
+            _matched=true;
+            EList<Expression> _args = exp.getArgs();
+            final Predicate<Expression> _function = new Predicate<Expression>() {
+              public boolean apply(final Expression it) {
+                Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
+                return (!(_isValue).booleanValue());
+              }
+            };
+            final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
+            /* { indexOfNextToReduce < 0 val method = exp.message as Method exp1 = replaceThisAndParams( method.body, receiver, method.params, exp.args).expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
+            {
+              try {
+                /* indexOfNextToReduce < 0 */
+                if (!(indexOfNextToReduce < 0)) {
+                  sneakyThrowRuleFailedException("indexOfNextToReduce < 0");
+                }
+                Member _message = exp.getMessage();
+                final Method method = ((Method) _message);
+                MethodBody _body = method.getBody();
+                EList<Parameter> _params = method.getParams();
+                EList<Expression> _args_1 = exp.getArgs();
+                MethodBody _replaceThisAndParams = this.replaceThisAndParamsInternal(_trace_, _body, receiver, _params, _args_1);
+                Expression _expression = _replaceThisAndParams.getExpression();
+                exp1 = _expression;
+              } catch (Exception e_1) {
+                previousFailure = extractRuleFailedException(e_1);
+                final Selection sel_1 = this.<Selection>clone(exp);
+                EList<Expression> _args_2 = sel_1.getArgs();
+                final Expression nextToReduce = _args_2.get(indexOfNextToReduce);
+                /* G |- nextToReduce ~> var Expression argi */
+                Expression argi = null;
+                Result<Expression> result_1 = reduceInternal(G, _trace_, nextToReduce);
+                checkAssignableTo(result_1.getFirst(), Expression.class);
+                argi = (Expression) result_1.getFirst();
+                
+                EList<Expression> _args_3 = sel_1.getArgs();
+                _args_3.set(indexOfNextToReduce, argi);
+                exp1 = sel_1;
+              }
             }
-          };
-          final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
-          /* { indexOfNextToReduce < 0 val method = exp.message as Method exp1 = replaceThisAndParams( method.body, receiver, method.params, exp.args).expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
-          try {
-            /* indexOfNextToReduce < 0 */
-            if (!(indexOfNextToReduce < 0)) {
-              sneakyThrowRuleFailedException("indexOfNextToReduce < 0");
-            }
-            Member _message = exp.getMessage();
-            final Method method = ((Method) _message);
-            MethodBody _body = method.getBody();
-            EList<Parameter> _params = method.getParams();
-            EList<Expression> _args_1 = exp.getArgs();
-            MethodBody _replaceThisAndParams = this.replaceThisAndParamsInternal(_trace_, _body, receiver, _params, _args_1);
-            Expression _expression = _replaceThisAndParams.getExpression();
-            exp1 = _expression;
-          } catch (Exception e_1) {
-            previousFailure = extractRuleFailedException(e_1);
-            final Selection sel_1 = this.<Selection>clone(exp);
-            EList<Expression> _args_2 = sel_1.getArgs();
-            final Expression nextToReduce = _args_2.get(indexOfNextToReduce);
-            /* G |- nextToReduce ~> var Expression argi */
-            Expression argi = null;
-            Result<Expression> result_1 = reduceInternal(G, _trace_, nextToReduce);
-            checkAssignableTo(result_1.getFirst(), Expression.class);
-            argi = (Expression) result_1.getFirst();
-            
-            EList<Expression> _args_3 = sel_1.getArgs();
-            _args_3.set(indexOfNextToReduce, argi);
-            exp1 = sel_1;
           }
         }
       }

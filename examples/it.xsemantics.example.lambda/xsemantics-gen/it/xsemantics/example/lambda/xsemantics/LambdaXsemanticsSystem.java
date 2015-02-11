@@ -751,21 +751,23 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   protected Result<Type> applyRuleParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     Type type = null; // output parameter
     /* { param.type != null type = EcoreUtil::copy(param.type) } or type = lambdaUtils.createFreshTypeVariable */
-    RuleFailedException previousFailure = null;
-    try {
-      Type _type = param.getType();
-      boolean _notEquals = (!Objects.equal(_type, null));
-      /* param.type != null */
-      if (!_notEquals) {
-        sneakyThrowRuleFailedException("param.type != null");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        Type _type = param.getType();
+        boolean _notEquals = (!Objects.equal(_type, null));
+        /* param.type != null */
+        if (!_notEquals) {
+          sneakyThrowRuleFailedException("param.type != null");
+        }
+        Type _type_1 = param.getType();
+        Type _copy = EcoreUtil.<Type>copy(_type_1);
+        type = _copy;
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        TypeVariable _createFreshTypeVariable = this.lambdaUtils.createFreshTypeVariable();
+        type = _createFreshTypeVariable;
       }
-      Type _type_1 = param.getType();
-      Type _copy = EcoreUtil.<Type>copy(_type_1);
-      type = _copy;
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      TypeVariable _createFreshTypeVariable = this.lambdaUtils.createFreshTypeVariable();
-      type = _createFreshTypeVariable;
     }
     return new Result<Type>(type);
   }

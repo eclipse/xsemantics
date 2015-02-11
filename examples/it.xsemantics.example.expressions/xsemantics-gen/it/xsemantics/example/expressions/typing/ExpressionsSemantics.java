@@ -434,33 +434,35 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     rightType = (Type) result_1.getFirst();
     
     /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
-    RuleFailedException previousFailure = null;
-    try {
-      boolean _or = false;
-      if ((leftType instanceof StringType)) {
-        _or = true;
-      } else {
-        _or = (rightType instanceof StringType);
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        boolean _or = false;
+        if ((leftType instanceof StringType)) {
+          _or = true;
+        } else {
+          _or = (rightType instanceof StringType);
+        }
+        /* leftType instanceof StringType || rightType instanceof StringType */
+        if (!_or) {
+          sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
+        }
+        StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
+        type = _createStringType;
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        boolean _and = false;
+        if (!(leftType instanceof IntType)) {
+          _and = false;
+        } else {
+          _and = (rightType instanceof IntType);
+        }
+        /* leftType instanceof IntType && rightType instanceof IntType */
+        if (!_and) {
+          sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
+        }
+        type = leftType;
       }
-      /* leftType instanceof StringType || rightType instanceof StringType */
-      if (!_or) {
-        sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
-      }
-      StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-      type = _createStringType;
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      boolean _and = false;
-      if (!(leftType instanceof IntType)) {
-        _and = false;
-      } else {
-        _and = (rightType instanceof IntType);
-      }
-      /* leftType instanceof IntType && rightType instanceof IntType */
-      if (!_and) {
-        sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
-      }
-      type = leftType;
     }
     return new Result<Type>(type);
   }

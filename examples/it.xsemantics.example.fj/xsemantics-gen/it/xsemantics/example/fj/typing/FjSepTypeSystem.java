@@ -159,19 +159,21 @@ public class FjSepTypeSystem extends FjTypeSystem {
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main */
-    RuleFailedException previousFailure = null;
-    try {
-      Expression _main = program.getMain();
-      boolean _equals = Objects.equal(_main, null);
-      /* program.main == null */
-      if (!_equals) {
-        sneakyThrowRuleFailedException("program.main == null");
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        Expression _main = program.getMain();
+        boolean _equals = Objects.equal(_main, null);
+        /* program.main == null */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("program.main == null");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* empty |- program.main */
+        Expression _main_1 = program.getMain();
+        checkInternal(emptyEnvironment(), _trace_, _main_1);
       }
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* empty |- program.main */
-      Expression _main_1 = program.getMain();
-      checkInternal(emptyEnvironment(), _trace_, _main_1);
     }
     return new Result<Boolean>(true);
   }
@@ -593,16 +595,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
     expType = (Type) result.getFirst();
     
     /* G |- cast.type <: expType or G |- expType <: cast.type */
-    RuleFailedException previousFailure = null;
-    try {
-      /* G |- cast.type <: expType */
-      ClassType _type = cast.getType();
-      subtypeInternal(G, _trace_, _type, expType);
-    } catch (Exception e) {
-      previousFailure = extractRuleFailedException(e);
-      /* G |- expType <: cast.type */
-      ClassType _type_1 = cast.getType();
-      subtypeInternal(G, _trace_, expType, _type_1);
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        /* G |- cast.type <: expType */
+        ClassType _type = cast.getType();
+        subtypeInternal(G, _trace_, _type, expType);
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* G |- expType <: cast.type */
+        ClassType _type_1 = cast.getType();
+        subtypeInternal(G, _trace_, expType, _type_1);
+      }
     }
     return new Result<Boolean>(true);
   }
