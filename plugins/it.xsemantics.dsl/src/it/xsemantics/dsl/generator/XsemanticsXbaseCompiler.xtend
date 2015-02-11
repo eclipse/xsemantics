@@ -369,7 +369,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 		// we must declare it only once per Java scope
 		// see https://github.com/LorenzoBettini/xsemantics/issues/46
-		if (!orExpression.isContainedInOrExpression) {
+		if (orExpression.previousFailureMustBeDeclared) {
 			declarePreviousFailureVariable(orExpression, b);
 		}
 
@@ -399,16 +399,26 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		b.append(" " + XsemanticsConstants.PREVIOUS_FAILURE + " = null;")
 	}
 
-	def private isContainedInOrExpression(OrExpression e) {
+	def private previousFailureMustBeDeclared(OrExpression e) {
 		var container = e.eContainer
 		while (container != null) {
+			// an outer or expression already declares
+			// previousFailure variable in the generated code
 			if (container instanceof OrExpression) {
+				return false
+			}
+			
+			// previousFailure is not final, so it must not be
+			// accessible in an or expression of a lambda
+			// moreover a lambda makes contained or expressions independent
+			// from possible outer or expressions
+			if (container instanceof XClosure) {
 				return true
 			}
 
 			container = container.eContainer
 		}
-		return false
+		return true
 	}
 
 	def dispatch void doInternalToJavaStatement(Fail fail, ITreeAppendable b,

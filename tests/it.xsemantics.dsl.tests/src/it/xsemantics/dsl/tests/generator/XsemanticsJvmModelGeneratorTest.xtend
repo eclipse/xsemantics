@@ -2041,6 +2041,161 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	}
 
 	@Test
+	def testOrExpressionInLambda_Issue_46() {
+		// https://github.com/LorenzoBettini/xsemantics/issues/46
+		'''
+import org.eclipse.emf.ecore.EObject
+
+system it.xsemantics.test.TypeSystem
+
+judgments {
+    type |- EObject it : output String
+}
+
+rule typeFoo
+    G |- EObject it : "Foo"
+from {
+	empty |- eClass : var String result
+    or 
+        newArrayList().forEach[
+        	dummy |
+	        empty |- eClass : var String result
+	        or true
+        ]
+}
+		'''.assertCorrectJavaCodeGeneration(
+'''
+package it.xsemantics.test;
+
+import com.google.inject.Provider;
+import it.xsemantics.runtime.ErrorInformation;
+import it.xsemantics.runtime.Result;
+import it.xsemantics.runtime.RuleApplicationTrace;
+import it.xsemantics.runtime.RuleEnvironment;
+import it.xsemantics.runtime.RuleFailedException;
+import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.ArrayList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+@SuppressWarnings("all")
+public class TypeSystem extends XsemanticsRuntimeSystem {
+  public final static String TYPEFOO = "it.xsemantics.test.TypeFoo";
+  
+  private PolymorphicDispatcher<Result<String>> typeDispatcher;
+  
+  public TypeSystem() {
+    init();
+  }
+  
+  public void init() {
+    typeDispatcher = buildPolymorphicDispatcher1(
+    	"typeImpl", 3, "|-", ":");
+  }
+  
+  public Result<String> type(final EObject it) {
+    return type(new RuleEnvironment(), null, it);
+  }
+  
+  public Result<String> type(final RuleEnvironment _environment_, final EObject it) {
+    return type(_environment_, null, it);
+  }
+  
+  public Result<String> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject it) {
+    try {
+    	return typeInternal(_environment_, _trace_, it);
+    } catch (Exception _e_type) {
+    	return resultForFailure(_e_type);
+    }
+  }
+  
+  protected Result<String> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject it) {
+    try {
+    	checkParamsNotNull(it);
+    	return typeDispatcher.invoke(_environment_, _trace_, it);
+    } catch (Exception _e_type) {
+    	sneakyThrowRuleFailedException(_e_type);
+    	return null;
+    }
+  }
+  
+  protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject it, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    throwRuleFailedException(_error, _issue, _ex, _errorInformations);
+  }
+  
+  protected Result<String> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject it) throws RuleFailedException {
+    try {
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<String> _result_ = applyRuleTypeFoo(G, _subtrace_, it);
+    	addToTrace(_trace_, new Provider<Object>() {
+    		public Object get() {
+    			return ruleName("typeFoo") + stringRepForEnv(G) + " |- " + stringRep(it) + " : " + stringRep(_result_.getFirst());
+    		}
+    	});
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleTypeFoo) {
+    	typeThrowException(ruleName("typeFoo") + stringRepForEnv(G) + " |- " + stringRep(it) + " : " + "String",
+    		TYPEFOO,
+    		e_applyRuleTypeFoo, it, new ErrorInformation[] {new ErrorInformation(it)});
+    	return null;
+    }
+  }
+  
+  protected Result<String> applyRuleTypeFoo(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject it) throws RuleFailedException {
+    /* empty |- eClass : var String result or newArrayList().forEach[ dummy | empty |- eClass : var String result or true ] */
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        /* empty |- eClass : var String result */
+        EClass _eClass = it.eClass();
+        String result = null;
+        Result<String> result_1 = typeInternal(emptyEnvironment(), _trace_, _eClass);
+        checkAssignableTo(result_1.getFirst(), String.class);
+        result = (String) result_1.getFirst();
+        
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+        final Procedure1<Object> _function = new Procedure1<Object>() {
+          public void apply(final Object dummy) {
+            /* empty |- eClass : var String result or true */
+            {
+              RuleFailedException previousFailure = null;
+              try {
+                /* empty |- eClass : var String result */
+                EClass _eClass = it.eClass();
+                String result = null;
+                Result<String> result_1 = typeInternal(emptyEnvironment(), _trace_, _eClass);
+                checkAssignableTo(result_1.getFirst(), String.class);
+                result = (String) result_1.getFirst();
+                
+              } catch (Exception e) {
+                previousFailure = extractRuleFailedException(e);
+                /* true */
+              }
+            }
+          }
+        };
+        IterableExtensions.<Object>forEach(_newArrayList, _function);
+      }
+    }
+    return new Result<String>(_applyRuleTypeFoo_1(G, it));
+  }
+  
+  private String _applyRuleTypeFoo_1(final RuleEnvironment G, final EObject it) throws RuleFailedException {
+    return "Foo";
+  }
+}
+'''
+		)
+	}
+
+	@Test
 	def testSystemWithValidatorExtends() {
 		testFiles.testCheckRuleWithValidatorExtends.assertCorrectJavaCodeGeneration(
 			null,
