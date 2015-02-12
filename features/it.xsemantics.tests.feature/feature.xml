@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.tests.feature"
       label="Xsemantics Feature For Testing"
-      version="1.7.0.qualifier"
+      version="1.7.1.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://www.example.com/description">
