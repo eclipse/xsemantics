@@ -10,10 +10,7 @@ import it.xsemantics.example.fj.fj.Class;
 import it.xsemantics.example.fj.fj.FjFactory;
 import it.xsemantics.example.fj.fj.New;
 import it.xsemantics.example.fj.fj.Program;
-import it.xsemantics.example.fj.lookup.AuxiliaryFunctions;
-import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions;
 import it.xsemantics.example.fj.util.ClassFactory;
-import it.xsemantics.example.fj.util.FragmentPrinter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -198,40 +195,4 @@ public class ProgramTest extends TestWithLoader {
 		assertEquals(program, outputStream.toString());
 	}
 
-	/**
-	 * Print the fragments of all elements of a program, and checks
-	 * that reference to types have exactly the same fragment of the types
-	 * themselves (thus we can uniquely refer to a class in a resource
-	 * using its fragment).
-	 * 
-	 * @throws IOException
-	 */
-	public void testFragments() throws IOException {
-		FjAuxiliaryFunctions aux = new FjAuxiliaryFunctions();
-		Program program = getProgramFromString("class A { B b; A c; C m(Object a) { return new C(); } } class B {} class C {}");
-		FragmentPrinter fragmentPrinter = new FragmentPrinter();
-		//fragmentPrinter.printFragment(program.eResource());
-		String fragmentToStringA = fragmentPrinter.fragmentToString(program.getClasses()
-				.get(0));
-		String fragmentToStringB = fragmentPrinter.fragmentToString(program.getClasses()
-				.get(1));
-		String fragmentToStringC = fragmentPrinter.fragmentToString(program.getClasses()
-				.get(2));
-		String fragmentToString_btype = fragmentPrinter
-				.fragmentToString(AuxiliaryFunctions.getClassType(
-						aux.selectFields(program.getClasses().get(0)).get(0)
-								.getType()).getClassref());
-		String fragmentToString_ctype = fragmentPrinter
-				.fragmentToString(AuxiliaryFunctions.getClassType(
-						aux.selectFields(program.getClasses().get(0)).get(1)
-								.getType()).getClassref());
-		String fragmentToString_mrettype = fragmentPrinter
-				.fragmentToString(AuxiliaryFunctions.getClassType(
-						aux.selectMethods(program.getClasses().get(0)).get(0)
-								.getType()).getClassref());
-		
-		assertEquals(fragmentToStringB, fragmentToString_btype);
-		assertEquals(fragmentToStringA, fragmentToString_ctype);
-		assertEquals(fragmentToStringC, fragmentToString_mrettype);
-	}
 } // ProgramTest
