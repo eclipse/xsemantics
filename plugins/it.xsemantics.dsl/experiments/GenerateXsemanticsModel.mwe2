@@ -8,23 +8,34 @@ var projectName = "it.xsemantics.dsl"
 var runtimeProject = "../${projectName}"
 
 Workflow {
+	
+
     bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
-		registerGenModelFile = "platform:/resource/${projectName}/model/custom/Xsemantics.genmodel"
-        // The following two lines ca be removed, if Xbase is not used.
-        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+
+		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+//        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+//		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+//		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     }
 
-	component = DirectoryCleaner {
-		directory="${runtimeProject}/emf-gen"
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = "emf-gen"
 	}
 
-	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${projectName}/model/custom/Xsemantics.genmodel"
-		srcPath ="platform:/resource/${projectName}/src"
+	component = de.itemis.xcore2java.XcoreReader {
+		register = org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup {}
+		path = "model"
+		slot = "model"
+	}
+
+	component = org.eclipse.xtext.generator.GeneratorComponent {
+		register = org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup {}
+		slot = 'model'
+		outlet = {
+			path = "emf-gen"
+		}
 	}
 
 }
