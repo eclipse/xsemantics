@@ -19,7 +19,8 @@ Require-Bundle: it.xsemantics.dsl,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  it.xsemantics.example.fj.tests,
  it.xsemantics.example.fjcached.tests,
- it.xsemantics.tests.pde.utils
+ it.xsemantics.tests.pde.utils,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.junit.runner;version="4.5.0",
