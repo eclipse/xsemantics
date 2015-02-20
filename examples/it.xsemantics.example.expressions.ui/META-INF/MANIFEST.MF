@@ -22,7 +22,7 @@ Require-Bundle: it.xsemantics.example.expressions;visibility:=reexport,
  org.eclipse.xpand;bundle-version="1.4.0"
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.expressions.ui.contentassist,
  it.xsemantics.example.expressions.ui.contentassist.antlr,
  it.xsemantics.example.expressions.ui.internal,

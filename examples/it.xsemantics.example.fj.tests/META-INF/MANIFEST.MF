@@ -6,7 +6,7 @@ Bundle-Version: 1.7.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Lorenzo Bettini
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.fj.tests,
  it.xsemantics.example.fj.tests.loader,
  it.xsemantics.example.fj
