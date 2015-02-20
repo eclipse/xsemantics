@@ -13,6 +13,8 @@ import it.xsemantics.example.fj.util.ClassFactory;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author bettini
@@ -90,18 +92,22 @@ public class FjAuxiliaryFunctionTest extends TestWithLoader {
 	}
 
 	/**
-	 * Test for file classes_methods.fj
+	 * Test for method redefinitions
 	 */
-	public void testMethodsAdditions() {
-		Program program = getProgramFromResource("classes_methods.fj");
+	public void testMethodsOverridden() {
+		Program program = getProgramFromResource("classes_methods_overridden.fj");
 		assertTrue(program != null);
 		Class class1 = program.getClasses().get(2);
 		assertEquals("C", class1.getName());
 		List<Method> methods = fixture.getMethods(class1);
-		assertEquals(3, methods.size());
-		assertEquals("n", methods.get(0).getName());
-		assertEquals("o", methods.get(1).getName());
-		assertEquals("m", methods.get(2).getName());
+		assertEquals(2, methods.size());
+		Method m;
+		m = methodByName(methods, "m");
+		// take the overridden version in B
+		assertSame(program.getClasses().get(1), m.eContainer());
+		m = methodByName(methods, "n");
+		// take the overridden version in C
+		assertSame(program.getClasses().get(2), m.eContainer());
 	}
 
 	public void testSuperclasses() {
@@ -125,4 +131,12 @@ public class FjAuxiliaryFunctionTest extends TestWithLoader {
 		assertTrue(superClasses.contains(c2));
 	}
 
+	private Method methodByName(List<Method> methods, final String name) {
+		return IterableExtensions.findFirst(methods, new Functions.Function1<Method, Boolean>() {
+
+			public Boolean apply(Method p) {
+				return p.getName().equals(name);
+			}
+		});
+	}
 }
