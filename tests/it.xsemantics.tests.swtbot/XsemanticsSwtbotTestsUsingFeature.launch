@@ -12,7 +12,7 @@
 <booleanAttribute key="clearwslog" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/pde-junit"/>
 <booleanAttribute key="default" value="false"/>
-<stringAttribute key="deselected_workspace_plugins" value="it.xsemantics.build.tools,it.xsemantics.doc,it.xsemantics.dsl,it.xsemantics.dsl.tests,it.xsemantics.dsl.ui,it.xsemantics.example.expressions,it.xsemantics.example.expressions.tests,it.xsemantics.example.expressions.ui,it.xsemantics.example.fj,it.xsemantics.example.fj.tests,it.xsemantics.example.fj.ui,it.xsemantics.example.fjcached,it.xsemantics.example.fjcached.tests,it.xsemantics.example.fjcached.ui,it.xsemantics.example.lambda,it.xsemantics.example.lambda.tests,it.xsemantics.example.lambda.ui,it.xsemantics.releng.tools,it.xsemantics.runtime,it.xsemantics.tests.pde.utils,it.xsemantics.tests.swtbot,it.xsemantics.ui.examples"/>
+<stringAttribute key="deselected_workspace_plugins" value="it.xsemantics.build.tools,it.xsemantics.doc,it.xsemantics.dsl,it.xsemantics.dsl.tests,it.xsemantics.dsl.ui,it.xsemantics.example.expressions,it.xsemantics.example.expressions.tests,it.xsemantics.example.expressions.ui,it.xsemantics.example.fj,it.xsemantics.example.fj.tests,it.xsemantics.example.fj.ui,it.xsemantics.example.fjcached,it.xsemantics.example.fjcached.tests,it.xsemantics.example.fjcached.ui,it.xsemantics.example.lambda,it.xsemantics.example.lambda.tests,it.xsemantics.example.lambda.ui,it.xsemantics.runtime,it.xsemantics.tests.pde.utils,it.xsemantics.tests.swtbot,it.xsemantics.ui.examples"/>
 <stringAttribute key="featureDefaultLocation" value="workspace"/>
 <stringAttribute key="featurePluginResolution" value="workspace"/>
 <booleanAttribute key="includeOptional" value="true"/>
