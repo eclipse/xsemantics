@@ -75,25 +75,25 @@
 				<artifactId>fornax-oaw-m2-plugin</artifactId>
 				<version>${fornax-oaw-m2-plugin-version}</version>
 				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<id>XcoreGeneration</id>
-						<configuration>
-							<skip>${mwe2.skip}</skip>
-							<workflowEngine>mwe2</workflowEngine>
-							<workflowDescriptor>src/it/xsemantics/dsl/GenerateXsemanticsModel.mwe2</workflowDescriptor>
-						</configuration>
-						<goals>
-							<goal>run-workflow</goal>
-						</goals>
-					</execution>
+<!-- 					<execution> -->
+<!-- 						<phase>generate-sources</phase> -->
+<!-- 						<id>XcoreGeneration</id> -->
+<!-- 						<configuration> -->
+<!-- 							<skip>${mwe2.skip}</skip> -->
+<!-- 							<workflowEngine>mwe2</workflowEngine> -->
+<!-- 							<workflowDescriptor>src/it/xsemantics/dsl/GenerateXsemanticsModel.mwe2</workflowDescriptor> -->
+<!-- 						</configuration> -->
+<!-- 						<goals> -->
+<!-- 							<goal>run-workflow</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
 					<execution>
 						<phase>generate-sources</phase>
 						<id>GrammarGeneration</id>
 						<configuration>
 							<skip>${mwe2.skip}</skip>
 							<!-- the second one must be forced, otherwise it won't be executed -->
-							<force>true</force>
+<!-- 							<force>true</force> -->
 							<workflowEngine>mwe2</workflowEngine>
 							<workflowDescriptor>src/it/xsemantics/dsl/GenerateXsemantics.mwe2</workflowDescriptor>
 						</configuration>

@@ -23,10 +23,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="[2.7.0,2.8.0)";visibility:=ree
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.xtend.standalone;resolution:=optional,
  org.eclipse.xtext.ecore,
- org.eclipse.emf.ecore.xcore.lib;visibility:=reexport,
- org.eclipse.emf.ecore.xcore;bundle-version="1.2.1";visibility:=reexport,
- org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport,
- it.xsemantics.releng.tools;resolution:=optional
+ org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: it.xsemantics.dsl,

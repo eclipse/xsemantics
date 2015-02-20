@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	UtilTest.class,
 	ProgramTest.class,
-	AuxiliaryFunctionTest.class,
+	FjAuxiliaryFunctionTest.class,
 	FormattingTest.class,
 	FjParserTests.class,
 	FjSemanticsTests.class,

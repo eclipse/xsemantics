@@ -94,7 +94,6 @@
 				<module>../../devtools/it.xsemantics.targetplatform</module>
 				
 				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../releng/it.xsemantics.releng.tools</module>
 				<module>../../plugins/it.xsemantics.dsl</module>
 				<module>../../plugins/it.xsemantics.dsl.ui</module>
 				<module>../../tests/it.xsemantics.dsl.tests</module>
@@ -142,7 +141,6 @@
 			<modules>
 				<module>../../devtools/it.xsemantics.targetplatform</module>
 				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../releng/it.xsemantics.releng.tools</module>
 				<module>../../plugins/it.xsemantics.dsl</module>
 			</modules>
 

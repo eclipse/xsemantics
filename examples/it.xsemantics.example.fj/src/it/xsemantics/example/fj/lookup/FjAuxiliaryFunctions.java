@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.xtext.EcoreUtil2;
 
 /**
- * @author bettini
+ * @author Lorenzo Bettini
  * 
  *         Auxiliary functions for looking up into classes (e.g., all the fields
  *         of a class hierarchy)
