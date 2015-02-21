@@ -80,7 +80,7 @@
 		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
 		
-		<target-file-name>luna</target-file-name>
+		<target-file-name>xtext-nightly</target-file-name>
 	</properties>
 	
 	<profiles>
