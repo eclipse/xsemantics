@@ -2211,7 +2211,7 @@ class XsemanticsTestFiles {
 	'''
 
 	def testInvalidJudgmentWithTheSameNameOfBaseSystem() '''
-	system it.xsemantics.test.ExtendedTypeSystem2 
+	system it.xsemantics.test.ExtendedTypeSystem3 
 		extends it.xsemantics.test.ExtendedTypeSystem
 	
 	import org.eclipse.emf.ecore.*
