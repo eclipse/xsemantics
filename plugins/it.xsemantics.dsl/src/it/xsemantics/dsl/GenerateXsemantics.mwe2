@@ -4,19 +4,23 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
 var file.extensions = "xsemantics"
 var projectName = "it.xsemantics.dsl"
 var runtimeProject = "../${projectName}"
 var testProject = "${runtimeProject}/../../tests/${projectName}.tests"
 var generateXtendStub = true
 var encoding = "UTF-8"
+var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/dsl/Xsemantics.xtext"
 
 Workflow {
     bean = StandaloneSetup {
-        scanClassPath = true
+        // use an XtextResourceSet throughout the process, which is able to resolve classpath:/ URIs.
+    	resourceSet = org.eclipse.xtext.resource.XtextResourceSet:theResourceSet {}
+    	
+    	scanClassPath = true
+    	
         platformUri = "${runtimeProject}/.."
-        // The following two lines ca be removed, if Xbase is not used.
+        // The following two lines can be removed, if Xbase is not used.
         registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
@@ -39,6 +43,9 @@ Workflow {
 	}
 
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		// make sure we use the resourceSet created during standalone setup.
+		resourceSet = theResourceSet
+		
 		genModel = "platform:/resource/${projectName}/model/custom/Xsemantics.genmodel"
 		srcPath = "platform:/resource/${projectName}/src"
 	}
@@ -50,7 +57,10 @@ Workflow {
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
         encoding = encoding
-        language = {
+        language = auto-inject {
+        	// make sure we use the resourceSet created during standalone setup.
+    		forcedResourceSet = theResourceSet
+        	
         	loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
         	// switch to xcore
         	// loadedResource = "platform:/resource/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore"
@@ -59,7 +69,7 @@ Workflow {
     		// loadedResource = "classpath:/model/Ecore.ecore"
 			// loadedResource = "classpath:/model/Ecore.genmodel"
         	//loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.xcore"
-        	
+
             uri = grammarURI
             fileExtensions = file.extensions
 
