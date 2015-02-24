@@ -1,3 +1,5 @@
+sudo: false
+
 language: java
 
 jdk: oraclejdk7
@@ -6,11 +8,11 @@ env: DISPLAY=:99.0
 
 install: true
 
-before_install:
- - sudo apt-get update
- - sudo apt-get install gnome-themes-standard
- - sudo apt-get install metacity
- - sudo apt-get install libwebkit-dev
+#before_install:
+# - sudo apt-get update
+# - sudo apt-get install gnome-themes-standard
+# - sudo apt-get install metacity
+# - sudo apt-get install libwebkit-dev
 
 before_script:
  - sh -e /etc/init.d/xvfb start
@@ -20,4 +22,4 @@ before_script:
  
 script:
  - export
- - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dfindbugs.skip=true
+ - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -Dfindbugs.skip=true
