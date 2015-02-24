@@ -79,6 +79,7 @@
 		<mwe2.skip>false</mwe2.skip>
 		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
+		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
 		<target-file-name>luna</target-file-name>
 	</properties>
