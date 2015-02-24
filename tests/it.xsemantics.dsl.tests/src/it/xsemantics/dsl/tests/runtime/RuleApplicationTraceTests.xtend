@@ -5,9 +5,16 @@ package it.xsemantics.dsl.tests.runtime;
 
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils
-import org.junit.Assert
-import org.junit.Test
+import org.apache.log4j.Level
 import org.apache.log4j.Logger
+import org.apache.log4j.spi.LoggingEvent
+import org.apache.log4j.varia.NullAppender
+import org.junit.After
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 /**
  * @author Lorenzo Bettini
@@ -15,9 +22,29 @@ import org.apache.log4j.Logger
  */
 public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	
-	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTraceTests);
+	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTrace);
 	
 	extension TraceUtils = new TraceUtils
+	
+	var LogListener logListener
+	
+	static class LogListener extends NullAppender {
+		
+		val public events = <LoggingEvent>newArrayList()
+		
+		override doAppend(LoggingEvent event) {
+			if (event.getLevel == Level.INFO) {
+				events += event
+			}
+		}
+
+		def containsMessage(String messagePart) {
+			val eventsToString = events.map[message.toString].join(",")
+			assertTrue("No messagePart found in " + eventsToString,
+				eventsToString.contains(messagePart)
+			)
+		}
+	}
 	
 	static class TestRuleApplicationTraceSubclass extends RuleApplicationTrace {
 		
@@ -53,6 +80,23 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 				first = true
 			}
 		}
+	}
+
+	@Before
+	def void createAppender() {
+		LOGGER.removeAllAppenders
+		// avoid print errors on the console
+		LOGGER.additivity = false
+		logListener = new LogListener => [
+			LOGGER.addAppender(it)
+		]
+	}
+
+	@After
+	def void removeAppender() {
+		LOGGER.removeAppender(logListener)
+		// reset print errors on the console
+		LOGGER.additivity = true
 	}
 
 	@Test
@@ -121,14 +165,14 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	@Test
 	def void testSnapshotWithInstantionExceptionReturnsThis() {
 		val t1 = new TestRuleApplicationTraceWithInstantiationException
-		LOGGER.info("*** EXCEPTION IN THE LOG IS EXPECTED IN THIS TEST ***")
 		assertSame(t1, t1.snapshot)
+		logListener.containsMessage("deep cloning of trace disabled")
 	}
 
 	@Test
 	def void testSnapshotWithIllegalAccessExceptionReturnsThis() {
 		val t1 = new TestRuleApplicationTraceWithIllegalAccessException
-		LOGGER.info("*** EXCEPTION IN THE LOG IS EXPECTED IN THIS TEST ***")
 		assertSame(t1, t1.snapshot)
+		logListener.containsMessage("deep cloning of trace disabled")
 	}
 }
