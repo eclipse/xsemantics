@@ -37,13 +37,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="checkrules" upperBound="-1"
         eType="#//CheckRule" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Injected" eSuperTypes="#//UniqueByName">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" unique="false"
-        eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
-        containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Injected" eSuperTypes="#//AbstractFieldDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="AuxiliaryDescription" eSuperTypes="#//Description">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -216,4 +210,12 @@
     <eLiterals name="Default"/>
     <eLiterals name="None"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractFieldDefinition" eSuperTypes="#//UniqueByName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" unique="false"
+        eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldDefinition" eSuperTypes="#//AbstractFieldDefinition"/>
 </ecore:EPackage>
