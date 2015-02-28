@@ -354,6 +354,40 @@ Duplicate name 'strings' (Injected)
 	}
 
 	@Test
+	def void testDuplicateFields() {
+		'''
+		system Test
+		
+		/* a utility field */
+		val int strings
+		val String strings
+		'''.
+		assertErrorMessages(
+'''
+Duplicate name 'strings' (FieldDefinition)
+Duplicate name 'strings' (FieldDefinition)
+'''
+		)
+	}
+
+	@Test
+	def void testDuplicateFieldAndInjectedField() {
+		'''
+		system Test
+		
+		/* a utility field */
+		inject Boolean strings
+		val String strings
+		'''.
+		assertErrorMessages(
+'''
+Duplicate name 'strings' (Injected)
+Duplicate name 'strings' (FieldDefinition)
+'''
+		)
+	}
+
+	@Test
 	def void testWrongEnvironmentXExpression() {
 		parser.parse(testFiles.testWrongEnvironmentXExpression).
 		assertError(

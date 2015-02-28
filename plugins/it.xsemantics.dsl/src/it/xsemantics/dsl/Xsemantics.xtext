@@ -1,4 +1,4 @@
-grammar it.xsemantics.dsl.Xsemantics with org.eclipse.xtext.xbase.Xbase
+grammar it.xsemantics.dsl.Xsemantics with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
 //generate xsemantics "http://www.xsemantics.it/dsl/Xsemantics"
 import "http://www.xsemantics.it/dsl/Xsemantics"
@@ -29,6 +29,16 @@ XsemanticsSystem:
 
 AbstractFieldDefinition:
 	{Injected} 'inject' extension?='extension'? type=JvmTypeReference name=ValidID
+	|
+	{FieldDefinition}
+	annotations+=XAnnotation*
+	(writeable?='var'|'val') 
+	(
+		extension?='extension' type=JvmTypeReference
+		|
+		type=JvmTypeReference?
+	) 
+	name=ValidID ('=' right=XExpression)? ';'?
 ;
 
 AuxiliaryDescription:
