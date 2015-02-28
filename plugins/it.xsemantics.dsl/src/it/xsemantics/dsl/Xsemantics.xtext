@@ -15,7 +15,7 @@ XsemanticsSystem:
 	('extends' superSystem=JvmParameterizedTypeReference)?
 	('validatorExtends' validatorExtends=JvmParameterizedTypeReference)?
 	importSection=XImportSection?
-	injections += Injected*
+	fields += AbstractFieldDefinition*
 	('auxiliary' '{'
 		auxiliaryDescriptions += AuxiliaryDescription+
 	'}')?
@@ -27,8 +27,8 @@ XsemanticsSystem:
 	checkrules+=CheckRule*
 ;
 
-Injected:
-	'inject' extension?='extension'? type=JvmTypeReference name=ValidID
+AbstractFieldDefinition:
+	{Injected} 'inject' extension?='extension'? type=JvmTypeReference name=ValidID
 ;
 
 AuxiliaryDescription:

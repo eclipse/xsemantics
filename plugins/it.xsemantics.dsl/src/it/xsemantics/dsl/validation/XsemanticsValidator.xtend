@@ -438,7 +438,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			}
 		}
 		
-		val elements = system.injections + 
+		val elements = system.fields + 
 			system.judgmentDescriptions +
 			system.auxiliaryDescriptions +
 			// system.auxiliaryFunctions + 

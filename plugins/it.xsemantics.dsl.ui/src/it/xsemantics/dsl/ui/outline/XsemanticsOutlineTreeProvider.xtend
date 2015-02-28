@@ -31,8 +31,8 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	def protected void _createChildren(IOutlineNode parentNode, XsemanticsSystem it) {
 		// skip imports
-		// injections
-		createNodesFor(parentNode, injections)
+		// fields
+		createNodesFor(parentNode, fields)
 		// auxiliary descriptions
 		createGroupedNodesForAuxliary(parentNode, it)
 		// judgment descriptions

@@ -105,14 +105,14 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				members += elem.genIssueField
 			}
 			
-			for (injectedField : ts.injections) {
-				members += injectedField.toField(
-					injectedField.name, 
-					injectedField.type
+			for (field : ts.fields) {
+				members += field.toField(
+					field.name, 
+					field.type
 				) [
-					documentation = injectedField.documentation
+					documentation = field.documentation
 					addInjectAnnotation
-					if (injectedField.extension) {
+					if (field.extension) {
 						addExtensionAnnotation
 					}
 					visibility = JvmVisibility::PRIVATE
@@ -132,11 +132,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			members += ts.genInit
 			
-			for (injectedField : ts.injections) {
-				members += injectedField.toGetter
-					(injectedField.name, injectedField.type)
-				members += injectedField.toSetter
-					(injectedField.name, injectedField.type)
+			for (field : ts.fields) {
+				members += field.toGetter
+					(field.name, field.type)
+				members += field.toSetter
+					(field.name, field.type)
 			}
 			
 			for (elem : ts.auxiliaryDescriptions) {
