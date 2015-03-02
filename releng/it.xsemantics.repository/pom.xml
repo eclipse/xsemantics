@@ -21,7 +21,15 @@
 			
 			<properties>
 				<updates.dir>xsemantics</updates.dir>
+				<remote.updates.dir>updates/releases</remote.updates.dir>
 				<site.label>Xsemantics Site</site.label>
+				
+				<!-- local source directory for rsync (read from this directory) -->
+				<rsync.remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics/${remote.updates.dir}/</rsync.remote.dir> 
+				<!-- remote rsync host -->
+				<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
+				<!-- pass "-n" to perform a trial run with no changes made -->
+				<dryrun></dryrun>
 			</properties>
 
 			<build>
@@ -72,6 +80,40 @@
 								<phase>package</phase>
 								<goals>
 									<goal>eclipse-run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>update-local-repository</id>
+								<phase>prepare-package</phase>
+								<configuration>
+									<target>
+										<ant antfile="${basedir}/rsync.ant" target="rsync-update">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<id>deploy-repository</id>
+								<phase>verify</phase>
+								<configuration>
+									<target>
+										<ant antfile="${basedir}/rsync.ant" target="rsync-commit">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
 								</goals>
 							</execution>
 						</executions>
