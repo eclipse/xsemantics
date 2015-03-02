@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lambda Tests
 Bundle-SymbolicName: it.xsemantics.example.lambda.tests
-Bundle-Version: 1.7.1.qualifier
+Bundle-Version: 1.8.0.qualifier
 Bundle-Activator: it.xsemantics.example.lambda.tests.Activator
 Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.core.runtime,
