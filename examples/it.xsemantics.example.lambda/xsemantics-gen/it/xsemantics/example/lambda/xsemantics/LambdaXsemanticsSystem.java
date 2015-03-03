@@ -556,10 +556,9 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
     BasicType _xblockexpression = null;
     {
-      final BasicType result = EcoreUtil.<BasicType>copy(basicType);
       String _typevarName = typeVar.getTypevarName();
-      substitutions.add(_typevarName, result);
-      _xblockexpression = (result);
+      substitutions.add(_typevarName, basicType);
+      _xblockexpression = (EcoreUtil.<BasicType>copy(basicType));
     }
     return _xblockexpression;
   }
@@ -587,95 +586,93 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     return this.unifyInternal(_trace_, substitutions, typeVar, basicType);
   }
   
-  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable left, final TypeVariable right) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, left, right);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
-    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(left) + ", " + stringRep(right)+ ")" + " = " + stringRep(_result_);
     		}
     	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
-    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")",
+    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(left) + ", " + stringRep(right)+ ")",
     		UNIFY,
-    		e_applyAuxFunUnify, substitutions, originalLeft, originalRight, new ErrorInformation[] {new ErrorInformation(originalLeft), new ErrorInformation(originalRight)});
+    		e_applyAuxFunUnify, substitutions, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
     	return null;
     }
   }
   
-  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable left, final TypeVariable right) throws RuleFailedException {
     TypeVariable _xblockexpression = null;
     {
-      final TypeVariable newLeft = this.lambdaUtils.createFreshTypeVariable();
-      final TypeVariable newRight = EcoreUtil.<TypeVariable>copy(newLeft);
-      String _typevarName = originalLeft.getTypevarName();
-      substitutions.add(_typevarName, newLeft);
-      String _typevarName_1 = originalRight.getTypevarName();
-      substitutions.add(_typevarName_1, newRight);
-      _xblockexpression = (newLeft);
+      final TypeVariable fresh = this.lambdaUtils.createFreshTypeVariable();
+      String _typevarName = left.getTypevarName();
+      substitutions.add(_typevarName, fresh);
+      String _typevarName_1 = right.getTypevarName();
+      substitutions.add(_typevarName_1, fresh);
+      _xblockexpression = (fresh);
     }
     return _xblockexpression;
   }
   
-  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable v, final ArrowType arrow) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, v, arrow);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
-    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(v) + ", " + stringRep(arrow)+ ")" + " = " + stringRep(_result_);
     		}
     	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
-    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")",
+    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(v) + ", " + stringRep(arrow)+ ")",
     		UNIFY,
-    		e_applyAuxFunUnify, substitutions, originalLeft, originalRight, new ErrorInformation[] {new ErrorInformation(originalLeft), new ErrorInformation(originalRight)});
+    		e_applyAuxFunUnify, substitutions, v, arrow, new ErrorInformation[] {new ErrorInformation(v), new ErrorInformation(arrow)});
     	return null;
     }
   }
   
-  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable v, final ArrowType arrow) throws RuleFailedException {
     ArrowType _xblockexpression = null;
     {
-      Boolean _notoccur = this.notoccurInternal(_trace_, originalLeft, originalRight);
-      /* notoccur(originalLeft, originalRight) */
+      Boolean _notoccur = this.notoccurInternal(_trace_, v, arrow);
+      /* notoccur(v, arrow) */
       if (!_notoccur) {
-        sneakyThrowRuleFailedException("notoccur(originalLeft, originalRight)");
+        sneakyThrowRuleFailedException("notoccur(v, arrow)");
       }
-      final ArrowType newLeft = EcoreUtil.<ArrowType>copy(originalRight);
-      String _typevarName = originalLeft.getTypevarName();
-      substitutions.add(_typevarName, newLeft);
-      _xblockexpression = (EcoreUtil.<ArrowType>copy(newLeft));
+      String _typevarName = v.getTypevarName();
+      substitutions.add(_typevarName, arrow);
+      _xblockexpression = (EcoreUtil.<ArrowType>copy(arrow));
     }
     return _xblockexpression;
   }
   
-  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow, final TypeVariable v) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, arrow, v);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
-    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
+    			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(arrow) + ", " + stringRep(v)+ ")" + " = " + stringRep(_result_);
     		}
     	});
     	addAsSubtrace(_trace_, _subtrace_);
     	return _result_;
     } catch (Exception e_applyAuxFunUnify) {
-    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")",
+    	unifyThrowException(auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(arrow) + ", " + stringRep(v)+ ")",
     		UNIFY,
-    		e_applyAuxFunUnify, substitutions, originalLeft, originalRight, new ErrorInformation[] {new ErrorInformation(originalLeft), new ErrorInformation(originalRight)});
+    		e_applyAuxFunUnify, substitutions, arrow, v, new ErrorInformation[] {new ErrorInformation(arrow), new ErrorInformation(v)});
     	return null;
     }
   }
   
-  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
-    return this.unifyInternal(_trace_, substitutions, originalRight, originalLeft);
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow, final TypeVariable v) throws RuleFailedException {
+    return this.unifyInternal(_trace_, substitutions, v, arrow);
   }
   
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {

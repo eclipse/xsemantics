@@ -94,9 +94,8 @@ auxiliary unify(TypeSubstitutions substitutions, IntType t1, IntType t2)
 
 auxiliary unify(TypeSubstitutions substitutions, TypeVariable typeVar, BasicType basicType)
 {
-	val result = EcoreUtil.copy(basicType)
-	substitutions.add(typeVar.typevarName, result)
-	result
+	substitutions.add(typeVar.typevarName, basicType)
+	EcoreUtil.copy(basicType)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, BasicType basicType, TypeVariable typeVar)
@@ -104,28 +103,26 @@ auxiliary unify(TypeSubstitutions substitutions, BasicType basicType, TypeVariab
 	unify(substitutions, typeVar, basicType)
 }
 
-auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, TypeVariable originalRight)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable left, TypeVariable right)
 {
 	// unify both variables with a fresh new variable
-	val newLeft = lambdaUtils.createFreshTypeVariable
-	val newRight = EcoreUtil.copy(newLeft)
-	substitutions.add(originalLeft.typevarName, newLeft)
-	substitutions.add(originalRight.typevarName, newRight)
-	newLeft
+	val fresh = lambdaUtils.createFreshTypeVariable
+	substitutions.add(left.typevarName, fresh)
+	substitutions.add(right.typevarName, fresh)
+	fresh
 }
 
-auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, ArrowType originalRight)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable v, ArrowType arrow)
 {
 	// occur check
-	notoccur(originalLeft, originalRight)
-	val newLeft = EcoreUtil.copy(originalRight)
-	substitutions.add(originalLeft.typevarName, newLeft)
-	EcoreUtil.copy(newLeft)
+	notoccur(v, arrow)
+	substitutions.add(v.typevarName, arrow)
+	EcoreUtil.copy(arrow)
 }
 
-auxiliary unify(TypeSubstitutions substitutions, ArrowType originalLeft, TypeVariable originalRight)
+auxiliary unify(TypeSubstitutions substitutions, ArrowType arrow, TypeVariable v)
 {
-	unify(substitutions, originalRight, originalLeft)
+	unify(substitutions, v, arrow)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, ArrowType arrow1, ArrowType arrow2)
