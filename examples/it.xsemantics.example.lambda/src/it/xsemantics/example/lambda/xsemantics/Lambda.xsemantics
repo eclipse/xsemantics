@@ -27,7 +27,7 @@ auxiliary {
 		error stringRep(type) + " occurs in " + stringRep(other)
 	typesubstitution(TypeSubstitutions substitutions, Type original) : Type
 	unify(TypeSubstitutions substitutions, 
-			Type left, Type right) : UnifyResult
+			Type left, Type right) : Type
 		error "cannot unify " + stringRep(left) + 
 			" with " + stringRep(right)
 }
@@ -59,7 +59,7 @@ auxiliary typesubstitution(TypeSubstitutions substitutions, TypeVariable variabl
 {
 	var mapped = substitutions.mapped(variable.typevarName)
 	if (mapped != null) {
-		val result = EcoreUtil::copy(mapped)
+		val result = EcoreUtil.copy(mapped)
 		typesubstitution(substitutions, result) // recursive
 	} else
 		variable
@@ -68,7 +68,7 @@ auxiliary typesubstitution(TypeSubstitutions substitutions, TypeVariable variabl
 auxiliary typesubstitution(TypeSubstitutions substitutions, ArrowType arrowType)
 {
 	var Type subResult
-	val result = EcoreUtil::copy(arrowType)
+	val result = EcoreUtil.copy(arrowType)
 	subResult = typesubstitution(substitutions, arrowType.left)
 	result.left = subResult
 	subResult = typesubstitution(substitutions, arrowType.right)
@@ -84,19 +84,18 @@ auxiliary unify(TypeSubstitutions substitutions, Type t1, Type t2) {
 
 auxiliary unify(TypeSubstitutions substitutions, StringType t1, StringType t2) 
 {
-	new UnifyResult(EcoreUtil::copy(t1), EcoreUtil::copy(t2))
+	EcoreUtil.copy(t1)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, IntType t1, IntType t2)
 {
-	new UnifyResult(EcoreUtil::copy(t1), EcoreUtil::copy(t2))
+	EcoreUtil.copy(t1)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, TypeVariable typeVar, BasicType basicType)
 {
-	val result = EcoreUtil::copy(basicType)
-	substitutions.add(typeVar.typevarName, result)
-	new UnifyResult(EcoreUtil::copy(basicType), result)
+	substitutions.add(typeVar.typevarName, basicType)
+	EcoreUtil.copy(basicType)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, BasicType basicType, TypeVariable typeVar)
@@ -104,41 +103,39 @@ auxiliary unify(TypeSubstitutions substitutions, BasicType basicType, TypeVariab
 	unify(substitutions, typeVar, basicType)
 }
 
-auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, TypeVariable originalRight)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable left, TypeVariable right)
 {
 	// unify both variables with a fresh new variable
-	val newLeft = lambdaUtils.createFreshTypeVariable
-	val newRight = EcoreUtil::copy(newLeft)
-	substitutions.add(originalLeft.typevarName, newLeft)
-	substitutions.add(originalRight.typevarName, newRight)
-	new UnifyResult(newLeft, newRight)
+	val fresh = lambdaUtils.createFreshTypeVariable
+	substitutions.add(left.typevarName, fresh)
+	substitutions.add(right.typevarName, fresh)
+	fresh
 }
 
-auxiliary unify(TypeSubstitutions substitutions, TypeVariable originalLeft, ArrowType originalRight)
+auxiliary unify(TypeSubstitutions substitutions, TypeVariable v, ArrowType arrow)
 {
 	// occur check
-	notoccur(originalLeft, originalRight)
-	val newLeft = EcoreUtil::copy(originalRight)
-	substitutions.add(originalLeft.typevarName, newLeft)
-	new UnifyResult(newLeft, EcoreUtil::copy(originalRight))
+	notoccur(v, arrow)
+	substitutions.add(v.typevarName, arrow)
+	EcoreUtil.copy(arrow)
 }
 
-auxiliary unify(TypeSubstitutions substitutions, ArrowType originalLeft, TypeVariable originalRight)
+auxiliary unify(TypeSubstitutions substitutions, ArrowType arrow, TypeVariable v)
 {
-	unify(substitutions, originalRight, originalLeft)
+	unify(substitutions, v, arrow)
 }
 
 auxiliary unify(TypeSubstitutions substitutions, ArrowType arrow1, ArrowType arrow2)
 {
-	val newArrow1 = EcoreUtil::copy(arrow1)
-	val newArrow2 = EcoreUtil::copy(arrow2)
+	val newArrow1 = EcoreUtil.copy(arrow1)
+	val newArrow2 = EcoreUtil.copy(arrow2)
 	var result = unify(substitutions, arrow1.left, arrow2.left)
-	newArrow1.left = result.first
-	newArrow2.left = result.second
+	newArrow1.left = EcoreUtil.copy(result)
+	newArrow2.left = EcoreUtil.copy(result)
 	result = unify(substitutions, arrow1.right, arrow2.right)
-	newArrow1.right = result.first
-	newArrow2.right = result.second
-	new UnifyResult(newArrow1, newArrow2)
+	newArrow1.right = EcoreUtil.copy(result)
+	newArrow2.right = EcoreUtil.copy(result)
+	newArrow1
 }
 
 rule ParameterType
@@ -146,7 +143,7 @@ rule ParameterType
 from {
 	{
 		param.type != null
-		type = EcoreUtil::copy(param.type)
+		type = EcoreUtil.copy(param.type)
 	}
 	or
 	type = lambdaUtils.createFreshTypeVariable
@@ -165,7 +162,7 @@ rule VariableType
 		Variable variable : Type type
 from {
 	type = typesubstitution(substitutions, 
-		EcoreUtil::copy(env(G, variable.ref, Type)))
+		EcoreUtil.copy(env(G, variable.ref, Type)))
 }
 
 rule ArithmeticsType
@@ -196,7 +193,7 @@ from {
 	
 	// make sure funType can be unified ArrowType
 	var arrowType = lambdaUtils.createFreshArrowType
-	arrowType = unify(substitutions, funType, arrowType).second as ArrowType
+	arrowType = unify(substitutions, funType, arrowType) as ArrowType
 	
 	G |- substitutions |> application.arg : var Type argType
 	
