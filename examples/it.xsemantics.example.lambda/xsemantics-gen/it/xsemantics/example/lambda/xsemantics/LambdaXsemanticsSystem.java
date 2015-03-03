@@ -20,7 +20,6 @@ import it.xsemantics.example.lambda.lambda.TypeVariable;
 import it.xsemantics.example.lambda.lambda.Variable;
 import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
 import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions;
-import it.xsemantics.example.lambda.xsemantics.UnifyResult;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
@@ -59,7 +58,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   private PolymorphicDispatcher<Type> typesubstitutionDispatcher;
   
-  private PolymorphicDispatcher<UnifyResult> unifyDispatcher;
+  private PolymorphicDispatcher<Type> unifyDispatcher;
   
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
@@ -114,11 +113,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  public UnifyResult unify(final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
+  public Type unify(final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
     return unify(null, substitutions, left, right);
   }
   
-  public UnifyResult unify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
+  public Type unify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
     try {
     	return unifyInternal(_trace_, substitutions, left, right);
     } catch (Exception _e_unify) {
@@ -217,7 +216,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
-  protected UnifyResult unifyInternal(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) {
+  protected Type unifyInternal(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) {
     try {
     	checkParamsNotNull(substitutions, left, right);
     	return unifyDispatcher.invoke(_trace_, substitutions, left, right);
@@ -460,10 +459,10 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     return _xblockexpression;
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
@@ -479,20 +478,20 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
     Object _xblockexpression = null;
     {
       /* fail */
       throwForExplicitFail();
       _xblockexpression = (null);
     }
-    return ((UnifyResult)_xblockexpression);
+    return ((Type)_xblockexpression);
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
@@ -508,16 +507,14 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
-    StringType _copy = EcoreUtil.<StringType>copy(t1);
-    StringType _copy_1 = EcoreUtil.<StringType>copy(t2);
-    return new UnifyResult(_copy, _copy_1);
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
+    return EcoreUtil.<StringType>copy(t1);
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, t1, t2);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(t1) + ", " + stringRep(t2)+ ")" + " = " + stringRep(_result_);
@@ -533,16 +530,14 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
-    IntType _copy = EcoreUtil.<IntType>copy(t1);
-    IntType _copy_1 = EcoreUtil.<IntType>copy(t2);
-    return new UnifyResult(_copy, _copy_1);
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
+    return EcoreUtil.<IntType>copy(t1);
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, typeVar, basicType);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, typeVar, basicType);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(typeVar) + ", " + stringRep(basicType)+ ")" + " = " + stringRep(_result_);
@@ -558,22 +553,21 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
-    UnifyResult _xblockexpression = null;
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
+    BasicType _xblockexpression = null;
     {
       final BasicType result = EcoreUtil.<BasicType>copy(basicType);
       String _typevarName = typeVar.getTypevarName();
       substitutions.add(_typevarName, result);
-      BasicType _copy = EcoreUtil.<BasicType>copy(basicType);
-      _xblockexpression = (new UnifyResult(_copy, result));
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, basicType, typeVar);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, basicType, typeVar);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(basicType) + ", " + stringRep(typeVar)+ ")" + " = " + stringRep(_result_);
@@ -589,14 +583,14 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
     return this.unifyInternal(_trace_, substitutions, typeVar, basicType);
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
@@ -612,8 +606,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
-    UnifyResult _xblockexpression = null;
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+    TypeVariable _xblockexpression = null;
     {
       final TypeVariable newLeft = this.lambdaUtils.createFreshTypeVariable();
       final TypeVariable newRight = EcoreUtil.<TypeVariable>copy(newLeft);
@@ -621,15 +615,15 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       substitutions.add(_typevarName, newLeft);
       String _typevarName_1 = originalRight.getTypevarName();
       substitutions.add(_typevarName_1, newRight);
-      _xblockexpression = (new UnifyResult(newLeft, newRight));
+      _xblockexpression = (newLeft);
     }
     return _xblockexpression;
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
@@ -645,8 +639,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
-    UnifyResult _xblockexpression = null;
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable originalLeft, final ArrowType originalRight) throws RuleFailedException {
+    ArrowType _xblockexpression = null;
     {
       Boolean _notoccur = this.notoccurInternal(_trace_, originalLeft, originalRight);
       /* notoccur(originalLeft, originalRight) */
@@ -656,16 +650,15 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
       final ArrowType newLeft = EcoreUtil.<ArrowType>copy(originalRight);
       String _typevarName = originalLeft.getTypevarName();
       substitutions.add(_typevarName, newLeft);
-      ArrowType _copy = EcoreUtil.<ArrowType>copy(originalRight);
-      _xblockexpression = (new UnifyResult(newLeft, _copy));
+      _xblockexpression = (EcoreUtil.<ArrowType>copy(newLeft));
     }
     return _xblockexpression;
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, originalLeft, originalRight);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(originalLeft) + ", " + stringRep(originalRight)+ ")" + " = " + stringRep(_result_);
@@ -681,14 +674,14 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType originalLeft, final TypeVariable originalRight) throws RuleFailedException {
     return this.unifyInternal(_trace_, substitutions, originalRight, originalLeft);
   }
   
-  protected UnifyResult unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
+  protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
-    	final UnifyResult _result_ = applyAuxFunUnify(_subtrace_, substitutions, arrow1, arrow2);
+    	final Type _result_ = applyAuxFunUnify(_subtrace_, substitutions, arrow1, arrow2);
     	addToTrace(_trace_, new Provider<Object>() {
     		public Object get() {
     			return auxFunName("unify") + "(" + stringRep(substitutions) + ", " + stringRep(arrow1) + ", " + stringRep(arrow2)+ ")" + " = " + stringRep(_result_);
@@ -704,27 +697,27 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
   }
   
-  protected UnifyResult applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
-    UnifyResult _xblockexpression = null;
+  protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
+    ArrowType _xblockexpression = null;
     {
       final ArrowType newArrow1 = EcoreUtil.<ArrowType>copy(arrow1);
       final ArrowType newArrow2 = EcoreUtil.<ArrowType>copy(arrow2);
       Type _left = arrow1.getLeft();
       Type _left_1 = arrow2.getLeft();
-      UnifyResult result = this.unifyInternal(_trace_, substitutions, _left, _left_1);
-      Type _first = result.getFirst();
-      newArrow1.setLeft(_first);
-      Type _second = result.getSecond();
-      newArrow2.setLeft(_second);
+      Type result = this.unifyInternal(_trace_, substitutions, _left, _left_1);
+      Type _copy = EcoreUtil.<Type>copy(result);
+      newArrow1.setLeft(_copy);
+      Type _copy_1 = EcoreUtil.<Type>copy(result);
+      newArrow2.setLeft(_copy_1);
       Type _right = arrow1.getRight();
       Type _right_1 = arrow2.getRight();
-      UnifyResult _unify = this.unifyInternal(_trace_, substitutions, _right, _right_1);
+      Type _unify = this.unifyInternal(_trace_, substitutions, _right, _right_1);
       result = _unify;
-      Type _first_1 = result.getFirst();
-      newArrow1.setRight(_first_1);
-      Type _second_1 = result.getSecond();
-      newArrow2.setRight(_second_1);
-      _xblockexpression = (new UnifyResult(newArrow1, newArrow2));
+      Type _copy_2 = EcoreUtil.<Type>copy(result);
+      newArrow1.setRight(_copy_2);
+      Type _copy_3 = EcoreUtil.<Type>copy(result);
+      newArrow2.setRight(_copy_3);
+      _xblockexpression = (newArrow1);
     }
     return _xblockexpression;
   }
@@ -750,7 +743,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Type> applyRuleParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     Type type = null; // output parameter
-    /* { param.type != null type = EcoreUtil::copy(param.type) } or type = lambdaUtils.createFreshTypeVariable */
+    /* { param.type != null type = EcoreUtil.copy(param.type) } or type = lambdaUtils.createFreshTypeVariable */
     {
       RuleFailedException previousFailure = null;
       try {
@@ -969,9 +962,8 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     funType = (Type) result.getFirst();
     
     ArrowType arrowType = this.lambdaUtils.createFreshArrowType();
-    UnifyResult _unify = this.unifyInternal(_trace_, substitutions, funType, arrowType);
-    Type _second = _unify.getSecond();
-    arrowType = ((ArrowType) _second);
+    Type _unify = this.unifyInternal(_trace_, substitutions, funType, arrowType);
+    arrowType = ((ArrowType) _unify);
     /* G |- substitutions |> application.arg : var Type argType */
     Term _arg = application.getArg();
     Type argType = null;
