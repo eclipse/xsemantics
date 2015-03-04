@@ -2752,4 +2752,34 @@ class XsemanticsTestFiles {
 			}
 	}
 	'''
+
+	def testFields() '''
+	system it.xsemantics.test.TypeSystem
+	
+	import it.xsemantics.dsl.tests.input.MyTestExtensions
+	import org.eclipse.emf.ecore.EObject
+	import org.eclipse.emf.ecore.EClass
+	import com.google.^inject.Inject
+	
+	/* a utility field with annotation */
+	@Inject
+	var extension MyTestExtensions myextensions
+
+	/* final field */
+	val MyTestExtensions finalField = new MyTestExtensions()
+
+	/* non final field */
+	var MyTestExtensions nonFinalField = new MyTestExtensions()
+	
+	judgments {
+		type |- EObject o : output EClass
+	}
+	
+	rule EObjectEClass
+		G |- EObject o : EClass c
+	from {
+		val list = newArrayList()
+		list.printList // printList comes from MyTestExtensions
+	}
+	'''
 }

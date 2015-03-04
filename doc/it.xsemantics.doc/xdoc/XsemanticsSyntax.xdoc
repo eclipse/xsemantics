@@ -47,21 +47,23 @@ inserts the corresponding import statement.
 
 The menu e["Organize Imports"] is also available for Xsemantics files.
 
-section:InjectedFields[Injected Fields]
+section:Fields[Fields]
 
-You can then specify code[Xsemantics][inject] fields which can then be used
-in all the rules of your system.
+You can then specify e[fields] in an Xsemantics system, using basically the
+same syntax of Xbase variable declarations, here are some examples:
 
 code[Xsemantics][
-inject MyClass foo
-inject MyOtherUtilityClass bar
+var MyClass foo // non final field
+
+// for final field you must specify an initialization expression
+val MyOtherUtilityClass bar = new MyOtherUtilityClass()
+
+// the type can be omitted: it will be inferred from the initialization expression
+// (in that case, the initialization expression is mandatory)
+val bar2 = new MyOtherUtilityClass()
 ]
 
-Remember that these will correspond to fields in the generated Java class
-(ref:CodeGeneration[]),
-that will be instantiated through Guice injection.
-
-Since version 1.5.1 such fields can also be declared as code[Xsemantics][extension]
+Fields can also be declared as code[Xsemantics][extension]
 (you may know such feature
 from Xtend, and it has exactly the same semantics), so that you can
 use all the methods of the corresponding type as e[extension methods]; for example,
@@ -81,7 +83,7 @@ We can write
 
 code[Xsemantics][
 /* a utility field */
-inject extension MyExtensions myextensions
+var extension MyExtensions myextensions = new MyExtensions
 
 ...
 
@@ -92,6 +94,41 @@ from {
 	list.printList // printList comes from MyExtensions
 }
 ]
+
+Fields can be annotated with Java annotations, e.g.,
+
+code[Xsemantics][
+@Inject
+var MyClass foo
+]
+
+As a shortcut for injected fields, you can declare code[Xsemantics][inject] fields
+(code[Xsemantics][inject] fields can also be specified as code[Xsemantics][extension] fields):
+
+code[Xsemantics][
+inject MyClass foo
+inject extension MyOtherUtilityClass bar
+]
+
+Remember that these will correspond to fields in the generated Java class
+(ref:CodeGeneration[]),
+that will be instantiated through Guice injection.
+
+In particular,
+
+code[Xsemantics][
+inject MyClass foo
+]
+
+can be seen as a shortcut for
+
+code[Xsemantics][
+@Inject
+var MyClass foo
+]
+
+NOTE: Until version 1.7.1, only code[Xsemantics][inject] fields could be specified; the more general
+syntax for field definition has been introduced in version 1.7.2.
 
 section:Judgments[Judgments]
 
@@ -498,7 +535,7 @@ code[Xsemantics][
 ]
 
 If you inject in your system definition, as extension, a codeRef[it.xsemantics.runtime.TraceUtils] field
-(see ref:InjectedFields[]) you can also use it to process the previousFailure; for instance
+(see ref:Fields[]) you can also use it to process the previousFailure; for instance
 
 code[Xsemantics][
 inject extension TraceUtils traceUtils

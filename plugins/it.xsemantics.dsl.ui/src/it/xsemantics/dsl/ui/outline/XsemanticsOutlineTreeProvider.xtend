@@ -4,7 +4,7 @@ import it.xsemantics.dsl.xsemantics.AuxiliaryDescription
 import it.xsemantics.dsl.xsemantics.AuxiliaryFunction
 import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.Description
-import it.xsemantics.dsl.xsemantics.Injected
+import it.xsemantics.dsl.xsemantics.AbstractFieldDefinition
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Named
 import it.xsemantics.dsl.xsemantics.Rule
@@ -31,8 +31,8 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	def protected void _createChildren(IOutlineNode parentNode, XsemanticsSystem it) {
 		// skip imports
-		// injections
-		createNodesFor(parentNode, injections)
+		// fields
+		createNodesFor(parentNode, fields)
 		// auxiliary descriptions
 		createGroupedNodesForAuxliary(parentNode, it)
 		// judgment descriptions
@@ -130,7 +130,7 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return true
 	}
 
-	def protected boolean _isLeaf(Injected i) {
+	def protected boolean _isLeaf(AbstractFieldDefinition f) {
 		return true
 	}
 	

@@ -24,6 +24,7 @@ import it.xsemantics.dsl.xsemantics.RuleParameter
 import it.xsemantics.dsl.xsemantics.UniqueByName
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+import it.xsemantics.dsl.xsemantics.FieldDefinition
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -131,6 +132,10 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	public static final String ACCESS_TO_OUTPUT_PARAM_WITHIN_CLOSURE = PREFIX + "AccessToOutputParamWithinClosure";
 
 	public static final String RESERVED_VARIABLE_NAME = PREFIX + "ReservedVariableName";
+	
+	public static final String FINAL_FIELD_NOT_INITIALIZED = PREFIX + "FinalFieldNotInitialized";
+	
+	public static final String TOO_LITTLE_TYPE_INFORMATION = PREFIX + "TooLittleTypeInformation";
 
 	@Check
 	override void checkAssignment(XAssignment assignment) {
@@ -438,7 +443,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			}
 		}
 		
-		val elements = system.injections + 
+		val elements = system.fields + 
 			system.judgmentDescriptions +
 			system.auxiliaryDescriptions +
 			// system.auxiliaryFunctions + 
@@ -605,6 +610,22 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				error("Primitives cannot be used in this context.", typeRef, null, 
 					IssueCodes.INVALID_USE_OF_TYPE
 				);
+		}
+	}
+
+	@Check
+	def void checkFieldInitialization(FieldDefinition f) {
+		if (!f.writeable && f.right == null) {
+			error("The final field " + f.name + " may not have been initialized",
+				XsemanticsPackage.Literals.ABSTRACT_FIELD_DEFINITION__NAME,
+				FINAL_FIELD_NOT_INITIALIZED
+			)
+		}
+		if (f.type == null && f.right == null) {
+			error("The field "+f.name+" needs an explicit type since there is no initialization expression to infer the type from.", 
+				f, XsemanticsPackage.Literals.ABSTRACT_FIELD_DEFINITION__NAME,
+				TOO_LITTLE_TYPE_INFORMATION
+			);
 		}
 	}
 
