@@ -359,8 +359,8 @@ Duplicate name 'strings' (Injected)
 		system Test
 		
 		/* a utility field */
-		val int strings
-		val String strings
+		val int strings = 0
+		val String strings = ""
 		'''.
 		assertErrorMessages(
 '''
@@ -377,12 +377,42 @@ Duplicate name 'strings' (FieldDefinition)
 		
 		/* a utility field */
 		inject Boolean strings
-		val String strings
+		val String strings = ""
 		'''.
 		assertErrorMessages(
 '''
 Duplicate name 'strings' (Injected)
 Duplicate name 'strings' (FieldDefinition)
+'''
+		)
+	}
+
+	@Test
+	def void testFinalFieldNotInitialized() {
+		'''
+		system Test
+		
+		val String string1 // final field not initialized
+		var String string2 // OK non final field, no initialization required
+		'''.
+		assertErrorMessages(
+'''
+The final field string1 may not have been initialized
+'''
+		)
+	}
+
+	@Test
+	def void testFieldWithoutDeclaredTypeNotInitialized() {
+		'''
+		system Test
+
+		var foo1 // no type, so an initialization is required
+		var foo2 = "foo" // OK: no declared type, but initialization expression provided
+		'''.
+		assertErrorMessages(
+'''
+The field foo1 needs an explicit type since there is no initialization expression to infer the type from.
 '''
 		)
 	}
