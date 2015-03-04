@@ -29,7 +29,7 @@
 		<maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<junit-version>4.11</junit-version>
-		<jacoco-version>0.5.8.201207111220</jacoco-version>
+		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xtext.version>2.8.0-SNAPSHOT</xtext.version>
