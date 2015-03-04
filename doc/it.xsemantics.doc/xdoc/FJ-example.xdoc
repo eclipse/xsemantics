@@ -129,7 +129,7 @@ section:FJTypeSystem[FJ Type System]
 
 We start by defining the name (we skip imports), the auxiliary descriptions
 (which will be used for auxiliary functions, ref:Auxiliary[]) and the judgments
-(ref:Judgments[]); we also use an injected field (ref:InjectedFields[])
+(ref:Judgments[]); we also use an injected field (ref:Fields[])
 of type codeRef[it.xsemantics.example.fj.util.FjTypeUtils]
 which contains some auxiliary functions that we will use in the rules.
 

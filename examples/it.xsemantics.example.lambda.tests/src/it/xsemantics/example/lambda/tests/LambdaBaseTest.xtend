@@ -17,7 +17,6 @@ import it.xsemantics.example.lambda.xsemantics.LambdaStringRepresentationWithTyp
 import it.xsemantics.example.lambda.xsemantics.LambdaUtils
 import it.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 import it.xsemantics.example.lambda.xsemantics.TypeSubstitutions
-import it.xsemantics.example.lambda.xsemantics.UnifyResult
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.StringRepresentation
@@ -131,10 +130,10 @@ class LambdaBaseTest {
 		assertEqualsStrings(expected, reprBeautifier.string(result.value))
 	}
 	
-	def void assertResult2AsString(UnifyResult result, String expected) {
-		Assert::assertNotNull(result.first);
-		Assert::assertNotNull(result.second);
-		assertEqualsStrings(expected, result.first.string + " -- " + result.second.string)
+	def void assertResult2AsString(Type result, String expected) {
+		Assert::assertNotNull(result);
+		Assert::assertNotNull(result);
+		assertEqualsStrings(expected, result.string)
 	}
 	
 	def void assertResultTrue(Boolean result) {

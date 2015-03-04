@@ -20,7 +20,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyTypeVar() {
 		assertUnify(
 			lambdaUtils.createFreshTypeVariable, lambdaUtils.createFreshTypeVariable,
-			"X3 -- X3",
+			"X3",
 			"X1=X3, X2=X3"
 		)
 	}
@@ -29,7 +29,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyStringType() {
 		assertUnify(
 			lambdaUtils.createStringType, lambdaUtils.createStringType,
-			"String -- String",
+			"String",
 			""
 		)
 	}
@@ -38,7 +38,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyIntType() {
 		assertUnify(
 			lambdaUtils.createIntType, lambdaUtils.createIntType,
-			"int -- int",
+			"int",
 			""
 		)
 	}
@@ -55,7 +55,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyTypeVarBasicType() {
 		assertUnify(
 			lambdaUtils.createFreshTypeVariable, lambdaUtils.createStringType,
-			"String -- String",
+			"String",
 			"X1=String"
 		)
 	}
@@ -64,7 +64,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyBasicTypeTypeVar() {
 		assertUnify(
 			lambdaUtils.createIntType, lambdaUtils.createFreshTypeVariable,
-			"int -- int",
+			"int",
 			"X1=int"
 		)
 	}
@@ -73,7 +73,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyTypeVarArrowType() {
 		assertUnify(
 			lambdaUtils.createFreshTypeVariable, lambdaUtils.createFreshArrowType,
-			"(X2 -> X3) -- (X2 -> X3)",
+			"(X2 -> X3)",
 			"X1=(X2 -> X3)"
 		)
 	}
@@ -82,7 +82,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyArrowTypeTypeVar() {
 		assertUnify(
 			lambdaUtils.createFreshArrowType, lambdaUtils.createFreshTypeVariable,
-			"(X1 -> X2) -- (X1 -> X2)",
+			"(X1 -> X2)",
 			"X3=(X1 -> X2)"
 		)
 	}
@@ -91,7 +91,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 	def void testUnifyArrowTypes() {
 		assertUnify(
 			lambdaUtils.createFreshArrowType, lambdaUtils.createFreshArrowType,
-			"(X5 -> X6) -- (X5 -> X6)",
+			"(X5 -> X6)",
 			"X1=X5, X2=X6, X3=X5, X4=X6"
 		)
 	}
@@ -102,7 +102,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 			lambdaUtils.createFreshArrowType, 
 				lambdaUtils.createArrowType
 					(lambdaUtils.createFreshArrowType, lambdaUtils.createFreshArrowType),
-			"((X3 -> X4) -> (X5 -> X6)) -- ((X3 -> X4) -> (X5 -> X6))",
+			"((X3 -> X4) -> (X5 -> X6))",
 			"X1=(X3 -> X4), X2=(X5 -> X6)"
 		)
 	}
@@ -116,7 +116,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 					(lambdaUtils.createIntType, lambdaUtils.createStringType),
 				lambdaUtils.createFreshArrowType
 			),
-			"((int -> String) -> (X3 -> X4)) -- ((int -> String) -> (X3 -> X4))",
+			"((int -> String) -> (X3 -> X4))",
 			"X1=(int -> String), X2=(X3 -> X4)"
 		)
 	}
@@ -134,7 +134,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 					(lambdaUtils.createIntType, lambdaUtils.createStringType),
 				lambdaUtils.createFreshArrowType
 			),
-			"((int -> String) -> (String -> int)) -- ((int -> String) -> (String -> int))",
+			"((int -> String) -> (String -> int))",
 			"X1=int, X2=String, X3=String, X4=int"
 		)
 	}
@@ -162,7 +162,7 @@ class LambdaUnifyTest extends LambdaBaseTest {
 			expectedResult
 		)
 		assertTypeSubstitutions(substitutions, expectedSubsts)
-		Assert::assertNotSame(left, result.first)
-		Assert::assertNotSame(right, result.second)
+		Assert::assertNotSame(left, result)
+		Assert::assertNotSame(right, result)
 	}
 }

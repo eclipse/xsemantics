@@ -12,6 +12,7 @@ import it.xsemantics.dsl.xsemantics.CheckRule
 import it.xsemantics.dsl.xsemantics.ExpressionInConclusion
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
 import it.xsemantics.dsl.xsemantics.Named
+import it.xsemantics.dsl.xsemantics.Overrider
 import it.xsemantics.dsl.xsemantics.Rule
 import it.xsemantics.dsl.xsemantics.RuleWithPremises
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
@@ -22,6 +23,7 @@ import it.xsemantics.runtime.RuleFailedException
 import it.xsemantics.runtime.XsemanticsProvider
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
@@ -34,11 +36,12 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.util.PolymorphicDispatcher
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.XExpression
-import it.xsemantics.dsl.xsemantics.Overrider
+import it.xsemantics.dsl.xsemantics.FieldDefinition
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -105,17 +108,23 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				members += elem.genIssueField
 			}
 			
-			for (injectedField : ts.injections) {
-				members += injectedField.toField(
-					injectedField.name, 
-					injectedField.type
+			for (field : ts.fields) {
+				members += field.toField(
+					field.name, 
+					field.type
 				) [
-					documentation = injectedField.documentation
-					addInjectAnnotation
-					if (injectedField.extension) {
+					documentation = field.documentation
+					if (field.extension) {
 						addExtensionAnnotation
 					}
 					visibility = JvmVisibility::PRIVATE
+					if (field instanceof FieldDefinition) {
+						translateAnnotations(field.annotations)
+						initializer = field.right
+						final = !field.writeable
+					} else {
+						addInjectAnnotation
+					}
 				]
 			}
 			
@@ -132,11 +141,17 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			members += ts.genInit
 			
-			for (injectedField : ts.injections) {
-				members += injectedField.toGetter
-					(injectedField.name, injectedField.type)
-				members += injectedField.toSetter
-					(injectedField.name, injectedField.type)
+			for (field : ts.fields) {
+				var addSetter = true
+				members += field.toGetter
+					(field.name, field.type)
+				if (field instanceof FieldDefinition) {
+					addSetter = field.writeable
+				}
+				if (addSetter) {
+					members += field.toSetter
+						(field.name, field.type)
+				}
 			}
 			
 			for (elem : ts.auxiliaryDescriptions) {
@@ -1044,5 +1059,8 @@ if (!«c.cacheConditionMethod»(«args»))
 		annotations += Extension.annotationRef
 	}
 
+	def private void translateAnnotations(JvmAnnotationTarget target, List<XAnnotation> annotations) {
+		target.addAnnotations(annotations.filterNull.filter[annotationType != null])
+	}
 }
 
