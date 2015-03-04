@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="it.xsemantics.runtime" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="we increase minor version due to Xtext version" id="926941240">
+        <filter id="926941240">
             <message_arguments>
                 <message_argument value="1.8.0"/>
-                <message_argument value="1.7.1"/>
+                <message_argument value="1.7.2"/>
             </message_arguments>
         </filter>
     </resource>
