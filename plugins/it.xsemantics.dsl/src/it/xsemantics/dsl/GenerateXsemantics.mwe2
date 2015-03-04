@@ -58,6 +58,7 @@ Workflow {
 			loadedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
 			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
 			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
+			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
 			loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
         	
         	// switch to xcore
