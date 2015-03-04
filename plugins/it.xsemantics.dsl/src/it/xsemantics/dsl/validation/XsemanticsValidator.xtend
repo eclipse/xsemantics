@@ -133,9 +133,9 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	public static final String RESERVED_VARIABLE_NAME = PREFIX + "ReservedVariableName";
 	
-	public static val FINAL_FIELD_NOT_INITIALIZED = PREFIX + "FinalFieldNotInitialized";
+	public static final String FINAL_FIELD_NOT_INITIALIZED = PREFIX + "FinalFieldNotInitialized";
 	
-	public static val TOO_LITTLE_TYPE_INFORMATION = PREFIX + "TooLittleTypeInformation";
+	public static final String TOO_LITTLE_TYPE_INFORMATION = PREFIX + "TooLittleTypeInformation";
 
 	@Check
 	override void checkAssignment(XAssignment assignment) {
