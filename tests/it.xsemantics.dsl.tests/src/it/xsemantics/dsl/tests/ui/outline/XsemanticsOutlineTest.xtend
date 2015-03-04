@@ -42,6 +42,7 @@ class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
 system my.test.System
 
 inject Object injectedField
+var Object field
 
 auxiliary {
 	aux(String s) : Integer
@@ -67,6 +68,7 @@ from {}
 '''
 my.test.System
   injectedField
+  field
   aux
     aux (aux)
   type
