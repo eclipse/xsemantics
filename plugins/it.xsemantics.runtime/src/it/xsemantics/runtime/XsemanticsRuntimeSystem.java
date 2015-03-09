@@ -149,8 +149,7 @@ public class XsemanticsRuntimeSystem {
 		}
 	}
 
-	public void checkParamsNotNull(Object... objects)
-			throws RuleFailedException {
+	public void checkParamsNotNull(Object... objects) {
 		for (int i = 0; i < objects.length; i++) {
 			Object object = objects[i];
 			checkNotNull(object);
@@ -238,8 +237,7 @@ public class XsemanticsRuntimeSystem {
 	}
 
 	public void throwRuleFailedException(String message, String issue,
-			Throwable t, ErrorInformation... errorInformations)
-			throws RuleFailedException {
+			Throwable t, ErrorInformation... errorInformations) {
 		throw newRuleFailedException(message, issue, t, errorInformations);
 	}
 

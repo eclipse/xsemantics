@@ -8,7 +8,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertEquals;
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
-import it.xsemantics.ui.examples.XsemanticsUiExamples;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -57,9 +56,6 @@ public class XsemanticsSwtbotTestBase {
 	@BeforeClass
 	public static void beforeClass() throws Exception {
 		PDETargetPlatformUtils.setTargetPlatform();
-		
-		// force loading of examples.ui plugin
-		XsemanticsUiExamples.getDefault();
 		
 		bot = new SWTWorkbenchBot();
 		
