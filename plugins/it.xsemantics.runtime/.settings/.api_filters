@@ -8,4 +8,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/StringRepresentationPostProcessor.java" type="it.xsemantics.runtime.StringRepresentationPostProcessor">
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.StringRepresentationPostProcessor"/>
+                <message_argument value="MAX_CHARS"/>
+            </message_arguments>
+        </filter>
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.StringRepresentationPostProcessor"/>
+                <message_argument value="OMISSIS"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
