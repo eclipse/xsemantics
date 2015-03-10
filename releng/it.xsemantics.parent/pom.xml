@@ -336,6 +336,7 @@
 								<feature id="org.eclipse.xtext.sdk"/>
 								<feature id="org.eclipse.xtend.sdk"/>
 								<feature id="org.eclipse.pde"/>
+								<feature id="org.eclipse.rcp"/>
 								<feature id="org.eclipse.emf.mwe2.language.sdk"/>
 								<feature id="org.eclipse.emf.mwe2.runtime.sdk"/>
 							</excludes>
