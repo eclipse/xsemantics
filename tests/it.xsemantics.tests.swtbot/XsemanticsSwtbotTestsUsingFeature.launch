@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
-<setAttribute key="additional_plugins"/>
+<setAttribute key="additional_plugins">
+<setEntry value="it.xsemantics.tests.swtbot:0.0.0.qualifier:default:true"/>
+</setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="askclear" value="false"/>
 <booleanAttribute key="automaticAdd" value="true"/>
@@ -88,7 +90,6 @@
 <setEntry value="org.eclipse.xtext.examples:default"/>
 <setEntry value="org.eclipse.xtext.runtime.source:default"/>
 <setEntry value="org.eclipse.xtext.runtime:default"/>
-<setEntry value="org.eclipse.xtext.sdk:default"/>
 <setEntry value="org.eclipse.xtext.ui.source:default"/>
 <setEntry value="org.eclipse.xtext.ui:default"/>
 <setEntry value="org.eclipse.xtext.xbase.lib.source:default"/>
