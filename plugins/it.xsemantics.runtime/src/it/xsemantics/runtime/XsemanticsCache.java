@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -25,8 +27,6 @@ public class XsemanticsCache {
 	@Inject private IResourceScopeCache cache;
 	
 	@Inject private XsemanticsCacheUtils cacheUtils;
-	
-	@Inject private TraceUtils traceUtils;
 	
 	public static String CACHED_STRING = "cached:";
 	
@@ -49,7 +49,7 @@ public class XsemanticsCache {
 			if (trace != null && trace != cached.getTrace()) {
 				trace.addToTrace(CACHED_STRING);
 				if (cached.getTrace() != null) {
-					trace.addObjectAsSubtrace(traceUtils.lastElementNotTrace(cached.getTrace()));
+					trace.addObjectAsSubtrace(lastElementNotTrace(cached.getTrace()));
 				}
 			}
 		} else {
@@ -76,5 +76,20 @@ public class XsemanticsCache {
 
 	public void removeListener(final XsemanticsCacheListener l) {
 		this.listeners.remove(l);
+	}
+	
+	/**
+	 * Returns the last element in the trace that is not a RuleApplicationTrace
+	 * 
+	 * @since 1.8
+	 */
+	public Object lastElementNotTrace(final RuleApplicationTrace trace) {
+		final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+			@Override
+			public Boolean apply(final Object it) {
+				return Boolean.valueOf((!(it instanceof RuleApplicationTrace)));
+			}
+		};
+		return IterableExtensions.<Object> findLast(trace.trace, _function);
 	}
 }
