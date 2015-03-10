@@ -116,7 +116,7 @@ Workflow {
             fragment = formatting.FormatterFragment {}
 
             // labeling API
-            fragment = labeling.LabelProviderFragment {}
+            fragment = labeling.LabelProviderFragment auto-inject {}
 
             // outline API
             fragment = outline.OutlineTreeProviderFragment auto-inject {}
