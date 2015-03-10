@@ -22,4 +22,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/it/xsemantics/runtime/XsemanticsCache.java" type="it.xsemantics.runtime.XsemanticsCache">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>
+                <message_argument value="getKeys(Object[])"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>
+                <message_argument value="getResource(Object[])"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

@@ -21,49 +21,6 @@ class XsemanticsCacheTest extends XsemanticsBaseTest {
 	@Inject XsemanticsCache cache
 
 	@Test
-	def void testNoObjects() {
-		cache.getResource().assertNull
-	}
-
-	@Test
-	def void testNonEObject() {
-		cache.getResource(new String()).assertNull
-	}
-
-	@Test
-	def void testEObject() {
-		val resource = createResourceSet.createResource[
-			it.createEObject
-			it.createEObject
-		]
-		cache.getResource(resource.contents.get(0), resource.contents.get(1)).assertNotNull
-	}
-
-	@Test
-	def void testResourceOfTheFirstEObject() {
-		val rs = createResourceSet
-		val resource1 = rs.createResource[]
-		val resource2 = rs.createResource[]
-		val o1 = createEObject
-		val o2 = createEObject
-		resource1.contents += o1
-		resource2.contents += o2
-		// must return the resource of the first passed EObject
-		cache.getResource(new String, 1, o2, o1).assertSame(resource2)
-	}
-
-	@Test
-	def void testKeysWithOneElement() {
-		"foo".assertEquals(cache.getKeys("foo"))
-	}
-
-	@Test
-	def void testKeysWithSeveralElement() {
-		("foo" -> 1).assertEquals(cache.getKeys("foo", 1))
-		("foo" -> 1 -> true).assertEquals(cache.getKeys("foo", 1, true))
-	}
-
-	@Test
 	def void testEffectiveCaching() {
 		val resource = createResourceSet.createResource[]
 		val key1 = createEObject

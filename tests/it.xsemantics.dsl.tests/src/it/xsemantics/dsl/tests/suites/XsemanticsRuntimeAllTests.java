@@ -9,6 +9,7 @@ import it.xsemantics.dsl.tests.runtime.StringRepresentationTests;
 import it.xsemantics.dsl.tests.runtime.TraceUtilsTests;
 import it.xsemantics.dsl.tests.runtime.XsemanticsCacheListenerTest;
 import it.xsemantics.dsl.tests.runtime.XsemanticsCacheTest;
+import it.xsemantics.dsl.tests.runtime.XsemanticsCacheUtilsTest;
 import it.xsemantics.dsl.tests.runtime.XsemanticsRuntimeSystemTests;
 
 import org.junit.runner.RunWith;
@@ -24,6 +25,7 @@ import org.junit.runners.Suite;
 	StringRepresentationTests.class,
 	RuleEnvironmentTests.class,
 	XsemanticsRuntimeSystemTests.class,
+	XsemanticsCacheUtilsTest.class,
 	XsemanticsCacheTest.class,
 	XsemanticsCacheListenerTest.class
 })
