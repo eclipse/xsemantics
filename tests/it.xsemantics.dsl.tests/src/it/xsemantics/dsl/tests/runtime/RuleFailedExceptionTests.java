@@ -3,10 +3,14 @@
  */
 package it.xsemantics.dsl.tests.runtime;
 
-import org.junit.Test;
-
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.RuleFailedException;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+import org.junit.Test;
 
 /**
  * @author bettini
@@ -57,6 +61,17 @@ public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 		ex.addErrorInformations();
 		assertMessage(ex, "message");
 		assertTrue(ex.getErrorInformations().isEmpty());
+	}
+
+	@Test
+	public void testSerialization() throws IOException {
+		RuleFailedException ex = new RuleFailedException("message");
+		ex.addErrorInformations(new ErrorInformation(emfUtils.createEObject()),
+				new ErrorInformation(emfUtils.createEObject()));
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream out = new ObjectOutputStream(bos);
+        out.writeObject(ex);
+        out.close();
 	}
 
 	protected void assertMessage(RuleFailedException ex, String message) {
