@@ -74,6 +74,10 @@
 		<!-- Example:
 			mvn sonar:sonar -pl :it.xsemantics.parent,:it.xsemantics.runtime,:it.xsemantics.dsl,:it.xsemantics.dsl.ui
 		 -->
+
+		<!-- Otherwise we'll have problems due to generated sources, which are
+		 not in the git repository (since Sonarqube 5) -->
+		<sonar.scm.disabled>true</sonar.scm.disabled>		
 		
 		<findbugs.skip>false</findbugs.skip>
 		<mwe2.skip>false</mwe2.skip>

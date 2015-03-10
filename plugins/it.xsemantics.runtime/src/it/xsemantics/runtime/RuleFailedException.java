@@ -16,7 +16,7 @@ public class RuleFailedException extends RuntimeException {
 	
 	protected final String issue;
 
-	protected final List<ErrorInformation> errorInformations = new LinkedList<ErrorInformation>();
+	protected final transient List<ErrorInformation> errorInformations = new LinkedList<ErrorInformation>();
 
 	/**
 	 * the previous exception in the trace of failures

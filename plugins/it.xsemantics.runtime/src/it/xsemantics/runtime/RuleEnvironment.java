@@ -188,6 +188,7 @@ public class RuleEnvironment {
 		return add(o1, o2, true);
 	}
 
+	@Override
 	public String toString() {
 		if (isEmpty()) {
 			return "";
@@ -262,6 +263,7 @@ public class RuleEnvironment {
 	 * 
 	 * @since 1.5
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof RuleEnvironment) {
 			return environment.equals(((RuleEnvironment) o).getEnvironment());
@@ -272,6 +274,7 @@ public class RuleEnvironment {
 	/**
 	 * @since 1.5
 	 */
+	@Override
 	public int hashCode() {
 		return environment.hashCode();
 	}
