@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 public class TupleType extends ArrayList<JvmTypeReference> {
 
 	private static final long serialVersionUID = 1L;
+	private static final int ODD_PRIME = 31;
 
 	/**
 	 * Redefined so that we use the referred JvmType
@@ -28,7 +29,7 @@ public class TupleType extends ArrayList<JvmTypeReference> {
 		while (i.hasNext()) {
 			JvmType type = i.next().getType();
 			if (type != null && !type.eIsProxy()) {
-				hashCode = 31 * hashCode + type.hashCode();
+				hashCode = ODD_PRIME * hashCode + type.hashCode();
 			}
 		}
 		return hashCode;
