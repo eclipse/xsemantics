@@ -1,4 +1,4 @@
-package it.xsemantics.runtime.caching
+package it.xsemantics.runtime.caching.util
 
 import org.eclipse.emf.ecore.EObject
 

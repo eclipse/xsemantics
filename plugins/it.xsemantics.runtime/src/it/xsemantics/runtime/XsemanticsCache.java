@@ -1,14 +1,14 @@
 package it.xsemantics.runtime;
 
-import it.xsemantics.runtime.caching.XsemanticsCacheUtils;
+import it.xsemantics.runtime.caching.util.XsemanticsCacheUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

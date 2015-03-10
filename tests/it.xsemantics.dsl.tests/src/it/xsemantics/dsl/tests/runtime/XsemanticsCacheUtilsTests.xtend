@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.EmfFactoryUtils
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.runtime.caching.XsemanticsCacheUtils
+import it.xsemantics.runtime.caching.util.XsemanticsCacheUtils
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
