@@ -84,12 +84,11 @@ public class XsemanticsCache {
 	 * @since 1.8
 	 */
 	public Object lastElementNotTrace(final RuleApplicationTrace trace) {
-		final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+		return IterableExtensions.<Object> findLast(trace.trace, new Function1<Object, Boolean>() {
 			@Override
 			public Boolean apply(final Object it) {
 				return Boolean.valueOf(!(it instanceof RuleApplicationTrace));
 			}
-		};
-		return IterableExtensions.<Object> findLast(trace.trace, _function);
+		});
 	}
 }
