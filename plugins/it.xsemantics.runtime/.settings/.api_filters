@@ -15,6 +15,12 @@
         </filter>
     </resource>
     <resource path="src/it/xsemantics/runtime/XsemanticsCache.java" type="it.xsemantics.runtime.XsemanticsCache">
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>
+                <message_argument value="CACHED_STRING"/>
+            </message_arguments>
+        </filter>
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>

@@ -28,7 +28,10 @@ public class XsemanticsCache {
 	
 	@Inject private XsemanticsCacheUtils cacheUtils;
 	
-	public static String CACHED_STRING = "cached:";
+	/**
+	 * @since 1.8
+	 */
+	protected String cachedString = "cached:";
 	
 	private List<XsemanticsCacheListener> listeners = new ArrayList<XsemanticsCacheListener>();
 
@@ -47,7 +50,7 @@ public class XsemanticsCache {
 			}
 			
 			if (trace != null && trace != cached.getTrace()) {
-				trace.addToTrace(CACHED_STRING);
+				trace.addToTrace(cachedString);
 				if (cached.getTrace() != null) {
 					trace.addObjectAsSubtrace(lastElementNotTrace(cached.getTrace()));
 				}

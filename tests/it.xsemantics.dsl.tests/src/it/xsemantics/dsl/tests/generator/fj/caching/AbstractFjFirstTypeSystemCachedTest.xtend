@@ -7,7 +7,6 @@ import it.xsemantics.example.fj.fj.Program
 import it.xsemantics.example.fj.fj.Type
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils
-import it.xsemantics.runtime.XsemanticsCache
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
@@ -111,7 +110,7 @@ abstract class AbstractFjFirstTypeSystemCachedTest {
 
 	def protected void assertCachedTrace(RuleApplicationTrace original, RuleApplicationTrace cached) {
 		val prepared = new RuleApplicationTrace()
-		prepared.addToTrace(XsemanticsCache.CACHED_STRING)
+		prepared.addToTrace("cached:")
 		prepared.addAsSubtrace(original)
 		assertEqualsStrings(prepared.traceAsString, cached.traceAsString)
 	}
