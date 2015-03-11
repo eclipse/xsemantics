@@ -198,6 +198,7 @@ public class RuleEnvironment {
 			IterableExtensions.join(
 				IterableExtensions.map(getEnvironment().entrySet(), 
 						new Functions.Function1<Entry<Object, Object>, String>() {
+							@Override
 							public String apply(Map.Entry<Object,Object> p) {
 								return p.getKey() + " -> " + p.getValue();
 							}

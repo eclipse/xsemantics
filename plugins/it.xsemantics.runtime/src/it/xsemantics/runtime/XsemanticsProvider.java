@@ -29,6 +29,7 @@ public abstract class XsemanticsProvider<T> implements com.google.inject.Provide
 		this.trace = trace;
 	}
 
+	@Override
 	public XsemanticsCachedData<T> get() {
 		called = true;
 		T doGet = doGet();

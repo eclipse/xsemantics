@@ -54,9 +54,9 @@ class StringRepresentationPostProcessorTests extends XsemanticsBaseTest {
 	
 	@Test
 	def void testProcessLongString() {
-		Assert::assertEquals(StringRepresentationPostProcessor::MAX_CHARS +
-			StringRepresentationPostProcessor::OMISSIS.length,
-			Strings::repeat("a", StringRepresentationPostProcessor::MAX_CHARS + 30)
+		Assert::assertEquals(processor.maxChars +
+			processor.omissis.length,
+			Strings::repeat("a", processor.maxChars + 30)
 				.process.length
 		)
 	}

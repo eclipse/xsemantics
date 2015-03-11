@@ -4,22 +4,22 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
 var file.extensions = "xsemantics"
 var projectName = "it.xsemantics.dsl"
 var runtimeProject = "../${projectName}"
 var testProject = "${runtimeProject}/../../tests/${projectName}.tests"
 var generateXtendStub = true
 var encoding = "UTF-8"
+var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
+// if you prefer platform:/resource URIs
+//var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/dsl/Xsemantics.xtext"
 
 Workflow {
     bean = StandaloneSetup {
-        scanClassPath = true
-        platformUri = "${runtimeProject}/.."
-        // The following two lines ca be removed, if Xbase is not used.
-        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+		// initialize the EMF singleton with proper classpath to platform:/resource mappings
+		scanClassPath = true
+		// put the Xbase genmodel into the EMF plugins singleton
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     }
 
 	component = DirectoryCleaner {
@@ -39,6 +39,8 @@ Workflow {
 	}
 
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		// generate the Java code for the EPackage
+		// the Xsemantics genmodel needs to find the Xbase genmodel thus the latter was registered in the standalone setup
 		genModel = "platform:/resource/${projectName}/model/custom/Xsemantics.genmodel"
 		srcPath = "platform:/resource/${projectName}/src"
 	}
@@ -50,8 +52,15 @@ Workflow {
         projectNameRt = projectName
         projectNameUi = "${projectName}.ui"
         encoding = encoding
-        language = {
-        	loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
+        language = auto-inject {
+			// here we initialize a resource set with a list of ecore files such that the grammar points to the local EPackages
+			// rather than the generated EPackages (which would be inconsistent).
+			loadedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
+			loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
+			loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.ecore"
+        	
         	// switch to xcore
         	// loadedResource = "platform:/resource/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore"
 			// loadedResource = "classpath:/model/Xbase.ecore"
@@ -59,7 +68,7 @@ Workflow {
     		// loadedResource = "classpath:/model/Ecore.ecore"
 			// loadedResource = "classpath:/model/Ecore.genmodel"
         	//loadedResource = "platform:/resource/${projectName}/model/custom/Xsemantics.xcore"
-        	
+
             uri = grammarURI
             fileExtensions = file.extensions
 

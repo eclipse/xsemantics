@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Expressions Example
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.7.2.qualifier
+Bundle-Version: 1.8.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.expressions;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.expressions,
  it.xsemantics.example.expressions.expressions,
  it.xsemantics.example.expressions.expressions.impl,

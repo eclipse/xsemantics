@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lambda Tests
 Bundle-SymbolicName: it.xsemantics.example.lambda.tests
-Bundle-Version: 1.7.2.qualifier
+Bundle-Version: 1.8.0.qualifier
 Bundle-Activator: it.xsemantics.example.lambda.tests.Activator
 Bundle-Vendor: Lorenzo Bettini
 Require-Bundle: org.eclipse.core.runtime,
@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  org.junit;bundle-version="4.8.2",
  org.eclipse.core.filesystem;bundle-version="1.2.0"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: it.xsemantics.example.lambda,
  it.xsemantics.example.lambda.tests,

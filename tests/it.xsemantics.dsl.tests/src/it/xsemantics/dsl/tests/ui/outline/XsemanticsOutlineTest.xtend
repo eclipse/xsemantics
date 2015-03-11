@@ -5,17 +5,22 @@ import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
 import it.xsemantics.dsl.ui.internal.XsemanticsActivator
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.xtext.junit4.Flaky
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.ui.tests.editor.outline.AbstractOutlineWorkbenchTest
 import org.junit.BeforeClass
 import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
+
+	@Rule
+	public Flaky.Rule flakyRule = new Flaky.Rule();
 	
 	@BeforeClass
 	def static void setupTargetPlatform() {
@@ -80,7 +85,7 @@ my.test.System
 		)
 	}
 
-	@Ignore("Luna") @Test
+	@Test
 	def void testEmptyOutline() {
 		val outline = getOutlineTreeViewer(
 '''
@@ -125,6 +130,7 @@ my.test.System
 		)
 	}
 
+	@Flaky
 	@Test
 	def void testOutlineWithDescriptionInAnotherResourceOnEditorOpen() {
 		createFileInTestProject("a",

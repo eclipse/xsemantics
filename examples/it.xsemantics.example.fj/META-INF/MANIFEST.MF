@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics FJ Example
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.7.2.qualifier
+Bundle-Version: 1.8.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fj;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.standalone;resolution:=optional,
  it.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.fj,
  it.xsemantics.example.fj.fj,
  it.xsemantics.example.fj.fj.impl,

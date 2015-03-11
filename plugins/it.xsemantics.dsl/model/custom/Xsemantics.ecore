@@ -6,7 +6,7 @@
     <details key="modelDirectory" value="/it.xsemantics.dsl/emf-gen"/>
     <details key="forceOverwrite" value="true"/>
     <details key="updateClasspath" value="false"/>
-    <details key="complianceLevel" value="5.0"/>
+    <details key="complianceLevel" value="6.0"/>
     <details key="operationReflection" value="false"/>
     <details key="basePackage" value="it.xsemantics.dsl"/>
   </eAnnotations>

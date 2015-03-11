@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: it.xsemantics.example.fjcached.tests
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.7.2.qualifier
+Bundle-Version: 1.8.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fjcached.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.fjcached;visibility:=reexport,
@@ -22,5 +22,5 @@ Import-Package: org.apache.log4j,
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.fjcached

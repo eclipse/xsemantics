@@ -2,9 +2,15 @@ package it.xsemantics.runtime;
 
 public class StringRepresentationPostProcessor {
 	
-	public static int MAX_CHARS = 40;
+	/**
+	 * @since 1.8
+	 */
+	protected int numOfMaxChars = 40;
 	
-	public static String OMISSIS = "...";
+	/**
+	 * @since 1.8
+	 */
+	protected String omissisString = "...";
 	
 	public String process(String string) {
 		if (string == null) {
@@ -14,11 +20,11 @@ public class StringRepresentationPostProcessor {
 	}
 	
 	public int maxChars() {
-		return MAX_CHARS;
+		return numOfMaxChars;
 	}
 	
 	public String omissis() {
-		return OMISSIS;
+		return omissisString;
 	}
 	
 	public String stopAtNewLine(String string) {

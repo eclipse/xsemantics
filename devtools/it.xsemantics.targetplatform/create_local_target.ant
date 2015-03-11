@@ -3,7 +3,7 @@
 
 	<property name="local.target" value="local.target"/>
 	<property name="orig.target" location="./luna.target"/>
-	<property name="local.mirror.path.input" location="${user.home}/mirror/luna-xtext-2.7-swtbot/final/"/>
+	<property name="local.mirror.path.input" location="${user.home}/mirror/luna-xtext-2.8-swtbot/final/"/>
 	<property name="local.mirror.url.input" value="file:${local.mirror.path}"/>
 	
 	<macrodef name="replace_win_slashes">
