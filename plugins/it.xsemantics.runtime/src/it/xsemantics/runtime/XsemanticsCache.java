@@ -87,7 +87,7 @@ public class XsemanticsCache {
 		final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
 			@Override
 			public Boolean apply(final Object it) {
-				return Boolean.valueOf((!(it instanceof RuleApplicationTrace)));
+				return Boolean.valueOf(!(it instanceof RuleApplicationTrace));
 			}
 		};
 		return IterableExtensions.<Object> findLast(trace.trace, _function);
