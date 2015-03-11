@@ -81,12 +81,10 @@ public class XsemanticsCache {
 		this.listeners.remove(l);
 	}
 	
-	/**
-	 * Returns the last element in the trace that is not a RuleApplicationTrace
-	 * 
-	 * @since 1.8
-	 */
-	public Object lastElementNotTrace(final RuleApplicationTrace trace) {
+	private Object lastElementNotTrace(final RuleApplicationTrace trace) {
+		// this is copied from TraceUtils, otherwise Sonarqube 5 reports
+		// a dependency cycle because it uses source folders instead of
+		// Java packages.
 		return IterableExtensions.<Object> findLast(trace.trace, new Function1<Object, Boolean>() {
 			@Override
 			public Boolean apply(final Object it) {
