@@ -1106,8 +1106,13 @@ The automatic caching mechanism has been introduced in version 1.5.0
 (it can be seen as an experimental feature).
 
 Xsemantics provides automatic caching mechanisms that can
-be enabled in a system specification. These mechanisms internally
-use at run-time the class codeRef[org.eclipse.xtext.util.OnChangeEvictingCache] that is part
+be enabled in a system specification. The interface for Xsemantics
+cache is codeRef[it.xsemantics.runtime.XsemanticsCache].
+
+The default implementation of this interface,
+codeRef[it.xsemantics.runtime.XsemanticsCacheDefaultImpl]
+uses internally
+the class codeRef[org.eclipse.xtext.util.OnChangeEvictingCache] that is part
 of the Xtext utility library. This class implements a cache that
 stores its values in the scope of a resource. The values will be
 automatically discarded as soon as the contents of the resource
@@ -1118,7 +1123,7 @@ then Xsemantics will generated Java code that automatically
 uses the cache.
 caching is enabled on a per-judgment and per-auxiliary description basis, 
 using the keyword code[Xsemantics][cached]. 
-Note that
+Note that by default
 caching is based on the Java hashing features, thus it makes sense
 only when used with actual object instances, not with references.
 It is responsibility
