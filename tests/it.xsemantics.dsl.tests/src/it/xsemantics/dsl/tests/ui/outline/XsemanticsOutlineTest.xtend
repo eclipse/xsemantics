@@ -10,6 +10,7 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.ui.tests.editor.outline.AbstractOutlineWorkbenchTest
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -177,8 +178,7 @@ my.test.System
 		// SEE THE FOLLOWING TEST, that simulates editing of the contents of the editor.
 	}
 
-	@Flaky
-	@Test
+	@Ignore("Unreliable Test") @Test
 	def void testOutlineWithDescriptionInAnotherResourceOnEditorModification() {
 		// Unfortunately this test has problems with synchronizations...
 		// it does not work reliably
