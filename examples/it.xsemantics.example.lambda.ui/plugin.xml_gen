@@ -372,5 +372,11 @@
             extensions="lambda">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="lambda"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>

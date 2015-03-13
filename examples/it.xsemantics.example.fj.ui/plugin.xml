@@ -383,5 +383,11 @@
             extensions="fj">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="fj"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>
