@@ -6,14 +6,15 @@
         <products name="org.eclipse.sdk.ide"/>
         <features name="org.eclipse.sdk.feature.group"/>
         <features name="org.eclipse.equinox.executable.feature.group"/>
+        <features name="org.eclipse.emf.sdk.feature.group" versionRange="[2.10.2,2.10.3)"/>
       </repositories>
     </contributions>
     <contributions description="Xtext Releases" label="Xtext Releases">
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases">
-        <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.8.1,2.9.0)"/>
-        <features name="org.eclipse.xtext.redist.feature.group" versionRange="[2.8.1,2.9.0)"/>
-        <features name="org.eclipse.xtext.redist.source.feature.group" versionRange="[2.8.1,2.9.0)"/>
-        <features name="org.eclipse.emf.sdk.feature.group"/>
+        <features name="org.eclipse.xtext.sdk.feature.group" versionRange="[2.8.2,2.9.0)"/>
+        <features name="org.eclipse.xtext.redist.feature.group" versionRange="[2.8.2,2.9.0)"/>
+        <features name="org.eclipse.xtext.redist.source.feature.group" versionRange="[2.8.2,2.9.0)"/>
+        <features name="org.eclipse.emf.mwe2.launcher.feature.group"/>
       </repositories>
     </contributions>
     <contributions description="SwtBot" label="SwtBot">
