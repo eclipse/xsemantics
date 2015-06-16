@@ -10,7 +10,7 @@
 
 	<properties>
 		<tycho-version>0.22.0</tycho-version>
-		<xtext.version>2.8.2</xtext.version>
+		<xtext.version>2.8.3</xtext.version>
 		<xsemantics.version>1.8.0</xsemantics.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
