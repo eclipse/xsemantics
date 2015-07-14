@@ -12,6 +12,11 @@ env: DISPLAY=:99.0
 
 install: true
 
+addons:
+  apt:
+    packages:
+    - metacity
+
 #before_install:
 # - sudo apt-get update
 # - sudo apt-get install gnome-themes-standard
@@ -26,4 +31,4 @@ before_script:
  
 script:
  - export
- - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -U -Dfindbugs.skip=true -Dswtbot.tests.skip=true
+ - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -U -Dfindbugs.skip=true
