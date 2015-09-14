@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fullBuild;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaProject;
 
 import java.lang.reflect.InvocationTargetException;
@@ -148,7 +148,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		//editor.getDocument().set(modelAsText.toString());
 		editor.doSave(monitor());
 		fullBuild();
-		waitForAutoBuild();
+		waitForBuild();
 		executeAsyncDisplayJobs();
 		
 		document = editor.getDocument();

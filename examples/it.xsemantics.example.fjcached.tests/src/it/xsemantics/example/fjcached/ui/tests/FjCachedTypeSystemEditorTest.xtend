@@ -66,7 +66,7 @@ class C {
 new C().m()
 '''
 		, "test").openEditor
-		waitForAutoBuild;
+		waitForBuild;
 		// this will trigger validation in the editor
 		editor.document.modify[
 			(contents.head as FjCachedProgram).cachedprogram.classes +=
@@ -86,7 +86,7 @@ new C().m()
 '''
 ''',
 		"temp").openEditor
-		waitForAutoBuild;
+		waitForBuild;
 		val res = editor.document.readOnly[it]
 		val ts = res.resourceServiceProvider.get(FjTypeSystem)
 		ts.cache

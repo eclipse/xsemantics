@@ -5,7 +5,7 @@ package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import static org.junit.Assert.assertTrue;
 import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
@@ -29,7 +29,7 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 	@After
 	public void runAfterEveryTest() throws CoreException {
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class XsemanticsCreateExamplesProjectWizardTests extends
 		bot.waitUntil(shellCloses(shell), SHELL_TIMEOUT);
 		assertTrue("Project doesn't exist", isProjectCreated(TEST_PROJECT));
 
-		waitForAutoBuild();
+		waitForBuild();
 		assertNoErrorsInProject();
 	}
 

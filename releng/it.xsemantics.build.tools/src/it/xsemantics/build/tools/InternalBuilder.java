@@ -47,11 +47,11 @@ public class InternalBuilder {
 		printMessage("Cleaning...");
 		cleanBuild();
 		printMessage("Waiting for autobuild...");
-		waitForAutoBuild();
+		waitForBuild();
 //		printMessage("Full build...");
 //		fullBuild();
 //		printMessage("Waiting for autobuild...");
-//		waitForAutoBuild();
+//		waitForBuild();
 		setAutoBuild(false);
 		
 		clearJdtIndex();
@@ -138,7 +138,7 @@ public class InternalBuilder {
 		} while (wasInterrupted);
 	}
 	
-	public static void waitForAutoBuild() {
+	public static void waitForBuild() {
 		boolean wasInterrupted = false;
 		do {
 			try {
