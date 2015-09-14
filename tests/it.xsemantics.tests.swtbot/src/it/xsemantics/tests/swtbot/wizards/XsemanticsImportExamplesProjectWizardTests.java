@@ -5,7 +5,7 @@ package it.xsemantics.tests.swtbot.wizards;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import static org.junit.Assert.assertTrue;
 import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 
@@ -32,7 +32,7 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 		disableBuildAutomatically();
 		cleanWorkspace();
 		enableBuildAutomatically();
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	@Test
@@ -41,13 +41,13 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 				"it.xsemantics.example.fj");
 		createExampleProjects("Xsemantics FJ (with cached type system) Example",
 				"it.xsemantics.example.fjcached");
-		waitForAutoBuild();
+		waitForBuild();
 		
 		// if we don't clean this project the fjcached project
 		// presents an error in the xsemantics file...
 		cleanProject("it.xsemantics.example.fj");
 		
-		waitForAutoBuildAndAssertNoErrors();
+		waitForBuildAndAssertNoErrors();
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 			String projectType, String mainProjectId) throws CoreException {
 		createExampleProjects(projectType, mainProjectId);
 
-		waitForAutoBuildAndAssertNoErrors();
+		waitForBuildAndAssertNoErrors();
 	}
 
 	protected void createExampleProjects(String projectType,

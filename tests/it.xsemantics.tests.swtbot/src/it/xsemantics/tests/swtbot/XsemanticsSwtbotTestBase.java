@@ -5,7 +5,7 @@ package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import static org.junit.Assert.assertEquals;
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 
@@ -199,8 +199,8 @@ public class XsemanticsSwtbotTestBase {
 		return getProjectTree().getTreeItem(myTestProject);
 	}
 
-	protected void waitForAutoBuildAndAssertNoErrors() throws CoreException {
-		waitForAutoBuild();
+	protected void waitForBuildAndAssertNoErrors() throws CoreException {
+		waitForBuild();
 		assertNoErrorsInProject();
 	}
 

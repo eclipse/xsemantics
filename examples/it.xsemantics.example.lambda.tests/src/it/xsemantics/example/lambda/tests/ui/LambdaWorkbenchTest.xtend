@@ -29,7 +29,7 @@ class LambdaWorkbenchTest extends AbstractWorkbenchTest {
 	
 	def void checkProgram(String contents, int expectedErrors) {
 		val file = createFile(TEST_PROJECT + "/src/test.lambda", contents)
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(expectedErrors, file.findMarkers(EValidator::MARKER, true,
 				IResource::DEPTH_INFINITE).size);
 	}

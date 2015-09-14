@@ -4,7 +4,7 @@
 package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper;
 import it.xsemantics.dsl.ui.internal.XsemanticsActivator;
 
@@ -55,14 +55,14 @@ public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 		// bot.tree().getTreeItem("MyTestProject").getNode("src").getNode("mytestproject").getNode("MyTest.xsemantics").select();
 		// bot.tree().getTreeItem("MyTestProject").getNode("src").getNode("mytestproject").getNode("MyTest.xsemantics").select();
 
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	@AfterClass
 	public static void cleanWorkbench() throws CoreException {
 		// bot.sleep(2000);
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	protected SWTBotEditor setEditorContents(CharSequence text) {

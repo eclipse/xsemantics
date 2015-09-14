@@ -7,7 +7,7 @@ import static it.xsemantics.example.lambda.tests.util.LambdaTestsUtil.rep;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.addNature;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.cleanWorkspace;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.createFile;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.waitForAutoBuild;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.waitForBuild;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.addSourceFolder;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.createJavaProject;
 import it.xsemantics.example.lambda.LambdaUiInjectorProvider;
@@ -70,7 +70,7 @@ public class LambdaIntegrationTest extends TestCase {
 	public void testValidSimpleLambdaProgram() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda", "lambda x. x");
-		waitForAutoBuild();
+		waitForBuild();
 		assertNoErrorMarkers(file);
 	}
 
@@ -94,7 +94,7 @@ public class LambdaIntegrationTest extends TestCase {
 	public void testGetActiveEditor() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda", "lambda x. x");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = openEditorAndGetDocument(file);
 		Program program = getLambdaProgramFromEditor(xtextDocument);
 		assertEquals("x", getAbstraction(program.getTerm()).getParam()
@@ -105,7 +105,7 @@ public class LambdaIntegrationTest extends TestCase {
 	public void testInferAndModifyAbstractionType() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda", "lambda x. x");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyAbstractionWithInferredType(file);
 		assertNoErrorMarkers(file);
 		Abstraction abstraction = getAbstractionFromProgramEditor(xtextDocument);
@@ -118,7 +118,7 @@ public class LambdaIntegrationTest extends TestCase {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda",
 				"lambda f . lambda g. lambda x. (f (g x))");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyAbstractionWithInferredType(file);
 		assertNoErrorMarkers(file);
 		Abstraction abstraction = getAbstractionFromProgramEditor(xtextDocument);
@@ -131,7 +131,7 @@ public class LambdaIntegrationTest extends TestCase {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda",
 				"lambda x : int -> string. x");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyAbstractionWithInferredType(file);
 		assertNoErrorMarkers(file);
 		Abstraction abstraction = getAbstractionFromProgramEditor(xtextDocument);
@@ -144,7 +144,7 @@ public class LambdaIntegrationTest extends TestCase {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda",
 				"lambda x : int -> string. x x");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyAbstractionWithInferredType(file);
 		assertContainsErrorMarkers(file);
 		Abstraction abstraction = getAbstractionFromProgramEditor(xtextDocument);
@@ -158,7 +158,7 @@ public class LambdaIntegrationTest extends TestCase {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo.lambda",
 				"lambda f . lambda g. lambda x. (f (g x))");
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyTermWithInferredType(file);
 		assertNoErrorMarkers(file);
 		String newProgramText = xtextDocument.get();
@@ -172,7 +172,7 @@ public class LambdaIntegrationTest extends TestCase {
 		createJavaProjectWithRootSrc("foo");
 		String originalProgramText = "lambda f . lambda g. lambda x. (f (f f))";
 		IFile file = createFile("foo/src/foo.lambda", originalProgramText);
-		waitForAutoBuild();
+		waitForBuild();
 		IXtextDocument xtextDocument = modifyTermWithInferredType(file);
 		assertContainsErrorMarkers(file);
 		String newProgramText = xtextDocument.get();
@@ -190,7 +190,7 @@ public class LambdaIntegrationTest extends TestCase {
 			throws PartInitException {
 		IXtextDocument xtextDocument = openEditor(file).getDocument();
 		modifyAbstractionWithInferredType(xtextDocument);
-		waitForAutoBuild();
+		waitForBuild();
 		return xtextDocument;
 	}
 
@@ -204,7 +204,7 @@ public class LambdaIntegrationTest extends TestCase {
 			throws PartInitException {
 		IXtextDocument xtextDocument = openEditor(file).getDocument();
 		modifyTermWithInferredType(xtextDocument);
-		waitForAutoBuild();
+		waitForBuild();
 		return xtextDocument;
 	}
 
