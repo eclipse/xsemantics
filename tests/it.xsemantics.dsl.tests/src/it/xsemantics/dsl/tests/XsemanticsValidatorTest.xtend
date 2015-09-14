@@ -338,7 +338,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		assertError(
 			XbasePackage::eINSTANCE.XFeatureCall,
 			Diagnostic::LINKING_DIAGNOSTIC,
-			"Couldn't resolve reference to JvmIdentifiableElement 'cc'"
+			"The method or field cc is undefined"
 		)
 	}
 
@@ -609,7 +609,7 @@ Primitives cannot be used in this context.
 			}
 		}
 		'''.assertErrorMessages(
-			"Couldn't resolve reference to JvmIdentifiableElement 'previousFailure'."
+			"The method or field previousFailure is undefined"
 		)
 	}
 

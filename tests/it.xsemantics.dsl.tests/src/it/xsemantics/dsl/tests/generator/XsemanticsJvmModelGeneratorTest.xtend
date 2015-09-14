@@ -5298,6 +5298,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
    */
   private MyTestExtensions nonFinalField = new MyTestExtensions();
   
+  /**
+   * inferred type for field
+   */
+  private MyTestExtensions inferredTypeField = new MyTestExtensions();
+  
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
   public TypeSystem() {
@@ -5327,6 +5332,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   public void setNonFinalField(final MyTestExtensions nonFinalField) {
     this.nonFinalField = nonFinalField;
+  }
+  
+  public MyTestExtensions getInferredTypeField() {
+    return this.inferredTypeField;
+  }
+  
+  public void setInferredTypeField(final MyTestExtensions inferredTypeField) {
+    this.inferredTypeField = inferredTypeField;
   }
   
   public Result<EClass> type(final EObject o) {

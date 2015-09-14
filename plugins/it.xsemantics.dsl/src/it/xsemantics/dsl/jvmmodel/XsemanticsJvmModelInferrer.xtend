@@ -143,14 +143,22 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			for (field : ts.fields) {
 				var addSetter = true
-				members += field.toGetter
-					(field.name, field.type)
+				var fieldType = field.type
 				if (field instanceof FieldDefinition) {
-					addSetter = field.writeable
+					if (field.right != null) {
+						fieldType = field.right.inferredType
+					}
 				}
-				if (addSetter) {
-					members += field.toSetter
-						(field.name, field.type)
+				if (fieldType != null) {
+					members += field.toGetter
+						(field.name, fieldType)
+					if (field instanceof FieldDefinition) {
+						addSetter = field.writeable
+					}
+					if (addSetter) {
+						members += field.toSetter
+							(field.name, fieldType)
+					}
 				}
 			}
 			
@@ -765,10 +773,10 @@ if (!«c.cacheConditionMethod»(«args»))
 					«rule.throwExceptionMethod»(«exceptionVarName», «inputArgs»);
 				«ELSE»
 				«judgment.throwExceptionMethod»(«rule.errorForRule»,
-						«rule.ruleIssueString»,
-						e_«applyRuleName», «inputArgs»«rule.errorInformationArgs»);
+					«rule.ruleIssueString»,
+					e_«applyRuleName», «inputArgs»«rule.errorInformationArgs»);
 				«ENDIF»
-					return null;
+				return null;
    				'''
    			)
 		]
@@ -809,9 +817,9 @@ if (!«c.cacheConditionMethod»(«args»))
 				ruleApplicationSubtraceName, inputArgs, aux.traceStringForAuxiliaryFun, exceptionVarName,
    				'''
 					«auxiliaryDescription.throwExceptionMethod»(«aux.errorForAuxiliaryFun»,
-							«auxiliaryDescription.ruleIssueString»,
-							«exceptionVarName», «inputArgs»«aux.errorInformationArgs»);
-						return «IF isBoolean»false«ELSE»null«ENDIF»;
+						«auxiliaryDescription.ruleIssueString»,
+						«exceptionVarName», «inputArgs»«aux.errorInformationArgs»);
+					return «IF isBoolean»false«ELSE»null«ENDIF»;
    				'''
    			)
    				// don't return null if resultType is boolean: the generated method will have

@@ -68,7 +68,7 @@ class XsemanticsParserTest extends XsemanticsBaseTest {
 		parser.parse(testFiles.testJudgmentDescriptionsReferringToUnknownTypes).assertError(
 				TypesPackage::eINSTANCE.jvmParameterizedTypeReference,
 				Diagnostic::LINKING_DIAGNOSTIC,
-				"Couldn't resolve reference to JvmType 'foo.bar.FooBar'")
+				"foo.bar.FooBar cannot be resolved to a type.")
 	}
 
 	@Test
