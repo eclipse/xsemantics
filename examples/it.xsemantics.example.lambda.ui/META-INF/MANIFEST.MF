@@ -27,5 +27,6 @@ Export-Package: it.xsemantics.example.lambda.ui,
  it.xsemantics.example.lambda.ui.typing,
  it.xsemantics.example.lambda.ui.util,
  it.xsemantics.example.lambda.ui.contentassist,
- it.xsemantics.example.lambda.ui.quickfix
+ it.xsemantics.example.lambda.ui.quickfix,
+ it.xsemantics.example.lambda.ui.contentassist.antlr.internal
 Bundle-Activator: it.xsemantics.example.lambda.ui.internal.LambdaActivator

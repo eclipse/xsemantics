@@ -26,5 +26,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.expressions.ui.contentassist,
  it.xsemantics.example.expressions.ui.contentassist.antlr,
  it.xsemantics.example.expressions.ui.internal,
- it.xsemantics.example.expressions.ui.quickfix
+ it.xsemantics.example.expressions.ui.quickfix,
+ it.xsemantics.example.expressions.ui.contentassist.antlr.internal
 Bundle-Activator: it.xsemantics.example.expressions.ui.internal.ExpressionsActivator

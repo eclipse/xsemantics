@@ -28,5 +28,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.fjcached.ui.quickfix,
  it.xsemantics.example.fjcached.ui.contentassist,
  it.xsemantics.example.fjcached.ui.contentassist.antlr,
- it.xsemantics.example.fjcached.ui.internal
+ it.xsemantics.example.fjcached.ui.internal,
+ it.xsemantics.example.fjcached.ui.contentassist.antlr.internal
 Bundle-Activator: it.xsemantics.example.fjcached.ui.internal.FjcachedActivator
