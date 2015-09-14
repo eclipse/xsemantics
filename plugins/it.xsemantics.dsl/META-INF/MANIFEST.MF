@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="[2.9.0,2.10.0)";visibility:=re
  org.eclipse.xtend.standalone;resolution:=optional,
  org.eclipse.xtext.ecore,
  org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport,
- org.eclipse.xtext.xtext.generator;resolution:=optional
+ org.eclipse.xtext.xtext.generator;resolution:=optional;visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.dsl,
