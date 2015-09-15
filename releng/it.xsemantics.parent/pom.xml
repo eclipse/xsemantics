@@ -37,8 +37,9 @@
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 		
 		<!-- tests and runtime args -->
+		<os-jvm-flags />
 		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
-		<uiTestsArgs>${memoryArgs} -Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
+		<uiTestsArgs>${memoryArgs} ${os-jvm-flags} -Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
 		<pdeTestsArgs>-DbuildingWithTycho=true</pdeTestsArgs>
 		<swtbotTestsArgs>${uiTestsArgs} -Dorg.eclipse.swtbot.search.timeout=180000 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</swtbotTestsArgs>
 		
@@ -148,7 +149,18 @@
 				<module>../../plugins/it.xsemantics.runtime</module>
 				<module>../../plugins/it.xsemantics.dsl</module>
 			</modules>
+		</profile>
 
+		<profile>
+			<id>macosx-jvm-flags</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
+			</properties>
 		</profile>
 	</profiles>
 
