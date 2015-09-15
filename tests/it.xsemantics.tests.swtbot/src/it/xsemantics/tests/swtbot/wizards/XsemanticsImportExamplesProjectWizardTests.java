@@ -45,7 +45,11 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 		
 		// if we don't clean this project the fjcached project
 		// presents an error in the xsemantics file...
-		cleanProject("it.xsemantics.example.fj");
+		// cleanProject("it.xsemantics.example.fj");
+
+		// This does not seem to be required in Xtext 2.9.0
+		// on the contrary, cleaning the fj project results in
+		// errors in fj.cached project
 		
 		waitForBuildAndAssertNoErrors();
 	}
