@@ -35,7 +35,7 @@ in Java).
    <feature id="it.xsemantics.feature.source">
       <category name="xsemantics"/>
    </feature>
-   <category-def name="xsemantics" label="Xsemantics (1.8.x) for Xtext 2.9">
+   <category-def name="xsemantics" label="Xsemantics (1.9.x) for Xtext 2.9">
       <description>
          Xsemantics is a DSL (implemented in Xtext itself) for writing
 type systems, reduction rules, interpreters (and in general relation

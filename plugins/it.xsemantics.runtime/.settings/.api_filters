@@ -13,6 +13,20 @@
                 <message_argument value="OMISSIS"/>
             </message_arguments>
         </filter>
+        <filter comment="TO REMOVE AFTER BASELINE UPDATE" id="1141899266">
+            <message_arguments>
+                <message_argument value="1.8"/>
+                <message_argument value="1.9"/>
+                <message_argument value="numOfMaxChars"/>
+            </message_arguments>
+        </filter>
+        <filter comment="TO REMOVE AFTER BASELINE UPDATE" id="1141899266">
+            <message_arguments>
+                <message_argument value="1.8"/>
+                <message_argument value="1.9"/>
+                <message_argument value="omissisString"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/it/xsemantics/runtime/XsemanticsCache.java" type="it.xsemantics.runtime.XsemanticsCache">
         <filter id="337809484">
@@ -20,6 +34,24 @@
                 <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>
                 <message_argument value="4"/>
                 <message_argument value="8"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/it/xsemantics/runtime/XsemanticsCacheDefaultImpl.java" type="it.xsemantics.runtime.XsemanticsCacheDefaultImpl">
+        <filter comment="TO REMOVE AFTER BASELINE UPDATE" id="1108344834">
+            <message_arguments>
+                <message_argument value="1.8"/>
+                <message_argument value="1.9"/>
+                <message_argument value="it.xsemantics.runtime.XsemanticsCacheDefaultImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/it/xsemantics/runtime/caching/util/XsemanticsCacheUtils.java" type="it.xsemantics.runtime.caching.util.XsemanticsCacheUtils">
+        <filter comment="TO REMOVE AFTER BASELINE UPDATE" id="1108344834">
+            <message_arguments>
+                <message_argument value="1.8"/>
+                <message_argument value="1.9"/>
+                <message_argument value="it.xsemantics.runtime.caching.util.XsemanticsCacheUtils"/>
             </message_arguments>
         </filter>
     </resource>
