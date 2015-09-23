@@ -7,8 +7,7 @@ import java.util.List
 import it.xsemantics.example.fj.typing.FjTypeSystem
 
 /*
- * A version of the FJ system where type computation and
- * checking are separated.
+ * A version of the FJ system where caching is used.
  */
 system it.xsemantics.example.fjcached.typing.FjCachedTypeSystem extends FjTypeSystem
 
