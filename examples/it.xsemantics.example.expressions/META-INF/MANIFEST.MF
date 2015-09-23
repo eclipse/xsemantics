@@ -20,8 +20,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.xtend.standalone;resolution:=optional,
  org.eclipse.xtext.xbase.lib,
- it.xsemantics.dsl;resolution:=optional,
- org.eclipse.xtext.xtext.generator;resolution:=optional
+ it.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
