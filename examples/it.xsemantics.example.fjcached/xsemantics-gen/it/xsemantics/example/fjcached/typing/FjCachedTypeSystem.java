@@ -16,8 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
- * A version of the FJ system where type computation and
- * checking are separated.
+ * A version of the FJ system where caching is used.
  */
 @SuppressWarnings("all")
 public class FjCachedTypeSystem extends FjTypeSystem {
