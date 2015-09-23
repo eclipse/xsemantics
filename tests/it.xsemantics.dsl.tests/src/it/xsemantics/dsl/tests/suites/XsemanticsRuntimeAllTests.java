@@ -1,5 +1,8 @@
 package it.xsemantics.dsl.tests.suites;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
 import it.xsemantics.dsl.tests.runtime.ResultTests;
 import it.xsemantics.dsl.tests.runtime.RuleApplicationTraceTests;
 import it.xsemantics.dsl.tests.runtime.RuleEnvironmentTests;
@@ -8,12 +11,9 @@ import it.xsemantics.dsl.tests.runtime.StringRepresentationPostProcessorTests;
 import it.xsemantics.dsl.tests.runtime.StringRepresentationTests;
 import it.xsemantics.dsl.tests.runtime.TraceUtilsTests;
 import it.xsemantics.dsl.tests.runtime.XsemanticsCacheListenerTest;
-import it.xsemantics.dsl.tests.runtime.XsemanticsCacheTest;
-import it.xsemantics.dsl.tests.runtime.XsemanticsCacheUtilsTest;
+import it.xsemantics.dsl.tests.runtime.XsemanticsCacheTests;
+import it.xsemantics.dsl.tests.runtime.XsemanticsCacheUtilsTests;
 import it.xsemantics.dsl.tests.runtime.XsemanticsRuntimeSystemTests;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -25,8 +25,8 @@ import org.junit.runners.Suite;
 	StringRepresentationTests.class,
 	RuleEnvironmentTests.class,
 	XsemanticsRuntimeSystemTests.class,
-	XsemanticsCacheUtilsTest.class,
-	XsemanticsCacheTest.class,
+	XsemanticsCacheUtilsTests.class,
+	XsemanticsCacheTests.class,
 	XsemanticsCacheListenerTest.class
 })
 public class XsemanticsRuntimeAllTests {
