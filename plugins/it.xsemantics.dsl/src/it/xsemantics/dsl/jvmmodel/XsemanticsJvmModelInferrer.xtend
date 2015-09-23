@@ -143,14 +143,22 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			for (field : ts.fields) {
 				var addSetter = true
-				members += field.toGetter
-					(field.name, field.type)
+				var fieldType = field.type
 				if (field instanceof FieldDefinition) {
-					addSetter = field.writeable
+					if (field.right != null) {
+						fieldType = field.right.inferredType
+					}
 				}
-				if (addSetter) {
-					members += field.toSetter
-						(field.name, field.type)
+				if (fieldType != null) {
+					members += field.toGetter
+						(field.name, fieldType)
+					if (field instanceof FieldDefinition) {
+						addSetter = field.writeable
+					}
+					if (addSetter) {
+						members += field.toSetter
+							(field.name, fieldType)
+					}
 				}
 			}
 			

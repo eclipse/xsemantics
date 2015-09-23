@@ -2770,6 +2770,9 @@ class XsemanticsTestFiles {
 
 	/* non final field */
 	var MyTestExtensions nonFinalField = new MyTestExtensions()
+
+	/* inferred type for field */
+	var inferredTypeField = new MyTestExtensions()
 	
 	judgments {
 		type |- EObject o : output EClass
