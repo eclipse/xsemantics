@@ -14,7 +14,7 @@ import static extension org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsCacheTest extends XsemanticsBaseTest {
+class XsemanticsCacheTests extends XsemanticsBaseTest {
 	
 	@Inject extension EmfFactoryUtils
 	
