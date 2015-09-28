@@ -25,7 +25,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.xdoc.feature.feature.group" version="0.0.0"/>
-<repository location="http://master.dl.sourceforge.net/project/xtext-xdoc/updates-2.7"/>
+<repository location="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.7"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.swtbot.forms.feature.group" version="0.0.0"/>
