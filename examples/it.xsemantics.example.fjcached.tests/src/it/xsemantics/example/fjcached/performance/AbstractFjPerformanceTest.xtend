@@ -57,10 +57,11 @@ abstract class AbstractFjPerformanceTest {
 		}
 		
 		new A_3(
-			new A_3(
-			new A_3(
-			new A_3(new A_3(new B()))
-		)))
+				new A_1(
+				new A_2(
+				new A_3(
+				new B_0()
+			))))
 		</pre>
 	 */
 	def protected testPerformance(int n) {
@@ -79,12 +80,12 @@ abstract class AbstractFjPerformanceTest {
 			«ENDFOR»
 			
 			new A_«n»(
-				«FOR i : n..2»
-				new A_«n»(
+				«FOR i : 1..n»
+				new A_«i»(
 				«ENDFOR»
-				new A_«n»(new A_«n»(new B_0()))
+				new B_0()
 			)
-			«FOR i : n..2»)«ENDFOR»
+			«FOR i : n..1»)«ENDFOR»
 		''')
 	}
 
