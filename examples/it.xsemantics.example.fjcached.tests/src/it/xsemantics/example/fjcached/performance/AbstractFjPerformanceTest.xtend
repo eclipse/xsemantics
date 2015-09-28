@@ -37,16 +37,17 @@ abstract class AbstractFjPerformanceTest {
 		testPerformance(200)
 	}
 
-	@Test def void test300() {
-		testPerformance(300)
-	}
+//	@Test def void test300() {
+//		testPerformance(300)
+//	}
 
 	/**
 	 * Generates input of the shape
 	 * 
 	 *  <pre>
-	 *  class A_0 {
-			Object f;
+	 *  class B {}
+	 *  class A_0 extends B {
+			B f;
 		}
 		class A_1 extends A_0 {
 		}
@@ -56,18 +57,20 @@ abstract class AbstractFjPerformanceTest {
 		}
 		
 		new A_3(
-			new A_2(
-			new A_1(
-			new A_1(new A_0(new Object()))
+			new A_3(
+			new A_3(
+			new A_3(new A_3(new B()))
 		)))
 		</pre>
 	 */
 	def protected testPerformance(int n) {
 		validateInput('''
 			class Object {}
+			
+			class B_0 {}
 		
-			class A_0 {
-				Object field;
+			class A_0 extends B_0 {
+				B_0 field;
 				Object getField() { return this.field; }
 			}
 			«FOR i : 1..n»
@@ -77,9 +80,9 @@ abstract class AbstractFjPerformanceTest {
 			
 			new A_«n»(
 				«FOR i : n..2»
-				new A_«i-1»(
+				new A_«n»(
 				«ENDFOR»
-				new A_1(new A_0(new Object()))
+				new A_«n»(new A_«n»(new B_0()))
 			)
 			«FOR i : n..2»)«ENDFOR»
 		''')
