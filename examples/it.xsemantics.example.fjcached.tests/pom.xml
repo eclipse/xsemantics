@@ -38,25 +38,22 @@
 							<goal>test</goal>
 						</goals>
 					</execution>
-					<execution>
-						<!-- compiler tests need an OSGI environment, but no UI -->
-						<id>performance-test</id>
-						<phase>integration-test</phase>
-						<configuration>
-							<skip>${dsl.tests.skip}</skip>
-							<useUIHarness>false</useUIHarness>
-							<useUIThread>false</useUIThread>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
-							<includes>
-								<include>**/fjcached/performance/*Test.java</include>
-							</includes>
-						</configuration>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
+<!-- 					<execution> -->
+<!-- 						<id>performance-test</id> -->
+<!-- 						<phase>integration-test</phase> -->
+<!-- 						<configuration> -->
+<!-- 							<skip>${dsl.tests.skip}</skip> -->
+<!-- 							<useUIHarness>false</useUIHarness> -->
+<!-- 							<useUIThread>false</useUIThread> -->
+<!-- 							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine> -->
+<!-- 							<includes> -->
+<!-- 								<include>**/fjcached/performance/*Test.java</include> -->
+<!-- 							</includes> -->
+<!-- 						</configuration> -->
+<!-- 						<goals> -->
+<!-- 							<goal>test</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
 					<execution>
 						<id>TychoSurefirePluginUiTest</id>
 						<phase>integration-test</phase>

@@ -5,6 +5,8 @@ import it.xsemantics.example.fj.fj.Method
 import it.xsemantics.example.fj.fj.Type
 import java.util.List
 import it.xsemantics.example.fj.typing.FjTypeSystem
+import it.xsemantics.example.fj.fj.ClassType
+import it.xsemantics.example.fj.fj.BasicType
 
 /*
  * A version of the FJ system where caching is used.
@@ -18,11 +20,32 @@ auxiliary {
 }
 
 judgments {
+	subclass ||- Class left <: Class right cached
+		error stringRep(left) + " is not a subclass of " + stringRep(right)
 	override type |- Expression expression : output Type cached
 		error "cannot type " + stringRep(expression)
 		source expression
-	override subtype |- Type left <: Type right cached
-		error stringRep(left) + " is not a subtype of " + stringRep(right)
-	override equalstype |- Type left ~~ Type right cached
-		error stringRep(left) + " is not the same type as " + stringRep(right)
+	override subtype |- Type left <: Type right cached {
+		condition=(left instanceof BasicType && right instanceof BasicType)	
+	}
+	error stringRep(left) + " is not a subtype of " + stringRep(right)
+//	override equalstype |- Type left ~~ Type right cached
+//		error stringRep(left) + " is not the same type as " + stringRep(right)
+}
+
+override rule ClassSubtyping
+	G |- ClassType left <: ClassType right
+from {
+	G ||- left.classref <: right.classref
+}
+
+rule Subclassing
+	G ||- Class left <: Class right
+from {
+	left == right
+	or
+	right.name == "Object"
+	or {
+		superclasses(left).contains(right)
+	}
 }

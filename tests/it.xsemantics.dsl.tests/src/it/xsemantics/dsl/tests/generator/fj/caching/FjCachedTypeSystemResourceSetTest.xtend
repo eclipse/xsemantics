@@ -1,6 +1,8 @@
 package it.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
+import it.xsemantics.example.fj.fj.FjPackage
+import it.xsemantics.example.fj.typing.FjTypeSystem
 import it.xsemantics.example.fjcached.FjcachedInjectorProvider
 import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
 import org.eclipse.xtext.junit4.InjectWith
@@ -37,7 +39,13 @@ class FjCachedTypeSystemResourceSetTest {
 			key.classes.last.superclass = null
 			
 			key.assertNoErrors
-			value.assertNoErrors
+			// in the second program the returned value
+			// is not subclass of A anymore
+			value.assertError(
+				FjPackage.eINSTANCE.^new,
+				FjTypeSystem.EXPRESSIONASSIGNABLETOTYPE,
+				"new B() is not assignable for A"
+			)
 		]
 	}
 

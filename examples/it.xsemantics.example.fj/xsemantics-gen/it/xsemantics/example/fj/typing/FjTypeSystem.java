@@ -496,6 +496,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
       List<Field> inheritedFields = this.fieldsInternal(_trace_, _superclass_1);
       final Procedure1<Field> _function = new Procedure1<Field>() {
+        @Override
         public void apply(final Field inheritedField) {
           String _name = field.getName();
           String _name_1 = inheritedField.getName();
@@ -538,8 +539,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       EList<Member> _members = clazz.getMembers();
       final List<Method> methods = EcoreUtil2.<Method>typeSelect(_members, Method.class);
       final Procedure1<Method> _function = new Procedure1<Method>() {
+        @Override
         public void apply(final Method inheritedMethod) {
           final Procedure1<Method> _function = new Procedure1<Method>() {
+            @Override
             public void apply(final Method it) {
               FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }
@@ -953,6 +956,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       final List<Method> methods = EcoreUtil2.<Method>typeSelect(_members, Method.class);
       List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, clazz);
       final Procedure1<it.xsemantics.example.fj.fj.Class> _function = new Procedure1<it.xsemantics.example.fj.fj.Class>() {
+        @Override
         public void apply(final it.xsemantics.example.fj.fj.Class c) {
           EList<Member> _members = c.getMembers();
           List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
@@ -1118,6 +1122,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final New exp) throws RuleFailedException {
     EList<Expression> _args = exp.getArgs();
     final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
+      @Override
       public Boolean apply(final Expression it) {
         return FjTypeSystem.this.isValueInternal(_trace_, it);
       }
@@ -1152,9 +1157,11 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected MethodBody applyAuxFunReplaceThisAndParams(final RuleApplicationTrace _trace_, final MethodBody body, final Expression thisReplacement, final List<Parameter> params, final List<Expression> args) throws RuleFailedException {
     MethodBody _clone = this.<MethodBody>clone(body);
     final Procedure1<MethodBody> _function = new Procedure1<MethodBody>() {
+      @Override
       public void apply(final MethodBody it) {
         List<This> _eAllOfType = EcoreUtil2.<This>eAllOfType(it, This.class);
         final Procedure1<This> _function = new Procedure1<This>() {
+          @Override
           public void apply(final This it) {
             EObject _eContainer = it.eContainer();
             EStructuralFeature _eContainingFeature = it.eContainingFeature();
@@ -1165,6 +1172,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         IterableExtensions.<This>forEach(_eAllOfType, _function);
         List<ParamRef> _eAllOfType_1 = EcoreUtil2.<ParamRef>eAllOfType(it, ParamRef.class);
         final Procedure1<ParamRef> _function_1 = new Procedure1<ParamRef>() {
+          @Override
           public void apply(final ParamRef it) {
             Parameter _parameter = it.getParameter();
             final int paramIndex = params.indexOf(_parameter);
@@ -1363,6 +1371,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   private BasicType _applyRuleTBoolConstant_1(final RuleEnvironment G, final BoolConstant b) throws RuleFailedException {
     final Function1<BasicType, BasicType> _function = new Function1<BasicType, BasicType>() {
+      @Override
       public BasicType apply(final BasicType t) {
         BasicType _xblockexpression = null;
         {
@@ -1830,6 +1839,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     exp1 = _clone;
     EList<Expression> _args = exp1.getArgs();
     final Predicate<Expression> _function = new Predicate<Expression>() {
+      @Override
       public boolean apply(final Expression it) {
         Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
         return (!(_isValue).booleanValue());
@@ -1916,6 +1926,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
             List<Field> _fields = this.fieldsInternal(_trace_, _classref);
             final Predicate<Field> _function = new Predicate<Field>() {
+              @Override
               public boolean apply(final Field it) {
                 String _name = it.getName();
                 String _name_1 = ((Field)message).getName();
@@ -1933,6 +1944,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             _matched=true;
             EList<Expression> _args = exp.getArgs();
             final Predicate<Expression> _function = new Predicate<Expression>() {
+              @Override
               public boolean apply(final Expression it) {
                 Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
                 return (!(_isValue).booleanValue());

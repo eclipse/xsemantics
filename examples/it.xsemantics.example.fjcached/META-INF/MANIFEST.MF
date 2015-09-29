@@ -36,5 +36,6 @@ Export-Package: it.xsemantics.example.fjcached,
  it.xsemantics.example.fjcached.scoping,
  it.xsemantics.example.fjcached.serializer,
  it.xsemantics.example.fjcached.services,
+ it.xsemantics.example.fjcached.typing,
  it.xsemantics.example.fjcached.validation
 
