@@ -24,18 +24,22 @@ Workflow {
 
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/emf-gen"
+		exclude = ".gitignore"
 	}
 	
     component = DirectoryCleaner {
         directory = "${runtimeProject}/src-gen"
+		exclude = ".gitignore"
     }
 
     component = DirectoryCleaner {
         directory = "${runtimeProject}.ui/src-gen"
+		exclude = ".gitignore"
     }
 
 	component = DirectoryCleaner {
 		directory = "${testProject}/src-gen"
+		exclude = ".gitignore"
 	}
 
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
