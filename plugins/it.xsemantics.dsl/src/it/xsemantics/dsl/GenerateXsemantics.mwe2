@@ -10,9 +10,9 @@ var runtimeProject = "../${projectName}"
 var testProject = "${runtimeProject}/../../tests/${projectName}.tests"
 var generateXtendStub = true
 var encoding = "UTF-8"
-var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
-// if you prefer platform:/resource URIs
-//var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/dsl/Xsemantics.xtext"
+//var grammarURI = "classpath:/it/xsemantics/dsl/Xsemantics.xtext"
+// use platform URI to make it easy for Oomph
+var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/dsl/Xsemantics.xtext"
 
 Workflow {
     bean = StandaloneSetup {
