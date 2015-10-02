@@ -4,11 +4,13 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/it/xsemantics/example/fj/FJ.xtext"
 var file.extensions = "fj"
 var projectName = "it.xsemantics.example.fj"
 var runtimeProject = "../${projectName}"
 var encoding = "UTF-8"
+// var grammarURI = "classpath:/it/xsemantics/example/fj/FJ.xtext"
+// use platform URI to make it easy for Oomph
+var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/example/fj/FJ.xtext"
 
 Workflow {
     bean = StandaloneSetup {
