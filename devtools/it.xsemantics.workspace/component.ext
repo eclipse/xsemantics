@@ -9,4 +9,6 @@
       name="it.xsemantics.repository.plain.project"/>
   <requirement
       name="it.xsemantics.parent.plain.project"/>
+  <requirement
+      name="it.xsemantics.targetplatform.plain.project"/>
 </targlets:ComponentExtension>
