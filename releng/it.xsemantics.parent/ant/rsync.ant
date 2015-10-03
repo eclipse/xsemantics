@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Rsync from Ant" basedir=".">
+
+	<!-- local source directory for rsync (read from this directory) -->
+	<!-- <property name="rsync.remote.dir" value="lbettini,eclipseexamples@frs.sourceforge.net:/home/frs/project/eclipseexamples/p2composite.example/updates/"/> -->
+
+	<!-- remote rsync host -->
+	<!-- <property name="rsync.local.dir" value="${user.home}/p2.repositories/updates/"/> -->
+
+	<!-- pass "-n" to perform a trial run with no changes made -->
+	<!-- <property name="dryrun" value="-n"/> -->
+
+	<target name="rsync-update">
+		<rsync source="${rsync.remote.dir}" dest="${rsync.local.dir}" />
+	</target>
+
+	<target name="rsync-commit">
+		<rsync source="${rsync.local.dir}" dest="${rsync.remote.dir}" />
+	</target>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: rsync          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="rsync">
+		<attribute name="source" />
+		<attribute name="dest" />
+		<sequential>
+			<echo message="Rsync source:" />
+			<echo message="@{source}" />
+			<echo message="Rsync destination:" />
+			<echo message="@{dest}" />
+			<exec dir="." executable="rsync">
+				<arg value="-azvc" />
+
+				<!-- exclude all hidden files and directories -->
+				<arg line="--exclude='.*'" />
+
+				<!-- use ssh -->
+				<arg line="-e ssh" />
+
+				<!-- use ssh -->
+				<arg line="--delete" />
+
+				<!-- use ssh -->
+				<arg line="${dryrun}" />
+
+				<!-- source for the rsync -->
+				<arg value="@{source}" />
+
+				<!-- destination for rsync -->
+				<arg value="@{dest}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+</project>
