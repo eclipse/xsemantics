@@ -21,6 +21,7 @@ public class FjInjectorProviderCustom extends FJInjectorProvider {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new FJRuntimeModule() {
+					@Override
 					public java.lang.Class<? extends it.xsemantics.runtime.StringRepresentation> bindStringRepresentation() {
 						return FjStringRepresentationForTests.class;
 					};

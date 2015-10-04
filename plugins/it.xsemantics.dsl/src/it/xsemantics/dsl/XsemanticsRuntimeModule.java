@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
  */
 public class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemanticsRuntimeModule {
 
+	@Override
 	public Class<? extends ITypeComputer> bindITypeComputer() {
 		return XsemanticsTypeComputer.class;
 	}
