@@ -16,6 +16,7 @@ public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
 
 	LambdaTypeModifier lambdaTypeModifier;
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

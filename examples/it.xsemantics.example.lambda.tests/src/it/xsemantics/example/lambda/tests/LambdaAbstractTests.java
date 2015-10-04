@@ -24,6 +24,7 @@ public class LambdaAbstractTests extends AbstractXtextTests {
 
 	protected LambdaStringRepresentation stringProvider;
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

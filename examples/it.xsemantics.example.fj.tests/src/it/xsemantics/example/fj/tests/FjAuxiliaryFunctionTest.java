@@ -28,11 +28,13 @@ public class FjAuxiliaryFunctionTest extends TestWithLoader {
 		super(name);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		fixture = new FjAuxiliaryFunctions();
 		super.setUp();
 	}
 
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
@@ -134,6 +136,7 @@ public class FjAuxiliaryFunctionTest extends TestWithLoader {
 	private Method methodByName(List<Method> methods, final String name) {
 		return IterableExtensions.findFirst(methods, new Functions.Function1<Method, Boolean>() {
 
+			@Override
 			public Boolean apply(Method p) {
 				return p.getName().equals(name);
 			}
