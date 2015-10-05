@@ -21,7 +21,6 @@ Require-Bundle: org.eclipse.xtext;bundle-version="[2.8.4,2.9.0)";visibility:=ree
  it.xsemantics.runtime;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.xtend.standalone;resolution:=optional,
  org.eclipse.xtext.ecore,
  org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
 Import-Package: org.apache.log4j
