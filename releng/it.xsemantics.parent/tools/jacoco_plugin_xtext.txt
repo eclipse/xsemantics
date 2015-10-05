@@ -1,0 +1,45 @@
+For Buckminster
+
+Path to exec files (e.g.: **/target/**.exec, **/jacoco.exec)	
+**/**.exec
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/it.xsemantics.runtime/**/bin,plugins/it.xsemantics.dsl/**/bin,plugins/it.xsemantics.dsl.ui/**/bin,examples/it.xsemantics.example.expressions/**/bin,examples/it.xsemantics.example.expressions.ui/**/bin,examples/it.xsemantics.example.fj/**/bin,examples/it.xsemantics.example.fj.ui/**/bin,examples/it.xsemantics.example.fjcached/**/bin,examples/it.xsemantics.example.lambda/**/bin,examples/it.xsemantics.example.lambda.ui/**/bin
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/it.xsemantics.*/src,plugins/it.xsemantics.*/xtend-gen,plugins/it.xsemantics.*/src-gen,examples/it.xsemantics.*/src,examples/it.xsemantics.*/xtend-gen,examples/it.xsemantics.*/src-gen,*/it.xsemantics.*/xsemantics-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+
+
+For Maven/Tycho
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/it.xsemantics.runtime/**/classes,plugins/it.xsemantics.dsl/**/classes,plugins/it.xsemantics.dsl.ui/**/classes,examples/it.xsemantics.example.expressions/**/classes,examples/it.xsemantics.example.expressions.ui/**/classes,examples/it.xsemantics.example.fj/**/classes,examples/it.xsemantics.example.fj.ui/**/classes,examples/it.xsemantics.example.fjcached/**/classes,examples/it.xsemantics.example.lambda/**/classes,examples/it.xsemantics.example.lambda.ui/**/classes
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/it.xsemantics.*/src,plugins/it.xsemantics.*/xtend-gen,plugins/it.xsemantics.*/src-gen,examples/it.xsemantics.*/src,examples/it.xsemantics.*/xtend-gen,examples/it.xsemantics.*/src-gen,*/it.xsemantics.*/xsemantics-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+
+WITHOUT EXAMPLES
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/it.xsemantics.runtime/**/classes,plugins/it.xsemantics.dsl/**/classes,plugins/it.xsemantics.dsl.ui/**/classes
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/it.xsemantics.*/src,plugins/it.xsemantics.*/xtend-gen,plugins/it.xsemantics.*/src-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/it/xsemantics/dsl/xsemantics/impl/*.*,**/it/xsemantics/dsl/xsemantics/util/*.*,**/it/xsemantics/dsl/xsemantics/EntryPointsOption.*,**/example/**/*.*,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java

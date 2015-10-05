@@ -254,6 +254,9 @@
 						<filesets>
 							<fileset>
 								<directory>${basedir}/xtend-gen</directory>
+								<excludes>
+									<exclude>.gitignore</exclude>
+								</excludes>
 							</fileset>
 						</filesets>
 					</configuration>
@@ -308,7 +311,7 @@
 						<!-- <threshold>Medium</threshold> -->
 						<maxRank>15</maxRank>
 						<jvmArgs>-Xmx1024m</jvmArgs>
-						<excludeFilterFile>${basedir}/../../releng/it.xsemantics.build/excludeFilter.xml</excludeFilterFile>
+						<excludeFilterFile>${basedir}/../../releng/it.xsemantics.parent/findbugs/excludeFilter.xml</excludeFilterFile>
 					</configuration>
 					<executions>
 						<execution>
