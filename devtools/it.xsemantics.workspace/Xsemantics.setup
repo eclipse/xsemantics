@@ -485,17 +485,29 @@
     <description>Generate Zips of Examples</description>
   </setupTask>
   <setupTask
-      xsi:type="mylyn:MylynQueriesTask"
-      connectorKind="github"
-      repositoryURL="https://github.com/LorenzoBettini/xsemantics"
-      userID="${github.user.id}"
-      password="">
-    <query summary="Xsemantics Issues"
-        url="">
-      <attribute
-          key="state"
-          value="open::"/>
-    </query>
+      xsi:type="setup:CompoundTask"
+      name="Mylyn Github Issues">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="PASSWORD"
+        name="github.user.password"
+        label="GitHub password for issues">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/LorenzoBettini/xsemantics"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xsemantics Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
   </setupTask>
   <stream name="master"/>
   <logicalProjectContainer
