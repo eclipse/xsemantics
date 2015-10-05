@@ -103,10 +103,7 @@
 		<!-- remote rsync host -->
 		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
 		<!-- pass "-n" to perform a trial run with no changes made -->
-		<dryrun>-n</dryrun>
-		
-		<!-- set it to true to have a self contained p2 repository https://wiki.eclipse.org/Tycho/eclipse-repository#Creating_a_self-contained_p2_repository -->
-		<includeAllDependencies>true</includeAllDependencies>
+		<dryrun></dryrun>
 	</properties>
 	
 	<profiles>
