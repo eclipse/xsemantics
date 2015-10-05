@@ -442,7 +442,7 @@
     <setupTask
         xsi:type="setup:PreferenceTask"
         id=""
-        key="org.eclipse.debug.ui.cancel_launch_with_compile_errors"
+        key="/instance/org.eclipse.debug.ui/org.eclipse.debug.ui.cancel_launch_with_compile_errors"
         value="always"/>
   </setupTask>
   <setupTask
