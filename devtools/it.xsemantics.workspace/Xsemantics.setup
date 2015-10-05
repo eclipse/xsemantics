@@ -428,12 +428,6 @@
     <description>The dynamic working sets for ${scope.project.label}</description>
   </setupTask>
   <setupTask
-      xsi:type="pde:APIBaselineTask"
-      name="xsemantics-latest"
-      version="1.7.2"
-      location="${installation.location}/api/v1.7.2/"
-      remoteURI="http://sourceforge.net/projects/xsemantics/files/zips/1.7.2/1.7.2.v20150304-1517.zip"/>
-  <setupTask
       xsi:type="projects:ProjectsBuildTask"
       refresh="true"/>
   <setupTask
@@ -510,6 +504,12 @@
         xsi:type="setup:VariableTask"
         name="xtext.site"
         value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/"/>
+    <setupTask
+        xsi:type="pde:APIBaselineTask"
+        name="xsemantics-latest"
+        version="1.7.2"
+        location="${installation.location}/api/v1.7.2/"
+        remoteURI="http://sourceforge.net/projects/xsemantics/files/zips/1.7.2/1.7.2.v20150304-1517.zip"/>
   </stream>
   <stream name="xtext-2.9">
     <setupTask
@@ -520,6 +520,12 @@
         xsi:type="setup:VariableTask"
         name="xtext.site"
         value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
+    <setupTask
+        xsi:type="pde:APIBaselineTask"
+        name="xsemantics-latest"
+        version="1.8.0"
+        location="${installation.location}/api/v1.8.0/"
+        remoteURI="http://sourceforge.net/projects/xsemantics/files/zips/1.8.0/1.8.0.v20150331-0735.zip"/>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
