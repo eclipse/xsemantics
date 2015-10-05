@@ -19,6 +19,7 @@ public class TypeSubstitutionsTests extends LambdaBaseTest {
 
 	TypeSubstitutions substitutions;
 	
+	@Override
 	@Before
 	public void setUp() {
 		lambdaUtils.resetCounter();

@@ -516,6 +516,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
     EList<Expression> _args_1 = newExp.getArgs();
     final Procedure1<Expression> _function = new Procedure1<Expression>() {
+      @Override
       public void apply(final Expression it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
@@ -633,6 +634,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     EList<Member> _members = cl.getMembers();
     final Procedure1<Member> _function = new Procedure1<Member>() {
+      @Override
       public void apply(final Member it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
@@ -648,6 +650,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
       List<Field> inheritedFields = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, 
         Field.class);
       final Procedure1<Field> _function_1 = new Procedure1<Field>() {
+        @Override
         public void apply(final Field inheritedField) {
           List<Field> _selectFields = FjSepTypeSystem.this.fjAux.selectFields(cl);
           for (final Field field : _selectFields) {
@@ -667,9 +670,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
       List<Method> inheritedMethods = this.<Method>getAll(_superclass_2, _class_Members_1, _class_Superclass_1, 
         Method.class);
       final Procedure1<Method> _function_2 = new Procedure1<Method>() {
+        @Override
         public void apply(final Method inheritedMethod) {
           List<Method> _selectMethods = FjSepTypeSystem.this.fjAux.selectMethods(cl);
           final Procedure1<Method> _function = new Procedure1<Method>() {
+            @Override
             public void apply(final Method it) {
               FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }

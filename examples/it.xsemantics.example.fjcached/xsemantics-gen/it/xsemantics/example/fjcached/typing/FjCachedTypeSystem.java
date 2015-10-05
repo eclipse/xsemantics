@@ -1,5 +1,9 @@
 package it.xsemantics.example.fjcached.typing;
 
+import com.google.common.base.Objects;
+import com.google.inject.Provider;
+import it.xsemantics.example.fj.fj.BasicType;
+import it.xsemantics.example.fj.fj.ClassType;
 import it.xsemantics.example.fj.fj.Expression;
 import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.Method;
@@ -26,17 +30,21 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   public final static String METHODS = "it.xsemantics.example.fjcached.typing.Methods";
   
+  public final static String CLASSSUBTYPING = "it.xsemantics.example.fjcached.typing.ClassSubtyping";
+  
+  public final static String SUBCLASSING = "it.xsemantics.example.fjcached.typing.Subclassing";
+  
   private PolymorphicDispatcher<List<it.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
   
   private PolymorphicDispatcher<List<Field>> fieldsDispatcher;
   
   private PolymorphicDispatcher<List<Method>> methodsDispatcher;
   
+  private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
+  
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
   
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
-  
-  private PolymorphicDispatcher<Result<Boolean>> equalstypeDispatcher;
   
   public FjCachedTypeSystem() {
     init();
@@ -45,12 +53,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   @Override
   public void init() {
     super.init();
+    subclassDispatcher = buildPolymorphicDispatcher1(
+    	"subclassImpl", 4, "||-", "<:");
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "|-", "<:");
-    equalstypeDispatcher = buildPolymorphicDispatcher1(
-    	"equalstypeImpl", 4, "|-", "~~");
     superclassesDispatcher = buildPolymorphicDispatcher(
     	"superclassesImpl", 2);
     fieldsDispatcher = buildPolymorphicDispatcher(
@@ -101,6 +109,44 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     }
   }
   
+  public Result<Boolean> subclass(final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return subclass(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Result<Boolean> subclass(final RuleEnvironment _environment_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return subclass(_environment_, null, left, right);
+  }
+  
+  public Result<Boolean> subclass(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return getFromCache("subclass", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
+    		public Result<Boolean> doGet() {
+    			try {
+    				return subclassInternal(_environment_, _trace_, left, right);
+    			} catch (Exception _e_subclass) {
+    				return resultForFailure(_e_subclass);
+    			}
+    		}
+    	}, left, right);
+  }
+  
+  public Boolean subclassSucceeded(final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return subclassSucceeded(new RuleEnvironment(), null, left, right);
+  }
+  
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return subclassSucceeded(_environment_, null, left, right);
+  }
+  
+  public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    try {
+    	subclassInternal(_environment_, _trace_, left, right);
+    	return true;
+    } catch (Exception _e_subclass) {
+    	return false;
+    }
+  }
+  
   @Override
   public Result<Type> type(final Expression expression) {
     return type(new RuleEnvironment(), null, expression);
@@ -137,6 +183,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    if (!subtypeCacheCondition(_environment_, left, right))
+    	try {
+    		return subtypeInternal(_environment_, _trace_, left, right);
+    	} catch (Exception _e_subtype) {
+    		return resultForFailure(_e_subtype);
+    	}
     return getFromCache("subtype", _environment_, _trace_,
     	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
     		public Result<Boolean> doGet() {
@@ -165,50 +217,6 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	subtypeInternal(_environment_, _trace_, left, right);
     	return true;
     } catch (Exception _e_subtype) {
-    	return false;
-    }
-  }
-  
-  @Override
-  public Result<Boolean> equalstype(final Type left, final Type right) {
-    return equalstype(new RuleEnvironment(), null, left, right);
-  }
-  
-  @Override
-  public Result<Boolean> equalstype(final RuleEnvironment _environment_, final Type left, final Type right) {
-    return equalstype(_environment_, null, left, right);
-  }
-  
-  @Override
-  public Result<Boolean> equalstype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
-    return getFromCache("equalstype", _environment_, _trace_,
-    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
-    		public Result<Boolean> doGet() {
-    			try {
-    				return equalstypeInternal(_environment_, _trace_, left, right);
-    			} catch (Exception _e_equalstype) {
-    				return resultForFailure(_e_equalstype);
-    			}
-    		}
-    	}, left, right);
-  }
-  
-  @Override
-  public Boolean equalstypeSucceeded(final Type left, final Type right) {
-    return equalstypeSucceeded(new RuleEnvironment(), null, left, right);
-  }
-  
-  @Override
-  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
-    return equalstypeSucceeded(_environment_, null, left, right);
-  }
-  
-  @Override
-  public Boolean equalstypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
-    try {
-    	equalstypeInternal(_environment_, _trace_, left, right);
-    	return true;
-    } catch (Exception _e_equalstype) {
     	return false;
     }
   }
@@ -273,6 +281,31 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
   
+  protected Result<Boolean> subclassInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) {
+    return getFromCache("subclassInternal", _environment_, _trace_,
+    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
+    		public Result<Boolean> doGet() {
+    			try {
+    				checkParamsNotNull(left, right);
+    				return subclassDispatcher.invoke(_environment_, _trace_, left, right);
+    			} catch (Exception _e_subclass) {
+    				sneakyThrowRuleFailedException(_e_subclass);
+    				return null;
+    			}
+    		}
+    	}, left, right);
+  }
+  
+  protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
+    String _stringRep = this.stringRep(left);
+    String _plus = (_stringRep + " is not a subclass of ");
+    String _stringRep_1 = this.stringRep(right);
+    String _plus_1 = (_plus + _stringRep_1);
+    String error = _plus_1;
+    throwRuleFailedException(error,
+    	_issue, _ex, new ErrorInformation(null, null));
+  }
+  
   @Override
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     return getFromCache("typeInternal", _environment_, _trace_,
@@ -301,6 +334,14 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   
   @Override
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
+    if (!subtypeCacheCondition(_environment_, left, right))
+    	try {
+    		checkParamsNotNull(left, right);
+    		return subtypeDispatcher.invoke(_environment_, _trace_, left, right);
+    	} catch (Exception _e_subtype) {
+    		sneakyThrowRuleFailedException(_e_subtype);
+    		return null;
+    	}
     return getFromCache("subtypeInternal", _environment_, _trace_,
     	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
     		public Result<Boolean> doGet() {
@@ -326,30 +367,96 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	_issue, _ex, new ErrorInformation(null, null));
   }
   
-  @Override
-  protected Result<Boolean> equalstypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
-    return getFromCache("equalstypeInternal", _environment_, _trace_,
-    	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
-    		public Result<Boolean> doGet() {
-    			try {
-    				checkParamsNotNull(left, right);
-    				return equalstypeDispatcher.invoke(_environment_, _trace_, left, right);
-    			} catch (Exception _e_equalstype) {
-    				sneakyThrowRuleFailedException(_e_equalstype);
-    				return null;
-    			}
-    		}
-    	}, left, right);
+  protected Boolean subtypeCacheCondition(final RuleEnvironment environment, final Type left, final Type right) {
+    boolean _and = false;
+    if (!(left instanceof BasicType)) {
+      _and = false;
+    } else {
+      _and = (right instanceof BasicType);
+    }
+    return Boolean.valueOf(_and);
   }
   
   @Override
-  protected void equalstypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    String _stringRep = this.stringRep(left);
-    String _plus = (_stringRep + " is not the same type as ");
-    String _stringRep_1 = this.stringRep(right);
-    String _plus_1 = (_plus + _stringRep_1);
-    String error = _plus_1;
-    throwRuleFailedException(error,
-    	_issue, _ex, new ErrorInformation(null, null));
+  protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
+    try {
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleClassSubtyping(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    		public Object get() {
+    			return ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right);
+    		}
+    	});
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleClassSubtyping) {
+    	subtypeThrowException(ruleName("ClassSubtyping") + stringRepForEnv(G) + " |- " + stringRep(left) + " <: " + stringRep(right),
+    		CLASSSUBTYPING,
+    		e_applyRuleClassSubtyping, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
+    }
+  }
+  
+  @Override
+  protected Result<Boolean> applyRuleClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
+    /* G ||- left.classref <: right.classref */
+    it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
+    it.xsemantics.example.fj.fj.Class _classref_1 = right.getClassref();
+    subclassInternal(G, _trace_, _classref, _classref_1);
+    return new Result<Boolean>(true);
+  }
+  
+  protected Result<Boolean> subclassImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) throws RuleFailedException {
+    try {
+    	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
+    	final Result<Boolean> _result_ = applyRuleSubclassing(G, _subtrace_, left, right);
+    	addToTrace(_trace_, new Provider<Object>() {
+    		public Object get() {
+    			return ruleName("Subclassing") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <: " + stringRep(right);
+    		}
+    	});
+    	addAsSubtrace(_trace_, _subtrace_);
+    	return _result_;
+    } catch (Exception e_applyRuleSubclassing) {
+    	subclassThrowException(ruleName("Subclassing") + stringRepForEnv(G) + " ||- " + stringRep(left) + " <: " + stringRep(right),
+    		SUBCLASSING,
+    		e_applyRuleSubclassing, left, right, new ErrorInformation[] {new ErrorInformation(left), new ErrorInformation(right)});
+    	return null;
+    }
+  }
+  
+  protected Result<Boolean> applyRuleSubclassing(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class left, final it.xsemantics.example.fj.fj.Class right) throws RuleFailedException {
+    /* left == right or right.name == "Object" or { superclasses(left).contains(right) } */
+    {
+      RuleFailedException previousFailure = null;
+      try {
+        boolean _equals = Objects.equal(left, right);
+        /* left == right */
+        if (!_equals) {
+          sneakyThrowRuleFailedException("left == right");
+        }
+      } catch (Exception e) {
+        previousFailure = extractRuleFailedException(e);
+        /* right.name == "Object" or { superclasses(left).contains(right) } */
+        {
+          try {
+            String _name = right.getName();
+            boolean _equals_1 = Objects.equal(_name, "Object");
+            /* right.name == "Object" */
+            if (!_equals_1) {
+              sneakyThrowRuleFailedException("right.name == \"Object\"");
+            }
+          } catch (Exception e_1) {
+            previousFailure = extractRuleFailedException(e_1);
+            List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, left);
+            /* superclasses(left).contains(right) */
+            if (!_superclasses.contains(right)) {
+              sneakyThrowRuleFailedException("superclasses(left).contains(right)");
+            }
+          }
+        }
+      }
+    }
+    return new Result<Boolean>(true);
   }
 }

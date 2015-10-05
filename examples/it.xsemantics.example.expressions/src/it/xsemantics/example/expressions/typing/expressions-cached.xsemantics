@@ -1,0 +1,20 @@
+import it.xsemantics.example.expressions.expressions.ExpressionsPackage
+import it.xsemantics.example.expressions.expressions.Type
+import it.xsemantics.example.expressions.expressions.Variable
+
+/*
+ * This system caches typing for variables, which involves
+ * expensive type inference
+ */
+system it.xsemantics.example.expressions.typing.CachedExpressionsSemantics
+	extends ExtendedExpressionsSemantics
+
+judgments {
+	override vartype ||- Variable variable : output Type
+		cached
+		error "cannot type " + stringRep(variable)
+		source variable
+		feature ExpressionsPackage::eINSTANCE.variable_Expression
+}
+
+
