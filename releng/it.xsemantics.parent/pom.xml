@@ -88,6 +88,22 @@
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
 		<target-file-name>mars-xtext-2.8</target-file-name>
+		
+		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
+		
+		<ant-files-path>${basedir}/../../releng/it.xsemantics.parent/ant</ant-files-path>
+
+		<updates.dir>xsemantics</updates.dir>
+		<remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics</remote.dir>
+		<remote.updates.dir>updates/releases</remote.updates.dir>
+		<site.label>Xsemantics Site</site.label>
+		
+		<!-- local source directory for rsync (read from this directory) -->
+		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
+		<!-- remote rsync host -->
+		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
+		<!-- pass "-n" to perform a trial run with no changes made -->
+		<dryrun></dryrun>
 	</properties>
 	
 	<profiles>
@@ -254,6 +270,9 @@
 						<filesets>
 							<fileset>
 								<directory>${basedir}/xtend-gen</directory>
+								<excludes>
+									<exclude>.gitignore</exclude>
+								</excludes>
 							</fileset>
 						</filesets>
 					</configuration>
@@ -308,7 +327,7 @@
 						<!-- <threshold>Medium</threshold> -->
 						<maxRank>15</maxRank>
 						<jvmArgs>-Xmx1024m</jvmArgs>
-						<excludeFilterFile>${basedir}/../../releng/it.xsemantics.build/excludeFilter.xml</excludeFilterFile>
+						<excludeFilterFile>${basedir}/../../releng/it.xsemantics.parent/findbugs/excludeFilter.xml</excludeFilterFile>
 					</configuration>
 					<executions>
 						<execution>
@@ -420,6 +439,15 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<format>'v'yyyyMMdd'-'HHmm</format>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<finalName>${project.artifactId}-${qualifiedVersion}</finalName>
 				</configuration>
 			</plugin>
 			

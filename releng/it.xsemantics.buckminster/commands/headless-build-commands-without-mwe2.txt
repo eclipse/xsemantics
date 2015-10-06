@@ -1,9 +1,0 @@
-# This is used only to simulate the building after having
-# materialized the contributor workspace
-
-# first build to compile at least the build project
-build --continueonerror
-
-junit --launch "it.xsemantics.build.tools/bootstrap-build.launch" --stderr --flatXML --output "${buckminster.output.root}/builder-run.result.xml"
-
-build --thorough

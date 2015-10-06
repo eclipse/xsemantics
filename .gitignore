@@ -7,9 +7,11 @@ logs.zip
 target/
 *.java._trace
 *.smap
-src-gen/
-xtend-gen/
-emf-gen/
+
+# set on single projects
+#src-gen/
+#xtend-gen/
+#emf-gen/
 
 buildroot
 org.sonar.ide.eclipse.core.prefs

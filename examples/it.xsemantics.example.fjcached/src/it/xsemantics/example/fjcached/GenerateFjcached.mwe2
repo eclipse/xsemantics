@@ -4,12 +4,14 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/it/xsemantics/example/fjcached/Fjcached.xtext"
 var fileExtensions = "fjcached"
 var projectName = "it.xsemantics.example.fjcached"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 var encoding = "UTF-8"
+// var grammarURI = "classpath:/it/xsemantics/example/fjcached/Fjcached.xtext"
+// use platform URI to make it easy for Oomph
+var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/example/fjcached/Fjcached.xtext"
 
 Workflow {
     bean = StandaloneSetup {
