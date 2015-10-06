@@ -108,19 +108,6 @@
 	
 	<profiles>
 		<profile>
-			<id>maven-deploy</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-
-			<modules>
-				<module>../../devtools/it.xsemantics.targetplatform</module>
-				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../plugins/it.xsemantics.dsl</module>
-			</modules>
-		</profile>
-
-		<profile>
 			<id>macosx-jvm-flags</id>
 			<activation>
 				<os>

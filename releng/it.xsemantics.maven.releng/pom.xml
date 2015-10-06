@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
+		<groupId>it.xsemantics</groupId>
+		<artifactId>it.xsemantics.parent</artifactId>
+		<version>1.8.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>it.xsemantics.maven.releng</artifactId>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>../../devtools/it.xsemantics.targetplatform</module>
+		<module>../../plugins/it.xsemantics.runtime</module>
+		<module>../../plugins/it.xsemantics.dsl</module>
+	</modules>
+</project>

@@ -13,4 +13,6 @@
       name="it.xsemantics.targetplatform.plain.project"/>
   <requirement
       name="it.xsemantics.releng.plain.project"/>
+  <requirement
+      name="it.xsemantics.maven.releng.plain.project"/>
 </targlets:ComponentExtension>
