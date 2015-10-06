@@ -392,6 +392,9 @@
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.targetplatform"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.releng"/>
         </operand>
       </predicate>
     </workingSet>
