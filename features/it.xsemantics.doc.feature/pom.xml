@@ -5,7 +5,7 @@
 
 	<parent>
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
-		<groupId>it.xsemantics</groupId>
+		<groupId>net.sf.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
 		<version>1.8.1-SNAPSHOT</version>
 	</parent>

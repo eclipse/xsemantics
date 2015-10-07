@@ -135,7 +135,7 @@
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>it.xsemantics</groupId>
+						<groupId>net.sf.xsemantics</groupId>
 						<artifactId>it.xsemantics.dsl</artifactId>
 						<version>${xsemantics.version}</version>
 					</dependency>

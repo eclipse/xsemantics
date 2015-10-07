@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>it.xsemantics</groupId>
+	<groupId>net.sf.xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
 	<version>1.8.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -204,7 +204,7 @@
 					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>it.xsemantics</groupId>
+							<groupId>net.sf.xsemantics</groupId>
 							<artifactId>it.xsemantics.dsl</artifactId>
 							<version>${project.version}</version>
 						</dependency>
@@ -262,7 +262,7 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>it.xsemantics</groupId>
+							<groupId>net.sf.xsemantics</groupId>
 							<artifactId>it.xsemantics.targetplatform</artifactId>
 							<version>${project.version}</version>
 							<classifier>${target-file-name}</classifier> 
