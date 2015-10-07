@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>it.xsemantics</groupId>
+	<groupId>net.sf.xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
 	<version>1.9.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
+	<name>Xsemantics</name>
+	<url>http://xsemantics.sourceforge.net</url>
+	<description>Xsemantics is a DSL for writing type systems, reduction rules, interpreters and in general relation rules for languages implemented in Xtext.</description>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
@@ -14,14 +26,21 @@
 				<role>architect</role>
 				<role>developer</role>
 			</roles>
+			<organization>Dip. Informatica, Univ. Torino</organization>
+      		<organizationUrl>http://www.di.unito.it</organizationUrl>
 		</developer>
 	</developers>
 
 	<scm>
-		<url>https://github.com/LorenzoBettini/xsemantics</url>
+		<url>git@github.com/LorenzoBettini/xsemantics.git</url>
 		<developerConnection>scm:git:https://github.com/LorenzoBettini/xsemantics.git</developerConnection>
 		<connection>scm:git:git@github.com/LorenzoBettini/xsemantics.git</connection>
 	</scm>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/LorenzoBettini/xsemantics/issues</url>
+	</issueManagement>
 	
 	<properties>
 		<tycho-version>0.22.0</tycho-version>
@@ -88,68 +107,39 @@
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
 		<target-file-name>xtext-nightly</target-file-name>
+		
+		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
+		
+		<ant-files-path>${basedir}/../../releng/it.xsemantics.parent/ant</ant-files-path>
+
+		<updates.dir>xsemantics</updates.dir>
+		<remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics</remote.dir>
+		<remote.updates.dir>updates/releases</remote.updates.dir>
+		<remote.zips.dir>zips</remote.zips.dir>
+		<site.label>Xsemantics Site</site.label>
+
+		<!-- remote host zips dir -->
+		<rsync.remote.zips.dir>${remote.dir}/${remote.zips.dir}</rsync.remote.zips.dir> 
+		<!-- remote rsync host -->
+		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
+		<!-- local source directory for rsync (read from this directory) -->
+		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
+		<!-- pass "-n" to perform a trial run with no changes made -->
+		<dryrun></dryrun>
 	</properties>
 	
 	<profiles>
 		<profile>
-			<id>build</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			
-			<modules>
-				<module>../../devtools/it.xsemantics.targetplatform</module>
-				
-				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../plugins/it.xsemantics.dsl</module>
-				<module>../../plugins/it.xsemantics.dsl.ui</module>
-				<module>../../tests/it.xsemantics.dsl.tests</module>
-		
-				<!-- we need the following examples for testing -->
-				<module>../../examples/it.xsemantics.example.fj</module>
-				<module>../../examples/it.xsemantics.example.fj.ui</module>
-				<module>../../examples/it.xsemantics.example.fj.tests</module>
-				<module>../../examples/it.xsemantics.example.fjcached</module>
-				<module>../../examples/it.xsemantics.example.fjcached.ui</module>
-				<module>../../examples/it.xsemantics.example.fjcached.tests</module>
-		
-				<module>../../examples/it.xsemantics.example.expressions</module>
-				<module>../../examples/it.xsemantics.example.expressions.ui</module>
-				<module>../../examples/it.xsemantics.example.expressions.tests</module>
-				<module>../../examples/it.xsemantics.example.lambda</module>
-				<module>../../examples/it.xsemantics.example.lambda.ui</module>
-				<module>../../examples/it.xsemantics.example.lambda.tests</module>
-				<module>../../features/it.xsemantics.examples.feature</module>
-				<module>../../features/it.xsemantics.implemented.examples.feature</module>
-		
-				<module>../../doc/it.xsemantics.doc</module>
-				<module>../../features/it.xsemantics.doc.feature</module>
-		
-				<module>../../examples/it.xsemantics.ui.examples</module>
-		
-				<module>../../features/it.xsemantics.runtime.feature</module>
-				<module>../../features/it.xsemantics.feature</module>
-				<module>../../features/it.xsemantics.sdk</module>
-		
-				<module>../../tests/it.xsemantics.tests.pde.utils</module>
-				<module>../../features/it.xsemantics.tests.feature</module>
-				<module>../../tests/it.xsemantics.tests.swtbot</module>
-		
-				<module>../../releng/it.xsemantics.repository</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>maven-deploy</id>
+			<id>release-snapshots</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-
-			<modules>
-				<module>../../devtools/it.xsemantics.targetplatform</module>
-				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../plugins/it.xsemantics.dsl</module>
-			</modules>
+			<properties>
+				<updates.dir>xsemantics-snapshots</updates.dir>
+				<remote.updates.dir>temp-snapshots</remote.updates.dir>
+				<remote.zips.dir>temp-zips</remote.zips.dir>
+				<site.label>Xsemantics Snapshot Site</site.label>
+			</properties>
 		</profile>
 
 		<profile>
@@ -162,64 +152,50 @@
 			<properties>
 				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
 			</properties>
-			<modules>
-				<module>../../devtools/it.xsemantics.targetplatform</module>
-				
-				<module>../../plugins/it.xsemantics.runtime</module>
-				<module>../../plugins/it.xsemantics.dsl</module>
-				<module>../../plugins/it.xsemantics.dsl.ui</module>
-				<module>../../tests/it.xsemantics.dsl.tests</module>
+		</profile>
 		
-				<!-- we need the following examples for testing -->
-				<module>../../examples/it.xsemantics.example.fj</module>
-				<module>../../examples/it.xsemantics.example.fj.ui</module>
-				<module>../../examples/it.xsemantics.example.fj.tests</module>
-				<module>../../examples/it.xsemantics.example.fjcached</module>
-				<module>../../examples/it.xsemantics.example.fjcached.ui</module>
-				<module>../../examples/it.xsemantics.example.fjcached.tests</module>
-		
-				<module>../../examples/it.xsemantics.example.expressions</module>
-				<module>../../examples/it.xsemantics.example.expressions.ui</module>
-				<module>../../examples/it.xsemantics.example.expressions.tests</module>
-				<module>../../examples/it.xsemantics.example.lambda</module>
-				<module>../../examples/it.xsemantics.example.lambda.ui</module>
-				<module>../../examples/it.xsemantics.example.lambda.tests</module>
-				<module>../../features/it.xsemantics.examples.feature</module>
-				<module>../../features/it.xsemantics.implemented.examples.feature</module>
-		
-				<module>../../doc/it.xsemantics.doc</module>
-				<module>../../features/it.xsemantics.doc.feature</module>
-		
-				<module>../../examples/it.xsemantics.ui.examples</module>
-		
-				<module>../../features/it.xsemantics.runtime.feature</module>
-				<module>../../features/it.xsemantics.feature</module>
-				<module>../../features/it.xsemantics.sdk</module>
-		
-				<module>../../tests/it.xsemantics.tests.pde.utils</module>
-				<module>../../features/it.xsemantics.tests.feature</module>
-				<module>../../tests/it.xsemantics.tests.swtbot</module>
-		
-				<module>../../releng/it.xsemantics.repository</module>
-			</modules>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+				    </plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
 	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-file</artifactId>
-				<version>2.8</version>
-			</extension>
-			
-			<!-- <extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>2.7</version>
-			</extension>  -->
-		</extensions>
-	
 		<pluginManagement>
 			<plugins>
 				<!-- xtend-maven-plugin is in pluginManagement instead of in plugins
@@ -288,7 +264,7 @@
 					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>it.xsemantics</groupId>
+							<groupId>net.sf.xsemantics</groupId>
 							<artifactId>it.xsemantics.dsl</artifactId>
 							<version>${project.version}</version>
 						</dependency>
@@ -327,6 +303,11 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
+				
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven-antrun-plugin.version}</version>
+				</plugin>
 
 			</plugins>
 		</pluginManagement>
@@ -346,7 +327,7 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>it.xsemantics</groupId>
+							<groupId>net.sf.xsemantics</groupId>
 							<artifactId>it.xsemantics.targetplatform</artifactId>
 							<version>${project.version}</version>
 							<classifier>${target-file-name}</classifier> 
@@ -427,6 +408,15 @@
 			</plugin>
 			
 			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<finalName>${project.artifactId}-${qualifiedVersion}</finalName>
+				</configuration>
+			</plugin>
+			
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco-version}</version>
@@ -461,15 +451,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -498,29 +479,14 @@
 	</pluginRepositories>
 
 	<distributionManagement>
-		<repository>
-			<id>xsemantics.sf.net</id>
-			<name>Xsemantics Releases</name>
-			<url>file:${user.home}/maven.repos/xsemantics/maven/repo/releases</url>
-		</repository>
 		<snapshotRepository>
-			<id>xsemantics.sf.net</id>
-			<name>Xsemantics Snapshots</name>
-			<url>file:${user.home}/maven.repos/xsemantics/maven/repo/snapshots</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
-	
-		<!--
 		<repository>
-			<id>xsemantics.sf.net</id>
-			<name>Xsemantics Releases</name>
-			<url>scp://shell.sourceforge.net/home/frs/project/xsemantics/maven/repo/releases</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-		<snapshotRepository>
-			<id>xsemantics.sf.net</id>
-			<name>Xsemantics Snapshots</name>
-			<url>scp://shell.sourceforge.net/home/frs/project/xsemantics/maven/repo/snapshots</url>
-		</snapshotRepository>
-		-->
 	</distributionManagement>
 
 </project>

@@ -1,7 +1,0 @@
-setpref targetPlatformPath="${target.platform}"
-
-importtargetdefinition "${projects.location}/releng/it.xsemantics.buckminster/api-baseline/api-baseline.target"
-addbaseline -A "api-baseline"
-
-resolve "${projects.location}/releng/it.xsemantics.buckminster/projects-platform.cquery"
-resolve "${projects.location}/releng/it.xsemantics.buckminster/project.cquery"

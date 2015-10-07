@@ -27,7 +27,7 @@
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
-      value="2048m"
+      value="1024m"
       vm="true">
     <description>Set the heap space needed to work with the projects of ${scope.project.label}</description>
   </setupTask>
@@ -392,6 +392,9 @@
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.targetplatform"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.releng"/>
         </operand>
       </predicate>
     </workingSet>
@@ -517,7 +520,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
-        value="1.7.2.v20150304-1517.zip"/>
+        value="it.xsemantics.repository-1.7.2.v20150304-1517.zip"/>
   </stream>
   <stream name="xtext-2.9">
     <setupTask
@@ -535,7 +538,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
-        value="1.8.0.v20150331-0735.zip"/>
+        value="it.xsemantics.repository-1.8.0.v20150331-0735.zip"/>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"

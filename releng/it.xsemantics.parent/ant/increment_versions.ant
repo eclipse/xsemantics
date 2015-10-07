@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="IncrementVersionsTask" basedir="." default="set-version">
+
+	<property name="WORKSPACE" location="${ant.file}/../../../../" />
+
+	<target name="show-workspace-path">
+		<echo message="WORKSPACE: ${WORKSPACE}" />
+	</target>
+
+	<target name="stripSnapshot">
+        <script language="javascript">
+            <![CDATA[
+
+	                // getting the value
+	                buildnumber = project.getProperty("project.version");
+	                index = buildnumber.lastIndexOf("-SNAPSHOT");
+	                counter = buildnumber.substring(0, index);
+	    			project.setProperty("version.main",counter);
+
+	            ]]>
+        </script>
+    </target>
+
+    <target name="test_stripSnapshot" depends="stripSnapshot">
+        <echo message="version.main: ${version.main}"/>
+    </target>
+	
+	<target name="set-version" description="Modifies artifacts to set a release version" >
+		<input message="Please enter the new release version (MAJOR.MINOR.MICRO):" addproperty="version.main" defaultvalue="${version_main}" />
+
+		<property name="version.osgi" value="${version.main}.qualifier"/>
+		<property name="version.mvn" value="${version.main}-SNAPSHOT"/>
+		
+		<propertyfile file="release.properties" comment="Build version">
+			<entry key="version_main" value="${version.main}" />
+			<entry key="version_osgi" value="${version.osgi}" />
+			<entry key="version_mvn" value="${version.mvn}" />
+		</propertyfile>
+		
+		<antcall target="-modify-artifacts"/>
+	</target>
+
+	<!-- strip the -SNAPSHOT from the property project.version -->
+	<target name="set-version-release" depends="stripSnapshot" description="Modifies artifacts to set a release version (without -SNAPSHOT)" >
+		<property name="version.osgi" value="${version.main}"/>
+		<property name="version.mvn" value="${version.main}"/>
+		
+		<echo message="VERSION MAIN: ${version.main}" />
+		<echo message="VERSION OSGI: ${version.osgi}" />
+		<echo message="VERSION MVN : ${version.mvn}" />
+		<echo message="WORKSPACE   : ${WORKSPACE}" />
+		<echo message="" />
+		
+		<antcall target="-modify-artifacts"/>
+	</target>
+
+	<target name="-modify-artifacts" if="version.main" >
+		<echo message="VERSION MAIN: ${version.main}" />
+		<echo message="VERSION OSGI: ${version.osgi}" />
+		<echo message="VERSION MVN : ${version.mvn}" />
+		<echo message="WORKSPACE   : ${WORKSPACE}" />
+		<echo message="" />
+		
+		<!-- pom.xml -->
+		<replaceregexp>
+			<regexp pattern="&lt;version&gt;(.*)&lt;/version&gt;" />
+			<substitution expression="&lt;version&gt;${version.mvn}&lt;/version&gt;" />
+			<fileset id="path.pom" dir="${WORKSPACE}">
+				<include name="**/pom.xml" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
+
+		<!-- MANIFEST.MF -->
+		<replaceregexp>
+			<regexp pattern="Bundle-Version: .*" />
+			<substitution expression="Bundle-Version: ${version.osgi}" />
+			<fileset id="path.manifest" dir="${WORKSPACE}">
+				<include name="**/META-INF/MANIFEST.MF" />
+				<exclude name="buildroot/**" />
+			</fileset>
+		</replaceregexp>
+
+		<!-- feature.xml -->
+		<replaceregexp>
+			<regexp pattern="(\s\s+)version=&quot;.*&quot;" />
+			<substitution expression="\1version=&quot;${version.osgi}&quot;" />
+			<fileset id="path.feature" dir="${WORKSPACE}">
+				<include name="**/feature.xml" />
+				<exclude name="buildroot/**" />
+			</fileset>
+		</replaceregexp>
+
+	</target>
+	
+	<target name="set-version-xtext" description="Sets the Xtext version constraints in MANIFEST.MF">
+		<!-- Read the last entered values for defaults -->
+		<property file="version.properties" />
+		<input message="Please enter the new Xtext version:" addproperty="version.xtext" defaultvalue="${version_xtext}" />
+		<!-- MANIFEST.MF -->
+		<replaceregexp>
+			<regexp pattern='org\.eclipse\.xtext;bundle-version=".*\"(.*)' />
+			<substitution expression='org.eclipse.xtext;bundle-version="${version.xtext}"\1' />
+			<fileset id="path.manifest" dir="${WORKSPACE}">
+				<include name="**/META-INF/MANIFEST.MF" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
+		<replaceregexp>
+			<regexp pattern='org\.eclipse\.xtext\.(?!example)(.*);bundle-version=".*\"(.*)' />
+			<substitution expression='org.eclipse.xtext.\1;bundle-version="${version.xtext}"\2' />
+			<fileset id="path.manifest" dir="${WORKSPACE}">
+				<include name="**/META-INF/MANIFEST.MF" />
+				<exclude name="**/target/**" />
+			</fileset>
+		</replaceregexp>
+	</target>
+</project>

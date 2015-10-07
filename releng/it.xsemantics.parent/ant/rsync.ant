@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Rsync from Ant" basedir=".">
 
-	<!-- local source directory for rsync (read from this directory) -->
-	<!-- <property name="rsync.remote.dir" value="lbettini,eclipseexamples@frs.sourceforge.net:/home/frs/project/eclipseexamples/p2composite.example/updates/"/> -->
-
 	<!-- remote rsync host -->
+	<!-- <property name="rsync.remote.dir" value="lbettini,eclipseexamples@frs.sourceforge.net:/home/frs/project/eclipseexamples/customeclipse/updates/"/> -->
+
+	<!-- local directory for rsync -->
 	<!-- <property name="rsync.local.dir" value="${user.home}/p2.repositories/updates/"/> -->
 
 	<!-- pass "-n" to perform a trial run with no changes made -->
-	<!-- <property name="dryrun" value="-n"/> -->
+	<property name="dryrun" value="-n"/>
 
 	<target name="rsync-update">
 		<rsync source="${rsync.remote.dir}" dest="${rsync.local.dir}" />
@@ -18,19 +18,37 @@
 		<rsync source="${rsync.local.dir}" dest="${rsync.remote.dir}" />
 	</target>
 
+	<!-- just copy contents of the source directory without recursion and without removal -->
+	<target name="rsync-copy-dir-contents">
+		<rsync source="${rsync.local.dir}" dest="${rsync.remote.dir}" delete="" filter="--filter='- /*/'"/>
+	</target>
+
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: rsync          
          = = = = = = = = = = = = = = = = = -->
 	<macrodef name="rsync">
 		<attribute name="source" />
 		<attribute name="dest" />
+		<attribute name="recursive" default="-a" />
+		<attribute name="delete" default="--delete" />
+		<attribute name="filter" default="" />
 		<sequential>
 			<echo message="Rsync source:" />
 			<echo message="@{source}" />
 			<echo message="Rsync destination:" />
 			<echo message="@{dest}" />
+			<echo message="dryrun: ${dryrun}" />
+			<echo message="recursive: @{recursive}" />
+			<echo message="delete: @{delete}" />
+			<echo message="filter: @{filter}" />
 			<exec dir="." executable="rsync">
-				<arg value="-azvc" />
+				<arg line="@{recursive}" />
+			
+				<arg line="@{delete}" />
+
+				<arg line="@{filter}" />
+
+				<arg value="-zvc" />
 
 				<!-- exclude all hidden files and directories -->
 				<arg line="--exclude='.*'" />
@@ -38,14 +56,10 @@
 				<!-- use ssh -->
 				<arg line="-e ssh" />
 
-				<!-- use ssh -->
-				<arg line="--delete" />
-
-				<!-- use ssh -->
 				<arg line="${dryrun}" />
 
 				<!-- source for the rsync -->
-				<arg value="@{source}" />
+				<arg line="@{source}" />
 
 				<!-- destination for rsync -->
 				<arg value="@{dest}" />

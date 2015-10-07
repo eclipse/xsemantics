@@ -36,7 +36,7 @@
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/luna</url>
+			<url>http://download.eclipse.org/releases/mars</url>
 		</repository>
 		<repository>
 			<id>Xtext Update Site</id>
@@ -47,8 +47,8 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>xsemantics_releases</id>
-			<url>https://sourceforge.net/projects/xsemantics/files/maven/repo/releases/</url>
+			<id>sonatype_releases</id>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -58,8 +58,8 @@
 		</pluginRepository>
 
 		<pluginRepository>
-			<id>xsemantics_snapshots</id>
-			<url>https://sourceforge.net/projects/xsemantics/files/maven/repo/snapshots/</url>
+			<id>sonatype_snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -85,6 +85,9 @@
 					<filesets>
 						<fileset>
 							<directory>${basedir}/xtend-gen</directory>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/xsemantics-gen</directory>
@@ -135,7 +138,7 @@
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>it.xsemantics</groupId>
+						<groupId>net.sf.xsemantics</groupId>
 						<artifactId>it.xsemantics.dsl</artifactId>
 						<version>${xsemantics.version}</version>
 					</dependency>
