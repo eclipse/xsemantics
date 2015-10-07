@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="IncrementVersionsTask" basedir="." default="set-version">
 
-	<property name="WORKSPACE" location="${ant.file}/../../../" />
+	<property name="WORKSPACE" location="${ant.file}/../../../../" />
 
 	<target name="show-workspace-path">
 		<echo message="WORKSPACE: ${WORKSPACE}" />
