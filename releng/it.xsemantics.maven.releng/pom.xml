@@ -12,11 +12,51 @@
 
 	<artifactId>it.xsemantics.maven.releng</artifactId>
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>../../releng/it.xsemantics.parent</module>
 		<module>../../devtools/it.xsemantics.targetplatform</module>
 		<module>../../plugins/it.xsemantics.runtime</module>
 		<module>../../plugins/it.xsemantics.dsl</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>set-version-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<!-- 
+							This must be used explicitly with the goal set-version in order 
+							to update the versions removing the SNAPSHOT before deploying Maven artifacts:
+							
+							mvn org.apache.maven.plugins:maven-antrun-plugin:run -Dtycho.mode=maven -Pset-version-release
+						-->
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>default-cli</id>
+								<phase>validate</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/increment_versions.ant"
+											target="set-version-release">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

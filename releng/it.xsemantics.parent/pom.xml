@@ -156,18 +156,6 @@
 							</execution>
 						</executions>
 				    </plugin>
-				    
-				    <plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-versions-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<!-- This must be used explicitly with the goal set-version in order
-							to update the versions removing the SNAPSHOT before deploying
-							Maven artifacts -->
-						<configuration>
-							<newVersion>${unqualifiedVersion}</newVersion>
-						</configuration>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -280,6 +268,11 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>2.5</version>
+				</plugin>
+				
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven-antrun-plugin.version}</version>
 				</plugin>
 
 			</plugins>
