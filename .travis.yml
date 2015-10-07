@@ -31,4 +31,4 @@ before_script:
  
 script:
  - export
- - mvn -f releng/it.xsemantics.parent/pom.xml clean verify -U -Dfindbugs.skip=true
+ - mvn -f releng/it.xsemantics.releng/pom.xml clean verify -U -Dfindbugs.skip=true

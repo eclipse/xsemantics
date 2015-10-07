@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" description="Mirror for Mars SDK, Xtext 2.8 and SWTBot Target Platform" label="Mirror for Mars SDK, Xtext 2.8 and SWTBot Target Platform" buildRoot="${user.home}/mirror/mars-xtext-2.8-swtbot" packedStrategy="SKIP">
   <validationSets label="main">
-    <contributions label="Luna RCP">
+    <contributions label="Mars RCP">
       <repositories location="http://download.eclipse.org/releases/mars">
         <products name="org.eclipse.sdk.ide"/>
         <features name="org.eclipse.sdk.feature.group"/>

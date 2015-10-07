@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="IncrementVersionsTask" basedir="." default="set-version">
 
-	<property name="WORKSPACE" location="${ant.file}/../../../" />
+	<property name="WORKSPACE" location="${ant.file}/../../../../" />
 
 	<target name="show-workspace-path">
 		<echo message="WORKSPACE: ${WORKSPACE}" />
 	</target>
+
+	<target name="stripSnapshot">
+        <script language="javascript">
+            <![CDATA[
+
+	                // getting the value
+	                buildnumber = project.getProperty("project.version");
+	                index = buildnumber.lastIndexOf("-SNAPSHOT");
+	                counter = buildnumber.substring(0, index);
+	    			project.setProperty("version.main",counter);
+
+	            ]]>
+        </script>
+    </target>
+
+    <target name="test_stripSnapshot" depends="stripSnapshot">
+        <echo message="version.main: ${version.main}"/>
+    </target>
 	
 	<target name="set-version" description="Modifies artifacts to set a release version" >
 		<input message="Please enter the new release version (MAJOR.MINOR.MICRO):" addproperty="version.main" defaultvalue="${version_main}" />
@@ -18,6 +36,20 @@
 			<entry key="version_osgi" value="${version.osgi}" />
 			<entry key="version_mvn" value="${version.mvn}" />
 		</propertyfile>
+		
+		<antcall target="-modify-artifacts"/>
+	</target>
+
+	<!-- strip the -SNAPSHOT from the property project.version -->
+	<target name="set-version-release" depends="stripSnapshot" description="Modifies artifacts to set a release version (without -SNAPSHOT)" >
+		<property name="version.osgi" value="${version.main}"/>
+		<property name="version.mvn" value="${version.main}"/>
+		
+		<echo message="VERSION MAIN: ${version.main}" />
+		<echo message="VERSION OSGI: ${version.osgi}" />
+		<echo message="VERSION MVN : ${version.mvn}" />
+		<echo message="WORKSPACE   : ${WORKSPACE}" />
+		<echo message="" />
 		
 		<antcall target="-modify-artifacts"/>
 	</target>
