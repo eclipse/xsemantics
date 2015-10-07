@@ -7,6 +7,17 @@
 	<version>1.8.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Xsemantics</name>
+	<url>http://xsemantics.sourceforge.net</url>
+	<description>Xsemantics is a DSL for writing type systems, reduction rules, interpreters and in general relation rules for languages implemented in Xtext.</description>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+
 	<developers>
 		<developer>
 			<name>Lorenzo Bettini</name>
@@ -15,14 +26,21 @@
 				<role>architect</role>
 				<role>developer</role>
 			</roles>
+			<organization>Dip. Informatica, Univ. Torino</organization>
+      		<organizationUrl>http://www.di.unito.it</organizationUrl>
 		</developer>
 	</developers>
 
 	<scm>
-		<url>https://github.com/LorenzoBettini/xsemantics</url>
+		<url>git@github.com/LorenzoBettini/xsemantics.git</url>
 		<developerConnection>scm:git:https://github.com/LorenzoBettini/xsemantics.git</developerConnection>
 		<connection>scm:git:git@github.com/LorenzoBettini/xsemantics.git</connection>
 	</scm>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/LorenzoBettini/xsemantics/issues</url>
+	</issueManagement>
 	
 	<properties>
 		<tycho-version>0.22.0</tycho-version>
@@ -472,4 +490,5 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+
 </project>
