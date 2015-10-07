@@ -97,17 +97,33 @@
 		<updates.dir>xsemantics</updates.dir>
 		<remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics</remote.dir>
 		<remote.updates.dir>updates/releases</remote.updates.dir>
+		<remote.zips.dir>zips</remote.zips.dir>
 		<site.label>Xsemantics Site</site.label>
-		
-		<!-- local source directory for rsync (read from this directory) -->
-		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
+
+		<!-- remote host zips dir -->
+		<rsync.remote.zips.dir>${remote.dir}/${remote.zips.dir}</rsync.remote.zips.dir> 
 		<!-- remote rsync host -->
+		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
+		<!-- local source directory for rsync (read from this directory) -->
 		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
 		<!-- pass "-n" to perform a trial run with no changes made -->
 		<dryrun></dryrun>
 	</properties>
 	
 	<profiles>
+		<profile>
+			<id>release-snapshots</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<updates.dir>xsemantics-snapshots</updates.dir>
+				<remote.updates.dir>temp-snapshots</remote.updates.dir>
+				<remote.zips.dir>temp-zips</remote.zips.dir>
+				<site.label>Xsemantics Snapshot Site</site.label>
+			</properties>
+		</profile>
+
 		<profile>
 			<id>macosx-jvm-flags</id>
 			<activation>

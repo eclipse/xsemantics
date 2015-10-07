@@ -112,7 +112,7 @@
 									<target>
 										<ant antfile="${ant-files-path}/rsync.ant" 
 													target="rsync-copy-dir-contents">
-											<property name="rsync.remote.dir" value="${remote.dir}/zips/${unqualifiedVersion}/"/>
+											<property name="rsync.remote.dir" value="${rsync.remote.zips.dir}/${unqualifiedVersion}/"/>
 											<property name="rsync.local.dir" value="${project.build.directory}/"/>
 										</ant>
 									</target>
