@@ -156,6 +156,18 @@
 							</execution>
 						</executions>
 				    </plugin>
+				    
+				    <plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<!-- This must be used explicitly with the goal set-version in order
+							to update the versions removing the SNAPSHOT before deploying
+							Maven artifacts -->
+						<configuration>
+							<newVersion>${unqualifiedVersion}</newVersion>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
