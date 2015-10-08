@@ -483,13 +483,6 @@
       xsi:type="setup:CompoundTask"
       name="Mylyn Github Issues">
     <setupTask
-        xsi:type="setup:VariableTask"
-        type="PASSWORD"
-        name="github.user.password"
-        label="GitHub password for issues">
-      <description></description>
-    </setupTask>
-    <setupTask
         xsi:type="mylyn:MylynQueriesTask"
         connectorKind="github"
         repositoryURL="https://github.com/LorenzoBettini/xsemantics"
