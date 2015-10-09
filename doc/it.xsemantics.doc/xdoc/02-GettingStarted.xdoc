@@ -25,9 +25,9 @@ section2:Sources[Sources]
 
 Sources of Xsemantics (and the examples, ref:Examples[]) are available
 from the git repository, please visit
-link[https://sourceforge.net/p/xsemantics/code][https://sourceforge.net/p/xsemantics/code].
+link[https://github.com/LorenzoBettini/xsemantics][https://github.com/LorenzoBettini/xsemantics].
 
-You might want to consider using link[http://www.eclipse.org/buckminster/][Buckminster]
+You might want to consider using link[https://wiki.eclipse.org/Eclipse_Oomph_Installer][Oomph]
 to easily materialize Xsemantics sources into your workspace, together with all
 the needed bundles in the target platform, as illustrated in ref:GettingSources[].
 
