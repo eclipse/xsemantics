@@ -58,3 +58,25 @@ img[images/first-xsemantics-file.png][An xsemantics file and generated code][ ][
 
 Xsemantics will generate Java classes as explained in ref:CodeGeneration[].
 
+section:UsingXsemanticsMaven[Using Xsemantics in Maven builds]
+
+Xsemantics provides Maven artifacts that can be used during a Maven build.
+The artifacts include the runtime library of Xsemantics and the DSL compiler.
+
+IMPORTANT: since version 1.8.1 such Maven artifacts are available from Maven central, and
+the e[groupId] is e[net.sf.xsemantics].
+
+For example
+
+code[
+<dependency>
+	<groupId>net.sf.xsemantics</groupId>
+	<artifactId>it.xsemantics.dsl</artifactId>
+	<version>${xsemantics.version}</version>
+</dependency>
+]
+
+The DSL compiler can be used together with the e[xtext-maven-plugin].
+
+An example can be found here
+link[https://github.com/LorenzoBettini/xsemantics/tree/master/tests/it.xsemantics.example.maven.test][https://github.com/LorenzoBettini/xsemantics/tree/master/tests/it.xsemantics.example.maven.test].
