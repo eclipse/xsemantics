@@ -39,6 +39,11 @@
     <description>Set the ReservedCodeCacheSize to work with the projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Doomph.redirection.xsemantics="
+      value="https://raw.githubusercontent.com/LorenzoBettini/xsemantics/master/devtools/it.xsemantics.workspace/Xsemantics.setup->${git.clone.location|uri}/devtools/it.xsemantics.workspace/Xsemantics.setup"
+      vm="true"/>
+  <setupTask
       xsi:type="setup:CompoundTask"
       name="org.eclipse.jdt.launching">
     <setupTask
@@ -368,7 +373,7 @@
             pattern=".*\.tests(\..*)?"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.10/@workingSets.0"/>
+            excludedWorkingSet="//@setupTasks.11/@workingSets.0"/>
       </predicate>
     </workingSet>
     <workingSet
@@ -407,7 +412,7 @@
             project="it.xsemantics.sdk"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.10/@workingSets.0 //@setupTasks.10/@workingSets.1 //@setupTasks.10/@workingSets.2"/>
+            excludedWorkingSet="//@setupTasks.11/@workingSets.0 //@setupTasks.11/@workingSets.1 //@setupTasks.11/@workingSets.2"/>
         <operand
             xsi:type="predicates:NaturePredicate"
             nature="org.eclipse.pde.FeatureNature"/>
@@ -422,7 +427,7 @@
             project="it.xsemantics.sdk"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.10/@workingSets.0 //@setupTasks.10/@workingSets.1"/>
+            excludedWorkingSet="//@setupTasks.11/@workingSets.0 //@setupTasks.11/@workingSets.1"/>
         <operand
             xsi:type="predicates:NaturePredicate"
             nature="org.eclipse.pde.PluginNature"/>
@@ -482,13 +487,6 @@
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Mylyn Github Issues">
-    <setupTask
-        xsi:type="setup:VariableTask"
-        type="PASSWORD"
-        name="github.user.password"
-        label="GitHub password for issues">
-      <description></description>
-    </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
         connectorKind="github"

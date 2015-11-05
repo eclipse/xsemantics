@@ -4,7 +4,7 @@ section:Install[Installation of Xsemantics]
 
 To get started, you should first install Xsemantics plugins;
 you can use the update site:
-link[http://master.dl.sourceforge.net/project/xsemantics/updates/composite/releases/][http://master.dl.sourceforge.net/project/xsemantics/updates/composite/releases/]
+link[https://sourceforge.net/projects/xsemantics/files/updates/composite/releases/][https://sourceforge.net/projects/xsemantics/files/updates/composite/releases/].
 
 Note that this composite update site contains links also to the
 official Xtext update site, so, if you don't have Xtext already installed,
@@ -25,9 +25,9 @@ section2:Sources[Sources]
 
 Sources of Xsemantics (and the examples, ref:Examples[]) are available
 from the git repository, please visit
-link[https://sourceforge.net/p/xsemantics/code][https://sourceforge.net/p/xsemantics/code].
+link[https://github.com/LorenzoBettini/xsemantics][https://github.com/LorenzoBettini/xsemantics].
 
-You might want to consider using link[http://www.eclipse.org/buckminster/][Buckminster]
+You might want to consider using link[https://wiki.eclipse.org/Eclipse_Oomph_Installer][Oomph]
 to easily materialize Xsemantics sources into your workspace, together with all
 the needed bundles in the target platform, as illustrated in ref:GettingSources[].
 
@@ -58,3 +58,25 @@ img[images/first-xsemantics-file.png][An xsemantics file and generated code][ ][
 
 Xsemantics will generate Java classes as explained in ref:CodeGeneration[].
 
+section:UsingXsemanticsMaven[Using Xsemantics in Maven builds]
+
+Xsemantics provides Maven artifacts that can be used during a Maven build.
+The artifacts include the runtime library of Xsemantics and the DSL compiler.
+
+IMPORTANT: since version 1.8.1 such Maven artifacts are available from Maven central, and
+the e[groupId] is e[net.sf.xsemantics].
+
+For example
+
+code[
+<dependency>
+	<groupId>net.sf.xsemantics</groupId>
+	<artifactId>it.xsemantics.dsl</artifactId>
+	<version>${xsemantics.version}</version>
+</dependency>
+]
+
+The DSL compiler can be used together with the e[xtext-maven-plugin].
+
+An example can be found here
+link[https://github.com/LorenzoBettini/xsemantics/tree/master/tests/it.xsemantics.example.maven.test][https://github.com/LorenzoBettini/xsemantics/tree/master/tests/it.xsemantics.example.maven.test].
