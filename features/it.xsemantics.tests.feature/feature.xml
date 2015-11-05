@@ -41,6 +41,10 @@
          id="org.eclipse.rcp"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.platform"
+         version="0.0.0"/>
+
    <plugin
          id="it.xsemantics.dsl.tests"
          download-size="0"
@@ -71,6 +75,13 @@
 
    <plugin
          id="it.xsemantics.example.expressions.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="it.xsemantics.example.fj.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
