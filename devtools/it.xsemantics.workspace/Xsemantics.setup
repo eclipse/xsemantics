@@ -532,11 +532,11 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.version"
-        value="1.8.0"/>
+        value="1.8.1"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
-        value="it.xsemantics.repository-1.8.0.v20150331-0735.zip"/>
+        value="it.xsemantics.repository-1.8.1.v20151009-0657.zip"/>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
