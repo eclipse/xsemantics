@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="it.xsemantics.workspace"
-      label="Xsemantics Workspace"
+      id="it.xsemantics.dsl.ui.tests.feature"
+      label="Xsemantics Feature For Dsl UI Testing"
       version="1.9.0.qualifier"
       provider-name="Lorenzo Bettini">
 
@@ -22,36 +22,19 @@
          version="0.0.0"/>
 
    <includes
-         id="it.xsemantics.tests.feature"
+         id="org.eclipse.pde"
          version="0.0.0"/>
 
    <includes
-         id="it.xsemantics.dsl.ui.tests.feature"
+         id="org.eclipse.rcp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.platform"
          version="0.0.0"/>
 
    <plugin
-         id="it.xsemantics.tests.swtbot"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="it.xsemantics.example.expressions.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="it.xsemantics.example.lambda.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="it.xsemantics.example.maven.test"
+         id="it.xsemantics.dsl.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
