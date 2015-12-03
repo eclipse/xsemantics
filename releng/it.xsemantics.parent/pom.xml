@@ -51,7 +51,7 @@
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.9.0.rc2</xtext.version>
+		<xtext.version>2.9.0</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 		
@@ -106,7 +106,7 @@
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>xtext-milestones</target-file-name>
+		<target-file-name>mars-xtext-2.9</target-file-name>
 		
 		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
 		
