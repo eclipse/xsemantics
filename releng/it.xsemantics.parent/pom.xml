@@ -70,6 +70,8 @@
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
+		<jacoco.reportPath>${project.basedir}/../target/coverage</jacoco.reportPath>
+		<jacoco.xml.reportPath>${jacoco.reportPath}/coverage.xml</jacoco.xml.reportPath>
 		<!--  <sonar.junit.reportsPath>../${project.artifactId}.tests/target/surefire-reports/</sonar.junit.reportsPath> -->
 		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**,file:**/example/**,file:**/tests/**,**/*RuntimeModule.java,**/*UiModule.java,**/*XcoreReader.java,**/*UiExamples.java,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java</sonar.exclusions>
 
@@ -303,7 +305,18 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
-				
+
+				<plugin>
+					<groupId>org.eluder.coveralls</groupId>
+					<artifactId>coveralls-maven-plugin</artifactId>
+					<version>4.1.0</version>
+					<configuration>
+						<jacocoReports>
+							<jacocoReport>${jacoco.xml.reportPath}</jacocoReport>
+						</jacocoReports>
+					</configuration>
+				</plugin>
+
 				<plugin>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>${maven-antrun-plugin.version}</version>
