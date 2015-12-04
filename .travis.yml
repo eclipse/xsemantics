@@ -25,10 +25,8 @@ addons:
 
 before_script:
  - sh -e /etc/init.d/xvfb start
- - sleep 10 # give xvfb some time to start
  - metacity --sm-disable --replace 2> metacity.err &
- - sleep 10 # give metacity some time to start
  
 script:
  - export
- - mvn -f releng/it.xsemantics.releng/pom.xml clean verify -U -Dfindbugs.skip=true
+ - mvn -f releng/it.xsemantics.releng/pom.xml clean verify -U -Dfindbugs.skip=true -Pjacoco-report coveralls:report
