@@ -5,4 +5,4 @@ XSemantics is a DSL (implemented in Xtext itself) for writing type systems, redu
 
 http://xsemantics.sourceforge.net
 
-[![Build Status](https://travis-ci.org/LorenzoBettini/xsemantics.svg?branch=master)](https://travis-ci.org/LorenzoBettini/xsemantics)
+[![Build Status](https://travis-ci.org/LorenzoBettini/xsemantics.svg?branch=master)](https://travis-ci.org/LorenzoBettini/xsemantics) [![Coverage Status](https://coveralls.io/repos/LorenzoBettini/xsemantics/badge.svg?branch=master&service=github)](https://coveralls.io/github/LorenzoBettini/xsemantics?branch=master)
