@@ -70,7 +70,7 @@
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
-		<jacoco.reportPath>${project.basedir}/../target/coverage</jacoco.reportPath>
+		<jacoco.reportPath>${project.basedir}/../../target/coverage</jacoco.reportPath>
 		<jacoco.xml.reportPath>${jacoco.reportPath}/coverage.xml</jacoco.xml.reportPath>
 		<!--  <sonar.junit.reportsPath>../${project.artifactId}.tests/target/surefire-reports/</sonar.junit.reportsPath> -->
 		<sonar.exclusions>file:**/src-gen/**,file:**/emf-gen/**,file:**/example/**,file:**/tests/**,**/*RuntimeModule.java,**/*UiModule.java,**/*XcoreReader.java,**/*UiExamples.java,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java</sonar.exclusions>

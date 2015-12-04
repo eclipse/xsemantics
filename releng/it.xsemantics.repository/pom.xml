@@ -175,7 +175,7 @@
 														<!-- Process class files only, ignore jacocoagent.jar -->
 														<fileset dir="../../plugins/it.xsemantics.dsl/target/classes" 
 															includes="**/*.class"
-															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/dsl/xsemantics/util/*.*,**/dsl/xsemantics/impl/*.*" 
+															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/*TypeSystemGen*,**/antlr/*.*,**/internal/*.*,**/dsl/xsemantics/*.*,**/dsl/xsemantics/util/*.*,**/dsl/xsemantics/impl/*.*" 
 														/>
 													</classfiles>
 													<sourcefiles>
