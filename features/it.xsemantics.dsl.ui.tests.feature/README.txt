@@ -1,0 +1,1 @@
+This is used only in the launch configuration for UI tests in dsl.tests
