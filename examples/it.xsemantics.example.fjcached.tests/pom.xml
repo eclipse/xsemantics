@@ -7,7 +7,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>net.sf.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.8.1-SNAPSHOT</version>
+		<version>1.9.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.example.fjcached.tests</artifactId>
@@ -39,22 +39,6 @@
 							<goal>test</goal>
 						</goals>
 					</execution>
-<!-- 					<execution> -->
-<!-- 						<id>performance-test</id> -->
-<!-- 						<phase>integration-test</phase> -->
-<!-- 						<configuration> -->
-<!-- 							<skip>${dsl.tests.skip}</skip> -->
-<!-- 							<useUIHarness>false</useUIHarness> -->
-<!-- 							<useUIThread>false</useUIThread> -->
-<!-- 							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine> -->
-<!-- 							<includes> -->
-<!-- 								<include>**/fjcached/performance/*Test.java</include> -->
-<!-- 							</includes> -->
-<!-- 						</configuration> -->
-<!-- 						<goals> -->
-<!-- 							<goal>test</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
 					<execution>
 						<id>TychoSurefirePluginUiTest</id>
 						<phase>integration-test</phase>

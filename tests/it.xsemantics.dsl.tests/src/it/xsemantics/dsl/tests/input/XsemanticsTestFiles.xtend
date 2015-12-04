@@ -2773,7 +2773,7 @@ class XsemanticsTestFiles {
 
 	/* inferred type for field */
 	var inferredTypeField = new MyTestExtensions()
-	
+
 	judgments {
 		type |- EObject o : output EClass
 	}

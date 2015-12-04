@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Lambda Example UI
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.8.1.qualifier
+Bundle-Version: 1.9.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.lambda.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.lambda;visibility:=reexport,
@@ -27,5 +27,6 @@ Export-Package: it.xsemantics.example.lambda.ui,
  it.xsemantics.example.lambda.ui.typing,
  it.xsemantics.example.lambda.ui.util,
  it.xsemantics.example.lambda.ui.contentassist,
- it.xsemantics.example.lambda.ui.quickfix
+ it.xsemantics.example.lambda.ui.quickfix,
+ it.xsemantics.example.lambda.ui.contentassist.antlr.internal
 Bundle-Activator: it.xsemantics.example.lambda.ui.internal.LambdaActivator

@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="it.xsemantics.runtime" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
+        <filter id="926941240">
             <message_arguments>
+                <message_argument value="1.9.0"/>
                 <message_argument value="1.8.1"/>
-                <message_argument value="1.7.2"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/it/xsemantics/runtime/StringRepresentationPostProcessor.java" type="it.xsemantics.runtime.StringRepresentationPostProcessor">
-        <filter id="338755678">
-            <message_arguments>
-                <message_argument value="it.xsemantics.runtime.StringRepresentationPostProcessor"/>
-                <message_argument value="MAX_CHARS"/>
-            </message_arguments>
-        </filter>
-        <filter id="338755678">
-            <message_arguments>
-                <message_argument value="it.xsemantics.runtime.StringRepresentationPostProcessor"/>
-                <message_argument value="OMISSIS"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/it/xsemantics/runtime/XsemanticsCache.java" type="it.xsemantics.runtime.XsemanticsCache">
-        <filter id="337809484">
-            <message_arguments>
-                <message_argument value="it.xsemantics.runtime.XsemanticsCache"/>
-                <message_argument value="4"/>
-                <message_argument value="8"/>
             </message_arguments>
         </filter>
     </resource>

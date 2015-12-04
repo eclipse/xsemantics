@@ -38,7 +38,7 @@ public class XsemanticsProposalProviderTest extends
 		val projectHelper = injector.getInstance(PluginProjectHelper)
 		
 		pluginJavaProject = projectHelper.createJavaPluginProject
-			(PROJECT_NAME, newArrayList("it.xsemantics.runtime"))
+			(PROJECT_NAME, newArrayList("it.xsemantics.runtime", "org.eclipse.xtext.xbase.lib"))
 	}
 	
 	@AfterClass

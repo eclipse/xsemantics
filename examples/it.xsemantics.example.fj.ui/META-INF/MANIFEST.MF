@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics FJ Eclipse UI
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.8.1.qualifier
+Bundle-Version: 1.9.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.fj.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: it.xsemantics.example.fj;visibility:=reexport,
@@ -25,5 +25,6 @@ Export-Package: it.xsemantics.example.fj.ui,
  it.xsemantics.example.fj.ui.contentassist,
  it.xsemantics.example.fj.ui.contentassist.antlr,
  it.xsemantics.example.fj.ui.internal,
- it.xsemantics.example.fj.ui.quickfix
+ it.xsemantics.example.fj.ui.quickfix,
+ it.xsemantics.example.fj.ui.contentassist.antlr.internal
 Bundle-Activator: it.xsemantics.example.fj.ui.FJActivatorCustom

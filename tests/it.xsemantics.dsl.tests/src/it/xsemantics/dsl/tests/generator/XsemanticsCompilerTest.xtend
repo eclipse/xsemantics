@@ -2,27 +2,27 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustomForPluginTest
+import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
+import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.util.Wrapper
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
-import it.xsemantics.runtime.Result
 
 /**
  * These tests also run the generated (and on the fly compiled) Java code
  * 
  * @author Lorenzo Bettini
  */
-@InjectWith(typeof(XsemanticsInjectorProviderCustomForPluginTest))
+@InjectWith(typeof(XsemanticsInjectorProviderCustom))
 @RunWith(typeof(XtextRunner))
 class XsemanticsCompilerTest extends XsemanticsBaseTest {
 	

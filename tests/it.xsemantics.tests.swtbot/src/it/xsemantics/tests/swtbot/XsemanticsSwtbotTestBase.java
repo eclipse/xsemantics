@@ -3,10 +3,13 @@
  */
 package it.xsemantics.tests.swtbot;
 
+import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 
 import java.util.ArrayList;
@@ -264,6 +267,31 @@ public class XsemanticsSwtbotTestBase {
 		}
 	}
 
+	protected void createProjectAndAssertNoErrorMarker(String projectType) throws CoreException {
+		SWTBotMenu fileMenu = bot.menu("File");
+		SWTBotMenu newMenu = fileMenu.menu("New");
+		SWTBotMenu projectMenu = newMenu.menu("Project...");
+		projectMenu.click();
+	
+		SWTBotShell shell = bot.shell("New Project");
+		shell.activate();
+		SWTBotTreeItem xsemanticsNode = bot.tree().expandNode("Xsemantics");
+		waitForTreeItems(xsemanticsNode);
+		xsemanticsNode.expandNode(projectType).select();
+		bot.button("Next >").click();
+	
+		bot.textWithLabel("Project name:").setText(TEST_PROJECT);
+	
+		bot.button("Finish").click();
+	
+		// creation of a project might require some time
+		bot.waitUntil(shellCloses(shell), SHELL_TIMEOUT);
+		assertTrue("Project doesn't exist", isProjectCreated(TEST_PROJECT));
+	
+		waitForBuild();
+		assertNoErrorsInProject();
+	}
+
 	protected static void assertNoErrorsInProject() throws CoreException {
 		IMarker[] markers = root().findMarkers(IMarker.PROBLEM, true,
 				IResource.DEPTH_INFINITE);
@@ -284,6 +312,7 @@ public class XsemanticsSwtbotTestBase {
 		StringBuffer buffer = new StringBuffer();
 		for (IMarker iMarker : errorMarkers) {
 			try {
+				buffer.append(iMarker.getResource() + "\n");
 				buffer.append(iMarker.getAttribute(IMarker.MESSAGE) + "\n");
 				buffer.append(iMarker.getAttribute(IMarker.SEVERITY) + "\n");
 			} catch (CoreException e) {

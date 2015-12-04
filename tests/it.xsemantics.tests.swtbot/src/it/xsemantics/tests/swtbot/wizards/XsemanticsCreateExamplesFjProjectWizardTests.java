@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(SWTBotJunit4ClassRunner.class)
-public class XsemanticsCreateExamplesProjectWizardTests extends XsemanticsSwtbotTestBase {
+public class XsemanticsCreateExamplesFjProjectWizardTests extends XsemanticsSwtbotTestBase {
 
 	@After
 	public void runAfterEveryTest() throws CoreException {
@@ -28,16 +28,7 @@ public class XsemanticsCreateExamplesProjectWizardTests extends XsemanticsSwtbot
 	}
 
 	@Test
-	public void canCreateANewLambdaProject() throws Exception {
-		createProjectAndAssertNoErrorMarker("Lambda Project");
+	public void canCreateANewFJProject() throws Exception {
+		createProjectAndAssertNoErrorMarker("FJ Project");
 	}
-
-	@Test
-	public void canCreateANewExpressionsProject() throws Exception {
-		createProjectAndAssertNoErrorMarker("Expressions Project");
-
-		// check that the Example.output is generated
-		getProjectTreeItem(TEST_PROJECT).expand().getNode("src-gen").expand().getNode("Example.output");
-	}
-
 }
