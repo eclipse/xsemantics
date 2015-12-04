@@ -506,24 +506,6 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.version"
-        value="1.7.2"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.zip"
-        value="it.xsemantics.repository-1.7.2.v20150304-1517.zip"/>
-  </stream>
-  <stream name="xtext-2.9">
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="mwe2.site"
         value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.2/"/>
     <setupTask
         xsi:type="setup:VariableTask"
