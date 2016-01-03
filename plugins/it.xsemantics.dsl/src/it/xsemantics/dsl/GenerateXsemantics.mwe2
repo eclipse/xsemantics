@@ -20,6 +20,9 @@ Workflow {
 		scanClassPath = true
 		// put the Xbase genmodel into the EMF plugins singleton
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+
+		// register current projects and its siblings for platform URI map, as they are not on the classpath.
+		platformUri = "${runtimeProject}/.."
     }
 
 	component = DirectoryCleaner {
