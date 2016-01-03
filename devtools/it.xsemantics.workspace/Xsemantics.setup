@@ -506,11 +506,11 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.2/"/>
+        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.3/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.0/"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.1/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.version"
