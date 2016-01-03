@@ -2,7 +2,9 @@ sudo: false
 
 language: java
 
-jdk: oraclejdk7
+os:
+  - linux
+  - osx
 
 cache:
   directories:
@@ -23,9 +25,13 @@ addons:
 # - sudo apt-get install metacity
 # - sudo apt-get install libwebkit-dev
 
+before_install:
+ - echo "MAVEN_OPTS='-Xmx2048m -XX:MaxPermSize=512m'" > ~/.mavenrc
+ - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export JAVA_HOME=$(/usr/libexec/java_home); fi
+ - echo $JAVA_HOME
+
 before_script:
- - sh -e /etc/init.d/xvfb start
- - metacity --sm-disable --replace 2> metacity.err &
+ - bash -e ./before_script.sh
  
 script:
  - export
