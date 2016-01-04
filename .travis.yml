@@ -32,7 +32,8 @@ before_install:
 
 before_script:
  - bash -e ./before_script.sh
- 
+
+# Build on MacOSX is triggered only for pull requests
 script:
  - export
- - mvn -f releng/it.xsemantics.releng/pom.xml clean verify -U -Dfindbugs.skip=true -Pjacoco-report coveralls:report
+ - bash -e ./travis_build.sh
