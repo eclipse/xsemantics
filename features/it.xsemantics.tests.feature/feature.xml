@@ -45,6 +45,10 @@
          id="org.eclipse.platform"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.jdt"
+         version="0.0.0"/>
+
    <plugin
          id="it.xsemantics.dsl.tests"
          download-size="0"
