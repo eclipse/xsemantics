@@ -133,19 +133,6 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        id="p2.m2e"
-        label="M2E"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="org.sonatype.tycho.m2e.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-      <repository
-          url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.8.0/N/LATEST"/>
-      <description>Maven connector</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
         label="EMF">
       <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
@@ -210,7 +197,7 @@
       <requirement
           name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
       <repository
-          url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
+          url="http://download.eclipse.org/modeling/emft/b3/updates-4.4"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -237,31 +224,6 @@
           name="org.eclipse.oomph.setup.workbench.feature.group"/>
       <requirement
           name="org.eclipse.oomph.setup.workingsets.feature.group"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        id="p2.org.eclipse.xtext"
-        label="Xtext Releases"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="org.eclipse.xtext.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
-      <requirement
-          name="de.itemis.xtext.antlr.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.xpand.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
-      <repository
-          url="${xtext.site}"/>
-      <repository
-          url="${mwe2.site}"/>
-      <repository
-          url="http://download.itemis.com/updates/releases/2.1.1/"/>
-      <description>Xtext &amp; Xtend</description>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -297,6 +259,23 @@
           url="${xtext.site}"/>
       <repository
           url="${mwe2.site}"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="p2.m2e"
+        label="M2E"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.sonatype.tycho.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.sonatype.m2e.buildhelper.feature.feature.group"/>
+      <repository
+          url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
+      <repository
+          url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-buildhelper/0.15.0/N/0.15.0.201207090124/"/>
+      <description>Maven connector</description>
     </setupTask>
   </setupTask>
   <setupTask
@@ -538,7 +517,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.1/"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.2/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.version"
@@ -547,6 +526,24 @@
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
         value="it.xsemantics.repository-1.8.1.v20151009-0657.zip"/>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="p2.org.eclipse.xtext.2"
+        label="Xtext Releases"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"
+          versionRange="[2.9.0,2.10.0)"/>
+      <requirement
+          name="de.itemis.xtext.antlr.feature.feature.group"/>
+      <repository
+          url="${xtext.site}"/>
+      <repository
+          url="${mwe2.site}"/>
+      <repository
+          url="http://download.itemis.com/updates/releases/2.1.1/"/>
+      <description>Xtext &amp; Xtend</description>
+    </setupTask>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
