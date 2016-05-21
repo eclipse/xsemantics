@@ -51,7 +51,7 @@
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.9.1</xtext.version>
+		<xtext.version>2.9.2</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 		
@@ -468,6 +468,18 @@
 	</build>
 
 	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+			<url>http://nexus.codehaus.org/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+
 		<pluginRepository>
 			<id>sonatype_releases</id>
 			<url>https://oss.sonatype.org/content/repositories/releases/</url>
