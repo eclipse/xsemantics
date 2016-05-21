@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Test Using Xtext Maven Plugin
 Bundle-SymbolicName: it.xsemantics.example.maven.test
-Bundle-Version: 1.9.0.qualifier
+Bundle-Version: 1.9.1.qualifier
 Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib,
