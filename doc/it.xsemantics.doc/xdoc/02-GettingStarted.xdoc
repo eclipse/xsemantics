@@ -4,7 +4,7 @@ section:Install[Installation of Xsemantics]
 
 To get started, you should first install Xsemantics plugins;
 you can use the update site:
-link[https://sourceforge.net/projects/xsemantics/files/updates/composite/releases/][https://sourceforge.net/projects/xsemantics/files/updates/composite/releases/].
+link[https://dl.bintray.com/lorenzobettini/xsemantics/updates][https://dl.bintray.com/lorenzobettini/xsemantics/updates].
 
 Note that this composite update site contains links also to the
 official Xtext update site, so, if you don't have Xtext already installed,
