@@ -31,6 +31,8 @@
 				<plugins>
 					<plugin>
 						<!-- 
+							This assumes a previous 'install' has been performed
+							
 							This must be used explicitly with the goal set-version in order 
 							to update the versions removing the SNAPSHOT before deploying Maven artifacts:
 							
