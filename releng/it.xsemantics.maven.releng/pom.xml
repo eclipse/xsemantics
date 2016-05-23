@@ -7,7 +7,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>net.sf.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.9.0-SNAPSHOT</version>
+		<version>1.9.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.maven.releng</artifactId>
@@ -31,6 +31,8 @@
 				<plugins>
 					<plugin>
 						<!-- 
+							This assumes a previous 'install' has been performed
+							
 							This must be used explicitly with the goal set-version in order 
 							to update the versions removing the SNAPSHOT before deploying Maven artifacts:
 							

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
-	<version>1.9.0-SNAPSHOT</version>
+	<version>1.9.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Xsemantics</name>
@@ -51,7 +51,7 @@
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.9.1</xtext.version>
+		<xtext.version>2.9.2</xtext.version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 		
@@ -114,22 +114,31 @@
 		
 		<ant-files-path>${basedir}/../../releng/it.xsemantics.parent/ant</ant-files-path>
 
-		<updates.dir>xsemantics</updates.dir>
-		<remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics</remote.dir>
-		<remote.updates.dir>updates/releases</remote.updates.dir>
-		<remote.zips.dir>zips</remote.zips.dir>
+		<!-- for deployment on bintray -->
+		<!-- The name of your own Bintray repository -->
+		<bintray.repo>xsemantics</bintray.repo>
+		<!-- The name of your own Bintray repository's package for releases -->
+		<bintray.package>releases</bintray.package>
+		<!-- The label for the Composite sites -->
 		<site.label>Xsemantics Site</site.label>
 
-		<!-- remote host zips dir -->
-		<rsync.remote.zips.dir>${remote.dir}/${remote.zips.dir}</rsync.remote.zips.dir> 
-		<!-- remote rsync host -->
-		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
-		<!-- local source directory for rsync (read from this directory) -->
-		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
-		<!-- pass "-n" to perform a trial run with no changes made -->
-		<dryrun></dryrun>
+		<!-- If the Bintray repository is owned by someone different from your
+			user, then specify the bintray.owner explicitly -->
+		<bintray.owner>${bintray.user}</bintray.owner>
+		<!-- Define bintray.user and bintray.apikey in some secret place,
+			like .m2/settings.xml -->
+
+		<!-- Default values for remote directories -->
+		<bintray.base.path></bintray.base.path>
+		<bintray.releases.path>${bintray.base.path}releases</bintray.releases.path>
+		<bintray.composite.path>${bintray.base.path}updates</bintray.composite.path>
+		<bintray.zip.path>${bintray.base.path}zipped</bintray.zip.path>
+		<bintray.products.path>${bintray.base.path}products</bintray.products.path>
+		<!-- note that the following must be consistent with the path schema
+			used to publish child composite repositories and actual released p2 repositories -->
+		<child.repository.path.prefix>../../releases/</child.repository.path.prefix>
 	</properties>
-	
+
 	<profiles>
 		<profile>
 			<id>release-snapshots</id>
@@ -137,9 +146,8 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<updates.dir>xsemantics-snapshots</updates.dir>
-				<remote.updates.dir>temp-snapshots</remote.updates.dir>
-				<remote.zips.dir>temp-zips</remote.zips.dir>
+				<bintray.package>snapshots</bintray.package>
+				<bintray.base.path>snapshots/</bintray.base.path>
 				<site.label>Xsemantics Snapshot Site</site.label>
 			</properties>
 		</profile>
@@ -165,6 +173,18 @@
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
+					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<version>2.9.1</version>
@@ -177,7 +197,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					
+
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
@@ -468,6 +488,18 @@
 	</build>
 
 	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+			<url>http://nexus.codehaus.org/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+
 		<pluginRepository>
 			<id>sonatype_releases</id>
 			<url>https://oss.sonatype.org/content/repositories/releases/</url>

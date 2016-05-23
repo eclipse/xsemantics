@@ -1,3 +1,37 @@
+PARENT POM
+
+		<updates.dir>xsemantics</updates.dir>
+		<remote.dir>lbettini,xsemantics@frs.sourceforge.net:/home/frs/project/xsemantics</remote.dir>
+		<remote.updates.dir>updates/releases</remote.updates.dir>
+		<remote.zips.dir>zips</remote.zips.dir>
+		<site.label>Xsemantics Site</site.label>
+
+		<!-- remote host zips dir -->
+		<rsync.remote.zips.dir>${remote.dir}/${remote.zips.dir}</rsync.remote.zips.dir> 
+		<!-- remote rsync host -->
+		<rsync.remote.dir>${remote.dir}/${remote.updates.dir}/</rsync.remote.dir> 
+		<!-- local source directory for rsync (read from this directory) -->
+		<rsync.local.dir>${user.home}/p2.repositories/${updates.dir}/</rsync.local.dir>
+		<!-- pass "-n" to perform a trial run with no changes made -->
+		<dryrun></dryrun>
+	</properties>
+	
+	<profiles>
+		<profile>
+			<id>release-snapshots</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<updates.dir>xsemantics-snapshots</updates.dir>
+				<remote.updates.dir>temp-snapshots</remote.updates.dir>
+				<remote.zips.dir>temp-zips</remote.zips.dir>
+				<site.label>Xsemantics Snapshot Site</site.label>
+			</properties>
+		</profile>
+
+REPOSITORY POM
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -7,24 +41,11 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>net.sf.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.9.1-SNAPSHOT</version>
+		<version>1.9.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-repository-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<finalName>${project.artifactId}-${qualifiedVersion}</finalName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 	<profiles>
 		<profile>
@@ -36,55 +57,14 @@
 			<build>
 				<plugins>
 					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${maven-antrun-plugin.version}</version>
-						<executions>
-							<execution>
-								<!-- Retrieve possibly existing remote composite metadata -->
-								<id>update-local-repository</id>
-								<phase>prepare-package</phase>
-								<configuration>
-									<target>
-										<ant antfile="${ant-files-path}/bintray.ant" target="get-composite-metadata">
-										</ant>
-									</target>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-							
-							<execution>
-								<!-- Deploy p2 repository, p2 composite updated metadata and zipped p2 repository -->
-								<id>deploy-repository</id>
-								<phase>verify</phase>
-								<configuration>
-									<target>
-										<ant antfile="${ant-files-path}/bintray.ant"
-												target="push-to-bintray">
-											<property name="bintray.zip.path"
-												value="${bintray.base.path}zipped/${unqualifiedVersion}"/>
-										</ant>
-									</target>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
 						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-eclipserun-plugin</artifactId>
 						<version>${tycho-version}</version>
 						<configuration>
-							<!-- Update p2 composite metadata or create it -->
-							<!-- IMPORTANT: DO NOT split the arg line -->
-							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile ${ant-files-path}/packaging-p2composite.ant p2.composite.add -Dsite.label="${site.label}" -Dcomposite.base.dir=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier} -Dchild.repository.path.prefix="${child.repository.path.prefix}"</appArgLine>
+							<appArgLine>-application org.eclipse.ant.core.antRunner -buildfile ${ant-files-path}/packaging-p2composite.ant p2.composite.add -Dupdates.dir=${updates.dir} -Dsite.label="${site.label}" -Dproject.build.directory=${project.build.directory} -DunqualifiedVersion=${unqualifiedVersion} -DbuildQualifier=${buildQualifier}</appArgLine>
 							<repositories>
 								<repository>
-									<id>mars</id>
+									<id>luna</id>
 									<layout>p2</layout>
 									<url>http://download.eclipse.org/releases/mars</url>
 								</repository>
@@ -126,10 +106,62 @@
 							</execution>
 						</executions>
 					</plugin>
+					
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>update-local-repository</id>
+								<phase>prepare-package</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/rsync.ant" target="rsync-update">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<id>deploy-repository</id>
+								<phase>verify</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/rsync.ant" target="rsync-commit">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<id>deploy-zipped-repository</id>
+								<phase>verify</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/rsync.ant" 
+													target="rsync-copy-dir-contents">
+											<property name="rsync.remote.dir" value="${rsync.remote.zips.dir}/${unqualifiedVersion}/"/>
+											<property name="rsync.local.dir" value="${project.build.directory}/"/>
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
 			</build>
-		</profile>
 
+		</profile>
+		
 		<profile>
 			<id>jacoco-report</id>
 			<activation>
