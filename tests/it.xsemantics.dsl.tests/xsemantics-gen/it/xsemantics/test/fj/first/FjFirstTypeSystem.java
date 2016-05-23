@@ -1557,18 +1557,16 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     checkInternal(G, _trace_, _receiver);
     final Member message = selection.getMessage();
     boolean _matched = false;
-    if (!_matched) {
-      if (message instanceof Method) {
-        _matched=true;
-        /* G |- selection : selection.args << message.params */
-        EList<Expression> _args = selection.getArgs();
-        EList<Parameter> _params = ((Method)message).getParams();
-        subtypesequenceInternal(G, _trace_, selection, _args, _params);
-        EList<Expression> _args_1 = selection.getArgs();
-        for (final Expression arg : _args_1) {
-          /* G |- arg */
-          checkInternal(G, _trace_, arg);
-        }
+    if (message instanceof Method) {
+      _matched=true;
+      /* G |- selection : selection.args << message.params */
+      EList<Expression> _args = selection.getArgs();
+      EList<Parameter> _params = ((Method)message).getParams();
+      subtypesequenceInternal(G, _trace_, selection, _args, _params);
+      EList<Expression> _args_1 = selection.getArgs();
+      for (final Expression arg : _args_1) {
+        /* G |- arg */
+        checkInternal(G, _trace_, arg);
       }
     }
     return new Result<Boolean>(true);

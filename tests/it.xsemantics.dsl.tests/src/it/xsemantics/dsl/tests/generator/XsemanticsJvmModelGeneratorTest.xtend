@@ -5088,15 +5088,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean withCacheConditionCacheCondition(final RuleEnvironment environment, final EObject o) {
-    boolean _and = false;
-    boolean _isEmpty = environment.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = (!(o instanceof EClass));
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((!environment.isEmpty()) && (!(o instanceof EClass))));
   }
   
   protected Result<EClass> withCacheConditionBlockInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
@@ -5127,15 +5119,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean withCacheConditionBlockCacheCondition(final RuleEnvironment environment, final EObject o) {
-    boolean _and = false;
-    boolean _isEmpty = environment.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = (!(o instanceof EClass));
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((!environment.isEmpty()) && (!(o instanceof EClass))));
   }
 }
 '''
