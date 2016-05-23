@@ -108,7 +108,7 @@
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>mars-xtext-2.9</target-file-name>
+		<target-file-name>xtext-nightly</target-file-name>
 		
 		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
 		
