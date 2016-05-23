@@ -1,20 +1,23 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
+import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.diagnostics.Severity
-import it.xsemantics.dsl.xsemantics.XsemanticsSystem
+
 import static it.xsemantics.dsl.validation.XsemanticsValidator.*
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsValidatorTest extends XsemanticsBaseTest {
 	
@@ -227,7 +230,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		parser.parse(testFiles.testAuxiliaryFunctionWithWrongReturnExpression).
 			assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from EClass to Boolean"
 		)
 	}
@@ -283,7 +286,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testRuleInvocationIsVoidInClosures)
 		s.assertError(
 			XsemanticsPackage::eINSTANCE.ruleInvocation,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from void to Boolean"
 		)
 	}
@@ -293,7 +296,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 		val s = parser.parse(testFiles.testInvalidRuleInvocationIsNotOfExpectedType)
 		s.assertError(
 			XsemanticsPackage::eINSTANCE.ruleInvocation,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from boolean to Integer"
 		)
 	}
@@ -304,7 +307,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 				.testAccessToVarInsideClosure()).
 		assertError(
 			XbasePackage::eINSTANCE.XFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
+			IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS,
 			"Cannot refer to the non-final variable s inside a lambda expression"
 		)
 	}
@@ -315,7 +318,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 				.testVarDeclInRuleInvokationShadowsPreviousVariable()).
 		assertError(
 			XbasePackage::eINSTANCE.XVariableDeclaration,
-			org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
+			IssueCodes.VARIABLE_NAME_SHADOWING,
 			"Duplicate local variable s"
 		)
 	}
@@ -326,7 +329,7 @@ Duplicate name 'foo' (AuxiliaryDescription)
 				.testDuplicateParamsInRule()).
 		assertError(
 			XsemanticsPackage::eINSTANCE.ruleParameter,
-			org.eclipse.xtext.xbase.validation.IssueCodes.VARIABLE_NAME_SHADOWING,
+			IssueCodes.VARIABLE_NAME_SHADOWING,
 			"Duplicate local variable eClass"
 		)
 	}
@@ -422,7 +425,7 @@ The field foo1 needs an explicit type since there is no initialization expressio
 		parser.parse(testFiles.testWrongEnvironmentXExpression).
 		assertError(
 			XbasePackage::eINSTANCE.XStringLiteral,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to RuleEnvironment"
 		)
 	}
@@ -432,7 +435,7 @@ The field foo1 needs an explicit type since there is no initialization expressio
 		parser.parse(testFiles.testWrongEnvironmentXExpression2).
 		assertError(
 			XbasePackage::eINSTANCE.XStringLiteral,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to RuleEnvironment"
 		)
 	}
@@ -442,7 +445,7 @@ The field foo1 needs an explicit type since there is no initialization expressio
 		parser.parse(testFiles.testErrorSpecificationFeatureNotEStructuralFeature).
 		assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from EClass to EStructuralFeature"
 		)
 	}
@@ -452,7 +455,7 @@ The field foo1 needs an explicit type since there is no initialization expressio
 		parser.parse(testFiles.testErrorSpecificationSourceNotEObject).
 		assertError(
 			XbasePackage::eINSTANCE.XMemberFeatureCall,
-			org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES,
+			IssueCodes.INCOMPATIBLE_TYPES,
 			"Type mismatch: cannot convert from String to EObject"
 		)
 	}

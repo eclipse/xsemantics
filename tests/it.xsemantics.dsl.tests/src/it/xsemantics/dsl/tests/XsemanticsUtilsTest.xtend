@@ -2,6 +2,7 @@ package it.xsemantics.dsl.tests
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.JudgmentDescription
@@ -11,11 +12,12 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import java.util.List
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import static org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+import static org.junit.Assert.*
+
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsUtilsTest extends XsemanticsBaseTest {
 	

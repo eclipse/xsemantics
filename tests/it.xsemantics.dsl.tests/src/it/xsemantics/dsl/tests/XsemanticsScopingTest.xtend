@@ -1,6 +1,7 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.xsemantics.EnvironmentMapping
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import it.xsemantics.dsl.xsemantics.RuleInvocation
@@ -15,7 +16,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsScopingTest extends XsemanticsBaseTest {
 
