@@ -587,6 +587,48 @@
         location="${installation.location}/api/${api.baseline.version}/"
         remoteURI="https://dl.bintray.com/lorenzobettini/xsemantics/zipped/${api.baseline.version}/${api.baseline.zip}"/>
   </stream>
+  <stream name="xtext-2.10">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="mwe2.site"
+        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.3/"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="xtext.site"
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="api.baseline.version"
+        value="1.9.1"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="api.baseline.zip"
+        value="it.xsemantics.repository-1.9.1.v20160523-0806.zip"/>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="p2.org.eclipse.xtext.2.10"
+        label="Xtext Nightly"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"
+          versionRange="[2.10.0,2.11.0)"/>
+      <requirement
+          name="de.itemis.xtext.antlr.feature.feature.group"/>
+      <repository
+          url="${xtext.site}"/>
+      <repository
+          url="${mwe2.site}"/>
+      <repository
+          url="http://download.itemis.com/updates/releases/2.1.1/"/>
+      <description>Xtext &amp; Xtend</description>
+    </setupTask>
+    <setupTask
+        xsi:type="pde:APIBaselineTask"
+        name="xsemantics-latest"
+        version="${api.baseline.version}"
+        location="${installation.location}/api/${api.baseline.version}/"
+        remoteURI="https://dl.bintray.com/lorenzobettini/xsemantics/zipped/${api.baseline.version}/${api.baseline.zip}"/>
+  </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='com.github']"/>
