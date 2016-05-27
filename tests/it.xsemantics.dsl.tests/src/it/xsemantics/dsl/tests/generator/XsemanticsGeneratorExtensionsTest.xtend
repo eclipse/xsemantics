@@ -1,18 +1,18 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
-import it.xsemantics.dsl.tests.generator.XsemanticsGeneratorBaseTest
+import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
 import it.xsemantics.dsl.util.XsemanticsUtils
-import static extension org.junit.Assert.*
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.dsl.generator.XsemanticsGeneratorExtensions
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+import static extension org.junit.Assert.*
+
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsGeneratorExtensionsTest extends XsemanticsGeneratorBaseTest {
 

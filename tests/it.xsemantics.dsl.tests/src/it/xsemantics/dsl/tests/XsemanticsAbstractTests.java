@@ -3,14 +3,14 @@
  */
 package it.xsemantics.dsl.tests;
 
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom.XsemanticsStandaloneSetupForTests;
-import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
-import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
-
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Assert;
 import org.junit.Before;
+
+import it.xsemantics.dsl.XsemanticsStandaloneSetup;
+import it.xsemantics.dsl.tests.input.FjTypeSystemFiles;
+import it.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 
 /**
  * @author bettini
@@ -36,7 +36,7 @@ public class XsemanticsAbstractTests extends AbstractXtextTests {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		with(XsemanticsStandaloneSetupForTests.class);
+		with(XsemanticsStandaloneSetup.class);
 	}
 
 	@Override

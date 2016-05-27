@@ -4,11 +4,12 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/it/xsemantics/example/expressions/Expressions.xtext"
 var file.extensions = "expressions"
 var projectName = "it.xsemantics.example.expressions"
 var runtimeProject = "../${projectName}"
 var encoding = "UTF-8"
+//var grammarURI = "classpath:/it/xsemantics/example/expressions/Expressions.xtext"
+var grammarURI = "platform:/resource/${projectName}/src/it/xsemantics/example/expressions/Expressions.xtext"
 
 Workflow {
     bean = StandaloneSetup {
@@ -18,6 +19,10 @@ Workflow {
 
     component = DirectoryCleaner {
         directory = "${runtimeProject}/src-gen"
+    }
+
+	component = DirectoryCleaner {
+    	directory = "${runtimeProject}/model/generated"
     }
 
     component = DirectoryCleaner {

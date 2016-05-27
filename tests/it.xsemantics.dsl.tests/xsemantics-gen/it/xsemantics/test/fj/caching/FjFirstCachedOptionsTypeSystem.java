@@ -170,12 +170,6 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
   }
   
   protected Boolean subtypeCacheCondition(final RuleEnvironment environment, final Type left, final Type right) {
-    boolean _and = false;
-    if (!(left instanceof BasicType)) {
-      _and = false;
-    } else {
-      _and = (right instanceof BasicType);
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((left instanceof BasicType) && (right instanceof BasicType)));
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
 <setAttribute key="additional_plugins">
-<setEntry value="it.xsemantics.tests.swtbot:1.9.0.qualifier:default:true"/>
+<setEntry value="it.xsemantics.tests.swtbot:1.10.0.qualifier:default:true"/>
 </setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="askclear" value="false"/>

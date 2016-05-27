@@ -2,8 +2,8 @@ package it.xsemantics.dsl.tests.performance
 
 import com.google.common.io.CharStreams
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import java.io.InputStreamReader
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -11,7 +11,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsPerformanceTest extends XsemanticsBaseTest {
 	

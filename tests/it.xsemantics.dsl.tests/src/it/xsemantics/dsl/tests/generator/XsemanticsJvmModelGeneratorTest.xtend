@@ -1,8 +1,8 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
+import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
-import it.xsemantics.dsl.tests.XsemanticsInjectorProviderCustom
 import java.util.List
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.TemporaryFolder
@@ -13,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(typeof(XsemanticsInjectorProviderCustom))
+@InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
@@ -5088,15 +5088,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean withCacheConditionCacheCondition(final RuleEnvironment environment, final EObject o) {
-    boolean _and = false;
-    boolean _isEmpty = environment.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = (!(o instanceof EClass));
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((!environment.isEmpty()) && (!(o instanceof EClass))));
   }
   
   protected Result<EClass> withCacheConditionBlockInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
@@ -5127,15 +5119,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean withCacheConditionBlockCacheCondition(final RuleEnvironment environment, final EObject o) {
-    boolean _and = false;
-    boolean _isEmpty = environment.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = (!(o instanceof EClass));
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((!environment.isEmpty()) && (!(o instanceof EClass))));
   }
 }
 '''

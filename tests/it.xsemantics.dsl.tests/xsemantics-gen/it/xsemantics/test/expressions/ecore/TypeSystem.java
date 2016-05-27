@@ -150,53 +150,33 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
-    boolean _or = false;
-    String _string = new String();
-    boolean _equals = Objects.equal("foo", _string);
-    if (_equals) {
-      _or = true;
-    } else {
-      String _string_1 = new String();
-      boolean _equals_1 = Objects.equal("bar", _string_1);
-      _or = _equals_1;
-    }
     /* 'foo' == new String() || 'bar' == new String() */
-    if (!_or) {
+    if (!(Objects.equal("foo", new String()) || Objects.equal("bar", new String()))) {
       sneakyThrowRuleFailedException("\'foo\' == new String() || \'bar\' == new String()");
     }
-    boolean _and = false;
-    String _string_2 = new String();
-    boolean _equals_2 = Objects.equal("foo", _string_2);
-    if (!_equals_2) {
-      _and = false;
-    } else {
-      String _string_3 = new String();
-      boolean _equals_3 = Objects.equal("bar", _string_3);
-      _and = _equals_3;
-    }
     /* 'foo' == new String() && 'bar' == new String() */
-    if (!_and) {
+    if (!(Objects.equal("foo", new String()) && Objects.equal("bar", new String()))) {
       sneakyThrowRuleFailedException("\'foo\' == new String() && \'bar\' == new String()");
     }
-    String _string_4 = new String();
+    String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
-    String _plus = (_string_4 + _firstUpper);
-    boolean _equals_4 = Objects.equal("foo", _plus);
+    String _plus = (_string + _firstUpper);
+    boolean _equals = Objects.equal("foo", _plus);
     /* 'foo' == new String() + 'bar'.toFirstUpper */
-    if (!_equals_4) {
+    if (!_equals) {
       sneakyThrowRuleFailedException("\'foo\' == new String() + \'bar\'.toFirstUpper");
     }
-    String _string_5 = new String();
+    String _string_1 = new String();
     String _firstUpper_1 = StringExtensions.toFirstUpper("bar");
-    String _plus_1 = (_string_5 + _firstUpper_1);
+    String _plus_1 = (_string_1 + _firstUpper_1);
     boolean _notEquals = (!Objects.equal("foo", _plus_1));
     /* 'foo' != new String() + 'bar'.toFirstUpper */
     if (!_notEquals) {
       sneakyThrowRuleFailedException("\'foo\' != new String() + \'bar\'.toFirstUpper");
     }
-    String _string_6 = new String();
+    String _string_2 = new String();
     String _firstUpper_2 = StringExtensions.toFirstUpper("bar");
-    final String temp = (_string_6 + _firstUpper_2);
+    final String temp = (_string_2 + _firstUpper_2);
     boolean _contains = "foo".contains("f");
     /* 'foo'.contains('f') */
     if (!_contains) {
