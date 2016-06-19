@@ -687,6 +687,25 @@ for (final EStructuralFeature s : _eAllStructuralFeatures) {
 	}
 
 	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInSwitch_Issue_73() {
+		checkCompilationOfAllPremises(
+			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInSwitch,
+		'''
+		
+		final EObject object_1 = object;
+		boolean _matched = false;
+		if (object_1 instanceof EClass) {
+		  _matched=true;
+		  String _name = ((EClass)object).getName();
+		  /* (!Objects.equal(_name, null)); */
+		}
+		if (!_matched) {
+		  /* (!Objects.equal(object, "foo")); */
+		}'''
+			)
+	}
+
+	@Test
 	def void testRuleInvocationWithVarDeclarationAsOutputArg() {
 		checkCompilationOfRuleInvocation(
 			testFiles.testVariableDeclarationAsOutputArgument, 0,

@@ -1703,6 +1703,19 @@ class XsemanticsTestFiles {
 		}
 	}
 	'''
+
+	def testRuleWithBooleanExpressionsWithNoSideEffectInSwitch() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		switch (object) {
+			EClass: object.name != null
+			default: object != 'foo'
+		}
+	}
+	'''
 	
 	def testForClosureWithExpressionWithNoSideEffect()
 	'''«typeSystemQualifiedName»
