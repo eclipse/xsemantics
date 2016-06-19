@@ -1704,7 +1704,31 @@ class XsemanticsTestFiles {
 	}
 	'''
 
+	def testRuleWithBooleanExpressionsWithNoSideEffectInIf2() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		if (eClass != null)
+			object != 'foo'
+	}
+	'''
+
 	def testRuleWithBooleanExpressionsWithNoSideEffectInSwitch() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		switch (object) {
+			EClass: { object.name != null }
+			default: { object != 'foo' }
+		}
+	}
+	'''
+
+	def testRuleWithBooleanExpressionsWithNoSideEffectInSwitch2() '''
 	«testJudgmentDescriptionsReferringToEcore»
 	
 	rule EClassEObject derives

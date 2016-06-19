@@ -687,9 +687,47 @@ for (final EStructuralFeature s : _eAllStructuralFeatures) {
 	}
 
 	@Test
-	def void testRuleWithBooleanExpressionsWithNoSideEffectInSwitch_Issue_73() {
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInIf2() {
+		checkCompilationOfAllPremises(
+			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInIf2,
+		'''
+		
+		boolean _notEquals = (!Objects.equal(eClass, null));
+		if (_notEquals) {
+		  /* (!Objects.equal(object, "foo")); */
+		}'''
+			)
+	}
+
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInSwitch() {
 		checkCompilationOfAllPremises(
 			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInSwitch,
+		'''
+		
+		final EObject object_1 = object;
+		boolean _matched = false;
+		if (object_1 instanceof EClass) {
+		  _matched=true;
+		  String _name = ((EClass)object).getName();
+		  /* object.name != null */
+		  if (!(!Objects.equal(_name, null))) {
+		    sneakyThrowRuleFailedException("object.name != null");
+		  }
+		}
+		if (!_matched) {
+		  /* object != 'foo' */
+		  if (!(!Objects.equal(object, "foo"))) {
+		    sneakyThrowRuleFailedException("object != \'foo\'");
+		  }
+		}'''
+			)
+	}
+
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInSwitch2() {
+		checkCompilationOfAllPremises(
+			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInSwitch2,
 		'''
 		
 		final EObject object_1 = object;
