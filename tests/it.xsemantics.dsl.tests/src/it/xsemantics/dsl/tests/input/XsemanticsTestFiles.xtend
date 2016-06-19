@@ -1691,6 +1691,18 @@ class XsemanticsTestFiles {
 		}
 	}
 	'''
+
+	def testRuleWithBooleanExpressionsWithNoSideEffectInIf() '''
+	«testJudgmentDescriptionsReferringToEcore»
+	
+	rule EClassEObject derives
+		G |- EClass eClass : EObject object
+	from {
+		if (eClass != null) {
+			object != 'foo'
+		}
+	}
+	'''
 	
 	def testForClosureWithExpressionWithNoSideEffect()
 	'''«typeSystemQualifiedName»

@@ -669,7 +669,23 @@ for (final EStructuralFeature s : _eAllStructuralFeatures) {
 }'''
 			)
 	}
-	
+
+	@Test
+	def void testRuleWithBooleanExpressionsWithNoSideEffectInIf() {
+		checkCompilationOfAllPremises(
+			testFiles.testRuleWithBooleanExpressionsWithNoSideEffectInIf,
+		'''
+		
+		boolean _notEquals = (!Objects.equal(eClass, null));
+		if (_notEquals) {
+		  /* object != 'foo' */
+		  if (!(!Objects.equal(object, "foo"))) {
+		    sneakyThrowRuleFailedException("object != \'foo\'");
+		  }
+		}'''
+			)
+	}
+
 	@Test
 	def void testRuleInvocationWithVarDeclarationAsOutputArg() {
 		checkCompilationOfRuleInvocation(
