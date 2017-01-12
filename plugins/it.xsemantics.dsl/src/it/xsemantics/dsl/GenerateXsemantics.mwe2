@@ -13,14 +13,14 @@ Workflow {
 				rootPath = rootPath
 				runtimeTest = {
 					enabled = true
-					root = "../../tests/it.xsemantics.dsl.tests"
+					root = "${rootPath}/../tests/it.xsemantics.dsl.tests"
 				}
 				eclipsePlugin = {
 					enabled = true
 				}
 				eclipsePluginTest = {
 					enabled = true
-					root = "../../tests/it.xsemantics.dsl.ui.tests"
+					root = "${rootPath}/../tests/it.xsemantics.dsl.ui.tests"
 				}
 				createEclipseMetaData = true
 			}
