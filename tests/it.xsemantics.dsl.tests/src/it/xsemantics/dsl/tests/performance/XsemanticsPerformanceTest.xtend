@@ -6,8 +6,10 @@ import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import java.io.InputStreamReader
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -16,6 +18,9 @@ import org.junit.runner.RunWith
 class XsemanticsPerformanceTest extends XsemanticsBaseTest {
 	
 	@Inject extension CompilationTestHelper
+	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder
 	
 	@Test
 	def void testBigFile() {
