@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.typing.TupleType
 import it.xsemantics.dsl.typing.XsemanticsTypeSystem
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem

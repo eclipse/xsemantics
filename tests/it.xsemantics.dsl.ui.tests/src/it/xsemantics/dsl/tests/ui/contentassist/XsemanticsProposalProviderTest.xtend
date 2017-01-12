@@ -1,22 +1,26 @@
 package it.xsemantics.dsl.tests.ui.contentassist
 
-import it.xsemantics.dsl.XsemanticsUiInjectorProvider
-import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
-import it.xsemantics.dsl.ui.internal.XsemanticsActivator
-import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
+import it.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
+import it.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator
+import org.eclipse.xtext.validation.ImportUriValidator
+import org.eclipse.xtext.validation.NamesAreUniqueValidator
 import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
+import org.eclipse.xtext.xtext.XtextValidator
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
+import it.xsemantics.dsl.ui.internal.DslActivator
+import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
+import org.eclipse.jdt.core.IJavaProject
 
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 @RunWith(typeof(XtextRunner))
@@ -33,7 +37,7 @@ public class XsemanticsProposalProviderTest extends
 	def static void setUp() {
 		PDETargetPlatformUtils.setTargetPlatform();
 		
-		val injector = XsemanticsActivator.getInstance().getInjector(XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
+		val injector = DslActivator.getInstance().getInjector(DslActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
 		
 		val projectHelper = injector.getInstance(PluginProjectHelper)
 		
@@ -303,10 +307,10 @@ public class XsemanticsProposalProviderTest extends
 		validatorExtends '''
 		).
 		assertText(
-			org.eclipse.xtext.validation.AbstractDeclarativeValidator.name,
-			org.eclipse.xtext.validation.ImportUriValidator.name,
-			org.eclipse.xtext.validation.NamesAreUniqueValidator.name,
-			org.eclipse.xtext.xtext.XtextValidator.name
+			AbstractDeclarativeValidator.name,
+			ImportUriValidator.name,
+			NamesAreUniqueValidator.name,
+			XtextValidator.name
 		);
 		// that's the only possible completion in this test:
 		// a validator can extend only a type that is-a AbstractDeclarativeValidator

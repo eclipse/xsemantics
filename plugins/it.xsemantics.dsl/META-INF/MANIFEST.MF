@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.xtext.ecore,
- org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
+ org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.dsl,
@@ -38,4 +39,5 @@ Export-Package: it.xsemantics.dsl,
  it.xsemantics.dsl.validation,
  it.xsemantics.dsl.xsemantics,
  it.xsemantics.dsl.xsemantics.impl,
- it.xsemantics.dsl.xsemantics.util
+ it.xsemantics.dsl.xsemantics.util,
+ it.xsemantics.dsl.scoping

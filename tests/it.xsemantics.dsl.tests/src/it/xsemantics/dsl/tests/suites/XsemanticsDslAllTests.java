@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.suites;
 
 import it.xsemantics.dsl.tests.QualifiedNameTest;
 import it.xsemantics.dsl.tests.XsemanticsNodeModelUtilsTest;
-import it.xsemantics.dsl.tests.XsemanticsParserTest;
+import it.xsemantics.dsl.tests.XsemanticsParsingTest;
 import it.xsemantics.dsl.tests.XsemanticsProposalsForDatatypeRulesTest;
 import it.xsemantics.dsl.tests.XsemanticsScopingTest;
 import it.xsemantics.dsl.tests.XsemanticsTypeSystemTest;
@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	XsemanticsParserTest.class,
+	XsemanticsParsingTest.class,
 	XsemanticsScopingTest.class,
 	XsemanticsProposalsForDatatypeRulesTest.class,
 	XsemanticsValidatorTests.class,

@@ -8,8 +8,8 @@ matrix:
     - os: linux
       jdk: oraclejdk8
       env: DISPLAY=:99.0
-    - os: osx
-      osx_image: xcode8
+#    - os: osx
+#      osx_image: xcode8
 
 cache:
   directories:

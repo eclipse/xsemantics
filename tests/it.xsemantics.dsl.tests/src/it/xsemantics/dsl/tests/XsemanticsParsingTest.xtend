@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.xsemantics.EnvironmentComposition
 import it.xsemantics.dsl.xsemantics.RuleInvocation
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
@@ -25,7 +24,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class XsemanticsParserTest extends XsemanticsBaseTest {
+class XsemanticsParsingTest extends XsemanticsBaseTest {
 	
 	@Inject extension ValidationTestHelper
 	

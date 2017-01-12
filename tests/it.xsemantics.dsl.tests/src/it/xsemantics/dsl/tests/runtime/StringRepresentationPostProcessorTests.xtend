@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.runtime
 
 import com.google.common.base.Strings
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.StringRepresentationPostProcessor
 import org.junit.Assert

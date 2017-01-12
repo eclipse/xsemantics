@@ -1,8 +1,8 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils

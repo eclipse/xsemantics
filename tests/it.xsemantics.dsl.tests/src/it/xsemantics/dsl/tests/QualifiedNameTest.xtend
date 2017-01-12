@@ -1,11 +1,10 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
-import org.junit.Assert
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 

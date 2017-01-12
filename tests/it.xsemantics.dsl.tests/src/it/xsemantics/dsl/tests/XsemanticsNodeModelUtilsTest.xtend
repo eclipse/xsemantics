@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.junit4.InjectWith

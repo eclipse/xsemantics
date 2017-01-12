@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xsemantics UI Tests
+Bundle-SymbolicName: it.xsemantics.dsl.ui.tests
+Bundle-Version: 1.10.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: it.xsemantics.dsl.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.junit,
+ it.xsemantics.tests.pde.utils,
+ org.eclipse.jdt.core;bundle-version="3.12.2",
+ org.eclipse.xtext.common.types.ui
+Export-Package: it.xsemantics.dsl.tests.utils.ui,
+ it.xsemantics.dsl.ui.tests
+Import-Package: org.hamcrest.core,
+ org.junit;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0"

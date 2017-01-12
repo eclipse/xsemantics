@@ -11,13 +11,13 @@
 <booleanAttribute key="clearws" value="true"/>
 <booleanAttribute key="clearwslog" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/pde-junit"/>
-<booleanAttribute key="default" value="false"/>
+<booleanAttribute key="default" value="true"/>
 <stringAttribute key="featureDefaultLocation" value="workspace"/>
 <stringAttribute key="featurePluginResolution" value="workspace"/>
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="location" value="${workspace_loc}/../junit-workspace"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/it.xsemantics.dsl.tests/src/it/xsemantics/dsl/tests/ui/XsemanticsAllUiTests.java"/>
+<listEntry value="/it.xsemantics.dsl.ui.tests/src/it/xsemantics/dsl/tests/ui/XsemanticsAllUiTests.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -29,7 +29,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="it.xsemantics.dsl.tests.ui.XsemanticsAllUiTests"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="it.xsemantics.dsl.tests"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="it.xsemantics.dsl.ui.tests"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms40m -Xmx384m -XX:MaxPermSize=256m"/>
 <stringAttribute key="pde.version" value="3.3"/>
@@ -62,7 +62,7 @@
 </setAttribute>
 <booleanAttribute key="show_selected_only" value="false"/>
 <booleanAttribute key="tracing" value="false"/>
-<booleanAttribute key="useCustomFeatures" value="true"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfig" value="true"/>
 <booleanAttribute key="useDefaultConfigArea" value="false"/>
 <booleanAttribute key="useProduct" value="true"/>

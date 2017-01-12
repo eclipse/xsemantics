@@ -1,7 +1,6 @@
 package it.xsemantics.dsl.tests
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.xsemantics.XsemanticsPackage
 import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.xtext.common.types.TypesPackage

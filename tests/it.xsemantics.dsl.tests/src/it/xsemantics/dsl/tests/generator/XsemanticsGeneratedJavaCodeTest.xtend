@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.InjectWith

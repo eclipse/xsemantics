@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-	<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
-	<groupId>net.sf.xsemantics</groupId>
-	<artifactId>it.xsemantics.parent</artifactId>
-	<version>1.10.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
+		<groupId>net.sf.xsemantics</groupId>
+		<artifactId>it.xsemantics.parent</artifactId>
+		<version>1.10.0-SNAPSHOT</version>
+	</parent>
 
 	<artifactId>it.xsemantics.dsl.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
@@ -26,165 +26,108 @@
 			<version>${junit-version}</version>
 		</dependency>
 	</dependencies>
-	  
-  <build>
-  	<plugins>
-  		<plugin>
-  			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>xtend-maven-plugin</artifactId>
-		</plugin>
 
-		<plugin>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>xtext-maven-plugin</artifactId>
-		</plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
 
-		<plugin>
-	        <groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-surefire-plugin</artifactId>
-			<version>${maven-surefire-plugin.version}</version>
-	       	<executions>
-				<execution>
-					<id>DSLTests</id>
-					<phase>test</phase>
-					<configuration>
-						<skip>${dsl.tests.skip}</skip>
-						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
-						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-						<includes>
-							<include>**/tests/runtime/*Test*.java</include>
-							<include>**/dsl/tests/*Test*.java</include>
-							<include>**/dsl/tests/performance/*Test*.java</include>
-							<include>**/dsl/tests/generator/*Test*.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/tests/runtime/*Abstract*.java</exclude>
-							<exclude>**/dsl/tests/*Abstract*.java</exclude>
-							<exclude>**/dsl/tests/*Helper*.java</exclude>
-							<exclude>**/dsl/tests/*Base*.java</exclude>
-							<exclude>**/dsl/tests/generator/*Abstract*.java</exclude>
-							<exclude>**/dsl/tests/generator/*Helper*.java</exclude>
-							<exclude>**/dsl/tests/generator/*Base*.java</exclude>
-							<exclude>**/dsl/tests/generator/*GeneratorForTest*.java</exclude>
-							<exclude>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</exclude>
-							<exclude>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</exclude>
-							<exclude>**/dsl/tests/generator/*CompilerTest*.java</exclude>
-						</excludes>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-				<execution>
-					<id>FJGeneratedTypeSystemTests</id>
-					<phase>test</phase>
-					<configuration>
-						<skip>${dsl.tests.skip}</skip>
-						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
-						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-						<includes>
-							<include>**/dsl/tests/generator/fj/*Test*.java</include>
-							<include>**/dsl/tests/generator/fj/caching/*Test*.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/dsl/tests/generator/fj/caching/*Abstract*.java</exclude>
-						</excludes>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-			</executions>
-	    </plugin>
-		
-		<plugin>
-	        <groupId>org.eclipse.tycho</groupId>
-	        <artifactId>tycho-surefire-plugin</artifactId>
-	        <version>${tycho-version}</version>
-	        <executions>
-	        	<execution>
-	        		<!--  We give each test run our own name, so we disable "default-test"  -->
-					<id>default-test</id>
-					<phase>integration-test</phase>
-					<configuration>
-						<skip>true</skip>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-	        	<execution>
-	        		<!--  compiler tests need an OSGI environment, but no UI  -->
-					<id>JavaCompilerBasedTests</id>
-					<phase>integration-test</phase>
-					<configuration>
-						<skip>${dsl.tests.skip}</skip>
-						<useUIHarness>false</useUIHarness>
-						<useUIThread>false</useUIThread>
-						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
-						<includes>
-							<include>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</include>
-							<include>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</include>
-							<include>**/dsl/tests/generator/*CompilerTest*.java</include>
-						</includes>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-				<execution>
-					<id>UiTests</id>
-					<phase>integration-test</phase>
-					<configuration>
-						<skip>${dsl.tests.skip}</skip>
-						<useUIHarness>true</useUIHarness>
-						<useUIThread>true</useUIThread>
-						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${uiTestsArgs} ${pdeTestsArgs}</argLine>
-						<includes>
-							<include>**/dsl/tests/ui/contentassist/*Test*.java</include>
-							<include>**/dsl/tests/ui/editor/*Test*.java</include>
-							<include>**/dsl/tests/ui/outline/*Test*.java</include>
-						</includes>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-maven-plugin</artifactId>
+			</plugin>
 
-		<plugin>
-			<groupId>org.eclipse.tycho</groupId>
-			<artifactId>target-platform-configuration</artifactId>
-			<configuration>
-				<dependency-resolution>
-					<extraRequirements>
-						<!-- to get the org.eclipse.osgi.compatibility.state plugin iff 
-						the targeted Eclipse version (e.g., Luna) has it
-						(backwards compatible with kepler and previous versions) -->
-						<requirement>
-							<type>eclipse-feature</type>
-							<id>org.eclipse.rcp</id>
-							<versionRange>0.0.0</versionRange>
-						</requirement>
-						<!--
-							See
-							https://github.com/LorenzoBettini/jbase/issues/3
-							https://www.eclipse.org/forums/index.php/t/1073366/
-						 -->
-						<requirement>
-							<type>eclipse-feature</type>
-							<id>org.eclipse.jdt</id>
-							<versionRange>0.0.0</versionRange>
-						</requirement>
-					</extraRequirements>
-				</dependency-resolution>
-			</configuration>
-		</plugin>
-  	</plugins>
-  </build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>DSLTests</id>
+						<phase>test</phase>
+						<configuration>
+							<skip>${dsl.tests.skip}</skip>
+							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+								for jacoco agent -->
+							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+							<includes>
+								<include>**/tests/runtime/*Test*.java</include>
+								<include>**/dsl/tests/*Test*.java</include>
+								<include>**/dsl/tests/performance/*Test*.java</include>
+								<include>**/dsl/tests/generator/*Test*.java</include>
+							</includes>
+							<excludes>
+								<exclude>**/tests/runtime/*Abstract*.java</exclude>
+								<exclude>**/dsl/tests/*Abstract*.java</exclude>
+								<exclude>**/dsl/tests/*Helper*.java</exclude>
+								<exclude>**/dsl/tests/*Base*.java</exclude>
+								<exclude>**/dsl/tests/generator/*Abstract*.java</exclude>
+								<exclude>**/dsl/tests/generator/*Helper*.java</exclude>
+								<exclude>**/dsl/tests/generator/*Base*.java</exclude>
+								<exclude>**/dsl/tests/generator/*GeneratorForTest*.java</exclude>
+								<exclude>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</exclude>
+								<exclude>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</exclude>
+								<exclude>**/dsl/tests/generator/*CompilerTest*.java</exclude>
+							</excludes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>FJGeneratedTypeSystemTests</id>
+						<phase>test</phase>
+						<configuration>
+							<skip>${dsl.tests.skip}</skip>
+							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+								for jacoco agent -->
+							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+							<includes>
+								<include>**/dsl/tests/generator/fj/*Test*.java</include>
+								<include>**/dsl/tests/generator/fj/caching/*Test*.java</include>
+							</includes>
+							<excludes>
+								<exclude>**/dsl/tests/generator/fj/caching/*Abstract*.java</exclude>
+							</excludes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<skip>${dsl.tests.skip}</skip>
+							<useUIHarness>false</useUIHarness>
+							<useUIThread>false</useUIThread>
+							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+								for jacoco agent -->
+							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+							<includes>
+								<include>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</include>
+								<include>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</include>
+								<include>**/dsl/tests/generator/*CompilerTest*.java</include>
+							</includes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

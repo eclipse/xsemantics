@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
 import org.eclipse.xtext.junit4.InjectWith

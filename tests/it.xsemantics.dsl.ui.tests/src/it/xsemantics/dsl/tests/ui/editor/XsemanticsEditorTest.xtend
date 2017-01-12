@@ -1,11 +1,16 @@
 package it.xsemantics.dsl.tests.ui.editor
 
-import it.xsemantics.dsl.XsemanticsUiInjectorProvider
-import it.xsemantics.dsl.ui.internal.XsemanticsActivator
+import com.google.inject.Inject
+import it.xsemantics.dsl.ui.internal.DslActivator
+import it.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
+import it.xsemantics.dsl.util.XsemanticsUtils
+import it.xsemantics.dsl.xsemantics.XsemanticsFile
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.ui.editor.XtextEditor
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,11 +18,6 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 
 import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import it.xsemantics.dsl.xsemantics.XsemanticsFile
-import com.google.inject.Inject
-import it.xsemantics.dsl.util.XsemanticsUtils
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.ui.editor.XtextEditor
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
@@ -28,7 +28,7 @@ class XsemanticsEditorTest extends AbstractEditorTest {
 	@Inject extension XsemanticsUtils
 	
 	override protected getEditorId() {
-		XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS
+		DslActivator.IT_XSEMANTICS_DSL_XSEMANTICS
 	}
 	
 	@Before

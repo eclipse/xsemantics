@@ -18,8 +18,10 @@
 		
 		<module>../../plugins/it.xsemantics.runtime</module>
 		<module>../../plugins/it.xsemantics.dsl</module>
+		<module>../../plugins/it.xsemantics.dsl.ide</module>
 		<module>../../plugins/it.xsemantics.dsl.ui</module>
 		<module>../../tests/it.xsemantics.dsl.tests</module>
+		<module>../../tests/it.xsemantics.dsl.ui.tests</module>
 
 		<!-- we need the following examples for testing -->
 		<module>../../examples/it.xsemantics.example.fj</module>

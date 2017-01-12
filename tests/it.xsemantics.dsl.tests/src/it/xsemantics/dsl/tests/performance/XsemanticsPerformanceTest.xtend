@@ -2,7 +2,7 @@ package it.xsemantics.dsl.tests.performance
 
 import com.google.common.io.CharStreams
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import java.io.InputStreamReader
 import org.eclipse.xtext.junit4.InjectWith
