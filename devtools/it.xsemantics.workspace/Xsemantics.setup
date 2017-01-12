@@ -20,8 +20,8 @@
     label="Xsemantics">
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-1.7"
-      location="${jre.location-1.7}">
+      version="JavaSE-1.8"
+      location="${jre.location-1.8}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -90,7 +90,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Mars"
+      defaultValue="Neon"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
@@ -115,10 +115,6 @@
           name="org.eclipse.releng.tools.feature.group"/>
       <requirement
           name="org.eclipse.wst.xml_ui.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/eclipse/updates/4.5"/>
-      <repository
-          url="http://download.eclipse.org/releases/mars"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -352,6 +348,21 @@
         <repository
             url="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.7"/>
       </repositoryList>
+      <repositoryList
+          name="Neon">
+        <repository
+            url="http://download.eclipse.org/releases/neon"/>
+        <repository
+            url="http://download.itemis.com/updates/releases/2.1.1/"/>
+        <repository
+            url="${xtext.site}"/>
+        <repository
+            url="${mwe2.site}"/>
+        <repository
+            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+        <repository
+            url="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.7"/>
+      </repositoryList>
     </targlet>
   </setupTask>
   <setupTask
@@ -507,7 +518,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.3/"/>
+        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
