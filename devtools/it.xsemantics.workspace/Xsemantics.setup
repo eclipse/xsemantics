@@ -472,6 +472,10 @@
   </setupTask>
   <setupTask
       xsi:type="launching:LaunchTask"
+      id="GenerateXsemanticsModelClasses"
+      launcher="GenerateXsemanticsModelClasses.mwe2"/>
+  <setupTask
+      xsi:type="launching:LaunchTask"
       id="GenerateXsemantics"
       launcher="Generate Language Infrastructure (it.xsemantics.dsl)"/>
   <setupTask
