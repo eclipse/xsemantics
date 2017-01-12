@@ -38,6 +38,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -46,7 +47,6 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
@@ -1325,8 +1325,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
     final List<Method> allMethods = this.<Method>getAll(cl, _class_Members, _class_Superclass, 
       Method.class);
-    final Procedure1<Method> _function = new Procedure1<Method>() {
-      public void apply(final Method method) {
+    final Consumer<Method> _function = new Consumer<Method>() {
+      public void accept(final Method method) {
         final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
           public Boolean apply(final Method it) {
             String _name = it.getName();
@@ -1341,7 +1341,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
         }
       }
     };
-    IterableExtensions.<Method>forEach(allMethods, _function);
+    allMethods.forEach(_function);
     methods = result;
     return new Result<List<Method>>(methods);
   }
@@ -1522,13 +1522,13 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
     EList<Expression> _args_1 = newExp.getArgs();
-    final Procedure1<Expression> _function = new Procedure1<Expression>() {
-      public void apply(final Expression it) {
+    final Consumer<Expression> _function = new Consumer<Expression>() {
+      public void accept(final Expression it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
       }
     };
-    IterableExtensions.<Expression>forEach(_args_1, _function);
+    _args_1.forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -1655,8 +1655,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       checkAssignableTo(result.getFirst(), List.class);
       inheritedFields = (List<Field>) result.getFirst();
       
-      final Procedure1<Field> _function = new Procedure1<Field>() {
-        public void apply(final Field inheritedField) {
+      final Consumer<Field> _function = new Consumer<Field>() {
+        public void accept(final Field inheritedField) {
           EList<Member> _members = cl.getMembers();
           List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
           for (final Field field : _typeSelect) {
@@ -1669,7 +1669,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
           }
         }
       };
-      IterableExtensions.<Field>forEach(inheritedFields, _function);
+      inheritedFields.forEach(_function);
       List<Method> inheritedMethods = null;
       /* G ||~ cl.superclass >> inheritedMethods */
       it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
@@ -1677,12 +1677,12 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       checkAssignableTo(result_1.getFirst(), List.class);
       inheritedMethods = (List<Method>) result_1.getFirst();
       
-      final Procedure1<Method> _function_1 = new Procedure1<Method>() {
-        public void apply(final Method inheritedMethod) {
+      final Consumer<Method> _function_1 = new Consumer<Method>() {
+        public void accept(final Method inheritedMethod) {
           EList<Member> _members = cl.getMembers();
           List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-          final Procedure1<Method> _function = new Procedure1<Method>() {
-            public void apply(final Method it) {
+          final Consumer<Method> _function = new Consumer<Method>() {
+            public void accept(final Method it) {
               /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
               {
                 RuleFailedException previousFailure = null;
@@ -1723,10 +1723,10 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
               }
             }
           };
-          IterableExtensions.<Method>forEach(_typeSelect, _function);
+          _typeSelect.forEach(_function);
         }
       };
-      IterableExtensions.<Method>forEach(inheritedMethods, _function_1);
+      inheritedMethods.forEach(_function_1);
     }
     return new Result<Boolean>(true);
   }

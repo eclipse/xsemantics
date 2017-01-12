@@ -594,13 +594,13 @@ if (!_forall_1) {
   sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ { it.name != \'foo\' } ]");
 }
 EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
+final Consumer<EStructuralFeature> _function_2 = new Consumer<EStructuralFeature>() {
+  public void accept(final EStructuralFeature it) {
     /* G ||- it */
     uselessInternal(G, _trace_, it);
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);
+_eStructuralFeatures_2.forEach(_function_2);
 EList<EStructuralFeature> _eStructuralFeatures_3 = eClass.getEStructuralFeatures();
 EStructuralFeature _get = _eStructuralFeatures_3.get(0);
 String _name = _get.getName();
@@ -618,8 +618,8 @@ if (!(!Objects.equal(_name, "foo"))) {
 '''
 
 EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
+final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+  public void accept(final EStructuralFeature it) {
     String _name = it.getName();
     /* it.name != "foo" */
     if (!(!Objects.equal(_name, "foo"))) {
@@ -627,29 +627,29 @@ final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeatu
     }
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+_eStructuralFeatures.forEach(_function);
 EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
+final Consumer<EStructuralFeature> _function_1 = new Consumer<EStructuralFeature>() {
+  public void accept(final EStructuralFeature it) {
     String _name = it.getName();
     /* (!Objects.equal(_name, "foo")); */
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);
+_eStructuralFeatures_1.forEach(_function_1);
 EList<EStructuralFeature> _eStructuralFeatures_2 = eClass.getEStructuralFeatures();
-final Procedure1<EStructuralFeature> _function_2 = new Procedure1<EStructuralFeature>() {
-  public void apply(final EStructuralFeature it) {
+final Consumer<EStructuralFeature> _function_2 = new Consumer<EStructuralFeature>() {
+  public void accept(final EStructuralFeature it) {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         String _name = it.getName();
         /* (!Objects.equal(_name, "foo")); */
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+    _eStructuralFeatures.forEach(_function);
   }
 };
-IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_2, _function_2);'''
+_eStructuralFeatures_2.forEach(_function_2);'''
 			)
 	}
 
