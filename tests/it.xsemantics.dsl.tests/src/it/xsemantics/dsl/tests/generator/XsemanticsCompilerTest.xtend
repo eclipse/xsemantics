@@ -41,7 +41,7 @@ class XsemanticsCompilerTest extends XsemanticsBaseTest {
 import java.util.List
 
 system my.test.ruleinvokations.System
-			
+
 judgments {
 	type |- Object o : output Object
 }
@@ -66,7 +66,7 @@ newArrayList("first", "second")
 import java.util.List
 
 system my.test.ruleinvokations.System
-			
+
 judgments {
 	type |- Object o : output Object
 }
@@ -103,7 +103,7 @@ newArrayList("first", "second")
 import java.util.List
 
 system my.test.ruleinvokations.System
-			
+
 judgments {
 	type |- Object o
 }
@@ -136,7 +136,7 @@ newArrayList("first", 0)
 import java.util.List
 
 system my.test.ruleinvokations.System
-			
+
 judgments {
 	type |- Object o : output Object
 }
@@ -166,7 +166,7 @@ newArrayList("first", "second")
 import java.util.List
 
 system my.test.ruleinvokations.System
-			
+
 judgments {
 	type |- Object o : output Object
 		error "type has failed"
@@ -299,7 +299,8 @@ newArrayList("first", "second")
 		val instantiated = Wrapper.forType(XsemanticsRuntimeSystem)
 		input.compile[
 			assertNoValidationErrors
-			val systemClass = compiledClass
+			// don't assume that the compiled system is the first one
+			val systemClass = getCompiledClass("my.test.ruleinvokations.System")
 			val obj = systemClass.newInstance
 			getOrCreateInjectorProvider.injector.injectMembers(obj)
 			obj.invoke("init")

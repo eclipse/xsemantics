@@ -10,6 +10,7 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -18,7 +19,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -569,13 +569,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleForEach(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass _eClass = obj.eClass();
     EList<EStructuralFeature> _eStructuralFeatures = _eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         /* G |- it */
         type1Internal(G, _trace_, it);
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+    _eStructuralFeatures.forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -600,13 +600,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleForEachWithBooleanExpressionInside(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         String _name = it.getName();
         /* (!Objects.equal(_name, "foo")); */
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+    _eStructuralFeatures.forEach(_function);
     return new Result<Boolean>(true);
   }
   

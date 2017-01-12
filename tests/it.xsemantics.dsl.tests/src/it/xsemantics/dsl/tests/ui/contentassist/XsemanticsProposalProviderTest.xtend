@@ -245,8 +245,8 @@ public class XsemanticsProposalProviderTest extends
 				println('''
 		).
 		computeCompletionProposals.map[displayString] => [
-			assertTrue(contains("myNewVar")) // in Xbase 2.6.0 that's proposed as well
-			assertTrue(contains('myNewVar2')) // in Xbase 2.6.0 that's proposed as well
+			assertFalse(contains("myNewVar")) // in Xbase 2.6.0 that's proposed as well
+			assertFalse(contains('myNewVar2')) // in Xbase 2.6.0 that's proposed as well
 		]
 	}
 

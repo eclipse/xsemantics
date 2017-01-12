@@ -22,7 +22,7 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	@Inject private FileExtensionProvider extensionProvider
 	
 	@Rule
-	@Inject public TemporaryFolder temporaryFolder 
+	@Inject public TemporaryFolder temporaryFolder
 	
 	@Test
 	def testJudgmentDescriptions() {
@@ -2075,12 +2075,11 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -2161,8 +2160,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
         ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-        final Procedure1<Object> _function = new Procedure1<Object>() {
-          public void apply(final Object dummy) {
+        final Consumer<Object> _function = new Consumer<Object>() {
+          public void accept(final Object dummy) {
             /* empty |- eClass : var String result or true */
             {
               RuleFailedException previousFailure = null;
@@ -2181,7 +2180,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
             }
           }
         };
-        IterableExtensions.<Object>forEach(_newArrayList, _function);
+        _newArrayList.forEach(_function);
       }
     }
     return new Result<String>(_applyRuleTypeFoo_1(G, it));
@@ -4431,13 +4430,12 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -4639,25 +4637,25 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         TypeSystem.this.overridesInternal(_trace_, it);
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+    _eStructuralFeatures.forEach(_function);
     EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function_1 = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function_1 = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
-        final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-          public void apply(final EStructuralFeature it) {
+        final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+          public void accept(final EStructuralFeature it) {
             TypeSystem.this.isValueInternal(_trace_, it);
           }
         };
-        IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures, _function);
+        _eStructuralFeatures.forEach(_function);
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eStructuralFeatures_1, _function_1);
+    _eStructuralFeatures_1.forEach(_function_1);
     return new Result<Boolean>(true);
   }
 }
@@ -4679,14 +4677,13 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
@@ -4788,14 +4785,14 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _clone = this.<EClass>clone(_eClass);
     eClass = _clone;
     EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
-    final Procedure1<EStructuralFeature> _function = new Procedure1<EStructuralFeature>() {
-      public void apply(final EStructuralFeature it) {
+    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      public void accept(final EStructuralFeature it) {
         EClass _eClass = obj.eClass();
         final EClass e = TypeSystem.this.<EClass>clone(_eClass);
         InputOutput.<EClass>println(e);
       }
     };
-    IterableExtensions.<EStructuralFeature>forEach(_eAllStructuralFeatures, _function);
+    _eAllStructuralFeatures.forEach(_function);
     return new Result<EClass>(eClass);
   }
 }

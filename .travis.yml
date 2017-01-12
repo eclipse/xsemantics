@@ -2,15 +2,18 @@ sudo: false
 
 language: java
 
-os:
-  - linux
-  - osx
+matrix:
+  fast_finish: true
+  include:
+    - os: linux
+      jdk: oraclejdk8
+      env: DISPLAY=:99.0
+    - os: osx
+      osx_image: xcode8
 
 cache:
   directories:
   - $HOME/.m2
-
-env: DISPLAY=:99.0
 
 install: true
 
