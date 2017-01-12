@@ -5,8 +5,6 @@ package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
-import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper;
-import it.xsemantics.dsl.ui.internal.XsemanticsActivator;
 
 import java.util.Arrays;
 
@@ -20,6 +18,9 @@ import org.junit.runner.RunWith;
 
 import com.google.inject.Injector;
 
+import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper;
+import it.xsemantics.dsl.ui.internal.DslActivator;
+
 /**
  * @author Lorenzo Bettini
  * 
@@ -31,7 +32,7 @@ public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	@BeforeClass
 	public static void setupProjectForTesting() throws Exception {
-		Injector injector = XsemanticsActivator.getInstance().getInjector(XsemanticsActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
+		Injector injector = DslActivator.getInstance().getInjector(DslActivator.IT_XSEMANTICS_DSL_XSEMANTICS);
 		
 		PluginProjectHelper projectHelper = injector.getInstance(PluginProjectHelper.class);
 		
