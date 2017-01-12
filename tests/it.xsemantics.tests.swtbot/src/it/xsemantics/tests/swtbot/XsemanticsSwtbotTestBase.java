@@ -189,12 +189,12 @@ public class XsemanticsSwtbotTestBase {
 	}
 
 	protected static SWTBotTree getProjectTree() {
-		SWTBotTree tree = getPackageExplorer().bot().tree();
+		SWTBotTree tree = getProjectExplorer().bot().tree();
 		return tree;
 	}
 
-	protected static SWTBotView getPackageExplorer() {
-		SWTBotView view = bot.viewByTitle("Package Explorer");
+	protected static SWTBotView getProjectExplorer() {
+		SWTBotView view = bot.viewByTitle("Project Explorer");
 		return view;
 	}
 
