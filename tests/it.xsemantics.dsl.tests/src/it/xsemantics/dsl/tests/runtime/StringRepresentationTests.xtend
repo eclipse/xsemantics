@@ -1,7 +1,7 @@
 package it.xsemantics.dsl.tests.runtime
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.classes.CustomStringRepresentation
 import it.xsemantics.dsl.xsemantics.XsemanticsFactory

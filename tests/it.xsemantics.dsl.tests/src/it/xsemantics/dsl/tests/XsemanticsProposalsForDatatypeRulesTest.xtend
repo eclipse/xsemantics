@@ -1,12 +1,11 @@
 package it.xsemantics.dsl.tests
 
-import org.eclipse.xtext.junit4.InjectWith
-import it.xsemantics.dsl.XsemanticsInjectorProvider
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
 import com.google.inject.Inject
 import it.xsemantics.dsl.services.XsemanticsProposalsForDatatypeRules
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))

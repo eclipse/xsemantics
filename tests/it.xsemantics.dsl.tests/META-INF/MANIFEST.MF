@@ -21,7 +21,7 @@ Require-Bundle: it.xsemantics.dsl,
  it.xsemantics.example.fjcached.tests,
  it.xsemantics.tests.pde.utils,
  org.eclipse.xtext.xbase.lib
-Import-Package:  org.apache.log4j,
+Import-Package: org.apache.log4j,
  org.apache.log4j.spi,
  org.apache.log4j.varia,
  org.hamcrest.core,
@@ -29,7 +29,8 @@ Import-Package:  org.apache.log4j,
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
  org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
+ org.junit.runners.model;version="4.5.0",
+ org.junit;version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: it.xsemantics.dsl,
+Export-Package: it.xsemantics.dsl.tests,
  it.xsemantics.dsl.tests.utils.ui

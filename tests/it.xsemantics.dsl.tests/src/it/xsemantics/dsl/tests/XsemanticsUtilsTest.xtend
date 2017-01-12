@@ -2,7 +2,6 @@ package it.xsemantics.dsl.tests
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.util.XsemanticsNodeModelUtils
 import it.xsemantics.dsl.util.XsemanticsUtils
 import it.xsemantics.dsl.xsemantics.JudgmentDescription

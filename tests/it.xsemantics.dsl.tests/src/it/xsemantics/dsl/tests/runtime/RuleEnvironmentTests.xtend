@@ -1,6 +1,6 @@
 package it.xsemantics.dsl.tests.runtime
 
-import it.xsemantics.dsl.XsemanticsInjectorProvider
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.RuleEnvironment
 import org.eclipse.xtext.junit4.InjectWith

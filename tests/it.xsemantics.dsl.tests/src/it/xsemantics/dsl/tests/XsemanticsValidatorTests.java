@@ -15,8 +15,6 @@ import static it.xsemantics.dsl.validation.XsemanticsValidator.NO_JUDGMENT_DESCR
 import static it.xsemantics.dsl.validation.XsemanticsValidator.RETURN_NOT_ALLOWED;
 import static it.xsemantics.dsl.validation.XsemanticsValidator.THROW_NOT_ALLOWED;
 import static it.xsemantics.dsl.validation.XsemanticsValidator.TOO_MANY_OUTPUT_PARAMS;
-import it.xsemantics.dsl.validation.XsemanticsValidator;
-import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 import java.util.List;
 
@@ -27,6 +25,9 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
+
+import it.xsemantics.dsl.validation.XsemanticsValidator;
+import it.xsemantics.dsl.xsemantics.XsemanticsPackage;
 
 public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 

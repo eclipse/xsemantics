@@ -4,7 +4,6 @@ import com.google.common.base.Joiner
 import com.google.inject.Inject
 import com.google.inject.Provider
 import it.xsemantics.dsl.XsemanticsConstants
-import it.xsemantics.dsl.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.input.FjTypeSystemFiles
 import it.xsemantics.dsl.tests.input.XsemanticsTestFiles
 import it.xsemantics.dsl.xsemantics.CheckRule
