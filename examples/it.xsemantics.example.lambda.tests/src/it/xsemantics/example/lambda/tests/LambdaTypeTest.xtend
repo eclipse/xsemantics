@@ -112,7 +112,7 @@ class LambdaTypeTest extends LambdaBaseTest {
 	def void testCompose3() {
 		assertAbstractionType("lambda x . lambda y. lambda z. x z (y z)",
 		"(a -> b -> c) -> (a -> b) -> a -> c",
-		"X1=(X4 -> X5), X2=(X9 -> X10), X3=X6, X10=X12, X4=X6, X5=(X7 -> X8), X6=X11, X7=X12, X9=X11")
+		"X9=X11, X10=X12, X1=(X4 -> X5), X2=(X9 -> X10), X3=X6, X4=X6, X5=(X7 -> X8), X6=X11, X7=X12")
 	}
 	
 	@Test
