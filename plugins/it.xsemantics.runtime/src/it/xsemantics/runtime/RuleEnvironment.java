@@ -4,7 +4,7 @@
 package it.xsemantics.runtime;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,15 +20,15 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 public class RuleEnvironment {
 
-	protected Map<Object, Object> environment = new HashMap<Object, Object>();
+	protected Map<Object, Object> environment = new LinkedHashMap<Object, Object>();
 
 	protected RuleEnvironment next = null;
 
 	public RuleEnvironment(RuleEnvironment e) {
 		if (e == null) {
-			environment = new HashMap<Object, Object>();
+			environment = new LinkedHashMap<Object, Object>();
 		} else {
-			environment = new HashMap<Object, Object>(e.getEnvironment());
+			environment = new LinkedHashMap<Object, Object>(e.getEnvironment());
 		}
 	}
 
