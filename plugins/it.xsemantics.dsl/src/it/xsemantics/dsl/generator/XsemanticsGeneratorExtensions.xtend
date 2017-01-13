@@ -67,7 +67,7 @@ class XsemanticsGeneratorExtensions {
 	
 	def toJavaFullyQualifiedName(Named e) {
 		val fQN = e.containingSystem.toJavaFullyQualifiedName
-		if (fQN != null && fQN.segmentCount > 1)
+		if (fQN !== null && fQN.segmentCount > 1)
 			fQN.skipLast(1) + "." + e.toJavaClassName
 		else
 			e.toJavaClassName
@@ -79,7 +79,7 @@ class XsemanticsGeneratorExtensions {
 	
 	def toValidatorPackage(XsemanticsSystem ts) {
 		val typeSystemPackage = ts.fullyQualifiedName
-		if (typeSystemPackage != null && typeSystemPackage.segmentCount > 1)
+		if (typeSystemPackage !== null && typeSystemPackage.segmentCount > 1)
 			typeSystemPackage.skipLast(1) + "." + "validation"
 		else
 			""
@@ -383,7 +383,7 @@ class XsemanticsGeneratorExtensions {
 			newArrayList(getTypeForName(Boolean, e))
 		} else {
 			newArrayList(outputParams.
-				filter[it.jvmTypeReference != null && it.jvmTypeReference.type != null].
+				filter[it.jvmTypeReference !== null && it.jvmTypeReference.type !== null].
 				map[it.jvmTypeReference])
 		}
 	}

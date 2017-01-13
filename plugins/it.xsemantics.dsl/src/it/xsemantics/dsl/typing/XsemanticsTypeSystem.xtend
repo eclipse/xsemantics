@@ -149,7 +149,7 @@ class XsemanticsTypeSystem {
 	}
 
 	def isSubtype(JvmTypeReference t1, JvmTypeReference t2, EObject context) {
-		if (t1 == null || t2 == null)
+		if (t1 === null || t2 === null)
 			return false
 
 		val type1 = t1.toLightweightTypeReference(context)
@@ -166,7 +166,7 @@ class XsemanticsTypeSystem {
 	}
 
 	def isPredicate(JudgmentDescription j) {
-		if (j == null)
+		if (j === null)
 			return false
 		j.outputJudgmentParameters.empty
 	}

@@ -180,7 +180,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 //	}
 
 	def protected boolean isContainedInAuxiliaryFunction(XExpression expr) {
-		return expr.getContainerOfType(AuxiliaryFunction) != null
+		return expr.getContainerOfType(AuxiliaryFunction) !== null
 	}
 
 //	override protected boolean isImplicitReturn(XExpression expr) {
@@ -293,7 +293,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	@Check
 	def public void checkRuleInvocation(RuleInvocation ruleInvocation) {
 		val judgmentDescription = checkRuleInvocationConformantToJudgmentDescription(ruleInvocation);
-		if (judgmentDescription != null) {
+		if (judgmentDescription !== null) {
 			val judgmentParameters = judgmentDescription
 					.getJudgmentParameters();
 			val invocationExpressions = ruleInvocation
@@ -334,7 +334,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def public void checkSystem(XsemanticsSystem system) {
 		val validatorExtends = system
 				.getValidatorExtends();
-		if (validatorExtends != null) {
+		if (validatorExtends !== null) {
 			if (!typeSystem.isAbstractDeclarativeValidator(validatorExtends,
 					system)) {
 				error("Not an AbstractDeclarativeValidator: "
@@ -344,14 +344,14 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			}
 		}
 		val superSystem = system.getSuperSystem();
-		if (superSystem != null) {
+		if (superSystem !== null) {
 			if (!typeSystem.isValidSuperSystem(superSystem, system)) {
 				error("Not an Xsemantics system: "
 						+ getNameOfTypes(superSystem),
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
 						NOT_VALID_SUPER_SYSTEM);
 			}
-			if (validatorExtends != null) {
+			if (validatorExtends !== null) {
 				error("system 'extends' cannot coexist with 'validatorExtends'",
 						XsemanticsPackage.Literals.XSEMANTICS_SYSTEM__SUPER_SYSTEM,
 						EXTENDS_CANNOT_COEXIST_WITH_VALIDATOR_EXTENDS);
@@ -505,7 +505,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			(T, T) => boolean conformanceComputer,
 			String kind) {
 		
-		if (superCollection == null) {
+		if (superCollection === null) {
 			for (j : collection.filter[override]) {
 				error(
 					"Cannot override " + kind + " without system 'extends'",
@@ -520,7 +520,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 				val overridden = superMap.get(name)
 					
 				if (!j.override) {
-					if (overridden != null)
+					if (overridden !== null)
 						error(
 							kind + " '" + name + "' must override " + kind +
 								reportContainingSystemName(overridden),
@@ -528,7 +528,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 							null, 
 							MUST_OVERRIDE);
 				} else {
-					if (overridden == null || !conformanceComputer.apply(j, overridden))
+					if (overridden === null || !conformanceComputer.apply(j, overridden))
 						error("No " + kind + " to override: " + name,
 							j,
 							null,
@@ -573,7 +573,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			AuxiliaryFunction aux) {
 		val auxiliaryDescription = aux
 				.getAuxiliaryDescription();
-		if (auxiliaryDescription == null) {
+		if (auxiliaryDescription === null) {
 			error("No auxiliary description for auxiliary function '"
 					+ aux.getName() + "'",
 					XsemanticsPackage.Literals.AUXILIARY_FUNCTION__NAME,
@@ -615,13 +615,13 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 
 	@Check
 	def void checkFieldInitialization(FieldDefinition f) {
-		if (!f.writeable && f.right == null) {
+		if (!f.writeable && f.right === null) {
 			error("The final field " + f.name + " may not have been initialized",
 				XsemanticsPackage.Literals.ABSTRACT_FIELD_DEFINITION__NAME,
 				FINAL_FIELD_NOT_INITIALIZED
 			)
 		}
-		if (f.type == null && f.right == null) {
+		if (f.type === null && f.right === null) {
 			error("The field "+f.name+" needs an explicit type since there is no initialization expression to infer the type from.", 
 				f, XsemanticsPackage.Literals.ABSTRACT_FIELD_DEFINITION__NAME,
 				TOO_LITTLE_TYPE_INFORMATION
@@ -630,7 +630,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	def private boolean insideClosure(XFeatureCall featureCall) {
-		return featureCall.getContainerOfType(XClosure) != null;
+		return featureCall.getContainerOfType(XClosure) !== null;
 	}
 
 	def protected void checkConformanceOfAuxiliaryFunction(AuxiliaryFunction aux,
@@ -721,7 +721,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	def private findJudgmentDescriptionOrError(ReferToJudgment element, String judgmentSymbol,
 			Iterable<String> relationSymbols, EStructuralFeature elementFeature) {
 		val judgmentDescription = element.getJudgmentDescription
-		if (judgmentDescription == null) {
+		if (judgmentDescription === null) {
 			error("No Judgment description for: "
 					+ judgmentRepresentation(judgmentSymbol, relationSymbols),
 					elementFeature, NO_JUDGMENT_DESCRIPTION);
@@ -736,7 +736,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 			Iterable<? extends EObject> elements,
 			String elementDescription, EStructuralFeature elementFeature,
 			EStructuralFeature conformanceFeature) {
-		if (judgmentDescription != null) {
+		if (judgmentDescription !== null) {
 			val judgmentParameters = judgmentDescription
 					.getJudgmentParameters();
 			val elementsIt = elements.iterator();
@@ -783,7 +783,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	def private Object getNameOfTypes(JvmTypeReference typeRef) {
-		return if (typeRef == null)  "<null>" else typeRef.getSimpleName();
+		return if (typeRef === null)  "<null>" else typeRef.getSimpleName();
 	}
 
 	def public boolean isEnableWarnings() {

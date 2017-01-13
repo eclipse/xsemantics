@@ -87,7 +87,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(XsemanticsSystem ts, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		if (ts.toJavaFullyQualifiedName == null)
+   		if (ts.toJavaFullyQualifiedName === null)
    			return
    		
    		val inferredClass = ts.toClass( ts.toJavaFullyQualifiedName )
@@ -95,7 +95,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		acceptor.accept(inferredClass) [
 			documentation = ts.documentation
 			
-			if (ts.superSystem != null)
+			if (ts.superSystem !== null)
 				superTypes += ts.superSystem.cloneWithProxies
 			else
 				superTypes += XsemanticsRuntimeSystem.typeRef
@@ -145,11 +145,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 				var addSetter = true
 				var fieldType = field.type
 				if (field instanceof FieldDefinition) {
-					if (field.right != null) {
+					if (field.right !== null) {
 						fieldType = field.right.inferredType
 					}
 				}
-				if (fieldType != null) {
+				if (fieldType !== null) {
 					members += field.toGetter
 						(field.name, fieldType)
 					if (field instanceof FieldDefinition) {
@@ -193,20 +193,20 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			}
 			
 			for (aux : ts.auxiliaryFunctions) {
-				if (aux.getAuxiliaryDescription != null) {
+				if (aux.getAuxiliaryDescription !== null) {
 					members += aux.compileImplMethod
 					members += aux.compileApplyAuxiliaryFunction
 				}
 			}
 			
 			for (rule : ts.rules) {
-				if (rule.getJudgmentDescription != null) {
+				if (rule.getJudgmentDescription !== null) {
 					members += rule.compileImplMethod
 					members += rule.compileApplyMethod
 					for (e : rule.expressionsInConclusion) {
 						members += e.compileExpressionInConclusionMethod
 					}
-					if (rule.conclusion.error != null)
+					if (rule.conclusion.error !== null)
 						members += rule.compileErrorSpecificationMethod
 				}
 			}
@@ -216,9 +216,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		acceptor.accept(ts.toClass(ts.toValidatorJavaFullyQualifiedName)) [
 			documentation = ts.documentation
 			
-			if (ts.superSystemDefinition != null)
+			if (ts.superSystemDefinition !== null)
 				superTypes += ts.superSystemDefinition.toValidatorJavaFullyQualifiedName.typeRef
-			else if (ts.validatorExtends != null)
+			else if (ts.validatorExtends !== null)
 				superTypes += ts.validatorExtends.cloneWithProxies
 			else
 				superTypes += AbstractDeclarativeValidator.typeRef
@@ -238,7 +238,7 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 			
 			members += ts.toGetter("xsemanticsSystem", inferredClass.createTypeRef) => [
 				visibility = JvmVisibility::PROTECTED
-				if (ts.superSystem != null)
+				if (ts.superSystem !== null)
    					addOverrideAnnotation
 			]
 			
@@ -293,11 +293,11 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 	
 	def genInit(XsemanticsSystem ts) {
    		ts.toMethod("init", Void::TYPE.getTypeForName(ts)) [
-   			if (ts.superSystem != null)
+   			if (ts.superSystem !== null)
    				addOverrideAnnotation
    			
    			body = [
-   				if (ts.superSystem != null)
+   				if (ts.superSystem !== null)
    					it.append('''
    					super.init();
    					''')
@@ -590,7 +590,7 @@ if (!«c.cacheConditionMethod»(«args»))
 	}
 
 	def compileErrorSpecification(JvmOperation it, XExpression errorSpecification) {
-		if (errorSpecification != null) {
+		if (errorSpecification !== null) {
 			body = errorSpecification
 		} else {
 			body = '''«throwRuleFailedExceptionMethod»(_error, _issue, _ex, _errorInformations);'''
@@ -769,7 +769,7 @@ if (!«c.cacheConditionMethod»(«args»))
    			body = bodyForImplMethod(resultType, applyRuleName,
 				rule.additionalArgsForRule, inputArgs, rule.traceStringForRule, exceptionVarName,
 				'''
-				«IF rule.conclusion.error != null»
+				«IF rule.conclusion.error !== null»
 					«rule.throwExceptionMethod»(«exceptionVarName», «inputArgs»);
 				«ELSE»
 				«judgment.throwExceptionMethod»(«rule.errorForRule»,
@@ -1034,7 +1034,7 @@ if (!«c.cacheConditionMethod»(«args»))
 	}
 
 	def isBoolean(JvmTypeReference typeRef) {
-		typeRef != null
+		typeRef !== null
 		&&
 		{
 		val identifier = typeRef.getType().getIdentifier()
@@ -1068,7 +1068,7 @@ if (!«c.cacheConditionMethod»(«args»))
 	}
 
 	def private void translateAnnotations(JvmAnnotationTarget target, List<XAnnotation> annotations) {
-		target.addAnnotations(annotations.filterNull.filter[annotationType != null])
+		target.addAnnotations(annotations.filterNull.filter[annotationType !== null])
 	}
 }
 

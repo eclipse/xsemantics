@@ -64,7 +64,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			
 			// if the return type is null we assume boolean
 			// and we must not check it
-			if (type == null)
+			if (type === null)
 				state = state.withExpectation(state.getPrimitiveVoid)
 			// we will adjust the boolean result in the compiler
 		}
@@ -83,7 +83,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		// this is copied (and translated to Xtend) from the base class
 		for (expectation: state.getExpectations()) {
 			val expectedType = expectation.getExpectedType();
-			if (expectedType != null && expectedType.isPrimitiveVoid()) {
+			if (expectedType !== null && expectedType.isPrimitiveVoid()) {
 				val expressions = b.getExpressions();
 				if (!expressions.isEmpty()) {
 					for(XExpression expression: expressions) {
@@ -153,7 +153,7 @@ class XsemanticsTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			// make sure to avoid adding the same variable if it's already in scope
 			// and avoid adding it for the first or branch (not already contained in
 			// an or branch)
-			if (!firstBranch && e.eContainer.containingOrExpression == null) {
+			if (!firstBranch && e.eContainer.containingOrExpression === null) {
 				val implicitVar = XbaseFactory.eINSTANCE.createXVariableDeclaration => [
 					writeable = false
 					name = XsemanticsConstants.PREVIOUS_FAILURE
