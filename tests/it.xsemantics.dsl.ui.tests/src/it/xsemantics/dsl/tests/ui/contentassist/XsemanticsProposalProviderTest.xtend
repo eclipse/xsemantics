@@ -1,11 +1,15 @@
 package it.xsemantics.dsl.tests.ui.contentassist
 
+import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
+import it.xsemantics.dsl.ui.internal.DslActivator
 import it.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
+import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.ImportUriValidator
 import org.eclipse.xtext.validation.NamesAreUniqueValidator
@@ -17,10 +21,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import it.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
-import it.xsemantics.dsl.ui.internal.DslActivator
-import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
-import org.eclipse.jdt.core.IJavaProject
 
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 @RunWith(typeof(XtextRunner))

@@ -6,8 +6,8 @@ import it.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
 import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtext.junit4.Flaky
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.tests.editor.outline.AbstractOutlineWorkbenchTest
 import org.junit.BeforeClass
 import org.junit.Ignore
