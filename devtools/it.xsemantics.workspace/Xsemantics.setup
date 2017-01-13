@@ -112,8 +112,6 @@
           name="org.eclipse.pde.api.tools.ee.feature.feature.group"
           optional="true"/>
       <requirement
-          name="org.eclipse.releng.tools.feature.group"/>
-      <requirement
           name="org.eclipse.wst.xml_ui.feature.feature.group"/>
     </setupTask>
     <setupTask
