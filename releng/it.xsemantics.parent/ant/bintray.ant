@@ -10,7 +10,6 @@
 	<property name="bintray.releases.path" value="" />
 	<property name="bintray.composite.path" value="" />
 	<property name="bintray.zip.path" value="" />
-	<property name="bintray.products.path" value="" />
 	-->
 
 	<property name="bintray.url" value="https://dl.bintray.com/${bintray.owner}/${bintray.repo}" />
@@ -106,15 +105,8 @@
 		<antcall target="push-main-composite-to-bintray" />
 	</target>
 
-	<target name="push-ide-to-bintray" >
-		<antcall target="postprocess-metadata" />
-		<antcall target="push-p2-repo-to-bintray" />
-		<antcall target="push-composite-to-bintray" />
-		<antcall target="push-main-composite-to-bintray" />
-	</target>
-
 	<target name="push-p2-repo-to-bintray">
-		<apply executable="curl" parallel="false" relative="true" addsourcefile="false">
+		<apply executable="curl" parallel="false" relative="true" addsourcefile="false" failonerror="true">
 			<arg value="-XPUT" />
 			<targetfile />
 
@@ -130,7 +122,7 @@
 	</target>
 
 	<target name="push-p2-repo-zipped-to-bintray">
-		<apply executable="curl" parallel="false" relative="true" addsourcefile="false">
+		<apply executable="curl" parallel="false" relative="true" addsourcefile="false" failonerror="true">
 			<arg value="-XPUT" />
 			<targetfile />
 
@@ -145,24 +137,8 @@
 		</apply>
 	</target>
 
-	<target name="push-products-zipped-to-bintray">
-		<apply executable="curl" parallel="false" relative="true" addsourcefile="false">
-			<arg value="-XPUT" />
-			<targetfile />
-
-			<fileset dir="${target}/products" includes="*.zip" />
-
-			<compositemapper>
-				<mergemapper to="-T" />
-				<globmapper from="*" to="${target}/products/*" />
-				<mergemapper to="-u${bintray.user}:${bintray.apikey}" />
-				<globmapper from="*" to="https://api.bintray.com/content/${bintray.owner}/${bintray.repo}/${bintray.products.path}/*;bt_package=${bintray.package};bt_version=${bintray.package.version};publish=1" />
-			</compositemapper>
-		</apply>
-	</target>
-
 	<target name="push-composite-to-bintray" depends="getMajorMinorVersion" >
-		<apply executable="curl" parallel="false" relative="true" addsourcefile="false">
+		<apply executable="curl" parallel="false" relative="true" addsourcefile="false" failonerror="true">
 			<arg value="-XPUT" />
 			<targetfile />
 
@@ -178,7 +154,7 @@
 	</target>
 
 	<target name="push-main-composite-to-bintray" >
-		<apply executable="curl" parallel="false" relative="true" addsourcefile="false">
+		<apply executable="curl" parallel="false" relative="true" addsourcefile="false" failonerror="true">
 			<arg value="-XPUT" />
 			<targetfile />
 
