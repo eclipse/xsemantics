@@ -7,7 +7,8 @@ Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: it.xsemantics.dsl,
  org.eclipse.xtext.ide,
- org.eclipse.xtext.xbase.ide
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
 Export-Package: it.xsemantics.dsl.ide.contentassist.antlr.internal,
  it.xsemantics.dsl.ide.contentassist.antlr
 
