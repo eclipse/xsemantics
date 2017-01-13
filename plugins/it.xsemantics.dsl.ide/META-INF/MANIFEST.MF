@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Generic Ide
 Bundle-SymbolicName: it.xsemantics.dsl.ide
-Bundle-Version: 1.10.0.qualifier
+Bundle-Version: 1.11.0.qualifier
 Bundle-Vendor: Lorenzo Bettini
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: it.xsemantics.dsl,
