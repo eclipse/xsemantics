@@ -20,8 +20,8 @@ class TraceUtils {
 	def failureAsList(RuleFailedException e) {
 		val list = newLinkedList(e)
 		var ex = e.previous
-		while (ex != null) {
-			if (ex.message != null)
+		while (ex !== null) {
+			if (ex.message !== null)
 				list.add(ex)
 			ex = ex.previous
 		}
@@ -75,7 +75,7 @@ class TraceUtils {
 	def allErrorInformation(RuleFailedException e) {
 		val list = Lists::newLinkedList(e.errorInformations)
 		var ex = e.previous
-		while (ex != null) {
+		while (ex !== null) {
 			list.addAll(ex.errorInformations)
 			ex = ex.previous
 		}
@@ -99,7 +99,7 @@ class TraceUtils {
 	
 	def removeNonNodeModelSources(Iterable<ErrorInformation> errorInformations) {
 		Lists::newLinkedList(errorInformations.filter [
-			NodeModelUtils::getNode(it.source) != null
+			NodeModelUtils::getNode(it.source) !== null
 		])
 	}
 	
