@@ -15,7 +15,7 @@ import it.xsemantics.example.fj.fj.MethodBody
 class FjStringRepresentationForTests extends FjStringRepresentation {
 	override stringRep(EObject eObject) {
 		val node = NodeModelUtils::getNode(eObject)
-		if (node != null)
+		if (node !== null)
 			return super.stringRep(eObject)
 		else
 			return customRep(eObject).toString

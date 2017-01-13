@@ -24,10 +24,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.common,
  org.antlr.runtime,
  it.xsemantics.example.fj.ui,
- org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.junit4
 Bundle-ActivationPolicy: lazy
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",

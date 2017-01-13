@@ -7,9 +7,9 @@ import it.xsemantics.example.fjcached.FjcachedUiInjectorProvider
 import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
 import it.xsemantics.example.fjcached.ui.internal.FjcachedActivator
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.junit.After
 import org.junit.Before
