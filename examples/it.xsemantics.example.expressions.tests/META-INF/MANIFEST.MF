@@ -9,11 +9,11 @@ Require-Bundle: it.xsemantics.example.expressions,
  it.xsemantics.example.expressions.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext,
- org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  com.google.inject,
  org.eclipse.xtext.xbase.lib,
- org.junit;bundle-version="4.8.2"
+ org.junit;bundle-version="4.8.2",
+ org.eclipse.xtext.testing
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
  org.junit.runner;version="4.5.0",

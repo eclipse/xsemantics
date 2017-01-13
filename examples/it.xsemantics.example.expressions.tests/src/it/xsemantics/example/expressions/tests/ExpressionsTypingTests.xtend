@@ -4,9 +4,9 @@ import com.google.inject.Inject
 import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.runtime.TraceUtils
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -139,14 +139,14 @@ failed: cannot type !('abc')
 			String expectedResult, CharSequence expectedTrace) {
 		val expression = program.parse.variables.get(variableIndex).expression
 		val result = semantics.type(null, trace, expression)
-		if (expectedResult != null) {
+		if (expectedResult !== null) {
 			if (result.failed) {
 				Assert::fail("unexpected failure: " + 
 					result.ruleFailedException.failureTraceAsString
 				)
 			}
 			assertEqualsStrings(expectedResult, result.value.string)
-			if (expectedTrace != null)
+			if (expectedTrace !== null)
 				assertEqualsStrings(expectedTrace.toString, trace.traceAsString)
 		} else {
 			if (!result.failed) {
@@ -154,7 +154,7 @@ failed: cannot type !('abc')
 					trace.traceAsString
 				)
 			}
-			if (expectedTrace != null)
+			if (expectedTrace !== null)
 				assertEqualsStrings(expectedTrace.toString,
 					result.ruleFailedException.failureTraceAsString
 				)

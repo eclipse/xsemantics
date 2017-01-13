@@ -1,9 +1,9 @@
 package it.xsemantics.example.expressions.tests
 
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.junit.runner.RunWith
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(ExpressionsInjectorProviderFirst))
