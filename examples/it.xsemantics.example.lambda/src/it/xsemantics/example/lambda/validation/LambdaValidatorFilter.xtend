@@ -12,7 +12,7 @@ class LambdaValidatorFilter extends XsemanticsValidatorFilter {
 	
 	override filterRuleFailedExceptions(RuleFailedException e) {
 		val inner = e.innermostRuleFailedExceptionWithNodeModelSources
-		if (inner != null)
+		if (inner !== null)
 			return inner.failureAsList
 		else // we must return at least a failure, so we default to the passed one
 			return Lists::newArrayList(e)

@@ -1,19 +1,19 @@
 package it.xsemantics.example.lambda.tests
 
+import com.google.inject.Inject
 import it.xsemantics.example.lambda.LambdaInjectorProvider
+import it.xsemantics.example.lambda.lambda.Program
 import it.xsemantics.example.lambda.validation.LambdaJavaValidator
-import org.junit.Assert
 import org.eclipse.emf.common.util.Diagnostic
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics
 import org.eclipse.xtext.junit4.validation.ValidatorTester
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.google.inject.Inject
-import org.eclipse.xtext.junit4.util.ParseHelper
-import it.xsemantics.example.lambda.lambda.Program
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorProvider))
