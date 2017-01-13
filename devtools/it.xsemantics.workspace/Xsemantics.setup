@@ -533,11 +533,11 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.version"
-        value="1.9.1"/>
+        value="1.10.0"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
-        value="it.xsemantics.repository-1.9.1.v20160523-0806.zip"/>
+        value="it.xsemantics.repository-1.10.0.v20160527-0805.zip"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
@@ -569,11 +569,11 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.version"
-        value="1.9.1"/>
+        value="1.10.0"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="api.baseline.zip"
-        value="it.xsemantics.repository-1.9.1.v20160523-0806.zip"/>
+        value="it.xsemantics.repository-1.10.0.v20160527-0805.zip"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.nightly"
