@@ -4,7 +4,7 @@
         <filter comment="We move to a new version of Xtext" id="926941240">
             <message_arguments>
                 <message_argument value="1.11.0"/>
-                <message_argument value="1.9.1"/>
+                <message_argument value="1.10.0"/>
             </message_arguments>
         </filter>
     </resource>
