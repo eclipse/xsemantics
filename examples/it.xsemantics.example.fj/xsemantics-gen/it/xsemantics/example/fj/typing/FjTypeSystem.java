@@ -39,6 +39,7 @@ import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -465,11 +466,10 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> checkMethodBodyInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
-    it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-    final ClassType typeForThis = this.fjTypeUtils.createClassType(_containerOfType);
+    final ClassType typeForThis = this.fjTypeUtils.createClassType(
+      EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class));
     /* 'this' <- typeForThis |- method.body.expression |> method.type */
-    MethodBody _body = method.getBody();
-    Expression _expression = _body.getExpression();
+    Expression _expression = method.getBody().getExpression();
     Type _type = method.getType();
     assignableInternal(environmentEntry("this", typeForThis), _trace_, _expression, _type);
     return new Result<Boolean>(true);
@@ -491,26 +491,25 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EObject _eContainer = field.eContainer();
     final it.xsemantics.example.fj.fj.Class clazz = ((it.xsemantics.example.fj.fj.Class) _eContainer);
     it.xsemantics.example.fj.fj.Class _superclass = clazz.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
-    if (_notEquals) {
-      it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
-      List<Field> inheritedFields = this.fieldsInternal(_trace_, _superclass_1);
-      final Procedure1<Field> _function = new Procedure1<Field>() {
-        public void apply(final Field inheritedField) {
+    boolean _tripleNotEquals = (_superclass != null);
+    if (_tripleNotEquals) {
+      List<Field> inheritedFields = this.fieldsInternal(_trace_, clazz.getSuperclass());
+      final Consumer<Field> _function = new Consumer<Field>() {
+        @Override
+        public void accept(final Field inheritedField) {
           String _name = field.getName();
           String _name_1 = inheritedField.getName();
           boolean _equals = Objects.equal(_name, _name_1);
           if (_equals) {
             /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-            EObject _eContainer = inheritedField.eContainer();
-            String _stringRep = FjTypeSystem.this.stringRep(_eContainer);
+            String _stringRep = FjTypeSystem.this.stringRep(inheritedField.eContainer());
             String _plus = ("field already defined in superclass " + _stringRep);
             String error = _plus;
             throwForExplicitFail(error, new ErrorInformation(null, null));
           }
         }
       };
-      IterableExtensions.<Field>forEach(inheritedFields, _function);
+      inheritedFields.forEach(_function);
     }
     return new Result<Boolean>(true);
   }
@@ -531,23 +530,23 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     EObject _eContainer = method.eContainer();
     final it.xsemantics.example.fj.fj.Class clazz = ((it.xsemantics.example.fj.fj.Class) _eContainer);
     it.xsemantics.example.fj.fj.Class _superclass = clazz.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
-    if (_notEquals) {
-      it.xsemantics.example.fj.fj.Class _superclass_1 = clazz.getSuperclass();
-      List<Method> inheritedMethods = this.methodsInternal(_trace_, _superclass_1);
-      EList<Member> _members = clazz.getMembers();
-      final List<Method> methods = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-      final Procedure1<Method> _function = new Procedure1<Method>() {
-        public void apply(final Method inheritedMethod) {
-          final Procedure1<Method> _function = new Procedure1<Method>() {
-            public void apply(final Method it) {
+    boolean _tripleNotEquals = (_superclass != null);
+    if (_tripleNotEquals) {
+      List<Method> inheritedMethods = this.methodsInternal(_trace_, clazz.getSuperclass());
+      final List<Method> methods = EcoreUtil2.<Method>typeSelect(clazz.getMembers(), Method.class);
+      final Consumer<Method> _function = new Consumer<Method>() {
+        @Override
+        public void accept(final Method inheritedMethod) {
+          final Consumer<Method> _function = new Consumer<Method>() {
+            @Override
+            public void accept(final Method it) {
               FjTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }
           };
-          IterableExtensions.<Method>forEach(methods, _function);
+          methods.forEach(_function);
         }
       };
-      IterableExtensions.<Method>forEach(inheritedMethods, _function);
+      inheritedMethods.forEach(_function);
     }
     return new Result<Boolean>(true);
   }
@@ -566,14 +565,13 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> checkClassHierachyNotCyclicInternal(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_superclass != null);
+    if (_tripleNotEquals) {
       /* !superclasses(cl).contains(cl) or fail error "Cyclic hierarchy for " + cl.name source cl */
       {
         RuleFailedException previousFailure = null;
         try {
-          List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, cl);
-          boolean _contains = _superclasses.contains(cl);
+          boolean _contains = this.superclassesInternal(_trace_, cl).contains(cl);
           boolean _not = (!_contains);
           /* !superclasses(cl).contains(cl) */
           if (!_not) {
@@ -606,15 +604,15 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
-    /* program.main == null or empty |- program.main : var Type mainType */
+    /* program.main === null or empty |- program.main : var Type mainType */
     {
       RuleFailedException previousFailure = null;
       try {
         Expression _main = program.getMain();
-        boolean _equals = Objects.equal(_main, null);
-        /* program.main == null */
-        if (!_equals) {
-          sneakyThrowRuleFailedException("program.main == null");
+        boolean _tripleEquals = (_main == null);
+        /* program.main === null */
+        if (!_tripleEquals) {
+          sneakyThrowRuleFailedException("program.main === null");
         }
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
@@ -882,9 +880,9 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, 
+      FjPackage.eINSTANCE.getClass_Superclass(), 
+      FjPackage.eINSTANCE.getClass_Superclass(), 
       it.xsemantics.example.fj.fj.Class.class);
   }
   
@@ -913,13 +911,11 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       Iterable<Field> fields = new ArrayList<Field>();
       List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, clazz);
       for (final it.xsemantics.example.fj.fj.Class superclass : _superclasses) {
-        EList<Member> _members = superclass.getMembers();
-        List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
+        List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(superclass.getMembers(), Field.class);
         Iterable<Field> _plus = Iterables.<Field>concat(_typeSelect, fields);
         fields = _plus;
       }
-      EList<Member> _members_1 = clazz.getMembers();
-      List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(_members_1, Field.class);
+      List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(clazz.getMembers(), Field.class);
       Iterable<Field> _plus_1 = Iterables.<Field>concat(fields, _typeSelect_1);
       fields = _plus_1;
       _xblockexpression = (Lists.<Field>newArrayList(fields));
@@ -949,17 +945,14 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected List<Method> applyAuxFunMethods(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     List<Method> _xblockexpression = null;
     {
-      EList<Member> _members = clazz.getMembers();
-      final List<Method> methods = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-      List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, clazz);
-      final Procedure1<it.xsemantics.example.fj.fj.Class> _function = new Procedure1<it.xsemantics.example.fj.fj.Class>() {
-        public void apply(final it.xsemantics.example.fj.fj.Class c) {
-          EList<Member> _members = c.getMembers();
-          List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
-          methods.addAll(_typeSelect);
+      final List<Method> methods = EcoreUtil2.<Method>typeSelect(clazz.getMembers(), Method.class);
+      final Consumer<it.xsemantics.example.fj.fj.Class> _function = new Consumer<it.xsemantics.example.fj.fj.Class>() {
+        @Override
+        public void accept(final it.xsemantics.example.fj.fj.Class c) {
+          methods.addAll(EcoreUtil2.<Method>typeSelect(c.getMembers(), Method.class));
         }
       };
-      IterableExtensions.<it.xsemantics.example.fj.fj.Class>forEach(_superclasses, _function);
+      this.superclassesInternal(_trace_, clazz).forEach(_function);
       _xblockexpression = (methods);
     }
     return _xblockexpression;
@@ -1008,8 +1001,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
             /* fail error "cannot change return type of inherited method: " + stringRep(previous.type) source current feature FjPackage::eINSTANCE.typedElement_Type */
-            Type _type_2 = previous.getType();
-            String _stringRep = this.stringRep(_type_2);
+            String _stringRep = this.stringRep(previous.getType());
             String _plus = ("cannot change return type of inherited method: " + _stringRep);
             String error = _plus;
             EObject source = current;
@@ -1018,24 +1010,20 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             throwForExplicitFail(error, new ErrorInformation(source, feature));
           }
         }
-        EList<Parameter> _params = current.getParams();
-        int _size = _params.size();
-        EList<Parameter> _params_1 = previous.getParams();
-        int _size_1 = _params_1.size();
+        int _size = current.getParams().size();
+        int _size_1 = previous.getParams().size();
         boolean _equals = (_size == _size_1);
         /* current.params.size == previous.params.size */
         if (!_equals) {
           sneakyThrowRuleFailedException("current.params.size == previous.params.size");
         }
-        EList<Parameter> _params_2 = previous.getParams();
-        final Iterator<Parameter> previousParamsIt = _params_2.iterator();
-        EList<Parameter> _params_3 = current.getParams();
-        for (final Parameter param : _params_3) {
+        final Iterator<Parameter> previousParamsIt = previous.getParams().iterator();
+        EList<Parameter> _params = current.getParams();
+        for (final Parameter param : _params) {
           /* empty |- param.type ~~ previousParamsIt.next.type */
-          Type _type_3 = param.getType();
-          Parameter _next = previousParamsIt.next();
-          Type _type_4 = _next.getType();
-          equalstypeInternal(emptyEnvironment(), _trace_, _type_3, _type_4);
+          Type _type_2 = param.getType();
+          Type _type_3 = previousParamsIt.next().getType();
+          equalstypeInternal(emptyEnvironment(), _trace_, _type_2, _type_3);
         }
       }
     }
@@ -1116,13 +1104,13 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Boolean applyAuxFunIsValue(final RuleApplicationTrace _trace_, final New exp) throws RuleFailedException {
-    EList<Expression> _args = exp.getArgs();
     final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
+      @Override
       public Boolean apply(final Expression it) {
         return FjTypeSystem.this.isValueInternal(_trace_, it);
       }
     };
-    boolean _forall = IterableExtensions.<Expression>forall(_args, _function);
+    boolean _forall = IterableExtensions.<Expression>forall(exp.getArgs(), _function);
     /* exp.args.forall[isValue(it)] */
     if (!Boolean.valueOf(_forall)) {
       sneakyThrowRuleFailedException("exp.args.forall[isValue(it)]");
@@ -1152,30 +1140,27 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected MethodBody applyAuxFunReplaceThisAndParams(final RuleApplicationTrace _trace_, final MethodBody body, final Expression thisReplacement, final List<Parameter> params, final List<Expression> args) throws RuleFailedException {
     MethodBody _clone = this.<MethodBody>clone(body);
     final Procedure1<MethodBody> _function = new Procedure1<MethodBody>() {
+      @Override
       public void apply(final MethodBody it) {
-        List<This> _eAllOfType = EcoreUtil2.<This>eAllOfType(it, This.class);
-        final Procedure1<This> _function = new Procedure1<This>() {
-          public void apply(final This it) {
-            EObject _eContainer = it.eContainer();
-            EStructuralFeature _eContainingFeature = it.eContainingFeature();
-            Expression _clone = FjTypeSystem.this.<Expression>clone(thisReplacement);
-            EcoreUtil2.replace(_eContainer, _eContainingFeature, it, _clone);
+        final Consumer<This> _function = new Consumer<This>() {
+          @Override
+          public void accept(final This it) {
+            EcoreUtil2.replace(it.eContainer(), 
+              it.eContainingFeature(), it, 
+              FjTypeSystem.this.<Expression>clone(thisReplacement));
           }
         };
-        IterableExtensions.<This>forEach(_eAllOfType, _function);
-        List<ParamRef> _eAllOfType_1 = EcoreUtil2.<ParamRef>eAllOfType(it, ParamRef.class);
-        final Procedure1<ParamRef> _function_1 = new Procedure1<ParamRef>() {
-          public void apply(final ParamRef it) {
-            Parameter _parameter = it.getParameter();
-            final int paramIndex = params.indexOf(_parameter);
-            EObject _eContainer = it.eContainer();
-            EStructuralFeature _eContainingFeature = it.eContainingFeature();
-            Expression _get = args.get(paramIndex);
-            Expression _clone = FjTypeSystem.this.<Expression>clone(_get);
-            EcoreUtil2.replace(_eContainer, _eContainingFeature, it, _clone);
+        EcoreUtil2.<This>eAllOfType(it, This.class).forEach(_function);
+        final Consumer<ParamRef> _function_1 = new Consumer<ParamRef>() {
+          @Override
+          public void accept(final ParamRef it) {
+            final int paramIndex = params.indexOf(it.getParameter());
+            EcoreUtil2.replace(it.eContainer(), 
+              it.eContainingFeature(), it, 
+              FjTypeSystem.this.<Expression>clone(args.get(paramIndex)));
           }
         };
-        IterableExtensions.<ParamRef>forEach(_eAllOfType_1, _function_1);
+        EcoreUtil2.<ParamRef>eAllOfType(it, ParamRef.class).forEach(_function_1);
       }
     };
     return ObjectExtensions.<MethodBody>operator_doubleArrow(_clone, _function);
@@ -1230,9 +1215,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Type> applyRuleTNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
-    ClassType _type = newExp.getType();
-    it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-    List<Field> fields = this.fieldsInternal(_trace_, _classref);
+    List<Field> fields = this.fieldsInternal(_trace_, newExp.getType().getClassref());
     /* G |- newExp ~> newExp.args << fields */
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
@@ -1269,8 +1252,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private Type _applyRuleTParamRef_1(final RuleEnvironment G, final ParamRef paramref) throws RuleFailedException {
-    Parameter _parameter = paramref.getParameter();
-    Type _type = _parameter.getType();
+    Type _type = paramref.getParameter().getType();
     return _type;
   }
   
@@ -1363,6 +1345,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   private BasicType _applyRuleTBoolConstant_1(final RuleEnvironment G, final BoolConstant b) throws RuleFailedException {
     final Function1<BasicType, BasicType> _function = new Function1<BasicType, BasicType>() {
+      @Override
       public BasicType apply(final BasicType t) {
         BasicType _xblockexpression = null;
         {
@@ -1372,8 +1355,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         return _xblockexpression;
       }
     };
-    BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
-    BasicType _apply = _function.apply(_createBasicType);
+    BasicType _apply = _function.apply(FjFactory.eINSTANCE.createBasicType());
     return _apply;
   }
   
@@ -1406,21 +1388,18 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     
     final Member message = selection.getMessage();
     boolean _matched = false;
-    if (!_matched) {
-      if (message instanceof Method) {
-        _matched=true;
-        /* G |- selection ~> selection.args << message.params */
-        EList<Expression> _args = selection.getArgs();
-        EList<Parameter> _params = ((Method)message).getParams();
-        subtypesequenceInternal(G, _trace_, selection, _args, _params);
-      }
+    if (message instanceof Method) {
+      _matched=true;
+      /* G |- selection ~> selection.args << message.params */
+      EList<Expression> _args = selection.getArgs();
+      EList<Parameter> _params = ((Method)message).getParams();
+      subtypesequenceInternal(G, _trace_, selection, _args, _params);
     }
     return new Result<Type>(_applyRuleTSelection_1(G, selection));
   }
   
   private Type _applyRuleTSelection_1(final RuleEnvironment G, final Selection selection) throws RuleFailedException {
-    Member _message = selection.getMessage();
-    Type _type = _message.getType();
+    Type _type = selection.getMessage().getType();
     return _type;
   }
   
@@ -1558,10 +1537,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleBasicSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
-    String _basic = left.getBasic();
-    String _basic_1 = right.getBasic();
     /* left.basic.equals(right.basic) */
-    if (!_basic.equals(_basic_1)) {
+    if (!left.getBasic().equals(right.getBasic())) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1603,8 +1580,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         /* right.classref.name == "Object" or { superclasses(left.classref).contains(right.classref) } */
         {
           try {
-            it.xsemantics.example.fj.fj.Class _classref_2 = right.getClassref();
-            String _name = _classref_2.getName();
+            String _name = right.getClassref().getName();
             boolean _equals_1 = Objects.equal(_name, "Object");
             /* right.classref.name == "Object" */
             if (!_equals_1) {
@@ -1612,11 +1588,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
             }
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
-            it.xsemantics.example.fj.fj.Class _classref_3 = left.getClassref();
-            List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref_3);
-            it.xsemantics.example.fj.fj.Class _classref_4 = right.getClassref();
             /* superclasses(left.classref).contains(right.classref) */
-            if (!_superclasses.contains(_classref_4)) {
+            if (!this.superclassesInternal(_trace_, left.getClassref()).contains(right.getClassref())) {
               sneakyThrowRuleFailedException("superclasses(left.classref).contains(right.classref)");
             }
           }
@@ -1713,10 +1686,8 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleBasicEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
-    String _basic = left.getBasic();
-    String _basic_1 = right.getBasic();
     /* left.basic.equals(right.basic) */
-    if (!_basic.equals(_basic_1)) {
+    if (!left.getBasic().equals(right.getBasic())) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1798,8 +1769,7 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
     final Iterator<TypedElement> typedElementsIterator = typedElements.iterator();
     for (final Expression exp : expressions) {
       /* G |- exp |> typedElementsIterator.next.type */
-      TypedElement _next = typedElementsIterator.next();
-      Type _type = _next.getType();
+      Type _type = typedElementsIterator.next().getType();
       assignableInternal(G, _trace_, exp, _type);
     }
     return new Result<Boolean>(true);
@@ -1826,16 +1796,15 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Expression> applyRuleRNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New exp) throws RuleFailedException {
     New exp1 = null; // output parameter
-    New _clone = this.<New>clone(exp);
-    exp1 = _clone;
-    EList<Expression> _args = exp1.getArgs();
+    exp1 = this.<New>clone(exp);
     final Predicate<Expression> _function = new Predicate<Expression>() {
+      @Override
       public boolean apply(final Expression it) {
         Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
         return (!(_isValue).booleanValue());
       }
     };
-    final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
+    final int indexOfNextToReduce = Iterables.<Expression>indexOf(exp1.getArgs(), _function);
     /* { indexOfNextToReduce < 0 } or { val nextToReduce = exp1.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression expi exp1.args.set(indexOfNextToReduce, expi) } */
     {
       RuleFailedException previousFailure = null;
@@ -1846,16 +1815,14 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         }
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        EList<Expression> _args_1 = exp1.getArgs();
-        final Expression nextToReduce = _args_1.get(indexOfNextToReduce);
+        final Expression nextToReduce = exp1.getArgs().get(indexOfNextToReduce);
         /* G |- nextToReduce ~> var Expression expi */
         Expression expi = null;
         Result<Expression> result = reduceInternal(G, _trace_, nextToReduce);
         checkAssignableTo(result.getFirst(), Expression.class);
         expi = (Expression) result.getFirst();
         
-        EList<Expression> _args_2 = exp1.getArgs();
-        _args_2.set(indexOfNextToReduce, expi);
+        exp1.getArgs().set(indexOfNextToReduce, expi);
       }
     }
     return new Result<Expression>(exp1);
@@ -1887,17 +1854,16 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
       RuleFailedException previousFailure = null;
       try {
         final Selection sel = this.<Selection>clone(exp);
-        Expression _receiver = exp.getReceiver();
-        Boolean _isValue = this.isValueInternal(_trace_, _receiver);
+        Boolean _isValue = this.isValueInternal(_trace_, exp.getReceiver());
         boolean _not = (!(_isValue).booleanValue());
         /* !isValue(exp.receiver) */
         if (!_not) {
           sneakyThrowRuleFailedException("!isValue(exp.receiver)");
         }
         /* G |- exp.receiver ~> var Expression expi */
-        Expression _receiver_1 = exp.getReceiver();
+        Expression _receiver = exp.getReceiver();
         Expression expi = null;
-        Result<Expression> result = reduceInternal(G, _trace_, _receiver_1);
+        Result<Expression> result = reduceInternal(G, _trace_, _receiver);
         checkAssignableTo(result.getFirst(), Expression.class);
         expi = (Expression) result.getFirst();
         
@@ -1905,40 +1871,34 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
         exp1 = sel;
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        Expression _receiver_2 = exp.getReceiver();
-        final New receiver = ((New) _receiver_2);
+        Expression _receiver_1 = exp.getReceiver();
+        final New receiver = ((New) _receiver_1);
         final Member message = exp.getMessage();
         boolean _matched = false;
-        if (!_matched) {
-          if (message instanceof Field) {
-            _matched=true;
-            ClassType _type = receiver.getType();
-            it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-            List<Field> _fields = this.fieldsInternal(_trace_, _classref);
-            final Predicate<Field> _function = new Predicate<Field>() {
-              public boolean apply(final Field it) {
-                String _name = it.getName();
-                String _name_1 = ((Field)message).getName();
-                return Objects.equal(_name, _name_1);
-              }
-            };
-            final int fieldIndex = Iterables.<Field>indexOf(_fields, _function);
-            EList<Expression> _args = receiver.getArgs();
-            Expression _get = _args.get(fieldIndex);
-            exp1 = _get;
-          }
+        if (message instanceof Field) {
+          _matched=true;
+          final Predicate<Field> _function = new Predicate<Field>() {
+            @Override
+            public boolean apply(final Field it) {
+              String _name = it.getName();
+              String _name_1 = ((Field)message).getName();
+              return Objects.equal(_name, _name_1);
+            }
+          };
+          final int fieldIndex = Iterables.<Field>indexOf(this.fieldsInternal(_trace_, receiver.getType().getClassref()), _function);
+          exp1 = receiver.getArgs().get(fieldIndex);
         }
         if (!_matched) {
           if (message instanceof Method) {
             _matched=true;
-            EList<Expression> _args = exp.getArgs();
             final Predicate<Expression> _function = new Predicate<Expression>() {
+              @Override
               public boolean apply(final Expression it) {
                 Boolean _isValue = FjTypeSystem.this.isValueInternal(_trace_, it);
                 return (!(_isValue).booleanValue());
               }
             };
-            final int indexOfNextToReduce = Iterables.<Expression>indexOf(_args, _function);
+            final int indexOfNextToReduce = Iterables.<Expression>indexOf(exp.getArgs(), _function);
             /* { indexOfNextToReduce < 0 val method = exp.message as Method exp1 = replaceThisAndParams( method.body, receiver, method.params, exp.args).expression } or { val sel = clone(exp) val nextToReduce = sel.args.get(indexOfNextToReduce) G |- nextToReduce ~> var Expression argi sel.args.set(indexOfNextToReduce, argi) exp1 = sel } */
             {
               try {
@@ -1948,25 +1908,20 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
                 }
                 Member _message = exp.getMessage();
                 final Method method = ((Method) _message);
-                MethodBody _body = method.getBody();
-                EList<Parameter> _params = method.getParams();
-                EList<Expression> _args_1 = exp.getArgs();
-                MethodBody _replaceThisAndParams = this.replaceThisAndParamsInternal(_trace_, _body, receiver, _params, _args_1);
-                Expression _expression = _replaceThisAndParams.getExpression();
-                exp1 = _expression;
+                exp1 = this.replaceThisAndParamsInternal(_trace_, 
+                  method.getBody(), receiver, 
+                  method.getParams(), exp.getArgs()).getExpression();
               } catch (Exception e_1) {
                 previousFailure = extractRuleFailedException(e_1);
                 final Selection sel_1 = this.<Selection>clone(exp);
-                EList<Expression> _args_2 = sel_1.getArgs();
-                final Expression nextToReduce = _args_2.get(indexOfNextToReduce);
+                final Expression nextToReduce = sel_1.getArgs().get(indexOfNextToReduce);
                 /* G |- nextToReduce ~> var Expression argi */
                 Expression argi = null;
                 Result<Expression> result_1 = reduceInternal(G, _trace_, nextToReduce);
                 checkAssignableTo(result_1.getFirst(), Expression.class);
                 argi = (Expression) result_1.getFirst();
                 
-                EList<Expression> _args_3 = sel_1.getArgs();
-                _args_3.set(indexOfNextToReduce, argi);
+                sel_1.getArgs().set(indexOfNextToReduce, argi);
                 exp1 = sel_1;
               }
             }
@@ -1999,20 +1954,18 @@ public class FjTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Expression> applyRuleRCast(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast exp) throws RuleFailedException {
     Expression exp1 = null; // output parameter
     final Cast cast = this.<Cast>clone(exp);
-    Expression _expression = cast.getExpression();
-    Boolean _isValue = this.isValueInternal(_trace_, _expression);
+    Boolean _isValue = this.isValueInternal(_trace_, cast.getExpression());
     if ((_isValue).booleanValue()) {
       /* G |- cast.expression |> cast.type */
-      Expression _expression_1 = cast.getExpression();
+      Expression _expression = cast.getExpression();
       ClassType _type = cast.getType();
-      assignableInternal(G, _trace_, _expression_1, _type);
-      Expression _expression_2 = cast.getExpression();
-      exp1 = _expression_2;
+      assignableInternal(G, _trace_, _expression, _type);
+      exp1 = cast.getExpression();
     } else {
       /* G |- cast.expression ~> var Expression expi */
-      Expression _expression_3 = cast.getExpression();
+      Expression _expression_1 = cast.getExpression();
       Expression expi = null;
-      Result<Expression> result = reduceInternal(G, _trace_, _expression_3);
+      Result<Expression> result = reduceInternal(G, _trace_, _expression_1);
       checkAssignableTo(result.getFirst(), Expression.class);
       expi = (Expression) result.getFirst();
       

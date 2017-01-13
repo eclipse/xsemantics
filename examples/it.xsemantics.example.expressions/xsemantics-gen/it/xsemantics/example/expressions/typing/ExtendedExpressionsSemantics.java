@@ -169,8 +169,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         resultType = expected;
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-        resultType = _createStringType;
+        resultType = ExpressionsFactory.eINSTANCE.createStringType();
       }
     }
     return new Result<Type>(resultType);
@@ -324,28 +323,15 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
         /* { (leftType instanceof StringType || rightType instanceof StringType) type = ExpressionsFactory::eINSTANCE.createStringType } or { (leftType instanceof IntType && rightType instanceof IntType) type = leftType } */
         {
           try {
-            boolean _or = false;
-            if ((leftType instanceof StringType)) {
-              _or = true;
-            } else {
-              _or = (rightType instanceof StringType);
-            }
             /* leftType instanceof StringType || rightType instanceof StringType */
-            if (!_or) {
+            if (!((leftType instanceof StringType) || (rightType instanceof StringType))) {
               sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
             }
-            StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-            type = _createStringType;
+            type = ExpressionsFactory.eINSTANCE.createStringType();
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
-            boolean _and = false;
-            if (!(leftType instanceof IntType)) {
-              _and = false;
-            } else {
-              _and = (rightType instanceof IntType);
-            }
             /* leftType instanceof IntType && rightType instanceof IntType */
-            if (!_and) {
+            if (!((leftType instanceof IntType) && (rightType instanceof IntType))) {
               sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
             }
             type = leftType;
@@ -379,8 +365,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> applyRuleBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
-    BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-    boolType = _createBooleanType;
+    boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
     /* G, 'expected' <- boolType |- negation.expression : boolType */
     Expression _expression = negation.getExpression();
     Result<Type> result = typeInternal(environmentComposition(
@@ -415,8 +400,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Type> applyRuleAndOr(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
-    BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
-    boolType = _createBooleanType;
+    boolType = ExpressionsFactory.eINSTANCE.createBooleanType();
     /* G, 'expected' <- boolType |- andOr.left : boolType */
     Expression _left = andOr.getLeft();
     Result<Type> result = typeInternal(environmentComposition(
@@ -495,8 +479,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   }
   
   protected Result<Boolean> applyRuleStringToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
-    String _value = string.getValue();
-    Integer.parseInt(_value);
+    Integer.parseInt(string.getValue());
     return new Result<Boolean>(true);
   }
   
@@ -520,18 +503,9 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   }
   
   protected Result<Boolean> applyRuleStringToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
-    boolean _or = false;
-    String _value = string.getValue();
-    boolean _equalsIgnoreCase = _value.equalsIgnoreCase("true");
-    if (_equalsIgnoreCase) {
-      _or = true;
-    } else {
-      String _value_1 = string.getValue();
-      boolean _equalsIgnoreCase_1 = _value_1.equalsIgnoreCase("false");
-      _or = _equalsIgnoreCase_1;
-    }
     /* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
-    if (!_or) {
+    if (!(string.getValue().equalsIgnoreCase("true") || 
+      string.getValue().equalsIgnoreCase("false"))) {
       sneakyThrowRuleFailedException("string.value.equalsIgnoreCase(\"true\") || string.value.equalsIgnoreCase(\"false\")");
     }
     return new Result<Boolean>(true);
@@ -613,25 +587,18 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     {
       RuleFailedException previousFailure = null;
       try {
-        IntType _env = this.<IntType>env(G, "expected", IntType.class);
-        expected = _env;
-        String _value = string.getValue();
-        int _parseInt = Integer.parseInt(_value);
-        result = Integer.valueOf(_parseInt);
+        expected = this.<IntType>env(G, "expected", IntType.class);
+        result = Integer.valueOf(Integer.parseInt(string.getValue()));
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
         /* { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
         {
           try {
-            BooleanType _env_1 = this.<BooleanType>env(G, "expected", BooleanType.class);
-            expected = _env_1;
-            String _value_1 = string.getValue();
-            boolean _parseBoolean = Boolean.parseBoolean(_value_1);
-            result = Boolean.valueOf(_parseBoolean);
+            expected = this.<BooleanType>env(G, "expected", BooleanType.class);
+            result = Boolean.valueOf(Boolean.parseBoolean(string.getValue()));
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
-            String _value_2 = string.getValue();
-            result = _value_2;
+            result = string.getValue();
           }
         }
       }
@@ -828,25 +795,9 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     String _op = andOr.getOp();
     boolean _equals = Objects.equal(_op, "&&");
     if (_equals) {
-      boolean _and = false;
-      boolean _booleanValue = leftResult.booleanValue();
-      if (!_booleanValue) {
-        _and = false;
-      } else {
-        boolean _booleanValue_1 = rightResult.booleanValue();
-        _and = _booleanValue_1;
-      }
-      result = Boolean.valueOf(_and);
+      result = Boolean.valueOf((leftResult.booleanValue() && rightResult.booleanValue()));
     } else {
-      boolean _or = false;
-      boolean _booleanValue_2 = leftResult.booleanValue();
-      if (_booleanValue_2) {
-        _or = true;
-      } else {
-        boolean _booleanValue_3 = rightResult.booleanValue();
-        _or = _booleanValue_3;
-      }
-      result = Boolean.valueOf(_or);
+      result = Boolean.valueOf((leftResult.booleanValue() || rightResult.booleanValue()));
     }
     return new Result<Object>(result);
   }

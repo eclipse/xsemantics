@@ -398,7 +398,7 @@ checkrule CheckField for
 from {
 	val clazz = field.eContainer as Class
 	
-	if (clazz.superclass != null) {
+	if (clazz.superclass !== null) {
 		var inheritedFields = fields(clazz.superclass)
 		// make sure no duplicate fields in the hierarchy
 		inheritedFields.forEach [
@@ -417,7 +417,7 @@ checkrule CheckMethodOverride for
 from {
 	val clazz = method.eContainer as Class
 	
-	if (clazz.superclass != null) {
+	if (clazz.superclass !== null) {
 		var inheritedMethods = methods(clazz.superclass)
 		val methods = EcoreUtil2::typeSelect(clazz.members, typeof(Method))
 		// check override predicate
@@ -433,7 +433,7 @@ from {
 checkrule CheckClassHierachyNotCyclic for
 	Class cl
 from {
-	if (cl.superclass != null) {
+	if (cl.superclass !== null) {
 		!superclasses(cl).contains(cl)
 		or
 		fail
@@ -445,7 +445,7 @@ from {
 checkrule CheckMain for
 	Program program
 from {
-	program.main == null // nothing to check
+	program.main === null // nothing to check
 	or
 	empty |- program.main : var Type mainType
 }

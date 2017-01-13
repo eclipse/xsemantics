@@ -11,7 +11,6 @@ import it.xsemantics.example.fj.fj.Field;
 import it.xsemantics.example.fj.fj.FjPackage;
 import it.xsemantics.example.fj.fj.Member;
 import it.xsemantics.example.fj.fj.Method;
-import it.xsemantics.example.fj.fj.MethodBody;
 import it.xsemantics.example.fj.fj.New;
 import it.xsemantics.example.fj.fj.ParamRef;
 import it.xsemantics.example.fj.fj.Parameter;
@@ -22,20 +21,17 @@ import it.xsemantics.example.fj.fj.Type;
 import it.xsemantics.example.fj.fj.TypedElement;
 import it.xsemantics.example.fj.lookup.FjAuxiliaryFunctions;
 import it.xsemantics.example.fj.typing.FjTypeSystem;
-import it.xsemantics.example.fj.util.FjTypeUtils;
 import it.xsemantics.runtime.ErrorInformation;
 import it.xsemantics.runtime.Result;
 import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A version of the FJ system where type computation and
@@ -158,15 +154,15 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
-    /* program.main == null or empty |- program.main */
+    /* program.main === null or empty |- program.main */
     {
       RuleFailedException previousFailure = null;
       try {
         Expression _main = program.getMain();
-        boolean _equals = Objects.equal(_main, null);
-        /* program.main == null */
-        if (!_equals) {
-          sneakyThrowRuleFailedException("program.main == null");
+        boolean _tripleEquals = (_main == null);
+        /* program.main === null */
+        if (!_tripleEquals) {
+          sneakyThrowRuleFailedException("program.main === null");
         }
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
@@ -307,8 +303,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
   }
   
   private Type _applyRuleTSelection_1(final RuleEnvironment G, final Selection selection) throws RuleFailedException {
-    Member _message = selection.getMessage();
-    Type _type = _message.getType();
+    Type _type = selection.getMessage().getType();
     return _type;
   }
   
@@ -436,9 +431,9 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
-    /* env(G, 'this', ClassType) != null */
-    if (!(!Objects.equal(_env, null))) {
-      sneakyThrowRuleFailedException("env(G, \'this\', ClassType) != null");
+    /* env(G, 'this', ClassType) !== null */
+    if (!(_env != null)) {
+      sneakyThrowRuleFailedException("env(G, \'this\', ClassType) !== null");
     }
     return new Result<Boolean>(true);
   }
@@ -463,13 +458,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckMethod(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
-    FjTypeUtils _fjTypeUtils = this.getFjTypeUtils();
-    it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-    final ClassType typeForThis = _fjTypeUtils.createClassType(_containerOfType);
+    final ClassType typeForThis = this.getFjTypeUtils().createClassType(
+      EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class));
     Type bodyType = null;
     /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
-    MethodBody _body = method.getBody();
-    Expression _expression = _body.getExpression();
+    Expression _expression = method.getBody().getExpression();
     Result<Type> result = typeInternal(environmentComposition(
       G, environmentEntry("this", typeForThis)
     ), _trace_, _expression);
@@ -480,8 +473,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     Type _type = method.getType();
     subtypeInternal(G, _trace_, bodyType, _type);
     /* G, 'this' <- typeForThis |- method.body.expression */
-    MethodBody _body_1 = method.getBody();
-    Expression _expression_1 = _body_1.getExpression();
+    Expression _expression_1 = method.getBody().getExpression();
     checkInternal(environmentComposition(
       G, environmentEntry("this", typeForThis)
     ), _trace_, _expression_1);
@@ -508,20 +500,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
-    ClassType _type = newExp.getType();
-    it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
-    List<Field> fields = this.fjAux.getFields(_classref);
+    List<Field> fields = this.fjAux.getFields(newExp.getType().getClassref());
     /* G |- newExp ~> newExp.args << fields */
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
-    EList<Expression> _args_1 = newExp.getArgs();
-    final Procedure1<Expression> _function = new Procedure1<Expression>() {
-      public void apply(final Expression it) {
+    final Consumer<Expression> _function = new Consumer<Expression>() {
+      @Override
+      public void accept(final Expression it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
       }
     };
-    IterableExtensions.<Expression>forEach(_args_1, _function);
+    newExp.getArgs().forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -550,18 +540,16 @@ public class FjSepTypeSystem extends FjTypeSystem {
     checkInternal(G, _trace_, _receiver);
     final Member message = selection.getMessage();
     boolean _matched = false;
-    if (!_matched) {
-      if (message instanceof Method) {
-        _matched=true;
-        /* G |- selection ~> selection.args << message.params */
-        EList<Expression> _args = selection.getArgs();
-        EList<Parameter> _params = ((Method)message).getParams();
-        subtypesequenceInternal(G, _trace_, selection, _args, _params);
-        EList<Expression> _args_1 = selection.getArgs();
-        for (final Expression arg : _args_1) {
-          /* G |- arg */
-          checkInternal(G, _trace_, arg);
-        }
+    if (message instanceof Method) {
+      _matched=true;
+      /* G |- selection ~> selection.args << message.params */
+      EList<Expression> _args = selection.getArgs();
+      EList<Parameter> _params = ((Method)message).getParams();
+      subtypesequenceInternal(G, _trace_, selection, _args, _params);
+      EList<Expression> _args_1 = selection.getArgs();
+      for (final Expression arg : _args_1) {
+        /* G |- arg */
+        checkInternal(G, _trace_, arg);
       }
     }
     return new Result<Boolean>(true);
@@ -631,24 +619,25 @@ public class FjSepTypeSystem extends FjTypeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    EList<Member> _members = cl.getMembers();
-    final Procedure1<Member> _function = new Procedure1<Member>() {
-      public void apply(final Member it) {
+    final Consumer<Member> _function = new Consumer<Member>() {
+      @Override
+      public void accept(final Member it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
       }
     };
-    IterableExtensions.<Member>forEach(_members, _function);
+    cl.getMembers().forEach(_function);
     it.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
-    boolean _notEquals = (!Objects.equal(_superclass, null));
-    if (_notEquals) {
-      it.xsemantics.example.fj.fj.Class _superclass_1 = cl.getSuperclass();
-      EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
-      EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-      List<Field> inheritedFields = this.<Field>getAll(_superclass_1, _class_Members, _class_Superclass, 
+    boolean _tripleNotEquals = (_superclass != null);
+    if (_tripleNotEquals) {
+      List<Field> inheritedFields = this.<Field>getAll(
+        cl.getSuperclass(), 
+        FjPackage.eINSTANCE.getClass_Members(), 
+        FjPackage.eINSTANCE.getClass_Superclass(), 
         Field.class);
-      final Procedure1<Field> _function_1 = new Procedure1<Field>() {
-        public void apply(final Field inheritedField) {
+      final Consumer<Field> _function_1 = new Consumer<Field>() {
+        @Override
+        public void accept(final Field inheritedField) {
           List<Field> _selectFields = FjSepTypeSystem.this.fjAux.selectFields(cl);
           for (final Field field : _selectFields) {
             String _name = field.getName();
@@ -660,24 +649,25 @@ public class FjSepTypeSystem extends FjTypeSystem {
           }
         }
       };
-      IterableExtensions.<Field>forEach(inheritedFields, _function_1);
-      it.xsemantics.example.fj.fj.Class _superclass_2 = cl.getSuperclass();
-      EReference _class_Members_1 = FjPackage.eINSTANCE.getClass_Members();
-      EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-      List<Method> inheritedMethods = this.<Method>getAll(_superclass_2, _class_Members_1, _class_Superclass_1, 
+      inheritedFields.forEach(_function_1);
+      List<Method> inheritedMethods = this.<Method>getAll(
+        cl.getSuperclass(), 
+        FjPackage.eINSTANCE.getClass_Members(), 
+        FjPackage.eINSTANCE.getClass_Superclass(), 
         Method.class);
-      final Procedure1<Method> _function_2 = new Procedure1<Method>() {
-        public void apply(final Method inheritedMethod) {
-          List<Method> _selectMethods = FjSepTypeSystem.this.fjAux.selectMethods(cl);
-          final Procedure1<Method> _function = new Procedure1<Method>() {
-            public void apply(final Method it) {
+      final Consumer<Method> _function_2 = new Consumer<Method>() {
+        @Override
+        public void accept(final Method inheritedMethod) {
+          final Consumer<Method> _function = new Consumer<Method>() {
+            @Override
+            public void accept(final Method it) {
               FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }
           };
-          IterableExtensions.<Method>forEach(_selectMethods, _function);
+          FjSepTypeSystem.this.fjAux.selectMethods(cl).forEach(_function);
         }
       };
-      IterableExtensions.<Method>forEach(inheritedMethods, _function_2);
+      inheritedMethods.forEach(_function_2);
     }
     return new Result<Boolean>(true);
   }

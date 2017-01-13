@@ -52,7 +52,7 @@ axiom CheckParamRef
 rule CheckThis
 	G |- This _this
 from {
-	env(G, 'this', ClassType) != null
+	env(G, 'this', ClassType) !== null
 }
 
 rule CheckMethod derives
@@ -111,7 +111,7 @@ rule CheckClass
 from {
 	cl.members.forEach [ G |- it ]
 	
-	if (cl.superclass != null) {
+	if (cl.superclass !== null) {
 		var inheritedFields = getAll(
 			cl.superclass,
 			FjPackage::eINSTANCE.class_Members,
@@ -151,7 +151,7 @@ from {
 override checkrule CheckMain for
 	Program program
 from {
-	program.main == null // nothing to check
+	program.main === null // nothing to check
 	or
 	empty |- program.main
 }

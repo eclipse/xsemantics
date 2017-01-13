@@ -437,28 +437,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     {
       RuleFailedException previousFailure = null;
       try {
-        boolean _or = false;
-        if ((leftType instanceof StringType)) {
-          _or = true;
-        } else {
-          _or = (rightType instanceof StringType);
-        }
         /* leftType instanceof StringType || rightType instanceof StringType */
-        if (!_or) {
+        if (!((leftType instanceof StringType) || (rightType instanceof StringType))) {
           sneakyThrowRuleFailedException("leftType instanceof StringType || rightType instanceof StringType");
         }
-        StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
-        type = _createStringType;
+        type = ExpressionsFactory.eINSTANCE.createStringType();
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        boolean _and = false;
-        if (!(leftType instanceof IntType)) {
-          _and = false;
-        } else {
-          _and = (rightType instanceof IntType);
-        }
         /* leftType instanceof IntType && rightType instanceof IntType */
-        if (!_and) {
+        if (!((leftType instanceof IntType) && (rightType instanceof IntType))) {
           sneakyThrowRuleFailedException("leftType instanceof IntType && rightType instanceof IntType");
         }
         type = leftType;
@@ -714,10 +701,10 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   protected Result<Type> applyRuleVariable(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Variable variable) throws RuleFailedException {
     Type type = null; // output parameter
     Expression _expression = variable.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    /* variable.expression != null */
-    if (!_notEquals) {
-      sneakyThrowRuleFailedException("variable.expression != null");
+    boolean _tripleNotEquals = (_expression != null);
+    /* variable.expression !== null */
+    if (!_tripleNotEquals) {
+      sneakyThrowRuleFailedException("variable.expression !== null");
     }
     /* G |- variable.expression : type */
     Expression _expression_1 = variable.getExpression();
@@ -811,8 +798,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   }
   
   private Boolean _applyRuleInterpretBooleanLiteral_1(final RuleEnvironment G, final BooleanLiteral bool) throws RuleFailedException {
-    String _value = bool.getValue();
-    Boolean _valueOf = Boolean.valueOf(_value);
+    Boolean _valueOf = Boolean.valueOf(bool.getValue());
     return _valueOf;
   }
   
@@ -979,25 +965,9 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     String _op = andOr.getOp();
     boolean _equals = Objects.equal(_op, "&&");
     if (_equals) {
-      boolean _and = false;
-      boolean _booleanValue = leftResult.booleanValue();
-      if (!_booleanValue) {
-        _and = false;
-      } else {
-        boolean _booleanValue_1 = rightResult.booleanValue();
-        _and = _booleanValue_1;
-      }
-      result = Boolean.valueOf(_and);
+      result = Boolean.valueOf((leftResult.booleanValue() && rightResult.booleanValue()));
     } else {
-      boolean _or = false;
-      boolean _booleanValue_2 = leftResult.booleanValue();
-      if (_booleanValue_2) {
-        _or = true;
-      } else {
-        boolean _booleanValue_3 = rightResult.booleanValue();
-        _or = _booleanValue_3;
-      }
-      result = Boolean.valueOf(_or);
+      result = Boolean.valueOf((leftResult.booleanValue() || rightResult.booleanValue()));
     }
     return new Result<Object>(result);
   }
@@ -1069,13 +1039,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_2.getFirst(), Object.class);
     rightResult = (Object) result_2.getFirst();
     
-    boolean _and = false;
-    if (!(leftResult instanceof String)) {
-      _and = false;
-    } else {
-      _and = (rightResult instanceof String);
-    }
-    if (_and) {
+    if (((leftResult instanceof String) && (rightResult instanceof String))) {
       String _string = leftResult.toString();
       String _string_1 = rightResult.toString();
       boolean _lessThan = (_string.compareTo(_string_1) < 0);
@@ -1164,13 +1128,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     checkAssignableTo(result_2.getFirst(), Object.class);
     rightResult = (Object) result_2.getFirst();
     
-    boolean _or = false;
-    if ((leftResult instanceof String)) {
-      _or = true;
-    } else {
-      _or = (rightResult instanceof String);
-    }
-    if (_or) {
+    if (((leftResult instanceof String) || (rightResult instanceof String))) {
       String leftString = leftResult.toString();
       String rightString = rightResult.toString();
       result = (leftString + rightString);
@@ -1204,8 +1162,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   protected Result<Object> applyRuleInterpretVariableRefenrence(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     Object result = null; // output parameter
     /* G |- varRef.ref.expression ~> result */
-    Variable _ref = varRef.getRef();
-    Expression _expression = _ref.getExpression();
+    Expression _expression = varRef.getRef().getExpression();
     Result<Object> result_1 = interpretInternal(G, _trace_, _expression);
     checkAssignableTo(result_1.getFirst(), Object.class);
     result = (Object) result_1.getFirst();

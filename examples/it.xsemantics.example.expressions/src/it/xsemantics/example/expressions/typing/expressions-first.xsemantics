@@ -130,7 +130,7 @@ from {
 rule Variable
 	G ||- Variable variable : Type type
 from {
-	variable.expression != null
+	variable.expression !== null
 	G |- variable.expression : type
 }
 
