@@ -126,6 +126,7 @@ RuleConclusion:
 	(error=ErrorSpecification)?
 ;
 
+@Override
 XExpressionOrVarDeclaration returns xbase::XExpression:
 	PremiseExpression
 ;
