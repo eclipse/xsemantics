@@ -15,7 +15,9 @@ Require-Bundle: it.xsemantics.dsl,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  it.xsemantics.example.fj.tests,
  it.xsemantics.example.fjcached.tests,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing
 Import-Package: org.apache.log4j,
  org.apache.log4j.spi,
  org.apache.log4j.varia,
@@ -27,4 +29,4 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.junit;version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: it.xsemantics.dsl.tests
+Export-Package: it.xsemantics.dsl.tests;x-internal=true

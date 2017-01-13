@@ -34,7 +34,7 @@ class FjExpectedTraces {
 		assertEqualsStrings(expectedErrorInformation.toString,
 			e.filteredErrorInformation.map [
 				it.source.string + 
-				if (it.feature != null) {
+				if (it.feature !== null) {
 					" feature: " + it.feature.name
 				} else {
 					""

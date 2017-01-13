@@ -16,7 +16,6 @@ import it.xsemantics.example.fj.fj.FjPackage;
 import it.xsemantics.example.fj.fj.IntConstant;
 import it.xsemantics.example.fj.fj.Member;
 import it.xsemantics.example.fj.fj.Method;
-import it.xsemantics.example.fj.fj.MethodBody;
 import it.xsemantics.example.fj.fj.New;
 import it.xsemantics.example.fj.fj.ParamRef;
 import it.xsemantics.example.fj.fj.Parameter;
@@ -33,7 +32,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -41,7 +39,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -714,9 +711,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected List<it.xsemantics.example.fj.fj.Class> applyAuxFunSuperclasses(final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-    EReference _class_Superclass_1 = FjPackage.eINSTANCE.getClass_Superclass();
-    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, _class_Superclass, _class_Superclass_1, 
+    return this.<it.xsemantics.example.fj.fj.Class>getAll(cl, 
+      FjPackage.eINSTANCE.getClass_Superclass(), 
+      FjPackage.eINSTANCE.getClass_Superclass(), 
       it.xsemantics.example.fj.fj.Class.class);
   }
   
@@ -935,8 +932,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
         return _xblockexpression;
       }
     };
-    BasicType _createBasicType = FjFactory.eINSTANCE.createBasicType();
-    BasicType _apply = _function.apply(_createBasicType);
+    BasicType _apply = _function.apply(FjFactory.eINSTANCE.createBasicType());
     return _apply;
   }
   
@@ -1048,10 +1044,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleBasicSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
-    String _basic = left.getBasic();
-    String _basic_1 = right.getBasic();
     /* left.basic.equals(right.basic) */
-    if (!_basic.equals(_basic_1)) {
+    if (!left.getBasic().equals(right.getBasic())) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1162,10 +1156,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleBasicEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BasicType left, final BasicType right) throws RuleFailedException {
-    String _basic = left.getBasic();
-    String _basic_1 = right.getBasic();
     /* left.basic.equals(right.basic) */
-    if (!_basic.equals(_basic_1)) {
+    if (!left.getBasic().equals(right.getBasic())) {
       sneakyThrowRuleFailedException("left.basic.equals(right.basic)");
     }
     return new Result<Boolean>(true);
@@ -1271,11 +1263,10 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     List<Field> fields = null; // output parameter
     final List<it.xsemantics.example.fj.fj.Class> superclasses = this.superclassesInternal(_trace_, cl);
     Collections.reverse(superclasses);
-    ArrayList<Field> _newArrayList = CollectionLiterals.<Field>newArrayList();
-    fields = _newArrayList;
+    fields = CollectionLiterals.<Field>newArrayList();
     for (final it.xsemantics.example.fj.fj.Class superclass : superclasses) {
-      EList<Member> _members = superclass.getMembers();
-      List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, 
+      List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(
+        superclass.getMembers(), 
         Field.class);
       Iterables.<Field>addAll(fields, _typeSelect);
     }
@@ -1283,8 +1274,8 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     {
       RuleFailedException previousFailure = null;
       try {
-        EList<Member> _members_1 = cl.getMembers();
-        List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(_members_1, 
+        List<Field> _typeSelect_1 = EcoreUtil2.<Field>typeSelect(
+          cl.getMembers(), 
           Field.class);
         boolean _add = Iterables.<Field>addAll(fields, _typeSelect_1);
         /* fields += EcoreUtil2::typeSelect( cl.members, typeof(Field) ) */
@@ -1321,9 +1312,9 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<List<Method>> applyRuleMethods(final RuleEnvironment G, final RuleApplicationTrace _trace_, final it.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     List<Method> methods = null; // output parameter
     final LinkedList<Method> result = new LinkedList<Method>();
-    EReference _class_Members = FjPackage.eINSTANCE.getClass_Members();
-    EReference _class_Superclass = FjPackage.eINSTANCE.getClass_Superclass();
-    final List<Method> allMethods = this.<Method>getAll(cl, _class_Members, _class_Superclass, 
+    final List<Method> allMethods = this.<Method>getAll(cl, 
+      FjPackage.eINSTANCE.getClass_Members(), 
+      FjPackage.eINSTANCE.getClass_Superclass(), 
       Method.class);
     final Consumer<Method> _function = new Consumer<Method>() {
       public void accept(final Method method) {
@@ -1466,12 +1457,11 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleCheckMethod(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
-    it.xsemantics.example.fj.fj.Class _containerOfType = EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class);
-    final ClassType typeForThis = this.fjTypeUtils.createClassType(_containerOfType);
+    final ClassType typeForThis = this.fjTypeUtils.createClassType(
+      EcoreUtil2.<it.xsemantics.example.fj.fj.Class>getContainerOfType(method, it.xsemantics.example.fj.fj.Class.class));
     Type bodyType = null;
     /* G, 'this' <- typeForThis |- method.body.expression : bodyType */
-    MethodBody _body = method.getBody();
-    Expression _expression = _body.getExpression();
+    Expression _expression = method.getBody().getExpression();
     Result<Type> result = typeInternal(environmentComposition(
       G, environmentEntry("this", typeForThis)
     ), _trace_, _expression);
@@ -1482,8 +1472,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     Type _type = method.getType();
     subtypeInternal(G, _trace_, bodyType, _type);
     /* G, 'this' <- typeForThis |- method.body.expression */
-    MethodBody _body_1 = method.getBody();
-    Expression _expression_1 = _body_1.getExpression();
+    Expression _expression_1 = method.getBody().getExpression();
     checkInternal(environmentComposition(
       G, environmentEntry("this", typeForThis)
     ), _trace_, _expression_1);
@@ -1512,8 +1501,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
   protected Result<Boolean> applyRuleCheckNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     List<Field> fields = null;
     /* G ||- newExp.type.classref >> fields */
-    ClassType _type = newExp.getType();
-    it.xsemantics.example.fj.fj.Class _classref = _type.getClassref();
+    it.xsemantics.example.fj.fj.Class _classref = newExp.getType().getClassref();
     Result<List<Field>> result = fieldsInternal(G, _trace_, _classref);
     checkAssignableTo(result.getFirst(), List.class);
     fields = (List<Field>) result.getFirst();
@@ -1521,14 +1509,13 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     /* G |- newExp : newExp.args << fields */
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
-    EList<Expression> _args_1 = newExp.getArgs();
     final Consumer<Expression> _function = new Consumer<Expression>() {
       public void accept(final Expression it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
       }
     };
-    _args_1.forEach(_function);
+    newExp.getArgs().forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -1640,8 +1627,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
     boolean _notEquals = (!Objects.equal(_superclass, null));
     if (_notEquals) {
       List<it.xsemantics.example.fj.fj.Class> superClasses = null;
-      List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, cl);
-      superClasses = _superclasses;
+      superClasses = this.superclassesInternal(_trace_, cl);
       boolean _contains = superClasses.contains(cl);
       boolean _not = (!_contains);
       /* !superClasses.contains(cl) */
@@ -1657,8 +1643,7 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       
       final Consumer<Field> _function = new Consumer<Field>() {
         public void accept(final Field inheritedField) {
-          EList<Member> _members = cl.getMembers();
-          List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(_members, Field.class);
+          List<Field> _typeSelect = EcoreUtil2.<Field>typeSelect(cl.getMembers(), Field.class);
           for (final Field field : _typeSelect) {
             String _name = field.getName();
             String _name_1 = inheritedField.getName();
@@ -1679,8 +1664,6 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
       
       final Consumer<Method> _function_1 = new Consumer<Method>() {
         public void accept(final Method inheritedMethod) {
-          EList<Member> _members = cl.getMembers();
-          List<Method> _typeSelect = EcoreUtil2.<Method>typeSelect(_members, Method.class);
           final Consumer<Method> _function = new Consumer<Method>() {
             public void accept(final Method it) {
               /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
@@ -1700,30 +1683,26 @@ public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
                   Type _type = it.getType();
                   Type _type_1 = inheritedMethod.getType();
                   equalstypeInternal(G, _trace_, _type, _type_1);
-                  EList<Parameter> _params = it.getParams();
-                  int _size = _params.size();
-                  EList<Parameter> _params_1 = inheritedMethod.getParams();
-                  int _size_1 = _params_1.size();
+                  int _size = it.getParams().size();
+                  int _size_1 = inheritedMethod.getParams().size();
                   boolean _equals = (_size == _size_1);
                   /* it.params.size == inheritedMethod.params.size */
                   if (!_equals) {
                     sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
                   }
-                  EList<Parameter> _params_2 = inheritedMethod.getParams();
-                  final Iterator<Parameter> inheritedMethodParamsIt = _params_2.iterator();
-                  EList<Parameter> _params_3 = it.getParams();
-                  for (final Parameter param : _params_3) {
+                  final Iterator<Parameter> inheritedMethodParamsIt = inheritedMethod.getParams().iterator();
+                  EList<Parameter> _params = it.getParams();
+                  for (final Parameter param : _params) {
                     /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
                     Type _type_2 = param.getType();
-                    Parameter _next = inheritedMethodParamsIt.next();
-                    Type _type_3 = _next.getType();
+                    Type _type_3 = inheritedMethodParamsIt.next().getType();
                     equalstypeInternal(G, _trace_, _type_2, _type_3);
                   }
                 }
               }
             }
           };
-          _typeSelect.forEach(_function);
+          EcoreUtil2.<Method>typeSelect(cl.getMembers(), Method.class).forEach(_function);
         }
       };
       inheritedMethods.forEach(_function_1);

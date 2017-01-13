@@ -11,7 +11,6 @@ import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -567,15 +566,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleForEach(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
-    EClass _eClass = obj.eClass();
-    EList<EStructuralFeature> _eStructuralFeatures = _eClass.getEStructuralFeatures();
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
       public void accept(final EStructuralFeature it) {
         /* G |- it */
         type1Internal(G, _trace_, it);
       }
     };
-    _eStructuralFeatures.forEach(_function);
+    obj.eClass().getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -599,14 +596,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleForEachWithBooleanExpressionInside(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
       public void accept(final EStructuralFeature it) {
         String _name = it.getName();
         /* (!Objects.equal(_name, "foo")); */
       }
     };
-    _eStructuralFeatures.forEach(_function);
+    eClass.getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
   }
   
@@ -643,8 +639,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         String error = "this is an error";
         EClass _eClass = o2.eClass();
         EObject source = _eClass;
-        EClass _eClass_1 = o2.eClass();
-        EStructuralFeature _eContainingFeature = _eClass_1.eContainingFeature();
+        EStructuralFeature _eContainingFeature = o2.eClass().eContainingFeature();
         EStructuralFeature feature = _eContainingFeature;
         throwForExplicitFail(error, new ErrorInformation(source, feature));
       }
@@ -672,21 +667,18 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature it) {
         String _name = it.getName();
         return Boolean.valueOf((!Objects.equal(_name, "foo")));
       }
     };
-    boolean _forall = IterableExtensions.<EStructuralFeature>forall(_eStructuralFeatures, _function);
+    boolean _forall = IterableExtensions.<EStructuralFeature>forall(eClass.getEStructuralFeatures(), _function);
     /* eClass.EStructuralFeatures.forall [ it.name != 'foo' ] */
     if (!_forall) {
       sneakyThrowRuleFailedException("eClass.EStructuralFeatures.forall [ it.name != \'foo\' ]");
     }
-    EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
-    EStructuralFeature _get = _eStructuralFeatures_1.get(0);
-    String _name = _get.getName();
+    String _name = eClass.getEStructuralFeatures().get(0).getName();
     /* eClass.EStructuralFeatures.get(0).name != 'foo' */
     if (!(!Objects.equal(_name, "foo"))) {
       sneakyThrowRuleFailedException("eClass.EStructuralFeatures.get(0).name != \'foo\'");

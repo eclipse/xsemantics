@@ -11,7 +11,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.test.fj.first.FjFirstTypeSystem;
-import java.util.List;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -112,9 +111,6 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
   }
   
   protected Result<Boolean> applyRuleExistsSubtypeWithLambda(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
-    it.xsemantics.example.fj.fj.Class _classref = left.getClassref();
-    List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, _classref);
-    List<it.xsemantics.example.fj.fj.Class> _reverseView = ListExtensions.<it.xsemantics.example.fj.fj.Class>reverseView(_superclasses);
     final Function1<it.xsemantics.example.fj.fj.Class, Boolean> _function = new Function1<it.xsemantics.example.fj.fj.Class, Boolean>() {
       public Boolean apply(final it.xsemantics.example.fj.fj.Class it) {
         /* G |- it <| right.classref */
@@ -124,7 +120,7 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
       }
     };
     /* left.classref.superclasses.reverseView.exists[ G |- it <| right.classref ] */
-    if (!IterableExtensions.<it.xsemantics.example.fj.fj.Class>exists(_reverseView, _function)) {
+    if (!IterableExtensions.<it.xsemantics.example.fj.fj.Class>exists(ListExtensions.<it.xsemantics.example.fj.fj.Class>reverseView(this.superclassesInternal(_trace_, left.getClassref())), _function)) {
       sneakyThrowRuleFailedException("left.classref.superclasses.reverseView.exists[ G |- it <| right.classref ]");
     }
     return new Result<Boolean>(true);

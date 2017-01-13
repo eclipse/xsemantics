@@ -4,8 +4,8 @@ import com.google.inject.Inject
 import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.generator.XsemanticsErrorSpecificationGenerator
 import it.xsemantics.dsl.xsemantics.ErrorSpecification
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,8 +40,7 @@ EObject source = c;''', "source")
 			testFiles.testJudgmentDescriptionsWithErrorSpecification,
 '''
 
-EClass _eClass = c.eClass();
-EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+EStructuralFeature _eContainingFeature = c.eClass().eContainingFeature();
 EStructuralFeature feature = _eContainingFeature;''', "feature")
 	}
 	

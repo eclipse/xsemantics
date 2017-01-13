@@ -1,18 +1,19 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
+import com.google.inject.Injector
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleApplicationTrace
 import it.xsemantics.runtime.TraceUtils
 import it.xsemantics.runtime.XsemanticsRuntimeSystem
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.TemporaryFolder
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
+import org.eclipse.xtext.xbase.testing.TemporaryFolder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +35,9 @@ class XsemanticsCompilerTest extends XsemanticsBaseTest {
 	@Inject extension ReflectExtensions
 	
 	@Inject extension TraceUtils
+
+	@Inject
+	var Injector injector
 	
 	@Test
 	def testRuleInvocation() {
@@ -302,7 +306,7 @@ newArrayList("first", "second")
 			// don't assume that the compiled system is the first one
 			val systemClass = getCompiledClass("my.test.ruleinvokations.System")
 			val obj = systemClass.newInstance
-			getOrCreateInjectorProvider.injector.injectMembers(obj)
+			injector.injectMembers(obj)
 			obj.invoke("init")
 			instantiated.set(obj as XsemanticsRuntimeSystem)
 		]

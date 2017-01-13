@@ -6,8 +6,8 @@ import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.XsemanticsCachedData
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
 import it.xsemantics.runtime.caching.XsemanticsCacheTraceLoggerListener
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith

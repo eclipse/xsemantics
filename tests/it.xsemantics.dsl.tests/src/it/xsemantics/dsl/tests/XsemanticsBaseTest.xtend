@@ -23,13 +23,11 @@ import it.xsemantics.dsl.xsemantics.XsemanticsSystem
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.junit4.IInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.internal.InjectorProviders
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBlockExpression
@@ -39,7 +37,6 @@ import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result
 import org.junit.runner.RunWith
-import org.junit.runners.model.TestClass
 
 import static org.junit.Assert.*
 
@@ -330,10 +327,6 @@ abstract class XsemanticsBaseTest {
 
 	def getRuleInvocations(EObject element) {
 		EcoreUtil2::getAllContentsOfType(element, typeof(RuleInvocation))
-	}
-
-	def protected IInjectorProvider getOrCreateInjectorProvider() {
-		return InjectorProviders.getOrCreateInjectorProvider(new TestClass(getClass()));
 	}
 
 	protected def assertNoValidationErrors(Result it) {

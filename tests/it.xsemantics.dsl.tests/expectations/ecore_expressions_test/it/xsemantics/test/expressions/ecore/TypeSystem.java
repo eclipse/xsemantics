@@ -215,9 +215,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleTestForThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass cl = null; // output parameter
-    EClass _eClass = obj.eClass();
-    EClass _clone = this.<EClass>clone(_eClass);
-    cl = _clone;
+    cl = this.<EClass>clone(obj.eClass());
     return new Result<EClass>(cl);
   }
 }
