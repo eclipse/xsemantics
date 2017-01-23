@@ -193,6 +193,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<xtext.maven.skip>false</xtext.maven.skip>
 				<bintray.package>snapshots</bintray.package>
 				<bintray.base.path>snapshots/</bintray.base.path>
 				<site.label>Xsemantics Snapshot Site</site.label>
