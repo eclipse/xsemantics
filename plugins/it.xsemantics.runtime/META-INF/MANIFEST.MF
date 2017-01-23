@@ -15,5 +15,6 @@ Bundle-ActivationPolicy: lazy
 Export-Package: it.xsemantics.runtime,
  it.xsemantics.runtime.caching,
  it.xsemantics.runtime.caching.util,
+ it.xsemantics.runtime.internal;x-internal:=true,
  it.xsemantics.runtime.validation
 Import-Package: org.apache.log4j
