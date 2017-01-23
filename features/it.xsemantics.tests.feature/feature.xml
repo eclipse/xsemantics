@@ -26,10 +26,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.pde"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.swtbot.eclipse"
          version="0.0.0"/>
 
@@ -39,10 +35,6 @@
 
    <includes
          id="org.eclipse.rcp"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.platform"
          version="0.0.0"/>
 
    <includes
@@ -93,6 +85,13 @@
 
    <plugin
          id="it.xsemantics.dsl.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.pde.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
