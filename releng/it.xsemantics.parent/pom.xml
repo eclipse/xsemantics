@@ -148,6 +148,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<xtext.maven.skip>false</xtext.maven.skip>
 				<skipTests>true</skipTests>
 			</properties>
 			<build>
