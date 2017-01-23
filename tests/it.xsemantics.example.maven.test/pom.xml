@@ -9,9 +9,9 @@
 	<packaging>eclipse-plugin</packaging>
 
 	<properties>
-		<tycho-version>0.24.0</tycho-version>
-		<xtext.version>2.9.1</xtext.version>
-		<xsemantics.version>1.9.0</xsemantics.version>
+		<tycho-version>0.25.0</tycho-version>
+		<xtext.version>2.10.0</xtext.version>
+		<xsemantics.version>1.10.0</xsemantics.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -31,17 +31,17 @@
 				resolve xsemantics runtime dependencies from the p2 repository -->
 			<id>Xsemantics</id>
 			<layout>p2</layout>
-			<url>http://sourceforge.net/projects/xsemantics/files/updates/releases</url>
+			<url>https://dl.bintray.com/lorenzobettini/xsemantics/updates/</url>
 		</repository>
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/mars</url>
+			<url>http://download.eclipse.org/releases/neon</url>
 		</repository>
 		<repository>
 			<id>Xtext Update Site</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${xtext.version}</url>
 		</repository>
 	</repositories>
 
