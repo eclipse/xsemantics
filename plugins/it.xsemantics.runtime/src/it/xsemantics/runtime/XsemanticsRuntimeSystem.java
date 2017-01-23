@@ -23,6 +23,8 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import it.xsemantics.runtime.internal.PatchedPolymorphicDispatcher;
+
 /**
  * All generated systems will inherit from this class.
  * 
@@ -70,7 +72,7 @@ public class XsemanticsRuntimeSystem {
 
 	protected <T> PolymorphicDispatcher<T> buildPolymorphicDispatcher(
 			final String methodName, int numOfArgs) {
-		return new PolymorphicDispatcher<T>(
+		return new PatchedPolymorphicDispatcher<T>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -83,7 +85,7 @@ public class XsemanticsRuntimeSystem {
 	protected <T> PolymorphicDispatcher<Result<T>> buildPolymorphicDispatcher1(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		return new PolymorphicDispatcher<Result<T>>(
+		return new PatchedPolymorphicDispatcher<Result<T>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -98,7 +100,7 @@ public class XsemanticsRuntimeSystem {
 	protected <F, S> PolymorphicDispatcher<Result2<F, S>> buildPolymorphicDispatcher2(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		return new PolymorphicDispatcher<Result2<F, S>>(
+		return new PatchedPolymorphicDispatcher<Result2<F, S>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
@@ -114,7 +116,7 @@ public class XsemanticsRuntimeSystem {
 	protected <F, S, T> PolymorphicDispatcher<Result3<F, S, T>> buildPolymorphicDispatcher3(
 			String methodName, int numOfArgs, final String judgmentSymbol,
 			final String... relationSymbols) {
-		return new PolymorphicDispatcher<Result3<F, S, T>>(
+		return new PatchedPolymorphicDispatcher<Result3<F, S, T>>(
 				Collections.singletonList(this), getPredicate(methodName,
 						numOfArgs)) {
 			@Override
