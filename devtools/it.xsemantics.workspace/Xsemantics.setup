@@ -248,7 +248,7 @@
       <requirement
           name="org.eclipse.xtext.xdoc.feature.feature.group"/>
       <repository
-          url="http://sourceforge.net/projects/xtext-xdoc/files/updates-2.7"/>
+          url="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
       <repository
           url="${xtext.site}"/>
       <repository
