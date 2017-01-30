@@ -7,10 +7,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -34,7 +37,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	private List<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
+	private Collection<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
 
 	private final ErrorHandler<RT> handler;
 
@@ -163,21 +166,8 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		return result;
 	}
 
-	private List<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
-		ArrayList<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
-		for (Object target : targets) {
-			Class<?> current = target.getClass();
-			while (current != Object.class) {
-				Method[] methods = current.getDeclaredMethods();
-				for (Method method : methods) {
-					if (methodFilter.apply(method)) {
-						cachedDescriptors.add(createMethodDesc(target, method));
-					}
-				}
-				current = current.getSuperclass();
-			}
-		}
-		Collections.sort(cachedDescriptors, new Comparator<MethodDesc>() {
+	private Collection<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
+		SortedSet<MethodDesc> cachedDescriptors = new TreeSet<MethodDesc>(new Comparator<MethodDesc>() {
 			@Override
 			public int compare(MethodDesc o1, MethodDesc o2) {
 				int compare = PatchedPolymorphicDispatcher.this.compare(o1, o2);
@@ -199,6 +189,18 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 				return compare;
 			}
 		});
+		for (Object target : targets) {
+			Class<?> current = target.getClass();
+			while (current != Object.class) {
+				Method[] methods = current.getDeclaredMethods();
+				for (Method method : methods) {
+					if (methodFilter.apply(method)) {
+						cachedDescriptors.add(createMethodDesc(target, method));
+					}
+				}
+				current = current.getSuperclass();
+			}
+		}
 		return cachedDescriptors;
 	}
 
