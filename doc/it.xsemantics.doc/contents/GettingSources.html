@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Getting Sources</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="00-Main.html" title="">
+</head>
+<body>
+<a name="GettingSources"></a>
+<h1>Getting Sources</h1>
+<p>
+If you want to get the sources of Xsemantics,
+for instance, to contribute new features and patches, you can get them
+via Git.  However, we strongly reccomend to
+use the automatic procedure detailed below.
+</p>
+<p>
+We use <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer">Oomph</a> for provisioning
+a full Eclipse IDE and workspace setup for Xsemantics.
+</p>
+<p>
+<ul>
+	<li>
+		Download and start Oomph: <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer">https://wiki.eclipse.org/Eclipse_Oomph_Installer</a>
+	</li>
+	<li>
+		On the initial page, click on the Switch to advanced mode button in the top right
+	</li>
+	<li>
+		On the Product page, select "Eclipse IDE for Eclipse Committers" (you can also select another product if you want,
+		but we prefer to start with this minimal product and the Oomph setup will install all the needed plug-ins).
+	</li>
+	<li>
+		On the Projects page, expand the node "Github Projects".
+	</li>
+	<li>
+		Double-click on "Xsemantics", and choose the Stream (usually you choose "master", which is the default).
+	</li>
+	<li>
+		Choose your preferred installation settings on the Variables page:
+		in particular for "Xsemantics Github repository", choose read or read/write.
+	</li>
+	<li>
+		Then specify your Github user ID and password (these are used for Mylyn issues).
+		Note that the "Authenticate..." button is currently not working
+		(<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=479309">https://bugs.eclipse.org/bugs/show_bug.cgi?id=479309</a>).
+	</li>
+</ul>
+</p>
+<p>
+Press next and finish.
+This will first create an Eclipse installation with all the needed plug-ins
+and then it will start the new installed Eclipse (press Finish to close the first installation dialog).
+The new installed Eclipse will automatically setup the workspace and you will have to wait for this procedure
+to end (you can click on the animated arrow icon on the status bar to show the progress).
+During this procedure you may be asked for additional passwords (especially if you use the Eclipse
+feature for storing passwords in a keyring).
+</p>
+</body>
+</html>
