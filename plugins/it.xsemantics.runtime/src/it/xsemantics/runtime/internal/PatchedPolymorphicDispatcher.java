@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -167,28 +164,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 	}
 
 	private Collection<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
-		SortedSet<MethodDesc> cachedDescriptors = new TreeSet<MethodDesc>(new Comparator<MethodDesc>() {
-			@Override
-			public int compare(MethodDesc o1, MethodDesc o2) {
-				int compare = PatchedPolymorphicDispatcher.this.compare(o1, o2);
-				if (compare != 0) {
-					return compare;
-				}
-				Class<?>[] p1 = o1.getParameterTypes();
-				Class<?>[] p2 = o2.getParameterTypes();
-				int to = Math.min(p1.length, p2.length);
-
-				for (int i = 0; i < to; i++) {
-					final String n1 = p1[i].getName();
-					final String n2 = p2[i].getName();
-					compare = n1.compareTo(n2);
-					if (compare != 0) {
-						return compare;
-					}
-				}
-				return compare;
-			}
-		});
+		Collection<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
 			while (current != Object.class) {
