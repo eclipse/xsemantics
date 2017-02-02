@@ -51,7 +51,7 @@
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.11.0-SNAPSHOT</xtext.version>
+		<xtext.version>2.11.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
 		<mwe2Version>[2.9.0,3.0)</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
@@ -110,7 +110,7 @@
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>xtext-nightly</target-file-name>
+		<target-file-name>neon-xtext-2.11</target-file-name>
 		
 		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
 		
