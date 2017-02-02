@@ -34,7 +34,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	private Collection<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
+	private Collection<MethodDesc> declaredMethods;
 
 	private final ErrorHandler<RT> handler;
 
@@ -47,7 +47,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.handler = handler;
-		declaredMethodsOrderedBySpecificParameterType = getDeclaredMethodsOrderedBySpecificParameterType();
+		declaredMethods = getDeclaredMethods();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 				@Override
 				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
-					Iterator<MethodDesc> iterator = declaredMethodsOrderedBySpecificParameterType.iterator();
+					Iterator<MethodDesc> iterator = declaredMethods.iterator();
 					while (iterator.hasNext()) {
 						MethodDesc methodDesc = iterator.next();
 						if (methodDesc.isInvokeable(paramTypes)) {
@@ -163,7 +163,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		return result;
 	}
 
-	private Collection<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
+	private Collection<MethodDesc> getDeclaredMethods() {
 		Collection<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
