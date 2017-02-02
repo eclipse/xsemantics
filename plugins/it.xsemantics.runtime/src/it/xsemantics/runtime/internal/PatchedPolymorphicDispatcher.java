@@ -7,8 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	private List<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
+	private Collection<MethodDesc> declaredMethods;
 
 	private final ErrorHandler<RT> handler;
 
@@ -47,7 +47,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.handler = handler;
-		declaredMethodsOrderedBySpecificParameterType = getDeclaredMethodsOrderedBySpecificParameterType();
+		declaredMethods = getDeclaredMethods();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 				@Override
 				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
-					Iterator<MethodDesc> iterator = declaredMethodsOrderedBySpecificParameterType.iterator();
+					Iterator<MethodDesc> iterator = declaredMethods.iterator();
 					while (iterator.hasNext()) {
 						MethodDesc methodDesc = iterator.next();
 						if (methodDesc.isInvokeable(paramTypes)) {
@@ -163,8 +163,8 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		return result;
 	}
 
-	private List<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
-		ArrayList<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
+	private Collection<MethodDesc> getDeclaredMethods() {
+		Collection<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
 			while (current != Object.class) {
@@ -177,28 +177,6 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 				current = current.getSuperclass();
 			}
 		}
-		Collections.sort(cachedDescriptors, new Comparator<MethodDesc>() {
-			@Override
-			public int compare(MethodDesc o1, MethodDesc o2) {
-				int compare = PatchedPolymorphicDispatcher.this.compare(o1, o2);
-				if (compare != 0) {
-					return compare;
-				}
-				Class<?>[] p1 = o1.getParameterTypes();
-				Class<?>[] p2 = o2.getParameterTypes();
-				int to = Math.min(p1.length, p2.length);
-
-				for (int i = 0; i < to; i++) {
-					final String n1 = p1[i].getName();
-					final String n2 = p2[i].getName();
-					compare = n1.compareTo(n2);
-					if (compare != 0) {
-						return compare;
-					}
-				}
-				return compare;
-			}
-		});
 		return cachedDescriptors;
 	}
 
