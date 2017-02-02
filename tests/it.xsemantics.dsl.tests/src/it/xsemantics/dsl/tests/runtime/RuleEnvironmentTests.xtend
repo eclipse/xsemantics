@@ -3,8 +3,8 @@ package it.xsemantics.dsl.tests.runtime
 import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
 import it.xsemantics.runtime.RuleEnvironment
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 

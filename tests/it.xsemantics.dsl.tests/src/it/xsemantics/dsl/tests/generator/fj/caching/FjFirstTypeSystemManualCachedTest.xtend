@@ -11,9 +11,9 @@ import it.xsemantics.runtime.RuleEnvironment
 import it.xsemantics.runtime.StringRepresentation
 import it.xsemantics.runtime.TraceUtils
 import it.xsemantics.test.fj.first.FjFirstTypeSystem
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 

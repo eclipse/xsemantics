@@ -2,8 +2,8 @@ package it.xsemantics.example.expressions.performance
 
 import com.google.inject.Inject
 import it.xsemantics.example.expressions.expressions.Model
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 
 abstract class AbstractExpressionsPerformanceTest {
 	@Inject extension ParseHelper<Model>

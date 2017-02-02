@@ -1,14 +1,14 @@
 package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
-import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import java.util.List
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.TemporaryFolder
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.TemporaryFolder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -666,8 +666,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String error = (("this " + c) + " made an error!");
     EObject source = c;
-    EClass _eClass = c.eClass();
-    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature _eContainingFeature = c.eClass().eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
@@ -974,9 +973,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     if (!_add) {
       sneakyThrowRuleFailedException("strings.add(myString)");
     }
-    EClass _eClass = o.eClass();
     /* eClasses.add(o.eClass) */
-    if (!this.eClasses.add(_eClass)) {
+    if (!this.eClasses.add(o.eClass())) {
       sneakyThrowRuleFailedException("eClasses.add(o.eClass)");
     }
     return new Result<EClass>(c);
@@ -999,7 +997,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -1080,8 +1077,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private EStructuralFeature _applyRuleTwoExpressionsInConclusion_2(final RuleEnvironment G, final EClass cl) throws RuleFailedException {
-    EList<EStructuralFeature> _eAllStructuralFeatures = cl.getEAllStructuralFeatures();
-    EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eAllStructuralFeatures);
+    EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(cl.getEAllStructuralFeatures());
     return _head;
   }
 }
@@ -1102,7 +1098,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -1175,8 +1170,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result2<EObject, EStructuralFeature> applyRuleTwoExpressionsInConclusion(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass cl) throws RuleFailedException {
-    String _name = cl.getName();
-    InputOutput.<String>println(_name);
+    InputOutput.<String>println(cl.getName());
     return new Result2<EObject, EStructuralFeature>(_applyRuleTwoExpressionsInConclusion_1(G, cl), _applyRuleTwoExpressionsInConclusion_2(G, cl));
   }
   
@@ -1185,8 +1179,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   private EStructuralFeature _applyRuleTwoExpressionsInConclusion_2(final RuleEnvironment G, final EClass cl) throws RuleFailedException {
-    EList<EStructuralFeature> _eAllStructuralFeatures = cl.getEAllStructuralFeatures();
-    EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(_eAllStructuralFeatures);
+    EStructuralFeature _head = IterableExtensions.<EStructuralFeature>head(cl.getEAllStructuralFeatures());
     return _head;
   }
 }
@@ -1337,8 +1330,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass _xblockexpression = null;
     {
       InputOutput.<TypeSystem>println(this);
-      EObject _clone = this.<EObject>clone(o);
-      _xblockexpression = (_clone.eClass());
+      _xblockexpression = (this.<EObject>clone(o).eClass());
     }
     return _xblockexpression;
   }
@@ -1635,8 +1627,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
               /* { println(previousFailure) } or {className == 'foobar'} */
               {
                 try {
-                  RuleFailedException _previousFailure = previousFailure;
-                  InputOutput.<RuleFailedException>println(_previousFailure);
+                  InputOutput.<RuleFailedException>println(previousFailure);
                 } catch (Exception e_2) {
                   previousFailure = extractRuleFailedException(e_2);
                   /* className == 'foobar' */
@@ -1671,13 +1662,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
               /* { println(previousFailure) } or { fail error "this is the previous error: " + previousFailure.message source object } */
               {
                 try {
-                  RuleFailedException _previousFailure_1 = previousFailure;
-                  InputOutput.<RuleFailedException>println(_previousFailure_1);
+                  InputOutput.<RuleFailedException>println(previousFailure);
                 } catch (Exception e_5) {
                   previousFailure = extractRuleFailedException(e_5);
                   /* fail error "this is the previous error: " + previousFailure.message source object */
-                  RuleFailedException _previousFailure_2 = previousFailure;
-                  String _message = _previousFailure_2.getMessage();
+                  String _message = previousFailure.getMessage();
                   String _plus = ("this is the previous error: " + _message);
                   String error = _plus;
                   EObject source = object;
@@ -1700,8 +1689,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         } catch (Exception e_6) {
           previousFailure = extractRuleFailedException(e_6);
           /* fail error "this is the previous error trace: " + previousFailure.failureTraceAsString source object */
-          RuleFailedException _previousFailure_3 = previousFailure;
-          String _failureTraceAsString = this.traceUtils.failureTraceAsString(_previousFailure_3);
+          String _failureTraceAsString = this.traceUtils.failureTraceAsString(previousFailure);
           String _plus_1 = ("this is the previous error trace: " + _failureTraceAsString);
           String error_1 = _plus_1;
           EObject source_1 = object;
@@ -2074,7 +2062,6 @@ import it.xsemantics.runtime.RuleApplicationTrace;
 import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
-import java.util.ArrayList;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -2159,8 +2146,8 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
         final Consumer<Object> _function = new Consumer<Object>() {
+          @Override
           public void accept(final Object dummy) {
             /* empty |- eClass : var String result or true */
             {
@@ -2180,7 +2167,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
             }
           }
         };
-        _newArrayList.forEach(_function);
+        CollectionLiterals.<Object>newArrayList().forEach(_function);
       }
     }
     return new Result<String>(_applyRuleTypeFoo_1(G, it));
@@ -2776,8 +2763,7 @@ public class ExtendedTypeSystemWithJudgmentOverride extends ExtendedTypeSystem2 
     String _plus_1 = (_plus + _stringRep_1);
     String error = _plus_1;
     EObject source = c1;
-    EClass _eClass = c1.eClass();
-    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature _eContainingFeature = c1.eClass().eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
@@ -2989,8 +2975,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String error = (("this " + c) + " made an error!");
     EObject source = c;
-    EClass _eClass = c.eClass();
-    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature _eContainingFeature = c.eClass().eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
     Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
@@ -3069,8 +3054,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   private void typeEClassThrowException(final Exception e_applyRuleTypeEClass, final EClass c) throws RuleFailedException {
     String error = "unexpected error!";
     EObject source = c;
-    EClass _eClass = c.eClass();
-    EStructuralFeature _eContainingFeature = _eClass.eContainingFeature();
+    EStructuralFeature _eContainingFeature = c.eClass().eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
     Object data = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList("some", "additional", "data", c));
     throwRuleFailedException(error,
@@ -3649,17 +3633,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     RuleEnvironment _ruleEnvironment_1 = new RuleEnvironment(G);
     typeInternal(_ruleEnvironment_1, _trace_, eClass, object);
     /* environmentComposition( emptyEnvironment(), environmentComposition( G, environmentComposition( emptyEnvironment(), G ) ) ) |- eClass : object */
-    RuleEnvironment _emptyEnvironment = this.emptyEnvironment();
-    RuleEnvironment _emptyEnvironment_1 = this.emptyEnvironment();
-    RuleEnvironment _environmentComposition = this.environmentComposition(_emptyEnvironment_1, G);
-    RuleEnvironment _environmentComposition_1 = this.environmentComposition(G, _environmentComposition);
-    RuleEnvironment _environmentComposition_2 = this.environmentComposition(_emptyEnvironment, _environmentComposition_1);
-    typeInternal(_environmentComposition_2, _trace_, eClass, object);
+    RuleEnvironment _environmentComposition = this.environmentComposition(
+      this.emptyEnvironment(), this.environmentComposition(G, this.environmentComposition(
+      this.emptyEnvironment(), G)));
+    typeInternal(_environmentComposition, _trace_, eClass, object);
     /* emptyEnvironment, 'a' <- object, new it.xsemantics.runtime.RuleEnvironment |- eClass : object */
-    RuleEnvironment _emptyEnvironment_2 = this.emptyEnvironment();
+    RuleEnvironment _emptyEnvironment = this.emptyEnvironment();
     RuleEnvironment _ruleEnvironment_2 = new RuleEnvironment();
     typeInternal(environmentComposition(
-      _emptyEnvironment_2, environmentComposition(
+      _emptyEnvironment, environmentComposition(
         environmentEntry("a", object), _ruleEnvironment_2
       )
     ), _trace_, eClass, object);
@@ -4117,8 +4099,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o) throws RuleFailedException {
     EClass c = null; // output parameter
     this.objectClassInternal(_trace_, o);
-    EClass _objectClass = this.objectClassInternal(_trace_, o);
-    c = _objectClass;
+    c = this.objectClassInternal(_trace_, o);
     return new Result<EClass>(c);
   }
 }
@@ -4431,7 +4412,6 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -4636,26 +4616,26 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
         TypeSystem.this.overridesInternal(_trace_, it);
       }
     };
-    _eStructuralFeatures.forEach(_function);
-    EList<EStructuralFeature> _eStructuralFeatures_1 = eClass.getEStructuralFeatures();
+    eClass.getEStructuralFeatures().forEach(_function);
     final Consumer<EStructuralFeature> _function_1 = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
-        EList<EStructuralFeature> _eStructuralFeatures = eClass.getEStructuralFeatures();
         final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+          @Override
           public void accept(final EStructuralFeature it) {
             TypeSystem.this.isValueInternal(_trace_, it);
           }
         };
-        _eStructuralFeatures.forEach(_function);
+        eClass.getEStructuralFeatures().forEach(_function);
       }
     };
-    _eStructuralFeatures_1.forEach(_function_1);
+    eClass.getEStructuralFeatures().forEach(_function_1);
     return new Result<Boolean>(true);
   }
 }
@@ -4678,7 +4658,6 @@ import it.xsemantics.runtime.RuleEnvironment;
 import it.xsemantics.runtime.RuleFailedException;
 import it.xsemantics.runtime.XsemanticsRuntimeSystem;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -4729,8 +4708,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected Result<Boolean> eObjectEClassCheckInternal(final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
-    EClass _eClass = obj.eClass();
-    final EClass eClass = this.<EClass>clone(_eClass);
+    final EClass eClass = this.<EClass>clone(obj.eClass());
     return new Result<Boolean>(true);
   }
   
@@ -4745,16 +4723,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
   
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
-    EClass _eClass = c.eClass();
-    EClass _clone = this.<EClass>clone(_eClass);
+    EClass _clone = this.<EClass>clone(c.eClass());
     String _plus = ("this " + _clone);
     String _plus_1 = (_plus + " made an error!");
     String error = _plus_1;
     EObject _clone_1 = this.<EObject>clone(c);
     EObject source = _clone_1;
-    EClass _eClass_1 = c.eClass();
-    EClass _clone_2 = this.<EClass>clone(_eClass_1);
-    EStructuralFeature _eContainingFeature = _clone_2.eContainingFeature();
+    EStructuralFeature _eContainingFeature = this.<EClass>clone(c.eClass()).eContainingFeature();
     EStructuralFeature feature = _eContainingFeature;
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
@@ -4781,18 +4756,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    EClass _eClass = obj.eClass();
-    EClass _clone = this.<EClass>clone(_eClass);
-    eClass = _clone;
-    EList<EStructuralFeature> _eAllStructuralFeatures = eClass.getEAllStructuralFeatures();
+    eClass = this.<EClass>clone(obj.eClass());
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
-        EClass _eClass = obj.eClass();
-        final EClass e = TypeSystem.this.<EClass>clone(_eClass);
+        final EClass e = TypeSystem.this.<EClass>clone(obj.eClass());
         InputOutput.<EClass>println(e);
       }
     };
-    _eAllStructuralFeatures.forEach(_function);
+    eClass.getEAllStructuralFeatures().forEach(_function);
     return new Result<EClass>(eClass);
   }
 }
@@ -5392,10 +5364,10 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			assertNoValidationErrors
 
 			for (e : allGeneratedResources.entrySet) {
-				if (e.key.endsWith("Validator.java") && expectedValidator != null) {
+				if (e.key.endsWith("Validator.java") && expectedValidator !== null) {
 					// check the expected Java code for the validator
 					assertEqualsStrings(expectedValidator, e.value)
-				} else if (!e.key.endsWith("Validator.java") && expected != null) {
+				} else if (!e.key.endsWith("Validator.java") && expected !== null) {
 					// check the expected Java code for the system
 					assertEqualsStrings(expected, e.value)
 				}
@@ -5413,11 +5385,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 			assertNoValidationErrors
 
 			for (e : allGeneratedResources.entrySet) {
-				if (prefix == null || e.key.contains(prefix)) {
-					if (e.key.endsWith("Validator.java") && expectedValidator != null) {
+				if (prefix === null || e.key.contains(prefix)) {
+					if (e.key.endsWith("Validator.java") && expectedValidator !== null) {
 						// check the expected Java code for the validator
 						assertEqualsStrings(expectedValidator, e.value)
-					} else if (!e.key.endsWith("Validator.java") && expected != null) {
+					} else if (!e.key.endsWith("Validator.java") && expected !== null) {
 						// check the expected Java code for the system
 						assertEqualsStrings(expected, e.value)
 					}

@@ -58,7 +58,7 @@ auxiliary typesubstitution(TypeSubstitutions substitutions, Type type)
 auxiliary typesubstitution(TypeSubstitutions substitutions, TypeVariable variable)
 {
 	var mapped = substitutions.mapped(variable.typevarName)
-	if (mapped != null) {
+	if (mapped !== null) {
 		val result = EcoreUtil.copy(mapped)
 		typesubstitution(substitutions, result) // recursive
 	} else
@@ -142,7 +142,7 @@ rule ParameterType
 	G |~ Parameter param : Type type
 from {
 	{
-		param.type != null
+		param.type !== null
 		type = EcoreUtil.copy(param.type)
 	}
 	or

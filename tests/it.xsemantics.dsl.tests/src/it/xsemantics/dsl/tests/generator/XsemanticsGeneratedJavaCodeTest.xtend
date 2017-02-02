@@ -2,14 +2,14 @@ package it.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import it.xsemantics.dsl.tests.XsemanticsBaseTest
+import it.xsemantics.dsl.tests.XsemanticsInjectorProvider
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.TemporaryFolder
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.TemporaryFolder
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

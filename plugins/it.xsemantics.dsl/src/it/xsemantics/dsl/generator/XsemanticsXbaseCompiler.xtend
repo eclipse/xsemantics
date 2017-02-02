@@ -64,7 +64,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 				return appendable
 			}
 			AuxiliaryFunction: {
-				if (rule.getAuxiliaryDescription.type != null)
+				if (rule.getAuxiliaryDescription.type !== null)
 					return super.compile(obj, appendable, expectedReturnType, declaredExceptions)
 				
 				// else we must put an explicit return true, since
@@ -164,7 +164,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		// data has been introduced recently, and I'd like to avoid
 		// to update all the generated test code, so we avoid passing
 		// the data to ErrorInformation if we don't need to
-		if (errorSpecification.getData() == null) {
+		if (errorSpecification.getData() === null) {
 			return "";
 		}
 		
@@ -178,7 +178,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	def protected String compileAndAssignToLocalVariable(
 			XExpression expression, ITreeAppendable b,
 			JvmTypeReference expectedType, String proposedVariable) {
-		if (expression == null)
+		if (expression === null)
 			return "null";
 
 		toJavaStatement(expression, b, true);
@@ -311,7 +311,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	override protected void appendFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
 		val feature = call.getFeature();
 		val auxiliaryDescription = feature.associatedAuxiliaryDescription();
-		if (auxiliaryDescription == null) {
+		if (auxiliaryDescription === null) {
 			super.appendFeatureCall(call, b);
 			return;
 		}
@@ -332,7 +332,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 						call.getMemberCallTarget()
 					else
 						null;
-				val shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
+				val shouldBreakFirstArgument = receiver === null || arguments.get(0) != receiver;
 				appendArguments(arguments, b, shouldBreakFirstArgument);
 			}
 			b.append(")");
@@ -401,7 +401,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 
 	def private previousFailureMustBeDeclared(OrExpression e) {
 		var container = e.eContainer
-		while (container != null) {
+		while (container !== null) {
 			// an outer or expression already declares
 			// previousFailure variable in the generated code
 			if (container instanceof OrExpression) {
@@ -425,7 +425,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			boolean isReference) {
 		generateCommentWithOriginalCode(fail, b);
 		val errorSpecification = fail.getError();
-		if (errorSpecification == null) {
+		if (errorSpecification === null) {
 			newLine(b);
 			b.append("throwForExplicitFail();");
 		} else {

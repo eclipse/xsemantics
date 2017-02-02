@@ -144,8 +144,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    EClass _eClass = obj.eClass();
-    eClass = _eClass;
+    eClass = obj.eClass();
     return new Result<EClass>(eClass);
   }
   
@@ -168,8 +167,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<EClass> applyRuleEObjectEClassWithErrorSpecification(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
-    EClass _eClass = obj.eClass();
-    eClass = _eClass;
+    eClass = obj.eClass();
     return new Result<EClass>(eClass);
   }
   

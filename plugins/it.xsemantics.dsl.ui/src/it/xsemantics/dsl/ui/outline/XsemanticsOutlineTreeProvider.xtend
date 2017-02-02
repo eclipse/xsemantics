@@ -42,8 +42,8 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		createNodesFor(parentNode, checkrules)
 		// nodes for auxiliary functions and rules that do not have a description
 		// (of course this will represent errors in the input program)
-		createNodesFor(parentNode, auxiliaryFunctions.filter[get_auxiliaryDescription == null])
-		createNodesFor(parentNode, rules.filter[get_judgment == null])
+		createNodesFor(parentNode, auxiliaryFunctions.filter[get_auxiliaryDescription === null])
+		createNodesFor(parentNode, rules.filter[get_judgment === null])
 	}
 	
 	def private <T extends EObject> void createNodesFor(IOutlineNode parentNode, Iterable<T> items){
@@ -93,7 +93,7 @@ public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		var region = startRegion
 		for(EObject eo: items){
 			val parserNode = NodeModelUtils.getNode(eo);
-			if( parserNode != null )
+			if( parserNode !== null )
 				region = region.merge(parserNode.textRegion)
 		}
 		region

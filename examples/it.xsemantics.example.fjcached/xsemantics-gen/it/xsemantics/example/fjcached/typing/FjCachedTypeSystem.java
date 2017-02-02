@@ -368,13 +368,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
   }
   
   protected Boolean subtypeCacheCondition(final RuleEnvironment environment, final Type left, final Type right) {
-    boolean _and = false;
-    if (!(left instanceof BasicType)) {
-      _and = false;
-    } else {
-      _and = (right instanceof BasicType);
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf(((left instanceof BasicType) && (right instanceof BasicType)));
   }
   
   @Override
@@ -448,9 +442,8 @@ public class FjCachedTypeSystem extends FjTypeSystem {
             }
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
-            List<it.xsemantics.example.fj.fj.Class> _superclasses = this.superclassesInternal(_trace_, left);
             /* superclasses(left).contains(right) */
-            if (!_superclasses.contains(right)) {
+            if (!this.superclassesInternal(_trace_, left).contains(right)) {
               sneakyThrowRuleFailedException("superclasses(left).contains(right)");
             }
           }

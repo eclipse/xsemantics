@@ -1,20 +1,21 @@
 package it.xsemantics.example.fj.tests
 
 import com.google.inject.Inject
+import it.xsemantics.example.fj.fj.Class
 import it.xsemantics.example.fj.fj.Expression
 import it.xsemantics.example.fj.fj.Selection
 import it.xsemantics.example.fj.typing.FjTypeSystem
 import it.xsemantics.runtime.Result
 import it.xsemantics.runtime.RuleEnvironment
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.util.Wrapper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.util.Wrapper
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjInjectorProviderCustom))
@@ -648,9 +649,9 @@ ClassSubtyping: [] |- B <: A
 	
 	def private assertReduceOneStep(Expression exp, CharSequence expected, CharSequence expectedTrace) {
 		val result = assertReduce(exp)
-		if (expected != null)
+		if (expected !== null)
 			Assert::assertEquals(expected.toString, stringRep.string(result.value))
-		if (expectedTrace != null)
+		if (expectedTrace !== null)
 			Assert::assertEquals(
 				expectedTrace.toString,
 				traceUtils.traceAsString(trace)
@@ -688,7 +689,7 @@ ClassSubtyping: [] |- B <: A
 		trace.addToTrace("WELLTYPED METHOD BODY")
 		
 		val typeForThis = fjSystem.fjTypeUtils.createClassType(
-			m.getContainerOfType(typeof(it.xsemantics.example.fj.fj.Class))
+			m.getContainerOfType(typeof(Class))
 		)
 		val methodBodyType = fjSystem.type(
 			new RuleEnvironment(fjSystem.environmentEntry("this", typeForThis)),

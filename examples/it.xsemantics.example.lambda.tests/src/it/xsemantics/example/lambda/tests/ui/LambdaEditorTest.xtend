@@ -5,9 +5,9 @@ import it.xsemantics.example.lambda.LambdaUiInjectorProvider
 import it.xsemantics.example.lambda.lambda.Program
 import it.xsemantics.example.lambda.ui.internal.LambdaActivator
 import it.xsemantics.example.lambda.ui.typing.LambdaTermModifier
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.model.IXtextDocument

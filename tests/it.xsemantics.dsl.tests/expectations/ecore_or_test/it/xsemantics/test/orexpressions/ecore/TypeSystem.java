@@ -126,8 +126,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         }
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        EClass _eClass = object.eClass();
-        String _name_1 = _eClass.getName();
+        String _name_1 = object.eClass().getName();
         boolean _equals_1 = Objects.equal(_name_1, "bar");
         /* object.eClass.name == 'bar' */
         if (!_equals_1) {
@@ -174,8 +173,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
         /* object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
         {
           try {
-            EClass _eClass = object.eClass();
-            String _name_1 = _eClass.getName();
+            String _name_1 = object.eClass().getName();
             boolean _equals_1 = Objects.equal(_name_1, "bar");
             /* object.eClass.name == 'bar' */
             if (!_equals_1) {
@@ -184,8 +182,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);
             final String foo = "foo";
-            EClass _eClass_1 = object.eClass();
-            String _name_2 = _eClass_1.getName();
+            String _name_2 = object.eClass().getName();
             boolean _equals_2 = Objects.equal(_name_2, "bar2");
             /* object.eClass.name == 'bar2' */
             if (!_equals_2) {

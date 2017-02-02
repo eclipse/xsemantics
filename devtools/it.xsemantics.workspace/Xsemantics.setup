@@ -452,6 +452,14 @@
     <description>The dynamic working sets for ${scope.project.label}</description>
   </setupTask>
   <setupTask
+      xsi:type="setup:VariableTask"
+      name="api.baseline.version"
+      value="1.10.0"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="api.baseline.zip"
+      value="it.xsemantics.repository-1.10.0.v20160527-0805.zip"/>
+  <setupTask
       xsi:type="pde:APIBaselineTask"
       name="xsemantics-latest"
       version="${api.baseline.version}"
@@ -529,15 +537,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.version"
-        value="1.10.0"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.zip"
-        value="it.xsemantics.repository-1.10.0.v20160527-0805.zip"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.11.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
@@ -545,7 +545,7 @@
         licenseConfirmationDisabled="true">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.10.0,2.11.0)"/>
+          versionRange="[2.11.0,2.12.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
@@ -561,19 +561,11 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
+        value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.version"
-        value="1.10.0"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="api.baseline.zip"
-        value="it.xsemantics.repository-1.10.0.v20160527-0805.zip"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.11.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.nightly"

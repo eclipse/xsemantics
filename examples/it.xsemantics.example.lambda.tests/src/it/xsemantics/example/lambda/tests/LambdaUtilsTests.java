@@ -3,19 +3,19 @@
  */
 package it.xsemantics.example.lambda.tests;
 
-import it.xsemantics.example.lambda.lambda.ArrowType;
-import it.xsemantics.example.lambda.lambda.TypeVariable;
-import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
-import it.xsemantics.runtime.StringRepresentation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Assert;
-
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
+
+import it.xsemantics.example.lambda.lambda.ArrowType;
+import it.xsemantics.example.lambda.lambda.TypeVariable;
+import it.xsemantics.example.lambda.xsemantics.LambdaUtils;
+import it.xsemantics.runtime.StringRepresentation;
 
 /**
  * @author bettini

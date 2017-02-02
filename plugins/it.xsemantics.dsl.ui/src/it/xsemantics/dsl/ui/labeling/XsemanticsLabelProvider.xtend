@@ -34,7 +34,7 @@ class XsemanticsLabelProvider extends XbaseLabelProvider {
 
 	def text(Rule rule) {
 		val judgmentDescription = rule.getJudgmentDescription();
-		if (judgmentDescription == null)
+		if (judgmentDescription === null)
 			return rule.getName;
 		return rule.getName()
 				+ " (" + Strings.emptyIfNull(judgmentDescription.getName()) + ")";
@@ -46,7 +46,7 @@ class XsemanticsLabelProvider extends XbaseLabelProvider {
 
 	def text(AuxiliaryFunction aux) {
 		val desc = aux.getAuxiliaryDescription();
-		if (desc == null)
+		if (desc === null)
 			return aux.getName;
 		return aux.getName() + " (" + Strings.emptyIfNull(desc.getName()) + ")";
 	}

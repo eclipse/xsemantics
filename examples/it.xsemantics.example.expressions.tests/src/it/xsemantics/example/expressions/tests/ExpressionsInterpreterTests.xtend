@@ -3,9 +3,9 @@ package it.xsemantics.example.expressions.tests
 import com.google.inject.Inject
 import it.xsemantics.example.expressions.expressions.Model
 import it.xsemantics.runtime.TraceUtils
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -186,7 +186,7 @@ InterpretAndOr: [] |- (1 < 2) && ('f0' == ('f' + 0)) ~> true
 			)
 		}
 		assertEqualsStrings(expectedResult.toString, result.value.toString)		
-		if (expectedTrace != null)
+		if (expectedTrace !== null)
 			assertEqualsStrings(expectedTrace.toString, trace.traceAsString)
 	}
 }

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Lambda Example
 Bundle-Vendor: Lorenzo Bettini
-Bundle-Version: 1.10.1.qualifier
+Bundle-Version: 1.11.0.qualifier
 Bundle-SymbolicName: it.xsemantics.example.lambda;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  it.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j,
- org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.lambda,

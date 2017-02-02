@@ -24,14 +24,14 @@ class FjTestsUtils {
 	def fjFieldForName(Program program, String fieldName) {
 		val field = program.getAllContentsOfType(typeof(Field)).
 			findFirst( [ it.name.equals(fieldName) ] )
-		Assert::assertTrue("field not found: " + fieldName, field != null)
+		Assert::assertTrue("field not found: " + fieldName, field !== null)
 		field
 	}
 	
 	def fjMethodForName(Program program, String methodName) {
 		val method = program.getAllContentsOfType(typeof(Method)).
 			findFirst( [ it.name.equals(methodName) ] )
-		Assert::assertTrue("method not found: " + methodName, method != null)
+		Assert::assertTrue("method not found: " + methodName, method !== null)
 		method
 	}
 	

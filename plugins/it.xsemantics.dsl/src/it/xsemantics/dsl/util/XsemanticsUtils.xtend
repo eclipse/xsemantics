@@ -158,7 +158,7 @@ class XsemanticsUtils {
 	
 	def isInputParam(JvmFormalParameter jvmFormalParameter) {
 		val ruleParameter = jvmFormalParameter.getContainerOfType(typeof(RuleParameter))
-		if (ruleParameter != null) {
+		if (ruleParameter !== null) {
 			ruleParameter.inputParam
 		} else {
 			// it is surely an input parameter
@@ -170,7 +170,7 @@ class XsemanticsUtils {
 		// compute it only on the first invokation
 		if (!rule.set_outputParams) {
 			val judgmentDescription = rule.getJudgmentDescription
-			if (judgmentDescription == null || judgmentDescription.judgmentParameters.empty)
+			if (judgmentDescription === null || judgmentDescription.judgmentParameters.empty)
 				return Lists::newArrayList
 			val judgmentParameters = judgmentDescription.judgmentParameters.iterator
 			// the corresponding judgmentParameter must be output
@@ -205,7 +205,7 @@ class XsemanticsUtils {
 				return !feature.inputParam
 			return true;
 		} else if (xexp instanceof XVariableDeclaration) {
-			return xexp.writeable && xexp.right == null
+			return xexp.writeable && xexp.right === null
 		}
 		return false;
 	}
@@ -278,7 +278,7 @@ class XsemanticsUtils {
 		visited.add(system)
 		Lists::<XsemanticsSystem>newArrayList() => [
 			val superS = system.superSystemDefinition
-			if (superS != null) {
+			if (superS !== null) {
 				it += superS
 				it += superS.allSuperSystemDefinitionsInternal(visited)
 			}

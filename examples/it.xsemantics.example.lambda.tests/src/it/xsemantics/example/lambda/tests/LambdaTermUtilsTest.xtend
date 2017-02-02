@@ -1,11 +1,11 @@
 package it.xsemantics.example.lambda.tests
 
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import it.xsemantics.example.lambda.xsemantics.LambdaTermUtils
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import it.xsemantics.example.lambda.xsemantics.LambdaTermUtils
-import org.junit.Assert
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))

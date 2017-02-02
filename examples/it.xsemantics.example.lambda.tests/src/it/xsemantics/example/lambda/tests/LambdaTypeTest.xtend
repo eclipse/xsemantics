@@ -3,8 +3,8 @@ package it.xsemantics.example.lambda.tests
 import it.xsemantics.example.lambda.lambda.Abstraction
 import it.xsemantics.example.lambda.lambda.Term
 import it.xsemantics.runtime.RuleEnvironment
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 
