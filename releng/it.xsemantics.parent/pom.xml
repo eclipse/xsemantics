@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.xsemantics</groupId>
 	<artifactId>it.xsemantics.parent</artifactId>
-	<version>1.10.0-SNAPSHOT</version>
+	<version>1.10.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Xsemantics</name>
@@ -148,6 +148,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<xtext.maven.skip>true</xtext.maven.skip>
 				<skipTests>true</skipTests>
 			</properties>
 			<build>
@@ -193,6 +194,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<xtext.maven.skip>true</xtext.maven.skip>
 				<bintray.package>snapshots</bintray.package>
 				<bintray.base.path>snapshots/</bintray.base.path>
 				<site.label>Xsemantics Snapshot Site</site.label>
@@ -270,11 +272,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- xtend-maven-plugin is in pluginManagement instead of in plugins
-					 so that it doesn't run before the exec-maven-plugin's *.mwe2 gen;
-					 this way we can list it after. 
-				  -->
-				  
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
@@ -291,6 +288,7 @@
 					</executions>
 					<configuration>
 						<outputDirectory>xtend-gen</outputDirectory>
+						<xtendAsPrimaryDebugSource>true</xtendAsPrimaryDebugSource>
 					</configuration>
 				</plugin>
 

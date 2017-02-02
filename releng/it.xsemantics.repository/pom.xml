@@ -7,7 +7,7 @@
 		<relativePath>../../releng/it.xsemantics.parent/pom.xml</relativePath>
 		<groupId>net.sf.xsemantics</groupId>
 		<artifactId>it.xsemantics.parent</artifactId>
-		<version>1.10.0-SNAPSHOT</version>
+		<version>1.10.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>it.xsemantics.repository</artifactId>
@@ -173,7 +173,7 @@
 														<!-- Process class files only, ignore jacocoagent.jar -->
 														<fileset dir="../../plugins/it.xsemantics.runtime/target/classes" 
 															includes="**/*.class"
-															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*" 
+															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*" 
 														/>
 													</classfiles>
 													<sourcefiles>
@@ -186,7 +186,7 @@
 														<!-- Process class files only, ignore jacocoagent.jar -->
 														<fileset dir="../../plugins/it.xsemantics.dsl/target/classes" 
 															includes="**/*.class"
-															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/*TypeSystemGen*,**/antlr/*.*,**/internal/*.*,**/dsl/xsemantics/*.*,**/dsl/xsemantics/util/*.*,**/dsl/xsemantics/impl/*.*" 
+															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/*TypeSystemGen*,**/antlr/*.*,**/internal/*.*,**/dsl/xsemantics/*.*,**/dsl/xsemantics/util/*.*,**/dsl/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*" 
 														/>
 													</classfiles>
 													<sourcefiles>
@@ -198,7 +198,7 @@
 													<classfiles>
 														<fileset dir="../../plugins/it.xsemantics.dsl.ui/target/classes" 
 															includes="**/*.class"
-															excludes="**/*ExtensionFactory*,**/*UiModule*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*"/>
+															excludes="**/*ExtensionFactory*,**/*UiModule*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*"/>
 													</classfiles>
 													<sourcefiles>
 														<fileset dir="../../plugins/it.xsemantics.dsl.ui/src" />

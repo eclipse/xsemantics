@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.dsl.ui.tests.feature"
       label="Xsemantics Feature For Dsl UI Testing"
-      version="1.10.0.qualifier"
+      version="1.10.1.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://www.example.com/description">
@@ -22,19 +22,18 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.pde"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.rcp"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.platform"
          version="0.0.0"/>
 
    <plugin
          id="it.xsemantics.dsl.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.pde.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
