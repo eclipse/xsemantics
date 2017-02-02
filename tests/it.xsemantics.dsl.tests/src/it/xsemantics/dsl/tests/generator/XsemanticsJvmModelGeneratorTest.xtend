@@ -2147,6 +2147,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
         final Consumer<Object> _function = new Consumer<Object>() {
+          @Override
           public void accept(final Object dummy) {
             /* empty |- eClass : var String result or true */
             {
@@ -4616,14 +4617,17 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
         TypeSystem.this.overridesInternal(_trace_, it);
       }
     };
     eClass.getEStructuralFeatures().forEach(_function);
     final Consumer<EStructuralFeature> _function_1 = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
         final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+          @Override
           public void accept(final EStructuralFeature it) {
             TypeSystem.this.isValueInternal(_trace_, it);
           }
@@ -4754,6 +4758,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     EClass eClass = null; // output parameter
     eClass = this.<EClass>clone(obj.eClass());
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
+      @Override
       public void accept(final EStructuralFeature it) {
         final EClass e = TypeSystem.this.<EClass>clone(obj.eClass());
         InputOutput.<EClass>println(e);
