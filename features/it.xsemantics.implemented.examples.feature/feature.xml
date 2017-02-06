@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.implemented.examples.feature"
       label="Xsemantics Implemented Examples"
-      version="1.10.1.qualifier"
+      version="1.10.2.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://xsemantics.sourceforge.net">
