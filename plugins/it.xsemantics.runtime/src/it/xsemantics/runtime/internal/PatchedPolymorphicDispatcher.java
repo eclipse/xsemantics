@@ -6,7 +6,6 @@ package it.xsemantics.runtime.internal;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -34,7 +33,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	private Collection<MethodDesc> declaredMethods;
+	private Collection<MethodDesc> methods;
 
 	private final ErrorHandler<RT> handler;
 
@@ -47,24 +46,24 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.handler = handler;
-		declaredMethods = getDeclaredMethods();
+		methods = getCandidateMethods();
 	}
 
 	@Override
 	protected int compare(MethodDesc o1, MethodDesc o2) {
-		final List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
-		final List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
+		final Class<?>[] paramTypes1 = o1.getParameterTypes();
+		final Class<?>[] paramTypes2 = o2.getParameterTypes();
 
 		// sort by number of parameters
-		if (paramTypes1.size() > paramTypes2.size())
+		if (paramTypes1.length > paramTypes2.length)
 			return 1;
-		if (paramTypes2.size() > paramTypes1.size())
+		if (paramTypes2.length > paramTypes1.length)
 			return -1;
 
 		// sort by parameter types from left to right
-		for (int i = 0; i < paramTypes1.size(); i++) {
-			final Class<?> class1 = paramTypes1.get(i);
-			final Class<?> class2 = paramTypes2.get(i);
+		for (int i = 0; i < paramTypes1.length; i++) {
+			final Class<?> class1 = paramTypes1[i];
+			final Class<?> class2 = paramTypes2[i];
 
 			if (class1.equals(class2))
 				continue;
@@ -92,21 +91,27 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 			new Function<List<Class<?>>, List<MethodDesc>>() {
 				@Override
 				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
+					// 'result' contains all best-matched MethodDesc for which 
+					// pairwise compare(m1, m2) == 0, meaning they're equal or unrelated. 
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
-					Iterator<MethodDesc> iterator = declaredMethods.iterator();
-					while (iterator.hasNext()) {
+					Iterator<MethodDesc> iterator = methods.iterator();
+					NEXT: while (iterator.hasNext()) {
 						MethodDesc methodDesc = iterator.next();
 						if (methodDesc.isInvokeable(paramTypes)) {
 							if (result.isEmpty()) {
 								result.add(methodDesc);
 							} else {
-								int compare = compare(result.get(0), methodDesc);
-								if (compare < 0) {
-									result.clear();
-									result.add(methodDesc);
-								} else if (compare == 0) {
-									result.add(methodDesc);
+								Iterator<MethodDesc> it = result.iterator();
+								while(it.hasNext()) {
+									MethodDesc next = it.next();
+									int compare = compare(next, methodDesc);
+									if (compare < 0) {
+										it.remove();
+									} else if (compare > 0) {
+										continue NEXT;
+									}
 								}
+								result.add(methodDesc);
 							}
 						}
 					}
@@ -163,7 +168,7 @@ public class PatchedPolymorphicDispatcher<RT> extends PolymorphicDispatcher<RT> 
 		return result;
 	}
 
-	private Collection<MethodDesc> getDeclaredMethods() {
+	private Collection<MethodDesc> getCandidateMethods() {
 		Collection<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
