@@ -2,7 +2,7 @@
 <feature
       id="it.xsemantics.dsl.ui.tests.feature"
       label="Xsemantics Feature For Dsl UI Testing"
-      version="1.11.0.qualifier"
+      version="1.11.1.qualifier"
       provider-name="Lorenzo Bettini">
 
    <description url="http://www.example.com/description">
