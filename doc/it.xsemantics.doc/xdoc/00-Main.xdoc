@@ -116,7 +116,8 @@ codelanguage-def[Xsemantics][
 	extends, override, auxiliary,
 	static, extension,
 	true, false,
-	cached, condition, entryPoints
+	cached, condition, entryPoints,
+	copyright
 	]
 
 codelanguage-def[Lambda][lambda,int,string]

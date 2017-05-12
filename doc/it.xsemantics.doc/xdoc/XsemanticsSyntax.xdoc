@@ -47,6 +47,15 @@ inserts the corresponding import statement.
 
 The menu e["Organize Imports"] is also available for Xsemantics files.
 
+section:Copyright[Copyright]
+
+A copyright header string can be specified that will be added
+in the generated Java code as a header comment:
+
+code[Xsemantics][
+copyright "(C) This is a test\ncopyright header."
+]
+
 section:Fields[Fields]
 
 You can then specify e[fields] in an Xsemantics system, using basically the
