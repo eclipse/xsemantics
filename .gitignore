@@ -7,6 +7,7 @@ logs.zip
 target/
 *.java._trace
 *.smap
+.DS_Store
 
 # set on single projects
 #src-gen/
