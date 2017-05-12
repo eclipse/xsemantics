@@ -93,6 +93,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
    		val inferredClass = ts.toClass( ts.toJavaFullyQualifiedName )
    		
    		acceptor.accept(inferredClass) [
+   			if (ts.copyright!==null) {
+   				fileHeader = ts.copyright	
+   			}
 			documentation = ts.documentation
 			
 			if (ts.superSystem !== null)
@@ -214,6 +217,9 @@ class XsemanticsJvmModelInferrer extends AbstractModelInferrer {
 		
 		// generation of the Validator
 		acceptor.accept(ts.toClass(ts.toValidatorJavaFullyQualifiedName)) [
+			if (ts.copyright!==null) {
+   				fileHeader = ts.copyright	
+   			}
 			documentation = ts.documentation
 			
 			if (ts.superSystemDefinition !== null)

@@ -13,6 +13,7 @@ XsemanticsFile:
 XsemanticsSystem:
 	'system' name=QualifiedName
 	('extends' superSystem=JvmParameterizedTypeReference)?
+	('copyright' copyright=STRING)?
 	('validatorExtends' validatorExtends=JvmParameterizedTypeReference)?
 	importSection=XImportSection?
 	fields += AbstractFieldDefinition*
