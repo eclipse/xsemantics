@@ -5,8 +5,8 @@ import java.util.List
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.util.PluginProjectFactory
 
 class PluginProjectHelper {

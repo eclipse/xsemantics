@@ -10,10 +10,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.ImportUriValidator
 import org.eclipse.xtext.validation.NamesAreUniqueValidator
-import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
 import org.eclipse.xtext.xtext.XtextValidator
 import org.junit.AfterClass
 import org.junit.BeforeClass
