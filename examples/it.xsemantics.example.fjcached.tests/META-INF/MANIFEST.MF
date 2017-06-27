@@ -15,7 +15,8 @@ Require-Bundle: it.xsemantics.example.fjcached;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  it.xsemantics.example.fj.tests,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.junit4
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.ui.testing
 Import-Package: org.apache.log4j,
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",

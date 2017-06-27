@@ -2,14 +2,14 @@ package it.xsemantics.example.lambda.tests.ui
 
 import org.eclipse.core.resources.IResource
 import org.eclipse.emf.ecore.EValidator
-import org.eclipse.xtext.junit4.ui.AbstractWorkbenchTest
+import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 class LambdaWorkbenchTest extends AbstractWorkbenchTest {
 	
