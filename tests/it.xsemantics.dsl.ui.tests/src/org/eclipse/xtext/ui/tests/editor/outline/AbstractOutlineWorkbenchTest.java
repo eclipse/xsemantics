@@ -7,11 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fullBuild;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaProject;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -29,8 +26,6 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -39,6 +34,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;

@@ -3,8 +3,7 @@
  */
 package it.xsemantics.tests.swtbot.wizards;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanWorkspace;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import it.xsemantics.tests.swtbot.XsemanticsSwtbotTestBase;
 

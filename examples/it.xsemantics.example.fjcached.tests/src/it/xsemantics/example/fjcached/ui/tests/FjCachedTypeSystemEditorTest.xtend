@@ -7,18 +7,18 @@ import it.xsemantics.example.fjcached.FjcachedUiInjectorProvider
 import it.xsemantics.example.fjcached.fjcached.FjCachedProgram
 import it.xsemantics.example.fjcached.ui.internal.FjcachedActivator
 import it.xsemantics.runtime.caching.XsemanticsCacheResultLoggerListener
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(FjcachedUiInjectorProvider))
