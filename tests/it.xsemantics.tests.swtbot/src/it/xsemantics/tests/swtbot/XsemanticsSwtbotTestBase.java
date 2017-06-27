@@ -4,13 +4,9 @@
 package it.xsemantics.tests.swtbot;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.monitor;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.root;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForBuild;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -44,6 +40,8 @@ import org.eclipse.ui.WorkbenchException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
+import it.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 
 /**
  * @author bettini
