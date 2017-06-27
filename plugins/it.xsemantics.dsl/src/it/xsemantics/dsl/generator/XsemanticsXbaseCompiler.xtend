@@ -280,7 +280,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 		}
 	}
 
-	override protected isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+	override protected isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		// in Xtext 2.5.1 this method does not behave correctly in case
 		// we need a referenced compile expression (for boolean premises)
 		if (expr.booleanPremise) {
@@ -301,7 +301,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			}
 		}
 		
-		return super.isVariableDeclarationRequired(expr, b)
+		return super.isVariableDeclarationRequired(expr, b, recursive)
 	}
 
 	/**
