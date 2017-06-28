@@ -238,14 +238,6 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Eclemma Jacoco">
-      <requirement
-          name="com.mountainminds.eclemma.feature.feature.group"/>
-      <repository
-          url="http://update.eclemma.org"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
         label="Xdoc">
       <requirement
           name="org.eclipse.xtext.xdoc.feature.feature.group"/>
