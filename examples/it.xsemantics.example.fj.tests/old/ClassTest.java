@@ -9,12 +9,6 @@
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
 
-/**
- * <copyright>
- * </copyright>
- *
- * $Id: ClassTest.java,v 1.1 2009-11-02 11:25:13 bettini Exp $
- */
 package it.xsemantics.example.fj.tests;
 
 import it.xsemantics.example.fj.fj.Class;
