@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: it.xsemantics.dsl.xsemantics.tests
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-Version: 1.12.1.qualifier
 Bundle-SymbolicName: it.xsemantics.dsl.tests;singleton:=true
 Bundle-ActivationPolicy: lazy

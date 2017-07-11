@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests PDE Utils
 Bundle-SymbolicName: it.xsemantics.tests.pde.utils
 Bundle-Version: 1.12.1.qualifier
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.pde.core;bundle-version="3.10.0";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.9.100",

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Generic Ide
 Bundle-SymbolicName: it.xsemantics.dsl.ide
 Bundle-Version: 1.12.1.qualifier
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: it.xsemantics.dsl,
  org.eclipse.xtext.ide,

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Examples
 Bundle-SymbolicName: it.xsemantics.ui.examples;singleton:=true
 Bundle-Version: 1.12.1.qualifier
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.ui;bundle-version="3.5.0",
  org.eclipse.emf.common.ui;bundle-version="2.7.0",
