@@ -1,14 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-Copyright (c) 2013-2017 Lorenzo Bettini.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-  Lorenzo Bettini - Initial contribution and API
--->
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/00-Main.html" label="Xsemantics Documentation" >
 	<topic href="contents/00-Main_12.html#Xsemantics%20Documentation_12" label="Reference Documentation" >
 		<topic href="contents/01-Introduction.html#Introduction" label="Introduction" >

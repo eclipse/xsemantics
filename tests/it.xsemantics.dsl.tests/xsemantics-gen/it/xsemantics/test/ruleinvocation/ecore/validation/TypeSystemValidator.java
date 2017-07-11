@@ -1,10 +1,3 @@
-package it.xsemantics.test.ruleinvocation.ecore.validation;
-
-import com.google.inject.Inject;
-import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
-import it.xsemantics.test.ruleinvocation.ecore.TypeSystem;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-
 /**
  * Copyright (c) 2013-2017 Lorenzo Bettini.
  * All rights reserved. This program and the accompanying materials
@@ -15,6 +8,13 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  */
+package it.xsemantics.test.ruleinvocation.ecore.validation;
+
+import com.google.inject.Inject;
+import it.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
+import it.xsemantics.test.ruleinvocation.ecore.TypeSystem;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+
 @SuppressWarnings("all")
 public class TypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
