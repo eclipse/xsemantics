@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.OutputConfigurationProvider
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.util.XExpressionHelper
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 
 /** 
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -46,5 +47,9 @@ class XsemanticsRuntimeModule extends it.xsemantics.dsl.AbstractXsemanticsRuntim
 
 	def Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XsemanticsXbaseCompiler
+	}
+
+	def Class<? extends JvmModelGenerator> bindJvmModelGenerator() {
+		return XsemanticsModelGenerator
 	}
 }
