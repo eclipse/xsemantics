@@ -1,20 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * Copyright (c) 2016 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  * Contributors:
- *   Lorenzo Bettini - Initial contribution and API
- *******************************************************************************/
-
-/*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ *   Jan Koehnlein - Initial contribution and API
+ *   Lorenzo Bettini - Customizations for Xsemantics
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
@@ -52,8 +44,36 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
+ * A utility class for testing the outline's tree of Xtext languages.
+ * 
+ * Example:
+ * <pre>
+ * &#64;RunWith(XtextRunner)
+ * &#64;InjectWith(MyLanguageUiInjectorProvider) 
+ * class OutlineTest extends AbstractOutlineTest {
+ * 
+ *	override protected getEditorId() {
+ *		MyDslActivator.ORG_XTEXT_EXAMPLE_MYDSL
+ *	}
+ *	
+ *	&#64;Test def void myTest() {
+ *	  '''
+ *	  	// DSL code
+ *	  	Foo bla {
+ *	  		Bar b
+ *	  		Bar c
+ *	  	}
+ *	  '''.assertAllLabels('''
+ *	  	bla
+ *	  	  b
+ *	  	  c
+ *	  '''
+ *	}
+ *  }
+ * </pre>
+ * 
  * @author Jan Koehnlein - Initial contribution and API
- * @author Lorenzo Bettini - Adapted to be used for any DSL
+ * @author Lorenzo Bettini - Customizations for Xsemantics
  */
 public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
