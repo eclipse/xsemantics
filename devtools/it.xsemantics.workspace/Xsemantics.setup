@@ -117,8 +117,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.egit"
-        label="EGit"
-        licenseConfirmationDisabled="true">
+        label="EGit">
       <requirement
           name="org.eclipse.egit.feature.group"/>
       <repository
@@ -134,8 +133,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.mylyn"
-        label="Mylyn"
-        licenseConfirmationDisabled="true">
+        label="Mylyn">
       <requirement
           name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
       <requirement
@@ -224,8 +222,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.swtbot"
-        label="SWTBot"
-        licenseConfirmationDisabled="true">
+        label="SWTBot">
       <requirement
           name="org.eclipse.swtbot.eclipse.feature.group"/>
       <requirement
@@ -251,8 +248,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.m2e"
-        label="M2E"
-        licenseConfirmationDisabled="true">
+        label="M2E">
       <requirement
           name="org.sonatype.tycho.m2e.feature.feature.group"/>
       <requirement
@@ -535,8 +531,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
-        label="Xtext Releases"
-        licenseConfirmationDisabled="true">
+        label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
           versionRange="[2.12.0,2.13.0)"/>
@@ -563,8 +558,7 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.nightly"
-        label="Xtext Nightly"
-        licenseConfirmationDisabled="true">
+        label="Xtext Nightly">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
           versionRange="[2.11.0,2.12.0)"/>
