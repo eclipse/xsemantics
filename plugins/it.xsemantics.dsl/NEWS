@@ -1,4 +1,0 @@
-1.5.0
-
-* caching
-* checkAssignable returns true if null is passed
