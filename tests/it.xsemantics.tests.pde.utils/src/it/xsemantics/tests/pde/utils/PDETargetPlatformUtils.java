@@ -30,13 +30,12 @@ import org.osgi.framework.Bundle;
 
 /**
  * Implements workaround suggested here:
- * https://bugs.eclipse.org/bugs/show_bug.cgi?id=343156
- * This is required when running SwtBot tests in Tycho
- * that requires the PDE, for example, for testing that the
- * imported projects compile fine, or if they use the DSL, which
+ * https://bugs.eclipse.org/bugs/show_bug.cgi?id=343156 This is required when
+ * running SwtBot tests in Tycho that requires PDE, for example, for testing
+ * that the imported projects compile fine, or if they use the DSL, which
  * requires PDE projects dependencies.
  * 
- * @author Lorenzo Bettini - some adaptations
+ * @author Lorenzo Bettini - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class PDETargetPlatformUtils {
@@ -71,8 +70,6 @@ public class PDETargetPlatformUtils {
 		System.out.println("Bundles for the target platform:");
 		for (Bundle bundle : bundles) {
 			System.out.print(bundle);
-//			AbstractBundle bundleImpl = (AbstractBundle) bundle;
-//			BaseData bundleData = (BaseData) bundleImpl.getBundleData();
 			EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
 			Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
 			File file = generation.getBundleFile().getBaseFile();
