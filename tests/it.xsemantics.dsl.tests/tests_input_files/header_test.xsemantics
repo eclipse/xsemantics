@@ -24,11 +24,7 @@ import org.eclipse.xtext.EcoreUtil2
 
 system it.xsemantics.test.fj.first.FjHeaderTypeSystem
 
-copyright
-"/**
- * (C) This is a test
- * copyright header.
- */"
+copyright "(C) This is a test\ncopyright header."
 
 validatorExtends AbstractFJJavaValidator
 
