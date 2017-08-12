@@ -9,12 +9,6 @@
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
 
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
 package it.xsemantics.example.fj.tests;
 
 import java.io.File;

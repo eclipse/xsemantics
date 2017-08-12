@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Documentation
 Bundle-SymbolicName: it.xsemantics.doc;singleton:=true
 Bundle-Version: 1.12.1.qualifier
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.help;bundle-version="3.5.0",
  org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0";resolution:=optional,
  it.xsemantics.runtime;bundle-version="1.0.0",

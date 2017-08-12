@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics DSL
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-Version: 1.12.1.qualifier
 Bundle-ClassPath: .
 Bundle-SymbolicName: it.xsemantics.dsl;singleton:=true

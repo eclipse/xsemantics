@@ -4,7 +4,7 @@ Bundle-Name: Xsemantics FJ Example Tests
 Bundle-SymbolicName: it.xsemantics.example.fj.tests;singleton:=true
 Bundle-Version: 1.12.1.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: it.xsemantics.example.fj.tests,
