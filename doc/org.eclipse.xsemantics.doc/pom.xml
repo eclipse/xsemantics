@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
+		<groupId>net.sf.xsemantics</groupId>
+		<artifactId>org.eclipse.xsemantics.parent</artifactId>
+		<version>1.12.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.eclipse.xsemantics.doc</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<profiles>
+		<profile>
+			<id>generate-xdoc</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<skip>${mwe2.skip}</skip>
+							<filesets>
+								<fileset>
+									<directory>${basedir}/contents</directory>
+									<includes>
+										<include>**/*.html</include>
+										<include>**/*.xml</include>
+										<include>**/*.jpeg</include>
+										<include>**/*.png</include>
+									</includes>
+									<excludes>
+										<exclude>**/.gitignore</exclude>
+										<exclude>**/*.css</exclude>
+									</excludes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.fornax.toolsupport</groupId>
+						<artifactId>fornax-oaw-m2-plugin</artifactId>
+						<version>${fornax-oaw-m2-plugin-version}</version>
+						<configuration>
+							<skip>${mwe2.skip}</skip>
+							<workflowEngine>mwe2</workflowEngine>
+							<workflowDescriptor>src/workflow/GenerateHelpArtifacts.mwe2</workflowDescriptor>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>run-workflow</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<!-- copy the images directory into contents, since running Xdoc from 
+							mwe2 does not seem to do that... -->
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>copy-images</id>
+								<phase>compile</phase>
+								<configuration>
+									<target>
+										<copy includeemptydirs="false" todir="${basedir}/contents/images">
+											<fileset dir="${basedir}/xdoc/images">
+												<include name="**" />
+											</fileset>
+										</copy>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

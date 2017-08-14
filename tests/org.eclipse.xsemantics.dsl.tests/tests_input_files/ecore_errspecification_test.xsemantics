@@ -1,0 +1,60 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+// some particular cases
+
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+
+system org.eclipse.xsemantics.test.errspecification.ecore.TypeSystem
+
+copyright
+"Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API"
+
+
+judgments {
+	type |- EObject c : output EClass
+		error "cannot find " + c + "'s EClass"
+	subtype |- EClass left <: EClass right
+		error left.name + " is not a subtype of " +
+			right.name
+		source left
+		feature left.getEStructuralFeature("name")
+}
+
+
+rule EObjectEClass
+	G |- EObject obj : EClass eClass
+from {
+	eClass = obj.eClass
+}
+
+rule EObjectEClassWithErrorSpecification
+	G |- EClass obj : EClass eClass
+		error "cannot find EClass for EClass " + stringRep(obj)
+		source obj
+		feature obj.eContainingFeature 
+from {
+	eClass = obj.eClass
+}
+
+rule EClassSubtyping
+	G |- EClass candidate <: EClass superClass
+from {
+	superClass.isSuperTypeOf(candidate)
+}

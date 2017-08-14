@@ -1,0 +1,45 @@
+For Buckminster
+
+Path to exec files (e.g.: **/target/**.exec, **/jacoco.exec)	
+**/**.exec
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/org.eclipse.xsemantics.runtime/**/bin,plugins/org.eclipse.xsemantics.dsl/**/bin,plugins/org.eclipse.xsemantics.dsl.ui/**/bin,examples/org.eclipse.xsemantics.example.expressions/**/bin,examples/org.eclipse.xsemantics.example.expressions.ui/**/bin,examples/org.eclipse.xsemantics.example.fj/**/bin,examples/org.eclipse.xsemantics.example.fj.ui/**/bin,examples/org.eclipse.xsemantics.example.fjcached/**/bin,examples/org.eclipse.xsemantics.example.lambda/**/bin,examples/org.eclipse.xsemantics.example.lambda.ui/**/bin
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/org.eclipse.xsemantics.*/src,plugins/org.eclipse.xsemantics.*/xtend-gen,plugins/org.eclipse.xsemantics.*/src-gen,examples/org.eclipse.xsemantics.*/src,examples/org.eclipse.xsemantics.*/xtend-gen,examples/org.eclipse.xsemantics.*/src-gen,*/org.eclipse.xsemantics.*/xsemantics-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+
+
+For Maven/Tycho
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/org.eclipse.xsemantics.runtime/**/classes,plugins/org.eclipse.xsemantics.dsl/**/classes,plugins/org.eclipse.xsemantics.dsl.ui/**/classes,examples/org.eclipse.xsemantics.example.expressions/**/classes,examples/org.eclipse.xsemantics.example.expressions.ui/**/classes,examples/org.eclipse.xsemantics.example.fj/**/classes,examples/org.eclipse.xsemantics.example.fj.ui/**/classes,examples/org.eclipse.xsemantics.example.fjcached/**/classes,examples/org.eclipse.xsemantics.example.lambda/**/classes,examples/org.eclipse.xsemantics.example.lambda.ui/**/classes
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/org.eclipse.xsemantics.*/src,plugins/org.eclipse.xsemantics.*/xtend-gen,plugins/org.eclipse.xsemantics.*/src-gen,examples/org.eclipse.xsemantics.*/src,examples/org.eclipse.xsemantics.*/xtend-gen,examples/org.eclipse.xsemantics.*/src-gen,*/org.eclipse.xsemantics.*/xsemantics-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+
+WITHOUT EXAMPLES
+
+Path to class directories (e.g.: **/target/classDir, **/classes)	
+plugins/org.eclipse.xsemantics.runtime/**/classes,plugins/org.eclipse.xsemantics.dsl/**/classes,plugins/org.eclipse.xsemantics.dsl.ui/**/classes
+
+Path to source directories (e.g.: **/mySourceFiles)
+plugins/org.eclipse.xsemantics.*/src,plugins/org.eclipse.xsemantics.*/xtend-gen,plugins/org.eclipse.xsemantics.*/src-gen
+
+Inclusions (e.g.: **/*.class)	
+
+
+Exclusions (e.g.: **/*Test*)
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/EntryPointsOption.*,**/example/**/*.*,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java
