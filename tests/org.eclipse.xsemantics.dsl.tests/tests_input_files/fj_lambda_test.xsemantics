@@ -1,0 +1,48 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+/**
+ * Uses rule invocations as boolean expressions
+ */
+system org.eclipse.xsemantics.test.fj.lambda.FjTestsForLambdas extends org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem
+
+copyright
+"Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API"
+
+
+import org.eclipse.xsemantics.example.fj.fj.ClassType
+import org.eclipse.xsemantics.example.fj.fj.Type
+import org.eclipse.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
+
+inject FjAuxiliaryFunctions fjAux
+
+judgments {
+	existsSubtype ||- Type left <<! Type right
+}
+
+rule ExistsSubtypeWithLambda
+	G ||- ClassType left <<! ClassType right
+from {
+	// we reverse the superclasses so that the top
+	// classes come first; this is useful to perform
+	// sensible tests (otherwise the first element examined
+	// will soon succeed)
+	left.classref.superclasses.reverseView.exists[
+		G |- it <| right.classref
+	]
+}
