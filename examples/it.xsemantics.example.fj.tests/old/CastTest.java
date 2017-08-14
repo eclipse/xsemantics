@@ -9,12 +9,6 @@
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
 
-/**
- * <copyright>
- * </copyright>
- *
- * $Id: CastTest.java,v 1.1 2009-11-02 11:25:12 bettini Exp $
- */
 package it.xsemantics.example.fj.tests;
 
 import it.xsemantics.example.fj.FJStandaloneSetup;

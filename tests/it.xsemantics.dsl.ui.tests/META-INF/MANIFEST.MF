@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics UI Tests
 Bundle-SymbolicName: it.xsemantics.dsl.ui.tests
+Bundle-Vendor: %providerName
 Bundle-Version: 1.12.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: it.xsemantics.dsl.ui,

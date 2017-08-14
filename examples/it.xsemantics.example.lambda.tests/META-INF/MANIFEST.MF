@@ -4,7 +4,7 @@ Bundle-Name: Lambda Tests
 Bundle-SymbolicName: it.xsemantics.example.lambda.tests
 Bundle-Version: 1.12.1.qualifier
 Bundle-Activator: it.xsemantics.example.lambda.tests.Activator
-Bundle-Vendor: Lorenzo Bettini
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime,
  it.xsemantics.example.lambda;bundle-version="1.0.0",
  it.xsemantics.example.lambda.ui;bundle-version="1.0.0",

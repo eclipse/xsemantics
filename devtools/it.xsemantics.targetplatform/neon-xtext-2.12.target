@@ -15,6 +15,10 @@
 <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 <repository location="http://download.eclipse.org/releases/neon/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+<repository location="http://download.eclipse.org/cbi/updates/license/1.0.1.v20140414-1359"/>
+</location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1/"/>
