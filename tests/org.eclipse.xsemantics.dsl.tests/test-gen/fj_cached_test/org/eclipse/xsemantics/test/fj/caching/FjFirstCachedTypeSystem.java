@@ -10,6 +10,7 @@
  */
 package org.eclipse.xsemantics.test.fj.caching;
 
+import java.util.List;
 import org.eclipse.xsemantics.example.fj.fj.Expression;
 import org.eclipse.xsemantics.example.fj.fj.Field;
 import org.eclipse.xsemantics.example.fj.fj.Method;
@@ -21,7 +22,6 @@ import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.runtime.XsemanticsProvider;
 import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem;
-import java.util.List;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")

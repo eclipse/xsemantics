@@ -11,9 +11,9 @@
 package org.eclipse.xsemantics.test.validation.ecore.validation;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xsemantics.test.validation.ecore.TypeSystem;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 

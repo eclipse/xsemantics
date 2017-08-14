@@ -13,6 +13,13 @@ package org.eclipse.xsemantics.test.fj.alt;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Consumer;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsemantics.example.fj.fj.ClassType;
 import org.eclipse.xsemantics.example.fj.fj.Expression;
 import org.eclipse.xsemantics.example.fj.fj.Field;
@@ -29,13 +36,6 @@ import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
