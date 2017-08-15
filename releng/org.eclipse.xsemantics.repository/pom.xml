@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
+		<groupId>net.sf.xsemantics</groupId>
+		<artifactId>org.eclipse.xsemantics.parent</artifactId>
+		<version>1.12.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.eclipse.xsemantics.repository</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<finalName>${project.artifactId}-${qualifiedVersion}</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>release-composite</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<!-- Retrieve possibly existing remote composite metadata -->
+								<id>update-local-repository</id>
+								<phase>prepare-package</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/bintray.ant" target="get-composite-metadata">
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<!-- Deploy p2 repository, p2 composite updated metadata and zipped p2 repository -->
+								<id>deploy-repository</id>
+								<phase>verify</phase>
+								<configuration>
+									<target>
+										<ant antfile="${ant-files-path}/bintray.ant"
+												target="push-to-bintray">
+											<property name="bintray.zip.path"
+												value="${bintray.base.path}zipped/${unqualifiedVersion}"/>
+										</ant>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-eclipserun-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<applicationsArgs>
+								<args>-application</args>
+								<args>org.eclipse.ant.core.antRunner</args>
+								<args>-buildfile</args>
+								<args>${ant-files-path}/packaging-p2composite.ant</args>
+								<args>p2.composite.add</args>
+								<args>-Dsite.label="${site.label}"</args>
+								<args>-Dcomposite.base.dir=${project.build.directory}</args>
+								<args>-DunqualifiedVersion=${unqualifiedVersion}</args>
+								<args>-DbuildQualifier=${buildQualifier}</args>
+								<args>-Dchild.repository.path.prefix="${child.repository.path.prefix}"</args>
+							</applicationsArgs>
+							<repositories>
+								<repository>
+									<id>mars</id>
+									<layout>p2</layout>
+									<url>http://download.eclipse.org/releases/neon</url>
+								</repository>
+							</repositories>
+							<dependencies>
+								<dependency>
+									<artifactId>org.eclipse.ant.core</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.apache.ant</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+									<type>eclipse-feature</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+									<type>eclipse-feature</type>
+								</dependency>
+								<dependency>
+									<artifactId>org.eclipse.equinox.ds</artifactId>
+									<type>eclipse-plugin</type>
+								</dependency>
+							</dependencies>
+						</configuration>
+						<executions>
+							<execution>
+								<id>add-p2-composite-repository</id>
+								<phase>package</phase>
+								<goals>
+									<goal>eclipse-run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>jacoco-report</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>prepare-reports</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<taskdef name="report" classname="org.jacoco.ant.ReportTask"
+											classpathref="maven.plugin.classpath" />
+										<echo message="Coverage report" />
+										<report>
+											<executiondata>
+												<file file="${sonar.jacoco.reportPath}" />
+											</executiondata>
+											<structure name="Xsemantics">
+												<group name="xsemantics.runtime">
+													<classfiles>
+														<!-- Process class files only, ignore jacocoagent.jar -->
+														<fileset dir="../../plugins/org.eclipse.xsemantics.runtime/target/classes" 
+															includes="**/*.class"
+															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*" 
+														/>
+													</classfiles>
+													<sourcefiles>
+														<fileset dir="../../plugins/org.eclipse.xsemantics.runtime/src" />
+														<fileset dir="../../plugins/org.eclipse.xsemantics.runtime/xtend-gen" />
+													</sourcefiles>
+												</group>
+												<group name="xsemantics">
+													<classfiles>
+														<!-- Process class files only, ignore jacocoagent.jar -->
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl/target/classes" 
+															includes="**/*.class"
+															excludes="**/*RuntimeModule*,**/*StandaloneSetup*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/*TypeSystemGen*,**/antlr/*.*,**/internal/*.*,**/dsl/xsemantics/*.*,**/dsl/xsemantics/util/*.*,**/dsl/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*" 
+														/>
+													</classfiles>
+													<sourcefiles>
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl/src" />
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl/xtend-gen" />
+													</sourcefiles>
+												</group>
+												<group name="xsemantics.ui">
+													<classfiles>
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl.ui/target/classes" 
+															includes="**/*.class"
+															excludes="**/*ExtensionFactory*,**/*UiModule*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*"/>
+													</classfiles>
+													<sourcefiles>
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl.ui/src" />
+														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl.ui/xtend-gen" />
+													</sourcefiles>
+												</group>
+											</structure>
+											<html destdir="${jacoco.reportPath}"
+												footer="Code Coverage Report for Xsemantics ${project.version}"
+												locale="en" />
+											<xml destfile="${jacoco.xml.reportPath}" />
+										</report>
+				
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.jacoco</groupId>
+								<artifactId>org.jacoco.ant</artifactId>
+								<version>${jacoco-version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-junit</artifactId>
+								<version>1.8.2</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+
+		</profile>
+	</profiles>
+</project>
