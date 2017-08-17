@@ -149,7 +149,7 @@ Contributors:
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>net.sf.xsemantics</groupId>
+						<groupId>org.eclipse.xsemantics</groupId>
 						<artifactId>org.eclipse.xsemantics.dsl</artifactId>
 						<version>${xsemantics.version}</version>
 					</dependency>

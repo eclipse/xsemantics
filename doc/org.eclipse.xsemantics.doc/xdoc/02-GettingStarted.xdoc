@@ -64,13 +64,13 @@ Xsemantics provides Maven artifacts that can be used during a Maven build.
 The artifacts include the runtime library of Xsemantics and the DSL compiler.
 
 IMPORTANT: since version 1.8.1 such Maven artifacts are available from Maven central, and
-the e[groupId] is e[net.sf.xsemantics].
+the e[groupId] is e[org.eclipse.xsemantics].
 
 For example
 
 code[
 <dependency>
-	<groupId>net.sf.xsemantics</groupId>
+	<groupId>org.eclipse.xsemantics</groupId>
 	<artifactId>org.eclipse.xsemantics.dsl</artifactId>
 	<version>${xsemantics.version}</version>
 </dependency>

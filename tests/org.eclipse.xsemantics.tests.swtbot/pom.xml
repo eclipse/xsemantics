@@ -15,7 +15,7 @@ Contributors:
 
 	<parent>
 		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
-		<groupId>net.sf.xsemantics</groupId>
+		<groupId>org.eclipse.xsemantics</groupId>
 		<artifactId>org.eclipse.xsemantics.parent</artifactId>
 		<version>1.12.1-SNAPSHOT</version>
 	</parent>

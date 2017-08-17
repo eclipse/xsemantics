@@ -12,7 +12,7 @@ Contributors:
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.sf.xsemantics</groupId>
+	<groupId>org.eclipse.xsemantics</groupId>
 	<artifactId>org.eclipse.xsemantics.parent</artifactId>
 	<version>1.12.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -344,7 +344,7 @@ Contributors:
 					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>net.sf.xsemantics</groupId>
+							<groupId>org.eclipse.xsemantics</groupId>
 							<artifactId>org.eclipse.xsemantics.dsl</artifactId>
 							<version>${project.version}</version>
 						</dependency>
@@ -418,7 +418,7 @@ Contributors:
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>net.sf.xsemantics</groupId>
+							<groupId>org.eclipse.xsemantics</groupId>
 							<artifactId>org.eclipse.xsemantics.targetplatform</artifactId>
 							<version>${project.version}</version>
 							<classifier>${target-file-name}</classifier> 
