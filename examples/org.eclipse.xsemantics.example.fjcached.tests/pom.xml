@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
+		<groupId>org.eclipse.xsemantics</groupId>
+		<artifactId>org.eclipse.xsemantics.parent</artifactId>
+		<version>1.12.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.eclipse.xsemantics.example.fjcached.tests</artifactId>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<!-- compiler tests need an OSGI environment, but no UI -->
+						<id>default-test</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<skip>${dsl.tests.skip}</skip>
+							<useUIHarness>false</useUIHarness>
+							<useUIThread>false</useUIThread>
+							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+								for jacoco agent -->
+							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+							<includes>
+								<include>**/fjcached/tests/*Test*.java</include>
+							</includes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>TychoSurefirePluginUiTest</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<skip>${dsl.tests.skip}</skip>
+							<useUIHarness>true</useUIHarness>
+							<useUIThread>true</useUIThread>
+							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+								for jacoco agent -->
+							<argLine>${tycho.testArgLine} ${uiTestsArgs}</argLine>
+							<includes>
+								<include>**/fjcached/ui/tests/*Test*.java</include>
+							</includes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<dependency-resolution>
+						<extraRequirements>
+							<!-- to get the org.eclipse.osgi.compatibility.state plugin iff 
+							the targeted Eclipse version (e.g., Luna) has it
+							(backwards compatible with kepler and previous versions) -->
+							<requirement>
+								<type>eclipse-feature</type>
+								<id>org.eclipse.rcp</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

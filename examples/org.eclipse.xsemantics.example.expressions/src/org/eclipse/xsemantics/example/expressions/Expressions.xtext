@@ -1,0 +1,68 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+grammar org.eclipse.xsemantics.example.expressions.Expressions with org.eclipse.xtext.common.Terminals
+
+generate expressions "http://xsemantics.sf.net/example/expressions/Expressions"
+
+Model:
+	(variables+=Variable)*
+;
+
+Variable:
+	name=ID '=' expression=Expression
+;
+
+Expression:
+	BooleanExpression;
+
+BooleanExpression returns Expression:
+	Comparison 
+	(({AndOrExpression.left=current} op=("||"|"&&")) right=Comparison)*;
+
+Comparison returns Expression:
+       Equals
+       (({Comparison.left=current}
+               op=("<")
+       ) right=Equals)*;
+
+Equals returns Expression:
+       Addition 
+       (({Equals.left=current}
+               op=("==")
+       ) right=Addition)*;
+ 
+Addition returns Expression:
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*; 
+
+Multiplication returns Expression:
+	Prefixed (({MultiOrDiv.left=current} op=("*"|"/")) right=Prefixed)*;
+
+Prefixed returns Expression:
+	{BooleanNegation} =>"!" expression=Atomic | /* right associativity */
+	{ArithmeticSigned} =>"-" expression=Atomic | /* right associativity */
+	Atomic
+;
+
+Atomic returns Expression:
+	'(' Expression ')' |
+	{NumberLiteral} value=INT |
+	{StringLiteral} value=STRING |
+	{BooleanLiteral} value=('true'|'false') |
+	{VariableReference} ref=[Variable]
+;
+
+// the types will be used only internally by the type system
+Type:
+	{IntType} 'int' |
+	{StringType} 'string' |
+	{BooleanType} 'boolean'
+;

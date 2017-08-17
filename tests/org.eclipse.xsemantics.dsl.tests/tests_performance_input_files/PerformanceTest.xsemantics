@@ -1,0 +1,1212 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+system org.eclipse.xsemantics.test.performance.System
+
+copyright
+"Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API"
+
+
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EcoreFactory
+
+auxiliary {
+	aux1(EObject o, EClass c) : EClass
+	aux2(EObject o, EClass c) : EClass
+	aux3(EObject o, EClass c) : EClass
+	aux4(EObject o, EClass c) : EClass
+	aux5(EObject o, EClass c) : EClass
+	aux6(EObject o, EClass c) : EClass
+	aux7(EObject o, EClass c) : EClass
+	aux8(EObject o, EClass c) : EClass
+	aux9(EObject o, EClass c) : EClass
+	aux10(EObject o, EClass c) : EClass
+}
+
+judgments {
+	type1 |- EClass c : EObject o
+	type2 |- EClass c <: EObject o
+	type3 |- EClass c :> EObject o
+	type4 |- EClass c << EObject o
+	type5 |- EClass c >> EObject o
+	type6 |- EClass c <| EObject o
+	type7 |- EClass c ~~ EObject o
+	type8 |- EClass c |> EObject o
+	type9 |- EClass c --> EObject o
+	type10 |- EClass c <- EObject o
+	type11 |- EClass c <~ EObject o
+	type12 |- EClass c ~> EObject o
+	type13 |- EClass c <! EObject o
+	type14 |- EClass c !> EObject o
+	type15 |- EClass c <<! EObject o
+	type16 |- EClass c !>> EObject o
+	type17 |- EClass c <~! EObject o
+	type18 |- EClass c !~> EObject o
+	type19 ||- EClass c >> EObject o
+	type20 ||- EClass c \/ EObject o
+	type21 ||- EClass c /\ EObject o
+}
+
+auxiliary aux1(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux2(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux3(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux4(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux5(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux6(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux7(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux8(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux9(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+auxiliary aux10(EObject o, EClass c) {
+	aux1(o, c)
+	aux2(o, c)
+	aux3(o, c)
+	aux4(o, c)
+	aux5(o, c)
+	aux6(o, c)
+	aux7(o, c)
+	aux8(o, c)
+	aux9(o, c)
+	aux10(o, c)
+	null
+}
+
+rule EClassEObject1 derives
+	G |- EClass eClass : EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject2 derives
+	G |- EClass eClass <: EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject3 derives
+	G |- EClass eClass :> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject4 derives
+	G |- EClass eClass << EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject5 derives
+	G |- EClass eClass >> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject6 derives
+	G |- EClass eClass <| EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject7 derives
+	G |- EClass eClass ~~ EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject8 derives
+	G |- EClass eClass |> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject9 derives
+	G |- EClass eClass --> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject10 derives
+	G |- EClass eClass <- EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject11 derives
+	G |- EClass eClass <~ EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject12 derives
+	G |- EClass eClass ~> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject13 derives
+	G |- EClass eClass <! EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject14 derives
+	G |- EClass eClass !> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject15 derives
+	G |- EClass eClass <<! EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject16 derives
+	G |- EClass eClass !>> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject17 derives
+	G |- EClass eClass <~! EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject18 derives
+	G |- EClass eClass !~> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject19 derives
+	G ||- EClass eClass >> EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject20 derives
+	G ||- EClass eClass \/ EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}
+
+rule EClassEObject21 derives
+	G ||- EClass eClass /\ EObject object
+from {
+	// some expressions from Xbase
+	'foo' == new String() + 'bar'.toFirstUpper
+	// :: as relation symbol disabled due to ambiguities with xbase static access
+	//G |- object.eClass :: eClass
+	//G |- (eClass) :: eClass // we need () otherwise interpreted as static access
+	//G |- (eClass) :: object.eClass.name == [ s | s.toFirstLower ].apply('foo')
+	val EClass eC = EcoreFactory::eINSTANCE.createEClass()
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <: eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass :> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass << eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass >> eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass <| eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass ~~ eClass
+	eC.name = 'MyEClass'
+	eClass == eC
+	G |- object.eClass |> eClass
+	G |- (object.eClass) --> (eClass)
+	G |- (object.eClass) <- (eClass)
+	G |- (object.eClass) <~ (eClass)
+	G |- (object.eClass) ~> (eClass)
+	G |- (object.eClass) <! (eClass)
+	G |- (object.eClass) !> (eClass)
+	G |- (object.eClass) <<! (eClass)
+	G |- (object.eClass) !>> (eClass)
+	G |- (object.eClass) <~! (eClass)
+	G |- (object.eClass) !~> (eClass)
+	eC.name = 'MyEClass'
+	eClass == eC
+	G ||- object.eClass >> eClass
+	G ||- object.eClass /\ eClass
+	G ||- object.eClass \/ eClass
+}

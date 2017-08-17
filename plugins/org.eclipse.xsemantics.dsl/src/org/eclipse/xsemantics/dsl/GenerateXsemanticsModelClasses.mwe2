@@ -1,0 +1,36 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+module org.eclipse.xsemantics.dsl.GenerateXsemanticsModelClasses
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = ".."
+var project = "org.eclipse.xsemantics.dsl"
+
+Workflow {
+	bean = org.eclipse.emf.mwe.utils.StandaloneSetup {
+		// initialize the EMF singleton with proper classpath to platform:/resource mappings
+		scanClassPath = true
+		// put the Xbase genmodel into the EMF plugins singleton
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"// register current projects and its siblings for platform URI map, as they are not on the classpath.
+		platformUri = "${rootPath}"
+	}
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = "${rootPath}/${project}/emf-gen"
+	}
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		// generate the Java code for the EPackage
+		// the genmodel needs to find the Xbase genmodel thus the latter was registered in the standalone setup
+		genModel = "platform:/resource/${project}/model/custom/Xsemantics.genmodel"
+		srcPath = "platform:/resource/${project}/src"
+	}
+}
