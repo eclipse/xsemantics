@@ -1,0 +1,30 @@
+application trace:
+TAbstraction [X1 -> IntType] |- lambda x . (-x) : (IntType -> IntType)
+ TAbstraction |- lambda x . (-x) : Type
+  TParam [X1 -> IntType] |- x : TypeVariable 'X1'
+   TParam |- x : Type
+   null not equals null
+   comparison failed: null and null are equal
+  TArithmetics [X1 -> IntType] |- -x : IntType
+   TArithmetics [x -> TypeVariable 'X1'] |- -x : Type
+    TVariable [X1 -> IntType] |- x : TypeVariable 'X1'
+     TVariable [x -> TypeVariable 'X1'] |- x : Type
+     TypeVariable 'X1' cast to Type
+      SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+       SubstituteTypeVariable [x -> TypeVariable 'X1'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+       cannot find mapping for X1 in environment
+    UnifyVariableBasicType [X1 -> IntType] |- TypeVariable 'X1' == IntType
+     UnifyVariableBasicType [x -> TypeVariable 'X1'] |- TypeVariable 'X1' == IntType
+     TypeVariable 'X1' cast to TypeVariable
+      ExtendVariableMapping [X1 -> IntType] |- TypeVariable 'X1' ~> IntType
+       ExtendVariableMapping [x -> TypeVariable 'X1'] |- TypeVariable 'X1' ~> IntType
+       cannot find mapping for X1 in environment
+    SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> IntType
+     SubstituteTypeVariable [X1 -> IntType, x -> TypeVariable 'X1'] |- TypeVariable 'X1' ==> Type
+     IntType cast to Type
+      SubstituteType [X1 -> IntType] |- IntType ==> IntType
+       SubstituteType [X1 -> IntType, x -> TypeVariable 'X1'] |- IntType ==> IntType
+  SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> IntType
+   SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+   IntType cast to Type
+    SubstituteType [X1 -> IntType] |- IntType ==> IntType

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
+		<groupId>org.eclipse.xsemantics</groupId>
+		<artifactId>org.eclipse.xsemantics.parent</artifactId>
+		<version>1.12.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>org.eclipse.xsemantics.releng</artifactId>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>../../devtools/org.eclipse.xsemantics.targetplatform</module>
+		
+		<module>../../plugins/org.eclipse.xsemantics.runtime</module>
+		<module>../../plugins/org.eclipse.xsemantics.dsl</module>
+		<module>../../plugins/org.eclipse.xsemantics.dsl.ide</module>
+		<module>../../plugins/org.eclipse.xsemantics.dsl.ui</module>
+		<module>../../tests/org.eclipse.xsemantics.dsl.tests</module>
+		<module>../../tests/org.eclipse.xsemantics.dsl.ui.tests</module>
+
+		<!-- we need the following examples for testing -->
+		<module>../../examples/org.eclipse.xsemantics.example.fj</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.ui</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.tests</module>
+
+		<module>../../examples/org.eclipse.xsemantics.example.expressions</module>
+		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui</module>
+		<module>../../examples/org.eclipse.xsemantics.example.expressions.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.tests</module>
+		<module>../../features/org.eclipse.xsemantics.examples.feature</module>
+		<module>../../features/org.eclipse.xsemantics.implemented.examples.feature</module>
+
+		<module>../../doc/org.eclipse.xsemantics.doc</module>
+		<module>../../features/org.eclipse.xsemantics.doc.feature</module>
+
+		<module>../../examples/org.eclipse.xsemantics.ui.examples</module>
+
+		<module>../../features/org.eclipse.xsemantics.runtime.feature</module>
+		<module>../../features/org.eclipse.xsemantics.feature</module>
+		<module>../../features/org.eclipse.xsemantics.sdk</module>
+
+		<module>../../tests/org.eclipse.xsemantics.tests.pde.utils</module>
+		<module>../../features/org.eclipse.xsemantics.tests.feature</module>
+		<module>../../tests/org.eclipse.xsemantics.tests.swtbot</module>
+
+		<module>../../releng/org.eclipse.xsemantics.repository</module>
+	</modules>
+</project>

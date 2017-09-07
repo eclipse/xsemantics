@@ -1,0 +1,228 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+system org.eclipse.xsemantics.example.expressions.typing.FirstExpressionsSemantics
+
+validatorExtends org.eclipse.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
+
+import org.eclipse.xsemantics.example.expressions.expressions.*
+
+judgments {
+	type |- Expression expression : output Type
+		error "cannot type " + stringRep(expression)
+		source expression
+	vartype ||- Variable variable : output Type
+		error "cannot type " + stringRep(variable)
+		source variable
+		feature ExpressionsPackage::eINSTANCE.variable_Expression
+	interpret |- Expression expression ~> output Object
+}
+
+axiom NumeralLiteral
+	G |- NumberLiteral num : ExpressionsFactory::eINSTANCE.createIntType
+
+axiom BooleanLiteral
+	G |- BooleanLiteral bool : ExpressionsFactory::eINSTANCE.createBooleanType
+
+axiom StringLiteral
+	G |- StringLiteral str : ExpressionsFactory::eINSTANCE.createStringType
+
+rule MultiOrDiv
+	G |- MultiOrDiv multiOrDiv : IntType intType
+from {
+	G |- multiOrDiv.left : intType
+	G |- multiOrDiv.right : intType
+}
+
+rule Minus
+	G |- Minus minus : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	var IntType intType
+	G |- minus.left : intType
+	G |- minus.right : intType
+}
+
+rule Plus
+	G |- Plus plus : Type type
+from {
+	G |- plus.left : var Type leftType
+	G |- plus.right : var Type rightType
+	
+	{
+		(leftType instanceof StringType || rightType instanceof StringType)
+		type = ExpressionsFactory::eINSTANCE.createStringType
+	}
+	or
+	{
+		(leftType instanceof IntType && rightType instanceof IntType)
+		type = leftType // i.e., IntType
+	}
+}
+
+rule Comparison
+	G |- Comparison comparison : ExpressionsFactory::eINSTANCE.createBooleanType
+from {
+	G |- comparison.left : var Type leftType
+	G |- comparison.right : var Type rightType
+	
+	// cannot compare booleans
+	(leftType instanceof IntType && rightType instanceof IntType) ||
+	(leftType instanceof StringType && rightType instanceof StringType)
+}
+
+rule Equals
+	G |- Equals comparison : ExpressionsFactory::eINSTANCE.createBooleanType
+from {
+	G |- comparison.left : var Type leftType
+	G |- comparison.right : var Type rightType
+	
+	// can compare only if they have the same type
+	(leftType.eClass == rightType.eClass)
+}
+
+rule BooleanNegation
+	G |- BooleanNegation negation : BooleanType boolType
+from {
+	G |- negation.expression : boolType
+}
+
+rule AndOr
+	G |- AndOrExpression andOr : BooleanType boolType
+from {
+	G |- andOr.left : boolType
+	G |- andOr.right : boolType
+}
+
+rule ArithmeticSigned
+	G |- ArithmeticSigned signed : ExpressionsFactory::eINSTANCE.createIntType
+from {
+	G |- signed.expression : var IntType intType
+}
+
+rule VariableReference
+	G |- VariableReference varRef : Type type
+from {
+	G ||- varRef.ref : type
+}
+
+rule Variable
+	G ||- Variable variable : Type type
+from {
+	variable.expression != null
+	G |- variable.expression : type
+}
+
+axiom InterpretNumberLiteral
+	G |- NumberLiteral number ~> number.value
+
+axiom InterpretStringLiteral
+	G |- StringLiteral string ~> string.value
+
+axiom InterpretBooleanLiteral
+	G |- BooleanLiteral bool ~> Boolean::valueOf(bool.value)
+
+rule InterpretMinus
+	G |- Minus plus ~> Integer result
+from {
+	G |- plus.left ~> var Integer leftResult
+	G |- plus.right ~> var Integer rightResult
+	result = leftResult.intValue - rightResult.intValue
+}
+
+rule InterpretMultiOrDiv
+	G |- MultiOrDiv multiOrDiv ~> Integer result
+from {
+	G |- multiOrDiv.left ~> var Integer leftResult
+	G |- multiOrDiv.right ~> var Integer rightResult
+	if (multiOrDiv.op == '*')
+		result = leftResult.intValue * rightResult.intValue
+	else
+		result = leftResult.intValue / rightResult.intValue
+}
+
+rule InterpretArithmeticSigned
+	G |- ArithmeticSigned signed ~> Integer result
+from {
+	G |- signed.expression ~> var Integer expResult
+	result = -(expResult)
+}
+
+rule InterpretAndOr
+	G |- AndOrExpression andOr ~> Boolean result
+from {
+	G |- andOr.left ~> var Boolean leftResult
+	G |- andOr.right ~> var Boolean rightResult
+	
+	if (andOr.op == "&&")
+		result = leftResult.booleanValue && rightResult.booleanValue
+	else
+		result = leftResult.booleanValue || rightResult.booleanValue
+}
+
+rule InterpretBooleanNegation
+	G |- BooleanNegation neg ~> Boolean result
+from {
+	G |- neg.expression ~> var Boolean expResult
+	result = !expResult
+}
+
+rule InterpretComparison
+	G |- Comparison comparison ~> Boolean result
+from {
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
+	
+	if (leftResult instanceof String && rightResult instanceof String) {
+		result = leftResult.toString < rightResult.toString
+	} else {
+		// both are int if the expression is well-typed
+		result = (leftResult as Integer) < (rightResult as Integer)
+	}
+}
+
+rule InterpretEquals
+	G |- Equals comparison ~> Boolean result
+from {
+	G |- comparison.left ~> var Object leftResult
+	G |- comparison.right ~> var Object rightResult
+	
+	result = leftResult.toString == rightResult.toString
+}
+
+rule InterpretPlus
+	G |- Plus plus ~> Object result
+from {
+	G |- plus.left ~> var Object leftResult
+	G |- plus.right ~> var Object rightResult
+	
+	if (leftResult instanceof String || rightResult instanceof String) {
+		var leftString = leftResult.toString
+		var rightString = rightResult.toString
+		result = leftString + rightString
+	} else {
+		// both are int if the expression is well-typed
+		var leftInt = leftResult as Integer
+		var rightInt = rightResult as Integer
+		result = leftInt + rightInt
+	}
+}
+
+rule InterpretVariableRefenrence
+	G |- VariableReference varRef ~> Object result
+from {
+	G |- varRef.ref.expression ~> result
+}
+
+checkrule CheckVariable for
+	Variable variable
+from {
+	empty ||- variable : var Type type
+}

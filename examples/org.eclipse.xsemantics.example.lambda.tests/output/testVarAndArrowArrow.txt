@@ -1,0 +1,21 @@
+application trace:
+UnifyVariableArrow [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' == ((IntType -> StringType) -> (StringType -> IntType))
+ UnifyVariableArrow |- TypeVariable 'X' == ((IntType -> StringType) -> (StringType -> IntType))
+  NotOccurVarInArrow [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- ((IntType -> StringType) -> (StringType -> IntType))
+   NotOccurVarInArrow |- TypeVariable 'X' !- ((IntType -> StringType) -> (StringType -> IntType))
+    NotOccurVarInArrow [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- (IntType -> StringType)
+     NotOccurVarInArrow |- TypeVariable 'X' !- (IntType -> StringType)
+      NotOccurType [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- IntType
+       NotOccurType |- TypeVariable 'X' !- IntType
+      NotOccurType [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- StringType
+       NotOccurType |- TypeVariable 'X' !- StringType
+    NotOccurVarInArrow [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- (StringType -> IntType)
+     NotOccurVarInArrow |- TypeVariable 'X' !- (StringType -> IntType)
+      NotOccurType [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- StringType
+       NotOccurType |- TypeVariable 'X' !- StringType
+      NotOccurType [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' !- IntType
+       NotOccurType |- TypeVariable 'X' !- IntType
+ TypeVariable 'X' cast to TypeVariable
+  ExtendVariableMapping [X -> ((IntType -> StringType) -> (StringType -> IntType))] |- TypeVariable 'X' ~> ((IntType -> StringType) -> (StringType -> IntType))
+   ExtendVariableMapping |- TypeVariable 'X' ~> ((IntType -> StringType) -> (StringType -> IntType))
+   cannot find mapping for X in environment

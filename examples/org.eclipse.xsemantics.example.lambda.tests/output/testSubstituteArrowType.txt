@@ -1,0 +1,10 @@
+application trace:
+SubstituteArrowType [X1 -> IntType] |- (IntType -> TypeVariable 'X2') ==> (IntType -> TypeVariable 'X2')
+ SubstituteArrowType [X1 -> IntType] |- (TypeVariable 'X1' -> TypeVariable 'X2') ==> Type
+  SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> IntType
+   SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X1' ==> Type
+   IntType cast to Type
+    SubstituteType [X1 -> IntType] |- IntType ==> IntType
+  SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+   SubstituteTypeVariable [X1 -> IntType] |- TypeVariable 'X2' ==> Type
+   cannot find mapping for X2 in environment

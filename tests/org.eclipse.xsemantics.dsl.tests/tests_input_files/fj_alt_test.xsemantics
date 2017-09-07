@@ -1,0 +1,128 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+import org.eclipse.xsemantics.example.fj.fj.Class
+import org.eclipse.xsemantics.example.fj.fj.ClassType
+import org.eclipse.xsemantics.example.fj.fj.Expression
+import org.eclipse.xsemantics.example.fj.fj.FjPackage
+import org.eclipse.xsemantics.example.fj.fj.New
+import org.eclipse.xsemantics.example.fj.fj.Program
+import org.eclipse.xsemantics.example.fj.fj.Type
+import org.eclipse.xsemantics.example.fj.lookup.FjAuxiliaryFunctions
+import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem
+import java.util.List
+
+/*
+ * alternative type system for FJ using external auxiliary functions
+ */
+system org.eclipse.xsemantics.test.fj.alt.FjAltTypeSystem extends FjFirstTypeSystem
+
+copyright
+"Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API"
+
+
+inject FjAuxiliaryFunctions fjAux
+
+judgments {
+	override classtype ||~ Expression expression : output ClassType
+		error stringRep(expression) + " has not a class type"
+		source expression
+	override subtype |- Type left <: Type right
+		error stringRep(left) + " is not a subtype of " + stringRep(right)
+		source left
+	override subclass |- Class candidate <| Class superclass
+		error candidate.name + " is not a subclass of " + superclass.name
+		source candidate
+		feature FjPackage::eINSTANCE.class_Name
+}
+
+rule TypeEquals
+	G |- Type left ~~ Type right
+		error stringRep(left) + " and " + stringRep(right) +
+			" are not comparable"
+from {
+	// this is the most general case
+	// which always fails
+	fail
+}
+
+override rule CheckNew derives
+	G |- New newExp
+from {
+	var fields = fjAux.getFields(newExp.type.classref)
+	G |- newExp : newExp.args << fields
+	// check all subexpressions (arguments)
+	newExp.args.forEach [ G |- it ]
+}
+
+override rule CheckClass
+	G |- Class cl
+from {
+	if (cl.superclass != null) {
+		var List<Class> superClasses = fjAux.getSuperclasses(cl)
+		!superClasses.contains(cl)
+		
+		var inheritedFields = fjAux.getFields(cl.superclass)
+		inheritedFields.forEach [
+			inheritedField |
+			for (field : fjAux.selectFields(cl)) {
+				field.name != inheritedField.name
+				or
+				fail
+					error "field already defined in superclass " +
+						stringRep(inheritedField.eContainer)
+			}
+		]
+		
+		var inheritedMethods = fjAux.getMethods(cl.superclass)
+		// check override predicate
+		inheritedMethods.forEach [
+			inheritedMethod |
+			fjAux.selectMethods(cl).forEach [
+				it.name != inheritedMethod.name
+				or
+				{
+					G |- it.type ~~ inheritedMethod.type
+					
+					it.params.size == inheritedMethod.params.size
+					val inheritedMethodParamsIt = inheritedMethod.params.iterator
+					for (param : it.params) {
+						G |- param.type ~~ inheritedMethodParamsIt.next.type
+					}
+				}
+			]
+		]
+	}
+}
+
+override checkrule CheckMain for
+	Program program
+from {
+	program.main == null // nothing to check
+	or
+	empty |- program.main
+}
+
+override checkrule CheckClassOk for
+	Class clazz
+from {
+	empty |- clazz
+}
+
+
+

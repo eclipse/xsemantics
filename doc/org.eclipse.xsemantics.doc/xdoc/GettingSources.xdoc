@@ -1,0 +1,31 @@
+chapter:GettingSources[Getting Sources]
+
+If you want to get the sources of Xsemantics,
+for instance, to contribute new features and patches, you can get them
+via Git.  However, we strongly reccomend to
+use the automatic procedure detailed below.
+
+We use link[https://wiki.eclipse.org/Eclipse_Oomph_Installer][Oomph] for provisioning
+a full Eclipse IDE and workspace setup for Xsemantics.
+
+ul[
+item[Download and start Oomph: link[https://wiki.eclipse.org/Eclipse_Oomph_Installer][https://wiki.eclipse.org/Eclipse_Oomph_Installer]]
+item[On the initial page, click on the Switch to advanced mode button in the top right]
+item[On the Product page, select "Eclipse IDE for Eclipse Committers" (you can also select another product if you want,
+but we prefer to start with this minimal product and the Oomph setup will install all the needed plug-ins).]
+item[On the Projects page, expand the node "Github Projects".]
+item[Double-click on "Xsemantics", and choose the Stream (usually you choose "master", which is the default).]
+item[Choose your preferred installation settings on the Variables page:
+in particular for "Xsemantics Github repository", choose read or read/write.]
+item[Then specify your Github user ID and password (these are used for Mylyn issues).
+Note that the "Authenticate..." button is currently not working
+(link[https://bugs.eclipse.org/bugs/show_bug.cgi?id=479309][https://bugs.eclipse.org/bugs/show_bug.cgi?id=479309]).]
+]
+
+Press next and finish.
+This will first create an Eclipse installation with all the needed plug-ins
+and then it will start the new installed Eclipse (press Finish to close the first installation dialog).
+The new installed Eclipse will automatically setup the workspace and you will have to wait for this procedure
+to end (you can click on the animated arrow icon on the status bar to show the progress).
+During this procedure you may be asked for additional passwords (especially if you use the Eclipse
+feature for storing passwords in a keyring).

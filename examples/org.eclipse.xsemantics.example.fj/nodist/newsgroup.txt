@@ -1,0 +1,39 @@
+textual representation:
+
+Note, that there's a serialize() operation on AbstactNode.
+So
+
+  NodeUtil.getNodeAdapter(eObject).getParserNode().serialize()
+
+works as well.
+
+Cheers,
+Sven
+
+
+Christoph Kulla schrieb:
+> Found a solution in the mean time:
+>
+> String text = "";
+> for (LeafNode ln :  NodeUtil.getNodeAdapter(eObject).getParserNode().getLeafNode s()) {
+>     text+=ln.getText();
+> }
+>
+> Pretty easy :)
+
+
+public ReffinderParameters exec(Returnvalue state)
+                    throws Exception {
+                IParseResult parseResult = state.getParseResult();
+                CompositeNode rootNode = parseResult.getRootNode();
+                AbstractNode currentNode = NodeUtil.findLeafNodeAtOffset(rootNode, caretOffset);
+            EObject semanticNode= NodeUtil.getNearestSemanticObject(currentNode);
+    return (Returnvalue)doSomethingWith(semanticNode);
+}});
+
+
+You can find the grammar elements for a certain offset using the node tree:
+
+CompositeNode rootNode = xtextResource.getParseResult().getRootNode();
+AbstractNode node = NodeUtil.findLeafNodeAtOffset(rootNode, myOffset);
+EObject grammarElements = node.getGrammarElement();

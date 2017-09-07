@@ -1,0 +1,96 @@
+application trace:
+TAbstraction [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- lambda x . (lambda y . ((x y))) : ((TypeVariable 'X2' -> TypeVariable 'X4') -> (TypeVariable 'X2' -> TypeVariable 'X4'))
+ TAbstraction |- lambda x . (lambda y . ((x y))) : Type
+  TParam [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- x : TypeVariable 'X1'
+   TParam |- x : Type
+   null not equals null
+   comparison failed: null and null are equal
+  TAbstraction [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- lambda y . ((x y)) : (TypeVariable 'X2' -> TypeVariable 'X4')
+   TAbstraction [x -> TypeVariable 'X1'] |- lambda y . ((x y)) : Type
+    TParam [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- y : TypeVariable 'X2'
+     TParam [x -> TypeVariable 'X1'] |- y : Type
+     null not equals null
+     comparison failed: null and null are equal
+    TApplication [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (x y) : TypeVariable 'X4'
+     TApplication [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- (x y) : Type
+      TVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- x : TypeVariable 'X1'
+       TVariable [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- x : Type
+       TypeVariable 'X1' cast to Type
+        SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+         SubstituteTypeVariable [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+         cannot find mapping for X1 in environment
+      UnifyVariableArrow [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' == (TypeVariable 'X3' -> TypeVariable 'X4')
+       UnifyVariableArrow [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' == (TypeVariable 'X3' -> TypeVariable 'X4')
+        NotOccurVarInArrow [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' !- (TypeVariable 'X3' -> TypeVariable 'X4')
+         NotOccurVarInArrow [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' !- (TypeVariable 'X3' -> TypeVariable 'X4')
+          NotOccurVar [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' !- TypeVariable 'X3'
+           NotOccurVar [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' !- TypeVariable 'X3'
+           X1 not equals X3
+          NotOccurVar [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' !- TypeVariable 'X4'
+           NotOccurVar [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' !- TypeVariable 'X4'
+           X1 not equals X4
+       TypeVariable 'X1' cast to TypeVariable
+        ExtendVariableMapping [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' ~> (TypeVariable 'X3' -> TypeVariable 'X4')
+         ExtendVariableMapping [x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' ~> (TypeVariable 'X3' -> TypeVariable 'X4')
+         cannot find mapping for X1 in environment
+      SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+       SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> (TypeVariable 'X3' -> TypeVariable 'X4')
+       (TypeVariable 'X3' -> TypeVariable 'X4') cast to Type
+        SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (TypeVariable 'X2' -> TypeVariable 'X4') ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+         SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- (TypeVariable 'X3' -> TypeVariable 'X4') ==> (TypeVariable 'X3' -> TypeVariable 'X4')
+          SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> TypeVariable 'X3'
+           SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> Type
+           cannot find mapping for X3 in environment
+          SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+           SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> Type
+           cannot find mapping for X4 in environment
+      TVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- y : TypeVariable 'X2'
+       TVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- y : Type
+       TypeVariable 'X2' cast to Type
+        SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+         SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+         cannot find mapping for X2 in environment
+      UnifyVar [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' == TypeVariable 'X2'
+       UnifyVar [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X3' == TypeVariable 'X2'
+       X3 equals X2
+       comparison failed: X3 and X2 are not equal
+        ExtendVariableMapping [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' ~> TypeVariable 'X2'
+         ExtendVariableMapping [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X3' ~> TypeVariable 'X2'
+         cannot find mapping for X3 in environment
+      SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (TypeVariable 'X2' -> TypeVariable 'X4') ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+       SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- (TypeVariable 'X3' -> TypeVariable 'X4') ==> (TypeVariable 'X3' -> TypeVariable 'X4')
+        SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> TypeVariable 'X2'
+         SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> Type
+         TypeVariable 'X2' cast to Type
+          SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+           SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+           cannot find mapping for X2 in environment
+        SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+         SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1', y -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> Type
+         cannot find mapping for X4 in environment
+    SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+     SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+     cannot find mapping for X2 in environment
+    SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+     SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2', x -> TypeVariable 'X1'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+     cannot find mapping for X4 in environment
+  SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+   SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X1' ==> TypeVariable 'X1'
+   (TypeVariable 'X3' -> TypeVariable 'X4') cast to Type
+    SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (TypeVariable 'X2' -> TypeVariable 'X4') ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+     SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (TypeVariable 'X3' -> TypeVariable 'X4') ==> (TypeVariable 'X3' -> TypeVariable 'X4')
+      SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> TypeVariable 'X2'
+       SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X3' ==> Type
+       TypeVariable 'X2' cast to Type
+        SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+         cannot find mapping for X2 in environment
+      SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+       SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> Type
+       cannot find mapping for X4 in environment
+  SubstituteArrowType [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- (TypeVariable 'X2' -> TypeVariable 'X4') ==> (TypeVariable 'X2' -> TypeVariable 'X4')
+    SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> TypeVariable 'X2'
+     SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X2' ==> Type
+     cannot find mapping for X2 in environment
+    SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> TypeVariable 'X4'
+     SubstituteTypeVariable [X1 -> (TypeVariable 'X3' -> TypeVariable 'X4'), X3 -> TypeVariable 'X2'] |- TypeVariable 'X4' ==> Type
+     cannot find mapping for X4 in environment

@@ -1,0 +1,43 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+«IMPORT it::xsemantics::example::fjcached::ui::wizard»
+
+«DEFINE main FOR FjcachedProjectInfo»
+«EXPAND model FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR FjcachedProjectInfo»
+«FILE "src/fjcached/Pair.fjcached"-»
+/*
+ * This is an example FJ program
+ */
+
+class A extends Object { }
+class B extends Object { }
+
+class Pair extends Object {
+    Object fst;
+    Object snd;
+
+    Pair setfst(Object newfst) {
+        return new Pair(newfst, this.snd);
+    }
+
+    Pair setsnd(Object newscd) {
+        return new Pair(this.fst, newscd);
+    }
+}
+
+// the main expression
+new Pair(new A(), new B()).setfst(new A()).fst
+«ENDFILE»
+«ENDDEFINE»

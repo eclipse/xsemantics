@@ -1,0 +1,89 @@
+/*******************************************************************************
+ * Copyright (c) 2013-2017 Lorenzo Bettini.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Lorenzo Bettini - Initial contribution and API
+ *******************************************************************************/
+
+grammar org.eclipse.xsemantics.example.fj.FJ with org.eclipse.xtext.common.Terminals
+
+generate fj "http://xsemantics.sf.net/example/fj/FJ"
+
+Program :
+	(classes += Class)*
+	(main = Expression)? 
+;
+
+Type: BasicType | ClassType;
+
+BasicType : basic=('int' | 'boolean' | 'String');
+
+ClassType : classref=[Class];
+
+Class:
+	'class' name=ID ('extends' superclass=[Class])? '{'
+		(members += Member)*
+	'}'
+;
+
+Member: Field | Method;
+
+Field:
+	type=Type name=ID ';'
+;
+
+Method:
+	type=Type name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' '{'
+		body=MethodBody
+	'}'
+;
+
+Parameter:
+	type=Type name=ID
+;
+
+TypedElement:
+	Member | Parameter;
+
+MethodBody:
+	'return' expression=Expression ';'
+;
+
+Expression:
+	TerminalExpression 
+	=>(
+		{Selection.receiver=current} '.' 
+		message=[Member]
+		('(' (args+=Expression (',' args+=Expression)*)? ')')?
+	)*
+;
+
+TerminalExpression returns Expression:
+   This |
+   ParamRef |
+   New |
+   =>Cast |
+   Constant |
+   Paren
+;
+
+This: variable='this';
+ParamRef: parameter=[Parameter];
+New: 'new' type=ClassType '(' (args+=Expression (',' args+=Expression)*)? ')';
+Cast: '(' type=ClassType ')' expression=TerminalExpression;
+Paren returns Expression: '(' Expression ')'; 
+
+Constant: IntConstant | BoolConstant | StringConstant;
+
+StringConstant: 
+	constant=STRING;
+
+IntConstant:
+	constant=INT;
+
+BoolConstant:
+	constant = ('true' | 'false');
