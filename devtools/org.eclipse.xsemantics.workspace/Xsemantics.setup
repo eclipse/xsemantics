@@ -525,7 +525,7 @@
       </query>
     </setupTask>
   </setupTask>
-  <stream name="master">
+  <stream name="GH-370">
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
