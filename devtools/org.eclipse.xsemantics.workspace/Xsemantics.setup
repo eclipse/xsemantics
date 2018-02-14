@@ -90,7 +90,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Neon"
+      defaultValue="Oxygen"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
@@ -341,9 +341,9 @@
             url="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
       </repositoryList>
       <repositoryList
-          name="Neon">
+          name="Oxygen">
         <repository
-            url="http://download.eclipse.org/releases/neon"/>
+            url="http://download.eclipse.org/releases/oxygen"/>
         <repository
             url="http://download.eclipse.org/cbi/updates/license/1.0.1.v20140414-1359"/>
         <repository
