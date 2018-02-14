@@ -90,7 +90,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Neon"
+      defaultValue="Oxygen"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
@@ -189,7 +189,7 @@
       <requirement
           name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
       <repository
-          url="http://download.eclipse.org/modeling/emft/b3/updates-4.4"/>
+          url="http://download.eclipse.org/cbi/updates/aggregator/ide/4.4/?d"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -341,9 +341,9 @@
             url="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
       </repositoryList>
       <repositoryList
-          name="Neon">
+          name="Oxygen">
         <repository
-            url="http://download.eclipse.org/releases/neon"/>
+            url="http://download.eclipse.org/releases/oxygen"/>
         <repository
             url="http://download.eclipse.org/cbi/updates/license/1.0.1.v20140414-1359"/>
         <repository
@@ -454,7 +454,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="api.baseline.zip"
-      value="org.eclipse.xsemantics.repository-1.11.0.v20170202-1734.zip"/>
+      value="it.xsemantics.repository-1.11.0.v20170202-1734.zip"/>
   <setupTask
       xsi:type="pde:APIBaselineTask"
       name="xsemantics-latest"
@@ -525,7 +525,7 @@
       </query>
     </setupTask>
   </setupTask>
-  <stream name="master">
+  <stream name="GH-370-2">
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
@@ -533,14 +533,14 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.12.0"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
         label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.12.0,2.13.0)"/>
+          versionRange="[2.13.0,2.13.1)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
@@ -560,14 +560,14 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.11.0"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.nightly"
         label="Xtext Nightly">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.11.0,2.12.0)"/>
+          versionRange="[2.13.0,2.13.1)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
