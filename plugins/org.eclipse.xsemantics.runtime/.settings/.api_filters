@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="926941240">
             <message_arguments>
-                <message_argument value="1.13.1"/>
+                <message_argument value="1.12.1"/>
                 <message_argument value="1.11.0"/>
             </message_arguments>
         </filter>
