@@ -63,7 +63,7 @@ Contributors:
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xtext.version>2.13.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
-		<mwe2Version>2.9.1</mwe2Version>
+		<mwe2Version>2.9.1.201705291010</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 
