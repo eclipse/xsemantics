@@ -14,7 +14,7 @@ Contributors:
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xsemantics</groupId>
 	<artifactId>org.eclipse.xsemantics.parent</artifactId>
-	<version>1.12.1-SNAPSHOT</version>
+	<version>1.13.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Xsemantics</name>
