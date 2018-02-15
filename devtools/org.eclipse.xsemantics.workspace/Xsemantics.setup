@@ -185,14 +185,6 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="B3 Aggregator">
-      <requirement
-          name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/cbi/updates/aggregator/ide/4.4/?d"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
         label="Oomph Extensions">
       <requirement
           name="org.eclipse.oomph.setup.git.feature.group"/>
@@ -540,7 +532,7 @@
         label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.13.0,2.13.1)"/>
+          versionRange="[2.13.0,2.14.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
@@ -567,7 +559,7 @@
         label="Xtext Nightly">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.13.0,2.13.1)"/>
+          versionRange="[2.13.0,2.14.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
