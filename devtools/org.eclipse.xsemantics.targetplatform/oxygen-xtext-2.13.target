@@ -13,7 +13,7 @@
 <unit id="org.eclipse.xpand" version="0.0.0"/>
 <unit id="org.eclipse.xtend" version="0.0.0"/>
 <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-<repository location="http://download.eclipse.org/releases/neon/"/>
+<repository location="http://download.eclipse.org/releases/oxygen/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
