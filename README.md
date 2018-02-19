@@ -16,4 +16,4 @@ Xsemantics is a DSL (implemented in Xtext itself) for writing type systems, redu
 
 http://xsemantics.sourceforge.net
 
-[![Build Status](https://travis-ci.org/LorenzoBettini/xsemantics.svg?branch=master)](https://travis-ci.org/LorenzoBettini/xsemantics) [![Coverage Status](https://coveralls.io/repos/LorenzoBettini/xsemantics/badge.svg?branch=master&service=github)](https://coveralls.io/github/LorenzoBettini/xsemantics?branch=master)
+[![Build Status](https://travis-ci.org/eclipse/xsemantics.svg?branch=master)](https://travis-ci.org/eclipse/xsemantics) [![Coverage Status](https://coveralls.io/repos/github/eclipse/xsemantics/badge.svg?branch=master)](https://coveralls.io/github/eclipse/xsemantics?branch=master)
