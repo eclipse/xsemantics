@@ -41,7 +41,7 @@
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Doomph.redirection.xsemantics="
-      value="https://raw.githubusercontent.com/LorenzoBettini/xsemantics/master/devtools/org.eclipse.xsemantics.workspace/Xsemantics.setup->${git.clone.location|uri}/devtools/org.eclipse.xsemantics.workspace/Xsemantics.setup"
+      value="https://raw.githubusercontent.com/eclipse/xsemantics/master/devtools/org.eclipse.xsemantics.workspace/Xsemantics.setup->${git.clone.location|uri}/devtools/org.eclipse.xsemantics.workspace/Xsemantics.setup"
       vm="true"/>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -257,7 +257,7 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone"
-      remoteURI="LorenzoBettini/xsemantics">
+      remoteURI="eclipse/xsemantics">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -505,7 +505,7 @@
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
         connectorKind="github"
-        repositoryURL="https://github.com/LorenzoBettini/xsemantics"
+        repositoryURL="https://github.com/eclipse/xsemantics"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
