@@ -173,6 +173,7 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 
 	@Test
 	def void testSnapshotWithInstantionExceptionReturnsThis() {
+		TestRuleApplicationTraceWithInstantiationException.first = false;
 		val t1 = new TestRuleApplicationTraceWithInstantiationException
 		assertSame(t1, t1.snapshot)
 		logListener.containsMessage("deep cloning of trace disabled")
@@ -180,6 +181,7 @@ public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 
 	@Test
 	def void testSnapshotWithIllegalAccessExceptionReturnsThis() {
+		TestRuleApplicationTraceWithIllegalAccessException.first = false;
 		val t1 = new TestRuleApplicationTraceWithIllegalAccessException
 		assertSame(t1, t1.snapshot)
 		logListener.containsMessage("deep cloning of trace disabled")
