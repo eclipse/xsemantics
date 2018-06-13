@@ -25,3 +25,4 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.example.expressions,
  org.eclipse.xsemantics.example.expressions.tests
+Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.tests

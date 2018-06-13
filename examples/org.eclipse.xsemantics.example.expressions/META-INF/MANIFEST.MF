@@ -37,4 +37,5 @@ Export-Package: org.eclipse.xsemantics.example.expressions,
  org.eclipse.xsemantics.example.expressions.typing,
  org.eclipse.xsemantics.example.expressions.typing.validation,
  org.eclipse.xsemantics.example.expressions.validation
+Automatic-Module-Name: org.eclipse.xsemantics.example.expressions
 

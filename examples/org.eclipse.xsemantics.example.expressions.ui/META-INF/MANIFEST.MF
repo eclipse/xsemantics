@@ -29,3 +29,4 @@ Export-Package: org.eclipse.xsemantics.example.expressions.ui.contentassist,
  org.eclipse.xsemantics.example.expressions.ui.quickfix,
  org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xsemantics.example.expressions.ui.internal.ExpressionsActivator
+Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.ui

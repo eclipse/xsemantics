@@ -37,4 +37,5 @@ Export-Package: org.eclipse.xsemantics.example.fj,
  org.eclipse.xsemantics.example.fj.typing.validation,
  org.eclipse.xsemantics.example.fj.util,
  org.eclipse.xsemantics.example.fj.validation
+Automatic-Module-Name: org.eclipse.xsemantics.example.fj
 

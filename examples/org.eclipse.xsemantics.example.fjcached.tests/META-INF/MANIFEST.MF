@@ -27,3 +27,4 @@ Import-Package: org.apache.log4j,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.example.fjcached
+Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached.tests

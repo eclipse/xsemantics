@@ -29,3 +29,4 @@ Import-Package: org.apache.log4j,
  org.junit;version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.dsl.tests;x-internal=true
+Automatic-Module-Name: org.eclipse.xsemantics.dsl.tests

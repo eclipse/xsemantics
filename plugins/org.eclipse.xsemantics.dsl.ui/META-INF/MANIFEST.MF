@@ -28,3 +28,4 @@ Export-Package: org.eclipse.xsemantics.dsl.ui.contentassist,
  org.eclipse.xsemantics.dsl.ui.internal,
  org.eclipse.xsemantics.dsl.ui.quickfix
 Bundle-Activator: org.eclipse.xsemantics.dsl.ui.internal.DslActivator
+Automatic-Module-Name: org.eclipse.xsemantics.dsl.ui

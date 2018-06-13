@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xsemantics.runtime
+Automatic-Module-Name: org.eclipse.xsemantics.example.maven.test
 

@@ -31,3 +31,4 @@ Export-Package: org.eclipse.xsemantics.example.fjcached.ui.quickfix,
  org.eclipse.xsemantics.example.fjcached.ui.internal,
  org.eclipse.xsemantics.example.fjcached.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xsemantics.example.fjcached.ui.internal.FjcachedActivator
+Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached.ui

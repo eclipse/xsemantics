@@ -41,4 +41,5 @@ Export-Package: org.eclipse.xsemantics.dsl,
  org.eclipse.xsemantics.dsl.xsemantics.impl,
  org.eclipse.xsemantics.dsl.xsemantics.util,
  org.eclipse.xsemantics.dsl.scoping
+Automatic-Module-Name: org.eclipse.xsemantics.dsl
  

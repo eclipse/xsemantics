@@ -18,3 +18,4 @@ Export-Package: org.eclipse.xsemantics.runtime,
  org.eclipse.xsemantics.runtime.internal;x-internal:=true,
  org.eclipse.xsemantics.runtime.validation
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.xsemantics.runtime

@@ -30,3 +30,4 @@ Export-Package: org.eclipse.xsemantics.example.lambda.ui,
  org.eclipse.xsemantics.example.lambda.ui.quickfix,
  org.eclipse.xsemantics.example.lambda.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xsemantics.example.lambda.ui.internal.LambdaActivator
+Automatic-Module-Name: org.eclipse.xsemantics.example.lambda.ui

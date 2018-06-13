@@ -28,3 +28,4 @@ Export-Package: org.eclipse.xsemantics.example.fj.ui,
  org.eclipse.xsemantics.example.fj.ui.quickfix,
  org.eclipse.xsemantics.example.fj.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xsemantics.example.fj.ui.FJActivatorCustom
+Automatic-Module-Name: org.eclipse.xsemantics.example.fj.ui
