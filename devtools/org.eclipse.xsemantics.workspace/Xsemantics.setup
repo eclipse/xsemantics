@@ -176,15 +176,6 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Findbugs">
-      <requirement
-          name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
-          optional="true"/>
-      <repository
-          url="http://findbugs.cs.umd.edu/eclipse/"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
         label="Oomph Extensions">
       <requirement
           name="org.eclipse.oomph.setup.git.feature.group"/>
