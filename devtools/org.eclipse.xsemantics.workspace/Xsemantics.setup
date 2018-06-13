@@ -208,8 +208,6 @@
           name="org.eclipse.oomph.setup.workbench.feature.group"/>
       <requirement
           name="org.eclipse.oomph.setup.workingsets.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/oomph/updates/"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -498,6 +496,14 @@
       id="GenerateExamplesZips"
       launcher="Build Zips">
     <description>Generate Zips of Examples</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      id="github.user.password"
+      type="PASSWORD"
+      name="github.user.password"
+      label="Github user password">
+    <description>Github user password</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
