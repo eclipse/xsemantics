@@ -127,7 +127,7 @@ Contributors:
 									</applicationsArgs>
 									<repositories>
 										<repository>
-											<url>http://download.eclipse.org/releases/oxygen</url>
+											<url>http://download.eclipse.org/releases/neon</url>
 											<layout>p2</layout>
 										</repository>
 									</repositories>
