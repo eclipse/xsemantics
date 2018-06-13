@@ -23,6 +23,14 @@ Contributors:
 	<artifactId>org.eclipse.xsemantics.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
+	<properties>
+		<p2.mirrorsPrefix>/xsemantics/${xsemantics.updates.dir}</p2.mirrorsPrefix>
+		<p2.versionMajorMinor>2.0</p2.versionMajorMinor>
+		<p2.statsURL>http://download.eclipse.org/stats</p2.statsURL>
+		<p2.mirrorsURL>http://www.eclipse.org/downloads/download.php?format=xml&amp;file=${p2.mirrorsPrefix}/${p2.versionMajorMinor}/${qualifiedVersion}/</p2.mirrorsURL>
+		<p2.statsTrackedArtifacts>org.eclipse.xsemantics.sdk,org.eclipse.xsemantics.feature,org.eclipse.xsemantics.examples.feature</p2.statsTrackedArtifacts>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -46,102 +54,194 @@ Contributors:
 			<build>
 				<plugins>
 					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${maven-antrun-plugin.version}</version>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-eclipserun-plugin</artifactId>
+						<version>${tycho-version}</version>
 						<executions>
 							<execution>
-								<!-- Retrieve possibly existing remote composite metadata -->
-								<id>update-local-repository</id>
-								<phase>prepare-package</phase>
-								<configuration>
-									<target>
-										<ant antfile="${ant-files-path}/bintray.ant" target="get-composite-metadata">
-										</ant>
-									</target>
-								</configuration>
+								<!--
+									(1)
+									See <http://wiki.eclipse.org/Equinox/p2/p2.mirrorsURL>.
+									This will add the mirror and statistics properties to your
+									artifacts.jar, but NOT to artifacts.xml.xz,
+									since p2 can only read artifacts.xml.zx but now write into it
+									(https://bugs.eclipse.org/bugs/show_bug.cgi?id=467779).
+									artifacts.xml.xz will be handled later (from (2) on). -->
+								<id>add-repo-properties</id>
 								<goals>
-									<goal>run</goal>
+									<goal>eclipse-run</goal>
 								</goals>
+								<phase>package</phase>
+								<configuration>
+									<applicationsArgs>
+										<arg>-application</arg>
+										<arg>org.eclipse.wtp.releng.tools.addRepoProperties</arg>
+									</applicationsArgs>
+									<jvmArgs>
+										<arg>-DartifactRepoDirectory=${project.build.directory}/repository</arg>
+										<arg>-Dp2MirrorsURL=${p2.mirrorsURL}</arg>
+										<arg>-Dp2StatsURI=${p2.statsURL}</arg>
+										<arg>-DstatsTrackedArtifacts=${p2.statsTrackedArtifacts}</arg>
+										<arg>-DstatsArtifactsSuffix=-${project.version}</arg>
+									</jvmArgs>
+									<work>${project.build.directory}/eclipserun-work-first</work>
+									<dependencies>
+										<dependency>
+											<artifactId>org.eclipse.wtp.releng.tools.feature</artifactId>
+											<type>eclipse-feature</type>
+										</dependency>
+									</dependencies>
+									<repositories>
+										<repository>
+											<url>http://download.eclipse.org/webtools/releng/repository</url>
+											<layout>p2</layout>
+										</repository>
+										<repository>
+											<url>http://download.eclipse.org/releases/oxygen</url>
+											<layout>p2</layout>
+										</repository>
+									</repositories>
+								</configuration>
 							</execution>
-							
 							<execution>
-								<!-- Deploy p2 repository, p2 composite updated metadata and zipped p2 repository -->
-								<id>deploy-repository</id>
+								<id>add-p2-composite-repository</id>
+								<goals>
+									<goal>eclipse-run</goal>
+								</goals>
+								<!-- this must be executed after package, since during package we also
+									deal with XZ compressed artifacts -->
 								<phase>verify</phase>
 								<configuration>
-									<target>
-										<ant antfile="${ant-files-path}/bintray.ant"
-												target="push-to-bintray">
-											<property name="bintray.zip.path"
-												value="${bintray.base.path}zipped/${unqualifiedVersion}"/>
-										</ant>
-									</target>
+									<applicationsArgs>
+										<arg>-application</arg>
+										<arg>org.eclipse.ant.core.antRunner</arg>
+										<arg>-buildfile</arg>
+										<arg>${ant-files-path}/packaging-p2composite.ant</arg>
+										<arg>p2.composite.add</arg>
+										<arg>-Dsoftware.download.area=${xsemantics.download.area}</arg>
+										<arg>-Dupdates.dir=${xsemantics.updates.dir}</arg>
+										<arg>-Dsite.label="${site.label}"</arg>
+										<arg>-Dproject.build.directory=${project.build.directory}</arg>
+										<arg>-DunqualifiedVersion=${unqualifiedVersion}</arg>
+										<arg>-DbuildQualifier=${buildQualifier}</arg>
+									</applicationsArgs>
+									<repositories>
+										<repository>
+											<url>http://download.eclipse.org/releases/oxygen</url>
+											<layout>p2</layout>
+										</repository>
+									</repositories>
+									<dependencies>
+										<dependency>
+											<artifactId>org.eclipse.ant.core</artifactId>
+											<type>eclipse-plugin</type>
+										</dependency>
+										<dependency>
+											<artifactId>org.apache.ant</artifactId>
+											<type>eclipse-plugin</type>
+										</dependency>
+										<dependency>
+											<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+											<type>eclipse-plugin</type>
+										</dependency>
+										<dependency>
+											<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+											<type>eclipse-feature</type>
+										</dependency>
+										<dependency>
+											<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+											<type>eclipse-feature</type>
+										</dependency>
+										<dependency>
+											<artifactId>org.eclipse.equinox.ds</artifactId>
+											<type>eclipse-plugin</type>
+										</dependency>
+									</dependencies>
 								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
 							</execution>
 						</executions>
 					</plugin>
 
 					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-eclipserun-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<applicationsArgs>
-								<args>-application</args>
-								<args>org.eclipse.ant.core.antRunner</args>
-								<args>-buildfile</args>
-								<args>${ant-files-path}/packaging-p2composite.ant</args>
-								<args>p2.composite.add</args>
-								<args>-Dsite.label="${site.label}"</args>
-								<args>-Dcomposite.base.dir=${project.build.directory}</args>
-								<args>-DunqualifiedVersion=${unqualifiedVersion}</args>
-								<args>-DbuildQualifier=${buildQualifier}</args>
-								<args>-Dchild.repository.path.prefix="${child.repository.path.prefix}"</args>
-							</applicationsArgs>
-							<repositories>
-								<repository>
-									<id>mars</id>
-									<layout>p2</layout>
-									<url>http://download.eclipse.org/releases/neon</url>
-								</repository>
-							</repositories>
-							<dependencies>
-								<dependency>
-									<artifactId>org.eclipse.ant.core</artifactId>
-									<type>eclipse-plugin</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.apache.ant</artifactId>
-									<type>eclipse-plugin</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
-									<type>eclipse-plugin</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
-									<type>eclipse-feature</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
-									<type>eclipse-feature</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.equinox.ds</artifactId>
-									<type>eclipse-plugin</type>
-								</dependency>
-							</dependencies>
-						</configuration>
+						<!-- copy the zipped p2 repository into download zips area  -->
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<dependencies>
+							<!-- Needed for XZ compression -->
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-compress</artifactId>
+								<version>1.4</version>
+							</dependency>
+						</dependencies>
 						<executions>
 							<execution>
-								<id>add-p2-composite-repository</id>
+								<id>copy-to-zips-download</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="" />
+										<echo message="Source path: ${project.build.directory}" />
+										<echo message="Built version: ${unqualifiedVersion}.${buildQualifier}" />
+										<echo message="" />
+		
+										<copy includeemptydirs="false" todir="${xsemantics.download.area}/${xsemantics.zips.dir}">
+											<fileset dir="${project.build.directory}">
+												<include name="*.zip" />
+											</fileset>
+										</copy>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							<execution>
+								<!-- (2)
+									Unpack artifacts.jar (which has already been processed) -->
+								<id>unjar-artifacts</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<unzip src="${project.build.directory}/repository/artifacts.jar"
+											dest="${project.build.directory}/repository/" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+							<execution>
+								<!-- (3)
+									pack artifacts.xml into artifacts.xml.xz (rewrite) -->
+								<id>xz-artifacts</id>
 								<phase>package</phase>
 								<goals>
-									<goal>eclipse-run</goal>
+									<goal>run</goal>
 								</goals>
+								<configuration>
+									<target name="xz-artifacts-xml">
+										<taskdef resource="org/apache/ant/compress/antlib.xml"
+											classpathref="maven.plugin.classpath" />
+										<xz
+											srcfile="${project.build.directory}/repository/artifacts.xml"
+											destfile="${project.build.directory}/repository/artifacts.xml.xz" />
+									</target>
+								</configuration>
+							</execution>
+							<execution>
+								<!-- (4)
+									Remove artifacts.xml (we don't need that anymore) -->
+								<id>remove-artifacts-xml</id>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<delete file="${project.build.directory}/repository/artifacts.xml"/>
+									</target>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>

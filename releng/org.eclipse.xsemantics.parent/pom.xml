@@ -122,33 +122,20 @@ Contributors:
 		
 		<target-file-name>oxygen-xtext-2.13</target-file-name>
 		
-		<!-- properties for deploying the composite update site and zipped products on Sourceforge -->
-		
 		<ant-files-path>${basedir}/../../releng/org.eclipse.xsemantics.parent/ant</ant-files-path>
 
-		<!-- for deployment on bintray -->
-		<!-- The name of your own Bintray repository -->
-		<bintray.repo>xsemantics</bintray.repo>
-		<!-- The name of your own Bintray repository's package for releases -->
-		<bintray.package>releases</bintray.package>
+		<!-- properties for deploying the composite update site and zipped site -->
 		<!-- The label for the Composite sites -->
 		<site.label>Xsemantics Site</site.label>
+		<xsemantics.download.area>/home/data/httpd/download.eclipse.org/xsemantics</xsemantics.download.area>
+		<xsemantics.updates.dir>updates</xsemantics.updates.dir>
+		<xsemantics.zips.dir>zips</xsemantics.zips.dir>
 
-		<!-- If the Bintray repository is owned by someone different from your
-			user, then specify the bintray.owner explicitly -->
-		<bintray.owner>${bintray.user}</bintray.owner>
-		<!-- Define bintray.user and bintray.apikey in some secret place,
-			like .m2/settings.xml -->
+		<!-- Enable this on Hudson CI @Eclipse.org -->
+		<cbi.jarsigner.skip>true</cbi.jarsigner.skip>
 
-		<!-- Default values for remote directories -->
-		<bintray.base.path></bintray.base.path>
-		<bintray.releases.path>${bintray.base.path}releases</bintray.releases.path>
-		<bintray.composite.path>${bintray.base.path}updates</bintray.composite.path>
-		<bintray.zip.path>${bintray.base.path}zipped</bintray.zip.path>
-		<bintray.products.path>${bintray.base.path}products</bintray.products.path>
-		<!-- note that the following must be consistent with the path schema
-			used to publish child composite repositories and actual released p2 repositories -->
-		<child.repository.path.prefix>../../releases/</child.repository.path.prefix>
+		<!-- Source references -->
+		<tycho.scmUrl>scm:git:https://github.com/eclipse/xsemantics.git</tycho.scmUrl>
 	</properties>
 
 	<profiles>
@@ -160,13 +147,41 @@ Contributors:
 			<properties>
 				<xtext.maven.skip>true</xtext.maven.skip>
 				<skipTests>true</skipTests>
+				<!-- for Hudson CI @Eclipse.org -->
+				<!-- Disable this on your local machine -->
+				<cbi.jarsigner.skip>false</cbi.jarsigner.skip>
 			</properties>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-pack200a-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>pack200-normalize</id>
+								<goals>
+									<goal>normalize</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-pack200b-plugin</artifactId>
-						<version>${tycho-version}</version>
 						<executions>
 							<execution>
 								<id>pack200-pack</id>
@@ -180,7 +195,6 @@ Contributors:
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>tycho-p2-plugin</artifactId>
-						<version>${tycho-version}</version>
 						<executions>
 							<execution>
 								<id>p2-metadata</id>
@@ -196,19 +210,6 @@ Contributors:
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-
-		<profile>
-			<id>release-snapshots</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<xtext.maven.skip>true</xtext.maven.skip>
-				<bintray.package>snapshots</bintray.package>
-				<bintray.base.path>snapshots/</bintray.base.path>
-				<site.label>Xsemantics Snapshot Site</site.label>
-			</properties>
 		</profile>
 
 		<profile>
@@ -496,7 +497,17 @@ Contributors:
 				<version>${tycho-version}</version>
 				<configuration>
 					<format>'v'yyyyMMdd'-'HHmm</format>
+					<sourceReferences>
+						<generate>true</generate>
+					</sourceReferences>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-sourceref-jgit</artifactId>
+						<version>${tycho-extras-version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>
@@ -579,6 +590,11 @@ Contributors:
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>cbi-release</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
