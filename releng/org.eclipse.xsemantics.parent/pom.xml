@@ -217,6 +217,19 @@ Contributors:
 			</build>
 		</profile>
 
+		<!-- To be used together with release-composite to release a milestone -->
+		<profile>
+			<id>release-milestone</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<site.label>Xsemantics Milestones Site</site.label>
+				<xsemantics.updates.dir>milestones</xsemantics.updates.dir>
+				<xsemantics.zips.dir>milestones/zips</xsemantics.zips.dir>
+			</properties>
+		</profile>
+
 		<profile>
 			<id>macosx-jvm-flags</id>
 			<activation>
