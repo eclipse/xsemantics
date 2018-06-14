@@ -234,6 +234,10 @@ Contributors:
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<properties>
+				<skipTests>true</skipTests>
+				<findbugs.skip>true</findbugs.skip>
+			</properties>
 
 			<build>
 				<plugins>
