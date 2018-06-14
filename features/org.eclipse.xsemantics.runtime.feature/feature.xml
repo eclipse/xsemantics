@@ -12,7 +12,7 @@ Contributors:
 <feature
       id="org.eclipse.xsemantics.runtime.feature"
       label="Xsemantics Runtime Feature"
-      version="1.12.1.qualifier"
+      version="1.13.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="1.0.1.v20140414-1359">

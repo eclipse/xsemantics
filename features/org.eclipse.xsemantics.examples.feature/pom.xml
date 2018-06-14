@@ -17,7 +17,7 @@ Contributors:
 		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
 		<groupId>org.eclipse.xsemantics</groupId>
 		<artifactId>org.eclipse.xsemantics.parent</artifactId>
-		<version>1.12.1-SNAPSHOT</version>
+		<version>1.13.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>org.eclipse.xsemantics.examples.feature</artifactId>

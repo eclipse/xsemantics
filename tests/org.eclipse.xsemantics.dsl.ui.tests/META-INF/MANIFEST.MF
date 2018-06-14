@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics UI Tests
 Bundle-SymbolicName: org.eclipse.xsemantics.dsl.ui.tests
 Bundle-Vendor: %providerName
-Bundle-Version: 1.12.1.qualifier
+Bundle-Version: 1.13.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xsemantics.dsl.ui,
  org.eclipse.core.runtime,

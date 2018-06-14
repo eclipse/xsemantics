@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics FJ Example Tests
 Bundle-SymbolicName: org.eclipse.xsemantics.example.fj.tests;singleton:=true
-Bundle-Version: 1.12.1.qualifier
+Bundle-Version: 1.13.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
