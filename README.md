@@ -14,6 +14,16 @@ Xsemantics
 
 Xsemantics is a DSL (implemented in Xtext itself) for writing type systems, reduction rules, interpreters (and in general relation rules) for languages implemented in Xtext. It then generates Java code that can be used in your language implemented in Xtext for scoping and validation (it can also generate a validator in Java).
 
-http://xsemantics.sourceforge.net
+https://projects.eclipse.org/projects/modeling.xsemantics
+
+## Milestones update site: http://download.eclipse.org/xsemantics/milestones/
+
+- version 1.13 requires Xtext 2.13.0
+
+## Maven snapshots
+
+- version 1.13.0-SNAPSHOT requires Xtext 2.13.0
+
+Make sure you enable Maven snapshots repositories, see, e.g., https://github.com/eclipse/xsemantics/blob/master/tests/org.eclipse.xsemantics.example.maven.test/pom.xml
 
 [![Build Status](https://travis-ci.org/eclipse/xsemantics.svg?branch=master)](https://travis-ci.org/eclipse/xsemantics) [![Coverage Status](https://coveralls.io/repos/github/eclipse/xsemantics/badge.svg?branch=master)](https://coveralls.io/github/eclipse/xsemantics?branch=master)
