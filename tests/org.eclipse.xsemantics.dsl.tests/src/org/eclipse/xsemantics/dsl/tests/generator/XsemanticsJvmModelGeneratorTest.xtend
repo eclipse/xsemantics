@@ -119,6 +119,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	def typeSystemWithNoPackage() {
 		testFiles.typeSystemWithNoPackage.compile[compiledClass]
 	}
+
+	@Test
+	def typeNoSystem() {
+		'''system'''.compile[compiledClass]
+	}
 	
 	@Test
 	def testSimpleRule() {
