@@ -308,7 +308,7 @@ Contributors:
 													<classfiles>
 														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl.ui/target/classes" 
 															includes="**/*.class"
-															excludes="**/*ExtensionFactory*,**/*UiModule*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*"/>
+															excludes="**/*ExtensionFactory*,**/*UiModule*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/xsemantics/xsemantics/util/*.*,**/xsemantics/xsemantics/impl/*.*,**/xsemantics/dsl/formatting/*.*,**/XsemanticsValidatorConfigurationBlock.*"/>
 													</classfiles>
 													<sourcefiles>
 														<fileset dir="../../plugins/org.eclipse.xsemantics.dsl.ui/src" />
