@@ -35,7 +35,7 @@ import static org.junit.Assert.*
 
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 @RunWith(typeof(XtextRunner))
-public class XsemanticsProposalProviderTest extends
+class XsemanticsProposalProviderTest extends
 		AbstractContentAssistTest {
 
 	XsemanticsTestFilesForContentAssist testInputs = new XsemanticsTestFilesForContentAssist();

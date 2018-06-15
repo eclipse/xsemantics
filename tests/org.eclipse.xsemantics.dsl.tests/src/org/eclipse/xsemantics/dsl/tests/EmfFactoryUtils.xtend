@@ -26,8 +26,7 @@ class EmfFactoryUtils {
 	
 	protected FjFactory fjFactory = FjFactory::eINSTANCE
 	
-	@Inject
-	private IResourceFactory resourceFactory;
+	@Inject IResourceFactory resourceFactory;
 	
 	var counter = 0
 

@@ -37,14 +37,11 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 class XsemanticsTypeSystem {
 	
-	@Inject
-	private CommonTypeComputationServices services
+	@Inject CommonTypeComputationServices services
 	
-	@Inject
-	private TypeReferences typeReferences
+	@Inject TypeReferences typeReferences
 	
-	@Inject
-	private XsemanticsTypeSystemGen xsemanticsTypeSystemGen
+	@Inject XsemanticsTypeSystemGen xsemanticsTypeSystemGen
 	
 	@Inject extension XsemanticsUtils
 	

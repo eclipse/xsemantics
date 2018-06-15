@@ -30,7 +30,7 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
 	@Inject extension CompilationTestHelper
 	
-	@Inject private FileExtensionProvider extensionProvider
+	@Inject FileExtensionProvider extensionProvider
 	
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder

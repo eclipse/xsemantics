@@ -53,7 +53,7 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsGeneratorExtensions
 	@Inject extension XsemanticsNodeModelUtils
 	@Inject extension XsemanticsTypeSystem typeSystem
-	@Inject private TypeReferences typeReferences
+	@Inject TypeReferences typeReferences
 	
 	override compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
 		val rule = obj.eContainer
