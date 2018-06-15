@@ -16,13 +16,17 @@ Xsemantics is a DSL (implemented in Xtext itself) for writing type systems, redu
 
 https://projects.eclipse.org/projects/modeling.xsemantics
 
-## Milestones update site: http://download.eclipse.org/xsemantics/milestones/
+## Milestones update site:
+
+http://download.eclipse.org/xsemantics/milestones/
 
 - version 1.13 requires Xtext 2.13.0
+- version 1.14 requires Xtext 2.14.0
 
 ## Maven snapshots
 
 - version 1.13.0-SNAPSHOT requires Xtext 2.13.0
+- version 1.14.0-SNAPSHOT requires Xtext 2.13.0
 
 Make sure you enable Maven snapshots repositories, see, e.g., https://github.com/eclipse/xsemantics/blob/master/tests/org.eclipse.xsemantics.example.maven.test/pom.xml
 
