@@ -33,7 +33,7 @@ import org.eclipse.xtext.util.ITextRegion
  * customization of the default outline structure
  * 
  */
-public class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
+class XsemanticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	def protected void _createChildren(DocumentRootNode parentNode, XsemanticsFile it) {
 		// skip useless toplevel node and imports - start tree with node for "system" 

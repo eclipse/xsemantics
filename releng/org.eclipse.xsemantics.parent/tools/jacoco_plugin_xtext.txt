@@ -28,7 +28,7 @@ Inclusions (e.g.: **/*.class)
 
 
 Exclusions (e.g.: **/*Test*)
-**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/fjcached/fjcached/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.***/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/example/fj/fj/**/*.*,**/example/lambda/lambda/**/*.*,**/example/expressions/expressions/**/*.*,**/XsemanticsValidatorConfigurationBlock.*
 
 WITHOUT EXAMPLES
 
@@ -42,4 +42,4 @@ Inclusions (e.g.: **/*.class)
 
 
 Exclusions (e.g.: **/*Test*)
-**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/EntryPointsOption.*,**/example/**/*.*,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java
+**/*Activator*,**/*Internal*,**/*Sequencer*,**/*Abstract*,**/*GrammarAccess*,**/antlr/*.*,**/internal/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/impl/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/util/*.*,**/org/eclipse/xsemantics/dsl/xsemantics/EntryPointsOption.*,**/example/**/*.*,**/*TypeSystemGen*.java,**/*StandaloneSetup*.java,**/XsemanticsValidatorConfigurationBlock.*

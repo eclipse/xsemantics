@@ -29,9 +29,9 @@ import org.junit.Test
  * @author Lorenzo Bettini
  * 
  */
-public class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
+class RuleApplicationTraceTests extends XsemanticsRuntimeAbstractTests {
 	
-	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTrace);
+	static final Logger LOGGER = Logger.getLogger(RuleApplicationTrace);
 	
 	extension TraceUtils = new TraceUtils
 	

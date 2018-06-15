@@ -30,7 +30,7 @@ class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 	
 	@Inject extension CompilationTestHelper
 	
-	@Inject private FileExtensionProvider extensionProvider
+	@Inject FileExtensionProvider extensionProvider
 	
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder
@@ -118,6 +118,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
 	@Test
 	def typeSystemWithNoPackage() {
 		testFiles.typeSystemWithNoPackage.compile[compiledClass]
+	}
+
+	@Test
+	def typeNoSystem() {
+		'''system'''.compile[compiledClass]
 	}
 	
 	@Test

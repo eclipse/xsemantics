@@ -302,7 +302,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkRuleInvocation(RuleInvocation ruleInvocation) {
+	def void checkRuleInvocation(RuleInvocation ruleInvocation) {
 		val judgmentDescription = checkRuleInvocationConformantToJudgmentDescription(ruleInvocation);
 		if (judgmentDescription !== null) {
 			val judgmentParameters = judgmentDescription
@@ -342,7 +342,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkSystem(XsemanticsSystem system) {
+	def void checkSystem(XsemanticsSystem system) {
 		val validatorExtends = system
 				.getValidatorExtends();
 		if (validatorExtends !== null) {
@@ -550,7 +550,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkAuxiliaryDescription(AuxiliaryDescription aux) {
+	def void checkAuxiliaryDescription(AuxiliaryDescription aux) {
 		if (aux.parameters.empty) {
 			error("No input parameter; at least one is needed",
 					XsemanticsPackage.Literals.AUXILIARY_DESCRIPTION__NAME,
@@ -580,7 +580,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkAuxiliaryFunctionHasAuxiliaryDescription(
+	def void checkAuxiliaryFunctionHasAuxiliaryDescription(
 			AuxiliaryFunction aux) {
 		val auxiliaryDescription = aux
 				.getAuxiliaryDescription();
@@ -594,7 +594,7 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 	}
 
 	@Check
-	def public void checkOutputParamAccessWithinClosure(XFeatureCall featureCall) {
+	def void checkOutputParamAccessWithinClosure(XFeatureCall featureCall) {
 		val feature = featureCall.getFeature();
 		if (feature instanceof JvmFormalParameter) {
 			val container = feature.eContainer();
@@ -797,11 +797,11 @@ class XsemanticsValidator extends AbstractXsemanticsValidator {
 		return if (typeRef === null)  "<null>" else typeRef.getSimpleName();
 	}
 
-	def public boolean isEnableWarnings() {
+	def boolean isEnableWarnings() {
 		return enableWarnings;
 	}
 
-	def public void setEnableWarnings(boolean enableWarnings) {
+	def void setEnableWarnings(boolean enableWarnings) {
 		this.enableWarnings = enableWarnings;
 	}
 

@@ -66,8 +66,7 @@ abstract class XsemanticsBaseTest {
 	@Inject
 	protected ParseHelper<XsemanticsFile> parser
 	
-	@Inject
-	private Provider<XtextResourceSet> resourceSetProvider
+	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
 	@Inject extension ValidationTestHelper
 	

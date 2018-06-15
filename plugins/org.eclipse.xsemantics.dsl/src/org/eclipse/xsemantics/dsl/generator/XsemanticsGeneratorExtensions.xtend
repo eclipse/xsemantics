@@ -378,6 +378,7 @@ class XsemanticsGeneratorExtensions {
 			)
 		else // safe default
 			resultT = getTypeForName(typeof(Result), e)
+		return resultT
 	}
 
 	def resultType(AuxiliaryDescription e) {

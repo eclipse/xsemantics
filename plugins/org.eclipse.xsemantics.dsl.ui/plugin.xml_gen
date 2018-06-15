@@ -250,6 +250,15 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xsemantics.dsl.Xsemantics"
+			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.eclipse.xsemantics.dsl.Xsemantics.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="org.eclipse.xsemantics.dsl.ui.keyword_Xsemantics"/>
+		</page>
+	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
@@ -484,7 +493,7 @@
 	</extension>
 	<extension point="org.eclipse.core.runtime.adapters">
 		<factory class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
-			adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+			adaptableType="org.eclipse.xsemantics.dsl.ui.editor.XsemanticsEditor">
 			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
 		</factory> 
 	</extension>
@@ -578,12 +587,18 @@
 			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="xsemantics">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xsemantics.dsl.Xsemantics.contenttype"
+			contentViewerId="org.eclipse.xsemantics.dsl.Xsemantics.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xsemantics.dsl.Xsemantics.compare.contentMergeViewers"
 			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="xsemantics" label="Xsemantics Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xsemantics.dsl.Xsemantics.contenttype"
+			contentMergeViewerId="org.eclipse.xsemantics.dsl.Xsemantics.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xsemantics.dsl.Xsemantics.editors.documentProviders"

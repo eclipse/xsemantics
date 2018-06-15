@@ -26,6 +26,7 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.dsl.ui.contentassist,
  org.eclipse.xsemantics.dsl.ui.internal,
- org.eclipse.xsemantics.dsl.ui.quickfix
+ org.eclipse.xsemantics.dsl.ui.quickfix,
+ org.eclipse.xsemantics.dsl.ui.editor
 Bundle-Activator: org.eclipse.xsemantics.dsl.ui.internal.DslActivator
 Automatic-Module-Name: org.eclipse.xsemantics.dsl.ui
