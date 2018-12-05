@@ -36,24 +36,24 @@ Contributors:
 				<role>architect</role>
 				<role>developer</role>
 			</roles>
-			<organization>Dip. Informatica, Univ. Torino</organization>
-      		<organizationUrl>http://www.di.unito.it</organizationUrl>
+			<organization>DISIA, Dip. Statistica, Informatica, Applicazioni, Univ. Firenze</organization>
+			<organizationUrl>https://www.disia.unifi.it/</organizationUrl>
 		</developer>
 	</developers>
 
 	<scm>
-		<url>git@github.com/LorenzoBettini/xsemantics.git</url>
-		<developerConnection>scm:git:https://github.com/LorenzoBettini/xsemantics.git</developerConnection>
-		<connection>scm:git:git@github.com/LorenzoBettini/xsemantics.git</connection>
+		<url>git@github.com/eclipse/xsemantics.git</url>
+		<developerConnection>scm:git:https://github.com/eclipse/xsemantics.git</developerConnection>
+		<connection>scm:git:git@github.com/eclipse/xsemantics.git</connection>
 	</scm>
 
 	<issueManagement>
 		<system>Github</system>
-		<url>https://github.com/LorenzoBettini/xsemantics/issues</url>
+		<url>https://github.com/eclipse/xsemantics/issues</url>
 	</issueManagement>
 	
 	<properties>
-		<tycho-version>1.0.0</tycho-version>
+		<tycho-version>1.2.0</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
@@ -61,7 +61,7 @@ Contributors:
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.14.0</xtext.version>
+		<xtext.version>2.15.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
 		<mwe2Version>2.9.1.201705291010</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
@@ -120,7 +120,7 @@ Contributors:
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>oxygen-xtext-2.14</target-file-name>
+		<target-file-name>oxygen-xtext-2.15</target-file-name>
 		
 		<ant-files-path>${basedir}/../../releng/org.eclipse.xsemantics.parent/ant</ant-files-path>
 
