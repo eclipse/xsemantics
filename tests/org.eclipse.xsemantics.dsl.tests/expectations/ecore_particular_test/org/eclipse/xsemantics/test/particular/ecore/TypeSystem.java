@@ -35,23 +35,23 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject";
+  public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject";
   
-  public final static String ECLASSEOBJECT2 = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject2";
+  public static final String ECLASSEOBJECT2 = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject2";
   
-  public final static String FEATURES = "org.eclipse.xsemantics.test.particular.ecore.Features";
+  public static final String FEATURES = "org.eclipse.xsemantics.test.particular.ecore.Features";
   
-  public final static String COLELCTIONS = "org.eclipse.xsemantics.test.particular.ecore.Colelctions";
+  public static final String COLELCTIONS = "org.eclipse.xsemantics.test.particular.ecore.Colelctions";
   
-  public final static String FOREACH = "org.eclipse.xsemantics.test.particular.ecore.ForEach";
+  public static final String FOREACH = "org.eclipse.xsemantics.test.particular.ecore.ForEach";
   
-  public final static String FOREACHWITHBOOLEANEXPRESSIONINSIDE = "org.eclipse.xsemantics.test.particular.ecore.ForEachWithBooleanExpressionInside";
+  public static final String FOREACHWITHBOOLEANEXPRESSIONINSIDE = "org.eclipse.xsemantics.test.particular.ecore.ForEachWithBooleanExpressionInside";
   
-  public final static String WITHFAIL = "org.eclipse.xsemantics.test.particular.ecore.WithFail";
+  public static final String WITHFAIL = "org.eclipse.xsemantics.test.particular.ecore.WithFail";
   
-  public final static String TESTFORCLOSURES = "org.eclipse.xsemantics.test.particular.ecore.TestForClosures";
+  public static final String TESTFORCLOSURES = "org.eclipse.xsemantics.test.particular.ecore.TestForClosures";
   
-  public final static String TESTFORENVIRONMENTS = "org.eclipse.xsemantics.test.particular.ecore.TestForEnvironments";
+  public static final String TESTFORENVIRONMENTS = "org.eclipse.xsemantics.test.particular.ecore.TestForEnvironments";
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   

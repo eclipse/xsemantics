@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class FjFirstCachedTypeSystem extends FjFirstTypeSystem {
-  public final static String SUPERCLASSES = "org.eclipse.xsemantics.test.fj.caching.Superclasses";
+  public static final String SUPERCLASSES = "org.eclipse.xsemantics.test.fj.caching.Superclasses";
   
   private PolymorphicDispatcher<List<org.eclipse.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
   

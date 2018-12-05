@@ -43,11 +43,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 @SuppressWarnings("all")
 public class FjAltTypeSystem extends FjFirstTypeSystem {
-  public final static String TYPEEQUALS = "org.eclipse.xsemantics.test.fj.alt.TypeEquals";
+  public static final String TYPEEQUALS = "org.eclipse.xsemantics.test.fj.alt.TypeEquals";
   
-  public final static String CHECKNEW = "org.eclipse.xsemantics.test.fj.alt.CheckNew";
+  public static final String CHECKNEW = "org.eclipse.xsemantics.test.fj.alt.CheckNew";
   
-  public final static String CHECKCLASS = "org.eclipse.xsemantics.test.fj.alt.CheckClass";
+  public static final String CHECKCLASS = "org.eclipse.xsemantics.test.fj.alt.CheckClass";
   
   @Inject
   private FjAuxiliaryFunctions fjAux;
