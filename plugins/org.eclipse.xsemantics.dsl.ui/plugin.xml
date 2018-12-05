@@ -261,15 +261,6 @@ Contributors:
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xsemantics.dsl.Xsemantics"
-			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xsemantics.dsl.Xsemantics.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xsemantics.dsl.ui.keyword_Xsemantics"/>
-		</page>
-	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xsemantics.dsl.ui.XsemanticsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"

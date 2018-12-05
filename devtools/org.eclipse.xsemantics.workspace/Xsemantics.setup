@@ -522,14 +522,14 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0"/>
+        value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.15.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
         label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.14.0,2.15.0)"/>
+          versionRange="[2.15.0,2.16.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
