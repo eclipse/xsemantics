@@ -21,7 +21,7 @@ Contributors:
 
 	<properties>
 		<tycho-version>1.0.0</tycho-version>
-		<xtext.version>2.15.0</xtext.version>
+		<xtext.version>2.16.0</xtext.version>
 		<xsemantics.version>${project.version}</xsemantics.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
