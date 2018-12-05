@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class FjTestsForLambdas extends FjFirstTypeSystem {
-  public final static String EXISTSSUBTYPEWITHLAMBDA = "org.eclipse.xsemantics.test.fj.lambda.ExistsSubtypeWithLambda";
+  public static final String EXISTSSUBTYPEWITHLAMBDA = "org.eclipse.xsemantics.test.fj.lambda.ExistsSubtypeWithLambda";
   
   @Inject
   private FjAuxiliaryFunctions fjAux;

@@ -147,7 +147,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
+  public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -269,7 +269,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECTESTRUCTURALFEATURE = "org.eclipse.xsemantics.test.EClassEObjectEStructuralFeature";
+  public static final String ECLASSEOBJECTESTRUCTURALFEATURE = "org.eclipse.xsemantics.test.EClassEObjectEStructuralFeature";
   
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
   
@@ -436,7 +436,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECTESTRUCTURALFEATURESTRING = "org.eclipse.xsemantics.test.EClassEObjectEStructuralFeatureString";
+  public static final String ECLASSEOBJECTESTRUCTURALFEATURESTRING = "org.eclipse.xsemantics.test.EClassEObjectEStructuralFeatureString";
   
   private PolymorphicDispatcher<Result3<EObject, EStructuralFeature, String>> typeDispatcher;
   
@@ -537,7 +537,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -711,7 +711,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -868,7 +868,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   /**
    * a utility field
@@ -1021,7 +1021,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TWOEXPRESSIONSINCONCLUSION = "org.eclipse.xsemantics.test.TwoExpressionsInConclusion";
+  public static final String TWOEXPRESSIONSINCONCLUSION = "org.eclipse.xsemantics.test.TwoExpressionsInConclusion";
   
   private PolymorphicDispatcher<Result2<EObject, EStructuralFeature>> typeDispatcher;
   
@@ -1123,7 +1123,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TWOEXPRESSIONSINCONCLUSION = "org.eclipse.xsemantics.test.TwoExpressionsInConclusion";
+  public static final String TWOEXPRESSIONSINCONCLUSION = "org.eclipse.xsemantics.test.TwoExpressionsInConclusion";
   
   private PolymorphicDispatcher<Result2<EObject, EStructuralFeature>> typeDispatcher;
   
@@ -1225,7 +1225,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   /**
    * a utility field
@@ -1376,7 +1376,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   /**
    * a utility field
@@ -1526,7 +1526,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
+  public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
   
   @Extension
   @Inject
@@ -1763,7 +1763,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
+  public static final String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
   
   private PolymorphicDispatcher<Result<String>> typeDispatcher;
   
@@ -1918,7 +1918,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
+  public static final String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
   
   private PolymorphicDispatcher<Result<String>> typeDispatcher;
   
@@ -2086,7 +2086,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
+  public static final String TYPEFOO = "org.eclipse.xsemantics.test.TypeFoo";
   
   private PolymorphicDispatcher<Result<String>> typeDispatcher;
   
@@ -2257,11 +2257,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystem2 extends ExtendedTypeSystem {
-  public final static String FROMTYPESYSTEM = "org.eclipse.xsemantics.test.FromTypeSystem";
+  public static final String FROMTYPESYSTEM = "org.eclipse.xsemantics.test.FromTypeSystem";
   
-  public final static String FROMEXTENDEDTYPESYSTEM = "org.eclipse.xsemantics.test.FromExtendedTypeSystem";
+  public static final String FROMEXTENDEDTYPESYSTEM = "org.eclipse.xsemantics.test.FromExtendedTypeSystem";
   
-  public final static String FROMTHISTYPESYSTEM = "org.eclipse.xsemantics.test.FromThisTypeSystem";
+  public static final String FROMTHISTYPESYSTEM = "org.eclipse.xsemantics.test.FromThisTypeSystem";
   
   private PolymorphicDispatcher<Result<Boolean>> type2Dispatcher;
   
@@ -2484,11 +2484,11 @@ import org.eclipse.xsemantics.test.ExtendedTypeSystem2;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
-  public final static String FROMTYPESYSTEM = "org.eclipse.xsemantics.test.FromTypeSystem";
+  public static final String FROMTYPESYSTEM = "org.eclipse.xsemantics.test.FromTypeSystem";
   
-  public final static String FROMEXTENDEDTYPESYSTEM = "org.eclipse.xsemantics.test.FromExtendedTypeSystem";
+  public static final String FROMEXTENDEDTYPESYSTEM = "org.eclipse.xsemantics.test.FromExtendedTypeSystem";
   
-  public final static String FROMTHISTYPESYSTEM = "org.eclipse.xsemantics.test.FromThisTypeSystem";
+  public static final String FROMTHISTYPESYSTEM = "org.eclipse.xsemantics.test.FromThisTypeSystem";
   
   public ExtendedTypeSystemWithRuleOverride() {
     init();
@@ -2904,15 +2904,15 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TYPEEOBJECT = "org.eclipse.xsemantics.test.TypeEObject";
+  public static final String TYPEEOBJECT = "org.eclipse.xsemantics.test.TypeEObject";
   
-  public final static String TYPEECLASS = "org.eclipse.xsemantics.test.TypeEClass";
+  public static final String TYPEECLASS = "org.eclipse.xsemantics.test.TypeEClass";
   
-  public final static String SUBTYPEEOBJECT = "org.eclipse.xsemantics.test.SubtypeEObject";
+  public static final String SUBTYPEEOBJECT = "org.eclipse.xsemantics.test.SubtypeEObject";
   
-  public final static String SUBTYPEESTRUCTURALFEATURE = "org.eclipse.xsemantics.test.SubtypeEStructuralFeature";
+  public static final String SUBTYPEESTRUCTURALFEATURE = "org.eclipse.xsemantics.test.SubtypeEStructuralFeature";
   
-  public final static String SUBTYPEECLASS = "org.eclipse.xsemantics.test.SubtypeEClass";
+  public static final String SUBTYPEECLASS = "org.eclipse.xsemantics.test.SubtypeEClass";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -3184,13 +3184,13 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TYPE1 = "org.eclipse.xsemantics.test.Type1";
+  public static final String TYPE1 = "org.eclipse.xsemantics.test.Type1";
   
-  public final static String TYPE2 = "org.eclipse.xsemantics.test.Type2";
+  public static final String TYPE2 = "org.eclipse.xsemantics.test.Type2";
   
-  public final static String SUBTYPE1 = "org.eclipse.xsemantics.test.SubType1";
+  public static final String SUBTYPE1 = "org.eclipse.xsemantics.test.SubType1";
   
-  public final static String SUBTYPE2 = "org.eclipse.xsemantics.test.SubType2";
+  public static final String SUBTYPE2 = "org.eclipse.xsemantics.test.SubType2";
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -3422,7 +3422,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
+  public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -3562,7 +3562,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
+  public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.EClassEObject";
   
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
   
@@ -3737,11 +3737,11 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ISVALUE = "org.eclipse.xsemantics.test.IsValue";
+  public static final String ISVALUE = "org.eclipse.xsemantics.test.IsValue";
   
-  public final static String VOIDFUN = "org.eclipse.xsemantics.test.VoidFun";
+  public static final String VOIDFUN = "org.eclipse.xsemantics.test.VoidFun";
   
-  public final static String OBJECTCLASS = "org.eclipse.xsemantics.test.ObjectClass";
+  public static final String OBJECTCLASS = "org.eclipse.xsemantics.test.ObjectClass";
   
   private PolymorphicDispatcher<Boolean> isValueDispatcher;
   
@@ -3971,9 +3971,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String OBJECTCLASS = "org.eclipse.xsemantics.test.ObjectClass";
+  public static final String OBJECTCLASS = "org.eclipse.xsemantics.test.ObjectClass";
   
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   private PolymorphicDispatcher<EClass> objectClassDispatcher;
   
@@ -4143,7 +4143,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String TESTRULE = "org.eclipse.xsemantics.test.TestRule";
+  public static final String TESTRULE = "org.eclipse.xsemantics.test.TestRule";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -4238,9 +4238,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String UNIONRULE = "org.eclipse.xsemantics.test.UnionRule";
+  public static final String UNIONRULE = "org.eclipse.xsemantics.test.UnionRule";
   
-  public final static String INTERSECTIONRULE = "org.eclipse.xsemantics.test.IntersectionRule";
+  public static final String INTERSECTIONRULE = "org.eclipse.xsemantics.test.IntersectionRule";
   
   private PolymorphicDispatcher<Result<Boolean>> typeUnionDispatcher;
   
@@ -4435,11 +4435,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String OVERRIDES = "org.eclipse.xsemantics.test.Overrides";
+  public static final String OVERRIDES = "org.eclipse.xsemantics.test.Overrides";
   
-  public final static String ISVALUE = "org.eclipse.xsemantics.test.IsValue";
+  public static final String ISVALUE = "org.eclipse.xsemantics.test.IsValue";
   
-  public final static String TESTFORCLOSURES = "org.eclipse.xsemantics.test.TestForClosures";
+  public static final String TESTFORCLOSURES = "org.eclipse.xsemantics.test.TestForClosures";
   
   private PolymorphicDispatcher<Boolean> overridesDispatcher;
   
@@ -4682,7 +4682,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
   
@@ -4809,9 +4809,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String ECLASSES = "org.eclipse.xsemantics.test.Eclasses";
+  public static final String ECLASSES = "org.eclipse.xsemantics.test.Eclasses";
   
-  public final static String AUXNOCACHEENTRYPOINTS = "org.eclipse.xsemantics.test.AuxnocacheentryPoints";
+  public static final String AUXNOCACHEENTRYPOINTS = "org.eclipse.xsemantics.test.AuxnocacheentryPoints";
   
   private PolymorphicDispatcher<List<EClass>> eclassesDispatcher;
   
@@ -5136,7 +5136,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   /**
    * a utility field
@@ -5248,7 +5248,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
-  public final static String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
+  public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.EObjectEClass";
   
   /**
    * a utility field with annotation

@@ -57,61 +57,61 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class FjFirstTypeSystem extends XsemanticsRuntimeSystem {
-  public final static String SUPERCLASSES = "org.eclipse.xsemantics.test.fj.first.Superclasses";
+  public static final String SUPERCLASSES = "org.eclipse.xsemantics.test.fj.first.Superclasses";
   
-  public final static String TTYPEDELEMENT = "org.eclipse.xsemantics.test.fj.first.TTypedElement";
+  public static final String TTYPEDELEMENT = "org.eclipse.xsemantics.test.fj.first.TTypedElement";
   
-  public final static String TTHIS = "org.eclipse.xsemantics.test.fj.first.TThis";
+  public static final String TTHIS = "org.eclipse.xsemantics.test.fj.first.TThis";
   
-  public final static String TNEW = "org.eclipse.xsemantics.test.fj.first.TNew";
+  public static final String TNEW = "org.eclipse.xsemantics.test.fj.first.TNew";
   
-  public final static String TPARAMREF = "org.eclipse.xsemantics.test.fj.first.TParamRef";
+  public static final String TPARAMREF = "org.eclipse.xsemantics.test.fj.first.TParamRef";
   
-  public final static String TSTRINGCONSTANT = "org.eclipse.xsemantics.test.fj.first.TStringConstant";
+  public static final String TSTRINGCONSTANT = "org.eclipse.xsemantics.test.fj.first.TStringConstant";
   
-  public final static String TINTCONSTANT = "org.eclipse.xsemantics.test.fj.first.TIntConstant";
+  public static final String TINTCONSTANT = "org.eclipse.xsemantics.test.fj.first.TIntConstant";
   
-  public final static String TBOOLCONSTANT = "org.eclipse.xsemantics.test.fj.first.TBoolConstant";
+  public static final String TBOOLCONSTANT = "org.eclipse.xsemantics.test.fj.first.TBoolConstant";
   
-  public final static String TSELECTION = "org.eclipse.xsemantics.test.fj.first.TSelection";
+  public static final String TSELECTION = "org.eclipse.xsemantics.test.fj.first.TSelection";
   
-  public final static String TCAST = "org.eclipse.xsemantics.test.fj.first.TCast";
+  public static final String TCAST = "org.eclipse.xsemantics.test.fj.first.TCast";
   
-  public final static String TEXPRESSIONCLASSTYPE = "org.eclipse.xsemantics.test.fj.first.TExpressionClassType";
+  public static final String TEXPRESSIONCLASSTYPE = "org.eclipse.xsemantics.test.fj.first.TExpressionClassType";
   
-  public final static String BASICSUBTYPING = "org.eclipse.xsemantics.test.fj.first.BasicSubtyping";
+  public static final String BASICSUBTYPING = "org.eclipse.xsemantics.test.fj.first.BasicSubtyping";
   
-  public final static String CLASSSUBTYPING = "org.eclipse.xsemantics.test.fj.first.ClassSubtyping";
+  public static final String CLASSSUBTYPING = "org.eclipse.xsemantics.test.fj.first.ClassSubtyping";
   
-  public final static String SUBCLASSING = "org.eclipse.xsemantics.test.fj.first.Subclassing";
+  public static final String SUBCLASSING = "org.eclipse.xsemantics.test.fj.first.Subclassing";
   
-  public final static String BASICEQUALS = "org.eclipse.xsemantics.test.fj.first.BasicEquals";
+  public static final String BASICEQUALS = "org.eclipse.xsemantics.test.fj.first.BasicEquals";
   
-  public final static String CLASSEQUALS = "org.eclipse.xsemantics.test.fj.first.ClassEquals";
+  public static final String CLASSEQUALS = "org.eclipse.xsemantics.test.fj.first.ClassEquals";
   
-  public final static String SUBTYPESEQUENCE = "org.eclipse.xsemantics.test.fj.first.SubtypeSequence";
+  public static final String SUBTYPESEQUENCE = "org.eclipse.xsemantics.test.fj.first.SubtypeSequence";
   
-  public final static String FIELDS = "org.eclipse.xsemantics.test.fj.first.Fields";
+  public static final String FIELDS = "org.eclipse.xsemantics.test.fj.first.Fields";
   
-  public final static String METHODS = "org.eclipse.xsemantics.test.fj.first.Methods";
+  public static final String METHODS = "org.eclipse.xsemantics.test.fj.first.Methods";
   
-  public final static String CHECKCONSTANT = "org.eclipse.xsemantics.test.fj.first.CheckConstant";
+  public static final String CHECKCONSTANT = "org.eclipse.xsemantics.test.fj.first.CheckConstant";
   
-  public final static String CHECKTYPEDELEMENT = "org.eclipse.xsemantics.test.fj.first.CheckTypedElement";
+  public static final String CHECKTYPEDELEMENT = "org.eclipse.xsemantics.test.fj.first.CheckTypedElement";
   
-  public final static String CHECKPARAMREF = "org.eclipse.xsemantics.test.fj.first.CheckParamRef";
+  public static final String CHECKPARAMREF = "org.eclipse.xsemantics.test.fj.first.CheckParamRef";
   
-  public final static String CHECKTHIS = "org.eclipse.xsemantics.test.fj.first.CheckThis";
+  public static final String CHECKTHIS = "org.eclipse.xsemantics.test.fj.first.CheckThis";
   
-  public final static String CHECKMETHOD = "org.eclipse.xsemantics.test.fj.first.CheckMethod";
+  public static final String CHECKMETHOD = "org.eclipse.xsemantics.test.fj.first.CheckMethod";
   
-  public final static String CHECKNEW = "org.eclipse.xsemantics.test.fj.first.CheckNew";
+  public static final String CHECKNEW = "org.eclipse.xsemantics.test.fj.first.CheckNew";
   
-  public final static String CHECKSELECTION = "org.eclipse.xsemantics.test.fj.first.CheckSelection";
+  public static final String CHECKSELECTION = "org.eclipse.xsemantics.test.fj.first.CheckSelection";
   
-  public final static String CHECKCAST = "org.eclipse.xsemantics.test.fj.first.CheckCast";
+  public static final String CHECKCAST = "org.eclipse.xsemantics.test.fj.first.CheckCast";
   
-  public final static String CHECKCLASS = "org.eclipse.xsemantics.test.fj.first.CheckClass";
+  public static final String CHECKCLASS = "org.eclipse.xsemantics.test.fj.first.CheckClass";
   
   @Inject
   private FjTypeUtils fjTypeUtils;
