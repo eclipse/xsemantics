@@ -14,13 +14,13 @@ Contributors:
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xsemantics.example.maven.test</groupId>
 	<artifactId>org.eclipse.xsemantics.example.maven.test</artifactId>
-	<version>1.16.0-SNAPSHOT</version>
+	<version>1.17.0-SNAPSHOT</version>
 	<description>Just a test project that uses the xtext-maven-plugin for generating code with Xsemantics</description>
 
 	<packaging>eclipse-plugin</packaging>
 
 	<properties>
-		<tycho-version>1.0.0</tycho-version>
+		<tycho-version>1.3.0</tycho-version>
 		<xtext.version>2.17.0</xtext.version>
 		<xsemantics.version>${project.version}</xsemantics.version>
 
