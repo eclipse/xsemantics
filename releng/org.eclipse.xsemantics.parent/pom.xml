@@ -582,6 +582,7 @@ Contributors:
 								<exclude>**/*Test.java</exclude>
 								<exclude>**/*TypeSystemGen*.java</exclude>
 								<exclude>**/*StandaloneSetup*.java</exclude>
+								<exclude>**/*QuickfixProvider*.java</exclude>
 							</excludes>
 							<append>true</append>
 						</configuration>
