@@ -120,7 +120,7 @@ Contributors:
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>oxygen-xtext-${xtext.version}</target-file-name>
+		<target-file-name>photon-xtext-${xtext.version}</target-file-name>
 		
 		<ant-files-path>${basedir}/../../releng/org.eclipse.xsemantics.parent/ant</ant-files-path>
 
