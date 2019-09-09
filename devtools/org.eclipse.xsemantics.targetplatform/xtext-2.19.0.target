@@ -35,5 +35,10 @@
 <unit id="org.eclipse.xtext.xdoc.feature.feature.group" version="0.0.0"/>
 <repository location="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+	<unit id="org.objectweb.asm" version="0.0.0"/>
+	<unit id="org.objectweb.asm.tree" version="0.0.0"/>
+	<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+</location>
 </locations>
 </target>
