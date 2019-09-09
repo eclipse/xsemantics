@@ -33,6 +33,7 @@ Export-Package: org.eclipse.xsemantics.example.lambda,
  org.eclipse.xsemantics.example.lambda.serializer,
  org.eclipse.xsemantics.example.lambda.services,
  org.eclipse.xsemantics.example.lambda.validation,
- org.eclipse.xsemantics.example.lambda.xsemantics
+ org.eclipse.xsemantics.example.lambda.xsemantics,
+ org.eclipse.xsemantics.example.lambda.xsemantics.validation
 Automatic-Module-Name: org.eclipse.xsemantics.example.lambda
 

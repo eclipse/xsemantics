@@ -26,5 +26,8 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xsemantics.example.fjcached
+Export-Package: org.eclipse.xsemantics.example.fjcached,
+ org.eclipse.xsemantics.example.fjcached.performance,
+ org.eclipse.xsemantics.example.fjcached.tests,
+ org.eclipse.xsemantics.example.fjcached.ui.tests
 Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached.tests

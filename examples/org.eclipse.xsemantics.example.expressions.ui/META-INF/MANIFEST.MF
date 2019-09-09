@@ -23,10 +23,14 @@ Require-Bundle: org.eclipse.xsemantics.example.expressions;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xsemantics.example.expressions.ui.contentassist,
+Export-Package: org.eclipse.xsemantics.example.expressions.ui,
+ org.eclipse.xsemantics.example.expressions.ui.contentassist,
  org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr,
+ org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr.internal,
  org.eclipse.xsemantics.example.expressions.ui.internal,
+ org.eclipse.xsemantics.example.expressions.ui.labeling,
+ org.eclipse.xsemantics.example.expressions.ui.outline,
  org.eclipse.xsemantics.example.expressions.ui.quickfix,
- org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr.internal
+ org.eclipse.xsemantics.example.expressions.ui.wizard
 Bundle-Activator: org.eclipse.xsemantics.example.expressions.ui.internal.ExpressionsActivator
 Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.ui

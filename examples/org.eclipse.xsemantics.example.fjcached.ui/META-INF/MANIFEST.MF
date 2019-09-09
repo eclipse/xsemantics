@@ -25,10 +25,14 @@ Require-Bundle: org.eclipse.xsemantics.example.fjcached;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xsemantics.example.fjcached.ui.quickfix,
+Export-Package: org.eclipse.xsemantics.example.fjcached.ui,
  org.eclipse.xsemantics.example.fjcached.ui.contentassist,
  org.eclipse.xsemantics.example.fjcached.ui.contentassist.antlr,
+ org.eclipse.xsemantics.example.fjcached.ui.contentassist.antlr.internal,
  org.eclipse.xsemantics.example.fjcached.ui.internal,
- org.eclipse.xsemantics.example.fjcached.ui.contentassist.antlr.internal
+ org.eclipse.xsemantics.example.fjcached.ui.labeling,
+ org.eclipse.xsemantics.example.fjcached.ui.outline,
+ org.eclipse.xsemantics.example.fjcached.ui.quickfix,
+ org.eclipse.xsemantics.example.fjcached.ui.wizard
 Bundle-Activator: org.eclipse.xsemantics.example.fjcached.ui.internal.FjcachedActivator
 Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached.ui

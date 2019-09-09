@@ -17,8 +17,12 @@ Require-Bundle: org.eclipse.xsemantics.dsl.ui,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.xbase.ui.testing
-Export-Package: org.eclipse.xsemantics.dsl.tests.utils.ui,
- org.eclipse.xsemantics.dsl.ui.tests;x-internal=true
+Export-Package: org.eclipse.xsemantics.dsl.tests.ui.contentassist,
+ org.eclipse.xsemantics.dsl.tests.ui.editor,
+ org.eclipse.xsemantics.dsl.tests.ui.outline,
+ org.eclipse.xsemantics.dsl.tests.utils.ui,
+ org.eclipse.xsemantics.dsl.ui.tests;x-internal=true,
+ org.eclipse.xtext.ui.tests.editor.outline
 Import-Package: org.hamcrest.core,
  org.junit;version="4.5.0",
  org.junit.runners.model;version="4.5.0",

@@ -36,5 +36,7 @@ Export-Package: org.eclipse.xsemantics.example.fjcached,
  org.eclipse.xsemantics.example.fjcached.scoping,
  org.eclipse.xsemantics.example.fjcached.serializer,
  org.eclipse.xsemantics.example.fjcached.services,
+ org.eclipse.xsemantics.example.fjcached.typing,
+ org.eclipse.xsemantics.example.fjcached.typing.validation,
  org.eclipse.xsemantics.example.fjcached.validation
 Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached
