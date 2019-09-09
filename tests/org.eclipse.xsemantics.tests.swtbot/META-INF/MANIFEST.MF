@@ -20,6 +20,7 @@ Require-Bundle: org.eclipse.swtbot.go;bundle-version="2.3.0",
  org.eclipse.xsemantics.dsl.tests,
  org.eclipse.xsemantics.dsl.ui.tests,
  org.eclipse.xtext.ui.testing
-Export-Package: org.eclipse.xsemantics.tests.swtbot.wizards
+Export-Package: org.eclipse.xsemantics.tests.swtbot,
+ org.eclipse.xsemantics.tests.swtbot.wizards
 Automatic-Module-Name: org.eclipse.xsemantics.tests.swtbot
 

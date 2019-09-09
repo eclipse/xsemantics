@@ -24,5 +24,6 @@ Import-Package: org.apache.log4j,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.example.expressions,
+ org.eclipse.xsemantics.example.expressions.performance,
  org.eclipse.xsemantics.example.expressions.tests
 Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.tests

@@ -24,8 +24,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xsemantics.example.fj.ui,
  org.eclipse.xsemantics.example.fj.ui.contentassist,
  org.eclipse.xsemantics.example.fj.ui.contentassist.antlr,
+ org.eclipse.xsemantics.example.fj.ui.contentassist.antlr.internal,
  org.eclipse.xsemantics.example.fj.ui.internal,
+ org.eclipse.xsemantics.example.fj.ui.labeling,
+ org.eclipse.xsemantics.example.fj.ui.outline,
  org.eclipse.xsemantics.example.fj.ui.quickfix,
- org.eclipse.xsemantics.example.fj.ui.contentassist.antlr.internal
+ org.eclipse.xsemantics.example.fj.ui.wizard
 Bundle-Activator: org.eclipse.xsemantics.example.fj.ui.FJActivatorCustom
 Automatic-Module-Name: org.eclipse.xsemantics.example.fj.ui

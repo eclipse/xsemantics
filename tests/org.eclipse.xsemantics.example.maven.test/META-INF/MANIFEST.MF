@@ -11,4 +11,7 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xsemantics.runtime
 Automatic-Module-Name: org.eclipse.xsemantics.example.maven.test
+Export-Package: org.eclipse.xsemantics.example.maven.test.model,
+ org.eclipse.xsemantics.example.maven.test.typesystem,
+ org.eclipse.xsemantics.example.maven.test.typesystem.validation
 

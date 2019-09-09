@@ -24,6 +24,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xsemantics.example.lambda,
  org.eclipse.xsemantics.example.lambda.tests,
+ org.eclipse.xsemantics.example.lambda.tests.ui,
  org.eclipse.xsemantics.example.lambda.tests.util
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",

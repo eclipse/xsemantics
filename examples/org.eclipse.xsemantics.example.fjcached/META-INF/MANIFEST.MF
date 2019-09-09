@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xsemantics.dsl;resolution:=optional,
- org.objectweb.asm;bundle-version="[7.0.0,7.1.0)";resolution:=optional
+ org.objectweb.asm;bundle-version="[7.1.0,7.2.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -36,5 +36,7 @@ Export-Package: org.eclipse.xsemantics.example.fjcached,
  org.eclipse.xsemantics.example.fjcached.scoping,
  org.eclipse.xsemantics.example.fjcached.serializer,
  org.eclipse.xsemantics.example.fjcached.services,
+ org.eclipse.xsemantics.example.fjcached.typing,
+ org.eclipse.xsemantics.example.fjcached.typing.validation,
  org.eclipse.xsemantics.example.fjcached.validation
 Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached
