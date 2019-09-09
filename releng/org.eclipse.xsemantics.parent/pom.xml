@@ -61,7 +61,7 @@ Contributors:
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.17.0</xtext.version>
+		<xtext.version>2.19.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
 		<mwe2Version>2.10.0</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
@@ -120,7 +120,7 @@ Contributors:
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
 		
-		<target-file-name>photon-xtext-${xtext.version}</target-file-name>
+		<target-file-name>xtext-${xtext.version}</target-file-name>
 		
 		<ant-files-path>${basedir}/../../releng/org.eclipse.xsemantics.parent/ant</ant-files-path>
 
