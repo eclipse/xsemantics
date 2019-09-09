@@ -113,7 +113,7 @@ Contributors:
 		 not in the git repository (since Sonarqube 5) -->
 		<sonar.scm.disabled>true</sonar.scm.disabled>		
 		
-		<findbugs.skip>false</findbugs.skip>
+		<findbugs.skip>true</findbugs.skip>
 		<mwe2.skip>false</mwe2.skip>
 		<xtext.maven.skip>false</xtext.maven.skip>
 		<dsl.tests.skip>false</dsl.tests.skip>
