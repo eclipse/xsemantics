@@ -9,7 +9,7 @@
 #   Lorenzo Bettini - Initial contribution and API
 #
 
-sudo: false
+dist: trusty
 
 language: java
 
