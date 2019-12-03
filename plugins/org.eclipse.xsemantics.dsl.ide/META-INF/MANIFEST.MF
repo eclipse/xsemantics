@@ -4,7 +4,7 @@ Bundle-Name: Xsemantics Generic Ide
 Bundle-SymbolicName: org.eclipse.xsemantics.dsl.ide
 Bundle-Version: 1.19.0.qualifier
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xsemantics.dsl,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,

@@ -61,6 +61,8 @@ Contributors:
 		<jacoco-version>0.7.4.201502262128</jacoco-version>
 		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<xtext.version>2.20.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
 		<mwe2Version>2.11.1</mwe2Version>

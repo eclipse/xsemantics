@@ -4,7 +4,7 @@ Bundle-Name: Xsemantics Examples
 Bundle-SymbolicName: org.eclipse.xsemantics.ui.examples;singleton:=true
 Bundle-Version: 1.19.0.qualifier
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.ui;bundle-version="3.5.0",
  org.eclipse.emf.common.ui;bundle-version="2.7.0",
  org.eclipse.ui.ide;bundle-version="3.5.0",
