@@ -35,7 +35,7 @@ Contributors:
 						<id>default-test</id>
 						<phase>integration-test</phase>
 						<configuration>
-							<skip>${dsl.tests.skip}</skip>
+							<skip>true</skip>
 							<useUIHarness>false</useUIHarness>
 							<useUIThread>false</useUIThread>
 							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
@@ -53,7 +53,7 @@ Contributors:
 						<id>TychoSurefirePluginUiTest</id>
 						<phase>integration-test</phase>
 						<configuration>
-							<skip>${dsl.tests.skip}</skip>
+							<skip>true</skip>
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>true</useUIThread>
 							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
