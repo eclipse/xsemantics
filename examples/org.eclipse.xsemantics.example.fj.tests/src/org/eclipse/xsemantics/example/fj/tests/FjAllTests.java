@@ -23,7 +23,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	FormattingTest.class,
 	FjParserTests.class,
 	FjSemanticsTests.class,
 	FjValidatorTests.class
