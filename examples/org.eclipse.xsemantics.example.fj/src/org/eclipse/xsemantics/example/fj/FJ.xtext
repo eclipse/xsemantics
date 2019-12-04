@@ -11,7 +11,7 @@
 
 grammar org.eclipse.xsemantics.example.fj.FJ with org.eclipse.xtext.common.Terminals
 
-generate fj "http://xsemantics.sf.net/example/fj/FJ"
+generate fj "http://www.eclipse.org/xsemantics/example/fj/FJ"
 
 Program :
 	(classes += Class)*

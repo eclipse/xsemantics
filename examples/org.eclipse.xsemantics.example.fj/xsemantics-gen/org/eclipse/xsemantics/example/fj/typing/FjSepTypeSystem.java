@@ -1,19 +1,22 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2013-2017 Lorenzo Bettini.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
- *******************************************************************************/
-
+ */
 package org.eclipse.xsemantics.example.fj.typing;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.List;
+import java.util.function.Consumer;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.example.fj.fj.Cast;
 import org.eclipse.xsemantics.example.fj.fj.ClassType;
 import org.eclipse.xsemantics.example.fj.fj.Constant;
@@ -37,10 +40,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import java.util.List;
-import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
@@ -50,29 +49,29 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 @SuppressWarnings("all")
 public class FjSepTypeSystem extends FjTypeSystem {
-  public final static String TNEW = "org.eclipse.xsemantics.example.fj.typing.TNew";
+  public static final String TNEW = "org.eclipse.xsemantics.example.fj.typing.TNew";
   
-  public final static String TSELECTION = "org.eclipse.xsemantics.example.fj.typing.TSelection";
+  public static final String TSELECTION = "org.eclipse.xsemantics.example.fj.typing.TSelection";
   
-  public final static String TCAST = "org.eclipse.xsemantics.example.fj.typing.TCast";
+  public static final String TCAST = "org.eclipse.xsemantics.example.fj.typing.TCast";
   
-  public final static String CHECKCONSTANT = "org.eclipse.xsemantics.example.fj.typing.CheckConstant";
+  public static final String CHECKCONSTANT = "org.eclipse.xsemantics.example.fj.typing.CheckConstant";
   
-  public final static String CHECKTYPEDELEMENT = "org.eclipse.xsemantics.example.fj.typing.CheckTypedElement";
+  public static final String CHECKTYPEDELEMENT = "org.eclipse.xsemantics.example.fj.typing.CheckTypedElement";
   
-  public final static String CHECKPARAMREF = "org.eclipse.xsemantics.example.fj.typing.CheckParamRef";
+  public static final String CHECKPARAMREF = "org.eclipse.xsemantics.example.fj.typing.CheckParamRef";
   
-  public final static String CHECKTHIS = "org.eclipse.xsemantics.example.fj.typing.CheckThis";
+  public static final String CHECKTHIS = "org.eclipse.xsemantics.example.fj.typing.CheckThis";
   
-  public final static String CHECKMETHOD = "org.eclipse.xsemantics.example.fj.typing.CheckMethod";
+  public static final String CHECKMETHOD = "org.eclipse.xsemantics.example.fj.typing.CheckMethod";
   
-  public final static String CHECKNEW = "org.eclipse.xsemantics.example.fj.typing.CheckNew";
+  public static final String CHECKNEW = "org.eclipse.xsemantics.example.fj.typing.CheckNew";
   
-  public final static String CHECKSELECTION = "org.eclipse.xsemantics.example.fj.typing.CheckSelection";
+  public static final String CHECKSELECTION = "org.eclipse.xsemantics.example.fj.typing.CheckSelection";
   
-  public final static String CHECKCAST = "org.eclipse.xsemantics.example.fj.typing.CheckCast";
+  public static final String CHECKCAST = "org.eclipse.xsemantics.example.fj.typing.CheckCast";
   
-  public final static String CHECKCLASS = "org.eclipse.xsemantics.example.fj.typing.CheckClass";
+  public static final String CHECKCLASS = "org.eclipse.xsemantics.example.fj.typing.CheckClass";
   
   @Inject
   private FjAuxiliaryFunctions fjAux;
@@ -516,7 +515,6 @@ public class FjSepTypeSystem extends FjTypeSystem {
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
     final Consumer<Expression> _function = new Consumer<Expression>() {
-      @Override
       public void accept(final Expression it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
@@ -631,7 +629,6 @@ public class FjSepTypeSystem extends FjTypeSystem {
   
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     final Consumer<Member> _function = new Consumer<Member>() {
-      @Override
       public void accept(final Member it) {
         /* G |- it */
         checkInternal(G, _trace_, it);
@@ -647,7 +644,6 @@ public class FjSepTypeSystem extends FjTypeSystem {
         FjPackage.eINSTANCE.getClass_Superclass(), 
         Field.class);
       final Consumer<Field> _function_1 = new Consumer<Field>() {
-        @Override
         public void accept(final Field inheritedField) {
           List<Field> _selectFields = FjSepTypeSystem.this.fjAux.selectFields(cl);
           for (final Field field : _selectFields) {
@@ -667,10 +663,8 @@ public class FjSepTypeSystem extends FjTypeSystem {
         FjPackage.eINSTANCE.getClass_Superclass(), 
         Method.class);
       final Consumer<Method> _function_2 = new Consumer<Method>() {
-        @Override
         public void accept(final Method inheritedMethod) {
           final Consumer<Method> _function = new Consumer<Method>() {
-            @Override
             public void accept(final Method it) {
               FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
             }

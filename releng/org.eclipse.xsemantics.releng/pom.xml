@@ -35,8 +35,10 @@ Contributors:
 
 		<!-- we need the following examples for testing -->
 		<module>../../examples/org.eclipse.xsemantics.example.fj</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fj.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fj.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.ui.tests</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.tests</module>

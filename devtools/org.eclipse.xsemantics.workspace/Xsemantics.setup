@@ -504,7 +504,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFj"
-      launcher="GenerateFJ.mwe2"/>
+      launcher="Generate FJ (fj) Language Infrastructure.mwe2"/>
   <setupTask
       xsi:type="projects:ProjectsBuildTask"
       refresh="true">

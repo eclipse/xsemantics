@@ -14,7 +14,7 @@
  */
 package org.eclipse.xsemantics.example.fj.ui;
 
-import org.eclipse.xsemantics.example.fj.ui.internal.FJActivator;
+import org.eclipse.xsemantics.example.fj.ui.internal.FjActivator;
 
 import com.google.inject.Module;
 
@@ -24,16 +24,15 @@ import com.google.inject.Module;
  * @author Lorenzo Bettini
  *
  */
-public class FJActivatorCustom extends FJActivator {
+public class FJActivatorCustom extends FjActivator {
 
 	public static final String ORG_ECLIPSE_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM = "org.eclipse.xsemantics.example.fj.FJ.Sep";
-	
+
 	@Override
 	protected Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM.equals(grammar)) {
 			return new org.eclipse.xsemantics.example.fj.FJSepTypeSystemRuntimeModule();
 		}
-		
 		return super.getRuntimeModule(grammar);
 	}
 
@@ -42,7 +41,6 @@ public class FJActivatorCustom extends FJActivator {
 		if (ORG_ECLIPSE_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM.equals(grammar)) {
 			return new org.eclipse.xsemantics.example.fj.ui.FJUiModule(this);
 		}
-		
 		return super.getUiModule(grammar);
 	}
 }
