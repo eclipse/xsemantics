@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xsemantics.example.expressions.tests
 Bundle-Vendor: %providerName
-Bundle-Version: 1.18.0.qualifier
+Bundle-Version: 1.19.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.example.expressions.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xsemantics.example.expressions,
@@ -22,7 +22,7 @@ Import-Package: org.apache.log4j,
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.expressions,
  org.eclipse.xsemantics.example.expressions.performance,
  org.eclipse.xsemantics.example.expressions.tests

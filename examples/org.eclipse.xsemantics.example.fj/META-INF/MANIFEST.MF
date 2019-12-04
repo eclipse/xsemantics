@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics FJ Example
 Bundle-Vendor: %providerName
-Bundle-Version: 1.18.0.qualifier
+Bundle-Version: 1.19.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.example.fj;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe.core;resolution:=optional,
+ org.eclipse.emf.mwe2.lib;resolution:=optional,
  com.ibm.icu;bundle-version="4.0.0";resolution:=optional,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.7.0",
@@ -20,7 +21,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.fj,
  org.eclipse.xsemantics.example.fj.fj,
  org.eclipse.xsemantics.example.fj.fj.impl,

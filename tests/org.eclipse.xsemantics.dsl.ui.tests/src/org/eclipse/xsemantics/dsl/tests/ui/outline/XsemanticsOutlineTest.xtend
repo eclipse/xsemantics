@@ -26,6 +26,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
@@ -49,9 +51,11 @@ class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
 		
 		projectHelper.createJavaPluginProject
 			(TEST_PROJECT, newArrayList("org.eclipse.xsemantics.runtime"))
+		
+		waitForBuild
 	}
 	
-	@Test
+	@Test @Flaky
 	def void testOutline() {
 		val outline = getOutlineTreeViewer(
 '''
@@ -96,7 +100,7 @@ my.test.System
 		)
 	}
 
-	@Test
+	@Test @Flaky
 	def void testEmptyOutline() {
 		val outline = getOutlineTreeViewer(
 '''
@@ -108,7 +112,7 @@ my.test.System
 		)
 	}
 
-	@Test
+	@Test @Flaky
 	def void testOutlineWithNoJudgmentAuxiliaryDescriptions() {
 		val outline = getOutlineTreeViewer(
 '''
@@ -141,8 +145,7 @@ my.test.System
 		)
 	}
 
-	@Flaky
-	@Test
+	@Test @Flaky
 	def void testOutlineWithDescriptionInAnotherResourceOnEditorOpen() {
 		createFileInTestProject("a",
 '''

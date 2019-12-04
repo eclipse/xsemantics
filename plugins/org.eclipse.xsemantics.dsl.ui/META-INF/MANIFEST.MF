@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics UI
 Bundle-Vendor: %providerName
-Bundle-Version: 1.18.0.qualifier
+Bundle-Version: 1.19.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.dsl.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xsemantics.dsl;visibility:=reexport,
@@ -23,7 +23,7 @@ Require-Bundle: org.eclipse.xsemantics.dsl;visibility:=reexport,
  org.eclipse.xsemantics.dsl.ide
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.dsl.ui.contentassist,
  org.eclipse.xsemantics.dsl.ui.internal,
  org.eclipse.xsemantics.dsl.ui.quickfix,

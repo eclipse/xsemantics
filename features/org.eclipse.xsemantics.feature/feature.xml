@@ -12,7 +12,7 @@ Contributors:
 <feature
       id="org.eclipse.xsemantics.feature"
       label="Xsemantics UI"
-      version="1.18.0.qualifier"
+      version="1.19.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="1.0.1.v20140414-1359">
@@ -46,8 +46,8 @@ Contributors:
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.eclipse.xtext.xbase" version="2.19.0" match="equivalent"/>
-      <import feature="org.eclipse.xtext.ui" version="2.19.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.20.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="2.20.0" match="equivalent"/>
    </requires>
 
    <plugin

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Lambda Example
 Bundle-Vendor: %providerName
-Bundle-Version: 1.18.0.qualifier
+Bundle-Version: 1.19.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.example.lambda;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.emf.mwe2.lib;resolution:=optional,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.7.0",
  org.eclipse.emf.common;bundle-version="2.7.0",
@@ -21,7 +22,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xsemantics.dsl;resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.lambda,
  org.eclipse.xsemantics.example.lambda.formatting,
  org.eclipse.xsemantics.example.lambda.lambda,

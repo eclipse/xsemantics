@@ -20,13 +20,21 @@ import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.util.PluginProjectFactory
 
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
+
 class PluginProjectHelper {
 	
 	@Inject PluginProjectFactory projectFactory
 
 	def IJavaProject createJavaPluginProject(String projectName, List<String> requiredBundles) {
 		projectFactory.setProjectName(projectName);
-		projectFactory.addFolders(newArrayList("src", "xsemantics-gen"));
+		// sometimes we get:
+		// ERROR org.eclipse.xtext.ui.util.JavaProjectFactory  - Build path contains duplicate entry: 'src' for project 'test'
+		// Java Model Exception: Java Model Status [Build path contains duplicate entry: 'src' for project 'test']
+		// probably due to some missing synchronization?
+		// thus we don't do:
+		// projectFactory.addFolders(newArrayList("src", "xsemantics-gen"));
+		// but we add source folders later, which also triggers workspace build for each added source folder
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 
 			"org.eclipse.pde.ManifestBuilder",
@@ -40,7 +48,10 @@ class PluginProjectHelper {
 		projectFactory.addRequiredBundles(requiredBundles);
 		val result = projectFactory.createProject(new NullProgressMonitor(), null);
 		JavaProjectSetupUtil.makeJava5Compliant(JavaCore.create(result));
-		return JavaProjectSetupUtil.findJavaProject(projectName);
+		val javaProject = JavaProjectSetupUtil.findJavaProject(projectName)
+		addSourceFolder(javaProject, "src")
+		addSourceFolder(javaProject, "xsemantics-gen")
+		return javaProject;
 	}
 
 }
