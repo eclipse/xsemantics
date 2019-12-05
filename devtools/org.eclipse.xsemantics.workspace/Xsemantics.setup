@@ -500,7 +500,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateLambda"
-      launcher="GenerateLambda.mwe2"/>
+      launcher="Generate Lambda (lambda) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFj"

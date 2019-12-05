@@ -11,10 +11,8 @@
 
 package org.eclipse.xsemantics.example.lambda.tests;
 
-import static org.eclipse.xsemantics.example.lambda.tests.util.LambdaTestsUtil.getAbstraction;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.xsemantics.example.lambda.lambda.Abstraction;
 import org.eclipse.xsemantics.example.lambda.lambda.Program;
@@ -22,17 +20,14 @@ import org.eclipse.xsemantics.example.lambda.lambda.Term;
 import org.eclipse.xsemantics.example.lambda.lambda.Type;
 import org.eclipse.xsemantics.example.lambda.xsemantics.LambdaTypeModifier;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
+import org.junit.Test;
 
-public class LambdaTypeInferAndModifyTest extends LambdaAbstractTests {
+import com.google.inject.Inject;
 
-	LambdaTypeModifier lambdaTypeModifier;
+public class LambdaTypeInferAndModifyTest extends LambdaAbstractBaseTest {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		lambdaTypeModifier = getInjector().getInstance(LambdaTypeModifier.class);
-	}
+	@Inject
+	private LambdaTypeModifier lambdaTypeModifier;
 
 	@Test
 	public void testInferTypeAndSetAbstractionTypeWithNoExplicitType()

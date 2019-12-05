@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
@@ -20,13 +20,13 @@ import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))
-class LambdaTermUtilsTest extends LambdaBaseTest {
-	
+class LambdaTermUtilsTest extends LambdaAbstractBaseTest {
+
 	@Test
 	def void testExplicitType() {
 		assertCloneWithoutTypes("lambda x : int . x", "lambda x . (x)")
 	}
-	
+
 	@Test
 	def void testExplicitTypes() {
 		assertCloneWithoutTypes(
@@ -34,7 +34,7 @@ class LambdaTermUtilsTest extends LambdaBaseTest {
 			"lambda x . (lambda y . ((y x)))"
 		)
 	}
-	
+
 	@Test
 	def void testNoTypes() {
 		assertCloneWithoutTypes(
@@ -42,10 +42,10 @@ class LambdaTermUtilsTest extends LambdaBaseTest {
 			"lambda x . (lambda y . ((y x)))"
 		)
 	}
-	
+
 	def void assertCloneWithoutTypes(CharSequence original, CharSequence expected) {
 		val program = original.parseAndAssertNoError
-		val beforeCloning= reprForSubstitutions.string(program)
+		val beforeCloning = reprForSubstitutions.string(program)
 		val clone = LambdaTermUtils::cloneWithoutTypes(program.term)
 		Assert::assertEquals(expected.toString, reprForSubstitutions.string(clone))
 		// make sure the original program is not modified

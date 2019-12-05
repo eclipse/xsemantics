@@ -11,7 +11,6 @@
 
 package org.eclipse.xsemantics.example.lambda.tests;
 
-import org.eclipse.xsemantics.example.lambda.LambdaInjectorProvider;
 import org.eclipse.xsemantics.example.lambda.LambdaRuntimeModule;
 import org.eclipse.xsemantics.example.lambda.LambdaStandaloneSetup;
 import org.eclipse.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation;

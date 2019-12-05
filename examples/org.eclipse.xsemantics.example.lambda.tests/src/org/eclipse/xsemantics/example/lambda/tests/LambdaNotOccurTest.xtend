@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
@@ -21,54 +21,57 @@ import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))
-class LambdaNotOccurTest extends LambdaBaseTest {
-	
-	@Rule public ExpectedException thrown= ExpectedException.none();
-	
+class LambdaNotOccurTest extends LambdaAbstractBaseTest {
+
+	@Rule public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	def void NotOccurConstantTypes() {
 		assertResultTrue(
 			system.notoccur(lambdaUtils.createStringType, lambdaUtils.createIntType)
 		)
 	}
-	
+
 	@Test
 	def void NotOccurDifferentTypeVariables() {
 		assertResultTrue(
 			system.notoccur(lambdaUtils.createFreshTypeVariable, lambdaUtils.createFreshTypeVariable)
 		)
 	}
-	
+
 	@Test
 	def void NotOccurTypeVariablesFails() {
-		thrown.expect( RuleFailedException );
-    	thrown.expectMessage("failed: X1 occurs in X1");
-		
+		thrown.expect(RuleFailedException);
+		thrown.expectMessage("failed: X1 occurs in X1");
+
 		val variable = lambdaUtils.createFreshTypeVariable
 		system.notoccur(variable, lambdaUtils.createTypeVariable("X1"))
 	}
-	
+
 	@Test
 	def void NotOccurTypeVariablesInArrowType() {
 		assertResultTrue(
-			system.notoccur(lambdaUtils.createFreshTypeVariable, 
+			system.notoccur(
+				lambdaUtils.createFreshTypeVariable,
 				lambdaUtils.createFreshArrowType
 			)
 		)
 	}
-	
+
 	@Test
 	def void notOccurTypeVariablesInArrowTypeFails() {
-		thrown.expect( RuleFailedException );
-    	thrown.expectMessage("failed: a occurs in ((X1 -> X2) -> (X3 -> a))");
-		
+		thrown.expect(RuleFailedException);
+		thrown.expectMessage("failed: a occurs in ((X1 -> X2) -> (X3 -> a))");
+
 		val variable = lambdaUtils.createTypeVariable("a")
-		system.notoccur(trace, variable, 
-						lambdaUtils.createArrowType(lambdaUtils.createFreshArrowType, 
-							lambdaUtils.createArrowType
-								(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
-						)
-					)
+		system.notoccur(
+			trace,
+			variable,
+			lambdaUtils.createArrowType(
+				lambdaUtils.createFreshArrowType,
+				lambdaUtils.createArrowType(lambdaUtils.createFreshTypeVariable, lambdaUtils.createTypeVariable("a"))
+			)
+		)
 //		val trace = new RuleApplicationTrace
 //		var notoccur = false
 //		try {

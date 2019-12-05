@@ -55,8 +55,11 @@ Contributors:
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui.tests</module>
 
 		<module>../../examples/org.eclipse.xsemantics.example.lambda</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui.tests</module>
+
 		<module>../../features/org.eclipse.xsemantics.examples.feature</module>
 		<module>../../features/org.eclipse.xsemantics.implemented.examples.feature</module>
 

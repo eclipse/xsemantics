@@ -1,19 +1,19 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2013-2017 Lorenzo Bettini.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
- *******************************************************************************/
-
+ */
 package org.eclipse.xsemantics.example.lambda.xsemantics;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xsemantics.example.lambda.lambda.Abstraction;
 import org.eclipse.xsemantics.example.lambda.lambda.Application;
 import org.eclipse.xsemantics.example.lambda.lambda.Arithmetics;
@@ -37,30 +37,29 @@ import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.runtime.XsemanticsRuntimeSystem;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
-  public final static String NOTOCCUR = "org.eclipse.xsemantics.example.lambda.xsemantics.Notoccur";
+  public static final String NOTOCCUR = "org.eclipse.xsemantics.example.lambda.xsemantics.Notoccur";
   
-  public final static String TYPESUBSTITUTION = "org.eclipse.xsemantics.example.lambda.xsemantics.Typesubstitution";
+  public static final String TYPESUBSTITUTION = "org.eclipse.xsemantics.example.lambda.xsemantics.Typesubstitution";
   
-  public final static String UNIFY = "org.eclipse.xsemantics.example.lambda.xsemantics.Unify";
+  public static final String UNIFY = "org.eclipse.xsemantics.example.lambda.xsemantics.Unify";
   
-  public final static String PARAMETERTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ParameterType";
+  public static final String PARAMETERTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ParameterType";
   
-  public final static String STRINGCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.StringConstantType";
+  public static final String STRINGCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.StringConstantType";
   
-  public final static String INTCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.IntConstantType";
+  public static final String INTCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.IntConstantType";
   
-  public final static String VARIABLETYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.VariableType";
+  public static final String VARIABLETYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.VariableType";
   
-  public final static String ARITHMETICSTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ArithmeticsType";
+  public static final String ARITHMETICSTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ArithmeticsType";
   
-  public final static String ABSTRACTIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.AbstractionType";
+  public static final String ABSTRACTIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.AbstractionType";
   
-  public final static String APPLICATIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ApplicationType";
+  public static final String APPLICATIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ApplicationType";
   
   @Inject
   private LambdaUtils lambdaUtils;
