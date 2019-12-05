@@ -24,14 +24,14 @@ Contributors:
 	<packaging>pom</packaging>
 	
 	<modules>
+		<module>../../releng/org.eclipse.xsemantics.parent</module>
+
 		<module>../../devtools/org.eclipse.xsemantics.targetplatform</module>
-		
+
 		<module>../../plugins/org.eclipse.xsemantics.runtime</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ide</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ui</module>
-		<module>../../tests/org.eclipse.xsemantics.dsl.tests</module>
-		<module>../../tests/org.eclipse.xsemantics.dsl.ui.tests</module>
 
 		<!-- we need the following examples for testing -->
 		<module>../../examples/org.eclipse.xsemantics.example.fj</module>
@@ -40,8 +40,13 @@ Contributors:
 		<module>../../examples/org.eclipse.xsemantics.example.fj.tests</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fj.ui.tests</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui.tests</module>
+
+		<module>../../tests/org.eclipse.xsemantics.dsl.tests</module>
+		<module>../../tests/org.eclipse.xsemantics.dsl.ui.tests</module>
 
 		<module>../../examples/org.eclipse.xsemantics.example.expressions</module>
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui</module>

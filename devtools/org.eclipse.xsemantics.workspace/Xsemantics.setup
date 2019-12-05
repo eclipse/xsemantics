@@ -504,7 +504,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFj"
-      launcher="Generate FJ (fj) Language Infrastructure.mwe2"/>
+      launcher="Generate FJ (fj) Language Infrastructure"/>
   <setupTask
       xsi:type="projects:ProjectsBuildTask"
       refresh="true">
@@ -513,7 +513,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFjCached"
-      launcher="Generate Language Infrastructure (org.eclipse.xsemantics.example.fjcached)"/>
+      launcher="Generate Fjcached (fjcached) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateExamplesZips"
