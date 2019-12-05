@@ -14,8 +14,8 @@ package org.eclipse.xsemantics.dsl.tests.generator.fj.caching
 import com.google.inject.Inject
 import org.eclipse.xsemantics.example.fj.fj.FjPackage
 import org.eclipse.xsemantics.example.fj.typing.FjTypeSystem
-import org.eclipse.xsemantics.example.fjcached.FjcachedInjectorProvider
 import org.eclipse.xsemantics.example.fjcached.fjcached.FjCachedProgram
+import org.eclipse.xsemantics.example.fjcached.tests.FjcachedInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper

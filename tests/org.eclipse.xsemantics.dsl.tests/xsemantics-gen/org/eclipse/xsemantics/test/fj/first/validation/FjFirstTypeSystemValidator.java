@@ -14,13 +14,13 @@ import com.google.inject.Inject;
 import org.eclipse.xsemantics.example.fj.fj.Field;
 import org.eclipse.xsemantics.example.fj.fj.Method;
 import org.eclipse.xsemantics.example.fj.fj.Program;
-import org.eclipse.xsemantics.example.fj.validation.AbstractFJJavaValidator;
+import org.eclipse.xsemantics.example.fj.validation.AbstractFJValidator;
 import org.eclipse.xsemantics.runtime.validation.XsemanticsValidatorErrorGenerator;
 import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem;
 import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
-public class FjFirstTypeSystemValidator extends AbstractFJJavaValidator {
+public class FjFirstTypeSystemValidator extends AbstractFJValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
   

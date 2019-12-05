@@ -13,8 +13,8 @@ package org.eclipse.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.xsemantics.example.fj.FJInjectorProvider
 import org.eclipse.xsemantics.example.fj.fj.Program
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider
 import org.eclipse.xsemantics.test.fj.caching.FjFirstCachedTypeSystem
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

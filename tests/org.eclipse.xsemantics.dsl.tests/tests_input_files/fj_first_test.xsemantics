@@ -30,7 +30,7 @@ import org.eclipse.xsemantics.example.fj.fj.This
 import org.eclipse.xsemantics.example.fj.fj.Type
 import org.eclipse.xsemantics.example.fj.fj.TypedElement
 import org.eclipse.xsemantics.example.fj.util.FjTypeUtils
-import org.eclipse.xsemantics.example.fj.validation.AbstractFJJavaValidator
+import org.eclipse.xsemantics.example.fj.validation.AbstractFJValidator
 import java.util.Collections
 import java.util.LinkedList
 import java.util.List
@@ -50,7 +50,7 @@ Contributors:
   Lorenzo Bettini - Initial contribution and API"
 
 
-validatorExtends AbstractFJJavaValidator
+validatorExtends AbstractFJValidator
 
 inject FjTypeUtils fjTypeUtils
 
