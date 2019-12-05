@@ -1,5 +1,6 @@
 *.class
 bin/
+test-bin/
 *~
 logs.zip
 *.log
