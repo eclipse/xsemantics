@@ -36,7 +36,7 @@ import org.eclipse.xsemantics.dsl.ui.internal.DslActivator;
  * 
  */
 @RunWith(SWTBotJunit4ClassRunner.class)
-public class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
+public abstract class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	protected static final String TEST_FILE = "mytest.xsemantics";
 

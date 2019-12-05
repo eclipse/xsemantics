@@ -59,7 +59,7 @@ import org.eclipse.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
  * 
  */
 @RunWith(SWTBotJunit4ClassRunner.class)
-public class XsemanticsSwtbotTestBase {
+public abstract class XsemanticsSwtbotTestBase {
 
 	protected static final String TEST_PROJECT = "MyTestProject";
 	protected static SWTWorkbenchBot bot;
