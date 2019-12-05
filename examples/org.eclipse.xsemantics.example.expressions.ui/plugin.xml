@@ -1,225 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Copyright (c) 2013-2017 Lorenzo Bettini.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-  Lorenzo Bettini - Initial contribution and API
--->
 <?eclipse version="3.0"?>
-
 <plugin>
-
-    <extension
-            point="org.eclipse.ui.editors">
-        <editor
-              class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-              default="true"
-              extensions="expressions"
-              icon="icons/expression.gif"
-              id="org.eclipse.xsemantics.example.expressions.Expressions"
-              name="Expressions Editor">
-        </editor>
-    </extension>
-    <extension
-        point="org.eclipse.ui.handlers">
-        <handler
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
-            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
-            <activeWhen>
-                <reference
-                    definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-                </reference>
-            </activeWhen>
-        </handler>
-        <handler
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xsemantics.example.expressions.Expressions.validate">
-         <activeWhen>
-            <reference
-                    definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-            </reference>
-         </activeWhen>
-      	</handler>
-      	<!-- copy qualified name -->
-        <handler
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
-            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
-            <activeWhen>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="expressions"
+			icon="icons/expression.gif"
+			id="org.eclipse.xsemantics.example.expressions.Expressions"
+			name="Expressions Editor">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="org.eclipse.xsemantics.example.expressions.Expressions.validate">
+		<activeWhen>
+			<reference
+					definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+			</reference>
+		</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
 				<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
-            </activeWhen>
-        </handler>
-        <handler
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
-            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
-            <activeWhen>
-            	<and>
-            		<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened" />
-	                <iterate>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened" />
+					<iterate>
 						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 					</iterate>
 				</and>
-            </activeWhen>
-        </handler>
-    </extension>
-    <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-            <and>
-                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-                <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xsemantics.example.expressions.Expressions" 
-                        forcePluginActivation="true"/>
-                </with>        
-            </and>
-        </definition>
-        <definition id="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened">
-            <and>
-                <reference definitionId="isXtextEditorActive"/>
-                <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xsemantics.example.expressions.Expressions" 
-                        forcePluginActivation="true"/>
-                </with>        
-            </and>
-        </definition>
-    </extension>
-    <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions"
-            name="Expressions">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-        </page>
-        <page
-            category="org.eclipse.xsemantics.example.expressions.Expressions"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions.coloring"
-            name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-        </page>
-        <page
-            category="org.eclipse.xsemantics.example.expressions.Expressions"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions.templates"
-            name="Templates">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions"
-            name="Expressions">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xsemantics.example.expressions.Expressions"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xsemantics.example.expressions.Expressions"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions"
+			name="Expressions">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.templates"
+			name="Templates">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions"
+			name="Expressions">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-    <extension
-        point="org.eclipse.ui.keywords">
-        <keyword
-            id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"
-            label="Expressions"/>
-    </extension>
-    <extension
-         point="org.eclipse.ui.commands">
-      <command
-            description="Trigger expensive validation"
-            id="org.eclipse.xsemantics.example.expressions.Expressions.validate"
-            name="Validate">
-      </command>
-      <!-- copy qualified name -->
-      <command
-            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
-            categoryId="org.eclipse.ui.category.edit"
-            description="Copy the qualified name for the selected element"
-            name="Copy Qualified Name">
-      </command>
-      <command
-            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
-            categoryId="org.eclipse.ui.category.edit"
-            description="Copy the qualified name for the selected element"
-            name="Copy Qualified Name">
-      </command>
-    </extension>
-    <extension point="org.eclipse.ui.menus">
-        <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-             <command
-                 commandId="org.eclipse.xsemantics.example.expressions.Expressions.validate"
-                 style="push"
-                 tooltip="Trigger expensive validation">
-            <visibleWhen checkEnabled="false">
-                <reference
-                    definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-                </reference>
-            </visibleWhen>
-         </command>  
-         </menuContribution>
-         <!-- copy qualified name -->
-         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
-         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
-         		style="push" tooltip="Copy Qualified Name">
-            	<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
-            	</visibleWhen>
-         	</command>  
-         </menuContribution>
-         <menuContribution locationURI="menu:edit?after=copy">
-         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
-            	style="push" tooltip="Copy Qualified Name">
-            	<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
-            	</visibleWhen>
-         	</command>  
-         </menuContribution>
-         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"
+			label="Expressions"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+	<command
+			description="Trigger expensive validation"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.validate"
+			name="Validate">
+	</command>
+	<!-- copy qualified name -->
+	<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+	</command>
+	<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+	</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			 <command
+				 commandId="org.eclipse.xsemantics.example.expressions.Expressions.validate"
+				 style="push"
+				 tooltip="Trigger expensive validation">
+			<visibleWhen checkEnabled="false">
+				<reference
+					definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+				</reference>
+			</visibleWhen>
+		</command>
+		</menuContribution>
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
-         		<visibleWhen checkEnabled="false">
-	            	<and>
-	            		<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened" />
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.XtextEditor.opened" />
 						<iterate>
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
 					</and>
 				</visibleWhen>
 			</command>
-         </menuContribution>
-    </extension>
-    <extension point="org.eclipse.ui.menus">
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-                	</reference>
-            	</visibleWhen>
+					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+					</reference>
+				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
-	    <handler
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.editor.FindReferences">
-            <activeWhen>
-                <reference
-                    definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-                </reference>
-            </activeWhen>
-        </handler>
-    </extension>   
-
-<!-- adding resource factories -->
-
+		<handler
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="expressions"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.contenttype"
+			name="Expressions File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -228,77 +223,78 @@ Contributors:
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="expressions">
-        </resourceServiceProvider>
-    </extension>
-
-
-    <!-- marker definitions for org.eclipse.xsemantics.example.expressions.Expressions -->
-    <extension
-            id="expressions.check.fast"
-            name="Expressions Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="expressions.check.normal"
-            name="Expressions Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="expressions.check.expensive"
-            name="Expressions Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
-
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="expressions"
-            >
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="org.eclipse.xsemantics.example.expressions.Expressions"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            category="org.eclipse.xsemantics.example.expressions.Expressions"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xsemantics.example.expressions.Expressions.compiler.propertyPage"
-            name="Compiler">
-            <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
+		<resourceServiceProvider
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="expressions">
+		</resourceServiceProvider>
+	</extension>
+	<!-- marker definitions for org.eclipse.xsemantics.example.expressions.Expressions -->
+	<extension
+			id="expressions.check.fast"
+			name="Expressions Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="expressions.check.normal"
+			name="Expressions Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="expressions.check.expensive"
+			name="Expressions Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="expressions"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-    <extension point="org.eclipse.ui.menus">
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
 			<command
 				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
 				id="org.eclipse.xsemantics.example.expressions.Expressions.OpenGeneratedCode"
 				style="push">
-					<visibleWhen checkEnabled="false">
-						<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
-					</visibleWhen>
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
+				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
@@ -306,12 +302,11 @@ Contributors:
 		<handler
 			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
-				<activeWhen>
-					<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
-				</activeWhen>
+			<activeWhen>
+				<reference definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened" />
+			</activeWhen>
 		</handler>
 	</extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
@@ -345,47 +340,35 @@ Contributors:
 			</command>
 		</menuContribution>
 	</extension>
-    <!-- quickfix marker resolution generator for org.eclipse.xsemantics.example.expressions.Expressions -->
-    <extension
-            point="org.eclipse.ui.ide.markerResolution">
-        <markerResolutionGenerator
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.fast">
-            <attribute
-                name="FIXABLE_KEY"
-                value="true">
-            </attribute>
-        </markerResolutionGenerator>
-        <markerResolutionGenerator
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.normal">
-            <attribute
-                name="FIXABLE_KEY"
-                value="true">
-            </attribute>
-        </markerResolutionGenerator>
-        <markerResolutionGenerator
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.expensive">
-            <attribute
-                name="FIXABLE_KEY"
-                value="true">
-            </attribute>
-        </markerResolutionGenerator>
-    </extension>
-
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.eclipse.xsemantics.dsl.wizards.category"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"
-            icon="icons/expression.gif"
-            id="org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"
-            name="Expressions Project"
-            project="true">
-      </wizard>
-   </extension>
-   	<!-- Rename Refactoring -->
+	<!-- quickfix marker resolution generator for org.eclipse.xsemantics.example.expressions.Expressions -->
+	<extension
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.fast">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.normal">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xsemantics.example.expressions.ui.expressions.check.expensive">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+	</extension>
+	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
 			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
@@ -397,52 +380,56 @@ Contributors:
 			</activeWhen>
 		</handler>
 	</extension>
-    <extension point="org.eclipse.ui.menus">
-         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
-               style="push">
-            <visibleWhen checkEnabled="false">
-               <reference
-                     definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-   </extension>
-   <extension point="org.eclipse.ui.preferencePages">
-	    <page
-	        category="org.eclipse.xsemantics.example.expressions.Expressions"
-	        class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-	        id="org.eclipse.xsemantics.example.expressions.Expressions.refactoring"
-	        name="Refactoring">
-	        <keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
-	    </page>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xsemantics.example.expressions.Expressions.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
 	</extension>
-
-  <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentViewers"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="expressions">
-    </viewer>
-  </extension>
-  <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentMergeViewers"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="expressions" label="Expressions Compare">
-     </viewer>
-  </extension>
-  <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="org.eclipse.xsemantics.example.expressions.Expressions.editors.documentProviders"
-            class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="expressions">
-    </provider>
-  </extension>
-  <extension point="org.eclipse.team.core.fileTypes">
-    <fileTypes
-            extension="expressions"
-            type="text">
-    </fileTypes>
-  </extension>
-
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xsemantics.example.expressions.Expressions"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="org.eclipse.xsemantics.example.expressions.Expressions.refactoring"
+			name="Refactoring">
+			<keywordReference id="org.eclipse.xsemantics.example.expressions.ui.keyword_Expressions"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentViewers"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="expressions">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xsemantics.example.expressions.Expressions.contenttype"
+			contentViewerId="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentViewers" />
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentMergeViewers"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="expressions" label="Expressions Compare">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xsemantics.example.expressions.Expressions.contenttype"
+			contentMergeViewerId="org.eclipse.xsemantics.example.expressions.Expressions.compare.contentMergeViewers" />
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="org.eclipse.xsemantics.example.expressions.Expressions.editors.documentProviders"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="expressions">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="expressions"
+			type="text">
+		</fileTypes>
+	</extension>
 </plugin>

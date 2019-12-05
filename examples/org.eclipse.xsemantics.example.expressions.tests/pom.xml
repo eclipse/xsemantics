@@ -26,41 +26,18 @@ Contributors:
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<!-- compiler tests need an OSGI environment, but no UI -->
-						<id>default-test</id>
-						<phase>integration-test</phase>
-						<configuration>
-							<skip>${dsl.tests.skip}</skip>
-							<useUIHarness>false</useUIHarness>
-							<useUIThread>false</useUIThread>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
-							<includes>
-								<include>**/expressions/tests/*Test*.java</include>
-							</includes>
-							<excludes>
-								<exclude>**/expressions/tests/*Activator*.java</exclude>
-								<exclude>**/expressions/tests/*Abstract*.java</exclude>
-								<exclude>**/expressions/tests/*Base*.java</exclude>
-								<exclude>**/expressions/tests/*AllTest*.java</exclude>
-							</excludes>
-						</configuration>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
+				<configuration>
+					<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
+						for jacoco agent -->
+					<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

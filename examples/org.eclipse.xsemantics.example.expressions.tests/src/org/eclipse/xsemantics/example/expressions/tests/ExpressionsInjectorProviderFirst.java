@@ -11,7 +11,6 @@
 
 package org.eclipse.xsemantics.example.expressions.tests;
 
-import org.eclipse.xsemantics.example.expressions.ExpressionsInjectorProvider;
 import org.eclipse.xsemantics.example.expressions.ExpressionsRuntimeModule;
 import org.eclipse.xsemantics.example.expressions.ExpressionsStandaloneSetup;
 import org.eclipse.xsemantics.example.expressions.typing.ExpressionsSemantics;

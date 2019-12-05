@@ -147,14 +147,13 @@ axiom BoolToBool
 override rule InterpretStringLiteral
 	G |- StringLiteral string ~> Object result
 from {
-	var Type expected
 	{
-		expected = env(G, 'expected', IntType)
+		env(G, 'expected', IntType)
 		result = Integer::parseInt(string.value)
 	}
 	or
 	{
-		expected = env(G, 'expected', BooleanType)
+		env(G, 'expected', BooleanType)
 		result = Boolean::parseBoolean(string.value)
 	}
 	or

@@ -1,18 +1,18 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2013-2017 Lorenzo Bettini.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
- *******************************************************************************/
-
+ */
 package org.eclipse.xsemantics.example.expressions.typing;
 
 import com.google.common.base.Objects;
 import com.google.inject.Provider;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.example.expressions.expressions.AndOrExpression;
 import org.eclipse.xsemantics.example.expressions.expressions.ArithmeticSigned;
 import org.eclipse.xsemantics.example.expressions.expressions.BooleanLiteral;
@@ -34,7 +34,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
@@ -44,39 +43,39 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 @SuppressWarnings("all")
 public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
-  public final static String STRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.StringLiteral";
+  public static final String STRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.StringLiteral";
   
-  public final static String MULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.MultiOrDiv";
+  public static final String MULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.MultiOrDiv";
   
-  public final static String MINUS = "org.eclipse.xsemantics.example.expressions.typing.Minus";
+  public static final String MINUS = "org.eclipse.xsemantics.example.expressions.typing.Minus";
   
-  public final static String PLUS = "org.eclipse.xsemantics.example.expressions.typing.Plus";
+  public static final String PLUS = "org.eclipse.xsemantics.example.expressions.typing.Plus";
   
-  public final static String BOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.BooleanNegation";
+  public static final String BOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.BooleanNegation";
   
-  public final static String ANDOR = "org.eclipse.xsemantics.example.expressions.typing.AndOr";
+  public static final String ANDOR = "org.eclipse.xsemantics.example.expressions.typing.AndOr";
   
-  public final static String ARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.ArithmeticSigned";
+  public static final String ARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.ArithmeticSigned";
   
-  public final static String STRINGTOINT = "org.eclipse.xsemantics.example.expressions.typing.StringToInt";
+  public static final String STRINGTOINT = "org.eclipse.xsemantics.example.expressions.typing.StringToInt";
   
-  public final static String STRINGTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.StringToBool";
+  public static final String STRINGTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.StringToBool";
   
-  public final static String INTTOINT = "org.eclipse.xsemantics.example.expressions.typing.IntToInt";
+  public static final String INTTOINT = "org.eclipse.xsemantics.example.expressions.typing.IntToInt";
   
-  public final static String BOOLTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.BoolToBool";
+  public static final String BOOLTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.BoolToBool";
   
-  public final static String INTERPRETSTRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretStringLiteral";
+  public static final String INTERPRETSTRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretStringLiteral";
   
-  public final static String INTERPRETMINUS = "org.eclipse.xsemantics.example.expressions.typing.InterpretMinus";
+  public static final String INTERPRETMINUS = "org.eclipse.xsemantics.example.expressions.typing.InterpretMinus";
   
-  public final static String INTERPRETMULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.InterpretMultiOrDiv";
+  public static final String INTERPRETMULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.InterpretMultiOrDiv";
   
-  public final static String INTERPRETARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.InterpretArithmeticSigned";
+  public static final String INTERPRETARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.InterpretArithmeticSigned";
   
-  public final static String INTERPRETANDOR = "org.eclipse.xsemantics.example.expressions.typing.InterpretAndOr";
+  public static final String INTERPRETANDOR = "org.eclipse.xsemantics.example.expressions.typing.InterpretAndOr";
   
-  public final static String INTERPRETBOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.InterpretBooleanNegation";
+  public static final String INTERPRETBOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.InterpretBooleanNegation";
   
   private PolymorphicDispatcher<Result<Boolean>> coerceDispatcher;
   
@@ -593,19 +592,18 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   @Override
   protected Result<Object> applyRuleInterpretStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     Object result = null; // output parameter
-    Type expected = null;
-    /* { expected = env(G, 'expected', IntType) result = Integer::parseInt(string.value) } or { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
+    /* { env(G, 'expected', IntType) result = Integer::parseInt(string.value) } or { env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
     {
       RuleFailedException previousFailure = null;
       try {
-        expected = this.<IntType>env(G, "expected", IntType.class);
+        this.<IntType>env(G, "expected", IntType.class);
         result = Integer.valueOf(Integer.parseInt(string.getValue()));
       } catch (Exception e) {
         previousFailure = extractRuleFailedException(e);
-        /* { expected = env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
+        /* { env(G, 'expected', BooleanType) result = Boolean::parseBoolean(string.value) } or result = string.value */
         {
           try {
-            expected = this.<BooleanType>env(G, "expected", BooleanType.class);
+            this.<BooleanType>env(G, "expected", BooleanType.class);
             result = Boolean.valueOf(Boolean.parseBoolean(string.getValue()));
           } catch (Exception e_1) {
             previousFailure = extractRuleFailedException(e_1);

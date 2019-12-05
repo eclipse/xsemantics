@@ -1,34 +1,25 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.expressions
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Expressions Example
-Bundle-Vendor: %providerName
+Bundle-Vendor: Eclipse Xsemantics Project
 Bundle-Version: 1.19.0.qualifier
-Bundle-SymbolicName: org.eclipse.xsemantics.example.expressions;singleton:=true
+Bundle-SymbolicName: org.eclipse.xsemantics.example.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.emf.mwe2.lib;resolution:=optional,
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.7.0",
- org.eclipse.emf.common;bundle-version="2.7.0",
- org.antlr.runtime,
- org.eclipse.xtext.common.types,
- org.eclipse.xsemantics.runtime;visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xsemantics.dsl;resolution:=optional
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xsemantics.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.expressions,
  org.eclipse.xsemantics.example.expressions.expressions,
  org.eclipse.xsemantics.example.expressions.expressions.impl,
  org.eclipse.xsemantics.example.expressions.expressions.util,
- org.eclipse.xsemantics.example.expressions.formatting,
  org.eclipse.xsemantics.example.expressions.generator,
  org.eclipse.xsemantics.example.expressions.parser.antlr,
  org.eclipse.xsemantics.example.expressions.parser.antlr.internal,
@@ -38,5 +29,4 @@ Export-Package: org.eclipse.xsemantics.example.expressions,
  org.eclipse.xsemantics.example.expressions.typing,
  org.eclipse.xsemantics.example.expressions.typing.validation,
  org.eclipse.xsemantics.example.expressions.validation
-Automatic-Module-Name: org.eclipse.xsemantics.example.expressions
-
+Import-Package: org.apache.log4j

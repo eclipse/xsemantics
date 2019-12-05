@@ -29,7 +29,7 @@ import org.eclipse.xsemantics.example.expressions.expressions.StringType
 import org.eclipse.xsemantics.example.expressions.expressions.Type
 import org.eclipse.xsemantics.example.expressions.expressions.Variable
 import org.eclipse.xsemantics.example.expressions.expressions.VariableReference
-import org.eclipse.xsemantics.example.expressions.validation.AbstractExpressionsJavaValidator
+import org.eclipse.xsemantics.example.expressions.validation.AbstractExpressionsValidator
 
 /*
  * This system allows to convert implicitly
@@ -49,7 +49,7 @@ Contributors:
   Lorenzo Bettini - Initial contribution and API"
 
 
-validatorExtends AbstractExpressionsJavaValidator
+validatorExtends AbstractExpressionsValidator
 
 judgments {
 	type |- Expression expression : output Type

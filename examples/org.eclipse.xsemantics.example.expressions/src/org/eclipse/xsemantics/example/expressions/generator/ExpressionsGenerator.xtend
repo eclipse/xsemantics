@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
@@ -15,6 +15,7 @@
 package org.eclipse.xsemantics.example.expressions.generator
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xsemantics.example.expressions.expressions.Expression
 import org.eclipse.xsemantics.example.expressions.expressions.Model
 import org.eclipse.xsemantics.example.expressions.expressions.Variable
@@ -22,19 +23,19 @@ import org.eclipse.xsemantics.example.expressions.typing.ExpressionsSemantics
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace
 import org.eclipse.xsemantics.runtime.StringRepresentation
 import org.eclipse.xsemantics.runtime.TraceUtils
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorContext
 
-class ExpressionsGenerator implements IGenerator {
-	
+class ExpressionsGenerator extends AbstractGenerator {
+
 	@Inject ExpressionsSemantics semantics
-	
+
 	@Inject extension TraceUtils
-	
+
 	@Inject extension StringRepresentation
-	
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+
+	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val dotIndex = resource.URI.lastSegment.lastIndexOf('.')
 		val fileName = resource.URI.lastSegment.substring(0, dotIndex)
 		fsa.generateFile(
@@ -42,29 +43,29 @@ class ExpressionsGenerator implements IGenerator {
 			compileModel(resource.contents.get(0) as Model)
 		)
 	}
-	
+
 	def compileModel(Model expModel) {
-		expModel.variables.map [ compileVariable ].join("\n\n")
+		expModel.variables.map[compileVariable].join("\n\n")
 	}
-	
+
 	def compileVariable(Variable variable) {
 		'''
-		Variable: «variable.name»
-		«variable.expression.compileExpression»
+			Variable: «variable.name»
+			«variable.expression.compileExpression»
 		'''
 	}
-	
+
 	def compileExpression(Expression exp) {
 		val typeTrace = new RuleApplicationTrace()
 		val interpreterTrace = new RuleApplicationTrace()
 		val type = semantics.type(null, typeTrace, exp)
 		val result = semantics.interpret(null, interpreterTrace, exp)
 		'''
-		type: «type.value.string»
-		type trace: «typeTrace.traceAsString»
-		
-		interpretation: «result.value.string»
-		interpretation trace: «interpreterTrace.traceAsString»
+			type: «type.value.string»
+			type trace: «typeTrace.traceAsString»
+			
+			interpretation: «result.value.string»
+			interpretation trace: «interpreterTrace.traceAsString»
 		'''
 	}
 }

@@ -496,7 +496,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateExpressions"
-      launcher="Generate Language Infrastructure (org.eclipse.xsemantics.example.expressions)"/>
+      launcher="Generate Expressions (expressions) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateLambda"

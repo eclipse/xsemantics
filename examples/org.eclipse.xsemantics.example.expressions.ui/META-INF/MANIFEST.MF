@@ -1,36 +1,28 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Expression UI
 Bundle-Vendor: %providerName
 Bundle-Version: 1.19.0.qualifier
-Bundle-SymbolicName: org.eclipse.xsemantics.example.expressions.ui;singleton:=true
+Bundle-SymbolicName: org.eclipse.xsemantics.example.expressions.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xsemantics.example.expressions;visibility:=reexport,
+Require-Bundle: org.eclipse.xsemantics.example.expressions,
+ org.eclipse.xsemantics.example.expressions.ide,
  org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
  org.eclipse.ui.ide;bundle-version="3.5.0",
- org.eclipse.xtext.ui.shared,
- org.eclipse.ui;bundle-version="3.5.0",
- org.eclipse.xtext.builder,
- org.antlr.runtime,
- org.eclipse.xtext.common.types.ui,
- org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare;bundle-version="3.5.0",
- org.eclipse.core.runtime;bundle-version="3.5.0",
- org.eclipse.core.resources;bundle-version="3.5.0",
- org.eclipse.xtend;bundle-version="1.4.0",
- org.eclipse.xpand;bundle-version="1.4.0"
-Import-Package: org.apache.log4j,
- org.apache.commons.logging
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.expressions.ui,
  org.eclipse.xsemantics.example.expressions.ui.contentassist,
- org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr,
- org.eclipse.xsemantics.example.expressions.ui.contentassist.antlr.internal,
  org.eclipse.xsemantics.example.expressions.ui.internal,
  org.eclipse.xsemantics.example.expressions.ui.labeling,
  org.eclipse.xsemantics.example.expressions.ui.outline,
  org.eclipse.xsemantics.example.expressions.ui.quickfix,
- org.eclipse.xsemantics.example.expressions.ui.wizard
+ org.eclipse.xsemantics.example.expressions.validation
 Bundle-Activator: org.eclipse.xsemantics.example.expressions.ui.internal.ExpressionsActivator
-Automatic-Module-Name: org.eclipse.xsemantics.example.expressions.ui

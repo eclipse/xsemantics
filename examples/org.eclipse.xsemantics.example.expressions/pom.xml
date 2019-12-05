@@ -12,51 +12,62 @@ Contributors:
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<relativePath>../../releng/org.eclipse.xsemantics.parent/pom.xml</relativePath>
 		<groupId>org.eclipse.xsemantics</groupId>
 		<artifactId>org.eclipse.xsemantics.parent</artifactId>
 		<version>1.19.0-SNAPSHOT</version>
 	</parent>
-
 	<artifactId>org.eclipse.xsemantics.example.expressions</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
 	<build>
-		<!-- The following is required so that the mwe2 workflow finds the .xtext 
-			grammar file -->
-		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<includes>
-					<include>**/*.xtext</include>
-				</includes>
-			</resource>
-		</resources>
-
 		<plugins>
-
 			<plugin>
-				<groupId>org.fornax.toolsupport</groupId>
-				<artifactId>fornax-oaw-m2-plugin</artifactId>
-				<version>${fornax-oaw-m2-plugin-version}</version>
-				<configuration>
-					<skip>${mwe2.skip}</skip>
-					<workflowEngine>mwe2</workflowEngine>
-					<workflowDescriptor>src/org/eclipse/xsemantics/example/expressions/GenerateExpressions.mwe2</workflowDescriptor>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
 				<executions>
 					<execution>
+						<id>mwe2Launcher</id>
 						<phase>generate-sources</phase>
 						<goals>
-							<goal>run-workflow</goal>
+							<goal>java</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
+					<arguments>
+						<argument>/${project.basedir}/src/org/eclipse/xsemantics/example/expressions/GenerateExpressions.mwe2</argument>
+						<argument>-p</argument>
+						<argument>rootPath=/${project.basedir}/..</argument>
+					</arguments>
+					<classpathScope>compile</classpathScope>
+					<includePluginDependencies>true</includePluginDependencies>
+					<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+				</configuration>
 				<dependencies>
-					<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=479196#c3 -->
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+						<version>${mwe2Version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.common.types</artifactId>
+						<version>${xtextVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+						<version>${xtextVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.xbase</artifactId>
+						<version>${xtextVersion}</version>
+					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>xtext-antlr-generator</artifactId>
@@ -64,22 +75,49 @@ Contributors:
 					</dependency>
 				</dependencies>
 			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
-			<!--
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
 			</plugin>
-			-->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.codehaus.mojo</groupId> -->
-<!-- 				<artifactId>findbugs-maven-plugin</artifactId> -->
-<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											exec-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.2.1,)
+										</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-	
+
 </project>
