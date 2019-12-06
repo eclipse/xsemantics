@@ -431,4 +431,33 @@
 			type="text">
 		</fileTypes>
 	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xsemantics.example.fj.ui.category" name="FJ">
+		</category>
+		<wizard
+			category="org.eclipse.xsemantics.example.fj.ui.category"
+			class="org.eclipse.xsemantics.example.fj.ui.FJExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.eclipse.xsemantics.example.fj.ui.wizard.FJNewProjectWizard"
+			name="FJ Project"
+			icon="icons/new_FJ_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.eclipse.xsemantics.example.fj.ui.FJExecutableExtensionFactory:org.eclipse.xsemantics.example.fj.ui.wizard.FJProjectTemplateProvider"
+			grammarName="org.eclipse.xsemantics.example.fj.FJ">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.fj.ui.wizard.FJNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.fj.ui.wizard.FJNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
 </plugin>
