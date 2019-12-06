@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 org.eclipse.jdt.core.builder.duplicateResourceTask=warning
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch, *.xtend, *.xtendbin, *._trace, .gitignore
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
 org.eclipse.jdt.core.compiler.compliance=1.8
