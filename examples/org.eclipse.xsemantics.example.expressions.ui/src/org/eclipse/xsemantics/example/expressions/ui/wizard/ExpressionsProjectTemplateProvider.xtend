@@ -25,9 +25,8 @@ class ExpressionsProjectTemplateProvider implements IProjectTemplateProvider {
 	}
 }
 
-@ProjectTemplate(label="Hello World", icon="project_template.png", description="<p><b>Hello World</b></p>
-<p>This is a parameterized hello world for Expressions. You can set a parameter to modify the content in the generated file
-and a parameter to set the package the file is created in.</p>")
+@ProjectTemplate(label="Expressions Example", icon="project_template.png", description="<p><b>Expressions Example</b></p>
+<p>An example of Expressions DSL (whose type system is implemented with Xsemantics).</p>")
 final class HelloWorldProject {
 	val advanced = check("Advanced:", false)
 	val advancedGroup = group("Properties")
