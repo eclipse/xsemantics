@@ -448,7 +448,7 @@
 			class="org.eclipse.xsemantics.example.fj.ui.FJExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
 			id="org.eclipse.xsemantics.example.fj.ui.wizard.FJNewProjectWizard"
 			name="FJ Project"
-			icon="icons/new_FJ_proj.gif"
+			icon="icons/fj_obj.gif"
 			project="true">
 		</wizard>
 	</extension>

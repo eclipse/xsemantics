@@ -439,7 +439,7 @@
 			class="org.eclipse.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
 			id="org.eclipse.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"
 			name="FJ (cached type system) Project"
-			icon="icons/new_Fjcached_proj.gif"
+			icon="icons/fj_cached.gif"
 			project="true">
 		</wizard>
 	</extension>

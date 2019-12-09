@@ -439,7 +439,7 @@
 			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
 			id="org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"
 			name="Expressions Project"
-			icon="icons/new_Expressions_proj.gif"
+			icon="icons/expression.gif"
 			project="true">
 		</wizard>
 	</extension>
