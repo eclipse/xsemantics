@@ -45,6 +45,9 @@ Workflow {
 			generator = {
 				generateXtendStub = true
 			}
+			projectWizard = {
+				generate = true
+			}
 		}
 	}
 }

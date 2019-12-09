@@ -432,4 +432,31 @@
 			type="text">
 		</fileTypes>
 	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<wizard
+			category="org.eclipse.xsemantics.dsl.wizards.category"
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"
+			name="Expressions Project"
+			icon="icons/new_Expressions_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.eclipse.xsemantics.example.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsProjectTemplateProvider"
+			grammarName="org.eclipse.xsemantics.example.expressions.Expressions">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.expressions.ui.wizard.ExpressionsNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
 </plugin>
