@@ -443,10 +443,8 @@
 	</extension>
 	<extension
 		point="org.eclipse.ui.newWizards">
-		<category id="org.eclipse.xsemantics.example.fj.ui.category" name="FJ">
-		</category>
 		<wizard
-			category="org.eclipse.xsemantics.example.fj.ui.category"
+			category="org.eclipse.xsemantics.dsl.wizards.category"
 			class="org.eclipse.xsemantics.example.fj.ui.FJExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
 			id="org.eclipse.xsemantics.example.fj.ui.wizard.FJNewProjectWizard"
 			name="FJ Project"
