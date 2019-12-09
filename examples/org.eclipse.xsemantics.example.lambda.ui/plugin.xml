@@ -432,7 +432,33 @@
 			type="text">
 		</fileTypes>
 	</extension>
-
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<wizard
+			category="org.eclipse.xsemantics.dsl.wizards.category"
+			class="org.eclipse.xsemantics.example.lambda.ui.LambdaExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.eclipse.xsemantics.example.lambda.ui.wizard.LambdaNewProjectWizard"
+			name="Lambda Project"
+			icon="icons/lambda-small.png"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.eclipse.xsemantics.example.lambda.ui.LambdaExecutableExtensionFactory:org.eclipse.xsemantics.example.lambda.ui.wizard.LambdaProjectTemplateProvider"
+			grammarName="org.eclipse.xsemantics.example.lambda.Lambda">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.lambda.ui.wizard.LambdaNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.lambda.ui.wizard.LambdaNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
 	<!-- custom extensions -->
 	<extension
 		id="org.eclipse.xsemantics.example.lambda.popup.editor"
