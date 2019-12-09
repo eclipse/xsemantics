@@ -25,20 +25,16 @@ class FJProjectTemplateProvider implements IProjectTemplateProvider {
 	}
 }
 
-@ProjectTemplate(label="Hello World", icon="project_template.png", description="<p><b>Hello World</b></p>
-<p>This is a parameterized hello world for FJ. You can set a parameter to modify the content in the generated file
-and a parameter to set the package the file is created in.</p>")
+@ProjectTemplate(label="FJ Pair Example", icon="project_template.png", description="<p><b>FJ Pair Example</b></p>
+<p>An example of FJ program: the Pair class and an FJ main expression.</p>")
 final class HelloWorldProject {
 	val advanced = check("Advanced:", false)
 	val advancedGroup = group("Properties")
-	val name = combo("Name:", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to", advancedGroup)
-	val path = text("Package:", "mydsl", "The package path to place the files in", advancedGroup)
+	val path = text("Package:", "fj", "The package path to place the files in", advancedGroup)
 
 	override protected updateVariables() {
-		name.enabled = advanced.value
 		path.enabled = advanced.value
 		if (!advanced.value) {
-			name.value = "Xtext"
 			path.value = "fj"
 		}
 	}
@@ -56,12 +52,31 @@ final class HelloWorldProject {
 			location = projectInfo.locationPath
 			projectNatures += #[JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID]
 			builderIds += #[JavaCore.BUILDER_ID, XtextProjectHelper.BUILDER_ID]
+			requiredBundles += #["org.eclipse.xsemantics.example.fj"]
 			folders += "src"
-			addFile('''src/«path»/Model.fj''', '''
+			addFile('''src/«path»/Pair.fj''', '''
 				/*
-				 * This is an example model
+				 * This is an example FJ program
 				 */
-				Hello «name»!
+				
+				class A extends Object { }
+				class B extends Object { }
+				
+				class Pair extends Object {
+				    Object fst;
+				    Object snd;
+				
+				    Pair setfst(Object newfst) {
+				        return new Pair(newfst, this.snd);
+				    }
+				
+				    Pair setsnd(Object newscd) {
+				        return new Pair(this.fst, newscd);
+				    }
+				}
+				
+				// the main expression
+				new Pair(new A(), new B()).setfst(new A()).fst
 			''')
 		])
 	}
