@@ -431,4 +431,33 @@
 			type="text">
 		</fileTypes>
 	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xsemantics.example.fjcached.ui.category" name="Fjcached">
+		</category>
+		<wizard
+			category="org.eclipse.xsemantics.example.fjcached.ui.category"
+			class="org.eclipse.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.eclipse.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"
+			name="Fjcached Project"
+			icon="icons/new_Fjcached_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.eclipse.xsemantics.example.fjcached.ui.FjcachedExecutableExtensionFactory:org.eclipse.xsemantics.example.fjcached.ui.wizard.FjcachedProjectTemplateProvider"
+			grammarName="org.eclipse.xsemantics.example.fjcached.Fjcached">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xsemantics.example.fjcached.ui.wizard.FjcachedNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
 </plugin>

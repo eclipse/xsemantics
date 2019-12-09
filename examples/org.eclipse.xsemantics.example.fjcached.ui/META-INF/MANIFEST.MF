@@ -16,7 +16,13 @@ Require-Bundle: org.eclipse.xsemantics.example.fjcached;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.compare,
  org.eclipse.xtext.builder,
- org.eclipse.xsemantics.example.fj.ui;bundle-version="1.19.0";visibility:=reexport
+ org.eclipse.xsemantics.example.fj.ui;bundle-version="1.19.0";visibility:=reexport,
+ org.eclipse.xtend.lib,
+ org.eclipse.jdt.core,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.pde.core,
+ org.eclipse.ui.forms
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.fjcached.ui,
@@ -25,5 +31,6 @@ Export-Package: org.eclipse.xsemantics.example.fjcached.ui,
  org.eclipse.xsemantics.example.fjcached.ui.labeling,
  org.eclipse.xsemantics.example.fjcached.ui.outline,
  org.eclipse.xsemantics.example.fjcached.ui.quickfix,
- org.eclipse.xsemantics.example.fjcached.validation
+ org.eclipse.xsemantics.example.fjcached.validation,
+ org.eclipse.xsemantics.example.fjcached.ui.wizard
 Bundle-Activator: org.eclipse.xsemantics.example.fjcached.ui.internal.FjcachedActivator
