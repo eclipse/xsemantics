@@ -23,4 +23,12 @@ Contributors:
 	<artifactId>org.eclipse.xsemantics.example.lambda.ui</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
