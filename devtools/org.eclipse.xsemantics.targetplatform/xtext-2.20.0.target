@@ -10,9 +10,6 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.xpand" version="0.0.0"/>
-<unit id="org.eclipse.xtend" version="0.0.0"/>
-<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 <unit id="org.eclipse.swtbot.forms.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.swtbot.ide.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.swtbot.eclipse.feature.group" version="0.0.0"/>

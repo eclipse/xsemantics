@@ -8,13 +8,8 @@
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
-
-/**
- * 
- */
 package org.eclipse.xsemantics.example.fj.tests;
 
-import org.eclipse.xsemantics.example.fj.FJInjectorProvider;
 import org.eclipse.xsemantics.example.fj.FJRuntimeModule;
 import org.eclipse.xsemantics.example.fj.FJStandaloneSetup;
 
@@ -22,7 +17,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
- * @author bettini
+ * @author Lorenzo Bettini
  * 
  */
 public class FjInjectorProviderCustom extends FJInjectorProvider {
@@ -34,7 +29,7 @@ public class FjInjectorProviderCustom extends FJInjectorProvider {
 				return Guice.createInjector(new FJRuntimeModule() {
 					@Override
 					public java.lang.Class<? extends org.eclipse.xsemantics.runtime.StringRepresentation> bindStringRepresentation() {
-						return FjStringRepresentationForTests.class;
+						return FjStringRepresentationForTest.class;
 					};
 				});
 			}

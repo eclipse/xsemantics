@@ -1,30 +1,22 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.lambda
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics Lambda Example
 Bundle-Vendor: %providerName
 Bundle-Version: 1.19.0.qualifier
-Bundle-SymbolicName: org.eclipse.xsemantics.example.lambda;singleton:=true
+Bundle-SymbolicName: org.eclipse.xsemantics.example.lambda; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.emf.mwe2.lib;resolution:=optional,
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.7.0",
- org.eclipse.emf.common;bundle-version="2.7.0",
- org.antlr.runtime,
- org.eclipse.xtext.common.types,
- org.eclipse.xsemantics.runtime;visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.xsemantics.dsl;resolution:=optional
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xsemantics.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.lambda,
- org.eclipse.xsemantics.example.lambda.formatting,
  org.eclipse.xsemantics.example.lambda.lambda,
  org.eclipse.xsemantics.example.lambda.lambda.impl,
  org.eclipse.xsemantics.example.lambda.lambda.util,
@@ -36,5 +28,4 @@ Export-Package: org.eclipse.xsemantics.example.lambda,
  org.eclipse.xsemantics.example.lambda.validation,
  org.eclipse.xsemantics.example.lambda.xsemantics,
  org.eclipse.xsemantics.example.lambda.xsemantics.validation
-Automatic-Module-Name: org.eclipse.xsemantics.example.lambda
-
+Import-Package: org.apache.log4j

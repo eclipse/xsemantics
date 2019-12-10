@@ -496,15 +496,15 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateExpressions"
-      launcher="Generate Language Infrastructure (org.eclipse.xsemantics.example.expressions)"/>
+      launcher="Generate Expressions (expressions) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateLambda"
-      launcher="GenerateLambda.mwe2"/>
+      launcher="Generate Lambda (lambda) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFj"
-      launcher="GenerateFJ.mwe2"/>
+      launcher="Generate FJ (fj) Language Infrastructure"/>
   <setupTask
       xsi:type="projects:ProjectsBuildTask"
       refresh="true">
@@ -513,7 +513,7 @@
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateFjCached"
-      launcher="Generate Language Infrastructure (org.eclipse.xsemantics.example.fjcached)"/>
+      launcher="Generate Fjcached (fjcached) Language Infrastructure"/>
   <setupTask
       xsi:type="launching:LaunchTask"
       id="GenerateExamplesZips"

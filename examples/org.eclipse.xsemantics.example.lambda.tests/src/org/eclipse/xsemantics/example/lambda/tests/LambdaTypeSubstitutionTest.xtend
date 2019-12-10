@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(LambdaInjectorWithNonBeautifiedTypesProvider))
-class LambdaTypeSubstitutionTest extends LambdaBaseTest {
+class LambdaTypeSubstitutionTest extends LambdaAbstractBaseTest {
 	
 	@Inject TypeSubstitutions substitutions
 

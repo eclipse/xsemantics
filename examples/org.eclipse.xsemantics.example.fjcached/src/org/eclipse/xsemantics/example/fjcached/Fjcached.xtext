@@ -8,11 +8,9 @@
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
-
 grammar org.eclipse.xsemantics.example.fjcached.Fjcached with org.eclipse.xsemantics.example.fj.FJ
 
 generate fjcached "http://www.eclipse.org/xsemantics/example/fjcached/Fjcached"
 
-FjCachedProgram : 
-	cachedprogram = Program
-;
+FjCachedProgram:
+	cachedprogram=Program;

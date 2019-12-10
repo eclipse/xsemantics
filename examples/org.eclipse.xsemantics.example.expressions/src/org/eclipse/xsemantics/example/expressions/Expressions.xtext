@@ -11,7 +11,7 @@
 
 grammar org.eclipse.xsemantics.example.expressions.Expressions with org.eclipse.xtext.common.Terminals
 
-generate expressions "http://xsemantics.sf.net/example/expressions/Expressions"
+generate expressions "http://www.eclipse.org/xsemantics/example/expressions/Expressions"
 
 Model:
 	(variables+=Variable)*

@@ -1,16 +1,18 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2013-2017 Lorenzo Bettini.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
- *******************************************************************************/
-
+ */
 package org.eclipse.xsemantics.example.expressions.typing;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsemantics.example.expressions.expressions.ExpressionsPackage;
 import org.eclipse.xsemantics.example.expressions.expressions.Type;
 import org.eclipse.xsemantics.example.expressions.expressions.Variable;
@@ -21,9 +23,6 @@ import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.runtime.XsemanticsProvider;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**

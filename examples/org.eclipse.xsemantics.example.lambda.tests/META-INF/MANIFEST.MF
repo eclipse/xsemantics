@@ -1,35 +1,16 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.lambda.tests
 Bundle-ManifestVersion: 2
 Bundle-Name: Lambda Tests
-Bundle-SymbolicName: org.eclipse.xsemantics.example.lambda.tests
-Bundle-Version: 1.19.0.qualifier
-Bundle-Activator: org.eclipse.xsemantics.example.lambda.tests.Activator
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.xsemantics.example.lambda;bundle-version="1.0.0",
- org.eclipse.xsemantics.example.lambda.ui;bundle-version="1.0.0",
- org.eclipse.core.resources;bundle-version="3.7.100",
- org.eclipse.jdt.core;bundle-version="3.7.1",
- org.eclipse.xtext.ui,
- org.eclipse.ui.ide;bundle-version="3.5.0",
- org.eclipse.xtext.junit4;bundle-version="2.2.1",
- com.google.inject,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
- org.junit;bundle-version="4.8.2",
- org.eclipse.core.filesystem;bundle-version="1.2.0",
- org.eclipse.xtext.testing,
- org.eclipse.xtext.ui.testing
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Version: 1.19.0.qualifier
+Bundle-SymbolicName: org.eclipse.xsemantics.example.lambda.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xsemantics.example.lambda,
- org.eclipse.xsemantics.example.lambda.tests,
- org.eclipse.xsemantics.example.lambda.tests.ui,
+Require-Bundle: org.eclipse.xsemantics.example.lambda,
+ org.junit;bundle-version="4.12.0",
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.xsemantics.example.lambda.tests;x-internal=true,
  org.eclipse.xsemantics.example.lambda.tests.util
-Import-Package: org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0",
- org.hamcrest.core
-Automatic-Module-Name: org.eclipse.xsemantics.example.lambda.tests

@@ -13,9 +13,9 @@ package org.eclipse.xsemantics.dsl.tests.generator.fj.caching
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.xsemantics.example.fj.FJInjectorProvider
 import org.eclipse.xsemantics.example.fj.fj.ClassType
 import org.eclipse.xsemantics.example.fj.fj.Program
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider
 import org.eclipse.xsemantics.example.fj.util.FjTypeUtils
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace
 import org.eclipse.xsemantics.runtime.RuleEnvironment

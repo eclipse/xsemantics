@@ -58,17 +58,25 @@ Contributors:
 
 	<target name="zip_all_examples">
 		<zip_example name="org.eclipse.xsemantics.example.fj" />
-		<zip_example name="org.eclipse.xsemantics.example.fj.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.fj.ide" />
 		<zip_example name="org.eclipse.xsemantics.example.fj.ui" />
+		<zip_example name="org.eclipse.xsemantics.example.fj.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.fj.ui.tests" />
 		<zip_example name="org.eclipse.xsemantics.example.fjcached" />
-		<zip_example name="org.eclipse.xsemantics.example.fjcached.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.fjcached.ide" />
 		<zip_example name="org.eclipse.xsemantics.example.fjcached.ui" />
+		<zip_example name="org.eclipse.xsemantics.example.fjcached.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.fjcached.ui.tests" />
 		<zip_example name="org.eclipse.xsemantics.example.expressions" />
-		<zip_example name="org.eclipse.xsemantics.example.expressions.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.expressions.ide" />
 		<zip_example name="org.eclipse.xsemantics.example.expressions.ui" />
+		<zip_example name="org.eclipse.xsemantics.example.expressions.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.expressions.ui.tests" />
 		<zip_example name="org.eclipse.xsemantics.example.lambda" />
-		<zip_example name="org.eclipse.xsemantics.example.lambda.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.lambda.ide" />
 		<zip_example name="org.eclipse.xsemantics.example.lambda.ui" />
+		<zip_example name="org.eclipse.xsemantics.example.lambda.tests" />
+		<zip_example name="org.eclipse.xsemantics.example.lambda.ui.tests" />
 	</target>
 
 	<target name="clean">

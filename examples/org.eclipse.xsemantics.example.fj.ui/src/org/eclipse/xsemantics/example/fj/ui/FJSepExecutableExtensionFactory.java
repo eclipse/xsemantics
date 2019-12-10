@@ -14,7 +14,7 @@
  */
 package org.eclipse.xsemantics.example.fj.ui;
 
-import org.eclipse.xsemantics.example.fj.ui.internal.FJActivator;
+import org.eclipse.xsemantics.example.fj.ui.internal.FjActivator;
 
 import com.google.inject.Injector;
 
@@ -24,9 +24,9 @@ import com.google.inject.Injector;
  * @author Lorenzo Bettini
  */
 public class FJSepExecutableExtensionFactory extends FJExecutableExtensionFactory {
-
 	@Override
 	protected Injector getInjector() {
-		return FJActivator.getInstance().getInjector(FJActivatorCustom.ORG_ECLIPSE_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM);
+		return FjActivator.getInstance()
+				.getInjector(FJActivatorCustom.ORG_ECLIPSE_XSEMANTICS_EXAMPLE_FJ_SEP_TYPESYSTEM);
 	}
 }

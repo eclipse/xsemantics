@@ -35,7 +35,6 @@ Contributors:
 						<id>default-test</id>
 						<phase>integration-test</phase>
 						<configuration>
-							<skip>true</skip>
 							<useUIHarness>false</useUIHarness>
 							<useUIThread>false</useUIThread>
 							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
@@ -49,49 +48,12 @@ Contributors:
 							<goal>test</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>TychoSurefirePluginUiTest</id>
-						<phase>integration-test</phase>
-						<configuration>
-							<skip>true</skip>
-							<useUIHarness>true</useUIHarness>
-							<useUIThread>true</useUIThread>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${uiTestsArgs}</argLine>
-							<includes>
-								<include>**/fjcached/ui/tests/*Test*.java</include>
-							</includes>
-						</configuration>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
 				</executions>
 			</plugin>
 
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<configuration>
-					<dependency-resolution>
-						<extraRequirements>
-							<!-- to get the org.eclipse.osgi.compatibility.state plugin iff 
-							the targeted Eclipse version (e.g., Luna) has it
-							(backwards compatible with kepler and previous versions) -->
-							<requirement>
-								<type>eclipse-feature</type>
-								<id>org.eclipse.rcp</id>
-								<versionRange>0.0.0</versionRange>
-							</requirement>
-						</extraRequirements>
-					</dependency-resolution>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

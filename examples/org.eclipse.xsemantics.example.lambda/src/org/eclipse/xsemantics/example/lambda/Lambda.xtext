@@ -11,7 +11,7 @@
 
 grammar org.eclipse.xsemantics.example.lambda.Lambda with org.eclipse.xtext.common.Terminals
 
-generate lambda "http://xsemantics.sf.net/example/lambda/Lambda"
+generate lambda "http://www.eclipse.org/xsemantics/example/lambda/Lambda"
 
 Program: 
 	term=Term

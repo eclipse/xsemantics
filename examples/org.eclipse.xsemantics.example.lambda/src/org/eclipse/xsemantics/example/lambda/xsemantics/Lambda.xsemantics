@@ -9,6 +9,7 @@
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
 
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xsemantics.example.lambda.lambda.Abstraction
 import org.eclipse.xsemantics.example.lambda.lambda.Application
 import org.eclipse.xsemantics.example.lambda.lambda.Arithmetics
@@ -24,8 +25,7 @@ import org.eclipse.xsemantics.example.lambda.lambda.Term
 import org.eclipse.xsemantics.example.lambda.lambda.Type
 import org.eclipse.xsemantics.example.lambda.lambda.TypeVariable
 import org.eclipse.xsemantics.example.lambda.lambda.Variable
-import org.eclipse.xsemantics.example.lambda.validation.AbstractLambdaJavaValidator
-import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xsemantics.example.lambda.validation.AbstractLambdaValidator
 
 system org.eclipse.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem
 
@@ -40,7 +40,7 @@ Contributors:
   Lorenzo Bettini - Initial contribution and API"
 
 
-validatorExtends AbstractLambdaJavaValidator
+validatorExtends AbstractLambdaValidator
 
 inject LambdaUtils lambdaUtils
 

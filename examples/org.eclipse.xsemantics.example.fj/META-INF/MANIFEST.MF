@@ -1,32 +1,25 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.fj
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics FJ Example
 Bundle-Vendor: %providerName
 Bundle-Version: 1.19.0.qualifier
-Bundle-SymbolicName: org.eclipse.xsemantics.example.fj;singleton:=true
+Bundle-SymbolicName: org.eclipse.xsemantics.example.fj; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe.core;resolution:=optional,
- org.eclipse.emf.mwe2.lib;resolution:=optional,
- com.ibm.icu;bundle-version="4.0.0";resolution:=optional,
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.7.0",
- org.eclipse.emf.common;bundle-version="2.7.0",
- org.antlr.runtime,
- org.eclipse.xsemantics.runtime;visibility:=reexport,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.xsemantics.dsl;resolution:=optional
-Import-Package: org.apache.log4j
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xsemantics.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.fj,
  org.eclipse.xsemantics.example.fj.fj,
  org.eclipse.xsemantics.example.fj.fj.impl,
  org.eclipse.xsemantics.example.fj.fj.util,
- org.eclipse.xsemantics.example.fj.formatting,
  org.eclipse.xsemantics.example.fj.lib,
  org.eclipse.xsemantics.example.fj.lookup,
  org.eclipse.xsemantics.example.fj.parser.antlr,
@@ -38,5 +31,4 @@ Export-Package: org.eclipse.xsemantics.example.fj,
  org.eclipse.xsemantics.example.fj.typing.validation,
  org.eclipse.xsemantics.example.fj.util,
  org.eclipse.xsemantics.example.fj.validation
-Automatic-Module-Name: org.eclipse.xsemantics.example.fj
-
+Import-Package: org.apache.log4j

@@ -1,36 +1,26 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xsemantics.example.fjcached
 Bundle-Vendor: %providerName
 Bundle-Version: 1.19.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.example.fjcached; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.emf.codegen.ecore;bundle-version="2.7.0";resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.eclipse.xsemantics.example.fj;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xsemantics.example.fj;bundle-version="1.19.0";visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.7.0",
- org.eclipse.emf.common;bundle-version="2.7.0",
- org.antlr.runtime,
- org.eclipse.xtext.common.types,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xsemantics.dsl;resolution:=optional,
- org.objectweb.asm;bundle-version="[7.1.0,7.2.0)";resolution:=optional
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.example.fjcached,
  org.eclipse.xsemantics.example.fjcached.fjcached,
  org.eclipse.xsemantics.example.fjcached.fjcached.impl,
  org.eclipse.xsemantics.example.fjcached.fjcached.util,
- org.eclipse.xsemantics.example.fjcached.formatting,
- org.eclipse.xsemantics.example.fjcached.generator,
- org.eclipse.xsemantics.example.fjcached.lib,
+ org.eclipse.xsemantics.example.fjcached.ib,
  org.eclipse.xsemantics.example.fjcached.parser.antlr,
  org.eclipse.xsemantics.example.fjcached.parser.antlr.internal,
  org.eclipse.xsemantics.example.fjcached.scoping,
@@ -39,4 +29,4 @@ Export-Package: org.eclipse.xsemantics.example.fjcached,
  org.eclipse.xsemantics.example.fjcached.typing,
  org.eclipse.xsemantics.example.fjcached.typing.validation,
  org.eclipse.xsemantics.example.fjcached.validation
-Automatic-Module-Name: org.eclipse.xsemantics.example.fjcached
+Import-Package: org.apache.log4j

@@ -15,7 +15,7 @@ import org.eclipse.xsemantics.example.fj.fj.Class
 import org.eclipse.xsemantics.example.fj.fj.New
 
 import org.eclipse.xsemantics.example.fj.util.FjTypeUtils
-import org.eclipse.xsemantics.example.fj.validation.AbstractFJJavaValidator
+import org.eclipse.xsemantics.example.fj.validation.AbstractFJValidator
 import java.util.Collections
 import java.util.LinkedList
 import java.util.List
@@ -26,7 +26,7 @@ system org.eclipse.xsemantics.test.fj.first.FjHeaderTypeSystem
 
 copyright "(C) This is a test\ncopyright header."
 
-validatorExtends AbstractFJJavaValidator
+validatorExtends AbstractFJValidator
 
 inject FjTypeUtils fjTypeUtils
 

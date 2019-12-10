@@ -24,29 +24,42 @@ Contributors:
 	<packaging>pom</packaging>
 	
 	<modules>
+		<module>../../releng/org.eclipse.xsemantics.parent</module>
+
 		<module>../../devtools/org.eclipse.xsemantics.targetplatform</module>
-		
+
 		<module>../../plugins/org.eclipse.xsemantics.runtime</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ide</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ui</module>
-		<module>../../tests/org.eclipse.xsemantics.dsl.tests</module>
-		<module>../../tests/org.eclipse.xsemantics.dsl.ui.tests</module>
 
 		<!-- we need the following examples for testing -->
 		<module>../../examples/org.eclipse.xsemantics.example.fj</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fj.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fj.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fj.ui.tests</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.fjcached.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.fjcached.ui.tests</module>
+
+		<module>../../tests/org.eclipse.xsemantics.dsl.tests</module>
+		<module>../../tests/org.eclipse.xsemantics.dsl.ui.tests</module>
 
 		<module>../../examples/org.eclipse.xsemantics.example.expressions</module>
+		<module>../../examples/org.eclipse.xsemantics.example.expressions.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui.tests</module>
+
 		<module>../../examples/org.eclipse.xsemantics.example.lambda</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.tests</module>
+		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui.tests</module>
+
 		<module>../../features/org.eclipse.xsemantics.examples.feature</module>
 		<module>../../features/org.eclipse.xsemantics.implemented.examples.feature</module>
 

@@ -49,8 +49,8 @@ Contributors:
    <includes
          id="org.eclipse.xsemantics.examples.feature"
          version="0.0.0"/>
-   
-      <plugin
+
+   <plugin
          id="org.eclipse.xsemantics.example.expressions"
          download-size="0"
          install-size="0"
@@ -101,6 +101,34 @@ Contributors:
 
    <plugin
          id="org.eclipse.xsemantics.example.fjcached.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xsemantics.example.expressions.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xsemantics.example.fj.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xsemantics.example.fjcached.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xsemantics.example.lambda.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"
