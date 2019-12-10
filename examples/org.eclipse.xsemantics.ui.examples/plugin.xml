@@ -77,6 +77,11 @@ Contributors:
                name="org.eclipse.xsemantics.example.fj">
          </projectDescriptor>
          <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.fj.ide.zip"
+               description="A smart editor for the language."
+               name="org.eclipse.xsemantics.example.fj.ide">
+         </projectDescriptor>
+         <projectDescriptor
                contentURI="contents/org.eclipse.xsemantics.example.fj.ui.zip"
                description="A smart editor for the language."
                name="org.eclipse.xsemantics.example.fj.ui">
@@ -85,6 +90,11 @@ Contributors:
                contentURI="contents/org.eclipse.xsemantics.example.fj.tests.zip"
                description="A test suite for the language."
                name="org.eclipse.xsemantics.example.fj.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.fj.ui.tests.zip"
+               description="A test suite for the language."
+               name="org.eclipse.xsemantics.example.fj.ui.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -100,6 +110,11 @@ Contributors:
                name="org.eclipse.xsemantics.example.fjcached">
          </projectDescriptor>
          <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.fjcached.ide.zip"
+               description="A smart editor for the language."
+               name="org.eclipse.xsemantics.example.fjcached.ide">
+         </projectDescriptor>
+         <projectDescriptor
                contentURI="contents/org.eclipse.xsemantics.example.fjcached.ui.zip"
                description="A smart editor for the language."
                name="org.eclipse.xsemantics.example.fjcached.ui">
@@ -108,6 +123,11 @@ Contributors:
                contentURI="contents/org.eclipse.xsemantics.example.fjcached.tests.zip"
                description="A test suite for the language."
                name="org.eclipse.xsemantics.example.fjcached.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.fjcached.ui.tests.zip"
+               description="A test suite for the language."
+               name="org.eclipse.xsemantics.example.fjcached.ui.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -144,6 +164,11 @@ Contributors:
                name="org.eclipse.xsemantics.example.expressions">
          </projectDescriptor>
          <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.expressions.ide.zip"
+               description="A smart editor for the language."
+               name="org.eclipse.xsemantics.example.expressions.ide">
+         </projectDescriptor>
+         <projectDescriptor
                contentURI="contents/org.eclipse.xsemantics.example.expressions.ui.zip"
                description="A smart editor for the language."
                name="org.eclipse.xsemantics.example.expressions.ui">
@@ -152,6 +177,11 @@ Contributors:
                contentURI="contents/org.eclipse.xsemantics.example.expressions.tests.zip"
                description="A test suite for the language."
                name="org.eclipse.xsemantics.example.expressions.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.expressions.ui.tests.zip"
+               description="A test suite for the language."
+               name="org.eclipse.xsemantics.example.expressions.ui.tests">
          </projectDescriptor>
       </example>
    </extension>
@@ -187,6 +217,11 @@ Contributors:
                name="org.eclipse.xsemantics.example.lambda">
          </projectDescriptor>
          <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.lambda.ide.zip"
+               description="A smart editor for the language."
+               name="org.eclipse.xsemantics.example.lambda.ide">
+         </projectDescriptor>
+         <projectDescriptor
                contentURI="contents/org.eclipse.xsemantics.example.lambda.ui.zip"
                description="A smart editor for the language."
                name="org.eclipse.xsemantics.example.lambda.ui">
@@ -195,6 +230,11 @@ Contributors:
                contentURI="contents/org.eclipse.xsemantics.example.lambda.tests.zip"
                description="A test suite for the language."
                name="org.eclipse.xsemantics.example.lambda.tests">
+         </projectDescriptor>
+         <projectDescriptor
+               contentURI="contents/org.eclipse.xsemantics.example.lambda.ui.tests.zip"
+               description="A test suite for the language."
+               name="org.eclipse.xsemantics.example.lambda.ui.tests">
          </projectDescriptor>
       </example>
    </extension>
