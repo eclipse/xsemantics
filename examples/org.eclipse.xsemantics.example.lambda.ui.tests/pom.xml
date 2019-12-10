@@ -35,7 +35,7 @@ Contributors:
 					<useUIHarness>true</useUIHarness>
 					<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
 						for jacoco agent -->
-					<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
+					<argLine>${tycho.testArgLine} ${uiTestsArgs} ${memoryArgs}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
