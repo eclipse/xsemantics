@@ -24,43 +24,27 @@ Contributors:
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
+		<systemProperties>${uiTestsArgs} ${pdeTestsArgs}</systemProperties>
 		<!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
 		<sonar.sources></sonar.sources>
 		<sonar.tests>src,xtend-gen</sonar.tests>
 	</properties>
 
-  <build>
-  	<plugins>
-  		<plugin>
-  			<groupId>org.eclipse.xtend</groupId>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
 			<artifactId>xtend-maven-plugin</artifactId>
 		</plugin>
 
 		<plugin>
-	        <groupId>org.eclipse.tycho</groupId>
-	        <artifactId>tycho-surefire-plugin</artifactId>
-	        <version>${tycho-version}</version>
-	        <executions>
-	        	<execution>
-					<id>default-test</id>
-					<phase>integration-test</phase>
-					<configuration>
-						<skip>${dsl.tests.skip}</skip>
-						<useUIHarness>true</useUIHarness>
-						<useUIThread>true</useUIThread>
-						<!-- tycho.testArgLine repeated to re-use the configuration for argLine for jacoco agent -->
-						<argLine>${tycho.testArgLine} ${uiTestsArgs} ${pdeTestsArgs}</argLine>
-						<includes>
-							<include>**/dsl/tests/ui/contentassist/*Test*.java</include>
-							<include>**/dsl/tests/ui/editor/*Test*.java</include>
-							<include>**/dsl/tests/ui/outline/*Test*.java</include>
-						</includes>
-					</configuration>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-			</executions>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-surefire-plugin</artifactId>
+			<configuration>
+				<skip>${dsl.tests.skip}</skip>
+				<useUIHarness>true</useUIHarness>
+				<useUIThread>true</useUIThread>
+			</configuration>
 		</plugin>
 
 		<plugin>

@@ -50,16 +50,12 @@ Contributors:
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>DSLTests</id>
 						<phase>test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 							<includes>
 								<include>**/tests/runtime/*Test*.java</include>
@@ -90,9 +86,6 @@ Contributors:
 						<phase>test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 							<includes>
 								<include>**/dsl/tests/generator/fj/*Test*.java</include>
@@ -119,11 +112,6 @@ Contributors:
 						<phase>integration-test</phase>
 						<configuration>
 							<skip>${dsl.tests.skip}</skip>
-							<useUIHarness>false</useUIHarness>
-							<useUIThread>false</useUIThread>
-							<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-								for jacoco agent -->
-							<argLine>${tycho.testArgLine} ${memoryArgs}</argLine>
 							<includes>
 								<include>**/dsl/tests/generator/*GeneratedJavaCodeTest*.java</include>
 								<include>**/dsl/tests/generator/*JvmModelGeneratorTest*.java</include>

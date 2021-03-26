@@ -55,10 +55,10 @@ Contributors:
 	<properties>
 		<tycho-version>1.5.0</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<junit-version>4.12</junit-version>
-		<jacoco-version>0.8.5</jacoco-version>
+		<jacoco-version>0.8.6</jacoco-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -69,11 +69,17 @@ Contributors:
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 
 		<!-- tests and runtime args -->
-		<os-jvm-flags />
 		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
-		<uiTestsArgs>${memoryArgs} ${os-jvm-flags} -Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
+		<uiTestsArgs>-Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
 		<pdeTestsArgs>-DbuildingWithTycho=true</pdeTestsArgs>
 		<swtbotTestsArgs>${uiTestsArgs} -Dorg.eclipse.swtbot.search.timeout=10000 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</swtbotTestsArgs>
+
+		<!-- Define overridable properties for tycho-surefire-plugin -->
+		<platformSystemProperties></platformSystemProperties>
+		<moduleProperties></moduleProperties>
+		<previewProperties></previewProperties>
+		<systemProperties></systemProperties>
+		<additionalTestArguments></additionalTestArguments>
 
 		<!-- <jacoco.reportPath>../target/jacoco.exec</jacoco.reportPath> -->
 
@@ -241,17 +247,46 @@ Contributors:
 		</profile>
 
 		<profile>
-			<id>macosx-jvm-flags</id>
+			<id>macos</id>
 			<activation>
 				<os>
 					<family>mac</family>
 				</os>
 			</activation>
 			<properties>
-				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
+				<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
+				<platformSystemProperties>-XstartOnFirstThread</platformSystemProperties>
 			</properties>
 		</profile>
-		
+		<profile>
+			<id>jdk9-or-newer</id>
+			<activation>
+				<jdk>[9,)</jdk>
+			</activation>
+			<properties>
+				<moduleProperties>--add-modules=ALL-SYSTEM</moduleProperties>
+			</properties>
+		</profile>
+		<profile>
+			<id>jdk12-or-newer</id>
+			<activation>
+				<jdk>[12,)</jdk>
+			</activation>
+			<properties>
+				<previewProperties>--enable-preview</previewProperties>
+			</properties>
+		</profile>
+		<profile>
+			<id>jacoco</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>sonatype-oss-release</id>
 			<activation>
@@ -333,7 +368,31 @@ Contributors:
 						<xtendAsPrimaryDebugSource>true</xtendAsPrimaryDebugSource>
 					</configuration>
 				</plugin>
-
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<argLine>${systemProperties} ${additionalTestArguments}</argLine>
+						<!-- workaround for https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
+						<useSystemClassLoader>false</useSystemClassLoader>
+					</configuration>
+				</plugin>
+				<!-- to skip running (and compiling) tests use commandline flag: -Dmaven.test.skip
+					To skip tests, but still compile them, use: -DskipTests
+					To allow all tests in a pom to pass/fail, use commandline flag: -fae (fail
+					at end) -->
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
+						<argLine>${previewProperties} ${platformSystemProperties} ${systemProperties} ${moduleProperties} ${additionalTestArguments}</argLine>
+						<failIfNoTests>false</failIfNoTests>
+						<useUIHarness>false</useUIHarness>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
@@ -349,7 +408,42 @@ Contributors:
 						</filesets>
 					</configuration>
 				</plugin>
-				
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<!-- Where to put jacoco coverage report -->
+								<destFile>${sonar.jacoco.reportPath}</destFile>
+								<includes>
+									<include>org.eclipse.xsemantics.*</include>
+								</includes>
+								<excludes>
+									<exclude>**/src-gen/**/*.java</exclude>
+									<exclude>**/org/eclipse/**/*.java</exclude>
+									<exclude>**.antlr**</exclude>
+									<exclude>**.parseTree**</exclude>
+									<exclude>**Abstract*RuntimeModule.java</exclude>
+									<exclude>**/*SetupGenerated*.java</exclude>
+									<exclude>**/Abstract*Validator.java</exclude>
+									<exclude>**/*GrammarAccess.java</exclude>
+									<exclude>**/Abstract*UiModule.java</exclude>
+									<exclude>**/Abstract*ProposalProvider.java</exclude>
+									<exclude>**/*Test.java</exclude>
+									<exclude>**/*TypeSystemGen*.java</exclude>
+									<exclude>**/*StandaloneSetup*.java</exclude>
+									<exclude>**/*QuickfixProvider*.java</exclude>
+								</excludes>
+								<append>true</append>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.xtext</groupId>
 					<artifactId>xtext-maven-plugin</artifactId>
@@ -521,43 +615,6 @@ Contributors:
 				<configuration>
 					<finalName>${project.artifactId}-${qualifiedVersion}</finalName>
 				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-							<configuration>
-							<!-- Where to put jacoco coverage report -->
-							<destFile>${sonar.jacoco.reportPath}</destFile>
-							<includes>
-								<include>org.eclipse.xsemantics.*</include>
-							</includes>
-							<excludes>
-								<exclude>**/src-gen/**/*.java</exclude>
-								<exclude>**/org/eclipse/**/*.java</exclude>
-								<exclude>**.antlr**</exclude>
-								<exclude>**.parseTree**</exclude>
-								<exclude>**Abstract*RuntimeModule.java</exclude>
-								<exclude>**/*SetupGenerated*.java</exclude>
-								<exclude>**/Abstract*Validator.java</exclude>
-								<exclude>**/*GrammarAccess.java</exclude>
-								<exclude>**/Abstract*UiModule.java</exclude>
-								<exclude>**/Abstract*ProposalProvider.java</exclude>
-								<exclude>**/*Test.java</exclude>
-								<exclude>**/*TypeSystemGen*.java</exclude>
-								<exclude>**/*StandaloneSetup*.java</exclude>
-								<exclude>**/*QuickfixProvider*.java</exclude>
-							</excludes>
-							<append>true</append>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

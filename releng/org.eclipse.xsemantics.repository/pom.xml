@@ -250,7 +250,7 @@ Contributors:
 		</profile>
 
 		<profile>
-			<id>jacoco-report</id>
+			<id>jacoco</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>

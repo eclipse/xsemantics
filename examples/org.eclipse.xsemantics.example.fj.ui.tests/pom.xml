@@ -26,7 +26,6 @@ Contributors:
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho-version}</version>
 				<configuration>
 					<skip>true</skip>
 					<useUIHarness>true</useUIHarness>
