@@ -59,7 +59,6 @@ Contributors:
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<junit-version>4.12</junit-version>
 		<jacoco-version>0.8.5</jacoco-version>
-		<findbugs-version>2.5.5</findbugs-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -77,7 +76,6 @@ Contributors:
 		<swtbotTestsArgs>${uiTestsArgs} -Dorg.eclipse.swtbot.search.timeout=10000 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</swtbotTestsArgs>
 
 		<!-- <jacoco.reportPath>../target/jacoco.exec</jacoco.reportPath> -->
-		<!-- <findbugs.reportPath>../target/findbugs</findbugs.reportPath>  -->
 
 		<!-- Sonar -->
 		<sonar.language>java</sonar.language>
@@ -115,7 +113,6 @@ Contributors:
 		 not in the git repository (since Sonarqube 5) -->
 		<sonar.scm.disabled>true</sonar.scm.disabled>		
 		
-		<findbugs.skip>true</findbugs.skip>
 		<mwe2.skip>false</mwe2.skip>
 		<xtext.maven.skip>false</xtext.maven.skip>
 		<dsl.tests.skip>false</dsl.tests.skip>
@@ -161,7 +158,6 @@ Contributors:
 			<properties>
 				<xtext.maven.skip>true</xtext.maven.skip>
 				<skipTests>true</skipTests>
-				<findbugs.skip>true</findbugs.skip>
 				<!-- for Hudson CI @Eclipse.org -->
 				<!-- Disable this on your local machine -->
 				<cbi.jarsigner.skip>false</cbi.jarsigner.skip>
@@ -263,7 +259,6 @@ Contributors:
 			</activation>
 			<properties>
 				<skipTests>true</skipTests>
-				<findbugs.skip>true</findbugs.skip>
 			</properties>
 
 			<build>
@@ -386,33 +381,6 @@ Contributors:
 							<version>${project.version}</version>
 						</dependency>
 					</dependencies>
-				</plugin>
-
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>${findbugs-version}</version>
-					<configuration>
-						<skip>${findbugs.skip}</skip>
-						<findbugsXmlOutput>true</findbugsXmlOutput>
-						<failOnError>false</failOnError>
-						<!-- <findbugsXmlOutputDirectory>${findbugs.reportPath}</findbugsXmlOutputDirectory> -->
-						<!-- Enables analysis which takes more memory but finds more bugs. If 
-							you run out of memory, changes the value of the effort element to 'Low'. -->
-						<!-- <effort>Max</effort> -->
-						<!-- Low: Reports all bugs (other values are medium and max) -->
-						<!-- <threshold>Medium</threshold> -->
-						<maxRank>15</maxRank>
-						<jvmArgs>-Xmx1024m</jvmArgs>
-						<excludeFilterFile>${basedir}/../../releng/org.eclipse.xsemantics.parent/findbugs/excludeFilter.xml</excludeFilterFile>
-					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 
 				<plugin>

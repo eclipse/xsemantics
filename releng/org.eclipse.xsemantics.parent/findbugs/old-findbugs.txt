@@ -1,0 +1,28 @@
+		<findbugs-version>2.5.5</findbugs-version>
+		
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>${findbugs-version}</version>
+					<configuration>
+						<skip>${findbugs.skip}</skip>
+						<findbugsXmlOutput>true</findbugsXmlOutput>
+						<failOnError>false</failOnError>
+						<!-- <findbugsXmlOutputDirectory>${findbugs.reportPath}</findbugsXmlOutputDirectory> -->
+						<!-- Enables analysis which takes more memory but finds more bugs. If 
+							you run out of memory, changes the value of the effort element to 'Low'. -->
+						<!-- <effort>Max</effort> -->
+						<!-- Low: Reports all bugs (other values are medium and max) -->
+						<!-- <threshold>Medium</threshold> -->
+						<maxRank>15</maxRank>
+						<jvmArgs>-Xmx1024m</jvmArgs>
+						<excludeFilterFile>${basedir}/../../releng/org.eclipse.xsemantics.parent/findbugs/excludeFilter.xml</excludeFilterFile>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
