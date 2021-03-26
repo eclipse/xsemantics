@@ -1,0 +1,30 @@
+name: Java CI with Maven
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.m2
+          ~/.sonar/cache
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml', '**/*.target') }}
+        restore-keys: ${{ runner.os }}-m2-
+    - name: Build with Maven
+      run: >
+        xvfb-run
+        mvn -f releng/org.eclipse.xsemantics.releng/pom.xml
+        clean verify -Dfindbugs.skip=true
+
