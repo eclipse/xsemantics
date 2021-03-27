@@ -26,5 +26,5 @@ jobs:
       run: >
         xvfb-run
         mvn -f releng/org.eclipse.xsemantics.releng/pom.xml
-        clean verify
+        clean verify -Pjacoco
 
