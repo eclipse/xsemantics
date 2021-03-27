@@ -40,4 +40,5 @@ http://download.eclipse.org/xsemantics/milestones/
 
 Make sure you enable Maven snapshots repositories, see, e.g., https://github.com/eclipse/xsemantics/blob/master/tests/org.eclipse.xsemantics.example.maven.test/pom.xml
 
-[![Build Status](https://travis-ci.org/eclipse/xsemantics.svg?branch=master)](https://travis-ci.org/eclipse/xsemantics) [![Coverage Status](https://coveralls.io/repos/github/eclipse/xsemantics/badge.svg?branch=master)](https://coveralls.io/github/eclipse/xsemantics?branch=master)
+[![Java CI with Maven](https://github.com/eclipse/xsemantics/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/eclipse/xsemantics/actions/workflows/maven.yml)
+[![Coverage Status](https://coveralls.io/repos/github/eclipse/xsemantics/badge.svg?branch=master)](https://coveralls.io/github/eclipse/xsemantics?branch=master)
