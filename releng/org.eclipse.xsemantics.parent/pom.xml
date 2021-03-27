@@ -278,6 +278,10 @@ Contributors:
 		</profile>
 		<profile>
 			<id>jacoco</id>
+			<properties>
+				<!-- tycho.testArgLine is where jacoco stores the agent path -->
+				<additionalTestArguments>${tycho.testArgLine}</additionalTestArguments>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
