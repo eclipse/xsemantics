@@ -24,6 +24,7 @@ Contributors:
 	<packaging>eclipse-test-plugin</packaging>
 	
 	<properties>
+		<systemProperties>${pdeTestsArgs} ${swtbotTestsArgs}</systemProperties>
 		<!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
 		<sonar.sources></sonar.sources>
 		<sonar.tests>src</sonar.tests>
@@ -34,21 +35,16 @@ Contributors:
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho-version}</version>
 				<configuration>
 					<skip>${swtbot.tests.skip}</skip>
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
-					<!-- tycho.testArgLine repeated to re-use the configuration for argLine 
-						for jacoco agent -->
-					<argLine>${tycho.testArgLine} ${pdeTestsArgs} ${swtbotTestsArgs}</argLine>
 					<includes>
 						<include>**/imports/*Test*.java</include>
 						<include>**/wizards/*Test*.java</include>
 					</includes>
 				</configuration>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
