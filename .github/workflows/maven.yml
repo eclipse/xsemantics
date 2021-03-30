@@ -27,4 +27,9 @@ jobs:
         xvfb-run
         mvn -f releng/org.eclipse.xsemantics.releng/pom.xml
         clean verify -Pjacoco
+        -DrepoToken=$COVERALLS_REPO_TOKEN
+        -DpullRequest=${{ github.event.pull_request.number }}
+        coveralls:report
+      env: 
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
 

@@ -496,6 +496,15 @@ Contributors:
 							<jacocoReport>${jacoco.xml.reportPath}</jacocoReport>
 						</jacocoReports>
 					</configuration>
+					<dependencies>
+						<!-- This is required when using JDK 9 or higher since javax.xml.bind has 
+							been removed from the JDK -->
+						<dependency>
+							<groupId>javax.xml.bind</groupId>
+							<artifactId>jaxb-api</artifactId>
+							<version>2.3.1</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 
 				<plugin>
