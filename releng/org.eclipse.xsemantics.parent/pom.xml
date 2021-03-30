@@ -535,7 +535,6 @@ Contributors:
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -569,31 +568,21 @@ Contributors:
 					</environments>
 				</configuration>
 			</plugin>
-			
 			<plugin>
-		        <groupId>org.eclipse.tycho</groupId>
-		        <artifactId>tycho-source-plugin</artifactId>
-		        <version>${tycho-version}</version>
-		        <executions>
-		          <execution>
-		            <id>plugin-source</id>
-		            <goals>
-		              <goal>plugin-source</goal>
-		            </goals>
-		          </execution>
-		        </executions>
-		    </plugin>
-		    
-		    <plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<executions>
 					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
+						<id>plugin-source</id>
 						<goals>
-							<goal>source-feature</goal>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<goals>
+							<goal>feature-source</goal>
 						</goals>
 						<configuration>
 							<excludes>
@@ -616,7 +605,6 @@ Contributors:
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
@@ -631,7 +619,6 @@ Contributors:
 					</execution>
 				</executions>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
@@ -650,7 +637,6 @@ Contributors:
 					</dependency>
 				</dependencies>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-repository-plugin</artifactId>
