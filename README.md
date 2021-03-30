@@ -18,7 +18,7 @@ https://projects.eclipse.org/projects/modeling.xsemantics
 
 ## Milestones update site:
 
-http://download.eclipse.org/xsemantics/milestones/
+https://download.eclipse.org/xsemantics/milestones/
 
 - version 1.13 requires Xtext 2.13.0
 - version 1.14 requires Xtext 2.14.0
