@@ -18,7 +18,6 @@ import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.runtime.XsemanticsProvider;
-import org.eclipse.xsemantics.test.fj.caching.FjFirstCachedTypeSystem;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")

@@ -12,7 +12,6 @@ package org.eclipse.xsemantics.test.fj.caching.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xsemantics.test.fj.caching.FjFirstCachedOptionsTypeSystem;
-import org.eclipse.xsemantics.test.fj.caching.validation.FjFirstCachedTypeSystemValidator;
 
 @SuppressWarnings("all")
 public class FjFirstCachedOptionsTypeSystemValidator extends FjFirstCachedTypeSystemValidator {
