@@ -2252,7 +2252,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.xsemantics.test.ExtendedTypeSystem;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
@@ -2441,7 +2440,6 @@ package org.eclipse.xsemantics.test.validation;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.test.ExtendedTypeSystem2;
-import org.eclipse.xsemantics.test.validation.ExtendedTypeSystemValidator;
 import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
@@ -2480,7 +2478,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.xsemantics.test.ExtendedTypeSystem2;
 
 @SuppressWarnings("all")
 public class ExtendedTypeSystemWithRuleOverride extends ExtendedTypeSystem2 {
@@ -2624,7 +2621,6 @@ package org.eclipse.xsemantics.test.validation;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.test.ExtendedTypeSystemWithRuleOverride;
-import org.eclipse.xsemantics.test.validation.ExtendedTypeSystem2Validator;
 import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")
@@ -2664,7 +2660,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.xsemantics.test.ExtendedTypeSystem2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
@@ -2804,7 +2799,6 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.xsemantics.test.ExtendedTypeSystem2;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 @SuppressWarnings("all")
@@ -3684,7 +3678,6 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.test.ExtendedTypeSystem;
-import org.eclipse.xsemantics.test.validation.TypeSystemValidator;
 import org.eclipse.xtext.validation.Check;
 
 @SuppressWarnings("all")

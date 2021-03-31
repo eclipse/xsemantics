@@ -425,6 +425,7 @@ The final field string1 may not have been initialized
 		'''.
 		assertErrorMessages(
 '''
+Cannot infer type
 The field foo1 needs an explicit type since there is no initialization expression to infer the type from.
 '''
 		)

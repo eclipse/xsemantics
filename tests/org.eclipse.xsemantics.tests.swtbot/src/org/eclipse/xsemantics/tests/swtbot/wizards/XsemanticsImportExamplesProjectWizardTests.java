@@ -91,7 +91,7 @@ public class XsemanticsImportExamplesProjectWizardTests extends
 		SWTBotMenu otherMenu = newMenu.menu("Other...");
 		otherMenu.click();
 
-		SWTBotShell shell = bot.shell("New");
+		SWTBotShell shell = bot.shell("Select a wizard");
 		shell.activate();
 		SWTBotTreeItem xsemanticsNode = bot.tree().expandNode("Xsemantics");
 		waitForTreeItems(xsemanticsNode);
