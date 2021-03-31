@@ -124,9 +124,9 @@ Contributors:
 		<dsl.tests.skip>false</dsl.tests.skip>
 		<swtbot.tests.only>false</swtbot.tests.only>
 		<swtbot.tests.skip>false</swtbot.tests.skip>
-		
-		<target-file-name>xtext-${xtext.version}</target-file-name>
-		
+
+		<target-file-name>xsemantics.target</target-file-name>
+
 		<ant-files-path>${basedir}/../../releng/org.eclipse.xsemantics.parent/ant</ant-files-path>
 
 		<!-- properties for deploying the composite update site and zipped site -->
