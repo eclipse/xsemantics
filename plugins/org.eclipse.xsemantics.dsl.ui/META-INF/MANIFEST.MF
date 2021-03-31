@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xsemantics UI
 Bundle-Vendor: %providerName
-Bundle-Version: 1.19.0.qualifier
+Bundle-Version: 1.20.0.qualifier
 Bundle-SymbolicName: org.eclipse.xsemantics.dsl.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xsemantics.dsl;visibility:=reexport,
