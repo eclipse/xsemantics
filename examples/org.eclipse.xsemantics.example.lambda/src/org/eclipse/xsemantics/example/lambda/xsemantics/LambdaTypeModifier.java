@@ -19,10 +19,8 @@ import org.eclipse.xsemantics.example.lambda.lambda.ArrowType;
 import org.eclipse.xsemantics.example.lambda.lambda.Parameter;
 import org.eclipse.xsemantics.example.lambda.lambda.Term;
 import org.eclipse.xsemantics.example.lambda.lambda.Type;
-import org.eclipse.xsemantics.example.lambda.xsemantics.LambdaXsemanticsSystem;
 import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.inject.Inject;

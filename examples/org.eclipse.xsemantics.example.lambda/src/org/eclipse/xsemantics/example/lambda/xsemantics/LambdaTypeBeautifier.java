@@ -14,17 +14,15 @@
  */
 package org.eclipse.xsemantics.example.lambda.xsemantics;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.xsemantics.example.lambda.lambda.ArrowType;
 import org.eclipse.xsemantics.example.lambda.lambda.IntType;
 import org.eclipse.xsemantics.example.lambda.lambda.StringType;
 import org.eclipse.xsemantics.example.lambda.lambda.Type;
 import org.eclipse.xsemantics.example.lambda.lambda.TypeVariable;
-import org.eclipse.xsemantics.example.lambda.xsemantics.LambdaStringRepresentation;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
