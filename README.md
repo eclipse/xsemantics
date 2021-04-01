@@ -27,6 +27,7 @@ https://download.eclipse.org/xsemantics/milestones/
 - version 1.17 requires Xtext 2.17.0
 - version 1.18 requires Xtext 2.19.0 (no version avaialable for Xtext 2.18)
 - version 1.19 requires Xtext 2.20.0
+- version 1.20 requires Xtext 2.25.0 (no version avaialable for Xtext 2.21-2.24)
 
 ## Maven snapshots
 
@@ -37,6 +38,7 @@ https://download.eclipse.org/xsemantics/milestones/
 - version 1.17.0-SNAPSHOT requires Xtext 2.17.0
 - version 1.18.0-SNAPSHOT requires Xtext 2.19.0 (no version avaialable for Xtext 2.18)
 - version 1.19.0-SNAPSHOT requires Xtext 2.20.0
+- version 1.20.0-SNAPSHOT requires Xtext 2.25.0 (no version avaialable for Xtext 2.21-2.24) 
 
 Make sure you enable Maven snapshots repositories, see, e.g., https://github.com/eclipse/xsemantics/blob/master/tests/org.eclipse.xsemantics.example.maven.test/pom.xml
 
