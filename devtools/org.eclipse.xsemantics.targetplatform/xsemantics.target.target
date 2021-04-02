@@ -28,9 +28,5 @@
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/"/>
 </location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.xdoc.feature.feature.group" version="0.0.0"/>
-<repository location="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
-</location>
 </locations>
 </target>
