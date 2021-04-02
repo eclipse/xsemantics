@@ -218,7 +218,7 @@
       <requirement
           name="org.eclipse.xtext.xdoc.feature.feature.group"/>
       <repository
-          url="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
+          url="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
       <repository
           url="${xtext.site}"/>
       <repository
@@ -298,7 +298,7 @@
         <repository
             url="${mwe2.site}"/>
         <repository
-            url="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
+            url="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
       </repositoryList>
     </targlet>
   </setupTask>
