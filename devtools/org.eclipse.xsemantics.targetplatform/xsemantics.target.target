@@ -30,7 +30,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.xdoc.feature.feature.group" version="0.0.0"/>
-<repository location="https://dl.bintray.com/lorenzobettini/xtext-xdoc/updates/"/>
+<repository location="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
 </location>
 </locations>
 </target>
