@@ -47,7 +47,7 @@ class PluginProjectHelper {
 		);
 		projectFactory.addRequiredBundles(requiredBundles);
 		val result = projectFactory.createProject(new NullProgressMonitor(), null);
-		JavaProjectSetupUtil.makeJava5Compliant(JavaCore.create(result));
+		JavaProjectSetupUtil.makeJava8Compliant(JavaCore.create(result));
 		val javaProject = JavaProjectSetupUtil.findJavaProject(projectName)
 		addSourceFolder(javaProject, "src")
 		addSourceFolder(javaProject, "xsemantics-gen")
