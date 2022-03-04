@@ -527,7 +527,7 @@ public class XsemanticsRuntimeSystemTests extends
 
 	@Test
 	public void testGetEObjectWithNonEObject() {
-		assertTrue(ts.getEObject(new Integer(10)) == null);
+		assertTrue(ts.getEObject(Integer.valueOf(10)) == null);
 	}
 
 	@Test

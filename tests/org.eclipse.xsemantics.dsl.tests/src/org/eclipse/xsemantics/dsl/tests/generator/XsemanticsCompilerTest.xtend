@@ -316,7 +316,7 @@ newArrayList("first", "second")
 			assertNoValidationErrors
 			// don't assume that the compiled system is the first one
 			val systemClass = getCompiledClass("my.test.ruleinvokations.System")
-			val obj = systemClass.newInstance
+			val obj = systemClass.getDeclaredConstructor().newInstance()
 			injector.injectMembers(obj)
 			obj.invoke("init")
 			instantiated.set(obj as XsemanticsRuntimeSystem)
