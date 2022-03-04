@@ -31,10 +31,10 @@ public class RuleApplicationTrace {
 
 	private static final Logger LOGGER = Logger.getLogger(RuleApplicationTrace.class);
 
-	protected List<Object> trace = new ArrayList<Object>();
+	protected List<Object> trace = new ArrayList<>();
 
 	public RuleApplicationTrace() {
-
+		// nothing to do
 	}
 
 	public void addToTrace(Object traceElement) {
@@ -97,16 +97,12 @@ public class RuleApplicationTrace {
 		RuleApplicationTrace cloned = null;
 		
 		try {
-			cloned = getClass().newInstance();
-		} catch (InstantiationException e) {
-			LOGGER.info(DEEP_CLONING, e);
-			return this;
-		} catch (IllegalAccessException e) {
+			cloned = getClass().getDeclaredConstructor().newInstance();
+		} catch (Exception e) {
 			LOGGER.info(DEEP_CLONING, e);
 			return this;
 		}
-
-		cloned.trace = new ArrayList<Object>();
+		cloned.trace = new ArrayList<>();
 		for (Object orig : trace) {
 			if (orig instanceof RuleApplicationTrace) {
 				cloned.trace.add(((RuleApplicationTrace)orig).performSafeDeepCloning());
