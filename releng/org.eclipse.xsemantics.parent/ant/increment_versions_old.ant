@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Copyright (c) 2013-2017 Lorenzo Bettini.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Lorenzo Bettini - Initial contribution and API
+-->
 <project name="IncrementVersionsTask" basedir="." default="set-version">
 
-	<!-- IMPORTANT: Make sure this points to the root folder of your project -->
 	<property name="WORKSPACE" location="${ant.file}/../../../../" />
-
-	<!--
-		IMPORTANT: this will update the first occurrence of <version> in POMs,
-		so if one of your POM inherits from an external parent with an unrelated number
-		make sure the <parent> part comes after the <version> part of the POM
-		you want to update. For example,
-		
-		<groupId>your group id</groupId>
-		<artifactId>your artifact id</artifactId>
-		<version>the version you want to update</version>
-		<parent>
-			<groupId>external parent group id</groupId>
-			<artifactId>external parent artifact id</artifactId>
-			<version>external parent version that must not be updated</version>
-		</parent>
-	-->
-
-	<!--Set these properties manually when increasing versions -->
-	<property name="version.major" value="1" />
-	<property name="version.minor" value="21" />
-	<property name="version.patch" value="0" />
-
-	<!-- Compute the version properties -->
-	<property name="version.main" value="${version.major}.${version.minor}.${version.patch}" />
-	<property name="majorMinorVersion" value="${version.major}.${version.minor}" />
 
 	<target name="show-workspace-path">
 		<echo message="WORKSPACE: ${WORKSPACE}" />
 	</target>
 
-	<target name="set-version" description="Modifies artifacts to set a release version" >
+	<target name="stripSnapshot">
+        <script language="javascript">
+            <![CDATA[
+
+	                // getting the value
+	                buildnumber = project.getProperty("project.version");
+	                index = buildnumber.lastIndexOf("-SNAPSHOT");
+	                counter = buildnumber.substring(0, index);
+	    			project.setProperty("version.main",counter);
+
+	            ]]>
+        </script>
+    </target>
+
+	<target name="getMajorMinorVersion">
+	    <script language="javascript">
+	        <![CDATA[
+	                // getting the value
+	                buildnumber = project.getProperty("version.main");
+	                index = buildnumber.lastIndexOf(".");
+	                counter = buildnumber.substring(0, index);
+	    			project.setProperty("majorMinorVersion",counter);
+
+	            ]]>
+	    </script>
+	</target>
+
+    <target name="test_stripSnapshot" depends="stripSnapshot">
+        <echo message="version.main: ${version.main}"/>
+    </target>
+
+	<target name="test_getMajorMinor" depends="getMajorMinorVersion">
+		<echo message="majorMinorVersion: ${majorMinorVersion}"/>
+	</target>
+
+	<target name="askVersion">
+		<input message="Please enter the new release version (MAJOR.MINOR.MICRO):" addproperty="version.main" defaultvalue="${version_main}" />
+	</target>
+
+	<target name="retrieveMajorMinor" depends="askVersion,getMajorMinorVersion">
+		<echo message="majorMinorVersion: ${majorMinorVersion}"/>
+	</target>
+
+	<target name="set-version" description="Modifies artifacts to set a release version" 
+			depends="retrieveMajorMinor" >
 		<property name="version.osgi" value="${version.main}.qualifier"/>
 		<property name="version.mvn" value="${version.main}-SNAPSHOT"/>
 
@@ -48,16 +76,16 @@
 	</target>
 
 	<!-- strip the -SNAPSHOT from the property project.version -->
-	<target name="set-version-release" description="Modifies artifacts to set a release version (without -SNAPSHOT)" >
+	<target name="set-version-release" depends="stripSnapshot" description="Modifies artifacts to set a release version (without -SNAPSHOT)" >
 		<property name="version.osgi" value="${version.main}"/>
 		<property name="version.mvn" value="${version.main}"/>
-
+		
 		<echo message="VERSION MAIN: ${version.main}" />
 		<echo message="VERSION OSGI: ${version.osgi}" />
 		<echo message="VERSION MVN : ${version.mvn}" />
 		<echo message="WORKSPACE   : ${WORKSPACE}" />
 		<echo message="" />
-
+		
 		<antcall target="-modify-artifacts"/>
 	</target>
 
@@ -88,7 +116,6 @@
 			</fileset>
 		</replaceregexp>
 
-		<!-- category.xml if major.minor is mentioned -->
 		<replaceregexp flags="g" byline="true">
 			<regexp pattern="label=&quot;(\w+)(\s+)(\d+\.\d+)(\.x)" />
 			<substitution expression="label=&quot;\1\2${majorMinorVersion}\4" />
@@ -129,7 +156,7 @@
 		</replaceregexp>
 
 	</target>
-
+	
 	<target name="set-version-xtext" description="Sets the Xtext version constraints in MANIFEST.MF">
 		<!-- Read the last entered values for defaults -->
 		<property file="version.properties" />
