@@ -53,18 +53,18 @@ Contributors:
 	</issueManagement>
 	
 	<properties>
-		<tycho-version>2.2.0</tycho-version>
+		<tycho-version>2.7.0</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-		<junit-version>4.13.1</junit-version>
+		<junit-version>4.13.2</junit-version>
 		<jacoco-version>0.8.6</jacoco-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<xtext.version>2.25.0</xtext.version>
+		<xtext.version>2.26.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
-		<mwe2Version>2.12.1</mwe2Version>
+		<mwe2Version>2.12.2</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 
