@@ -649,6 +649,10 @@ Contributors:
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<!-- required to have valid consumable Maven artifacts
+					https://github.com/eclipse/xsemantics/issues/156
+					https://github.com/eclipse/tycho/issues/781 -->
+					<skipPomGeneration>true</skipPomGeneration>
 					<format>'v'yyyyMMdd'-'HHmm</format>
 					<sourceReferences>
 						<generate>true</generate>
