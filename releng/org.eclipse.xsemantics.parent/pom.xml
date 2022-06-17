@@ -589,6 +589,11 @@ Contributors:
 								<id>org.eclipse.jdt.compiler.apt</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.jdt.compiler.tool</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
 				</configuration>
