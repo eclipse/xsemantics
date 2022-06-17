@@ -46,8 +46,8 @@ Contributors:
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.eclipse.xtext.xbase" version="2.26.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.xtext.ui" version="2.26.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.27.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtext.ui" version="2.27.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
