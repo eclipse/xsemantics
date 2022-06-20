@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
@@ -21,10 +21,12 @@ import org.eclipse.xsemantics.runtime.TraceUtils
 import org.eclipse.xsemantics.runtime.XsemanticsRuntimeSystem
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.eclipse.xtext.xbase.testing.TemporaryFolder
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,22 +39,27 @@ import org.junit.runner.RunWith
 @InjectWith(typeof(XsemanticsInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class XsemanticsCompilerTest extends XsemanticsBaseTest {
-	
+
 	@Rule
-	@Inject public TemporaryFolder temporaryFolder 
-	
-	@Inject extension CompilationTestHelper
-	
+	@Inject public TemporaryFolder temporaryFolder
+
+	@Inject extension CompilationTestHelper compilationTestHelper
+
 	@Inject extension ReflectExtensions
-	
+
 	@Inject extension TraceUtils
 
 	@Inject
 	var Injector injector
-	
+
+	@Before
+	def void setUp() {
+		compilationTestHelper.javaVersion = JavaVersion.JAVA8
+	}
+
 	@Test
 	def testRuleInvocation() {
-'''
+		'''
 import java.util.List
 
 system my.test.ruleinvokations.System
@@ -66,9 +73,9 @@ from {
 	res = list.head
 }
 '''.invokeTypeAndExpect(
-'''Type: [] |- [first, second] : first''',
-newArrayList("first", "second")
-)
+			'''Type: [] |- [first, second] : first''',
+			newArrayList("first", "second")
+		)
 	}
 
 	@Test
@@ -77,7 +84,7 @@ newArrayList("first", "second")
 		// the generated code used to fail to compile into Java
 		// because RuleFailedException was not caught
 		// now RuleFailedException extends RuntimeException
-'''
+		'''
 import java.util.List
 
 system my.test.ruleinvokations.System
@@ -99,13 +106,13 @@ from {
 // the result is simply the input
 axiom TypeString G |- String s : s
 '''.invokeTypeAndExpect(
-'''
+			'''
 TypeList: [] |- [first, second] : [first, second]
  TypeString: [] |- first : first
  TypeString: [] |- second : second
 ''',
-newArrayList("first", "second")
-)
+			newArrayList("first", "second")
+		)
 	}
 
 	@Test
@@ -114,7 +121,7 @@ newArrayList("first", "second")
 		// the generated code used to fail to compile into Java
 		// because RuleFailedException was not caught
 		// now RuleFailedException extends RuntimeException
-'''
+		'''
 import java.util.List
 
 system my.test.ruleinvokations.System
@@ -137,17 +144,17 @@ axiom TypeString G |- String s
 
 // no rule defined for input Integer
 '''.invokeTypeAndExpectFailure(
-'''
+			'''
 failed: TypeList: [] |- [first, 0]
  cannot find a rule for |- 0
 ''',
-newArrayList("first", 0)
-)
+			newArrayList("first", 0)
+		)
 	}
 
 	@Test
 	def testUseOfPreviousFailure() {
-'''
+		'''
 import java.util.List
 
 system my.test.ruleinvokations.System
@@ -169,15 +176,15 @@ from {
 	}
 }
 '''.invokeTypeAndExpectFailure(
-'''failed: Type: [] |- [first, second] : Object
+			'''failed: Type: [] |- [first, second] : Object
  there was a failure caused by: failed: list.size > 3''',
-newArrayList("first", "second")
-)
+			newArrayList("first", "second")
+		)
 	}
 
 	@Test
 	def testUseOfErrorInformationDataFromJudgment() {
-'''
+		'''
 import java.util.List
 
 system my.test.ruleinvokations.System
@@ -206,15 +213,15 @@ from {
 	}
 }
 '''.invokeTypeAndExpectFailure(
-'''failed: type has failed
+			'''failed: type has failed
  data from failure: [data: , first]''',
-newArrayList("first", "second")
-)
+			newArrayList("first", "second")
+		)
 	}
 
 	@Test
 	def testUseOfErrorInformationDataFromFail() {
-'''
+		'''
 import java.util.List
 import org.eclipse.xsemantics.runtime.TraceUtils
 
@@ -248,15 +255,15 @@ from {
 	}
 }
 '''.invokeTypeAndExpectFailure(
-'''failed: Type: [] |- [first, second] : Object
+			'''failed: Type: [] |- [first, second] : Object
  data from failure: [data: , first]''',
-newArrayList("first", "second")
-)
+			newArrayList("first", "second")
+		)
 	}
 
 	@Test
 	def testUseOfErrorInformationDataFromRule() {
-'''
+		'''
 import java.util.List
 import org.eclipse.xsemantics.runtime.TraceUtils
 
@@ -290,10 +297,10 @@ from {
 	}
 }
 '''.invokeTypeAndExpectFailure(
-'''failed: Type: [] |- [first, second] : Object
+			'''failed: Type: [] |- [first, second] : Object
  data from failure: [data: , first]''',
-newArrayList("first", "second")
-)
+			newArrayList("first", "second")
+		)
 	}
 
 	def private invokeTypeAndExpect(CharSequence input, CharSequence expectedTrace, Object args) {
@@ -312,7 +319,7 @@ newArrayList("first", "second")
 
 	def private instantiateSystem(CharSequence input) {
 		val instantiated = Wrapper.forType(XsemanticsRuntimeSystem)
-		input.compile[
+		input.compile [
 			assertNoValidationErrors
 			// don't assume that the compiled system is the first one
 			val systemClass = getCompiledClass("my.test.ruleinvokations.System")

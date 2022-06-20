@@ -124,13 +124,11 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
   }
 
   protected Result<Boolean> applyRuleExistsSubtypeWithLambda(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
-    final Function1<org.eclipse.xsemantics.example.fj.fj.Class, Boolean> _function = new Function1<org.eclipse.xsemantics.example.fj.fj.Class, Boolean>() {
-      public Boolean apply(final org.eclipse.xsemantics.example.fj.fj.Class it) {
-        /* G |- it <| right.classref */
-        org.eclipse.xsemantics.example.fj.fj.Class _classref = right.getClassref();
-        boolean _ruleinvocation = subclassSucceeded(G, _trace_, it, _classref);
-        return Boolean.valueOf(_ruleinvocation);
-      }
+    final Function1<org.eclipse.xsemantics.example.fj.fj.Class, Boolean> _function = (org.eclipse.xsemantics.example.fj.fj.Class it) -> {
+      /* G |- it <| right.classref */
+      org.eclipse.xsemantics.example.fj.fj.Class _classref = right.getClassref();
+      boolean _ruleinvocation = subclassSucceeded(G, _trace_, it, _classref);
+      return Boolean.valueOf(_ruleinvocation);
     };
     /* left.classref.superclasses.reverseView.exists[ G |- it <| right.classref ] */
     if (!IterableExtensions.<org.eclipse.xsemantics.example.fj.fj.Class>exists(ListExtensions.<org.eclipse.xsemantics.example.fj.fj.Class>reverseView(this.superclassesInternal(_trace_, left.getClassref())), _function)) {

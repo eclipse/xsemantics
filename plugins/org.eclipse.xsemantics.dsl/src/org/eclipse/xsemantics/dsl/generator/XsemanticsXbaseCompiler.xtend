@@ -47,6 +47,9 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.EcoreUtil2
 
 class XsemanticsXbaseCompiler extends XbaseCompiler {
 	@Inject extension XsemanticsUtils
@@ -430,6 +433,19 @@ class XsemanticsXbaseCompiler extends XbaseCompiler {
 			container = container.eContainer
 		}
 		return true
+	}
+
+	/**
+	 * To respect the semantics of previousFailureMustBeDeclared we must check
+	 * whether it's contained in an OrExpression: when we're inside an OrExpression
+	 * we compile the lambda into an anonymous class, so that redeclaring
+	 * "previousFailure" local variable does not generate invalid Java code
+	 */
+	override protected canCompileToJavaLambda(XClosure closure, LightweightTypeReference typeRef, JvmOperation operation) {
+		return
+			EcoreUtil2.getContainerOfType(closure, OrExpression) === null
+			&&
+			super.canCompileToJavaLambda(closure, typeRef, operation)
 	}
 
 	def dispatch void doInternalToJavaStatement(Fail fail, ITreeAppendable b,

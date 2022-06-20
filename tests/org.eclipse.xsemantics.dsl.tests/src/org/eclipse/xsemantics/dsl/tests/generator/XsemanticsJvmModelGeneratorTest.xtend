@@ -12,14 +12,16 @@
 package org.eclipse.xsemantics.dsl.tests.generator
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.xsemantics.dsl.tests.XsemanticsBaseTest
 import org.eclipse.xsemantics.dsl.tests.XsemanticsInjectorProvider
-import java.util.List
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.eclipse.xtext.xbase.testing.TemporaryFolder
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,12 +30,17 @@ import org.junit.runner.RunWith
 @RunWith(typeof(XtextRunner))
 class XsemanticsJvmModelGeneratorTest extends XsemanticsBaseTest {
 
-	@Inject extension CompilationTestHelper
+	@Inject extension CompilationTestHelper compilationTestHelper
 
 	@Inject FileExtensionProvider extensionProvider
 
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder
+
+	@Before
+	def void setUp() {
+		compilationTestHelper.javaVersion = JavaVersion.JAVA8
+	}
 
 	@Test
 	def testJudgmentDescriptions() {
@@ -4620,24 +4627,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
 
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-      @Override
-      public void accept(final EStructuralFeature it) {
-        TypeSystem.this.overridesInternal(_trace_, it);
-      }
+    final Consumer<EStructuralFeature> _function = (EStructuralFeature it) -> {
+      this.overridesInternal(_trace_, it);
     };
     eClass.getEStructuralFeatures().forEach(_function);
-    final Consumer<EStructuralFeature> _function_1 = new Consumer<EStructuralFeature>() {
-      @Override
-      public void accept(final EStructuralFeature it) {
-        final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-          @Override
-          public void accept(final EStructuralFeature it_1) {
-            TypeSystem.this.isValueInternal(_trace_, it_1);
-          }
-        };
-        eClass.getEStructuralFeatures().forEach(_function);
-      }
+    final Consumer<EStructuralFeature> _function_1 = (EStructuralFeature it) -> {
+      final Consumer<EStructuralFeature> _function_2 = (EStructuralFeature it_1) -> {
+        this.isValueInternal(_trace_, it_1);
+      };
+      eClass.getEStructuralFeatures().forEach(_function_2);
     };
     eClass.getEStructuralFeatures().forEach(_function_1);
     return new Result<Boolean>(true);
@@ -4760,12 +4758,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
     eClass = this.<EClass>clone(obj.eClass());
-    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-      @Override
-      public void accept(final EStructuralFeature it) {
-        final EClass e = TypeSystem.this.<EClass>clone(obj.eClass());
-        InputOutput.<EClass>println(e);
-      }
+    final Consumer<EStructuralFeature> _function = (EStructuralFeature it) -> {
+      final EClass e = this.<EClass>clone(obj.eClass());
+      InputOutput.<EClass>println(e);
     };
     eClass.getEAllStructuralFeatures().forEach(_function);
     return new Result<EClass>(eClass);
