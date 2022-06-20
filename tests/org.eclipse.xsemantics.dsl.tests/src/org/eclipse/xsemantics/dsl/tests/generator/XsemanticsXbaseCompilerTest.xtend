@@ -637,8 +637,8 @@ eClass.getEStructuralFeatures().forEach(_function_1);
 final Consumer<EStructuralFeature> _function_2 = new Consumer<EStructuralFeature>() {
   public void accept(final EStructuralFeature it) {
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-      public void accept(final EStructuralFeature it) {
-        String _name = it.getName();
+      public void accept(final EStructuralFeature it_1) {
+        String _name = it_1.getName();
         /* (!Objects.equal(_name, "foo")); */
       }
     };

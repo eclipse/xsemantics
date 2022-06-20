@@ -32,39 +32,39 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class FjTestsForLambdas extends FjFirstTypeSystem {
   public static final String EXISTSSUBTYPEWITHLAMBDA = "org.eclipse.xsemantics.test.fj.lambda.ExistsSubtypeWithLambda";
-  
+
   @Inject
   private FjAuxiliaryFunctions fjAux;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> existsSubtypeDispatcher;
-  
+
   public FjTestsForLambdas() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
     existsSubtypeDispatcher = buildPolymorphicDispatcher1(
     	"existsSubtypeImpl", 4, "||-", "<<!");
   }
-  
+
   public FjAuxiliaryFunctions getFjAux() {
     return this.fjAux;
   }
-  
+
   public void setFjAux(final FjAuxiliaryFunctions fjAux) {
     this.fjAux = fjAux;
   }
-  
+
   public Result<Boolean> existsSubtype(final Type left, final Type right) {
     return existsSubtype(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Result<Boolean> existsSubtype(final RuleEnvironment _environment_, final Type left, final Type right) {
     return existsSubtype(_environment_, null, left, right);
   }
-  
+
   public Result<Boolean> existsSubtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
     	return existsSubtypeInternal(_environment_, _trace_, left, right);
@@ -72,15 +72,15 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     	return resultForFailure(_e_existsSubtype);
     }
   }
-  
+
   public Boolean existsSubtypeSucceeded(final Type left, final Type right) {
     return existsSubtypeSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Boolean existsSubtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
     return existsSubtypeSucceeded(_environment_, null, left, right);
   }
-  
+
   public Boolean existsSubtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
     	existsSubtypeInternal(_environment_, _trace_, left, right);
@@ -89,7 +89,7 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     	return false;
     }
   }
-  
+
   protected Result<Boolean> existsSubtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
     	checkParamsNotNull(left, right);
@@ -99,11 +99,11 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   protected void existsSubtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> existsSubtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -122,7 +122,7 @@ public class FjTestsForLambdas extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleExistsSubtypeWithLambda(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     final Function1<org.eclipse.xsemantics.example.fj.fj.Class, Boolean> _function = new Function1<org.eclipse.xsemantics.example.fj.fj.Class, Boolean>() {
       public Boolean apply(final org.eclipse.xsemantics.example.fj.fj.Class it) {

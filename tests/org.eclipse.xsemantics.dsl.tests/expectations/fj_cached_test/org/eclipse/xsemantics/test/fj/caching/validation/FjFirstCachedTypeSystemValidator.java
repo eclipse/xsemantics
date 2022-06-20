@@ -18,7 +18,7 @@ import org.eclipse.xsemantics.test.fj.first.validation.FjFirstTypeSystemValidato
 public class FjFirstCachedTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject
   protected FjFirstCachedTypeSystem xsemanticsSystem;
-  
+
   @Override
   protected FjFirstCachedTypeSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;

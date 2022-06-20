@@ -25,34 +25,34 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public static final String EOBJECTECLASS = "org.eclipse.xsemantics.test.errspecification.ecore.EObjectEClass";
-  
+
   public static final String EOBJECTECLASSWITHERRORSPECIFICATION = "org.eclipse.xsemantics.test.errspecification.ecore.EObjectEClassWithErrorSpecification";
-  
+
   public static final String ECLASSSUBTYPING = "org.eclipse.xsemantics.test.errspecification.ecore.EClassSubtyping";
-  
+
   private PolymorphicDispatcher<Result<EClass>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
-  
+
   public TypeSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "|-", "<:");
   }
-  
+
   public Result<EClass> type(final EObject c) {
     return type(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EClass> type(final RuleEnvironment _environment_, final EObject c) {
     return type(_environment_, null, c);
   }
-  
+
   public Result<EClass> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
     try {
     	return typeInternal(_environment_, _trace_, c);
@@ -60,15 +60,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result<Boolean> subtype(final EClass left, final EClass right) {
     return subtype(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final EClass left, final EClass right) {
     return subtype(_environment_, null, left, right);
   }
-  
+
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
     try {
     	return subtypeInternal(_environment_, _trace_, left, right);
@@ -76,15 +76,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_subtype);
     }
   }
-  
+
   public Boolean subtypeSucceeded(final EClass left, final EClass right) {
     return subtypeSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final EClass left, final EClass right) {
     return subtypeSucceeded(_environment_, null, left, right);
   }
-  
+
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
     try {
     	subtypeInternal(_environment_, _trace_, left, right);
@@ -93,7 +93,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Result<EClass> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject c) {
     try {
     	checkParamsNotNull(c);
@@ -103,13 +103,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EObject c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String error = (("cannot find " + c) + "\'s EClass");
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }
-  
+
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass left, final EClass right) {
     try {
     	checkParamsNotNull(left, right);
@@ -119,7 +119,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final EClass left, final EClass right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _name = left.getName();
     String _plus = (_name + " is not a subtype of ");
@@ -132,7 +132,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
   }
-  
+
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -151,13 +151,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EClass> applyRuleEObjectEClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
     eClass = obj.eClass();
     return new Result<EClass>(eClass);
   }
-  
+
   protected Result<EClass> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass obj) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -174,13 +174,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EClass> applyRuleEObjectEClassWithErrorSpecification(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass obj) throws RuleFailedException {
     EClass eClass = null; // output parameter
     eClass = obj.eClass();
     return new Result<EClass>(eClass);
   }
-  
+
   private void eObjectEClassWithErrorSpecificationThrowException(final Exception e_applyRuleEObjectEClassWithErrorSpecification, final EClass obj) throws RuleFailedException {
     String _stringRep = this.stringRep(obj);
     String _plus = ("cannot find EClass for EClass " + _stringRep);
@@ -191,7 +191,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	EOBJECTECLASSWITHERRORSPECIFICATION, e_applyRuleEObjectEClassWithErrorSpecification, new ErrorInformation(source, feature));
   }
-  
+
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass candidate, final EClass superClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -210,7 +210,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleEClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass candidate, final EClass superClass) throws RuleFailedException {
     /* superClass.isSuperTypeOf(candidate) */
     if (!superClass.isSuperTypeOf(candidate)) {

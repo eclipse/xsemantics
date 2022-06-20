@@ -28,32 +28,32 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.orexpressions.ecore.EClassEObject";
-  
+
   public static final String ECLASSEOBJECT2 = "org.eclipse.xsemantics.test.orexpressions.ecore.EClassEObject2";
-  
+
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<EObject>> type2Dispatcher;
-  
+
   public TypeSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
     type2Dispatcher = buildPolymorphicDispatcher1(
     	"type2Impl", 3, "||-", ":");
   }
-  
+
   public Result<EObject> type(final EClass c) {
     return type(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final EClass c) {
     return type(_environment_, null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return typeInternal(_environment_, _trace_, c);
@@ -61,15 +61,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result<EObject> type2(final EClass c) {
     return type2(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EObject> type2(final RuleEnvironment _environment_, final EClass c) {
     return type2(_environment_, null, c);
   }
-  
+
   public Result<EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return type2Internal(_environment_, _trace_, c);
@@ -77,7 +77,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type2);
     }
   }
-  
+
   protected Result<EObject> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	checkParamsNotNull(c);
@@ -87,11 +87,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EObject> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	checkParamsNotNull(c);
@@ -101,11 +101,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void type2ThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EObject> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -124,7 +124,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' */
@@ -149,7 +149,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     return new Result<EObject>(object);
   }
-  
+
   protected Result<EObject> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -168,7 +168,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* eClass.name == 'foo' or object.eClass.name == 'bar' or { val foo = 'foo' object.eClass.name == 'bar2' eClass.name == foo } */
