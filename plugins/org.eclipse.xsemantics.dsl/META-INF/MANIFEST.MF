@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
  org.eclipse.xsemantics.runtime;visibility:=reexport,
- org.objectweb.asm;bundle-version="9.3.0";visibility:=reexport
+ org.objectweb.asm;bundle-version="9.3.0";visibility:=reexport,
+ org.eclipse.xtend.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xsemantics.dsl,
