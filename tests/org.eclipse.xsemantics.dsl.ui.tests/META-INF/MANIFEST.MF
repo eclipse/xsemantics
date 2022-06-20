@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.xsemantics.dsl.ui,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.ui.testing,
- org.eclipse.xtext.xbase.ui.testing
+ org.eclipse.xtext.xbase.ui.testing,
+ org.eclipse.ui.ide
 Export-Package: org.eclipse.xsemantics.dsl.tests.ui.contentassist,
  org.eclipse.xsemantics.dsl.tests.ui.editor,
  org.eclipse.xsemantics.dsl.tests.ui.outline,

@@ -14,22 +14,17 @@
  */
 package org.eclipse.xsemantics.tests.swtbot;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-
-import java.util.Arrays;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.cleanWorkspace;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.waitForBuild;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.xsemantics.dsl.tests.utils.ui.ProjectImportUtil;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xsemantics.dsl.tests.utils.ui.PluginProjectHelper;
-import org.eclipse.xsemantics.dsl.ui.internal.DslActivator;
 
 /**
  * @author Lorenzo Bettini
@@ -42,12 +37,7 @@ public abstract class XsemanticsWorkbenchBase extends XsemanticsSwtbotTestBase {
 
 	@BeforeClass
 	public static void setupProjectForTesting() throws Exception {
-		Injector injector = DslActivator.getInstance().getInjector(DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS);
-		
-		PluginProjectHelper projectHelper = injector.getInstance(PluginProjectHelper.class);
-		
-		projectHelper.createJavaPluginProject
-			(TEST_PROJECT, Arrays.asList("org.eclipse.xsemantics.runtime"));
+		ProjectImportUtil.importJavaProject(TEST_PROJECT);
 		
 //		SWTBotMenu fileMenu = bot.menu("File");
 //		SWTBotMenu newMenu = fileMenu.menu("New");

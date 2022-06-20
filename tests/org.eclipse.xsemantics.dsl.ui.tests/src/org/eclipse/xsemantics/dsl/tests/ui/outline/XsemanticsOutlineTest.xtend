@@ -12,8 +12,7 @@
 package org.eclipse.xsemantics.dsl.tests.ui.outline
 
 import org.eclipse.core.runtime.CoreException
-import org.eclipse.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
-import org.eclipse.xsemantics.dsl.ui.internal.DslActivator
+import org.eclipse.xsemantics.dsl.tests.utils.ui.ProjectImportUtil
 import org.eclipse.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
 import org.eclipse.xtext.testing.Flaky
 import org.eclipse.xtext.testing.InjectWith
@@ -33,17 +32,9 @@ class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
 	@Rule
 	public Flaky.Rule flakyRule = new Flaky.Rule();
 	
-	override protected getEditorId() {
-		DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS
-	}
-	
 	override protected createTestJavaProject() throws CoreException {
-		val injector = DslActivator.getInstance().getInjector(DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS);
-		
-		val projectHelper = injector.getInstance(PluginProjectHelper)
-		
-		projectHelper.createJavaPluginProject
-			(TEST_PROJECT, newArrayList("org.eclipse.xsemantics.runtime"))
+		ProjectImportUtil
+					.importJavaProject(TEST_PROJECT)
 		
 		waitForBuild
 	}

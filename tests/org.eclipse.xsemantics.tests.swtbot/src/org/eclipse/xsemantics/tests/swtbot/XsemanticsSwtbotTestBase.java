@@ -61,7 +61,7 @@ import org.junit.runner.RunWith;
 @RunWith(SWTBotJunit4ClassRunner.class)
 public abstract class XsemanticsSwtbotTestBase {
 
-	protected static final String TEST_PROJECT = "MyTestProject";
+	protected static final String TEST_PROJECT = "org.eclipse.xsemantics.dsl.ui.tests.project";
 	protected static SWTWorkbenchBot bot;
 	protected static int SHELL_TIMEOUT = 150000;
 
