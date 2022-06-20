@@ -48,6 +48,7 @@ Contributors:
    <requires>
       <import feature="org.eclipse.xtext.xbase" version="2.27.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.xtext.ui" version="2.27.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.pde.ui"/>
    </requires>
 
    <plugin

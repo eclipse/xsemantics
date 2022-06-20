@@ -72,7 +72,6 @@ Contributors:
 		<module>../../features/org.eclipse.xsemantics.feature</module>
 		<module>../../features/org.eclipse.xsemantics.sdk</module>
 
-		<module>../../tests/org.eclipse.xsemantics.tests.pde.utils</module>
 		<module>../../features/org.eclipse.xsemantics.tests.feature</module>
 		<module>../../tests/org.eclipse.xsemantics.tests.swtbot</module>
 
