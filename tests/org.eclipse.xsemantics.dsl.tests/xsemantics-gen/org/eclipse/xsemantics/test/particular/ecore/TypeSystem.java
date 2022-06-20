@@ -579,11 +579,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
 
   protected Result<Boolean> applyRuleForEach(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
-    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-      public void accept(final EStructuralFeature it) {
-        /* G |- it */
-        type1Internal(G, _trace_, it);
-      }
+    final Consumer<EStructuralFeature> _function = (EStructuralFeature it) -> {
+      /* G |- it */
+      type1Internal(G, _trace_, it);
     };
     obj.eClass().getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
@@ -609,11 +607,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
 
   protected Result<Boolean> applyRuleForEachWithBooleanExpressionInside(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
-      public void accept(final EStructuralFeature it) {
-        String _name = it.getName();
-        /* (!Objects.equal(_name, "foo")); */
-      }
+    final Consumer<EStructuralFeature> _function = (EStructuralFeature it) -> {
+      String _name = it.getName();
+      /* (!Objects.equal(_name, "foo")); */
     };
     eClass.getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
@@ -680,11 +676,9 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
   }
 
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
-    final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
-      public Boolean apply(final EStructuralFeature it) {
-        String _name = it.getName();
-        return Boolean.valueOf((!Objects.equal(_name, "foo")));
-      }
+    final Function1<EStructuralFeature, Boolean> _function = (EStructuralFeature it) -> {
+      String _name = it.getName();
+      return Boolean.valueOf((!Objects.equal(_name, "foo")));
     };
     boolean _forall = IterableExtensions.<EStructuralFeature>forall(eClass.getEStructuralFeatures(), _function);
     /* eClass.EStructuralFeatures.forall [ it.name != 'foo' ] */

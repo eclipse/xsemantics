@@ -365,11 +365,9 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     /* G |- newExp : newExp.args << fields */
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
-    final Consumer<Expression> _function = new Consumer<Expression>() {
-      public void accept(final Expression it) {
-        /* G |- it */
-        checkInternal(G, _trace_, it);
-      }
+    final Consumer<Expression> _function = (Expression it) -> {
+      /* G |- it */
+      checkInternal(G, _trace_, it);
     };
     newExp.getArgs().forEach(_function);
     return new Result<Boolean>(true);
@@ -408,77 +406,71 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
         sneakyThrowRuleFailedException("!superClasses.contains(cl)");
       }
       List<Field> inheritedFields = this.fjAux.getFields(cl.getSuperclass());
-      final Consumer<Field> _function = new Consumer<Field>() {
-        public void accept(final Field inheritedField) {
-          List<Field> _selectFields = FjAltTypeSystem.this.fjAux.selectFields(cl);
-          for (final Field field : _selectFields) {
-            /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-            {
-              RuleFailedException previousFailure = null;
-              try {
-                String _name = field.getName();
-                String _name_1 = inheritedField.getName();
-                boolean _notEquals = (!Objects.equal(_name, _name_1));
-                /* field.name != inheritedField.name */
-                if (!_notEquals) {
-                  sneakyThrowRuleFailedException("field.name != inheritedField.name");
-                }
-              } catch (Exception e) {
-                previousFailure = extractRuleFailedException(e);
-                /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
-                String _stringRep = FjAltTypeSystem.this.stringRep(inheritedField.eContainer());
-                String _plus = ("field already defined in superclass " + _stringRep);
-                String error = _plus;
-                throwForExplicitFail(error, new ErrorInformation(null, null));
+      final Consumer<Field> _function = (Field inheritedField) -> {
+        List<Field> _selectFields = this.fjAux.selectFields(cl);
+        for (final Field field : _selectFields) {
+          /* field.name != inheritedField.name or fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+          {
+            RuleFailedException previousFailure = null;
+            try {
+              String _name = field.getName();
+              String _name_1 = inheritedField.getName();
+              boolean _notEquals_1 = (!Objects.equal(_name, _name_1));
+              /* field.name != inheritedField.name */
+              if (!_notEquals_1) {
+                sneakyThrowRuleFailedException("field.name != inheritedField.name");
               }
+            } catch (Exception e) {
+              previousFailure = extractRuleFailedException(e);
+              /* fail error "field already defined in superclass " + stringRep(inheritedField.eContainer) */
+              String _stringRep = this.stringRep(inheritedField.eContainer());
+              String _plus = ("field already defined in superclass " + _stringRep);
+              String error = _plus;
+              throwForExplicitFail(error, new ErrorInformation(null, null));
             }
           }
         }
       };
       inheritedFields.forEach(_function);
       List<Method> inheritedMethods = this.fjAux.getMethods(cl.getSuperclass());
-      final Consumer<Method> _function_1 = new Consumer<Method>() {
-        public void accept(final Method inheritedMethod) {
-          final Consumer<Method> _function = new Consumer<Method>() {
-            public void accept(final Method it) {
-              /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
-              {
-                RuleFailedException previousFailure = null;
-                try {
-                  String _name = it.getName();
-                  String _name_1 = inheritedMethod.getName();
-                  boolean _notEquals = (!Objects.equal(_name, _name_1));
-                  /* it.name != inheritedMethod.name */
-                  if (!_notEquals) {
-                    sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
-                  }
-                } catch (Exception e) {
-                  previousFailure = extractRuleFailedException(e);
-                  /* G |- it.type ~~ inheritedMethod.type */
-                  Type _type = it.getType();
-                  Type _type_1 = inheritedMethod.getType();
-                  equalstypeInternal(G, _trace_, _type, _type_1);
-                  int _size = it.getParams().size();
-                  int _size_1 = inheritedMethod.getParams().size();
-                  boolean _equals = (_size == _size_1);
-                  /* it.params.size == inheritedMethod.params.size */
-                  if (!_equals) {
-                    sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
-                  }
-                  final Iterator<Parameter> inheritedMethodParamsIt = inheritedMethod.getParams().iterator();
-                  EList<Parameter> _params = it.getParams();
-                  for (final Parameter param : _params) {
-                    /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
-                    Type _type_2 = param.getType();
-                    Type _type_3 = inheritedMethodParamsIt.next().getType();
-                    equalstypeInternal(G, _trace_, _type_2, _type_3);
-                  }
-                }
+      final Consumer<Method> _function_1 = (Method inheritedMethod) -> {
+        final Consumer<Method> _function_2 = (Method it) -> {
+          /* it.name != inheritedMethod.name or { G |- it.type ~~ inheritedMethod.type it.params.size == inheritedMethod.params.size val inheritedMethodParamsIt = inheritedMethod.params.iterator for (param : it.params) { G |- param.type ~~ inheritedMethodParamsIt.next.type } } */
+          {
+            RuleFailedException previousFailure = null;
+            try {
+              String _name = it.getName();
+              String _name_1 = inheritedMethod.getName();
+              boolean _notEquals_1 = (!Objects.equal(_name, _name_1));
+              /* it.name != inheritedMethod.name */
+              if (!_notEquals_1) {
+                sneakyThrowRuleFailedException("it.name != inheritedMethod.name");
+              }
+            } catch (Exception e) {
+              previousFailure = extractRuleFailedException(e);
+              /* G |- it.type ~~ inheritedMethod.type */
+              Type _type = it.getType();
+              Type _type_1 = inheritedMethod.getType();
+              equalstypeInternal(G, _trace_, _type, _type_1);
+              int _size = it.getParams().size();
+              int _size_1 = inheritedMethod.getParams().size();
+              boolean _equals = (_size == _size_1);
+              /* it.params.size == inheritedMethod.params.size */
+              if (!_equals) {
+                sneakyThrowRuleFailedException("it.params.size == inheritedMethod.params.size");
+              }
+              final Iterator<Parameter> inheritedMethodParamsIt = inheritedMethod.getParams().iterator();
+              EList<Parameter> _params = it.getParams();
+              for (final Parameter param : _params) {
+                /* G |- param.type ~~ inheritedMethodParamsIt.next.type */
+                Type _type_2 = param.getType();
+                Type _type_3 = inheritedMethodParamsIt.next().getType();
+                equalstypeInternal(G, _trace_, _type_2, _type_3);
               }
             }
-          };
-          FjAltTypeSystem.this.fjAux.selectMethods(cl).forEach(_function);
-        }
+          }
+        };
+        this.fjAux.selectMethods(cl).forEach(_function_2);
       };
       inheritedMethods.forEach(_function_1);
     }
