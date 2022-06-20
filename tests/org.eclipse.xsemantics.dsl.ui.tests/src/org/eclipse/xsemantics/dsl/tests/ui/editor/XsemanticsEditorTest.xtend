@@ -12,35 +12,28 @@
 package org.eclipse.xsemantics.dsl.tests.ui.editor
 
 import com.google.inject.Inject
-import org.eclipse.xsemantics.dsl.ui.internal.DslActivator
+import org.eclipse.xsemantics.dsl.tests.utils.ui.ProjectImportUtil
 import org.eclipse.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
 import org.eclipse.xsemantics.dsl.util.XsemanticsUtils
 import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
-import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
-
-import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XsemanticsUiInjectorProvider))
 class XsemanticsEditorTest extends AbstractEditorTest {
 	
-	val TEST_PROJECT = "mytestproject"
+	val TEST_PROJECT = "org.eclipse.xsemantics.dsl.ui.tests.project"
 	
 	@Inject extension XsemanticsUtils
-	
-	override protected getEditorId() {
-		DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS
-	}
 	
 	@Before
 	override void setUp() {
@@ -49,9 +42,8 @@ class XsemanticsEditorTest extends AbstractEditorTest {
 	}
 	
 	def void createJavaProjectWithXtextNature() {
-		createJavaProject(TEST_PROJECT) => [
-			getProject().addNature(XtextProjectHelper::NATURE_ID)
-		]
+		ProjectImportUtil
+					.importJavaProject(TEST_PROJECT)
 	}
 
 	def createTestFile(CharSequence contents) {

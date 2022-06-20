@@ -76,4 +76,11 @@ Contributors:
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.eclipse.xsemantics.dsl.ui.tests.project"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
