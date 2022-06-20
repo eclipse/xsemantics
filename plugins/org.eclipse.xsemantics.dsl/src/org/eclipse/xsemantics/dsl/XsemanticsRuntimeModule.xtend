@@ -14,6 +14,7 @@
  */
 package org.eclipse.xsemantics.dsl
 
+import org.eclipse.xsemantics.dsl.generator.XsemanticsGeneratorConfigProvider
 import org.eclipse.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider
 import org.eclipse.xsemantics.dsl.generator.XsemanticsXbaseCompiler
 import org.eclipse.xsemantics.dsl.internal.parser.PatchedLookAheadPreservingNodeModelBuilder
@@ -22,6 +23,7 @@ import org.eclipse.xsemantics.dsl.validation.XsemanticsXExpressionHelper
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfigurationProvider
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.util.XExpressionHelper
@@ -40,6 +42,10 @@ class XsemanticsRuntimeModule extends AbstractXsemanticsRuntimeModule {
 
 	def Class<? extends OutputConfigurationProvider> bindOutputConfigurationProvider() {
 		return XsemanticsOutputConfigurationProvider
+	}
+
+	def Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+		return XsemanticsGeneratorConfigProvider
 	}
 
 	def Class<? extends XExpressionHelper> bindXExpressionHelper() {
