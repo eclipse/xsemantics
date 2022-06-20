@@ -12,7 +12,6 @@ package org.eclipse.xsemantics.example.expressions.typing.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xsemantics.example.expressions.typing.CachedExpressionsSemantics;
-import org.eclipse.xsemantics.example.expressions.typing.validation.ExtendedExpressionsSemanticsValidator;
 
 /**
  * This system caches typing for variables, which involves
@@ -22,7 +21,7 @@ import org.eclipse.xsemantics.example.expressions.typing.validation.ExtendedExpr
 public class CachedExpressionsSemanticsValidator extends ExtendedExpressionsSemanticsValidator {
   @Inject
   protected CachedExpressionsSemantics xsemanticsSystem;
-  
+
   @Override
   protected CachedExpressionsSemantics getXsemanticsSystem() {
     return this.xsemanticsSystem;

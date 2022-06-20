@@ -26,14 +26,14 @@ import org.eclipse.xtext.validation.Check;
 public class ExpressionsSemanticsValidator extends AbstractExpressionsValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
+
   @Inject
   protected ExpressionsSemantics xsemanticsSystem;
-  
+
   protected ExpressionsSemantics getXsemanticsSystem() {
     return this.xsemanticsSystem;
   }
-  
+
   @Check
   public void checkVariable(final Variable variable) {
     errorGenerator.generateErrors(this,

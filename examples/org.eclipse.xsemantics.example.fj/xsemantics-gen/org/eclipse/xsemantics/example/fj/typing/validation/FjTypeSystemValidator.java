@@ -27,42 +27,42 @@ import org.eclipse.xtext.validation.Check;
 public class FjTypeSystemValidator extends AbstractDeclarativeValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
+
   @Inject
   protected FjTypeSystem xsemanticsSystem;
-  
+
   protected FjTypeSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;
   }
-  
+
   @Check
   public void checkMethodBody(final Method method) {
     errorGenerator.generateErrors(this,
     	getXsemanticsSystem().checkMethodBody(method),
     		method);
   }
-  
+
   @Check
   public void checkField(final Field field) {
     errorGenerator.generateErrors(this,
     	getXsemanticsSystem().checkField(field),
     		field);
   }
-  
+
   @Check
   public void checkMethodOverride(final Method method) {
     errorGenerator.generateErrors(this,
     	getXsemanticsSystem().checkMethodOverride(method),
     		method);
   }
-  
+
   @Check
   public void checkClassHierachyNotCyclic(final org.eclipse.xsemantics.example.fj.fj.Class cl) {
     errorGenerator.generateErrors(this,
     	getXsemanticsSystem().checkClassHierachyNotCyclic(cl),
     		cl);
   }
-  
+
   @Check
   public void checkMain(final Program program) {
     errorGenerator.generateErrors(this,

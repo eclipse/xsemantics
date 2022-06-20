@@ -12,7 +12,6 @@ package org.eclipse.xsemantics.example.expressions.typing.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics;
-import org.eclipse.xsemantics.example.expressions.typing.validation.ExpressionsSemanticsValidator;
 
 /**
  * This system is more involved:
@@ -23,7 +22,7 @@ import org.eclipse.xsemantics.example.expressions.typing.validation.ExpressionsS
 public class ExtendedExpressionsSemanticsValidator extends ExpressionsSemanticsValidator {
   @Inject
   protected ExtendedExpressionsSemantics xsemanticsSystem;
-  
+
   @Override
   protected ExtendedExpressionsSemantics getXsemanticsSystem() {
     return this.xsemanticsSystem;

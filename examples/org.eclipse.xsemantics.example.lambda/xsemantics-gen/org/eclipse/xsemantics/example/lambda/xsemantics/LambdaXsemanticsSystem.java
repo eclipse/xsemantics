@@ -29,8 +29,6 @@ import org.eclipse.xsemantics.example.lambda.lambda.Term;
 import org.eclipse.xsemantics.example.lambda.lambda.Type;
 import org.eclipse.xsemantics.example.lambda.lambda.TypeVariable;
 import org.eclipse.xsemantics.example.lambda.lambda.Variable;
-import org.eclipse.xsemantics.example.lambda.xsemantics.LambdaUtils;
-import org.eclipse.xsemantics.example.lambda.xsemantics.TypeSubstitutions;
 import org.eclipse.xsemantics.runtime.ErrorInformation;
 import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
@@ -42,42 +40,42 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
   public static final String NOTOCCUR = "org.eclipse.xsemantics.example.lambda.xsemantics.Notoccur";
-  
+
   public static final String TYPESUBSTITUTION = "org.eclipse.xsemantics.example.lambda.xsemantics.Typesubstitution";
-  
+
   public static final String UNIFY = "org.eclipse.xsemantics.example.lambda.xsemantics.Unify";
-  
+
   public static final String PARAMETERTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ParameterType";
-  
+
   public static final String STRINGCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.StringConstantType";
-  
+
   public static final String INTCONSTANTTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.IntConstantType";
-  
+
   public static final String VARIABLETYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.VariableType";
-  
+
   public static final String ARITHMETICSTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ArithmeticsType";
-  
+
   public static final String ABSTRACTIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.AbstractionType";
-  
+
   public static final String APPLICATIONTYPE = "org.eclipse.xsemantics.example.lambda.xsemantics.ApplicationType";
-  
+
   @Inject
   private LambdaUtils lambdaUtils;
-  
+
   private PolymorphicDispatcher<Boolean> notoccurDispatcher;
-  
+
   private PolymorphicDispatcher<Type> typesubstitutionDispatcher;
-  
+
   private PolymorphicDispatcher<Type> unifyDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Type>> paramtypeDispatcher;
-  
+
   public LambdaXsemanticsSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 4, "|-", "|>", ":");
@@ -90,19 +88,19 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     unifyDispatcher = buildPolymorphicDispatcher(
     	"unifyImpl", 4);
   }
-  
+
   public LambdaUtils getLambdaUtils() {
     return this.lambdaUtils;
   }
-  
+
   public void setLambdaUtils(final LambdaUtils lambdaUtils) {
     this.lambdaUtils = lambdaUtils;
   }
-  
+
   public Boolean notoccur(final Type type, final Type other) throws RuleFailedException {
     return notoccur(null, type, other);
   }
-  
+
   public Boolean notoccur(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
     try {
     	return notoccurInternal(_trace_, type, other);
@@ -110,11 +108,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	throw extractRuleFailedException(_e_notoccur);
     }
   }
-  
+
   public Type typesubstitution(final TypeSubstitutions substitutions, final Type original) throws RuleFailedException {
     return typesubstitution(null, substitutions, original);
   }
-  
+
   public Type typesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) throws RuleFailedException {
     try {
     	return typesubstitutionInternal(_trace_, substitutions, original);
@@ -122,11 +120,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	throw extractRuleFailedException(_e_typesubstitution);
     }
   }
-  
+
   public Type unify(final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
     return unify(null, substitutions, left, right);
   }
-  
+
   public Type unify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) throws RuleFailedException {
     try {
     	return unifyInternal(_trace_, substitutions, left, right);
@@ -134,15 +132,15 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	throw extractRuleFailedException(_e_unify);
     }
   }
-  
+
   public Result<Type> type(final TypeSubstitutions substitutions, final Term term) {
     return type(new RuleEnvironment(), null, substitutions, term);
   }
-  
+
   public Result<Type> type(final RuleEnvironment _environment_, final TypeSubstitutions substitutions, final Term term) {
     return type(_environment_, null, substitutions, term);
   }
-  
+
   public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Term term) {
     try {
     	return typeInternal(_environment_, _trace_, substitutions, term);
@@ -150,15 +148,15 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result<Type> paramtype(final Parameter param) {
     return paramtype(new RuleEnvironment(), null, param);
   }
-  
+
   public Result<Type> paramtype(final RuleEnvironment _environment_, final Parameter param) {
     return paramtype(_environment_, null, param);
   }
-  
+
   public Result<Type> paramtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Parameter param) {
     try {
     	return paramtypeInternal(_environment_, _trace_, param);
@@ -166,11 +164,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_paramtype);
     }
   }
-  
+
   public Result<Boolean> checkProgram(final Program program) {
     return checkProgram(null, program);
   }
-  
+
   public Result<Boolean> checkProgram(final RuleApplicationTrace _trace_, final Program program) {
     try {
     	return checkProgramInternal(_trace_, program);
@@ -178,7 +176,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_CheckProgram);
     }
   }
-  
+
   protected Result<Boolean> checkProgramInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     this.lambdaUtils.resetCounter();
     /* empty |- new TypeSubstitutions() |> program.term : var Type type */
@@ -191,7 +189,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Boolean notoccurInternal(final RuleApplicationTrace _trace_, final Type type, final Type other) {
     try {
     	checkParamsNotNull(type, other);
@@ -201,7 +199,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected void notoccurThrowException(final String _error, final String _issue, final Exception _ex, final Type type, final Type other, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(type);
     String _plus = (_stringRep + " occurs in ");
@@ -211,7 +209,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }
-  
+
   protected Type typesubstitutionInternal(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type original) {
     try {
     	checkParamsNotNull(substitutions, original);
@@ -221,11 +219,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typesubstitutionThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Type original, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Type unifyInternal(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type left, final Type right) {
     try {
     	checkParamsNotNull(substitutions, left, right);
@@ -235,7 +233,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void unifyThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(left);
     String _plus = ("cannot unify " + _stringRep);
@@ -247,7 +245,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }
-  
+
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Term term) {
     try {
     	checkParamsNotNull(substitutions, term);
@@ -257,11 +255,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final TypeSubstitutions substitutions, final Term term, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Type> paramtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Parameter param) {
     try {
     	checkParamsNotNull(param);
@@ -271,11 +269,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void paramtypeThrowException(final String _error, final String _issue, final Exception _ex, final Parameter param, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -294,7 +292,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final Type type, final Type other) throws RuleFailedException {
     /* true */
     if (!true) {
@@ -302,7 +300,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return true;
   }
-  
+
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -321,7 +319,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final TypeVariable variable, final TypeVariable other) throws RuleFailedException {
     String _typevarName = variable.getTypevarName();
     String _typevarName_1 = other.getTypevarName();
@@ -332,7 +330,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return true;
   }
-  
+
   protected Boolean notoccurImpl(final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -351,7 +349,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Boolean applyAuxFunNotoccur(final RuleApplicationTrace _trace_, final TypeVariable variable, final ArrowType arrowType) throws RuleFailedException {
     Boolean _notoccur = this.notoccurInternal(_trace_, variable, arrowType.getLeft());
     /* notoccur(variable, arrowType.left) */
@@ -365,7 +363,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return true;
   }
-  
+
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -384,11 +382,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type type) throws RuleFailedException {
     return type;
   }
-  
+
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -407,7 +405,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable variable) throws RuleFailedException {
     Type _xblockexpression = null;
     {
@@ -427,7 +425,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Type typesubstitutionImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -446,7 +444,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunTypesubstitution(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrowType) throws RuleFailedException {
     ArrowType _xblockexpression = null;
     {
@@ -460,7 +458,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -479,7 +477,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Type t1, final Type t2) throws RuleFailedException {
     Object _xblockexpression = null;
     {
@@ -489,7 +487,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return ((Type)_xblockexpression);
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -508,11 +506,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringType t1, final StringType t2) throws RuleFailedException {
     return EcoreUtil.<StringType>copy(t1);
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -531,11 +529,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntType t1, final IntType t2) throws RuleFailedException {
     return EcoreUtil.<IntType>copy(t1);
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -554,7 +552,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable typeVar, final BasicType basicType) throws RuleFailedException {
     BasicType _xblockexpression = null;
     {
@@ -563,7 +561,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -582,11 +580,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final BasicType basicType, final TypeVariable typeVar) throws RuleFailedException {
     return this.unifyInternal(_trace_, substitutions, typeVar, basicType);
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable left, final TypeVariable right) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -605,7 +603,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable left, final TypeVariable right) throws RuleFailedException {
     TypeVariable _xblockexpression = null;
     {
@@ -616,7 +614,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable v, final ArrowType arrow) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -635,7 +633,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final TypeVariable v, final ArrowType arrow) throws RuleFailedException {
     ArrowType _xblockexpression = null;
     {
@@ -649,7 +647,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow, final TypeVariable v) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -668,11 +666,11 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow, final TypeVariable v) throws RuleFailedException {
     return this.unifyInternal(_trace_, substitutions, v, arrow);
   }
-  
+
   protected Type unifyImpl(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -691,7 +689,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Type applyAuxFunUnify(final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final ArrowType arrow1, final ArrowType arrow2) throws RuleFailedException {
     ArrowType _xblockexpression = null;
     {
@@ -707,7 +705,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return _xblockexpression;
   }
-  
+
   protected Result<Type> paramtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -726,7 +724,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleParameterType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Parameter param) throws RuleFailedException {
     Type type = null; // output parameter
     /* { param.type !== null type = EcoreUtil.copy(param.type) } or type = lambdaUtils.createFreshTypeVariable */
@@ -747,7 +745,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     }
     return new Result<Type>(type);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -766,17 +764,17 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleStringConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleStringConstantType_2(G, substitutions, stringConstant));
   }
-  
+
   private StringType _applyRuleStringConstantType_2(final RuleEnvironment G, final TypeSubstitutions substitutions, final StringConstant stringConstant) throws RuleFailedException {
     StringType _createStringType = this.lambdaUtils.createStringType();
     return _createStringType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -795,17 +793,17 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleIntConstantType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleIntConstantType_2(G, substitutions, intConstant));
   }
-  
+
   private IntType _applyRuleIntConstantType_2(final RuleEnvironment G, final TypeSubstitutions substitutions, final IntConstant intConstant) throws RuleFailedException {
     IntType _createIntType = this.lambdaUtils.createIntType();
     return _createIntType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -824,14 +822,14 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleVariableType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Variable variable) throws RuleFailedException {
     Type type = null; // output parameter
     type = this.typesubstitutionInternal(_trace_, substitutions, 
       EcoreUtil.<Type>copy(this.<Type>env(G, variable.getRef(), Type.class)));
     return new Result<Type>(type);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Arithmetics arithmetics) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -850,7 +848,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleArithmeticsType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Arithmetics arithmetics) throws RuleFailedException {
     IntType intType = null; // output parameter
     intType = this.lambdaUtils.createIntType();
@@ -864,7 +862,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     this.unifyInternal(_trace_, substitutions, termType, intType);
     return new Result<Type>(intType);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Abstraction abstraction) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -883,7 +881,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleAbstractionType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Abstraction abstraction) throws RuleFailedException {
     ArrowType type = null; // output parameter
     /* G |~ abstraction.param : var Type paramType */
@@ -908,7 +906,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     type = this.lambdaUtils.createArrowType(paramType, termType);
     return new Result<Type>(type);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Application application) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -927,7 +925,7 @@ public class LambdaXsemanticsSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleApplicationType(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypeSubstitutions substitutions, final Application application) throws RuleFailedException {
     Type type = null; // output parameter
     /* G |- substitutions |> application.fun : var Type funType */

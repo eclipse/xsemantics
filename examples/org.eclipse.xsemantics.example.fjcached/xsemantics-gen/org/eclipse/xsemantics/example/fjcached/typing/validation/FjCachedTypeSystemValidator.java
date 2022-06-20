@@ -21,7 +21,7 @@ import org.eclipse.xsemantics.example.fjcached.typing.FjCachedTypeSystem;
 public class FjCachedTypeSystemValidator extends FjTypeSystemValidator {
   @Inject
   protected FjCachedTypeSystem xsemanticsSystem;
-  
+
   @Override
   protected FjCachedTypeSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;

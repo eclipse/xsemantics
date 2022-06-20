@@ -21,14 +21,14 @@ import org.eclipse.xtext.validation.Check;
 public class LambdaXsemanticsSystemValidator extends AbstractLambdaValidator {
   @Inject
   protected XsemanticsValidatorErrorGenerator errorGenerator;
-  
+
   @Inject
   protected LambdaXsemanticsSystem xsemanticsSystem;
-  
+
   protected LambdaXsemanticsSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;
   }
-  
+
   @Check
   public void checkProgram(final Program program) {
     errorGenerator.generateErrors(this,

@@ -52,65 +52,65 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
   public static final String NUMERALLITERAL = "org.eclipse.xsemantics.example.expressions.typing.NumeralLiteral";
-  
+
   public static final String BOOLEANLITERAL = "org.eclipse.xsemantics.example.expressions.typing.BooleanLiteral";
-  
+
   public static final String STRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.StringLiteral";
-  
+
   public static final String MULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.MultiOrDiv";
-  
+
   public static final String MINUS = "org.eclipse.xsemantics.example.expressions.typing.Minus";
-  
+
   public static final String PLUS = "org.eclipse.xsemantics.example.expressions.typing.Plus";
-  
+
   public static final String COMPARISON = "org.eclipse.xsemantics.example.expressions.typing.Comparison";
-  
+
   public static final String EQUALS = "org.eclipse.xsemantics.example.expressions.typing.Equals";
-  
+
   public static final String BOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.BooleanNegation";
-  
+
   public static final String ANDOR = "org.eclipse.xsemantics.example.expressions.typing.AndOr";
-  
+
   public static final String ARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.ArithmeticSigned";
-  
+
   public static final String VARIABLEREFERENCE = "org.eclipse.xsemantics.example.expressions.typing.VariableReference";
-  
+
   public static final String VARIABLE = "org.eclipse.xsemantics.example.expressions.typing.Variable";
-  
+
   public static final String INTERPRETNUMBERLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretNumberLiteral";
-  
+
   public static final String INTERPRETSTRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretStringLiteral";
-  
+
   public static final String INTERPRETBOOLEANLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretBooleanLiteral";
-  
+
   public static final String INTERPRETMINUS = "org.eclipse.xsemantics.example.expressions.typing.InterpretMinus";
-  
+
   public static final String INTERPRETMULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.InterpretMultiOrDiv";
-  
+
   public static final String INTERPRETARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.InterpretArithmeticSigned";
-  
+
   public static final String INTERPRETANDOR = "org.eclipse.xsemantics.example.expressions.typing.InterpretAndOr";
-  
+
   public static final String INTERPRETBOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.InterpretBooleanNegation";
-  
+
   public static final String INTERPRETCOMPARISON = "org.eclipse.xsemantics.example.expressions.typing.InterpretComparison";
-  
+
   public static final String INTERPRETEQUALS = "org.eclipse.xsemantics.example.expressions.typing.InterpretEquals";
-  
+
   public static final String INTERPRETPLUS = "org.eclipse.xsemantics.example.expressions.typing.InterpretPlus";
-  
+
   public static final String INTERPRETVARIABLEREFENRENCE = "org.eclipse.xsemantics.example.expressions.typing.InterpretVariableRefenrence";
-  
+
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Type>> vartypeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Object>> interpretDispatcher;
-  
+
   public ExpressionsSemantics() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
@@ -119,15 +119,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     interpretDispatcher = buildPolymorphicDispatcher1(
     	"interpretImpl", 3, "|-", "~>");
   }
-  
+
   public Result<Type> type(final Expression expression) {
     return type(new RuleEnvironment(), null, expression);
   }
-  
+
   public Result<Type> type(final RuleEnvironment _environment_, final Expression expression) {
     return type(_environment_, null, expression);
   }
-  
+
   public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	return typeInternal(_environment_, _trace_, expression);
@@ -135,15 +135,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result<Type> vartype(final Variable variable) {
     return vartype(new RuleEnvironment(), null, variable);
   }
-  
+
   public Result<Type> vartype(final RuleEnvironment _environment_, final Variable variable) {
     return vartype(_environment_, null, variable);
   }
-  
+
   public Result<Type> vartype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Variable variable) {
     try {
     	return vartypeInternal(_environment_, _trace_, variable);
@@ -151,15 +151,15 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_vartype);
     }
   }
-  
+
   public Result<Object> interpret(final Expression expression) {
     return interpret(new RuleEnvironment(), null, expression);
   }
-  
+
   public Result<Object> interpret(final RuleEnvironment _environment_, final Expression expression) {
     return interpret(_environment_, null, expression);
   }
-  
+
   public Result<Object> interpret(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	return interpretInternal(_environment_, _trace_, expression);
@@ -167,11 +167,11 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_interpret);
     }
   }
-  
+
   public Result<Boolean> checkVariable(final Variable variable) {
     return checkVariable(null, variable);
   }
-  
+
   public Result<Boolean> checkVariable(final RuleApplicationTrace _trace_, final Variable variable) {
     try {
     	return checkVariableInternal(_trace_, variable);
@@ -179,7 +179,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_CheckVariable);
     }
   }
-  
+
   protected Result<Boolean> checkVariableInternal(final RuleApplicationTrace _trace_, final Variable variable) throws RuleFailedException {
     /* empty ||- variable : var Type type */
     Type type = null;
@@ -189,7 +189,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -199,7 +199,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(expression);
     String _plus = ("cannot type " + _stringRep);
@@ -208,7 +208,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
-  
+
   protected Result<Type> vartypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Variable variable) {
     try {
     	checkParamsNotNull(variable);
@@ -218,7 +218,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void vartypeThrowException(final String _error, final String _issue, final Exception _ex, final Variable variable, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(variable);
     String _plus = ("cannot type " + _stringRep);
@@ -229,7 +229,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
   }
-  
+
   protected Result<Object> interpretInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
     	checkParamsNotNull(expression);
@@ -239,11 +239,11 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void interpretThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral num) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -262,17 +262,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleNumeralLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral num) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleNumeralLiteral_1(G, num));
   }
-  
+
   private IntType _applyRuleNumeralLiteral_1(final RuleEnvironment G, final NumberLiteral num) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -291,17 +291,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleBooleanLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleBooleanLiteral_1(G, bool));
   }
-  
+
   private BooleanType _applyRuleBooleanLiteral_1(final RuleEnvironment G, final BooleanLiteral bool) throws RuleFailedException {
     BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
     return _createBooleanType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -320,17 +320,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleStringLiteral_1(G, str));
   }
-  
+
   private StringType _applyRuleStringLiteral_1(final RuleEnvironment G, final StringLiteral str) throws RuleFailedException {
     StringType _createStringType = ExpressionsFactory.eINSTANCE.createStringType();
     return _createStringType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -349,7 +349,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleMultiOrDiv(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     IntType intType = null; // output parameter
     /* G |- multiOrDiv.left : intType */
@@ -366,7 +366,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(intType);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -385,7 +385,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleMinus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     IntType intType = null;
     /* G |- minus.left : intType */
@@ -402,12 +402,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(_applyRuleMinus_1(G, minus));
   }
-  
+
   private IntType _applyRuleMinus_1(final RuleEnvironment G, final Minus minus) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -426,7 +426,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRulePlus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     Type type = null; // output parameter
     /* G |- plus.left : var Type leftType */
@@ -463,7 +463,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Type>(type);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -482,7 +482,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleComparison(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     /* empty |- comparison.left : var Type leftType */
     Expression _left = comparison.getLeft();
@@ -504,12 +504,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Type>(_applyRuleComparison_1(G, comparison));
   }
-  
+
   private BooleanType _applyRuleComparison_1(final RuleEnvironment G, final Comparison comparison) throws RuleFailedException {
     BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
     return _createBooleanType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -528,7 +528,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     /* G |- comparison.left : var Type leftType */
     Expression _left = comparison.getLeft();
@@ -552,12 +552,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Type>(_applyRuleEquals_1(G, comparison));
   }
-  
+
   private BooleanType _applyRuleEquals_1(final RuleEnvironment G, final Equals comparison) throws RuleFailedException {
     BooleanType _createBooleanType = ExpressionsFactory.eINSTANCE.createBooleanType();
     return _createBooleanType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -576,7 +576,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
     /* G |- negation.expression : boolType */
@@ -587,7 +587,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(boolType);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -606,7 +606,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleAndOr(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
     /* G |- andOr.left : boolType */
@@ -623,7 +623,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(boolType);
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -642,7 +642,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleArithmeticSigned(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     /* G |- signed.expression : var IntType intType */
     Expression _expression = signed.getExpression();
@@ -653,12 +653,12 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(_applyRuleArithmeticSigned_1(G, signed));
   }
-  
+
   private IntType _applyRuleArithmeticSigned_1(final RuleEnvironment G, final ArithmeticSigned signed) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -677,7 +677,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleVariableReference(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     Type type = null; // output parameter
     /* G ||- varRef.ref : type */
@@ -688,7 +688,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(type);
   }
-  
+
   protected Result<Type> vartypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Variable variable) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -707,7 +707,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Type> applyRuleVariable(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Variable variable) throws RuleFailedException {
     Type type = null; // output parameter
     Expression _expression = variable.getExpression();
@@ -724,7 +724,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     
     return new Result<Type>(type);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -743,17 +743,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretNumberLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number) throws RuleFailedException {
     
     return new Result<Object>(_applyRuleInterpretNumberLiteral_1(G, number));
   }
-  
+
   private int _applyRuleInterpretNumberLiteral_1(final RuleEnvironment G, final NumberLiteral number) throws RuleFailedException {
     int _value = number.getValue();
     return _value;
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -772,17 +772,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     
     return new Result<Object>(_applyRuleInterpretStringLiteral_1(G, string));
   }
-  
+
   private String _applyRuleInterpretStringLiteral_1(final RuleEnvironment G, final StringLiteral string) throws RuleFailedException {
     String _value = string.getValue();
     return _value;
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -801,17 +801,17 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretBooleanLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool) throws RuleFailedException {
     
     return new Result<Object>(_applyRuleInterpretBooleanLiteral_1(G, bool));
   }
-  
+
   private Boolean _applyRuleInterpretBooleanLiteral_1(final RuleEnvironment G, final BooleanLiteral bool) throws RuleFailedException {
     Boolean _valueOf = Boolean.valueOf(bool.getValue());
     return _valueOf;
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -830,7 +830,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretMinus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     Integer result = null; // output parameter
     /* G |- plus.left ~> var Integer leftResult */
@@ -853,7 +853,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     result = Integer.valueOf(_minus);
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -872,7 +872,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretMultiOrDiv(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     Integer result = null; // output parameter
     /* G |- multiOrDiv.left ~> var Integer leftResult */
@@ -904,7 +904,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -923,7 +923,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretArithmeticSigned(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     Integer result = null; // output parameter
     /* G |- signed.expression ~> var Integer expResult */
@@ -936,7 +936,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     result = Integer.valueOf((-(expResult).intValue()));
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -955,7 +955,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretAndOr(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     Boolean result = null; // output parameter
     /* G |- andOr.left ~> var Boolean leftResult */
@@ -981,7 +981,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1000,7 +1000,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     Boolean result = null; // output parameter
     /* G |- neg.expression ~> var Boolean expResult */
@@ -1013,7 +1013,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     result = Boolean.valueOf((!(expResult).booleanValue()));
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1032,7 +1032,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretComparison(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Comparison comparison) throws RuleFailedException {
     Boolean result = null; // output parameter
     /* empty |- comparison.left ~> var Object leftResult */
@@ -1060,7 +1060,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1079,7 +1079,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Equals comparison) throws RuleFailedException {
     Boolean result = null; // output parameter
     /* empty |- comparison.left ~> var Object leftResult */
@@ -1102,7 +1102,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     result = Boolean.valueOf(_equals);
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1121,7 +1121,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretPlus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     Object result = null; // output parameter
     /* G |- plus.left ~> var Object leftResult */
@@ -1149,7 +1149,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     }
     return new Result<Object>(result);
   }
-  
+
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -1168,7 +1168,7 @@ public class ExpressionsSemantics extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Object> applyRuleInterpretVariableRefenrence(final RuleEnvironment G, final RuleApplicationTrace _trace_, final VariableReference varRef) throws RuleFailedException {
     Object result = null; // output parameter
     /* G |- varRef.ref.expression ~> result */

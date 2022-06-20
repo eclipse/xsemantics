@@ -35,31 +35,31 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class FjCachedTypeSystem extends FjTypeSystem {
   public static final String SUPERCLASSES = "org.eclipse.xsemantics.example.fjcached.typing.Superclasses";
-  
+
   public static final String FIELDS = "org.eclipse.xsemantics.example.fjcached.typing.Fields";
-  
+
   public static final String METHODS = "org.eclipse.xsemantics.example.fjcached.typing.Methods";
-  
+
   public static final String CLASSSUBTYPING = "org.eclipse.xsemantics.example.fjcached.typing.ClassSubtyping";
-  
+
   public static final String SUBCLASSING = "org.eclipse.xsemantics.example.fjcached.typing.Subclassing";
-  
+
   private PolymorphicDispatcher<List<org.eclipse.xsemantics.example.fj.fj.Class>> superclassesDispatcher;
-  
+
   private PolymorphicDispatcher<List<Field>> fieldsDispatcher;
-  
+
   private PolymorphicDispatcher<List<Method>> methodsDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Type>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
-  
+
   public FjCachedTypeSystem() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
@@ -76,12 +76,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     methodsDispatcher = buildPolymorphicDispatcher(
     	"methodsImpl", 2);
   }
-  
+
   @Override
   public List<org.eclipse.xsemantics.example.fj.fj.Class> superclasses(final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return superclasses(null, cl);
   }
-  
+
   @Override
   public List<org.eclipse.xsemantics.example.fj.fj.Class> superclasses(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
@@ -90,12 +90,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	throw extractRuleFailedException(_e_superclasses);
     }
   }
-  
+
   @Override
   public List<Field> fields(final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return fields(null, cl);
   }
-  
+
   @Override
   public List<Field> fields(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
@@ -104,12 +104,12 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	throw extractRuleFailedException(_e_fields);
     }
   }
-  
+
   @Override
   public List<Method> methods(final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     return methods(null, cl);
   }
-  
+
   @Override
   public List<Method> methods(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
@@ -118,15 +118,15 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	throw extractRuleFailedException(_e_methods);
     }
   }
-  
+
   public Result<Boolean> subclass(final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return subclass(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return subclass(_environment_, null, left, right);
   }
-  
+
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return getFromCache("subclass", _environment_, _trace_,
     	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
@@ -139,15 +139,15 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   public Boolean subclassSucceeded(final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return subclassSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return subclassSucceeded(_environment_, null, left, right);
   }
-  
+
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     try {
     	subclassInternal(_environment_, _trace_, left, right);
@@ -156,17 +156,17 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   public Result<Type> type(final Expression expression) {
     return type(new RuleEnvironment(), null, expression);
   }
-  
+
   @Override
   public Result<Type> type(final RuleEnvironment _environment_, final Expression expression) {
     return type(_environment_, null, expression);
   }
-  
+
   @Override
   public Result<Type> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     return getFromCache("type", _environment_, _trace_,
@@ -180,17 +180,17 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, expression);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final Type left, final Type right) {
     return subtype(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtype(_environment_, null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     if (!subtypeCacheCondition(_environment_, left, right))
@@ -210,17 +210,17 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final Type left, final Type right) {
     return subtypeSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtypeSucceeded(_environment_, null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
@@ -230,7 +230,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   protected List<org.eclipse.xsemantics.example.fj.fj.Class> superclassesInternal(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("superclassesInternal", (RuleEnvironment)null, _trace_,
@@ -246,11 +246,11 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, cl);
   }
-  
+
   protected void superclassesThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   @Override
   protected List<Field> fieldsInternal(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("fieldsInternal", (RuleEnvironment)null, _trace_,
@@ -266,11 +266,11 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, cl);
   }
-  
+
   protected void fieldsThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   @Override
   protected List<Method> methodsInternal(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) {
     return getFromCache("methodsInternal", (RuleEnvironment)null, _trace_,
@@ -286,11 +286,11 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, cl);
   }
-  
+
   protected void methodsThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class cl, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> subclassInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) {
     return getFromCache("subclassInternal", _environment_, _trace_,
     	new XsemanticsProvider<Result<Boolean>>(_environment_, _trace_) {
@@ -305,7 +305,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(left);
     String _plus = (_stringRep + " is not a subclass of ");
@@ -315,7 +315,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }
-  
+
   @Override
   protected Result<Type> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     return getFromCache("typeInternal", _environment_, _trace_,
@@ -331,7 +331,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, expression);
   }
-  
+
   @Override
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(expression);
@@ -341,7 +341,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
-  
+
   @Override
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     if (!subtypeCacheCondition(_environment_, left, right))
@@ -365,7 +365,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(left);
@@ -376,11 +376,11 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(null, null));
   }
-  
+
   protected Boolean subtypeCacheCondition(final RuleEnvironment environment, final Type left, final Type right) {
     return Boolean.valueOf(((left instanceof BasicType) && (right instanceof BasicType)));
   }
-  
+
   @Override
   protected Result<Boolean> subtypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     try {
@@ -400,7 +400,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Boolean> applyRuleClassSubtyping(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ClassType left, final ClassType right) throws RuleFailedException {
     /* G ||- left.classref <: right.classref */
@@ -409,7 +409,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     subclassInternal(G, _trace_, _classref, _classref_1);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> subclassImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -428,7 +428,7 @@ public class FjCachedTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleSubclassing(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class left, final org.eclipse.xsemantics.example.fj.fj.Class right) throws RuleFailedException {
     /* left == right or right.name == "Object" or { superclasses(left).contains(right) } */
     {
