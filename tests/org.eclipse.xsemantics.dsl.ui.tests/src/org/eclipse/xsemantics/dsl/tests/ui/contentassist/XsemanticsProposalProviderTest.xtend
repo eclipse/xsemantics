@@ -11,14 +11,13 @@
 
 package org.eclipse.xsemantics.dsl.tests.ui.contentassist
 
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
 import org.eclipse.xsemantics.dsl.ui.internal.DslActivator
 import org.eclipse.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
 import org.eclipse.xsemantics.runtime.XsemanticsRuntimeSystem
-import org.eclipse.xsemantics.tests.pde.utils.PDETargetPlatformUtils
-import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
@@ -46,8 +45,6 @@ class XsemanticsProposalProviderTest extends
 	
 	@BeforeClass
 	def static void setUp() {
-		PDETargetPlatformUtils.setTargetPlatform();
-		
 		val injector = DslActivator.getInstance().getInjector(DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS);
 		
 		val projectHelper = injector.getInstance(PluginProjectHelper)

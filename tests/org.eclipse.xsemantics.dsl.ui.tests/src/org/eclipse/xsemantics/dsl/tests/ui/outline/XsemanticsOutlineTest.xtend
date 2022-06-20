@@ -11,16 +11,14 @@
 
 package org.eclipse.xsemantics.dsl.tests.ui.outline
 
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.xsemantics.dsl.tests.utils.ui.PluginProjectHelper
 import org.eclipse.xsemantics.dsl.ui.internal.DslActivator
 import org.eclipse.xsemantics.dsl.ui.tests.XsemanticsUiInjectorProvider
-import org.eclipse.xsemantics.tests.pde.utils.PDETargetPlatformUtils
-import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtext.testing.Flaky
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.tests.editor.outline.AbstractOutlineWorkbenchTest
-import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -34,11 +32,6 @@ class XsemanticsOutlineTest extends AbstractOutlineWorkbenchTest {
 
 	@Rule
 	public Flaky.Rule flakyRule = new Flaky.Rule();
-	
-	@BeforeClass
-	def static void setupTargetPlatform() {
-		PDETargetPlatformUtils.setTargetPlatform();
-	}
 	
 	override protected getEditorId() {
 		DslActivator.ORG_ECLIPSE_XSEMANTICS_DSL_XSEMANTICS
