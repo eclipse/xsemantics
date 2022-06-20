@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsemantics.example.expressions.expressions.ExpressionsPackage;
 import org.eclipse.xsemantics.example.expressions.expressions.Type;
 import org.eclipse.xsemantics.example.expressions.expressions.Variable;
-import org.eclipse.xsemantics.example.expressions.typing.ExtendedExpressionsSemantics;
 import org.eclipse.xsemantics.runtime.ErrorInformation;
 import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
@@ -32,28 +31,28 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class CachedExpressionsSemantics extends ExtendedExpressionsSemantics {
   private PolymorphicDispatcher<Result<Type>> vartypeDispatcher;
-  
+
   public CachedExpressionsSemantics() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
     vartypeDispatcher = buildPolymorphicDispatcher1(
     	"vartypeImpl", 3, "||-", ":");
   }
-  
+
   @Override
   public Result<Type> vartype(final Variable variable) {
     return vartype(new RuleEnvironment(), null, variable);
   }
-  
+
   @Override
   public Result<Type> vartype(final RuleEnvironment _environment_, final Variable variable) {
     return vartype(_environment_, null, variable);
   }
-  
+
   @Override
   public Result<Type> vartype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Variable variable) {
     return getFromCache("vartype", _environment_, _trace_,
@@ -67,7 +66,7 @@ public class CachedExpressionsSemantics extends ExtendedExpressionsSemantics {
     		}
     	}, variable);
   }
-  
+
   @Override
   protected Result<Type> vartypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Variable variable) {
     return getFromCache("vartypeInternal", _environment_, _trace_,
@@ -83,7 +82,7 @@ public class CachedExpressionsSemantics extends ExtendedExpressionsSemantics {
     		}
     	}, variable);
   }
-  
+
   @Override
   protected void vartypeThrowException(final String _error, final String _issue, final Exception _ex, final Variable variable, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(variable);

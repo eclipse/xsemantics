@@ -34,7 +34,6 @@ import org.eclipse.xsemantics.example.fj.fj.This;
 import org.eclipse.xsemantics.example.fj.fj.Type;
 import org.eclipse.xsemantics.example.fj.fj.TypedElement;
 import org.eclipse.xsemantics.example.fj.lookup.FjAuxiliaryFunctions;
-import org.eclipse.xsemantics.example.fj.typing.FjTypeSystem;
 import org.eclipse.xsemantics.runtime.ErrorInformation;
 import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
@@ -50,61 +49,61 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class FjSepTypeSystem extends FjTypeSystem {
   public static final String TNEW = "org.eclipse.xsemantics.example.fj.typing.TNew";
-  
+
   public static final String TSELECTION = "org.eclipse.xsemantics.example.fj.typing.TSelection";
-  
+
   public static final String TCAST = "org.eclipse.xsemantics.example.fj.typing.TCast";
-  
+
   public static final String CHECKCONSTANT = "org.eclipse.xsemantics.example.fj.typing.CheckConstant";
-  
+
   public static final String CHECKTYPEDELEMENT = "org.eclipse.xsemantics.example.fj.typing.CheckTypedElement";
-  
+
   public static final String CHECKPARAMREF = "org.eclipse.xsemantics.example.fj.typing.CheckParamRef";
-  
+
   public static final String CHECKTHIS = "org.eclipse.xsemantics.example.fj.typing.CheckThis";
-  
+
   public static final String CHECKMETHOD = "org.eclipse.xsemantics.example.fj.typing.CheckMethod";
-  
+
   public static final String CHECKNEW = "org.eclipse.xsemantics.example.fj.typing.CheckNew";
-  
+
   public static final String CHECKSELECTION = "org.eclipse.xsemantics.example.fj.typing.CheckSelection";
-  
+
   public static final String CHECKCAST = "org.eclipse.xsemantics.example.fj.typing.CheckCast";
-  
+
   public static final String CHECKCLASS = "org.eclipse.xsemantics.example.fj.typing.CheckClass";
-  
+
   @Inject
   private FjAuxiliaryFunctions fjAux;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> checkDispatcher;
-  
+
   public FjSepTypeSystem() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
     checkDispatcher = buildPolymorphicDispatcher1(
     	"checkImpl", 3, "|-");
   }
-  
+
   public FjAuxiliaryFunctions getFjAux() {
     return this.fjAux;
   }
-  
+
   public void setFjAux(final FjAuxiliaryFunctions fjAux) {
     this.fjAux = fjAux;
   }
-  
+
   public Result<Boolean> check(final EObject obj) {
     return check(new RuleEnvironment(), null, obj);
   }
-  
+
   public Result<Boolean> check(final RuleEnvironment _environment_, final EObject obj) {
     return check(_environment_, null, obj);
   }
-  
+
   public Result<Boolean> check(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	return checkInternal(_environment_, _trace_, obj);
@@ -112,15 +111,15 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_check);
     }
   }
-  
+
   public Boolean checkSucceeded(final EObject obj) {
     return checkSucceeded(new RuleEnvironment(), null, obj);
   }
-  
+
   public Boolean checkSucceeded(final RuleEnvironment _environment_, final EObject obj) {
     return checkSucceeded(_environment_, null, obj);
   }
-  
+
   public Boolean checkSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	checkInternal(_environment_, _trace_, obj);
@@ -129,11 +128,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return false;
     }
   }
-  
+
   public Result<Boolean> checkClassOk(final org.eclipse.xsemantics.example.fj.fj.Class clazz) {
     return checkClassOk(null, clazz);
   }
-  
+
   public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class clazz) {
     try {
     	return checkClassOkInternal(_trace_, clazz);
@@ -141,18 +140,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_CheckClassOk);
     }
   }
-  
+
   protected Result<Boolean> checkClassOkInternal(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     /* empty |- clazz */
     checkInternal(emptyEnvironment(), _trace_, clazz);
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   public Result<Boolean> checkMain(final Program program) {
     return checkMain(null, program);
   }
-  
+
   @Override
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
@@ -161,7 +160,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_CheckMain);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main === null or empty |- program.main */
@@ -183,12 +182,12 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   public Result<Boolean> checkMethodBody(final Method method) {
     return checkMethodBody(null, method);
   }
-  
+
   @Override
   public Result<Boolean> checkMethodBody(final RuleApplicationTrace _trace_, final Method method) {
     try {
@@ -197,17 +196,17 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_CheckMethodBody);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkMethodBodyInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   public Result<Boolean> checkField(final Field field) {
     return checkField(null, field);
   }
-  
+
   @Override
   public Result<Boolean> checkField(final RuleApplicationTrace _trace_, final Field field) {
     try {
@@ -216,17 +215,17 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_CheckField);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkFieldInternal(final RuleApplicationTrace _trace_, final Field field) throws RuleFailedException {
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   public Result<Boolean> checkMethodOverride(final Method method) {
     return checkMethodOverride(null, method);
   }
-  
+
   @Override
   public Result<Boolean> checkMethodOverride(final RuleApplicationTrace _trace_, final Method method) {
     try {
@@ -235,12 +234,12 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return resultForFailure(_e_CheckMethodOverride);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkMethodOverrideInternal(final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	checkParamsNotNull(obj);
@@ -250,11 +249,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected void checkThrowException(final String _error, final String _issue, final Exception _ex, final EObject obj, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
@@ -274,18 +273,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleTNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleTNew_1(G, newExp));
   }
-  
+
   private ClassType _applyRuleTNew_1(final RuleEnvironment G, final New newExp) throws RuleFailedException {
     ClassType _type = newExp.getType();
     return _type;
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
@@ -305,18 +304,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleTSelection(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleTSelection_1(G, selection));
   }
-  
+
   private Type _applyRuleTSelection_1(final RuleEnvironment G, final Selection selection) throws RuleFailedException {
     Type _type = selection.getMessage().getType();
     return _type;
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
@@ -336,18 +335,18 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleTCast(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     
     return new Result<Type>(_applyRuleTCast_1(G, cast));
   }
-  
+
   private ClassType _applyRuleTCast_1(final RuleEnvironment G, final Cast cast) throws RuleFailedException {
     ClassType _type = cast.getType();
     return _type;
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Constant _const) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -366,12 +365,12 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckConstant(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Constant _const) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -390,12 +389,12 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckTypedElement(final RuleEnvironment G, final RuleApplicationTrace _trace_, final TypedElement typedElement) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -414,12 +413,12 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckParamRef(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ParamRef paramref) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -438,7 +437,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final This _this) throws RuleFailedException {
     ClassType _env = this.<ClassType>env(G, "this", ClassType.class);
     /* env(G, 'this', ClassType) !== null */
@@ -447,7 +446,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -466,7 +465,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckMethod(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Method method) throws RuleFailedException {
     final ClassType typeForThis = this.getFjTypeUtils().createClassType(
       EcoreUtil2.<org.eclipse.xsemantics.example.fj.fj.Class>getContainerOfType(method, org.eclipse.xsemantics.example.fj.fj.Class.class));
@@ -489,7 +488,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     ), _trace_, _expression_1);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -508,22 +507,20 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     List<Field> fields = this.fjAux.getFields(newExp.getType().getClassref());
     /* G |- newExp ~> newExp.args << fields */
     EList<Expression> _args = newExp.getArgs();
     subtypesequenceInternal(G, _trace_, newExp, _args, fields);
-    final Consumer<Expression> _function = new Consumer<Expression>() {
-      public void accept(final Expression it) {
-        /* G |- it */
-        checkInternal(G, _trace_, it);
-      }
+    final Consumer<Expression> _function = (Expression it) -> {
+      /* G |- it */
+      checkInternal(G, _trace_, it);
     };
     newExp.getArgs().forEach(_function);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -542,7 +539,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckSelection(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Selection selection) throws RuleFailedException {
     /* G |- selection.receiver */
     Expression _receiver = selection.getReceiver();
@@ -563,7 +560,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -582,7 +579,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckCast(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Cast cast) throws RuleFailedException {
     Type expType = null;
     /* G |- cast.expression : expType */
@@ -607,7 +604,7 @@ public class FjSepTypeSystem extends FjTypeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -626,13 +623,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
-    final Consumer<Member> _function = new Consumer<Member>() {
-      public void accept(final Member it) {
-        /* G |- it */
-        checkInternal(G, _trace_, it);
-      }
+    final Consumer<Member> _function = (Member it) -> {
+      /* G |- it */
+      checkInternal(G, _trace_, it);
     };
     cl.getMembers().forEach(_function);
     org.eclipse.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();
@@ -643,16 +638,14 @@ public class FjSepTypeSystem extends FjTypeSystem {
         FjPackage.eINSTANCE.getClass_Members(), 
         FjPackage.eINSTANCE.getClass_Superclass(), 
         Field.class);
-      final Consumer<Field> _function_1 = new Consumer<Field>() {
-        public void accept(final Field inheritedField) {
-          List<Field> _selectFields = FjSepTypeSystem.this.fjAux.selectFields(cl);
-          for (final Field field : _selectFields) {
-            String _name = field.getName();
-            String _name_1 = inheritedField.getName();
-            /* field.name != inheritedField.name */
-            if (!(!Objects.equal(_name, _name_1))) {
-              sneakyThrowRuleFailedException("field.name != inheritedField.name");
-            }
+      final Consumer<Field> _function_1 = (Field inheritedField) -> {
+        List<Field> _selectFields = this.fjAux.selectFields(cl);
+        for (final Field field : _selectFields) {
+          String _name = field.getName();
+          String _name_1 = inheritedField.getName();
+          /* field.name != inheritedField.name */
+          if (!(!Objects.equal(_name, _name_1))) {
+            sneakyThrowRuleFailedException("field.name != inheritedField.name");
           }
         }
       };
@@ -662,15 +655,11 @@ public class FjSepTypeSystem extends FjTypeSystem {
         FjPackage.eINSTANCE.getClass_Members(), 
         FjPackage.eINSTANCE.getClass_Superclass(), 
         Method.class);
-      final Consumer<Method> _function_2 = new Consumer<Method>() {
-        public void accept(final Method inheritedMethod) {
-          final Consumer<Method> _function = new Consumer<Method>() {
-            public void accept(final Method it) {
-              FjSepTypeSystem.this.overridesInternal(_trace_, it, inheritedMethod);
-            }
-          };
-          FjSepTypeSystem.this.fjAux.selectMethods(cl).forEach(_function);
-        }
+      final Consumer<Method> _function_2 = (Method inheritedMethod) -> {
+        final Consumer<Method> _function_3 = (Method it) -> {
+          this.overridesInternal(_trace_, it, inheritedMethod);
+        };
+        this.fjAux.selectMethods(cl).forEach(_function_3);
       };
       inheritedMethods.forEach(_function_2);
     }

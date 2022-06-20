@@ -15,7 +15,6 @@ import org.eclipse.xsemantics.example.fj.fj.Field;
 import org.eclipse.xsemantics.example.fj.fj.Method;
 import org.eclipse.xsemantics.example.fj.fj.Program;
 import org.eclipse.xsemantics.example.fj.typing.FjSepTypeSystem;
-import org.eclipse.xsemantics.example.fj.typing.validation.FjTypeSystemValidator;
 import org.eclipse.xtext.validation.Check;
 
 /**
@@ -26,19 +25,19 @@ import org.eclipse.xtext.validation.Check;
 public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
   @Inject
   protected FjSepTypeSystem xsemanticsSystem;
-  
+
   @Override
   protected FjSepTypeSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;
   }
-  
+
   @Check
   public void checkClassOk(final org.eclipse.xsemantics.example.fj.fj.Class clazz) {
     errorGenerator.generateErrors(this,
     	getXsemanticsSystem().checkClassOk(clazz),
     		clazz);
   }
-  
+
   @Override
   @Check
   public void checkMain(final Program program) {
@@ -46,7 +45,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     	getXsemanticsSystem().checkMain(program),
     		program);
   }
-  
+
   @Override
   @Check
   public void checkMethodBody(final Method method) {
@@ -54,7 +53,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     	getXsemanticsSystem().checkMethodBody(method),
     		method);
   }
-  
+
   @Override
   @Check
   public void checkField(final Field field) {
@@ -62,7 +61,7 @@ public class FjSepTypeSystemValidator extends FjTypeSystemValidator {
     	getXsemanticsSystem().checkField(field),
     		field);
   }
-  
+
   @Override
   @Check
   public void checkMethodOverride(final Method method) {

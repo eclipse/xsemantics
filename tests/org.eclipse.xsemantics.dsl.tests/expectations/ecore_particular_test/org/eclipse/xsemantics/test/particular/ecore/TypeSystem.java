@@ -36,45 +36,45 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject";
-  
+
   public static final String ECLASSEOBJECT2 = "org.eclipse.xsemantics.test.particular.ecore.EClassEObject2";
-  
+
   public static final String FEATURES = "org.eclipse.xsemantics.test.particular.ecore.Features";
-  
+
   public static final String COLELCTIONS = "org.eclipse.xsemantics.test.particular.ecore.Colelctions";
-  
+
   public static final String FOREACH = "org.eclipse.xsemantics.test.particular.ecore.ForEach";
-  
+
   public static final String FOREACHWITHBOOLEANEXPRESSIONINSIDE = "org.eclipse.xsemantics.test.particular.ecore.ForEachWithBooleanExpressionInside";
-  
+
   public static final String WITHFAIL = "org.eclipse.xsemantics.test.particular.ecore.WithFail";
-  
+
   public static final String TESTFORCLOSURES = "org.eclipse.xsemantics.test.particular.ecore.TestForClosures";
-  
+
   public static final String TESTFORENVIRONMENTS = "org.eclipse.xsemantics.test.particular.ecore.TestForEnvironments";
-  
+
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result2<EClass, EObject>> type2Dispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> type1Dispatcher;
-  
+
   private PolymorphicDispatcher<Result<List<EStructuralFeature>>> featuresDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> collectionsDispatcher;
-  
+
   private PolymorphicDispatcher<Result<EClass>> type3Dispatcher;
-  
+
   private PolymorphicDispatcher<Result<EClass>> withfailDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> closuresDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> environmentsDispatcher;
-  
+
   public TypeSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
@@ -95,15 +95,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     environmentsDispatcher = buildPolymorphicDispatcher1(
     	"environmentsImpl", 3, "||-");
   }
-  
+
   public Result<EObject> type(final EClass c) {
     return type(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final EClass c) {
     return type(_environment_, null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return typeInternal(_environment_, _trace_, c);
@@ -111,15 +111,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result2<EClass, EObject> type2(final String s) {
     return type2(new RuleEnvironment(), null, s);
   }
-  
+
   public Result2<EClass, EObject> type2(final RuleEnvironment _environment_, final String s) {
     return type2(_environment_, null, s);
   }
-  
+
   public Result2<EClass, EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
     try {
     	return type2Internal(_environment_, _trace_, s);
@@ -127,15 +127,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure2(_e_type2);
     }
   }
-  
+
   public Result<Boolean> type1(final EObject o) {
     return type1(new RuleEnvironment(), null, o);
   }
-  
+
   public Result<Boolean> type1(final RuleEnvironment _environment_, final EObject o) {
     return type1(_environment_, null, o);
   }
-  
+
   public Result<Boolean> type1(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	return type1Internal(_environment_, _trace_, o);
@@ -143,15 +143,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type1);
     }
   }
-  
+
   public Boolean type1Succeeded(final EObject o) {
     return type1Succeeded(new RuleEnvironment(), null, o);
   }
-  
+
   public Boolean type1Succeeded(final RuleEnvironment _environment_, final EObject o) {
     return type1Succeeded(_environment_, null, o);
   }
-  
+
   public Boolean type1Succeeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	type1Internal(_environment_, _trace_, o);
@@ -160,15 +160,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   public Result<List<EStructuralFeature>> features(final EClass c1) {
     return features(new RuleEnvironment(), null, c1);
   }
-  
+
   public Result<List<EStructuralFeature>> features(final RuleEnvironment _environment_, final EClass c1) {
     return features(_environment_, null, c1);
   }
-  
+
   public Result<List<EStructuralFeature>> features(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1) {
     try {
     	return featuresInternal(_environment_, _trace_, c1);
@@ -176,15 +176,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_features);
     }
   }
-  
+
   public Result<Boolean> collections(final EClass c2, final List<EStructuralFeature> l2) {
     return collections(new RuleEnvironment(), null, c2, l2);
   }
-  
+
   public Result<Boolean> collections(final RuleEnvironment _environment_, final EClass c2, final List<EStructuralFeature> l2) {
     return collections(_environment_, null, c2, l2);
   }
-  
+
   public Result<Boolean> collections(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c2, final List<EStructuralFeature> l2) {
     try {
     	return collectionsInternal(_environment_, _trace_, c2, l2);
@@ -192,15 +192,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_collections);
     }
   }
-  
+
   public Boolean collectionsSucceeded(final EClass c2, final List<EStructuralFeature> l2) {
     return collectionsSucceeded(new RuleEnvironment(), null, c2, l2);
   }
-  
+
   public Boolean collectionsSucceeded(final RuleEnvironment _environment_, final EClass c2, final List<EStructuralFeature> l2) {
     return collectionsSucceeded(_environment_, null, c2, l2);
   }
-  
+
   public Boolean collectionsSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c2, final List<EStructuralFeature> l2) {
     try {
     	collectionsInternal(_environment_, _trace_, c2, l2);
@@ -209,15 +209,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   public Result<EClass> type3(final EObject o2) {
     return type3(new RuleEnvironment(), null, o2);
   }
-  
+
   public Result<EClass> type3(final RuleEnvironment _environment_, final EObject o2) {
     return type3(_environment_, null, o2);
   }
-  
+
   public Result<EClass> type3(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o2) {
     try {
     	return type3Internal(_environment_, _trace_, o2);
@@ -225,15 +225,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type3);
     }
   }
-  
+
   public Result<EClass> withfail(final EObject o2) {
     return withfail(new RuleEnvironment(), null, o2);
   }
-  
+
   public Result<EClass> withfail(final RuleEnvironment _environment_, final EObject o2) {
     return withfail(_environment_, null, o2);
   }
-  
+
   public Result<EClass> withfail(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o2) {
     try {
     	return withfailInternal(_environment_, _trace_, o2);
@@ -241,15 +241,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_withfail);
     }
   }
-  
+
   public Result<Boolean> closures(final EClass eClass) {
     return closures(new RuleEnvironment(), null, eClass);
   }
-  
+
   public Result<Boolean> closures(final RuleEnvironment _environment_, final EClass eClass) {
     return closures(_environment_, null, eClass);
   }
-  
+
   public Result<Boolean> closures(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	return closuresInternal(_environment_, _trace_, eClass);
@@ -257,15 +257,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_closures);
     }
   }
-  
+
   public Boolean closuresSucceeded(final EClass eClass) {
     return closuresSucceeded(new RuleEnvironment(), null, eClass);
   }
-  
+
   public Boolean closuresSucceeded(final RuleEnvironment _environment_, final EClass eClass) {
     return closuresSucceeded(_environment_, null, eClass);
   }
-  
+
   public Boolean closuresSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	closuresInternal(_environment_, _trace_, eClass);
@@ -274,15 +274,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   public Result<Boolean> environments(final EClass eClass) {
     return environments(new RuleEnvironment(), null, eClass);
   }
-  
+
   public Result<Boolean> environments(final RuleEnvironment _environment_, final EClass eClass) {
     return environments(_environment_, null, eClass);
   }
-  
+
   public Result<Boolean> environments(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	return environmentsInternal(_environment_, _trace_, eClass);
@@ -290,15 +290,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_environments);
     }
   }
-  
+
   public Boolean environmentsSucceeded(final EClass eClass) {
     return environmentsSucceeded(new RuleEnvironment(), null, eClass);
   }
-  
+
   public Boolean environmentsSucceeded(final RuleEnvironment _environment_, final EClass eClass) {
     return environmentsSucceeded(_environment_, null, eClass);
   }
-  
+
   public Boolean environmentsSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	environmentsInternal(_environment_, _trace_, eClass);
@@ -307,7 +307,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Result<EObject> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	checkParamsNotNull(c);
@@ -317,11 +317,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result2<EClass, EObject> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final String s) {
     try {
     	checkParamsNotNull(s);
@@ -331,11 +331,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void type2ThrowException(final String _error, final String _issue, final Exception _ex, final String s, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> type1Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o) {
     try {
     	checkParamsNotNull(o);
@@ -345,11 +345,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void type1ThrowException(final String _error, final String _issue, final Exception _ex, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<List<EStructuralFeature>> featuresInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c1) {
     try {
     	checkParamsNotNull(c1);
@@ -359,11 +359,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void featuresThrowException(final String _error, final String _issue, final Exception _ex, final EClass c1, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> collectionsInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c2, final List<EStructuralFeature> l2) {
     try {
     	checkParamsNotNull(c2, l2);
@@ -373,11 +373,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void collectionsThrowException(final String _error, final String _issue, final Exception _ex, final EClass c2, final List<EStructuralFeature> l2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EClass> type3Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o2) {
     try {
     	checkParamsNotNull(o2);
@@ -387,11 +387,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void type3ThrowException(final String _error, final String _issue, final Exception _ex, final EObject o2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EClass> withfailInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject o2) {
     try {
     	checkParamsNotNull(o2);
@@ -401,11 +401,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void withfailThrowException(final String _error, final String _issue, final Exception _ex, final EObject o2, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> closuresInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	checkParamsNotNull(eClass);
@@ -415,11 +415,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void closuresThrowException(final String _error, final String _issue, final Exception _ex, final EClass eClass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> environmentsInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass eClass) {
     try {
     	checkParamsNotNull(eClass);
@@ -429,11 +429,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void environmentsThrowException(final String _error, final String _issue, final Exception _ex, final EClass eClass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EObject> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass _createEObject) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -452,7 +452,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass _createEObject) throws RuleFailedException {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");
@@ -463,12 +463,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     return new Result<EObject>(_applyRuleEClassEObject_1(G, _createEObject));
   }
-  
+
   private EObject _applyRuleEClassEObject_1(final RuleEnvironment G, final EClass _createEObject) throws RuleFailedException {
     EObject _createEObject_1 = EcoreFactory.eINSTANCE.createEObject();
     return _createEObject_1;
   }
-  
+
   protected Result2<EClass, EObject> type2Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -487,7 +487,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result2<EClass, EObject> applyRuleEClassEObject2(final RuleEnvironment G, final RuleApplicationTrace _trace_, final String s) throws RuleFailedException {
     EClass _createEObject = null; // output parameter
     String _string = new String();
@@ -499,12 +499,12 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     return new Result2<EClass, EObject>(_createEObject, _applyRuleEClassEObject2_2(G, s));
   }
-  
+
   private EObject _applyRuleEClassEObject2_2(final RuleEnvironment G, final String s) throws RuleFailedException {
     EObject _createEObject = EcoreFactory.eINSTANCE.createEObject();
     return _createEObject;
   }
-  
+
   protected Result<List<EStructuralFeature>> featuresImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eclass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -523,7 +523,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<List<EStructuralFeature>> applyRuleFeatures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eclass) throws RuleFailedException {
     List<EStructuralFeature> features = null; // output parameter
     /* G |- eclass >> features */
@@ -533,7 +533,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     
     return new Result<List<EStructuralFeature>>(features);
   }
-  
+
   protected Result<Boolean> collectionsImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eclass, final List<EStructuralFeature> features) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -552,13 +552,13 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleColelctions(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eclass, final List<EStructuralFeature> features) throws RuleFailedException {
     /* G |- eclass |> features */
     collectionsInternal(G, _trace_, eclass, features);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> type1Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -577,7 +577,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleForEach(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
       public void accept(final EStructuralFeature it) {
@@ -588,7 +588,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     obj.eClass().getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> type1Impl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -607,7 +607,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleForEachWithBooleanExpressionInside(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     final Consumer<EStructuralFeature> _function = new Consumer<EStructuralFeature>() {
       public void accept(final EStructuralFeature it) {
@@ -618,7 +618,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     eClass.getEStructuralFeatures().forEach(_function);
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<EClass> withfailImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o2) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -637,7 +637,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EClass> applyRuleWithFail(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject o2) throws RuleFailedException {
     EClass eClass = null; // output parameter
     /* fail or fail error "this is an error" source o2.eClass feature o2.eClass.eContainingFeature */
@@ -659,7 +659,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     return new Result<EClass>(eClass);
   }
-  
+
   protected Result<Boolean> closuresImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -678,7 +678,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleTestForClosures(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature it) {
@@ -698,7 +698,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> environmentsImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -717,7 +717,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleTestForEnvironments(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     /* 'this' <- eClass ||- eClass */
     environmentsInternal(environmentEntry("this", eClass), _trace_, eClass);

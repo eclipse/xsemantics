@@ -80,7 +80,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected static int TAB_INDENT = 2;
 	protected static int EXPECTED_TIMEOUT = 500;
 
-	protected static String TEST_PROJECT = "test";
+	protected static String TEST_PROJECT = "org.eclipse.xsemantics.dsl.ui.tests.project";
 
 	protected IOutlineNodeComparer nodeComparer = new IOutlineNodeComparer.Default();
 

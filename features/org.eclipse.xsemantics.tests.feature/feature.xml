@@ -44,80 +44,22 @@ Contributors:
          id="org.eclipse.xsemantics.implemented.examples.feature"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.swtbot.eclipse"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.ide"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.rcp"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.jdt"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.dsl.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.example.fj"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.example.fj.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.ui.examples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.example.expressions.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.example.fj.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xsemantics.dsl.ui.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.pde.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
    <plugin
          id="org.eclipse.emf.mwe2.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xtext.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.itemis.xtext.antlr"
          download-size="0"
          install-size="0"
          version="0.0.0"

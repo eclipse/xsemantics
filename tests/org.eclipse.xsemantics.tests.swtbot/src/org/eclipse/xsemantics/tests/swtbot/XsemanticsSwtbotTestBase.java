@@ -15,7 +15,9 @@
 package org.eclipse.xsemantics.tests.swtbot;
 
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.monitor;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.root;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.waitForBuild;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -52,8 +54,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import org.eclipse.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
-
 /**
  * @author bettini
  * 
@@ -61,14 +61,12 @@ import org.eclipse.xsemantics.tests.pde.utils.PDETargetPlatformUtils;
 @RunWith(SWTBotJunit4ClassRunner.class)
 public abstract class XsemanticsSwtbotTestBase {
 
-	protected static final String TEST_PROJECT = "MyTestProject";
+	protected static final String TEST_PROJECT = "org.eclipse.xsemantics.dsl.ui.tests.project";
 	protected static SWTWorkbenchBot bot;
 	protected static int SHELL_TIMEOUT = 150000;
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		PDETargetPlatformUtils.setTargetPlatform();
-		
 		bot = new SWTWorkbenchBot();
 		
 		closeWelcomePage();

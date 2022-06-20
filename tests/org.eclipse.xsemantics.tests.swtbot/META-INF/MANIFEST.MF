@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.swtbot.go;bundle-version="2.3.0",
  org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xsemantics.tests.pde.utils,
  org.eclipse.pde.ui,
  org.eclipse.xsemantics.ui.examples,
  org.eclipse.ui.editors,
@@ -19,7 +18,8 @@ Require-Bundle: org.eclipse.swtbot.go;bundle-version="2.3.0",
  org.eclipse.xsemantics.dsl.ui,
  org.eclipse.xsemantics.dsl.tests,
  org.eclipse.xsemantics.dsl.ui.tests,
- org.eclipse.xtext.ui.testing
+ org.eclipse.xtext.ui.testing,
+ org.slf4j.api;bundle-version="1.7.30"
 Export-Package: org.eclipse.xsemantics.tests.swtbot,
  org.eclipse.xsemantics.tests.swtbot.wizards
 Automatic-Module-Name: org.eclipse.xsemantics.tests.swtbot

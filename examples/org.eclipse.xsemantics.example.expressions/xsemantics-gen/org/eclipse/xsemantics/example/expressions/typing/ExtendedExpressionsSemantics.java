@@ -28,7 +28,6 @@ import org.eclipse.xsemantics.example.expressions.expressions.Plus;
 import org.eclipse.xsemantics.example.expressions.expressions.StringLiteral;
 import org.eclipse.xsemantics.example.expressions.expressions.StringType;
 import org.eclipse.xsemantics.example.expressions.expressions.Type;
-import org.eclipse.xsemantics.example.expressions.typing.ExpressionsSemantics;
 import org.eclipse.xsemantics.runtime.ErrorInformation;
 import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
@@ -44,60 +43,60 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
   public static final String STRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.StringLiteral";
-  
+
   public static final String MULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.MultiOrDiv";
-  
+
   public static final String MINUS = "org.eclipse.xsemantics.example.expressions.typing.Minus";
-  
+
   public static final String PLUS = "org.eclipse.xsemantics.example.expressions.typing.Plus";
-  
+
   public static final String BOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.BooleanNegation";
-  
+
   public static final String ANDOR = "org.eclipse.xsemantics.example.expressions.typing.AndOr";
-  
+
   public static final String ARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.ArithmeticSigned";
-  
+
   public static final String STRINGTOINT = "org.eclipse.xsemantics.example.expressions.typing.StringToInt";
-  
+
   public static final String STRINGTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.StringToBool";
-  
+
   public static final String INTTOINT = "org.eclipse.xsemantics.example.expressions.typing.IntToInt";
-  
+
   public static final String BOOLTOBOOL = "org.eclipse.xsemantics.example.expressions.typing.BoolToBool";
-  
+
   public static final String INTERPRETSTRINGLITERAL = "org.eclipse.xsemantics.example.expressions.typing.InterpretStringLiteral";
-  
+
   public static final String INTERPRETMINUS = "org.eclipse.xsemantics.example.expressions.typing.InterpretMinus";
-  
+
   public static final String INTERPRETMULTIORDIV = "org.eclipse.xsemantics.example.expressions.typing.InterpretMultiOrDiv";
-  
+
   public static final String INTERPRETARITHMETICSIGNED = "org.eclipse.xsemantics.example.expressions.typing.InterpretArithmeticSigned";
-  
+
   public static final String INTERPRETANDOR = "org.eclipse.xsemantics.example.expressions.typing.InterpretAndOr";
-  
+
   public static final String INTERPRETBOOLEANNEGATION = "org.eclipse.xsemantics.example.expressions.typing.InterpretBooleanNegation";
-  
+
   private PolymorphicDispatcher<Result<Boolean>> coerceDispatcher;
-  
+
   public ExtendedExpressionsSemantics() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
     coerceDispatcher = buildPolymorphicDispatcher1(
     	"coerceImpl", 4, "|~", "|>");
   }
-  
+
   public Result<Boolean> coerce(final Expression expression, final Type expectedType) {
     return coerce(new RuleEnvironment(), null, expression, expectedType);
   }
-  
+
   public Result<Boolean> coerce(final RuleEnvironment _environment_, final Expression expression, final Type expectedType) {
     return coerce(_environment_, null, expression, expectedType);
   }
-  
+
   public Result<Boolean> coerce(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
     try {
     	return coerceInternal(_environment_, _trace_, expression, expectedType);
@@ -105,15 +104,15 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return resultForFailure(_e_coerce);
     }
   }
-  
+
   public Boolean coerceSucceeded(final Expression expression, final Type expectedType) {
     return coerceSucceeded(new RuleEnvironment(), null, expression, expectedType);
   }
-  
+
   public Boolean coerceSucceeded(final RuleEnvironment _environment_, final Expression expression, final Type expectedType) {
     return coerceSucceeded(_environment_, null, expression, expectedType);
   }
-  
+
   public Boolean coerceSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
     try {
     	coerceInternal(_environment_, _trace_, expression, expectedType);
@@ -122,7 +121,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return false;
     }
   }
-  
+
   protected Result<Boolean> coerceInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression, final Type expectedType) {
     try {
     	checkParamsNotNull(expression, expectedType);
@@ -132,7 +131,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   protected void coerceThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final Type expectedType, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(expression);
     String _plus = ("cannot convert " + _stringRep);
@@ -145,7 +144,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     try {
@@ -165,7 +164,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral str) throws RuleFailedException {
     Type resultType = null; // output parameter
@@ -184,7 +183,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Type>(resultType);
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
@@ -204,7 +203,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleMultiOrDiv(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
@@ -226,12 +225,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     return new Result<Type>(_applyRuleMultiOrDiv_1(G, multiOrDiv));
   }
-  
+
   private IntType _applyRuleMultiOrDiv_1(final RuleEnvironment G, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     try {
@@ -251,7 +250,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleMinus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus minus) throws RuleFailedException {
     IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
@@ -273,12 +272,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     return new Result<Type>(_applyRuleMinus_1(G, minus));
   }
-  
+
   private IntType _applyRuleMinus_1(final RuleEnvironment G, final Minus minus) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     try {
@@ -298,7 +297,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRulePlus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Plus plus) throws RuleFailedException {
     Type type = null; // output parameter
@@ -351,7 +350,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Type>(type);
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     try {
@@ -371,7 +370,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation negation) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
@@ -386,7 +385,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     return new Result<Type>(boolType);
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
@@ -406,7 +405,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleAndOr(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     BooleanType boolType = null; // output parameter
@@ -429,7 +428,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     return new Result<Type>(boolType);
   }
-  
+
   @Override
   protected Result<Type> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
@@ -449,7 +448,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Type> applyRuleArithmeticSigned(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     IntType intType = ExpressionsFactory.eINSTANCE.createIntType();
@@ -463,12 +462,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     
     return new Result<Type>(_applyRuleArithmeticSigned_1(G, signed));
   }
-  
+
   private IntType _applyRuleArithmeticSigned_1(final RuleEnvironment G, final ArithmeticSigned signed) throws RuleFailedException {
     IntType _createIntType = ExpressionsFactory.eINSTANCE.createIntType();
     return _createIntType;
   }
-  
+
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -487,12 +486,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleStringToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final IntType type) throws RuleFailedException {
     Integer.parseInt(string.getValue());
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -511,7 +510,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleStringToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string, final BooleanType type) throws RuleFailedException {
     /* string.value.equalsIgnoreCase("true") || string.value.equalsIgnoreCase("false") */
     if (!(string.getValue().equalsIgnoreCase("true") || 
@@ -520,7 +519,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number, final IntType type) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -539,12 +538,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleIntToInt(final RuleEnvironment G, final RuleApplicationTrace _trace_, final NumberLiteral number, final IntType type) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
-  
+
   protected Result<Boolean> coerceImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool, final BooleanType type) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -563,12 +562,12 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleBoolToBool(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanLiteral bool, final BooleanType type) throws RuleFailedException {
     
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     try {
@@ -588,7 +587,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretStringLiteral(final RuleEnvironment G, final RuleApplicationTrace _trace_, final StringLiteral string) throws RuleFailedException {
     Object result = null; // output parameter
@@ -614,7 +613,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Object>(result);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     try {
@@ -634,7 +633,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretMinus(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Minus plus) throws RuleFailedException {
     Integer result = null; // output parameter
@@ -663,7 +662,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     result = Integer.valueOf(_minus);
     return new Result<Object>(result);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     try {
@@ -683,7 +682,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretMultiOrDiv(final RuleEnvironment G, final RuleApplicationTrace _trace_, final MultiOrDiv multiOrDiv) throws RuleFailedException {
     Integer result = null; // output parameter
@@ -721,7 +720,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Object>(result);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     try {
@@ -741,7 +740,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretArithmeticSigned(final RuleEnvironment G, final RuleApplicationTrace _trace_, final ArithmeticSigned signed) throws RuleFailedException {
     Integer result = null; // output parameter
@@ -758,7 +757,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     result = Integer.valueOf((-(expResult).intValue()));
     return new Result<Object>(result);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     try {
@@ -778,7 +777,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretAndOr(final RuleEnvironment G, final RuleApplicationTrace _trace_, final AndOrExpression andOr) throws RuleFailedException {
     Boolean result = null; // output parameter
@@ -810,7 +809,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     }
     return new Result<Object>(result);
   }
-  
+
   @Override
   protected Result<Object> interpretImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     try {
@@ -830,7 +829,7 @@ public class ExtendedExpressionsSemantics extends ExpressionsSemantics {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Object> applyRuleInterpretBooleanNegation(final RuleEnvironment G, final RuleApplicationTrace _trace_, final BooleanNegation neg) throws RuleFailedException {
     Boolean result = null; // output parameter

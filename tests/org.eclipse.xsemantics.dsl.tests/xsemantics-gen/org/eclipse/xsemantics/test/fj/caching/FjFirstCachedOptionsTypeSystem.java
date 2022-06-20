@@ -23,13 +23,13 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
   private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
-  
+
   public FjFirstCachedOptionsTypeSystem() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
@@ -38,17 +38,17 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     subtypeDispatcher = buildPolymorphicDispatcher1(
     	"subtypeImpl", 4, "|-", "<:");
   }
-  
+
   @Override
   public Result<Boolean> subclass(final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclass(new RuleEnvironment(), null, candidate, superclass);
   }
-  
+
   @Override
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclass(_environment_, null, candidate, superclass);
   }
-  
+
   @Override
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     try {
@@ -57,17 +57,17 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     	return resultForFailure(_e_subclass);
     }
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclassSucceeded(new RuleEnvironment(), null, candidate, superclass);
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclassSucceeded(_environment_, null, candidate, superclass);
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     try {
@@ -77,17 +77,17 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   public Result<Boolean> subtype(final Type left, final Type right) {
     return subtype(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtype(_environment_, null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     if (!subtypeCacheCondition(_environment_, left, right))
@@ -107,17 +107,17 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final Type left, final Type right) {
     return subtypeSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtypeSucceeded(_environment_, null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
@@ -127,7 +127,7 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   protected Result<Boolean> subclassInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return getFromCache("subclassInternal", _environment_, _trace_,
@@ -143,12 +143,12 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     		}
     	}, candidate, superclass);
   }
-  
+
   @Override
   protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   @Override
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     if (!subtypeCacheCondition(_environment_, left, right))
@@ -172,12 +172,12 @@ public class FjFirstCachedOptionsTypeSystem extends FjFirstCachedTypeSystem {
     		}
     	}, left, right);
   }
-  
+
   @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Boolean subtypeCacheCondition(final RuleEnvironment environment, final Type left, final Type right) {
     return Boolean.valueOf(((left instanceof BasicType) && (right instanceof BasicType)));
   }

@@ -53,7 +53,7 @@ Contributors:
 	</issueManagement>
 	
 	<properties>
-		<tycho-version>2.7.0</tycho-version>
+		<tycho-version>2.7.3</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
@@ -62,9 +62,9 @@ Contributors:
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<xtext.version>2.26.0</xtext.version>
+		<xtext.version>2.27.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
-		<mwe2Version>2.12.2</mwe2Version>
+		<mwe2Version>2.13.0</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 
@@ -171,20 +171,6 @@ Contributors:
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-pack200a-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<executions>
-							<execution>
-								<id>pack200-normalize</id>
-								<goals>
-									<goal>normalize</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
 						<groupId>org.eclipse.cbi.maven.plugins</groupId>
 						<artifactId>eclipse-jarsigner-plugin</artifactId>
 						<version>1.3.2</version>
@@ -193,20 +179,6 @@ Contributors:
 								<id>sign</id>
 								<goals>
 									<goal>sign</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-pack200b-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<executions>
-							<execution>
-								<id>pack200-pack</id>
-								<goals>
-									<goal>pack</goal>
 								</goals>
 								<phase>package</phase>
 							</execution>
@@ -366,6 +338,11 @@ Contributors:
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
@@ -548,7 +525,6 @@ Contributors:
 							<classifier>${target-file-name}</classifier> 
 						</artifact>
 					</target>
-					<includePackedArtifacts>true</includePackedArtifacts>
 					<environments>
 						<environment>
 							<os>macosx</os>
@@ -587,6 +563,11 @@ Contributors:
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.jdt.compiler.apt</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.jdt.compiler.tool</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
 						</extraRequirements>

@@ -21,7 +21,7 @@ import org.eclipse.xsemantics.test.fj.lambda.FjTestsForLambdas;
 public class FjTestsForLambdasValidator extends FjFirstTypeSystemValidator {
   @Inject
   protected FjTestsForLambdas xsemanticsSystem;
-  
+
   @Override
   protected FjTestsForLambdas getXsemanticsSystem() {
     return this.xsemanticsSystem;

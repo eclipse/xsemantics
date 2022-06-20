@@ -16,10 +16,12 @@ package org.eclipse.xsemantics.dsl
 
 import org.eclipse.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider
 import org.eclipse.xsemantics.dsl.generator.XsemanticsXbaseCompiler
+import org.eclipse.xsemantics.dsl.internal.parser.PatchedLookAheadPreservingNodeModelBuilder
 import org.eclipse.xsemantics.dsl.typing.XsemanticsTypeComputer
 import org.eclipse.xsemantics.dsl.validation.XsemanticsXExpressionHelper
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfigurationProvider
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.util.XExpressionHelper
@@ -27,7 +29,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper
 /** 
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-class XsemanticsRuntimeModule extends org.eclipse.xsemantics.dsl.AbstractXsemanticsRuntimeModule {
+class XsemanticsRuntimeModule extends AbstractXsemanticsRuntimeModule {
 	override Class<? extends ITypeComputer> bindITypeComputer() {
 		return XsemanticsTypeComputer
 	}
@@ -46,5 +48,9 @@ class XsemanticsRuntimeModule extends org.eclipse.xsemantics.dsl.AbstractXsemant
 
 	def Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XsemanticsXbaseCompiler
+	}
+
+	override Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
+		return PatchedLookAheadPreservingNodeModelBuilder
 	}
 }

@@ -44,24 +44,24 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 @SuppressWarnings("all")
 public class FjAltTypeSystem extends FjFirstTypeSystem {
   public static final String TYPEEQUALS = "org.eclipse.xsemantics.test.fj.alt.TypeEquals";
-  
+
   public static final String CHECKNEW = "org.eclipse.xsemantics.test.fj.alt.CheckNew";
-  
+
   public static final String CHECKCLASS = "org.eclipse.xsemantics.test.fj.alt.CheckClass";
-  
+
   @Inject
   private FjAuxiliaryFunctions fjAux;
-  
+
   private PolymorphicDispatcher<Result<ClassType>> classtypeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subtypeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<Boolean>> subclassDispatcher;
-  
+
   public FjAltTypeSystem() {
     init();
   }
-  
+
   @Override
   public void init() {
     super.init();
@@ -72,25 +72,25 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     subclassDispatcher = buildPolymorphicDispatcher1(
     	"subclassImpl", 4, "|-", "<|");
   }
-  
+
   public FjAuxiliaryFunctions getFjAux() {
     return this.fjAux;
   }
-  
+
   public void setFjAux(final FjAuxiliaryFunctions fjAux) {
     this.fjAux = fjAux;
   }
-  
+
   @Override
   public Result<ClassType> classtype(final Expression expression) {
     return classtype(new RuleEnvironment(), null, expression);
   }
-  
+
   @Override
   public Result<ClassType> classtype(final RuleEnvironment _environment_, final Expression expression) {
     return classtype(_environment_, null, expression);
   }
-  
+
   @Override
   public Result<ClassType> classtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
@@ -99,17 +99,17 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return resultForFailure(_e_classtype);
     }
   }
-  
+
   @Override
   public Result<Boolean> subtype(final Type left, final Type right) {
     return subtype(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtype(_environment_, null, left, right);
   }
-  
+
   @Override
   public Result<Boolean> subtype(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
@@ -118,17 +118,17 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return resultForFailure(_e_subtype);
     }
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final Type left, final Type right) {
     return subtypeSucceeded(new RuleEnvironment(), null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final Type left, final Type right) {
     return subtypeSucceeded(_environment_, null, left, right);
   }
-  
+
   @Override
   public Boolean subtypeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
@@ -138,17 +138,17 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   public Result<Boolean> subclass(final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclass(new RuleEnvironment(), null, candidate, superclass);
   }
-  
+
   @Override
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclass(_environment_, null, candidate, superclass);
   }
-  
+
   @Override
   public Result<Boolean> subclass(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     try {
@@ -157,17 +157,17 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return resultForFailure(_e_subclass);
     }
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclassSucceeded(new RuleEnvironment(), null, candidate, superclass);
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     return subclassSucceeded(_environment_, null, candidate, superclass);
   }
-  
+
   @Override
   public Boolean subclassSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     try {
@@ -177,12 +177,12 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return false;
     }
   }
-  
+
   @Override
   public Result<Boolean> checkMain(final Program program) {
     return checkMain(null, program);
   }
-  
+
   @Override
   public Result<Boolean> checkMain(final RuleApplicationTrace _trace_, final Program program) {
     try {
@@ -191,7 +191,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return resultForFailure(_e_CheckMain);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkMainInternal(final RuleApplicationTrace _trace_, final Program program) throws RuleFailedException {
     /* program.main == null or empty |- program.main */
@@ -213,12 +213,12 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     }
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   public Result<Boolean> checkClassOk(final org.eclipse.xsemantics.example.fj.fj.Class clazz) {
     return checkClassOk(null, clazz);
   }
-  
+
   @Override
   public Result<Boolean> checkClassOk(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class clazz) {
     try {
@@ -227,14 +227,14 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return resultForFailure(_e_CheckClassOk);
     }
   }
-  
+
   @Override
   protected Result<Boolean> checkClassOkInternal(final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class clazz) throws RuleFailedException {
     /* empty |- clazz */
     checkInternal(emptyEnvironment(), _trace_, clazz);
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   protected Result<ClassType> classtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Expression expression) {
     try {
@@ -245,7 +245,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected void classtypeThrowException(final String _error, final String _issue, final Exception _ex, final Expression expression, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(expression);
@@ -255,7 +255,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
-  
+
   @Override
   protected Result<Boolean> subtypeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final Type left, final Type right) {
     try {
@@ -266,7 +266,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected void subtypeThrowException(final String _error, final String _issue, final Exception _ex, final Type left, final Type right, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _stringRep = this.stringRep(left);
@@ -278,7 +278,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, null));
   }
-  
+
   @Override
   protected Result<Boolean> subclassInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass) {
     try {
@@ -289,7 +289,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected void subclassThrowException(final String _error, final String _issue, final Exception _ex, final org.eclipse.xsemantics.example.fj.fj.Class candidate, final org.eclipse.xsemantics.example.fj.fj.Class superclass, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     String _name = candidate.getName();
@@ -303,7 +303,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     throwRuleFailedException(error,
     	_issue, _ex, new ErrorInformation(source, feature));
   }
-  
+
   protected Result<Boolean> equalstypeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type left, final Type right) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -320,13 +320,13 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleTypeEquals(final RuleEnvironment G, final RuleApplicationTrace _trace_, final Type left, final Type right) throws RuleFailedException {
     /* fail */
     throwForExplicitFail();
     return new Result<Boolean>(true);
   }
-  
+
   private void typeEqualsThrowException(final Exception e_applyRuleTypeEquals, final Type left, final Type right) throws RuleFailedException {
     String _stringRep = this.stringRep(left);
     String _plus = (_stringRep + " and ");
@@ -338,7 +338,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     throwRuleFailedException(error,
     	TYPEEQUALS, e_applyRuleTypeEquals, new ErrorInformation(null, null));
   }
-  
+
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     try {
@@ -358,7 +358,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Boolean> applyRuleCheckNew(final RuleEnvironment G, final RuleApplicationTrace _trace_, final New newExp) throws RuleFailedException {
     List<Field> fields = this.fjAux.getFields(newExp.getType().getClassref());
@@ -374,7 +374,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     newExp.getArgs().forEach(_function);
     return new Result<Boolean>(true);
   }
-  
+
   @Override
   protected Result<Boolean> checkImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     try {
@@ -394,7 +394,7 @@ public class FjAltTypeSystem extends FjFirstTypeSystem {
     	return null;
     }
   }
-  
+
   @Override
   protected Result<Boolean> applyRuleCheckClass(final RuleEnvironment G, final RuleApplicationTrace _trace_, final org.eclipse.xsemantics.example.fj.fj.Class cl) throws RuleFailedException {
     org.eclipse.xsemantics.example.fj.fj.Class _superclass = cl.getSuperclass();

@@ -63,6 +63,13 @@ Contributors:
 							<id>org.eclipse.jdt</id>
 							<versionRange>0.0.0</versionRange>
 						</requirement>
+						<!-- We specify our feature so that we're sure we're using also all the 
+							required software -->
+						<requirement>
+							<type>eclipse-feature</type>
+							<id>org.eclipse.xsemantics.feature</id>
+							<versionRange>0.0.0</versionRange>
+						</requirement>
 					</extraRequirements>
 				</dependency-resolution>
 			</configuration>

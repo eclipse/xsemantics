@@ -30,19 +30,19 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.expressions.ecore.EClassEObject";
-  
+
   public static final String TESTFORTHIS = "org.eclipse.xsemantics.test.expressions.ecore.TestForThis";
-  
+
   private PolymorphicDispatcher<Result<EObject>> typeDispatcher;
-  
+
   private PolymorphicDispatcher<Result<EObject>> type2Dispatcher;
-  
+
   private PolymorphicDispatcher<Result<EClass>> testforthisDispatcher;
-  
+
   public TypeSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 3, "|-", ":");
@@ -51,15 +51,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     testforthisDispatcher = buildPolymorphicDispatcher1(
     	"testforthisImpl", 3, "|~", ":");
   }
-  
+
   public Result<EObject> type(final EClass c) {
     return type(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final EClass c) {
     return type(_environment_, null, c);
   }
-  
+
   public Result<EObject> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return typeInternal(_environment_, _trace_, c);
@@ -67,15 +67,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Result<EObject> type2(final EClass c) {
     return type2(new RuleEnvironment(), null, c);
   }
-  
+
   public Result<EObject> type2(final RuleEnvironment _environment_, final EClass c) {
     return type2(_environment_, null, c);
   }
-  
+
   public Result<EObject> type2(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	return type2Internal(_environment_, _trace_, c);
@@ -83,15 +83,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type2);
     }
   }
-  
+
   public Result<EClass> testforthis(final EObject obj) {
     return testforthis(new RuleEnvironment(), null, obj);
   }
-  
+
   public Result<EClass> testforthis(final RuleEnvironment _environment_, final EObject obj) {
     return testforthis(_environment_, null, obj);
   }
-  
+
   public Result<EClass> testforthis(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	return testforthisInternal(_environment_, _trace_, obj);
@@ -99,7 +99,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_testforthis);
     }
   }
-  
+
   protected Result<EObject> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	checkParamsNotNull(c);
@@ -109,11 +109,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EObject> type2Internal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c) {
     try {
     	checkParamsNotNull(c);
@@ -123,11 +123,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void type2ThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EClass> testforthisInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EObject obj) {
     try {
     	checkParamsNotNull(obj);
@@ -137,11 +137,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void testforthisThrowException(final String _error, final String _issue, final Exception _ex, final EObject obj, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<EObject> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -160,7 +160,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EObject> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass) throws RuleFailedException {
     EObject object = null; // output parameter
     /* 'foo' == new String() || 'bar' == new String() */
@@ -206,7 +206,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     Boolean b = Boolean.valueOf(false);
     return new Result<EObject>(object);
   }
-  
+
   protected Result<EClass> testforthisImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -225,7 +225,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<EClass> applyRuleTestForThis(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EObject obj) throws RuleFailedException {
     EClass cl = null; // output parameter
     cl = this.<EClass>clone(obj.eClass());

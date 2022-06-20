@@ -27,26 +27,26 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class TypeSystem extends XsemanticsRuntimeSystem {
   public static final String ECLASSEOBJECT = "org.eclipse.xsemantics.test.ecore.EClassEObject";
-  
+
   private PolymorphicDispatcher<Result<Boolean>> typeDispatcher;
-  
+
   public TypeSystem() {
     init();
   }
-  
+
   public void init() {
     typeDispatcher = buildPolymorphicDispatcher1(
     	"typeImpl", 4, "|-", ":");
   }
-  
+
   public Result<Boolean> type(final EClass c, final EObject o) {
     return type(new RuleEnvironment(), null, c, o);
   }
-  
+
   public Result<Boolean> type(final RuleEnvironment _environment_, final EClass c, final EObject o) {
     return type(_environment_, null, c, o);
   }
-  
+
   public Result<Boolean> type(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	return typeInternal(_environment_, _trace_, c, o);
@@ -54,15 +54,15 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return resultForFailure(_e_type);
     }
   }
-  
+
   public Boolean typeSucceeded(final EClass c, final EObject o) {
     return typeSucceeded(new RuleEnvironment(), null, c, o);
   }
-  
+
   public Boolean typeSucceeded(final RuleEnvironment _environment_, final EClass c, final EObject o) {
     return typeSucceeded(_environment_, null, c, o);
   }
-  
+
   public Boolean typeSucceeded(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	typeInternal(_environment_, _trace_, c, o);
@@ -71,7 +71,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return false;
     }
   }
-  
+
   protected Result<Boolean> typeInternal(final RuleEnvironment _environment_, final RuleApplicationTrace _trace_, final EClass c, final EObject o) {
     try {
     	checkParamsNotNull(c, o);
@@ -81,11 +81,11 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected void typeThrowException(final String _error, final String _issue, final Exception _ex, final EClass c, final EObject o, final ErrorInformation[] _errorInformations) throws RuleFailedException {
     throwRuleFailedException(_error, _issue, _ex, _errorInformations);
   }
-  
+
   protected Result<Boolean> typeImpl(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     try {
     	final RuleApplicationTrace _subtrace_ = newTrace(_trace_);
@@ -104,7 +104,7 @@ public class TypeSystem extends XsemanticsRuntimeSystem {
     	return null;
     }
   }
-  
+
   protected Result<Boolean> applyRuleEClassEObject(final RuleEnvironment G, final RuleApplicationTrace _trace_, final EClass eClass, final EObject object) throws RuleFailedException {
     String _string = new String();
     String _firstUpper = StringExtensions.toFirstUpper("bar");

@@ -23,12 +23,12 @@ import org.eclipse.xtext.validation.Check;
 public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
   @Inject
   protected FjAltTypeSystem xsemanticsSystem;
-  
+
   @Override
   protected FjAltTypeSystem getXsemanticsSystem() {
     return this.xsemanticsSystem;
   }
-  
+
   @Override
   @Check
   public void checkMain(final Program program) {
@@ -36,7 +36,7 @@ public class FjAltTypeSystemValidator extends FjFirstTypeSystemValidator {
     	getXsemanticsSystem().checkMain(program),
     		program);
   }
-  
+
   @Override
   @Check
   public void checkClassOk(final org.eclipse.xsemantics.example.fj.fj.Class clazz) {

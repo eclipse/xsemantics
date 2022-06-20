@@ -89,7 +89,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2021-12"
+      defaultValue="2022-06"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
@@ -295,9 +295,9 @@
       <sourceLocator
           rootFolder="${git.clone.location}"/>
       <repositoryList
-          name="2021-12">
+          name="2022-06">
         <repository
-            url="https://download.eclipse.org/releases/2021-12"/>
+            url="https://download.eclipse.org/releases/2022-06"/>
         <repository
             url="https://download.eclipse.org/cbi/updates/license/1.0.1.v20140414-1359"/>
         <repository
@@ -473,18 +473,18 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.2/"/>
+        value="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0"/>
+        value="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
         label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.26.0,2.27.0)"/>
+          versionRange="[2.27.0,2.28.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
