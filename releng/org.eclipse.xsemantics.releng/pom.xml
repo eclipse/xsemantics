@@ -30,7 +30,6 @@ Contributors:
 
 		<module>../../plugins/org.eclipse.xsemantics.runtime</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl</module>
-		<module>../../examples/org.eclipse.xsemantics.example.lambda</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ide</module>
 		<module>../../plugins/org.eclipse.xsemantics.dsl.ui</module>
 
@@ -55,6 +54,7 @@ Contributors:
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.tests</module>
 		<module>../../examples/org.eclipse.xsemantics.example.expressions.ui.tests</module>
 
+		<module>../../examples/org.eclipse.xsemantics.example.lambda</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.ide</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.ui</module>
 		<module>../../examples/org.eclipse.xsemantics.example.lambda.tests</module>
