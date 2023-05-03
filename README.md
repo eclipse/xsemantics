@@ -32,7 +32,7 @@ https://download.eclipse.org/xsemantics/milestones/
 - version 1.22 requires Xtext 2.27.0
 - version 1.23 requires Xtext 2.30.0
 
-## Maven snapshots
+## Maven artifacts
 
 - version 1.13.0-SNAPSHOT requires Xtext 2.13.0
 - version 1.14.0-SNAPSHOT requires Xtext 2.14.0
