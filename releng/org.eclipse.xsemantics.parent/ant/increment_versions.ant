@@ -22,7 +22,7 @@
 
 	<!--Set these properties manually when increasing versions -->
 	<property name="version.major" value="1" />
-	<property name="version.minor" value="22" />
+	<property name="version.minor" value="23" />
 	<property name="version.patch" value="0" />
 
 	<!-- Compute the version properties -->
