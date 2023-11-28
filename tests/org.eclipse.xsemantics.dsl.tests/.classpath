@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="xsemantics-gen"/>
 	<classpathentry kind="src" path="tests_input_files"/>
 	<classpathentry kind="src" path="tests_performance_input_files"/>
+	<classpathentry kind="src" path="external"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
