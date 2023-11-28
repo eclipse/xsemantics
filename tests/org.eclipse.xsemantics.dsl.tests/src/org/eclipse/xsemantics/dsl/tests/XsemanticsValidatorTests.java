@@ -26,38 +26,55 @@ import static org.eclipse.xsemantics.dsl.validation.XsemanticsValidator.NO_JUDGM
 import static org.eclipse.xsemantics.dsl.validation.XsemanticsValidator.RETURN_NOT_ALLOWED;
 import static org.eclipse.xsemantics.dsl.validation.XsemanticsValidator.THROW_NOT_ALLOWED;
 import static org.eclipse.xsemantics.dsl.validation.XsemanticsValidator.TOO_MANY_OUTPUT_PARAMS;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xsemantics.dsl.tests.input.FjTypeSystemFiles;
+import org.eclipse.xsemantics.dsl.tests.input.XsemanticsTestFiles;
+import org.eclipse.xsemantics.dsl.validation.XsemanticsValidator;
+import org.eclipse.xsemantics.dsl.validation.testutils.ValidatorTester;
+import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsFile;
+import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsPackage;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.eclipse.xsemantics.dsl.validation.XsemanticsValidator;
-import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsPackage;
+import com.google.inject.Inject;
 
-public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class XsemanticsValidatorTests {
 
 	private static final String IN_SYSTEM_ORG_ECLIPSE_XSEMANTICS_TEST_TYPE_SYSTEM = ", in system: org.eclipse.xsemantics.test.TypeSystem";
 
+	@Inject
+	private ParseHelper<XsemanticsFile> parser;
+
+	@Inject
 	private XsemanticsValidator validator;
 
+	@Inject
 	private ValidatorTester<XsemanticsValidator> tester;
 
+	@Inject
 	private ValidationTestHelper validationTestHelper;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		validator = get(XsemanticsValidator.class);
+	private XsemanticsTestFiles testFiles = new XsemanticsTestFiles();
+
+	private FjTypeSystemFiles fjTSFiles = new FjTypeSystemFiles();
+
+	@Before
+	public void setUp() {
 		validator.setEnableWarnings(false);
-		tester = new ValidatorTester<XsemanticsValidator>(validator,
-				getInjector());
-		validationTestHelper = get(ValidationTestHelper.class);
 	}
 
 	@Test
@@ -380,9 +397,13 @@ public class XsemanticsValidatorTests extends XsemanticsAbstractTests {
 						.warningMsg("No function defined for the auxiliary description"));
 	}
 
-	protected AssertableDiagnostics loadModelAndValidate(
+	private AssertableDiagnostics loadModelAndValidate(
 			CharSequence testFileContents) throws Exception {
-		return tester.validate(getModel(testFileContents.toString()));
+		return tester.validate(getModel(testFileContents));
+	}
+
+	private XsemanticsFile getModel(CharSequence testFileContents) throws Exception {
+		return parser.parse(testFileContents);
 	}
 
 	protected void assertDuplicateErrors(AssertableDiagnostics validate,
