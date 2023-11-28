@@ -81,8 +81,8 @@ public class RuleFailedExceptionTests extends XsemanticsRuntimeAbstractTests {
 				new ErrorInformation(emfUtils.createEObject()));
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(bos);
-        out.writeObject(ex);
-        out.close();
+		out.writeObject(ex);
+		out.close();
 	}
 
 	protected void assertMessage(RuleFailedException ex, String message) {
