@@ -67,7 +67,8 @@ abstract class XsemanticsBaseTest {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
-	@Inject extension ValidationTestHelper
+	@Inject
+	protected extension ValidationTestHelper validationTestHelper
 	
 //	@BeforeClass
 //	def static void setNewLine() {

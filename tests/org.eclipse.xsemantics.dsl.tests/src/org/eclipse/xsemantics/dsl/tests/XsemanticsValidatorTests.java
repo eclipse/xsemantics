@@ -32,17 +32,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xsemantics.dsl.tests.input.FjTypeSystemFiles;
-import org.eclipse.xsemantics.dsl.tests.input.XsemanticsTestFiles;
 import org.eclipse.xsemantics.dsl.validation.XsemanticsValidator;
 import org.eclipse.xsemantics.dsl.validation.testutils.ValidatorTester;
 import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsFile;
 import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsPackage;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
-import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,25 +48,15 @@ import com.google.inject.Inject;
 
 @InjectWith(XsemanticsInjectorProvider.class)
 @RunWith(XtextRunner.class)
-public class XsemanticsValidatorTests {
+public class XsemanticsValidatorTests extends XsemanticsBaseTest {
 
 	private static final String IN_SYSTEM_ORG_ECLIPSE_XSEMANTICS_TEST_TYPE_SYSTEM = ", in system: org.eclipse.xsemantics.test.TypeSystem";
-
-	@Inject
-	private ParseHelper<XsemanticsFile> parser;
 
 	@Inject
 	private XsemanticsValidator validator;
 
 	@Inject
 	private ValidatorTester<XsemanticsValidator> tester;
-
-	@Inject
-	private ValidationTestHelper validationTestHelper;
-
-	private XsemanticsTestFiles testFiles = new XsemanticsTestFiles();
-
-	private FjTypeSystemFiles fjTSFiles = new FjTypeSystemFiles();
 
 	@Before
 	public void setUp() {
@@ -188,7 +174,7 @@ public class XsemanticsValidatorTests {
 
 	@Test
 	public void testFjExpressionTypingRules() throws Exception {
-		assertOk(loadModelAndValidate(fjTSFiles.fjExpressionTypeRules()));
+		assertOk(loadModelAndValidate(fjTestFiles.fjExpressionTypeRules()));
 	}
 
 	@Test
