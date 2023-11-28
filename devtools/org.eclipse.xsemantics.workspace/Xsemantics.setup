@@ -14,13 +14,13 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/WorkingSets.ecore"
     name="xsemantics"
     label="Xsemantics">
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-11"
-      location="${jre.location-11}">
+      version="JavaSE-17"
+      location="${jre.location-17}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -89,7 +89,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2022-06"
+      defaultValue="2023-12"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
@@ -235,17 +235,23 @@
       <sourceLocator
           rootFolder="${git.clone.location}"/>
       <repositoryList
-          name="2022-06">
-        <repository
-            url="https://download.eclipse.org/releases/2022-06"/>
-        <repository
-            url="https://download.eclipse.org/cbi/updates/license/1.0.1.v20140414-1359"/>
-        <repository
-            url="https://download.itemis.com/updates/releases/2.1.1/"/>
+          name="2023-12">
         <repository
             url="${xtext.site}"/>
         <repository
             url="${mwe2.site}"/>
+        <repository
+            url="https://download.eclipse.org/releases/2023-12"/>
+        <repository
+            url="https://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.itemis.com/updates/releases/2.1.1/"/>
+        <repository
+            url="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2023-12/"/>
+        <repository
+            url="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315/"/>
       </repositoryList>
     </targlet>
   </setupTask>
@@ -413,18 +419,18 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="mwe2.site"
-        value="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/"/>
+        value="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.16.0/"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="xtext.site"
-        value="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.30.0"/>
+        value="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.33.0"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.org.eclipse.xtext.2.10"
         label="Xtext Releases">
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"
-          versionRange="[2.30.0,2.31.0)"/>
+          versionRange="[2.33.0,2.34.0)"/>
       <requirement
           name="de.itemis.xtext.antlr.feature.feature.group"/>
       <repository
@@ -433,6 +439,12 @@
           url="${mwe2.site}"/>
       <repository
           url="https://download.itemis.com/updates/releases/2.1.1/"/>
+      <repository
+          url="https://lorenzobettini.github.io/xtext-xdoc-releases/"/>
+      <repository
+          url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2023-12/"/>
+      <repository
+          url="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315/"/>
       <description>Xtext &amp; Xtend</description>
     </setupTask>
   </stream>

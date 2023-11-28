@@ -53,23 +53,23 @@ Contributors:
 	</issueManagement>
 	
 	<properties>
-		<tycho-version>2.7.3</tycho-version>
+		<tycho-version>3.0.5</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
-		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<junit-version>4.13.2</junit-version>
-		<jacoco-version>0.8.6</jacoco-version>
+		<jacoco-version>0.8.8</jacoco-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<xtext.version>2.30.0</xtext.version>
+		<xtext.version>2.33.0</xtext.version>
 		<xtextVersion>${xtext.version}</xtextVersion>
-		<mwe2Version>2.14.0</mwe2Version>
+		<mwe2Version>2.16.0</mwe2Version>
 		<platform-version>[3.9,4.0)</platform-version>
 		<fornax-oaw-m2-plugin-version>3.5.1</fornax-oaw-m2-plugin-version>
 
 		<!-- tests and runtime args -->
-		<memoryArgs>-Xms256M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
+		<memoryArgs>-XX:+HeapDumpOnOutOfMemoryError</memoryArgs>
 		<uiTestsArgs>-Dorg.eclipse.swt.browser.DefaultType=mozilla</uiTestsArgs>
 		<pdeTestsArgs>-DbuildingWithTycho=true</pdeTestsArgs>
 		<swtbotTestsArgs>${uiTestsArgs} -Dorg.eclipse.swtbot.search.timeout=10000 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</swtbotTestsArgs>
@@ -346,7 +346,7 @@ Contributors:
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
@@ -564,7 +564,9 @@ Contributors:
 							</requirement>
 							<!-- to force the same version of jdt.compiler.apt and jdt.core
 								(for xtext-maven-plugin) 
-								see https://github.com/eclipse/xtext-maven/issues/146 -->
+								see https://github.com/eclipse/xtext-maven/issues/146
+								It is not necessary anymore since 2023-03 since the fragments have been removed -->
+							<!--
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.jdt.compiler.apt</id>
@@ -575,6 +577,7 @@ Contributors:
 								<id>org.eclipse.jdt.compiler.tool</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
+							-->
 						</extraRequirements>
 					</dependency-resolution>
 				</configuration>
