@@ -8,11 +8,9 @@
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
-
-/**
- * 
- */
 package org.eclipse.xsemantics.dsl.tests.runtime;
+
+import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 import java.util.List;

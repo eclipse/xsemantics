@@ -8,10 +8,6 @@
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
-
-/**
- * 
- */
 package org.eclipse.xsemantics.dsl.tests.runtime;
 
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace
@@ -24,6 +20,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import static org.junit.Assert.*
 
 /**
  * @author Lorenzo Bettini
