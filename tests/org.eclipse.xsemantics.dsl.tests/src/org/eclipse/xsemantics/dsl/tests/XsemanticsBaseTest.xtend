@@ -14,7 +14,7 @@ package org.eclipse.xsemantics.dsl.tests
 import com.google.common.base.Joiner
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.xsemantics.dsl.XsemanticsConstants
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xsemantics.dsl.tests.input.FjTypeSystemFiles
 import org.eclipse.xsemantics.dsl.tests.input.XsemanticsTestFiles
 import org.eclipse.xsemantics.dsl.xsemantics.CheckRule
@@ -31,7 +31,6 @@ import org.eclipse.xsemantics.dsl.xsemantics.RuleParameter
 import org.eclipse.xsemantics.dsl.xsemantics.RuleWithPremises
 import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsFile
 import org.eclipse.xsemantics.dsl.xsemantics.XsemanticsSystem
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -69,14 +68,6 @@ abstract class XsemanticsBaseTest {
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
 	@Inject extension ValidationTestHelper
-	
-	new() {
-		// the following are useless... but it's just to have coverage
-		// for the protected constructors ("required" by sonar)...
-		new XsemanticsConstants() {
-			
-		}
-	}
 	
 //	@BeforeClass
 //	def static void setNewLine() {

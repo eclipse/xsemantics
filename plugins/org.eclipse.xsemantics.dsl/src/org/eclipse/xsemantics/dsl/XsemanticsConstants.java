@@ -24,7 +24,7 @@ public class XsemanticsConstants {
 
 	public static final String PREVIOUS_FAILURE = "previousFailure";
 	
-	protected XsemanticsConstants() {
+	private XsemanticsConstants() {
 		
 	}
 }
