@@ -13,6 +13,7 @@ package org.eclipse.xsemantics.dsl.tests.generator;
 
 import org.eclipse.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
 import org.eclipse.xsemantics.dsl.tests.XsemanticsAbstractTests;
+import org.eclipse.xsemantics.dsl.tests.XsemanticsInjectorProvider;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -22,27 +23,28 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Inject;
+
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
 	protected static final String VALIDATION_SUBDIR = "validation/";
 
-	GeneratorForTests generator;
-	
-	XtextResourceSet resourceSet;
+	@Inject
+	private GeneratorForTests generator;
+
+	@Inject
+	private XtextResourceSet resourceSet;
 
 //	static {
 //		System.setProperty("line.separator", "\n");
 //	}
-
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		generator = get(GeneratorForTests.class);
-		generator.setOutputPath(null);
-		resourceSet = get(XtextResourceSet.class);
-	}
 
 	protected void setGeneratorOutputPath(String outputPath) {
 		generator.setOutputPath(outputPath);
