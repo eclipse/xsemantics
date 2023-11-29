@@ -1,19 +1,22 @@
 <?xml version="1.0"?>
 <project name="project">
 	
-	<!--
-		The properties
-		parsedVersion.majorVersion
-		parsedVersion.minorVersion
-		are expected to be provided (see the POM and the use of build-helper-maven-plugin
-	-->
 	<target name="getMajorMinorVersion">
-		<property name="majorMinorVersion" value="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}" />
-		<echo message="majorMinorVersion: ${majorMinorVersion}" />
+	    <script language="javascript">
+	        <![CDATA[
+
+	                // getting the value
+	                buildnumber = project.getProperty("unqualifiedVersion");
+	                index = buildnumber.lastIndexOf(".");
+	                counter = buildnumber.substring(0, index);
+	    			project.setProperty("majorMinorVersion",counter);
+
+	            ]]>
+	    </script>
 	</target>
 
 	<target name="test_getMajorMinor" depends="getMajorMinorVersion">
-		<echo message="majorMinorVersion: ${majorMinorVersion}" />
+		<echo message="majorMinorVersion: ${majorMinorVersion}"/>
 	</target>
 
 	<!--

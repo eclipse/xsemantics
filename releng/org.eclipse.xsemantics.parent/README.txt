@@ -9,4 +9,13 @@ Contributors:
   Lorenzo Bettini - Initial contribution and API
 *******************************************************************************
 
-MAVEN_OPTS="-Xms40m -Xmx384m -XX:MaxPermSize=256m"
+To test a composite release locally, from the root folder
+
+mkdir -p ${HOME}/tmp/download-area
+
+mvn -f releng/org.eclipse.xsemantics.releng/pom.xml package \
+	-DskipTests=true \
+	-Dxtext.maven.skip=true \
+	-Dcbi.jarsigner.skip=true \
+	-Dxsemantics.download.area=${HOME}/tmp/download-area \
+	-Prelease-composite,release-milestone
