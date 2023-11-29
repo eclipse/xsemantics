@@ -11,20 +11,28 @@
 
 package org.eclipse.xsemantics.dsl.tests.generator.fj
 
+import com.google.inject.Inject
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjAbstractTests
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjInputFilesForTyping
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjTestsUtils
-import org.eclipse.xsemantics.example.fj.FJStandaloneSetup
 import org.eclipse.xsemantics.example.fj.fj.Class
 import org.eclipse.xsemantics.example.fj.fj.FjFactory
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace
 import org.eclipse.xsemantics.runtime.TraceUtils
 import org.eclipse.xsemantics.test.fj.lambda.FjTestsForLambdas
-import org.junit.Before
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
+import static org.junit.Assert.*
+
+@InjectWith(FJInjectorProvider)
+@RunWith(XtextRunner)
 class FjLambdaGeneratedTypeSystemTests extends FjAbstractTests {
-	
+
+	@Inject
 	var FjTestsForLambdas typeSystem;
 
 	var TraceUtils traceUtils;
@@ -32,14 +40,6 @@ class FjLambdaGeneratedTypeSystemTests extends FjAbstractTests {
 	val inputs = new FjInputFilesForTyping
 	
 	val fjTestUtils = new FjTestsUtils
-	
-	@Before
-	override void setUp() {
-		super.setUp();
-		with(FJStandaloneSetup);
-		typeSystem = get(FjTestsForLambdas);
-		traceUtils = get(TraceUtils);
-	}
 
 	@Test
 	def void testExistsSubtypeSucceeds() {

@@ -15,42 +15,45 @@ import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedV
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModuleForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider;
 import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem;
 import org.eclipse.xsemantics.test.fj.first.validation.FjFirstTypeSystemValidator;
-
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Injector;
+
+@InjectWith(FjFirstGeneratedValidatorTests.FjFirstGeneratedTypeSystemInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class FjFirstGeneratedValidatorTests extends
 		FjAbstractGeneratedValidatorTests {
 
-	public static class FjStandaloneSetupFirst extends
-			FjCustomStandaloneSetupForTesting {
-		
+	public static class FjFirstGeneratedTypeSystemInjectorProvider extends FJInjectorProvider {
 		public static class FjFirstTypeSystemWrapper extends FjFirstTypeSystem
 				implements IFjTypeSystem {
-
 		}
 
 		@Override
-		protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
-			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+		protected Injector internalCreateInjector() {
+			return new FjCustomStandaloneSetupForTesting() {
+				@Override
+				protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
+					return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+						@Override
+						public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
+							return FjFirstTypeSystemValidator.class;
+						}
+					};
+				}
 
 				@Override
-				public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
-					return FjFirstTypeSystemValidator.class;
+				protected Class<FjFirstTypeSystemWrapper> fjTypeSystemClass() {
+					return FjFirstTypeSystemWrapper.class;
 				}
-				
-			};
+			}.createInjectorAndDoEMFRegistration();
 		}
-		
-		@Override
-		protected Class<FjFirstTypeSystemWrapper> fjTypeSystemClass() {
-			return FjFirstTypeSystemWrapper.class;
-		}
-	}
-
-	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
-		return FjStandaloneSetupFirst.class;
 	}
 
 }

@@ -14,27 +14,33 @@ package org.eclipse.xsemantics.dsl.tests.generator.fj;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedTypeSystemTests;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider;
 import org.eclipse.xsemantics.test.fj.first.FjFirstTypeSystem;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Injector;
+
+@InjectWith(FjFirstGeneratedTypeSystemTests.FjFirstGeneratedTypeSystemInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class FjFirstGeneratedTypeSystemTests extends
 		FjAbstractGeneratedTypeSystemTests {
 
-	public static class FjStandaloneSetupFirst extends
-			FjCustomStandaloneSetupForTesting {
-		
+	public static class FjFirstGeneratedTypeSystemInjectorProvider extends FJInjectorProvider {
 		public static class FjFirstTypeSystemWrapper extends FjFirstTypeSystem
 				implements IFjTypeSystem {
-
 		}
 
 		@Override
-		protected Class<FjFirstTypeSystemWrapper> fjTypeSystemClass() {
-			return FjFirstTypeSystemWrapper.class;
+		protected Injector internalCreateInjector() {
+			return new FjCustomStandaloneSetupForTesting() {
+				@Override
+				protected Class<FjFirstTypeSystemWrapper> fjTypeSystemClass() {
+					return FjFirstTypeSystemWrapper.class;
+				}
+			}.createInjectorAndDoEMFRegistration();
 		}
-	}
-
-	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
-		return FjStandaloneSetupFirst.class;
 	}
 
 }
