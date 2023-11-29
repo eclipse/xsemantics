@@ -12,8 +12,9 @@
 package org.eclipse.xsemantics.dsl.tests.generator;
 
 import org.eclipse.xsemantics.dsl.generator.XsemanticsOutputConfigurationProvider;
-import org.eclipse.xsemantics.dsl.tests.XsemanticsAbstractTests;
 import org.eclipse.xsemantics.dsl.tests.XsemanticsInjectorProvider;
+
+import static org.junit.Assert.*;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -33,8 +34,16 @@ import com.google.inject.Inject;
 
 @InjectWith(XsemanticsInjectorProvider.class)
 @RunWith(XtextRunner.class)
-public class XsemanticsGeneratorRunnerTests extends XsemanticsAbstractTests {
-	protected static final String VALIDATION_SUBDIR = "validation/";
+public class XsemanticsGeneratorRunnerTests {
+	private static final String VALIDATION_SUBDIR = "validation/";
+
+	private static final String TESTS_INPUT_FILES = "./tests_input_files/";
+
+	private static final String TESTS_INPUT_FILES_WITH_ERRORS = "./tests_input_files_with_errors/";
+
+	private static final String EXPECTATION_DIR = "expectations/";
+
+	private static final String RESULT_DIR = "test-gen/";
 
 	@Inject
 	private GeneratorForTests generator;
