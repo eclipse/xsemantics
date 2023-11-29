@@ -17,32 +17,38 @@ import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSe
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
 import org.eclipse.xsemantics.example.fj.fj.Method;
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Injector;
+
+@InjectWith(FjActualGeneratedTypeSystemTests.FjActualGeneratedTypeSystemInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class FjActualGeneratedTypeSystemTests extends
 		FjAbstractGeneratedTypeSystemTests {
 
-	public static class FjStandaloneSetupActual extends
-			FjCustomStandaloneSetupForTesting {
-
+	public static class FjActualGeneratedTypeSystemInjectorProvider extends FJInjectorProvider {
 		@Override
-		protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
-			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
-				@SuppressWarnings("unused")
-				public java.lang.Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
-					return FjActualExpectedTraces.class;
+		protected Injector internalCreateInjector() {
+			return new FjCustomStandaloneSetupForTesting() {
+				@Override
+				protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
+					return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+						@SuppressWarnings("unused")
+						public Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
+							return FjActualExpectedTraces.class;
+						}
+					};
 				}
-			};
-		}
 
-		@Override
-		protected Class<? extends IFjTypeSystem> fjTypeSystemClass() {
-			return FjActualTypeSystemWrapper.class;
+				@Override
+				protected Class<? extends IFjTypeSystem> fjTypeSystemClass() {
+					return FjActualTypeSystemWrapper.class;
+				}
+			}.createInjectorAndDoEMFRegistration();
 		}
-	}
-
-	@Override
-	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
-		return FjStandaloneSetupActual.class;
 	}
 
 	@Override

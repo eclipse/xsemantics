@@ -11,6 +11,11 @@
 
 package org.eclipse.xsemantics.dsl.tests.generator.fj.common;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsemantics.example.fj.fj.Class;
 import org.eclipse.xsemantics.example.fj.fj.Expression;
 import org.eclipse.xsemantics.example.fj.fj.Field;
@@ -21,25 +26,27 @@ import org.eclipse.xsemantics.runtime.Result;
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
-import org.eclipse.xsemantics.runtime.StringRepresentation;
 import org.eclipse.xsemantics.runtime.TraceUtils;
-
-import org.eclipse.emf.ecore.EObject;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.inject.Inject;
 
 public abstract class FjAbstractGeneratedTypeSystemTests extends
 		FjAbstractTests {
 
+	@Inject
 	protected IFjTypeSystem fjTypeSystem;
-	
+
 	protected FjTypeUtils fjTypeUtils;
 
+	@Inject
 	protected FjExpectedTraces expectedTraces;
 
 	protected RuleApplicationTrace trace;
 
-	protected StringRepresentation stringRep;
+	@Inject
+	protected FjTestsStringRepresentation stringRep;
 
 	protected TraceUtils traceUtils;
 
@@ -98,20 +105,11 @@ public abstract class FjAbstractGeneratedTypeSystemTests extends
 		}
 	}
 
-	@Override
 	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		with(fjCustomStandaloneSetupClass());
-		fjTypeSystem = get(IFjTypeSystem.class);
-		fjTypeUtils = get(FjTypeUtils.class);
-		expectedTraces = get(FjExpectedTraces.class);
+	public void setUp() {
+		fjTypeUtils = new FjTypeUtils();
 		trace = new RuleApplicationTrace();
-		stringRep = get(FjTestsStringRepresentation.class);
-		traceUtils = get(TraceUtils.class);
 	}
-
-	protected abstract java.lang.Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass();
 
 	@Test
 	public void testNullArguments() throws Exception {

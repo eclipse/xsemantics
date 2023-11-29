@@ -11,38 +11,31 @@
 
 package org.eclipse.xsemantics.dsl.tests.generator.fj.common;
 
+import static org.junit.Assert.fail;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
-import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xsemantics.dsl.validation.testutils.ValidatorTester;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.google.inject.Inject;
 
 public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests {
 
+	@Inject
 	protected ValidatorTester<AbstractDeclarativeValidator> tester;
+
+	@Inject
+	protected FjExpectedTraces expectedTraces;
 
 	protected FjInputFilesForTyping testFiles = new FjInputFilesForTyping();
 
 	protected FjTestsUtils utils = new FjTestsUtils();
-
-	protected FjExpectedTraces expectedTraces;
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		with(fjCustomStandaloneSetupClass());
-		tester = new ValidatorTester<AbstractDeclarativeValidator>(
-				get(AbstractDeclarativeValidator.class), getInjector());
-		expectedTraces = get(FjExpectedTraces.class);
-	}
-
-	protected abstract java.lang.Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass();
 
 	@Test
 	public void testMethodCall() throws Exception {
@@ -78,7 +71,7 @@ public abstract class FjAbstractGeneratedValidatorTests extends FjAbstractTests 
 	}
 
 	protected void assertOk(AssertableDiagnostics validate) {
-		if (listOfDiagnostics(validate).size() != 0) {
+		if (!listOfDiagnostics(validate).isEmpty()) {
 			System.err.println(utils.diagnosticsToString(validate));
 			fail("There are expected to be no diagnostics.: "
 					+ utils.diagnosticsToString(validate));

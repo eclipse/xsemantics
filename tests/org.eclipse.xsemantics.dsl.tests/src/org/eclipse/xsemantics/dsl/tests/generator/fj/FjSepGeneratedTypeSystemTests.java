@@ -16,31 +16,38 @@ import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModul
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Injector;
+
+@InjectWith(FjSepGeneratedTypeSystemTests.FjSepGeneratedTypeSystemInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class FjSepGeneratedTypeSystemTests extends
 		FjAbstractGeneratedTypeSystemTests {
 
-	public static class FjStandaloneSetupSep extends
-			FjCustomStandaloneSetupForTesting {
-
+	public static class FjSepGeneratedTypeSystemInjectorProvider extends FJInjectorProvider {
 		@Override
-		protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
-			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
-				@SuppressWarnings("unused")
-				public java.lang.Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
-					return FjSepExpectedTraces.class;
+		protected Injector internalCreateInjector() {
+			return new FjCustomStandaloneSetupForTesting() {
+				@Override
+				protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
+					return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+						@SuppressWarnings("unused")
+						public java.lang.Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
+							return FjSepExpectedTraces.class;
+						}
+					};
 				}
-			};
-		}
 
-		@Override
-		protected Class<? extends IFjTypeSystem> fjTypeSystemClass() {
-			return FjSepTypeSystemWrapper.class;
+				@Override
+				protected Class<? extends IFjTypeSystem> fjTypeSystemClass() {
+					return FjSepTypeSystemWrapper.class;
+				}
+			}.createInjectorAndDoEMFRegistration();
 		}
-	}
-
-	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
-		return FjStandaloneSetupSep.class;
 	}
 
 	@Override

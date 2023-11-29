@@ -15,56 +15,62 @@ import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjAbstractGeneratedV
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomRuntimeModuleForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjCustomStandaloneSetupForTesting;
 import org.eclipse.xsemantics.dsl.tests.generator.fj.common.FjExpectedTraces;
+import org.eclipse.xsemantics.dsl.tests.generator.fj.common.IFjTypeSystem;
+import org.eclipse.xsemantics.example.fj.tests.FJInjectorProvider;
 import org.eclipse.xsemantics.example.fj.typing.validation.FjTypeSystemValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.google.inject.Injector;
+
+@InjectWith(FjActualGeneratedValidatorTests.FjActualGeneratedTypeSystemInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class FjActualGeneratedValidatorTests extends
 		FjAbstractGeneratedValidatorTests {
 
-	public static class FjStandaloneSetupActual extends
-			FjCustomStandaloneSetupForTesting {
-
+	public static class FjActualGeneratedTypeSystemInjectorProvider extends FJInjectorProvider {
 		public static class CustomFjTypeSystemValidator extends
 				FjTypeSystemValidator {
 			@Override
 			protected List<EPackage> getEPackages() {
-				List<EPackage> result = new ArrayList<EPackage>();
+				List<EPackage> result = new ArrayList<>();
 				result.add(org.eclipse.xsemantics.example.fj.fj.FjPackage.eINSTANCE);
 				return result;
 			}
 		}
 
 		@Override
-		protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
-			return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+		protected Injector internalCreateInjector() {
+			return new FjCustomStandaloneSetupForTesting() {
+				@Override
+				protected FjCustomRuntimeModuleForTesting createFjCustomRuntimeModule() {
+					return new FjCustomRuntimeModuleForTesting(fjTypeSystemClass()) {
+						@Override
+						public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
+							return CustomFjTypeSystemValidator.class;
+						}
+
+						@SuppressWarnings("unused")
+						public Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
+							return FjActualExpectedTraces.class;
+						}
+					};
+				}
 
 				@Override
-				public Class<? extends AbstractDeclarativeValidator> bindAbstractDeclarativeValidator() {
-					return CustomFjTypeSystemValidator.class;
+				protected Class<? extends IFjTypeSystem> fjTypeSystemClass() {
+					return FjActualTypeSystemWrapper.class;
 				}
-
-				@SuppressWarnings("unused")
-				public java.lang.Class<? extends FjExpectedTraces> bindFjExpectedTraces() {
-					return FjActualExpectedTraces.class;
-				}
-
-			};
+			}.createInjectorAndDoEMFRegistration();
 		}
-
-		@Override
-		protected Class<FjActualTypeSystemWrapper> fjTypeSystemClass() {
-			return FjActualTypeSystemWrapper.class;
-		}
-	}
-
-	protected Class<? extends FjCustomStandaloneSetupForTesting> fjCustomStandaloneSetupClass() {
-		return FjStandaloneSetupActual.class;
 	}
 
 	@Test

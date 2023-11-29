@@ -8,12 +8,18 @@
  * Contributors:
  *   Lorenzo Bettini - Initial contribution and API
  *******************************************************************************/
-
-/**
- * 
- */
 package org.eclipse.xsemantics.dsl.tests.runtime;
 
+import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xsemantics.dsl.tests.XsemanticsInjectorProvider;
 import org.eclipse.xsemantics.dsl.tests.classes.BaseClass1;
 import org.eclipse.xsemantics.dsl.tests.classes.BaseClass2;
 import org.eclipse.xsemantics.dsl.tests.classes.DerivedAlternativeClass1;
@@ -33,31 +39,30 @@ import org.eclipse.xsemantics.runtime.RuleApplicationTrace;
 import org.eclipse.xsemantics.runtime.RuleEnvironment;
 import org.eclipse.xsemantics.runtime.RuleFailedException;
 import org.eclipse.xsemantics.runtime.XsemanticsRuntimeSystem;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.junit.Before;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
  * @author bettini
  * 
  */
+@InjectWith(XsemanticsInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class XsemanticsRuntimeSystemTests extends
 		XsemanticsRuntimeAbstractTests {
 
-	protected TestTypeSystemWithPolymorphicDispatcher ts;
+	@Inject
+	private TestTypeSystemWithPolymorphicDispatcher ts;
 
-	protected XsemanticsRuntimeSystem runtimeTypeSystem;
-	
+	@Inject
+	private XsemanticsRuntimeSystem runtimeTypeSystem;
+
 	private Object traceElement = new Object();
 
 	public class EClassesForTesting {
@@ -100,14 +105,6 @@ public class XsemanticsRuntimeSystemTests extends
 			return traceElement;
 		}
 		
-	}
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		ts = get(TestTypeSystemWithPolymorphicDispatcher.class);
-		runtimeTypeSystem = get(XsemanticsRuntimeSystem.class);
 	}
 
 	@Test

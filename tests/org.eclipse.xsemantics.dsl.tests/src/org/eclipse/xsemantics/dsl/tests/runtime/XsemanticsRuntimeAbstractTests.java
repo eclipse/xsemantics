@@ -14,17 +14,22 @@
  */
 package org.eclipse.xsemantics.dsl.tests.runtime;
 
-import org.eclipse.xsemantics.dsl.tests.XsemanticsAbstractTests;
-import org.eclipse.xsemantics.runtime.Result2;
-import org.eclipse.xsemantics.runtime.RuleFailedException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xsemantics.dsl.tests.EmfFactoryUtils;
+import org.eclipse.xsemantics.runtime.Result2;
+import org.eclipse.xsemantics.runtime.RuleFailedException;
+import org.junit.Assert;
 
 /**
  * @author bettini
  * 
  */
-public class XsemanticsRuntimeAbstractTests extends XsemanticsAbstractTests {
+public class XsemanticsRuntimeAbstractTests {
+
+	protected EmfFactoryUtils emfUtils = new EmfFactoryUtils();
 
 	protected <LeftT, RightT> void assertLeftRightPair(
 			Result2<LeftT, RightT> result, LeftT expectedLeft,
@@ -56,5 +61,12 @@ public class XsemanticsRuntimeAbstractTests extends XsemanticsAbstractTests {
 		assertEquals(expectedMessage, exception.getMessage());
 		assertEquals(expectedIssue, ((RuleFailedException)exception).getIssue());
 		return (RuleFailedException) exception;
+	}
+
+	protected void assertEqualsStrings(Object expected, Object actual) {
+		Assert.assertEquals(
+			("" + expected).replace("\r", ""), 
+			("" + actual).replace("\r", "")
+		);
 	}
 }

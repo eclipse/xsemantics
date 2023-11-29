@@ -19,7 +19,7 @@ import org.eclipse.xsemantics.example.fj.fj.Program
 import org.eclipse.xsemantics.runtime.RuleApplicationTrace
 import org.eclipse.xsemantics.runtime.RuleFailedException
 import org.eclipse.xsemantics.runtime.TraceUtils
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics
 import org.junit.Assert
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -84,8 +84,8 @@ class FjTestsUtils {
 
 	def assertEqualsStrings(Object expected, Object actual) {
 		Assert.assertEquals(
-			("" + expected).replaceAll("\r", ""), 
-			("" + actual).replaceAll("\r", "")
+			("" + expected).replace("\r", ""), 
+			("" + actual).replace("\r", "")
 		)
 	}
 }
