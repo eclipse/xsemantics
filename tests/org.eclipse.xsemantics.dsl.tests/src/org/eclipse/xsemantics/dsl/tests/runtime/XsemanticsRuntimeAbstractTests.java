@@ -65,8 +65,8 @@ public class XsemanticsRuntimeAbstractTests {
 
 	protected void assertEqualsStrings(Object expected, Object actual) {
 		Assert.assertEquals(
-				("" + expected).replaceAll("\r", ""), 
-				("" + actual).replaceAll("\r", "")
-			);
+			("" + expected).replace("\r", ""), 
+			("" + actual).replace("\r", "")
+		);
 	}
 }
